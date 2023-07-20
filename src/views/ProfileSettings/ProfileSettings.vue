@@ -63,18 +63,8 @@
                   @input="$v.form.newPassword.$touch()"
                 />
                 <b-form-invalid-feedback role="alert">
-                  <template
-                    v-if="
-                      !$v.form.newPassword.minLength ||
-                      !$v.form.newPassword.maxLength
-                    "
-                  >
-                    {{
-                      $t('pageProfileSettings.newPassLabelTextInfo', {
-                        min: passwordRequirements.minLength,
-                        max: passwordRequirements.maxLength,
-                      })
-                    }}
+                  <template v-if="!$v.form.newPassword.pattern">
+                    {{ $t('global.form.invalidFormat') }}
                   </template>
                 </b-form-invalid-feedback>
               </input-password-toggle>
@@ -145,7 +135,7 @@
 <script>
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import InputPasswordToggle from '@/components/Global/InputPasswordToggle';
-import { maxLength, minLength, sameAs } from 'vuelidate/lib/validators';
+import { sameAs } from 'vuelidate/lib/validators';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import LocalTimezoneLabelMixin from '@/components/Mixins/LocalTimezoneLabelMixin';
 import PageTitle from '@/components/Global/PageTitle';
@@ -192,8 +182,9 @@ export default {
     return {
       form: {
         newPassword: {
-          minLength: minLength(this.passwordRequirements.minLength),
-          maxLength: maxLength(this.passwordRequirements.maxLength),
+          pattern: function (pw) {
+            return this.passwordValidation(pw);
+          },
         },
         confirmPassword: {
           sameAsPassword: sameAs('newPassword'),
@@ -243,6 +234,12 @@ export default {
       ) {
         this.saveTimeZonePrefrenceData();
       }
+    },
+    passwordValidation(val) {
+      if (!/^(?=.*[\w\d]).+/gi.test(val)) {
+        return false;
+      }
+      return true;
     },
     confirmAuthenticate() {
       this.$v.form.newPassword.$touch();

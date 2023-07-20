@@ -9,6 +9,30 @@ import i18n from '@/i18n';
  * @param {string} serverStatus
  * @returns {Promise}
  */
+const HOST_STATE = {
+  on: 'xyz.openbmc_project.State.Host.HostState.Running',
+  off: 'xyz.openbmc_project.State.Host.HostState.Off',
+  error: 'xyz.openbmc_project.State.Host.HostState.Quiesced',
+  diagnosticMode: 'xyz.openbmc_project.State.Host.HostState.DiagnosticMode',
+};
+const serverStateMapper = (hostState) => {
+  switch (hostState) {
+    case HOST_STATE.on:
+    case 'On': // Redfish PowerState
+      return 'on';
+    case HOST_STATE.off:
+    case 'Off': // Redfish PowerState
+      return 'off';
+    case HOST_STATE.error:
+    case 'Quiesced': // Redfish Status
+      return 'error';
+    case HOST_STATE.diagnosticMode:
+    case 'InTest': // Redfish Status
+      return 'diagnosticMode';
+    default:
+      return 'unreachable';
+  }
+};
 const checkForServerStatus = function (serverStatus) {
   return new Promise((resolve) => {
     const timer = setTimeout(() => {
@@ -31,6 +55,7 @@ const checkForServerStatus = function (serverStatus) {
 const ControlStore = {
   namespaced: true,
   state: {
+    serverStatus: 'unreachable',
     isOperationInProgress: false,
     lastPowerOperationTime: null,
     lastBmcRebootTime: null,
@@ -39,6 +64,7 @@ const ControlStore = {
     isOperationInProgress: (state) => state.isOperationInProgress,
     lastPowerOperationTime: (state) => state.lastPowerOperationTime,
     lastBmcRebootTime: (state) => state.lastBmcRebootTime,
+    serverStatus: (state) => state.serverStatus,
   },
   mutations: {
     setOperationInProgress: (state, inProgress) =>
@@ -47,16 +73,27 @@ const ControlStore = {
       (state.lastPowerOperationTime = lastPowerOperationTime),
     setLastBmcRebootTime: (state, lastBmcRebootTime) =>
       (state.lastBmcRebootTime = lastBmcRebootTime),
+    setServerStatus: (state, serverState) =>
+      (state.serverStatus = serverStateMapper(serverState)),
   },
   actions: {
     async getLastPowerOperationTime({ commit }) {
       return await api
         .get('/redfish/v1/Systems/system')
         .then((response) => {
+          commit('setOperationInProgress', false);
           const lastReset = response.data.LastResetTime;
           if (lastReset) {
             const lastPowerOperationTime = new Date(lastReset);
             commit('setLastPowerOperationTime', lastPowerOperationTime);
+          }
+          if (
+            response.data.Status.State === 'Quiesced' ||
+            response.data.Status.State === 'InTest'
+          ) {
+            commit('setServerStatus', response.data.Status.State);
+          } else {
+            commit('setServerStatus', response.data.PowerState);
           }
         })
         .catch((error) => console.log(error));

@@ -1,11 +1,11 @@
 <template>
-  <b-card bg-variant="light" border-variant="light">
+  <b-card bg-variant="light" border-variant="info">
     <b-row class="d-flex justify-content-between align-items-center">
       <b-col sm="6" lg="9" class="mb-2 mt-2">
         <dl>
           <dt>{{ $t('pageOverview.bmcTime') }}</dt>
           <dd v-if="bmcTime" data-test-id="overviewQuickLinks-text-bmcTime">
-            {{ bmcTime | formatDate }} {{ bmcTime | formatTime }}
+            {{ bmcTime }}
           </dd>
           <dd v-else>--</dd>
         </dl>
@@ -37,7 +37,15 @@ export default {
   mixins: [BVToastMixin],
   computed: {
     bmcTime() {
-      return this.$store.getters['global/bmcTime'];
+      let dateTime = this.$store.getters['global/bmcDateTime'];
+      return (
+        dateTime?.slice(0, 10) +
+        ' ' +
+        dateTime?.slice(11, 19) +
+        ' (UTC' +
+        dateTime?.slice(19) +
+        ')'
+      );
     },
   },
   created() {

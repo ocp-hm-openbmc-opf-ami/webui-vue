@@ -60,7 +60,6 @@
             :empty-filtered-text="$t('global.table.emptySearchMessage')"
             :filter="searchFilter"
             :busy="isBusy"
-            @filtered="onChangeSearchFilter"
             @row-selected="onRowSelected($event, filteredTableItems.length)"
           >
             <!-- Checkbox column -->
@@ -306,7 +305,7 @@ export default {
   },
   created() {
     this.startLoader();
-    this.$store.dispatch('dumps/getBmcDumpEntries').finally(() => {
+    this.$store.dispatch('dumps/getAllDumps').finally(() => {
       this.endLoader();
       this.isBusy = false;
     });

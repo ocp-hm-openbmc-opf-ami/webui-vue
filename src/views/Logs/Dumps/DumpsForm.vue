@@ -44,10 +44,9 @@ export default {
   mixins: [BVToastMixin, VuelidateMixin],
   data() {
     return {
-      selectedDumpType: null,
+      selectedDumpType: 'bmc',
       dumpTypeOptions: [
         { value: 'bmc', text: this.$t('pageDumps.form.bmcDump') },
-        { value: 'system', text: this.$t('pageDumps.form.systemDump') },
       ],
     };
   },

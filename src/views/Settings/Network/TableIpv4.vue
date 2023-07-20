@@ -1,37 +1,25 @@
 <template>
   <page-section :section-title="$t('pageNetwork.ipv4')">
-    <b-row class="mb-4">
-      <b-col lg="2" md="6">
-        <dl>
-          <dt>{{ $t('pageNetwork.dhcp') }}</dt>
-          <dd>
-            <b-form-checkbox
-              id="dhcpSwitch"
-              v-model="dhcpEnabledState"
-              data-test-id="networkSettings-switch-dhcpEnabled"
-              switch
-              @change="changeDhcpEnabledState"
-            >
-              <span v-if="dhcpEnabledState">
-                {{ $t('global.status.enabled') }}
-              </span>
-              <span v-else>{{ $t('global.status.disabled') }}</span>
-            </b-form-checkbox>
-          </dd>
-        </dl>
-      </b-col>
-    </b-row>
     <b-row>
       <b-col>
         <h3 class="h5">
           {{ $t('pageNetwork.ipv4Addresses') }}
         </h3>
       </b-col>
-      <b-col class="text-right">
-        <b-button variant="primary" @click="initAddIpv4Address()">
-          <icon-add />
-          {{ $t('pageNetwork.table.addIpv4Address') }}
-        </b-button>
+      <b-col class="text-right" md="3">
+        <dl>
+          <dd>
+            <b-form-checkbox
+              v-model="globalNetworkSettings[tabIndex].ipv4DhcpEnabled"
+              switch
+              @change="changeDhcpIpv4State"
+            >
+              <span>
+                {{ $t('pageNetwork.dhcp') }}
+              </span>
+            </b-form-checkbox>
+          </dd>
+        </dl>
       </b-col>
     </b-row>
     <b-table
@@ -50,11 +38,10 @@
           :value="action.value"
           :title="action.title"
           :enabled="action.enabled"
-          @click-table-action="onIpv4TableAction(action, $event, index)"
+          @click-table-action="editIpv4TableRow(index)"
         >
           <template #icon>
             <icon-edit v-if="action.value === 'edit'" />
-            <icon-trashcan v-if="action.value === 'delete'" />
           </template>
         </table-row-action>
       </template>
@@ -64,9 +51,7 @@
 
 <script>
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
-import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import IconEdit from '@carbon/icons-vue/es/edit/20';
-import IconTrashcan from '@carbon/icons-vue/es/trash-can/20';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import PageSection from '@/components/Global/PageSection';
 import TableRowAction from '@/components/Global/TableRowAction';
@@ -75,9 +60,7 @@ import { mapState } from 'vuex';
 export default {
   name: 'Ipv4Table',
   components: {
-    IconAdd,
     IconEdit,
-    IconTrashcan,
     PageSection,
     TableRowAction,
   },
@@ -90,6 +73,8 @@ export default {
   },
   data() {
     return {
+      networkOverlay: false,
+      ipv4BtnDisable: false,
       form: {
         ipv4TableItems: [],
       },
@@ -97,10 +82,6 @@ export default {
         {
           value: 'edit',
           title: this.$t('global.action.edit'),
-        },
-        {
-          value: 'delete',
-          title: this.$t('global.action.delete'),
         },
       ],
       ipv4TableFields: [
@@ -126,19 +107,7 @@ export default {
   },
   computed: {
     ...mapState('network', ['ethernetData']),
-    selectedInterface() {
-      return this.$store.getters['network/selectedInterfaceIndex'];
-    },
-    dhcpEnabledState: {
-      get() {
-        return this.$store.getters['network/globalNetworkSettings'][
-          this.selectedInterface
-        ].dhcpEnabled;
-      },
-      set(newValue) {
-        return newValue;
-      },
-    },
+    ...mapState('network', ['globalNetworkSettings']),
   },
   watch: {
     // Watch for change in tab index
@@ -151,16 +120,22 @@ export default {
   },
   created() {
     this.getIpv4TableItems();
-    this.$store.dispatch('network/getEthernetData').finally(() => {
-      // Emit initial data fetch complete to parent component
-      this.$root.$emit('network-table-ipv4-complete');
-    });
   },
   methods: {
     getIpv4TableItems() {
+      this.ipv4BtnDisable =
+        this.ethernetData[this.tabIndex].IPv4StaticAddresses.length < 2 &&
+        this.ethernetData[this.tabIndex].DHCPv4.DHCPEnabled == false
+          ? false
+          : true;
       const index = this.tabIndex;
       const addresses = this.ethernetData[index].IPv4Addresses || [];
-      this.form.ipv4TableItems = addresses.map((ipv4) => {
+      this.form.ipv4TableItems = addresses.filter((ipv4) => {
+        if (ipv4.AddressOrigin !== 'IPv4LinkLocal') {
+          return ipv4;
+        }
+      });
+      this.form.ipv4TableItems = this.form.ipv4TableItems.map((ipv4) => {
         return {
           Address: ipv4.Address,
           SubnetMask: ipv4.SubnetMask,
@@ -168,66 +143,87 @@ export default {
           AddressOrigin: ipv4.AddressOrigin,
           actions: [
             {
-              value: 'delete',
-              title: this.$t('pageNetwork.table.deleteIpv4'),
+              value: 'edit',
+              title: this.$t('pageNetwork.table.editIpv4'),
+              enabled:
+                this.ethernetData[this.tabIndex].DHCPv4.DHCPEnabled == false
+                  ? true
+                  : false,
             },
           ],
         };
       });
     },
-    onIpv4TableAction(action, $event, index) {
-      if ($event === 'delete') {
-        this.deleteIpv4TableRow(index);
-      }
-    },
-    deleteIpv4TableRow(index) {
-      this.form.ipv4TableItems.splice(index, 1);
-      const newIpv4Array = this.form.ipv4TableItems.map((ipv4) => {
-        const { Address, SubnetMask, Gateway } = ipv4;
-        return {
-          Address,
-          SubnetMask,
-          Gateway,
-        };
-      });
-      this.$store
-        .dispatch('network/editIpv4Address', newIpv4Array)
-        .then((message) => this.successToast(message))
-        .catch(({ message }) => this.errorToast(message));
-    },
-    initAddIpv4Address() {
+    editIpv4TableRow(index) {
+      this.$emit('ipv4TableData', this.form.ipv4TableItems);
+      this.$emit('ipv4EditData', index);
       this.$bvModal.show('modal-add-ipv4');
     },
-    changeDhcpEnabledState(state) {
-      this.$bvModal
-        .msgBoxConfirm(
-          state
-            ? this.$t('pageNetwork.modal.confirmEnableDhcp')
-            : this.$t('pageNetwork.modal.confirmDisableDhcp'),
-          {
-            title: this.$t('pageNetwork.modal.dhcpConfirmTitle', {
-              dhcpState: state
-                ? this.$t('global.action.enable')
-                : this.$t('global.action.disable'),
-            }),
-            okTitle: state
-              ? this.$t('global.action.enable')
-              : this.$t('global.action.disable'),
-            okVariant: 'danger',
+    initAddIpv4Address() {
+      this.$emit('addIpv4');
+      this.$emit('ipv4TableData', this.form.ipv4TableItems);
+      this.$bvModal.show('modal-add-ipv4');
+    },
+    changeDhcpIpv4State(dhcpEnable) {
+      if (dhcpEnable) {
+        this.$bvModal
+          .msgBoxConfirm(this.$tc('pageNetwork.modal.confirmMessage'), {
+            title: this.$tc('pageNetwork.modal.confirmTitle'),
+            okTitle: this.$t('global.action.ok'),
             cancelTitle: this.$t('global.action.cancel'),
-          }
-        )
-        .then((dhcpEnableConfirmed) => {
-          if (dhcpEnableConfirmed) {
-            this.$store
-              .dispatch('network/saveDhcpEnabledState', state)
-              .then((message) => this.successToast(message))
-              .catch(({ message }) => this.errorToast(message));
-          } else {
-            let onDhcpCancel = document.getElementById('dhcpSwitch');
-            onDhcpCancel.checked = !state;
-          }
-        });
+          })
+          .then((addConfirmed) => {
+            if (addConfirmed) {
+              const data = { dhcpEnable: dhcpEnable, index: this.tabIndex };
+              this.$store.commit('network/setIpv4Dhcp', data);
+              this.$store
+                .dispatch('network/saveIpv4Dhcp', true)
+                .then((message) => {
+                  this.successToast(message);
+                  this.$bvModal
+                    .msgBoxOk(
+                      this.$tc('pageNetwork.modal.informationMessage'),
+                      {
+                        title: this.$tc('pageNetwork.modal.informatiomTitle'),
+                      }
+                    )
+                    .then((addConfirmed) => {
+                      if (addConfirmed) {
+                        this.$emit('networkOverlay', true);
+                      }
+                    });
+                })
+                .catch(({ message }) => this.errorToast(message));
+            } else {
+              const data = { dhcpEnable: !dhcpEnable, index: this.tabIndex };
+              this.$store.commit('network/setIpv4Dhcp', data);
+            }
+          });
+      } else {
+        const data = { dhcpEnable: !dhcpEnable, index: this.tabIndex };
+        this.$store.commit('network/setIpv4Dhcp', data);
+        if (this.ethernetData[this.tabIndex].IPv4StaticAddresses.length < 2) {
+          this.$bvModal.show('modal-add-ipv4');
+        } else {
+          this.$bvModal.msgBoxOk(
+            this.$tc('pageNetwork.modal.ipv4Confirmation'),
+            {
+              title: this.$tc('pageNetwork.modal.confirm'),
+            }
+          );
+          const data = { dhcpEnable: dhcpEnable, index: this.tabIndex };
+          this.$store.commit('network/setIpv4Dhcp', data);
+          this.form.ipv4TableItems.forEach((element) => {
+            element.actions = [
+              {
+                value: 'edit',
+                title: this.$t('pageNetwork.table.editIpv4'),
+                enabled: true,
+              },
+            ];
+          });
+        }
+      }
     },
   },
 };

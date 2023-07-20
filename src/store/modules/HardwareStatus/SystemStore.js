@@ -5,9 +5,15 @@ const SystemStore = {
   namespaced: true,
   state: {
     systems: [],
+    greenLedStatus: null,
+    amberLedStatus: null,
+    susackLedStatus: null,
   },
   getters: {
     systems: (state) => state.systems,
+    getGreenLedStatus: (state) => state.greenLedStatus,
+    getAmberLedStatus: (state) => state.amberLedStatus,
+    getSusackLedStatus: (state) => state.susackLedStatus,
   },
   mutations: {
     setSystemInfo: (state, data) => {
@@ -41,6 +47,11 @@ const SystemStore = {
       system.systemType = data.SystemType;
       state.systems = [system];
     },
+    setPhysicalLedStatus: (state, data) => {
+      state.greenLedStatus = data.GreenLED;
+      state.amberLedStatus = data.AmberLED;
+      state.susackLedStatus = data.SusackLED;
+    },
   },
   actions: {
     async getSystem({ commit }) {
@@ -49,7 +60,17 @@ const SystemStore = {
         .then((response) =>
           api.get(`${response.data.Systems['@odata.id']}/system`)
         )
-        .then(({ data }) => commit('setSystemInfo', data))
+        .then(({ data }) => {
+          commit('setSystemInfo', data);
+          if (
+            Object.keys(data).includes('Oem') &&
+            Object.keys(data.Oem).includes('OpenBmc')
+          ) {
+            if (data.Oem.OpenBmc.PhysicalLED) {
+              commit('setPhysicalLedStatus', data.Oem.OpenBmc.PhysicalLED);
+            }
+          }
+        })
         .catch((error) => console.log(error));
     },
     async changeIdentifyLedState({ commit }, ledState) {

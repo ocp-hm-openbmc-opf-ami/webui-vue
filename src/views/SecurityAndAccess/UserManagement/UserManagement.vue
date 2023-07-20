@@ -101,6 +101,22 @@
         </b-collapse>
       </b-col>
     </b-row>
+    <b-row>
+      <b-col xl="8">
+        <b-button
+          v-b-toggle.collapse-Password-rules
+          data-test-id="userManagement-button-passwordComplexityRules"
+          variant="link"
+          class="mt-3"
+        >
+          <icon-chevron />
+          {{ $t('pageUserManagement.passwordComplexityRules') }}
+        </b-button>
+        <b-collapse id="collapse-Password-rules" class="mt-3">
+          <password-complexity-rules />
+        </b-collapse>
+      </b-col>
+    </b-row>
     <!-- Modals -->
     <modal-settings :settings="setting" @ok="saveAccountSettings" />
     <modal-user
@@ -125,6 +141,7 @@ import PageTitle from '@/components/Global/PageTitle';
 import TableRoles from './TableRoles';
 import TableToolbar from '@/components/Global/TableToolbar';
 import TableRowAction from '@/components/Global/TableRowAction';
+import PasswordComplexityRules from './PasswordComplexityRules.vue';
 
 import BVTableSelectableMixin, {
   selectedRows,
@@ -133,6 +150,7 @@ import BVTableSelectableMixin, {
 } from '@/components/Mixins/BVTableSelectableMixin';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import i18n from '@/i18n';
 
 export default {
   name: 'UserManagement',
@@ -148,6 +166,7 @@ export default {
     TableRoles,
     TableRowAction,
     TableToolbar,
+    PasswordComplexityRules,
   },
   mixins: [BVTableSelectableMixin, BVToastMixin, LoadingBarMixin],
   beforeRouteLeave(to, from, next) {
@@ -254,7 +273,10 @@ export default {
   },
   methods: {
     editEnable(user) {
-      if ('root' === this.$store.getters['global/username']) {
+      if (
+        'root' === this.$store.getters['global/username'] ||
+        user.RoleId === 'Administrator'
+      ) {
         return true;
       } else {
         return user.UserName === 'root' ? false : true;
@@ -305,10 +327,35 @@ export default {
     deleteUser({ username }) {
       this.startLoader();
       this.$store
-        .dispatch('userManagement/deleteUser', username)
-        .then((success) => this.successToast(success))
-        .catch(({ message }) => this.errorToast(message))
-        .finally(() => this.endLoader());
+        .dispatch('userManagement/getSessionsData')
+        .then((allSessions) => {
+          let userDelete = true;
+          allSessions.forEach((session) => {
+            if (
+              session.SessionType == 'WebUI' &&
+              session.UserName == username
+            ) {
+              userDelete = false;
+            }
+          });
+          return userDelete;
+        })
+        .then((userDelete) => {
+          if (userDelete) {
+            this.$store
+              .dispatch('userManagement/deleteUser', username)
+              .then((success) => this.successToast(success))
+              .catch(({ message }) => this.errorToast(message))
+              .finally(() => this.endLoader());
+          } else {
+            this.endLoader();
+            this.errorToast(
+              i18n.t('pageUserManagement.toast.errorDeleteLoggedUser', {
+                username,
+              })
+            );
+          }
+        });
     },
     onBatchAction(action) {
       switch (action) {

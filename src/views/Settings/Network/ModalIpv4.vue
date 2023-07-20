@@ -99,6 +99,14 @@ export default {
       type: String,
       default: '',
     },
+    ipv4Data: {
+      type: Object,
+      default: () => {},
+    },
+    addIpv4: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -107,11 +115,25 @@ export default {
         gateway: '',
         subnetMask: '',
       },
+      isAddIpv4: false,
     };
   },
   watch: {
     defaultGateway() {
       this.form.gateway = this.defaultGateway;
+    },
+    addIpv4() {
+      this.isAddIpv4 = this.addIpv4;
+      if (this.isAddIpv4) {
+        this.form.ipAddress = null;
+        this.form.gateway = null;
+        this.form.subnetMask = null;
+      }
+    },
+    ipv4Data() {
+      this.form.ipAddress = this.ipv4Data?.Address;
+      this.form.gateway = this.ipv4Data?.Gateway;
+      this.form.subnetMask = this.ipv4Data?.SubnetMask;
     },
   },
   validations() {
@@ -136,12 +158,22 @@ export default {
     handleSubmit() {
       this.$v.$touch();
       if (this.$v.$invalid) return;
-      this.$emit('ok', {
-        Address: this.form.ipAddress,
-        Gateway: this.form.gateway,
-        SubnetMask: this.form.subnetMask,
-      });
-      this.closeModal();
+      this.$bvModal
+        .msgBoxConfirm(this.$tc('pageNetwork.modal.confirmMessage'), {
+          title: this.$tc('pageNetwork.modal.confirmTitle'),
+          okTitle: this.$t('global.action.ok'),
+          cancelTitle: this.$t('global.action.cancel'),
+        })
+        .then((addConfirmed) => {
+          if (addConfirmed) {
+            this.$emit('ok', {
+              Address: this.form.ipAddress,
+              Gateway: this.form.gateway,
+              SubnetMask: this.form.subnetMask,
+            });
+            this.closeModal();
+          }
+        });
     },
     closeModal() {
       this.$nextTick(() => {
@@ -149,9 +181,15 @@ export default {
       });
     },
     resetForm() {
-      this.form.ipAddress = null;
-      this.form.gateway = this.defaultGateway;
-      this.form.subnetMask = null;
+      if (this.isAddIpv4) {
+        this.form.ipAddress = null;
+        this.form.gateway = null;
+        this.form.subnetMask = null;
+      } else {
+        this.form.ipAddress = this.ipv4Data?.Address;
+        this.form.gateway = this.ipv4Data?.Gateway;
+        this.form.subnetMask = this.ipv4Data?.SubnetMask;
+      }
       this.$v.$reset();
       this.$emit('hidden');
     },

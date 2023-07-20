@@ -18,14 +18,16 @@
         <b-col lg="3">
           <dl>
             <dt>{{ $t('pageDateTime.form.date') }}</dt>
-            <dd v-if="bmcTime">{{ bmcTime | formatDate }}</dd>
+            <dd v-if="bmcTime">{{ form.manual.date }}</dd>
             <dd v-else>--</dd>
           </dl>
         </b-col>
         <b-col lg="3">
           <dl>
             <dt>{{ $t('pageDateTime.form.time.label') }}</dt>
-            <dd v-if="bmcTime">{{ bmcTime | formatTime }}</dd>
+            <dd v-if="bmcTime">
+              {{ form.manual.timeUtc }}
+            </dd>
             <dd v-else>--</dd>
           </dl>
         </b-col>
@@ -122,6 +124,21 @@
               </b-form-group>
             </b-col>
           </b-row>
+          <b-row class="mt-3 ml-3">
+            <b-col xl="6">
+              <b-form-group
+                :label="$t('pageDateTime.form.timezone')"
+                label-for="timeZone"
+              >
+                <b-form-select
+                  id="timeZone"
+                  v-model="form.manual.dateTimeLocalOffset"
+                  :options="timeZoneOptions"
+                >
+                </b-form-select>
+              </b-form-group>
+            </b-col>
+          </b-row>
           <b-form-radio
             v-model="form.configurationSelected"
             value="ntp"
@@ -142,12 +159,15 @@
                     :state="getValidationState($v.form.ntp.firstAddress)"
                     :disabled="manualOptionSelected"
                     data-test-id="dateTime-input-ntpServer1"
-                    @blur="$v.form.ntp.firstAddress.$touch()"
+                    @input="$v.form.ntp.firstAddress.$touch()"
                   />
                   <b-form-invalid-feedback role="alert">
-                    <div v-if="!$v.form.ntp.firstAddress.required">
+                    <template v-if="!$v.form.ntp.firstAddress.required">
                       {{ $t('global.form.fieldRequired') }}
-                    </div>
+                    </template>
+                    <template v-if="!$v.form.ntp.firstAddress.pattern">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
                   </b-form-invalid-feedback>
                 </b-input-group>
               </b-form-group>
@@ -161,9 +181,16 @@
                   <b-form-input
                     id="input-ntp-2"
                     v-model="form.ntp.secondAddress"
+                    :state="getValidationState($v.form.ntp.secondAddress)"
                     :disabled="manualOptionSelected"
                     data-test-id="dateTime-input-ntpServer2"
+                    @input="$v.form.ntp.secondAddress.$touch()"
                   />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.form.ntp.secondAddress.pattern">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
                 </b-input-group>
               </b-form-group>
             </b-col>
@@ -176,9 +203,16 @@
                   <b-form-input
                     id="input-ntp-3"
                     v-model="form.ntp.thirdAddress"
+                    :state="getValidationState($v.form.ntp.thirdAddress)"
                     :disabled="manualOptionSelected"
                     data-test-id="dateTime-input-ntpServer3"
+                    @input="$v.form.ntp.thirdAddress.$touch()"
                   />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.form.ntp.thirdAddress.pattern">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
                 </b-input-group>
               </b-form-group>
             </b-col>
@@ -232,12 +266,170 @@ export default {
       form: {
         configurationSelected: 'manual',
         manual: {
-          date: '',
-          time: '',
+          date: this.$store.getters['global/bmcDateTime']?.slice(0, 10),
+          time: this.$store.getters['global/bmcDateTime']?.slice(11, 16),
+          timeUtc:
+            this.$store.getters['global/bmcDateTime']?.slice(11, 19) +
+            ' (UTC' +
+            this.$store.getters['global/bmcDateTime']?.slice(19) +
+            ')',
+          dateTimeLocalOffset: this.$store.getters['global/timeZone'],
         },
         ntp: { firstAddress: '', secondAddress: '', thirdAddress: '' },
       },
       loading,
+      timeZoneOptions: [
+        {
+          value: '-11:00',
+          text: this.$t('pageDateTime.timeZone.MIDWAY'),
+        },
+        {
+          value: '-10:00',
+          text: this.$t('pageDateTime.timeZone.HONOLULU'),
+        },
+        {
+          value: '-09:00',
+          text: this.$t('pageDateTime.timeZone.ANCHORAGE'),
+        },
+        {
+          value: '-08:00',
+          text: this.$t('pageDateTime.timeZone.LOSANGELES_TIJUANA'),
+        },
+        {
+          value: '-07:00',
+          text: this.$t('pageDateTime.timeZone.PHOENIX_CHIHUAHUA_DENVER'),
+        },
+        {
+          value: '-06:00',
+          text: this.$t(
+            'pageDateTime.timeZone.COSTARICA_CHICAGO_MEXICOCITY_REGINA'
+          ),
+        },
+        {
+          value: '-05:00',
+          text: this.$t('pageDateTime.timeZone.BOGOTA'),
+        },
+        {
+          value: '-04:30',
+          text: this.$t('pageDateTime.timeZone.CARACAS'),
+        },
+        {
+          value: '-04:00',
+          text: this.$t('pageDateTime.timeZone.BARBADOS_HALIFAX_MANAUS'),
+        },
+        {
+          value: '-03:30',
+          text: this.$t('pageDateTime.timeZone.STJOHNS'),
+        },
+        {
+          value: '-03:00',
+          text: this.$t(
+            'pageDateTime.timeZone.SANTIAGO_RECIFE_BUENOSAIRES_NUUK_MONTEVIDEO'
+          ),
+        },
+        {
+          value: '-02:00',
+          text: this.$t('pageDateTime.timeZone.SAOPAULO'),
+        },
+        {
+          value: '-01:00',
+          text: this.$t('pageDateTime.timeZone.AZORES_CAPEVERDE'),
+        },
+        {
+          value: '+00:00',
+          text: this.$t('pageDateTime.timeZone.CASABLANCA_LONDON'),
+        },
+        {
+          value: '+01:00',
+          text: this.$t(
+            'pageDateTime.timeZone.AMSTERDAM_BELGRADE_BRUSSELS_MADRID_SARAJEVO_BRAZZAVILLE'
+          ),
+        },
+        {
+          value: '+02:00',
+          text: this.$t(
+            'pageDateTime.timeZone.WINDHOEK_AMMAN_ATHENS_ISTANBUL_BEIRUT_CAIRO_HELSINKI_JERUSALEM_HARARE'
+          ),
+        },
+        {
+          value: '+03:00',
+          text: this.$t(
+            'pageDateTime.timeZone.MINSK_BAGHDAD_MOSCOW_KUWAIT_NAIROBI'
+          ),
+        },
+        {
+          value: '+03:30',
+          text: this.$t('pageDateTime.timeZone.TEHRAN'),
+        },
+        {
+          value: '+04:00',
+          text: this.$t('pageDateTime.timeZone.BAKU_TBILISI_YEREVAN_DUBAI'),
+        },
+        {
+          value: '+04:30',
+          text: this.$t('pageDateTime.timeZone.KABUL'),
+        },
+        {
+          value: '+05:00',
+          text: this.$t('pageDateTime.timeZone.KARACHI_ORAL_YEKATERINBURG'),
+        },
+        {
+          value: '+05:30',
+          text: this.$t('pageDateTime.timeZone.KOLKATA_COLOMBO'),
+        },
+        {
+          value: '+05:45',
+          text: this.$t('pageDateTime.timeZone.KATHMANDU'),
+        },
+        {
+          value: '+06:00',
+          text: this.$t('pageDateTime.timeZone.ALMATY'),
+        },
+        {
+          value: '+06:30',
+          text: this.$t('pageDateTime.timeZone.RANGOON'),
+        },
+        {
+          value: '+07:00',
+          text: this.$t('pageDateTime.timeZone.KRASNOYARSK_BANGKOK_JAKARTA'),
+        },
+        {
+          value: '+08:00',
+          text: this.$t(
+            'pageDateTime.timeZone.SHANGHAI_HONGKONG_IRKUTSK_KUALALUMPUR_PERTH_TAIPEI'
+          ),
+        },
+        {
+          value: '+09:00',
+          text: this.$t('pageDateTime.timeZone.SEOUL_TOKYO_YAKUTSK'),
+        },
+        {
+          value: '+09:30',
+          text: this.$t('pageDateTime.timeZone.DARWIN'),
+        },
+        {
+          value: '+10:00',
+          text: this.$t(
+            'pageDateTime.timeZone.BRISBANE_VLADIVOSTOK_GUAM_MAGADAN'
+          ),
+        },
+        {
+          value: '+10:30',
+          text: this.$t('pageDateTime.timeZone.ADELAIDE'),
+        },
+        {
+          value: '+11:00',
+          text: this.$t('pageDateTime.timeZone.HOBART_SYDNEY_NOUMEA'),
+        },
+        {
+          value: '+12:00',
+          text: this.$t('pageDateTime.timeZone.MAJURO'),
+        },
+        {
+          value: '+13:00',
+          text: this.$t('pageDateTime.timeZone.AUCKLAND'),
+        },
+      ],
     };
   },
   validations() {
@@ -262,6 +454,19 @@ export default {
             required: requiredIf(function () {
               return this.form.configurationSelected === 'ntp';
             }),
+            pattern: function (val) {
+              return this.ntpServerValidation(val);
+            },
+          },
+          secondAddress: {
+            pattern: function (val) {
+              return this.ntpServerValidation(val);
+            },
+          },
+          thirdAddress: {
+            pattern: function (val) {
+              return this.ntpServerValidation(val);
+            },
           },
         },
       },
@@ -270,7 +475,10 @@ export default {
   computed: {
     ...mapState('dateTime', ['ntpServers', 'isNtpProtocolEnabled']),
     bmcTime() {
-      return this.$store.getters['global/bmcTime'];
+      return this.$store.getters['global/bmcDateTime'];
+    },
+    dateTimeLocalOffset() {
+      return this.$store.getters['global/timeZone'];
     },
     ntpOptionSelected() {
       return this.form.configurationSelected === 'ntp';
@@ -296,12 +504,24 @@ export default {
       this.emitChange();
     },
     bmcTime() {
-      this.form.manual.date = this.$options.filters.formatDate(
-        this.$store.getters['global/bmcTime']
+      this.form.manual.date = this.$store.getters['global/bmcDateTime'].slice(
+        0,
+        10
       );
-      this.form.manual.time = this.$options.filters
-        .formatTime(this.$store.getters['global/bmcTime'])
-        .slice(0, 5);
+      this.form.manual.time = this.$store.getters['global/bmcDateTime'].slice(
+        11,
+        16
+      );
+      this.form.manual.timeUtc =
+        this.$store.getters['global/bmcDateTime']?.slice(11, 19) +
+        ' (UTC' +
+        this.$store.getters['global/bmcDateTime']?.slice(19) +
+        ')';
+    },
+    dateTimeLocalOffset() {
+      this.form.manual.dateTimeLocalOffset = this.$store.getters[
+        'global/timeZone'
+      ];
     },
   },
   created() {
@@ -337,7 +557,7 @@ export default {
 
       let dateTimeForm = {};
       let isNTPEnabled = this.form.configurationSelected === 'ntp';
-
+      dateTimeForm.dateTimeLocalOffset = this.form.manual.dateTimeLocalOffset;
       if (!isNTPEnabled) {
         const isUtcDisplay = this.$store.getters['global/isUtcDisplay'];
         let date;
@@ -382,13 +602,15 @@ export default {
           if (!isNTPEnabled) return;
           // Shift address up if second address is empty
           // to avoid refreshing after delay when updating NTP
-          if (!this.form.ntp.secondAddress && this.form.ntp.thirdAddres) {
-            this.form.ntp.secondAddress = this.form.ntp.thirdAddres;
+          if (!this.form.ntp.secondAddress && this.form.ntp.thirdAddress) {
+            this.form.ntp.secondAddress = this.form.ntp.thirdAddress;
             this.form.ntp.thirdAddress = '';
           }
         })
         .then(() => {
-          this.$store.dispatch('global/getBmcTime');
+          setTimeout(() => {
+            this.$store.dispatch('global/getBmcTime');
+          }, 5000);
         })
         .catch(({ message }) => this.errorToast(message))
         .finally(() => {
@@ -411,6 +633,28 @@ export default {
         timeArray[1] // User input minute
       );
       return new Date(utcDate);
+    },
+    ntpServerValidation(value) {
+      if (
+        !/^$/gi.test(value) &&
+        (!(
+          /^(([a-zA-Z]{1})|([a-zA-Z]{1}[a-zA-Z]{1})|([a-zA-Z]{1}[0-9]{1})|([0-9]{1}[a-zA-Z]{1})|([a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]))(.*\.)?.*\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\.[a-zA-Z]{2,3})$/gi.test(
+            value
+          ) ||
+          /((^\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s*$)|(^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$))/gi.test(
+            value
+          )
+        ) ||
+          String(value).charAt(0) == '0' ||
+          '#255.255.255.0#0.24.56.4#255.255.255.255#'.indexOf(
+            '#' + value + '#'
+          ) > -1 ||
+          !/^([a-z0-9\\S\\_\\-\\.\\:]+)$/.test(value))
+      ) {
+        return false;
+      } else {
+        return true;
+      }
     },
   },
 };

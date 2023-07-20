@@ -1,5 +1,10 @@
 <template>
-  <b-alert :show="show" :variant="variant" :class="{ small }">
+  <b-alert
+    :show="show"
+    :variant="variant"
+    :class="{ small }"
+    :dismissible="dismissible"
+  >
     <div
       v-if="
         variant == 'info' ||
@@ -42,6 +47,10 @@ export default {
       default: '',
     },
     small: Boolean,
+    dismissible: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>

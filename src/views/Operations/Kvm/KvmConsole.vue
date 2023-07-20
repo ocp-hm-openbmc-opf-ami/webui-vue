@@ -33,6 +33,15 @@
             <icon-launch />
             {{ $t('pageKvm.openNewTab') }}
           </b-button>
+          <div v-if="isSoftkeyboardSupported" class="softkeyboardBtn">
+            <draggable-div-vue>
+              <template slot="header">
+                <div>
+                  <softKeyBoard @onKeyPress="onKeyPress" />
+                </div>
+              </template>
+            </draggable-div-vue>
+          </div>
         </b-col>
       </b-row>
     </div>
@@ -42,9 +51,15 @@
 
 <script>
 import RFB from '@novnc/novnc/core/rfb';
+import Keys from '@novnc/novnc/core/input/keysym';
 import StatusIcon from '@/components/Global/StatusIcon';
 import IconLaunch from '@carbon/icons-vue/es/launch/20';
 import IconArrowDown from '@carbon/icons-vue/es/arrow--down/16';
+import BVToastMixin from '@/components/Mixins/BVToastMixin';
+import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import softKeyBoard from '@/components/SoftKeyboard/softKeyboard';
+import DraggableDivVue from '@/components/SoftKeyboard/draggableDiv';
+import '@/components/SoftKeyboard/softKeyboard.css';
 import { throttle } from 'lodash';
 import { mapState } from 'vuex';
 
@@ -54,7 +69,14 @@ const Disconnected = 2;
 
 export default {
   name: 'KvmConsole',
-  components: { StatusIcon, IconLaunch, IconArrowDown },
+  components: {
+    StatusIcon,
+    IconLaunch,
+    IconArrowDown,
+    softKeyBoard,
+    DraggableDivVue,
+  },
+  mixins: [BVToastMixin, LoadingBarMixin],
   props: {
     isFullWindow: {
       type: Boolean,
@@ -63,7 +85,9 @@ export default {
   },
   data() {
     return {
-      isConsoleWindow: null,
+      isconsoleWindow: null,
+      isSoftkeyboardSupported:
+        process.env.VUE_APP_KVM_SOFT_KEYBOARD_SUPPORT === 'true' ? true : false,
       rfb: null,
       isConnected: false,
       terminalClass: this.isFullWindow ? 'full-window' : '',
@@ -85,23 +109,49 @@ export default {
     },
     serverStatus() {
       if (this.status === Connected) {
+        this.$root.$emit('enable-softkeyboard-btn');
         return this.$t('pageKvm.connected');
       } else if (this.status === Disconnected) {
+        this.$root.$emit('disable-softkeyboard-btn');
         return this.$t('pageKvm.disconnected');
+      } else if (this.getKvmActiveData()) {
+        this.$root.$emit('disable-softkeyboard-btn');
+        return this.$t('pageKvm.alreadyInMasterSession');
       }
+      this.$root.$emit('disable-softkeyboard-btn');
       return this.$t('pageKvm.connecting');
     },
   },
   watch: {
     consoleWindow() {
-      if (this.consoleWindow == false) this.isConsoleWindow.close();
+      if (this.consoleWindow == false) {
+        this.isconsoleWindow.close();
+        this.$root.$emit('refresh-application');
+      }
     },
   },
   created() {
     this.$store.dispatch('global/getSystemInfo');
   },
   mounted() {
-    this.openTerminal();
+    setTimeout(() => {
+      this.$store
+        .dispatch('kvm/getData')
+        .then(() => {
+          if (this.getKvmActiveData()) {
+            this.errorToast(this.$t('pageKvm.alreadyActiveSession'));
+          } else {
+            this.openTerminal();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.errorToast(this.$t('pageKvm.errorInGettingActiveStatus'));
+        })
+        .finally(() => {
+          this.endLoader();
+        });
+    }, 500);
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeKvmWindow);
@@ -114,6 +164,10 @@ export default {
     closeTerminal() {
       this.rfb.disconnect();
       this.rfb = null;
+    },
+    getKvmActiveData() {
+      let kvmData = this.$store.getters['kvm/getKvmActiveStatus'];
+      return kvmData;
     },
     openTerminal() {
       const token = this.$store.getters['authentication/token'];
@@ -154,20 +208,14 @@ export default {
       }
     },
     openConsoleWindow() {
-      // If isConsoleWindow is not null
-      // Check the newly opened window is closed or not
-      if (this.isConsoleWindow) {
-        // If window is not closed set focus to new window
-        // If window is closed, do open new window
-        if (!this.isConsoleWindow.closed) {
-          this.isConsoleWindow.focus();
-          return;
-        } else {
-          this.openNewWindow();
-        }
-      } else {
-        // If isConsoleWindow is null, open new window
-        this.openNewWindow();
+      if (this.rfb != null && this.isconsoleWindow == null) {
+        this.rfb.disconnect();
+        this.rfb = null;
+        this.isconsoleWindow = window.open(
+          '#/console/kvm',
+          '_blank',
+          'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=700,height=550'
+        );
       }
     },
     openNewWindow() {
@@ -176,6 +224,11 @@ export default {
         'kvmConsoleWindow',
         'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=700,height=550'
       );
+    },
+    onKeyPress(keyId, keyValue, status) {
+      if (this.rfb) {
+        this.rfb.sendKey(Keys[keyId], keyValue, status);
+      }
     },
   },
 };
@@ -194,5 +247,9 @@ export default {
 
 .margin-left-full-window {
   margin-left: 5px;
+}
+
+.softkeyboardBtn {
+  padding-bottom: 57px;
 }
 </style>
