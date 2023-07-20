@@ -1,0 +1,179 @@
+.keyboardContainer {
+  display: flex;
+  background-color: rgba(16, 221, 235, 0.342);
+  justify-content: center;
+  width: 625px;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.hg-theme-default .hg-button {
+  height: 32px !important;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.simple-keyboard.hg-theme-default {
+  display: inline-block;
+}
+
+.simple-keyboard-main.simple-keyboard {
+  width: 500px;
+  min-width: 500px;
+  background-color: transparent;
+}
+.simple-keyboard-main.simple-keyboard .hg-row:first-child {
+  margin-bottom: 10px;
+}
+.simple-keyboard-main.simple-keyboard .hg-button {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.simple-keyboard-arrows.simple-keyboard {
+  align-self: flex-end;
+  background-color: transparent;
+}
+.simple-keyboard .hg-button.selectedButton {
+  background-color: rgba(5, 25, 70, 0.53);
+  color: white;
+}
+.simple-keyboard .hg-button.emptySpace {
+  pointer-events: none;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+.simple-keyboard-arrows .hg-row {
+  justify-content: center;
+}
+.simple-keyboard-arrows .hg-button {
+  width: 30px;
+  height: 30px;
+  flex-grow: 0;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+
+.controlArrows {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: column;
+}
+
+.simple-keyboard-control.simple-keyboard {
+  background-color: transparent;
+}
+
+.simple-keyboard-control.simple-keyboard .hg-row:first-child {
+  margin-bottom: 10px;
+}
+
+.simple-keyboard-control .hg-button {
+  width: 35px;
+  height: 40px;
+  flex-grow: 0;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.hg-functionBtn {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px !important;
+}
+
+.simple-keyboard.hg-theme-default .hg-button.hg-selectedButton {
+  background: rgba(5, 25, 70, 0.53);
+  color: white;
+}
+
+.hg-button.hg-functionBtn.hg-button-space {
+  width: 250px;
+}
+
+.hg-standardBtn:focus,
+.hg-functionBtn:focus {
+  box-shadow: #d6d6e7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+}
+
+.hg-standardBtn:hover,
+.hg-functionBtn:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.hg-standardBtn:active,
+.hg-functionBtn:active {
+  box-shadow: #d6d6e7 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+.closeBtnDiv {
+  width: 665px;
+}
+
+.closeBtn {
+  float: right;
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(
+    100% 100% at 100% 0,
+    rgb(255, 255, 255),
+    rgb(255, 255, 255) 100%
+  );
+  border: 0;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono", monospace;
+  height: 25px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 5px;
+  padding-right: 5px;
+  bottom: 27px;
+  right: 42px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow 0.15s, transform 0.15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  font-size: 12px;
+}
+
+.closeBtn:focus {
+  box-shadow: #3cd5e0 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3cd5e0 0 -3px 0 inset;
+}
+
+.closeBtn:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #000000 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.closeBtn:active {
+  box-shadow: #3cd5e0 0 3px 7px inset;
+  transform: translateY(2px);
+}

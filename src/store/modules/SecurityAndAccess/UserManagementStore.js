@@ -1,19 +1,6 @@
 import api, { getResponseCount } from '@/store/api';
 import i18n from '@/i18n';
 
-const getServerErrorMessages = function (error) {
-  let errorData = error.response.data.error
-    ? error.response.data.error
-    : error.response.data;
-  if (typeof errorData == 'string') {
-    return [];
-  }
-  return Object.values(errorData)
-    .reduce((a, b) => a.concat(b))
-    .filter((info) => info.Message)
-    .map((info) => info.Message);
-};
-
 const UserManagementStore = {
   namespaced: true,
   state: {
@@ -65,15 +52,44 @@ const UserManagementStore = {
     },
   },
   actions: {
+    async getSessionsData() {
+      return await api
+        .get('/redfish/v1/SessionService/Sessions')
+        .then((response) =>
+          response.data.Members.map((sessionLogs) => sessionLogs['@odata.id'])
+        )
+        .then((sessionUris) =>
+          api.all(sessionUris.map((sessionUri) => api.get(sessionUri)))
+        )
+        .then((sessionUris) => {
+          const allSessionsData = sessionUris.map((sessionUri) => {
+            return sessionUri.data;
+          });
+          return allSessionsData;
+        })
+        .catch((error) => {
+          console.log('Client Session Data:', error);
+        });
+    },
     async getUsers({ commit }) {
       return await api
         .get('/redfish/v1/AccountService/Accounts')
         .then((response) =>
           response.data.Members.map((user) => user['@odata.id'])
         )
-        .then((userIds) => api.all(userIds.map((user) => api.get(user))))
+        .then((userIds) => {
+          const userRequests = userIds.map((user) => {
+            return api.get(user).catch((error) => {
+              console.log(`Failed to fetch user ${user}: ${error}`);
+              return null;
+            });
+          });
+          return Promise.all(userRequests);
+        })
         .then((users) => {
-          const userData = users.map((user) => user.data);
+          const userData = users
+            .filter((user) => user !== null)
+            .map((user) => user.data);
           commit('setUsers', userData);
         })
         .catch((error) => {
@@ -125,15 +141,10 @@ const UserManagementStore = {
             username,
           })
         )
-        .catch((error) => {
-          let serverMessages = getServerErrorMessages(error);
-          let message =
-            serverMessages.length > 0
-              ? serverMessages.join(' ')
-              : i18n.t('pageUserManagement.toast.errorCreateUser', {
-                  username: username,
-                });
-          throw new Error(message);
+        .catch(async (error) => {
+          console.log(error);
+          let temp = await dispatch('handleError', { error, username });
+          throw new Error(temp);
         });
     },
     async updateUser(
@@ -154,16 +165,10 @@ const UserManagementStore = {
             username: originalUsername,
           })
         )
-        .catch((error) => {
+        .catch(async (error) => {
           console.log(error);
-          const serverMessages = getServerErrorMessages(error);
-          const message =
-            serverMessages.length > 0
-              ? serverMessages.join(' ')
-              : i18n.t('pageUserManagement.toast.errorUpdateUser', {
-                  username: originalUsername,
-                });
-          throw new Error(message);
+          let temp = await dispatch('handleError', { error, originalUsername });
+          throw new Error(temp);
         });
     },
     async deleteUser({ dispatch }, username) {
@@ -331,6 +336,47 @@ const UserManagementStore = {
           const message = i18n.t('pageUserManagement.toast.errorSaveSettings');
           throw new Error(message);
         });
+    },
+    async handleError(_, { error, username, originalUsername }) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data['Password@Message.ExtendedInfo']
+      ) {
+        const extendedInfo =
+          error.response.data['Password@Message.ExtendedInfo'];
+        if (Array.isArray(extendedInfo) && extendedInfo.length > 0) {
+          const message = extendedInfo[0].Message;
+          if (message && message.indexOf('Password') !== -1) {
+            const errorMessage = i18n.t(
+              'pageUserManagement.toast.errorInvalidPassword',
+              {
+                username,
+                originalUsername,
+              }
+            );
+            return errorMessage;
+          }
+        }
+      }
+      if (username && username != undefined) {
+        const errorMessage = i18n.t(
+          'pageUserManagement.toast.errorCreateUser',
+          {
+            username,
+          }
+        );
+        return errorMessage;
+      }
+      if (originalUsername && originalUsername != undefined) {
+        const errorMessage = i18n.t(
+          'pageUserManagement.toast.errorUpdateUser',
+          {
+            username: originalUsername,
+          }
+        );
+        return errorMessage;
+      }
     },
   },
 };

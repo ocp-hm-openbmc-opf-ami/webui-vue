@@ -126,12 +126,6 @@ export default {
       },
     },
   },
-  created() {
-    this.$store.dispatch('network/getEthernetData').finally(() => {
-      // Emit initial data fetch complete to parent component
-      this.$root.$emit('network-global-settings-complete');
-    });
-  },
   methods: {
     changeDomainNameState(state) {
       this.$store

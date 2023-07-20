@@ -177,7 +177,7 @@ export default {
   },
   computed: {
     serverStatus() {
-      return this.$store.getters['global/serverStatus'];
+      return this.$store.getters['controls/serverStatus'];
     },
     isOperationInProgress() {
       return this.$store.getters['controls/isOperationInProgress'];

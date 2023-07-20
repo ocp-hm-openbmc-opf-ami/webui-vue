@@ -1,13 +1,22 @@
 <template>
   <transition name="fade">
-    <b-progress v-if="!isLoadingComplete">
-      <b-progress-bar
-        striped
-        animated
-        :value="loadingIndicatorValue"
-        :aria-label="$t('global.ariaLabel.progressBar')"
-      />
-    </b-progress>
+    <div v-if="!isLoadingComplete">
+      <b-overlay
+        :blur="blur"
+        :show="true"
+        opacity="0.6"
+        no-wrap
+        fixed
+        class="full-overlay"
+      >
+        <template #overlay>
+          <div class="text-center">
+            <b-icon icon="stopwatch" font-scale="3" animation="cylon"></b-icon>
+            <p id="cancel-label">Please wait...</p>
+          </div>
+        </template>
+      </b-overlay>
+    </div>
   </transition>
 </template>
 
@@ -19,9 +28,11 @@ export default {
       isLoadingComplete: false,
       loadingIntervalId: null,
       timeoutId: null,
+      blur: '3px',
     };
   },
   created() {
+    this.$emit('load', this.isLoadingComplete);
     this.$root.$on('loader-start', () => {
       this.startLoadingInterval();
     });
@@ -38,6 +49,7 @@ export default {
       this.clearTimeout();
       this.loadingIndicatorValue = 0;
       this.isLoadingComplete = false;
+      this.$emit('load', this.isLoadingComplete);
       this.loadingIntervalId = setInterval(() => {
         this.loadingIndicatorValue += 1;
         if (this.loadingIndicatorValue > 100) this.clearLoadingInterval();
@@ -51,6 +63,7 @@ export default {
         // Let animation complete before hiding
         // the loading bar
         this.isLoadingComplete = true;
+        this.$emit('load', this.isLoadingComplete);
       }, 1000);
     },
     hideLoadingBar() {
@@ -58,6 +71,7 @@ export default {
       this.clearTimeout();
       this.loadingIndicatorValue = 0;
       this.isLoadingComplete = true;
+      this.$emit('load', this.isLoadingComplete);
     },
     clearLoadingInterval() {
       if (this.loadingIntervalId) clearInterval(this.loadingIntervalId);

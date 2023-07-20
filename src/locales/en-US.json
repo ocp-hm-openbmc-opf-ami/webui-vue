@@ -81,7 +81,8 @@
             "selectItem": "Select item",
             "selectedItems": "%{filterCount} of %{count} items",
             "toDate": "To date",
-            "viewAll": "View all"
+            "viewAll": "View all",
+            "overAllSystemHealth": "Overall System Health"
         },
         "toast": {
             "unAuthTitle": "Unauthorized",
@@ -119,6 +120,7 @@
         "logs": "Logs",
         "userManagement": "@:appPageTitle.userManagement",
         "network": "@:appPageTitle.network",
+        "vlan": "@:appPageTitle.vlan",
         "overview": "@:appPageTitle.overview",
         "primaryNavigation": "Primary navigation",
         "postCodeLogs": "@:appPageTitle.postCodeLogs",
@@ -131,7 +133,17 @@
         "certificates": "@:appPageTitle.certificates",
         "virtualMedia": "@:appPageTitle.virtualMedia",
         "power": "@:appPageTitle.power",
-        "keyClear": "@:appPageTitle.keyClear"
+        "keyClear": "@:appPageTitle.keyClear",
+        "factoryDefault": "Factory Default",
+        "smtpSettings": "SMTP Settings",
+        "pef": "Platform Event Filter",
+        "eventFilter": "Event Filter",
+        "alertDestination": "Alert Destination",
+        "nicInformation": "NIC Information",
+        "nvmeInformation": "@:appPageTitle.nvmeInformation",
+        "hostSystemDiagnostics": "Host System Diagnostics",
+        "autonomousCrashDump": "ACD",
+        "asd": "@:appPageTitle.asd"
     },
     "appPageTitle": {
         "changePassword": "Change password",
@@ -148,6 +160,7 @@
         "userManagement": "User management",
         "login": "Login",
         "network": "Network",
+        "vlan": "VLAN",
         "overview": "Overview",
         "pageNotFound": "Page not found",
         "postCodeLogs": "POST code logs",
@@ -160,7 +173,15 @@
         "serverPowerOperations": "Server power operations",
         "certificates": "Certificates",
         "virtualMedia": "Virtual media",
-        "keyClear": "Key clear"
+        "keyClear": "Key clear",
+        "FactoryDefault": "Factory Default",
+        "smtpSettings": "SMTP Settings",
+        "eventFilter": "Event Filter",
+        "alertDestination": "Alert Destination",
+        "nicInformation": "NIC Information",
+        "nvmeInformation": "NVMe Information",
+        "autonomousCrashDump": "ACD",
+        "asd": "ASD"
     },
     "pageChangePassword": {
         "changePassword": "Change password",
@@ -168,6 +189,7 @@
         "changePasswordError": "There was an error changing the password.",
         "confirmNewPassword": "Confirm new password",
         "goBack": "Go back",
+        "submit": "Submit",
         "newPassword": "New password",
         "username": "Username"
     },
@@ -191,6 +213,42 @@
             "successDelete": "Successfully disconnected %{count} session. | Successfully disconnected %{count} sessions."
         }
     },
+    "pageNic": {
+        "pciClassCode": "PCI Class Code",
+        "slotNumber": "Slot Number",
+        "vendorId": "Vendor ID",
+        "deviceId": "Device ID",
+        "currentSpeed": "Current Speed",
+        "portIdx": "Port Idx",
+        "mediaState": "Media State",
+        "macAddress": "MAC Address",
+        "firmwareAddress": "Firmware Address"
+    },
+    "pageNvmeInformation": {
+        "nvmeSolidStateDrive": "NVMe Solid State Drive State",
+        "nvmeInformation": "NVMe Information",
+        "model": "Model",
+        "serialNumber": "Serial number",
+        "pcie0LinkSpeed": "PCIe 0 Link Speed",
+        "pcie1LinkSpeed": "PCIe 1 Link Speed",
+        "pcie0LinkWidth": "PCIe 0 Link Width",
+        "pcie1LinkWidth": "PCIe 1 Link Width",
+        "nvmePowered": "NVMe Powered",
+        "nvmeFunctional": "NVMe Functional",
+        "nvmeResetRequired": "NVMe Reset Required",
+        "port0PcieLinkActive": "Port 0 PCIe Link Active",
+        "port1PcieLinkActive": "Port 1 PCIe Link Active",
+        "deviceClass": "Device Class",
+        "deviceSubClass": "Device Sub-Class",
+        "deviceProgrammingIntfc": "Device Programming Intfc",
+        "driveLifeConsumed": "Drive Life Consumed",
+        "manufacturer": "Manufacturer",
+        "deviceLocation": "Device Location",
+        "firmwareVersion": "firmware Version",
+        "toast": {
+            "errorShowingNVMeInfo": "Error in displaying NVMe Information"
+        }
+    },
     "pageDateTime": {
         "alert": {
             "message": "To change how date and time are displayed (either UTC or browser offset) throughout the application, visit ",
@@ -200,6 +258,7 @@
         "form": {
             "date": "Date",
             "manual": "Manual",
+            "timezone": "Timezone",
             "time": {
                 "label": "24-hour time",
                 "timezone": "@:pageDateTime.form.time.label (%{timezone})"
@@ -213,6 +272,42 @@
         "toast": {
             "errorSaveDateTime": "Error saving date and time settings.",
             "successSaveDateTime": "Successfully saved date and time settings."
+        },
+        "timeZone": {
+            "MIDWAY": "GMT-11:00 | Midway",
+            "HONOLULU": "GMT-10:00 | Honolulu",
+            "ANCHORAGE": "GMT-09:00 | Anchorage",
+            "LOSANGELES_TIJUANA": "GMT-08:00 | Los Angeles/Tijuana",
+            "PHOENIX_CHIHUAHUA_DENVER": "GMT-07:00 | Phoenix/Chihuahua/Denver",
+            "COSTARICA_CHICAGO_MEXICOCITY_REGINA": "GMT-06:00 | Costa Rica/Chicago/Mexico City/Regina",
+            "BOGOTA": "GMT-05:00 | Bogota/New York",
+            "CARACAS": "GMT-04:30 | Caracas",
+            "BARBADOS_HALIFAX_MANAUS": "GMT-04:00 | Barbados/Halifax/Manaus",
+            "STJOHNS": "GMT-03:30 | St Johns",
+            "SANTIAGO_RECIFE_BUENOSAIRES_NUUK_MONTEVIDEO": "GMT-03:00 | Santiago/Recife/Buenos Aires/Nuuk/Montevideo",
+            "SAOPAULO": "GMT-02:00 | Sao Paulo/South Georgia",
+            "AZORES_CAPEVERDE": "GMT-01:00 | Azores/Cape Verde",
+            "CASABLANCA_LONDON": "GMT+00:00 | Casablanca/London",
+            "AMSTERDAM_BELGRADE_BRUSSELS_MADRID_SARAJEVO_BRAZZAVILLE": "GMT+01:00 | Amsterdam/Belgrade/Brussels/Madrid/Sarajevo/Brazzaville",
+            "WINDHOEK_AMMAN_ATHENS_ISTANBUL_BEIRUT_CAIRO_HELSINKI_JERUSALEM_HARARE": "GMT+02:00 | Windhoek/Amman/Athens/Istanbul/Beirut/Cairo/Helsinki/Jerusalem/Harare",
+            "MINSK_BAGHDAD_MOSCOW_KUWAIT_NAIROBI": "GMT+03:00 | Minsk/Baghdad/Moscow/Kuwait/Nairobi",
+            "TEHRAN": "GMT+03:30 | Tehran",
+            "BAKU_TBILISI_YEREVAN_DUBAI": "GMT+04:00 | Baku/Tbilisi/Yerevan/Dubai",
+            "KABUL": "GMT+04:30 | Kabul",
+            "KARACHI_ORAL_YEKATERINBURG": "GMT+05:00 | Karachi/Oral/Yekaterinburg",
+            "KOLKATA_COLOMBO": "GMT+05:30 | Kolkata/Colombo",
+            "KATHMANDU": "GMT+05:45 | Kathmandu",
+            "ALMATY": "GMT+06:00 | Almaty",
+            "RANGOON": "GMT+06:30 | Rangoon",
+            "KRASNOYARSK_BANGKOK_JAKARTA": "GMT+07:00 | Krasnoyarsk/Bangkok/Jakarta",
+            "SHANGHAI_HONGKONG_IRKUTSK_KUALALUMPUR_PERTH_TAIPEI": "GMT+08:00 | Shanghai/Hong Kong/Irkutsk/Kuala Lumpur/Perth/Taipei",
+            "SEOUL_TOKYO_YAKUTSK": "GMT+09:00 | Seoul/Tokyo/Yakutsk",
+            "DARWIN": "GMT+09:30 | Darwin",
+            "BRISBANE_VLADIVOSTOK_GUAM_MAGADAN": "GMT+10:00 | Brisbane/Vladivostok/Guam/Magadan",
+            "ADELAIDE": "GMT+10:30 | Adelaide",
+            "HOBART_SYDNEY_NOUMEA": "GMT+11:00 | Hobart/Sydney/Noumea",
+            "MAJURO": "GMT+12:00 | Majuro",
+            "AUCKLAND": "GMT+13:00 | Auckland/Fiji/Tongatapu"
         }
     },
     "pageDumps": {
@@ -320,6 +415,57 @@
             "resetBiosError": "Factory reset of server settings failed.",
             "resetToDefaultsSuccess": "Factory reset of BMC and server settings successful.",
             "resetToDefaultsError": "Factory reset of BMC and server settings failed."
+        }
+    },
+    "pageAutonomousCrashDump": {
+        "acd": "ACD Server",
+        "action": {
+            "download": "Download log",
+            "generate": "Generate",
+            "close": "Close",
+            "view": "After a click wait for a minute, JSON Viewer popup window is loading.."
+        },
+        "modal": {
+            "jsonViewer": "Selected File: %{fileName}"
+        },
+        "table": {
+            "fileName": "File Name",
+            "fileInformation": "File Information ",
+            "sino": "S.NO"
+        },
+        "pageDescription": "Autonomous Crash Dump",
+        "toast": {
+            "successGenerateCrashDumpLog": "Successfully Generated Crash Dump",
+            "errorACDDisabled": "Error for disabling ACD.",
+            "errorACDEnabled": "Error for enabling ACD.",
+            "successACDDisabled": "Successfully disabled ACD.",
+            "successACDEnabled": "Successfully enabled ACD."
+        }
+    },
+    "pageAsd": {
+        "pageDescription": "At-Scale Debug Service",
+        "asdServer": "ASD Server",
+        "toast": {
+            "errorAsdDisabled": "Error disabling ASD server.",
+            "errorAsdEnabled": "Error enabling ASD server.",
+            "successAsdDisabled": "Successfully disabled ASD server.",
+            "successAsdEnabled": "Successfully enabled ASD server."
+        }
+    },
+    "PageFactoryDefault": {
+        "toast": {
+            "restoreToDefaultsSuccess": "Factory Default Restore Default successful.",
+            "restoreToDefaultsError": "Factory Default Restore Default failed.",
+            "FactoryDefaultConfirmationFull": "This operation cannot be undone. All remote sessions will be ended, and all users and network interfaces will be disabled. Click OK to continue,or click Cancel to stop now.",
+            "FactoryDefaultConfirmationPartial": "This operation cannot be undone. All remote sessions will be ended, and will reserve user and LAN configurations based on Default Restore. Click OK to continue, or click Cancel to stop now.",
+            "title": "Factory Default",
+            "okTitle": "ok"
+        }
+    },
+    "PageOperations": {
+        "form": {
+            "RestoreDefaultPartial": "Restore Default - Partial",
+            "RestoreDefaultFull": "Restore Default - Full"
         }
     },
     "pageFirmware": {
@@ -488,7 +634,10 @@
         "status": "Status",
         "connected": "Connected",
         "connecting": "Connecting",
-        "disconnected": "Disconnected"
+        "disconnected": "Disconnected",
+        "alreadyActiveSession": "Already master KVM session is Running! Please try after some time.",
+        "alreadyInMasterSession": "Master session is Running",
+        "errorInGettingActiveStatus": "Error in Getting KVM active status!!"
     },
     "pageLdap": {
         "pageDescription": "Configure LDAP settings and manage role groups",
@@ -547,6 +696,8 @@
         "deleteUser": "Delete user | Delete users",
         "editUser": "Edit user",
         "viewPrivilegeRoleDescriptions": "View privilege role descriptions",
+        "passwordComplexityRules": "Password complexity rules",
+        "note": "To view or modify the password complexity rule go to security and access -> polices page",        
         "modal": {
             "accountLocked": "Account locked",
             "accountStatus": "Account status",
@@ -589,13 +740,15 @@
             "errorBatchDelete": "Error deleting %{count} user. | Error deleting %{count} users.",
             "errorBatchDisable": "Error disabling %{count} user. | Error disabling %{count} users.",
             "errorBatchEnable": "Error enabling %{count} user. | Error enabling %{count} users.",
-            "errorCreateUser": "Error creating user '%{username}'.",
+            "errorCreateUser": "Username '%{username}' already exists.",
             "errorAlreadyExistUser": "Username '%{username}' already exists.",
             "errorDeleteUser": "Error deleting user '%{username}'.",
+            "errorDeleteLoggedUser": "User '%{username}' currently logged-in another session",
             "errorLoadAccountSettings": "Error loading account settings",
             "errorLoadUsers": "Error loading users.",
             "errorSaveSettings": "Error saving account settings.",
             "errorUpdateUser": "Error updating user '%{username}'.",
+            "errorInvalidPassword": "Invalid Password check the Password complexity rules",
             "successBatchDelete": "Successfully deleted %{count} user. | Successfully deleted %{count} users.",
             "successBatchDisable": "Successfully disabled %{count} user. | Successfully disabled %{count} users.",
             "successBatchEnable": "Successfully enabled %{count} user. | Successfully enabled %{count} users.",
@@ -603,7 +756,50 @@
             "successDeleteUser": "Deleted user '%{username}'.",
             "successSaveSettings": "Successfully saved account settings.",
             "successUpdateUser": "Updated user '%{username}'."
-        }
+        },
+        "passwordRules": {
+          "passwordForHigh": {
+            "passwordComplexityForHigh": "Password Complexity for high",
+            "rule1": "Contains printable characters only.",
+            "rule2": "Password length should not be shorter than 8 characters.",
+            "rule3":"Meets following 4 criteria:" ,
+            "rule4": "Contains upper case (e.g. A, G).",
+            "rule5": "Contains lower case (e.g. a, g).",
+            "rule6": "Contains digit numbers (e.g. 1, 6).",
+            "rule7": "Contain at least a space or symbols (e.g. $, &).",
+            "rule8": "Could not contains username or the user name in reverse order (case insensitive).",
+            "rule9": "Have at least two new characters when compared with theprevious password.",
+            "rule10": "Could not contains continuous digits longer than or equal to 3 characters (e.g. BMC(123)ste, BMC(654)sfc are not allowed).",
+            "rule11": "Could not contains continuous alphabets longer than or equalto 3 characters (e.g. (AbC)3478!,57$(DeF)68k are notallowed).",
+            "rule12": "Alphabets could no longer than 3 characters (e.g. (Fher)145! are not allowed))",
+            "rule13": "Digits could no longer than 3 characters (e.g. Fgke(1245)#@, (4390)FGL$ are not allowed)",
+            "rule14": "Contains no more than 3 same alphabets(case insensitive) (e.g. Fkr4fcpF&f (4 'f' or 'F'),Glg5gt2G! (4 'g' or 'G') are not allowed)"
+          },
+          "passwordFormedium": {
+            "passwordComplexityFormedium": "Password Complexity for Medium",
+            "rule1": "Contains printable characters only.",
+            "rule2": "Password length should not be shorter than 8 characters.",
+            "rule3": "Cannot be the same as the username or the user name in reverse order.",
+            "rule4": "Have at least two new characters when compared with the previous password.",
+            "rule5": "Meets following 4 criteria:",
+            "rule6": "Contains upper case (e.g. A, G).",
+            "rule7": "Contains lower case (e.g. a, g).",
+            "rule8": "Contains digit numbers (e.g. 1, 6).",
+            "rule9": "Contain at least a space or symbols (e.g. $, &).",
+            "rule10": "Could not contains username or the user name in reverse order (case insensitive) (eg,username=Hello, Password=th12(oLleH)_78 is not allowed)."
+          },
+          "passwordForLow": {
+            "passwordComplexityForLow": "Password Complexity for Low",
+            "rule1": "Contains printable characters only.",
+            "rule2": "Password length should not be shorter than 6 characters.",
+            "rule3": "Meets following 4 criteria:",
+            "rule4": "Contains upper case (e.g. A, G).",
+            "rule5": "Contains lower case (e.g. a, g).",
+            "rule6": "Contains digit numbers (e.g. 1, 6).",
+            "rule7": "Contain at least a space or symbols (e.g. $, &).",
+            "rule8": "Could not contains user name or the user name in reverse order (pam_cracklib will check both) (case insensitive) (eg, username=Hello, both Password=th12(heLLo)_78 and Password=th12(oLleH)_78 is not allowed, same as Medium and High)."
+          }
+     }        
     },
     "pageLogin": {
         "language": "Language",
@@ -611,7 +807,8 @@
         "password": "Password",
         "username": "Username",
         "alert": {
-            "message": "Invalid username or password"
+            "message": "Invalid username or password",
+            "authLockmessage": "Reached maximum login attempts. User account locked"
         }
     },
     "pageOverview": {
@@ -702,6 +899,7 @@
         "ipv4": "IPv4",
         "ipv4Addresses": "IPv4 addresses",
         "ipv6": "IPv6",
+        "ipv6Addresses": "IPv6 addresses",
         "linkStatus": "Link status",
         "macAddress": "MAC address",
         "network": "network",
@@ -722,23 +920,113 @@
             "gateway": "Gateway",
             "ipAddress": "IP address",
             "staticDns": "Static DNS",
-            "subnetMask": "Subnet mask"
+            "subnetMask": "Subnet mask",
+            "prefixLength": "Prefix Length",
+            "primaryDns": "Primary DNS Server",
+            "secondaryDns": "Secondary DNS Server",
+            "confirm": "Confirmation",
+            "ipv4Confirmation": "Please delete any one of IPV4 address to add Static IPV4 address.",
+            "ipv6Confirmation": "Please delete any one of IPV6 address to add Static IPV6 address.",
+            "confirmTitle": "Confirm?",
+            "confirmMessage":"This configuration may change the IP address of the device, making further access impossible. After confirming the device IP, you can log in with the new IP. Do you want to proceed?",
+            "informatiomTitle": "Information",
+            "informationMessage": "Network configuration has been reset successfully. Please close this browser session and open a new browser session to connect to the device with new IP"
         },
         "table": {
             "addDnsAddress": "Add IP address",
             "addIpv4Address": "Add static IPv4 address",
+            "addIpv6Address": "Add static IPv6 address",
             "addressOrigin": "Address origin",
             "deleteDns": "Delete DNS address",
             "deleteIpv4": "Delete IPv4 address",
+            "deleteIpv6": "Delete IPv6 address",
             "editDns": "Edit DNS address",
             "editIpv4": "Edit IPv4 address",
+            "editIpv6": "Edit IPv6 address",
             "gateway": "Gateway",
             "ipAddress": "IP address",
-            "subnet": "Subnet mask"
+            "subnet": "Subnet mask",
+            "prefixLength": "Prefix Length",
+            "primaryDns": "Primary DNS Server",
+            "secondaryDns": "Secondary DNS Server"
         },
         "toast": {
             "errorSaveNetworkSettings": "Error updating %{setting} settings.",
             "successSaveNetworkSettings": "Successfully updated %{setting} settings."
+        }
+    },
+    "pageVlan": {
+        "vlan": "VLAN Settings",
+        "table": {
+            "virtualInterface": "Virtual Interface",
+            "id": "VLAN ID",
+            "add": "Add",
+            "deleteVlan": "Delete Vlan Id"
+        },
+        "toast": {
+            "successAddedVlan": "Successfully updated network configuration.",
+            "errorAddedVlan": "Error adding VLAN.",
+            "successDeleteVlan": "Virtual interface was deleted successfully.",
+            "errorDeleteVlan": "Error deleting VLAN.",
+            "errorVlanId": "The VLAN ID should be in the range of 1~4094."
+        },
+        "modal": {
+            "confirmTitle": "Confirm?",
+            "confirmMessage": "This feature may change the IP address of the device, making further access impossible. After confirming the device IP, you can log in with the new IP. Do you want to proceed?"
+        }
+    },
+    "pageSmtp": {
+        "pageDescription": "Configure BMC SMTP Settings",
+        "sectionTitle": "SMTP",
+        "smtpLabel": "SMTP Settings",
+        "formGroupLabel": "SMTP Configuration",
+        "labelServerAddress": "Server Address",
+        "labelSenderEmailAddress": "Sender Email Address",
+        "labelPort": "Port",
+        "toast": {
+            "successSMTPConfiguration": "Successfully updated SMTP Configuration",
+            "errorSMTPConfiguration": "Error updating SMTP Configuration"
+        }
+    },
+    "pageAlertDestination": {
+        "pageDescription": "Configure Alert Destinations",
+        "sectionTitle": "Alert Destination",
+        "alertDestinationLabel": "Configure Alert Destination details",
+        "sendEmailTo": "Send Email to:",
+        "sendTestAlert": "send Test Alert",
+        "toast": {
+            "successMsg": "Successfully updated Alert Destination",
+            "errorMsg": "Error in updating Alert Destination",
+            "successMsgTestAlert": "Test Alert send successfully",
+            "errorMsgAlert": "Error in sending test alerts"
+        }
+    },
+    "pageEventFilter": {
+        "pageDescription": "Select the Events that will trigger the alert",
+        "sectionTitle": "Event Filter",
+        "eventFilterLabel": "Configure Alert Destination details",
+        "enableAllEvents": "Enable/Disable all Event Filters",
+        "temperatureSensorOutOfRange": "Temperature Sensor Out of Range",
+        "fanFailure": "Fan Failure",
+        "powerSupplyFailure": "Power Supply Failure",
+        "biosPostErrorCode": "BIOS: Post Error Code",
+        "nodeManagerException": "Node Manager Exception",
+        "systemRestart": "System Restart",
+        "powerUnitRedundancyFailure": "Power Unit Redundancy Failure",
+        "fanRedundancyFailure": "Fan Redundancy Failure",
+        "processorPresence": "Processor Presence",
+        "voltageSensorOutOfRange": "Voltage Sensor Out of Range",
+        "chassisIntrusion": "Chassis Intrusion",
+        "memoryError": "Memory Error",
+        "frbFailure": "FRB Failure",
+        "watchdogTimer": "Watchdog Timer",
+        "hardDriveFailure": "Hard Drive Failure",
+        "inletTemperatureOverheatShutdown": "Inlet Temperature Overheat Shutdown",
+        "powerUnitStatus": "Power Unit Status",
+        "processorDimmThermTrip": "Processor DIMM Therm Trip",
+        "toast": {
+            "successEventFilterMsg": "Event Filter configuration updated successfully",
+            "errorEventFilterMsg": "Error in Updating event filter configuration"
         }
     },
     "pagePageNotFound": {
@@ -776,6 +1064,8 @@
         }
     },
     "pagePolicies": {
+        "ipmiProtocolPortLabel": "IPMI Port Value (in numbers)",
+        "solSshPortLabel": "SOL SSH  Port Value (in numbers)",
         "ipmi": "Network IPMI (out-of-band IPMI)",
         "ipmiDescription": "Allow remote management of the platform via IPMI. Tools such as ipmitool require this setting to be enabled.",
         "rtad": "RTAD",
@@ -793,6 +1083,8 @@
             }
         },
         "toast": {
+            "errorIpmiPort": "Error in setting IPMI port value.",
+            "errorSolSshPort": "Error in setting SOL SSH port value.",
             "errorIpmiDisabled": "Error disabling IPMI security setting.",
             "errorIpmiEnabled": "Error enabling IPMI security setting.",
             "errorRtadDisabled": "Error disabling RTAD security setting.",
@@ -801,7 +1093,17 @@
             "errorSshEnabled": "Error enabling SSH security setting.",
             "errorVtpmDisabled": "Error disabling VirtualTPM security setting.",
             "errorVtpmEnabled": "Error enabling VirtualTPM security setting.",
+            "errorKvmDisabled": "Error disabling KVM security setting.",
+            "errorKvmEnabled": "Error enabling KVM security setting.",
+            "errorVmcDisabled": "Error disabling Virtual Media security setting.",
+            "errorVmcEnabled": "Error enabling Virtual Media security setting.",
+            "errorSOLDisabled": "Error disabling SOL SSH security setting.",
+            "errorSOLEnabled": "Error enabling SOL SSH security setting.",
+            "successIpmiPort": "Successfully update IPMI Port value.",
+            "successSolSshPort": "Successfully update SOL SSH Port value.",
             "errorSessionTimeout": "Error configuring session timeout.",
+            "errorComplexity": "Error in changing complexity.",
+            "errorPasswordHistory": "Error in changing password history.",
             "successIpmiDisabled": "Successfully disabled IPMI security setting.",
             "successIpmiEnabled": "Successfully enabled IPMI security setting.",
             "successRtadDisabled": "Successfully disabled RTAD security setting.",
@@ -810,7 +1112,15 @@
             "successSshEnabled": "Successfully enabled SSH security setting.",
             "successVtpmDisabled": "Successfully disabled VirtualTPM security setting.",
             "successVtpmEnabled": "Successfully enabled VirtualTPM security setting.",
-            "successSessionTimeout": "Successfully configured the session timeout."
+            "successKvmDisabled": "Successfully disabled KVM security setting.",
+            "successKvmEnabled": "Successfully enabled KVM security setting.",
+            "successVmcDisabled": "Successfully disabled Virtual Media security setting.",
+            "successVmcEnabled": "Successfully enabled Virtual Media security setting.",
+            "successSOLDisabled": "Successfully disabled SOL SSH security setting.",
+            "successSOLEnabled": "Successfully enabled SOL SSH security setting.",
+            "successSessionTimeout": "Successfully configured the session timeout.",
+            "successComplexity": "Successfully changed the complexity value.",
+            "successPasswordHistory": "Successfully changed the password history value."
         },
         "options": {
             "30minutes": "30 Minutes",
@@ -823,7 +1133,21 @@
         "vtpm": "VirtualTPM",
         "vtpmDescription": "Enabling vTPM makes a TPM available to the guest operating system.",
         "webSessionTimeOut": "WEB Session Timeout",
-        "webSessionTimeOutDescription": "Change the Web session timeout in given options"
+        "webSessionTimeOutDescription": "Change the Web session timeout in given options",
+        "kvm": "KVM",
+        "kvmDescription": "Enabling KVM makes to the guest operating system",
+        "vmc": "Virtual Media",
+        "vmcDescription": "Enabling Virtual Media for image redirection",
+        "solssh": "SOL SSH",
+        "solDescription": "Enabling SOL SSH",
+        "complexity": "Complexity",
+        "complexityDescription": "Select the Password Complexity dropdown to set the password complexity (Disabled, Low, Medium, High). Password cannot exceed 20 bytes of length due to IPMI 2.0 restrictions.",
+        "passwordHistory": "Password History",
+        "passwordHistoryDescription": "Select the Password History dropdown to set the password History (0 to 5). saves the last N(0~5) passwords for each user in order to force password change history and keep the user from alternating between the same password too frequently.",
+        "disabled": "Disabled",
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
     },
     "pagePower": {
         "description": "Set a power cap to keep power consumption at or below the specified value in watts",
@@ -956,7 +1280,9 @@
             "password": "Password",
             "serverUri": "External server URI",
             "title": "Legacy mode configuration",
-            "username": "Username"
+            "username": "Username",
+            "mount": "Mount Type",
+            "imagePath": "Path to Image"
         },
         "toast": {
             "errorMounting": "Error mounting",
@@ -965,7 +1291,8 @@
             "serverRunning": "Server running",
             "serverConnectionEstablished": "Server connection established",
             "serverClosedSuccessfully": "Server closed successfully",
-            "serverClosedWithErrors": "Server closed with errors"
+            "serverClosedWithErrors": "Server closed with errors",
+            "errorImageFormat": "Please provide valid image .nrg / .ima / .iso or .img format!"
         }
     },
     "countries": {

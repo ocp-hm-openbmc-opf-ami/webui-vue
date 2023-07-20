@@ -17,9 +17,6 @@
               <template v-if="!$v.form.manualUnlock.$dirty">
                 {{ $t('pageUserManagement.modal.accountLocked') }}
               </template>
-              <template v-else>
-                {{ $t('pageUserManagement.modal.clickSaveToUnlockAccount') }}
-              </template>
             </alert>
           </b-col>
           <b-col sm="3">
@@ -33,7 +30,7 @@
               variant="primary"
               :disabled="$v.form.manualUnlock.$dirty"
               data-test-id="userManagement-button-manualUnlock"
-              @click="$v.form.manualUnlock.$touch()"
+              @click="accountUnLock"
             >
               {{ $t('pageUserManagement.modal.unlock') }}
             </b-button>
@@ -56,7 +53,10 @@
                 name="user-status"
                 data-test-id="userManagement-radioButton-statusDisabled"
                 :value="false"
-                :disabled="!newUser && originalUsername === disabled"
+                :disabled="
+                  (!newUser && originalUsername === disabled) ||
+                  form.username === 'root'
+                "
                 @input="$v.form.status.$touch()"
               >
                 {{ $t('global.status.disabled') }}
@@ -82,7 +82,10 @@
                 aria-describedby="username-help-block"
                 data-test-id="userManagement-input-username"
                 :state="getValidationState($v.form.username)"
-                :disabled="!newUser && originalUsername === disabled"
+                :disabled="
+                  (!newUser && originalUsername === disabled) ||
+                  form.username === 'root'
+                "
                 @input="$v.form.username.$touch()"
               />
               <b-form-invalid-feedback role="alert">
@@ -109,6 +112,7 @@
                 :options="privilegeTypes"
                 data-test-id="userManagement-select-privilege"
                 :state="getValidationState($v.form.privilege)"
+                :disabled="!newUser && originalUsername === 'root'"
                 @input="$v.form.privilege.$touch()"
               >
                 <template #first>
@@ -152,17 +156,8 @@
                   <template v-if="!$v.form.password.required">
                     {{ $t('global.form.fieldRequired') }}
                   </template>
-                  <template
-                    v-if="
-                      !$v.form.password.minLength || !$v.form.password.maxLength
-                    "
-                  >
-                    {{
-                      $t('pageUserManagement.modal.passwordMustBeBetween', {
-                        min: passwordRequirements.minLength,
-                        max: passwordRequirements.maxLength,
-                      })
-                    }}
+                  <template v-else-if="!$v.form.password.pattern">
+                    {{ $t('global.form.invalidFormat') }}
                   </template>
                 </b-form-invalid-feedback>
               </input-password-toggle>
@@ -227,7 +222,6 @@
 import {
   required,
   maxLength,
-  minLength,
   sameAs,
   helpers,
   requiredIf,
@@ -235,10 +229,11 @@ import {
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import InputPasswordToggle from '@/components/Global/InputPasswordToggle';
 import Alert from '@/components/Global/Alert';
+import BVToastMixin from '@/components/Mixins/BVToastMixin';
 
 export default {
   components: { Alert, InputPasswordToggle },
-  mixins: [VuelidateMixin],
+  mixins: [VuelidateMixin, BVToastMixin],
   props: {
     user: {
       type: Object,
@@ -295,7 +290,7 @@ export default {
         username: {
           required,
           maxLength: maxLength(16),
-          pattern: helpers.regex('pattern', /^([a-zA-Z_][a-zA-Z0-9_]*)/),
+          pattern: helpers.regex('pattern', /^[a-zA-Z_][a-zA-Z0-9_]*$/),
         },
         privilege: {
           required,
@@ -304,8 +299,9 @@ export default {
           required: requiredIf(function () {
             return this.requirePassword();
           }),
-          minLength: minLength(this.passwordRequirements.minLength),
-          maxLength: maxLength(this.passwordRequirements.maxLength),
+          pattern: function (pw) {
+            return this.passwordValidation(pw);
+          },
         },
         passwordConfirmation: {
           required: requiredIf(function () {
@@ -343,11 +339,6 @@ export default {
         if (this.$v.form.password.$dirty) {
           userData.password = this.form.password;
         }
-        if (this.$v.form.manualUnlock.$dirty) {
-          // If form manualUnlock control $dirty then
-          // set user Locked property to false
-          userData.locked = false;
-        }
         if (Object.entries(userData).length === 1) {
           this.closeModal();
           return;
@@ -382,6 +373,22 @@ export default {
       // prevent modal close
       bvModalEvt.preventDefault();
       this.handleSubmit();
+    },
+    passwordValidation(val) {
+      if (!/^(?=.*[\w\d]).+/gi.test(val)) {
+        return false;
+      }
+      return true;
+    },
+    accountUnLock() {
+      let userData = {};
+      userData.originalUsername = this.originalUsername;
+      userData.locked = false;
+      this.$store
+        .dispatch('userManagement/updateUser', userData)
+        .then((success) => this.successToast(success))
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => this.closeModal());
     },
   },
 };

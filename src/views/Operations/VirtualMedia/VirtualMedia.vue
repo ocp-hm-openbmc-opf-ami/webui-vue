@@ -13,6 +13,7 @@
                   v-if="!dev.isActive"
                   :id="concatId(dev.id)"
                   v-model="dev.file"
+                  accept=".iso, .img, .ima, .nrg"
                 >
                   <template #invalid>
                     <b-form-invalid-feedback role="alert">
@@ -125,10 +126,30 @@ export default {
     legacyDevices() {
       return this.$store.getters['virtualMedia/legacyDevices'];
     },
+    vmStarted: {
+      get() {
+        return this.$store.getters['virtualMedia/vmStarted'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    legacyStarted: {
+      get() {
+        return this.$store.getters['virtualMedia/legacyStarted'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
   },
   created() {
     this.$store.dispatch('global/getSystemInfo');
-    if (this.proxyDevices.length > 0 || this.legacyDevices.length > 0) return;
+    if (
+      (this.proxyDevices.length > 0 || this.legacyDevices.length > 0) &&
+      (this.vmStarted > 0 || this.legacyStarted > 0)
+    )
+      return;
     this.startLoader();
     this.$store
       .dispatch('virtualMedia/getData')
@@ -159,19 +180,38 @@ export default {
         device.file = null;
         device.isActive = false;
       };
-
+      this.$store.state.virtualMedia.vmStarted = ++this.vmStarted;
       device.nbd.start();
       device.isActive = true;
     },
     stopVM(device) {
+      this.$store.state.virtualMedia.vmStarted = --this.vmStarted;
       device.nbd.stop();
     },
     startLegacy(connectionData) {
       var data = {};
-      data.Image = connectionData.serverUri;
+      switch (connectionData.transferProtocolType) {
+        case 'NFS':
+          data.Image =
+            'nfs://' +
+            connectionData.serverUri +
+            ':' +
+            connectionData.imagePath;
+          break;
+        case 'CIFS':
+          data.Image =
+            'smb://' + connectionData.serverUri + connectionData.imagePath;
+          break;
+        case 'HTTPS':
+          data.Image =
+            'https://' + connectionData.serverUri + connectionData.imagePath;
+          break;
+      }
       data.UserName = connectionData.username;
       data.Password = connectionData.password;
       data.WriteProtected = !connectionData.isRW;
+      data.TransferProtocolType = connectionData.transferProtocolType;
+      data.Inserted = true;
       this.startLoader();
       this.$store
         .dispatch('virtualMedia/mountImage', {
@@ -179,6 +219,7 @@ export default {
           data: data,
         })
         .then(() => {
+          this.$store.state.virtualMedia.legacyStarted = ++this.legacyStarted;
           this.successToast(
             this.$t('pageVirtualMedia.toast.serverConnectionEstablished')
           );
@@ -194,6 +235,7 @@ export default {
       this.$store
         .dispatch('virtualMedia/unmountImage', connectionData.id)
         .then(() => {
+          this.$store.state.virtualMedia.legacyStarted = --this.legacyStarted;
           this.successToast(
             this.$t('pageVirtualMedia.toast.serverClosedSuccessfully')
           );
@@ -206,9 +248,12 @@ export default {
     },
     saveConnection(connectionData) {
       this.modalConfigureConnection.serverUri = connectionData.serverUri;
+      this.modalConfigureConnection.imagePath = connectionData.imagePath;
       this.modalConfigureConnection.username = connectionData.username;
       this.modalConfigureConnection.password = connectionData.password;
       this.modalConfigureConnection.isRW = connectionData.isRW;
+      this.modalConfigureConnection.transferProtocolType =
+        connectionData.transferProtocolType;
     },
     configureConnection(connectionData) {
       this.modalConfigureConnection = connectionData;

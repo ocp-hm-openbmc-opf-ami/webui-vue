@@ -7,12 +7,14 @@ const AuthenticationStore = {
   state: {
     consoleWindow: null,
     authError: false,
+    authLocked: false,
     xsrfCookie: Cookies.get('XSRF-TOKEN'),
     isAuthenticatedCookie: Cookies.get('IsAuthenticated'),
   },
   getters: {
     consoleWindow: (state) => state.consoleWindow,
     authError: (state) => state.authError,
+    authLocked: (state) => state.authLocked,
     isLoggedIn: (state) => {
       return (
         state.xsrfCookie !== undefined || state.isAuthenticatedCookie == 'true'
@@ -27,6 +29,11 @@ const AuthenticationStore = {
     },
     authError(state, authError = true) {
       state.authError = authError;
+      state.authLocked = !authError;
+    },
+    authLocked(state, authLocked = true) {
+      state.authLocked = authLocked;
+      state.authError = authLocked;
     },
     logout(state) {
       Cookies.remove('XSRF-TOKEN');
@@ -44,7 +51,11 @@ const AuthenticationStore = {
         .post('/login', { data: [username, password] })
         .then(() => commit('authSuccess'))
         .catch((error) => {
-          commit('authError');
+          if (error.response.status == 423) {
+            commit('authLocked');
+          } else {
+            commit('authError');
+          }
           throw new Error(error);
         });
     },
@@ -58,14 +69,17 @@ const AuthenticationStore = {
         .then(() => router.go('/login'))
         .catch((error) => console.log(error));
     },
-    getUserInfo(_, username) {
-      return api
+    async checkPasswordChangeRequired(_, username) {
+      return await api
         .get(`/redfish/v1/AccountService/Accounts/${username}`)
-        .then(({ data }) => data)
+        .then((response) => {
+          return response.data.PasswordChangeRequired;
+        })
         .catch((error) => console.log(error));
     },
     resetStoreState({ state }) {
       state.authError = false;
+      state.authLocked = false;
       state.xsrfCookie = Cookies.get('XSRF-TOKEN');
       state.isAuthenticatedCookie = Cookies.get('IsAuthenticated');
     },

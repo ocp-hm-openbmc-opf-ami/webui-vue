@@ -1,7 +1,13 @@
 <template>
-  <b-card bg-variant="light" border-variant="light" class="mb-4">
-    <div class="justify-content-between align-items-center d-flex flex-wrap">
-      <h3 class="h5 mb-0">{{ title }}</h3>
+  <b-card
+    :header="title"
+    border-variant="info"
+    header-bg-variant="info"
+    header-text-variant="white"
+    class="text-center mb-4"
+  >
+    <div class="justify-content-between align-items-center flex-wrap">
+      <!-- <h3 class="h5 mb-0">{{ title }}</h3> -->
       <div class="card-buttons">
         <b-button
           v-if="exportButton || downloadButton"

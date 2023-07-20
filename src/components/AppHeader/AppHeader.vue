@@ -37,7 +37,8 @@
           >
             <img
               class="header-logo"
-              src="@/assets/images/logo-header.svg"
+              width="100px"
+              src="../../assets/images/ami-logo-type-dark-bg.svg"
               :alt="altLogo"
             />
           </b-navbar-brand>
@@ -72,7 +73,10 @@
               data-test-id="appHeader-button-refresh"
               @click="refresh"
             >
-              <icon-renew :title="$t('appHeader.titleRefresh')" />
+              <icon-renew
+                class="iconRenew"
+                :title="$t('appHeader.titleRefresh')"
+              />
               <span class="responsive-text">{{ $t('appHeader.refresh') }}</span>
             </b-button>
           </li>
@@ -84,7 +88,10 @@
               data-test-id="appHeader-container-user"
             >
               <template #button-content>
-                <icon-avatar :title="$t('appHeader.titleProfile')" />
+                <icon-avatar
+                  class="iconAvatar"
+                  :title="$t('appHeader.titleProfile')"
+                />
                 <span class="responsive-text">{{ username }}</span>
               </template>
               <b-dropdown-item
@@ -136,12 +143,12 @@ export default {
   data() {
     return {
       isNavigationOpen: false,
-      altLogo: process.env.VUE_APP_COMPANY_NAME || 'Built on OpenBMC',
+      altLogo: process.env.VUE_APP_COMPANY_NAME || 'AMI',
     };
   },
   computed: {
     isNavTagPresent() {
-      return this.assetTag || this.modelType || this.serialNumber;
+      return false;
     },
     assetTag() {
       return this.$store.getters['global/assetTag'];
@@ -281,9 +288,6 @@ export default {
   .navbar {
     padding: 0;
     background-color: $navbar-color;
-    @include media-breakpoint-up($responsive-layout-bp) {
-      height: $header-height;
-    }
 
     .helper-menu {
       @include media-breakpoint-down(sm) {

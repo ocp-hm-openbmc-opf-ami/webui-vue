@@ -55,14 +55,17 @@ export default {
   mixins: [LoadingBarMixin],
   data() {
     return {
-      showDumps: process.env.VUE_APP_ENV_NAME === 'ibm',
+      showDumps: process.env.VUE_APP_ENV_NAME === 'intel',
     };
   },
   created() {
     this.startLoader();
-    const dumpsPromise = new Promise((resolve) => {
-      this.$root.$on('overview-dumps-complete', () => resolve());
-    });
+    let dumpsPromise = null;
+    if (this.showDumps === 'intel') {
+      dumpsPromise = new Promise((resolve) => {
+        this.$root.$on('overview-dumps-complete', () => resolve());
+      });
+    }
     const eventsPromise = new Promise((resolve) => {
       this.$root.$on('overview-events-complete', () => resolve());
     });
@@ -85,7 +88,8 @@ export default {
       this.$root.$on('overview-server-complete', () => resolve());
     });
 
-    const promises = [
+    Promise.all([
+      dumpsPromise,
       eventsPromise,
       firmwarePromise,
       inventoryPromise,
@@ -93,9 +97,7 @@ export default {
       powerPromise,
       quicklinksPromise,
       serverPromise,
-    ];
-    if (this.showDumps) promises.push(dumpsPromise);
-    Promise.all(promises).finally(() => this.endLoader());
+    ]).finally(() => this.endLoader());
   },
 };
 </script>

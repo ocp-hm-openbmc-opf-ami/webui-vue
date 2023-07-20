@@ -5,7 +5,7 @@
       :title="togglePasswordLabel"
       variant="link"
       class="input-action-btn btn-icon-only"
-      :class="{ isVisible: isVisible }"
+      :class="[{ isVisible: isVisible }, isloginpage ? 'h50' : '']"
       @click="toggleVisibility"
     >
       <icon-view-off v-if="isVisible" />
@@ -22,6 +22,12 @@ import IconViewOff from '@carbon/icons-vue/es/view--off/20';
 export default {
   name: 'InputPasswordToggle',
   components: { IconView, IconViewOff },
+  props: {
+    isloginpage: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       isVisible: false,

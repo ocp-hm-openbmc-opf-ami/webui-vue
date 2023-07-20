@@ -164,7 +164,7 @@ svg {
   font-weight: $headings-font-weight;
   padding-left: $spacer; // defining consistent padding for links and buttons
   padding-right: $spacer;
-  color: theme-color('secondary');
+  color: white;
 
   &:hover {
     background-color: theme-color-level(dark, -10.5);
@@ -211,15 +211,12 @@ svg {
 .nav-container {
   position: fixed;
   width: $navigation-width;
-  top: $header-height;
   bottom: 0;
   left: 0;
   z-index: $zindex-fixed;
   overflow-y: auto;
-  background-color: theme-color('light');
   transform: translateX(-$navigation-width);
   transition: transform $exit-easing--productive $duration--moderate-02;
-  border-right: 1px solid theme-color-level('light', 2.85);
 
   @include media-breakpoint-down(md) {
     z-index: $zindex-fixed + 2;

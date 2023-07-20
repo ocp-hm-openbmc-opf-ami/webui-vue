@@ -37,6 +37,8 @@ import {
   TabsPlugin,
   ToastPlugin,
   TooltipPlugin,
+  OverlayPlugin,
+  BootstrapVueIcons,
 } from 'bootstrap-vue';
 import Vuelidate from 'vuelidate';
 import i18n from './i18n';
@@ -128,6 +130,8 @@ Vue.use(TabsPlugin);
 Vue.use(ToastPlugin);
 Vue.use(TooltipPlugin);
 Vue.use(Vuelidate);
+Vue.use(OverlayPlugin);
+Vue.use(BootstrapVueIcons);
 
 new Vue({
   router,

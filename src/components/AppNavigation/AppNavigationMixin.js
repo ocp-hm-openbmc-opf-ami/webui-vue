@@ -83,6 +83,11 @@ const AppNavigationMixin = {
               route: '/operations/kvm',
             },
             {
+              id: 'factory-default',
+              label: this.$t('appNavigation.factoryDefault'),
+              route: '/operations/factory-default',
+            },
+            {
               id: 'key-clear',
               label: this.$t('appNavigation.keyClear'),
               route: '/operations/key-clear',
@@ -132,9 +137,36 @@ const AppNavigationMixin = {
               route: '/settings/network',
             },
             {
+              id: 'vlan',
+              label: this.$t('appNavigation.vlan'),
+              route: '/settings/vlan',
+            },
+            {
+              id: 'smtp',
+              label: this.$t('appNavigation.smtpSettings'),
+              route: '/settings/smtp',
+            },
+            {
               id: 'power-restore-policy',
               label: this.$t('appNavigation.powerRestorePolicy'),
               route: '/settings/power-restore-policy',
+            },
+          ],
+        },
+        {
+          id: 'platform-event-filter',
+          label: this.$t('appNavigation.pef'),
+          icon: 'iconLogs',
+          children: [
+            {
+              id: 'event-filter',
+              label: this.$t('appNavigation.eventFilter'),
+              route: '/pef/eventFilter',
+            },
+            {
+              id: 'alert-destination',
+              label: this.$t('appNavigation.alertDestination'),
+              route: '/pef/alertDestination',
             },
           ],
         },

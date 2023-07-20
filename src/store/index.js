@@ -13,6 +13,9 @@ import ControlStore from './modules/Operations/ControlStore';
 import PowerControlStore from './modules/ResourceManagement/PowerControlStore';
 import PowerPolicyStore from './modules/Settings/PowerPolicyStore';
 import NetworkStore from './modules/Settings/NetworkStore';
+import VlanStore from './modules/Settings/VlanStore';
+import SMTPStore from './modules/Settings/SMTPStore';
+import EventFilterStore from './modules/Pef/EventFilterStore';
 import EventLogStore from './modules/Logs/EventLogStore';
 import DumpsStore from './modules/Logs/DumpsStore';
 import SensorsStore from './modules/HardwareStatus/SensorsStore';
@@ -29,10 +32,16 @@ import PostCodeLogsStore from './modules/Logs/PostCodeLogsStore';
 import PoliciesStore from './modules/SecurityAndAccess/PoliciesStore';
 import FactoryResetStore from './modules/Operations/FactoryResetStore';
 import KeyClearStore from './modules/Operations/KeyClearStore';
-
+import FactoryDefaultStore from './modules/Operations/FactoryDefault';
 import WebSocketPlugin from './plugins/WebSocketPlugin';
 import DateTimeStore from './modules/Settings/DateTimeStore';
 import VirtualMediaStore from './modules/Operations/VirtualMediaStore';
+import KvmStore from './modules/Operations/KvmStore';
+import AlertDestinationStore from './modules/Pef/alertDestinationStore';
+import NicStore from './modules/Nic/Nic';
+import NvmeInformationStore from './modules/NvmeInformation/NvmeInformationStore';
+import AutonomousCrashDumpStore from './modules/HostSystemDiagnostics/AcdStore';
+import AsdStore from './modules/HostSystemDiagnostics/AsdStore';
 
 Vue.use(Vuex);
 
@@ -54,6 +63,10 @@ export default new Vuex.Store({
     powerPolicy: PowerPolicyStore,
     powerSupply: PowerSupplyStore,
     network: NetworkStore,
+    vlan: VlanStore,
+    smtp: SMTPStore,
+    eventFilter: EventFilterStore,
+    alertDestination: AlertDestinationStore,
     eventLog: EventLogStore,
     dumps: DumpsStore,
     sensors: SensorsStore,
@@ -68,9 +81,15 @@ export default new Vuex.Store({
     assemblies: AssemblyStore,
     postCodeLogs: PostCodeLogsStore,
     virtualMedia: VirtualMediaStore,
+    kvm: KvmStore,
     policies: PoliciesStore,
     factoryReset: FactoryResetStore,
     keyClear: KeyClearStore,
+    FactoryDefault: FactoryDefaultStore,
+    nic: NicStore,
+    nvme: NvmeInformationStore,
+    acd: AutonomousCrashDumpStore,
+    asd: AsdStore,
   },
   plugins: [WebSocketPlugin],
 });

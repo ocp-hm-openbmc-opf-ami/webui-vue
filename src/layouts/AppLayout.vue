@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <loading-bar class="loading" @load="loading" />
     <app-header
       ref="focusTarget"
       class="app-header"
@@ -21,6 +22,7 @@ import AppNavigation from '@/components/AppNavigation';
 import PageContainer from '@/components/Global/PageContainer';
 import ButtonBackToTop from '@/components/Global/ButtonBackToTop';
 import JumpLinkMixin from '@/components/Mixins/JumpLinkMixin';
+import LoadingBar from '@/components/Global/LoadingBar.vue';
 
 export default {
   name: 'App',
@@ -29,11 +31,13 @@ export default {
     AppNavigation,
     PageContainer,
     ButtonBackToTop,
+    LoadingBar,
   },
   mixins: [JumpLinkMixin],
   data() {
     return {
       routerKey: 0,
+      isloading: true,
     };
   },
   watch: {
@@ -51,6 +55,9 @@ export default {
       // Changing the component :key value will trigger
       // a component re-rendering and 'refresh' the view
       this.routerKey += 1;
+    },
+    loading(isLoadingComplete) {
+      this.isloading = !isLoadingComplete;
     },
   },
 };
@@ -86,6 +93,5 @@ export default {
 
 .app-content {
   grid-area: content;
-  background-color: $white;
 }
 </style>

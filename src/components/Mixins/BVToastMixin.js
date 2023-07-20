@@ -47,8 +47,8 @@ const BVToastMixin = {
       this.$root.$bvToast.toast(body, {
         title,
         variant,
-        autoHideDelay: 10000, //auto hide in milliseconds
-        noAutoHide: variant !== 'success',
+        autoHideDelay: variant === 'danger' ? 20000 : 10000,
+        noAutoHide: variant !== 'success' && variant !== 'danger',
         isStatus: true,
         solid: true,
       });
