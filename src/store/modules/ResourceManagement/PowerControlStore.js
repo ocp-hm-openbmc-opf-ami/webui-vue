@@ -7,11 +7,13 @@ const PowerControlStore = {
     powerCapValue: null,
     powerCapUri: '',
     powerConsumptionValue: null,
+    powerCapEnable: null,
   },
   getters: {
     powerCapValue: (state) => state.powerCapValue,
     powerCapUri: (state) => state.powerCapUri,
     powerConsumptionValue: (state) => state.powerConsumptionValue,
+    powerCapEnable: (state) => state.powerCapEnable,
   },
   mutations: {
     setPowerCapValue: (state, powerCapValue) =>
@@ -19,6 +21,8 @@ const PowerControlStore = {
     setPowerCapUri: (state, powerCapUri) => (state.powerCapUri = powerCapUri),
     setPowerConsumptionValue: (state, powerConsumptionValue) =>
       (state.powerConsumptionValue = powerConsumptionValue),
+    setPowerCapEnableValue: (state, powerCapEnable) =>
+      (state.powerCapEnable = powerCapEnable),
   },
   actions: {
     setPowerCapUpdatedValue({ commit }, value) {
@@ -44,11 +48,13 @@ const PowerControlStore = {
           if (!powerControl || powerControl.length === 0) return;
           const powerCapUri = response.data['@odata.id'];
           const powerCap = powerControl[0].PowerLimit.LimitInWatts;
+          const powerCapEnable = powerControl[0].Oem.OpenBmc.PowerCapEnable;
           // If system is powered off, power consumption does not exist in the PowerControl
           const powerConsumption = powerControl[0].PowerConsumedWatts || null;
           commit('setPowerCapUri', powerCapUri);
           commit('setPowerCapValue', powerCap);
           commit('setPowerConsumptionValue', powerConsumption);
+          commit('setPowerCapEnableValue', powerCapEnable);
         })
         .catch((error) => {
           console.log('Power control', error);
@@ -68,6 +74,41 @@ const PowerControlStore = {
           throw new Error(
             i18n.t('pageServerPowerOperations.toast.errorSaveSettings')
           );
+        });
+    },
+    async setPowerCapEnable({ state, commit, dispatch }, powerCapEnable) {
+      commit('setPowerCapEnableValue', powerCapEnable);
+      const data = {
+        PowerControl: [
+          {
+            Oem: {
+              OpenBmc: {
+                PowerCapEnable: powerCapEnable,
+              },
+            },
+          },
+        ],
+      };
+      return await api
+        .patch(state.powerCapUri, data)
+        .then(dispatch('getPowerControl'))
+        .then(() => {
+          if (powerCapEnable) {
+            return i18n.t('pagePower.toast.successApplyPowerCapEnable');
+          } else {
+            return i18n.t('pagePower.toast.successApplyPowerCapDisable');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          commit('setPowerCapEnableValue', !powerCapEnable);
+          if (powerCapEnable) {
+            throw new Error(i18n.t('pagePower.toast.errorApplyPowerCapEnable'));
+          } else {
+            throw new Error(
+              i18n.t('pagePower.toast.errorApplyPowerCapDisable')
+            );
+          }
         });
     },
   },
