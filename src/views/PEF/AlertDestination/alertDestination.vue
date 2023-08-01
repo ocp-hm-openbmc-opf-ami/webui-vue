@@ -23,10 +23,13 @@
                         v-model="form.emailAddress1"
                         data-test-id="alertDestination-input-emailAddress1"
                         :state="getValidationState($v.form.emailAddress1)"
-                        @change="$v.form.emailAddress1.$touch()"
+                        @input="$v.form.emailAddress1.$touch()"
                       />
                       <b-form-invalid-feedback role="alert">
-                        <template v-if="!$v.form.emailAddress1.email">
+                        <template v-if="!$v.form.emailAddress1.required">
+                          {{ $t('global.form.fieldRequired') }}
+                        </template>
+                        <template v-else-if="!$v.form.emailAddress1.email">
                           {{ $t('global.form.invalidFormat') }}
                         </template>
                       </b-form-invalid-feedback>
@@ -42,10 +45,13 @@
                         v-model="form.emailAddress2"
                         data-test-id="alertDestination-input-emailAddress2"
                         :state="getValidationState($v.form.emailAddress2)"
-                        @change="$v.form.emailAddress2.$touch()"
+                        @input="$v.form.emailAddress2.$touch()"
                       />
                       <b-form-invalid-feedback role="alert">
-                        <template v-if="!$v.form.emailAddress2.email">
+                        <template v-if="!$v.form.emailAddress2.required">
+                          {{ $t('global.form.fieldRequired') }}
+                        </template>
+                        <template v-else-if="!$v.form.emailAddress2.email">
                           {{ $t('global.form.invalidFormat') }}
                         </template>
                       </b-form-invalid-feedback>
@@ -84,7 +90,7 @@
 </template>
 
 <script>
-import { email } from 'vuelidate/lib/validators';
+import { email, requiredIf } from 'vuelidate/lib/validators';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin';
 import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
@@ -110,9 +116,15 @@ export default {
   validations: {
     form: {
       emailAddress1: {
+        required: requiredIf(function () {
+          return this.requireEmail();
+        }),
         email,
       },
       emailAddress2: {
+        required: requiredIf(function () {
+          return this.requireEmail();
+        }),
         email,
       },
     },
@@ -154,6 +166,8 @@ export default {
       ];
     },
     checkEmailAddress() {
+      this.$v.$touch();
+      if (this.$v.$invalid) return;
       if (this.form.emailAddress1 == '' && this.form.emailAddress2 == '') {
         this.errorToast('Configure send Email address to send Test mail.');
         return;
@@ -184,6 +198,10 @@ export default {
           this.$v.form.$reset();
           this.endLoader();
         });
+    },
+    requireEmail() {
+      if (this.form.emailAddress1 == '' && this.form.emailAddress2 == '')
+        return true;
     },
   },
 };
