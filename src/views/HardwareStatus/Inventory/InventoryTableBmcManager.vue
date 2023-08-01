@@ -121,37 +121,23 @@
                 <dt>{{ $t('pageInventory.table.firmwareVersion') }}:</dt>
                 <dd>{{ item.firmwareVersion }}</dd>
               </dl>
-              <!-- Graphical console -->
+              <!-- Command Shell -->
               <p class="mt-1 mb-2 h6 float-none m-0">
-                {{ $t('pageInventory.table.graphicalConsole') }}
+                {{ $t('pageInventory.table.commandShell') }}
               </p>
               <dl class="ml-4">
                 <dt>{{ $t('pageInventory.table.connectTypesSupported') }}:</dt>
                 <dd>
-                  {{ dataFormatterArray(item.graphicalConsoleConnectTypes) }}
+                  {{ dataFormatterArray(item.commandShellConnectTypes) }}
                 </dd>
                 <dt>{{ $t('pageInventory.table.maxConcurrentSessions') }}:</dt>
                 <dd>
-                  {{ dataFormatter(item.graphicalConsoleMaxSessions) }}
+                  {{ dataFormatter(item.commandShellMaxSessions) }}
                 </dd>
                 <dt>{{ $t('pageInventory.table.serviceEnabled') }}:</dt>
                 <dd>
-                  {{ dataFormatter(item.graphicalConsoleEnabled) }}
+                  {{ dataFormatter(item.commandShellEnabled) }}
                 </dd>
-              </dl>
-              <!-- Serial console -->
-              <p class="mt-1 mb-2 h6 float-none m-0">
-                {{ $t('pageInventory.table.serialConsole') }}
-              </p>
-              <dl class="ml-4">
-                <dt>{{ $t('pageInventory.table.connectTypesSupported') }}:</dt>
-                <dd>
-                  {{ dataFormatterArray(item.serialConsoleConnectTypes) }}
-                </dd>
-                <dt>{{ $t('pageInventory.table.maxConcurrentSessions') }}:</dt>
-                <dd>{{ dataFormatter(item.serialConsoleMaxSessions) }}</dd>
-                <dt>{{ $t('pageInventory.table.serviceEnabled') }}:</dt>
-                <dd>{{ dataFormatter(item.serialConsoleEnabled) }}</dd>
               </dl>
             </b-col>
           </b-row>

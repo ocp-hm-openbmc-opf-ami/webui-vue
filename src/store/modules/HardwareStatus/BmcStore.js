@@ -15,11 +15,9 @@ const BmcStore = {
       bmc.dateTime = new Date(data.DateTime);
       bmc.description = data.Description;
       bmc.firmwareVersion = data.FirmwareVersion;
-      bmc.graphicalConsoleConnectTypes =
-        data.GraphicalConsole.ConnectTypesSupported;
-      bmc.graphicalConsoleEnabled = data.GraphicalConsole.ServiceEnabled;
-      bmc.graphicalConsoleMaxSessions =
-        data.GraphicalConsole.MaxConcurrentSessions;
+      bmc.commandShellConnectTypes = data.CommandShell?.ConnectTypesSupported;
+      bmc.commandShellEnabled = data.CommandShell?.ServiceEnabled;
+      bmc.commandShellMaxSessions = data.CommandShell?.MaxConcurrentSessions;
       bmc.health = data.Status.Health;
       bmc.healthRollup = data.Status.HealthRollup;
       bmc.id = data.Id;
@@ -32,9 +30,6 @@ const BmcStore = {
       bmc.name = data.Name;
       bmc.partNumber = data.PartNumber;
       bmc.powerState = data.PowerState;
-      bmc.serialConsoleConnectTypes = data.SerialConsole.ConnectTypesSupported;
-      bmc.serialConsoleEnabled = data.SerialConsole.ServiceEnabled;
-      bmc.serialConsoleMaxSessions = data.SerialConsole.MaxConcurrentSessions;
       bmc.serialNumber = data.SerialNumber;
       bmc.serviceEntryPointUuid = data.ServiceEntryPointUUID;
       bmc.sparePartNumber = data.SparePartNumber;
