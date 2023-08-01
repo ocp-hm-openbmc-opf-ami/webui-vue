@@ -85,7 +85,7 @@ export default {
   },
   data() {
     return {
-      isconsoleWindow: null,
+      isConsoleWindow: null,
       isSoftkeyboardSupported:
         process.env.VUE_APP_KVM_SOFT_KEYBOARD_SUPPORT === 'true' ? true : false,
       rfb: null,
@@ -124,10 +124,7 @@ export default {
   },
   watch: {
     consoleWindow() {
-      if (this.consoleWindow == false) {
-        this.isconsoleWindow.close();
-        this.$root.$emit('refresh-application');
-      }
+      if (this.consoleWindow == false) this.isConsoleWindow.close();
     },
   },
   created() {
@@ -208,14 +205,20 @@ export default {
       }
     },
     openConsoleWindow() {
-      if (this.rfb != null && this.isconsoleWindow == null) {
-        this.rfb.disconnect();
-        this.rfb = null;
-        this.isconsoleWindow = window.open(
-          '#/console/kvm',
-          '_blank',
-          'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=700,height=550'
-        );
+      // If isConsoleWindow is not null
+      // Check the newly opened window is closed or not
+      if (this.isConsoleWindow) {
+        // If window is not closed set focus to new window
+        // If window is closed, do open new window
+        if (!this.isConsoleWindow.closed) {
+          this.isConsoleWindow.focus();
+          return;
+        } else {
+          this.openNewWindow();
+        }
+      } else {
+        // If isConsoleWindow is null, open new window
+        this.openNewWindow();
       }
     },
     openNewWindow() {

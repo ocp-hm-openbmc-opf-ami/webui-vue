@@ -60,12 +60,9 @@ export default {
   },
   created() {
     this.startLoader();
-    let dumpsPromise = null;
-    if (this.showDumps === 'intel') {
-      dumpsPromise = new Promise((resolve) => {
-        this.$root.$on('overview-dumps-complete', () => resolve());
-      });
-    }
+    const dumpsPromise = new Promise((resolve) => {
+      this.$root.$on('overview-dumps-complete', () => resolve());
+    });
     const eventsPromise = new Promise((resolve) => {
       this.$root.$on('overview-events-complete', () => resolve());
     });
@@ -88,8 +85,7 @@ export default {
       this.$root.$on('overview-server-complete', () => resolve());
     });
 
-    Promise.all([
-      dumpsPromise,
+    const promises = [
       eventsPromise,
       firmwarePromise,
       inventoryPromise,
@@ -97,7 +93,9 @@ export default {
       powerPromise,
       quicklinksPromise,
       serverPromise,
-    ]).finally(() => this.endLoader());
+    ];
+    if (this.showDumps) promises.push(dumpsPromise);
+    Promise.all(promises).finally(() => this.endLoader());
   },
 };
 </script>
