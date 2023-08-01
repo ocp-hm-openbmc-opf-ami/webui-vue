@@ -18,7 +18,7 @@
         <b-col lg="3">
           <dl>
             <dt>{{ $t('pageDateTime.form.date') }}</dt>
-            <dd v-if="bmcTime">{{ form.manual.date }}</dd>
+            <dd v-if="bmcTime">{{ form.manual.dateOffset }}</dd>
             <dd v-else>--</dd>
           </dl>
         </b-col>
@@ -26,7 +26,7 @@
           <dl>
             <dt>{{ $t('pageDateTime.form.time.label') }}</dt>
             <dd v-if="bmcTime">
-              {{ form.manual.timeUtc }}
+              {{ form.manual.timeOffset }}
             </dd>
             <dd v-else>--</dd>
           </dl>
@@ -266,14 +266,11 @@ export default {
       form: {
         configurationSelected: 'manual',
         manual: {
-          date: this.$store.getters['global/bmcDateTime']?.slice(0, 10),
-          time: this.$store.getters['global/bmcDateTime']?.slice(11, 16),
-          timeUtc:
-            this.$store.getters['global/bmcDateTime']?.slice(11, 19) +
-            ' (UTC' +
-            this.$store.getters['global/bmcDateTime']?.slice(19) +
-            ')',
-          dateTimeLocalOffset: this.$store.getters['global/timeZone'],
+          date: this.isDate(),
+          time: this.isTime(false),
+          dateOffset: this.isDate(),
+          timeOffset: this.isTime(true),
+          dateTimeLocalOffset: this.isDateTimeLocalOffset(),
         },
         ntp: { firstAddress: '', secondAddress: '', thirdAddress: '' },
       },
@@ -504,24 +501,13 @@ export default {
       this.emitChange();
     },
     bmcTime() {
-      this.form.manual.date = this.$store.getters['global/bmcDateTime'].slice(
-        0,
-        10
-      );
-      this.form.manual.time = this.$store.getters['global/bmcDateTime'].slice(
-        11,
-        16
-      );
-      this.form.manual.timeUtc =
-        this.$store.getters['global/bmcDateTime']?.slice(11, 19) +
-        ' (UTC' +
-        this.$store.getters['global/bmcDateTime']?.slice(19) +
-        ')';
+      this.form.manual.date = this.isDate();
+      this.form.manual.time = this.isTime(false);
+      this.form.manual.dateOffset = this.isDate();
+      this.form.manual.timeOffset = this.isTime(true);
     },
     dateTimeLocalOffset() {
-      this.form.manual.dateTimeLocalOffset = this.$store.getters[
-        'global/timeZone'
-      ];
+      this.form.manual.dateTimeLocalOffset = this.isDateTimeLocalOffset();
     },
   },
   created() {
@@ -533,6 +519,59 @@ export default {
     ]).finally(() => this.endLoader());
   },
   methods: {
+    isDate() {
+      const bmcDateTime = this.$store.getters['global/bmcDateTime'];
+      var date = null;
+      if (localStorage.getItem('storedUtcDisplay') == 'false') {
+        var dateTime = new Date(bmcDateTime);
+        date = [
+          dateTime.getFullYear().toString().padStart(2, '0'),
+          (dateTime.getMonth() + 1).toString().padStart(2, '0'),
+          dateTime.getDate().toString().padStart(2, '0'),
+        ].join('-');
+      } else {
+        date = bmcDateTime?.slice(0, 10);
+      }
+      return date;
+    },
+    isTime(timeOffset) {
+      const bmcDateTime = this.$store.getters['global/bmcDateTime'];
+      var time = null;
+      if (localStorage.getItem('storedUtcDisplay') == 'false') {
+        var dateTime = new Date(bmcDateTime);
+        if (timeOffset) {
+          time =
+            [
+              dateTime.getHours().toString().padStart(2, '0'),
+              dateTime.getMinutes().toString().padStart(2, '0'),
+              dateTime.getSeconds().toString().padStart(2, '0'),
+            ].join(':') +
+            ' (' +
+            this.localOffset() +
+            ')';
+        } else {
+          time = [
+            dateTime.getHours().toString().padStart(2, '0'),
+            dateTime.getMinutes().toString().padStart(2, '0'),
+          ].join(':');
+        }
+      } else {
+        if (timeOffset) {
+          time =
+            bmcDateTime?.slice(11, 19) + ' (UTC' + bmcDateTime?.slice(19) + ')';
+        } else time = bmcDateTime?.slice(11, 16);
+      }
+      return time;
+    },
+    isDateTimeLocalOffset() {
+      if (localStorage.getItem('storedUtcDisplay') == 'false') {
+        const timezone = this.localOffset().split('UTC')[1];
+        if (timezone.length > 3) {
+          return timezone.substring(0, 1) + '0' + timezone.substring(1);
+        } else
+          return timezone.substring(0, 1) + '0' + timezone.substring(1) + ':00';
+      } else return this.$store.getters['global/timeZone'];
+    },
     emitChange() {
       if (this.$v.$invalid) return;
       this.$v.$reset(); //reset to re-validate on blur
@@ -559,18 +598,11 @@ export default {
       let isNTPEnabled = this.form.configurationSelected === 'ntp';
       dateTimeForm.dateTimeLocalOffset = this.form.manual.dateTimeLocalOffset;
       if (!isNTPEnabled) {
-        const isUtcDisplay = this.$store.getters['global/isUtcDisplay'];
         let date;
 
         dateTimeForm.ntpProtocolEnabled = false;
 
-        if (isUtcDisplay) {
-          // Create UTC Date
-          date = this.getUtcDate(this.form.manual.date, this.form.manual.time);
-        } else {
-          // Create local Date
-          date = new Date(`${this.form.manual.date} ${this.form.manual.time}`);
-        }
+        date = this.getUtcDate(this.form.manual.date, this.form.manual.time);
 
         dateTimeForm.updatedDateTime = date.toISOString();
       } else {
