@@ -167,26 +167,27 @@ svg {
   color: white;
 
   &:hover {
-    background-color: theme-color-level(dark, -10.5);
-    color: theme-color('dark');
+    background-color: $blue;
+    color: #d99b51;
   }
 
   &:focus {
-    background-color: theme-color-level(light, 0);
+    background-color: $blue;
     box-shadow: inset 0 0 0 2px theme-color('primary');
-    color: theme-color('dark');
+    color: #d99b51;
     outline: 0;
   }
 
   &:active {
-    background-color: theme-color('secondary');
+    background-color: $blue;
     color: $white;
   }
 }
 
 .nav-link--current {
   font-weight: $headings-font-weight;
-  background-color: theme-color('secondary');
+  background-color: $red;
+  background-image: linear-gradient(90deg, #d99b51 0%, $red 100%);
   color: theme-color('light');
   cursor: default;
   box-shadow: none;
@@ -203,7 +204,8 @@ svg {
 
   &:hover,
   &:focus {
-    background-color: theme-color('secondary');
+    background-image: linear-gradient(90deg, #d99b51 0%, $red 100%);
+    background-color: $red;
     color: theme-color('light');
   }
 }
@@ -232,6 +234,13 @@ svg {
     transition-duration: $duration--fast-01;
     transform: translateX(0);
   }
+}
+.nav-container::-webkit-scrollbar {
+  width: 10px;
+}
+.nav-container:hover::-webkit-scrollbar-thumb {
+  background: #545863;
+  border-radius: 10px;
 }
 
 .nav-overlay {

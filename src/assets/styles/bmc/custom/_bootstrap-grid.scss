@@ -5,4 +5,7 @@
   // so the content doesn't center align
   // https://bootstrap-vue.org/docs/components/layout#fluid-width-container
   margin-left: 0;
+  @media (min-width: 1200px) {
+      max-width: 1260px
+    }
 }

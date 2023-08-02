@@ -174,7 +174,7 @@
         "certificates": "Certificates",
         "virtualMedia": "Virtual media",
         "keyClear": "Key clear",
-        "FactoryDefault": "Factory Default",
+        "factoryDefault": "Factory Default",
         "smtpSettings": "SMTP Settings",
         "eventFilter": "Event Filter",
         "alertDestination": "Alert Destination",

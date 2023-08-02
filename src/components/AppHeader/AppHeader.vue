@@ -365,6 +365,7 @@ export default {
   }
 
   .dropdown-menu {
+    min-width: 7rem;
     margin-top: 0;
 
     @include media-breakpoint-only(md) {
@@ -386,6 +387,12 @@ export default {
   &:focus {
     box-shadow: inset 0 0 0 3px $navbar-color, inset 0 0 0 5px color('white');
     outline: 0;
+  }
+}
+.dropdown-item {
+  &:hover {
+    color: #d99b51;
+    background-color: #ffffff;
   }
 }
 </style>
