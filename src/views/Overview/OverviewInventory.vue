@@ -26,7 +26,7 @@
       <b-col sm="6">
         <dl sm="6">
           <dt>{{ $t('global.table.overAllSystemHealth') }}</dt>
-          <dd>
+          <dd v-if="greenLed || amberLed || susackLed">
             <b-icon
               icon="circle-fill"
               :animation="greenBlinkStatus"
@@ -49,6 +49,9 @@
               :title="susackLed"
               font-scale="2"
             />
+          </dd>
+          <dd v-else>
+            {{ $t('global.status.notAvailable') }}
           </dd>
         </dl>
       </b-col>

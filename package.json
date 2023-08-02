@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "@carbon/icons-vue": "10.28.0",
+        "@fontsource/source-sans-pro": "5.0.5",
         "@novnc/novnc": "1.2.0",
         "axios": "0.21.4",
         "bootstrap": "4.6.0",
@@ -41,7 +42,7 @@
     "devDependencies": {
         "@intlify/vue-i18n-loader": "1.1.0",
         "@vue/cli-plugin-babel": "4.5.12",
-        "@vue/cli-plugin-eslint": "4.5.12",
+        "@vue/cli-plugin-eslint": "5.0.8",
         "@vue/cli-plugin-router": "4.5.12",
         "@vue/cli-plugin-unit-jest": "4.5.12",
         "@vue/cli-plugin-vuex": "4.5.12",

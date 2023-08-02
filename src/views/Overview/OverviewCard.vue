@@ -21,7 +21,9 @@
           <span v-if="exportButton">{{ $t('global.action.exportAll') }}</span>
         </b-button>
         <span v-if="exportButton || downloadButton" class="pl-2 pr-2">|</span>
-        <b-link :to="to">{{ $t('pageOverview.viewMore') }}</b-link>
+        <b-link class="font-blue" :to="to">{{
+          $t('pageOverview.viewMore')
+        }}</b-link>
       </div>
     </div>
     <slot></slot>
@@ -83,5 +85,8 @@ a {
 }
 .card {
   min-width: 310px;
+}
+.font-blue {
+  color: rgb(1, 70, 159);
 }
 </style>

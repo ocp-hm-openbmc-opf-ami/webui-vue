@@ -13,7 +13,7 @@
       <b-col sm="6" lg="3" class="mb-2 mt-2">
         <b-button
           to="/operations/serial-over-lan"
-          variant="secondary"
+          variant="primary"
           data-test-id="overviewQuickLinks-button-solConsole"
           class="d-flex justify-content-between align-items-center"
         >

@@ -190,7 +190,7 @@ export default {
   justify-content: space-around;
 
   @include media-breakpoint-up('md') {
-    background: radial-gradient(circle, #4bb1b9 0%, #191c24 100%) !important;
+    background: radial-gradient(circle, $blue 0%, #191c24 100%) !important;
     flex-direction: row;
   }
 }

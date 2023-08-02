@@ -82,9 +82,11 @@ export default {
 
 .app-header {
   grid-area: header;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: $zindex-fixed + 1;
+  width: 100%;
+  margin-top: 0;
 }
 
 .app-navigation {
@@ -92,6 +94,7 @@ export default {
 }
 
 .app-content {
+  margin-top: 58px;
   grid-area: content;
 }
 </style>

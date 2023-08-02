@@ -299,6 +299,7 @@ export default {
 #table-session-logs {
   td .btn-link {
     width: auto !important;
+    color: rgb(1, 70, 159);
   }
 }
 </style>

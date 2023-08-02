@@ -262,7 +262,7 @@ const routes = [
       },
       {
         path: '/host-system-diagnostics/acd',
-        name: 'acd',
+        name: 'autonomous-crash-dump',
         component: ACD,
         meta: {
           title: i18n.t('appPageTitle.autonomousCrashDump'),

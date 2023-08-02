@@ -60,7 +60,7 @@
                 label-class="bold"
               >
                 <b-button
-                  variant="primary"
+                  variant="secondary"
                   :disabled="device.isActive"
                   @click="configureConnection(device)"
                 >
