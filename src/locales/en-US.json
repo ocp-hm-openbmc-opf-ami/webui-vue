@@ -550,6 +550,7 @@
             "fanSpeed": "Fan speed",
             "firmwareVersion": "Firmware version",
             "graphicalConsole": "Graphical console",
+            "commandShell": "Command Shell",
             "hardwareType": "Hardware type",
             "health": "Health",
             "healthRollup": "Health rollup",
@@ -717,7 +718,8 @@
             "unlock": "Unlock",
             "username": "Username",
             "userPassword": "User password",
-            "userUnlockMethod": "User unlock method"
+            "userUnlockMethod": "User unlock method",
+            "passwordChangeRequired": "Password Change Required"
         },
         "table": {
             "privilege": "Privilege",
@@ -755,7 +757,8 @@
             "successCreateUser": "Created user '%{username}'.",
             "successDeleteUser": "Deleted user '%{username}'.",
             "successSaveSettings": "Successfully saved account settings.",
-            "successUpdateUser": "Updated user '%{username}'."
+            "successUpdateUser": "Updated user '%{username}'.",
+            "successPasswordChanged": "Password has been changed successfully.Please relogin with the new password"
         },
         "passwordRules": {
           "passwordForHigh": {
@@ -1156,7 +1159,13 @@
         "powerCapSettingData": "Apply power cap",
         "powerCapSettingLabel": "Power cap setting",
         "powerConsumption": "Current power consumption",
-        "serverPowCapSetting": "Server power cap setting"
+        "serverPowCapSetting": "Server power cap setting",
+        "toast": {
+            "successApplyPowerCapEnable": "successfully enabled apply powerCap ",
+            "successApplyPowerCapDisable": "successfully disabled apply powerCap",
+            "errorApplyPowerCapEnable": "error enabling apply powerCap",
+            "errorApplyPowerCapDisable": "error disabling apply powerCap"
+        }
     },
     "pageSensors": {
         "exportFilePrefix": "sensors_",

@@ -126,12 +126,16 @@ const UserManagementStore = {
         })
         .catch((error) => console.log(error));
     },
-    async createUser({ dispatch }, { username, password, privilege, status }) {
+    async createUser(
+      { dispatch },
+      { username, password, privilege, status, PasswordChangeRequired }
+    ) {
       const data = {
         UserName: username,
         Password: password,
         RoleId: privilege,
         Enabled: status,
+        PasswordChangeRequired: PasswordChangeRequired,
       };
       return await api
         .post('/redfish/v1/AccountService/Accounts', data)
@@ -149,7 +153,16 @@ const UserManagementStore = {
     },
     async updateUser(
       { dispatch },
-      { originalUsername, username, password, privilege, status, locked }
+      {
+        originalUsername,
+        username,
+        password,
+        privilege,
+        status,
+        locked,
+        PasswordChangeRequired,
+        routerPath,
+      }
     ) {
       const data = {};
       if (username) data.UserName = username;
@@ -157,14 +170,20 @@ const UserManagementStore = {
       if (privilege) data.RoleId = privilege;
       if (status !== undefined) data.Enabled = status;
       if (locked !== undefined) data.Locked = locked;
+      if (PasswordChangeRequired !== undefined)
+        data.PasswordChangeRequired = PasswordChangeRequired;
       return await api
         .patch(`/redfish/v1/AccountService/Accounts/${originalUsername}`, data)
         .then(() => dispatch('getUsers'))
-        .then(() =>
-          i18n.t('pageUserManagement.toast.successUpdateUser', {
-            username: originalUsername,
-          })
-        )
+        .then(() => {
+          if (routerPath === '/change-password') {
+            return i18n.t('pageUserManagement.toast.successPasswordChanged');
+          } else {
+            return i18n.t('pageUserManagement.toast.successUpdateUser', {
+              username: originalUsername,
+            });
+          }
+        })
         .catch(async (error) => {
           console.log(error);
           let temp = await dispatch('handleError', { error, originalUsername });

@@ -146,9 +146,11 @@ export default {
       this.$v.$touch();
       if (this.$v.$invalid) return;
       this.disableSubmitButton = true;
+      let routerPath = this.$router.history.current.path;
       let data = {
         originalUsername: this.username,
         password: this.form.password,
+        routerPath: routerPath,
       };
 
       this.$store

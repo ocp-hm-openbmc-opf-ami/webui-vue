@@ -127,6 +127,33 @@
                 </template>
               </b-form-invalid-feedback>
             </b-form-group>
+            <b-form-group
+              :label="$t('pageUserManagement.modal.passwordChangeRequired')"
+            >
+              <b-form-radio
+                v-model="form.PasswordChangeRequired"
+                name="Password-change-status"
+                :value="true"
+                data-test-id="userManagement-radioButton-statusEnabled"
+                :disabled="form.username === 'root'"
+                @input="$v.form.PasswordChangeRequired.$touch()"
+              >
+                {{ $t('global.status.enabled') }}
+              </b-form-radio>
+              <b-form-radio
+                v-model="form.PasswordChangeRequired"
+                name="Password-change-status"
+                data-test-id="userManagement-radioButton-statusDisabled"
+                :value="false"
+                :disabled="
+                  (!newUser && originalUsername === disabled) ||
+                  form.username === 'root'
+                "
+                @input="$v.form.PasswordChangeRequired.$touch()"
+              >
+                {{ $t('global.status.disabled') }}
+              </b-form-radio>
+            </b-form-group>
           </b-col>
           <b-col>
             <b-form-group
@@ -254,6 +281,7 @@ export default {
         password: '',
         passwordConfirmation: '',
         manualUnlock: false,
+        PasswordChangeRequired: false,
       },
       disabled: this.$store.getters['global/username'],
     };
@@ -279,6 +307,7 @@ export default {
       this.form.username = value.username;
       this.form.status = value.Enabled;
       this.form.privilege = value.privilege;
+      this.form.PasswordChangeRequired = value.PasswordChangeRequired;
     },
   },
   validations() {
@@ -310,6 +339,9 @@ export default {
           sameAsPassword: sameAs('password'),
         },
         manualUnlock: {},
+        PasswordChangeRequired: {
+          required,
+        },
       },
     };
   },
@@ -323,6 +355,7 @@ export default {
         userData.username = this.form.username;
         userData.status = this.form.status;
         userData.privilege = this.form.privilege;
+        userData.PasswordChangeRequired = this.form.PasswordChangeRequired;
         userData.password = this.form.password;
       } else {
         if (this.$v.$invalid) return;
@@ -335,6 +368,9 @@ export default {
         }
         if (this.$v.form.privilege.$dirty) {
           userData.privilege = this.form.privilege;
+        }
+        if (this.$v.form.PasswordChangeRequired.$dirty) {
+          userData.PasswordChangeRequired = this.form.PasswordChangeRequired;
         }
         if (this.$v.form.password.$dirty) {
           userData.password = this.form.password;
@@ -358,6 +394,7 @@ export default {
       this.form.status = true;
       this.form.username = '';
       this.form.privilege = null;
+      this.form.PasswordChangeRequired = false;
       this.form.password = '';
       this.form.passwordConfirmation = '';
       this.$v.$reset();
