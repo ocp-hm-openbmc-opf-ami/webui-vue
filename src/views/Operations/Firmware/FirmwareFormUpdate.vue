@@ -2,6 +2,21 @@
   <div>
     <div class="form-background p-3">
       <b-form @submit.prevent="onSubmitUpload">
+        <b-row class="pad-tb">
+          <b-col sm="4">
+            <b-form-checkbox v-model="recovery" @change="changeRecovery">
+              {{ $t('pageFirmware.form.updateFirmware.recovery') }}
+            </b-form-checkbox>
+          </b-col>
+          <b-col sm="6">
+            <b-form-checkbox
+              v-model="resetImmediately"
+              @change="changeResetImmediately"
+            >
+              {{ $t('pageFirmware.form.updateFirmware.resetImmediately') }}
+            </b-form-checkbox>
+          </b-col>
+        </b-row>
         <b-form-group
           v-if="isTftpUploadAvailable"
           :label="$t('pageFirmware.form.updateFirmware.fileSource')"
@@ -110,6 +125,22 @@ export default {
     isTftpUploadAvailable() {
       return this.$store.getters['firmware/isTftpUploadAvailable'];
     },
+    recovery: {
+      get() {
+        return this.$store.getters['firmware/recovery'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    resetImmediately: {
+      get() {
+        return this.$store.getters['firmware/resetImmediately'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
   },
   watch: {
     isWorkstationSelected: function () {
@@ -182,6 +213,24 @@ export default {
       this.file = file;
       this.$v.file.$touch();
     },
+    changeRecovery(option) {
+      this.$store
+        .dispatch('firmware/setFirmwarUpdateRecovery', option)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
+    changeResetImmediately(option) {
+      this.$store
+        .dispatch('firmware/setFirmwarUpdateReset', option)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
   },
 };
 </script>
+<style>
+.pad-tb {
+  padding-top: 15px;
+  padding-bottom: 25px;
+}
+</style>

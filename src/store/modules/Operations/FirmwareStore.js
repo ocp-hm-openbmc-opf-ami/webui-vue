@@ -11,6 +11,8 @@ const FirmwareStore = {
     applyTime: null,
     httpPushUri: null,
     tftpAvailable: false,
+    recovery: null,
+    resetImmediately: null,
   },
   getters: {
     isTftpUploadAvailable: (state) => state.tftpAvailable,
@@ -35,6 +37,8 @@ const FirmwareStore = {
         (firmware) => firmware.id !== state.hostActiveFirmwareId
       );
     },
+    recovery: (state) => state.recovery,
+    resetImmediately: (state) => state.resetImmediately,
   },
   mutations: {
     setActiveBmcFirmwareId: (state, id) => (state.bmcActiveFirmwareId = id),
@@ -45,6 +49,9 @@ const FirmwareStore = {
     setHttpPushUri: (state, httpPushUri) => (state.httpPushUri = httpPushUri),
     setTftpUploadAvailable: (state, tftpAvailable) =>
       (state.tftpAvailable = tftpAvailable),
+    setResetImmediately: (state, resetImmediately) =>
+      (state.resetImmediately = resetImmediately),
+    setRecovery: (state, recovery) => (state.recovery = recovery),
   },
   actions: {
     async getFirmwareInformation({ dispatch }) {
@@ -118,6 +125,12 @@ const FirmwareStore = {
           commit('setApplyTime', applyTime);
           const httpPushUri = data.HttpPushUri;
           commit('setHttpPushUri', httpPushUri);
+          commit('setRecovery', data.HttpPushUriTargetsBusy);
+          let resetImmediately = null;
+          if (applyTime == 'Immediate') {
+            resetImmediately = true;
+          } else resetImmediately = false;
+          commit('setResetImmediately', resetImmediately);
           if (allowableActions?.includes('TFTP')) {
             commit('setTftpUploadAvailable', true);
           }
@@ -136,6 +149,65 @@ const FirmwareStore = {
         .patch('/redfish/v1/UpdateService', data)
         .then(() => commit('setApplyTime', 'Immediate'))
         .catch((error) => console.log(error));
+    },
+    setFirmwarUpdateReset({ commit }, resetImmediately) {
+      commit('setResetImmediately', resetImmediately);
+      let resetImmediatelyValue;
+      if (resetImmediately) resetImmediatelyValue = 'Immediate';
+      else resetImmediatelyValue = 'OnReset';
+      const data = {
+        HttpPushUriOptions: {
+          HttpPushUriApplyTime: {
+            ApplyTime: resetImmediatelyValue,
+          },
+        },
+      };
+      return api
+        .patch('/redfish/v1/UpdateService', data)
+        .then(() => {
+          if (resetImmediately) {
+            return i18n.t('pageFirmware.toast.successEnabledResetImmediately');
+          } else {
+            return i18n.t('pageFirmware.toast.successDisabledResetImmediately');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          commit('setResetImmediately', !resetImmediately);
+          if (resetImmediately) {
+            throw new Error(
+              i18n.t('pageFirmware.toast.errorEnabledResetImmediately')
+            );
+          } else {
+            throw new Error(
+              i18n.t('pageFirmware.toast.errorDisabledResetImmediately')
+            );
+          }
+        });
+    },
+    setFirmwarUpdateRecovery({ commit }, recovery) {
+      commit('setRecovery', recovery);
+      const data = {
+        HttpPushUriTargetsBusy: recovery,
+      };
+      return api
+        .patch('/redfish/v1/UpdateService', data)
+        .then(() => {
+          if (recovery) {
+            return i18n.t('pageFirmware.toast.successEnabledRecovery');
+          } else {
+            return i18n.t('pageFirmware.toast.successDisabledRecovery');
+          }
+        })
+        .catch((error) => {
+          commit('setRecovery', !recovery);
+          console.log(error);
+          if (recovery) {
+            throw new Error(i18n.t('pageFirmware.toast.errorEnabledRecovery'));
+          } else {
+            throw new Error(i18n.t('pageFirmware.toast.errorDisabledRecovery'));
+          }
+        });
     },
     async uploadFirmware({ state, dispatch }, image) {
       if (state.applyTime !== 'Immediate') {
