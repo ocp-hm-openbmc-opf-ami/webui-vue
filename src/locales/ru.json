@@ -347,7 +347,9 @@
                 "imageFile": "Файл образа",
                 "startUpdate": "Начать обновление",
                 "tftpServer": "TFTP сервер",
-                "workstation": "Рабочая станция"
+                "workstation": "Рабочая станция",
+                "resetImmediately": "Немедленно сбросить",
+                "recovery": "Восстановление"
             }
         },
         "modal": {
@@ -363,6 +365,14 @@
         "toast": {
             "errorSwitchImages": "Ошибка переключения между рабочим и резервным образом.",
             "errorUpdateFirmware": "Ошибка при запуске обновления встроенного ПО.",
+            "errorEnabledRecovery": "Ошибка включения восстановления",
+            "errorDisabledRecovery": "Ошибка отключения восстановления",
+            "errorEnabledResetImmediately": "Немедленный сброс ошибки",
+            "errorDisabledResetImmediately": "Ошибка отключена сброс немедленно",
+            "successEnabledRecovery": "Восстановление успешно включено",
+            "successDisabledRecovery": "Восстановление успешно отключено",
+            "successEnabledResetImmediately": "Успешно включен сброс немедленно",
+            "successDisabledResetImmediately": "Успешно отключен сброс немедленно",
             "rebootStarted": "Сервер перезагружается",
             "rebootStartedMessage": "Сервер перезапускается с использованием резервного образа.",
             "updateStarted": "Обновление выполняется",

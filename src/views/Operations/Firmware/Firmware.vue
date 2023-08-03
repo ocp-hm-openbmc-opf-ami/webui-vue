@@ -22,7 +22,7 @@
       :section-title="$t('pageFirmware.sectionTitleUpdateFirmware')"
     >
       <b-row>
-        <b-col sm="8" md="6" xl="4">
+        <b-col sm="10" md="8" xl="5">
           <!-- Update form -->
           <form-update
             :is-server-off="isServerOff"
