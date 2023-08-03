@@ -492,7 +492,9 @@
                 "imageFile": "Image file",
                 "startUpdate": "Start update",
                 "tftpServer": "TFTP server",
-                "workstation": "Workstation"
+                "workstation": "Workstation",
+                "resetImmediately": "Reset Immediately",
+                "recovery": "Recovery"
             }
         },
         "modal": {
@@ -508,6 +510,14 @@
         "toast": {
             "errorSwitchImages": "Error switching running and backup images.",
             "errorUpdateFirmware": "Error starting firmware update.",
+            "errorEnabledRecovery": "Error enabled recovery",
+            "errorDisabledRecovery": "Error disabled recovery",
+            "errorEnabledResetImmediately": "Error enabled reset immediately",
+            "errorDisabledResetImmediately": "Error disabled reset immediately",
+            "successEnabledRecovery": "Successfully enabled recovery",
+            "successDisabledRecovery": "Successfully disabled recovery",
+            "successEnabledResetImmediately": "Successfully enabled reset immediately",
+            "successDisabledResetImmediately": "Successfully disabled reset immediately",
             "rebootStarted": "Reboot started",
             "rebootStartedMessage": "Successfully started reboot from backup image.",
             "updateStarted": "Update started",
