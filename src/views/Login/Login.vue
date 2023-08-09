@@ -183,7 +183,19 @@ export default {
             this.$store.commit('global/setPrivilege', RoleId);
           }
         })
-        .catch((error) => console.log(error))
+        .catch(() =>
+          this.$store
+            .dispatch('authentication/getEternalUserInfo', username)
+            .then(({ Oem }) => {
+              if (Oem) {
+                this.$store.commit(
+                  'global/setPrivilege',
+                  Oem.OpenBmc.LoginPrivilege
+                );
+                this.$router.push('/');
+              }
+            })
+        )
         .finally(() => (this.disableSubmitButton = false));
     },
   },

@@ -75,6 +75,19 @@ const AuthenticationStore = {
         .then(({ data }) => data)
         .catch((error) => console.log(error));
     },
+    getEternalUserInfo(_, username) {
+      const externalUserName = {
+        Oem: {
+          OpenBMC: {
+            LoginUser: username,
+          },
+        },
+      };
+      return api
+        .patch(`/redfish/v1/AccountService`, externalUserName)
+        .then(({ data }) => data)
+        .catch((error) => console.log(error));
+    },
     resetStoreState({ state }) {
       state.authError = false;
       state.authLocked = false;
