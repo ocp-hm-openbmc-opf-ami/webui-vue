@@ -113,6 +113,7 @@ export default {
   },
   data() {
     return {
+      firmwareUpdateOptionModified: null,
       loading,
       isWorkstationSelected: true,
       file: null,
@@ -180,10 +181,23 @@ export default {
         title: this.$t('pageFirmware.toast.updateStarted'),
         timestamp: true,
       });
-      if (this.isWorkstationSelected) {
-        this.dispatchWorkstationUpload(timerId);
+      if (!this.firmwareUpdateOptionModified && this.resetImmediately) {
+        this.$store
+          .dispatch('firmware/setFirmwarUpdateReset', false)
+          .then(() => {
+            if (this.isWorkstationSelected) {
+              this.dispatchWorkstationUpload(timerId);
+            } else {
+              this.dispatchTftpUpload(timerId);
+            }
+          })
+          .catch(({ message }) => this.errorToast(message));
       } else {
-        this.dispatchTftpUpload(timerId);
+        if (this.isWorkstationSelected) {
+          this.dispatchWorkstationUpload(timerId);
+        } else {
+          this.dispatchTftpUpload(timerId);
+        }
       }
     },
     dispatchWorkstationUpload(timerId) {
@@ -220,9 +234,13 @@ export default {
         .catch(({ message }) => this.errorToast(message));
     },
     changeResetImmediately(option) {
+      this.firmwareUpdateOptionModified = false;
       this.$store
         .dispatch('firmware/setFirmwarUpdateReset', option)
-        .then((message) => this.successToast(message))
+        .then((message) => {
+          this.successToast(message);
+          this.firmwareUpdateOptionModified = true;
+        })
         .catch(({ message }) => this.errorToast(message));
     },
   },
