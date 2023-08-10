@@ -185,7 +185,7 @@ export default {
         })
         .catch(() =>
           this.$store
-            .dispatch('authentication/getEternalUserInfo', username)
+            .dispatch('authentication/getExternalUserInfo', username)
             .then(({ Oem }) => {
               if (Oem) {
                 this.$store.commit(
