@@ -210,11 +210,6 @@ const FirmwareStore = {
         });
     },
     async uploadFirmware({ state, dispatch }, image) {
-      if (state.applyTime !== 'Immediate') {
-        // ApplyTime must be set to Immediate before making
-        // request to update firmware
-        await dispatch('setApplyTimeImmediate');
-      }
       return await api
         .post(state.httpPushUri, image, {
           headers: { 'Content-Type': 'application/octet-stream' },
