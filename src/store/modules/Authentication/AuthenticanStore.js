@@ -75,7 +75,7 @@ const AuthenticationStore = {
         .then(({ data }) => data)
         .catch((error) => console.log(error));
     },
-    getEternalUserInfo(_, username) {
+    getExternalUserInfo(_, username) {
       const externalUserName = {
         Oem: {
           OpenBMC: {
