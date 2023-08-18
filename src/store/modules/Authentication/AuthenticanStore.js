@@ -66,7 +66,7 @@ const AuthenticationStore = {
           commit('setConsoleWindow', false);
           commit('logout');
         })
-        .then(() => router.go('/login'))
+        .then(() => router.push('/login'))
         .catch((error) => console.log(error));
     },
     getUserInfo(_, username) {

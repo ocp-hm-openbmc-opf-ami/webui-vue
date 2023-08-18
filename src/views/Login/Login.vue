@@ -39,7 +39,7 @@
               v-model="userInfo.username"
               type="text"
               class="input"
-              placeholder="Username"
+              :placeholder="$t('pageLogin.username')"
               aria-describedby="login-error-alert username-required"
               :state="getValidationState($v.userInfo.username)"
               data-test-id="login-input-username"
@@ -61,7 +61,7 @@
               <b-form-input
                 id="password"
                 v-model="userInfo.password"
-                placeholder="Password"
+                :placeholder="$t('pageLogin.password')"
                 aria-describedby="login-error-alert password-required"
                 :state="getValidationState($v.userInfo.password)"
                 type="password"
@@ -126,18 +126,30 @@ export default {
       languages: [
         {
           value: 'en-US',
-          text: 'English',
+          text: 'US - English',
         },
         {
           value: 'es',
-          text: 'Español',
+          text: 'Spanish - Español',
         },
         {
-          value: 'ru-RU',
-          text: 'Русский',
+          value: 'ru',
+          text: 'Russian - Русский',
         },
       ],
     };
+  },
+  created() {
+    if (process.env.VUE_APP_CHINESE_ZH_CN_LANGUAGE_SUPPORT == 'true')
+      this.languages.push({
+        value: 'zh-CN',
+        text: 'China - 中文 (简体)',
+      });
+    if (process.env.VUE_APP_TAIWAN_ZH_TW_LANGUAGE_SUPPORT == 'true')
+      this.languages.push({
+        value: 'zh-TW',
+        text: 'Taiwan - 中文 (正體)',
+      });
   },
   computed: {
     authError() {
