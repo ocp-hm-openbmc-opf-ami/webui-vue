@@ -29,7 +29,6 @@ const KvmStore = {
       return await api
         .get('/kvm/kvmActiveStatus')
         .then((response) => {
-          console.log('kvm active status', response);
           commit('setKvmActiveStatusData', response.data);
         })
         .catch((error) => {
