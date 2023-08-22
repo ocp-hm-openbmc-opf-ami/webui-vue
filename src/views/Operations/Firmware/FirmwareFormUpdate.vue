@@ -234,12 +234,10 @@ export default {
         .catch(({ message }) => this.errorToast(message));
     },
     changeResetImmediately(option) {
-      this.firmwareUpdateOptionModified = false;
       this.$store
         .dispatch('firmware/setFirmwarUpdateReset', option)
         .then((message) => {
           this.successToast(message);
-          this.firmwareUpdateOptionModified = true;
         })
         .catch(({ message }) => this.errorToast(message));
     },

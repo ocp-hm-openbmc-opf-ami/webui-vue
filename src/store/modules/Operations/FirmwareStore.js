@@ -209,7 +209,7 @@ const FirmwareStore = {
           }
         });
     },
-    async uploadFirmware({ state, dispatch }, image) {
+    async uploadFirmware({ state }, image) {
       return await api
         .post(state.httpPushUri, image, {
           headers: { 'Content-Type': 'application/octet-stream' },
