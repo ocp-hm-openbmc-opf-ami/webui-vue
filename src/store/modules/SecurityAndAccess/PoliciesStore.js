@@ -192,7 +192,6 @@ const PoliciesStore = {
           }
         })
         .catch((error) => {
-          console.log(error);
           if (updatedRtad === 'Enabled') {
             throw new Error(i18n.t('pagePolicies.toast.errorRtadEnabled'));
           } else {
