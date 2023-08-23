@@ -215,7 +215,6 @@ const PoliciesStore = {
           }
         })
         .catch((error) => {
-          console.log(error);
           if (updatedVtpm === 'Enabled') {
             throw new Error(i18n.t('pagePolicies.toast.errorVtpmEnabled'));
           } else {
