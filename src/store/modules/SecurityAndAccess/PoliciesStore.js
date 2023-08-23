@@ -167,7 +167,6 @@ const PoliciesStore = {
           }
         })
         .catch((error) => {
-          console.log(error);
           commit('setSshProtocolEnabled', !protocolEnabled);
           if (protocolEnabled) {
             throw new Error(i18n.t('pagePolicies.toast.errorSshEnabled'));
