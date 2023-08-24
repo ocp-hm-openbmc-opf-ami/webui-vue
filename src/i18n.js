@@ -34,6 +34,9 @@ function fallbackLanguage() {
   if (process.env.VUE_APP_TAIWAN_ZH_TW_LANGUAGE_SUPPORT != 'true') {
     languages.splice(languages.indexOf('zh-TW'), 1);
   }
+  if (process.env.VUE_APP_GERMAN_DE_LANGUAGE_SUPPORT != 'true') {
+    languages.splice(languages.indexOf('de-DE'), 1);
+  }
   let language = null;
   languages.forEach((lang) => {
     if (lang == navigator.language) {

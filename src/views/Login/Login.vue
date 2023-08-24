@@ -150,6 +150,11 @@ export default {
         value: 'zh-TW',
         text: 'Taiwan - 中文 (正體)',
       });
+    if (process.env.VUE_APP_GERMAN_DE_LANGUAGE_SUPPORT == 'true')
+      this.languages.push({
+        value: 'de-DE',
+        text: 'Germany - Deutsch',
+      });
   },
   computed: {
     authError() {
