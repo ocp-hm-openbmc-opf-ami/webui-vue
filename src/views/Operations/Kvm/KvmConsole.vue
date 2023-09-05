@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import RFB from '@novnc/novnc/core/rfb';
+import AMI_RFB from './lib/amirfb';
 import Keys from '@novnc/novnc/core/input/keysym';
 import StatusIcon from '@/components/Global/StatusIcon';
 import IconLaunch from '@carbon/icons-vue/es/launch/20';
@@ -168,7 +168,7 @@ export default {
     },
     openTerminal() {
       const token = this.$store.getters['authentication/token'];
-      this.rfb = new RFB(
+      this.rfb = new AMI_RFB(
         this.$refs.panel,
         `wss://${window.location.host}/kvm/0`,
         { wsProtocols: [token] }

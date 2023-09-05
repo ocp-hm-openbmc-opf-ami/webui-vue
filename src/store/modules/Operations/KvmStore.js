@@ -12,10 +12,12 @@ const KvmStore = {
       capsKeyStatus: false,
       cmdKeyStatus: false,
     },
+    keyboardLayout: 'en-us' /* Default keyboard layout */,
   },
   getters: {
     getKvmActiveStatus: (state) => state.activeStatus,
     getSoftKeyboardStatus: (state) => state.softKeyboardStates,
+    getKeyboardLayout: (state) => state.keyboardLayout,
   },
   mutations: {
     setKvmActiveStatusData: (state, statusData) =>
@@ -23,9 +25,18 @@ const KvmStore = {
     updateSoftKeyStatus: (state, keyStatus) => {
       state.softKeyboardStates[keyStatus[1]] = keyStatus[0];
     },
+    setKeyboardLayout: (state, statusData) =>
+      (state.keyboardLayout = statusData),
   },
   actions: {
     async getData({ commit }) {
+      commit(
+        'setKeyboardLayout',
+        /* Get the current browser display language and set it as keyboard
+         * layout value */
+        // TODO: remove this after menu implementation
+        window.navigator.language.toLocaleLowerCase()
+      );
       return await api
         .get('/kvm/kvmActiveStatus')
         .then((response) => {
