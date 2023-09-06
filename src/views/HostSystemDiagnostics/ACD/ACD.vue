@@ -4,7 +4,7 @@
     <b-row>
       <b-col>
         <b-table
-          id="table-nic-information"
+          id="table-AutonomousCrashDump"
           ref="table"
           responsive="md"
           no-select-on-click
@@ -13,7 +13,7 @@
           :busy="isBusy"
           :fields="fields"
           :items="allConnections"
-          :empty-text="$t('global.table.emptyMessage')"
+          :empty-text="emptyTableText"
           @row-selected="onRowSelected($event, allConnections.length)"
         >
           <template #cell(date)="{ value }">
@@ -53,6 +53,7 @@
             class="display"
             date-test-id="AutonomousCrashDump-toggle-ACDstate"
             switch
+            :disabled="polling === 'Running'"
             @change="changeAcdServer"
           >
             <span class="sr-only display">
@@ -75,11 +76,10 @@
           <b-tooltip target="downloadlog" triggers> </b-tooltip>
         </b-form-group>
         <b-button
-          v-if="Hidebuttons === false"
+          v-if="Hidebuttons && polling != 'Running'"
           id="toolbtn"
           title="Click to Generate the logs"
-          variant="link"
-          :disabled="Hidebuttons === false || polling === 'Running'"
+          variant="primary"
           @click="createCrashDump"
           ><icon-add />{{
             $t('pageAutonomousCrashDump.action.generate')
@@ -87,6 +87,7 @@
         >
         <b-tooltip :disabled="Hidebuttons === false" target="toolbtn" triggers>
         </b-tooltip>
+        <loader v-if="polling === 'Running' || Hidebuttons === false"></loader>
       </b-col>
     </b-row>
     <modal-view :title="filename" :data="data"></modal-view>
@@ -101,6 +102,7 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import IconView from '@carbon/icons-vue/es/view/20';
 import ModalView from './AcdModalview.vue';
+import Loader from '@/components/Global/Loader';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
 import { mapState } from 'vuex';
@@ -111,6 +113,7 @@ export default {
     IconView,
     IconAdd,
     ModalView,
+    Loader,
   },
   mixins: [LoadingBarMixin, BVToastMixin],
   beforeRouteLeave(to, from, next) {
@@ -123,7 +126,9 @@ export default {
     return {
       isBusy: true,
       filename: '',
+      polling: null,
       Hidebuttons: true,
+      emptyTableText: this.$t('global.table.emptyMessage'),
       data: {},
       fields: [
         {
@@ -162,7 +167,7 @@ export default {
         };
       });
     },
-    ...mapState('acd', ['allCrashDump', 'getJsonFile']),
+    ...mapState('acd', ['allCrashDump', 'getJsonFile', 'TaskState']),
     Acdstate: {
       get() {
         return this.$store.getters['acd/ACDEnabled'];
@@ -181,43 +186,62 @@ export default {
     getJsonFile: function (value) {
       this.data = value;
     },
-    // TaskState: function (value) {
-    //   this.polling = value;
-    // },
+    TaskState: function (value) {
+      this.polling = value;
+    },
+    polling(newPolling) {
+      if (newPolling === 'Running') {
+        this.emptyTableText = this.$t(
+          'pageAutonomousCrashDump.action.logInProgress'
+        );
+      } else {
+        this.emptyTableText = this.$t('global.table.emptyMessage');
+      }
+    },
   },
   created() {
     this.startLoader();
+    this.polling = this.TaskState;
     Promise.all([
       this.$store.dispatch('acd/getAcdServerStatus'),
       this.$store.dispatch('acd/getcrashDumpData'),
     ]).finally(() => this.endLoader());
     this.isBusy = false;
+    const pollingFromLocalStorage = localStorage.getItem('polling');
+    if (pollingFromLocalStorage !== null) {
+      this.$store.dispatch('acd/checkStatus', pollingFromLocalStorage);
+      this.checkStatus(pollingFromLocalStorage);
+    }
   },
   methods: {
-    // createCrashDump() {
-    //   this.Hidebuttons = false;
-    //   this.$store
-    //     .dispatch('acd/createCrashDump')
-    //     .then((data) => {
-    //       var interval = setInterval(() => {
-    //         this.$store
-    //           .dispatch('acd/checkStatus', data)
-    //           .then((success) => {
-    //             if (success) {
-    //               this.successToast(success);
-    //               this.Hidebuttons = true;
-    //               clearInterval(interval);
-    //             }
-    //           });
-    //       }, 10000);
-    //     })
-    //     .catch(({ message }) => {
-    //       this.errorToast(message);
-    //       if (message) {
-    //         this.Hidebuttons = true;
-    //       }
-    //     });
-    // },
+    createCrashDump() {
+      this.$bvModal
+        .msgBoxConfirm(
+          this.$tc('pageAutonomousCrashDump.modal.confirmMessage'),
+          {
+            title: this.$tc('pageAutonomousCrashDump.modal.confirmTitle'),
+            okTitle: this.$t('global.action.ok'),
+            cancelTitle: this.$t('global.action.cancel'),
+          }
+        )
+        .then((createCrashDump) => {
+          if (createCrashDump) {
+            this.Hidebuttons = false;
+            this.$store
+              .dispatch('acd/createCrashDump')
+              .then((data) => {
+                this.checkStatus(data);
+              })
+              .catch(({ message }) => {
+                this.errorToast(message);
+                if (message) {
+                  this.Hidebuttons = true;
+                  localStorage.removeItem('polling');
+                }
+              });
+          }
+        });
+    },
     onTableRowAction(action, row) {
       switch (action) {
         case 'view':
@@ -246,6 +270,19 @@ export default {
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.endLoader());
     },
+    checkStatus(data) {
+      var interval = setInterval(() => {
+        this.Hidebuttons = false;
+        this.$store.dispatch('acd/checkStatus', data).then((success) => {
+          if (success) {
+            this.successToast(success);
+            this.Hidebuttons = true;
+            localStorage.removeItem('polling');
+            clearInterval(interval);
+          }
+        });
+      }, 10000);
+    },
     initModalView() {
       this.$bvModal.show('modal-view');
     },
@@ -264,6 +301,6 @@ export default {
 }
 
 .btn {
-  margin-left: 5px;
+  margin-left: 11px;
 }
 </style>

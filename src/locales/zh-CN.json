@@ -423,10 +423,13 @@
             "download": "下载纪录",
             "generate": "一般",
             "close": "关闭",
-            "view": "典籍后请等待一分钟，JSON Viewer跳出视窗正在载入.."
+            "view": "典籍后请等待一分钟，JSON Viewer跳出视窗正在载入..",
+            "logInProgress": "日志生成正在进行中"
         },
         "modal": {
-            "jsonViewer": "已选择档案: %{fileName}"
+            "jsonViewer": "已选择档案: %{fileName}",
+            "confirmTitle": "确认？",
+            "confirmMessage":"您确定要生成故障转储日志吗？有时可能需要 10 到 15 分钟才能生成日志."
         },
         "table": {
             "fileName": "档案名称",

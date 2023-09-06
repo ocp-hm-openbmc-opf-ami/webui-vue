@@ -6,7 +6,7 @@ const AutonomousCrashDumpStore = {
   state: {
     allCrashDump: [],
     getJsonFile: [],
-    TaskState: '',
+    TaskState: null,
     ACDEnabled: null,
   },
   getters: {
@@ -53,11 +53,13 @@ const AutonomousCrashDumpStore = {
     },
     async checkStatus({ commit, dispatch }, data) {
       return await api.get(data).then((response) => {
+        localStorage.setItem('polling', data);
         if (response.data.TaskState === 'Running') {
           commit('setTaskState', response.data.TaskState);
         } else {
           if (response.data.TaskState === 'Completed') {
             commit('setTaskState', response.data.TaskState);
+            localStorage.removeItem('polling');
             dispatch('getcrashDumpData');
             return i18n.t(
               'pageAutonomousCrashDump.toast.successGenerateCrashDumpLog'

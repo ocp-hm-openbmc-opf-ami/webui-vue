@@ -423,10 +423,13 @@
             "download": "Protokoll herunterladen",
             "generate": "Generieren",
             "close": "Schließen",
-            "view": "Nachdem Sie eine Minute lang geklickt haben, wird das JSON Viewer Popup Fenster geladen.."
+            "view": "Nachdem Sie eine Minute lang geklickt haben, wird das JSON Viewer Popup Fenster geladen..",
+            "logInProgress": "Die Protokollerstellung ist im Gange"
         },
         "modal": {
-            "jsonViewer": "Ausgewählte Datei: %{fileName}"
+            "jsonViewer": "Ausgewählte Datei: %{fileName}",
+            "confirmTitle": "Bestätigen?",
+            "confirmMessage":"Sind Sie sicher, dass Sie ein Crashdump-Protokoll erstellen möchten? Manchmal kann die Erstellung des Protokolls 10 bis 15 Minuten dauern."
         },
         "table": {
             "fileName": "Dateinamen",

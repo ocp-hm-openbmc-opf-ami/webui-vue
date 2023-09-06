@@ -423,10 +423,13 @@
             "download": "Download log",
             "generate": "Generate",
             "close": "Close",
-            "view": "After a click wait for a minute, JSON Viewer popup window is loading.."
+            "view": "After a click wait for a minute, JSON Viewer popup window is loading..",
+            "logInProgress": "Log generation is in progress"
         },
         "modal": {
-            "jsonViewer": "Selected File: %{fileName}"
+            "jsonViewer": "Selected File: %{fileName}",
+            "confirmTitle": "Confirm?",
+            "confirmMessage":"Are you sure you want to Generate Crashdump log? Sometimes it may take 10 to 15 minutes to generate the log."
         },
         "table": {
             "fileName": "File Name",

@@ -423,10 +423,13 @@
             "download": "下載紀錄",
             "generate": "一般",
             "close": "關閉",
-            "view": "典籍後請等待一分鐘，JSON Viewer跳出視窗正在載入.."
+            "view": "典籍後請等待一分鐘，JSON Viewer跳出視窗正在載入..",
+            "logInProgress": "日誌生成正在進行中"
         },
         "modal": {
-            "jsonViewer": "已選擇檔案: %{fileName}"
+            "jsonViewer": "已選擇檔案: %{fileName}",
+            "confirmTitle": "確認？",
+            "confirmMessage":"您確定要生成故障轉儲日誌嗎？有時可能需要 10 到 15 分鐘才能生成日誌."
         },
         "table": {
             "fileName": "檔案名稱",
