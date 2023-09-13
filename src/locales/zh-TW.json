@@ -448,11 +448,14 @@
     "pageAsd": {
         "pageDescription": "At-Scale 除錯服務",
         "asdServer": "ASD 伺服器",
+        "TLSAuthentication": "TLS 驗證",
+        "JTAGInfo": "JTAG 信息",
         "toast": {
             "errorAsdDisabled": "停用 ASD 伺服器發生錯誤",
             "errorAsdEnabled": "啟用 ASD 伺服器發生錯誤",
             "successAsdDisabled": "成功停用 ASD 伺服器",
-            "successAsdEnabled": "成功啟用 ASD 伺服器"
+            "successAsdEnabled": "成功啟用 ASD 伺服器",
+            "errorAsdDbusEnable": "無法獲取 TLS 和 JTAG 信息"
         }
     },
     "PageFactoryDefault": {

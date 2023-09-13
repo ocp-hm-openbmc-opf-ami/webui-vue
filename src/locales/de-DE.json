@@ -448,11 +448,14 @@
     "pageAsd": {
         "pageDescription": "At-Scale Debug Dienst",
         "asdServer": "ASD Server",
+        "TLSAuthentication": "TLS Authentifizierung",
+        "JTAGInfo": "JTAG Info",
         "toast": {
             "errorAsdDisabled": "Fehler beim Deaktivieren des ASD-Servers.",
             "errorAsdEnabled": "Fehler beim Aktivieren des ASD-Servers.",
             "successAsdDisabled": "ASD Server erfolgreich deaktiviert.",
-            "successAsdEnabled": "ASD Server erfolgreich aktiviert."
+            "successAsdEnabled": "ASD Server erfolgreich aktiviert.",
+            "errorAsdDbusEnable": "Die TLS und JTAG Informationen können nicht abgerufen werden."
         }
     },
     "PageFactoryDefault": {

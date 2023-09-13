@@ -5,13 +5,21 @@ const AsdStore = {
   namespaced: true,
   state: {
     asdServerEnabled: null,
+    TLSAuthentication: '',
+    JTagInformation: '',
   },
   getters: {
     asdServerEnabled: (state) => state.asdServerEnabled,
+    TLSAuthentication: (state) => state.TLSAuthentication,
+    JTagInformation: (state) => state.JTagInformation,
   },
   mutations: {
     setAsdServerEnabled: (state, asdServerEnabled) =>
       (state.asdServerEnabled = asdServerEnabled),
+    setTLSAuthentication: (state, TLSAuthentication) =>
+      (state.TLSAuthentication = TLSAuthentication),
+    setJTagInformation: (state, JTagInformation) =>
+      (state.JTagInformation = JTagInformation),
   },
   actions: {
     async getAsdServerStatus({ commit }) {
@@ -19,8 +27,18 @@ const AsdStore = {
         .get('/redfish/v1/Oem/Ami/AtScaleDebug')
         .then((response) => {
           commit('setAsdServerEnabled', response.data.Enabled);
+          const TLSAuthentication = response.data.TLSAuthentication;
+          commit('setTLSAuthentication', TLSAuthentication);
+          const JTagInformation = response.data.JTagInformation;
+          commit('setJTagInformation', JTagInformation);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          commit('setAsdServerEnabled', error.response.data.Enabled);
+          commit('setJTagInformation', 'N/A');
+          commit('setTLSAuthentication', 'N/A');
+          throw new Error(i18n.t('pageAsd.toast.errorAsdDbusEnable'));
+        });
     },
     async saveAsdServerStatus({ commit, dispatch }, asdServerEnabled) {
       commit('setAsdServerEnabled', asdServerEnabled);

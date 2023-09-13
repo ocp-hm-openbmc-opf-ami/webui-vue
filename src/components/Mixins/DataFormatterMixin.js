@@ -24,6 +24,9 @@ const DataFormatterMixin = {
     dataFormatterArray(value) {
       return value.join(', ');
     },
+    firstLetterUpperCase(inputString) {
+      return inputString.charAt(0).toUpperCase() + inputString.slice(1);
+    },
   },
 };
 
