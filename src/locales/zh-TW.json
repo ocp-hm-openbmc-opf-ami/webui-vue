@@ -144,7 +144,8 @@
         "nvmeInformation": "@:appPageTitle.nvmeInformation",
         "hostSystemDiagnostics": "主系統診斷",
         "autonomousCrashDump": "ACD",
-        "asd": "@:appPageTitle.asd"
+        "asd": "@:appPageTitle.asd",
+        "onDemand":"@:appPageTitle.onDemand"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -183,7 +184,24 @@
         "nicInformation": "NIC 資訊",
         "nvmeInformation": "NVMe 資訊",
         "autonomousCrashDump": "ACD",
-        "asd": "ASD"
+        "asd": "ASD",
+        "onDemand":"一經請求"
+    },
+    "pageOnDemand": {
+        "onDemand":"一經請求",
+        "availableCPU": "可用CPU",
+        "all": "全部",
+        "table": {
+            "name": "姓名",
+            "dynamicFeature": "動態狀態",
+            "meteringFeature": "測光狀態",
+            "provisionFeature": "供給狀態",
+            "stateFeature": "狀態特徵"
+        },
+        "toast": {
+            "errorGettingCpus": "CPU 信息不可用。",
+            "errorShowingOnDemandInfo": "顯示點播信息時出錯。"
+        }
     },
     "pageBsod": {
         "capturedBsod": "捕獲的 Bsod",

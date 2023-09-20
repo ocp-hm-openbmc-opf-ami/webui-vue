@@ -43,6 +43,7 @@ import NicStore from './modules/Nic/Nic';
 import NvmeInformationStore from './modules/NvmeInformation/NvmeInformationStore';
 import AutonomousCrashDumpStore from './modules/HostSystemDiagnostics/AcdStore';
 import AsdStore from './modules/HostSystemDiagnostics/AsdStore';
+import OnDemand from './modules/Settings/OnDemand';
 
 Vue.use(Vuex);
 
@@ -92,6 +93,7 @@ export default new Vuex.Store({
     nvme: NvmeInformationStore,
     acd: AutonomousCrashDumpStore,
     asd: AsdStore,
+    ondemand: OnDemand,
   },
   plugins: [WebSocketPlugin],
 });

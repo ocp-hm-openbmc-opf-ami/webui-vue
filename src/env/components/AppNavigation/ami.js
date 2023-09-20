@@ -245,6 +245,13 @@ const AppNavigationMixin = {
           route: '/nic',
         });
       }
+      if (process.env.VUE_APP_ONDEMAND_ENABLED === 'true') {
+        navigationItemsList.navigationItems[4].children.push({
+          id: 'OnDemand',
+          label: this.$t('appNavigation.onDemand'),
+          route: '/settings/on-demand',
+        });
+      }
       return navigationItemsList;
     },
   },

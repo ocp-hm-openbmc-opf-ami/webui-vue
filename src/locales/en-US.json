@@ -144,7 +144,8 @@
         "nvmeInformation": "@:appPageTitle.nvmeInformation",
         "hostSystemDiagnostics": "Host System Diagnostics",
         "autonomousCrashDump": "ACD",
-        "asd": "@:appPageTitle.asd"
+        "asd": "@:appPageTitle.asd",
+        "onDemand":"@:appPageTitle.onDemand"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -183,7 +184,24 @@
         "nicInformation": "NIC Information",
         "nvmeInformation": "NVMe Information",
         "autonomousCrashDump": "ACD",
-        "asd": "ASD"
+        "asd": "ASD",
+        "onDemand":"OnDemand"
+    },
+    "pageOnDemand": {
+        "onDemand":"OnDemand",
+        "availableCPU": "Available CPUs",
+        "all": "All",
+        "table": {
+            "name": "Name",
+            "dynamicFeature": "Dynamic State",
+            "meteringFeature": "Metering State",
+            "provisionFeature": "Provision State",
+            "stateFeature": "State Feature"
+        },
+        "toast": {
+            "errorGettingCpus": "The CPUs informations not available.",
+            "errorShowingOnDemandInfo": "Error in displaying OnDemand Information."
+        }
     },
     "pageBsod": {
         "capturedBsod": "Captured Bsod",
