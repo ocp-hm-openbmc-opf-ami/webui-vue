@@ -2,6 +2,7 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import ChangePassword from '@/views/ChangePassword';
 import Sessions from '@/views/SecurityAndAccess/Sessions';
 import ConsoleLayout from '@/layouts/ConsoleLayout.vue';
+import Bsod from '@/views/Settings/Bsod';
 import DateTime from '@/views/Settings/DateTime';
 import EventLogs from '@/views/Logs/EventLogs';
 import Firmware from '@/views/Operations/Firmware';
@@ -194,6 +195,14 @@ const routes = [
         component: DateTime,
         meta: {
           title: i18n.t('appPageTitle.dateTime'),
+        },
+      },
+      {
+        path: '/settings/bsod',
+        name: 'bsod',
+        component: Bsod,
+        meta: {
+          title: i18n.t('appPageTitle.bsod'),
         },
       },
       {

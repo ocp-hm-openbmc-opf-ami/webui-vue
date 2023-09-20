@@ -103,6 +103,7 @@
         "titleRefresh": "Refresh application data"
     },
     "appNavigation": {
+        "bsod": "@:appPageTitle.bsod",
         "resourceManagement": "Resource management",
         "securityAndAccess": "Security and access",
         "sessions": "@:appPageTitle.sessions",
@@ -146,6 +147,7 @@
         "asd": "@:appPageTitle.asd"
     },
     "appPageTitle": {
+        "bsod": "BSOD",
         "changePassword": "Change password",
         "power": "Power",
         "sessions": "Sessions",
@@ -182,6 +184,15 @@
         "nvmeInformation": "NVMe Information",
         "autonomousCrashDump": "ACD",
         "asd": "ASD"
+    },
+    "pageBsod": {
+        "capturedBsod": "Captured Bsod",
+        "downloadBsodImage": "Download BSOD Image",
+        "lastBsodCaptured": "Last Bsod Screen Captured.",
+        "bsodImageNotAvailable": "BSOD screen is not available.",
+        "toast": {
+            "errorGettingBsodApi": "Error in getting BSOD Image."
+        }
     },
     "pageChangePassword": {
         "changePassword": "Change password",

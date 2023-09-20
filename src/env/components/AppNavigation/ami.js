@@ -124,6 +124,11 @@ const AppNavigationMixin = {
           icon: 'iconSettings',
           children: [
             {
+              id: 'bsod',
+              label: this.$t('appNavigation.bsod'),
+              route: '/settings/bsod',
+            },
+            {
               id: 'date-time',
               label: this.$t('appNavigation.dateTime'),
               route: '/settings/date-time',

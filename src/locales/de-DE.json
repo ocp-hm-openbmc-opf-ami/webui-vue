@@ -103,6 +103,7 @@
         "titleRefresh": "Anwendungsdaten aktualisieren"
     },
     "appNavigation": {
+        "bsod": "@:appPageTitle.bsod",
         "resourceManagement": "Resourcenmanagement",
         "securityAndAccess": "Sicherheit und Zugang",
         "sessions": "@:appPageTitle.sessions",
@@ -146,6 +147,7 @@
         "asd": "@:appPageTitle.asd"
     },
     "appPageTitle": {
+        "bsod": "BSOD",
         "changePassword": "Kennwort ändern",
         "power": "Leistung",
         "sessions": "Sitzungen",
@@ -182,6 +184,15 @@
         "nvmeInformation": "NVMe Informationen",
         "autonomousCrashDump": "ACD",
         "asd": "ASD"
+    },
+    "pageBsod": {
+        "capturedBsod": "Gefangener Bsod",
+        "downloadBsodImage": "Laden Sie das BSOD-Image herunter",
+        "lastBsodCaptured": "Letzter Bsod-Bildschirm aufgenommen.",
+        "bsodImageNotAvailable": "Der BSOD-Bildschirm ist nicht verfügbar.",
+        "toast": {
+            "errorGettingBsodApi": "Fehler beim Abrufen des BSOD-Images."
+        }
     },
     "pageChangePassword": {
         "changePassword": "Kennwort ändern",

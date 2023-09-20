@@ -103,6 +103,7 @@
         "titleRefresh": "更新应用程式资料"
     },
     "appNavigation": {
+        "bsod": "@:appPageTitle.bsod",
         "resourceManagement": "资源管理",
         "securityAndAccess": "安全性与存取权",
         "sessions": "@:appPageTitle.sessions",
@@ -146,6 +147,7 @@
         "asd": "@:appPageTitle.asd"
     },
     "appPageTitle": {
+        "bsod": "BSOD",
         "changePassword": "变更密码",
         "power": "电源",
         "sessions": "对谈",
@@ -182,6 +184,15 @@
         "nvmeInformation": "NVMe 资讯",
         "autonomousCrashDump": "ACD",
         "asd": "ASD"
+    },
+    "pageBsod": {
+        "capturedBsod": "捕获的 Bsod",
+        "downloadBsodImage": "下载 BSOD 图像",
+        "lastBsodCaptured": "最后捕获的 Bsod 屏幕.",
+        "bsodImageNotAvailable": "BSOD 屏幕不可用.",
+        "toast": {
+            "errorGettingBsodApi": "获取 BSOD 图像时出错."
+        }
     },
     "pageChangePassword": {
         "changePassword": "变更密码",

@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import GlobalStore from './modules/GlobalStore';
 import AuthenticationStore from './modules/Authentication/AuthenticanStore';
+import BsodStore from './modules/Settings/BsodStore';
 import SessionsStore from './modules/SecurityAndAccess/SessionsStore';
 import LdapStore from './modules/SecurityAndAccess/LdapStore';
 import UserManagementStore from './modules/SecurityAndAccess/UserManagementStore';
@@ -52,6 +53,7 @@ export default new Vuex.Store({
   modules: {
     global: GlobalStore,
     authentication: AuthenticationStore,
+    bsod: BsodStore,
     sessions: SessionsStore,
     dateTime: DateTimeStore,
     ldap: LdapStore,
