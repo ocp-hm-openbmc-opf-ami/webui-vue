@@ -416,7 +416,7 @@ export default {
   created() {
     this.startLoader();
     Promise.all([
-      this.$store.dispatch('policies/getBiosStatus'),
+      // this.$store.dispatch('policies/getBiosStatus'),
       this.$store.dispatch('policies/getNetworkProtocolStatus'),
       this.$store.dispatch('policies/getSessionTimeout'),
       this.$store.dispatch('policies/getKvmServiceStatus'),

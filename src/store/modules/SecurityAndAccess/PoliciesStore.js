@@ -343,52 +343,52 @@ const PoliciesStore = {
           throw new Error(i18n.t('pagePolicies.toast.errorSessionTimeout'));
         });
     },
-  },
-  async saveComplexity({ commit }, complexityValue) {
-    commit('setComplexity', complexityValue);
-    const Oem = {
-      Oem: {
-        OpenBMC: {
-          PasswordPolicyComplexity: complexityValue,
+    async saveComplexity({ commit }, complexityValue) {
+      commit('setComplexity', complexityValue);
+      const Oem = {
+        Oem: {
+          OpenBMC: {
+            PasswordPolicyComplexity: complexityValue,
+          },
         },
-      },
-    };
-    return await api
-      .patch('/redfish/v1/AccountService', Oem)
-      .then(() => {
-        if (complexityValue) {
-          return i18n.t('pagePolicies.toast.successComplexity');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        if (complexityValue) {
-          throw new Error(i18n.t('pagePolicies.toast.errorComplexity'));
-        }
-      });
-  },
-  async savePasswordHistory({ commit }, passwordHistoryValue) {
-    commit('setPasswordHistory', passwordHistoryValue);
-    const Oem = {
-      Oem: {
-        OpenBMC: {
-          RememberOldPasswordTimes: passwordHistoryValue,
+      };
+      return await api
+        .patch('/redfish/v1/AccountService', Oem)
+        .then(() => {
+          if (complexityValue) {
+            return i18n.t('pagePolicies.toast.successComplexity');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          if (complexityValue) {
+            throw new Error(i18n.t('pagePolicies.toast.errorComplexity'));
+          }
+        });
+    },
+    async savePasswordHistory({ commit }, passwordHistoryValue) {
+      commit('setPasswordHistory', passwordHistoryValue);
+      const Oem = {
+        Oem: {
+          OpenBMC: {
+            RememberOldPasswordTimes: passwordHistoryValue,
+          },
         },
-      },
-    };
-    return await api
-      .patch('/redfish/v1/AccountService', Oem)
-      .then(() => {
-        if (passwordHistoryValue) {
-          return i18n.t('pagePolicies.toast.successPasswordHistory');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        if (passwordHistoryValue) {
-          throw new Error(i18n.t('pagePolicies.toast.errorPasswordHistory'));
-        }
-      });
+      };
+      return await api
+        .patch('/redfish/v1/AccountService', Oem)
+        .then(() => {
+          if (passwordHistoryValue) {
+            return i18n.t('pagePolicies.toast.successPasswordHistory');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          if (passwordHistoryValue) {
+            throw new Error(i18n.t('pagePolicies.toast.errorPasswordHistory'));
+          }
+        });
+    },
   },
 };
 
