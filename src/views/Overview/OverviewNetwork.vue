@@ -59,7 +59,18 @@ export default {
   mixins: [DataFormatterMixin],
   computed: {
     network() {
-      return this.$store.getters['network/globalNetworkSettings'][0];
+      var networkData;
+      var globalNetwork = this.$store.getters['network/globalNetworkSettings'];
+      if (globalNetwork.length) {
+        this.$store.getters['network/globalNetworkSettings'].forEach(
+          (network) => {
+            if (network.id == 'eth0') {
+              networkData = network;
+            }
+          }
+        );
+      }
+      return networkData;
     },
   },
   created() {

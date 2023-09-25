@@ -43,6 +43,7 @@ const NetworkStore = {
           IPv4StaticAddresses,
           LinkStatus,
           MACAddress,
+          Id,
         } = data;
         return {
           defaultGateway: IPv4StaticAddresses[0]?.Gateway, //First static gateway is the default gateway
@@ -58,6 +59,7 @@ const NetworkStore = {
           useNtpEnabled: DHCPv4.UseNTPServers,
           ipv4DhcpEnabled: DHCPv4.DHCPEnabled,
           ipv6DhcpEnabled: DHCPv6.OperatingMode == 'Stateful' ? true : false,
+          id: Id,
         };
       });
     },
