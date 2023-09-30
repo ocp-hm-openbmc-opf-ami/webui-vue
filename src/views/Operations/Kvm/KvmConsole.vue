@@ -222,6 +222,9 @@ export default {
       }
     },
     openNewWindow() {
+      if (this.rfb != null) {
+        this.closeTerminal();
+      }
       this.isConsoleWindow = window.open(
         '#/console/kvm',
         'kvmConsoleWindow',
