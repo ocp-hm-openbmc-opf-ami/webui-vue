@@ -243,15 +243,14 @@
         }
     },
     "pageNic": {
-        "pciClassCode": "PCI 類代碼",
-        "slotNumber": "Slot 數字",
+        "currentTemperature": "目前溫度",
+        "manufacturerId": "製造商 ID",
         "vendorId": "供應商 ID",
         "deviceId": "設備 ID",
-        "currentSpeed": "目前速度",
-        "portIdx": "端口 Idx",
-        "mediaState": "媒體狀態",
-        "macAddress": "MAC 位址",
-        "firmwareAddress": "韌體位址"
+        "NCSIVersion": "NCSI版本",
+        "health": "健康",
+        "firmwareName": "韌體名稱",
+        "firmwareVersion": "韌體版本"
     },
     "pageNvmeInformation": {
         "nvmeSolidStateDrive": "NVMe 固體狀態驅動狀態",

@@ -243,15 +243,14 @@
         }
     },
     "pageNic": {
-        "pciClassCode": "PCI Klasse code",
-        "slotNumber": "Steckplatznummer",
+        "currentTemperature": "Aktuelle Temperatur",
+        "manufacturerId": "Hersteller ID",
         "vendorId": "Hersteller ID",
         "deviceId": "Geräte ID",
-        "currentSpeed": "momentane Geschwindigkeit",
-        "portIdx": "Port Idx",
-        "mediaState": "Medienstaat",
-        "macAddress": "MAC Adresse",
-        "firmwareAddress": "Firmware Adresse"
+        "NCSIVersion": "NCSI Version",
+        "health": "Gesundheit",
+        "firmwareName": "Firmware Name",
+        "firmwareVersion": "Firmware version"
     },
     "pageNvmeInformation": {
         "nvmeSolidStateDrive": "NVMe Solid State Laufwerksstatus",
