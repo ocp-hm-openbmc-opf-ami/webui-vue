@@ -73,7 +73,14 @@ const AuthenticationStore = {
       return api
         .get(`/redfish/v1/AccountService/Accounts/${username}`)
         .then(({ data }) => data)
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          if (error.response.status == 404) {
+            return Promise.resolve({
+              PasswordChangeRequired: false,
+              RoleId: 'Administrator',
+            });
+          }
+        });
     },
     resetStoreState({ state }) {
       state.authError = false;

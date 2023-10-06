@@ -139,6 +139,14 @@ export default {
       ],
     };
   },
+  computed: {
+    authError() {
+      return this.$store.getters['authentication/authError'];
+    },
+    authLocked() {
+      return this.$store.getters['authentication/authLocked'];
+    },
+  },
   created() {
     if (process.env.VUE_APP_CHINESE_ZH_CN_LANGUAGE_SUPPORT == 'true')
       this.languages.push({
@@ -155,14 +163,6 @@ export default {
         value: 'de-DE',
         text: 'Germany - Deutsch',
       });
-  },
-  computed: {
-    authError() {
-      return this.$store.getters['authentication/authError'];
-    },
-    authLocked() {
-      return this.$store.getters['authentication/authLocked'];
-    },
   },
   validations: {
     userInfo: {
