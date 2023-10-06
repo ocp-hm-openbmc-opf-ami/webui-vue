@@ -23,7 +23,10 @@
             "selected": "Selected",
             "ok": "OK",
             "warning": "Warning",
-            "critical": "Critical"
+            "critical": "Critical",
+            "create": "Create",
+            "success": "Success",
+            "alert": "Alert"
         },
         "ariaLabel": {
             "clearSearch": "Clear search input",
@@ -145,7 +148,12 @@
         "hostSystemDiagnostics": "Host System Diagnostics",
         "autonomousCrashDump": "ACD",
         "asd": "@:appPageTitle.asd",
-        "onDemand":"@:appPageTitle.onDemand"
+        "onDemand":"@:appPageTitle.onDemand",
+        "raidManagement": "@:appPageTitle.raidManagement",
+        "adapter": "@:appPageTitle.adapter",
+        "physicalDevice": "@:appPageTitle.physicalDevice",
+        "logicalDevice": "@:appPageTitle.logicalDevice",
+        "createLogicalDevice": "@:appPageTitle.createLogicalDevice"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -185,7 +193,12 @@
         "nvmeInformation": "NVMe Information",
         "autonomousCrashDump": "ACD",
         "asd": "ASD",
-        "onDemand":"OnDemand"
+        "onDemand":"OnDemand",
+        "raidManagement": "RAID Management",
+        "adapter": "Adapter",
+        "physicalDevice": "Physical Device",
+        "logicalDevice": "Logical Device",
+        "createLogicalDevice": "Create Logical Device"
     },
     "pageOnDemand": {
         "onDemand":"OnDemand",
@@ -1336,6 +1349,108 @@
             "serverClosedSuccessfully": "Server closed successfully",
             "serverClosedWithErrors": "Server closed with errors",
             "errorImageFormat": "Please provide valid image .nrg / .ima / .iso or .img format!"
+        }
+    },
+    "pageAdapter": {
+        "firmwareVersion": "Firmware Version :",
+        "memberId": "Member Id :",
+        "name": "Name :",
+        "serialNumber": "Serial Number :",
+        "supportedRaidTypes": "Supported RAID Types :",
+        "viewPhysicalDevices": "View Physical Devices",
+        "viewLogicalDevices": "View Logical Devices",
+        "noRaidControllerAvailable": "There are no RAID Controller Available."
+    },
+    "pagePhysicalDevice": {
+        "table": {
+            "id": "ID",
+            "failurePredicted": "Failure Predicted",
+            "blockSizeBytes": "Block Size Bytes",
+            "manufacturer": "Manufacturer",
+            "negotiatedSpeedGbs": "Negotiated Speed Gbs",
+            "protocol": "Protocol",
+            "revision": "Revision",
+            "serialNumber": "Serial Number"
+        },
+        "noPhysicalDevice": "There are no Physical Device information present at this time."
+    },
+    "pageLogicalDevice": {
+        "createLogicalDevice": "Create Logical Device",
+        "raidController": "RAID Controller",
+        "raidLevel": "RAID Level",
+        "virtualDeviceName": "Virtual Device Name",
+        "spanDepth": "Span Depth",
+        "numberOfDrives": "Number of Drives",
+        "initState": "Initialization State",
+        "stripeSize": "Stripe Size",
+        "readPolicy": "Read Policy",
+        "writePolicy": "Write Policy",
+        "ioPolicy": "IO Policy",
+        "accessPolicy": "Access Policy",
+        "diskCacheCapacity": "Disk Cache Capacity",
+        "unConfiguredPhysicalDrive": "Unconfigured Physical Drives",
+        "noLogicalDevice": "There are no Logical Device information present at this time.",
+        "raidOptions": {
+            "raid0": "RAID0",
+            "raid1": "RAID1",
+            "raid5": "RAID5",
+            "raid6": "RAID6",
+            "raidIe": "RAID IE (RLQ = 1)",
+            "raid1e": "RAID 1E (RLQ = 0)",
+            "raidIe0": "RAID IE0 (RLQ = 0)",
+            "raid00": "RAID00",
+            "raid10": "RAID10",
+            "raid50": "RAID50",
+            "raid60": "RAID60"
+        },
+        "initStateOptions": {
+            "noInitialization": "No Initialization",
+            "quickInitialization": "Quick Initialization",
+            "fastInitialization": "Fast Initialization"
+        },
+        "readPolicyOptions": {
+            "noReadAhead": "No Read Ahead",
+            "alwaysReadAhead": "Always Read Ahead"
+        },
+        "writePolicyOptions": {
+            "writeThrough": "Write Through",
+            "alwaysWriteBack": "Always Write Back",
+            "writeBackWithBBU": "Write back with BBU"
+        },
+        "ioPolicyOptions": {
+            "directIO": "DirectIO",
+            "cachedIO": "CachedIO"
+        },
+        "accessPolicyOptions": {
+            "readWrite": "Read-Write",
+            "readOnly": "Read Only",
+            "blocked": "Blocked"
+        },
+        "diskCacheCapacityOptions": {
+            "unchanged": "Unchanged",
+            "enabled": "Enabled",
+            "disabled": "Disabled"
+        },
+        "table": {
+            "name": "Name",
+            "raidType": "RAID Type",
+            "stripSizeBytes": "Strip Size Bytes",
+            "readCachePolicyType": "Read Cache Policy Type",
+            "writeCachePolicyType": "Write Cache Policy Type",
+            "capacityBytes": "Capacity Bytes",
+            "numberOfPhysicalDevices": "Number Of Physical Devices"
+        },
+        "modal": {
+            "noPhysicalDeviceAvailable": "No Physical Device is available to configure!",
+            "deleteConfirmationMsg": "Are you sure you want to delete the logical device? Click Ok to continue, or click Cancel to stop now.",
+            "deleteConfirmationTitle": "Delete logical device."
+        },
+        "toast": {
+            "successCreateLogicalDevice": "Successfully Created Logical Device",
+            "errorCreateLogicalDevice": "Error Creating Logical Device",
+            "successDeleteLogicalDevice": "Successfully Deleted Logical Device",
+            "errorDeleteLogicalDevice": "Error Deleting Logical Device",
+            "errorNumberOfDrivesValidation": "Number of Drives count should not higher than UnConfigured Physical Device count!"
         }
     },
     "countries": {

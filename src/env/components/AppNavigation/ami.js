@@ -9,6 +9,7 @@ import IconDataBase from '@carbon/icons-vue/es/data--base--alt/16';
 import IconNic from '@carbon/icons-vue/es/network--2/16';
 import IconObjectStorage from '@carbon/icons-vue/es/object-storage/16';
 import IconHostSystemDiagnostics from '@carbon/icons-vue/es/laptop/16';
+import IconStorageRequest from '@carbon/icons-vue/es/storage-request/16';
 
 const AppNavigationMixin = {
   components: {
@@ -23,6 +24,7 @@ const AppNavigationMixin = {
     iconNic: IconNic,
     iconObjectStorage: IconObjectStorage,
     iconHostSystemDiagnostics: IconHostSystemDiagnostics,
+    iconStorageRequest: IconStorageRequest,
   },
   data() {
     return this.renderNavigationItems();
@@ -229,6 +231,30 @@ const AppNavigationMixin = {
           ],
         },
       ];
+      if (process.env.VUE_APP_RAID_ENABLED === 'true') {
+        navigationItemsList.navigationItems.push({
+          id: 'raid',
+          label: this.$t('appNavigation.raidManagement'),
+          icon: 'iconStorageRequest',
+          children: [
+            {
+              id: 'adapter',
+              label: this.$t('appNavigation.adapter'),
+              route: '/raid/adapter',
+            },
+            {
+              id: 'physical-device',
+              label: this.$t('appNavigation.physicalDevice'),
+              route: '/raid/physical-device',
+            },
+            {
+              id: 'logical-device',
+              label: this.$t('appNavigation.logicalDevice'),
+              route: '/raid/logical-device',
+            },
+          ],
+        });
+      }
       if (process.env.VUE_APP_NVME_ENABLED === 'true') {
         navigationItemsList.navigationItems.push({
           id: 'nvmeInformation',

@@ -341,6 +341,52 @@ if (process.env.VUE_APP_ONDEMAND_ENABLED == 'true') {
     },
   });
 }
+if (process.env.VUE_APP_RAID_ENABLED == 'true') {
+  routes[2].children.push(
+    {
+      path: '/raid/adapter',
+      name: 'adapter',
+      component: () =>
+        import(/* webpackChunkName: "Adapter" */ '@/views/RAID/Adapter'),
+      meta: {
+        title: i18n.t('appPageTitle.adapter'),
+      },
+    },
+    {
+      path: '/raid/physical-device',
+      name: 'physical-device',
+      component: () =>
+        import(
+          /* webpackChunkName: "PhysicalStorage" */ '@/views/RAID/PhysicalStorage'
+        ),
+      meta: {
+        title: i18n.t('appPageTitle.physicalDevice'),
+      },
+    },
+    {
+      path: '/raid/logical-device',
+      name: 'logical-device',
+      component: () =>
+        import(
+          /* webpackChunkName: "LogicalStorage" */ '@/views/RAID/LogicalStorage/LogicalStorage.vue'
+        ),
+      meta: {
+        title: i18n.t('appPageTitle.logicalDevice'),
+      },
+    },
+    {
+      path: '/raid/create-logical-device',
+      name: 'create-logical-device',
+      component: () =>
+        import(
+          /* webpackChunkName: "CreateLogicalStorage" */ '@/views/RAID/LogicalStorage/CreateLogicalStorage.vue'
+        ),
+      meta: {
+        title: i18n.t('appPageTitle.createLogicalDevice'),
+      },
+    }
+  );
+}
 if (process.env.VUE_APP_NVME_ENABLED == 'true') {
   routes[2].children.push({
     path: '/nvme-information',

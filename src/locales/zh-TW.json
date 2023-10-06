@@ -23,7 +23,10 @@
             "selected": "已選定",
             "ok": "OK",
             "warning": "警告",
-            "critical": "嚴重"
+            "critical": "嚴重",
+            "create": "創造",
+            "success": "成功",
+            "alert": "警報"
         },
         "ariaLabel": {
             "clearSearch": "清除搜索條件",
@@ -145,7 +148,12 @@
         "hostSystemDiagnostics": "主系統診斷",
         "autonomousCrashDump": "ACD",
         "asd": "@:appPageTitle.asd",
-        "onDemand":"@:appPageTitle.onDemand"
+        "onDemand":"@:appPageTitle.onDemand",
+        "raidManagement": "@:appPageTitle.raidManagement",
+        "adapter": "@:appPageTitle.adapter",
+        "physicalDevice": "@:appPageTitle.physicalDevice",
+        "logicalDevice": "@:appPageTitle.logicalDevice",
+        "createLogicalDevice": "@:appPageTitle.createLogicalDevice"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -185,7 +193,12 @@
         "nvmeInformation": "NVMe 資訊",
         "autonomousCrashDump": "ACD",
         "asd": "ASD",
-        "onDemand":"一經請求"
+        "onDemand":"一經請求",
+        "raidManagement": "磁盤陣列管理",
+        "adapter": "適配器",
+        "physicalDevice": "物理設備",
+        "logicalDevice": "邏輯設備",
+        "createLogicalDevice": "創建邏輯設備"
     },
     "pageOnDemand": {
         "onDemand":"一經請求",
@@ -1335,6 +1348,108 @@
             "serverConnectionEstablished": "伺服器已連線",
             "serverClosedSuccessfully": "關閉伺服器成功",
             "serverClosedWithErrors": "伺服器已關閉但有錯誤發生"
+        }
+    },
+    "pageAdapter": {
+        "firmwareVersion": "固件版本 :",
+        "memberId": "會員ID :",
+        "name": "姓名 :",
+        "serialNumber": "序列號 :",
+        "supportedRaidTypes": "支持的 RAID 類型 :",
+        "viewPhysicalDevices": "查看物理設備",
+        "viewLogicalDevices": "查看邏輯設備",
+        "noRaidControllerAvailable": "沒有可用的 RAID 控制器。"
+    },
+    "pagePhysicalDevice": {
+        "table": {
+            "id": "ID",
+            "failurePredicted": "預測失敗",
+            "blockSizeBytes": "塊大小字節",
+            "manufacturer": "製造商",
+            "negotiatedSpeedGbs": "協商速度 Gbs",
+            "protocol": "協議",
+            "revision": "修訂",
+            "serialNumber": "序列號"
+        },
+        "noPhysicalDevice": "目前不存在物理設備信息。"
+    },
+    "pageLogicalDevice": {
+        "createLogicalDevice": "創建邏輯設備",
+        "raidController": "RAID控制器",
+        "raidLevel": "RAID級別",
+        "virtualDeviceName": "虛擬設備名稱",
+        "spanDepth": "跨度深度",
+        "numberOfDrives": "驅動器數量",
+        "initState": "初始化狀態",
+        "stripeSize": "條紋尺寸",
+        "readPolicy": "閱讀政策",
+        "writePolicy": "寫策略",
+        "ioPolicy": "IO政策",
+        "accessPolicy": "准入政策",
+        "diskCacheCapacity": "磁盤緩存容量",
+        "unConfiguredPhysicalDrive": "未配置的物理驅動器",
+        "noLogicalDevice": "此時不存在邏輯設備信息。",
+        "raidOptions": {
+            "raid0": "RAID0",
+            "raid1": "RAID1",
+            "raid5": "RAID5",
+            "raid6": "RAID6",
+            "raidIe": "RAID IE (RLQ = 1)",
+            "raid1e": "RAID 1E (RLQ = 0)",
+            "raidIe0": "RAID IE0 (RLQ = 0)",
+            "raid00": "RAID00",
+            "raid10": "RAID10",
+            "raid50": "RAID50",
+            "raid60": "RAID60"
+        },
+        "initStateOptions": {
+            "noInitialization": "無初始化",
+            "quickInitialization": "快速初始化",
+            "fastInitialization": "快速初始化"
+        },
+        "readPolicyOptions": {
+            "noReadAhead": "沒有預讀",
+            "alwaysReadAhead": "始終提前閱讀"
+        },
+        "writePolicyOptions": {
+            "writeThrough": "直寫",
+            "alwaysWriteBack": "總是回信",
+            "writeBackWithBBU": "用BBU回寫"
+        },
+        "ioPolicyOptions": {
+            "directIO": "直接IO",
+            "cachedIO": "緩存IO"
+        },
+        "accessPolicyOptions": {
+            "readWrite": "讀寫",
+            "readOnly": "只讀",
+            "blocked": "被阻止"
+        },
+        "diskCacheCapacityOptions": {
+            "unchanged": "不變",
+            "enabled": "啟用",
+            "disabled": "殘疾人"
+        },
+        "table": {
+            "name": "姓名",
+            "raidType": "磁盤陣列類型",
+            "stripSizeBytes": "條帶大小字節",
+            "readCachePolicyType": "讀取緩存策略類型",
+            "writeCachePolicyType": "寫入緩存策略類型",
+            "capacityBytes": "容量字節",
+            "numberOfPhysicalDevices": "物理設備數量"
+        },
+        "modal": {
+            "noPhysicalDeviceAvailable": "沒有可配置的物理設備！",
+            "deleteConfirmationMsg": "您確定要刪除邏輯設備嗎？單擊“確定”繼續，或單擊“取消”立即停止。",
+            "deleteConfirmationTitle": "刪除邏輯設備。"
+        },
+        "toast": {
+            "successCreateLogicalDevice": "邏輯設備創建成功",
+            "errorCreateLogicalDevice": "創建邏輯設備時出錯",
+            "successDeleteLogicalDevice": "成功刪除邏輯設備",
+            "errorDeleteLogicalDevice": "刪除邏輯設備時出錯",
+            "errorNumberOfDrivesValidation": "驅動器數量不應高於未配置的物理設備數量！"
         }
     },
     "countries": {

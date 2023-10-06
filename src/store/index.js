@@ -44,6 +44,7 @@ import NvmeInformationStore from './modules/NvmeInformation/NvmeInformationStore
 import AutonomousCrashDumpStore from './modules/HostSystemDiagnostics/AcdStore';
 import AsdStore from './modules/HostSystemDiagnostics/AsdStore';
 import OnDemand from './modules/Settings/OnDemand';
+import RaidStore from './modules/Raid/RaidStore';
 
 Vue.use(Vuex);
 
@@ -94,6 +95,7 @@ export default new Vuex.Store({
     acd: AutonomousCrashDumpStore,
     asd: AsdStore,
     ondemand: OnDemand,
+    raid: RaidStore,
   },
   plugins: [WebSocketPlugin],
 });
