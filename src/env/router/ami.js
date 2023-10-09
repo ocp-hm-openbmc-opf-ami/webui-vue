@@ -37,6 +37,13 @@ import Dumps from '@/views/Logs/Dumps';
 import ACD from '@/views/HostSystemDiagnostics/ACD';
 import Asd from '@/views/HostSystemDiagnostics/Asd';
 
+const roles = {
+  administrator: 'Administrator',
+  operator: 'Operator',
+  readonly: 'ReadOnly',
+  noaccess: 'NoAccess',
+};
+
 const routes = [
   {
     path: '/login',
@@ -307,6 +314,7 @@ const routes = [
         component: SerialOverLan,
         meta: {
           title: i18n.t('appPageTitle.serialOverLan'),
+          exclusiveToRoles: [roles.administrator],
         },
       },
       {
@@ -323,6 +331,7 @@ const routes = [
         component: VirtualMedia,
         meta: {
           title: i18n.t('appPageTitle.virtualMedia'),
+          exclusiveToRoles: [roles.administrator],
         },
       },
     ],

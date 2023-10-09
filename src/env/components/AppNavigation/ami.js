@@ -11,6 +11,13 @@ import IconObjectStorage from '@carbon/icons-vue/es/object-storage/16';
 import IconHostSystemDiagnostics from '@carbon/icons-vue/es/laptop/16';
 import IconStorageRequest from '@carbon/icons-vue/es/storage-request/16';
 
+const roles = {
+  administrator: 'Administrator',
+  operator: 'Operator',
+  readonly: 'ReadOnly',
+  noaccess: 'NoAccess',
+};
+
 const AppNavigationMixin = {
   components: {
     iconOverview: IconDashboard,
@@ -107,6 +114,7 @@ const AppNavigationMixin = {
               id: 'serial-over-lan',
               label: this.$t('appNavigation.serialOverLan'),
               route: '/operations/serial-over-lan',
+              exclusiveToRoles: [roles.administrator],
             },
             {
               id: 'server-power-operations',
@@ -117,6 +125,7 @@ const AppNavigationMixin = {
               id: 'virtual-media',
               label: this.$t('appNavigation.virtualMedia'),
               route: '/operations/virtual-media',
+              exclusiveToRoles: [roles.administrator],
             },
           ],
         },
