@@ -18,7 +18,7 @@ const BsodStore = {
           commit('SetBsodImageData', response.data.Image);
         })
         .catch((error) => {
-          commit('SetBsodImageData', 'Image not open');
+          commit('SetBsodImageData', 'Image File is  not Created');
           console.log('Error in getting BSOD Image ', error);
           throw new Error(i18n.t('pageBsod.toast.errorGettingBsodApi'));
         });

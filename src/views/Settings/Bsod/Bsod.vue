@@ -3,12 +3,12 @@
     <page-title />
     <b-row sm="12">
       <b-col sm="3">
-        <span v-if="base64ImageData === 'Image not open'">
+        <span v-if="base64ImageData === 'Image File is  not Created'">
           <b-alert show variant="warning">{{
             $t('pageBsod.bsodImageNotAvailable')
           }}</b-alert>
         </span>
-        <span v-if="base64ImageData != 'Image not open'">
+        <span v-if="base64ImageData != 'Image File is  not Created'">
           <b-alert show variant="success">{{
             $t('pageBsod.lastBsodCaptured')
           }}</b-alert>
@@ -16,7 +16,7 @@
       </b-col>
       <b-col sm="8" class="text-right">
         <b-button
-          v-if="base64ImageData != 'Image not open'"
+          v-if="base64ImageData != 'Image File is  not Created'"
           variant="primary"
           type="button"
           @click="downloadImage"
@@ -27,7 +27,7 @@
     </b-row>
     <br />
     <img
-      v-if="base64ImageData != 'Image not open'"
+      v-if="base64ImageData != 'Image File is  not Created'"
       width="1500"
       :src="'data:image/jpeg;base64,' + base64ImageData"
       alt="Download BSOD Image"
