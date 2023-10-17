@@ -54,9 +54,10 @@ exports[`AppHeader.vue should render correctly 1`] = `
           to="/"
         >
           <img
-            alt="Built on OpenBMC"
+            alt="AMI"
             class="header-logo"
-            src="@/assets/images/logo-header.svg"
+            src="../../assets/images/ami-logo-type-dark-bg.svg"
+            width="100px"
           />
         </b-navbar-brand>
          
@@ -139,6 +140,7 @@ exports[`AppHeader.vue should render correctly 1`] = `
             variant="link"
           >
             <svg
+              class="iconRenew"
               fill="currentColor"
               focusable="false"
               height="20"
@@ -199,14 +201,62 @@ exports[`AppHeader.vue should render correctly 1`] = `
   <transition-stub
     name="fade"
   >
-    <b-progress>
-      <b-progress-bar
-        animated=""
-        aria-label="global.ariaLabel.progressBar"
-        striped=""
-        value="0"
-      />
-    </b-progress>
+    <div>
+      <transition-stub
+        appear="true"
+        appearactiveclass="fade"
+        appearclass=""
+        appeartoclass="show"
+        class="full-overlay"
+        css="true"
+        enteractiveclass="fade"
+        enterclass=""
+        entertoclass="show"
+        leaveactiveclass="fade"
+        leaveclass="show"
+        leavetoclass=""
+        name=""
+      >
+        <div
+          class="b-overlay position-fixed"
+          style="top: 0px; left: 0px; bottom: 0px; right: 0px; z-index: 10;"
+        >
+          <div
+            class="position-absolute bg-light"
+            style="top: 0px; left: 0px; bottom: 0px; right: 0px; opacity: 0.6;"
+          />
+          <div
+            class="position-absolute"
+            style="top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);"
+          >
+            <div
+              class="text-center"
+            >
+              <svg
+                aria-label="blank"
+                class="bi-blank b-icon bi b-icon-animation-cylon"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                role="img"
+                style="font-size: 300%;"
+                viewBox="0 0 16 16"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g />
+              </svg>
+               
+              <p
+                id="cancel-label"
+              >
+                Please wait...
+              </p>
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+    </div>
   </transition-stub>
 </div>
 `;

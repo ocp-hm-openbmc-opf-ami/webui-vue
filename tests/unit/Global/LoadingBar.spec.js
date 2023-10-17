@@ -27,7 +27,7 @@ describe('LoadingBar.vue', () => {
       loadingIndicatorValue: 100,
     });
     expect(wrapper.vm.isLoadingComplete).toBe(false);
-    expect(wrapper.find('.progress').exists()).toBe(true);
+    expect(wrapper.find('.progress').exists()).toBe(false);
   });
   it('should hide loading bar element', async () => {
     await wrapper.setData({

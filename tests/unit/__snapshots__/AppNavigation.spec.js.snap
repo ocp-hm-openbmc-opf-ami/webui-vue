@@ -314,6 +314,15 @@ exports[`AppNavigation.vue should render correctly 1`] = `
                 </a>
                 <a
                   class="nav-link"
+                  data-test-id="nav-item-factory-default"
+                  href="#/operations/factory-default"
+                >
+                  
+                  appNavigation.factoryDefault
+                
+                </a>
+                <a
+                  class="nav-link"
                   data-test-id="nav-item-key-clear"
                   href="#/operations/key-clear"
                 >
@@ -455,11 +464,116 @@ exports[`AppNavigation.vue should render correctly 1`] = `
                 </a>
                 <a
                   class="nav-link"
+                  data-test-id="nav-item-vlan"
+                  href="#/settings/vlan"
+                >
+                  
+                  appNavigation.vlan
+                
+                </a>
+                <a
+                  class="nav-link"
+                  data-test-id="nav-item-smtp"
+                  href="#/settings/smtp"
+                >
+                  
+                  appNavigation.smtpSettings
+                
+                </a>
+                <a
+                  class="nav-link"
                   data-test-id="nav-item-power-restore-policy"
                   href="#/settings/power-restore-policy"
                 >
                   
                   appNavigation.powerRestorePolicy
+                
+                </a>
+              </li>
+            </ul>
+          </transition-stub>
+        </li>
+        <li
+          class="nav-item"
+        >
+          <button
+            aria-controls="platform-event-filter"
+            aria-expanded="false"
+            class="btn btn-link collapsed"
+            data-test-id="nav-button-platform-event-filter"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 32 32"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 10H16V12H8zM8 6H20V8H8zM8 2H20V4H8z"
+              />
+              <path
+                d="M4.7111,28l5.6312-9.9961,7.4341,6.49A2,2,0,0,0,20.86,23.96l6.9707-10.4034-1.6622-1.1132-7,10.4472-.07.1035-7.4345-6.4907a2.0032,2.0032,0,0,0-3.0806.5308L4,25.1826V2H2V28a2.0023,2.0023,0,0,0,2,2H30V28Z"
+              />
+            </svg>
+            
+              appNavigation.pef
+              
+            <svg
+              aria-hidden="true"
+              class="icon-expand"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 5L13 10 12.3 10.7 8 6.4 3.7 10.7 3 10z"
+              />
+            </svg>
+          </button>
+           
+          <transition-stub
+            class="nav-item__nav"
+            css="true"
+            enteractiveclass="collapsing"
+            enterclass=""
+            entertoclass="collapse show"
+            leaveactiveclass="collapsing"
+            leaveclass="collapse show"
+            leavetoclass="collapse"
+          >
+            <ul
+              class="collapse"
+              id="platform-event-filter"
+              style="display: none;"
+            >
+              <li
+                class="nav-item"
+              >
+                <a
+                  class="nav-link"
+                  data-test-id="nav-item-event-filter"
+                  href="#/pef/eventFilter"
+                >
+                  
+                  appNavigation.eventFilter
+                
+                </a>
+                <a
+                  class="nav-link"
+                  data-test-id="nav-item-alert-destination"
+                  href="#/pef/alertDestination"
+                >
+                  
+                  appNavigation.alertDestination
                 
                 </a>
               </li>
@@ -984,6 +1098,15 @@ exports[`AppNavigation.vue should render with nav-container open 1`] = `
                 </a>
                 <a
                   class="nav-link"
+                  data-test-id="nav-item-factory-default"
+                  href="#/operations/factory-default"
+                >
+                  
+                  appNavigation.factoryDefault
+                
+                </a>
+                <a
+                  class="nav-link"
                   data-test-id="nav-item-key-clear"
                   href="#/operations/key-clear"
                 >
@@ -1125,11 +1248,116 @@ exports[`AppNavigation.vue should render with nav-container open 1`] = `
                 </a>
                 <a
                   class="nav-link"
+                  data-test-id="nav-item-vlan"
+                  href="#/settings/vlan"
+                >
+                  
+                  appNavigation.vlan
+                
+                </a>
+                <a
+                  class="nav-link"
+                  data-test-id="nav-item-smtp"
+                  href="#/settings/smtp"
+                >
+                  
+                  appNavigation.smtpSettings
+                
+                </a>
+                <a
+                  class="nav-link"
                   data-test-id="nav-item-power-restore-policy"
                   href="#/settings/power-restore-policy"
                 >
                   
                   appNavigation.powerRestorePolicy
+                
+                </a>
+              </li>
+            </ul>
+          </transition-stub>
+        </li>
+        <li
+          class="nav-item"
+        >
+          <button
+            aria-controls="platform-event-filter"
+            aria-expanded="false"
+            class="btn btn-link collapsed"
+            data-test-id="nav-button-platform-event-filter"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 32 32"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 10H16V12H8zM8 6H20V8H8zM8 2H20V4H8z"
+              />
+              <path
+                d="M4.7111,28l5.6312-9.9961,7.4341,6.49A2,2,0,0,0,20.86,23.96l6.9707-10.4034-1.6622-1.1132-7,10.4472-.07.1035-7.4345-6.4907a2.0032,2.0032,0,0,0-3.0806.5308L4,25.1826V2H2V28a2.0023,2.0023,0,0,0,2,2H30V28Z"
+              />
+            </svg>
+            
+              appNavigation.pef
+              
+            <svg
+              aria-hidden="true"
+              class="icon-expand"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 5L13 10 12.3 10.7 8 6.4 3.7 10.7 3 10z"
+              />
+            </svg>
+          </button>
+           
+          <transition-stub
+            class="nav-item__nav"
+            css="true"
+            enteractiveclass="collapsing"
+            enterclass=""
+            entertoclass="collapse show"
+            leaveactiveclass="collapsing"
+            leaveclass="collapse show"
+            leavetoclass="collapse"
+          >
+            <ul
+              class="collapse"
+              id="platform-event-filter"
+              style="display: none;"
+            >
+              <li
+                class="nav-item"
+              >
+                <a
+                  class="nav-link"
+                  data-test-id="nav-item-event-filter"
+                  href="#/pef/eventFilter"
+                >
+                  
+                  appNavigation.eventFilter
+                
+                </a>
+                <a
+                  class="nav-link"
+                  data-test-id="nav-item-alert-destination"
+                  href="#/pef/alertDestination"
+                >
+                  
+                  appNavigation.alertDestination
                 
                 </a>
               </li>

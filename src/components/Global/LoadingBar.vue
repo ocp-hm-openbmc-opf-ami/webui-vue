@@ -21,7 +21,12 @@
 </template>
 
 <script>
+import { BIcon, BOverlay } from 'bootstrap-vue';
 export default {
+  components: {
+    BIcon,
+    BOverlay,
+  },
   data() {
     return {
       loadingIndicatorValue: 0,
