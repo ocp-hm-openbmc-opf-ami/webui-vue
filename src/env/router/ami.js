@@ -37,7 +37,11 @@ import Dumps from '@/views/Logs/Dumps';
 import ACD from '@/views/HostSystemDiagnostics/ACD';
 import Asd from '@/views/HostSystemDiagnostics/Asd';
 import BackupAndRestore from '@/views/Operations/BackupAndRestore';
+<<<<<<< HEAD
 import systemInventory from '@/views/SystemInventory/SystemInventory';
+=======
+import systemInventory from '@/views/SystemInventory/systemInventory';
+>>>>>>> OT-2119 Adding router configuration
 
 const roles = {
   administrator: 'Administrator',
@@ -353,7 +357,7 @@ const routes = [
         name: 'system-inventory',
         component: systemInventory,
         meta: {
-          title: i18n.t('appPageTitle.systemInventory'),
+          title: i18n.t('appPageTitle.system-inventory'),
         },
       },
     ],
