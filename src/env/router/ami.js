@@ -36,6 +36,7 @@ import i18n from '@/i18n';
 import Dumps from '@/views/Logs/Dumps';
 import ACD from '@/views/HostSystemDiagnostics/ACD';
 import Asd from '@/views/HostSystemDiagnostics/Asd';
+import systemInventory from '@/views/SystemInventory/systemInventory';
 
 const roles = {
   administrator: 'Administrator',
@@ -332,6 +333,14 @@ const routes = [
         meta: {
           title: i18n.t('appPageTitle.virtualMedia'),
           exclusiveToRoles: [roles.administrator],
+        },
+      },
+      {
+        path: '/system-inventory',
+        name: 'system-inventory',
+        component: systemInventory,
+        meta: {
+          title: i18n.t('appPageTitle.system-inventory'),
         },
       },
     ],
