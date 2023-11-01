@@ -157,7 +157,6 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
-        "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "system-inventory":"@:appPageTitle.system-inventory"
     },
     "appPageTitle": {
@@ -204,42 +203,7 @@
         "physicalDevice": "物理設備",
         "logicalDevice": "邏輯設備",
         "createLogicalDevice": "創建邏輯設備",
-        "backupAndRestore": "備份還原"
-    },
-    "pageBackupAndRestore": {
-        "backup": "備份",
-        "restore": "恢復",
-        "authentication": "驗證",
-        "ipmi": "IPMI",
-        "kvm": "KVM",
-        "network": "網路",
-        "ntp": "NTP",
-        "smtp": "SMTP",
-        "snmp": "SNMP",
-        "sysLog": "系統日誌",
-        "uploadRestoreFiles": "上傳恢復文件",
-        "checkAll": "啟用/停用所有備份屬性",
-        "tarFileOnly": "僅上傳恢復 (.tar) 文件",
-        "toast": {
-            "successMessage": "已成功下載屬性備份功能",
-            "errorMessage": "屬性「備份功能」不在可接受值清單中",
-            "fileUploadedSuccessfully": "恢復檔案上傳成功 ",
-            "fileUploadedError": "上傳恢復檔案時發生錯誤",
-            "errorGettingBackupDetails": "取得屬性備份功能時發生錯誤",
-            "errorMessageNotConfigured": "由於設定檔不存在，操作無法完成",
-            "featureNotAvailable": "未啟用備份和復原功能."
-        },
         "system-inventory":"system-inventory"
-    },
-    "systemInventory":{
-        "Processor":"Processor",
-        "Memory Controller":"Memory Controller",
-        "BaseBoard":"BaseBoard",
-        "Power":"Power",
-        "Thermal":"Thermal",
-        "PCIEDevice":"PCIE Device",
-        "PCIEFunction":"PCIEFunction",
-        "Storage":"Storage"
     },
     "pageOnDemand": {
         "onDemand":"一經請求",
@@ -1125,16 +1089,16 @@
     },
     "pageSystemInventory": {
         "system":{
-            "system":"System",
-            "systemInfo":"System Info",
+            "system":"system",
+            "systemInfo":"system Info",
             "Name": "Name",
             "Description": "Description",
             "Model": "Model",
             "IndicatorLED": "Indicator LED",
             "Manufacture": "Manufacture",
             "PowerState": "Power State",
-            "SerialNumuber": "Serial Numuber",
-            "PartNumuber": "Part Numuber",
+            "SerialNmuber": "Serial Nmuber",
+            "PartNmuber": "Part Nmuber",
             "SystemType": "System Type",
             "AssetTag": "Asset Tag",
             "BiosVersion": "Bios Version",
@@ -1164,8 +1128,8 @@
                  "Name": "Name",
                  "CapacityMiB": "Capacity MiB",
                  "Manufacturer": "Manufacturer",
-                 "SerialNumuber": "Serial Numuber",
-                 "PartNumuber": "Part Numuber",
+                 "SerialNmuber": "Serial Nmuber",
+                 "PartNmuber": "Part Nmuber",
                  "State": "State",
                  "OperatingSpeedMhz": "OperatingSpeed Mhz",
                  "MemoryType": "Memory Type",
@@ -1179,7 +1143,7 @@
                 "BaseBoardInfo":"BaseBoard Info",
                 "Name": "Name",
                 "Description": "Description",
-                "FirmwareVersion": "Firmware Version",
+                "FrmwareVersion": "Frmware Version",
                 "Model": "Model",
                 "State": "State",
                 "PowerState": "Power State"
@@ -1196,15 +1160,6 @@
                 "PermanentMACAddress": "Permanent MAC Address",
                 "State": "State"
             },
-            "NetworkInterfaceIPv6": 
-                {
-                    "NetworkInterfaceIPv6Info": "IPv6 Addresses Info",
-                    "Address": "Address",
-                    "PrefixLength": "PrefixLength",
-                    "AddressOrigin": "AddressOrigin",
-                    "Index": "Index",
-                    "Name": "Name"
-                },
             "Power": 
                 {
                 "Power":"Power",
@@ -1274,7 +1229,7 @@
                 "Manufacturer": "Manufacturer",
                 "AssetTag": "AssetTag",
                 "DeviceType": "DeviceType",
-                "FirmwareVersion": "FirmwareVersion",
+                "FrmwareVersion": "FrmwareVersion",
                 "State": "State"
             },
             "PCIEFunction":
@@ -1301,7 +1256,7 @@
                 "StorageDriveInfo":"Storage Drive Info",
                 "Id": "Id",
                 "Name": "Name",
-                "SerialNumuber": "Serial Numuber",
+                "SerialNmuber": "Serial Nmuber",
                 "Manufacturer": "Manufacturer",
                 "Protocol": "Protocol",
                 "Model": "Model",
@@ -1315,7 +1270,7 @@
                 "StorageControllerInfo":"Storage Controller Info",
                 "MemberId": "MemberId",
                 "Name": "Name",
-                "SerialNumuber": "Serial Numuber",
+                "SerialNmuber": "Serial Nmuber",
                 "Model": "Model",
                 "FirmwareVersion": "FirmwareVersion",
                 "SpeedGbs": "SpeedGbs",
