@@ -158,7 +158,11 @@
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
+<<<<<<< HEAD
         "systemInventory":"@:appPageTitle.systemInventory"
+=======
+        "system-inventory":"@:appPageTitle.system-inventory"
+>>>>>>> System inventory ot 2119
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -229,7 +233,8 @@
             "errorGettingBackupDetails": "获取属性备份功能时出错",
             "errorMessageNotConfigured": "由于配置文件不存在，操作无法完成",
             "featureNotAvailable": "未启用备份和恢复功能."
-        }
+        },
+        "system-inventory":"system-inventory"
     },
     "pageOnDemand": {
         "onDemand":"一经请求",
@@ -1131,16 +1136,26 @@
     },
     "pageSystemInventory": {
         "system":{
+<<<<<<< HEAD
             "system":"System",
             "systemInfo":"System Info",
+=======
+            "system":"system",
+            "systemInfo":"system Info",
+>>>>>>> System inventory ot 2119
             "Name": "Name",
             "Description": "Description",
             "Model": "Model",
             "IndicatorLED": "Indicator LED",
             "Manufacture": "Manufacture",
             "PowerState": "Power State",
+<<<<<<< HEAD
             "SerialNumuber": "Serial Numuber",
             "PartNumuber": "Part Numuber",
+=======
+            "SerialNmuber": "Serial Nmuber",
+            "PartNmuber": "Part Nmuber",
+>>>>>>> System inventory ot 2119
             "SystemType": "System Type",
             "AssetTag": "Asset Tag",
             "BiosVersion": "Bios Version",
@@ -1170,8 +1185,13 @@
                  "Name": "Name",
                  "CapacityMiB": "Capacity MiB",
                  "Manufacturer": "Manufacturer",
+<<<<<<< HEAD
                  "SerialNumuber": "Serial Numuber",
                  "PartNumuber": "Part Numuber",
+=======
+                 "SerialNmuber": "Serial Nmuber",
+                 "PartNmuber": "Part Nmuber",
+>>>>>>> System inventory ot 2119
                  "State": "State",
                  "OperatingSpeedMhz": "OperatingSpeed Mhz",
                  "MemoryType": "Memory Type",
@@ -1185,7 +1205,11 @@
                 "BaseBoardInfo":"BaseBoard Info",
                 "Name": "Name",
                 "Description": "Description",
+<<<<<<< HEAD
                 "FirmwareVersion": "Firmware Version",
+=======
+                "FrmwareVersion": "Frmware Version",
+>>>>>>> System inventory ot 2119
                 "Model": "Model",
                 "State": "State",
                 "PowerState": "Power State"
@@ -1202,6 +1226,7 @@
                 "PermanentMACAddress": "Permanent MAC Address",
                 "State": "State"
             },
+<<<<<<< HEAD
             "NetworkInterfaceIPv6": 
                 {
                     "NetworkInterfaceIPv6Info": "IPv6 Addresses Info",
@@ -1211,6 +1236,8 @@
                     "Index": "Index",
                     "Name": "Name"
                 },
+=======
+>>>>>>> System inventory ot 2119
             "Power": 
                 {
                 "Power":"Power",
@@ -1280,7 +1307,11 @@
                 "Manufacturer": "Manufacturer",
                 "AssetTag": "AssetTag",
                 "DeviceType": "DeviceType",
+<<<<<<< HEAD
                 "FirmwareVersion": "FirmwareVersion",
+=======
+                "FrmwareVersion": "FrmwareVersion",
+>>>>>>> System inventory ot 2119
                 "State": "State"
             },
             "PCIEFunction":
@@ -1307,7 +1338,11 @@
                 "StorageDriveInfo":"Storage Drive Info",
                 "Id": "Id",
                 "Name": "Name",
+<<<<<<< HEAD
                 "SerialNumuber": "Serial Numuber",
+=======
+                "SerialNmuber": "Serial Nmuber",
+>>>>>>> System inventory ot 2119
                 "Manufacturer": "Manufacturer",
                 "Protocol": "Protocol",
                 "Model": "Model",
@@ -1321,7 +1356,11 @@
                 "StorageControllerInfo":"Storage Controller Info",
                 "MemberId": "MemberId",
                 "Name": "Name",
+<<<<<<< HEAD
                 "SerialNumuber": "Serial Numuber",
+=======
+                "SerialNmuber": "Serial Nmuber",
+>>>>>>> System inventory ot 2119
                 "Model": "Model",
                 "FirmwareVersion": "FirmwareVersion",
                 "SpeedGbs": "SpeedGbs",

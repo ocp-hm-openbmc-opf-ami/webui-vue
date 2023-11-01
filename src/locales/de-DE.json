@@ -157,7 +157,12 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+<<<<<<< HEAD
         "systemInventory":"@:appPageTitle.systemInventory"
+=======
+        "backupAndRestore": "@:appPageTitle.backupAndRestore",
+        "system-inventory":"@:appPageTitle.system-inventory"
+>>>>>>> System inventory ot 2119
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -228,7 +233,8 @@
             "errorGettingBackupDetails": "Fehler beim Abrufen der Eigenschaft BackupFeatures",
             "errorMessageNotConfigured": "Der Vorgang kann nicht abgeschlossen werden, da die Konfigurationsdatei nicht beendet wird",
             "featureNotAvailable": "Die Sicherungs- und Wiederherstellungsfunktion ist nicht aktiviert."
-        }
+        },
+        "system-inventory":"system-inventory"
     },
     "pageOnDemand": {
         "onDemand":"Auf Anfrage",
@@ -1131,16 +1137,26 @@
     },
     "pageSystemInventory": {
         "system":{
+<<<<<<< HEAD
             "system":"System",
             "systemInfo":"System Info",
+=======
+            "system":"system",
+            "systemInfo":"system Info",
+>>>>>>> System inventory ot 2119
             "Name": "Name",
             "Description": "Description",
             "Model": "Model",
             "IndicatorLED": "Indicator LED",
             "Manufacture": "Manufacture",
             "PowerState": "Power State",
+<<<<<<< HEAD
             "SerialNumuber": "Serial Numuber",
             "PartNumuber": "Part Numuber",
+=======
+            "SerialNmuber": "Serial Nmuber",
+            "PartNmuber": "Part Nmuber",
+>>>>>>> System inventory ot 2119
             "SystemType": "System Type",
             "AssetTag": "Asset Tag",
             "BiosVersion": "Bios Version",
@@ -1170,8 +1186,13 @@
                  "Name": "Name",
                  "CapacityMiB": "Capacity MiB",
                  "Manufacturer": "Manufacturer",
+<<<<<<< HEAD
                  "SerialNumuber": "Serial Numuber",
                  "PartNumuber": "Part Numuber",
+=======
+                 "SerialNmuber": "Serial Nmuber",
+                 "PartNmuber": "Part Nmuber",
+>>>>>>> System inventory ot 2119
                  "State": "State",
                  "OperatingSpeedMhz": "OperatingSpeed Mhz",
                  "MemoryType": "Memory Type",
@@ -1185,8 +1206,12 @@
                 "BaseBoardInfo":"BaseBoard Info",
                 "Name": "Name",
                 "Description": "Description",
+<<<<<<< HEAD
 
                 "FirmwareVersion": "Firmware Version",
+=======
+                "FrmwareVersion": "Frmware Version",
+>>>>>>> System inventory ot 2119
                 "Model": "Model",
                 "State": "State",
                 "PowerState": "Power State"
@@ -1272,8 +1297,12 @@
                 "Manufacturer": "Manufacturer",
                 "AssetTag": "AssetTag",
                 "DeviceType": "DeviceType",
+<<<<<<< HEAD
 
                 "FirmwareVersion": "FirmwareVersion",
+=======
+                "FrmwareVersion": "FrmwareVersion",
+>>>>>>> System inventory ot 2119
                 "State": "State"
             },
             "PCIEFunction":
@@ -1300,8 +1329,12 @@
                 "StorageDriveInfo":"Storage Drive Info",
                 "Id": "Id",
                 "Name": "Name",
+<<<<<<< HEAD
 
                 "SerialNumuber": "Serial Numuber",
+=======
+                "SerialNmuber": "Serial Nmuber",
+>>>>>>> System inventory ot 2119
                 "Manufacturer": "Manufacturer",
                 "Protocol": "Protocol",
                 "Model": "Model",
@@ -1315,8 +1348,12 @@
                 "StorageControllerInfo":"Storage Controller Info",
                 "MemberId": "MemberId",
                 "Name": "Name",
+<<<<<<< HEAD
 
                 "SerialNumuber": "Serial Numuber",
+=======
+                "SerialNmuber": "Serial Nmuber",
+>>>>>>> System inventory ot 2119
                 "Model": "Model",
                 "FirmwareVersion": "FirmwareVersion",
                 "SpeedGbs": "SpeedGbs",

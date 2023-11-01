@@ -238,7 +238,11 @@ const AppNavigationMixin = {
         },
         {
           id: 'system-inventory',
+<<<<<<< HEAD
           label: this.$t('appNavigation.systemInventory'),
+=======
+          label: this.$t('appNavigation.system-inventory'),
+>>>>>>> System inventory ot 2119
           route: '/system-inventory',
           icon: 'iconLogs',
         },
