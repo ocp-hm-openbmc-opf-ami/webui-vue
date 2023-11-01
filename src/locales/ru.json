@@ -133,7 +133,7 @@
         "virtualMedia": "@:appPageTitle.virtualMedia",
         "power": "@:appPageTitle.power",
         "keyClear": "@:appPageTitle.keyClear",
-        "systemInventory":"@:appPageTitle.systemInventory"
+        "system-inventory":"@:appPageTitle.system-inventory"
     },
     "appPageTitle": {
         "changePassword": "Изменить пароль",
@@ -163,17 +163,7 @@
         "certificates": "Сертификаты",
         "virtualMedia": "Виртуальные носители",
         "keyClear": "Удаление ключей",
-        "systemInventory":"SystemInventory"
-    },    
-    "systemInventory":{
-        "Processor":"Processor",
-        "Memory Controller":"Memory Controller",
-        "BaseBoard":"BaseBoard",
-        "Power":"Power",
-        "Thermal":"Thermal",
-        "PCIEDevice":"PCIE Device",
-        "PCIEFunction":"PCIEFunction",
-        "Storage":"Storage"
+        "system-inventory":"system-inventory"
     },
     "pageChangePassword": {
         "changePassword": "Изменить пароль",
@@ -967,16 +957,16 @@
     },
     "pageSystemInventory": {
         "system":{
-            "system":"System",
-            "systemInfo":"System Info",
+            "system":"system",
+            "systemInfo":"system Info",
             "Name": "Name",
             "Description": "Description",
             "Model": "Model",
             "IndicatorLED": "Indicator LED",
             "Manufacture": "Manufacture",
             "PowerState": "Power State",
-            "SerialNumuber": "Serial Numuber",
-            "PartNumuber": "Part Numuber",
+            "SerialNmuber": "Serial Nmuber",
+            "PartNmuber": "Part Nmuber",
             "SystemType": "System Type",
             "AssetTag": "Asset Tag",
             "BiosVersion": "Bios Version",
@@ -1006,8 +996,8 @@
                  "Name": "Name",
                  "CapacityMiB": "Capacity MiB",
                  "Manufacturer": "Manufacturer",
-                 "SerialNumuber": "Serial Numuber",
-                 "PartNumuber": "Part Numuber",
+                 "SerialNmuber": "Serial Nmuber",
+                 "PartNmuber": "Part Nmuber",
                  "State": "State",
                  "OperatingSpeedMhz": "OperatingSpeed Mhz",
                  "MemoryType": "Memory Type",
@@ -1021,7 +1011,7 @@
                 "BaseBoardInfo":"BaseBoard Info",
                 "Name": "Name",
                 "Description": "Description",
-                "FirmwareVersion": "Firmware Version",
+                "FrmwareVersion": "Frmware Version",
                 "Model": "Model",
                 "State": "State",
                 "PowerState": "Power State"
@@ -1038,15 +1028,6 @@
                 "PermanentMACAddress": "Permanent MAC Address",
                 "State": "State"
             },
-            "NetworkInterfaceIPv6": 
-                {
-                    "NetworkInterfaceIPv6Info": "IPv6 Addresses Info",
-                    "Address": "Address",
-                    "PrefixLength": "PrefixLength",
-                    "AddressOrigin": "AddressOrigin",
-                    "Index": "Index",
-                    "Name": "Name"
-                },
             "Power": 
                 {
                 "Power":"Power",
@@ -1116,7 +1097,7 @@
                 "Manufacturer": "Manufacturer",
                 "AssetTag": "AssetTag",
                 "DeviceType": "DeviceType",
-                "FirmwareVersion": "FirmwareVersion",
+                "FrmwareVersion": "FrmwareVersion",
                 "State": "State"
             },
             "PCIEFunction":
@@ -1143,7 +1124,7 @@
                 "StorageDriveInfo":"Storage Drive Info",
                 "Id": "Id",
                 "Name": "Name",
-                "SerialNumuber": "Serial Numuber",
+                "SerialNmuber": "Serial Nmuber",
                 "Manufacturer": "Manufacturer",
                 "Protocol": "Protocol",
                 "Model": "Model",
@@ -1157,7 +1138,7 @@
                 "StorageControllerInfo":"Storage Controller Info",
                 "MemberId": "MemberId",
                 "Name": "Name",
-                "SerialNumuber": "Serial Numuber",
+                "SerialNmuber": "Serial Nmuber",
                 "Model": "Model",
                 "FirmwareVersion": "FirmwareVersion",
                 "SpeedGbs": "SpeedGbs",
