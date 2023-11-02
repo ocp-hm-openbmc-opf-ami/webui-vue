@@ -23,7 +23,7 @@
             {{
               $t('pageSystemInventory.MemoryController.MemoryControllerInfo')
             }}
-            <memory-controller></memory-controller>
+            <memoryController></memoryController>
           </b-tab>
           <b-tab :title="$t('pageSystemInventory.BaseBoard.BaseBoard')">
             {{ $t('pageSystemInventory.BaseBoard.BaseBoardInfo')
@@ -31,53 +31,35 @@
             >{{
               $t('pageSystemInventory.NetworkInterfaces.NetworkInterfacesInfo')
             }}
-            <network-interfaces></network-interfaces
-            >{{
-              $t(
-                'pageSystemInventory.NetworkInterfaceIPv6.NetworkInterfaceIPv6Info'
-              )
-            }}
-            <network-interface-ipv6></network-interface-ipv6
+            <networkInterfaces></networkInterfaces
           ></b-tab>
-          <b-tab v-if="hideTab" :title="$t('pageSystemInventory.Power.Power')">
+          <b-tab :title="$t('pageSystemInventory.Power.Power')">
             {{ $t('pageSystemInventory.Power.PowerInfo')
-            }}<power-control></power-control
+            }}<powercontrol></powercontrol
             >{{ $t('pageSystemInventory.Voltage.VoltageControlInfo') }}
-            <voltage-control></voltage-control
+            <voltagecontrol></voltagecontrol
           ></b-tab>
-          <b-tab
-            v-if="hideTab"
-            :title="$t('pageSystemInventory.Thermal.Thermal')"
-          >
+          <b-tab :title="$t('pageSystemInventory.Thermal.Thermal')">
             {{ $t('pageSystemInventory.Thermal.FanINFO') }}
             <thermal></thermal
             >{{ $t('pageSystemInventory.temperature.temperatureInfo') }}
             <temperature></temperature>
           </b-tab>
-          <b-tab
-            v-if="hideTab"
-            :title="$t('pageSystemInventory.PCIEDevice.PCIEDevice')"
-          >
+          <b-tab :title="$t('pageSystemInventory.PCIEDevice.PCIEDevice')">
             {{ $t('pageSystemInventory.PCIEDevice.PCIEDeviceInfo')
-            }}<pcie-device></pcie-device
+            }}<pcieDevice></pcieDevice
           ></b-tab>
-          <b-tab
-            v-if="hideTab"
-            :title="$t('pageSystemInventory.PCIEFunction.PCIEFunction')"
-          >
+          <b-tab :title="$t('pageSystemInventory.PCIEFunction.PCIEFunction')">
             {{ $t('pageSystemInventory.PCIEFunction.PCIEFunctionInfo')
-            }}<pcie-function></pcie-function>
+            }}<pciefunction></pciefunction>
           </b-tab>
-          <b-tab
-            v-if="hideTab"
-            :title="$t('pageSystemInventory.Storage.Storage')"
-          >
+          <b-tab :title="$t('pageSystemInventory.Storage.Storage')">
             {{ $t('pageSystemInventory.Storage.StorageDriveInfo') }}
-            <storage-drive></storage-drive>
+            <storageDrive></storageDrive>
             {{
               $t('pageSystemInventory.StorageController.StorageControllerInfo')
             }}
-            <storage-controller></storage-controller>
+            <storageController></storageController>
           </b-tab>
         </b-tabs>
       </b-card>
@@ -86,43 +68,40 @@
 </template>
 <script>
 import PageTitle from '@/components/Global/PageTitle';
-import System from './System.vue';
-import Processor from './Processor.vue';
-import MemoryController from './MemoryController.vue';
-import Baseboard from './Baseboard.vue';
-import NetworkInterfaces from './NetworkInterfaces.vue';
-import NetworkInterfaceIpv6 from './NetworkInterfaceIPv6.vue';
-import PowerControl from './PowerControl.vue';
-import VoltageControl from './VoltageControl.vue';
-import Thermal from './Thermal.vue';
-import Temperature from './Temperature.vue';
-import PcieDevice from './PcieDevice.vue';
-import PcieFunction from './PcieFunction.vue';
-import StorageDrive from './StorageDrive.vue';
-import StorageController from './StorageController.vue';
+import system from './System.vue';
+import processor from './Processor.vue';
+import memoryController from './MemoryController.vue';
+import baseboard from './Baseboard.vue';
+import networkInterfaces from './NetworkInterfaces.vue';
+import powercontrol from './Powercontrol.vue';
+import voltagecontrol from './Voltagecontrol.vue';
+import thermal from './Thermal.vue';
+import temperature from './Temperature.vue';
+import pcieDevice from './PcieDevice.vue';
+import pciefunction from './Pciefunction.vue';
+import storageDrive from './StorageDrive.vue';
+import storageController from './StorageController.vue';
 export default {
   name: 'SystemInventory',
   components: {
     PageTitle,
-    System,
-    Processor,
-    MemoryController,
-    Baseboard,
-    NetworkInterfaces,
-    NetworkInterfaceIpv6,
-    PowerControl,
-    VoltageControl,
-    Thermal,
-    Temperature,
-    PcieDevice,
-    PcieFunction,
-    StorageDrive,
-    StorageController,
+    system,
+    processor,
+    memoryController,
+    baseboard,
+    networkInterfaces,
+    powercontrol,
+    voltagecontrol,
+    thermal,
+    temperature,
+    pcieDevice,
+    pciefunction,
+    storageDrive,
+    storageController,
   },
   data() {
     return {
       tabIndex: 0,
-      hideTab: false,
     };
   },
 };
