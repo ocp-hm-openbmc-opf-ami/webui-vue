@@ -33,7 +33,6 @@ import SerialOverLanConsole from '@/views/Operations/SerialOverLan/SerialOverLan
 import ServerPowerOperations from '@/views/Operations/ServerPowerOperations';
 import Certificates from '@/views/SecurityAndAccess/Certificates';
 import VirtualMedia from '@/views/Operations/VirtualMedia';
-import systemInventory from '@/views/SystemInventory/systemInventory';
 import Power from '@/views/ResourceManagement/Power';
 import i18n from '@/i18n';
 
@@ -324,14 +323,6 @@ const routes = [
         meta: {
           title: i18n.t('appPageTitle.virtualMedia'),
           exclusiveToRoles: [roles.administrator],
-        },
-      },
-      {
-        path: '/system-inventory',
-        name: 'system-inventory',
-        component: systemInventory,
-        meta: {
-          title: i18n.t('appPageTitle.system-inventory'),
         },
       },
       {
