@@ -5,7 +5,6 @@
       hover
       sticky-header
       :fields="PCIEDeviceFields"
-      :items="pcieDeviceInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -46,14 +45,6 @@ export default {
         },
       ],
     };
-  },
-  computed: {
-    pcieDeviceInfo() {
-      return this.$store.getters['SystemStore/pcieDevice'];
-    },
-  },
-  created() {
-    this.$store.dispatch('SystemStore/getPcieDeviceInfo');
   },
 };
 </script>

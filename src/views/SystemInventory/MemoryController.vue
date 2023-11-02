@@ -5,7 +5,6 @@
       hover
       sticky-header
       :fields="MemoryControllerFields"
-      :items="MemoryControllerInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -33,12 +32,12 @@ export default {
           label: this.$t('pageSystemInventory.MemoryController.Manufacturer'),
         },
         {
-          key: 'SerialNumuber',
-          label: this.$t('pageSystemInventory.MemoryController.SerialNumuber'),
+          key: 'SerialNmuber',
+          label: this.$t('pageSystemInventory.MemoryController.SerialNmuber'),
         },
         {
-          key: 'PartNumuber',
-          label: this.$t('pageSystemInventory.MemoryController.PartNumuber'),
+          key: 'PartNmuber',
+          label: this.$t('pageSystemInventory.MemoryController.PartNmuber'),
         },
         {
           key: 'State',
@@ -70,14 +69,6 @@ export default {
         },
       ],
     };
-  },
-  computed: {
-    MemoryControllerInfo() {
-      return this.$store.getters['SystemStore/memoryController'];
-    },
-  },
-  created() {
-    this.$store.dispatch('SystemStore/getMemoryControllersInfo');
   },
 };
 </script>
