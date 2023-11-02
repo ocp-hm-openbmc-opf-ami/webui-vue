@@ -203,7 +203,8 @@
         "physicalDevice": "物理设备",
         "logicalDevice": "逻辑设备",
         "createLogicalDevice": "创建逻辑设备",
-        "system-inventory":"system-inventory"
+        "system-inventory":"System Inventory",
+        "systemInventory":"SystemInventory"
     },
     "pageOnDemand": {
         "onDemand":"一经请求",
@@ -1105,8 +1106,8 @@
     },
     "pageSystemInventory": {
         "system":{
-            "system":"system",
-            "systemInfo":"system Info",
+            "system":"System",
+            "systemInfo":"System Info",
             "Name": "Name",
             "Description": "Description",
             "Model": "Model",
