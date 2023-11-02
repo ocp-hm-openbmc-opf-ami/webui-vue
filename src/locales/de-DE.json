@@ -204,15 +204,8 @@
         "physicalDevice": "Physisches Gerät",
         "logicalDevice": "Logisches Gerät",
         "createLogicalDevice": "Logisches Gerät erstellen",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "backupAndRestore": "Sichern und Wiederherstellen"
-=======
         "backupAndRestore": "Sichern und Wiederherstellen",
         "systemInventory":"Systeminventar"
->>>>>>> OT-2119 Binding data to system Inventory tabs
     },
     "pageBackupAndRestore": {
         "backup": "Sicherung",
@@ -236,10 +229,6 @@
             "errorGettingBackupDetails": "Fehler beim Abrufen der Eigenschaft BackupFeatures",
             "errorMessageNotConfigured": "Der Vorgang kann nicht abgeschlossen werden, da die Konfigurationsdatei nicht beendet wird",
             "featureNotAvailable": "Die Sicherungs- und Wiederherstellungsfunktion ist nicht aktiviert."
-<<<<<<< HEAD
-<<<<<<< HEAD
-        },
-        "system-inventory":"system-inventory"
     },
     "systemInventory":{
         "Processor":"Processor",
@@ -250,32 +239,7 @@
         "PCIEDevice":"PCIE Device",
         "PCIEFunction":"PCIEFunction",
         "Storage":"Storage"
-=======
-        "system-inventory":"system-inventory"
->>>>>>> System inventory ot 2119
-=======
-        "system-inventory":"System Inventory",
-=======
->>>>>>> OT-2119 naming convention changes in system Inventory
-        "systemInventory":"SystemInventory"
->>>>>>> OT-2119 changed the naming convention for all files in system Inventory module
-    },
-    "systemInventory":{
-        "Processor":"Processor",
-        "Memory Controller":"Memory Controller",
-        "BaseBoard":"BaseBoard",
-        "Power":"Power",
-        "Thermal":"Thermal",
-        "PCIEDevice":"PCIE Device",
-        "PCIEFunction":"PCIEFunction",
-        "Storage":"Storage"
-=======
         }
->>>>>>> OT-2119 Binding data to system Inventory tabs
-=======
-        },
-        "system-inventory":"system-inventory"
->>>>>>> System inventory ot 2119
     },
     "pageOnDemand": {
         "onDemand":"Auf Anfrage",
@@ -1178,46 +1142,16 @@
     },
     "pageSystemInventory": {
         "system":{
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             "system":"System",
             "systemInfo":"System Info",
-=======
-            "system":"system",
-            "systemInfo":"system Info",
->>>>>>> System inventory ot 2119
-=======
-            "system":"System",
-            "systemInfo":"System Info",
->>>>>>> OT-2119 changed the naming convention for all files in system Inventory module
-=======
-            "system":"system",
-            "systemInfo":"system Info",
->>>>>>> System inventory ot 2119
             "Name": "Name",
             "Description": "Description",
             "Model": "Model",
             "IndicatorLED": "Indicator LED",
             "Manufacture": "Manufacture",
             "PowerState": "Power State",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "SerialNumuber": "Serial Numuber",
-            "PartNumuber": "Part Numuber",
-=======
             "SerialNmuber": "Serial Nmuber",
             "PartNmuber": "Part Nmuber",
->>>>>>> System inventory ot 2119
-=======
-            "SerialNumuber": "Serial Numuber",
-            "PartNumuber": "Part Numuber",
->>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
-=======
-            "SerialNmuber": "Serial Nmuber",
-            "PartNmuber": "Part Nmuber",
->>>>>>> System inventory ot 2119
             "SystemType": "System Type",
             "AssetTag": "Asset Tag",
             "BiosVersion": "Bios Version",
@@ -1247,23 +1181,8 @@
                  "Name": "Name",
                  "CapacityMiB": "Capacity MiB",
                  "Manufacturer": "Manufacturer",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                 "SerialNumuber": "Serial Numuber",
-                 "PartNumuber": "Part Numuber",
-=======
                  "SerialNmuber": "Serial Nmuber",
                  "PartNmuber": "Part Nmuber",
->>>>>>> System inventory ot 2119
-=======
-                 "SerialNumuber": "Serial Numuber",
-                 "PartNumuber": "Part Numuber",
->>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
-=======
-                 "SerialNmuber": "Serial Nmuber",
-                 "PartNmuber": "Part Nmuber",
->>>>>>> System inventory ot 2119
                  "State": "State",
                  "OperatingSpeedMhz": "OperatingSpeed Mhz",
                  "MemoryType": "Memory Type",
@@ -1277,19 +1196,7 @@
                 "BaseBoardInfo":"BaseBoard Info",
                 "Name": "Name",
                 "Description": "Description",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "FirmwareVersion": "Firmware Version",
-=======
                 "FrmwareVersion": "Frmware Version",
->>>>>>> System inventory ot 2119
-=======
-                "FirmwareVersion": "Firmware Version",
->>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
-=======
-                "FrmwareVersion": "Frmware Version",
->>>>>>> System inventory ot 2119
                 "Model": "Model",
                 "State": "State",
                 "PowerState": "Power State"
