@@ -163,7 +163,8 @@
         "certificates": "Сертификаты",
         "virtualMedia": "Виртуальные носители",
         "keyClear": "Удаление ключей",
-        "system-inventory":"system-inventory"
+        "system-inventory":"System Inventory",
+        "systemInventory":"SystemInventory"
     },
     "pageChangePassword": {
         "changePassword": "Изменить пароль",
@@ -957,8 +958,8 @@
     },
     "pageSystemInventory": {
         "system":{
-            "system":"system",
-            "systemInfo":"system Info",
+            "system":"System",
+            "systemInfo":"System Info",
             "Name": "Name",
             "Description": "Description",
             "Model": "Model",
