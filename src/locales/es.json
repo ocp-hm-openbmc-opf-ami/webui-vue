@@ -8,12 +8,14 @@
         "localUserMgmt": "Administración de usuarios locales",
         "login": "Inicio de sesión",
         "overview": "Información general",
-        "unauthorized": "No autorizado"
+        "unauthorized": "No autorizado",
+        "system-inventory":"System Inventory",
+        "systemInventory":"SystemInventory"
     },
     "pageSystemInventory": {
         "system":{
-            "system":"system",
-            "systemInfo":"system Info",
+            "system":"System",
+            "systemInfo":"System Info",
             "Name": "Name",
             "Description": "Description",
             "Model": "Model",
