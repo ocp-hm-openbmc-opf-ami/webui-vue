@@ -5,7 +5,6 @@
       hover
       sticky-header
       :fields="NetworkInterfacesFields"
-      :items="NetworkinterfacesTabItems"
       head-variant="light"
     ></b-table>
   </div>
@@ -54,29 +53,6 @@ export default {
         },
       ],
     };
-  },
-  computed: {
-    NetworkinterfacesInfo() {
-      return this.$store.getters['SystemStore/basebordInfoNetworkinterfaces'];
-    },
-    NetworkinterfacesTabItems() {
-      // transform system tab data to table data
-      return this.NetworkinterfacesInfo?.map((data) => {
-        return {
-          Name: data.Name,
-          MACAddress: data.MACAddress,
-          InterfaceEnabled: data.InterfaceEnabled,
-          IPv4Addresses: data.IPv4Addresses,
-          HostName: data.HostName,
-          FullDuplex: data.FullDuplex,
-          PermanentMACAddress: data.PermanentMACAddress,
-          State: data.State,
-        };
-      });
-    },
-  },
-  created() {
-    this.$store.dispatch('SystemStore/getBasebordInfoNetworkinterfaces');
   },
 };
 </script>

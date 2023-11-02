@@ -5,7 +5,6 @@
       hover
       sticky-header
       :fields="processorFields"
-      :items="ProcessorInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -25,7 +24,7 @@ export default {
           label: this.$t('pageSystemInventory.Processor.Name'),
         },
         {
-          key: 'Manufacturer',
+          key: 'Manufacture',
           label: this.$t('pageSystemInventory.Processor.Manufacture'),
         },
         {
@@ -57,19 +56,11 @@ export default {
           label: this.$t('pageSystemInventory.Processor.TotalCores'),
         },
         {
-          key: 'State',
+          key: 'state',
           label: this.$t('pageSystemInventory.Processor.state'),
         },
       ],
     };
-  },
-  computed: {
-    ProcessorInfo() {
-      return this.$store.getters['SystemStore/processors'];
-    },
-  },
-  created() {
-    this.$store.dispatch('SystemStore/getProcessorsInfo');
   },
 };
 </script>
