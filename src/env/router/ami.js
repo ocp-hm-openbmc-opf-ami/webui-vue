@@ -36,7 +36,7 @@ import i18n from '@/i18n';
 import Dumps from '@/views/Logs/Dumps';
 import ACD from '@/views/HostSystemDiagnostics/ACD';
 import Asd from '@/views/HostSystemDiagnostics/Asd';
-import systemInventory from '@/views/SystemInventory/systemInventory';
+import systemInventory from '@/views/SystemInventory/SystemInventory';
 
 const roles = {
   administrator: 'Administrator',
