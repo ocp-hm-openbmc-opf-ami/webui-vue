@@ -203,7 +203,7 @@
         "physicalDevice": "Physical Device",
         "logicalDevice": "Logical Device",
         "createLogicalDevice": "Create Logical Device",
-        "system-inventory":"system-inventory",
+        "system-inventory":"System Inventory",
         "systemInventory":"SystemInventory"
     },
     "systemInventory":{
@@ -1100,8 +1100,8 @@
     },
     "pageSystemInventory": {
         "system":{
-            "system":"system",
-            "systemInfo":"system Info",
+            "system":"System",
+            "systemInfo":"System Info",
             "Name": "Name",
             "Description": "Description",
             "Model": "Model",

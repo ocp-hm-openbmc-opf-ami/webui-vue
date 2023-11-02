@@ -213,6 +213,7 @@
         "logicalDevice": "Logisches Gerät",
         "createLogicalDevice": "Logisches Gerät erstellen",
 <<<<<<< HEAD
+<<<<<<< HEAD
         "backupAndRestore": "Sichern und Wiederherstellen"
     },
     "pageBackupAndRestore": {
@@ -252,6 +253,10 @@
 =======
         "system-inventory":"system-inventory"
 >>>>>>> System inventory ot 2119
+=======
+        "system-inventory":"System Inventory",
+        "systemInventory":"SystemInventory"
+>>>>>>> OT-2119 changed the naming convention for all files in system Inventory module
     },
     "pageOnDemand": {
         "onDemand":"Auf Anfrage",
@@ -1138,12 +1143,17 @@
     "pageSystemInventory": {
         "system":{
 <<<<<<< HEAD
+<<<<<<< HEAD
             "system":"System",
             "systemInfo":"System Info",
 =======
             "system":"system",
             "systemInfo":"system Info",
 >>>>>>> System inventory ot 2119
+=======
+            "system":"System",
+            "systemInfo":"System Info",
+>>>>>>> OT-2119 changed the naming convention for all files in system Inventory module
             "Name": "Name",
             "Description": "Description",
             "Model": "Model",
