@@ -5,7 +5,6 @@
       hover
       sticky-header
       :fields="processorFields"
-      :items="processorInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -17,52 +16,51 @@ export default {
     return {
       processorFields: [
         {
-          key: 'id',
-          label: this.$t('pageSystemInventory.processor.id'),
+          key: 'Id',
+          label: this.$t('pageSystemInventory.Processor.Id'),
         },
         {
-          key: 'name',
-          label: this.$t('pageSystemInventory.processor.name'),
+          key: 'Name',
+          label: this.$t('pageSystemInventory.Processor.Name'),
         },
         {
-          key: 'manufacturer',
-          label: this.$t('pageSystemInventory.processor.manufacture'),
+          key: 'Manufacture',
+          label: this.$t('pageSystemInventory.Processor.Manufacture'),
         },
         {
-          key: 'maxSpeedMHz',
-          label: this.$t('pageSystemInventory.processor.maxSpeedMHz'),
+          key: 'MaxSpeedMHz',
+          label: this.$t('pageSystemInventory.Processor.MaxSpeedMHz'),
         },
         {
-          key: 'model',
-          label: this.$t('pageSystemInventory.processor.model'),
+          key: 'Model',
+          label: this.$t('pageSystemInventory.Processor.Model'),
         },
         {
-          key: 'processorArchitecture',
-          label: this.$t('pageSystemInventory.processor.processorArchitecture'),
+          key: 'ProcessorArchitecture',
+          label: this.$t('pageSystemInventory.Processor.ProcessorArchitecture'),
         },
         {
-          key: 'processorType',
-          label: this.$t('pageSystemInventory.processor.processorType'),
+          key: 'ProcessorType',
+          label: this.$t('pageSystemInventory.Processor.ProcessorType'),
         },
         {
-          key: 'socket',
-          label: this.$t('pageSystemInventory.processor.socket'),
+          key: 'Socket',
+          label: this.$t('pageSystemInventory.Processor.Socket'),
         },
         {
-          key: 'totalCores',
-          label: this.$t('pageSystemInventory.processor.totalCores'),
+          key: 'EffectiveFamily',
+          label: this.$t('pageSystemInventory.Processor.EffectiveFamily'),
+        },
+        {
+          key: 'TotalCores',
+          label: this.$t('pageSystemInventory.Processor.TotalCores'),
         },
         {
           key: 'state',
-          label: this.$t('pageSystemInventory.processor.state'),
+          label: this.$t('pageSystemInventory.Processor.state'),
         },
       ],
     };
-  },
-  computed: {
-    processorInfo() {
-      return this.$store.getters['SystemStore/processors'];
-    },
   },
 };
 </script>

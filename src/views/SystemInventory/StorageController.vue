@@ -4,7 +4,7 @@
       responsive="md"
       hover
       sticky-header
-      :fields="storageControllerFields"
+      :fields="StorageControllerFields"
       head-variant="light"
     ></b-table>
   </div>
@@ -14,36 +14,36 @@
 export default {
   data() {
     return {
-      storageControllerFields: [
+      StorageControllerFields: [
         {
-          key: 'memberId',
-          label: this.$t('pageSystemInventory.storageController.memberId'),
+          key: 'MemberId',
+          label: this.$t('pageSystemInventory.StorageController.MemberId'),
         },
         {
-          key: 'name',
-          label: this.$t('pageSystemInventory.storageController.name'),
+          key: 'Name',
+          label: this.$t('pageSystemInventory.StorageController.Name'),
         },
         {
-          key: 'serialNmuber',
-          label: this.$t('pageSystemInventory.storageController.serialNmuber'),
+          key: 'SerialNmuber',
+          label: this.$t('pageSystemInventory.StorageController.SerialNmuber'),
         },
         {
-          key: 'model',
-          label: this.$t('pageSystemInventory.storageController.model'),
+          key: 'Model',
+          label: this.$t('pageSystemInventory.StorageController.Model'),
         },
         {
-          key: 'firmwareVersion',
+          key: 'FirmwareVersion',
           label: this.$t(
-            'pageSystemInventory.storageController.firmwareVersion'
+            'pageSystemInventory.StorageController.FirmwareVersion'
           ),
         },
         {
-          key: 'speedGbs',
-          label: this.$t('pageSystemInventory.storageController.speedGbs'),
+          key: 'SpeedGbs',
+          label: this.$t('pageSystemInventory.StorageController.SpeedGbs'),
         },
         {
-          key: 'state',
-          label: this.$t('pageSystemInventory.storageController.state'),
+          key: 'State',
+          label: this.$t('pageSystemInventory.StorageController.State'),
         },
       ],
     };

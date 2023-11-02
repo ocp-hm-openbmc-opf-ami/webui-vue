@@ -4,8 +4,7 @@
       responsive="md"
       hover
       sticky-header
-      :fields="temperatureFields"
-      :items="temperatureInfo"
+      :fields="TemperatureFields"
       head-variant="light"
     ></b-table>
   </div>
@@ -15,66 +14,61 @@
 export default {
   data() {
     return {
-      temperatureFields: [
+      TemperatureFields: [
         {
-          key: 'name',
-          label: this.$t('pageSystemInventory.temperature.name'),
+          key: 'Name',
+          label: this.$t('pageSystemInventory.temperature.Name'),
         },
         {
-          key: 'physicalContext',
-          label: this.$t('pageSystemInventory.temperature.physicalContext'),
+          key: 'SensorNumber',
+          label: this.$t('pageSystemInventory.temperature.SensorNumber'),
         },
         {
-          key: 'state',
-          label: this.$t('pageSystemInventory.temperature.state'),
+          key: 'PhysicalContext',
+          label: this.$t('pageSystemInventory.temperature.PhysicalContext'),
         },
         {
-          key: 'readingUnits',
-          label: this.$t('pageSystemInventory.temperature.readingUnits'),
+          key: 'State',
+          label: this.$t('pageSystemInventory.temperature.State'),
         },
         {
-          key: 'reading',
-          label: this.$t('pageSystemInventory.temperature.reading'),
+          key: 'ReadingRPM',
+          label: this.$t('pageSystemInventory.temperature.ReadingCelsius'),
         },
         {
-          key: 'readingRangeMin',
-          label: this.$t('pageSystemInventory.temperature.minReadingRange'),
+          key: 'UpperThresholdFatal',
+          label: this.$t('pageSystemInventory.temperature.UpperThresholdFatal'),
         },
         {
-          key: 'readingRangeMax',
-          label: this.$t('pageSystemInventory.temperature.maxReadingRange'),
-        },
-        {
-          key: 'readingType',
-          label: this.$t('pageSystemInventory.temperature.readingType'),
-        },
-        {
-          key: 'upperThresholdFatal',
-          label: this.$t('pageSystemInventory.temperature.upperThresholdFatal'),
-        },
-        {
-          key: 'upperThresholdCritical',
+          key: 'UpperThresholdCritical',
           label: this.$t(
-            'pageSystemInventory.temperature.upperThresholdCritical'
+            'pageSystemInventory.temperature.UpperThresholdCritical'
           ),
         },
         {
-          key: 'lowerThresholdCritical',
+          key: 'UpperThresholdNonCritical',
           label: this.$t(
-            'pageSystemInventory.temperature.lowerThresholdCritical'
+            'pageSystemInventory.temperature.UpperThresholdNonCritical'
           ),
         },
         {
-          key: 'lowerThresholdFatal',
-          label: this.$t('pageSystemInventory.temperature.lowerThresholdFatal'),
+          key: 'LowerThresholdNonCritical',
+          label: this.$t(
+            'pageSystemInventory.temperature.LowerThresholdNonCritical'
+          ),
+        },
+        {
+          key: 'LowerThresholdCritical',
+          label: this.$t(
+            'pageSystemInventory.temperature.LowerThresholdCritical'
+          ),
+        },
+        {
+          key: 'LowerThresholdFatal',
+          label: this.$t('pageSystemInventory.temperature.LowerThresholdFatal'),
         },
       ],
     };
-  },
-  computed: {
-    temperatureInfo() {
-      return this.$store.getters['SystemStore/temperature'];
-    },
   },
 };
 </script>

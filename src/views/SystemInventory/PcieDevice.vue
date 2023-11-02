@@ -4,8 +4,7 @@
       responsive="md"
       hover
       sticky-header
-      :fields="pcieDeviceFields"
-      :items="pcieDeviceInfo"
+      :fields="PCIEDeviceFields"
       head-variant="light"
     ></b-table>
   </div>
@@ -15,30 +14,37 @@
 export default {
   data() {
     return {
-      pcieDeviceFields: [
+      PCIEDeviceFields: [
         {
-          key: 'id',
-          label: this.$t('pageSystemInventory.pcieDevice.id'),
+          key: 'Name',
+          label: this.$t('pageSystemInventory.PCIEDevice.Name'),
         },
         {
-          key: 'name',
-          label: this.$t('pageSystemInventory.pcieDevice.name'),
+          key: 'Description',
+          label: this.$t('pageSystemInventory.PCIEDevice.Description'),
         },
         {
-          key: 'manufacturer',
-          label: this.$t('pageSystemInventory.pcieDevice.manufacturer'),
+          key: 'Manufacturer',
+          label: this.$t('pageSystemInventory.PCIEDevice.Manufacturer'),
         },
         {
-          key: 'state',
-          label: this.$t('pageSystemInventory.pcieDevice.state'),
+          key: 'AssetTag',
+          label: this.$t('pageSystemInventory.PCIEDevice.AssetTag'),
+        },
+        {
+          key: 'DeviceType',
+          label: this.$t('pageSystemInventory.PCIEDevice.DeviceType'),
+        },
+        {
+          key: 'FrmwareVersion',
+          label: this.$t('pageSystemInventory.PCIEDevice.FrmwareVersion'),
+        },
+        {
+          key: 'State',
+          label: this.$t('pageSystemInventory.PCIEDevice.State'),
         },
       ],
     };
-  },
-  computed: {
-    pcieDeviceInfo() {
-      return this.$store.getters['SystemStore/pcieDevice'];
-    },
   },
 };
 </script>

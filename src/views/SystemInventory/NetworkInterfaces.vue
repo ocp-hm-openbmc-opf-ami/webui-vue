@@ -4,8 +4,7 @@
       responsive="md"
       hover
       sticky-header
-      :fields="networkInterfacesFields"
-      :items="networkInterfacesInfo"
+      :fields="NetworkInterfacesFields"
       head-variant="light"
     ></b-table>
   </div>
@@ -15,40 +14,45 @@
 export default {
   data() {
     return {
-      networkInterfacesFields: [
+      NetworkInterfacesFields: [
         {
-          key: 'id',
-          label: this.$t('pageSystemInventory.networkInterfaces.id'),
+          key: 'Name',
+          label: this.$t('pageSystemInventory.NetworkInterfaces.Name'),
         },
         {
-          key: 'mACAddress',
-          label: this.$t('pageSystemInventory.networkInterfaces.mACAddress'),
+          key: 'MACAddress',
+          label: this.$t('pageSystemInventory.NetworkInterfaces.MACAddress'),
         },
         {
-          key: 'interfaceEnabled',
+          key: 'InterfaceEnabled',
           label: this.$t(
-            'pageSystemInventory.networkInterfaces.interfaceEnabled'
+            'pageSystemInventory.NetworkInterfaces.InterfaceEnabled'
           ),
         },
         {
-          key: 'iPv4Addresses',
-          label: this.$t('pageSystemInventory.networkInterfaces.iPv4Addresses'),
+          key: 'IPv4Addresses',
+          label: this.$t('pageSystemInventory.NetworkInterfaces.IPv4Addresses'),
         },
         {
-          key: 'hostName',
-          label: this.$t('pageSystemInventory.networkInterfaces.hostName'),
+          key: 'HostName',
+          label: this.$t('pageSystemInventory.NetworkInterfaces.HostName'),
         },
         {
-          key: 'state',
-          label: this.$t('pageSystemInventory.networkInterfaces.state'),
+          key: 'FullDuplex',
+          label: this.$t('pageSystemInventory.NetworkInterfaces.FullDuplex'),
+        },
+        {
+          key: 'PermanentMACAddress',
+          label: this.$t(
+            'pageSystemInventory.NetworkInterfaces.PermanentMACAddress'
+          ),
+        },
+        {
+          key: 'State',
+          label: this.$t('pageSystemInventory.NetworkInterfaces.State'),
         },
       ],
     };
-  },
-  computed: {
-    networkInterfacesInfo() {
-      return this.$store.getters['SystemStore/basebordInfoNetworkinterfaces'];
-    },
   },
 };
 </script>

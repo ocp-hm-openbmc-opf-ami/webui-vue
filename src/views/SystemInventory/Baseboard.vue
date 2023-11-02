@@ -4,8 +4,7 @@
       responsive="md"
       hover
       sticky-header
-      :fields="baseBoardFields"
-      :items="baseBoardInfo"
+      :fields="BaseboardFields"
       head-variant="light"
     ></b-table>
   </div>
@@ -15,56 +14,33 @@
 export default {
   data() {
     return {
-      baseBoardFields: [
+      BaseboardFields: [
         {
-          key: 'name',
-          label: this.$t('pageSystemInventory.baseBoard.name'),
+          key: 'Name',
+          label: this.$t('pageSystemInventory.BaseBoard.Name'),
         },
         {
-          key: 'indicatorLED',
-          label: this.$t('pageSystemInventory.baseBoard.indicatorLED'),
+          key: 'Description',
+          label: this.$t('pageSystemInventory.BaseBoard.Description'),
         },
         {
-          key: 'locationIndicatorActive',
-          label: this.$t(
-            'pageSystemInventory.baseBoard.locationIndicatorActive'
-          ),
+          key: 'FrmwareVersion',
+          label: this.$t('pageSystemInventory.BaseBoard.FrmwareVersion'),
         },
         {
-          key: 'model',
-          label: this.$t('pageSystemInventory.baseBoard.model'),
+          key: 'Model',
+          label: this.$t('pageSystemInventory.BaseBoard.Model'),
         },
         {
-          key: 'state',
-          label: this.$t('pageSystemInventory.baseBoard.state'),
+          key: 'State',
+          label: this.$t('pageSystemInventory.BaseBoard.State'),
         },
         {
-          key: 'powerState',
-          label: this.$t('pageSystemInventory.baseBoard.powerState'),
-        },
-        {
-          key: 'assetTag',
-          label: this.$t('pageSystemInventory.baseBoard.assetTag'),
-        },
-        {
-          key: 'manufacturer',
-          label: this.$t('pageSystemInventory.baseBoard.manufacturer'),
-        },
-        {
-          key: 'partNumber',
-          label: this.$t('pageSystemInventory.baseBoard.partNumber'),
-        },
-        {
-          key: 'serialNumber',
-          label: this.$t('pageSystemInventory.baseBoard.serialNumber'),
+          key: 'PowerState',
+          label: this.$t('pageSystemInventory.BaseBoard.PowerState'),
         },
       ],
     };
-  },
-  computed: {
-    baseBoardInfo() {
-      return this.$store.getters['SystemStore/baseBoard'];
-    },
   },
 };
 </script>
