@@ -203,7 +203,8 @@
         "physicalDevice": "物理設備",
         "logicalDevice": "邏輯設備",
         "createLogicalDevice": "創建邏輯設備",
-        "system-inventory":"system-inventory"
+        "system-inventory":"System Inventory",
+        "systemInventory":"SystemInventory"
     },
     "pageOnDemand": {
         "onDemand":"一經請求",
@@ -1088,8 +1089,8 @@
     },
     "pageSystemInventory": {
         "system":{
-            "system":"system",
-            "systemInfo":"system Info",
+            "system":"System",
+            "systemInfo":"System Info",
             "Name": "Name",
             "Description": "Description",
             "Model": "Model",
