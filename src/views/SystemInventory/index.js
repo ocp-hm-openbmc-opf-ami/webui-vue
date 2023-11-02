@@ -1,2 +1,2 @@
-import systemInventory from '@/views/SystemInventory/systemInventory';
-export default systemInventory;
+import SystemInventory from '@/views/SystemInventory/SystemInventory';
+export default SystemInventory;
