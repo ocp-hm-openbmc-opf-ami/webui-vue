@@ -68,19 +68,19 @@
 </template>
 <script>
 import PageTitle from '@/components/Global/PageTitle';
-import system from './system.vue';
-import processor from './processor.vue';
-import memoryController from '@/views/SystemInventory/memoryController';
-import baseboard from '@/views/SystemInventory/baseboard';
-import networkInterfaces from '@/views/SystemInventory/networkInterfaces';
-import powercontrol from '@/views/SystemInventory/powercontrol';
-import voltagecontrol from '@/views/SystemInventory/voltagecontrol';
-import thermal from '@/views/SystemInventory/thermal';
-import temperature from '@/views/SystemInventory/temperature';
-import pcieDevice from '@/views/SystemInventory/pcieDevice';
-import pciefunction from '@/views/SystemInventory/pciefunction';
-import storageDrive from './storageDrive.vue';
-import storageController from '@/views/SystemInventory/storageController';
+import system from './System.vue';
+import processor from './Processor.vue';
+import memoryController from './MemoryController.vue';
+import baseboard from './Baseboard.vue';
+import networkInterfaces from './NetworkInterfaces.vue';
+import powercontrol from './Powercontrol.vue';
+import voltagecontrol from './Voltagecontrol.vue';
+import thermal from './Thermal.vue';
+import temperature from './Temperature.vue';
+import pcieDevice from './PcieDevice.vue';
+import pciefunction from './Pciefunction.vue';
+import storageDrive from './StorageDrive.vue';
+import storageController from './StorageController.vue';
 export default {
   name: 'SystemInventory',
   components: {
