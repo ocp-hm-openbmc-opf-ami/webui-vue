@@ -214,12 +214,6 @@ const AppNavigationMixin = {
             },
           ],
         },
-        {
-          id: 'system-inventory',
-          label: this.$t('appNavigation.system-inventory'),
-          route: '/system-inventory',
-          icon: '',
-        },
       ],
     };
   },
