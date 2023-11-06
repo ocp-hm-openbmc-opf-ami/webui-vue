@@ -1,5 +1,5 @@
 const CompressionPlugin = require('compression-webpack-plugin');
-
+//test
 module.exports = {
   css: {
     loaderOptions: {
