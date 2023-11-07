@@ -23,7 +23,7 @@
             {{
               $t('pageSystemInventory.MemoryController.MemoryControllerInfo')
             }}
-            <memoryController></memoryController>
+            <memory-controller></memory-controller>
           </b-tab>
           <b-tab :title="$t('pageSystemInventory.BaseBoard.BaseBoard')">
             {{ $t('pageSystemInventory.BaseBoard.BaseBoardInfo')
@@ -31,13 +31,13 @@
             >{{
               $t('pageSystemInventory.NetworkInterfaces.NetworkInterfacesInfo')
             }}
-            <networkInterfaces></networkInterfaces
+            <network-interfaces></network-interfaces
           ></b-tab>
           <b-tab :title="$t('pageSystemInventory.Power.Power')">
             {{ $t('pageSystemInventory.Power.PowerInfo')
-            }}<powercontrol></powercontrol
+            }}<power-control></power-control
             >{{ $t('pageSystemInventory.Voltage.VoltageControlInfo') }}
-            <voltagecontrol></voltagecontrol
+            <voltage-control></voltage-control
           ></b-tab>
           <b-tab :title="$t('pageSystemInventory.Thermal.Thermal')">
             {{ $t('pageSystemInventory.Thermal.FanINFO') }}
@@ -47,19 +47,19 @@
           </b-tab>
           <b-tab :title="$t('pageSystemInventory.PCIEDevice.PCIEDevice')">
             {{ $t('pageSystemInventory.PCIEDevice.PCIEDeviceInfo')
-            }}<pcieDevice></pcieDevice
+            }}<pcie-device></pcie-device
           ></b-tab>
           <b-tab :title="$t('pageSystemInventory.PCIEFunction.PCIEFunction')">
             {{ $t('pageSystemInventory.PCIEFunction.PCIEFunctionInfo')
-            }}<pciefunction></pciefunction>
+            }}<pcie-function></pcie-function>
           </b-tab>
           <b-tab :title="$t('pageSystemInventory.Storage.Storage')">
             {{ $t('pageSystemInventory.Storage.StorageDriveInfo') }}
-            <storageDrive></storageDrive>
+            <storage-drive></storage-drive>
             {{
               $t('pageSystemInventory.StorageController.StorageControllerInfo')
             }}
-            <storageController></storageController>
+            <storage-controller></storage-controller>
           </b-tab>
         </b-tabs>
       </b-card>
@@ -68,36 +68,36 @@
 </template>
 <script>
 import PageTitle from '@/components/Global/PageTitle';
-import system from './System.vue';
-import processor from './Processor.vue';
-import memoryController from './MemoryController.vue';
-import baseboard from './Baseboard.vue';
-import networkInterfaces from './NetworkInterfaces.vue';
-import powercontrol from './Powercontrol.vue';
-import voltagecontrol from './Voltagecontrol.vue';
-import thermal from './Thermal.vue';
-import temperature from './Temperature.vue';
-import pcieDevice from './PcieDevice.vue';
-import pciefunction from './Pciefunction.vue';
-import storageDrive from './StorageDrive.vue';
-import storageController from './StorageController.vue';
+import System from './System.vue';
+import Processor from './Processor.vue';
+import MemoryController from './MemoryController.vue';
+import Baseboard from './Baseboard.vue';
+import NetworkInterfaces from './NetworkInterfaces.vue';
+import PowerControl from './PowerControl.vue';
+import VoltageControl from './VoltageControl.vue';
+import Thermal from './Thermal.vue';
+import Temperature from './Temperature.vue';
+import PcieDevice from './PcieDevice.vue';
+import PcieFunction from './PcieFunction.vue';
+import StorageDrive from './StorageDrive.vue';
+import StorageController from './StorageController.vue';
 export default {
   name: 'SystemInventory',
   components: {
     PageTitle,
-    system,
-    processor,
-    memoryController,
-    baseboard,
-    networkInterfaces,
-    powercontrol,
-    voltagecontrol,
-    thermal,
-    temperature,
-    pcieDevice,
-    pciefunction,
-    storageDrive,
-    storageController,
+    System,
+    Processor,
+    MemoryController,
+    Baseboard,
+    NetworkInterfaces,
+    PowerControl,
+    VoltageControl,
+    Thermal,
+    Temperature,
+    PcieDevice,
+    PcieFunction,
+    StorageDrive,
+    StorageController,
   },
   data() {
     return {
