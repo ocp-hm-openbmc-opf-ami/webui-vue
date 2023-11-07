@@ -153,7 +153,8 @@
         "adapter": "@:appPageTitle.adapter",
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
-        "createLogicalDevice": "@:appPageTitle.createLogicalDevice"
+        "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "autovideo":"@:appPageTitle.autovideo"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -198,7 +199,8 @@
         "adapter": "适配器",
         "physicalDevice": "物理设备",
         "logicalDevice": "逻辑设备",
-        "createLogicalDevice": "创建逻辑设备"
+        "createLogicalDevice": "创建逻辑设备",
+        "autovideo":"Auto Video Settings"
     },
     "pageOnDemand": {
         "onDemand":"一经请求",
@@ -1035,6 +1037,34 @@
         "toast": {
             "successSMTPConfiguration": "成功更新 SMTP 设定",
             "errorSMTPConfiguration": "更新 SMTP 发生错误"
+        }
+    },
+    "pageVideo": {
+        "autovideo":"Auto Video Settings",
+        "Video": "Video Trigger Settings",
+        "Videoremote": "Video Remote Storage",
+        "VideoTriggerSettings": {
+            "critical": "Critical Events (Temperature/Voltage)",
+            "noncritical": "Non Critical Events (Temperature/Voltage)",
+            "nonrecoverable": "Non Recoverable Events (Temperature/Voltage)",
+            "fanstatechanged": "Fan state changed Events",
+            "WatchdogTimer": "Watchdog Timer Events",
+            "ChassisPowerOn": "Chassis Power On Events",
+            "ChassisPowerOff": "Chassis Power Off Events",
+            "ChassisReset": "Chassis Reset Events",
+            "LPCReset": "LPC Reset Events",
+            "dateAndTime": "Date and Time Event"
+        },
+        "VideoRemoteSettings": {
+            "RecordVideotoRemoteServer": "Record Video to Remote Server",
+            "MaximumDumps":"Maximum Dumps",
+            "MaximumDurationinSec": "Maximum Duration (Sec)",
+            "MaximumSizeinMB":"Maximum Size (MB)",
+            "ServerAddress": "Server Address",
+            "Pathinserver": "Path in server",
+            "ShareType": "Share Type",
+            "NFS": "NFS",
+            "CIFS": "CIFS"
         }
     },
     "pageAlertDestination": {

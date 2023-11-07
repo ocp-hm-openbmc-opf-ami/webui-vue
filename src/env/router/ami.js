@@ -36,6 +36,7 @@ import i18n from '@/i18n';
 import Dumps from '@/views/Logs/Dumps';
 import ACD from '@/views/HostSystemDiagnostics/ACD';
 import Asd from '@/views/HostSystemDiagnostics/Asd';
+import AutoVideosettings from '@/views/Settings/AutoVideosettings';
 
 const roles = {
   administrator: 'Administrator',
@@ -332,6 +333,14 @@ const routes = [
         meta: {
           title: i18n.t('appPageTitle.virtualMedia'),
           exclusiveToRoles: [roles.administrator],
+        },
+      },
+      {
+        path: '/settings/Autovideo',
+        name: 'autovideo',
+        component: AutoVideosettings,
+        meta: {
+          title: i18n.t('appPageTitle.autovideo'),
         },
       },
     ],

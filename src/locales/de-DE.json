@@ -153,7 +153,8 @@
         "adapter": "@:appPageTitle.adapter",
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
-        "createLogicalDevice": "@:appPageTitle.createLogicalDevice"
+        "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "autovideo":"@:appPageTitle.autovideo"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -198,7 +199,8 @@
         "adapter": "Adapter",
         "physicalDevice": "Physisches Gerät",
         "logicalDevice": "Logisches Gerät",
-        "createLogicalDevice": "Logisches Gerät erstellen"
+        "createLogicalDevice": "Logisches Gerät erstellen",
+        "autovideo":"Auto Video Settings"
     },
     "pageOnDemand": {
         "onDemand":"Auf Anfrage",
@@ -1036,6 +1038,34 @@
         "toast": {
             "successSMTPConfiguration": "SMTP Konfiguration erfolgreich aktualisiert",
             "errorSMTPConfiguration": "Fehler beim Aktualisieren der SMTP Konfiguration"
+        }
+    },
+    "pageVideo": {
+        "autovideo":"Auto Video Settings",
+        "Video": "Video Trigger Settings",
+        "Videoremote": "Video Remote Storage",
+        "VideoTriggerSettings": {
+            "critical": "Critical Events (Temperature/Voltage)",
+            "noncritical": "Non Critical Events (Temperature/Voltage)",
+            "nonrecoverable": "Non Recoverable Events (Temperature/Voltage)",
+            "fanstatechanged": "Fan state changed Events",
+            "WatchdogTimer": "Watchdog Timer Events",
+            "ChassisPowerOn": "Chassis Power On Events",
+            "ChassisPowerOff": "Chassis Power Off Events",
+            "ChassisReset": "Chassis Reset Events",
+            "LPCReset": "LPC Reset Events",
+            "dateAndTime": "Date and Time Event"
+        },
+        "VideoRemoteSettings": {
+            "RecordVideotoRemoteServer": "Record Video to Remote Server",
+            "MaximumDumps":"Maximum Dumps",
+            "MaximumDurationinSec": "Maximum Duration (Sec)",
+            "MaximumSizeinMB":"Maximum Size (MB)",
+            "ServerAddress": "Server Address",
+            "Pathinserver": "Path in server",
+            "ShareType": "Share Type",
+            "NFS": "NFS",
+            "CIFS": "CIFS"
         }
     },
     "pageAlertDestination": {

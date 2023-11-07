@@ -159,6 +159,11 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.smtpSettings'),
               route: '/settings/smtp',
             },
+            {
+              id: 'Auto-Video-Settings',
+              label: this.$t('appNavigation.autovideo'),
+              route: '/settings/Autovideo',
+            },
           ],
         },
         {
