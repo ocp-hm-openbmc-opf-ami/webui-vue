@@ -4,8 +4,7 @@
       responsive="md"
       hover
       sticky-header
-      :fields="pcieFunctionFields"
-      :items="pcieFunctionInfo"
+      :fields="PCIEFunctionFields"
       head-variant="light"
     ></b-table>
   </div>
@@ -15,54 +14,53 @@
 export default {
   data() {
     return {
-      pcieFunctionFields: [
+      PCIEFunctionFields: [
         {
-          key: 'id',
-          label: this.$t('pageSystemInventory.pcieFunction.id'),
+          key: 'Id',
+          label: this.$t('pageSystemInventory.PCIEFunction.Id'),
         },
         {
-          key: 'name',
-          label: this.$t('pageSystemInventory.pcieFunction.name'),
+          key: 'Name',
+          label: this.$t('pageSystemInventory.PCIEFunction.Name'),
         },
         {
-          key: 'deviceClass',
-          label: this.$t('pageSystemInventory.pcieFunction.deviceClass'),
+          key: 'DeviceLinked',
+          label: this.$t('pageSystemInventory.PCIEFunction.DeviceLinked'),
         },
         {
-          key: 'classCode',
-          label: this.$t('pageSystemInventory.pcieFunction.classCode'),
+          key: 'DeviceClass',
+          label: this.$t('pageSystemInventory.PCIEFunction.DeviceClass'),
         },
         {
-          key: 'deviceId',
-          label: this.$t('pageSystemInventory.pcieFunction.deviceId'),
+          key: 'ClassCode',
+          label: this.$t('pageSystemInventory.PCIEFunction.ClassCode'),
         },
         {
-          key: 'vendorId',
-          label: this.$t('pageSystemInventory.pcieFunction.vendorId'),
+          key: 'DeviceId',
+          label: this.$t('pageSystemInventory.PCIEFunction.DeviceId'),
         },
         {
-          key: 'functionId',
-          label: this.$t('pageSystemInventory.pcieFunction.functionId'),
+          key: 'VendorId',
+          label: this.$t('pageSystemInventory.PCIEFunction.VendorId'),
         },
         {
-          key: 'functionType',
-          label: this.$t('pageSystemInventory.pcieFunction.functionType'),
+          key: 'FunctionId',
+          label: this.$t('pageSystemInventory.PCIEFunction.FunctionId'),
         },
         {
-          key: 'revisionId',
-          label: this.$t('pageSystemInventory.pcieFunction.revisionId'),
+          key: 'RevisionId',
+          label: this.$t('pageSystemInventory.PCIEFunction.RevisionId'),
         },
         {
-          key: 'subSystemVendorId',
-          label: this.$t('pageSystemInventory.pcieFunction.subSystemVendorId'),
+          key: 'SubSystemVendorId',
+          label: this.$t('pageSystemInventory.PCIEFunction.SubSystemVendorId'),
+        },
+        {
+          key: 'State',
+          label: this.$t('pageSystemInventory.PCIEFunction.State'),
         },
       ],
     };
-  },
-  computed: {
-    pcieFunctionInfo() {
-      return this.$store.getters['SystemStore/pcieFunction'];
-    },
   },
 };
 </script>

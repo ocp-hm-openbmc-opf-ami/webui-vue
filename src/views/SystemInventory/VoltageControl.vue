@@ -4,8 +4,7 @@
       responsive="md"
       hover
       sticky-header
-      :fields="voltageFields"
-      :items="temperatureInfo"
+      :fields="VoltageFields"
       head-variant="light"
     ></b-table>
   </div>
@@ -15,58 +14,57 @@
 export default {
   data() {
     return {
-      voltageFields: [
+      VoltageFields: [
         {
-          key: 'name',
-          label: this.$t('pageSystemInventory.voltage.name'),
+          key: 'Name',
+          label: this.$t('pageSystemInventory.Voltage.Name'),
         },
         {
-          key: 'state',
-          label: this.$t('pageSystemInventory.voltage.state'),
+          key: 'SensorNumber',
+          label: this.$t('pageSystemInventory.Voltage.SensorNumber'),
         },
         {
-          key: 'readingUnits',
-          label: this.$t('pageSystemInventory.voltage.readingUnits'),
+          key: 'State',
+          label: this.$t('pageSystemInventory.Voltage.State'),
         },
         {
-          key: 'reading',
-          label: this.$t('pageSystemInventory.voltage.reading'),
+          key: 'MinReadingRange',
+          label: this.$t('pageSystemInventory.Voltage.MinReadingRange'),
         },
         {
-          key: 'readingRangeMin',
-          label: this.$t('pageSystemInventory.voltage.minReadingRange'),
+          key: 'MaxReadingRange',
+          label: this.$t('pageSystemInventory.Voltage.MaxReadingRange'),
         },
         {
-          key: 'readingRangeMax',
-          label: this.$t('pageSystemInventory.voltage.maxReadingRange'),
+          key: 'UpperThresholdFatal',
+          label: this.$t('pageSystemInventory.Voltage.UpperThresholdFatal'),
         },
         {
-          key: 'readingType',
-          label: this.$t('pageSystemInventory.voltage.readingType'),
+          key: 'UpperThresholdCritical',
+          label: this.$t('pageSystemInventory.Voltage.UpperThresholdCritical'),
         },
         {
-          key: 'upperThresholdFatal',
-          label: this.$t('pageSystemInventory.voltage.upperThresholdFatal'),
+          key: 'UpperThresholdNonCritical',
+          label: this.$t(
+            'pageSystemInventory.Voltage.UpperThresholdNonCritical'
+          ),
         },
         {
-          key: 'upperThresholdCritical',
-          label: this.$t('pageSystemInventory.voltage.upperThresholdCritical'),
+          key: 'LowerThresholdNonCritical',
+          label: this.$t(
+            'pageSystemInventory.Voltage.LowerThresholdNonCritical'
+          ),
         },
         {
-          key: 'lowerThresholdCritical',
-          label: this.$t('pageSystemInventory.voltage.lowerThresholdCritical'),
+          key: 'LowerThresholdCritical',
+          label: this.$t('pageSystemInventory.Voltage.LowerThresholdCritical'),
         },
         {
-          key: 'lowerThresholdFatal',
-          label: this.$t('pageSystemInventory.voltage.lowerThresholdFatal'),
+          key: 'LowerThresholdFatal',
+          label: this.$t('pageSystemInventory.Voltage.LowerThresholdFatal'),
         },
       ],
     };
-  },
-  computed: {
-    temperatureInfo() {
-      return this.$store.getters['SystemStore/voltage'];
-    },
   },
 };
 </script>

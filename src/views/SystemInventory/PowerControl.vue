@@ -4,8 +4,7 @@
       responsive="md"
       hover
       sticky-header
-      :fields="powerControlFields"
-      :items="powerInfo"
+      :fields="powercontrolFields"
       head-variant="light"
     ></b-table>
   </div>
@@ -15,48 +14,37 @@
 export default {
   data() {
     return {
-      powerControlFields: [
+      powercontrolFields: [
         {
-          key: 'name',
-          label: this.$t('pageSystemInventory.power.name'),
-          tdClass: 'text-nowrap',
+          key: 'Name',
+          label: this.$t('pageSystemInventory.Power.Name'),
         },
         {
-          key: 'manufacturer',
-          label: this.$t('pageSystemInventory.power.manufacturer'),
-          tdClass: 'text-nowrap',
+          key: 'AverageConsumedWatts',
+          label: this.$t('pageSystemInventory.Power.AverageConsumedWatts'),
         },
         {
-          key: 'model',
-          label: this.$t('pageSystemInventory.power.model'),
+          key: 'MaxConsumedWatts',
+          label: this.$t('pageSystemInventory.Power.MaxConsumedWatts'),
         },
         {
-          key: 'plugType',
-          label: this.$t('pageSystemInventory.power.plugType'),
+          key: 'MinConsumedWatts',
+          label: this.$t('pageSystemInventory.Power.MinConsumedWatts'),
         },
         {
-          key: 'powerCapacityWatts',
-          label: this.$t('pageSystemInventory.power.powerCapacityWatts'),
+          key: 'IntervalInMinutes',
+          label: this.$t('pageSystemInventory.Power.IntervalInMinutes'),
         },
         {
-          key: 'PowerSupplyType',
-          label: this.$t('pageSystemInventory.power.PowerSupplyType'),
+          key: 'LimitInWatts',
+          label: this.$t('pageSystemInventory.Power.LimitInWatts'),
         },
         {
-          key: 'SerialNumber',
-          label: this.$t('pageSystemInventory.power.SerialNumber'),
-        },
-        {
-          key: 'state',
-          label: this.$t('pageSystemInventory.power.state'),
+          key: 'LimitException',
+          label: this.$t('pageSystemInventory.Power.LimitException'),
         },
       ],
     };
-  },
-  computed: {
-    powerInfo() {
-      return this.$store.getters['SystemStore/power'];
-    },
   },
 };
 </script>
