@@ -154,7 +154,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
-        "system-inventory":"@:appPageTitle.system-inventory"
+        "system-inventory":"@:appPageTitle.systemInventory"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -200,8 +200,7 @@
         "physicalDevice": "Physical Device",
         "logicalDevice": "Logical Device",
         "createLogicalDevice": "Create Logical Device",
-        "system-inventory":"System Inventory",
-        "systemInventory":"SystemInventory"
+        "systemInventory":"System Inventory"
     },
     "systemInventory":{
         "Processor":"Processor",
