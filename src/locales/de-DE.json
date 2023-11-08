@@ -157,7 +157,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
-        "system-inventory":"@:appPageTitle.system-inventory"
+        "systemInventory":"@:appPageTitle.systemInventory"
 
     },
     "appPageTitle": {
@@ -204,16 +204,7 @@
         "physicalDevice": "Physisches Gerät",
         "logicalDevice": "Logisches Gerät",
         "createLogicalDevice": "Logisches Gerät erstellen",
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "backupAndRestore": "Sichern und Wiederherstellen",
-        "systemInventory":"Systeminventar"
-=======
-=======
->>>>>>> OT-2119 changed the naming convention for all files in system Inventory module
-<<<<<<< HEAD
         "backupAndRestore": "Sichern und Wiederherstellen"
->>>>>>> System inventory ot 2119
     },
     "pageBackupAndRestore": {
         "backup": "Sicherung",
@@ -248,14 +239,8 @@
         "Thermal":"Thermal",
         "PCIEDevice":"PCIE Device",
         "PCIEFunction":"PCIEFunction",
-        "Storage":"Storage"
-=======
-        "system-inventory":"system-inventory"
->>>>>>> System inventory ot 2119
-=======
-        "system-inventory":"System Inventory",
+        "Storage":"Storage",
         "systemInventory":"SystemInventory"
->>>>>>> OT-2119 changed the naming convention for all files in system Inventory module
     },
     "pageOnDemand": {
         "onDemand":"Auf Anfrage",
@@ -1158,31 +1143,16 @@
     },
     "pageSystemInventory": {
         "system":{
-<<<<<<< HEAD
-<<<<<<< HEAD
             "system":"System",
             "systemInfo":"System Info",
-=======
-            "system":"system",
-            "systemInfo":"system Info",
->>>>>>> System inventory ot 2119
-=======
-            "system":"System",
-            "systemInfo":"System Info",
->>>>>>> OT-2119 changed the naming convention for all files in system Inventory module
             "Name": "Name",
             "Description": "Description",
             "Model": "Model",
             "IndicatorLED": "Indicator LED",
             "Manufacture": "Manufacture",
             "PowerState": "Power State",
-<<<<<<< HEAD
-            "SerialNumuber": "Serial Numuber",
-            "PartNumuber": "Part Numuber",
-=======
             "SerialNmuber": "Serial Nmuber",
             "PartNmuber": "Part Nmuber",
->>>>>>> System inventory ot 2119
             "SystemType": "System Type",
             "AssetTag": "Asset Tag",
             "BiosVersion": "Bios Version",
@@ -1212,13 +1182,8 @@
                  "Name": "Name",
                  "CapacityMiB": "Capacity MiB",
                  "Manufacturer": "Manufacturer",
-<<<<<<< HEAD
-                 "SerialNumuber": "Serial Numuber",
-                 "PartNumuber": "Part Numuber",
-=======
                  "SerialNmuber": "Serial Nmuber",
                  "PartNmuber": "Part Nmuber",
->>>>>>> System inventory ot 2119
                  "State": "State",
                  "OperatingSpeedMhz": "OperatingSpeed Mhz",
                  "MemoryType": "Memory Type",
@@ -1232,11 +1197,7 @@
                 "BaseBoardInfo":"BaseBoard Info",
                 "Name": "Name",
                 "Description": "Description",
-<<<<<<< HEAD
-                "FirmwareVersion": "Firmware Version",
-=======
                 "FrmwareVersion": "Frmware Version",
->>>>>>> System inventory ot 2119
                 "Model": "Model",
                 "State": "State",
                 "PowerState": "Power State"
@@ -1253,18 +1214,6 @@
                 "PermanentMACAddress": "Permanent MAC Address",
                 "State": "State"
             },
-<<<<<<< HEAD
-            "NetworkInterfaceIPv6": 
-                {
-                    "NetworkInterfaceIPv6Info": "IPv6 Addresses Info",
-                    "Address": "Address",
-                    "PrefixLength": "PrefixLength",
-                    "AddressOrigin": "AddressOrigin",
-                    "Index": "Index",
-                    "Name": "Name"
-                },
-=======
->>>>>>> System inventory ot 2119
             "Power": 
                 {
                 "Power":"Power",
@@ -1334,11 +1283,7 @@
                 "Manufacturer": "Manufacturer",
                 "AssetTag": "AssetTag",
                 "DeviceType": "DeviceType",
-<<<<<<< HEAD
-                "FirmwareVersion": "FirmwareVersion",
-=======
                 "FrmwareVersion": "FrmwareVersion",
->>>>>>> System inventory ot 2119
                 "State": "State"
             },
             "PCIEFunction":
@@ -1365,11 +1310,7 @@
                 "StorageDriveInfo":"Storage Drive Info",
                 "Id": "Id",
                 "Name": "Name",
-<<<<<<< HEAD
-                "SerialNumuber": "Serial Numuber",
-=======
                 "SerialNmuber": "Serial Nmuber",
->>>>>>> System inventory ot 2119
                 "Manufacturer": "Manufacturer",
                 "Protocol": "Protocol",
                 "Model": "Model",
@@ -1383,11 +1324,7 @@
                 "StorageControllerInfo":"Storage Controller Info",
                 "MemberId": "MemberId",
                 "Name": "Name",
-<<<<<<< HEAD
-                "SerialNumuber": "Serial Numuber",
-=======
                 "SerialNmuber": "Serial Nmuber",
->>>>>>> System inventory ot 2119
                 "Model": "Model",
                 "FirmwareVersion": "FirmwareVersion",
                 "SpeedGbs": "SpeedGbs",
