@@ -9,7 +9,6 @@
         "login": "Inicio de sesión",
         "overview": "Información general",
         "unauthorized": "No autorizado",
-        "system-inventory":"System Inventory",
         "systemInventory":"SystemInventory"
     },
     "pageSystemInventory": {
