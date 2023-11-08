@@ -163,7 +163,6 @@
         "certificates": "Сертификаты",
         "virtualMedia": "Виртуальные носители",
         "keyClear": "Удаление ключей",
-        "system-inventory":"System Inventory",
         "systemInventory":"SystemInventory"
     },
     "pageChangePassword": {

@@ -159,6 +159,7 @@
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "system-inventory":"@:appPageTitle.system-inventory"
 =======
@@ -167,6 +168,9 @@
 =======
         "system-inventory":"@:appPageTitle.system-inventory"
 >>>>>>> System inventory ot 2119
+=======
+        "systemInventory":"@:appPageTitle.systemInventory"
+>>>>>>> OT-2119 naming convention changes in system Inventory
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -214,6 +218,7 @@
         "createLogicalDevice": "Logisches Gerät erstellen",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "backupAndRestore": "Sichern und Wiederherstellen"
     },
     "pageBackupAndRestore": {
@@ -255,6 +260,8 @@
 >>>>>>> System inventory ot 2119
 =======
         "system-inventory":"System Inventory",
+=======
+>>>>>>> OT-2119 naming convention changes in system Inventory
         "systemInventory":"SystemInventory"
 >>>>>>> OT-2119 changed the naming convention for all files in system Inventory module
     },
