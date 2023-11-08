@@ -340,7 +340,7 @@ const routes = [
         name: 'system-inventory',
         component: systemInventory,
         meta: {
-          title: i18n.t('appPageTitle.system-inventory'),
+          title: i18n.t('appPageTitle.systemInventory'),
         },
       },
     ],
