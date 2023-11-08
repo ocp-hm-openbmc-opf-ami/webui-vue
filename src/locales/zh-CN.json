@@ -200,7 +200,6 @@
         "physicalDevice": "物理设备",
         "logicalDevice": "逻辑设备",
         "createLogicalDevice": "创建逻辑设备",
-        "system-inventory":"System Inventory",
         "systemInventory":"SystemInventory"
     },
     "pageOnDemand": {

@@ -200,7 +200,6 @@
         "physicalDevice": "物理設備",
         "logicalDevice": "邏輯設備",
         "createLogicalDevice": "創建邏輯設備",
-        "system-inventory":"System Inventory",
         "systemInventory":"SystemInventory"
     },
     "pageOnDemand": {
