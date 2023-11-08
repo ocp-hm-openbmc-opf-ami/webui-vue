@@ -133,7 +133,7 @@
         "virtualMedia": "@:appPageTitle.virtualMedia",
         "power": "@:appPageTitle.power",
         "keyClear": "@:appPageTitle.keyClear",
-        "system-inventory":"@:appPageTitle.system-inventory"
+        "systemInventory":"@:appPageTitle.systemInventory"
     },
     "appPageTitle": {
         "changePassword": "Изменить пароль",
