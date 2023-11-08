@@ -157,7 +157,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
-        "system-inventory":"@:appPageTitle.systemInventory"
+        "systemInventory":"@:appPageTitle.systemInventory"
     },
     "appPageTitle": {
         "bsod": "BSOD",
