@@ -10,10 +10,10 @@
           card
           content-class="mt-3"
         >
-          <b-tab :title="$t('pageVideo.Video')">
+          <b-tab :title="$t('pageVideo.video')">
             <videotrigger></videotrigger>
           </b-tab>
-          <b-tab :title="$t('pageVideo.Videoremote')">
+          <b-tab :title="$t('pageVideo.videoRemote')">
             <videoremotestorage></videoremotestorage>
           </b-tab>
         </b-tabs>

@@ -336,11 +336,11 @@ const routes = [
         },
       },
       {
-        path: '/settings/Autovideo',
-        name: 'autovideo',
+        path: '/settings/auto-video',
+        name: 'auto-video',
         component: AutoVideosettings,
         meta: {
-          title: i18n.t('appPageTitle.autovideo'),
+          title: i18n.t('appPageTitle.autoVideo'),
         },
       },
     ],

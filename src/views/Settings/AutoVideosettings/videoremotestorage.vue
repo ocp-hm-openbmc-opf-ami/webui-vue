@@ -4,18 +4,17 @@
       <b-row>
         <b-col md="6">
           <b-form-checkbox>
-            {{ $t('pageVideo.VideoRemoteSettings.RecordVideotoRemoteServer') }}
+            {{ $t('pageVideo.videoRemoteSettings.recordVideotoRemoteServer') }}
           </b-form-checkbox>
           <b-row>
             <b-col cols="6">
               <div class="mt-2">
                 <b-form-group
-                  :label="$t('pageVideo.VideoRemoteSettings.MaximumDumps')"
-                  label-for="MaximumDumps"
+                  :label="$t('pageVideo.videoRemoteSettings.maximumDumps')"
+                  label-for="maximumDumps"
                 >
                   <b-form-input
-                    :id="MaximumDumps"
-                    v-model="form.MaximumDumps"
+                    :id="maximumDumps"
                     disabled
                     :type="text"
                     placeholder="2"
@@ -23,67 +22,67 @@
                 </b-form-group>
                 <b-form-group
                   :label="
-                    $t('pageVideo.VideoRemoteSettings.MaximumDurationinSec')
+                    $t('pageVideo.videoRemoteSettings.maximumDuration')
                   "
-                  label-for="MaximumDurationinSec"
+                  label-for="maximumDuration"
                 >
                   <b-form-input
-                    :id="MaximumDumps"
+                    :id="maximumDuration"
                     disabled
                     :type="text"
                     placeholder="20"
                   />
                 </b-form-group>
                 <b-form-group
-                  :label="$t('pageVideo.VideoRemoteSettings.MaximumSizeinMB')"
-                  label-for="MaximumSizeinMB"
+                  :label="$t('pageVideo.videoRemoteSettings.maximumSize')"
+                  label-for="maximumSize"
                 >
                   <b-form-input
-                    :id="MaximumDumps"
+                    :id="maximumSize"
                     disabled
                     :type="text"
                     placeholder="5"
                   />
                 </b-form-group>
                 <b-form-group
-                  :label="$t('pageVideo.VideoRemoteSettings.ServerAddress')"
-                  label-for="ServerAddress"
+                  :label="$t('pageVideo.videoRemoteSettings.serverAddress')"
+                  label-for="serverAddress"
                 >
                   <b-form-input
-                    :id="MaximumDumps"
+                    :id="serverAddress"
                     disabled
                     :type="text"
                     placeholder="10.0.124.75"
                   />
                 </b-form-group>
                 <b-form-group
-                  :label="$t('pageVideo.VideoRemoteSettings.Pathinserver')"
-                  label-for="Pathinserver"
+                  :label="$t('pageVideo.videoRemoteSettings.pathInServer')"
+                  label-for="pathInServer"
                 >
                   <b-form-input
-                    :id="MaximumDumps"
+                    :id="pathInServer"
                     disabled
                     :type="text"
                     placeholder="/home"
                   />
                 </b-form-group>
                 <b-form-group
-                  :label="$t('pageVideo.VideoRemoteSettings.ShareType')"
-                  label-for="ShareType"
+                  :label="$t('pageVideo.videoRemoteSettings.shareType')"
+                  label-for="shareType"
                 >
                   <b-form-row>
                     <b-form-radio
                       value="ShareType"
-                      data-test-id="pageVideo.VideoRemoteSettings-sharetype"
+                      data-test-id="video-videoRemoteSettings-sharetype-nfs"
                       class="mr-2"
                     >
-                      {{ $t('pageVideo.VideoRemoteSettings.NFS') }}
+                      {{ $t('pageVideo.videoRemoteSettings.nfs') }}
                     </b-form-radio>
                     <b-form-radio
                       value="ShareType"
-                      data-test-id="pageVideo.VideoRemoteSettings-sharetype"
+                      data-test-id="video-videoRemoteSettings-sharetype-cifs"
                     >
-                      {{ $t('pageVideo.VideoRemoteSettings.CIFS') }}
+                      {{ $t('pageVideo.videoRemoteSettings.cifs') }}
                     </b-form-radio>
                   </b-form-row>
                 </b-form-group>
@@ -92,7 +91,7 @@
                     <b-btn
                       variant="primary"
                       type="submit"
-                      data-test-id="smtp-button-saveSettings"
+                      data-test-id="videoRemoteStorage-button-saveSettings"
                       :disabled="loading"
                     >
                       {{ $t('global.action.saveSettings') }}
@@ -126,11 +125,7 @@ export default {
     },
   },
   data() {
-    return {
-      form: {
-        MaximumDumps: '',
-      },
-    };
+    return {};
   },
   methods: {},
 };

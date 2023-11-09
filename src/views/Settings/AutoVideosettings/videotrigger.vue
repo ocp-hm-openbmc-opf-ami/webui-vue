@@ -5,7 +5,7 @@
         <b-row class="setting-section">
           <b-col class="d-flex align-items-center justify-content-between">
             <dl class="mr-3 w-75">
-              <dt>{{ $t('pageVideo.VideoTriggerSettings.critical') }}</dt>
+              <dt>{{ $t('pageVideo.videoTriggerSettings.critical') }}</dt>
             </dl>
             <b-form-checkbox id="" switch>
               <span v-if="videotriggerevent">
@@ -18,7 +18,7 @@
         <b-row class="setting-section">
           <b-col class="d-flex align-items-center justify-content-between">
             <dl class="mt-3 mr-3 w-75">
-              <dt>{{ $t('pageVideo.VideoTriggerSettings.noncritical') }}</dt>
+              <dt>{{ $t('pageVideo.videoTriggerSettings.nonCritical') }}</dt>
             </dl>
             <b-form-checkbox id="" switch>
               <span v-if="videotriggerevent">
@@ -31,7 +31,7 @@
         <b-row class="setting-section">
           <b-col class="d-flex align-items-center justify-content-between">
             <dl class="mt-3 mr-3 w-75">
-              <dt>{{ $t('pageVideo.VideoTriggerSettings.nonrecoverable') }}</dt>
+              <dt>{{ $t('pageVideo.videoTriggerSettings.nonRecoverable') }}</dt>
             </dl>
             <b-form-checkbox id="" switch>
               <span v-if="videotriggerevent">
@@ -45,7 +45,7 @@
           <b-col class="d-flex align-items-center justify-content-between">
             <dl class="mt-3 mr-3 w-75">
               <dt>
-                {{ $t('pageVideo.VideoTriggerSettings.fanstatechanged') }}
+                {{ $t('pageVideo.videoTriggerSettings.fanStateChanged') }}
               </dt>
             </dl>
             <b-form-checkbox id="" switch>
@@ -59,7 +59,7 @@
         <b-row class="setting-section">
           <b-col class="d-flex align-items-center justify-content-between">
             <dl class="mt-3 mr-3 w-75">
-              <dt>{{ $t('pageVideo.VideoTriggerSettings.WatchdogTimer') }}</dt>
+              <dt>{{ $t('pageVideo.videoTriggerSettings.watchdogTimer') }}</dt>
             </dl>
             <b-form-checkbox id="" switch>
               <span v-if="videotriggerevent">
@@ -72,22 +72,7 @@
         <b-row class="setting-section">
           <b-col class="d-flex align-items-center justify-content-between">
             <dl class="mt-3 mr-3 w-75">
-              <dt>{{ $t('pageVideo.VideoTriggerSettings.ChassisPowerOn') }}</dt>
-            </dl>
-            <b-form-checkbox id="" switch>
-              <span v-if="videotriggerevent">
-                {{ $t('global.status.enabled') }}
-              </span>
-              <span v-else>{{ $t('global.status.disabled') }}</span>
-            </b-form-checkbox>
-          </b-col>
-        </b-row>
-        <b-row class="setting-section">
-          <b-col class="d-flex align-items-center justify-content-between">
-            <dl class="mt-3 mr-3 w-75">
-              <dt>
-                {{ $t('pageVideo.VideoTriggerSettings.ChassisPowerOff') }}
-              </dt>
+              <dt>{{ $t('pageVideo.videoTriggerSettings.chassisPowerOn') }}</dt>
             </dl>
             <b-form-checkbox id="" switch>
               <span v-if="videotriggerevent">
@@ -101,7 +86,7 @@
           <b-col class="d-flex align-items-center justify-content-between">
             <dl class="mt-3 mr-3 w-75">
               <dt>
-                {{ $t('pageVideo.VideoTriggerSettings.ChassisReset') }}
+                {{ $t('pageVideo.videoTriggerSettings.chassisPowerOff') }}
               </dt>
             </dl>
             <b-form-checkbox id="" switch>
@@ -116,7 +101,7 @@
           <b-col class="d-flex align-items-center justify-content-between">
             <dl class="mt-3 mr-3 w-75">
               <dt>
-                {{ $t('pageVideo.VideoTriggerSettings.LPCReset') }}
+                {{ $t('pageVideo.videoTriggerSettings.chassisReset') }}
               </dt>
             </dl>
             <b-form-checkbox id="" switch>
@@ -131,7 +116,22 @@
           <b-col class="d-flex align-items-center justify-content-between">
             <dl class="mt-3 mr-3 w-75">
               <dt>
-                {{ $t('pageVideo.VideoTriggerSettings.dateAndTime') }}
+                {{ $t('pageVideo.videoTriggerSettings.LPCReset') }}
+              </dt>
+            </dl>
+            <b-form-checkbox id="" switch>
+              <span v-if="videotriggerevent">
+                {{ $t('global.status.enabled') }}
+              </span>
+              <span v-else>{{ $t('global.status.disabled') }}</span>
+            </b-form-checkbox>
+          </b-col>
+        </b-row>
+        <b-row class="setting-section">
+          <b-col class="d-flex align-items-center justify-content-between">
+            <dl class="mt-3 mr-3 w-75">
+              <dt>
+                {{ $t('pageVideo.videoTriggerSettings.dateAndTime') }}
               </dt>
             </dl>
             <b-form-checkbox id="" switch>
