@@ -132,14 +132,6 @@ export default {
       },
     };
   },
-  methods: {
-    setFormValues(serviceType) {
-      if (!serviceType) {
-        serviceType = this.isActiveDirectoryEnabled
-          ? this.activeDirectory
-          : this.ldap;
-      }
-    },
-  },
+  methods: {},
 };
 </script>
