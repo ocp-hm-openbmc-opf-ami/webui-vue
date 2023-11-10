@@ -147,7 +147,7 @@ export default {
     this.$store.dispatch('global/getSystemInfo');
     if (
       (this.proxyDevices.length > 0 || this.legacyDevices.length > 0) &&
-      (this.vmStarted > 0 || this.legacyStarted > 0)
+      this.vmStarted > 0
     )
       return;
     this.startLoader();
