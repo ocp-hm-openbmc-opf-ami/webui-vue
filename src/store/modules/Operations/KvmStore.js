@@ -13,11 +13,15 @@ const KvmStore = {
       cmdKeyStatus: false,
     },
     keyboardLayout: 'en-us' /* Default keyboard layout */,
+    clientKeyboardLEDState: -1,
+    hostKeyboardLEDState: -1,
   },
   getters: {
     getKvmActiveStatus: (state) => state.activeStatus,
     getSoftKeyboardStatus: (state) => state.softKeyboardStates,
     getKeyboardLayout: (state) => state.keyboardLayout,
+    getclientKeyboardLEDState: (state) => state.clientKeyboardLEDState,
+    gethostKeyboardLEDState: (state) => state.hostKeyboardLEDState,
   },
   mutations: {
     setKvmActiveStatusData: (state, statusData) =>
@@ -27,6 +31,10 @@ const KvmStore = {
     },
     setKeyboardLayout: (state, statusData) =>
       (state.keyboardLayout = statusData),
+    setclientKeyboardLEDState: (state, keyState) =>
+      (state.clientKeyboardLEDState = keyState),
+    sethostKeyboardLEDState: (state, keyState) =>
+      (state.hostKeyboardLEDState = keyState),
   },
   actions: {
     async getData({ commit }) {
