@@ -36,6 +36,7 @@ import i18n from '@/i18n';
 import Dumps from '@/views/Logs/Dumps';
 import ACD from '@/views/HostSystemDiagnostics/ACD';
 import Asd from '@/views/HostSystemDiagnostics/Asd';
+import BackupAndRestore from '@/views/Operations/BackupAndRestore';
 
 const roles = {
   administrator: 'Administrator',
@@ -306,6 +307,14 @@ const routes = [
         component: RebootBmc,
         meta: {
           title: i18n.t('appPageTitle.rebootBmc'),
+        },
+      },
+      {
+        path: '/operations/backup-and-restore',
+        name: 'backup-and-restore',
+        component: BackupAndRestore,
+        meta: {
+          title: i18n.t('appPageTitle.backupAndRestore'),
         },
       },
       {

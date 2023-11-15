@@ -155,7 +155,8 @@
         "adapter": "@:appPageTitle.adapter",
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
-        "createLogicalDevice": "@:appPageTitle.createLogicalDevice"
+        "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "backupAndRestore": "@:appPageTitle.backupAndRestore"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -200,7 +201,12 @@
         "adapter": "Adapter",
         "physicalDevice": "Physical Device",
         "logicalDevice": "Logical Device",
-        "createLogicalDevice": "Create Logical Device"
+        "createLogicalDevice": "Create Logical Device",
+        "backupAndRestore": "Backup And Restore"
+    },
+    "pageBackupAndRestore": {
+        "backup": "Backup",
+        "restore": "Restore"
     },
     "pageOnDemand": {
         "onDemand":"OnDemand",
