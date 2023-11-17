@@ -98,6 +98,7 @@ export default new Vuex.Store({
     asd: AsdStore,
     ondemand: OnDemand,
     raid: RaidStore,
+    backupAndRestore: BackupAndRestore,
     SystemStore: SystemInfoStore,
   },
   plugins: [WebSocketPlugin],
