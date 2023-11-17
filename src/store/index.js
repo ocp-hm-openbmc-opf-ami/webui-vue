@@ -45,7 +45,10 @@ import AutonomousCrashDumpStore from './modules/HostSystemDiagnostics/AcdStore';
 import AsdStore from './modules/HostSystemDiagnostics/AsdStore';
 import OnDemand from './modules/Settings/OnDemand';
 import RaidStore from './modules/Raid/RaidStore';
+<<<<<<< HEAD
 import BackupAndRestore from './modules/Operations/BackupAndRestore';
+=======
+>>>>>>> OT-2119 fetched data to store
 import SystemInfoStore from './modules/SystemInventory/SystemInventoryStore';
 
 Vue.use(Vuex);
@@ -98,7 +101,6 @@ export default new Vuex.Store({
     asd: AsdStore,
     ondemand: OnDemand,
     raid: RaidStore,
-    backupAndRestore: BackupAndRestore,
     SystemStore: SystemInfoStore,
   },
   plugins: [WebSocketPlugin],
