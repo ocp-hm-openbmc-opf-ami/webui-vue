@@ -70,5 +70,16 @@ export default {
       ],
     };
   },
+  created() {
+    this.$store.dispatch('SystemStore/getMemoryControllersInfo');
+  },
+  methods: {
+    SystemInfo() {
+      const MicroCntrollersInfo = this.$store.getters[
+        'SystemInventoryStore/getMemoryControllersInfo'
+      ];
+      console.log('MicroCntrollersInfo', MicroCntrollersInfo);
+    },
+  },
 };
 </script>
