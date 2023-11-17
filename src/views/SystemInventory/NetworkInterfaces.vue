@@ -54,5 +54,16 @@ export default {
       ],
     };
   },
+  created() {
+    this.$store.dispatch('SystemStore/getBasebordInfoNetworkinterfaces');
+  },
+  methods: {
+    SystemInfo() {
+      const BasebordInfoNetworkinterfaces = this.$store.getters[
+        'SystemInventoryStore/getBasebordInfoNetworkinterfaces'
+      ];
+      console.log('network', BasebordInfoNetworkinterfaces);
+    },
+  },
 };
 </script>
