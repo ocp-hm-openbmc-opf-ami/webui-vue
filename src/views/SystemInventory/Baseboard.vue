@@ -42,5 +42,16 @@ export default {
       ],
     };
   },
+  created() {
+    this.$store.dispatch('SystemStore/getBaseBoardInfo');
+  },
+  methods: {
+    SystemInfo() {
+      const BaseBoardInfo = this.$store.getters[
+        'SystemInventoryStore/getBaseBoardInfo'
+      ];
+      console.log('BaseBoardInfo', BaseBoardInfo);
+    },
+  },
 };
 </script>

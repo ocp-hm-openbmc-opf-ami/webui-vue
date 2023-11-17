@@ -62,5 +62,16 @@ export default {
       ],
     };
   },
+  created() {
+    this.$store.dispatch('SystemStore/getProcessorsInfo');
+  },
+  methods: {
+    SystemInfo() {
+      const ProcessorsInfo = this.$store.getters[
+        'SystemInventoryStore/getProcessorsInfo'
+      ];
+      console.log('getProcessorsInfo', ProcessorsInfo);
+    },
+  },
 };
 </script>
