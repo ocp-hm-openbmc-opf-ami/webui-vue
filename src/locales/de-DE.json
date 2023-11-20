@@ -265,6 +265,16 @@
         "systemInventory":"SystemInventory"
 >>>>>>> OT-2119 changed the naming convention for all files in system Inventory module
     },
+    "systemInventory":{
+        "Processor":"Processor",
+        "Memory Controller":"Memory Controller",
+        "BaseBoard":"BaseBoard",
+        "Power":"Power",
+        "Thermal":"Thermal",
+        "PCIEDevice":"PCIE Device",
+        "PCIEFunction":"PCIEFunction",
+        "Storage":"Storage"
+    },
     "pageOnDemand": {
         "onDemand":"Auf Anfrage",
         "availableCPU": "Verfügbare CPUs",
@@ -1168,12 +1178,17 @@
             "Manufacture": "Manufacture",
             "PowerState": "Power State",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "SerialNumuber": "Serial Numuber",
             "PartNumuber": "Part Numuber",
 =======
             "SerialNmuber": "Serial Nmuber",
             "PartNmuber": "Part Nmuber",
 >>>>>>> System inventory ot 2119
+=======
+            "SerialNumuber": "Serial Numuber",
+            "PartNumuber": "Part Numuber",
+>>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
             "SystemType": "System Type",
             "AssetTag": "Asset Tag",
             "BiosVersion": "Bios Version",
@@ -1204,12 +1219,17 @@
                  "CapacityMiB": "Capacity MiB",
                  "Manufacturer": "Manufacturer",
 <<<<<<< HEAD
+<<<<<<< HEAD
                  "SerialNumuber": "Serial Numuber",
                  "PartNumuber": "Part Numuber",
 =======
                  "SerialNmuber": "Serial Nmuber",
                  "PartNmuber": "Part Nmuber",
 >>>>>>> System inventory ot 2119
+=======
+                 "SerialNumuber": "Serial Numuber",
+                 "PartNumuber": "Part Numuber",
+>>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
                  "State": "State",
                  "OperatingSpeedMhz": "OperatingSpeed Mhz",
                  "MemoryType": "Memory Type",
@@ -1224,10 +1244,14 @@
                 "Name": "Name",
                 "Description": "Description",
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "FirmwareVersion": "Firmware Version",
 =======
                 "FrmwareVersion": "Frmware Version",
 >>>>>>> System inventory ot 2119
+=======
+                "FirmwareVersion": "Firmware Version",
+>>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
                 "Model": "Model",
                 "State": "State",
                 "PowerState": "Power State"
@@ -1245,6 +1269,9 @@
                 "State": "State"
             },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
             "NetworkInterfaceIPv6": 
                 {
                     "NetworkInterfaceIPv6Info": "IPv6 Addresses Info",
@@ -1254,8 +1281,11 @@
                     "Index": "Index",
                     "Name": "Name"
                 },
+<<<<<<< HEAD
 =======
 >>>>>>> System inventory ot 2119
+=======
+>>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
             "Power": 
                 {
                 "Power":"Power",
@@ -1326,10 +1356,14 @@
                 "AssetTag": "AssetTag",
                 "DeviceType": "DeviceType",
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "FirmwareVersion": "FirmwareVersion",
 =======
                 "FrmwareVersion": "FrmwareVersion",
 >>>>>>> System inventory ot 2119
+=======
+                "FirmwareVersion": "FirmwareVersion",
+>>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
                 "State": "State"
             },
             "PCIEFunction":
@@ -1357,10 +1391,14 @@
                 "Id": "Id",
                 "Name": "Name",
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "SerialNumuber": "Serial Numuber",
 =======
                 "SerialNmuber": "Serial Nmuber",
 >>>>>>> System inventory ot 2119
+=======
+                "SerialNumuber": "Serial Numuber",
+>>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
                 "Manufacturer": "Manufacturer",
                 "Protocol": "Protocol",
                 "Model": "Model",
@@ -1375,10 +1413,14 @@
                 "MemberId": "MemberId",
                 "Name": "Name",
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "SerialNumuber": "Serial Numuber",
 =======
                 "SerialNmuber": "Serial Nmuber",
 >>>>>>> System inventory ot 2119
+=======
+                "SerialNumuber": "Serial Numuber",
+>>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
                 "Model": "Model",
                 "FirmwareVersion": "FirmwareVersion",
                 "SpeedGbs": "SpeedGbs",

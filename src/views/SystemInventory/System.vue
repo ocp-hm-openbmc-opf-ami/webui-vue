@@ -5,12 +5,11 @@
       hover
       sticky-header
       :fields="systemFields"
+      :items="systemTabItems"
       head-variant="light"
-      :items="systemTabItems()"
-    />
+    ></b-table>
   </div>
 </template>
-
 <script>
 export default {
   data() {
@@ -32,7 +31,7 @@ export default {
           class: 'text-center',
         },
         {
-          key: 'Manufacture',
+          key: 'Manufacturer',
           label: this.$t('pageSystemInventory.system.Manufacture'),
           class: 'text-center',
         },
@@ -42,13 +41,13 @@ export default {
           class: 'text-center',
         },
         {
-          key: 'SerialNmuber',
-          label: this.$t('pageSystemInventory.system.SerialNmuber'),
+          key: 'SerialNumuber',
+          label: this.$t('pageSystemInventory.system.SerialNumuber'),
           class: 'text-center',
         },
         {
-          key: 'PartNmuber',
-          label: this.$t('pageSystemInventory.system.PartNmuber'),
+          key: 'PartNumuber',
+          label: this.$t('pageSystemInventory.system.PartNumuber'),
           class: 'text-center',
         },
         {
@@ -72,7 +71,7 @@ export default {
           class: 'text-center',
         },
         {
-          key: 'state',
+          key: 'State',
           label: this.$t('pageSystemInventory.system.state'),
           class: 'text-center',
         },
@@ -81,43 +80,32 @@ export default {
   },
   computed: {
     SystemInfo() {
-      return this.$store.getters['SystemInventoryStore/getSystemsInfo'];
+      return this.$store.getters['SystemStore/systems'];
+    },
+    systemTabItems() {
+      // transform system tab data to table data
+      return this.SystemInfo?.map((data) => {
+        // console.log('datasystem', data.Name, index);
+        return {
+          Name: data.Name,
+          Description: data.Description,
+          Model: data.Model,
+          IndicatorLED: data.IndicatorLED,
+          Manufacturer: data.Manufacturer,
+          PowerState: data.PowerState,
+          SerialNumuber: data.SerialNumber,
+          PartNumuber: data.PartNumber,
+          SystemType: data.SystemType,
+          AssetTag: data.AssetTag,
+          BiosVersion: data.BiosVersion,
+          UUID: data.UUID,
+          State: data.State,
+        };
+      });
     },
   },
   created() {
-    this.$store.dispatch('SystemInventoryStore/getSystemsInfo');
-    console.log(
-      this.$store.getters['SystemInventoryStore/systems'],
-      'systemTabItems'
-    );
+    this.$store.dispatch('SystemStore/getSystemsInfo');
   },
-  methods: {
-    systemTabItems() {
-      console.log(
-        this.$store.getters['SystemInventoryStore/systems'],
-        'systemTabItems'
-      );
-    },
-  },
-  // systemTabItems() {
-  //   // transform system tab data to table data
-  //   return this.SystemInfo;
-  //   // return {
-  //   //   Name: data[index].Name,
-  //   //   Description: data[index].Description,
-  //   //   Model: data[index].Model,
-  //   //   IndicatorLED: data[index].IndicatorLED,
-  //   //   Manufacture: data[index].Manufacture,
-  //   //   PowerState: data[index].PowerState,
-  //   //   SerialNmuber: data[index].SerialNmuber,
-  //   //   PartNmuber: data[index].PartNmuber,
-  //   //   SystemType: data[index].SystemType,
-  //   //   AssetTag: data[index].AssetTag,
-  //   //   BiosVersion: data[index].BiosVersion,
-  //   //   UUID: data[index].UUID,
-  //   //   state: data[index].state,
-  //   // };
-  //   // });
-  // },
 };
 </script>
