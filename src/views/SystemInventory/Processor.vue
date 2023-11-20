@@ -5,6 +5,7 @@
       hover
       sticky-header
       :fields="processorFields"
+      :items="ProcessorTabItems"
       head-variant="light"
     ></b-table>
   </div>
@@ -24,7 +25,7 @@ export default {
           label: this.$t('pageSystemInventory.Processor.Name'),
         },
         {
-          key: 'Manufacture',
+          key: 'Manufacturer',
           label: this.$t('pageSystemInventory.Processor.Manufacture'),
         },
         {
@@ -56,22 +57,37 @@ export default {
           label: this.$t('pageSystemInventory.Processor.TotalCores'),
         },
         {
-          key: 'state',
+          key: 'State',
           label: this.$t('pageSystemInventory.Processor.state'),
         },
       ],
     };
   },
+  computed: {
+    ProcessorInfo() {
+      return this.$store.getters['SystemStore/processors'];
+    },
+    ProcessorTabItems() {
+      // transform system tab data to table data
+      return this.ProcessorInfo?.map((data) => {
+        return {
+          Id: data.Id,
+          Name: data.Name,
+          Manufacturer: data.Manufacturer,
+          MaxSpeedMHz: data.MaxSpeedMHz,
+          Model: data.Model,
+          ProcessorArchitecture: data.ProcessorArchitecture,
+          ProcessorType: data.ProcessorType,
+          Socket: data.Socket,
+          EffectiveFamily: data.EffectiveFamily,
+          TotalCores: data.TotalCores,
+          State: data.State,
+        };
+      });
+    },
+  },
   created() {
     this.$store.dispatch('SystemStore/getProcessorsInfo');
-  },
-  methods: {
-    SystemInfo() {
-      const ProcessorsInfo = this.$store.getters[
-        'SystemInventoryStore/getProcessorsInfo'
-      ];
-      console.log('getProcessorsInfo', ProcessorsInfo);
-    },
   },
 };
 </script>

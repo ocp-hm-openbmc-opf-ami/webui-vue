@@ -205,6 +205,16 @@
         "createLogicalDevice": "Logisches Gerät erstellen",
         "systemInventory":"SystemInventory"
     },
+    "systemInventory":{
+        "Processor":"Processor",
+        "Memory Controller":"Memory Controller",
+        "BaseBoard":"BaseBoard",
+        "Power":"Power",
+        "Thermal":"Thermal",
+        "PCIEDevice":"PCIE Device",
+        "PCIEFunction":"PCIEFunction",
+        "Storage":"Storage"
+    },
     "pageOnDemand": {
         "onDemand":"Auf Anfrage",
         "availableCPU": "Verfügbare CPUs",
@@ -1114,8 +1124,8 @@
             "IndicatorLED": "Indicator LED",
             "Manufacture": "Manufacture",
             "PowerState": "Power State",
-            "SerialNmuber": "Serial Nmuber",
-            "PartNmuber": "Part Nmuber",
+            "SerialNumuber": "Serial Numuber",
+            "PartNumuber": "Part Numuber",
             "SystemType": "System Type",
             "AssetTag": "Asset Tag",
             "BiosVersion": "Bios Version",
@@ -1145,8 +1155,8 @@
                  "Name": "Name",
                  "CapacityMiB": "Capacity MiB",
                  "Manufacturer": "Manufacturer",
-                 "SerialNmuber": "Serial Nmuber",
-                 "PartNmuber": "Part Nmuber",
+                 "SerialNumuber": "Serial Numuber",
+                 "PartNumuber": "Part Numuber",
                  "State": "State",
                  "OperatingSpeedMhz": "OperatingSpeed Mhz",
                  "MemoryType": "Memory Type",
@@ -1160,7 +1170,7 @@
                 "BaseBoardInfo":"BaseBoard Info",
                 "Name": "Name",
                 "Description": "Description",
-                "FrmwareVersion": "Frmware Version",
+                "FirmwareVersion": "Firmware Version",
                 "Model": "Model",
                 "State": "State",
                 "PowerState": "Power State"
@@ -1177,15 +1187,6 @@
                 "PermanentMACAddress": "Permanent MAC Address",
                 "State": "State"
             },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
-=======
->>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
             "NetworkInterfaceIPv6": 
                 {
                     "NetworkInterfaceIPv6Info": "IPv6 Addresses Info",
@@ -1195,18 +1196,6 @@
                     "Index": "Index",
                     "Name": "Name"
                 },
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> System inventory ot 2119
-=======
->>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
-=======
->>>>>>> System inventory ot 2119
-=======
->>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
-=======
->>>>>>> System inventory ot 2119
             "Power": 
                 {
                 "Power":"Power",
@@ -1276,27 +1265,7 @@
                 "Manufacturer": "Manufacturer",
                 "AssetTag": "AssetTag",
                 "DeviceType": "DeviceType",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                 "FirmwareVersion": "FirmwareVersion",
-=======
-                "FrmwareVersion": "FrmwareVersion",
->>>>>>> System inventory ot 2119
-=======
-                "FirmwareVersion": "FirmwareVersion",
->>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
-=======
-                "FrmwareVersion": "FrmwareVersion",
->>>>>>> System inventory ot 2119
-=======
-                "FirmwareVersion": "FirmwareVersion",
->>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
-=======
-                "FrmwareVersion": "FrmwareVersion",
->>>>>>> System inventory ot 2119
                 "State": "State"
             },
             "PCIEFunction":
@@ -1323,27 +1292,7 @@
                 "StorageDriveInfo":"Storage Drive Info",
                 "Id": "Id",
                 "Name": "Name",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                 "SerialNumuber": "Serial Numuber",
-=======
-                "SerialNmuber": "Serial Nmuber",
->>>>>>> System inventory ot 2119
-=======
-                "SerialNumuber": "Serial Numuber",
->>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
-=======
-                "SerialNmuber": "Serial Nmuber",
->>>>>>> System inventory ot 2119
-=======
-                "SerialNumuber": "Serial Numuber",
->>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
-=======
-                "SerialNmuber": "Serial Nmuber",
->>>>>>> System inventory ot 2119
                 "Manufacturer": "Manufacturer",
                 "Protocol": "Protocol",
                 "Model": "Model",
@@ -1357,33 +1306,12 @@
                 "StorageControllerInfo":"Storage Controller Info",
                 "MemberId": "MemberId",
                 "Name": "Name",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                 "SerialNumuber": "Serial Numuber",
-=======
-                "SerialNmuber": "Serial Nmuber",
->>>>>>> System inventory ot 2119
-=======
-                "SerialNumuber": "Serial Numuber",
->>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
-=======
-                "SerialNmuber": "Serial Nmuber",
->>>>>>> System inventory ot 2119
-=======
-                "SerialNumuber": "Serial Numuber",
->>>>>>> OT-2119 fetched data from store and binded in web-ui for system processor memoryController baseboard tabs and hided remaining tabs
-=======
-                "SerialNmuber": "Serial Nmuber",
->>>>>>> System inventory ot 2119
                 "Model": "Model",
                 "FirmwareVersion": "FirmwareVersion",
                 "SpeedGbs": "SpeedGbs",
                 "State": "State"
                 }
-          
     },
     "pageEventFilter": {
         "pageDescription": "Wählen Sie die Ereignisse aus, die die Warnung auslösen sollen",
