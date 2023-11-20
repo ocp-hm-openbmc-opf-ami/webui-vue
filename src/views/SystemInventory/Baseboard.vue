@@ -5,6 +5,7 @@
       hover
       sticky-header
       :fields="BaseboardFields"
+      :items="BaseBoardTabItems"
       head-variant="light"
     ></b-table>
   </div>
@@ -24,8 +25,8 @@ export default {
           label: this.$t('pageSystemInventory.BaseBoard.Description'),
         },
         {
-          key: 'FrmwareVersion',
-          label: this.$t('pageSystemInventory.BaseBoard.FrmwareVersion'),
+          key: 'FirmwareVersion',
+          label: this.$t('pageSystemInventory.BaseBoard.FirmwareVersion'),
         },
         {
           key: 'Model',
@@ -42,16 +43,27 @@ export default {
       ],
     };
   },
+  computed: {
+    BaseBoardInfo() {
+      return this.$store.getters['SystemStore/baseBoard'];
+    },
+    BaseBoardTabItems() {
+      // transform system tab data to table data
+      return this.BaseBoardInfo?.map((data, index) => {
+        console.log('memory', data.Manufacturer, index);
+        return {
+          Name: data.Name,
+          Description: data.Description,
+          FirmwareVersion: data.FirmwareVersion,
+          Model: data.Model,
+          State: data.State,
+          PowerState: data.PowerState,
+        };
+      });
+    },
+  },
   created() {
     this.$store.dispatch('SystemStore/getBaseBoardInfo');
-  },
-  methods: {
-    SystemInfo() {
-      const BaseBoardInfo = this.$store.getters[
-        'SystemInventoryStore/getBaseBoardInfo'
-      ];
-      console.log('BaseBoardInfo', BaseBoardInfo);
-    },
   },
 };
 </script>

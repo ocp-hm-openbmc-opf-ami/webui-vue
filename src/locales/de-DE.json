@@ -235,6 +235,16 @@
         },
         "system-inventory":"system-inventory"
     },
+    "systemInventory":{
+        "Processor":"Processor",
+        "Memory Controller":"Memory Controller",
+        "BaseBoard":"BaseBoard",
+        "Power":"Power",
+        "Thermal":"Thermal",
+        "PCIEDevice":"PCIE Device",
+        "PCIEFunction":"PCIEFunction",
+        "Storage":"Storage"
+    },
     "pageOnDemand": {
         "onDemand":"Auf Anfrage",
         "availableCPU": "Verfügbare CPUs",
@@ -1127,8 +1137,8 @@
             "IndicatorLED": "Indicator LED",
             "Manufacture": "Manufacture",
             "PowerState": "Power State",
-            "SerialNmuber": "Serial Nmuber",
-            "PartNmuber": "Part Nmuber",
+            "SerialNumuber": "Serial Numuber",
+            "PartNumuber": "Part Numuber",
             "SystemType": "System Type",
             "AssetTag": "Asset Tag",
             "BiosVersion": "Bios Version",
@@ -1158,8 +1168,8 @@
                  "Name": "Name",
                  "CapacityMiB": "Capacity MiB",
                  "Manufacturer": "Manufacturer",
-                 "SerialNmuber": "Serial Nmuber",
-                 "PartNmuber": "Part Nmuber",
+                 "SerialNumuber": "Serial Numuber",
+                 "PartNumuber": "Part Numuber",
                  "State": "State",
                  "OperatingSpeedMhz": "OperatingSpeed Mhz",
                  "MemoryType": "Memory Type",
@@ -1173,7 +1183,7 @@
                 "BaseBoardInfo":"BaseBoard Info",
                 "Name": "Name",
                 "Description": "Description",
-                "FrmwareVersion": "Frmware Version",
+                "FirmwareVersion": "Firmware Version",
                 "Model": "Model",
                 "State": "State",
                 "PowerState": "Power State"
@@ -1190,6 +1200,15 @@
                 "PermanentMACAddress": "Permanent MAC Address",
                 "State": "State"
             },
+            "NetworkInterfaceIPv6": 
+                {
+                    "NetworkInterfaceIPv6Info": "IPv6 Addresses Info",
+                    "Address": "Address",
+                    "PrefixLength": "PrefixLength",
+                    "AddressOrigin": "AddressOrigin",
+                    "Index": "Index",
+                    "Name": "Name"
+                },
             "Power": 
                 {
                 "Power":"Power",
@@ -1259,7 +1278,7 @@
                 "Manufacturer": "Manufacturer",
                 "AssetTag": "AssetTag",
                 "DeviceType": "DeviceType",
-                "FrmwareVersion": "FrmwareVersion",
+                "FirmwareVersion": "FirmwareVersion",
                 "State": "State"
             },
             "PCIEFunction":
@@ -1286,7 +1305,7 @@
                 "StorageDriveInfo":"Storage Drive Info",
                 "Id": "Id",
                 "Name": "Name",
-                "SerialNmuber": "Serial Nmuber",
+                "SerialNumuber": "Serial Numuber",
                 "Manufacturer": "Manufacturer",
                 "Protocol": "Protocol",
                 "Model": "Model",
@@ -1300,7 +1319,7 @@
                 "StorageControllerInfo":"Storage Controller Info",
                 "MemberId": "MemberId",
                 "Name": "Name",
-                "SerialNmuber": "Serial Nmuber",
+                "SerialNumuber": "Serial Numuber",
                 "Model": "Model",
                 "FirmwareVersion": "FirmwareVersion",
                 "SpeedGbs": "SpeedGbs",
