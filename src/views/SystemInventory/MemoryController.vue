@@ -5,6 +5,7 @@
       hover
       sticky-header
       :fields="MemoryControllerFields"
+      :items="MemoryControllerTabItems"
       head-variant="light"
     ></b-table>
   </div>
@@ -32,12 +33,12 @@ export default {
           label: this.$t('pageSystemInventory.MemoryController.Manufacturer'),
         },
         {
-          key: 'SerialNmuber',
-          label: this.$t('pageSystemInventory.MemoryController.SerialNmuber'),
+          key: 'SerialNumuber',
+          label: this.$t('pageSystemInventory.MemoryController.SerialNumuber'),
         },
         {
-          key: 'PartNmuber',
-          label: this.$t('pageSystemInventory.MemoryController.PartNmuber'),
+          key: 'PartNumuber',
+          label: this.$t('pageSystemInventory.MemoryController.PartNumuber'),
         },
         {
           key: 'State',
@@ -70,16 +71,33 @@ export default {
       ],
     };
   },
+  computed: {
+    MemoryControllerInfo() {
+      return this.$store.getters['SystemStore/memoryController'];
+    },
+    MemoryControllerTabItems() {
+      // transform system tab data to table data
+      return this.MemoryControllerInfo?.map((data) => {
+        // console.log('memory', data.Manufacturer, index);
+        return {
+          Id: data.Id,
+          Name: data.Name,
+          CapacityMiB: data.CapacityMiB,
+          Manufacturer: data.Manufacturer,
+          SerialNumuber: data.SerialNumuber,
+          PartNumuber: data.PartNumuber,
+          State: data.State,
+          OperatingSpeedMhz: data.OperatingSpeedMhz,
+          MemoryType: data.MemoryType,
+          Description: data.Description,
+          AllowedSpeedsMHz: data.AllowedSpeedsMHz,
+          ServiceLabel: data.ServiceLabel,
+        };
+      });
+    },
+  },
   created() {
     this.$store.dispatch('SystemStore/getMemoryControllersInfo');
-  },
-  methods: {
-    SystemInfo() {
-      const MicroCntrollersInfo = this.$store.getters[
-        'SystemInventoryStore/getMemoryControllersInfo'
-      ];
-      console.log('MicroCntrollersInfo', MicroCntrollersInfo);
-    },
   },
 };
 </script>
