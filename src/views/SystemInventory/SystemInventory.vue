@@ -32,28 +32,46 @@
               $t('pageSystemInventory.NetworkInterfaces.NetworkInterfacesInfo')
             }}
             <network-interfaces></network-interfaces
+            >{{
+              $t(
+                'pageSystemInventory.NetworkInterfaceIPv6.NetworkInterfaceIPv6Info'
+              )
+            }}
+            <network-interface-ipv6></network-interface-ipv6
           ></b-tab>
-          <b-tab :title="$t('pageSystemInventory.Power.Power')">
+          <b-tab v-if="hideTab" :title="$t('pageSystemInventory.Power.Power')">
             {{ $t('pageSystemInventory.Power.PowerInfo')
             }}<power-control></power-control
             >{{ $t('pageSystemInventory.Voltage.VoltageControlInfo') }}
             <voltage-control></voltage-control
           ></b-tab>
-          <b-tab :title="$t('pageSystemInventory.Thermal.Thermal')">
+          <b-tab
+            v-if="hideTab"
+            :title="$t('pageSystemInventory.Thermal.Thermal')"
+          >
             {{ $t('pageSystemInventory.Thermal.FanINFO') }}
             <thermal></thermal
             >{{ $t('pageSystemInventory.temperature.temperatureInfo') }}
             <temperature></temperature>
           </b-tab>
-          <b-tab :title="$t('pageSystemInventory.PCIEDevice.PCIEDevice')">
+          <b-tab
+            v-if="hideTab"
+            :title="$t('pageSystemInventory.PCIEDevice.PCIEDevice')"
+          >
             {{ $t('pageSystemInventory.PCIEDevice.PCIEDeviceInfo')
             }}<pcie-device></pcie-device
           ></b-tab>
-          <b-tab :title="$t('pageSystemInventory.PCIEFunction.PCIEFunction')">
+          <b-tab
+            v-if="hideTab"
+            :title="$t('pageSystemInventory.PCIEFunction.PCIEFunction')"
+          >
             {{ $t('pageSystemInventory.PCIEFunction.PCIEFunctionInfo')
             }}<pcie-function></pcie-function>
           </b-tab>
-          <b-tab :title="$t('pageSystemInventory.Storage.Storage')">
+          <b-tab
+            v-if="hideTab"
+            :title="$t('pageSystemInventory.Storage.Storage')"
+          >
             {{ $t('pageSystemInventory.Storage.StorageDriveInfo') }}
             <storage-drive></storage-drive>
             {{
@@ -73,6 +91,7 @@ import Processor from './Processor.vue';
 import MemoryController from './MemoryController.vue';
 import Baseboard from './Baseboard.vue';
 import NetworkInterfaces from './NetworkInterfaces.vue';
+import NetworkInterfaceIpv6 from './NetworkInterfaceIPv6.vue';
 import PowerControl from './PowerControl.vue';
 import VoltageControl from './VoltageControl.vue';
 import Thermal from './Thermal.vue';
@@ -90,6 +109,7 @@ export default {
     MemoryController,
     Baseboard,
     NetworkInterfaces,
+    NetworkInterfaceIpv6,
     PowerControl,
     VoltageControl,
     Thermal,
@@ -102,6 +122,7 @@ export default {
   data() {
     return {
       tabIndex: 0,
+      hideTab: false,
     };
   },
 };
