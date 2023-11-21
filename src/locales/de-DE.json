@@ -155,7 +155,8 @@
         "adapter": "@:appPageTitle.adapter",
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
-        "createLogicalDevice": "@:appPageTitle.createLogicalDevice"
+        "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "backupAndRestore": "@:appPageTitle.backupAndRestore"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -200,7 +201,21 @@
         "adapter": "Adapter",
         "physicalDevice": "Physisches Gerät",
         "logicalDevice": "Logisches Gerät",
-        "createLogicalDevice": "Logisches Gerät erstellen"
+        "createLogicalDevice": "Logisches Gerät erstellen",
+        "backupAndRestore": "Sichern und Wiederherstellen"
+    },
+    "pageBackupAndRestore": {
+        "backup": "Sicherung",
+        "restore": "Wiederherstellen",
+        "authentication": "Authentifizierung",
+        "ipmi": "IPMI",
+        "kvm": "KVM",
+        "network": "Netzwerk",
+        "ntp": "NTP",
+        "snmp": "SNMP",
+        "sysLog": "Syslog",
+        "uploadRestoreFiles": "Laden Sie Wiederherstellungsdateien hoch",
+        "checkAll": "Alle Backup Eigenschaften aktivieren/deaktivieren"
     },
     "pageOnDemand": {
         "onDemand":"Auf Anfrage",

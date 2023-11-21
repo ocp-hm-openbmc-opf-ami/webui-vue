@@ -155,7 +155,8 @@
         "adapter": "@:appPageTitle.adapter",
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
-        "createLogicalDevice": "@:appPageTitle.createLogicalDevice"
+        "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "backupAndRestore": "@:appPageTitle.backupAndRestore"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -200,7 +201,21 @@
         "adapter": "适配器",
         "physicalDevice": "物理设备",
         "logicalDevice": "逻辑设备",
-        "createLogicalDevice": "创建逻辑设备"
+        "createLogicalDevice": "创建逻辑设备",
+        "backupAndRestore": "备份还原"
+    },
+    "pageBackupAndRestore": {
+        "backup": "备份",
+        "restore": "恢复",
+        "authentication": "验证",
+        "ipmi": "IPMI",
+        "kvm": "KVM",
+        "network": "网络",
+        "ntp": "NTP",
+        "snmp": "SNMP",
+        "sysLog": "系统日志",
+        "uploadRestoreFiles": "上传恢复文件",
+        "checkAll": "启用/禁用所有备份属性"
     },
     "pageOnDemand": {
         "onDemand":"一经请求",

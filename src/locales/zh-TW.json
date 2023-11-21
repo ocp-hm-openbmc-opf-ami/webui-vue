@@ -155,7 +155,8 @@
         "adapter": "@:appPageTitle.adapter",
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
-        "createLogicalDevice": "@:appPageTitle.createLogicalDevice"
+        "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "backupAndRestore": "@:appPageTitle.backupAndRestore"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -200,7 +201,21 @@
         "adapter": "適配器",
         "physicalDevice": "物理設備",
         "logicalDevice": "邏輯設備",
-        "createLogicalDevice": "創建邏輯設備"
+        "createLogicalDevice": "創建邏輯設備",
+        "backupAndRestore": "備份還原"
+    },
+    "pageBackupAndRestore": {
+        "backup": "備份",
+        "restore": "恢復",
+        "authentication": "驗證",
+        "ipmi": "IPMI",
+        "kvm": "KVM",
+        "network": "網路",
+        "ntp": "NTP",
+        "snmp": "SNMP",
+        "sysLog": "系統日誌",
+        "uploadRestoreFiles": "上傳恢復文件",
+        "checkAll": "啟用/停用所有備份屬性"
     },
     "pageOnDemand": {
         "onDemand":"一經請求",
