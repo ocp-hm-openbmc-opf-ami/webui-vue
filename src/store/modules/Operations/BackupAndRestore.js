@@ -68,21 +68,29 @@ const BackupAndRestore = {
         .then(dispatch('getBackupConfig'));
     },
     async getBackupConfig({ commit }) {
-      return await api.get('/redfish/v1/Managers/bmc').then((response) => {
-        commit(
-          'setAuthentication',
-          response.data.Oem.Ami?.SelectedBackupFeatures?.Authentication
-        );
-        commit('setIPMI', response.data.Oem.Ami?.SelectedBackupFeatures?.IPMI);
-        commit('setKvm', response.data.Oem.Ami?.SelectedBackupFeatures?.KVM);
-        commit(
-          'setNetwork',
-          response.data.Oem.Ami?.SelectedBackupFeatures?.Network
-        );
-        commit('setSnmp', response.data.Oem.Ami?.SelectedBackupFeatures?.SNMP);
-        commit('setNtp', response.data.Oem.Ami?.SelectedBackupFeatures?.NTP);
-      })
-      .catch((error) => console.log(error));
+      return await api
+        .get('/redfish/v1/Managers/bmc')
+        .then((response) => {
+          commit(
+            'setAuthentication',
+            response.data.Oem.Ami?.SelectedBackupFeatures?.Authentication
+          );
+          commit(
+            'setIPMI',
+            response.data.Oem.Ami?.SelectedBackupFeatures?.IPMI
+          );
+          commit('setKvm', response.data.Oem.Ami?.SelectedBackupFeatures?.KVM);
+          commit(
+            'setNetwork',
+            response.data.Oem.Ami?.SelectedBackupFeatures?.Network
+          );
+          commit(
+            'setSnmp',
+            response.data.Oem.Ami?.SelectedBackupFeatures?.SNMP
+          );
+          commit('setNtp', response.data.Oem.Ami?.SelectedBackupFeatures?.NTP);
+        })
+        .catch((error) => console.log(error));
     },
   },
 };
