@@ -2,11 +2,134 @@
   <b-container fluid="xl">
     <div class="form-background p-5">
       <b-row>
+        <b-col md="9" lg="8" xl="9">
+          <b-form-group :label="$t('pageBackupAndRestore.checkAll')">
+            <b-form-checkbox
+              v-model="checkAll"
+              data-test-id="checkAllBackup"
+              switch
+            >
+              <span v-if="checkAll">{{ $t('global.status.enabled') }}</span>
+              <span v-else>{{ $t('global.status.disabled') }}</span>
+            </b-form-checkbox>
+          </b-form-group>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col class="d-flex" cols="2">
+          <dl class="mr-3 w-10">
+            <dd class="font_style">
+              {{ $t('pageBackupAndRestore.authentication') }}
+            </dd>
+          </dl>
+        </b-col>
         <b-col cols="10">
-          <b-form-checkbox id="asdServer" switch>
-            <span> Disable </span>
-            <!-- <span v-else>{{ $t('global.status.disabled') }}</span> -->
+          <b-form-checkbox id="Authentication" v-model="Authentication" switch>
+            <span v-if="Authentication">{{ $t('global.status.enabled') }}</span>
+            <span v-else>{{ $t('global.status.disabled') }}</span>
           </b-form-checkbox>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col class="d-flex" cols="2">
+          <dl class="mr-3 w-10">
+            <dd class="font_style">
+              {{ $t('pageBackupAndRestore.kvm') }}
+            </dd>
+          </dl>
+        </b-col>
+        <b-col cols="10">
+          <b-form-checkbox id="kvm" v-model="KVM" switch>
+            <span v-if="KVM">{{ $t('global.status.enabled') }}</span>
+            <span v-else>{{ $t('global.status.disabled') }}</span>
+          </b-form-checkbox>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col class="d-flex" cols="2">
+          <dl class="mr-3 w-10">
+            <dd class="font_style">
+              {{ $t('pageBackupAndRestore.ipmi') }}
+            </dd>
+          </dl>
+        </b-col>
+        <b-col cols="10">
+          <b-form-checkbox id="ipmi" v-model="IPMI" switch>
+            <span v-if="IPMI">{{ $t('global.status.enabled') }}</span>
+            <span v-else>{{ $t('global.status.disabled') }}</span>
+          </b-form-checkbox>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col class="d-flex" cols="2">
+          <dl class="mr-3 w-10">
+            <dd class="font_style">
+              {{ $t('pageBackupAndRestore.network') }}
+            </dd>
+          </dl>
+        </b-col>
+        <b-col cols="10">
+          <b-form-checkbox id="network" v-model="Network" switch>
+            <span v-if="Network">{{ $t('global.status.enabled') }}</span>
+            <span v-else>{{ $t('global.status.disabled') }}</span>
+          </b-form-checkbox>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col class="d-flex" cols="2">
+          <dl class="mr-3 w-10">
+            <dd class="font_style">
+              {{ $t('pageBackupAndRestore.ntp') }}
+            </dd>
+          </dl>
+        </b-col>
+        <b-col cols="10">
+          <b-form-checkbox id="ntp" v-model="NTP" switch>
+            <span v-if="NTP">{{ $t('global.status.enabled') }}</span>
+            <span v-else>{{ $t('global.status.disabled') }}</span>
+          </b-form-checkbox>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col class="d-flex" cols="2">
+          <dl class="mr-3 w-10">
+            <dd class="font_style">
+              {{ $t('pageBackupAndRestore.snmp') }}
+            </dd>
+          </dl>
+        </b-col>
+        <b-col cols="10">
+          <b-form-checkbox id="snmp" v-model="SNMP" switch>
+            <span v-if="SNMP">{{ $t('global.status.enabled') }}</span>
+            <span v-else>{{ $t('global.status.disabled') }}</span>
+          </b-form-checkbox>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col class="d-flex" cols="2">
+          <dl class="mr-3 w-10">
+            <dd class="font_style">
+              {{ $t('pageBackupAndRestore.sysLog') }}
+            </dd>
+          </dl>
+        </b-col>
+        <b-col cols="10">
+          <b-form-checkbox id="sysLog" v-model="SysLog" switch>
+            <span v-if="SysLog">{{ $t('global.status.enabled') }}</span>
+            <span v-else>{{ $t('global.status.disabled') }}</span>
+          </b-form-checkbox>
+        </b-col>
+      </b-row>
+      <b-row class="mt-4 mb-5">
+        <b-col>
+          <b-button
+            class="mt-2"
+            type="submit"
+            variant="primary"
+            @click="handleSubmit"
+            ><icon-download />
+            {{ $t('global.action.download') }}
+          </b-button>
         </b-col>
       </b-row>
     </div>
@@ -15,10 +138,14 @@
 
 <script>
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
-
+import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import IconDownload from '@carbon/icons-vue/es/document--download/20';
+import { saveAs } from 'file-saver';
+import { mapState } from 'vuex';
 export default {
   name: 'Backup',
-  mixins: [BVToastMixin],
+  components: { IconDownload },
+  mixins: [BVToastMixin, LoadingBarMixin],
   props: {
     tabIndex: {
       type: Number,
@@ -26,8 +153,107 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      Authentication: this.$store.getters['backupAndRestore/authentication'],
+      backupFile: {},
+      filename: 'myData.txt',
+      KVM: this.$store.getters['backupAndRestore/kvm'],
+      IPMI: this.$store.getters['backupAndRestore/ipmi'],
+      Network: this.$store.getters['backupAndRestore/network'],
+      NTP: this.$store.getters['backupAndRestore/ntp'],
+      SNMP: this.$store.getters['backupAndRestore/snmp'],
+      SysLog: this.$store.getters['backupAndRestore/sysLog'],
+      checkAll: false,
+    };
   },
-  methods: {},
+  computed: {
+    ...mapState('backupAndRestore', [
+      'authentication',
+      'ipmi',
+      'kvm',
+      'network',
+      'ntp',
+      'snmp',
+      'sysLog',
+    ]),
+  },
+  watch: {
+    authentication: function (value) {
+      this.Authentication = value;
+    },
+    ipmi: function (value) {
+      this.IPMI = value;
+    },
+    kvm: function (value) {
+      this.KVM = value;
+    },
+    network: function (value) {
+      this.Network = value;
+    },
+    ntp: function (value) {
+      this.NTP = value;
+    },
+    snmp: function (value) {
+      this.SNMP = value;
+    },
+    sysLog: function (value) {
+      this.SysLog = value;
+    },
+    checkAll(newValue) {
+      this.Authentication = newValue;
+      this.KVM = newValue;
+      this.IPMI = newValue;
+      this.Network = newValue;
+      this.NTP = newValue;
+      this.SNMP = newValue;
+      this.SysLog = newValue;
+    },
+  },
+  created() {
+    this.startLoader();
+    this.$store
+      .dispatch('backupAndRestore/getBackupConfig')
+      .finally(() => this.endLoader());
+  },
+  methods: {
+    handleSubmit() {
+      let data = [];
+      if (this.Authentication) {
+        data.push('Authentication');
+      }
+      if (this.KVM) {
+        data.push('KVM');
+      }
+      if (this.IPMI) {
+        data.push('IPMI');
+      }
+      if (this.Network) {
+        data.push('Network');
+      }
+      if (this.NTP) {
+        data.push('NTP');
+      }
+      if (this.SNMP) {
+        data.push('SNMP');
+      }
+      if (this.SysLog) {
+        data.push('Syslog');
+      }
+      this.$store
+        .dispatch('backupAndRestore/updateBackup', data)
+        .then((response) => {
+          this.backupFile = response.data;
+          if (this.backupFile !== null || '') {
+            let fileToSave = new Blob([this.backupFile], {
+              type: 'text/plain',
+            });
+            saveAs(fileToSave, this.fileName);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
 };
 </script>

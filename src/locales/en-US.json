@@ -206,7 +206,16 @@
     },
     "pageBackupAndRestore": {
         "backup": "Backup",
-        "restore": "Restore"
+        "restore": "Restore",
+        "authentication": "Authentication",
+        "ipmi": "IPMI",
+        "kvm": "KVM",
+        "network": "Network",
+        "ntp": "NTP",
+        "snmp": "SNMP",
+        "sysLog": "Syslog",
+        "uploadRestoreFiles": "Upload Restore Files",
+        "checkAll": "Enable/Disable all Backup Properties"
     },
     "pageOnDemand": {
         "onDemand":"OnDemand",
