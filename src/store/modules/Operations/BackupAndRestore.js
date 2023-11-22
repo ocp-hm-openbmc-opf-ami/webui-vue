@@ -1,4 +1,5 @@
 import api from '@/store/api';
+import i18n from '@/i18n';
 
 const BackupAndRestore = {
   namespaced: true,
@@ -11,7 +12,7 @@ const BackupAndRestore = {
     ntp: null,
     snmp: null,
     sysLog: null,
-    backupFile: [],
+    backupFile: {},
   },
   getters: {
     BackupDatas(state) {
@@ -56,7 +57,7 @@ const BackupAndRestore = {
     },
   },
   actions: {
-    async updateBackup({ dispatch }, authentication) {
+    async updateBackup({ dispatch, commit }, authentication) {
       const data = {
         BackupFeatures: authentication,
       };
@@ -65,7 +66,17 @@ const BackupAndRestore = {
           '/redfish/v1/Managers/bmc/Actions/Oem/AMIManager.BackupConfig',
           data
         )
-        .then(dispatch('getBackupConfig'));
+        .then((response) => {
+          commit('setBackupFile', response.data);
+        })
+        .then(() => dispatch('getBackupConfig'))
+        .then(() => {
+          return i18n.t('pageBackupAndRestore.toast.successMessage');
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(i18n.t('pageBackupAndRestore.toast.errorMessage'));
+        });
     },
     async getBackupConfig({ commit }) {
       return await api
@@ -90,7 +101,37 @@ const BackupAndRestore = {
           );
           commit('setNtp', response.data.Oem.Ami?.SelectedBackupFeatures?.NTP);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          throw new Error(
+            i18n.t('pageBackupAndRestore.toast.errorGettingBackupDetails')
+          );
+        });
+    },
+    async uploadRestoreFiles(_, uploadRestoreFiles) {
+      let uploadData = new FormData();
+      uploadData.append('conf_file', uploadRestoreFiles);
+      const config = {
+        headers: {
+          Authorization: 'Basic cm9vdDowcGVuQm1j',
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+      return await api
+        .post(
+          'redfish/v1/Managers/bmc/Actions/Oem/AMIManager.RestoreConfig',
+          uploadData,
+          config
+        )
+        .then(() => {
+          return i18n.t('pageBackupAndRestore.toast.fileUploadedSuccessfully');
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(
+            i18n.t('pageBackupAndRestore.toast.fileUploadedError')
+          );
+        });
     },
   },
 };

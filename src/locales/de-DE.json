@@ -215,7 +215,14 @@
         "snmp": "SNMP",
         "sysLog": "Syslog",
         "uploadRestoreFiles": "Laden Sie Wiederherstellungsdateien hoch",
-        "checkAll": "Alle Backup Eigenschaften aktivieren/deaktivieren"
+        "checkAll": "Alle Backup Eigenschaften aktivieren/deaktivieren",
+        "toast": {
+            "successMessage": "Die Eigenschaft BackupFeatures wurde erfolgreich heruntergeladen",
+            "errorMessage": "Die Eigenschaft BackupFeatures ist nicht in der Liste der zulässigen Werte enthalten",
+            "fileUploadedSuccessfully": "Die Wiederherstellungsdatei wurde erfolgreich hochgeladen ",
+            "fileUploadedError": "Fehler beim Hochladen der Wiederherstellungsdatei",
+            "errorGettingBackupDetails": "Fehler beim Abrufen der Eigenschaft BackupFeatures"
+        }
     },
     "pageOnDemand": {
         "onDemand":"Auf Anfrage",

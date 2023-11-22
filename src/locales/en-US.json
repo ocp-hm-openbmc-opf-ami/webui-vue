@@ -215,7 +215,14 @@
         "snmp": "SNMP",
         "sysLog": "Syslog",
         "uploadRestoreFiles": "Upload Restore Files",
-        "checkAll": "Enable/Disable all Backup Properties"
+        "checkAll": "Enable/Disable all Backup Properties",
+        "toast": {
+            "successMessage": "Successfully Downloaded the property BackupFeatures",
+            "errorMessage": "The property BackupFeatures is not in the list of acceptable values",
+            "fileUploadedSuccessfully": "Successfully Uploaded the Restore File ",
+            "fileUploadedError": "Error Uploading the Restore File",
+            "errorGettingBackupDetails": "Error in getting the property BackupFeatures"
+        }
     },
     "pageOnDemand": {
         "onDemand":"OnDemand",

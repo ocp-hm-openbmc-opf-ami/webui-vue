@@ -45,7 +45,7 @@
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row>
+      <b-row v-if="hide">
         <b-col class="d-flex" cols="2">
           <dl class="mr-3 w-10">
             <dd class="font_style">
@@ -75,7 +75,7 @@
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row>
+      <b-row v-if="hide">
         <b-col class="d-flex" cols="2">
           <dl class="mr-3 w-10">
             <dd class="font_style">
@@ -90,7 +90,7 @@
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row>
+      <b-row v-if="hide">
         <b-col class="d-flex" cols="2">
           <dl class="mr-3 w-10">
             <dd class="font_style">
@@ -105,7 +105,7 @@
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row>
+      <b-row v-if="hide">
         <b-col class="d-flex" cols="2">
           <dl class="mr-3 w-10">
             <dd class="font_style">
@@ -155,8 +155,8 @@ export default {
   data() {
     return {
       Authentication: this.$store.getters['backupAndRestore/authentication'],
-      backupFile: {},
-      filename: 'myData.txt',
+      BackupFile: this.$store.getters['backupAndRestore/backupFile'],
+      fileName: 'bmc-config.tar',
       KVM: this.$store.getters['backupAndRestore/kvm'],
       IPMI: this.$store.getters['backupAndRestore/ipmi'],
       Network: this.$store.getters['backupAndRestore/network'],
@@ -164,6 +164,7 @@ export default {
       SNMP: this.$store.getters['backupAndRestore/snmp'],
       SysLog: this.$store.getters['backupAndRestore/sysLog'],
       checkAll: false,
+      hide: false,
     };
   },
   computed: {
@@ -175,6 +176,7 @@ export default {
       'ntp',
       'snmp',
       'sysLog',
+      'backupFile',
     ]),
   },
   watch: {
@@ -199,24 +201,25 @@ export default {
     sysLog: function (value) {
       this.SysLog = value;
     },
+    backupFile: function (value) {
+      this.BackupFile = value;
+    },
     checkAll(newValue) {
       this.Authentication = newValue;
       this.KVM = newValue;
-      this.IPMI = newValue;
       this.Network = newValue;
-      this.NTP = newValue;
-      this.SNMP = newValue;
-      this.SysLog = newValue;
     },
   },
   created() {
     this.startLoader();
     this.$store
       .dispatch('backupAndRestore/getBackupConfig')
+      .catch(({ message }) => this.errorToast(message))
       .finally(() => this.endLoader());
   },
   methods: {
     handleSubmit() {
+      this.startLoader();
       let data = [];
       if (this.Authentication) {
         data.push('Authentication');
@@ -241,18 +244,17 @@ export default {
       }
       this.$store
         .dispatch('backupAndRestore/updateBackup', data)
-        .then((response) => {
-          this.backupFile = response.data;
-          if (this.backupFile !== null || '') {
-            let fileToSave = new Blob([this.backupFile], {
-              type: 'text/plain',
+        .then((success) => {
+          if (success) {
+            this.successToast(success);
+            let fileToSave = new Blob([this.BackupFile], {
+              type: 'conf',
             });
             saveAs(fileToSave, this.fileName);
           }
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => this.endLoader());
     },
   },
 };

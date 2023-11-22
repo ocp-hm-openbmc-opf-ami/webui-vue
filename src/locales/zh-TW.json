@@ -215,7 +215,14 @@
         "snmp": "SNMP",
         "sysLog": "系統日誌",
         "uploadRestoreFiles": "上傳恢復文件",
-        "checkAll": "啟用/停用所有備份屬性"
+        "checkAll": "啟用/停用所有備份屬性",
+        "toast": {
+            "successMessage": "已成功下載屬性備份功能",
+            "errorMessage": "屬性「備份功能」不在可接受值清單中",
+            "fileUploadedSuccessfully": "恢復檔案上傳成功 ",
+            "fileUploadedError": "上傳恢復檔案時發生錯誤",
+            "errorGettingBackupDetails": "取得屬性備份功能時發生錯誤"
+        }
     },
     "pageOnDemand": {
         "onDemand":"一經請求",
