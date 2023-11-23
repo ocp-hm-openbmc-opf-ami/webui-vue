@@ -113,7 +113,6 @@ const BackupAndRestore = {
       uploadData.append('conf_file', uploadRestoreFiles);
       const config = {
         headers: {
-          Authorization: 'Basic cm9vdDowcGVuQm1j',
           'Content-Type': 'multipart/form-data',
         },
       };

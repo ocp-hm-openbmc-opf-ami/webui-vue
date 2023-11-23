@@ -5,7 +5,7 @@
         <b-col md="9" lg="8" xl="9">
           <b-form-group :label="$t('pageBackupAndRestore.checkAll')">
             <b-form-checkbox
-              v-model="checkAll"
+              v-model="allSelected"
               data-test-id="checkAllBackup"
               switch
             >
@@ -168,6 +168,16 @@ export default {
     };
   },
   computed: {
+    allSelected: {
+      get() {
+        return this.Authentication && this.KVM && this.Network;
+      },
+      set(value) {
+        this.Authentication = value;
+        this.KVM = value;
+        this.Network = value;
+      },
+    },
     ...mapState('backupAndRestore', [
       'authentication',
       'ipmi',
@@ -204,10 +214,8 @@ export default {
     backupFile: function (value) {
       this.BackupFile = value;
     },
-    checkAll(newValue) {
-      this.Authentication = newValue;
-      this.KVM = newValue;
-      this.Network = newValue;
+    allSelected(newValue) {
+      this.checkAll = newValue;
     },
   },
   created() {
