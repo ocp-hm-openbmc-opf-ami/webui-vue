@@ -26,7 +26,8 @@
             "critical": "Kritisch",
             "create": "Erstellen",
             "success": "Erfolg",
-            "alert": "Alarm"
+            "alert": "Alarm",
+            "upload": "Hochladen"
         },
         "ariaLabel": {
             "clearSearch": "Sucheingabe löschen",
@@ -214,7 +215,7 @@
         "ntp": "NTP",
         "snmp": "SNMP",
         "sysLog": "Syslog",
-        "uploadRestoreFiles": "Laden Sie Wiederherstellungsdateien hoch",
+        "uploadRestoreFiles": "Laden Sie die Wiederherstellungsdatei hoch",
         "checkAll": "Alle Backup Eigenschaften aktivieren/deaktivieren",
         "toast": {
             "successMessage": "Die Eigenschaft BackupFeatures wurde erfolgreich heruntergeladen",

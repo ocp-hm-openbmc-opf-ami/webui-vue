@@ -26,7 +26,8 @@
             "critical": "Critical",
             "create": "Create",
             "success": "Success",
-            "alert": "Alert"
+            "alert": "Alert",
+            "upload": "Upload"
         },
         "ariaLabel": {
             "clearSearch": "Clear search input",
@@ -214,7 +215,7 @@
         "ntp": "NTP",
         "snmp": "SNMP",
         "sysLog": "Syslog",
-        "uploadRestoreFiles": "Upload Restore Files",
+        "uploadRestoreFiles": "Upload Restore File",
         "checkAll": "Enable/Disable all Backup Properties",
         "toast": {
             "successMessage": "Successfully Downloaded the property BackupFeatures",

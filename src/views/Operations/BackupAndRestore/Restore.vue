@@ -2,31 +2,33 @@
   <b-container fluid="xl">
     <div class="form-background p-5">
       <b-form @submit.prevent="onSubmitUpload">
-        <b-row>
-          <b-form-group
-            :label="$t('pageBackupAndRestore.uploadRestoreFiles')"
-            label-for="image-file"
-          >
-            <form-file
-              id="image-file"
-              v-model="file"
-              accept=".tar"
-              :state="getValidationState($v.file)"
-              aria-describedby="image-file-help-block"
-              @input="onFileUpload($event)"
+        <b-row sm="3">
+          <b-col sm="3">
+            <b-form-group
+              :label="$t('pageBackupAndRestore.uploadRestoreFiles')"
+              label-for="image-file"
             >
-              <template #invalid>
-                <b-form-invalid-feedback role="alert">
-                  {{ $t('global.form.required') }}
-                </b-form-invalid-feedback>
-              </template>
-            </form-file>
-          </b-form-group>
-        </b-row>
-        <b-row>
-          <b-button class="mt-1" type="submit" variant="primary">
-            {{ $t('global.action.save') }}
-          </b-button>
+              <form-file
+                id="image-file"
+                v-model="file"
+                accept=".tar"
+                :state="getValidationState($v.file)"
+                aria-describedby="image-file-help-block"
+                @input="onFileUpload($event)"
+              >
+                <template #invalid>
+                  <b-form-invalid-feedback role="alert">
+                    {{ $t('global.form.required') }}
+                  </b-form-invalid-feedback>
+                </template>
+              </form-file>
+            </b-form-group>
+          </b-col>
+          <b-col sm="3">
+            <b-button class="btn-margin" type="submit" variant="primary">
+              {{ $t('global.action.upload') }}
+            </b-button>
+          </b-col>
         </b-row>
       </b-form>
     </div>
@@ -88,3 +90,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.btn-margin {
+  margin-top: 27px;
+}
+</style>
