@@ -3,12 +3,16 @@
     <div class="form-background p-5">
       <b-form @submit.prevent="onSubmitUpload">
         <b-row sm="3">
-          <b-col sm="3">
+          <b-col sm="4">
             <b-form-group
               :label="$t('pageBackupAndRestore.uploadRestoreFiles')"
               label-for="image-file"
             >
+              <b-form-text id="username-help-block">
+                {{ $t('pageBackupAndRestore.tarFileOnly') }}
+              </b-form-text>
               <form-file
+                ref="formFile"
                 id="image-file"
                 v-model="file"
                 accept=".tar"
@@ -25,7 +29,7 @@
             </b-form-group>
           </b-col>
           <b-col sm="3">
-            <b-button class="btn-margin" type="submit" variant="primary">
+            <b-button class="upload-button" type="submit" variant="primary">
               {{ $t('global.action.upload') }}
             </b-button>
           </b-col>
@@ -75,10 +79,13 @@ export default {
         .dispatch('backupAndRestore/uploadRestoreFiles', this.file)
         .then((message) => {
           this.successToast(message);
+          this.clearFile();
         })
-        .catch(({ message }) => this.errorToast(message))
+        .catch(({ message }) => {
+          this.errorToast(message);
+          this.clearFile();
+        })
         .finally(() => {
-          this.file = null;
           this.reset();
           this.endLoader();
         });
@@ -87,11 +94,17 @@ export default {
       this.file = null;
       this.$v.$reset();
     },
+    clearFile() {
+      const formFileComponent = this.$refs.formFile;
+      if (formFileComponent) {
+        formFileComponent.clearSelectedFile();
+      }
+    },
   },
 };
 </script>
 <style scoped>
-.btn-margin {
-  margin-top: 27px;
+.upload-button {
+  margin-top: 54px;
 }
 </style>

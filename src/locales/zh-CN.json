@@ -217,6 +217,7 @@
         "sysLog": "系统日志",
         "uploadRestoreFiles": "上传恢复文件",
         "checkAll": "启用/禁用所有备份属性",
+        "tarFileOnly": "仅上传恢复 (.tar) 文件",
         "toast": {
             "successMessage": "已成功下载属性备份功能",
             "errorMessage": "属性“备份功能”不在可接受值列表中",

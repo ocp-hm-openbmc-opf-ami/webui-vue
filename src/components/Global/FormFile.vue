@@ -78,6 +78,11 @@ export default {
       return this.variant === 'secondary';
     },
   },
+  methods: {
+    clearSelectedFile() {
+      this.file = null;
+    },
+  },
 };
 </script>
 

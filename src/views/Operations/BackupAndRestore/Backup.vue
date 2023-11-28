@@ -256,7 +256,7 @@ export default {
           if (success) {
             this.successToast(success);
             let fileToSave = new Blob([this.BackupFile], {
-              type: 'conf',
+              type: 'application/x-tar',
             });
             saveAs(fileToSave, this.fileName);
           }

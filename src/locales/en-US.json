@@ -217,6 +217,7 @@
         "sysLog": "Syslog",
         "uploadRestoreFiles": "Upload Restore File",
         "checkAll": "Enable/Disable all Backup Properties",
+        "tarFileOnly": "Upload Restore (.tar) files only",
         "toast": {
             "successMessage": "Successfully Downloaded the property BackupFeatures",
             "errorMessage": "The property BackupFeatures is not in the list of acceptable values",

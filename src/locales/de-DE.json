@@ -217,6 +217,7 @@
         "sysLog": "Syslog",
         "uploadRestoreFiles": "Laden Sie die Wiederherstellungsdatei hoch",
         "checkAll": "Alle Backup Eigenschaften aktivieren/deaktivieren",
+        "tarFileOnly": "Laden Sie nur Wiederherstellungsdateien (.tar) hoch",
         "toast": {
             "successMessage": "Die Eigenschaft BackupFeatures wurde erfolgreich heruntergeladen",
             "errorMessage": "Die Eigenschaft BackupFeatures ist nicht in der Liste der zulässigen Werte enthalten",
