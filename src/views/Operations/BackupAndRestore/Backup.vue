@@ -173,9 +173,20 @@ export default {
         return this.Authentication && this.KVM && this.Network;
       },
       set(value) {
-        this.Authentication = value;
-        this.KVM = value;
-        this.Network = value;
+        this.checkAll = value;
+        if (value) {
+          this.Authentication = value;
+          this.KVM = value;
+          this.Network = value;
+        } else {
+          if (!(this.Authentication && this.KVM && this.Network)) {
+            this.checkAll = false;
+          } else {
+            this.Authentication = value;
+            this.KVM = value;
+            this.Network = value;
+          }
+        }
       },
     },
     ...mapState('backupAndRestore', [
@@ -214,8 +225,20 @@ export default {
     backupFile: function (value) {
       this.BackupFile = value;
     },
-    allSelected(newValue) {
-      this.checkAll = newValue;
+    Authentication(value) {
+      if (!value) {
+        this.checkAll = false;
+      }
+    },
+    KVM(value) {
+      if (!value) {
+        this.checkAll = false;
+      }
+    },
+    Network(value) {
+      if (!value) {
+        this.checkAll = false;
+      }
     },
   },
   created() {
