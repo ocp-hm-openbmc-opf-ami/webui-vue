@@ -257,13 +257,32 @@
     },
     "pageNic": {
         "currentTemperature": "当前温度",
-        "manufacturerId": "制造商 ID",
-        "vendorId": "供应商 ID",
-        "deviceId": "设备 ID",
-        "NCSIVersion": "NCSI版本",
-        "health": "健康",
+        "channelCount": "通道数",
+        "vendorId": "供应商ID",
+        "deviceId": "设备ID",
+        "linkStatus": "链接状态",
         "firmwareName": "固件名称",
-        "firmwareVersion": "固件版本"
+        "firmwareVersion": "固件版本",
+        "flowControlConfiguration": "流量控制配置",
+        "signalDetected": "检测到信号",
+        "physicalPortNumber": "物理端口号",
+        "health": "健康",
+        "getBootConfigProperties": "引导配置属性",
+        "getNCCapabilitiesAndSettings": "网络控制器功能和设置",
+        "getPFAssignmentProperties": "PF 分配属性",
+        "getPackageStatus": "包裹状态",
+        "getPartitionStatisticsProperties": "分区统计属性",
+        "getPortConfigurationProperties": "端口配置属性",
+        "macAddressCount": "MAC地址计数",
+        "MCTP_over_PCIE_EID": "MCTP_over_PCIE_EID",
+        "MCTP_over_SMBUS_EID": "MCTP_over_SMBUS_EID",
+        "manufacturerId": "制造商 Id",
+        "NCSIVersion": "NCSI版本",
+        "OEMMacAddress": "OEM Mac 地址",
+        "noInformationAvailable":"NIC 信息不可用",
+        "headers": {
+            "MacAddress":"MAC地址"
+        }
     },
     "pageNvmeInformation": {
         "nvmeSolidStateDrive": "NVMe 固体状态驱动状态",

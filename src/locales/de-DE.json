@@ -257,13 +257,32 @@
     },
     "pageNic": {
         "currentTemperature": "Aktuelle Temperatur",
-        "manufacturerId": "Hersteller ID",
+        "channelCount": "Kanalanzahl",
         "vendorId": "Hersteller ID",
         "deviceId": "Geräte ID",
-        "NCSIVersion": "NCSI Version",
-        "health": "Gesundheit",
+        "linkStatus": "Link Status",
         "firmwareName": "Firmware Name",
-        "firmwareVersion": "Firmware version"
+        "firmwareVersion": "Firmware version",
+        "flowControlConfiguration": "Konfiguration der Flusskontrolle",
+        "signalDetected": "Signal erkannt",
+        "physicalPortNumber": "Physische Portnummer",
+        "health": "Gesundheit",
+        "getBootConfigProperties": "Boot Konfigurationseigenschaften",
+        "getNCCapabilitiesAndSettings": "Funktionen und Einstellungen des Netzwerkcontrollers",
+        "getPFAssignmentProperties": "PF Zuweisungseigenschaften",
+        "getPackageStatus": "Paket Status",
+        "getPartitionStatisticsProperties": "Eigenschaften der Partitionsstatistik",
+        "getPortConfigurationProperties": "Eigenschaften der Portkonfiguration",
+        "macAddressCount": "Anzahl der MAC-Adressen",
+        "MCTP_over_PCIE_EID": "MCTP_over_PCIE_EID",
+        "MCTP_over_SMBUS_EID": "MCTP_over_SMBUS_EID",
+        "manufacturerId": "Hersteller Id",
+        "NCSIVersion": "NCSI Version",
+        "OEMMacAddress": "OEM Mac Address",
+        "noInformationAvailable":"NIC Informationen nicht verfügbar",
+        "headers": {
+            "MacAddress":"MAC-Adresse"
+        }
     },
     "pageNvmeInformation": {
         "nvmeSolidStateDrive": "NVMe Solid State Laufwerksstatus",

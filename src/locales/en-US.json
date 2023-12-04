@@ -257,13 +257,32 @@
     },
     "pageNic": {
         "currentTemperature": "Current Temperature",
-        "manufacturerId": "Manufacturer ID",
+        "channelCount": "Channel Count",
         "vendorId": "Vendor ID",
         "deviceId": "Device ID",
-        "NCSIVersion": "NCSI Version",
-        "health": "Health",
+        "linkStatus": "Link Status",
         "firmwareName": "Firmware Name",
-        "firmwareVersion": "Firmware version"
+        "firmwareVersion": "Firmware version",
+        "flowControlConfiguration": "Flow Control Configuration",
+        "signalDetected": "Signal Detected",
+        "physicalPortNumber": "Physical Port Number",
+        "health": "Health",
+        "getBootConfigProperties": "Boot Config Properties",
+        "getNCCapabilitiesAndSettings": "Network Controller Capabilities And Settings",
+        "getPFAssignmentProperties": "PF Assignment Properties",
+        "getPackageStatus": "Package Status",
+        "getPartitionStatisticsProperties": "Partition Statistics Properties",
+        "getPortConfigurationProperties": "Port Configuration Properties",
+        "macAddressCount": "MACAddress Count",
+        "MCTP_over_PCIE_EID": "MCTP_over_PCIE_EID",
+        "MCTP_over_SMBUS_EID": "MCTP_over_SMBUS_EID",
+        "manufacturerId": "Manufacturer Id",
+        "NCSIVersion": "NCSI Version",
+        "OEMMacAddress": "OEM Mac Address",
+        "noInformationAvailable":"NIC informations not available",
+        "headers": {
+            "MacAddress":"MACAddress"
+        }
     },
     "pageNvmeInformation": {
         "nvmeSolidStateDrive": "NVMe Solid State Drive State",

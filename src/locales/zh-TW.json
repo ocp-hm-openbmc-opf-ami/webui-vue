@@ -257,13 +257,32 @@
     },
     "pageNic": {
         "currentTemperature": "目前溫度",
-        "manufacturerId": "製造商 ID",
-        "vendorId": "供應商 ID",
-        "deviceId": "設備 ID",
-        "NCSIVersion": "NCSI版本",
-        "health": "健康",
+        "channelCount": "頻道數",
+        "vendorId": "供應商ID",
+        "deviceId": "設備ID",
+        "linkStatus": "連結狀態",
         "firmwareName": "韌體名稱",
-        "firmwareVersion": "韌體版本"
+        "firmwareVersion": "韌體版本",
+        "flowControlConfiguration": "流量控製配置",
+        "signalDetected": "偵測到訊號",
+        "physicalPortNumber": "實體連接埠號",
+        "health": "健康",
+        "getBootConfigProperties": "引導配置屬性",
+        "getNCCapabilitiesAndSettings": "網路控制器功能和設定",
+        "getPFAssignmentProperties": "PF 分配屬性",
+        "getPackageStatus": "包裹狀態",
+        "getPartitionStatisticsProperties": "分區統計屬性",
+        "getPortConfigurationProperties": "連接埠配置屬性",
+        "macAddressCount": "MAC位址計數",
+        "MCTP_over_PCIE_EID": "MCTP_over_PCIE_EID",
+        "MCTP_over_SMBUS_EID": "MCTP_over_SMBUS_EID",
+        "manufacturerId": "製造商 ID",
+        "NCSIVersion": "NCSI版本",
+        "OEMMacAddress": "OEM Mac 位址",
+        "noInformationAvailable":"NIC 資訊不可用",
+        "headers": {
+            "MacAddress":"MAC位址"
+        }
     },
     "pageNvmeInformation": {
         "nvmeSolidStateDrive": "NVMe 固體狀態驅動狀態",
