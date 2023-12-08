@@ -219,10 +219,13 @@
     "pageBsod": {
         "capturedBsod": "捕獲的 Bsod",
         "downloadBsodImage": "下載 BSOD 圖像",
+        "deleteBsodImage": "刪除 BSOD 影像",
         "lastBsodCaptured": "最後捕獲的 Bsod 屏幕.",
         "bsodImageNotAvailable": "BSOD 屏幕不可用.",
         "toast": {
-            "errorGettingBsodApi": "獲取 BSOD 圖像時出錯."
+            "errorGettingBsodApi": "獲取 BSOD 圖像時出錯.",
+            "errorDeleteBsodImage": "刪除 BSOD 影像時出錯",
+            "successDeleteBsodImage": "已成功刪除 BSOD 影像"
         }
     },
     "pageChangePassword": {

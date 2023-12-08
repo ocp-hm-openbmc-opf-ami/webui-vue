@@ -23,6 +23,17 @@ const BsodStore = {
           throw new Error(i18n.t('pageBsod.toast.errorGettingBsodApi'));
         });
     },
+    async deleteBsodImage({ dispatch }) {
+      return await api
+        .delete(`/redfish/v1/Managers/bmc/Oem/OpenBmc/Jpeg`)
+        .then(() => dispatch('getBsodImage'))
+        .then(() => i18n.t('pageBsod.toast.successDeleteBsodImage'))
+        .catch((error) => {
+          console.log(error);
+          const message = i18n.t('pageBsod.toast.errorDeleteBsodImage');
+          throw new Error(message);
+        });
+    },
   },
 };
 

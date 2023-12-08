@@ -219,10 +219,13 @@
     "pageBsod": {
         "capturedBsod": "Gefangener Bsod",
         "downloadBsodImage": "Laden Sie das BSOD-Image herunter",
+        "deleteBsodImage": "BSOD-Image löschen",
         "lastBsodCaptured": "Letzter Bsod-Bildschirm aufgenommen.",
         "bsodImageNotAvailable": "Der BSOD-Bildschirm ist nicht verfügbar.",
         "toast": {
-            "errorGettingBsodApi": "Fehler beim Abrufen des BSOD-Images."
+            "errorGettingBsodApi": "Fehler beim Abrufen des BSOD-Images.",
+            "errorDeleteBsodImage": "Fehler beim Löschen des BSOD Images",
+            "successDeleteBsodImage": "BSOD Image erfolgreich gelöscht"
         }
     },
     "pageChangePassword": {

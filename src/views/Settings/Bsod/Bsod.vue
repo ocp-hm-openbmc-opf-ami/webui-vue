@@ -23,6 +23,15 @@
         >
           {{ $t('pageBsod.downloadBsodImage') }}
         </b-button>
+        <b-button
+          v-if="base64ImageData != 'Image File is  not Created'"
+          class="ml-3"
+          variant="primary"
+          type="button"
+          @click="deleteBsodImage"
+        >
+          {{ $t('pageBsod.deleteBsodImage') }}
+        </b-button>
       </b-col>
     </b-row>
     <br />
@@ -65,6 +74,14 @@ export default {
       downloadLink.href = linkSource;
       downloadLink.download = 'BSOD_SCREEN.jpeg';
       downloadLink.click();
+    },
+    deleteBsodImage() {
+      this.startLoader();
+      this.$store
+        .dispatch('bsod/deleteBsodImage')
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => this.endLoader());
     },
   },
 };
