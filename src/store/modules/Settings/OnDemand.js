@@ -6,6 +6,7 @@ const OnDemand = {
   state: {
     Ondemand: [],
     tableVariants: [],
+    loader: null,
   },
   getters: {
     Ondemand: (state) => state.Ondemand,
@@ -17,7 +18,8 @@ const OnDemand = {
       (state.tableVariants = tableVariants),
   },
   actions: {
-    async getOnDemandData({ dispatch, commit }) {
+    async getOnDemandData({ dispatch, commit, state }) {
+      state.loader = false;
       const OnDemand = [];
       const selectOptionValue = i18n.t('pageOnDemand.all');
       const tableVariants = [selectOptionValue];
@@ -28,42 +30,48 @@ const OnDemand = {
           api.get(processorurl).then(({ data: { Members } }) => {
             if (Members.length > 0) {
               Members.forEach((cpus) => {
-                api.get(cpus['@odata.id']).then(async (response) => {
-                  const Processors = response;
-                  const MeteringFeatureUrl =
-                    response.data?.Oem?.Intel?.MeteringFeature['@odata.id'];
-                  const MeteringFeatureData = await dispatch(
-                    'getMeteringFeature',
-                    MeteringFeatureUrl
-                  );
-                  const StateFeatureUrl =
-                    response.data?.Oem?.Intel?.StateFeature['@odata.id'];
-                  const StateFeatureData = await dispatch(
-                    'getStateFeature',
-                    StateFeatureUrl
-                  );
-                  const DynamicFeatureUrl =
-                    response.data?.Oem?.Intel?.DynamicFeature['@odata.id'];
-                  const DynamicFeatureData = await dispatch(
-                    'getDynamicFeature',
-                    DynamicFeatureUrl
-                  );
-                  const ProvisionFeatureUrl =
-                    response.data?.Oem?.Intel?.ProvisionFeature['@odata.id'];
-                  const ProvisionFeatureData = await dispatch(
-                    'getProvisionFeature',
-                    ProvisionFeatureUrl
-                  );
-                  tableVariants.push(response.data.Id);
-                  Processors.Name = response.data.Id;
-                  Processors.MeteringFeature =
-                    MeteringFeatureData.FeatureStatus;
-                  Processors.StateFeature = StateFeatureData.FeatureStatus;
-                  Processors.DynamicFeature = DynamicFeatureData.FeatureStatus;
-                  Processors.ProvisionFeature =
-                    ProvisionFeatureData.FeatureStatus;
-                  OnDemand.push(Processors);
-                });
+                api
+                  .get(cpus['@odata.id'])
+                  .then(async (response) => {
+                    const Processors = response;
+                    const MeteringFeatureUrl =
+                      response.data?.Oem?.Intel?.MeteringFeature['@odata.id'];
+                    const MeteringFeatureData = await dispatch(
+                      'getMeteringFeature',
+                      MeteringFeatureUrl
+                    );
+                    const StateFeatureUrl =
+                      response.data?.Oem?.Intel?.StateFeature['@odata.id'];
+                    const StateFeatureData = await dispatch(
+                      'getStateFeature',
+                      StateFeatureUrl
+                    );
+                    const DynamicFeatureUrl =
+                      response.data?.Oem?.Intel?.DynamicFeature['@odata.id'];
+                    const DynamicFeatureData = await dispatch(
+                      'getDynamicFeature',
+                      DynamicFeatureUrl
+                    );
+                    const ProvisionFeatureUrl =
+                      response.data?.Oem?.Intel?.ProvisionFeature['@odata.id'];
+                    const ProvisionFeatureData = await dispatch(
+                      'getProvisionFeature',
+                      ProvisionFeatureUrl
+                    );
+                    tableVariants.push(response.data.Id);
+                    Processors.Name = response.data.Id;
+                    Processors.MeteringFeature =
+                      MeteringFeatureData.FeatureStatus;
+                    Processors.StateFeature = StateFeatureData.FeatureStatus;
+                    Processors.DynamicFeature =
+                      DynamicFeatureData.FeatureStatus;
+                    Processors.ProvisionFeature =
+                      ProvisionFeatureData.FeatureStatus;
+                    OnDemand.push(Processors);
+                  })
+                  .then(() => {
+                    state.loader = true;
+                  });
                 commit('setOndemand', OnDemand);
                 commit('setTableVariants', tableVariants);
               });
@@ -72,12 +80,14 @@ const OnDemand = {
                 'setOndemand',
                 i18n.t('pageOnDemand.toast.errorGettingCpus')
               );
+              state.loader = true;
             }
           });
         })
         .catch((err) => {
           commit('setOndemand', '');
           console.log(err);
+          state.loader = true;
           throw new Error(
             i18n.t('pageOnDemand.toast.errorShowingOnDemandInfo')
           );

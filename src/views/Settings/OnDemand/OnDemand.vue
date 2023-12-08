@@ -34,6 +34,7 @@
 import PageTitle from '@/components/Global/PageTitle';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
+import { mapState } from 'vuex';
 
 export default {
   name: 'OnDemand',
@@ -82,7 +83,6 @@ export default {
           };
         });
       } else {
-        console.log('onDemandData', onDemandData);
         if (onDemandData != '') {
           this.errorToast(onDemandData);
           return [];
@@ -97,13 +97,20 @@ export default {
         return this.$store.getters['ondemand/tableVariants'];
       }
     },
+    ...mapState('ondemand', ['loader']),
+  },
+  watch: {
+    loader() {
+      if (this.loader) {
+        this.endLoader();
+      }
+    },
   },
   created() {
     this.startLoader();
     this.$store
       .dispatch('ondemand/getOnDemandData')
       .finally(() => {
-        this.endLoader();
         this.isBusy = false;
       })
       .catch(({ message }) => this.errorToast(message));
@@ -114,8 +121,7 @@ export default {
       if (this.tableVariantState === this.$t('pageOnDemand.all')) {
         this.$store
           .dispatch('ondemand/getOnDemandData')
-          .catch(({ message }) => this.errorToast(message))
-          .finally(() => this.endLoader());
+          .catch(({ message }) => this.errorToast(message));
       } else {
         this.$store
           .dispatch('ondemand/updateProcessors', this.tableVariantState)
