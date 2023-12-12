@@ -48,6 +48,8 @@
             "dateMustBeAfter": "日期必須在 %{date} 之後",
             "dateMustBeBefore": "日期必須在 %{date} 之前",
             "fieldRequired": "必要欄位",
+            "usernameRequired": "需要使用者名稱",
+            "passwordRequired": "要求輸入密碼",
             "invalidFormat": "無效的格式",
             "invalidValue": "無效的值",
             "lengthMustBeBetween": "字元長度必須在  %{min} – %{max} 之間",

@@ -53,7 +53,7 @@
               role="alert"
             >
               <template v-if="!$v.userInfo.username.required">
-                {{ $t('global.form.fieldRequired') }}
+                {{ $t('global.form.usernameRequired') }}
               </template>
             </b-form-invalid-feedback>
             <div class="mb-4"></div>
@@ -70,16 +70,16 @@
                 @input="$v.userInfo.password.$touch()"
               >
               </b-form-input>
+              <b-form-invalid-feedback
+                id="password-required"
+                class="valid"
+                role="alert"
+              >
+                <template v-if="!$v.userInfo.password.required">
+                  {{ $t('global.form.passwordRequired') }}
+                </template>
+              </b-form-invalid-feedback>
             </input-password-toggle>
-            <b-form-invalid-feedback
-              id="password-required"
-              class="valid"
-              role="alert"
-            >
-              <template v-if="!$v.userInfo.password.required">
-                {{ $t('global.form.fieldRequired') }}
-              </template>
-            </b-form-invalid-feedback>
             <div class="mb-4"></div>
             <b-form-select
               id="language"

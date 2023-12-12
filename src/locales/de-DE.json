@@ -48,6 +48,8 @@
             "dateMustBeAfter": "Das Datum muss danach liegen %{date}",
             "dateMustBeBefore": "Das Datum muss vorher liegen %{date}",
             "fieldRequired": "Pflichtfeld",
+            "usernameRequired": "Benutzername erforderlich",
+            "passwordRequired": "Passwort erforderlich",
             "invalidFormat": "Ungültiges Format",
             "invalidValue": "Ungültiger Wert",
             "lengthMustBeBetween": "Die Länge muss zwischen liegen %{min} – %{max} Figuren",

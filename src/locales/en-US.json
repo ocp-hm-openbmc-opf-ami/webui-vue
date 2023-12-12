@@ -48,6 +48,8 @@
             "dateMustBeAfter": "Date must be after %{date}",
             "dateMustBeBefore": "Date must be before %{date}",
             "fieldRequired": "Field required",
+            "usernameRequired": "Username required",
+            "passwordRequired": "Password required",
             "invalidFormat": "Invalid format",
             "invalidValue": "Invalid value",
             "lengthMustBeBetween": "Length must be between %{min} – %{max} characters",
