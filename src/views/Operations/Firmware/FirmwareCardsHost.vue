@@ -49,7 +49,11 @@ export default {
       return this.$store.getters['firmware/backupHostFirmware'];
     },
     runningVersion() {
-      return this.running?.version || '--';
+      if (this.running?.version === 'NA') {
+        return '--';
+      } else {
+        return this.running?.version || '--';
+      }
     },
     backupVersion() {
       return this.backup?.version || '--';

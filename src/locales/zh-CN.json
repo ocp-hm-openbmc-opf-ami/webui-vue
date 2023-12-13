@@ -524,6 +524,8 @@
         }
     },
     "PageFactoryDefault": {
+        "FactoryDefaultPartialDescription": "BMC 将重新启动，启动至 BMC 控制台后，所有配置的数据将被保留.",
+        "FactoryDefaultFullDescription": "BMC 将重新启动，启动到 BMC 控制台后，配置的数据将恢复为设备固件的默认值.",
         "toast": {
             "restoreToDefaultsSuccess": "原厂设定恢復成功",
             "restoreToDefaultsError": "原厂设定恢復失败",
@@ -1220,7 +1222,9 @@
         "disabled": "停用",
         "low": "低",
         "medium": "中",
-        "high": "高"
+        "high": "高",
+        "configurationPolicies": "配置",
+        "servicesPolicies": "服务"
     },
     "pagePower": {
         "description": "设置电源上限以使功耗保持在或低于指定值",

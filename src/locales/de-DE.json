@@ -524,6 +524,8 @@
         }
     },
     "PageFactoryDefault": {
+        "FactoryDefaultPartialDescription": "BMC wird neu gestartet und nach dem Booten auf der BMC-Konsole bleiben alle konfigurierten Daten erhalten.",
+        "FactoryDefaultFullDescription": "BMC wird neu gestartet und nach dem Booten auf der BMC-Konsole werden die konfigurierten Daten auf die Standardeinstellungen der Geräte-Firmware zurückgesetzt.",
         "toast": {
             "restoreToDefaultsSuccess": "Wiederherstellung der Werkseinstellungen erfolgreich.",
             "restoreToDefaultsError": "Die Wiederherstellung der Werkseinstellungen ist fehlgeschlagen.",
@@ -1221,7 +1223,9 @@
         "disabled": "Behinderte",
         "low": "Niedrig",
         "medium": "Mittel",
-        "high": "Hoch"
+        "high": "Hoch",
+        "configurationPolicies": "Konfigurationen",
+        "servicesPolicies": "Dienstleistungen"
     },
     "pagePower": {
         "description": "Legen Sie eine Leistungsobergrenze fest, um den Stromverbrauch auf oder unter dem angegebenen Wert in Watt zu halten",

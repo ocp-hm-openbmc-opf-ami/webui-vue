@@ -524,6 +524,8 @@
         }
     },
     "PageFactoryDefault": {
+        "FactoryDefaultPartialDescription": "BMC 將重新啟動，啟動至 BMC 控制台後，所有設定的資料將會保留.",
+        "FactoryDefaultFullDescription": "BMC 將重新啟動，啟動至 BMC 控制台後，配置的資料將恢復為裝置韌體的預設值.",
         "toast": {
             "restoreToDefaultsSuccess": "原廠設定恢復成功",
             "restoreToDefaultsError": "原廠設定恢復失敗",
@@ -1221,7 +1223,9 @@
         "disabled": "停用",
         "low": "低",
         "medium": "中",
-        "high": "高"
+        "high": "高",
+        "configurationPolicies": "配置",
+        "servicesPolicies": "服務"
     },
     "pagePower": {
         "description": "設置電源上限以使功耗保持在或低於指定值",

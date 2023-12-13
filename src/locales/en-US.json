@@ -524,6 +524,8 @@
         }
     },
     "PageFactoryDefault": {
+        "FactoryDefaultPartialDescription": "BMC will reboot and after boot to BMC console, all configured data will be preserved.",
+        "FactoryDefaultFullDescription": "BMC will reboot and after boot to BMC console, configured data will be restore to the defaults of the device firmware.",
         "toast": {
             "restoreToDefaultsSuccess": "Factory Default Restore Default successful.",
             "restoreToDefaultsError": "Factory Default Restore Default failed.",
@@ -1221,7 +1223,9 @@
         "disabled": "Disabled",
         "low": "Low",
         "medium": "Medium",
-        "high": "High"
+        "high": "High",
+        "configurationPolicies": "Configurations",
+        "servicesPolicies": "Services"
     },
     "pagePower": {
         "description": "Set a power cap to keep power consumption at or below the specified value in watts",

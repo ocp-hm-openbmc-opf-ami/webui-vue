@@ -11,11 +11,17 @@
           <b-form-radio value="ResetToDefaultButKeepReservedSettings">{{
             $t('PageOperations.form.RestoreDefaultPartial')
           }}</b-form-radio>
+          <b-form-text id="reset" class="ml-4 mb-3">
+            {{ $t('PageFactoryDefault.FactoryDefaultPartialDescription') }}
+          </b-form-text>
         </div>
         <div class="mt-2">
           <b-form-radio value="ResetAll">{{
             $t('PageOperations.form.RestoreDefaultFull')
           }}</b-form-radio>
+          <b-form-text id="reset" class="ml-4 mb-3">
+            {{ $t('PageFactoryDefault.FactoryDefaultFullDescription') }}
+          </b-form-text>
         </div>
       </b-form-radio-group>
       <div class="mt-3">
