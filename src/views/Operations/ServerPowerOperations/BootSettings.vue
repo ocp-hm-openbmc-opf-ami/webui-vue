@@ -95,11 +95,7 @@ export default {
     },
   },
   created() {
-    this.$store
-      .dispatch('serverBootSettings/getTpmPolicy')
-      .finally(() =>
-        this.$root.$emit('server-power-operations-boot-settings-complete')
-      );
+    this.$root.$emit('server-power-operations-boot-settings-complete');
   },
   methods: {
     handleSubmit() {

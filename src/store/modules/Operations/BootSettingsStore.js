@@ -27,7 +27,15 @@ const BootSettingsStore = {
         state.overrideEnabled = false;
       }
     },
-    setTpmPolicy: (state, tpmEnabled) => (state.tpmEnabled = tpmEnabled),
+    // setTpmPolicy: (state, tpmEnabled) => (state.tpmEnabled = tpmEnabled),
+    setTpmPolicy: (state, TrustedModuleRequiredToBoot) => {
+      if (TrustedModuleRequiredToBoot === 'Required') {
+        state.tpmEnabled = true;
+      } else {
+        // 'Continuous' or 'Disabled'
+        state.tpmEnabled = false;
+      }
+    },
   },
   actions: {
     async getBootSettings({ commit }) {
@@ -40,6 +48,7 @@ const BootSettingsStore = {
           );
           commit('setOverrideEnabled', Boot.BootSourceOverrideEnabled);
           commit('setBootSource', Boot.BootSourceOverrideTarget);
+          commit('setTpmPolicy', Boot.TrustedModuleRequiredToBoot);
         })
         .catch((error) => console.log(error));
     },
@@ -71,22 +80,26 @@ const BootSettingsStore = {
         });
     },
     async getTpmPolicy({ commit }) {
-      // TODO: switch to Redfish when available
       return await api
-        .get('/xyz/openbmc_project/control/host0/TPMEnable')
-        .then(({ data: { data: { TPMEnable } } }) =>
-          commit('setTpmPolicy', TPMEnable)
-        )
+        .get('/redfish/v1/Systems/system')
+        .then(({ data: { Boot } }) => {
+          commit(
+            'setBootSourceOptions',
+            Boot['BootSourceOverrideTarget@Redfish.AllowableValues']
+          );
+          commit('setTpmPolicy', Boot.TrustedModuleRequiredToBoot);
+        })
         .catch((error) => console.log(error));
     },
     saveTpmPolicy({ commit, dispatch }, tpmEnabled) {
-      // TODO: switch to Redfish when available
-      const data = { data: tpmEnabled };
+      if (tpmEnabled) {
+        var tpmStatus = { Boot: { TrustedModuleRequiredToBoot: 'Required' } };
+      } else {
+        tpmStatus = { Boot: { TrustedModuleRequiredToBoot: 'Disabled' } };
+      }
       return api
-        .put(
-          '/xyz/openbmc_project/control/host0/TPMEnable/attr/TPMEnable',
-          data
-        )
+        .patch('/redfish/v1/Systems/system', tpmStatus)
+        .then(dispatch('getTpmPolicy'))
         .then((response) => {
           // If request success, commit the values
           commit('setTpmPolicy', tpmEnabled);
@@ -95,7 +108,6 @@ const BootSettingsStore = {
         .catch((error) => {
           console.log(error);
           // If request error, GET saved policy
-          dispatch('getTpmPolicy');
           return error;
         });
     },
