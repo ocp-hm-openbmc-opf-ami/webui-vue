@@ -792,7 +792,8 @@
             "username": "Username",
             "userPassword": "User password",
             "userUnlockMethod": "User unlock method",
-            "passwordChangeRequired": "Password Change Required"
+            "passwordChangeRequired": "Password Change Required",
+            "vmediaAccess": "VMedia Access"
         },
         "table": {
             "privilege": "Privilege",
@@ -1360,6 +1361,7 @@
         "stop": "Stop",
         "virtualMediaSubTitleFirst": "Load image from web browser",
         "virtualMediaSubTitleSecond": "Load image from external server",
+        "permissionRestricted": "You don't have a permission to view this page",
         "modal": {
             "password": "Password",
             "serverUri": "External server URI",

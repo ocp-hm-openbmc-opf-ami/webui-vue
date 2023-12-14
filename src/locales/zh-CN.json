@@ -792,7 +792,8 @@
             "unlock": "未锁",
             "username": "使用者名称",
             "userPassword": "使用者密码",
-            "userUnlockMethod": "使用者解锁方法"
+            "userUnlockMethod": "使用者解锁方法",
+            "vmediaAccess": "视频媒体访问"
         },
         "table": {
             "privilege": "特权",
@@ -1359,6 +1360,7 @@
         "stop": "停止",
         "virtualMediaSubTitleFirst": "从网页浏览器读取映像档",
         "virtualMediaSubTitleSecond": "从外部伺服器读取映像档",
+        "permissionRestricted": "您没有权限查看此页面",
         "modal": {
             "password": "密码",
             "serverUri": "外部伺服器 URI",

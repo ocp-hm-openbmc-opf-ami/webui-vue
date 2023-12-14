@@ -154,6 +154,31 @@
                 {{ $t('global.status.disabled') }}
               </b-form-radio>
             </b-form-group>
+            <b-form-group :label="$t('pageUserManagement.modal.vmediaAccess')">
+              <b-form-radio
+                v-model="form.vmediaAccess"
+                name="vmediaAccess-change-status"
+                :value="true"
+                data-test-id="userManagement-vmediaAccess-statusEnabled"
+                :disabled="form.username === 'root'"
+                @input="$v.form.vmediaAccess.$touch()"
+              >
+                {{ $t('global.status.enabled') }}
+              </b-form-radio>
+              <b-form-radio
+                v-model="form.vmediaAccess"
+                name="vmediaAccess-change-status"
+                data-test-id="userManagement-vmediaAccess-statusDisabled"
+                :value="false"
+                :disabled="
+                  (!newUser && originalUsername === disabled) ||
+                  form.username === 'root'
+                "
+                @input="$v.form.vmediaAccess.$touch()"
+              >
+                {{ $t('global.status.disabled') }}
+              </b-form-radio>
+            </b-form-group>
           </b-col>
           <b-col>
             <b-form-group
@@ -282,6 +307,7 @@ export default {
         passwordConfirmation: '',
         manualUnlock: false,
         PasswordChangeRequired: false,
+        vmediaAccess: true,
       },
       disabled: this.$store.getters['global/username'],
     };
@@ -308,12 +334,16 @@ export default {
       this.form.status = value.Enabled;
       this.form.privilege = value.privilege;
       this.form.PasswordChangeRequired = value.PasswordChangeRequired;
+      this.form.vmediaAccess = value.OEMAccountTypes.includes('media');
     },
   },
   validations() {
     return {
       form: {
         status: {
+          required,
+        },
+        vmediaAccess: {
           required,
         },
         username: {
@@ -356,8 +386,10 @@ export default {
         userData.status = this.form.status;
         userData.privilege = this.form.privilege;
         userData.PasswordChangeRequired = this.form.PasswordChangeRequired;
+        userData.vmediaAccess = this.form.vmediaAccess;
         userData.password = this.form.password;
       } else {
+        this.$v.$touch();
         if (this.$v.$invalid) return;
         userData.originalUsername = this.originalUsername;
         if (this.$v.form.status.$dirty) {
@@ -371,6 +403,9 @@ export default {
         }
         if (this.$v.form.PasswordChangeRequired.$dirty) {
           userData.PasswordChangeRequired = this.form.PasswordChangeRequired;
+        }
+        if (this.$v.form.vmediaAccess.$dirty) {
+          userData.vmediaAccess = this.form.vmediaAccess;
         }
         if (this.$v.form.password.$dirty) {
           userData.password = this.form.password;
@@ -395,6 +430,7 @@ export default {
       this.form.username = '';
       this.form.privilege = null;
       this.form.PasswordChangeRequired = false;
+      this.form.vmediaAccess = true;
       this.form.password = '';
       this.form.passwordConfirmation = '';
       this.$v.$reset();

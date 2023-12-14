@@ -792,7 +792,8 @@
             "username": "Nutzername",
             "userPassword": "Benutzer Passwort",
             "userUnlockMethod": "Methode zum Entsperren des Benutzers",
-            "passwordChangeRequired": "Passwortänderung erforderlich"
+            "passwordChangeRequired": "Passwortänderung erforderlich",
+            "vmediaAccess": "VMedia-Zugriff"
         },
         "table": {
             "privilege": "Privileg",
@@ -1360,6 +1361,7 @@
         "stop": "Stoppen",
         "virtualMediaSubTitleFirst": "Bild vom Browser laden",
         "virtualMediaSubTitleSecond": "Bild von externem Server laden",
+        "permissionRestricted": "Sie haben keine Berechtigung, diese Seite anzuzeigen",
         "modal": {
             "password": "Passwort",
             "serverUri": "Externer Server URI",

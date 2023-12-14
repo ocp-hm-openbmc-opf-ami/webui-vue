@@ -793,7 +793,8 @@
             "username": "使用者名稱",
             "userPassword": "使用者密碼",
             "userUnlockMethod": "使用者解鎖方法",
-            "passwordChangeRequired": "Password Change Required"
+            "passwordChangeRequired": "Password Change Required",
+            "vmediaAccess": "視頻媒體訪問"
         },
         "table": {
             "privilege": "特權",
@@ -1360,6 +1361,7 @@
         "stop": "停止",
         "virtualMediaSubTitleFirst": "從網頁瀏覽器讀取映像檔",
         "virtualMediaSubTitleSecond": "從外部伺服器讀取映像檔",
+        "permissionRestricted": "您沒有權限查看此頁面",
         "modal": {
             "password": "密碼",
             "serverUri": "外部伺服器 URI",

@@ -21,18 +21,22 @@ const VirtualMediaStore = {
     connections: [],
     vmStarted: 0,
     legacyStarted: 0,
+    virtualMediaAccess: true,
   },
   getters: {
     proxyDevices: (state) => state.proxyDevices,
     legacyDevices: (state) => state.legacyDevices,
     vmStarted: (state) => state.vmStarted,
     legacyStarted: (state) => state.legacyStarted,
+    virtualMediaAccess: (state) => state.virtualMediaAccess,
   },
   mutations: {
     setProxyDevicesData: (state, deviceData) =>
       (state.proxyDevices = deviceData),
     setLegacyDevicesData: (state, deviceData) =>
       (state.legacyDevices = deviceData),
+    setVirtualMediaAccess: (state, keyState) =>
+      (state.virtualMediaAccess = keyState),
   },
   actions: {
     async getData({ commit }) {
@@ -89,9 +93,11 @@ const VirtualMediaStore = {
             });
           commit('setProxyDevicesData', proxyDevices);
           commit('setLegacyDevicesData', legacyDevices);
+          commit('setVirtualMediaAccess', true);
         })
         .catch((error) => {
           console.log('Virtual Media:', error);
+          commit('setVirtualMediaAccess', false);
         });
     },
     async mountImage(_, { id, data }) {

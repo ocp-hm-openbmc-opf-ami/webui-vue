@@ -125,7 +125,11 @@ const AppNavigationMixin = {
               id: 'virtual-media',
               label: this.$t('appNavigation.virtualMedia'),
               route: '/operations/virtual-media',
-              exclusiveToRoles: [roles.administrator],
+              exclusiveToRoles: [
+                roles.administrator,
+                roles.operator,
+                roles.readonly,
+              ],
             },
           ],
         },

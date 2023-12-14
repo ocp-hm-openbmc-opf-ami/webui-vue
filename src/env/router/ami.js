@@ -331,7 +331,11 @@ const routes = [
         component: VirtualMedia,
         meta: {
           title: i18n.t('appPageTitle.virtualMedia'),
-          exclusiveToRoles: [roles.administrator],
+          exclusiveToRoles: [
+            roles.administrator,
+            roles.operator,
+            roles.readonly,
+          ],
         },
       },
     ],

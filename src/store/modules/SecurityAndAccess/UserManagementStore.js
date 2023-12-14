@@ -128,7 +128,14 @@ const UserManagementStore = {
     },
     async createUser(
       { dispatch },
-      { username, password, privilege, status, PasswordChangeRequired }
+      {
+        username,
+        password,
+        privilege,
+        status,
+        PasswordChangeRequired,
+        vmediaAccess,
+      }
     ) {
       const data = {
         UserName: username,
@@ -136,6 +143,7 @@ const UserManagementStore = {
         RoleId: privilege,
         Enabled: status,
         PasswordChangeRequired: PasswordChangeRequired,
+        OEMAccountTypes: vmediaAccess ? ['media'] : [],
       };
       return await api
         .post('/redfish/v1/AccountService/Accounts', data)
@@ -160,18 +168,21 @@ const UserManagementStore = {
         privilege,
         status,
         locked,
-        PasswordChangeRequired,
+        // PasswordChangeRequired,
         routerPath,
+        vmediaAccess,
       }
     ) {
       const data = {};
       if (username) data.UserName = username;
       if (password) data.Password = password;
       if (privilege) data.RoleId = privilege;
+      if (vmediaAccess !== undefined)
+        data.OEMAccountTypes = vmediaAccess ? ['media'] : [];
       if (status !== undefined) data.Enabled = status;
       if (locked !== undefined) data.Locked = locked;
-      if (PasswordChangeRequired !== undefined)
-        data.PasswordChangeRequired = PasswordChangeRequired;
+      /*if (PasswordChangeRequired !== undefined)
+        data.PasswordChangeRequired = PasswordChangeRequired;*/
       return await api
         .patch(`/redfish/v1/AccountService/Accounts/${originalUsername}`, data)
         .then(() => dispatch('getUsers'))

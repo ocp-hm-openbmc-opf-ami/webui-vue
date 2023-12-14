@@ -959,6 +959,7 @@
         "stop": "Стоп",
         "virtualMediaSubTitleFirst": "Подключить образ с помощью веб браузера",
         "virtualMediaSubTitleSecond": "Загрузить образ с внешнего сервера",
+        "permissionRestricted": "У вас нет разрешения на просмотр этой страницы",
         "modal": {
             "password": "Пароль",
             "serverUri": "URI Внешнего сервера",
