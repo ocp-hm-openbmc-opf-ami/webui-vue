@@ -514,13 +514,17 @@
         "pageDescription": "At-Scale Debug Service",
         "asdServer": "ASD Server",
         "TLSAuthentication": "TLS Authentication",
+        "TLSCertificate": "TLS Certificate",
         "JTAGInfo": "JTAG Info",
+        "uploadCertificate": "Upload Certificate",
         "toast": {
             "errorAsdDisabled": "Error disabling ASD server.",
             "errorAsdEnabled": "Error enabling ASD server.",
             "successAsdDisabled": "Successfully disabled ASD server.",
             "successAsdEnabled": "Successfully enabled ASD server.",
-            "errorAsdDbusEnable": "Unable to get the TLS & JTAG Info."
+            "errorAsdDbusEnable": "Unable to get the TLS & JTAG Info.",
+            "errorAsdCertificate": "Unable to get the TLS Certificate Availability.",
+            "errorAsdCertInfo": "Unable to get the TLS Certificate Info."
         }
     },
     "PageFactoryDefault": {
@@ -1307,6 +1311,7 @@
         "generateCsr": "Generate CSR",
         "httpsCertificate": "HTTPS Certificate",
         "ldapCertificate": "LDAP Certificate",
+        "asdCertificate": "ASD Certificate",
         "replaceCertificate": "Replace certificate",
         "alert": {
             "certificateExpiredMessage": "%{certificate} has expired. Consider replacing it with a new certificate.",

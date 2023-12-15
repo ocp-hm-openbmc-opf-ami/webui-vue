@@ -20,6 +20,11 @@ export const CERTIFICATE_TYPES = [
     // the term 'TrustStore Certificate' wasn't recognized/was unfamilar
     label: i18n.t('pageCertificates.caCertificate'),
   },
+  {
+    type: 'ASD Certificate',
+    location: '/redfish/v1/Managers/bmc/Certificates/',
+    label: i18n.t('pageCertificates.asdCertificate'),
+  },
 ];
 
 const getCertificateProp = (type, prop) => {

@@ -514,13 +514,17 @@
         "pageDescription": "At-Scale 除错服务",
         "asdServer": "ASD 伺服器",
         "TLSAuthentication": "TLS 验证",
+        "TLSCertificate": "TLS证书",
         "JTAGInfo": "JTAG 信息",
+        "uploadCertificate": "上传证书",
         "toast": {
             "errorAsdDisabled": "停用 ASD 伺服器发生错误",
             "errorAsdEnabled": "启用 ASD 伺服器发生错误",
             "successAsdDisabled": "成功停用 ASD 伺服器",
             "successAsdEnabled": "成功启用 ASD 伺服器",
-            "errorAsdDbusEnable": "无法获取 TLS 和 JTAG 信息"
+            "errorAsdDbusEnable": "无法获取 TLS 和 JTAG 信息",
+            "errorAsdCertificate": "无法获取 TLS 证书可用性.",
+            "errorAsdCertInfo": "无法获取 TLS 证书信息."
         }
     },
     "PageFactoryDefault": {
@@ -1306,6 +1310,7 @@
         "generateCsr": "产生 CSR",
         "httpsCertificate": "HTTPS 凭证",
         "ldapCertificate": "LDAP 凭证",
+        "asdCertificate": "ASD 凭证",
         "replaceCertificate": "置换凭证",
         "alert": {
             "certificateExpiredMessage": "%{certificate} 已过期。请考虑用新凭证替换它。",

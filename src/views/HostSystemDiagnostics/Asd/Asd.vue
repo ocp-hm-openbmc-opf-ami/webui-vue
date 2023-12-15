@@ -24,7 +24,22 @@
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row class="d-flex margin">
+      <b-row v-if="asdServer" class="d-flex margin">
+        <b-col cols="2">
+          <span class="font_style">
+            {{ $t('pageAsd.TLSCertificate') }}
+          </span>
+        </b-col>
+        <b-col cols="10">
+          <span v-if="certInformation !== 'N/A'">
+            {{ certInformation }}
+          </span>
+          <a href="#/security-and-access/certificates">
+            (<upload-file /> {{ $t('pageAsd.uploadCertificate') }})
+          </a>
+        </b-col>
+      </b-row>
+      <b-row v-if="asdServer" class="d-flex margin">
         <b-col class="d-flex" cols="2">
           <span class="font_style">
             {{ $t('pageAsd.TLSAuthentication') }}
@@ -36,7 +51,7 @@
           </span>
         </b-col>
       </b-row>
-      <b-row class="d-flex">
+      <b-row v-if="asdServer" class="d-flex">
         <b-col cols="2">
           <span class="font_style">
             {{ $t('pageAsd.JTAGInfo') }}
@@ -57,10 +72,12 @@ import PageTitle from '@/components/Global/PageTitle';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
+import UploadFile from '@carbon/icons-vue/es/upload/20';
 
 export default {
   components: {
     PageTitle,
+    UploadFile,
   },
   mixins: [LoadingBarMixin, BVToastMixin, DataFormatterMixin],
   computed: {
@@ -78,6 +95,9 @@ export default {
     JTagInformation() {
       return this.$store.getters['asd/JTagInformation'];
     },
+    certInformation() {
+      return this.$store.getters['asd/certValidationUpto'];
+    },
   },
   created() {
     this.startLoader();
@@ -86,14 +106,56 @@ export default {
       .finally(() => {
         this.endLoader();
       })
-      .catch(({ message }) => this.errorToast(message));
+      .catch(({ message }) => {
+        if (this.asdServer) {
+          this.errorToast(message);
+        }
+      });
+    this.startLoader();
+    this.$store
+      .dispatch('asd/getAsdCertificateStatus')
+      .finally(() => {
+        this.endLoader();
+      })
+      .catch(({ message }) => {
+        if (this.asdServer) {
+          this.errorToast(message);
+        }
+      });
   },
   methods: {
     changeAsdServer(state) {
       this.$store
         .dispatch('asd/saveAsdServerStatus', state)
-        .then((message) => this.successToast(message))
-        .catch(({ message }) => this.errorToast(message));
+        .then((message) => {
+          this.successToast(message);
+          if (this.asdServer) {
+            this.$store
+              .dispatch('asd/getAsdServerStatus')
+              .finally(() => {
+                this.endLoader();
+              })
+              .catch(({ message }) => {
+                if (this.asdServer) {
+                  this.errorToast(message);
+                }
+              });
+            this.startLoader();
+            this.$store
+              .dispatch('asd/getAsdCertificateStatus')
+              .finally(() => {
+                this.endLoader();
+              })
+              .catch(({ message }) => {
+                if (this.asdServer) {
+                  this.errorToast(message);
+                }
+              });
+          }
+        })
+        .catch(({ message }) => {
+          this.errorToast(message);
+        });
     },
   },
 };
