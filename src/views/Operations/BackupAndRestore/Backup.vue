@@ -19,6 +19,21 @@
         <b-col class="d-flex" cols="2">
           <dl class="mr-3 w-10">
             <dd class="font_style">
+              {{ $t('pageBackupAndRestore.smtp') }}
+            </dd>
+          </dl>
+        </b-col>
+        <b-col cols="10">
+          <b-form-checkbox id="smtp" v-model="SMTP" switch>
+            <span v-if="SMTP">{{ $t('global.status.enabled') }}</span>
+            <span v-else>{{ $t('global.status.disabled') }}</span>
+          </b-form-checkbox>
+        </b-col>
+      </b-row>
+      <b-row v-if="hide">
+        <b-col class="d-flex" cols="2">
+          <dl class="mr-3 w-10">
+            <dd class="font_style">
               {{ $t('pageBackupAndRestore.authentication') }}
             </dd>
           </dl>
@@ -154,7 +169,7 @@ export default {
   },
   data() {
     return {
-      Authentication: this.$store.getters['backupAndRestore/authentication'],
+      SMTP: this.$store.getters['backupAndRestore/smtp'],
       BackupFile: this.$store.getters['backupAndRestore/backupFile'],
       fileName: 'bmc-config.tar',
       KVM: this.$store.getters['backupAndRestore/kvm'],
@@ -170,19 +185,19 @@ export default {
   computed: {
     allSelected: {
       get() {
-        return this.Authentication && this.KVM && this.Network;
+        return this.SMTP && this.KVM && this.Network;
       },
       set(value) {
         this.checkAll = value;
         if (value) {
-          this.Authentication = value;
+          this.SMTP = value;
           this.KVM = value;
           this.Network = value;
         } else {
-          if (!(this.Authentication && this.KVM && this.Network)) {
+          if (!(this.SMTP && this.KVM && this.Network)) {
             this.checkAll = false;
           } else {
-            this.Authentication = value;
+            this.SMTP = value;
             this.KVM = value;
             this.Network = value;
           }
@@ -190,7 +205,7 @@ export default {
       },
     },
     ...mapState('backupAndRestore', [
-      'authentication',
+      'smtp',
       'ipmi',
       'kvm',
       'network',
@@ -201,8 +216,8 @@ export default {
     ]),
   },
   watch: {
-    authentication: function (value) {
-      this.Authentication = value;
+    smtp: function (value) {
+      this.SMTP = value;
     },
     ipmi: function (value) {
       this.IPMI = value;
@@ -225,7 +240,7 @@ export default {
     backupFile: function (value) {
       this.BackupFile = value;
     },
-    Authentication(value) {
+    SMTP(value) {
       if (!value) {
         this.checkAll = false;
       }
@@ -252,8 +267,8 @@ export default {
     handleSubmit() {
       this.startLoader();
       let data = [];
-      if (this.Authentication) {
-        data.push('Authentication');
+      if (this.SMTP) {
+        data.push('SMTP');
       }
       if (this.KVM) {
         data.push('KVM');

@@ -5,7 +5,7 @@ const BackupAndRestore = {
   namespaced: true,
   state: {
     BackupDatas: [],
-    authentication: null,
+    smtp: null,
     ipmi: null,
     kvm: null,
     network: null,
@@ -18,7 +18,7 @@ const BackupAndRestore = {
     BackupDatas(state) {
       return state.BackupDatas;
     },
-    authentication: (state) => state.authentication,
+    smtp: (state) => state.smtp,
     ipmi: (state) => state.ipmi,
     kvm: (state) => state.kvm,
     network: (state) => state.network,
@@ -31,8 +31,8 @@ const BackupAndRestore = {
     setBackupDatas(state, BackupDatas) {
       state.BackupDatas = BackupDatas;
     },
-    setAuthentication(state, authentication) {
-      state.authentication = authentication;
+    setSmtp(state, smtp) {
+      state.smtp = smtp;
     },
     setIPMI(state, ipmi) {
       state.ipmi = ipmi;
@@ -83,8 +83,8 @@ const BackupAndRestore = {
         .get('/redfish/v1/Managers/bmc')
         .then((response) => {
           commit(
-            'setAuthentication',
-            response.data.Oem.Ami?.SelectedBackupFeatures?.Authentication
+            'setSmtp',
+            response.data.Oem.Ami?.SelectedBackupFeatures?.SMTP
           );
           commit(
             'setIPMI',
