@@ -842,13 +842,12 @@
         "passwordRules": {
             "passwordForHigh": {
                 "passwordComplexityForHigh": "密碼複雜度高",
-                "rule1": "僅包含可印的字元",
                 "rule2": "密碼長度不能短於八個字元",
                 "rule3": "須符合以下四個標準:" ,
                 "rule4": "包含一個大寫字母(e.g. A, G)",
                 "rule5": "包含一個小寫字母(e.g. a, g)",
                 "rule6": "包含數字(e.g. 1, 6)",
-                "rule7": "包含至少一個空格或是符號(e.g. $, &)",
+                "rule7": "包含可列印字元和至少一個空格或符號(e.g. $, &)",
                 "rule8": "不能包含使用者名稱或是倒反的使用者名稱(字母沒有大小寫之分).",
                 "rule9": "與先前的密碼相比，至少包含兩個字元",
                 "rule10": "不能包含三個或三個以上連續數字 (e.g. BMC(123)ste, BMC(654)sfc 是不被允許)",
@@ -859,7 +858,6 @@
               },
               "passwordFormedium": {
                 "passwordComplexityFormedium": "密碼複雜度中",
-                "rule1": "僅包含可印的字元",
                 "rule2": "密碼長度不能短於八個字元",
                 "rule3": "不能包含使用者名稱或是倒反的使用者名稱",
                 "rule4": "與先前的密碼相比，至少包含兩個字元",
@@ -867,18 +865,17 @@
                 "rule6": "包含一個大寫字母(e.g. A, G).",
                 "rule7": "包含一個小寫字母 (e.g. a, g).",
                 "rule8": "包含數字 (e.g. 1, 6).",
-                "rule9": "包含至少一個空格或是符號 (e.g. $, &).",
+                "rule9": "包含可列印字元和至少一個空格或符號 (e.g. $, &).",
                 "rule10": "不能包含使用者名稱或是倒反的使用者名稱(字母沒有大小寫之分) (eg,username=Hello, Password=th12(oLleH)_78 是不被允許)."
               },
             "passwordForLow": {
               "passwordComplexityForLow": "密碼複雜度低",
-              "rule1": "僅包含可印的字元",
               "rule2": "密碼長度不能短於六個字元",
               "rule3": "須符合以下四個標準:",
               "rule4": "包含一個大寫字母(e.g. A, G).",
               "rule5": "包含一個小寫字母 (e.g. a, g).",
               "rule6": "包含數字 (e.g. 1, 6).",
-              "rule7": "包含至少一個空格或是符號 (e.g. $, &).",
+              "rule7": "包含可列印字元和至少一個空格或符號 (e.g. $, &).",
               "rule8": "不能包含使用者名稱或是倒反的使用者名稱 (pam_cracklib將會檢查兩者) (字母沒有大小寫之分) (eg, username=Hello,  Password=th12(heLLo)_78 和 Password=th12(oLleH)_78是不被允許,跟密碼複雜度中高一樣)."
             }
         }

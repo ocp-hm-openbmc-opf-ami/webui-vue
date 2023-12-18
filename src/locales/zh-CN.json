@@ -841,13 +841,12 @@
         "passwordRules": {
             "passwordForHigh": {
                 "passwordComplexityForHigh": "密码複杂度高",
-                "rule1": "仅包含可印的字元",
                 "rule2": "密码长度不能短于八个字元",
                 "rule3": "须符合以下四个标准:" ,
                 "rule4": "包含一个大写字母(e.g. A, G)",
                 "rule5": "包含一个小写字母(e.g. a, g)",
                 "rule6": "包含数字(e.g. 1, 6)",
-                "rule7": "包含至少一个空格或是符号(e.g. $, &)",
+                "rule7": "包含可打印字符和至少一个空格或符号(e.g. $, &)",
                 "rule8": "不能包含使用者名称或是倒反的使用者名称(字母没有大小写之分).",
                 "rule9": "与先前的密码相比，至少包含两个字元",
                 "rule10": "不能包含三个或三个以上连续数字 (e.g. BMC(123)ste, BMC(654)sfc 是不被允许)",
@@ -858,7 +857,6 @@
               },
               "passwordFormedium": {
                 "passwordComplexityFormedium": "密码複杂度中",
-                "rule1": "仅包含可印的字元",
                 "rule2": "密码长度不能短于八个字元",
                 "rule3": "不能包含使用者名称或是倒反的使用者名称",
                 "rule4": "与先前的密码相比，至少包含两个字元",
@@ -866,18 +864,17 @@
                 "rule6": "包含一个大写字母(e.g. A, G).",
                 "rule7": "包含一个小写字母 (e.g. a, g).",
                 "rule8": "包含数字 (e.g. 1, 6).",
-                "rule9": "包含至少一个空格或是符号 (e.g. $, &).",
+                "rule9": "包含可打印字符和至少一个空格或符号 (e.g. $, &).",
                 "rule10": "不能包含使用者名称或是倒反的使用者名称(字母没有大小写之分) (eg,username=Hello, Password=th12(oLleH)_78 是不被允许)."
               },
             "passwordForLow": {
               "passwordComplexityForLow": "密码複杂度低",
-              "rule1": "仅包含可印的字元",
               "rule2": "密码长度不能短于六个字元",
               "rule3": "须符合以下四个标准:",
               "rule4": "包含一个大写字母(e.g. A, G).",
               "rule5": "包含一个小写字母 (e.g. a, g).",
               "rule6": "包含数字 (e.g. 1, 6).",
-              "rule7": "包含至少一个空格或是符号 (e.g. $, &).",
+              "rule7": "包含可打印字符和至少一个空格或符号 (e.g. $, &).",
               "rule8": "不能包含使用者名称或是倒反的使用者名称 (pam_cracklib将会检查两者) (字母没有大小写之分) (eg, username=Hello,  Password=th12(heLLo)_78 和 Password=th12(oLleH)_78是不被允许,跟密码複杂度中高一样)."
             }
         }
