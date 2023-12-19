@@ -1404,7 +1404,8 @@
             "negotiatedSpeedGbs": "協商速度 Gbs",
             "protocol": "協議",
             "revision": "修訂",
-            "serialNumber": "序列號"
+            "serialNumber": "序列號",
+            "health": "健康"
         },
         "noPhysicalDevice": "目前不存在物理設備信息。"
     },
@@ -1414,7 +1415,7 @@
         "raidLevel": "RAID級別",
         "virtualDeviceName": "虛擬設備名稱",
         "spanDepth": "跨度深度",
-        "numberOfDrives": "驅動器數量",
+        "numberOfDrives": "每個跨度的驅動器數量",
         "initState": "初始化狀態",
         "stripeSize": "條紋尺寸",
         "readPolicy": "閱讀政策",
@@ -1424,19 +1425,6 @@
         "diskCacheCapacity": "磁盤緩存容量",
         "unConfiguredPhysicalDrive": "未配置的物理驅動器",
         "noLogicalDevice": "此時不存在邏輯設備信息。",
-        "raidOptions": {
-            "raid0": "RAID0",
-            "raid1": "RAID1",
-            "raid5": "RAID5",
-            "raid6": "RAID6",
-            "raidIe": "RAID IE (RLQ = 1)",
-            "raid1e": "RAID 1E (RLQ = 0)",
-            "raidIe0": "RAID IE0 (RLQ = 0)",
-            "raid00": "RAID00",
-            "raid10": "RAID10",
-            "raid50": "RAID50",
-            "raid60": "RAID60"
-        },
         "initStateOptions": {
             "noInitialization": "無初始化",
             "quickInitialization": "快速初始化",
@@ -1472,7 +1460,8 @@
             "readCachePolicyType": "讀取緩存策略類型",
             "writeCachePolicyType": "寫入緩存策略類型",
             "capacityBytes": "容量字節",
-            "numberOfPhysicalDevices": "物理設備數量"
+            "numberOfPhysicalDevices": "物理設備數量",
+            "health": "健康"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "沒有可配置的物理設備！",
@@ -1481,10 +1470,20 @@
         },
         "toast": {
             "successCreateLogicalDevice": "邏輯設備創建成功",
-            "errorCreateLogicalDevice": "創建邏輯設備時出錯",
+            "errorCreateLogicalDevice": "建立邏輯設備錯誤",
+            "errorRaidDeviceNotPresent": "RAID 設備不存在。",
+            "errorRaidCtrlIdInvalid": "RAID 控制器 ID 無效。",
+            "errorRaidCtrlDevIdInvalid": "RAID 控制器設備 ID 無效。",
+            "errorRaidNoVirtualDevicePresent": "不存在 RAID 邏輯設備。",
+            "errorRaidOperationNotPermitted": "不允許 RAID 操作。",
+            "errorRaidUnsupportedPhysicalDev": "不支援的 RAID 實體設備。",
+            "errorRaidUnsupportedLogicalDev": "不支援的 RAID 邏輯設備。",
+            "errorRaidControllerBusy": "Raid 控制器正忙，無法處理指令。",
             "successDeleteLogicalDevice": "成功刪除邏輯設備",
             "errorDeleteLogicalDevice": "刪除邏輯設備時出錯",
-            "errorNumberOfDrivesValidation": "驅動器數量不應高於未配置的物理設備數量！"
+            "errorNumberOfDrivesValidation": "驅動器數量不應高於未配置的物理設備數量！",
+            "errorMinMaxSpanDepth":"最小和最大跨度深度均為 2。",
+            "errorSpanDepthDrives":"選定的 UnConfig 驅動器應等於跨距深度和每個跨距的驅動器數的倍數。"
         }
     },
     "countries": {

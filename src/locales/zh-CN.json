@@ -1403,7 +1403,8 @@
             "negotiatedSpeedGbs": "协商速度 Gbs",
             "protocol": "协议",
             "revision": "修订",
-            "serialNumber": "序列号"
+            "serialNumber": "序列号",
+            "health": "健康"
         },
         "noPhysicalDevice": "目前不存在物理设备信息。"
     },
@@ -1413,7 +1414,7 @@
         "raidLevel": "RAID级别",
         "virtualDeviceName": "虚拟设备名称",
         "spanDepth": "跨度深度",
-        "numberOfDrives": "驱动器数量",
+        "numberOfDrives": "每个跨度的驱动器数量",
         "initState": "初始化状态",
         "stripeSize": "条纹尺寸",
         "readPolicy": "阅读政策",
@@ -1423,19 +1424,6 @@
         "diskCacheCapacity": "磁盘缓存容量",
         "unConfiguredPhysicalDrive": "未配置的物理驱动器",
         "noLogicalDevice": "此时不存在逻辑设备信息。",
-        "raidOptions": {
-            "raid0": "RAID0",
-            "raid1": "RAID1",
-            "raid5": "RAID5",
-            "raid6": "RAID6",
-            "raidIe": "RAID IE (RLQ = 1)",
-            "raid1e": "RAID 1E (RLQ = 0)",
-            "raidIe0": "RAID IE0 (RLQ = 0)",
-            "raid00": "RAID00",
-            "raid10": "RAID10",
-            "raid50": "RAID50",
-            "raid60": "RAID60"
-        },
         "initStateOptions": {
             "noInitialization": "无初始化",
             "quickInitialization": "快速初始化",
@@ -1471,7 +1459,8 @@
             "readCachePolicyType": "读取缓存策略类型",
             "writeCachePolicyType": "写入缓存策略类型",
             "capacityBytes": "容量字节",
-            "numberOfPhysicalDevices": "物理设备数量"
+            "numberOfPhysicalDevices": "物理设备数量",
+            "health": "健康"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "没有可配置的物理设备！",
@@ -1480,10 +1469,20 @@
         },
         "toast": {
             "successCreateLogicalDevice": "逻辑设备创建成功",
-            "errorCreateLogicalDevice": "创建逻辑设备时出错",
-            "successDeleteLogicalDevice": "成功删除逻辑设备",
+            "errorCreateLogicalDevice": "创建逻辑设备出错",
+            "errorRaidDeviceNotPresent": "RAID 设备不存在。",
+            "errorRaidCtrlIdInvalid": "RAID 控制器 ID 无效。",
+            "errorRaidCtrlDevIdInvalid": "RAID 控制器设备 ID 无效。",
+            "errorRaidNoVirtualDevicePresent": "不存在 RAID 逻辑设备。",
+            "errorRaidOperationNotPermitted": "不允许 RAID 操作。",
+            "errorRaidUnsupportedPhysicalDev": "不支持的 RAID 物理设备。",
+            "errorRaidUnsupportedLogicalDev": "不支持的 RAID 逻辑设备。",
+            "errorRaidControllerBusy": "Raid 控制器正忙，无法处理命令。",
+            "successDeleteLogicalDevice": "已成功删除逻辑设备。",
             "errorDeleteLogicalDevice": "删除逻辑设备时出错",
-            "errorNumberOfDrivesValidation": "驱动器数量不应高于未配置的物理设备数量！"
+            "errorNumberOfDrivesValidation": "驱动器数量不应高于未配置的物理设备数量！",
+            "errorMinMaxSpanDepth":"最小和最大跨度深度均为 2。",
+            "errorSpanDepthDrives":"选定的 UnConfig 驱动器应等于跨度深度和每个跨度的驱动器数的倍数。"
         }
     },
     "countries": {

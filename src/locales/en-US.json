@@ -1405,7 +1405,8 @@
             "negotiatedSpeedGbs": "Negotiated Speed Gbs",
             "protocol": "Protocol",
             "revision": "Revision",
-            "serialNumber": "Serial Number"
+            "serialNumber": "Serial Number",
+            "health": "Health"
         },
         "noPhysicalDevice": "There are no Physical Device information present at this time."
     },
@@ -1415,7 +1416,7 @@
         "raidLevel": "RAID Level",
         "virtualDeviceName": "Virtual Device Name",
         "spanDepth": "Span Depth",
-        "numberOfDrives": "Number of Drives",
+        "numberOfDrives": "Number of Drives per Span",
         "initState": "Initialization State",
         "stripeSize": "Stripe Size",
         "readPolicy": "Read Policy",
@@ -1425,19 +1426,6 @@
         "diskCacheCapacity": "Disk Cache Capacity",
         "unConfiguredPhysicalDrive": "Unconfigured Physical Drives",
         "noLogicalDevice": "There are no Logical Device information present at this time.",
-        "raidOptions": {
-            "raid0": "RAID0",
-            "raid1": "RAID1",
-            "raid5": "RAID5",
-            "raid6": "RAID6",
-            "raidIe": "RAID IE (RLQ = 1)",
-            "raid1e": "RAID 1E (RLQ = 0)",
-            "raidIe0": "RAID IE0 (RLQ = 0)",
-            "raid00": "RAID00",
-            "raid10": "RAID10",
-            "raid50": "RAID50",
-            "raid60": "RAID60"
-        },
         "initStateOptions": {
             "noInitialization": "No Initialization",
             "quickInitialization": "Quick Initialization",
@@ -1473,7 +1461,8 @@
             "readCachePolicyType": "Read Cache Policy Type",
             "writeCachePolicyType": "Write Cache Policy Type",
             "capacityBytes": "Capacity Bytes",
-            "numberOfPhysicalDevices": "Number Of Physical Devices"
+            "numberOfPhysicalDevices": "Number Of Physical Devices",
+            "health": "Health"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "No Physical Device is available to configure!",
@@ -1482,10 +1471,20 @@
         },
         "toast": {
             "successCreateLogicalDevice": "Successfully Created Logical Device",
-            "errorCreateLogicalDevice": "Error Creating Logical Device",
-            "successDeleteLogicalDevice": "Successfully Deleted Logical Device",
-            "errorDeleteLogicalDevice": "Error Deleting Logical Device",
-            "errorNumberOfDrivesValidation": "Number of Drives count should not higher than UnConfigured Physical Device count!"
+            "errorCreateLogicalDevice": "Error in Creating Logical Device",
+            "errorRaidDeviceNotPresent": "RAID Device not present.",
+            "errorRaidCtrlIdInvalid": "Invalid RAID Controller ID.",
+            "errorRaidCtrlDevIdInvalid": "Invalid RAID Controller Device ID.",
+            "errorRaidNoVirtualDevicePresent": "No RAID Logical Device Present.",
+            "errorRaidOperationNotPermitted": "RAID Operation not permitted.",
+            "errorRaidUnsupportedPhysicalDev": "Unsupported RAID Physical Device.",
+            "errorRaidUnsupportedLogicalDev": "Unsupported RAID Logical device.",
+            "errorRaidControllerBusy": "Raid Controller is Busy and command could not be processed.",
+            "successDeleteLogicalDevice": "Successfully deleted the Logical Device.",
+            "errorDeleteLogicalDevice": "Error in deleting the Logical Device.",
+            "errorNumberOfDrivesValidation": "Number of Drives count should not higher than UnConfigured Physical Device count!",
+            "errorMinMaxSpanDepth":"The minimum and maximum Span Depth is 2.",
+            "errorSpanDepthDrives":"Selected UnConfig Drives should be equal to multiple of Span Depth and Drives per Span."
         }
     },
     "countries": {

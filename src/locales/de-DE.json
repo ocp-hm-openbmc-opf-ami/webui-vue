@@ -1405,7 +1405,8 @@
             "negotiatedSpeedGbs": "Ausgehandelte Geschwindigkeit in GB",
             "protocol": "Protokoll",
             "revision": "Revision",
-            "serialNumber": "Seriennummer"
+            "serialNumber": "Seriennummer",
+            "health": "Gesundheit"
         },
         "noPhysicalDevice": "Derzeit sind keine Informationen zum physischen Gerät vorhanden."
     },
@@ -1415,7 +1416,7 @@
         "raidLevel": "RAID-Level",
         "virtualDeviceName": "Name des virtuellen Geräts",
         "spanDepth": "Spannweite",
-        "numberOfDrives": "Anzahl der Laufwerke",
+        "numberOfDrives": "Anzahl der Laufwerke pro Span",
         "initState": "Initialisierungsstatus",
         "stripeSize": "Streifengröße",
         "readPolicy": "Lesen Sie die Richtlinie",
@@ -1425,19 +1426,6 @@
         "diskCacheCapacity": "Festplatten-Cache-Kapazität",
         "unConfiguredPhysicalDrive": "Nicht konfigurierte physische Laufwerke",
         "noLogicalDevice": "Derzeit sind keine Informationen zum logischen Gerät vorhanden.",
-        "raidOptions": {
-            "raid0": "RAID0",
-            "raid1": "RAID1",
-            "raid5": "RAID5",
-            "raid6": "RAID6",
-            "raidIe": "RAID IE (RLQ = 1)",
-            "raid1e": "RAID 1E (RLQ = 0)",
-            "raidIe0": "RAID IE0 (RLQ = 0)",
-            "raid00": "RAID00",
-            "raid10": "RAID10",
-            "raid50": "RAID50",
-            "raid60": "RAID60"
-        },
         "initStateOptions": {
             "noInitialization": "Keine Initialisierung",
             "quickInitialization": "Schnelle Initialisierung",
@@ -1473,7 +1461,8 @@
             "readCachePolicyType": "Cache-Richtlinientyp lesen",
             "writeCachePolicyType": "Cache-Richtlinientyp schreiben",
             "capacityBytes": "Kapazität Bytes",
-            "numberOfPhysicalDevices": "Anzahl physischer Geräte"
+            "numberOfPhysicalDevices": "Anzahl physischer Geräte",
+            "health": "Gesundheit"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "Es ist kein physisches Gerät zum Konfigurieren verfügbar!",
@@ -1483,9 +1472,19 @@
         "toast": {
             "successCreateLogicalDevice": "Logisches Gerät erfolgreich erstellt",
             "errorCreateLogicalDevice": "Fehler beim Erstellen des logischen Geräts",
-            "successDeleteLogicalDevice": "Logisches Gerät erfolgreich gelöscht",
-            "errorDeleteLogicalDevice": "Fehler beim Löschen des logischen Geräts",
-            "errorNumberOfDrivesValidation": "Die Anzahl der Laufwerke sollte nicht höher sein als die Anzahl der nicht konfigurierten physischen Geräte!"
+            "errorRaidDeviceNotPresent": "RAID-Gerät nicht vorhanden.",
+            "errorRaidCtrlIdInvalid": "Ungültige RAID-Controller-ID.",
+            "errorRaidCtrlDevIdInvalid": "Ungültige RAID-Controller-Geräte-ID.",
+            "errorRaidNoVirtualDevicePresent": "Kein logisches RAID-Gerät vorhanden.",
+            "errorRaidOperationNotPermitted": "RAID-Betrieb nicht zulässig.",
+            "errorRaidUnsupportedPhysicalDev": "Nicht unterstütztes physisches RAID-Gerät.",
+            "errorRaidUnsupportedLogicalDev": "Nicht unterstütztes logisches RAID-Gerät.",
+            "errorRaidControllerBusy": "Der Raid-Controller ist beschäftigt und der Befehl konnte nicht verarbeitet werden.",
+            "successDeleteLogicalDevice": "Das logische Gerät wurde erfolgreich gelöscht.",
+            "errorDeleteLogicalDevice": "Fehler beim Löschen des logischen Geräts.",
+            "errorNumberOfDrivesValidation": "Die Anzahl der Laufwerke sollte nicht höher sein als die Anzahl der nicht konfigurierten physischen Geräte!",
+            "errorMinMaxSpanDepth":"Die minimale und maximale Spanntiefe beträgt 2.",
+            "errorSpanDepthDrives":"Ausgewählte UnConfig-Laufwerke sollten einem Vielfachen der Span-Tiefe und der Laufwerke pro Span entsprechen."
         }
     },
     "countries": {
