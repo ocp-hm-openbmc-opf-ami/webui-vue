@@ -1382,8 +1382,7 @@
             "serverRunning": "Server läuft",
             "serverConnectionEstablished": "Serververbindung hergestellt",
             "serverClosedSuccessfully": "Der Server wurde erfolgreich geschlossen",
-            "serverClosedWithErrors": "Server mit Fehlern geschlossen",
-            "errorImageFormat": "Bitte stellen Sie ein gültiges Bild bereit .nrg / .ima / .iso or .img format!"
+            "serverClosedWithErrors": "Server mit Fehlern geschlossen"
         }
     },
     "pageAdapter": {

@@ -36,6 +36,7 @@
           id="imagePath"
           v-model="form.imagePath"
           type="text"
+          :state="getValidationState($v.form.imagePath)"
           data-test-id="configureConnection-input-imagePath"
           @input="$v.form.imagePath.$touch()"
         />
@@ -55,7 +56,12 @@
         >
         </b-form-radio-group>
       </b-form-group>
-      <div v-if="form.transferProtocolType !== 'NFS'">
+      <div
+        v-if="
+          form.transferProtocolType !== undefined &&
+          form.transferProtocolType !== 'NFS'
+        "
+      >
         <b-form-group
           :label="$t('pageVirtualMedia.modal.username')"
           label-for="username"
@@ -64,8 +70,15 @@
             id="username"
             v-model="form.username"
             type="text"
+            :state="getValidationState($v.form.username)"
             data-test-id="configureConnection-input-username"
+            @input="$v.form.username.$touch()"
           />
+          <b-form-invalid-feedback role="alert">
+            <template v-if="!$v.form.username.required">
+              {{ $t('global.form.fieldRequired') }}
+            </template>
+          </b-form-invalid-feedback>
         </b-form-group>
         <b-form-group
           :label="$t('pageVirtualMedia.modal.password')"
@@ -75,8 +88,16 @@
             id="password"
             v-model="form.password"
             type="password"
+            :state="getValidationState($v.form.password)"
             data-test-id="configureConnection-input-password"
+            autocomplete="new-password"
+            @input="$v.form.password.$touch()"
           />
+          <b-form-invalid-feedback role="alert">
+            <template v-if="!$v.form.password.required">
+              {{ $t('global.form.fieldRequired') }}
+            </template>
+          </b-form-invalid-feedback>
         </b-form-group>
       </div>
       <b-form-group>
@@ -99,7 +120,7 @@
 </template>
 
 <script>
-import { required } from 'vuelidate/lib/validators';
+import { required, requiredIf } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 export default {
@@ -146,6 +167,22 @@ export default {
         imagePath: {
           required,
         },
+        username: {
+          required: requiredIf(function () {
+            return (
+              this.form.transferProtocolType !== undefined &&
+              this.form.transferProtocolType !== 'NFS'
+            );
+          }),
+        },
+        password: {
+          required: requiredIf(function () {
+            return (
+              this.form.transferProtocolType !== undefined &&
+              this.form.transferProtocolType !== 'NFS'
+            );
+          }),
+        },
       },
     };
   },
@@ -159,15 +196,10 @@ export default {
     handleSubmit() {
       this.$v.$touch();
       if (this.$v.$invalid) return;
-      const ext = this.form.imagePath.slice(-3);
-      if (ext == 'iso' || ext == 'img' || ext == 'ima' || ext == 'nrg') {
-        let connectionData = {};
-        Object.assign(connectionData, this.form);
-        this.$emit('ok', connectionData);
-        this.closeModal();
-      } else {
-        this.errorToast(this.$t('pageVirtualMedia.toast.errorImageFormat'));
-      }
+      let connectionData = {};
+      Object.assign(connectionData, this.form);
+      this.$emit('ok', connectionData);
+      this.closeModal();
     },
     initModal() {
       if (this.connection) {

@@ -67,6 +67,7 @@
                 type="password"
                 class="form-control-with-button input"
                 data-test-id="login-input-password"
+                autocomplete="new-password"
                 @input="$v.userInfo.password.$touch()"
               >
               </b-form-input>
