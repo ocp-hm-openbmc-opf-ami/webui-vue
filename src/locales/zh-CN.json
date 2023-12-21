@@ -213,6 +213,7 @@
         "kvm": "KVM",
         "network": "网络",
         "ntp": "NTP",
+        "smtp": "SMTP",
         "snmp": "SNMP",
         "sysLog": "系统日志",
         "uploadRestoreFiles": "上传恢复文件",

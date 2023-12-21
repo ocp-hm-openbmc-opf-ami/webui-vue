@@ -213,6 +213,7 @@
         "kvm": "KVM",
         "network": "Netzwerk",
         "ntp": "NTP",
+        "smtp": "SMTP",
         "snmp": "SNMP",
         "sysLog": "Syslog",
         "uploadRestoreFiles": "Laden Sie die Wiederherstellungsdatei hoch",

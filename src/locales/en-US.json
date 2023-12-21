@@ -213,6 +213,7 @@
         "kvm": "KVM",
         "network": "Network",
         "ntp": "NTP",
+        "smtp": "SMTP",
         "snmp": "SNMP",
         "sysLog": "Syslog",
         "uploadRestoreFiles": "Upload Restore File",
