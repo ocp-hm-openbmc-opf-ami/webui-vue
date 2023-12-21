@@ -58,7 +58,7 @@ const NetworkStore = {
           useDomainNameEnabled: DHCPv4.UseDomainName,
           useNtpEnabled: DHCPv4.UseNTPServers,
           ipv4DhcpEnabled: DHCPv4.DHCPEnabled,
-          ipv6DhcpEnabled: DHCPv6.OperatingMode == 'Stateful' ? true : false,
+          ipv6DhcpEnabled: DHCPv6.OperatingMode == 'Enabled' ? true : false,
           id: Id,
         };
       });

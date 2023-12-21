@@ -209,7 +209,7 @@ export default {
         const data = { dhcpEnable: dhcpEnable, index: this.tabIndex };
         this.$store.commit('network/setIpv6Dhcp', data);
         this.$store
-          .dispatch('network/saveIpv6Dhcp', 'Stateful')
+          .dispatch('network/saveIpv6Dhcp', 'Enabled')
           .then((message) => {
             setTimeout(() => {
               this.$store.dispatch('network/getEthernetData');
