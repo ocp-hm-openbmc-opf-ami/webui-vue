@@ -219,14 +219,17 @@
         }
     },
     "pageBsod": {
-        "capturedBsod": "Captured Bsod",
-        "downloadBsodImage": "Download BSOD Image",
-        "deleteBsodImage": "Delete BSOD Image",
-        "lastBsodCaptured": "Last Bsod Screen Captured.",
+        "capturedBsod": "Captured BSOD",
+        "downloadBsodImage": "Download",
+        "deleteBsodImage": "Delete",
+        "triggerBsodImage": "Trigger",
+        "lastBsodCaptured": "Last BSOD Screen Captured.",
         "bsodImageNotAvailable": "BSOD screen is not available.",
         "toast": {
             "errorGettingBsodApi": "Error in getting BSOD Image.",
             "errorDeleteBsodImage": "Error in deleting BSOD Image",
+            "errorTriggerBsodImage": "Error in Trigger BSOD Image",
+            "successTriggerBsodImage": "Successfully triggered BSOD Image",
             "successDeleteBsodImage": "Successfully deleted BSOD Image"
         }
     },

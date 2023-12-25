@@ -220,13 +220,16 @@
     },
     "pageBsod": {
         "capturedBsod": "捕获的 Bsod",
-        "downloadBsodImage": "下载 BSOD 图像",
-        "deleteBsodImage": "删除 BSOD 图像",
+        "downloadBsodImage": "下载",
+        "deleteBsodImage": "删除",
+        "triggerBsodImage": "扳机",
         "lastBsodCaptured": "最后捕获的 Bsod 屏幕.",
         "bsodImageNotAvailable": "BSOD 屏幕不可用.",
         "toast": {
             "errorGettingBsodApi": "获取 BSOD 图像时出错.",
             "errorDeleteBsodImage": "删除 BSOD 图像时出错",
+            "errorTriggerBsodImage": "触发 BSOD 图像时出错",
+            "successTriggerBsodImage": "成功触发 BSOD 图像",
             "successDeleteBsodImage": "已成功删除 BSOD 图像"
         }
     },

@@ -34,6 +34,17 @@ const BsodStore = {
           throw new Error(message);
         });
     },
+    async triggerBsodImage({ dispatch }) {
+      return await api
+        .post(`/redfish/v1/Managers/bmc/Oem/OpenBmc/Jpeg`)
+        .then(() => dispatch('getBsodImage'))
+        .then(() => i18n.t('pageBsod.toast.successTriggerBsodImage'))
+        .catch((error) => {
+          console.log(error);
+          const message = i18n.t('pageBsod.toast.errorTriggerBsodImage');
+          throw new Error(message);
+        });
+    },
   },
 };
 

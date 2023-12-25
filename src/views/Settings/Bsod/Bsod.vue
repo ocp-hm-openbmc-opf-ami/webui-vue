@@ -15,8 +15,12 @@
         </span>
       </b-col>
       <b-col sm="8" class="text-right">
+        <b-button variant="primary" type="button" @click="triggerBsodImage">
+          {{ $t('pageBsod.triggerBsodImage') }}
+        </b-button>
         <b-button
           v-if="base64ImageData != 'Image File is  not Created'"
+          class="ml-3"
           variant="primary"
           type="button"
           @click="downloadImage"
@@ -79,6 +83,14 @@ export default {
       this.startLoader();
       this.$store
         .dispatch('bsod/deleteBsodImage')
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => this.endLoader());
+    },
+    triggerBsodImage() {
+      this.startLoader();
+      this.$store
+        .dispatch('bsod/triggerBsodImage')
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.endLoader());
