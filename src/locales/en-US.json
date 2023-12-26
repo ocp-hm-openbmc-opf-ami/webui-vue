@@ -844,44 +844,41 @@
         "passwordRules": {
           "passwordForHigh": {
             "passwordComplexityForHigh": "Password Complexity for high",
-            "rule1": "Contains printable characters only.",
             "rule2": "Password length should not be shorter than 8 characters.",
             "rule3":"Meets following 4 criteria:" ,
             "rule4": "Contains upper case (e.g. A, G).",
             "rule5": "Contains lower case (e.g. a, g).",
             "rule6": "Contains digit numbers (e.g. 1, 6).",
-            "rule7": "Contain at least a space or symbols (e.g. $, &).",
-            "rule8": "Could not contains username or the user name in reverse order (case insensitive).",
-            "rule9": "Have at least two new characters when compared with theprevious password.",
+            "rule7": "Contain printable characters and at least a space or symbols (e.g. $, &).",
+            "rule8": "Could not contains username or the username in reverse order (case insensitive).",
+            "rule9": "Have at least two new characters when compared with the previous password.",
             "rule10": "Could not contains continuous digits longer than or equal to 3 characters (e.g. BMC(123)ste, BMC(654)sfc are not allowed).",
-            "rule11": "Could not contains continuous alphabets longer than or equalto 3 characters (e.g. (AbC)3478!,57$(DeF)68k are notallowed).",
+            "rule11": "Could not contains continuous alphabets longer than or equal to 3 characters (e.g. (AbC)3478!,57$(DeF)68k are not allowed).",
             "rule12": "Alphabets could no longer than 3 characters (e.g. (Fher)145! are not allowed))",
             "rule13": "Digits could no longer than 3 characters (e.g. Fgke(1245)#@, (4390)FGL$ are not allowed)",
             "rule14": "Contains no more than 3 same alphabets(case insensitive) (e.g. Fkr4fcpF&f (4 'f' or 'F'),Glg5gt2G! (4 'g' or 'G') are not allowed)"
           },
           "passwordFormedium": {
             "passwordComplexityFormedium": "Password Complexity for Medium",
-            "rule1": "Contains printable characters only.",
             "rule2": "Password length should not be shorter than 8 characters.",
-            "rule3": "Cannot be the same as the username or the user name in reverse order.",
+            "rule3": "Cannot be the same as the username or the username in reverse order.",
             "rule4": "Have at least two new characters when compared with the previous password.",
             "rule5": "Meets following 4 criteria:",
             "rule6": "Contains upper case (e.g. A, G).",
             "rule7": "Contains lower case (e.g. a, g).",
             "rule8": "Contains digit numbers (e.g. 1, 6).",
-            "rule9": "Contain at least a space or symbols (e.g. $, &).",
-            "rule10": "Could not contains username or the user name in reverse order (case insensitive) (eg,username=Hello, Password=th12(oLleH)_78 is not allowed)."
+            "rule9": "Contain printable characters and at least a space or symbols (e.g. $, &).",
+            "rule10": "Could not contains username or the username in reverse order (case insensitive) (eg,username=Hello, Password=th12(oLleH)_78 is not allowed)."
           },
           "passwordForLow": {
             "passwordComplexityForLow": "Password Complexity for Low",
-            "rule1": "Contains printable characters only.",
             "rule2": "Password length should not be shorter than 6 characters.",
             "rule3": "Meets following 4 criteria:",
             "rule4": "Contains upper case (e.g. A, G).",
             "rule5": "Contains lower case (e.g. a, g).",
             "rule6": "Contains digit numbers (e.g. 1, 6).",
-            "rule7": "Contain at least a space or symbols (e.g. $, &).",
-            "rule8": "Could not contains user name or the user name in reverse order (pam_cracklib will check both) (case insensitive) (eg, username=Hello, both Password=th12(heLLo)_78 and Password=th12(oLleH)_78 is not allowed, same as Medium and High)."
+            "rule7": "Contain printable characters and at least a space or symbols (e.g. $, &).",
+            "rule8": "Could not contains username or the username in reverse order (pam_cracklib will check both) (case insensitive) (eg, username=Hello, both Password=th12(heLLo)_78 and Password=th12(oLleH)_78 is not allowed, same as Medium and High)."
           }
      }        
     },

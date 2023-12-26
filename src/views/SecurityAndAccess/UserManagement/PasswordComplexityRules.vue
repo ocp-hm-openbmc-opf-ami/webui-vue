@@ -12,9 +12,6 @@
           </h5>
           <ul>
             <li>
-              {{ $t('pageUserManagement.passwordRules.passwordForHigh.rule1') }}
-            </li>
-            <li>
               {{ $t('pageUserManagement.passwordRules.passwordForHigh.rule2') }}
             </li>
             <li>
@@ -84,11 +81,6 @@
           <ul>
             <li>
               {{
-                $t('pageUserManagement.passwordRules.passwordFormedium.rule1')
-              }}
-            </li>
-            <li>
-              {{
                 $t('pageUserManagement.passwordRules.passwordFormedium.rule2')
               }}
             </li>
@@ -151,9 +143,6 @@
             }}
           </h5>
           <ul>
-            <li>
-              {{ $t('pageUserManagement.passwordRules.passwordForLow.rule1') }}
-            </li>
             <li>
               {{ $t('pageUserManagement.passwordRules.passwordForLow.rule2') }}
             </li>
