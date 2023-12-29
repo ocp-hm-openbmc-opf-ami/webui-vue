@@ -16,6 +16,10 @@ api.interceptors.response.use(undefined, (error) => {
 
   // TODO: Provide user with a notification and way to keep system active
   if (response.status == 401) {
+    const isConsoleWindow = store.getters['kvm/getIsConsoleWindow'];
+    if (isConsoleWindow) {
+      isConsoleWindow.isconsolewindowOpen.close();
+    }
     if (response.config.url != '/login') {
       window.location = '/login';
       // Commit logout to remove XSRF-TOKEN cookie

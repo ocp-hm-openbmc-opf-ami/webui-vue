@@ -127,6 +127,10 @@ export default {
       if (this.consoleWindow == false) this.isConsoleWindow.close();
     },
   },
+  created() {
+    this.$store.dispatch('global/getSystemInfo');
+    window.addEventListener('beforeunload', this.handleChildWindowBeforeUnload);
+  },
   mounted() {
     setTimeout(() => {
       this.$store
@@ -149,6 +153,10 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeKvmWindow);
+    window.removeEventListener(
+      'beforeunload',
+      this.handleChildWindowBeforeUnload
+    );
     this.closeTerminal();
   },
   methods: {
@@ -227,6 +235,14 @@ export default {
         'kvmConsoleWindow',
         'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=700,height=550'
       );
+      this.$store.commit('kvm/setIsConsoleWindow', {
+        isconsolewindowOpen: this.isConsoleWindow,
+      });
+    },
+    handleChildWindowBeforeUnload() {
+      if (this.isConsoleWindow && !this.isConsoleWindow.closed) {
+        this.isConsoleWindow.close();
+      }
     },
     onKeyPress(keyId, keyValue, status) {
       if (this.rfb) {

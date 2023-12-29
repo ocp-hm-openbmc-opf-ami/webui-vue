@@ -4,6 +4,7 @@ const KvmStore = {
   namespaced: true,
   state: {
     activeStatus: 0,
+    isconsolewindow: null,
     softKeyboardStates: {
       keyboardLayoutStatus: 'default',
       altKeyStatus: false,
@@ -18,6 +19,7 @@ const KvmStore = {
   },
   getters: {
     getKvmActiveStatus: (state) => state.activeStatus,
+    getIsConsoleWindow: (state) => state.isconsolewindow,
     getSoftKeyboardStatus: (state) => state.softKeyboardStates,
     getKeyboardLayout: (state) => state.keyboardLayout,
     getclientKeyboardLEDState: (state) => state.clientKeyboardLEDState,
@@ -26,6 +28,9 @@ const KvmStore = {
   mutations: {
     setKvmActiveStatusData: (state, statusData) =>
       (state.activeStatus = statusData.kvmActiveStatus),
+    setIsConsoleWindow: (state, isconsolewindowOpen) => {
+      state.isconsolewindow = isconsolewindowOpen;
+    },
     updateSoftKeyStatus: (state, keyStatus) => {
       state.softKeyboardStates[keyStatus[1]] = keyStatus[0];
     },
