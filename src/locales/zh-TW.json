@@ -745,7 +745,8 @@
         "disconnected": "已斷連",
         "alreadyActiveSession": "主KVM對談正在運轉 請稍後再試 ",
         "alreadyInMasterSession": "主對談正在運轉",
-        "errorInGettingActiveStatus": "取得KVM活躍狀態發生錯誤!"
+        "errorInGettingActiveStatus": "取得KVM活躍狀態發生錯誤!",
+        "disabledKVMService": "KVM服務已停用。進入安全性和存取 -> 策略頁面啟用 KVM 服務。"
     },
     "pageLdap": {
         "pageDescription": "配置LDAP設定和管理角色群",
@@ -1220,10 +1221,10 @@
             "successSshEnabled": "啟用 SSH 安全設定成功",
             "successVtpmDisabled": "停用 VirtualTPM 安全設定成功",
             "successVtpmEnabled": "啟用 VirtualTPM 安全設定成功",
-            "successKvmDisabled": "停用 KVM  安全設定成功",
-            "successKvmEnabled": "啟用 KVM  安全設定成功",
-            "successVmcDisabled": "停用 Virtual Media 安全設定成功",
-            "successVmcEnabled": "啟用 Virtual Media  安全設定成功",
+            "successKvmDisabled": "已停用的KVM服務已成功儲存。請等待 10-20 秒以進行停用。",
+            "successKvmEnabled": "啟用的KVM服務已成功儲存。請等待最多 10-20 秒以啟用..",
+            "successVmcDisabled": "已停用的虛擬媒體服務已成功儲存。請等待 10-20 秒以進行停用。",
+            "successVmcEnabled": "啟用的虛擬媒體服務已成功儲存。請等待最多 10-20 秒以啟用..",
             "successSOLDisabled": "停用 SOL SSH  安全設定成功",
             "successSOLEnabled": " 啟用 SOL SSH  安全設定成功",
             "successSessionTimeout": "配置會話逾期成功",
@@ -1394,6 +1395,7 @@
         "virtualMediaSubTitleFirst": "從網頁瀏覽器讀取映像檔",
         "virtualMediaSubTitleSecond": "從外部伺服器讀取映像檔",
         "permissionRestricted": "您沒有權限查看此頁面",
+        "disabledVirtualMediaService": "虛擬媒體服務已停用。進入安全性和存取 -> 策略頁面以啟用虛擬媒體服務。",
         "modal": {
             "password": "密碼",
             "serverUri": "外部伺服器 URI",

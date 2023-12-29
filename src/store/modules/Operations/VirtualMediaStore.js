@@ -97,7 +97,11 @@ const VirtualMediaStore = {
         })
         .catch((error) => {
           console.log('Virtual Media:', error);
-          commit('setVirtualMediaAccess', false);
+          if (error.response.status != 500) {
+            commit('setVirtualMediaAccess', false);
+          } else {
+            commit('setVirtualMediaAccess', true);
+          }
         });
     },
     async mountImage(_, { id, data }) {

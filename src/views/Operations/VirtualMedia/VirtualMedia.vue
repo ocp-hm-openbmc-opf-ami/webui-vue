@@ -7,98 +7,109 @@
       }}</b-alert>
     </div>
     <div v-if="virtualMediaAccess">
-      <b-row class="mb-4">
-        <b-col md="12">
-          <page-section
-            :section-title="$t('pageVirtualMedia.virtualMediaSubTitleFirst')"
-          >
-            <b-row>
-              <b-col v-for="(dev, $index) in proxyDevices" :key="$index" md="6">
-                <b-form-group :label="dev.id" label-class="bold">
-                  <form-file
+      <div v-if="!virtualMediaServiceEnabledAccess">
+        <b-alert show variant="warning">{{
+          $t('pageVirtualMedia.disabledVirtualMediaService')
+        }}</b-alert>
+      </div>
+      <div v-else>
+        <b-row class="mb-4">
+          <b-col md="12">
+            <page-section
+              :section-title="$t('pageVirtualMedia.virtualMediaSubTitleFirst')"
+            >
+              <b-row>
+                <b-col
+                  v-for="(dev, $index) in proxyDevices"
+                  :key="$index"
+                  md="6"
+                >
+                  <b-form-group :label="dev.id" label-class="bold">
+                    <form-file
+                      v-if="!dev.isActive"
+                      :id="concatId(dev.id)"
+                      v-model="dev.file"
+                    >
+                      <template #invalid>
+                        <b-form-invalid-feedback role="alert">
+                          {{ $t('global.form.required') }}
+                        </b-form-invalid-feedback>
+                      </template>
+                    </form-file>
+                  </b-form-group>
+                  <b-button
                     v-if="!dev.isActive"
-                    :id="concatId(dev.id)"
-                    v-model="dev.file"
-                  >
-                    <template #invalid>
-                      <b-form-invalid-feedback role="alert">
-                        {{ $t('global.form.required') }}
-                      </b-form-invalid-feedback>
-                    </template>
-                  </form-file>
-                </b-form-group>
-                <b-button
-                  v-if="!dev.isActive"
-                  variant="primary"
-                  :disabled="!dev.file"
-                  @click="startVM(dev)"
-                >
-                  {{ $t('pageVirtualMedia.start') }}
-                </b-button>
-                <b-button
-                  v-if="dev.isActive"
-                  variant="primary"
-                  :disabled="!dev.file"
-                  @click="stopVM(dev)"
-                >
-                  {{ $t('pageVirtualMedia.stop') }}
-                </b-button>
-              </b-col>
-            </b-row>
-          </page-section>
-        </b-col>
-      </b-row>
-      <b-row v-if="loadImageFromExternalServer" class="mb-4">
-        <b-col md="12">
-          <page-section
-            :section-title="$t('pageVirtualMedia.virtualMediaSubTitleSecond')"
-          >
-            <b-row>
-              <b-col
-                v-for="(device, $index) in legacyDevices"
-                :key="$index"
-                md="6"
-              >
-                <b-form-group
-                  :label="device.id"
-                  :label-for="device.id"
-                  label-class="bold"
-                >
-                  <b-button
-                    variant="secondary"
-                    :disabled="device.isActive"
-                    @click="configureConnection(device)"
-                  >
-                    {{ $t('pageVirtualMedia.configureConnection') }}
-                  </b-button>
-
-                  <b-button
-                    v-if="!device.isActive"
                     variant="primary"
-                    class="float-right"
-                    :disabled="!device.serverUri"
-                    @click="startLegacy(device)"
+                    :disabled="!dev.file"
+                    @click="startVM(dev)"
                   >
                     {{ $t('pageVirtualMedia.start') }}
                   </b-button>
                   <b-button
-                    v-if="device.isActive"
+                    v-if="dev.isActive"
                     variant="primary"
-                    class="float-right"
-                    @click="stopLegacy(device)"
+                    :disabled="!dev.file"
+                    @click="stopVM(dev)"
                   >
                     {{ $t('pageVirtualMedia.stop') }}
                   </b-button>
-                </b-form-group>
-              </b-col>
-            </b-row>
-          </page-section>
-        </b-col>
-      </b-row>
-      <modal-configure-connection
-        :connection="modalConfigureConnection"
-        @ok="saveConnection"
-      />
+                </b-col>
+              </b-row>
+            </page-section>
+          </b-col>
+        </b-row>
+        <b-row v-if="loadImageFromExternalServer" class="mb-4">
+          <b-col md="12">
+            <page-section
+              :section-title="$t('pageVirtualMedia.virtualMediaSubTitleSecond')"
+            >
+              <b-row>
+                <b-col
+                  v-for="(device, $index) in legacyDevices"
+                  :key="$index"
+                  md="6"
+                >
+                  <b-form-group
+                    :label="device.id"
+                    :label-for="device.id"
+                    label-class="bold"
+                  >
+                    <b-button
+                      variant="secondary"
+                      :disabled="device.isActive"
+                      @click="configureConnection(device)"
+                    >
+                      {{ $t('pageVirtualMedia.configureConnection') }}
+                    </b-button>
+
+                    <b-button
+                      v-if="!device.isActive"
+                      variant="primary"
+                      class="float-right"
+                      :disabled="!device.serverUri"
+                      @click="startLegacy(device)"
+                    >
+                      {{ $t('pageVirtualMedia.start') }}
+                    </b-button>
+                    <b-button
+                      v-if="device.isActive"
+                      variant="primary"
+                      class="float-right"
+                      @click="stopLegacy(device)"
+                    >
+                      {{ $t('pageVirtualMedia.stop') }}
+                    </b-button>
+                  </b-form-group>
+                </b-col>
+              </b-row>
+            </page-section>
+          </b-col>
+        </b-row>
+        <modal-configure-connection
+          :connection="modalConfigureConnection"
+          @ok="saveConnection"
+        />
+      </div>
     </div>
   </b-container>
 </template>
@@ -111,6 +122,7 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import ModalConfigureConnection from './ModalConfigureConnection';
 import NbdServer from '@/utilities/NBDServer';
 import FormFile from '@/components/Global/FormFile';
+import { mapState } from 'vuex';
 
 export default {
   name: 'VirtualMedia',
@@ -126,6 +138,7 @@ export default {
     };
   },
   computed: {
+    ...mapState('global', ['virtualMediaServiceEnabledAccess']),
     proxyDevices() {
       return this.$store.getters['virtualMedia/proxyDevices'];
     },

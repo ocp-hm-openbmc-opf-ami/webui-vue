@@ -745,7 +745,8 @@
         "disconnected": "Getrennt",
         "alreadyActiveSession": "Die Master KVM Sitzung läuft bereits! Bitte versuchen Sie es nach einiger Zeit.",
         "alreadyInMasterSession": "Die Master Sitzung läuft",
-        "errorInGettingActiveStatus": "Fehler beim Abrufen des KVM Aktiv Status!!"
+        "errorInGettingActiveStatus": "Fehler beim Abrufen des KVM Aktiv Status!!",
+        "disabledKVMService": "Der KVM-Dienst ist deaktiviert. Gehen Sie zur Seite Sicherheit und Zugriff -> Richtlinien, um den KVM-Dienst zu aktivieren."
     },
     "pageLdap": {
         "pageDescription": "Konfigurieren Sie LDAP Einstellungen und verwalten Sie Rollengruppen",
@@ -1220,10 +1221,10 @@
             "successSshEnabled": "SSH Sicherheitseinstellung erfolgreich aktiviert.",
             "successVtpmDisabled": "Die VirtualTPM Sicherheitseinstellung wurde erfolgreich deaktiviert.",
             "successVtpmEnabled": "Die VirtualTPM Sicherheitseinstellung wurde erfolgreich aktiviert.",
-            "successKvmDisabled": "Die KVM Sicherheitseinstellung wurde erfolgreich deaktiviert.",
-            "successKvmEnabled": "KVM Sicherheitseinstellung erfolgreich aktiviert.",
-            "successVmcDisabled": "Die Sicherheitseinstellung für virtuelle Medien wurde erfolgreich deaktiviert.",
-            "successVmcEnabled": "Die Sicherheitseinstellung für virtuelle Medien wurde erfolgreich aktiviert.",
+            "successKvmDisabled": "Der deaktivierte KVM-Dienst wurde erfolgreich gespeichert. Bitte warten Sie bis zu 10–20 Sekunden mit der Deaktivierung.",
+            "successKvmEnabled": "Der aktivierte KVM-Dienst wurde erfolgreich gespeichert. Bitte warten Sie bis zu 10–20 Sekunden, bis die Aktivierung erfolgt.",
+            "successVmcDisabled": "Der deaktivierte Virtual Media-Dienst wurde erfolgreich gespeichert. Bitte warten Sie bis zu 10–20 Sekunden mit der Deaktivierung.",
+            "successVmcEnabled": "Der aktivierte Virtual Media-Dienst wurde erfolgreich gespeichert. Bitte warten Sie bis zu 10–20 Sekunden, bis die Aktivierung erfolgt.",
             "successSOLDisabled": "Die SOL SSH Sicherheitseinstellung wurde erfolgreich deaktiviert.",
             "successSOLEnabled": "Die SOL SSH Sicherheitseinstellung wurde erfolgreich aktiviert.",
             "successSessionTimeout": "Das Sitzungszeitlimit wurde erfolgreich konfiguriert.",
@@ -1394,6 +1395,7 @@
         "virtualMediaSubTitleFirst": "Bild vom Browser laden",
         "virtualMediaSubTitleSecond": "Bild von externem Server laden",
         "permissionRestricted": "Sie haben keine Berechtigung, diese Seite anzuzeigen",
+        "disabledVirtualMediaService": "Der virtuelle Mediendienst ist vollständig. Gehen Sie zur Seite „Beveiliging en toegang“ -> Klicken Sie hier, um den Virtual Media-Dienst zu öffnen.",
         "modal": {
             "password": "Passwort",
             "serverUri": "Externer Server URI",

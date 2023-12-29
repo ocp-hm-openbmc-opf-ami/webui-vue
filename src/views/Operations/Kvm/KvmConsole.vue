@@ -127,9 +127,6 @@ export default {
       if (this.consoleWindow == false) this.isConsoleWindow.close();
     },
   },
-  created() {
-    this.$store.dispatch('global/getSystemInfo');
-  },
   mounted() {
     setTimeout(() => {
       this.$store

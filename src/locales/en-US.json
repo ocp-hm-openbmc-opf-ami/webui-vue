@@ -745,7 +745,8 @@
         "disconnected": "Disconnected",
         "alreadyActiveSession": "Already master KVM session is Running! Please try after some time.",
         "alreadyInMasterSession": "Master session is Running",
-        "errorInGettingActiveStatus": "Error in Getting KVM active status!!"
+        "errorInGettingActiveStatus": "Error in Getting KVM active status!!",
+        "disabledKVMService": "KVM service is disabled. Go to Security and Access -> Policies page to enable KVM service."
     },
     "pageLdap": {
         "pageDescription": "Configure LDAP settings and manage role groups",
@@ -1220,10 +1221,10 @@
             "successSshEnabled": "Successfully enabled SSH security setting.",
             "successVtpmDisabled": "Successfully disabled VirtualTPM security setting.",
             "successVtpmEnabled": "Successfully enabled VirtualTPM security setting.",
-            "successKvmDisabled": "Successfully disabled KVM security setting.",
-            "successKvmEnabled": "Successfully enabled KVM security setting.",
-            "successVmcDisabled": "Successfully disabled Virtual Media security setting.",
-            "successVmcEnabled": "Successfully enabled Virtual Media security setting.",
+            "successKvmDisabled": "The KVM service disabled has been saved successfully. Please wait up to 10–20 seconds for Disabling..",
+            "successKvmEnabled": "The KVM service enabled has been saved successfully. Please wait up to 10–20 seconds for Enabling..",
+            "successVmcDisabled": "The virtual media service disabled has been saved successfully. Please wait up to 10–20 seconds for Disabling..",
+            "successVmcEnabled": "The virtual media service enabled has been saved successfully. Please wait up to 10–20 seconds for Enabling..",
             "successSOLDisabled": "Successfully disabled SOL SSH security setting.",
             "successSOLEnabled": "Successfully enabled SOL SSH security setting.",
             "successSessionTimeout": "Successfully configured the session timeout.",
@@ -1394,6 +1395,7 @@
         "virtualMediaSubTitleFirst": "Load image from web browser",
         "virtualMediaSubTitleSecond": "Load image from external server",
         "permissionRestricted": "You don't have a permission to view this page",
+        "disabledVirtualMediaService": " Virtual Media service is disabled. Go to Security and Access -> Policies page to enable Virtual Media service.",
         "modal": {
             "password": "Password",
             "serverUri": "External server URI",

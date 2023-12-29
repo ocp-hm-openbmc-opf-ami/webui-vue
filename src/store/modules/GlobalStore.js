@@ -44,6 +44,8 @@ const GlobalStore = {
     isAuthorized: true,
     userPrivilege: null,
     backupAndRestore: null,
+    virtualMediaServiceEnabledAccess: true,
+    kvmServiceEnabledAccess: true,
   },
   getters: {
     assetTag: (state) => state.assetTag,
@@ -59,6 +61,9 @@ const GlobalStore = {
     isAuthorized: (state) => state.isAuthorized,
     userPrivilege: (state) => state.userPrivilege,
     backupAndRestore: (state) => state.backupAndRestore,
+    virtualMediaServiceEnabledAccess: (state) =>
+      state.virtualMediaServiceEnabledAccess,
+    kvmServiceEnabledAccess: (state) => state.kvmServiceEnabledAccess,
   },
   mutations: {
     setAssetTag: (state, assetTag) => (state.assetTag = assetTag),
@@ -85,6 +90,15 @@ const GlobalStore = {
     },
     setbackupAndRestore: (state, backupAndRestore) => {
       state.backupAndRestore = backupAndRestore;
+    },
+    setVirtualMediaServiceEnabledAccess: (
+      state,
+      virtualMediaServiceEnabledAccess
+    ) => {
+      state.virtualMediaServiceEnabledAccess = virtualMediaServiceEnabledAccess;
+    },
+    setkvmServiceEnabledAccess: (state, kvmServiceEnabledAccess) => {
+      state.kvmServiceEnabledAccess = kvmServiceEnabledAccess;
     },
   },
   actions: {
@@ -133,12 +147,22 @@ const GlobalStore = {
               Model,
               PowerState,
               SerialNumber,
+              VirtualMediaConfig,
+              GraphicalConsole,
               Status: { State } = {},
             },
           } = {}) => {
             commit('setAssetTag', AssetTag);
             commit('setSerialNumber', SerialNumber);
             commit('setModelType', Model);
+            commit(
+              'setVirtualMediaServiceEnabledAccess',
+              VirtualMediaConfig.ServiceEnabled
+            );
+            commit(
+              'setkvmServiceEnabledAccess',
+              GraphicalConsole.ServiceEnabled
+            );
             if (State === 'Quiesced' || State === 'InTest') {
               // OpenBMC's host state interface is mapped to 2 Redfish
               // properties "Status""State" and "PowerState". Look first

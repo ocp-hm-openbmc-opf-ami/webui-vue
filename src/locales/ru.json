@@ -492,7 +492,8 @@
         "disconnected": "Отключено",
         "alreadyActiveSession": "Мастер-сессия KVM уже запущена! Пожалуйста, попробуйте через некоторое время.",
         "alreadyInMasterSession": "основная сессия запущена",
-        "errorInGettingActiveStatus": "Ошибка при получении активного статуса KVM!!"
+        "errorInGettingActiveStatus": "Ошибка при получении активного статуса KVM!!",
+        "disabledKVMService": "Служба KVM отключена. Перейдите на страницу «Безопасность и доступ» -> «Политики», чтобы включить службу KVM."
     },
     "pageLdap": {
         "pageDescription": "Настройка параметров LDAP и управление группами",
@@ -960,6 +961,7 @@
         "virtualMediaSubTitleFirst": "Подключить образ с помощью веб браузера",
         "virtualMediaSubTitleSecond": "Загрузить образ с внешнего сервера",
         "permissionRestricted": "У вас нет разрешения на просмотр этой страницы",
+        "disabledVirtualMediaService": "Служба виртуальных носителей отключена. Перейдите на страницу «Безопасность и доступ» -> «Политики», чтобы включить службу виртуального носителя.",
         "modal": {
             "password": "Пароль",
             "serverUri": "URI Внешнего сервера",
