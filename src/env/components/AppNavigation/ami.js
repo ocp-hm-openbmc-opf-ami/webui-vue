@@ -111,6 +111,11 @@ const AppNavigationMixin = {
               route: '/operations/reboot-bmc',
             },
             {
+              id: 'backup-and-restore',
+              label: this.$t('appNavigation.backupAndRestore'),
+              route: '/operations/backup-and-restore',
+            },
+            {
               id: 'serial-over-lan',
               label: this.$t('appNavigation.serialOverLan'),
               route: '/operations/serial-over-lan',

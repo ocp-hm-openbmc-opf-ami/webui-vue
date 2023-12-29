@@ -43,6 +43,7 @@ const GlobalStore = {
     username: localStorage.getItem('storedUsername'),
     isAuthorized: true,
     userPrivilege: null,
+    backupAndRestore: null,
   },
   getters: {
     assetTag: (state) => state.assetTag,
@@ -57,6 +58,7 @@ const GlobalStore = {
     username: (state) => state.username,
     isAuthorized: (state) => state.isAuthorized,
     userPrivilege: (state) => state.userPrivilege,
+    backupAndRestore: (state) => state.backupAndRestore,
   },
   mutations: {
     setAssetTag: (state, assetTag) => (state.assetTag = assetTag),
@@ -81,18 +83,43 @@ const GlobalStore = {
     setPrivilege: (state, privilege) => {
       state.userPrivilege = privilege;
     },
+    setbackupAndRestore: (state, backupAndRestore) => {
+      state.backupAndRestore = backupAndRestore;
+    },
   },
   actions: {
     async getBmcTime({ commit }) {
       return await api
         .get('/redfish/v1/Managers/bmc')
         .then((response) => {
+          const availableActions = response.data.Actions;
+
+          const isBackupConfigAvailable =
+            availableActions &&
+            availableActions.Oem &&
+            availableActions.Oem['#AMIManager.BackupConfig'] &&
+            availableActions.Oem['#AMIManager.BackupConfig'][
+              '@Redfish.ActionInfo'
+            ];
+
+          const isRestoreConfigAvailable =
+            availableActions &&
+            availableActions.Oem &&
+            availableActions.Oem['#AMIManager.RestoreConfig'] &&
+            availableActions.Oem['#AMIManager.RestoreConfig'][
+              '@Redfish.ActionInfo'
+            ];
+
+          const areBothActionsAvailable =
+            isBackupConfigAvailable !== undefined &&
+            isRestoreConfigAvailable !== undefined;
           const bmcDateTime = response.data.DateTime;
           const date = new Date(bmcDateTime);
           const timeZone = response.data.DateTimeLocalOffset;
           commit('setBmcTime', date);
           commit('setBmcDateTime', bmcDateTime);
           commit('setTimeZone', timeZone);
+          commit('setbackupAndRestore', areBothActionsAvailable);
         })
         .catch((error) => console.log(error));
     },

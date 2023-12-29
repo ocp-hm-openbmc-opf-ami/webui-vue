@@ -26,7 +26,8 @@
             "critical": "嚴重",
             "create": "創造",
             "success": "成功",
-            "alert": "警報"
+            "alert": "警報",
+            "upload": "上傳"
         },
         "ariaLabel": {
             "clearSearch": "清除搜索條件",
@@ -155,7 +156,8 @@
         "adapter": "@:appPageTitle.adapter",
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
-        "createLogicalDevice": "@:appPageTitle.createLogicalDevice"
+        "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "backupAndRestore": "@:appPageTitle.backupAndRestore"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -200,7 +202,32 @@
         "adapter": "適配器",
         "physicalDevice": "物理設備",
         "logicalDevice": "邏輯設備",
-        "createLogicalDevice": "創建邏輯設備"
+        "createLogicalDevice": "創建邏輯設備",
+        "backupAndRestore": "備份還原"
+    },
+    "pageBackupAndRestore": {
+        "backup": "備份",
+        "restore": "恢復",
+        "authentication": "驗證",
+        "ipmi": "IPMI",
+        "kvm": "KVM",
+        "network": "網路",
+        "ntp": "NTP",
+        "smtp": "SMTP",
+        "snmp": "SNMP",
+        "sysLog": "系統日誌",
+        "uploadRestoreFiles": "上傳恢復文件",
+        "checkAll": "啟用/停用所有備份屬性",
+        "tarFileOnly": "僅上傳恢復 (.tar) 文件",
+        "toast": {
+            "successMessage": "已成功下載屬性備份功能",
+            "errorMessage": "屬性「備份功能」不在可接受值清單中",
+            "fileUploadedSuccessfully": "恢復檔案上傳成功 ",
+            "fileUploadedError": "上傳恢復檔案時發生錯誤",
+            "errorGettingBackupDetails": "取得屬性備份功能時發生錯誤",
+            "errorMessageNotConfigured": "由於設定檔不存在，操作無法完成",
+            "featureNotAvailable": "未啟用備份和復原功能."
+        }
     },
     "pageOnDemand": {
         "onDemand":"一經請求",
