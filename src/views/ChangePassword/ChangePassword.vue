@@ -33,6 +33,7 @@
                 autofocus="autofocus"
                 type="password"
                 :state="getValidationState($v.form.password)"
+                autocomplete="new-password"
                 @change="$v.form.password.$touch()"
               >
               </b-form-input>
@@ -66,6 +67,7 @@
                 autofocus="autofocus"
                 type="password"
                 :state="getValidationState($v.form.passwordConfirm)"
+                autocomplete="new-password"
                 @change="$v.form.passwordConfirm.$touch()"
               >
               </b-form-input>

@@ -72,6 +72,7 @@
             type="text"
             :state="getValidationState($v.form.username)"
             data-test-id="configureConnection-input-username"
+            autocomplete="new-username"
             @input="$v.form.username.$touch()"
           />
           <b-form-invalid-feedback role="alert">

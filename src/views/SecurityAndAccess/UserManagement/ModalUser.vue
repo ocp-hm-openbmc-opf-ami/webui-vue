@@ -84,8 +84,9 @@
                 :state="getValidationState($v.form.username)"
                 :disabled="
                   (!newUser && originalUsername === disabled) ||
-                  form.username === 'root'
+                  newUser === 'root'
                 "
+                autocomplete="new-username"
                 @input="$v.form.username.$touch()"
               />
               <b-form-invalid-feedback role="alert">
@@ -145,10 +146,7 @@
                 name="Password-change-status"
                 data-test-id="userManagement-radioButton-statusDisabled"
                 :value="false"
-                :disabled="
-                  (!newUser && originalUsername === disabled) ||
-                  form.username === 'root'
-                "
+                :disabled="form.username === 'root'"
                 @input="$v.form.PasswordChangeRequired.$touch()"
               >
                 {{ $t('global.status.disabled') }}
@@ -170,10 +168,7 @@
                 name="vmediaAccess-change-status"
                 data-test-id="userManagement-vmediaAccess-statusDisabled"
                 :value="false"
-                :disabled="
-                  (!newUser && originalUsername === disabled) ||
-                  form.username === 'root'
-                "
+                :disabled="form.username === 'root'"
                 @input="$v.form.vmediaAccess.$touch()"
               >
                 {{ $t('global.status.disabled') }}
@@ -202,6 +197,7 @@
                   aria-describedby="password-help-block"
                   :state="getValidationState($v.form.password)"
                   class="form-control-with-button"
+                  autocomplete="new-password"
                   @input="$v.form.password.$touch()"
                 />
                 <b-form-invalid-feedback role="alert">
@@ -226,6 +222,7 @@
                   type="password"
                   :state="getValidationState($v.form.passwordConfirmation)"
                   class="form-control-with-button"
+                  autocomplete="new-password"
                   @input="$v.form.passwordConfirmation.$touch()"
                 />
                 <b-form-invalid-feedback role="alert">

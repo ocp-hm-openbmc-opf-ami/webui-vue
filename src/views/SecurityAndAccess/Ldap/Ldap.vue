@@ -145,6 +145,7 @@
                           type="password"
                           :state="getValidationState($v.form.bindPassword)"
                           class="form-control-with-button"
+                          autocomplete="new-password"
                           @change="$v.form.bindPassword.$touch()"
                         />
                         <b-form-invalid-feedback role="alert">

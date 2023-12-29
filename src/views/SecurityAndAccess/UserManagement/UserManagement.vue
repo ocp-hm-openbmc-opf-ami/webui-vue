@@ -274,8 +274,20 @@ export default {
   methods: {
     editEnable(user) {
       if (
-        'root' === this.$store.getters['global/username'] ||
+        user.UserName === this.$store.getters['global/username'] &&
+        (user.RoleId === 'Operator' || user.RoleId === 'ReadOnly')
+      ) {
+        return false;
+      }
+      if (
+        'root' === this.$store.getters['global/username'] &&
+        user.UserName !== 'root' &&
         user.RoleId === 'Administrator'
+      ) {
+        return true;
+      } else if (
+        this.$store.getters['global/username'] === user.UserName ||
+        'root' === this.$store.getters['global/username']
       ) {
         return true;
       } else {

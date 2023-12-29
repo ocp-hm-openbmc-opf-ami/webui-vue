@@ -34,6 +34,7 @@
                   v-model="form.currentPassword"
                   type="password"
                   data-test-id="profileSettings-input-ocurrentPassword"
+                  autocomplete="new-password"
                   class="form-control-with-button"
                 />
               </input-password-toggle>
@@ -60,6 +61,7 @@
                   :state="getValidationState($v.form.newPassword)"
                   data-test-id="profileSettings-input-newPassword"
                   class="form-control-with-button"
+                  autocomplete="new-password"
                   @input="$v.form.newPassword.$touch()"
                 />
                 <b-form-invalid-feedback role="alert">
@@ -82,6 +84,7 @@
                   :state="getValidationState($v.form.confirmPassword)"
                   data-test-id="profileSettings-input-confirmPassword"
                   class="form-control-with-button"
+                  autocomplete="new-password"
                   @input="$v.form.confirmPassword.$touch()"
                 />
                 <b-form-invalid-feedback role="alert">
