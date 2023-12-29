@@ -35,49 +35,36 @@ const NetworkStore = {
             (ethernetInterface) => ethernetInterface.data
           );
           commit('setVlanAllData', vlanAllData);
-          console.log(vlanAllData);
           const vlanTableData = [];
           ethernetInterfaces.map((ethernetInterface) => {
-            if (ethernetInterface.data.VLANs) {
-              api
-                .get(ethernetInterface.data.VLANs['@odata.id'])
-                .then((response) =>
-                  response.data.Members.map(
-                    (ethernetInterface) => ethernetInterface['@odata.id']
-                  )
-                )
-                .then((ethernetInterfaceIds) =>
-                  api.all(
-                    ethernetInterfaceIds.map((ethernetInterface) =>
-                      api.get(ethernetInterface)
-                    )
-                  )
-                )
-                .then((result) => {
-                  const vlanData = result.map(
-                    (ethernetInterface) => ethernetInterface.data
-                  );
-                  vlanTableData.push(vlanData);
-                });
+            if (ethernetInterface.data.VLAN) {
+              const vlanData = ethernetInterface.data.VLAN;
+              vlanData.Id = ethernetInterface.data['@odata.id'].split('/')[6];
+              vlanTableData.push(vlanData);
             }
           });
           commit('setVlanTableData', vlanTableData);
-          console.log('setVlanTableData', vlanTableData);
         })
         .catch((error) => {
-          console.log('VLAN Error:', error);
+          console.log(error);
         });
     },
     async addVlan({ dispatch }, { VLANEnable, VLANId, TabId }) {
       const data = {
-        VLANId: VLANId,
-        VLANEnable: VLANEnable,
+        VLAN: {
+          VLANEnable: VLANEnable,
+          VLANId: VLANId,
+        },
+        Links: {
+          RelatedInterfaces: [
+            {
+              '@odata.id': `/redfish/v1/Managers/bmc/EthernetInterfaces/${TabId}`,
+            },
+          ],
+        },
       };
       return await api
-        .post(
-          `/redfish/v1/Managers/bmc/EthernetInterfaces/${TabId}/VLANs/`,
-          data
-        )
+        .post('/redfish/v1/Managers/bmc/EthernetInterfaces', data)
         .then(() => dispatch('getEthernetData'))
         .then(() => i18n.tc('pageVlan.toast.successAddedVlan'))
         .catch((error) => {
@@ -85,10 +72,10 @@ const NetworkStore = {
           throw new Error(i18n.tc('pageVlan.toast.errorAddedVlan'));
         });
     },
-    async deleteVlan({ dispatch }, { TabId, VirtualInterface }) {
+    async deleteVlan({ dispatch }, { VirtualInterface }) {
       return await api
         .delete(
-          `/redfish/v1/Managers/bmc/EthernetInterfaces/${TabId}/VLANs/${VirtualInterface}`
+          `/redfish/v1/Managers/bmc/EthernetInterfaces/${VirtualInterface}`
         )
         .then(() => dispatch('getEthernetData'))
         .then(() => i18n.t('pageVlan.toast.successDeleteVlan'))

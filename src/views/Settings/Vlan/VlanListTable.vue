@@ -26,30 +26,31 @@
     </b-table>
     <br />
     <div>
-      <!-- <b-row class="w-50 mb-2">
-        <b-col class="d-sm-flex"
-          ><span>{{ $t('pageVlan.table.enable') }}</span></b-col
-        >
-        <b-col class="d-sm-flex">
-          <b-form-checkbox
-            v-model="form.enableVlan"
-            value="true"
-            unchecked-value="false"
-          >
-          </b-form-checkbox>
-        </b-col>
-      </b-row> -->
       <br />
       <b-row class="w-50 mb-2">
         <b-col class="d-sm-flex"
           ><span>{{ $t('pageVlan.table.id') }}</span></b-col
         >
         <b-col class="d-sm-flex">
-          <b-form-input id="vlanId" v-model="form.vlanId"> </b-form-input>
+          <b-form-group>
+            <b-form-input
+              id="vlanId"
+              v-model="form.vlanId"
+              :state="getValidationState($v.form.vlanId)"
+            >
+            </b-form-input>
+            <b-form-invalid-feedback role="alert">
+              <template v-if="!$v.form.vlanId.required">
+                {{ $t('global.form.fieldRequired') }}
+              </template>
+              <template v-if="!$v.form.vlanId.numeric">
+                {{ $t('global.form.invalidFormat') }}
+              </template>
+            </b-form-invalid-feedback>
+          </b-form-group>
         </b-col>
       </b-row>
     </div>
-    <br />
     <b-button variant="primary" @click="addVlan()">
       {{ $t('pageVlan.table.add') }}
     </b-button>
@@ -62,11 +63,13 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import IconTrashcan from '@carbon/icons-vue/es/trash-can/20';
 import TableRowAction from '@/components/Global/TableRowAction';
 import { mapState } from 'vuex';
-// import Axios from 'axios';
+import { required, numeric } from 'vuelidate/lib/validators';
+import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
+
 export default {
   name: 'VlanListTable',
   components: { IconTrashcan, TableRowAction },
-  mixins: [BVToastMixin, LoadingBarMixin],
+  mixins: [BVToastMixin, LoadingBarMixin, VuelidateMixin],
   props: {
     tabId: {
       type: String,
@@ -105,16 +108,24 @@ export default {
   watch: {
     vlanTableData() {
       this.setVlanData();
-      console.log('getters working');
     },
     // Watch for change in tab index
     tabId() {
-      console.log('tabId', this.tabId);
       this.setVlanData();
     },
   },
   created() {
     this.setVlanData();
+  },
+  validations() {
+    return {
+      form: {
+        vlanId: {
+          required,
+          numeric,
+        },
+      },
+    };
   },
   methods: {
     tabIdFn() {
@@ -128,24 +139,22 @@ export default {
     },
     setVlanData() {
       this.form.tableItems = [];
-      this.vlanTableData.forEach((vlanData) => {
-        vlanData.forEach((rowData) => {
-          if (this.tabIdFn() == rowData.Id.split('_')[0]) {
-            const tableRow = {
-              VLANEnable: rowData.VLANEnable,
-              VirtualInterface: rowData.Id,
-              VLANId: rowData.VLANId,
-              actions: [
-                {
-                  value: 'delete',
-                  title: this.$t('pageVlan.table.deleteVlan'),
-                  enabled: true,
-                },
-              ],
-            };
-            this.form.tableItems.push(tableRow);
-          }
-        });
+      this.vlanTableData.forEach((rowData) => {
+        if (this.tabIdFn() == rowData.Id.split('_')[0]) {
+          const tableRow = {
+            VLANEnable: rowData.VLANEnable,
+            VirtualInterface: rowData.Id,
+            VLANId: rowData.VLANId,
+            actions: [
+              {
+                value: 'delete',
+                title: this.$t('pageVlan.table.deleteVlan'),
+                enabled: true,
+              },
+            ],
+          };
+          this.form.tableItems.push(tableRow);
+        }
       });
       if (this.form.tableItems.length === 0) {
         this.form.tableItems.push({
@@ -161,9 +170,9 @@ export default {
           ],
         });
       }
+      this.endLoader();
     },
     onRowSelected(rowData) {
-      console.log(rowData);
       this.rowSelected = true;
       if (rowData.VLANId == '~') {
         this.form.vlanId = null;
@@ -172,6 +181,8 @@ export default {
       }
     },
     addVlan() {
+      this.$v.$touch();
+      if (this.$v.$invalid) return;
       this.$bvModal
         .msgBoxConfirm(this.$tc('pageVlan.modal.confirmMessage'), {
           title: this.$tc('pageVlan.modal.confirmTitle'),
@@ -181,6 +192,7 @@ export default {
         .then((addConfirmed) => {
           if (addConfirmed) {
             if (this.form.vlanId != '') {
+              this.startLoader();
               const vlanInputData = {
                 VLANId: parseInt(this.form.vlanId),
                 VLANEnable: true,
@@ -188,8 +200,14 @@ export default {
               };
               this.$store
                 .dispatch('vlan/addVlan', vlanInputData)
-                .then((message) => this.successToast(message))
-                .catch(({ message }) => this.errorToast(message));
+                .then((message) => {
+                  this.$store.dispatch('vlan/getEthernetData');
+                  this.successToast(message);
+                })
+                .catch(({ message }) => {
+                  this.errorToast(message);
+                  this.endLoader();
+                });
             } else {
               this.errorToast(this.$tc('pageVlan.toast.errorVlanId'));
             }
@@ -205,14 +223,21 @@ export default {
         })
         .then((deleteConfirmed) => {
           if (deleteConfirmed) {
+            this.startLoader();
             const vlanInputData = {
               TabId: this.tabIdFn(),
               VirtualInterface: this.form.tableItems[index].VirtualInterface,
             };
             this.$store
               .dispatch('vlan/deleteVlan', vlanInputData)
-              .then((message) => this.successToast(message))
-              .catch(({ message }) => this.errorToast(message));
+              .then((message) => {
+                this.$store.dispatch('vlan/getEthernetData');
+                this.successToast(message);
+              })
+              .catch(({ message }) => {
+                this.errorToast(message);
+                this.endLoader();
+              });
           }
         });
     },
