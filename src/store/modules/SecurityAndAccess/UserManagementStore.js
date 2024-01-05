@@ -1,5 +1,6 @@
 import api, { getResponseCount } from '@/store/api';
 import i18n from '@/i18n';
+import store from '../GlobalStore';
 
 const UserManagementStore = {
   namespaced: true,
@@ -174,13 +175,22 @@ const UserManagementStore = {
       }
     ) {
       const data = {};
-      if (username) data.UserName = username;
-      if (password) data.Password = password;
-      if (privilege) data.RoleId = privilege;
-      if (vmediaAccess !== undefined)
-        data.OEMAccountTypes = vmediaAccess ? ['media'] : [];
-      if (status !== undefined) data.Enabled = status;
-      if (locked !== undefined) data.Locked = locked;
+      const globalPrivilege = store.getters.userPrivilege(store.state);
+      if (globalPrivilege === 'Administrator') {
+        if (originalUsername === 'root') {
+          if (password) data.Password = password;
+        } else {
+          if (username) data.UserName = username;
+          if (password) data.Password = password;
+          if (privilege) data.RoleId = privilege;
+          if (vmediaAccess !== undefined)
+            data.OEMAccountTypes = vmediaAccess ? ['media'] : [];
+          if (status !== undefined) data.Enabled = status;
+          if (locked !== undefined) data.Locked = locked;
+        }
+      } else if (privilege === 'Operator' || privilege === 'ReadOnly') {
+        if (password) data.Password = password;
+      }
       /*if (PasswordChangeRequired !== undefined)
         data.PasswordChangeRequired = PasswordChangeRequired;*/
       return await api

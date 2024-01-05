@@ -274,12 +274,6 @@ export default {
   methods: {
     editEnable(user) {
       if (
-        user.UserName === this.$store.getters['global/username'] &&
-        (user.RoleId === 'Operator' || user.RoleId === 'ReadOnly')
-      ) {
-        return false;
-      }
-      if (
         'root' === this.$store.getters['global/username'] &&
         user.UserName !== 'root' &&
         user.RoleId === 'Administrator'
