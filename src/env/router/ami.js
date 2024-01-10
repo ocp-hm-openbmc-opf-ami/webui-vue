@@ -397,11 +397,22 @@ if (process.env.VUE_APP_RAID_ENABLED == 'true') {
       },
     },
     {
-      path: '/raid/create-logical-device',
+      path: '/raid/brcm-create-logical-device',
       name: 'create-logical-device',
       component: () =>
         import(
-          /* webpackChunkName: "CreateLogicalStorage" */ '@/views/RAID/LogicalStorage/CreateLogicalStorage.vue'
+          /* webpackChunkName: "CreateLogicalStorage" */ '@/views/RAID/LogicalStorage/BrcmCreateLogicalStorage.vue'
+        ),
+      meta: {
+        title: i18n.t('appPageTitle.createLogicalDevice'),
+      },
+    },
+    {
+      path: '/raid/mscc-create-logical-device',
+      name: 'create-logical-device',
+      component: () =>
+        import(
+          /* webpackChunkName: "CreateLogicalStorage" */ '@/views/RAID/LogicalStorage/MsccCreateLogicalStorage.vue'
         ),
       meta: {
         title: i18n.t('appPageTitle.createLogicalDevice'),

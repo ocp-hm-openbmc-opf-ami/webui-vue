@@ -1443,6 +1443,12 @@
         "raidController": "RAID Controller",
         "raidLevel": "RAID Level",
         "virtualDeviceName": "Virtual Device Name",
+        "logicalDeviceName": "Logical Device Name",
+        "stripSize": "Strip Size",
+        "size": "Size in Bytes",
+        "parityGroupCount": "Parity Group Count",
+        "arrayNumber": "Array Number",
+        "accelerator": "Accelerator",
         "spanDepth": "Span Depth",
         "numberOfDrives": "Number of Drives per Span",
         "initState": "Initialization State",
@@ -1499,6 +1505,9 @@
         },
         "toast": {
             "successCreateLogicalDevice": "Successfully Created Logical Device",
+            "successDeleteLogicalDevice": "Successfully deleted the Logical Device.",
+            "successMsccCreateLogicalDevice": "Successfully Created Logical Device. Wait for Sometime and Refresh the application to see the changes.",
+            "successMsccDeleteLogicalDevice": "Successfully deleted the Logical Device. Wait for Sometime and Refresh the application to see the changes.",
             "errorCreateLogicalDevice": "Error in Creating Logical Device",
             "errorRaidDeviceNotPresent": "RAID Device not present.",
             "errorRaidCtrlIdInvalid": "Invalid RAID Controller ID.",
@@ -1508,11 +1517,11 @@
             "errorRaidUnsupportedPhysicalDev": "Unsupported RAID Physical Device.",
             "errorRaidUnsupportedLogicalDev": "Unsupported RAID Logical device.",
             "errorRaidControllerBusy": "Raid Controller is Busy and command could not be processed.",
-            "successDeleteLogicalDevice": "Successfully deleted the Logical Device.",
             "errorDeleteLogicalDevice": "Error in deleting the Logical Device.",
             "errorNumberOfDrivesValidation": "Number of Drives count should not higher than UnConfigured Physical Device count!",
             "errorMinMaxSpanDepth":"The minimum and maximum Span Depth is 2.",
-            "errorSpanDepthDrives":"Selected UnConfig Drives should be equal to multiple of Span Depth and Drives per Span."
+            "errorSpanDepthDrives":"Selected UnConfig Drives should be equal to multiple of Span Depth and Drives per Span.",
+            "errorMsccSize":"Size should be divisible by Strip Size."
         }
     },
     "countries": {
