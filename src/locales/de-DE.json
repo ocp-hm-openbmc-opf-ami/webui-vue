@@ -157,12 +157,8 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
-<<<<<<< HEAD
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "system-inventory":"@:appPageTitle.system-inventory"
-=======
-        "systemInventory":"@:appPageTitle.systemInventory"
->>>>>>> OT-2119 naming convention changes in system Inventory
     },
     "appPageTitle": {
         "bsod": "BSOD",

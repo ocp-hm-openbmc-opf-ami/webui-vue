@@ -356,6 +356,14 @@ const routes = [
           title: i18n.t('appPageTitle.systemInventory'),
         },
       },
+      {
+        path: '/system-inventory',
+        name: 'system-inventory',
+        component: systemInventory,
+        meta: {
+          title: i18n.t('appPageTitle.systemInventory'),
+        },
+      },
     ],
   },
 ];
