@@ -37,7 +37,7 @@
             <draggable-div-vue>
               <template slot="header">
                 <div>
-                  <softKeyBoard @onKeyPress="onKeyPress" />
+                  <softKeyBoard ref="softkeyboard" @onKeyPress="onKeyPress" />
                 </div>
               </template>
             </draggable-div-vue>
@@ -229,6 +229,11 @@ export default {
     openNewWindow() {
       if (this.rfb != null) {
         this.closeTerminal();
+        // close the softkeyboard if kvm is opening in new window
+        const softkeyboardComponent = this.$refs.softkeyboard;
+        if (softkeyboardComponent) {
+          softkeyboardComponent.closeSoftKeyboard();
+        }
       }
       this.isConsoleWindow = window.open(
         '#/console/kvm',
