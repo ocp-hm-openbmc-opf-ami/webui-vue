@@ -23,7 +23,9 @@
               <template v-if="!$v.form.ipAddress.required">
                 {{ $t('global.form.fieldRequired') }}
               </template>
-              <template v-if="!$v.form.ipAddress.ipAddress">
+              <template
+                v-if="$v.form.ipAddress.required && !$v.form.ipAddress.pattern"
+              >
                 {{ $t('global.form.invalidFormat') }}
               </template>
             </b-form-invalid-feedback>
@@ -45,7 +47,9 @@
               <template v-if="!$v.form.gateway.required">
                 {{ $t('global.form.fieldRequired') }}
               </template>
-              <template v-if="!$v.form.gateway.ipAddress">
+              <template
+                v-if="$v.form.gateway.required && !$v.form.gateway.ipAddress"
+              >
                 {{ $t('global.form.invalidFormat') }}
               </template>
             </b-form-invalid-feedback>
@@ -69,7 +73,11 @@
               <template v-if="!$v.form.subnetMask.required">
                 {{ $t('global.form.fieldRequired') }}
               </template>
-              <template v-if="!$v.form.subnetMask.ipAddress">
+              <template
+                v-if="
+                  $v.form.subnetMask.required && !$v.form.subnetMask.ipAddress
+                "
+              >
                 {{ $t('global.form.invalidFormat') }}
               </template>
             </b-form-invalid-feedback>
@@ -90,7 +98,7 @@
 
 <script>
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
-import { ipAddress, required } from 'vuelidate/lib/validators';
+import { required } from 'vuelidate/lib/validators';
 
 export default {
   mixins: [VuelidateMixin],
@@ -141,15 +149,21 @@ export default {
       form: {
         ipAddress: {
           required,
-          ipAddress,
+          pattern: function (val) {
+            return this.ipv4addressValidation(val);
+          },
         },
         gateway: {
           required,
-          ipAddress,
+          pattern: function (val) {
+            return this.ipv4gatewayValidation(val);
+          },
         },
         subnetMask: {
           required,
-          ipAddress,
+          pattern: function (val) {
+            return this.ipv4subnetValidation(val);
+          },
         },
       },
     };
@@ -197,6 +211,50 @@ export default {
       // prevent modal close
       bvModalEvt.preventDefault();
       this.handleSubmit();
+    },
+    ipv4addressValidation(value) {
+      if (
+        !/^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$/.test(
+          value
+        ) ||
+        /^localhost$|^127(?:\.[0-9]+){0,2}\.[0-9]+$|^(?:0*\\:)*?:?0*1$/.test(
+          value
+        ) ||
+        (value != undefined &&
+          value != null &&
+          (String(value).charAt(0) == '0' ||
+            '#255.255.255.0#0.24.56.4#255.255.255.255#'.indexOf(
+              '#' + value + '#'
+            ) > -1))
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+    ipv4subnetValidation(value) {
+      if (
+        !/^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$/.test(
+          value
+        ) ||
+        (value != undefined && value != null && String(value).charAt(0) == '0')
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+    ipv4gatewayValidation(value) {
+      if (
+        !/^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$/.test(
+          value
+        ) ||
+        (value != undefined && value != null && String(value).charAt(0) == '0')
+      ) {
+        return false;
+      } else {
+        return true;
+      }
     },
   },
 };
