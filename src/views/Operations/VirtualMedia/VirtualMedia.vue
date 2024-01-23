@@ -201,13 +201,13 @@ export default {
           );
         device.file = null;
         device.isActive = false;
+        this.$store.state.virtualMedia.vmStarted = --this.vmStarted;
       };
       this.$store.state.virtualMedia.vmStarted = ++this.vmStarted;
       device.nbd.start();
       device.isActive = true;
     },
     stopVM(device) {
-      this.$store.state.virtualMedia.vmStarted = --this.vmStarted;
       device.nbd.stop();
     },
     startLegacy(connectionData) {
