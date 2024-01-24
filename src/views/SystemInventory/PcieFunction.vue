@@ -5,6 +5,7 @@
       hover
       sticky-header
       :fields="PCIEFunctionFields"
+      :items="pcieFunctionInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -61,6 +62,14 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    pcieFunctionInfo() {
+      return this.$store.getters['SystemStore/pcieFunction'];
+    },
+  },
+  created() {
+    this.$store.dispatch('SystemStore/getPcieFunctionInfo');
   },
 };
 </script>

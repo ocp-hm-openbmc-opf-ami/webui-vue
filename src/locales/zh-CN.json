@@ -157,6 +157,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "systemInventory":"@:appPageTitle.systemInventory"
     },
     "appPageTitle": {
@@ -203,17 +204,32 @@
         "physicalDevice": "物理设备",
         "logicalDevice": "逻辑设备",
         "createLogicalDevice": "创建逻辑设备",
-        "systemInventory":"SystemInventory"
+        "backupAndRestore": "备份还原",
+        "systemInventory":"系统库存"
     },
-    "systemInventory":{
-        "Processor":"Processor",
-        "Memory Controller":"Memory Controller",
-        "BaseBoard":"BaseBoard",
-        "Power":"Power",
-        "Thermal":"Thermal",
-        "PCIEDevice":"PCIE Device",
-        "PCIEFunction":"PCIEFunction",
-        "Storage":"Storage"
+    "pageBackupAndRestore": {
+        "backup": "备份",
+        "restore": "恢复",
+        "authentication": "验证",
+        "ipmi": "IPMI",
+        "kvm": "KVM",
+        "network": "网络",
+        "ntp": "NTP",
+        "smtp": "SMTP",
+        "snmp": "SNMP",
+        "sysLog": "系统日志",
+        "uploadRestoreFiles": "上传恢复文件",
+        "checkAll": "启用/禁用所有备份属性",
+        "tarFileOnly": "仅上传恢复 (.tar) 文件",
+        "toast": {
+            "successMessage": "已成功下载属性备份功能",
+            "errorMessage": "属性“备份功能”不在可接受值列表中",
+            "fileUploadedSuccessfully": "恢复文件上传成功 ",
+            "fileUploadedError": "上传恢复文件时出错",
+            "errorGettingBackupDetails": "获取属性备份功能时出错",
+            "errorMessageNotConfigured": "由于配置文件不存在，操作无法完成",
+            "featureNotAvailable": "未启用备份和恢复功能."
+        }
     },
     "pageOnDemand": {
         "onDemand":"一经请求",

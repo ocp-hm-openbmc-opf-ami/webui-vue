@@ -161,6 +161,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
+<<<<<<< HEAD
         "system-inventory":"@:appPageTitle.system-inventory"
 =======
         "systemInventory":"@:appPageTitle.systemInventory"
@@ -171,6 +172,9 @@
 =======
         "systemInventory":"@:appPageTitle.systemInventory"
 >>>>>>> OT-2119 naming convention changes in system Inventory
+=======
+        "systemInventory":"@:appPageTitle.systemInventory"
+>>>>>>> OT-2119 Binding data to system Inventory tabs
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -219,7 +223,12 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "backupAndRestore": "Sichern und Wiederherstellen"
+=======
+        "backupAndRestore": "Sichern und Wiederherstellen",
+        "systemInventory":"Systeminventar"
+>>>>>>> OT-2119 Binding data to system Inventory tabs
     },
     "pageBackupAndRestore": {
         "backup": "Sicherung",
@@ -243,6 +252,7 @@
             "errorGettingBackupDetails": "Fehler beim Abrufen der Eigenschaft BackupFeatures",
             "errorMessageNotConfigured": "Der Vorgang kann nicht abgeschlossen werden, da die Konfigurationsdatei nicht beendet wird",
             "featureNotAvailable": "Die Sicherungs- und Wiederherstellungsfunktion ist nicht aktiviert."
+<<<<<<< HEAD
         },
         "system-inventory":"system-inventory"
     },
@@ -274,6 +284,9 @@
         "PCIEDevice":"PCIE Device",
         "PCIEFunction":"PCIEFunction",
         "Storage":"Storage"
+=======
+        }
+>>>>>>> OT-2119 Binding data to system Inventory tabs
     },
     "pageOnDemand": {
         "onDemand":"Auf Anfrage",
