@@ -5,7 +5,7 @@
       hover
       sticky-header
       :fields="MemoryControllerFields"
-      :items="MemoryControllerTabItems"
+      :items="MemoryControllerInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -74,26 +74,6 @@ export default {
   computed: {
     MemoryControllerInfo() {
       return this.$store.getters['SystemStore/memoryController'];
-    },
-    MemoryControllerTabItems() {
-      // transform system tab data to table data
-      return this.MemoryControllerInfo?.map((data) => {
-        // console.log('memory', data.Manufacturer, index);
-        return {
-          Id: data.Id,
-          Name: data.Name,
-          CapacityMiB: data.CapacityMiB,
-          Manufacturer: data.Manufacturer,
-          SerialNumuber: data.SerialNumuber,
-          PartNumuber: data.PartNumuber,
-          State: data.State,
-          OperatingSpeedMhz: data.OperatingSpeedMhz,
-          MemoryType: data.MemoryType,
-          Description: data.Description,
-          AllowedSpeedsMHz: data.AllowedSpeedsMHz,
-          ServiceLabel: data.ServiceLabel,
-        };
-      });
     },
   },
   created() {

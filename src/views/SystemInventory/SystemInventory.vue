@@ -45,33 +45,21 @@
             >{{ $t('pageSystemInventory.Voltage.VoltageControlInfo') }}
             <voltage-control></voltage-control
           ></b-tab>
-          <b-tab
-            v-if="hideTab"
-            :title="$t('pageSystemInventory.Thermal.Thermal')"
-          >
+          <b-tab :title="$t('pageSystemInventory.Thermal.Thermal')">
             {{ $t('pageSystemInventory.Thermal.FanINFO') }}
             <thermal></thermal
             >{{ $t('pageSystemInventory.temperature.temperatureInfo') }}
             <temperature></temperature>
           </b-tab>
-          <b-tab
-            v-if="hideTab"
-            :title="$t('pageSystemInventory.PCIEDevice.PCIEDevice')"
-          >
+          <b-tab :title="$t('pageSystemInventory.PCIEDevice.PCIEDevice')">
             {{ $t('pageSystemInventory.PCIEDevice.PCIEDeviceInfo')
             }}<pcie-device></pcie-device
           ></b-tab>
-          <b-tab
-            v-if="hideTab"
-            :title="$t('pageSystemInventory.PCIEFunction.PCIEFunction')"
-          >
+          <b-tab :title="$t('pageSystemInventory.PCIEFunction.PCIEFunction')">
             {{ $t('pageSystemInventory.PCIEFunction.PCIEFunctionInfo')
             }}<pcie-function></pcie-function>
           </b-tab>
-          <b-tab
-            v-if="hideTab"
-            :title="$t('pageSystemInventory.Storage.Storage')"
-          >
+          <b-tab :title="$t('pageSystemInventory.Storage.Storage')">
             {{ $t('pageSystemInventory.Storage.StorageDriveInfo') }}
             <storage-drive></storage-drive>
             {{
