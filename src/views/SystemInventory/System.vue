@@ -5,7 +5,7 @@
       hover
       sticky-header
       :fields="systemFields"
-      :items="systemTabItems"
+      :items="SystemInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -81,27 +81,6 @@ export default {
   computed: {
     SystemInfo() {
       return this.$store.getters['SystemStore/systems'];
-    },
-    systemTabItems() {
-      // transform system tab data to table data
-      return this.SystemInfo?.map((data) => {
-        // console.log('datasystem', data.Name, index);
-        return {
-          Name: data.Name,
-          Description: data.Description,
-          Model: data.Model,
-          IndicatorLED: data.IndicatorLED,
-          Manufacturer: data.Manufacturer,
-          PowerState: data.PowerState,
-          SerialNumuber: data.SerialNumber,
-          PartNumuber: data.PartNumber,
-          SystemType: data.SystemType,
-          AssetTag: data.AssetTag,
-          BiosVersion: data.BiosVersion,
-          UUID: data.UUID,
-          State: data.State,
-        };
-      });
     },
   },
   created() {
