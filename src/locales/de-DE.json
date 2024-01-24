@@ -158,7 +158,7 @@
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
-        "system-inventory":"@:appPageTitle.system-inventory"
+        "systemInventory":"@:appPageTitle.systemInventory"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -204,7 +204,8 @@
         "physicalDevice": "Physisches Gerät",
         "logicalDevice": "Logisches Gerät",
         "createLogicalDevice": "Logisches Gerät erstellen",
-        "backupAndRestore": "Sichern und Wiederherstellen"
+        "backupAndRestore": "Sichern und Wiederherstellen",
+        "systemInventory":"Systeminventar"
     },
     "pageBackupAndRestore": {
         "backup": "Sicherung",
@@ -228,18 +229,7 @@
             "errorGettingBackupDetails": "Fehler beim Abrufen der Eigenschaft BackupFeatures",
             "errorMessageNotConfigured": "Der Vorgang kann nicht abgeschlossen werden, da die Konfigurationsdatei nicht beendet wird",
             "featureNotAvailable": "Die Sicherungs- und Wiederherstellungsfunktion ist nicht aktiviert."
-        },
-        "system-inventory":"system-inventory"
-    },
-    "systemInventory":{
-        "Processor":"Processor",
-        "Memory Controller":"Memory Controller",
-        "BaseBoard":"BaseBoard",
-        "Power":"Power",
-        "Thermal":"Thermal",
-        "PCIEDevice":"PCIE Device",
-        "PCIEFunction":"PCIEFunction",
-        "Storage":"Storage"
+        }
     },
     "pageOnDemand": {
         "onDemand":"Auf Anfrage",

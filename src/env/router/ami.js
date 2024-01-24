@@ -37,7 +37,7 @@ import Dumps from '@/views/Logs/Dumps';
 import ACD from '@/views/HostSystemDiagnostics/ACD';
 import Asd from '@/views/HostSystemDiagnostics/Asd';
 import BackupAndRestore from '@/views/Operations/BackupAndRestore';
-import systemInventory from '@/views/SystemInventory/systemInventory';
+import systemInventory from '@/views/SystemInventory/SystemInventory';
 
 const roles = {
   administrator: 'Administrator',
@@ -346,14 +346,6 @@ const routes = [
             roles.operator,
             roles.readonly,
           ],
-        },
-      },
-      {
-        path: '/system-inventory',
-        name: 'system-inventory',
-        component: systemInventory,
-        meta: {
-          title: i18n.t('appPageTitle.systemInventory'),
         },
       },
       {
