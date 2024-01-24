@@ -157,6 +157,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "systemInventory":"@:appPageTitle.systemInventory"
     },
     "appPageTitle": {
@@ -203,17 +204,32 @@
         "physicalDevice": "Physisches Gerät",
         "logicalDevice": "Logisches Gerät",
         "createLogicalDevice": "Logisches Gerät erstellen",
-        "systemInventory":"SystemInventory"
+        "backupAndRestore": "Sichern und Wiederherstellen",
+        "systemInventory":"Systeminventar"
     },
-    "systemInventory":{
-        "Processor":"Processor",
-        "Memory Controller":"Memory Controller",
-        "BaseBoard":"BaseBoard",
-        "Power":"Power",
-        "Thermal":"Thermal",
-        "PCIEDevice":"PCIE Device",
-        "PCIEFunction":"PCIEFunction",
-        "Storage":"Storage"
+    "pageBackupAndRestore": {
+        "backup": "Sicherung",
+        "restore": "Wiederherstellen",
+        "authentication": "Authentifizierung",
+        "ipmi": "IPMI",
+        "kvm": "KVM",
+        "network": "Netzwerk",
+        "ntp": "NTP",
+        "smtp": "SMTP",
+        "snmp": "SNMP",
+        "sysLog": "Syslog",
+        "uploadRestoreFiles": "Laden Sie die Wiederherstellungsdatei hoch",
+        "checkAll": "Alle Backup Eigenschaften aktivieren/deaktivieren",
+        "tarFileOnly": "Laden Sie nur Wiederherstellungsdateien (.tar) hoch",
+        "toast": {
+            "successMessage": "Die Eigenschaft BackupFeatures wurde erfolgreich heruntergeladen",
+            "errorMessage": "Die Eigenschaft BackupFeatures ist nicht in der Liste der zulässigen Werte enthalten",
+            "fileUploadedSuccessfully": "Die Wiederherstellungsdatei wurde erfolgreich hochgeladen ",
+            "fileUploadedError": "Fehler beim Hochladen der Wiederherstellungsdatei",
+            "errorGettingBackupDetails": "Fehler beim Abrufen der Eigenschaft BackupFeatures",
+            "errorMessageNotConfigured": "Der Vorgang kann nicht abgeschlossen werden, da die Konfigurationsdatei nicht beendet wird",
+            "featureNotAvailable": "Die Sicherungs- und Wiederherstellungsfunktion ist nicht aktiviert."
+        }
     },
     "pageOnDemand": {
         "onDemand":"Auf Anfrage",

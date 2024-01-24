@@ -157,6 +157,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "systemInventory":"@:appPageTitle.systemInventory"
     },
     "appPageTitle": {
@@ -203,17 +204,32 @@
         "physicalDevice": "Physical Device",
         "logicalDevice": "Logical Device",
         "createLogicalDevice": "Create Logical Device",
+        "backupAndRestore": "Backup And Restore",
         "systemInventory":"System Inventory"
     },
-    "systemInventory":{
-        "Processor":"Processor",
-        "Memory Controller":"Memory Controller",
-        "BaseBoard":"BaseBoard",
-        "Power":"Power",
-        "Thermal":"Thermal",
-        "PCIEDevice":"PCIE Device",
-        "PCIEFunction":"PCIEFunction",
-        "Storage":"Storage"
+    "pageBackupAndRestore": {
+        "backup": "Backup",
+        "restore": "Restore",
+        "authentication": "Authentication",
+        "ipmi": "IPMI",
+        "kvm": "KVM",
+        "network": "Network",
+        "ntp": "NTP",
+        "smtp": "SMTP",
+        "snmp": "SNMP",
+        "sysLog": "Syslog",
+        "uploadRestoreFiles": "Upload Restore File",
+        "checkAll": "Enable/Disable all Backup Properties",
+        "tarFileOnly": "Upload Restore (.tar) files only",
+        "toast": {
+            "successMessage": "Successfully Downloaded the property BackupFeatures",
+            "errorMessage": "The property BackupFeatures is not in the list of acceptable values",
+            "fileUploadedSuccessfully": "Successfully Uploaded the Restore File ",
+            "fileUploadedError": "Error Uploading the Restore File",
+            "errorGettingBackupDetails": "Error in getting the property BackupFeatures",
+            "errorMessageNotConfigured": "The operation cannot be completed, since the Configuration file does not exit",
+            "featureNotAvailable": "The backup and restore feature is not enabled."
+        }
     },
     "pageOnDemand": {
         "onDemand":"OnDemand",

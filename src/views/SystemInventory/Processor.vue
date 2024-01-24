@@ -5,7 +5,7 @@
       hover
       sticky-header
       :fields="processorFields"
-      :items="ProcessorTabItems"
+      :items="ProcessorInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -66,24 +66,6 @@ export default {
   computed: {
     ProcessorInfo() {
       return this.$store.getters['SystemStore/processors'];
-    },
-    ProcessorTabItems() {
-      // transform system tab data to table data
-      return this.ProcessorInfo?.map((data) => {
-        return {
-          Id: data.Id,
-          Name: data.Name,
-          Manufacturer: data.Manufacturer,
-          MaxSpeedMHz: data.MaxSpeedMHz,
-          Model: data.Model,
-          ProcessorArchitecture: data.ProcessorArchitecture,
-          ProcessorType: data.ProcessorType,
-          Socket: data.Socket,
-          EffectiveFamily: data.EffectiveFamily,
-          TotalCores: data.TotalCores,
-          State: data.State,
-        };
-      });
     },
   },
   created() {
