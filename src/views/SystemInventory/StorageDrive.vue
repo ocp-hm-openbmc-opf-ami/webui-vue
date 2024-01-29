@@ -4,7 +4,7 @@
       responsive="md"
       hover
       sticky-header
-      :fields="StorageFields"
+      :fields="storageFields"
       head-variant="light"
     ></b-table>
   </div>
@@ -14,42 +14,42 @@
 export default {
   data() {
     return {
-      StorageFields: [
+      storageFields: [
         {
-          key: 'Name',
-          label: this.$t('pageSystemInventory.Storage.Name'),
+          key: 'name',
+          label: this.$t('pageSystemInventory.storage.name'),
         },
         {
-          key: 'SerialNmuber',
-          label: this.$t('pageSystemInventory.Storage.SerialNmuber'),
+          key: 'serialNmuber',
+          label: this.$t('pageSystemInventory.storage.serialNmuber'),
         },
         {
-          key: 'Manufacturer',
-          label: this.$t('pageSystemInventory.Storage.Manufacturer'),
+          key: 'manufacturer',
+          label: this.$t('pageSystemInventory.storage.manufacturer'),
         },
         {
-          key: 'Protocol',
-          label: this.$t('pageSystemInventory.Storage.Protocol'),
+          key: 'protocol',
+          label: this.$t('pageSystemInventory.storage.protocol'),
         },
         {
-          key: 'Model',
-          label: this.$t('pageSystemInventory.Storage.Model'),
+          key: 'model',
+          label: this.$t('pageSystemInventory.storage.model'),
         },
         {
-          key: 'Revision',
-          label: this.$t('pageSystemInventory.Storage.Revision'),
+          key: 'revision',
+          label: this.$t('pageSystemInventory.storage.revision'),
         },
         {
-          key: 'EncryptionStatus',
-          label: this.$t('pageSystemInventory.Storage.EncryptionStatus'),
+          key: 'encryptionStatus',
+          label: this.$t('pageSystemInventory.storage.encryptionStatus'),
         },
         {
-          key: 'MediaType',
-          label: this.$t('pageSystemInventory.Storage.MediaType'),
+          key: 'mediaType',
+          label: this.$t('pageSystemInventory.storage.mediaType'),
         },
         {
-          key: 'State',
-          label: this.$t('pageSystemInventory.Storage.State'),
+          key: 'state',
+          label: this.$t('pageSystemInventory.storage.state'),
         },
       ],
     };

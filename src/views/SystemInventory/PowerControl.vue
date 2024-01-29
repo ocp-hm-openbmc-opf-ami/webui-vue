@@ -4,7 +4,8 @@
       responsive="md"
       hover
       sticky-header
-      :fields="powercontrolFields"
+      :fields="powerControlFields"
+      :items="powerInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -14,37 +15,59 @@
 export default {
   data() {
     return {
-      powercontrolFields: [
+      powerControlFields: [
         {
-          key: 'Name',
-          label: this.$t('pageSystemInventory.Power.Name'),
+          key: 'name',
+          label: this.$t('pageSystemInventory.power.name'),
+          tdClass: 'text-nowrap',
         },
         {
-          key: 'AverageConsumedWatts',
-          label: this.$t('pageSystemInventory.Power.AverageConsumedWatts'),
+          key: 'manufacturer',
+          label: this.$t('pageSystemInventory.power.manufacturer'),
+          tdClass: 'text-nowrap',
         },
         {
-          key: 'MaxConsumedWatts',
-          label: this.$t('pageSystemInventory.Power.MaxConsumedWatts'),
+          key: 'model',
+          label: this.$t('pageSystemInventory.power.model'),
         },
         {
-          key: 'MinConsumedWatts',
-          label: this.$t('pageSystemInventory.Power.MinConsumedWatts'),
+          key: 'plugType',
+          label: this.$t('pageSystemInventory.power.plugType'),
         },
         {
-          key: 'IntervalInMinutes',
-          label: this.$t('pageSystemInventory.Power.IntervalInMinutes'),
+          key: 'powerCapacityWatts',
+          label: this.$t('pageSystemInventory.power.powerCapacityWatts'),
         },
         {
-          key: 'LimitInWatts',
-          label: this.$t('pageSystemInventory.Power.LimitInWatts'),
+          key: 'PowerSupplyType',
+          label: this.$t('pageSystemInventory.power.PowerSupplyType'),
         },
         {
-          key: 'LimitException',
-          label: this.$t('pageSystemInventory.Power.LimitException'),
+          key: 'SerialNumber',
+          label: this.$t('pageSystemInventory.power.SerialNumber'),
+        },
+        {
+          key: 'state',
+          label: this.$t('pageSystemInventory.power.state'),
+        },
+        {
+          key: 'efficiencyPercent',
+          label: this.$t('pageSystemInventory.power.efficiencyPercent'),
+        },
+        {
+          key: 'inputRanges',
+          label: this.$t('pageSystemInventory.power.inputRanges'),
         },
       ],
     };
+  },
+  computed: {
+    powerInfo() {
+      return this.$store.getters['SystemStore/power'];
+    },
+  },
+  created() {
+    this.$store.dispatch('SystemStore/getPowerInfo');
   },
 };
 </script>

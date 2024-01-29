@@ -4,7 +4,8 @@
       responsive="md"
       hover
       sticky-header
-      :fields="ThermalFields"
+      :fields="thermalFields"
+      :items="thermalFanInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -14,65 +15,37 @@
 export default {
   data() {
     return {
-      ThermalFields: [
+      thermalFields: [
         {
-          key: 'Name',
-          label: this.$t('pageSystemInventory.Thermal.Name'),
+          key: 'name',
+          label: this.$t('pageSystemInventory.thermal.name'),
         },
         {
-          key: 'SensorNumber',
-          label: this.$t('pageSystemInventory.Thermal.SensorNumber'),
+          key: 'state',
+          label: this.$t('pageSystemInventory.thermal.state'),
         },
         {
-          key: 'PhysicalContext',
-          label: this.$t('pageSystemInventory.Thermal.PhysicalContext'),
+          key: 'readingRPM',
+          label: this.$t('pageSystemInventory.thermal.readingRPM'),
         },
         {
-          key: 'State',
-          label: this.$t('pageSystemInventory.Thermal.State'),
+          key: 'minReadingRange',
+          label: this.$t('pageSystemInventory.thermal.minReadingRange'),
         },
         {
-          key: 'ReadingRPM',
-          label: this.$t('pageSystemInventory.Thermal.ReadingRPM'),
-        },
-        {
-          key: 'MinReadingRange',
-          label: this.$t('pageSystemInventory.Thermal.MinReadingRange'),
-        },
-        {
-          key: 'MaxReadingRange',
-          label: this.$t('pageSystemInventory.Thermal.MaxReadingRange'),
-        },
-        {
-          key: 'UpperThresholdFatal',
-          label: this.$t('pageSystemInventory.Thermal.UpperThresholdFatal'),
-        },
-        {
-          key: 'UpperThresholdCritical',
-          label: this.$t('pageSystemInventory.Thermal.UpperThresholdCritical'),
-        },
-        {
-          key: 'UpperThresholdNonCritical',
-          label: this.$t(
-            'pageSystemInventory.Thermal.UpperThresholdNonCritical'
-          ),
-        },
-        {
-          key: 'LowerThresholdNonCritical',
-          label: this.$t(
-            'pageSystemInventory.Thermal.LowerThresholdNonCritical'
-          ),
-        },
-        {
-          key: 'LowerThresholdCritical',
-          label: this.$t('pageSystemInventory.Thermal.LowerThresholdCritical'),
-        },
-        {
-          key: 'LowerThresholdFatal',
-          label: this.$t('pageSystemInventory.Thermal.LowerThresholdFatal'),
+          key: 'maxReadingRange',
+          label: this.$t('pageSystemInventory.thermal.maxReadingRange'),
         },
       ],
     };
+  },
+  computed: {
+    thermalFanInfo() {
+      return this.$store.getters['SystemStore/fans'];
+    },
+  },
+  created() {
+    this.$store.dispatch('SystemStore/getFansInfo');
   },
 };
 </script>
