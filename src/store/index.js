@@ -45,6 +45,10 @@ import AutonomousCrashDumpStore from './modules/HostSystemDiagnostics/AcdStore';
 import AsdStore from './modules/HostSystemDiagnostics/AsdStore';
 import OnDemand from './modules/Settings/OnDemand';
 import RaidStore from './modules/Raid/RaidStore';
+<<<<<<< HEAD
+=======
+import BackupAndRestore from './modules/Operations/BackupAndRestore';
+>>>>>>> 6dac7d78f3ea7944a32e142c589c853aa3cf9618
 import SystemInfoStore from './modules/SystemInventory/SystemInventoryStore';
 
 Vue.use(Vuex);
@@ -97,6 +101,7 @@ export default new Vuex.Store({
     asd: AsdStore,
     ondemand: OnDemand,
     raid: RaidStore,
+    backupAndRestore: BackupAndRestore,
     SystemStore: SystemInfoStore,
   },
   plugins: [WebSocketPlugin],
