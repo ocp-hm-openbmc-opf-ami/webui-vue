@@ -4,8 +4,8 @@
       responsive="md"
       hover
       sticky-header
-      :fields="MemoryControllerFields"
-      :items="MemoryControllerInfo"
+      :fields="memoryControllerFields"
+      :items="memoryControllerInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -15,64 +15,60 @@
 export default {
   data() {
     return {
-      MemoryControllerFields: [
+      memoryControllerFields: [
         {
-          key: 'Id',
-          label: this.$t('pageSystemInventory.MemoryController.Id'),
+          key: 'id',
+          label: this.$t('pageSystemInventory.memoryController.id'),
         },
         {
-          key: 'Name',
-          label: this.$t('pageSystemInventory.MemoryController.Name'),
+          key: 'name',
+          label: this.$t('pageSystemInventory.memoryController.name'),
         },
         {
-          key: 'CapacityMiB',
-          label: this.$t('pageSystemInventory.MemoryController.CapacityMiB'),
+          key: 'capacityMiB',
+          label: this.$t('pageSystemInventory.memoryController.capacityMiB'),
         },
         {
-          key: 'Manufacturer',
-          label: this.$t('pageSystemInventory.MemoryController.Manufacturer'),
+          key: 'manufacturer',
+          label: this.$t('pageSystemInventory.memoryController.manufacturer'),
         },
         {
-          key: 'SerialNumuber',
-          label: this.$t('pageSystemInventory.MemoryController.SerialNumuber'),
+          key: 'serialNumuber',
+          label: this.$t('pageSystemInventory.memoryController.serialNumuber'),
         },
         {
-          key: 'PartNumuber',
-          label: this.$t('pageSystemInventory.MemoryController.PartNumuber'),
+          key: 'partNumuber',
+          label: this.$t('pageSystemInventory.memoryController.partNumuber'),
         },
         {
-          key: 'State',
-          label: this.$t('pageSystemInventory.MemoryController.State'),
+          key: 'state',
+          label: this.$t('pageSystemInventory.memoryController.state'),
         },
         {
-          key: 'OperatingSpeedMhz',
+          key: 'operatingSpeedMhz',
           label: this.$t(
-            'pageSystemInventory.MemoryController.OperatingSpeedMhz'
+            'pageSystemInventory.memoryController.operatingSpeedMhz'
           ),
         },
         {
-          key: 'MemoryType',
-          label: this.$t('pageSystemInventory.MemoryController.MemoryType'),
+          key: 'memoryType',
+          label: this.$t('pageSystemInventory.memoryController.memoryType'),
         },
         {
-          key: 'Description',
-          label: this.$t('pageSystemInventory.MemoryController.Description'),
-        },
-        {
-          key: 'AllowedSpeedsMHz',
+          key: 'allowedSpeedsMHz',
           label: this.$t(
-            'pageSystemInventory.MemoryController.AllowedSpeedsMHz'
+            'pageSystemInventory.memoryController.allowedSpeedsMHz'
           ),
         },
         {
-          key: 'ServiceLabel',
-          label: this.$t('pageSystemInventory.MemoryController.ServiceLabel'),
+          key: 'serviceLabel',
+          label: this.$t('pageSystemInventory.memoryController.serviceLabel'),
         },
       ],
     };
   },
   computed: {
-    MemoryControllerInfo() {
+    memoryControllerInfo() {
       return this.$store.getters['SystemStore/memoryController'];
     },
   },

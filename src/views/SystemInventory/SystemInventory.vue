@@ -13,57 +13,60 @@
           <b-tab :title="$t('pageSystemInventory.system.system')"
             >{{ $t('pageSystemInventory.system.systemInfo') }} <system></system
           ></b-tab>
-          <b-tab :title="$t('pageSystemInventory.Processor.Processor')">
-            {{ $t('pageSystemInventory.Processor.ProcessorInfo') }}
+          <b-tab :title="$t('pageSystemInventory.processor.processor')">
+            {{ $t('pageSystemInventory.processor.processorInfo') }}
             <processor></processor>
           </b-tab>
           <b-tab
-            :title="$t('pageSystemInventory.MemoryController.MemoryController')"
+            :title="$t('pageSystemInventory.memoryController.memoryController')"
           >
             {{
-              $t('pageSystemInventory.MemoryController.MemoryControllerInfo')
+              $t('pageSystemInventory.memoryController.memoryControllerInfo')
             }}
             <memory-controller></memory-controller>
           </b-tab>
-          <b-tab :title="$t('pageSystemInventory.BaseBoard.BaseBoard')">
-            {{ $t('pageSystemInventory.BaseBoard.BaseBoardInfo')
+          <b-tab :title="$t('pageSystemInventory.baseBoard.baseBoard')">
+            {{ $t('pageSystemInventory.baseBoard.baseBoardInfo')
             }}<baseboard></baseboard
             >{{
-              $t('pageSystemInventory.NetworkInterfaces.NetworkInterfacesInfo')
+              $t('pageSystemInventory.networkInterfaces.networkInterfacesInfo')
             }}
             <network-interfaces></network-interfaces
             >{{
               $t(
-                'pageSystemInventory.NetworkInterfaceIPv6.NetworkInterfaceIPv6Info'
+                'pageSystemInventory.networkInterfaceIPv6.networkInterfaceIPv6Info'
               )
             }}
             <network-interface-ipv6></network-interface-ipv6
           ></b-tab>
-          <b-tab v-if="hideTab" :title="$t('pageSystemInventory.Power.Power')">
-            {{ $t('pageSystemInventory.Power.PowerInfo')
+          <b-tab :title="$t('pageSystemInventory.power.power')">
+            {{ $t('pageSystemInventory.power.powerInfo')
             }}<power-control></power-control
-            >{{ $t('pageSystemInventory.Voltage.VoltageControlInfo') }}
+            >{{ $t('pageSystemInventory.voltage.voltageControlInfo') }}
             <voltage-control></voltage-control
           ></b-tab>
-          <b-tab :title="$t('pageSystemInventory.Thermal.Thermal')">
-            {{ $t('pageSystemInventory.Thermal.FanINFO') }}
+          <b-tab :title="$t('pageSystemInventory.thermal.thermal')">
+            {{ $t('pageSystemInventory.thermal.fanINFO') }}
             <thermal></thermal
             >{{ $t('pageSystemInventory.temperature.temperatureInfo') }}
             <temperature></temperature>
           </b-tab>
-          <b-tab :title="$t('pageSystemInventory.PCIEDevice.PCIEDevice')">
-            {{ $t('pageSystemInventory.PCIEDevice.PCIEDeviceInfo')
+          <b-tab :title="$t('pageSystemInventory.pcieDevice.pcieDevice')">
+            {{ $t('pageSystemInventory.pcieDevice.pcieDeviceInfo')
             }}<pcie-device></pcie-device
           ></b-tab>
-          <b-tab :title="$t('pageSystemInventory.PCIEFunction.PCIEFunction')">
-            {{ $t('pageSystemInventory.PCIEFunction.PCIEFunctionInfo')
+          <b-tab :title="$t('pageSystemInventory.pcieFunction.pcieFunction')">
+            {{ $t('pageSystemInventory.pcieFunction.pcieFunctionInfo')
             }}<pcie-function></pcie-function>
           </b-tab>
-          <b-tab :title="$t('pageSystemInventory.Storage.Storage')">
-            {{ $t('pageSystemInventory.Storage.StorageDriveInfo') }}
+          <b-tab
+            v-if="hideTab"
+            :title="$t('pageSystemInventory.storage.storage')"
+          >
+            {{ $t('pageSystemInventory.storage.storageDriveInfo') }}
             <storage-drive></storage-drive>
             {{
-              $t('pageSystemInventory.StorageController.StorageControllerInfo')
+              $t('pageSystemInventory.storageController.storageControllerInfo')
             }}
             <storage-controller></storage-controller>
           </b-tab>

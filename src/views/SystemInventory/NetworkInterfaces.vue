@@ -4,8 +4,8 @@
       responsive="md"
       hover
       sticky-header
-      :fields="NetworkInterfacesFields"
-      :items="NetworkinterfacesTabItems"
+      :fields="networkInterfacesFields"
+      :items="networkInterfacesTabItems"
       head-variant="light"
     ></b-table>
   </div>
@@ -15,53 +15,53 @@
 export default {
   data() {
     return {
-      NetworkInterfacesFields: [
+      networkInterfacesFields: [
         {
-          key: 'Name',
-          label: this.$t('pageSystemInventory.NetworkInterfaces.Name'),
+          key: 'name',
+          label: this.$t('pageSystemInventory.networkInterfaces.name'),
         },
         {
-          key: 'MACAddress',
-          label: this.$t('pageSystemInventory.NetworkInterfaces.MACAddress'),
+          key: 'mACAddress',
+          label: this.$t('pageSystemInventory.networkInterfaces.mACAddress'),
         },
         {
-          key: 'InterfaceEnabled',
+          key: 'interfaceEnabled',
           label: this.$t(
-            'pageSystemInventory.NetworkInterfaces.InterfaceEnabled'
+            'pageSystemInventory.networkInterfaces.interfaceEnabled'
           ),
         },
         {
-          key: 'IPv4Addresses',
-          label: this.$t('pageSystemInventory.NetworkInterfaces.IPv4Addresses'),
+          key: 'iPv4Addresses',
+          label: this.$t('pageSystemInventory.networkInterfaces.iPv4Addresses'),
         },
         {
-          key: 'HostName',
-          label: this.$t('pageSystemInventory.NetworkInterfaces.HostName'),
+          key: 'hostName',
+          label: this.$t('pageSystemInventory.networkInterfaces.hostName'),
         },
         {
-          key: 'FullDuplex',
-          label: this.$t('pageSystemInventory.NetworkInterfaces.FullDuplex'),
+          key: 'fullDuplex',
+          label: this.$t('pageSystemInventory.networkInterfaces.fullDuplex'),
         },
         {
-          key: 'PermanentMACAddress',
+          key: 'permanentMACAddress',
           label: this.$t(
-            'pageSystemInventory.NetworkInterfaces.PermanentMACAddress'
+            'pageSystemInventory.networkInterfaces.permanentMACAddress'
           ),
         },
         {
-          key: 'State',
-          label: this.$t('pageSystemInventory.NetworkInterfaces.State'),
+          key: 'state',
+          label: this.$t('pageSystemInventory.networkInterfaces.state'),
         },
       ],
     };
   },
   computed: {
-    NetworkinterfacesInfo() {
+    networkInterfacesInfo() {
       return this.$store.getters['SystemStore/basebordInfoNetworkinterfaces'];
     },
-    NetworkinterfacesTabItems() {
+    networkInterfacesTabItems() {
       // transform system tab data to table data
-      return this.NetworkinterfacesInfo?.map((data) => {
+      return this.networkInterfacesInfo?.map((data) => {
         return {
           Name: data.Name,
           MACAddress: data.MACAddress,
