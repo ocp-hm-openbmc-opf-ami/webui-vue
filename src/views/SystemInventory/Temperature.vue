@@ -4,7 +4,7 @@
       responsive="md"
       hover
       sticky-header
-      :fields="TemperatureFields"
+      :fields="temperatureFields"
       head-variant="light"
     ></b-table>
   </div>
@@ -14,58 +14,58 @@
 export default {
   data() {
     return {
-      TemperatureFields: [
+      temperatureFields: [
         {
-          key: 'Name',
-          label: this.$t('pageSystemInventory.temperature.Name'),
+          key: 'name',
+          label: this.$t('pageSystemInventory.temperature.name'),
         },
         {
-          key: 'SensorNumber',
-          label: this.$t('pageSystemInventory.temperature.SensorNumber'),
+          key: 'sensorNumber',
+          label: this.$t('pageSystemInventory.temperature.sensorNumber'),
         },
         {
-          key: 'PhysicalContext',
-          label: this.$t('pageSystemInventory.temperature.PhysicalContext'),
+          key: 'physicalContext',
+          label: this.$t('pageSystemInventory.temperature.physicalContext'),
         },
         {
-          key: 'State',
-          label: this.$t('pageSystemInventory.temperature.State'),
+          key: 'state',
+          label: this.$t('pageSystemInventory.temperature.state'),
         },
         {
-          key: 'ReadingRPM',
-          label: this.$t('pageSystemInventory.temperature.ReadingCelsius'),
+          key: 'readingRPM',
+          label: this.$t('pageSystemInventory.temperature.readingCelsius'),
         },
         {
-          key: 'UpperThresholdFatal',
-          label: this.$t('pageSystemInventory.temperature.UpperThresholdFatal'),
+          key: 'upperThresholdFatal',
+          label: this.$t('pageSystemInventory.temperature.upperThresholdFatal'),
         },
         {
-          key: 'UpperThresholdCritical',
+          key: 'upperThresholdCritical',
           label: this.$t(
-            'pageSystemInventory.temperature.UpperThresholdCritical'
+            'pageSystemInventory.temperature.upperThresholdCritical'
           ),
         },
         {
-          key: 'UpperThresholdNonCritical',
+          key: 'upperThresholdNonCritical',
           label: this.$t(
-            'pageSystemInventory.temperature.UpperThresholdNonCritical'
+            'pageSystemInventory.temperature.upperThresholdNonCritical'
           ),
         },
         {
-          key: 'LowerThresholdNonCritical',
+          key: 'lowerThresholdNonCritical',
           label: this.$t(
-            'pageSystemInventory.temperature.LowerThresholdNonCritical'
+            'pageSystemInventory.temperature.lowerThresholdNonCritical'
           ),
         },
         {
-          key: 'LowerThresholdCritical',
+          key: 'lowerThresholdCritical',
           label: this.$t(
-            'pageSystemInventory.temperature.LowerThresholdCritical'
+            'pageSystemInventory.temperature.lowerThresholdCritical'
           ),
         },
         {
-          key: 'LowerThresholdFatal',
-          label: this.$t('pageSystemInventory.temperature.LowerThresholdFatal'),
+          key: 'lowerThresholdFatal',
+          label: this.$t('pageSystemInventory.temperature.lowerThresholdFatal'),
         },
       ],
     };

@@ -5,7 +5,7 @@
       hover
       sticky-header
       :fields="systemFields"
-      :items="SystemInfo"
+      :items="systemInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -16,62 +16,57 @@ export default {
     return {
       systemFields: [
         {
-          key: 'Name',
-          label: this.$t('pageSystemInventory.system.Name'),
+          key: 'name',
+          label: this.$t('pageSystemInventory.system.name'),
           class: 'text-center',
         },
         {
-          key: 'Description',
-          label: this.$t('pageSystemInventory.system.Description'),
+          key: 'description',
+          label: this.$t('pageSystemInventory.system.description'),
           class: 'text-center',
         },
         {
-          key: 'IndicatorLED',
-          label: this.$t('pageSystemInventory.system.IndicatorLED'),
+          key: 'indicatorLED',
+          label: this.$t('pageSystemInventory.system.indicatorLED'),
           class: 'text-center',
         },
         {
-          key: 'Manufacturer',
-          label: this.$t('pageSystemInventory.system.Manufacture'),
+          key: 'manufacturer',
+          label: this.$t('pageSystemInventory.system.manufacture'),
           class: 'text-center',
         },
         {
-          key: 'PowerState',
-          label: this.$t('pageSystemInventory.system.PowerState'),
+          key: 'powerState',
+          label: this.$t('pageSystemInventory.system.powerState'),
           class: 'text-center',
         },
         {
-          key: 'SerialNumuber',
-          label: this.$t('pageSystemInventory.system.SerialNumuber'),
+          key: 'serialNumuber',
+          label: this.$t('pageSystemInventory.system.serialNumuber'),
           class: 'text-center',
         },
         {
-          key: 'PartNumuber',
-          label: this.$t('pageSystemInventory.system.PartNumuber'),
+          key: 'partNumuber',
+          label: this.$t('pageSystemInventory.system.partNumuber'),
           class: 'text-center',
         },
         {
-          key: 'SystemType',
-          label: this.$t('pageSystemInventory.system.SystemType'),
+          key: 'systemType',
+          label: this.$t('pageSystemInventory.system.systemType'),
           class: 'text-center',
         },
         {
-          key: 'AssetTag',
-          label: this.$t('pageSystemInventory.system.AssetTag'),
+          key: 'assetTag',
+          label: this.$t('pageSystemInventory.system.assetTag'),
           class: 'text-center',
         },
         {
-          key: 'BiosVersion',
-          label: this.$t('pageSystemInventory.system.BiosVersion'),
+          key: 'biosVersion',
+          label: this.$t('pageSystemInventory.system.biosVersion'),
           class: 'text-center',
         },
         {
-          key: 'UUID',
-          label: this.$t('pageSystemInventory.system.UUID'),
-          class: 'text-center',
-        },
-        {
-          key: 'State',
+          key: 'state',
           label: this.$t('pageSystemInventory.system.state'),
           class: 'text-center',
         },
@@ -79,7 +74,7 @@ export default {
     };
   },
   computed: {
-    SystemInfo() {
+    systemInfo() {
       return this.$store.getters['SystemStore/systems'];
     },
   },

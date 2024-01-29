@@ -4,8 +4,8 @@
       responsive="md"
       hover
       sticky-header
-      :fields="BaseboardFields"
-      :items="BaseBoardTabItems"
+      :fields="baseBoardFields"
+      :items="baseBoardInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -15,51 +15,55 @@
 export default {
   data() {
     return {
-      BaseboardFields: [
+      baseBoardFields: [
         {
-          key: 'Name',
-          label: this.$t('pageSystemInventory.BaseBoard.Name'),
+          key: 'name',
+          label: this.$t('pageSystemInventory.baseBoard.name'),
         },
         {
-          key: 'Description',
-          label: this.$t('pageSystemInventory.BaseBoard.Description'),
+          key: 'indicatorLED',
+          label: this.$t('pageSystemInventory.baseBoard.indicatorLED'),
         },
         {
-          key: 'FirmwareVersion',
-          label: this.$t('pageSystemInventory.BaseBoard.FirmwareVersion'),
+          key: 'locationIndicatorActive',
+          label: this.$t(
+            'pageSystemInventory.baseBoard.locationIndicatorActive'
+          ),
         },
         {
-          key: 'Model',
-          label: this.$t('pageSystemInventory.BaseBoard.Model'),
+          key: 'model',
+          label: this.$t('pageSystemInventory.baseBoard.model'),
         },
         {
-          key: 'State',
-          label: this.$t('pageSystemInventory.BaseBoard.State'),
+          key: 'state',
+          label: this.$t('pageSystemInventory.baseBoard.state'),
         },
         {
-          key: 'PowerState',
-          label: this.$t('pageSystemInventory.BaseBoard.PowerState'),
+          key: 'powerState',
+          label: this.$t('pageSystemInventory.baseBoard.powerState'),
+        },
+        {
+          key: 'assetTag',
+          label: this.$t('pageSystemInventory.baseBoard.assetTag'),
+        },
+        {
+          key: 'manufacturer',
+          label: this.$t('pageSystemInventory.baseBoard.manufacturer'),
+        },
+        {
+          key: 'partNumber',
+          label: this.$t('pageSystemInventory.baseBoard.partNumber'),
+        },
+        {
+          key: 'serialNumber',
+          label: this.$t('pageSystemInventory.baseBoard.serialNumber'),
         },
       ],
     };
   },
   computed: {
-    BaseBoardInfo() {
+    baseBoardInfo() {
       return this.$store.getters['SystemStore/baseBoard'];
-    },
-    BaseBoardTabItems() {
-      // transform system tab data to table data
-      return this.BaseBoardInfo?.map((data, index) => {
-        console.log('memory', data.Manufacturer, index);
-        return {
-          Name: data.Name,
-          Description: data.Description,
-          FirmwareVersion: data.FirmwareVersion,
-          Model: data.Model,
-          State: data.State,
-          PowerState: data.PowerState,
-        };
-      });
     },
   },
   created() {

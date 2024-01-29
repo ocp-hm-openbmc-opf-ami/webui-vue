@@ -1,10 +1,15 @@
 <template>
   <div>
+    <div class="ml-sm-4">
+      <table-cell-count
+        :total-number-of-cells="pcieDeviceInfo.length"
+      ></table-cell-count>
+    </div>
     <b-table
       responsive="md"
       hover
       sticky-header
-      :fields="PCIEDeviceFields"
+      :fields="pcieDeviceFields"
       :items="pcieDeviceInfo"
       head-variant="light"
     ></b-table>
@@ -12,37 +17,28 @@
 </template>
 
 <script>
+import TableCellCount from '@/components/Global/TableCellCount';
+
 export default {
+  components: { TableCellCount },
   data() {
     return {
-      PCIEDeviceFields: [
+      pcieDeviceFields: [
         {
-          key: 'Name',
-          label: this.$t('pageSystemInventory.PCIEDevice.Name'),
+          key: 'id',
+          label: this.$t('pageSystemInventory.pcieDevice.id'),
         },
         {
-          key: 'Description',
-          label: this.$t('pageSystemInventory.PCIEDevice.Description'),
+          key: 'name',
+          label: this.$t('pageSystemInventory.pcieDevice.name'),
         },
         {
-          key: 'Manufacturer',
-          label: this.$t('pageSystemInventory.PCIEDevice.Manufacturer'),
+          key: 'manufacturer',
+          label: this.$t('pageSystemInventory.pcieDevice.manufacturer'),
         },
         {
-          key: 'AssetTag',
-          label: this.$t('pageSystemInventory.PCIEDevice.AssetTag'),
-        },
-        {
-          key: 'DeviceType',
-          label: this.$t('pageSystemInventory.PCIEDevice.DeviceType'),
-        },
-        {
-          key: 'FrmwareVersion',
-          label: this.$t('pageSystemInventory.PCIEDevice.FrmwareVersion'),
-        },
-        {
-          key: 'State',
-          label: this.$t('pageSystemInventory.PCIEDevice.State'),
+          key: 'state',
+          label: this.$t('pageSystemInventory.pcieDevice.state'),
         },
       ],
     };
