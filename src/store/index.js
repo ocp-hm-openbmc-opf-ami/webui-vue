@@ -45,6 +45,7 @@ import AutonomousCrashDumpStore from './modules/HostSystemDiagnostics/AcdStore';
 import AsdStore from './modules/HostSystemDiagnostics/AsdStore';
 import OnDemand from './modules/Settings/OnDemand';
 import RaidStore from './modules/Raid/RaidStore';
+import BackupAndRestore from './modules/Operations/BackupAndRestore';
 import SystemInfoStore from './modules/SystemInventory/SystemInventoryStore';
 
 Vue.use(Vuex);
