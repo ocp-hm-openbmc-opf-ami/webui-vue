@@ -5,6 +5,7 @@
       hover
       sticky-header
       :fields="voltageFields"
+      :items="temperatureInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -20,20 +21,28 @@ export default {
           label: this.$t('pageSystemInventory.voltage.name'),
         },
         {
-          key: 'sensorNumber',
-          label: this.$t('pageSystemInventory.voltage.sensorNumber'),
-        },
-        {
           key: 'state',
           label: this.$t('pageSystemInventory.voltage.state'),
         },
         {
-          key: 'minReadingRange',
+          key: 'readingUnits',
+          label: this.$t('pageSystemInventory.voltage.readingUnits'),
+        },
+        {
+          key: 'reading',
+          label: this.$t('pageSystemInventory.voltage.reading'),
+        },
+        {
+          key: 'readingRangeMin',
           label: this.$t('pageSystemInventory.voltage.minReadingRange'),
         },
         {
-          key: 'maxReadingRange',
+          key: 'readingRangeMax',
           label: this.$t('pageSystemInventory.voltage.maxReadingRange'),
+        },
+        {
+          key: 'readingType',
+          label: this.$t('pageSystemInventory.voltage.readingType'),
         },
         {
           key: 'upperThresholdFatal',
@@ -42,18 +51,6 @@ export default {
         {
           key: 'upperThresholdCritical',
           label: this.$t('pageSystemInventory.voltage.upperThresholdCritical'),
-        },
-        {
-          key: 'upperThresholdNonCritical',
-          label: this.$t(
-            'pageSystemInventory.voltage.upperThresholdNonCritical'
-          ),
-        },
-        {
-          key: 'lowerThresholdNonCritical',
-          label: this.$t(
-            'pageSystemInventory.voltage.lowerThresholdNonCritical'
-          ),
         },
         {
           key: 'lowerThresholdCritical',
@@ -65,6 +62,11 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    temperatureInfo() {
+      return this.$store.getters['SystemStore/voltage'];
+    },
   },
 };
 </script>

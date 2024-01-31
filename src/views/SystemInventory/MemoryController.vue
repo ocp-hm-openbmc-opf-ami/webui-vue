@@ -72,8 +72,5 @@ export default {
       return this.$store.getters['SystemStore/memoryController'];
     },
   },
-  created() {
-    this.$store.dispatch('SystemStore/getMemoryControllersInfo');
-  },
 };
 </script>

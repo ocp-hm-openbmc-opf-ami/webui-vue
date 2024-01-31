@@ -50,14 +50,6 @@ export default {
           key: 'state',
           label: this.$t('pageSystemInventory.power.state'),
         },
-        {
-          key: 'efficiencyPercent',
-          label: this.$t('pageSystemInventory.power.efficiencyPercent'),
-        },
-        {
-          key: 'inputRanges',
-          label: this.$t('pageSystemInventory.power.inputRanges'),
-        },
       ],
     };
   },
@@ -65,9 +57,6 @@ export default {
     powerInfo() {
       return this.$store.getters['SystemStore/power'];
     },
-  },
-  created() {
-    this.$store.dispatch('SystemStore/getPowerInfo');
   },
 };
 </script>
