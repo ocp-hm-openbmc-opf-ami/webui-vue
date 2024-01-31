@@ -64,8 +64,5 @@ export default {
       return this.$store.getters['SystemStore/processors'];
     },
   },
-  created() {
-    this.$store.dispatch('SystemStore/getProcessorsInfo');
-  },
 };
 </script>

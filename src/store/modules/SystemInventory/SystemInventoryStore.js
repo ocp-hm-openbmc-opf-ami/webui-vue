@@ -13,6 +13,8 @@ const SystemInventoryStore = {
     pcieFunction: [],
     fans: [],
     power: [],
+    temperature: [],
+    voltage: [],
   },
   getters: {
     systems: (state) => state.systems,
@@ -27,6 +29,8 @@ const SystemInventoryStore = {
     pcieFunction: (state) => state.pcieFunction,
     fans: (state) => state.fans,
     power: (state) => state.power,
+    temperature: (state) => state.temperature,
+    voltage: (state) => state.voltage,
   },
   mutations: {
     setSystems: (state, systems) => (state.systems = systems),
@@ -46,6 +50,8 @@ const SystemInventoryStore = {
       (state.pcieFunction = pcieFunction),
     setFans: (state, fans) => (state.fans = fans),
     setPower: (state, power) => (state.power = power),
+    setTemperature: (state, temperature) => (state.temperature = temperature),
+    setvoltage: (state, voltage) => (state.voltage = voltage),
   },
   actions: {
     async getSystemsInfo({ commit }) {
@@ -169,10 +175,10 @@ const SystemInventoryStore = {
           baseBoard.powerState = response.data?.PowerState
             ? response.data?.PowerState
             : 'NA';
-          baseBoard.serialNumber = response.data.SerialNumber
-            ? response.data.SerialNumber
+          baseBoard.serialNumber = response.data?.SerialNumber
+            ? response.data?.SerialNumber
             : 'NA';
-          baseBoard.partNumuber = response.data?.PartNumber
+          baseBoard.partNumber = response.data?.PartNumber
             ? response.data?.PartNumber
             : 'NA';
           baseBoard.model = response.data?.Model ? response.data?.Model : 'NA';
@@ -188,17 +194,7 @@ const SystemInventoryStore = {
         .catch((error) => console.log(error));
     },
     async getBasebordInfoNetworkinterfaces({ commit }) {
-      return await api
-        .get('/localApi/SystemInventory')
-        .then((response) => {
-          commit(
-            'setBasebordInfoNetworkinterfaces',
-            response.data.NetworkInterface
-          );
-        })
-        .catch((error) => console.log(error));
-    },
-    async getBasebordInfoNetworkInterfacesIpv6({ commit }) {
+      const networkInterfacesInfo = [];
       return await api
         .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
         .then((response) =>
@@ -214,22 +210,57 @@ const SystemInventoryStore = {
           )
         )
         .then((ethernetInterfaces) => {
-          const ipv6AddressInfo = ethernetInterfaces.map(({ data }) => {
-            return {
-              address: data.IPv6Addresses[0]?.Address
-                ? data.IPv6Addresses[0]?.Address
-                : 'NA',
-              prefixLength: data.IPv6Addresses[0]?.PrefixLength
-                ? data.IPv6Addresses[0]?.PrefixLength
-                : 'NA',
-              scope: data.IPv6Addresses[0]?.AddressOrigin
-                ? data.IPv6Addresses[0]?.AddressOrigin == 'SLAAC'
-                  ? 'Global'
-                  : data.IPv6Addresses[0]?.AddressOrigin == 'LinkLocal'
-                  ? 'LinkLocal'
-                  : ''
-                : 'NA',
-            };
+          ethernetInterfaces.forEach(({ data }) => {
+            data.IPv4Addresses.forEach((ipv4) => {
+              const networkIntefaces = {
+                id: data.Id,
+                mACAddress: data.MACAddress,
+                interfaceEnabled: data.InterfaceEnabled,
+                iPv4Addresses: ipv4.Address || 'NA',
+                hostName: data.HostName,
+                state: data.Status?.State,
+                address: ipv4.Address || 'NA',
+              };
+              networkInterfacesInfo.push(networkIntefaces);
+            });
+          });
+          commit('setBasebordInfoNetworkinterfaces', networkInterfacesInfo);
+        })
+        .catch((error) => console.log(error));
+    },
+    async getBasebordInfoNetworkInterfacesIpv6({ commit }) {
+      const ipv6AddressInfo = [];
+      return await api
+        .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
+        .then((response) =>
+          response.data.Members.map(
+            (ethernetInterface) => ethernetInterface['@odata.id']
+          )
+        )
+        .then((ethernetInterfaceIds) =>
+          api.all(
+            ethernetInterfaceIds.map((ethernetInterface) =>
+              api.get(ethernetInterface)
+            )
+          )
+        )
+        .then((ethernetInterfaces) => {
+          ethernetInterfaces.forEach(({ data }) => {
+            data.IPv6Addresses.forEach((ipv6) => {
+              const ipv6Address = {
+                id: data.Id ? data.Id : 'NA',
+                address: ipv6.Address || 'NA',
+                prefixLength: ipv6.PrefixLength || 'NA',
+                scope: ipv6.AddressOrigin
+                  ? ipv6.AddressOrigin === 'SLAAC'
+                    ? 'Global'
+                    : ipv6.AddressOrigin === 'LinkLocal'
+                    ? 'LinkLocal'
+                    : ''
+                  : 'NA',
+              };
+              ipv6AddressInfo.push(ipv6Address);
+            });
           });
           commit('setBasebordInfoNetworkInterfacesIpv6', ipv6AddressInfo);
         })
@@ -374,15 +405,94 @@ const SystemInventoryStore = {
                 : 'NA',
               SerialNumber: data.SerialNumber ? data.SerialNumber : 'NA',
               state: data.Status?.State ? data.Status?.State : 'NA',
-              efficiencyPercent: data.EfficiencyRatings[0]?.EfficiencyPercent
-                ? data.EfficiencyRatings[0]?.EfficiencyPercent
-                : 'NA',
-              inputRanges: data.InputRanges[0]?.NominalVoltageType
-                ? data.InputRanges[0]?.NominalVoltageType
-                : 'NA',
             };
           });
           commit('setPower', powerInfo);
+        })
+        .catch((error) => console.log(error));
+    },
+    async getTemperatureInfo({ commit }) {
+      return await api
+        .get('/redfish/v1/Chassis/AC_Baseboard/Sensors')
+        .then(({ data: { Members = [] } = {} }) => {
+          const promises = Members.filter((member) =>
+            member['@odata.id'].includes('temperature')
+          ).map((member) => api.get(member['@odata.id']));
+          return api.all(promises);
+        })
+        .then((response) => {
+          const temperatureInfo = response.map(({ data }) => {
+            return {
+              name: data.Name ? data.Name : 'NA',
+              physicalContext: data.PhysicalContext
+                ? data.PhysicalContext
+                : 'NA',
+              readingUnits: data.ReadingUnits ? data.ReadingUnits : 'NA',
+              reading: data.Reading ? data.Reading : 'NA',
+              readingRangeMin: data.ReadingRangeMin
+                ? data.ReadingRangeMin
+                : 'NA',
+              readingRangeMax: data.ReadingRangeMax
+                ? data.ReadingRangeMax
+                : 'NA',
+              readingType: data.ReadingType ? data.ReadingType : 'NA',
+              upperThresholdFatal: data.Thresholds?.UpperCaution?.Reading
+                ? data.Thresholds?.UpperCaution?.Reading
+                : 'NA',
+              upperThresholdCritical: data.Thresholds?.UpperCritical?.Reading
+                ? data.Thresholds?.UpperCritical?.Reading
+                : 'NA',
+              lowerThresholdCritical: data.Thresholds?.LowerCritical?.Reading
+                ? data.Thresholds?.LowerCritical?.Reading
+                : 'NA',
+              lowerThresholdFatal: data.Thresholds?.LowerCaution?.Reading
+                ? data.Thresholds?.LowerCaution?.Reading
+                : 'NA',
+              state: data.Status?.State ? data.Status?.State : 'NA',
+            };
+          });
+          commit('setTemperature', temperatureInfo);
+        })
+        .catch((error) => console.log(error));
+    },
+    async getVoltageInfo({ commit }) {
+      return await api
+        .get('/redfish/v1/Chassis/AC_Baseboard/Sensors')
+        .then(({ data: { Members = [] } = {} }) => {
+          const promises = Members.filter((member) =>
+            member['@odata.id'].includes('voltage')
+          ).map((member) => api.get(member['@odata.id']));
+          return api.all(promises);
+        })
+        .then((response) => {
+          const voltageInfo = response.map(({ data }) => {
+            return {
+              name: data.Name ? data.Name : 'NA',
+              readingUnits: data.ReadingUnits ? data.ReadingUnits : 'NA',
+              reading: data.Reading ? data.Reading : 'NA',
+              readingRangeMin: data.ReadingRangeMin
+                ? data.ReadingRangeMin
+                : 'NA',
+              readingRangeMax: data.ReadingRangeMax
+                ? data.ReadingRangeMax
+                : 'NA',
+              readingType: data.ReadingType ? data.ReadingType : 'NA',
+              upperThresholdFatal: data.Thresholds?.UpperCaution?.Reading
+                ? data.Thresholds?.UpperCaution?.Reading
+                : 'NA',
+              upperThresholdCritical: data.Thresholds?.UpperCritical?.Reading
+                ? data.Thresholds?.UpperCritical?.Reading
+                : 'NA',
+              lowerThresholdCritical: data.Thresholds?.LowerCritical?.Reading
+                ? data.Thresholds?.LowerCritical?.Reading
+                : 'NA',
+              lowerThresholdFatal: data.Thresholds?.LowerCaution?.Reading
+                ? data.Thresholds?.LowerCaution?.Reading
+                : 'NA',
+              state: data.Status?.State ? data.Status?.State : 'NA',
+            };
+          });
+          commit('setvoltage', voltageInfo);
         })
         .catch((error) => console.log(error));
     },

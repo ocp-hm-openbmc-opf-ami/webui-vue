@@ -44,8 +44,5 @@ export default {
       return this.$store.getters['SystemStore/fans'];
     },
   },
-  created() {
-    this.$store.dispatch('SystemStore/getFansInfo');
-  },
 };
 </script>

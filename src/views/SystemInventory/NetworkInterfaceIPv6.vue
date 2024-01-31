@@ -17,6 +17,10 @@ export default {
     return {
       networkInterfacesIpv6Fields: [
         {
+          key: 'id',
+          label: this.$t('pageSystemInventory.networkInterfaceIPv6.id'),
+        },
+        {
           key: 'address',
           label: this.$t('pageSystemInventory.networkInterfaceIPv6.address'),
         },
@@ -41,9 +45,6 @@ export default {
         'SystemStore/basebordInfoNetworkInterfacesIpv6'
       ];
     },
-  },
-  created() {
-    this.$store.dispatch('SystemStore/getBasebordInfoNetworkInterfacesIpv6');
   },
 };
 </script>
