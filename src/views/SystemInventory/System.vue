@@ -78,8 +78,5 @@ export default {
       return this.$store.getters['SystemStore/systems'];
     },
   },
-  created() {
-    this.$store.dispatch('SystemStore/getSystemsInfo');
-  },
 };
 </script>

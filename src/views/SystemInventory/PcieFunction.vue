@@ -1,10 +1,5 @@
 <template>
   <div>
-    <div class="ml-sm-4">
-      <table-cell-count
-        :total-number-of-cells="pcieFunctionInfo.length"
-      ></table-cell-count>
-    </div>
     <b-table
       responsive="md"
       hover
@@ -17,10 +12,7 @@
 </template>
 
 <script>
-import TableCellCount from '@/components/Global/TableCellCount';
-
 export default {
-  components: { TableCellCount },
   data() {
     return {
       pcieFunctionFields: [
@@ -71,9 +63,6 @@ export default {
     pcieFunctionInfo() {
       return this.$store.getters['SystemStore/pcieFunction'];
     },
-  },
-  created() {
-    this.$store.dispatch('SystemStore/getPcieFunctionInfo');
   },
 };
 </script>

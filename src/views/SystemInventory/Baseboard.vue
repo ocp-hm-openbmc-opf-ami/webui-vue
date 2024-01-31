@@ -66,8 +66,5 @@ export default {
       return this.$store.getters['SystemStore/baseBoard'];
     },
   },
-  created() {
-    this.$store.dispatch('SystemStore/getBaseBoardInfo');
-  },
 };
 </script>

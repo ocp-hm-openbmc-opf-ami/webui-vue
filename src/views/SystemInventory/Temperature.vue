@@ -5,6 +5,7 @@
       hover
       sticky-header
       :fields="temperatureFields"
+      :items="temperatureInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -20,10 +21,6 @@ export default {
           label: this.$t('pageSystemInventory.temperature.name'),
         },
         {
-          key: 'sensorNumber',
-          label: this.$t('pageSystemInventory.temperature.sensorNumber'),
-        },
-        {
           key: 'physicalContext',
           label: this.$t('pageSystemInventory.temperature.physicalContext'),
         },
@@ -32,8 +29,24 @@ export default {
           label: this.$t('pageSystemInventory.temperature.state'),
         },
         {
-          key: 'readingRPM',
-          label: this.$t('pageSystemInventory.temperature.readingCelsius'),
+          key: 'readingUnits',
+          label: this.$t('pageSystemInventory.temperature.readingUnits'),
+        },
+        {
+          key: 'reading',
+          label: this.$t('pageSystemInventory.temperature.reading'),
+        },
+        {
+          key: 'readingRangeMin',
+          label: this.$t('pageSystemInventory.temperature.minReadingRange'),
+        },
+        {
+          key: 'readingRangeMax',
+          label: this.$t('pageSystemInventory.temperature.maxReadingRange'),
+        },
+        {
+          key: 'readingType',
+          label: this.$t('pageSystemInventory.temperature.readingType'),
         },
         {
           key: 'upperThresholdFatal',
@@ -43,18 +56,6 @@ export default {
           key: 'upperThresholdCritical',
           label: this.$t(
             'pageSystemInventory.temperature.upperThresholdCritical'
-          ),
-        },
-        {
-          key: 'upperThresholdNonCritical',
-          label: this.$t(
-            'pageSystemInventory.temperature.upperThresholdNonCritical'
-          ),
-        },
-        {
-          key: 'lowerThresholdNonCritical',
-          label: this.$t(
-            'pageSystemInventory.temperature.lowerThresholdNonCritical'
           ),
         },
         {
@@ -69,6 +70,11 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    temperatureInfo() {
+      return this.$store.getters['SystemStore/temperature'];
+    },
   },
 };
 </script>
