@@ -5,7 +5,7 @@
       hover
       sticky-header
       :fields="networkInterfacesFields"
-      :items="networkInterfacesTabItems"
+      :items="networkInterfacesInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -17,8 +17,8 @@ export default {
     return {
       networkInterfacesFields: [
         {
-          key: 'name',
-          label: this.$t('pageSystemInventory.networkInterfaces.name'),
+          key: 'id',
+          label: this.$t('pageSystemInventory.networkInterfaces.id'),
         },
         {
           key: 'mACAddress',
@@ -39,16 +39,6 @@ export default {
           label: this.$t('pageSystemInventory.networkInterfaces.hostName'),
         },
         {
-          key: 'fullDuplex',
-          label: this.$t('pageSystemInventory.networkInterfaces.fullDuplex'),
-        },
-        {
-          key: 'permanentMACAddress',
-          label: this.$t(
-            'pageSystemInventory.networkInterfaces.permanentMACAddress'
-          ),
-        },
-        {
           key: 'state',
           label: this.$t('pageSystemInventory.networkInterfaces.state'),
         },
@@ -59,24 +49,6 @@ export default {
     networkInterfacesInfo() {
       return this.$store.getters['SystemStore/basebordInfoNetworkinterfaces'];
     },
-    networkInterfacesTabItems() {
-      // transform system tab data to table data
-      return this.networkInterfacesInfo?.map((data) => {
-        return {
-          Name: data.Name,
-          MACAddress: data.MACAddress,
-          InterfaceEnabled: data.InterfaceEnabled,
-          IPv4Addresses: data.IPv4Addresses,
-          HostName: data.HostName,
-          FullDuplex: data.FullDuplex,
-          PermanentMACAddress: data.PermanentMACAddress,
-          State: data.State,
-        };
-      });
-    },
-  },
-  created() {
-    this.$store.dispatch('SystemStore/getBasebordInfoNetworkinterfaces');
   },
 };
 </script>

@@ -91,6 +91,7 @@ import PcieDevice from './PcieDevice.vue';
 import PcieFunction from './PcieFunction.vue';
 import StorageDrive from './StorageDrive.vue';
 import StorageController from './StorageController.vue';
+import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 export default {
   name: 'SystemInventory',
   components: {
@@ -110,11 +111,28 @@ export default {
     StorageDrive,
     StorageController,
   },
+  mixins: [LoadingBarMixin],
   data() {
     return {
       tabIndex: 0,
       hideTab: false,
     };
+  },
+  created() {
+    this.startLoader();
+    Promise.all([
+      this.$store.dispatch('SystemStore/getSystemsInfo'),
+      this.$store.dispatch('SystemStore/getBaseBoardInfo'),
+      this.$store.dispatch('SystemStore/getMemoryControllersInfo'),
+      this.$store.dispatch('SystemStore/getBasebordInfoNetworkInterfacesIpv6'),
+      this.$store.dispatch('SystemStore/getBasebordInfoNetworkinterfaces'),
+      this.$store.dispatch('SystemStore/getPcieDeviceInfo'),
+      this.$store.dispatch('SystemStore/getPcieFunctionInfo'),
+      this.$store.dispatch('SystemStore/getPowerInfo'),
+      this.$store.dispatch('SystemStore/getTemperatureInfo'),
+      this.$store.dispatch('SystemStore/getFansInfo'),
+      this.$store.dispatch('SystemStore/getVoltageInfo'),
+    ]).finally(() => this.endLoader());
   },
 };
 </script>
