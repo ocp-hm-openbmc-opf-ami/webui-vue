@@ -1092,6 +1092,7 @@
         "labelServerAddress": "Serveradresse",
         "labelSenderEmailAddress": "EMail Adresse des Absenders",
         "labelPort": "Hafen",
+        "PortRangeRequired": "Geben Sie einen gültigen Portbereich zwischen 1 und 65535 ein",
         "toast": {
             "successSMTPConfiguration": "SMTP Konfiguration erfolgreich aktualisiert",
             "errorSMTPConfiguration": "Fehler beim Aktualisieren der SMTP Konfiguration"

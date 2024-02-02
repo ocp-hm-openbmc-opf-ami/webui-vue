@@ -1092,6 +1092,7 @@
         "labelServerAddress": "伺服器位址",
         "labelSenderEmailAddress": "傳送者 Email 位址",
         "labelPort": "端口",
+        "PortRangeRequired": "輸入 1-65535 之間的有效連接埠範圍",
         "toast": {
             "successSMTPConfiguration": "成功更新 SMTP 設定",
             "errorSMTPConfiguration": "更新 SMTP 發生錯誤"
