@@ -1267,6 +1267,8 @@
         "vmcDescription": "Aktivieren von Virtual Media für die Bildumleitung",
         "solssh": "SOL SSH",
         "solDescription": "SOL SSH aktivieren",
+        "ssdpProtocol": "SSDP",
+        "ssdpDescription": "SSDP-Protokoll aktivieren",
         "complexity": "Komplexität",
         "complexityDescription": "Wählen Sie die Dropdown-Liste „Passwortkomplexität“ aus, um die Passwortkomplexität festzulegen (Deaktiviert, Niedrig, Mittel, Hoch). Aufgrund von IPMI 2.0-Einschränkungen darf das Passwort nicht länger als 20 Byte sein.",
         "passwordHistory": "Passwort Verlauf",

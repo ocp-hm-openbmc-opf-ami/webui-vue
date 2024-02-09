@@ -1298,6 +1298,8 @@
         "vmcDescription": "Enabling Virtual Media for image redirection",
         "solssh": "SOL SSH",
         "solDescription": "Enabling SOL SSH",
+        "ssdpProtocol": "SSDP",
+        "ssdpDescription": "Enabling SSDP Protocol",
         "complexity": "Complexity",
         "complexityDescription": "Select the Password Complexity dropdown to set the password complexity (Disabled, Low, Medium, High). Password cannot exceed 20 bytes of length due to IPMI 2.0 restrictions.",
         "passwordHistory": "Password History",

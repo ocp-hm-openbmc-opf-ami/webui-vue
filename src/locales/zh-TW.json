@@ -1267,6 +1267,8 @@
         "vmcDescription": "啟用虛擬媒體為了映像重導",
         "solssh": "SOL SSH",
         "solDescription": "啟用 SOL SSH",
+        "ssdpProtocol": "SSDP",
+        "ssdpDescription": "啟用SSDP協議",
         "complexity": "複雜度",
         "complexityDescription": "點選密碼歷史選單以設定密碼複雜度 (停用, 低, 中, 高). 密碼不能超過20 bytes長度，由於 IPMI 2.0 限制.",
         "passwordHistory": "密碼歷史",

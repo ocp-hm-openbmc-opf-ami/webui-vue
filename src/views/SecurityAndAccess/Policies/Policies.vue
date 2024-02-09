@@ -209,6 +209,31 @@
                   </b-form-checkbox>
                 </b-col>
               </b-row>
+              <b-row class="setting-section">
+                <b-col
+                  class="d-flex align-items-center justify-content-between"
+                >
+                  <dl class="mt-3 mr-3 w-75">
+                    <dt>{{ $t('pagePolicies.ssdpProtocol') }}</dt>
+                    <dd>{{ $t('pagePolicies.ssdpDescription') }}</dd>
+                  </dl>
+                  <b-form-checkbox
+                    id="ssdpSwitch"
+                    v-model="ssdpState"
+                    data-test-id="policies-toggle-sol"
+                    switch
+                    @change="changeSSDPState"
+                  >
+                    <span class="sr-only">
+                      {{ $t('pagePolicies.ssdpProtocol') }}
+                    </span>
+                    <span v-if="ssdpState">
+                      {{ $t('global.status.enabled') }}
+                    </span>
+                    <span v-else>{{ $t('global.status.disabled') }}</span>
+                  </b-form-checkbox>
+                </b-col>
+              </b-row>
               <b-row v-if="solState" class="setting-section">
                 <b-col cols="3" class="d-flex align-items-center">
                   <b-form-group
