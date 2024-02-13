@@ -124,6 +124,7 @@ export default {
       this.$store.dispatch('SystemStore/getSystemsInfo'),
       this.$store.dispatch('SystemStore/getBaseBoardInfo'),
       this.$store.dispatch('SystemStore/getMemoryControllersInfo'),
+      this.$store.dispatch('SystemStore/getProcessorsInfo'),
       this.$store.dispatch('SystemStore/getBasebordInfoNetworkInterfacesIpv6'),
       this.$store.dispatch('SystemStore/getBasebordInfoNetworkinterfaces'),
       this.$store.dispatch('SystemStore/getPcieDeviceInfo'),
