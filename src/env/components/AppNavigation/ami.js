@@ -168,6 +168,11 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.smtpSettings'),
               route: '/settings/smtp',
             },
+            {
+              id: 'snmp',
+              label: this.$t('appNavigation.snmpSettings'),
+              route: '/settings/snmp',
+            },
           ],
         },
         {

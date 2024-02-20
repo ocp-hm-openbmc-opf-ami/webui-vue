@@ -143,6 +143,7 @@
         "keyClear": "@:appPageTitle.keyClear",
         "factoryDefault": "Factory Default",
         "smtpSettings": "SMTP Settings",
+        "snmpSettings": "SNMP Settings",
         "pef": "Platform Event Filter",
         "eventFilter": "Event Filter",
         "alertDestination": "Alert Destination",
@@ -151,7 +152,7 @@
         "hostSystemDiagnostics": "Host System Diagnostics",
         "autonomousCrashDump": "ACD",
         "asd": "@:appPageTitle.asd",
-        "onDemand":"@:appPageTitle.onDemand",
+        "onDemand": "@:appPageTitle.onDemand",
         "raidManagement": "@:appPageTitle.raidManagement",
         "adapter": "@:appPageTitle.adapter",
         "physicalDevice": "@:appPageTitle.physicalDevice",
@@ -191,13 +192,14 @@
         "keyClear": "Key clear",
         "factoryDefault": "Factory Default",
         "smtpSettings": "SMTP Settings",
+        "snmp": "SNMP Settings",
         "eventFilter": "Event Filter",
         "alertDestination": "Alert Destination",
         "nicInformation": "NIC Information",
         "nvmeInformation": "NVMe Information",
         "autonomousCrashDump": "ACD",
         "asd": "ASD",
-        "onDemand":"OnDemand",
+        "onDemand": "OnDemand",
         "raidManagement": "RAID Management",
         "adapter": "Adapter",
         "physicalDevice": "Physical Device",
@@ -230,7 +232,7 @@
         }
     },
     "pageOnDemand": {
-        "onDemand":"OnDemand",
+        "onDemand": "OnDemand",
         "availableCPU": "Available CPUs",
         "all": "All",
         "table": {
@@ -314,9 +316,9 @@
         "manufacturerId": "Manufacturer Id",
         "NCSIVersion": "NCSI Version",
         "OEMMacAddress": "OEM Mac Address",
-        "noInformationAvailable":"NIC informations not available",
+        "noInformationAvailable": "NIC informations not available",
         "headers": {
-            "MacAddress":"MACAddress"
+            "MacAddress": "MACAddress"
         }
     },
     "pageNvmeInformation": {
@@ -524,7 +526,7 @@
         "modal": {
             "jsonViewer": "Selected File: %{fileName}",
             "confirmTitle": "Confirm?",
-            "confirmMessage":"Are you sure you want to Generate Crashdump log? Sometimes it may take 10 to 15 minutes to generate the log."
+            "confirmMessage": "Are you sure you want to Generate Crashdump log? Sometimes it may take 10 to 15 minutes to generate the log."
         },
         "table": {
             "fileName": "File Name",
@@ -823,7 +825,7 @@
         "editUser": "Edit user",
         "viewPrivilegeRoleDescriptions": "View privilege role descriptions",
         "passwordComplexityRules": "Password complexity rules",
-        "note": "To view or modify the password complexity rule go to security and access -> polices page",        
+        "note": "To view or modify the password complexity rule go to security and access -> polices page",
         "modal": {
             "accountLocked": "Account locked",
             "accountStatus": "Account status",
@@ -887,45 +889,45 @@
             "successPasswordChanged": "Password has been changed successfully.Please relogin with the new password"
         },
         "passwordRules": {
-          "passwordForHigh": {
-            "passwordComplexityForHigh": "Password Complexity for high",
-            "rule2": "Password length should not be shorter than 8 characters.",
-            "rule3":"Meets following 4 criteria:" ,
-            "rule4": "Contains upper case (e.g. A, G).",
-            "rule5": "Contains lower case (e.g. a, g).",
-            "rule6": "Contains digit numbers (e.g. 1, 6).",
-            "rule7": "Contain printable characters and at least a space or symbols (e.g. $, &).",
-            "rule8": "Could not contains username or the username in reverse order (case insensitive).",
-            "rule9": "Have at least two new characters when compared with the previous password.",
-            "rule10": "Could not contains continuous digits longer than or equal to 3 characters (e.g. BMC(123)ste, BMC(654)sfc are not allowed).",
-            "rule11": "Could not contains continuous alphabets longer than or equal to 3 characters (e.g. (AbC)3478!,57$(DeF)68k are not allowed).",
-            "rule12": "Alphabets could no longer than 3 characters (e.g. (Fher)145! are not allowed))",
-            "rule13": "Digits could no longer than 3 characters (e.g. Fgke(1245)#@, (4390)FGL$ are not allowed)",
-            "rule14": "Contains no more than 3 same alphabets(case insensitive) (e.g. Fkr4fcpF&f (4 'f' or 'F'),Glg5gt2G! (4 'g' or 'G') are not allowed)"
-          },
-          "passwordFormedium": {
-            "passwordComplexityFormedium": "Password Complexity for Medium",
-            "rule2": "Password length should not be shorter than 8 characters.",
-            "rule3": "Cannot be the same as the username or the username in reverse order.",
-            "rule4": "Have at least two new characters when compared with the previous password.",
-            "rule5": "Meets following 4 criteria:",
-            "rule6": "Contains upper case (e.g. A, G).",
-            "rule7": "Contains lower case (e.g. a, g).",
-            "rule8": "Contains digit numbers (e.g. 1, 6).",
-            "rule9": "Contain printable characters and at least a space or symbols (e.g. $, &).",
-            "rule10": "Could not contains username or the username in reverse order (case insensitive) (eg,username=Hello, Password=th12(oLleH)_78 is not allowed)."
-          },
-          "passwordForLow": {
-            "passwordComplexityForLow": "Password Complexity for Low",
-            "rule2": "Password length should not be shorter than 6 characters.",
-            "rule3": "Meets following 4 criteria:",
-            "rule4": "Contains upper case (e.g. A, G).",
-            "rule5": "Contains lower case (e.g. a, g).",
-            "rule6": "Contains digit numbers (e.g. 1, 6).",
-            "rule7": "Contain printable characters and at least a space or symbols (e.g. $, &).",
-            "rule8": "Could not contains username or the username in reverse order (pam_cracklib will check both) (case insensitive) (eg, username=Hello, both Password=th12(heLLo)_78 and Password=th12(oLleH)_78 is not allowed, same as Medium and High)."
-          }
-     }        
+            "passwordForHigh": {
+                "passwordComplexityForHigh": "Password Complexity for high",
+                "rule2": "Password length should not be shorter than 8 characters.",
+                "rule3": "Meets following 4 criteria:",
+                "rule4": "Contains upper case (e.g. A, G).",
+                "rule5": "Contains lower case (e.g. a, g).",
+                "rule6": "Contains digit numbers (e.g. 1, 6).",
+                "rule7": "Contain printable characters and at least a space or symbols (e.g. $, &).",
+                "rule8": "Could not contains username or the username in reverse order (case insensitive).",
+                "rule9": "Have at least two new characters when compared with the previous password.",
+                "rule10": "Could not contains continuous digits longer than or equal to 3 characters (e.g. BMC(123)ste, BMC(654)sfc are not allowed).",
+                "rule11": "Could not contains continuous alphabets longer than or equal to 3 characters (e.g. (AbC)3478!,57$(DeF)68k are not allowed).",
+                "rule12": "Alphabets could no longer than 3 characters (e.g. (Fher)145! are not allowed))",
+                "rule13": "Digits could no longer than 3 characters (e.g. Fgke(1245)#@, (4390)FGL$ are not allowed)",
+                "rule14": "Contains no more than 3 same alphabets(case insensitive) (e.g. Fkr4fcpF&f (4 'f' or 'F'),Glg5gt2G! (4 'g' or 'G') are not allowed)"
+            },
+            "passwordFormedium": {
+                "passwordComplexityFormedium": "Password Complexity for Medium",
+                "rule2": "Password length should not be shorter than 8 characters.",
+                "rule3": "Cannot be the same as the username or the username in reverse order.",
+                "rule4": "Have at least two new characters when compared with the previous password.",
+                "rule5": "Meets following 4 criteria:",
+                "rule6": "Contains upper case (e.g. A, G).",
+                "rule7": "Contains lower case (e.g. a, g).",
+                "rule8": "Contains digit numbers (e.g. 1, 6).",
+                "rule9": "Contain printable characters and at least a space or symbols (e.g. $, &).",
+                "rule10": "Could not contains username or the username in reverse order (case insensitive) (eg,username=Hello, Password=th12(oLleH)_78 is not allowed)."
+            },
+            "passwordForLow": {
+                "passwordComplexityForLow": "Password Complexity for Low",
+                "rule2": "Password length should not be shorter than 6 characters.",
+                "rule3": "Meets following 4 criteria:",
+                "rule4": "Contains upper case (e.g. A, G).",
+                "rule5": "Contains lower case (e.g. a, g).",
+                "rule6": "Contains digit numbers (e.g. 1, 6).",
+                "rule7": "Contain printable characters and at least a space or symbols (e.g. $, &).",
+                "rule8": "Could not contains username or the username in reverse order (pam_cracklib will check both) (case insensitive) (eg, username=Hello, both Password=th12(heLLo)_78 and Password=th12(oLleH)_78 is not allowed, same as Medium and High)."
+            }
+        }
     },
     "pageLogin": {
         "language": "Language",
@@ -1054,7 +1056,7 @@
             "ipv4Confirmation": "Please delete any one of IPV4 address to add Static IPV4 address.",
             "ipv6Confirmation": "Please delete any one of IPV6 address to add Static IPV6 address.",
             "confirmTitle": "Confirm?",
-            "confirmMessage":"This configuration may change the IP address of the device, making further access impossible. After confirming the device IP, you can log in with the new IP. Do you want to proceed?",
+            "confirmMessage": "This configuration may change the IP address of the device, making further access impossible. After confirming the device IP, you can log in with the new IP. Do you want to proceed?",
             "informatiomTitle": "Information",
             "informationMessage": "Network configuration has been reset successfully. Please close this browser session and open a new browser session to connect to the device with new IP"
         },
@@ -1099,6 +1101,35 @@
         "modal": {
             "confirmTitle": "Confirm?",
             "confirmMessage": "This feature may change the IP address of the device, making further access impossible. After confirming the device IP, you can log in with the new IP. Do you want to proceed?"
+        }
+    },
+    "pageSnmp": {
+        "destination": "Destination IP",
+        "snmpTrap": "SNMPTrap",
+        "subscriptionType": "Subscription Type",
+        "protocol": "Protocol",
+        "snmpProtocolV1": "SNMPv2c",
+        "addSubscrition": "Add Subscription",
+        "editSubscrition": "Edit Subscription",
+        "modal": {
+            "destination": "Destination",
+            "subscriptionType": "Subscription Type",
+            "protocol": "Protocal",
+            "cancel": "Cancel",
+            "addTrap": "Add Trap"
+        },
+        "table": {
+            "destination": "Destination",
+            "subscriptionType": "Subscription Type",
+            "protocol": "Protocol",
+            "sino": "S.NO"
+        },
+        "toast": {
+            "errorInAddSubscription": "Error in Adding Subcription",
+            "errorInDeleteSubscription": "Error in Deleting Subcription",
+            "errorInEditSubscription": "Error in Editing Subcription",
+            "successInAddSubscription": "Successfully added SNMPTrap",
+            "successInDeleteSubscription": "Successfully deleted SNMPTrap"
         }
     },
     "pageSmtp": {
@@ -1529,8 +1560,8 @@
             "successDeleteLogicalDevice": "Successfully deleted the Logical Device.",
             "errorDeleteLogicalDevice": "Error in deleting the Logical Device.",
             "errorNumberOfDrivesValidation": "Number of Drives count should not higher than UnConfigured Physical Device count!",
-            "errorMinMaxSpanDepth":"The minimum and maximum Span Depth is 2.",
-            "errorSpanDepthDrives":"Selected UnConfig Drives should be equal to multiple of Span Depth and Drives per Span."
+            "errorMinMaxSpanDepth": "The minimum and maximum Span Depth is 2.",
+            "errorSpanDepthDrives": "Selected UnConfig Drives should be equal to multiple of Span Depth and Drives per Span."
         }
     },
     "countries": {

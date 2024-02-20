@@ -37,6 +37,7 @@ import Dumps from '@/views/Logs/Dumps';
 import ACD from '@/views/HostSystemDiagnostics/ACD';
 import Asd from '@/views/HostSystemDiagnostics/Asd';
 import BackupAndRestore from '@/views/Operations/BackupAndRestore';
+import SnmpSettings from '@/views/Settings/SNMP';
 
 const roles = {
   administrator: 'Administrator',
@@ -315,6 +316,14 @@ const routes = [
         component: BackupAndRestore,
         meta: {
           title: i18n.t('appPageTitle.backupAndRestore'),
+        },
+      },
+      {
+        path: '/settings/snmp',
+        name: 'snmp',
+        component: SnmpSettings,
+        meta: {
+          title: i18n.t('appPageTitle.snmpSettings'),
         },
       },
       {
