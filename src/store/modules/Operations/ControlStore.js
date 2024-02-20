@@ -33,12 +33,17 @@ const serverStateMapper = (hostState) => {
       return 'unreachable';
   }
 };
-const checkForServerStatus = function (serverStatus) {
+const checkForServerStatus = function (serverStatus, isKvm) {
+  /* If power action is done from KVM console
+   * means timeout value reduced 10 seconds for
+   * updating the server status
+   */
+  const timeoutValue = isKvm === 'kvm' ? 10000 : 300000;
   return new Promise((resolve) => {
     const timer = setTimeout(() => {
       resolve();
       unwatch();
-    }, 300000 /*5mins*/);
+    }, timeoutValue);
     const unwatch = this.watch(
       (state) => state.global.serverStatus,
       (value) => {
@@ -119,48 +124,84 @@ const ControlStore = {
           throw new Error(i18n.t('pageRebootBmc.toast.errorRebootStart'));
         });
     },
-    async serverPowerOn({ dispatch, commit }) {
+    async serverPowerOn({ dispatch, commit }, isKvm) {
       const data = { ResetType: 'On' };
-      dispatch('serverPowerChange', data);
-      await checkForServerStatus.bind(this, 'on')();
-      commit('setOperationInProgress', false);
-      dispatch('getLastPowerOperationTime');
+      return dispatch('serverPowerChange', data)
+        .then(async () => {
+          await checkForServerStatus.bind(this, 'on', isKvm)();
+          commit('setOperationInProgress', false);
+          dispatch('getLastPowerOperationTime');
+          return i18n.t('pageKvm.toast.success');
+        })
+        .catch((error) => {
+          console.error(error);
+          throw new Error(i18n.t('pageKvm.toast.error'));
+        });
     },
-    async serverSoftReboot({ dispatch, commit }) {
+    async serverSoftReboot({ dispatch, commit }, isKvm) {
       const data = { ResetType: 'GracefulRestart' };
-      dispatch('serverPowerChange', data);
-      await checkForServerStatus.bind(this, 'on')();
-      commit('setOperationInProgress', false);
-      dispatch('getLastPowerOperationTime');
+      return dispatch('serverPowerChange', data)
+        .then(async () => {
+          await checkForServerStatus.bind(this, 'on', isKvm)();
+          commit('setOperationInProgress', false);
+          dispatch('getLastPowerOperationTime');
+          return i18n.t('pageKvm.toast.success');
+        })
+        .catch((error) => {
+          console.error(error);
+          throw new Error(i18n.t('pageKvm.toast.error'));
+        });
     },
-    async serverHardReboot({ dispatch, commit }) {
+    async serverHardReboot({ dispatch, commit }, isKvm) {
       const data = { ResetType: 'ForceRestart' };
-      dispatch('serverPowerChange', data);
-      await checkForServerStatus.bind(this, 'on')();
-      commit('setOperationInProgress', false);
-      dispatch('getLastPowerOperationTime');
+      return dispatch('serverPowerChange', data)
+        .then(async () => {
+          await checkForServerStatus.bind(this, 'on', isKvm)();
+          commit('setOperationInProgress', false);
+          dispatch('getLastPowerOperationTime');
+          return i18n.t('pageKvm.toast.success');
+        })
+        .catch((error) => {
+          console.error(error);
+          throw new Error(i18n.t('pageKvm.toast.error'));
+        });
     },
-    async serverSoftPowerOff({ dispatch, commit }) {
+    async serverSoftPowerOff({ dispatch, commit }, isKvm) {
       const data = { ResetType: 'GracefulShutdown' };
-      dispatch('serverPowerChange', data);
-      await checkForServerStatus.bind(this, 'off')();
-      commit('setOperationInProgress', false);
-      dispatch('getLastPowerOperationTime');
+      return dispatch('serverPowerChange', data)
+        .then(async () => {
+          await checkForServerStatus.bind(this, 'off', isKvm)();
+          commit('setOperationInProgress', false);
+          dispatch('getLastPowerOperationTime');
+          return i18n.t('pageKvm.toast.success');
+        })
+        .catch((error) => {
+          console.error(error);
+          throw new Error(i18n.t('pageKvm.toast.error'));
+        });
     },
-    async serverHardPowerOff({ dispatch, commit }) {
+    async serverHardPowerOff({ dispatch, commit }, isKvm) {
       const data = { ResetType: 'ForceOff' };
-      dispatch('serverPowerChange', data);
-      await checkForServerStatus.bind(this, 'off')();
-      commit('setOperationInProgress', false);
-      dispatch('getLastPowerOperationTime');
+      return dispatch('serverPowerChange', data)
+        .then(async () => {
+          await checkForServerStatus.bind(this, 'off', isKvm)();
+          commit('setOperationInProgress', false);
+          dispatch('getLastPowerOperationTime');
+          return i18n.t('pageKvm.toast.success');
+        })
+        .catch((error) => {
+          console.error(error);
+          throw new Error(i18n.t('pageKvm.toast.error'));
+        });
     },
-    serverPowerChange({ commit }, data) {
+    async serverPowerChange({ commit }, data) {
       commit('setOperationInProgress', true);
-      api
+      return await api
         .post('/redfish/v1/Systems/system/Actions/ComputerSystem.Reset', data)
         .catch((error) => {
           console.log(error);
           commit('setOperationInProgress', false);
+          throw error;
         });
     },
   },

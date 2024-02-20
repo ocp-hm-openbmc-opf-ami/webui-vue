@@ -739,6 +739,19 @@
     "pageKvm": {
         "openNewTab": "在新的標籤頁開啟",
         "buttonCtrlAltDelete": "送出 Ctrl+Alt+Delete",
+        "power": "力量",
+        "powerOperation": {
+            "powerOn": "打開",
+            "gracefulShutdown": "優雅關機",
+            "gracefulRestart": "優雅重啟",
+            "forcedShutdown": "強制關機",
+            "forcedRestart": "強制重啟"
+        },
+        "powerOnTooltip": "開啟伺服器",
+        "gracefulShutdownTooltip": "作業系統關閉，然後伺服器關閉",
+        "gracefulRestartTooltip": "作業系統關閉，然後伺服器重新啟動",
+        "forcedShutdownTooltip": "伺服器關閉，作業系統不關閉；可能會導致資料損壞",
+        "forcedRestartTooltip": "伺服器重新啟動而不關閉作業系統；可能會導致資料損壞",
         "status": "狀態",
         "connected": "已結接",
         "connecting": "連結中",
@@ -746,7 +759,11 @@
         "alreadyActiveSession": "主KVM對談正在運轉 請稍後再試 ",
         "alreadyInMasterSession": "主對談正在運轉",
         "errorInGettingActiveStatus": "取得KVM活躍狀態發生錯誤!",
-        "disabledKVMService": "KVM服務已停用。進入安全性和存取 -> 策略頁面啟用 KVM 服務。"
+        "disabledKVMService": "KVM服務已停用。進入安全性和存取 -> 策略頁面啟用 KVM 服務。",
+        "toast": {
+            "success" : "電源操作成功執行",
+            "error" : "執行電源操作時發生錯誤"
+        }
     },
     "pageLdap": {
         "pageDescription": "配置LDAP設定和管理角色群",

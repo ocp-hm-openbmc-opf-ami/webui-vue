@@ -739,6 +739,19 @@
     "pageKvm": {
         "openNewTab": "Open in new tab",
         "buttonCtrlAltDelete": "Send Ctrl+Alt+Delete",
+        "power": "Power",
+        "powerOperation": {
+            "powerOn": "Power ON",
+            "gracefulShutdown": "Graceful Shutdown",
+            "gracefulRestart": "Graceful Restart",
+            "forcedShutdown": "Forced Shutdown",
+            "forcedRestart": "Forced Restart"
+        },
+        "powerOnTooltip": "Turn on the server",
+        "gracefulShutdownTooltip": "Operating system shuts down, then server shuts down",
+        "gracefulRestartTooltip": "Operating system shuts down, then server reboots",
+        "forcedShutdownTooltip": "Server shuts down without operating system shutting down; may cause data corruption",
+        "forcedRestartTooltip": "Server reboots without operating system shutting down; may cause data corruption",
         "status": "Status",
         "connected": "Connected",
         "connecting": "Connecting",
@@ -746,7 +759,11 @@
         "alreadyActiveSession": "Already master KVM session is Running! Please try after some time.",
         "alreadyInMasterSession": "Master session is Running",
         "errorInGettingActiveStatus": "Error in Getting KVM active status!!",
-        "disabledKVMService": "KVM service is disabled. Go to Security and Access -> Policies page to enable KVM service."
+        "disabledKVMService": "KVM service is disabled. Go to Security and Access -> Policies page to enable KVM service.",
+        "toast": {
+            "success" : "Power operation executed successfully",
+            "error" : "Error in performing power operation"
+        }
     },
     "pageLdap": {
         "pageDescription": "Configure LDAP settings and manage role groups",

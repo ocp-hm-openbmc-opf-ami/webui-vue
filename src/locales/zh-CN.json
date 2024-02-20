@@ -739,6 +739,19 @@
     "pageKvm": {
         "openNewTab": "在新的标籤页开启",
         "buttonCtrlAltDelete": "送出 Ctrl+Alt+Delete",
+        "power": "力量",
+        "powerOperation": {
+            "powerOn": "打开",
+            "gracefulShutdown": "优雅关机",
+            "gracefulRestart": "优雅重启",
+            "forcedShutdown": "强制关机",
+            "forcedRestart": "强制重启"
+        },
+        "powerOnTooltip": "打开服务器",
+        "gracefulShutdownTooltip": "操作系统关闭，然后服务器关闭",
+        "gracefulRestartTooltip": "操作系统关闭，然后服务器重新启动",
+        "forcedShutdownTooltip": "服务器关闭，操作系统不关闭；可能会导致数据损坏",
+        "forcedRestartTooltip": "服务器重新启动而不关闭操作系统；可能会导致数据损坏",
         "status": "状态",
         "connected": "已结接",
         "connecting": "连结中",
@@ -746,7 +759,11 @@
         "alreadyActiveSession": "主KVM对谈正在运转 请稍后再试 ",
         "alreadyInMasterSession": "主对谈正在运转",
         "errorInGettingActiveStatus": "取得KVM活跃状态发生错误!",
-        "disabledKVMService": "KVM服务被禁用。进入安全和访问 -> 策略页面启用 KVM 服务。"
+        "disabledKVMService": "KVM服务被禁用。进入安全和访问 -> 策略页面启用 KVM 服务。",
+        "toast": {
+            "success" : "电源操作成功",
+            "error" : "执行电源操作时出错"
+        }
     },
     "pageLdap": {
         "pageDescription": "配置LDAP设定和管理角色群",

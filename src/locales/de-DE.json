@@ -739,6 +739,19 @@
     "pageKvm": {
         "openNewTab": "In neuem Tab öffnen",
         "buttonCtrlAltDelete": "Schicken Ctrl+Alt+Delete",
+        "power": "Leistung",
+        "powerOperation": {
+            "powerOn": "Ein",
+            "gracefulShutdown": "Würdevolles Herunterfahren",
+            "gracefulRestart": "Würdevoller Neustart",
+            "forcedShutdown": "Zwangsabschaltung",
+            "forcedRestart": "Erzwungener Neustart"
+        },
+        "powerOnTooltip": "Schalten Sie den Server ein",
+        "gracefulShutdownTooltip": "Das Betriebssystem wird heruntergefahren, dann wird der Server heruntergefahren",
+        "gracefulRestartTooltip": "Das Betriebssystem wird heruntergefahren und der Server neu gestartet",
+        "forcedShutdownTooltip": "Der Server wird heruntergefahren, ohne dass das Betriebssystem heruntergefahren wird. kann zu Datenbeschädigungen führen",
+        "forcedRestartTooltip": "Der Server wird neu gestartet, ohne dass das Betriebssystem heruntergefahren wird. kann zu Datenbeschädigungen führen",
         "status": "Status",
         "connected": "In Verbindung gebracht",
         "connecting": "verbinden",
@@ -746,7 +759,11 @@
         "alreadyActiveSession": "Die Master KVM Sitzung läuft bereits! Bitte versuchen Sie es nach einiger Zeit.",
         "alreadyInMasterSession": "Die Master Sitzung läuft",
         "errorInGettingActiveStatus": "Fehler beim Abrufen des KVM Aktiv Status!!",
-        "disabledKVMService": "Der KVM-Dienst ist deaktiviert. Gehen Sie zur Seite Sicherheit und Zugriff -> Richtlinien, um den KVM-Dienst zu aktivieren."
+        "disabledKVMService": "Der KVM-Dienst ist deaktiviert. Gehen Sie zur Seite Sicherheit und Zugriff -> Richtlinien, um den KVM-Dienst zu aktivieren.",
+        "toast": {
+            "success" : "Der Stromvorgang wurde erfolgreich ausgeführt",
+            "error" : "Fehler beim Ausführen des Strombetriebs"
+        }
     },
     "pageLdap": {
         "pageDescription": "Konfigurieren Sie LDAP Einstellungen und verwalten Sie Rollengruppen",
