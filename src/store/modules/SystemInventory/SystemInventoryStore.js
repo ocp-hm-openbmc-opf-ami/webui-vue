@@ -66,6 +66,8 @@ const SystemInventoryStore = {
             : 'NA';
           systemData.indicatorLED = response.data?.LocationIndicatorActive
             ? response.data?.LocationIndicatorActive
+            : response.data?.LocationIndicatorActive === false
+            ? response.data?.LocationIndicatorActive
             : 'NA';
           systemData.manufacturer = response.data?.Manufacturer
             ? response.data?.Manufacturer
@@ -107,7 +109,11 @@ const SystemInventoryStore = {
               id: data.Id ? data.Id : 'NA',
               name: data.Name ? data.Name : 'NA',
               manufacturer: data.Manufacturer ? data.Manufacturer : 'NA',
-              maxSpeedMHz: data.MaxSpeedMHz ? data.MaxSpeedMHz : 'NA',
+              maxSpeedMHz: data.MaxSpeedMHz
+                ? data.MaxSpeedMHz
+                : data.MaxSpeedMHz === 0 || 0.0
+                ? data.MaxSpeedMHz
+                : 'NA',
               model: data.Model ? data.Model : 'NA',
               processorArchitecture: data.ProcessorArchitecture
                 ? data.ProcessorArchitecture
@@ -134,12 +140,18 @@ const SystemInventoryStore = {
             return {
               id: data.Id ? data.Id : 'NA',
               name: data.Name ? data.Name : 'NA',
-              capacityMiB: data.CapacityMiB ? data.CapacityMiB : 'NA',
+              capacityMiB: data.CapacityMiB
+                ? data.CapacityMiB
+                : data.CapacityMiB === 0 || 0.0
+                ? data.CapacityMiB
+                : 'NA',
               manufacturer: data.Manufacturer ? data.Manufacturer : 'NA',
               serialNumuber: data.SerialNumber ? data.SerialNumber : 'NA',
               partNumuber: data.PartNumber ? data.PartNumber : 'NA',
               state: data.Status?.State ? data.Status?.State : 'NA',
               operatingSpeedMhz: data.OperatingSpeedMhz
+                ? data.OperatingSpeedMhz
+                : data.OperatingSpeedMhz === 0 || 0.0
                 ? data.OperatingSpeedMhz
                 : 'NA',
               memoryType: data.MemoryType ? data.MemoryType : 'NA',
@@ -164,6 +176,8 @@ const SystemInventoryStore = {
           baseBoard.name = response.data?.Name ? response.data?.Name : 'NA';
           baseBoard.locationIndicatorActive = response.data
             ?.LocationIndicatorActive
+            ? response.data?.LocationIndicatorActive
+            : response.data?.LocationIndicatorActive === false
             ? response.data?.LocationIndicatorActive
             : 'NA';
           baseBoard.indicatorLED = response.data?.IndicatorLED
@@ -321,6 +335,8 @@ const SystemInventoryStore = {
                     : 'NA',
                   functionId: pcieFunction.data?.FunctionId
                     ? pcieFunction.data?.FunctionId
+                    : pcieFunction.data?.FunctionId === 0
+                    ? pcieFunction.data?.FunctionId
                     : 'NA',
                   functionType: pcieFunction.data?.FunctionType
                     ? pcieFunction.data?.FunctionType
@@ -365,11 +381,19 @@ const SystemInventoryStore = {
             return {
               name: data.Name ? data.Name : 'NA',
               state: data.Status?.State ? data.Status?.State : 'NA',
-              readingRPM: data.Reading ? data.Reading : 'NA',
+              readingRPM: data.Reading
+                ? data.Reading
+                : data.Reading === 0 || 0.0
+                ? data.Reading
+                : 'NA',
               minReadingRange: data.ReadingRangeMin
+                ? data.ReadingRangeMin
+                : data.ReadingRangeMin === 0 || 0.0
                 ? data.ReadingRangeMin
                 : 'NA',
               maxReadingRange: data.ReadingRangeMax
+                ? data.ReadingRangeMax
+                : data.ReadingRangeMax === 0 || 0.0
                 ? data.ReadingRangeMax
                 : 'NA',
             };
@@ -428,24 +452,40 @@ const SystemInventoryStore = {
                 ? data.PhysicalContext
                 : 'NA',
               readingUnits: data.ReadingUnits ? data.ReadingUnits : 'NA',
-              reading: data.Reading ? data.Reading : 'NA',
+              reading: data.Reading
+                ? data.Reading
+                : data.Reading === 0 || 0.0
+                ? data.Reading
+                : 'NA',
               readingRangeMin: data.ReadingRangeMin
+                ? data.ReadingRangeMin
+                : data.ReadingRangeMin === 0 || 0.0
                 ? data.ReadingRangeMin
                 : 'NA',
               readingRangeMax: data.ReadingRangeMax
+                ? data.ReadingRangeMax
+                : data.ReadingRangeMax === 0 || 0.0
                 ? data.ReadingRangeMax
                 : 'NA',
               readingType: data.ReadingType ? data.ReadingType : 'NA',
               upperThresholdFatal: data.Thresholds?.UpperCaution?.Reading
                 ? data.Thresholds?.UpperCaution?.Reading
+                : data.Thresholds?.UpperCaution?.Reading === 0 || 0.0
+                ? data.Thresholds?.UpperCaution?.Reading
                 : 'NA',
               upperThresholdCritical: data.Thresholds?.UpperCritical?.Reading
+                ? data.Thresholds?.UpperCritical?.Reading
+                : data.Thresholds?.UpperCritical?.Reading === 0 || 0.0
                 ? data.Thresholds?.UpperCritical?.Reading
                 : 'NA',
               lowerThresholdCritical: data.Thresholds?.LowerCritical?.Reading
                 ? data.Thresholds?.LowerCritical?.Reading
+                : data.Thresholds?.LowerCritical?.Reading === 0 || 0.0
+                ? data.Thresholds?.LowerCritical?.Reading
                 : 'NA',
               lowerThresholdFatal: data.Thresholds?.LowerCaution?.Reading
+                ? data.Thresholds?.LowerCaution?.Reading
+                : data.Thresholds?.LowerCaution?.Reading === 0 || 0.0
                 ? data.Thresholds?.LowerCaution?.Reading
                 : 'NA',
               state: data.Status?.State ? data.Status?.State : 'NA',
@@ -469,24 +509,40 @@ const SystemInventoryStore = {
             return {
               name: data.Name ? data.Name : 'NA',
               readingUnits: data.ReadingUnits ? data.ReadingUnits : 'NA',
-              reading: data.Reading ? data.Reading : 'NA',
+              reading: data.Reading
+                ? data.Reading
+                : data.Reading === 0 || 0.0
+                ? data.Reading
+                : 'NA',
               readingRangeMin: data.ReadingRangeMin
+                ? data.ReadingRangeMin
+                : data.ReadingRangeMin === 0 || 0.0
                 ? data.ReadingRangeMin
                 : 'NA',
               readingRangeMax: data.ReadingRangeMax
+                ? data.ReadingRangeMax
+                : data.ReadingRangeMax === 0 || 0.0
                 ? data.ReadingRangeMax
                 : 'NA',
               readingType: data.ReadingType ? data.ReadingType : 'NA',
               upperThresholdFatal: data.Thresholds?.UpperCaution?.Reading
                 ? data.Thresholds?.UpperCaution?.Reading
+                : data.Thresholds?.UpperCaution?.Reading === 0 || 0.0
+                ? data.Thresholds?.UpperCaution?.Reading
                 : 'NA',
               upperThresholdCritical: data.Thresholds?.UpperCritical?.Reading
+                ? data.Thresholds?.UpperCritical?.Reading
+                : data.Thresholds?.UpperCritical?.Reading === 0 || 0.0
                 ? data.Thresholds?.UpperCritical?.Reading
                 : 'NA',
               lowerThresholdCritical: data.Thresholds?.LowerCritical?.Reading
                 ? data.Thresholds?.LowerCritical?.Reading
+                : data.Thresholds?.LowerCritical?.Reading === 0 || 0.0
+                ? data.Thresholds?.LowerCritical?.Reading
                 : 'NA',
               lowerThresholdFatal: data.Thresholds?.LowerCaution?.Reading
+                ? data.Thresholds?.LowerCaution?.Reading
+                : data.Thresholds?.LowerCaution?.Reading === 0 || 0.0
                 ? data.Thresholds?.LowerCaution?.Reading
                 : 'NA',
               state: data.Status?.State ? data.Status?.State : 'NA',

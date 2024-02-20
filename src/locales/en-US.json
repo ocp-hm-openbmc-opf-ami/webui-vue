@@ -1211,7 +1211,7 @@
         },
         "power": {
             "power": "Power",
-            "powerInfo": "Power controll Info",
+            "powerInfo": "Power control Info",
             "name": "Name",
             "maxConsumedWatts": "MaxConsumedWatts",
             "minConsumedWatts": "MinConsumedWatts",
