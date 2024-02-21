@@ -157,7 +157,8 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
-        "backupAndRestore": "@:appPageTitle.backupAndRestore"
+        "backupAndRestore": "@:appPageTitle.backupAndRestore",
+        "fireWall": "@:appPageTitle.FireWall"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -203,7 +204,8 @@
         "physicalDevice": "物理設備",
         "logicalDevice": "邏輯設備",
         "createLogicalDevice": "創建邏輯設備",
-        "backupAndRestore": "備份還原"
+        "backupAndRestore": "備份還原",
+        "FireWall": "系統防火牆"
     },
     "pageBackupAndRestore": {
         "backup": "備份",
@@ -1531,6 +1533,48 @@
             "errorNumberOfDrivesValidation": "驅動器數量不應高於未配置的物理設備數量！",
             "errorMinMaxSpanDepth":"最小和最大跨度深度均為 2。",
             "errorSpanDepthDrives":"選定的 UnConfig 驅動器應等於跨距深度和每個跨距的驅動器數的倍數。"
+        }
+    },
+    "pageFireWall": {
+        "firewallSettings": {
+            "addNewRule":"新增規則",
+            "flushAll": "沖洗全部",
+            "modal": {
+                "blockAll": "全部封鎖",
+                "addFirewallSettings": "新增新的防火牆規則",
+                "ipStart": "IP 單（或）範圍起始",
+                "ipEnd": "IP 範圍結束",
+                "portStart": "連接埠單一（或）範圍起始",
+                "portEnd": "連接埠範圍結束",
+                "enableTimeout": "啟用逾時",
+                "startDate": "開始日期 (YYYY-MM-DD)",
+                "startTime": "開始時間（24 小時制 HH:MM）",
+                "endDate": "結束日期 (YYYY-MM-DD)",
+                "endTime": "時間結束（24 小時制 HH:MM）",
+                "sourceMacAddress": "MAC位址",
+                "protocol": "協定",
+                "drop": "降低",
+                "tcp": "TCP",
+                "udp": "UDP",
+                "all": "全部",
+                "target": "目標",
+                "deleteConfirmMessage": "您確定要查看該記錄嗎？此操作無法撤銷。",
+                "deleteFireWall": "刪除|刪除 ",
+                "endDateCanNotBeLessThanStartDate": "結束日期不能早於開始日期",
+                "endTimeCanNotBeEqualToStartTime": "結束時間不能早於開始時間",
+                "invalidIPAddress": "IP 位址無效",
+                "accept": "接受",
+                "ipv4": "IPv4",
+                "ipv6": "IPv6",
+                "both": "兩個都"
+            }
+        },
+        "toast": {
+            "successSaveFireWall": "已成功儲存防火牆規則。",
+            "successDeleteFireWall": "成功刪除防火牆規則。",
+            "errorSaveFireWall": "已儲存的防火牆規則出錯。",
+            "errorDelete": "刪除防火牆規則時發生錯誤。",
+            "errorDateOrTimeSaveFireWall": "日期或時間無效。"
         }
     },
     "countries": {

@@ -173,6 +173,11 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.snmpSettings'),
               route: '/settings/snmp',
             },
+            {
+              id: 'system_firewall',
+              label: this.$t('appNavigation.fireWall'),
+              route: '/settings/firewall',
+            },
           ],
         },
         {

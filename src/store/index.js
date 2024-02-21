@@ -47,6 +47,7 @@ import OnDemand from './modules/Settings/OnDemand';
 import RaidStore from './modules/Raid/RaidStore';
 import BackupAndRestore from './modules/Operations/BackupAndRestore';
 import SNMPStore from './modules/Settings/SNMPStore';
+import FireWallStore from './modules/Settings/FireWallStore';
 
 Vue.use(Vuex);
 
@@ -100,6 +101,7 @@ export default new Vuex.Store({
     raid: RaidStore,
     backupAndRestore: BackupAndRestore,
     snmp: SNMPStore,
+    fireWall: FireWallStore,
   },
   plugins: [WebSocketPlugin],
 });

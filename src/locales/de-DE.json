@@ -157,7 +157,8 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
-        "backupAndRestore": "@:appPageTitle.backupAndRestore"
+        "backupAndRestore": "@:appPageTitle.backupAndRestore",
+        "fireWall": "@:appPageTitle.FireWall"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -203,7 +204,8 @@
         "physicalDevice": "Physisches Gerät",
         "logicalDevice": "Logisches Gerät",
         "createLogicalDevice": "Logisches Gerät erstellen",
-        "backupAndRestore": "Sichern und Wiederherstellen"
+        "backupAndRestore": "Sichern und Wiederherstellen",
+        "FireWall": "System-Firewall"
     },
     "pageBackupAndRestore": {
         "backup": "Sicherung",
@@ -1531,6 +1533,48 @@
             "errorNumberOfDrivesValidation": "Die Anzahl der Laufwerke sollte nicht höher sein als die Anzahl der nicht konfigurierten physischen Geräte!",
             "errorMinMaxSpanDepth":"Die minimale und maximale Spanntiefe beträgt 2.",
             "errorSpanDepthDrives":"Ausgewählte UnConfig-Laufwerke sollten einem Vielfachen der Span-Tiefe und der Laufwerke pro Span entsprechen."
+        }
+    },
+    "pageFireWall": {
+        "firewallSettings": {
+            "addNewRule":"Neue Regel hinzufügen",
+            "flushAll": "Alles spülen",
+            "modal": {
+                "blockAll": "Alles blockieren",
+                "addFirewallSettings": "Neue Firewall-Regel hinzufügen",
+                "ipStart": "IP Single (oder) Range Start",
+                "ipEnd": "Ende des IP-Bereichs",
+                "portStart": "Port Single (oder) Range Start",
+                "portEnd": "Ende des Portbereichs",
+                "enableTimeout": "Aktivieren Sie Timeout",
+                "startDate": "Startdatum (YYYY-MM-DD)",
+                "startTime": "Startzeit (24-Stunden-Zeit HH:MM)",
+                "endDate": "Endtermin (YYYY-MM-DD)",
+                "endTime": "Endzeit (24-Stunden-Zeit HH:MM)",
+                "sourceMacAddress": "MAC-Adresse",
+                "protocol": "Protokoll",
+                "drop": "Fallen",
+                "tcp": "TCP",
+                "udp": "UDP",
+                "all": "alle",
+                "target": "Ziel",
+                "deleteConfirmMessage": "Sind Sie sicher, dass Sie die Aufzeichnung möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+                "deleteFireWall": "Löschen | Löschen ",
+                "endDateCanNotBeLessThanStartDate": "Das Enddatum darf nicht kleiner als das Startdatum sein",
+                "endTimeCanNotBeEqualToStartTime": "Die Endzeit darf nicht kleiner als die Startzeit sein",
+                "invalidIPAddress": "Ungültige IP-Adresse",
+                "accept": "Akzeptieren",
+                "ipv4": "IPv4",
+                "ipv6": "IPv6",
+                "both": "Beide"
+            }
+        },
+        "toast": {
+            "successSaveFireWall": "Firewall-Regeln erfolgreich gespeichert.",
+            "successDeleteFireWall": "Firewall-Regeln erfolgreich löschen.",
+            "errorSaveFireWall": "Fehler beim Speichern der Firewall-Regeln.",
+            "errorDelete": "Fehler beim Löschen der FireWall-Regeln.",
+            "errorDateOrTimeSaveFireWall": "Ungültiges Datum oder ungültige Uhrzeit."
         }
     },
     "countries": {

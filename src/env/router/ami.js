@@ -38,6 +38,7 @@ import ACD from '@/views/HostSystemDiagnostics/ACD';
 import Asd from '@/views/HostSystemDiagnostics/Asd';
 import BackupAndRestore from '@/views/Operations/BackupAndRestore';
 import SnmpSettings from '@/views/Settings/SNMP';
+import FireWall from '@/views/Settings/FireWall';
 
 const roles = {
   administrator: 'Administrator',
@@ -354,6 +355,14 @@ const routes = [
             roles.operator,
             roles.readonly,
           ],
+        },
+      },
+      {
+        path: '/settings/firewall',
+        name: 'FireWall',
+        component: FireWall,
+        meta: {
+          title: i18n.t('appPageTitle.systemFirewall'),
         },
       },
     ],

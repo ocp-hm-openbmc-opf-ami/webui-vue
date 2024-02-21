@@ -158,7 +158,8 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
-        "backupAndRestore": "@:appPageTitle.backupAndRestore"
+        "backupAndRestore": "@:appPageTitle.backupAndRestore",
+        "fireWall": "@:appPageTitle.FireWall"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -205,7 +206,8 @@
         "physicalDevice": "Physical Device",
         "logicalDevice": "Logical Device",
         "createLogicalDevice": "Create Logical Device",
-        "backupAndRestore": "Backup And Restore"
+        "backupAndRestore": "Backup And Restore",
+        "FireWall": "System Firewall"
     },
     "pageBackupAndRestore": {
         "backup": "Backup",
@@ -1562,6 +1564,49 @@
             "errorNumberOfDrivesValidation": "Number of Drives count should not higher than UnConfigured Physical Device count!",
             "errorMinMaxSpanDepth": "The minimum and maximum Span Depth is 2.",
             "errorSpanDepthDrives": "Selected UnConfig Drives should be equal to multiple of Span Depth and Drives per Span."
+        }
+    },
+    "pageFireWall": {
+        "firewallSettings": {
+            "addNewRule":"Add New Rule",
+            "flushAll": "Flush All",
+            "modal": {
+                "blockAll": "BlockAll",
+                "addFirewallSettings": "Add New Firewall Rule",
+                "ipStart": "IP Single (or) Range Start",
+                "ipEnd": "IP Range End",
+                "portStart": "Port Single (or) Range Start",
+                "portEnd": "Port Range End",
+                "enableTimeout": "Enable Timeout",
+                "startDate": "Start Date (YYYY-MM-DD)",
+                "startTime": "Start Time (24-hour time HH:MM)",
+                "endDate": "End Date (YYYY-MM-DD)",
+                "endTime": "End Time (24-hour time HH:MM)",
+                "sourceMacAddress": "MacAddress",
+                "protocol": "Protocol",
+                "drop": "Drop",
+                "tcp": "TCP",
+                "udp": "UDP",
+                "all": "All",
+                "target": "Target",
+                "unspecified": "Unspecified",
+                "deleteConfirmMessage": "Are you sure you want the record ? This action cannot be undone.",
+                "deleteFireWall": "Delete | Delete ",
+                "endDateCanNotBeLessThanStartDate": "End date can not be less than Start date",
+                "endTimeCanNotBeEqualToStartTime": "End Time can not be less than Start Time",
+                "invalidIPAddress": "Invalid IP Address",
+                "accept": "Accept",
+                "ipv4": "IPv4",
+                "ipv6": "IPv6",
+                "both": "Both"
+            }
+        },
+        "toast": {
+            "successSaveFireWall": "Successfully saved Firewall Rules.",
+            "successDeleteFireWall": "Successfully Delete Firewall Rules.",
+            "errorSaveFireWall": "Error saved Firewall Rules.",
+            "errorDelete": "Error deleting FireWall Rules.",
+            "errorDateOrTimeSaveFireWall": "Invalid Date or Time."
         }
     },
     "countries": {
