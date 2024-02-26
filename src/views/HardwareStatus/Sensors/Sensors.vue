@@ -1,102 +1,144 @@
 <template>
   <b-container fluid="xl">
-    <page-title />
-    <b-row class="align-items-end">
-      <b-col sm="6" md="5" xl="4">
-        <search
-          :placeholder="$t('pageSensors.searchForSensors')"
-          data-test-id="sensors-input-searchForSensors"
-          @change-search="onChangeSearchInput"
-          @clear-search="onClearSearchInput"
-        />
-      </b-col>
-      <b-col sm="3" md="3" xl="2">
-        <table-cell-count
-          :filtered-items-count="filteredRows"
-          :total-number-of-cells="allSensors.length"
-        ></table-cell-count>
-      </b-col>
-      <b-col sm="3" md="4" xl="6" class="text-right">
-        <table-filter :filters="tableFilters" @filter-change="onFilterChange" />
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col xl="12">
-        <table-toolbar
-          ref="toolbar"
-          :selected-items-count="selectedRows.length"
-          @clear-selected="clearSelectedRows($refs.table)"
-        >
-          <template #toolbar-buttons>
-            <table-toolbar-export
-              :data="selectedRows"
-              :file-name="exportFileNameByDate()"
-            />
-          </template>
-        </table-toolbar>
-        <b-table
-          ref="table"
-          responsive="md"
-          selectable
-          no-select-on-click
-          sort-icon-left
-          hover
-          no-sort-reset
-          sticky-header="75vh"
-          sort-by="status"
-          show-empty
-          :no-border-collapse="true"
-          :items="filteredSensors"
-          :fields="fields"
-          :sort-desc="true"
-          :sort-compare="sortCompare"
-          :filter="searchFilter"
-          :empty-text="$t('global.table.emptyMessage')"
-          :empty-filtered-text="$t('global.table.emptySearchMessage')"
-          :busy="isBusy"
-          @filtered="onFiltered"
-          @row-selected="onRowSelected($event, filteredSensors.length)"
-        >
-          <!-- Checkbox column -->
-          <template #head(checkbox)>
-            <b-form-checkbox
-              v-model="tableHeaderCheckboxModel"
-              :indeterminate="tableHeaderCheckboxIndeterminate"
-              @change="onChangeHeaderCheckbox($refs.table)"
-            >
-              <span class="sr-only">{{ $t('global.table.selectAll') }}</span>
-            </b-form-checkbox>
-          </template>
-          <template #cell(checkbox)="row">
-            <b-form-checkbox
-              v-model="row.rowSelected"
-              @change="toggleSelectRow($refs.table, row.index)"
-            >
-              <span class="sr-only">{{ $t('global.table.selectItem') }}</span>
-            </b-form-checkbox>
-          </template>
+    <div v-if="showSensor">
+      <page-title />
+      <b-row class="align-items-end">
+        <b-col sm="6" md="5" xl="4">
+          <search
+            :placeholder="$t('pageSensors.searchForSensors')"
+            data-test-id="sensors-input-searchForSensors"
+            @change-search="onChangeSearchInput"
+            @clear-search="onClearSearchInput"
+          />
+        </b-col>
+        <b-col sm="3" md="3" xl="2">
+          <table-cell-count
+            :filtered-items-count="filteredRows"
+            :total-number-of-cells="allSensors.length"
+          ></table-cell-count>
+        </b-col>
+        <b-col sm="3" md="4" xl="6" class="text-right">
+          <table-filter
+            :filters="tableFilters"
+            @filter-change="onFilterChange"
+          />
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col xl="12">
+          <table-toolbar
+            ref="toolbar"
+            :selected-items-count="selectedRows.length"
+            @clear-selected="clearSelectedRows($refs.table)"
+          >
+            <template #toolbar-buttons>
+              <table-toolbar-export
+                :data="selectedRows"
+                :file-name="exportFileNameByDate()"
+              />
+            </template>
+          </table-toolbar>
+          <b-table
+            ref="table"
+            responsive="md"
+            selectable
+            no-select-on-click
+            sort-icon-left
+            hover
+            no-sort-reset
+            sticky-header="75vh"
+            sort-by="status"
+            show-empty
+            :no-border-collapse="true"
+            :items="filteredSensors"
+            :fields="fields"
+            :sort-desc="true"
+            :sort-compare="sortCompare"
+            :filter="searchFilter"
+            :empty-text="$t('global.table.emptyMessage')"
+            :empty-filtered-text="$t('global.table.emptySearchMessage')"
+            :busy="isBusy"
+            :tbody-tr-class="rowClass"
+            @filtered="onFiltered"
+            @row-selected="onRowSelected($event, filteredSensors.length)"
+            @row-clicked="onRowclick($event)"
+          >
+            <!-- Checkbox column -->
+            <template #head(checkbox)>
+              <b-form-checkbox
+                v-model="tableHeaderCheckboxModel"
+                :indeterminate="tableHeaderCheckboxIndeterminate"
+                @change="onChangeHeaderCheckbox($refs.table)"
+              >
+                <span class="sr-only">{{ $t('global.table.selectAll') }}</span>
+              </b-form-checkbox>
+            </template>
+            <template #cell(checkbox)="row">
+              <b-form-checkbox
+                v-model="row.rowSelected"
+                @change="toggleSelectRow($refs.table, row.index)"
+              >
+                <span class="sr-only">{{ $t('global.table.selectItem') }}</span>
+              </b-form-checkbox>
+            </template>
+            <template #cell(name)="{ value }">
+              <u v-if="value == 'System Airflow'" class="name_air">
+                {{ value }} -
+              </u>
 
-          <template #cell(status)="{ value }">
-            <status-icon :status="statusIcon(value)" /> {{ value }}
-          </template>
-          <template #cell(currentValue)="data">
-            {{ data.value }} {{ data.item.units }}
-          </template>
-          <template #cell(lowerCaution)="data">
-            {{ data.value }} {{ data.item.units }}
-          </template>
-          <template #cell(upperCaution)="data">
-            {{ data.value }} {{ data.item.units }}
-          </template>
-          <template #cell(lowerCritical)="data">
-            {{ data.value }} {{ data.item.units }}
-          </template>
-          <template #cell(upperCritical)="data">
-            {{ data.value }} {{ data.item.units }}
-          </template>
-        </b-table>
-      </b-col>
-    </b-row>
+              <span v-else> {{ value }} </span>
+              <svg
+                v-if="value == 'System Airflow'"
+                data-v-99969f6c=""
+                focusable="false"
+                preserveAspectRatio="xMidYMid meet"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#416f89"
+                width="16"
+                height="16"
+                viewBox="0 0 32 32"
+                aria-hidden="true"
+              >
+                <path
+                  data-v-99969f6c=""
+                  d="M8 10H16V12H8zM8 6H20V8H8zM8 2H20V4H8z"
+                ></path>
+                <path
+                  data-v-99969f6c=""
+                  d="M4.7111,28l5.6312-9.9961,7.4341,6.49A2,2,0,0,0,20.86,23.96l6.9707-10.4034-1.6622-1.1132-7,10.4472-.07.1035-7.4345-6.4907a2.0032,2.0032,0,0,0-3.0806.5308L4,25.1826V2H2V28a2.0023,2.0023,0,0,0,2,2H30V28Z"
+                ></path>
+              </svg>
+            </template>
+            <template #cell(status)="{ value }">
+              <status-icon :status="statusIcon(value)" /> {{ value }}
+            </template>
+            <template #cell(currentValue)="data">
+              {{ data.value }} {{ data.item.units }}
+            </template>
+            <template #cell(lowerCaution)="data">
+              {{ data.value }} {{ data.item.units }}
+            </template>
+            <template #cell(upperCaution)="data">
+              {{ data.value }} {{ data.item.units }}
+            </template>
+            <template #cell(lowerCritical)="data">
+              {{ data.value }} {{ data.item.units }}
+            </template>
+            <template #cell(upperCritical)="data">
+              {{ data.value }} {{ data.item.units }}
+            </template>
+          </b-table>
+        </b-col>
+      </b-row>
+    </div>
+    <div v-else>
+      <chart
+        :sensor-graph-data="itemdata"
+        :options="options"
+        :type="type"
+        @BackSensorpage="isbackSensorpage"
+      />
+    </div>
   </b-container>
 </template>
 
@@ -108,6 +150,7 @@ import TableFilter from '@/components/Global/TableFilter';
 import TableToolbar from '@/components/Global/TableToolbar';
 import TableToolbarExport from '@/components/Global/TableToolbarExport';
 import TableCellCount from '@/components/Global/TableCellCount';
+import Chart from '../../Settings/Network/SensorGraph.vue';
 
 import BVTableSelectableMixin, {
   selectedRows,
@@ -132,6 +175,7 @@ export default {
     TableFilter,
     TableToolbar,
     TableToolbarExport,
+    Chart,
   },
   mixins: [
     TableFilterMixin,
@@ -209,6 +253,64 @@ export default {
       selectedRows: selectedRows,
       tableHeaderCheckboxModel: tableHeaderCheckboxModel,
       tableHeaderCheckboxIndeterminate: tableHeaderCheckboxIndeterminate,
+      options: {
+        defaults: {
+          borderColor: '#ce3a2f',
+        },
+        plugins: {
+          legend: {
+            display: false,
+          },
+          tooltip: {
+            boxWidth: 25,
+            displayColors: false,
+            callbacks: {
+              title: function (TooltipItem) {
+                return TooltipItem[0].label;
+              },
+              label: function (TooltipItem) {
+                return TooltipItem.parsed.y;
+              },
+            },
+            intersect: false,
+          },
+        },
+        responsive: true,
+        interaction: {
+          intersect: false,
+        },
+        scales: {
+          x: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Timestamp',
+            },
+            defaults: {
+              borderColor: 'red',
+            },
+          },
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Values',
+            },
+          },
+        },
+        elements: {
+          line: {
+            borderColor: '#cf4132',
+            borderWidth: 2,
+          },
+          point: {
+            radius: 0,
+          },
+        },
+      },
+      type: 'line',
+      showSensor: true,
+      itemdata: {},
     };
   },
   computed: {
@@ -255,6 +357,29 @@ export default {
         date.toString().split(':').join('-').split(' ')[4];
       return this.$t('pageSensors.exportFilePrefix') + date;
     },
+    onRowclick(item) {
+      if (item.name == 'System Airflow') {
+        this.showSensor = false;
+        this.itemdata = item;
+      }
+    },
+    isbackSensorpage() {
+      this.showSensor = true;
+    },
+    rowClass(item) {
+      if (item && item.name == 'System Airflow') {
+        return 'row_class';
+      }
+    },
   },
 };
 </script>
+<style>
+.name_air {
+  color: #416f89;
+  cursor: pointer;
+}
+.row_class {
+  cursor: pointer;
+}
+</style>
