@@ -158,7 +158,8 @@
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
-        "fireWall": "@:appPageTitle.FireWall"
+        "fireWall": "@:appPageTitle.FireWall",
+        "gpgpu": "@:appPageTitle.gpgpu"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -205,7 +206,8 @@
         "logicalDevice": "逻辑设备",
         "createLogicalDevice": "创建逻辑设备",
         "backupAndRestore": "备份还原",
-        "FireWall": "系统防火墙"
+        "FireWall": "系统防火墙",
+        "gpgpu": "GPGPU"
     },
     "pageBackupAndRestore": {
         "backup": "备份",
@@ -1594,6 +1596,39 @@
             "errorSaveFireWall": "保存的防火墙规则出错。",
             "errorDelete": "删除防火墙规则时出错。",
             "errorDateOrTimeSaveFireWall": "日期或时间无效。"
+        }
+    },
+    "gpgpu": {
+        "tab":{
+            "gpgpuInterfaceProcessorTab" : "处理器",
+            "gpgpuInterfaceChassisTab" : "机壳",
+            "gpgpuInterfaceMemoryTab": "记忆"
+        },
+        "gpgpuInterfaceHeader" : "图形处理器",
+        "gpgpuInterfaceMemoryChassisContentTitle":"底盘信息",
+        "gpgpuInterfaceMemoryEnvironmentMetricsContentTitle":"环境指标",
+        "gpgpuInterfaceMemoryMetricsContentTitle":"内存指标",
+        "gpgpuInterfaceMemoryContentTitle": "内存控制器信息",
+        "gpgpuInterfaceProcessorSystemInterfaceContentTitle":"系统接口",
+        "gpgpuInterfaceProcessorMetricsContentTitle":"处理器指标",
+        "gpgpuInterfaceProcessorEnvironmentmetricsContentTitle":"环境指标",
+        "gpgpuInterfaceProcessorMemorySummaryContentTitle": "内存总结",
+        "gpgpuInterfaceInfoContentTitle": "GPU信息",
+        "gpgpuInterfaceMemorySensorsInfoContentTitle":"传感器信息",
+        "gpgpuInterfaceMemoryPcieDevicesContentTitle":"PCIe 设备",
+        "gpgpuDevices":"GPU 设备=",
+        "fpga": {
+            "fpgaInterfaceHeader" : "FPGA",
+            "fpgaInterfaceProcessorPortContentTitle": "港口信息",
+            "fpgaInterfaceFpgaContentTitle": "FPGA信息",
+            "fpgaInterfaceChassisContentTitle": "底盘信息"
+        },
+        "baseboard": {
+            "baseBoardInterfaceHeader" : "底板",     
+            "baseBoardInterfaceAssemblyTab" : "集会",
+            "baseBoardInterfaceSensorsTab" : "传感器",
+            "baseBoardInterfaceChassisSensorsInfoContentTitle":"传感器信息",
+            "baseBoardInterfaceBaseBoardAssemblyContentTitle": "装配信息"
         }
     },
     "countries": {

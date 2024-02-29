@@ -158,7 +158,8 @@
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
-        "fireWall": "@:appPageTitle.FireWall"
+        "fireWall": "@:appPageTitle.FireWall",
+        "gpgpu": "@:appPageTitle.gpgpu"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -205,7 +206,8 @@
         "logicalDevice": "邏輯設備",
         "createLogicalDevice": "創建邏輯設備",
         "backupAndRestore": "備份還原",
-        "FireWall": "系統防火牆"
+        "FireWall": "系統防火牆",
+        "gpgpu": "GPGPU"
     },
     "pageBackupAndRestore": {
         "backup": "備份",
@@ -1595,6 +1597,39 @@
             "errorSaveFireWall": "已儲存的防火牆規則出錯。",
             "errorDelete": "刪除防火牆規則時發生錯誤。",
             "errorDateOrTimeSaveFireWall": "日期或時間無效。"
+        }
+    },
+    "gpgpu": {
+        "tab":{
+            "gpgpuInterfaceProcessorTab" : "處理器",
+            "gpgpuInterfaceChassisTab" : "機殼",
+            "gpgpuInterfaceMemoryTab": "記憶"
+        },
+        "gpgpuInterfaceHeader" : "圖形處理器",
+        "gpgpuInterfaceMemoryChassisContentTitle":"底盤資訊",
+        "gpgpuInterfaceMemoryEnvironmentMetricsContentTitle":"環境指標",
+        "gpgpuInterfaceMemoryMetricsContentTitle":"記憶體指標",
+        "gpgpuInterfaceMemoryContentTitle": "記憶體控制器資訊",
+        "gpgpuInterfaceProcessorSystemInterfaceContentTitle":"系統介面",
+        "gpgpuInterfaceProcessorMetricsContentTitle":"處理器指標",
+        "gpgpuInterfaceProcessorEnvironmentmetricsContentTitle":"環境指標",
+        "gpgpuInterfaceProcessorMemorySummaryContentTitle": "記憶體總結",
+        "gpgpuInterfaceInfoContentTitle": "GPU資訊",
+        "gpgpuInterfaceMemorySensorsInfoContentTitle":"感測器資訊",
+        "gpgpuInterfaceMemoryPcieDevicesContentTitle":"PCIe 裝置",
+        "gpgpuDevices":"GPU裝置",
+        "fpga": {
+            "fpgaInterfaceHeader" : "FPGA",
+            "fpgaInterfaceProcessorPortContentTitle": "港口資訊",
+            "fpgaInterfaceFpgaContentTitle": "FPGA資訊",
+            "fpgaInterfaceChassisContentTitle": "底盤資訊"
+        },
+        "baseboard": {
+            "baseBoardInterfaceHeader" : "底板",     
+            "baseBoardInterfaceAssemblyTab" : "集會",
+            "baseBoardInterfaceSensorsTab" : "感應器",
+            "baseBoardInterfaceChassisSensorsInfoContentTitle":"感測器資訊",
+            "baseBoardInterfaceBaseBoardAssemblyContentTitle": "裝配資訊"
         }
     },
     "countries": {

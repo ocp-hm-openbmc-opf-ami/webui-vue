@@ -158,7 +158,8 @@
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
-        "fireWall": "@:appPageTitle.FireWall"
+        "fireWall": "@:appPageTitle.FireWall",
+        "gpgpu": "@:appPageTitle.gpgpu"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -205,7 +206,8 @@
         "logicalDevice": "Logisches Gerät",
         "createLogicalDevice": "Logisches Gerät erstellen",
         "backupAndRestore": "Sichern und Wiederherstellen",
-        "FireWall": "System-Firewall"
+        "FireWall": "System-Firewall",
+        "gpgpu": "GPGPU"
     },
     "pageBackupAndRestore": {
         "backup": "Sicherung",
@@ -1595,6 +1597,39 @@
             "errorSaveFireWall": "Fehler beim Speichern der Firewall-Regeln.",
             "errorDelete": "Fehler beim Löschen der FireWall-Regeln.",
             "errorDateOrTimeSaveFireWall": "Ungültiges Datum oder ungültige Uhrzeit."
+        }
+    },
+    "gpgpu": {
+        "tab":{
+            "gpgpuInterfaceProcessorTab" : "Prozessor",
+            "gpgpuInterfaceChassisTab" : "Chassis",
+            "gpgpuInterfaceMemoryTab": "Erinnerung"
+        },
+        "gpgpuInterfaceHeader" : "GPU",
+        "gpgpuInterfaceMemoryChassisContentTitle":"Fahrgestellinformationen",
+        "gpgpuInterfaceMemoryEnvironmentMetricsContentTitle":"Umgebungsmetriken",
+        "gpgpuInterfaceMemoryMetricsContentTitle":"Speichermetriken",
+        "gpgpuInterfaceMemoryContentTitle": "Informationen zum Speichercontroller",
+        "gpgpuInterfaceProcessorSystemInterfaceContentTitle":"Systemschnittstelle",
+        "gpgpuInterfaceProcessorMetricsContentTitle":"Prozessormetriken",
+        "gpgpuInterfaceProcessorEnvironmentmetricsContentTitle":"Umgebungsmetriken",
+        "gpgpuInterfaceProcessorMemorySummaryContentTitle": "Speicherzusammenfassung",
+        "gpgpuInterfaceInfoContentTitle": "GPU-Info",
+        "gpgpuInterfaceMemorySensorsInfoContentTitle":"Informationen zu Sensoren",
+        "gpgpuInterfaceMemoryPcieDevicesContentTitle":"PCIe-Geräte",
+        "gpgpuDevices":"GPU-Geräte",
+        "fpga": {
+            "fpgaInterfaceHeader" : "FPGA",
+            "fpgaInterfaceProcessorPortContentTitle": "Hafeninformationen",
+            "fpgaInterfaceFpgaContentTitle": "FPGA-Info",
+            "fpgaInterfaceChassisContentTitle": "Fahrgestellinformationen"
+        },
+        "baseboard": {
+            "baseBoardInterfaceHeader" : "BaseBoard",     
+            "baseBoardInterfaceAssemblyTab" : "Montage",
+            "baseBoardInterfaceSensorsTab" : "Sensoren",
+            "baseBoardInterfaceChassisSensorsInfoContentTitle":"Informationen zu Sensoren",
+            "baseBoardInterfaceBaseBoardAssemblyContentTitle": "Montageinformationen"
         }
     },
     "countries": {

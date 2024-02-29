@@ -39,6 +39,7 @@ import Asd from '@/views/HostSystemDiagnostics/Asd';
 import BackupAndRestore from '@/views/Operations/BackupAndRestore';
 import SnmpSettings from '@/views/Settings/SNMP';
 import FireWall from '@/views/Settings/FireWall';
+import Gpgpu from '@/views/Settings/Gpgpu';
 
 const roles = {
   administrator: 'Administrator',
@@ -363,6 +364,14 @@ const routes = [
         component: FireWall,
         meta: {
           title: i18n.t('appPageTitle.systemFirewall'),
+        },
+      },
+      {
+        path: '/settings/gpgpu',
+        name: 'gpgpu',
+        component: Gpgpu,
+        meta: {
+          title: i18n.t('appPageTitle.gpgpu'),
         },
       },
     ],

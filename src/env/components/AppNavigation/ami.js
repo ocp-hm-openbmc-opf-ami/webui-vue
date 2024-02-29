@@ -178,6 +178,11 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.fireWall'),
               route: '/settings/firewall',
             },
+            {
+              id: 'gpgpu',
+              label: this.$t('appNavigation.gpgpu'),
+              route: '/settings/gpgpu',
+            },
           ],
         },
         {

@@ -159,7 +159,8 @@
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
-        "fireWall": "@:appPageTitle.FireWall"
+        "fireWall": "@:appPageTitle.FireWall",
+        "gpgpu": "@:appPageTitle.gpgpu"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -207,7 +208,8 @@
         "logicalDevice": "Logical Device",
         "createLogicalDevice": "Create Logical Device",
         "backupAndRestore": "Backup And Restore",
-        "FireWall": "System Firewall"
+        "FireWall": "System Firewall",
+        "gpgpu": "GPGPU"
     },
     "pageBackupAndRestore": {
         "backup": "Backup",
@@ -1627,6 +1629,39 @@
             "errorSaveFireWall": "Error saved Firewall Rules.",
             "errorDelete": "Error deleting FireWall Rules.",
             "errorDateOrTimeSaveFireWall": "Invalid Date or Time."
+        }
+    },
+    "gpgpu": {
+        "tab":{
+            "gpgpuInterfaceProcessorTab" : "Processor",
+            "gpgpuInterfaceChassisTab" : "Chassis",
+            "gpgpuInterfaceMemoryTab": "Memory"
+        },
+        "gpgpuInterfaceHeader" : "GPU",
+        "gpgpuInterfaceMemoryChassisContentTitle":"Chassis Info",
+        "gpgpuInterfaceMemoryEnvironmentMetricsContentTitle":"Environment Metrics",
+        "gpgpuInterfaceMemoryMetricsContentTitle":"Memory Metrics",
+        "gpgpuInterfaceMemoryContentTitle": "Memory Controller Info",
+        "gpgpuInterfaceProcessorSystemInterfaceContentTitle":"System Interface",
+        "gpgpuInterfaceProcessorMetricsContentTitle":"Processor Metrics",
+        "gpgpuInterfaceProcessorEnvironmentmetricsContentTitle":"Environment Metrics",
+        "gpgpuInterfaceProcessorMemorySummaryContentTitle": "Memory Summary",
+        "gpgpuInterfaceInfoContentTitle": "GPU Info",
+        "gpgpuInterfaceMemorySensorsInfoContentTitle":"Sensors Info",
+        "gpgpuInterfaceMemoryPcieDevicesContentTitle":"PCIe Devices",
+        "gpgpuDevices":"GPU Devices",
+        "fpga": {
+            "fpgaInterfaceHeader" : "FPGA",
+            "fpgaInterfaceProcessorPortContentTitle": "Port Info",
+            "fpgaInterfaceFpgaContentTitle": "FPGA Info",
+            "fpgaInterfaceChassisContentTitle": "Chassis Info"
+        },
+        "baseboard": {
+            "baseBoardInterfaceHeader" : "BaseBoard",     
+            "baseBoardInterfaceAssemblyTab" : "Assembly",
+            "baseBoardInterfaceSensorsTab" : "Sensors",
+            "baseBoardInterfaceChassisSensorsInfoContentTitle":"Sensors Info",
+            "baseBoardInterfaceBaseBoardAssemblyContentTitle": "Assembly Info"
         }
     },
     "countries": {
