@@ -32,7 +32,12 @@
       </b-col>
 
       <b-col v-if="!isFullWindow" class="d-flex justify-content-end">
-        <b-button variant="link" type="button" @click="openConsoleWindow()">
+        <b-button
+          variant="link"
+          type="button"
+          :disabled="disable"
+          @click="openConsoleWindow()"
+        >
           <icon-launch />
           {{ $t('pageSerialOverLan.openNewTab') }}
         </b-button>
@@ -50,6 +55,7 @@ import { Terminal } from 'xterm';
 import { throttle } from 'lodash';
 import IconLaunch from '@carbon/icons-vue/es/launch/20';
 import StatusIcon from '@/components/Global/StatusIcon';
+import { mapState } from 'vuex';
 
 export default {
   name: 'SerialOverLanConsole',
@@ -67,9 +73,11 @@ export default {
   data() {
     return {
       resizeConsoleWindow: null,
+      disable: false,
     };
   },
   computed: {
+    ...mapState('authentication', ['consoleWindow']),
     serverStatus() {
       return this.$store.getters['global/serverStatus'];
     },
@@ -80,14 +88,34 @@ export default {
       return this.connection ? 'success' : 'danger';
     },
   },
+  watch: {
+    consoleWindow() {
+      if (this.consoleWindow == false) window.isConsoleWindow.close();
+    },
+  },
   created() {
     this.$store.dispatch('global/getSystemInfo');
+    window.addEventListener('beforeunload', this.handleChildWindowBeforeUnload);
   },
   mounted() {
-    this.openTerminal();
+    this.timeTrack();
+    if (window.isConsoleWindow) {
+      if (window.isConsoleWindow.closed) {
+        this.openTerminal();
+      } else {
+        this.disable = true;
+      }
+    } else {
+      this.openTerminal();
+    }
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeConsoleWindow);
+    window.removeEventListener(
+      'beforeunload',
+      this.handleChildWindowBeforeUnload
+    );
+    clearInterval(this.intervalId);
     this.closeTerminal();
   },
   methods: {
@@ -144,18 +172,57 @@ export default {
       }
     },
     closeTerminal() {
-      console.log('closeTerminal');
-      this.term.dispose();
-      this.term = null;
-      this.ws.close();
-      this.ws = null;
+      if (this.term) {
+        this.term.dispose();
+        this.term = null;
+      }
+      if (this.ws) {
+        this.ws.close();
+        this.ws = null;
+      }
     },
     openConsoleWindow() {
-      window.open(
+      // If isConsoleWindow is not null
+      // Check the newly opened window is closed or not
+      if (window.isConsoleWindow) {
+        // If window is not closed set focus to new window
+        // If window is closed, do open new window
+        if (!window.isConsoleWindow.closed) {
+          window.isConsoleWindow.focus();
+          return;
+        } else {
+          this.openNewWindow();
+        }
+      } else {
+        // If isConsoleWindow is null, open new window
+        this.openNewWindow();
+      }
+    },
+    openNewWindow() {
+      if (this.ws != null) {
+        this.closeTerminal();
+      }
+      window.isConsoleWindow = window.open(
         '#/console/serial-over-lan-console',
         '_blank',
         'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=600,height=550'
       );
+      this.timeTrack();
+      this.disable = true;
+    },
+    handleChildWindowBeforeUnload() {
+      if (window.isConsoleWindow && !window.isConsoleWindow.closed) {
+        window.isConsoleWindow.close();
+      }
+    },
+    timeTrack() {
+      const intervalId = setInterval(() => {
+        if (window.isConsoleWindow && window.isConsoleWindow.closed) {
+          this.disable = false; // Update disable property when window is closed
+          // Clear interval once disable value is false
+          clearInterval(intervalId);
+        }
+      }, 1000); //To check open new window status every second
     },
   },
 };
