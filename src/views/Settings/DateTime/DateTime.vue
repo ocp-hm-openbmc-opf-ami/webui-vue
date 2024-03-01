@@ -79,6 +79,8 @@
                     right
                     :hide-header="true"
                     :locale="locale"
+                    :min="dateMin"
+                    :max="dateMax"
                     :label-help="
                       $t('global.calendar.useCursorKeysToNavigateCalendarDates')
                     "
@@ -427,6 +429,8 @@ export default {
           text: this.$t('pageDateTime.timeZone.AUCKLAND'),
         },
       ],
+      dateMin: '1970-01-02',
+      dateMax: '2038-01-18',
     };
   },
   validations() {
