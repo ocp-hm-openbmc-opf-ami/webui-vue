@@ -1012,6 +1012,7 @@
         "timezoneDisplay": "時區顯示選項",
         "timezoneDisplayDesc": "選擇整個應用程序中時間的顯示方式",
         "username": "使用者名稱",
+        "userPrivilege": "使用者權限",
         "toast": {
             "successUpdatingTimeZone": "更新時區成功.",
             "wrongCredentials": "憑證錯誤"

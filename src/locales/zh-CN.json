@@ -1011,6 +1011,7 @@
         "timezoneDisplay": "时区显示选项",
         "timezoneDisplayDesc": "选择整个应用程序中时间的显示方式",
         "username": "使用者名称",
+        "userPrivilege": "用户权限",
         "toast": {
             "successUpdatingTimeZone": "更新时区成功.",
             "wrongCredentials": "凭证错误"

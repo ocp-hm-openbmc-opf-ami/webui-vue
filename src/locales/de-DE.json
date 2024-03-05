@@ -1012,6 +1012,7 @@
         "timezoneDisplay": "Präferenz für die Anzeige der Zeitzone",
         "timezoneDisplayDesc": "Wählen Sie aus, wie die Zeit in der gesamten Anwendung angezeigt wird",
         "username": "Nutzername",
+        "userPrivilege": "Benutzerprivileg",
         "toast": {
             "successUpdatingTimeZone": "Zeitzone erfolgreich aktualisiert.",
             "wrongCredentials": "Falsche Anmeldeinformationen"

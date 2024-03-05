@@ -13,6 +13,12 @@
               {{ username }}
             </dd>
           </dl>
+          <dl>
+            <dt>{{ $t('pageProfileSettings.userPrivilege') }}</dt>
+            <dd>
+              {{ userPrivilege }}
+            </dd>
+          </dl>
         </page-section>
       </b-col>
     </b-row>
@@ -173,6 +179,9 @@ export default {
     },
     timezone() {
       return this.localOffset();
+    },
+    userPrivilege() {
+      return this.$store.getters['global/userPrivilege'];
     },
   },
   created() {
