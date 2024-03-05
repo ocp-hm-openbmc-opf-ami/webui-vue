@@ -5,52 +5,21 @@ const AutonomousCrashDumpStore = {
   namespaced: true,
   state: {
     allCrashDump: [],
-    getJsonFile: [],
     TaskState: null,
     ACDEnabled: null,
   },
   getters: {
     allCrashDump: (state) => state.allCrashDump,
-    getJsonFile: (state) => state.getJsonFile,
     TaskState: (state) => state.TaskState,
     ACDEnabled: (state) => state.ACDEnabled,
   },
   mutations: {
     setAllCrashDump: (state, allCrashDump) =>
       (state.allCrashDump = allCrashDump),
-    setJsonFile: (state, getJsonFile) => (state.getJsonFile = getJsonFile),
     setTaskState: (state, TaskState) => (state.TaskState = TaskState),
     setAcdServerEnabled: (state, ACDEnabled) => (state.ACDEnabled = ACDEnabled),
   },
   actions: {
-    async getcrashDumpData({ commit }) {
-      return await api
-        .get('/redfish/v1/Systems/system/LogServices/Crashdump/Entries')
-        .then(({ data: { Members = [] } = {} }) => {
-          const allCrashDumpData = Members.map((log, index) => {
-            var createdate = new Date(log.Created);
-            return {
-              date: createdate,
-              filename: log.AdditionalDataURI.split('/').pop(),
-              Sino: index + 1,
-            };
-          });
-
-          commit('setAllCrashDump', allCrashDumpData);
-          return Members[0]?.AdditionalDataURI;
-        })
-        .then((data) => {
-          if (data != null && data != undefined) {
-            api.get(data).then((response) => {
-              const getData = response.data;
-              commit('setJsonFile', getData);
-            });
-          }
-        })
-        .catch((error) => {
-          console.log('Crash Dump:', error);
-        });
-    },
     async checkStatus({ commit, dispatch }, data) {
       return await api.get(data).then((response) => {
         localStorage.setItem('polling', data);
@@ -60,7 +29,7 @@ const AutonomousCrashDumpStore = {
           if (response.data.TaskState === 'Completed') {
             commit('setTaskState', response.data.TaskState);
             localStorage.removeItem('polling');
-            dispatch('getcrashDumpData');
+            dispatch('getAcdServerStatus');
             return i18n.t(
               'pageAutonomousCrashDump.toast.successGenerateCrashDumpLog'
             );
@@ -90,7 +59,19 @@ const AutonomousCrashDumpStore = {
       return await api
         .get('/redfish/v1/Oem/Ami/AutonomousCrashDump')
         .then((response) => {
+          const dumpFileUrls = response.data?.DumpFiles;
+          const allCrashDumpData = dumpFileUrls.map((log, index) => {
+            var createdate = new Date(log.Created);
+            return {
+              date: createdate,
+              filename: log.FilePath.split('/').pop(),
+              urls: log.FilePath,
+              Sino: index + 1,
+            };
+          });
           commit('setAcdServerEnabled', response.data.Enabled);
+          commit('setAllCrashDump', allCrashDumpData);
+          return dumpFileUrls;
         })
         .catch((error) => console.log(error));
     },
@@ -122,6 +103,17 @@ const AutonomousCrashDumpStore = {
             );
           }
         });
+    },
+    async getJsonData(_, data) {
+      return await api.get(data).then((response) => {
+        if (response.data == '') {
+          const getJsonFile = {};
+          return getJsonFile;
+        } else {
+          const getJsonFile = response.data;
+          return getJsonFile;
+        }
+      });
     },
   },
 };

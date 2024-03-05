@@ -2,7 +2,11 @@
   <b-modal
     id="modal-view"
     ref="modal"
-    :title="$t('pageAutonomousCrashDump.modal.jsonViewer', { fileName: title })"
+    :title="
+      $t('pageAutonomousCrashDump.modal.jsonViewer', {
+        fileName: title,
+      })
+    "
     size="xl"
     header-text-variant="dark"
   >

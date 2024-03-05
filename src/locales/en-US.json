@@ -519,7 +519,7 @@
     "pageAutonomousCrashDump": {
         "acd": "ACD Server",
         "action": {
-            "download": "Download log",
+            "download": "Download all logs",
             "generate": "Generate",
             "close": "Close",
             "view": "After a click wait for a minute, JSON Viewer popup window is loading..",

@@ -517,7 +517,7 @@
     "pageAutonomousCrashDump": {
         "acd": "ACD Server",
         "action": {
-            "download": "Protokoll herunterladen",
+            "download": "Laden Sie alle Protokolle herunter",
             "generate": "Generieren",
             "close": "Schließen",
             "view": "Nachdem Sie eine Minute lang geklickt haben, wird das JSON Viewer Popup Fenster geladen..",

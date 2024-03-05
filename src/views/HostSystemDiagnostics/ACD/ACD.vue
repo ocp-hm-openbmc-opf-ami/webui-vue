@@ -32,6 +32,7 @@
                 <icon-view
                   v-if="action.value === 'view'"
                   :data-test-id="`AutonomousCrashDump-tableRowAction-view-${index}`"
+                  @click="onClickView(row.item)"
                 />
               </template>
             </table-row-action>
@@ -130,6 +131,7 @@ export default {
       Hidebuttons: true,
       emptyTableText: this.$t('global.table.emptyMessage'),
       data: {},
+      allCrashDumpFiles: [],
       fields: [
         {
           key: 'Sino',
@@ -167,7 +169,7 @@ export default {
         };
       });
     },
-    ...mapState('acd', ['allCrashDump', 'getJsonFile', 'TaskState']),
+    ...mapState('acd', ['allCrashDump', 'TaskState']),
     Acdstate: {
       get() {
         return this.$store.getters['acd/ACDEnabled'];
@@ -180,11 +182,8 @@ export default {
   watch: {
     allCrashDump: function (value) {
       if (value.length !== 0) {
-        this.filename = value[0].filename;
+        this.allCrashDumpFiles = value;
       }
-    },
-    getJsonFile: function (value) {
-      this.data = value;
     },
     TaskState: function (value) {
       this.polling = value;
@@ -202,10 +201,9 @@ export default {
   created() {
     this.startLoader();
     this.polling = this.TaskState;
-    Promise.all([
-      this.$store.dispatch('acd/getAcdServerStatus'),
-      this.$store.dispatch('acd/getcrashDumpData'),
-    ]).finally(() => this.endLoader());
+    Promise.all([this.$store.dispatch('acd/getAcdServerStatus')]).finally(() =>
+      this.endLoader()
+    );
     this.isBusy = false;
     const pollingFromLocalStorage = localStorage.getItem('polling');
     if (pollingFromLocalStorage !== null) {
@@ -242,25 +240,33 @@ export default {
           }
         });
     },
-    onTableRowAction(action, row) {
+    onTableRowAction(action) {
       switch (action) {
         case 'view':
-          this.initModalView(row);
           break;
         default:
           break;
       }
     },
-    downloadZipFile() {
+    async downloadZipFile() {
+      this.startLoader();
       let zip = new JSZip();
-
-      zip.file(this.filename, JSON.stringify(this.data, null, 2));
-
-      zip.generateAsync({ type: 'blob' }).then((blob) => {
-        const filenameExtention = this.filename.split('.json')[0];
-        const zipFile = `${filenameExtention}.zip`;
-        saveAs(blob, zipFile);
-      });
+      let promises = [];
+      for (let i = 0; i < this.allCrashDumpFiles.length; i++) {
+        let filename = this.allCrashDumpFiles[i].filename;
+        let url = this.allCrashDumpFiles[i].urls;
+        let promise = this.$store
+          .dispatch('acd/getJsonData', url)
+          .then((response) => {
+            zip.file(filename, JSON.stringify(response, null, 2));
+          });
+        promises.push(promise);
+      }
+      await Promise.all(promises);
+      this.endLoader();
+      let blob = await zip.generateAsync({ type: 'blob' });
+      const filename = 'allCrashDumpFiles.zip';
+      saveAs(blob, filename);
     },
     changeAcdServer(state) {
       this.startLoader();
@@ -285,6 +291,19 @@ export default {
     },
     initModalView() {
       this.$bvModal.show('modal-view');
+    },
+    onClickView(row) {
+      this.startLoader();
+      this.$store
+        .dispatch('acd/getJsonData', row.urls)
+        .then((response) => {
+          this.filename = row.filename;
+          this.data = response;
+        })
+        .finally(() => {
+          this.initModalView(row);
+          this.endLoader();
+        });
     },
   },
 };

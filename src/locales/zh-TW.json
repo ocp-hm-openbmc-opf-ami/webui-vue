@@ -517,7 +517,7 @@
     "pageAutonomousCrashDump": {
         "acd": "ACD 伺服器",
         "action": {
-            "download": "下載紀錄",
+            "download": "下載所有日誌",
             "generate": "一般",
             "close": "關閉",
             "view": "典籍後請等待一分鐘，JSON Viewer跳出視窗正在載入..",
