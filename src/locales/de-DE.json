@@ -891,41 +891,53 @@
         "passwordRules": {
           "passwordForHigh": {
             "passwordComplexityForHigh": "Passwortkomplexität für hoch",
+            "rule1": "Es sollte nur druckbare Zeichen enthalten.",
             "rule2": "Die Länge des Passworts sollte nicht kürzer als 8 Zeichen sein.",
-            "rule3":"Erfüllt die folgenden 4 Kriterien:" ,
-            "rule4": "Enthält Großbuchstaben (e.g. A, G).",
-            "rule5": "Enthält Kleinbuchstaben (e.g. a, g).",
-            "rule6": "Enthält Ziffern (e.g. 1, 6).",
-            "rule7": "Enthält druckbare Zeichen und mindestens ein Leerzeichen oder Symbole (e.g. $, &).",
-            "rule8": "Der Benutzername oder der Benutzername konnte nicht in umgekehrter Reihenfolge enthalten sein (Groß  und Kleinschreibung wird nicht beachtet).",
-            "rule9": "Im Vergleich zum vorherigen Passwort müssen mindestens zwei neue Zeichen vorhanden sein.",
+            "rule3": "Es müssen mindestens 5 eindeutige Zeichen enthalten (abcabcabc nicht zulässig)",
+            "rule4":"Erfüllt die folgenden 4 Kriterien:" ,
+            "rule5": "Enthält Großbuchstaben (e.g. A, G).",
+            "rule6": "Enthält Kleinbuchstaben (e.g. a, g).",
+            "rule7": "Enthält Ziffern (e.g. 1, 6).",
+            "rule8": "Enthält mindestens ein Leerzeichen oder Symbole (z. B. $, &).",
+            "rule9": "Der Benutzername oder der Benutzername konnte nicht in umgekehrter Reihenfolge enthalten sein (Groß  und Kleinschreibung wird nicht beachtet).",
             "rule10": "Konnte keine fortlaufenden Ziffern enthalten, die länger als oder gleich 3 Zeichen sind (e.g. BMC(123)ste, BMC(654)sfc sind nicht erlaubt).",
-            "rule11": "Konnte keine fortlaufenden Alphabete enthalten, die länger als oder gleich 3 Zeichen sind (e.g. (AbC)3478!,57$(DeF)68k sind nicht erlaubt).",
-            "rule12": "Alphabete dürfen nicht länger als 3 Zeichen sein (e.g. (Fher)145! sind nicht erlaubt))",
-            "rule13": "Ziffern dürfen nicht länger als 3 Zeichen sein (e.g. Fgke(1245)#@, (4390)FGL$ sind nicht erlaubt)",
-            "rule14": "Enthält nicht mehr als 3 gleiche Alphabete(Groß  und Kleinschreibung wird nicht beachtet) (e.g. Fkr4fcpF&f (4 'f' or 'F'),Glg5gt2G! (4 'g' or 'G') sind nicht erlaubt)"
+            "rule11": "Konnte keine fortlaufenden Alphabete enthalten, bei denen die Groß- und Kleinschreibung beachtet wird und die länger als oder gleich 3 Zeichen sind (z. B. (AbC)3478!,57$(DeF)68k sind nicht zulässig).",
+            "rule12": "Symbole dürfen nicht länger als 3 Zeichen enthalten (z. B. 34Mgs57(?!$#)68k sind nicht zulässig)).",
+            "rule13": "Ziffern dürfen nicht länger als 3 Zeichen sein (z. B. Fgke(1245)#@, (4390)FGL$ sind nicht zulässig).",
+            "rule14": "Das Alphabet darf nicht länger als 3 Zeichen enthalten (Groß- und Kleinschreibung beachten) (z. B. Fg1s3as(FDGB), GleOp34!(asbd) sind nicht zulässig)."
           },
           "passwordFormedium": {
             "passwordComplexityFormedium": "Passwortkomplexität für Medium",
+            "rule1": "Es sollte nur druckbare Zeichen enthalten.",
             "rule2": "Die Länge des Passworts sollte nicht kürzer als 8 Zeichen sein.",
-            "rule3": "Darf nicht mit dem Benutzernamen oder dem Benutzernamen in umgekehrter Reihenfolge identisch sein.",
-            "rule4": "Im Vergleich zum vorherigen Passwort müssen mindestens zwei neue Zeichen vorhanden sein.",
+            "rule3": "Es müssen mindestens 5 eindeutige Zeichen enthalten (abcabcabc nicht zulässig)",
+            "rule4": "Darf nicht mit dem Benutzernamen oder dem Benutzernamen in umgekehrter Reihenfolge identisch sein.",
             "rule5": "Erfüllt die folgenden 4 Kriterien:",
             "rule6": "Enthält Großbuchstaben (e.g. A, G).",
             "rule7": "Enthält Kleinbuchstaben (e.g. a, g).",
             "rule8": "Enthält Ziffern (e.g. 1, 6).",
-            "rule9": "Enthält druckbare Zeichen und mindestens ein Leerzeichen oder Symbole (e.g. $, &).",
+            "rule9": "Enthält mindestens ein Leerzeichen oder Symbole (z. B. $, &).",
             "rule10": "Der Benutzername oder der Benutzername konnte nicht in umgekehrter Reihenfolge enthalten sein (Groß  und Kleinschreibung wird nicht beachtet) (eg,Nutzername=Hallo, Passwort=th12(oLleH)_78 ist nicht erlaubt)."
           },
           "passwordForLow": {
             "passwordComplexityForLow": "Passwortkomplexität für Niedrig",
+            "rule1": "Es sollte nur druckbare Zeichen enthalten.",
             "rule2": "Die Länge des Passworts sollte nicht kürzer als 6 Zeichen sein.",
-            "rule3": "Erfüllt die folgenden 4 Kriterien:",
-            "rule4": "Enthält Großbuchstaben (e.g. A, G).",
-            "rule5": "Enthält Kleinbuchstaben (e.g. a, g).",
-            "rule6": "Enthält Ziffern (e.g. 1, 6).",
-            "rule7": "Enthält druckbare Zeichen und mindestens ein Leerzeichen oder Symbole (e.g. $, &).",
-            "rule8": "Der Benutzername konnte nicht oder der Benutzername in umgekehrter Reihenfolge enthalten sein (pam_cracklib will check both) (case insensitive) (eg, Nutzername=Hallo, beide Passwort=th12(heLLo)_78 and Passwort=th12(oLleH)_78 ist nicht erlaubt, same as Medium and High)."
+            "rule3": "Es müssen mindestens 5 eindeutige Zeichen enthalten (abcabcabc nicht zulässig)",
+            "rule4": "Erfüllt die folgenden 4 Kriterien:",
+            "rule5": "Enthält Großbuchstaben (e.g. A, G).",
+            "rule6": "Enthält Kleinbuchstaben (e.g. a, g).",
+            "rule7": "Enthält Ziffern (e.g. 1, 6).",
+            "rule8": "Enthält mindestens ein Leerzeichen oder Symbole (z. B. $, &).",
+            "rule9": "Der Benutzername konnte nicht oder der Benutzername in umgekehrter Reihenfolge enthalten sein (pam_cracklib will check both) (case insensitive) (eg, Nutzername=Hallo, beide Passwort=th12(heLLo)_78 and Passwort=th12(oLleH)_78 ist nicht erlaubt, same as Medium and High)."
+          },
+          "passwordForDisabled": {
+            "passwordComplexityForDisabled": "Passwortkomplexität für Behinderte",
+            "rule1": "Es sollte nur druckbare Zeichen enthalten.",
+            "rule2": "Das Passwort sollte nicht kürzer als 6 Zeichen sein.",
+            "rule3": "Darf nicht mit dem Benutzernamen oder dem Benutzernamen in umgekehrter Reihenfolge identisch sein.",
+            "rule4": "Es müssen mindestens 5 eindeutige Zeichen enthalten (abcabcabc nicht zulässig)",
+            "rule5": "Es dürfen keine einfachen Passwörter wie „Passwort“ sein."
           }
      }
     },

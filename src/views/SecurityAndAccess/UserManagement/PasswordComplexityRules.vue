@@ -12,16 +12,17 @@
           </h5>
           <ul>
             <li>
+              {{ $t('pageUserManagement.passwordRules.passwordForHigh.rule1') }}
+            </li>
+            <li>
               {{ $t('pageUserManagement.passwordRules.passwordForHigh.rule2') }}
             </li>
             <li>
               {{ $t('pageUserManagement.passwordRules.passwordForHigh.rule3') }}
+            </li>
+            <li>
+              {{ $t('pageUserManagement.passwordRules.passwordForHigh.rule4') }}
               <ul>
-                <li>
-                  {{
-                    $t('pageUserManagement.passwordRules.passwordForHigh.rule4')
-                  }}
-                </li>
                 <li>
                   {{
                     $t('pageUserManagement.passwordRules.passwordForHigh.rule5')
@@ -37,10 +38,12 @@
                     $t('pageUserManagement.passwordRules.passwordForHigh.rule7')
                   }}
                 </li>
+                <li>
+                  {{
+                    $t('pageUserManagement.passwordRules.passwordForHigh.rule8')
+                  }}
+                </li>
               </ul>
-            </li>
-            <li>
-              {{ $t('pageUserManagement.passwordRules.passwordForHigh.rule8') }}
             </li>
             <li>
               {{ $t('pageUserManagement.passwordRules.passwordForHigh.rule9') }}
@@ -79,6 +82,11 @@
             }}
           </h5>
           <ul>
+            <li>
+              {{
+                $t('pageUserManagement.passwordRules.passwordFormedium.rule1')
+              }}
+            </li>
             <li>
               {{
                 $t('pageUserManagement.passwordRules.passwordFormedium.rule2')
@@ -144,16 +152,17 @@
           </h5>
           <ul>
             <li>
+              {{ $t('pageUserManagement.passwordRules.passwordForLow.rule1') }}
+            </li>
+            <li>
               {{ $t('pageUserManagement.passwordRules.passwordForLow.rule2') }}
             </li>
             <li>
               {{ $t('pageUserManagement.passwordRules.passwordForLow.rule3') }}
+            </li>
+            <li>
+              {{ $t('pageUserManagement.passwordRules.passwordForLow.rule4') }}
               <ul>
-                <li>
-                  {{
-                    $t('pageUserManagement.passwordRules.passwordForLow.rule4')
-                  }}
-                </li>
                 <li>
                   {{
                     $t('pageUserManagement.passwordRules.passwordForLow.rule5')
@@ -169,10 +178,49 @@
                     $t('pageUserManagement.passwordRules.passwordForLow.rule7')
                   }}
                 </li>
+                <li>
+                  {{
+                    $t('pageUserManagement.passwordRules.passwordForLow.rule8')
+                  }}
+                </li>
               </ul>
             </li>
             <li>
-              {{ $t('pageUserManagement.passwordRules.passwordForLow.rule8') }}
+              {{ $t('pageUserManagement.passwordRules.passwordForLow.rule9') }}
+            </li>
+          </ul>
+          <h5 class="bold">
+            {{
+              $t(
+                'pageUserManagement.passwordRules.passwordForDisabled.passwordComplexityForDisabled'
+              )
+            }}
+          </h5>
+          <ul>
+            <li>
+              {{
+                $t('pageUserManagement.passwordRules.passwordForDisabled.rule1')
+              }}
+            </li>
+            <li>
+              {{
+                $t('pageUserManagement.passwordRules.passwordForDisabled.rule2')
+              }}
+            </li>
+            <li>
+              {{
+                $t('pageUserManagement.passwordRules.passwordForDisabled.rule3')
+              }}
+            </li>
+            <li>
+              {{
+                $t('pageUserManagement.passwordRules.passwordForDisabled.rule4')
+              }}
+            </li>
+            <li>
+              {{
+                $t('pageUserManagement.passwordRules.passwordForDisabled.rule5')
+              }}
             </li>
           </ul>
         </b-form-group>
