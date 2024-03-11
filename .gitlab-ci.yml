@@ -907,12 +907,15 @@ revision_update:
           if git ls-remote -q "$git_auth_url" &>/dev/null; then
             echo "==> Receipe Repo URL Valid"
             
-            if [[ $CI_PROJECT_URL =~ https://$repo_url ]]; then
+            if [[ https://$repo_url =~ $CI_PROJECT_URL ]]; then
               echo "==> Found a Match"
-              sed -i "s/SRCREV_override = \".*\"/SRCREV_override = \"\${AUTOREV}\"/g" $filepath
-              sed -i "s/SRCREV = \".*\"/SRCREV = \"\${AUTOREV}\"/g" $filepath
-              echo "-----------------"
-              sed -i "s|branch=[^ ;\"]\+|branch=$CI_COMMIT_REF_NAME|g" $filepath
+              echo "=========================================="
+              echo "==> Previewing before making change "
+              cat ${filepath}
+              echo "=========================================="
+              sed -i "s/^SRCREV = \".*\"/SRCREV = \"\$CI_COMMIT_SHA\"/g" $filepath
+              echo "=========================================="
+              echo "==> Previewing after making change "
               cat ${filepath}
               echo "-----------------"
             fi
