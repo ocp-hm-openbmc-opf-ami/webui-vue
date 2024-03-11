@@ -1,0 +1,100 @@
+{
+  "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries",
+  "@odata.type": "#LogEntryCollection.LogEntryCollection",
+  "Description": "Collection of System Event Log Entries",
+  "Members": [
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1",
+      "@odata.type": "#LogEntry.v1_8_0.LogEntry",
+      "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1/attachment",
+      "Created": "2022-06-14T12:38:37+00:00",
+      "EntryType": "Event",
+      "Id": "1",
+      "Message": "xyz.openbmc_project.Common.Error.InternalFailure",
+      "Modified": "2022-06-14T12:38:37+00:00",
+      "Name": "System Event Log Entry",
+      "Resolved": false,
+      "Severity": "Critical"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/2",
+      "@odata.type": "#LogEntry.v1_8_0.LogEntry",
+      "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/2/attachment",
+      "Created": "2022-06-15T08:29:42+00:00",
+      "EntryType": "Event",
+      "Id": "2",
+      "Message": "xyz.openbmc_project.Common.Error.InternalFailure",
+      "Modified": "2022-06-15T08:29:42+00:00",
+      "Name": "System Event Log Entry",
+      "Resolved": false,
+      "Severity": "Critical"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/3",
+      "@odata.type": "#LogEntry.v1_8_0.LogEntry",
+      "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/3/attachment",
+      "Created": "2022-06-15T12:15:44+00:00",
+      "EntryType": "Event",
+      "Id": "3",
+      "Message": "xyz.openbmc_project.Common.Error.InternalFailure",
+      "Modified": "2022-06-15T12:15:44+00:00",
+      "Name": "System Event Log Entry",
+      "Resolved": false,
+      "Severity": "Critical"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/4",
+      "@odata.type": "#LogEntry.v1_8_0.LogEntry",
+      "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/4/attachment",
+      "Created": "2022-06-15T20:17:49+00:00",
+      "EntryType": "Event",
+      "Id": "4",
+      "Message": "xyz.openbmc_project.Common.Error.InternalFailure",
+      "Modified": "2022-06-15T20:17:49+00:00",
+      "Name": "System Event Log Entry",
+      "Resolved": false,
+      "Severity": "Critical"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/5",
+      "@odata.type": "#LogEntry.v1_8_0.LogEntry",
+      "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/5/attachment",
+      "Created": "2022-06-28T10:34:30+00:00",
+      "EntryType": "Event",
+      "Id": "5",
+      "Message": "xyz.openbmc_project.Common.Error.InternalFailure",
+      "Modified": "2022-06-28T10:34:30+00:00",
+      "Name": "System Event Log Entry",
+      "Resolved": false,
+      "Severity": "Critical"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/6",
+      "@odata.type": "#LogEntry.v1_8_0.LogEntry",
+      "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/6/attachment",
+      "Created": "2022-06-28T11:43:59+00:00",
+      "EntryType": "Event",
+      "Id": "6",
+      "Message": "xyz.openbmc_project.Common.Error.InternalFailure",
+      "Modified": "2022-06-28T11:43:59+00:00",
+      "Name": "System Event Log Entry",
+      "Resolved": false,
+      "Severity": "Critical"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/7",
+      "@odata.type": "#LogEntry.v1_8_0.LogEntry",
+      "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/7/attachment",
+      "Created": "2022-06-28T12:12:46+00:00",
+      "EntryType": "Event",
+      "Id": "7",
+      "Message": "xyz.openbmc_project.Common.Error.InternalFailure",
+      "Modified": "2022-06-28T12:12:46+00:00",
+      "Name": "System Event Log Entry",
+      "Resolved": false,
+      "Severity": "Critical"
+    }
+  ],
+  "Members@odata.count": 7,
+  "Name": "System Event Log Entries"
+}

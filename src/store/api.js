@@ -3,9 +3,7 @@ import Axios from 'axios';
 //Exact match alias set to support
 //dotenv customizations.
 import store from '../store';
-
-Axios.defaults.headers.common['Accept'] = 'application/json';
-Axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+import Cookies from 'js-cookie';
 
 const api = Axios.create({
   withCredentials: true,
@@ -16,10 +14,6 @@ api.interceptors.response.use(undefined, (error) => {
 
   // TODO: Provide user with a notification and way to keep system active
   if (response.status == 401) {
-    const isConsoleWindow = store.getters['kvm/getIsConsoleWindow'];
-    if (isConsoleWindow) {
-      isConsoleWindow.isconsolewindowOpen.close();
-    }
     if (response.config.url != '/login') {
       window.location = '/login';
       // Commit logout to remove XSRF-TOKEN cookie
@@ -37,14 +31,36 @@ api.interceptors.response.use(undefined, (error) => {
   return Promise.reject(error);
 });
 
+const splitString = function (stringToSplit) {
+  let tmp = stringToSplit.split('/').pop();
+  return 'localApi/' + tmp;
+};
+
 export default {
-  get(path) {
-    return api.get(path);
+  get(path, params, cancelSource) {
+    path = splitString(path);
+    if (path != 'localApi/') {
+      return api.get(path);
+    } else {
+      return cancelSource && cancelSource.token
+        ? api.get(path, { cancelToken: cancelSource.token, params })
+        : api.get(path, { params });
+    }
   },
   delete(path, payload) {
     return api.delete(path, payload);
   },
   post(path, payload, config) {
+    console.log('1', path);
+    if (path.indexOf('login') != -1) {
+      Cookies.set('XSRF-TOKEN', 'DCRS2vYgXbdZxXuT2xig');
+      Cookies.set('SESSION', '832CGiPefdz5m7uG5tlk');
+      return api.get(path);
+    }
+    console.log(path);
+    if (path.indexOf('logout') != -1) {
+      return api.get(path);
+    }
     return api.post(path, payload, config);
   },
   patch(path, payload) {
@@ -58,6 +74,9 @@ export default {
   },
   spread(callback) {
     return Axios.spread(callback);
+  },
+  getCancelTokenSource() {
+    return Axios.CancelToken.source();
   },
 };
 

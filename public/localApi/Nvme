@@ -1,0 +1,15 @@
+{
+    "@odata.id": "/redfish/v1/Systems/system/Storage/Nvme",
+    "@odata.type": "#Storage.v1_7_1.Storage",
+    "Controllers": {
+        "@odata.id": "/redfish/v1/Systems/system/Storage/Nvme/Controllers"
+    },
+    "Drives": [
+        {
+            "@odata.id": "/redfish/v1/Systems/system/Storage/Nvme/Drives/0"
+        }
+    ],
+    "Drives@odata.count": 1,
+    "Id": "Nvme",
+    "Name": "Storage"
+}

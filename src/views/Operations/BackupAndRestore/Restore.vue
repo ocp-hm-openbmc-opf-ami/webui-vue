@@ -12,8 +12,8 @@
                 {{ $t('pageBackupAndRestore.tarFileOnly') }}
               </b-form-text>
               <form-file
-                ref="formFile"
                 id="image-file"
+                ref="formFile"
                 v-model="file"
                 accept=".tar"
                 :state="getValidationState($v.file)"

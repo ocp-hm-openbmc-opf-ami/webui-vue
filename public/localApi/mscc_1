@@ -1,0 +1,37 @@
+{
+  "@odata.id": "/redfish/v1/Systems/system/Storage/mscc_1",
+  "@odata.type": "#Storage.v1_10_1.Storage",
+  "Actions": {
+    "Oem": {
+      "#StorageCollection.CreateDrive": {
+        "target": "/redfish/v1/Systems/system/Storage/mscc_1/Actions/StorageMSCCLDrive.Create"
+      },
+      "#StorageCollection.DeleteDrive": {
+        "target": "/redfish/v1/Systems/system/Storage/mscc_1/Actions/StorageMSCCLDrive.Delete"
+      }
+    }
+  },
+  "Description": "Integrated mscc Controller",
+  "Drives": [],
+  "Drives@odata.count": 0,
+  "Id": "mscc_1",
+  "Name": "Local Storage Controller",
+  "Oem": {
+    "OpenBmc": {
+      "@odata.type": "#OemStorage.v1_0_0.OemStorage"
+    }
+  },
+  "StorageControllers": [
+    {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/mscc_1#/StorageControllers/0",
+      "FirmwareVersion": "5.32",
+      "MemberId": "0",
+      "Model": "2100-24i",
+      "Name": "Local Storage Controller",
+      "SerialNumber": "8A17631430A"
+    }
+  ],
+  "Volumes": {
+    "@odata.id": "/redfish/v1/Systems/system/Storage/mscc_1/Volumes"
+  }
+}

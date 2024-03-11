@@ -42,7 +42,7 @@ module.exports = {
       '/': {
         target: process.env.BASE_URL,
         headers: {
-          Connection: 'keep-alive',
+          Connection: 'upgrade',
         },
         onProxyRes: (proxyRes) => {
           // This header is ignored in the browser so removing

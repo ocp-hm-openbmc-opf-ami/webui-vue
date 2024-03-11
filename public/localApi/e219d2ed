@@ -1,0 +1,20 @@
+{
+  "@odata.id": "/redfish/v1/UpdateService/FirmwareInventory/e219d2ed",
+  "@odata.type": "#SoftwareInventory.v1_1_0.SoftwareInventory",
+  "Description": "BMC image",
+  "Id": "e219d2ed",
+  "Name": "Software Inventory",
+  "RelatedItem": [
+    {
+      "@odata.id": "/redfish/v1/Managers/bmc"
+    }
+  ],
+  "RelatedItem@odata.count": 1,
+  "Status": {
+    "Health": "OK",
+    "HealthRollup": "OK",
+    "State": "Enabled"
+  },
+  "Updateable": true,
+  "Version": "2.9.1-2626-ga11381766-dirty.1654578097.6135247"
+}

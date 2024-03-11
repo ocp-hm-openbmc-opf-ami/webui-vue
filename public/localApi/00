@@ -1,0 +1,50 @@
+{
+    "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Volumes/00",
+    "@odata.type": "#Volume.v1_6_2.Volume",
+    "CapacityBytes": 534773760,
+    "Id": "0",
+    "Links": {
+      "Drives": [
+        {
+          "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/16"
+        },
+        {
+          "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/17"
+        },
+        {
+          "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/18"
+        },
+        {
+          "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/19"
+        },
+        {
+          "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/20"
+        },
+        {
+          "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/21"
+        },
+        {
+          "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/22"
+        },
+        {
+          "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/23"
+        }
+      ],
+      "Drives@odata.count": 8
+    },
+    "Name": "RAID TEST 9",
+    "Oem": {
+      "OpenBmc": {
+        "@odata.type": "#OemVolume.v1_0_0.Volume",
+        "LDeviceId": 0,
+        "PdList": [
+          16,
+          17,
+          18
+        ],
+        "SparePdList": []
+      }
+    },
+    "RAIDType": "RAID5",
+    "StripSizeBytes": 262144
+  }

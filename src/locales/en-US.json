@@ -27,7 +27,8 @@
             "create": "Create",
             "success": "Success",
             "alert": "Alert",
-            "upload": "Upload"
+            "upload": "Upload",
+            "send": "Send"
         },
         "ariaLabel": {
             "clearSearch": "Clear search input",
@@ -765,8 +766,8 @@
         "errorInGettingActiveStatus": "Error in Getting KVM active status!!",
         "disabledKVMService": "KVM service is disabled. Go to Security and Access -> Policies page to enable KVM service.",
         "toast": {
-            "success" : "Power operation executed successfully",
-            "error" : "Error in performing power operation"
+            "success": "Power operation executed successfully",
+            "error": "Error in performing power operation"
         }
     },
     "pageLdap": {
@@ -891,57 +892,57 @@
             "successPasswordChanged": "Password has been changed successfully.Please relogin with the new password"
         },
         "passwordRules": {
-          "passwordForHigh": {
-            "passwordComplexityForHigh": "Password Complexity for high",
-            "rule1": "It should contain printable characters only.",
-            "rule2": "Password length should not be shorter than 8 characters.",
-            "rule3": "Must contain at least 5 unique characters (abcabcabc not allowed)",
-            "rule4":"Meets following 4 criteria:" ,
-            "rule5": "Contains upper case (e.g. A, G).",
-            "rule6": "Contains lower case (e.g. a, g).",
-            "rule7": "Contains digit numbers (e.g. 1, 6).",
-            "rule8": "Contains at least a space or symbols (e.g. $, &).",
-            "rule9": "Could not contains username or the username in reverse order (case insensitive).",
-            "rule10": "Could not contains continuous digits longer than or equal to 3 characters (e.g. BMC(123)ste, BMC(654)sfc are not allowed).",
-            "rule11": "Could not contains continuous case sensitive alphabets longer than or equal to 3 characters (e.g. (AbC)3478!,57$(DeF)68k are not allowed).",
-            "rule12": "Symbols could contain no longer than 3 characters (e.g. 34Mgs57(?!$#)68k are not allowed))",
-            "rule13": "Digits could no longer than 3 characters (e.g. Fgke(1245)#@, (4390)FGL$ are not allowed)",
-            "rule14": "Alphabet could contain no longer than 3 characters (case sensitive) (e.g. Fg1s3as(FDGB), GleOp34!(asbd) are not allowed)"
-          },
-          "passwordFormedium": {
-            "passwordComplexityFormedium": "Password Complexity for Medium",
-            "rule1": "It should contain printable characters only.",
-            "rule2": "Password length should not be shorter than 8 characters.",
-            "rule3": "Must contain at least 5 unique characters (abcabcabc not allowed)",
-            "rule4": "Cannot be the same as the username or the username in reverse order.",
-            "rule5": "Meets following 4 criteria:",
-            "rule6": "Contains upper case (e.g. A, G).",
-            "rule7": "Contains lower case (e.g. a, g).",
-            "rule8": "Contains digit numbers (e.g. 1, 6).",
-            "rule9": "Contains at least a space or symbols (e.g. $, &).",
-            "rule10": "Could not contains username or the username in reverse order (case insensitive) (eg,username=Hello, Password=th12(oLleH)_78 is not allowed)."
-          },
-          "passwordForLow": {
-            "passwordComplexityForLow": "Password Complexity for Low",
-            "rule1": "It should contain printable characters only.",
-            "rule2": "Password length should not be shorter than 6 characters.",
-            "rule3": "Must contain at least 5 unique characters (abcabcabc not allowed)",
-            "rule4": "Meets following 4 criteria:",
-            "rule5": "Contains upper case (e.g. A, G).",
-            "rule6": "Contains lower case (e.g. a, g).",
-            "rule7": "Contains digit numbers (e.g. 1, 6).",
-            "rule8": "Contains at least a space or symbols (e.g. $, &).",
-            "rule9": "Could not contains username or the username in reverse order (pam_cracklib will check both) (case insensitive) (eg, username=Hello, both Password=th12(heLLo)_78 and Password=th12(oLleH)_78 is not allowed)."
-          },
-          "passwordForDisabled": {
-            "passwordComplexityForDisabled": "Password Complexity for Disabled",
-            "rule1": "It should contain printable characters only.",
-            "rule2": "Password length should not be shorter than 6 characters.",
-            "rule3": "Cannot be the same as the username or the username in reverse order.",
-            "rule4": "Must contain at least 5 unique characters (abcabcabc not allowed)",
-            "rule5": "Cannot be simple passwords like 'password'"
-          }
-     }        
+            "passwordForHigh": {
+                "passwordComplexityForHigh": "Password Complexity for high",
+                "rule1": "It should contain printable characters only.",
+                "rule2": "Password length should not be shorter than 8 characters.",
+                "rule3": "Must contain at least 5 unique characters (abcabcabc not allowed)",
+                "rule4": "Meets following 4 criteria:",
+                "rule5": "Contains upper case (e.g. A, G).",
+                "rule6": "Contains lower case (e.g. a, g).",
+                "rule7": "Contains digit numbers (e.g. 1, 6).",
+                "rule8": "Contains at least a space or symbols (e.g. $, &).",
+                "rule9": "Could not contains username or the username in reverse order (case insensitive).",
+                "rule10": "Could not contains continuous digits longer than or equal to 3 characters (e.g. BMC(123)ste, BMC(654)sfc are not allowed).",
+                "rule11": "Could not contains continuous case sensitive alphabets longer than or equal to 3 characters (e.g. (AbC)3478!,57$(DeF)68k are not allowed).",
+                "rule12": "Symbols could contain no longer than 3 characters (e.g. 34Mgs57(?!$#)68k are not allowed))",
+                "rule13": "Digits could no longer than 3 characters (e.g. Fgke(1245)#@, (4390)FGL$ are not allowed)",
+                "rule14": "Alphabet could contain no longer than 3 characters (case sensitive) (e.g. Fg1s3as(FDGB), GleOp34!(asbd) are not allowed)"
+            },
+            "passwordFormedium": {
+                "passwordComplexityFormedium": "Password Complexity for Medium",
+                "rule1": "It should contain printable characters only.",
+                "rule2": "Password length should not be shorter than 8 characters.",
+                "rule3": "Must contain at least 5 unique characters (abcabcabc not allowed)",
+                "rule4": "Cannot be the same as the username or the username in reverse order.",
+                "rule5": "Meets following 4 criteria:",
+                "rule6": "Contains upper case (e.g. A, G).",
+                "rule7": "Contains lower case (e.g. a, g).",
+                "rule8": "Contains digit numbers (e.g. 1, 6).",
+                "rule9": "Contains at least a space or symbols (e.g. $, &).",
+                "rule10": "Could not contains username or the username in reverse order (case insensitive) (eg,username=Hello, Password=th12(oLleH)_78 is not allowed)."
+            },
+            "passwordForLow": {
+                "passwordComplexityForLow": "Password Complexity for Low",
+                "rule1": "It should contain printable characters only.",
+                "rule2": "Password length should not be shorter than 6 characters.",
+                "rule3": "Must contain at least 5 unique characters (abcabcabc not allowed)",
+                "rule4": "Meets following 4 criteria:",
+                "rule5": "Contains upper case (e.g. A, G).",
+                "rule6": "Contains lower case (e.g. a, g).",
+                "rule7": "Contains digit numbers (e.g. 1, 6).",
+                "rule8": "Contains at least a space or symbols (e.g. $, &).",
+                "rule9": "Could not contains username or the username in reverse order (pam_cracklib will check both) (case insensitive) (eg, username=Hello, both Password=th12(heLLo)_78 and Password=th12(oLleH)_78 is not allowed)."
+            },
+            "passwordForDisabled": {
+                "passwordComplexityForDisabled": "Password Complexity for Disabled",
+                "rule1": "It should contain printable characters only.",
+                "rule2": "Password length should not be shorter than 6 characters.",
+                "rule3": "Cannot be the same as the username or the username in reverse order.",
+                "rule4": "Must contain at least 5 unique characters (abcabcabc not allowed)",
+                "rule5": "Cannot be simple passwords like 'password'"
+            }
+        }
     },
     "pageLogin": {
         "language": "Language",
@@ -1151,25 +1152,36 @@
         "pageDescription": "Configure BMC SMTP Settings",
         "sectionTitle": "SMTP",
         "smtpLabel": "SMTP Settings",
-        "formGroupLabel": "SMTP Configuration",
+        "sendTestAlert": "Send Test Alert",
+        "alertDestination": "Alert Destination",
+        "primaryFormGroupLabel": "Primary Configuration",
+        "secondaryFormGroupLabel": "Secondary Configuration",
+        "certificate": "TLS Certificate",
         "labelServerAddress": "Server Address",
         "labelSenderEmailAddress": "Sender Email Address",
+        "labelRecipientEmailAddress": "Recipient Email Address",
+        "addRecipientEmailAddress": " Add Recipient Email Address",
         "labelPort": "Port",
+        "tlsEnable": "TLS Enable",
+        "username": "Username",
+        "password": "Password",
+        "authentication": "Authentication",
         "PortRangeRequired": "Enter valid port range between 1-65535",
+        "cacertPEM": "Cacert PEM Certificate",
+        "serverCRT": "Server CRT Certificate",
+        "serverKey": "Server Key Certificate",
+        "modal": {
+            "subject": "Subject",
+            "mailContent": "Mail Content"
+        },
         "toast": {
             "successSMTPConfiguration": "Successfully updated SMTP Configuration",
-            "errorSMTPConfiguration": "Error updating SMTP Configuration"
-        }
-    },
-    "pageAlertDestination": {
-        "pageDescription": "Configure Alert Destinations",
-        "sectionTitle": "Alert Destination",
-        "alertDestinationLabel": "Configure Alert Destination details",
-        "sendEmailTo": "Send Email to:",
-        "sendTestAlert": "send Test Alert",
-        "toast": {
-            "successMsg": "Successfully updated Alert Destination",
-            "errorMsg": "Error in updating Alert Destination",
+            "successAddCertificate": "Successfully added %{certificate}.",
+            "errorSMTPConfiguration": "Error updating SMTP Configuration",
+            "errorAddCertificate": "Error adding certificate.",
+            "errorAddPemCertificate": "Please upload the Cacert PEM certificate",
+            "errorAddCrtCertificate": "Please upload the Server CRT certificate",
+            "errorAddKeyCertificate": "Please upload the Server Key certificate",
             "successMsgTestAlert": "Test Alert send successfully",
             "errorMsgAlert": "Error in sending test alerts"
         }
@@ -1581,7 +1593,7 @@
     },
     "pageFireWall": {
         "firewallSettings": {
-            "addNewRule":"Add New Rule",
+            "addNewRule": "Add New Rule",
             "flushAll": "Flush All",
             "modal": {
                 "blockAll": "BlockAll",

@@ -1,0 +1,44 @@
+{
+  "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/NetworkAdapters/ANicBMC0/NetworkPorts/NICChannel3",
+  "@odata.type": "#NetworkPort.v1_2_5.NetworkPort",
+  "FlowControlConfiguration": "None",
+  "Id": "NICChannel3",
+  "LinkStatus": "Down",
+  "Name": "Network Port View",
+  "Oem": {
+    "OpenBmc": {
+      "@odata.type": "#OemNetworkPort.v1_0_0.NetworkPort",
+      "ChannelCount": 4,
+      "CurrentTemperature": "36",
+      "DeviceId": "1593h",
+      "FirmwareName": "E810 FW ver",
+      "FirmwareVersion": "00.00.03.10",
+      "GetBootConfigProperties": "unsupported",
+      "GetNCCapabilitiesAndSettings": "unsupported",
+      "GetPFAssignmentProperties": "unsupported",
+      "GetPackageStatus": "unsupported",
+      "GetPartitionProperties": "unsupported",
+      "GetPartitionStatisticsProperties": "unsupported",
+      "GetPortConfigurationProperties": "unsupported",
+      "MACAddress1": "ae:51:e5:10:0e:4b",
+      "MACAddress2": "ae:52:e1:10:0e:6b",
+      "MACAddressCount": 2,
+      "MCTP_over_PCIE_EID": "0",
+      "MCTP_over_SMBUS_EID": "9",
+      "ManufacturerId": "0x00000157",
+      "NCSIVersion": "1.1.0",
+      "OEM_Mac_Address": "ae:51:e5:10:0e:4b",
+      "SSId": "0005h",
+      "SVId": "8086h",
+      "UUID": "5af04860-05df-11e4-af79-000100000000"
+    }
+  },
+  "PhysicalPortNumber": "NICChannel3",
+  "SignalDetected": false,
+  "Status": {
+    "Health": "OK",
+    "HealthRollup": "OK",
+    "State": "Enabled"
+  },
+  "VendorId": "8086h"
+}

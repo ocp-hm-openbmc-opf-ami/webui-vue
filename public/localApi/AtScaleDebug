@@ -1,0 +1,10 @@
+{
+  "@odata.id": "/redfish/v1/Oem/Ami/AtScaleDebug",
+  "@odata.type": "#AMIAtScaleDebug.v1_0_0.AMIAtScaleDebug",
+  "Description": "Resource showing AtScaleDebug status",
+  "Enabled": true,
+  "Id": "AtScaleDebug",
+  "JTagInformation": "Found TDI data on TDO after 64 bits. Found 2 possible devices Device 2126521192: [32b] 0x60044113 Device 2126521192: [32b] 0x60044113 Overshift: [64b] 0xdeadbeefbad4f00d Total bits: 640 Seconds elapsed: 0.002179 Throughput: 293712 bps (0.293712 mbps) Successfully finished 4 iterations of idcode with 64 bits of over-shifted data. ",
+  "Name": "AtScaleDebug",
+  "TLSAuthentication": "enable"
+}

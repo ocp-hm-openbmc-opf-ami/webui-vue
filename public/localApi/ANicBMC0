@@ -1,0 +1,26 @@
+{
+  "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/NetworkAdapters/ANicBMC0",
+  "@odata.type": "#NetworkAdapter.v1_4_0.NetworkAdapter",
+  "Controllers": [
+    {
+      "FirmwarePackageVersion": "00.00.03.10",
+      "Links": {
+        "NetworkPorts": [
+          {
+            "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/NetworkAdapters/ANicBMC0/NetworkPorts/NICChannel3"
+          }
+        ],
+        "NetworkPorts@odata.count": 1
+      }
+    }
+  ],
+  "Id": "NicBMC0",
+  "Name": "Network Adapter View",
+  "NetworkPorts": {
+    "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/NetworkAdapters/ANicBMC0/NetworkPorts"
+  },
+  "Status": {
+    "Health": "OK",
+    "HealthRollup": "OK"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/19",
+  "@odata.type": "#Drive.v1_13_0.Drive",
+  "BlockSizeBytes": 512,
+  "Id": "19",
+  "Links": {
+    "Storage": {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0"
+    },
+    "Volumes": [],
+    "Volumes@odata.count": null
+  },
+  "Manufacturer": "ATA     ",
+  "Name": "PhysicalDrive_19",
+  "NegotiatedSpeedGbs": 60,
+  "Oem": {
+    "OpenBmc": {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/19#/Oem/OpenBmc",
+      "@odata.type": "#OemDrive.v1_0_0.Drive",
+      "PDeviceId": 19,
+      "ProductId": "WDC WD20EARX-00PASB0",
+      "Slot": "CN4:1:19"
+    }
+  },
+  "Protocol": "SATA",
+  "Revision": "51.0AB51",
+  "SerialNumber": "WD-WMAZA8624058"
+}

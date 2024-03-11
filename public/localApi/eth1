@@ -1,0 +1,64 @@
+{
+  "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/eth1",
+  "@odata.type": "#EthernetInterface.v1_4_1.EthernetInterface",
+  "DHCPv4": {
+    "DHCPEnabled": true,
+    "UseDNSServers": true,
+    "UseDomainName": true,
+    "UseNTPServers": true
+  },
+  "DHCPv6": {
+    "OperatingMode": "Stateful",
+    "UseDNSServers": true,
+    "UseDomainName": true,
+    "UseNTPServers": true
+  },
+  "Description": "Management Network Interface",
+  "FQDN": "dgx",
+  "HostName": "dgx",
+  "IPv4Addresses": [
+    {
+      "Address": "10.0.125.218",
+      "AddressOrigin": "DHCP",
+      "Gateway": "10.0.120.1",
+      "SubnetMask": "255.255.248.0"
+    }
+  ],
+  "IPv4StaticAddresses": [],
+  "IPv6AddressPolicyTable": [],
+  "IPv6Addresses": [
+    {
+      "Address": "fe80::8f6:75ff:febd:aa6e",
+      "AddressOrigin": "LinkLocal",
+      "AddressState": null,
+      "PrefixLength": 64
+    },
+    {
+      "Address": "3001:7:7:7:8f6:75ff:febd:aa6e",
+      "AddressOrigin": "DHCPv6",
+      "AddressState": null,
+      "PrefixLength": 64
+    }
+  ],
+  "IPv6DefaultGateway": "0:0:0:0:0:0:0:0",
+  "IPv6StaticAddresses": [],
+  "Id": "eth1",
+  "InterfaceEnabled": true,
+  "LinkStatus": "LinkUp",
+  "MACAddress": "0a:f6:75:bd:aa:6e",
+  "Name": "Manager Ethernet Interface",
+  "NameServers": [
+    "10.0.0.31",
+    "10.0.0.32"
+  ],
+  "SpeedMbps": 0,
+  "StaticNameServers": [],
+  "Status": {
+    "Health": "OK",
+    "HealthRollup": "OK",
+    "State": "Enabled"
+  },
+  "VLANs": {
+    "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/eth1/VLANs"
+  }
+}

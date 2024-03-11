@@ -1,0 +1,28 @@
+{
+  "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/16",
+  "@odata.type": "#Drive.v1_13_0.Drive",
+  "BlockSizeBytes": 512,
+  "Id": "16",
+  "Links": {
+    "Storage": {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0"
+    },
+    "Volumes": [],
+    "Volumes@odata.count": null
+  },
+  "Manufacturer": "ATA     ",
+  "Name": "PhysicalDrive_16",
+  "NegotiatedSpeedGbs": 60,
+  "Oem": {
+    "OpenBmc": {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/16#/Oem/OpenBmc",
+      "@odata.type": "#OemDrive.v1_0_0.Drive",
+      "PDeviceId": 16,
+      "ProductId": "ST250DM000-1BD141",
+      "Slot": "CN4:1:16"
+    }
+  },
+  "Protocol": "SATA",
+  "Revision": "KC45",
+  "SerialNumber": "Z3TNF3RK"
+}

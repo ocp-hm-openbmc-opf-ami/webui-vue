@@ -1,0 +1,20 @@
+{
+  "Redundancy": [],
+  "error": {
+    "@Message.ExtendedInfo": [
+      {
+        "@odata.type": "#Message.v1_1_1.Message",
+        "Message": "The requested resource of type Chassis named chassis was not found.",
+        "MessageArgs": [
+          "Chassis",
+          "chassis"
+        ],
+        "MessageId": "Base.1.8.1.ResourceNotFound",
+        "MessageSeverity": "Critical",
+        "Resolution": "Provide a valid resource identifier and resubmit the request."
+      }
+    ],
+    "code": "Base.1.8.1.ResourceNotFound",
+    "message": "The requested resource of type Chassis named chassis was not found."
+  }
+}

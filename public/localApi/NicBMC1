@@ -1,0 +1,18 @@
+{
+  "@odata.id": "/redfish/v1/Systems/system/NetworkInterfaces/NicBMC1",
+  "@odata.type": "#NetworkInterface.v1_2_1.NetworkInterface",
+  "Id": "NicBMC1",
+  "Links": {
+    "NetworkAdapter": {
+      "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/NetworkAdapters/ANicBMC1"
+    }
+  },
+  "Name": "Network Device View",
+  "NetworkPorts": {
+    "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/NetworkAdapters/ANicBMC1/NetworkPorts"
+  },
+  "Status": {
+    "Health": "OK",
+    "HealthRollup": "OK"
+  }
+}

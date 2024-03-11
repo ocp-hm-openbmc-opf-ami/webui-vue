@@ -1,0 +1,28 @@
+{
+  "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/18",
+  "@odata.type": "#Drive.v1_13_0.Drive",
+  "BlockSizeBytes": 512,
+  "Id": "18",
+  "Links": {
+    "Storage": {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0"
+    },
+    "Volumes": [],
+    "Volumes@odata.count": null
+  },
+  "Manufacturer": "ATA     ",
+  "Name": "PhysicalDrive_18",
+  "NegotiatedSpeedGbs": 30,
+  "Oem": {
+    "OpenBmc": {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/18#/Oem/OpenBmc",
+      "@odata.type": "#OemDrive.v1_0_0.Drive",
+      "PDeviceId": 18,
+      "ProductId": "WDC WD2503ABYX-01WERA1",
+      "Slot": "CN4:1:18"
+    }
+  },
+  "Protocol": "SATA",
+  "Revision": "01.01S02",
+  "SerialNumber": "WD-WMAYP5210089"
+}

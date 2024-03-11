@@ -1,0 +1,22 @@
+{
+    "@odata.id": "/redfish/v1/Systems/system/Storage/Nvme/Controllers/0/Ports/port_0",
+    "@odata.type": "#Port.v1_3_0.Port",
+    "Id": "0",
+    "Name": "PCIe",
+    "Oem": {
+        "Ami": {
+            "@odata.type": "@AMINVMeMIPort.v1_0_0.AMINVMeMIPort",
+            "PortInformation": {
+                "CurrentLinkSpeed": "6.0 GT/s",
+                "MaxLinkWidth": "PCIe x6",
+                "MaxMCTPTransUnitSize": 0,
+                "MaxPayloadSize": "512 bytes",
+                "NegotiatedLinkWidth": "PCIe x4",
+                "PortNo": "0",
+                "PortStatus": "Active",
+                "PortType": "PCIe",
+                "SupportedLinkSpeeds": "4.0 GT/s"
+            }
+        }
+    }
+}

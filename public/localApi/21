@@ -1,0 +1,28 @@
+{
+  "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/21",
+  "@odata.type": "#Drive.v1_13_0.Drive",
+  "BlockSizeBytes": 512,
+  "Id": "21",
+  "Links": {
+    "Storage": {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0"
+    },
+    "Volumes": [],
+    "Volumes@odata.count": null
+  },
+  "Manufacturer": "ATA     ",
+  "Name": "PhysicalDrive_21",
+  "NegotiatedSpeedGbs": 60,
+  "Oem": {
+    "OpenBmc": {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/21#/Oem/OpenBmc",
+      "@odata.type": "#OemDrive.v1_0_0.Drive",
+      "PDeviceId": 21,
+      "ProductId": "ST1000NM0033-9ZM173",
+      "Slot": "CN5:1:21"
+    }
+  },
+  "Protocol": "SATA",
+  "Revision": "SN03",
+  "SerialNumber": "Z1W018WW"
+}

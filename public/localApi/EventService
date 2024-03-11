@@ -1,0 +1,76 @@
+{
+    "@odata.id": "/redfish/v1/EventService",
+    "@odata.type": "#EventService.v1_5_0.EventService",
+    "Actions": {
+        "#EventService.SubmitTestEvent": {
+            "target": "/redfish/v1/EventService/Actions/EventService.SubmitTestEvent"
+        }
+    },
+    "DeliveryRetryAttempts": 3,
+    "DeliveryRetryIntervalSeconds": 30,
+    "EventFormatTypes": [
+        "Event",
+        "MetricReport"
+    ],
+    "Id": "EventService",
+    "Name": "Event Service",
+    "Oem": {
+        "SMTP": {
+            "Action": {
+                "CacertPEM": "/redfish/v1/EventService/Actions/Oem/Ami/SMTP.CacertPEMCertificate",
+                "ServerCRT": "/redfish/v1/EventService/Actions/Oem/Ami/SMTP.ServerCRTCertificate",
+                "ServerKey": "/redfish/v1/EventService/Actions/Oem/Ami/SMTP.ServerKeyCertificate"
+            },
+            "PrimaryConfiguration": {
+                "Authentication": true,
+                "Enable": true,
+                "Host": "10.0.122.89",
+                "Password": "ubuntu@123",
+                "Port": 25,
+                "Recipient": [
+                    "msgubuntu@coreqa.com"
+                ],
+                "Sender": "Prasannas@ami.com",
+                "TLSEnable": true,
+                "UserName": "msgubuntu"
+            },
+            "SecondaryConfiguration": {
+                "Authentication": false,
+                "Enable": true,
+                "Host": "10.0.10.198",
+                "Password": "ubuntu@123",
+                "Port": 234,
+                "Recipient": [
+                    "ami@coreqa.com"
+                ],
+                "Sender": "Prasannas@ami.com",
+                "TLSEnable": true,
+                "UserName": "msgubuntu"
+            }
+        }
+    },
+    "RegistryPrefixes": [
+        "Base",
+        "OpenBMC",
+        "TaskEvent"
+    ],
+    "ResourceTypes": [
+        "Task"
+    ],
+    "SSEFilterPropertiesSupported": {
+        "EventFormatType": true,
+        "MessageId": true,
+        "MetricReportDefinition": true,
+        "OriginResource": false,
+        "RegistryPrefix": true,
+        "ResourceType": false
+    },
+    "ServerSentEventUri": "/redfish/v1/EventService/SSE",
+    "ServiceEnabled": true,
+    "Status": {
+        "State": "Enabled"
+    },
+    "Subscriptions": {
+        "@odata.id": "/redfish/v1/EventService/Subscriptions"
+    }
+}

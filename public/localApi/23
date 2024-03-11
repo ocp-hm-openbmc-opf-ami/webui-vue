@@ -1,0 +1,28 @@
+{
+  "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/23",
+  "@odata.type": "#Drive.v1_13_0.Drive",
+  "BlockSizeBytes": 512,
+  "Id": "23",
+  "Links": {
+    "Storage": {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0"
+    },
+    "Volumes": [],
+    "Volumes@odata.count": null
+  },
+  "Manufacturer": "ATA     ",
+  "Name": "PhysicalDrive_23",
+  "NegotiatedSpeedGbs": 60,
+  "Oem": {
+    "OpenBmc": {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/23#/Oem/OpenBmc",
+      "@odata.type": "#OemDrive.v1_0_0.Drive",
+      "PDeviceId": 23,
+      "ProductId": "WDC WD10JPLX-00MBPT0",
+      "Slot": "CN5:1:23"
+    }
+  },
+  "Protocol": "SATA",
+  "Revision": "01.01H01",
+  "SerialNumber": "JR1000BN39L03E"
+}

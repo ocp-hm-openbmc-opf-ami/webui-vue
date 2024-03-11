@@ -1,0 +1,33 @@
+{
+  "@odata.id": "/redfish/v1/AccountService/Accounts/readUser",
+  "@odata.type": "#ManagerAccount.v1_7_0.ManagerAccount",
+  "AccountTypes": [
+    "IPMI",
+    "OEM",
+    "Redfish",
+    "WebUI",
+    "VirtualMedia",
+    "ManagerConsole"
+  ],
+  "Description": "User Account",
+  "Enabled": true,
+  "Id": "readUser",
+  "Links": {
+    "Role": {
+      "@odata.id": "/redfish/v1/AccountService/Roles/ReadOnly"
+    }
+  },
+  "Locked": false,
+  "Locked@Redfish.AllowableValues": [
+    "false"
+  ],
+  "Name": "User Account",
+  "OEMAccountTypes": [
+    "media"
+  ],
+  "Password": null,
+  "PasswordChangeRequired": false,
+  "RoleId": "ReadOnly",
+  "StrictAccountTypes": true,
+  "UserName": "readUser"
+}

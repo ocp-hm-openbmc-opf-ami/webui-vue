@@ -1,0 +1,49 @@
+{
+  "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/NetworkAdapters/ANicBMC1/NetworkPorts/NICChannel1",
+  "@odata.type": "#NetworkPort.v1_2_5.NetworkPort",
+  "FlowControlConfiguration": "None",
+  "Id": "NICChannel1",
+  "LinkStatus": "Down",
+  "Name": "Network Port View",
+  "Oem": {
+    "OpenBmc": {
+      "@odata.type": "#OemNetworkPort.v1_0_0.NetworkPort",
+      "ChannelCount": 2,
+      "CurrentTemperature": "34",
+      "DeviceId": "1017h",
+      "FirmwareName": "mlx0.1",
+      "FirmwareVersion": "10.1d.07.d2",
+      "GetBootConfigProperties": "unsupported",
+      "GetNCCapabilitiesAndSettings": "unsupported",
+      "GetPFAssignmentProperties": "unsupported",
+      "GetPackageStatus": "Hardware arbitration is unsupported",
+      "GetPartitionStatisticsProperties": "unsupported",
+      "GetPortConfigurationProperties": "unsupported",
+      "MACAddress1": "97:03:9b:8c:55:a0",
+      "MACAddress2": "98:02:9b:8c:55:a0",
+      "MACAddress3": "98:03:6b:8c:55:a0",
+      "MACAddress4": "98:03:9b:8c:44:a0",
+      "MACAddress5": "98:05:9b:8c:55:a0",
+      "MACAddress6": "98:03:9b:5c:55:a0",
+      "MACAddress7": "98:03:9b:dc:22:a0",
+      "MACAddress8": "98:05:9b:8c:55:a0",
+      "MACAddressCount": 8,
+      "MCTP_over_PCIE_EID": "0",
+      "MCTP_over_SMBUS_EID": "10",
+      "ManufacturerId": "0x00008119",
+      "NCSIVersion": "1.1.0",
+      "OEM_Mac_Address": "98:03:9b:8c:55:a0",
+      "SSId": "0061h",
+      "SVId": "15b3h",
+      "UUID": "5ee8bbef-7bf7-e811-8000-98039b8c55a0"
+    }
+  },
+  "PhysicalPortNumber": "NICChannel1",
+  "SignalDetected": false,
+  "Status": {
+    "Health": "OK",
+    "HealthRollup": "OK",
+    "State": "Enabled"
+  },
+  "VendorId": "15b3h"
+}

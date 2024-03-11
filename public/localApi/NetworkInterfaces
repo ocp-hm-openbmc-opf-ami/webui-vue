@@ -1,0 +1,14 @@
+{
+  "@odata.id": "/redfish/v1/Systems/system/NetworkInterfaces",
+  "@odata.type": "#NetworkInterfaceCollection.NetworkInterfaceCollection",
+  "Members": [
+    {
+      "@odata.id": "/redfish/v1/Systems/system/NetworkInterfaces/NicBMC0"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/NetworkInterfaces/NicBMC1"
+    }
+  ],
+  "Members@odata.count": 2,
+  "Name": "Network Interface Collection"
+}

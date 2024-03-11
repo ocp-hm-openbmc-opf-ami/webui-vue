@@ -1,0 +1,14 @@
+{
+    "@odata.id": "/redfish/v1/Chassis/AV_Baseboard/ThermalSubsystem/Fans/Pwm_PSU2_Fan_1",
+    "@odata.type": "#Fan.v1_3_0.Fan",
+    "Id": "Pwm_PSU2_Fan_1",
+    "Name": "Pwm_PSU2_Fan_1",
+    "SpeedPercent": {
+        "DataSourceUri": "/redfish/v1/Chassis/AC_Baseboard/Sensors/fanpwm_Pwm_PSU2_Fan_1",
+        "Reading": 100.0
+    },
+    "status": {
+        "Health": "OK",
+        "State": "Enabled"
+    }
+}

@@ -5,7 +5,7 @@
       :title="togglePasswordLabel"
       variant="link"
       class="input-action-btn btn-icon-only"
-      :class="[{ isVisible: isVisible }, isloginpage ? 'h50' : '']"
+      :class="[{ isVisible: isVisible }, isloginpage ? 'h50' : 'h35']"
       @click="toggleVisibility"
     >
       <icon-view-off v-if="isVisible" />
@@ -56,5 +56,8 @@ export default {
 <style lang="scss" scoped>
 .input-password-toggle-container {
   position: relative;
+}
+.h35 {
+  height: 35px;
 }
 </style>

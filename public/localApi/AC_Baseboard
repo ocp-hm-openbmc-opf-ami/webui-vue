@@ -1,0 +1,62 @@
+{
+  "@odata.id": "/redfish/v1/Chassis/AC_Baseboard",
+  "@odata.type": "#Chassis.v1_16_0.Chassis",
+  "Actions": {
+    "#Chassis.Reset": {
+      "@Redfish.ActionInfo": "/redfish/v1/Chassis/AC_Baseboard/ResetActionInfo",
+      "target": "/redfish/v1/Chassis/AC_Baseboard/Actions/Chassis.Reset"
+    }
+  },
+  "AssetTag": "....................",
+  "ChassisType": "RackMount",
+  "EnvironmentMetrics": {
+    "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/EnvironmentMetrics"
+  },
+  "Id": "AC_Baseboard",
+  "IndicatorLED": "Off",
+  "Links": {
+    "ComputerSystems": [
+      {
+        "@odata.id": "/redfish/v1/Systems/system"
+      }
+    ],
+    "ManagedBy": [
+      {
+        "@odata.id": "/redfish/v1/Managers/bmc"
+      }
+    ]
+  },
+  "LocationIndicatorActive": false,
+  "Manufacturer": "Intel Corporation",
+  "Model": "ArcherCity",
+  "Name": "AC_Baseboard",
+  "NetworkAdapters": {
+    "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/NetworkAdapters"
+  },
+  "PCIeDevices": {
+    "@odata.id": "/redfish/v1/Systems/system/PCIeDevices"
+  },
+  "PartNumber": "..........",
+  "Power": {
+    "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Power"
+  },
+  "PowerState": "On",
+  "PowerSubsystem": {
+    "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/PowerSubsystem"
+  },
+  "Sensors": {
+    "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Sensors"
+  },
+  "SerialNumber": "Intel_3245",
+  "Status": {
+    "Health": "OK",
+    "HealthRollup": "OK",
+    "State": "Enabled"
+  },
+  "Thermal": {
+    "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Thermal"
+  },
+  "ThermalSubsystem": {
+    "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/ThermalSubsystem"
+  }
+}

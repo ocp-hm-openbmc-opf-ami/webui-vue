@@ -413,18 +413,18 @@ if (process.env.VUE_APP_RAID_ENABLED == 'true') {
       meta: {
         title: i18n.t('appPageTitle.logicalDevice'),
       },
-    },
-    {
-      path: '/raid/create-logical-device',
-      name: 'create-logical-device',
-      component: () =>
-        import(
-          /* webpackChunkName: "CreateLogicalStorage" */ '@/views/RAID/LogicalStorage/CreateLogicalStorage.vue'
-        ),
-      meta: {
-        title: i18n.t('appPageTitle.createLogicalDevice'),
-      },
     }
+    // {
+    //   path: '/raid/create-logical-device',
+    //   name: 'create-logical-device',
+    //   component: () =>
+    //     import(
+    //       /* webpackChunkName: "CreateLogicalStorage" */ '@/views/RAID/LogicalStorage/CreateLogicalStorage.vue'
+    //     ),
+    //   meta: {
+    //     title: i18n.t('appPageTitle.createLogicalDevice'),
+    //   },
+    // }
   );
 }
 if (process.env.VUE_APP_NVME_ENABLED == 'true') {

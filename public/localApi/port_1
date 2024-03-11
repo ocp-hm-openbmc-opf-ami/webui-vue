@@ -1,0 +1,17 @@
+{
+    "@odata.id": "/redfish/v1/Systems/system/Storage/Nvme/Controllers/0/Ports/port_1",
+    "@odata.type": "#Port.v1_3_0.Port",
+    "Id": "1",
+    "Name": "Inactive",
+    "Oem": {
+        "Ami": {
+            "@odata.type": "@AMINVMeMIPort.v1_0_0.AMINVMeMIPort",
+            "PortInformation": {
+                "PortNo": "1",
+                "PortStatus": "Inactive",
+                "PortType": "N/A",
+                "SupportedLinkSpeeds": "7.0 GT/s"
+            }
+        }
+    }
+}

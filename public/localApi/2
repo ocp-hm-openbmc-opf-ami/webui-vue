@@ -1,0 +1,47 @@
+{
+    "@odata.id": "/redfish/v1/TaskService/Tasks/2",
+    "@odata.type": "#Task.v1_4_3.Task",
+    "EndTime": "2024-03-08T12:38:08+00:00",
+    "HidePayload": false,
+    "Id": "2",
+    "Messages": [
+        {
+            "@odata.type": "#Message.v1_1_1.Message",
+            "Message": "The task with Id '2' has started.",
+            "MessageArgs": [
+                "2"
+            ],
+            "MessageId": "TaskEvent.1.0.3.TaskStarted",
+            "MessageSeverity": "OK",
+            "Resolution": "None."
+        },
+        {
+            "@odata.type": "#Message.v1_1_1.Message",
+            "Message": "The request completed successfully.",
+            "MessageArgs": [],
+            "MessageId": "Base.1.16.0.Success",
+            "MessageSeverity": "OK",
+            "Resolution": "None"
+        }
+    ],
+    "Name": "Task 2",
+    "Payload": {
+        "HttpHeaders": [
+            "Host: 10.0.96.25",
+            "Connection: keep-alive",
+            "Content-Length: 59",
+            "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+            "Accept: application/json",
+            "Accept-Encoding: gzip, deflate, br, zstd",
+            "Location: /redfish/v1/Managers/bmc/LogServices/Dump/Entries/2"
+        ],
+        "HttpOperation": "POST",
+        "JsonBody": "{\n  \"DiagnosticDataType\": \"Manager\",\n  \"OEMDiagnosticDataType\": \"\"\n}",
+        "TargetUri": "/redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData"
+    },
+    "PercentComplete": 0,
+    "StartTime": "2024-03-08T12:35:04+00:00",
+    "TaskMonitor": "/redfish/v1/TaskService/Tasks/2/Monitor",
+    "TaskState": "Completed",
+    "TaskStatus": "OK"
+}

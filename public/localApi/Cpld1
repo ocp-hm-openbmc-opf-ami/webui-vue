@@ -1,0 +1,59 @@
+{
+  "@odata.id": "/redfish/v1/Chassis/Cpld1",
+  "@odata.type": "#Chassis.v1_16_0.Chassis",
+  "Actions": {
+    "#Chassis.Reset": {
+      "@Redfish.ActionInfo": "/redfish/v1/Chassis/Cpld1/ResetActionInfo",
+      "target": "/redfish/v1/Chassis/Cpld1/Actions/Chassis.Reset"
+    }
+  },
+  "Assembly": {
+    "@odata.id": "/redfish/v1/Chassis/Cpld1/Assembly"
+  },
+  "ChassisType": "Module",
+  "EnvironmentMetrics": {
+    "@odata.id": "/redfish/v1/Chassis/Cpld1/EnvironmentMetrics"
+  },
+  "Id": "Cpld1",
+  "Links": {
+    "ComputerSystems": [
+      {
+        "@odata.id": "/redfish/v1/Systems/system"
+      }
+    ],
+    "ManagedBy": [
+      {
+        "@odata.id": "/redfish/v1/Managers/bmc"
+      }
+    ]
+  },
+  "Manufacturer": "",
+  "Model": "",
+  "Name": "Cpld1",
+  "PCIeDevices": {
+    "@odata.id": "/redfish/v1/Chassis/Cpld1/PCIeDevices"
+  },
+  "PartNumber": "",
+  "Power": {
+    "@odata.id": "/redfish/v1/Chassis/Cpld1/Power"
+  },
+  "PowerState": "On",
+  "PowerSubsystem": {
+    "@odata.id": "/redfish/v1/Chassis/Cpld1/PowerSubsystem"
+  },
+  "Sensors": {
+    "@odata.id": "/redfish/v1/Chassis/Cpld1/Sensors"
+  },
+  "SerialNumber": "",
+  "Status": {
+    "Health": "OK",
+    "HealthRollup": "OK",
+    "State": "Enabled"
+  },
+  "Thermal": {
+    "@odata.id": "/redfish/v1/Chassis/Cpld1/Thermal"
+  },
+  "ThermalSubsystem": {
+    "@odata.id": "/redfish/v1/Chassis/Cpld1/ThermalSubsystem"
+  }
+}

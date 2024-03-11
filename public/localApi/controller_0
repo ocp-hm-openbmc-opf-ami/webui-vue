@@ -1,0 +1,98 @@
+{
+    "@odata.id": "/redfish/v1/Systems/system/Storage/Nvme/Controllers/controller_0",
+    "@odata.type": "#StorageController.v1_0_0.StorageController",
+    "Id": "0",
+    "Links": {
+        "Chassis": {
+            "@odata.id": "/redfish/v1/Chassis/AC_Baseboard"
+        }
+    },
+    "Manufacturer": "INTE",
+    "Model": "P5910",
+    "NVMeControllerProperties": {
+        "NVMeSMARTCriticalWarnings": {
+            "MediaInReadOnly": "false",
+            "OverallSubsystemDegraded": "false",
+            "PowerBackupFailed": "false",
+            "SpareCapacityWornOut": "false"
+        }
+    },
+    "Name": "NVME controller",
+    "Oem": {
+        "Ami": {
+            "@odata.type": "#AMINVMeMIController.v1_0_0.AMINVMeMIController",
+            "NVMeMISubSystemInformation": {
+                "SubSystemHealthStatusPoll": {
+                    "CompositeControllerStatus": {
+                        "AvailableSpare": 0,
+                        "CompositeTemperatureChange": 1,
+                        "ControllerEnableChangeOccured": 1,
+                        "ControllerFatalStatus": 0,
+                        "ControllerStatusChange": 1,
+                        "CriticalWarnings": 0,
+                        "FirmwareActivated": 0,
+                        "NVMSubSystemResetOccured": 0,
+                        "NameSpaceAttributeChange": 0,
+                        "PercentageUsed": 0,
+                        "Ready": 1,
+                        "ShutDownStatus": 0
+                    },
+                    "CompositeTemperature": 30,
+                    "DriveFunctional": 2,
+                    "PDLU": 1,
+                    "Port0PCIeLinkActive": 1,
+                    "Port1PCIeLinkActive": 2,
+                    "ResetNotRequired": 0,
+                    "SmartWarnings": {
+                        "UnderThresh": 0
+                    }
+                },
+                "SubSystemInformation": {
+                    "MajorVersion": 1,
+                    "MinorVersion": 0,
+                    "NoOfPorts": 2
+                }
+            },
+            "VitalProductData": {
+                "MultiRecordInformation": {
+                    "NVMeMultiRecord": {
+                        "EPTFactor": 17,
+                        "InitialPowerSupplyReq1.8v": 0,
+                        "InitialPowerSupplyReq12v": 0,
+                        "InitialPowerSupplyReq3.3v": 0,
+                        "InitialPowerSupplyReq5v": 0,
+                        "MaxAuxPowerSupplyReq3.3v": 0,
+                        "MaxPowerSupplyReq1.8v": 0,
+                        "MaxPowerSupplyReq12v": 0,
+                        "MaxPowerSupplyReq3.3v": 0,
+                        "MaxPowerSupplyReq5v": 0,
+                        "MaxThermalLoad": 0,
+                        "RecordAreaVersion": 0
+                    },
+                    "NVMePCIePortMultiRecord": {
+                        "MctpSupport": 0,
+                        "PCIeMaximumLinkWidth": "PCIe x4",
+                        "PCIePortInformation": 1,
+                        "PCIePortNumber": 0,
+                        "PCIeRecordVersion": 130,
+                        "PCIeSupportedlinkSpeeds": "2.5 GT/s, 5.0 GT/s, 8.0 GT/s",
+                        "RefClockCapability": "Separate Reference with no SSC"
+                    }
+                },
+                "ProductInformation": {
+                    "IPMIVersion": 1
+                }
+            }
+        }
+    },
+    "PartNumber": "INTEL SSDPE2KX010T8O",
+    "Ports": {
+        "@odata.id": "/redfish/v1/Systems/system/Storage/Nvme/Controllers/0/Ports"
+    },
+    "SerialNumber": "PHLJ1330037C1P0FGN",
+    "Status": {
+        "Health": "OK",
+        "HealthRollup": "OK",
+        "State": "Enabled"
+    }
+}

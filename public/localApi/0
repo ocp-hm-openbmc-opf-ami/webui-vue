@@ -1,0 +1,15 @@
+{
+    "@odata.id": "/redfish/v1/Systems/system/Storage/Nvme/Drives/0",
+    "@odata.type": "#Drive.v1_7_0.Drive",
+    "Id": "0",
+    "Links": {
+        "Chassis": {
+            "@odata.id": "/redfish/v1/Chassis/AC_Baseboard"
+        }
+    },
+    "Manufacturer": "INTE",
+    "Model": "P4510",
+    "Name": "0",
+    "PartNumber": "INTEL SSDPE2KX010T8O",
+    "SerialNumber": "PHLJ1330037C1P0FGN"
+}

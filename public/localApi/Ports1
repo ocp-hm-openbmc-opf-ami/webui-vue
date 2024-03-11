@@ -1,0 +1,15 @@
+{
+    "@odata.id": "/redfish/v1/Systems/system/Storage/Nvme/Controllers/1/Ports1",
+    "@odata.type": "#PortCollection.PortCollection",
+    "Description": "The Collections of Ports",
+    "Members": [
+        {
+            "@odata.id": "/redfish/v1/Systems/system/Storage/Nvme/Controllers/1/Ports1/ports_0"
+        },
+        {
+            "@odata.id": "/redfish/v1/Systems/system/Storage/Nvme/Controllers/1/Ports1/ports_1"
+        }
+    ],
+    "Members@odata.count": 2,
+    "Name": "Port Collections"
+}

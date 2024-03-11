@@ -1,0 +1,62 @@
+{
+  "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0",
+  "@odata.type": "#Storage.v1_10_1.Storage",
+  "Actions": {
+    "Oem": {
+      "#StorageCollection.CreateDrive": {
+        "target": "/redfish/v1/Systems/system/Storage/Raid_0/Actions/StorageRAIDLDrive.Create"
+      },
+      "#StorageCollection.DeleteDrive": {
+        "target": "/redfish/v1/Systems/system/Storage/Raid_0/Actions/StorageRAIDLDrive.Delete"
+      }
+    }
+  },
+  "Description": "Integrated Raid Controller",
+  "Drives": [
+    {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/16"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/17"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/18"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/19"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/20"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/21"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/22"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Drives/23"
+    }
+  ],
+  "Drives@odata.count": 8,
+  "Id": "Raid_0",
+  "Name": "Local Storage Controller",
+  "Oem": {
+    "OpenBmc": {
+      "@odata.type": "#OemStorage.v1_0_0.OemStorage"
+    }
+  },
+  "StorageControllers": [
+    {
+      "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0#/StorageControllers/0",
+      "FirmwareVersion": "5.32",
+      "MemberId": "0",
+      "Model": "3154-24i",
+      "Name": "Local Storage Controller",
+      "SerialNumber": "8A476331267"
+    }
+  ],
+  "Volumes": {
+    "@odata.id": "/redfish/v1/Systems/system/Storage/Raid_0/Volumes"
+  }
+}
