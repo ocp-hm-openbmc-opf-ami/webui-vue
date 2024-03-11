@@ -936,5 +936,6 @@ revision_update:
   variables:
     GIT_STRATEGY: none
   parallel:
-    - source_repo: [$metami_repo]
+    matrix:
+      - source_repo: [$metami_repo]
      
