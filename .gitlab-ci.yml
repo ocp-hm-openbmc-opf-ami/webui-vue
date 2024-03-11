@@ -894,6 +894,8 @@ revision_update:
           repo_url=$(echo $line | sed -n 's/.*git@\([^;]*\).*/\1/p; s/.*git:\/\/\([^;]*\).*/\1/p')
           git_auth_url=https://$GUSER:$GPASS@$repo_url
           recipe_name=${repo_url##*/}
+          recipe_name=$(basename "$repo_url" .git)
+          echo "$project_name"
           echo "================================================"
           echo "==> Filepath $filepath"
           echo "==> Line $line"
@@ -914,7 +916,20 @@ revision_update:
               echo "==> Old Commit id $orginal_commit_id"
               echo "==> Previewing before making change "
               cat ${filepath}
-              sed -i "s/^SRCREV = \".*\"/SRCREV = \"$CI_COMMIT_SHA\"/g" $filepath
+
+              if grep -q '^SRCREV_FORMAT' $filepath; then
+                srcrev_format=$(grep '^SRCREV_FORMAT' $filepath | awk -F'=' '{print $2}' | tr -d ' ')
+              else
+                  echo "SRCREV_FORMAT not found"
+              fi
+
+              if [[ srcrev_format == "override" ]]; then
+                echo "====> Updating SRCREV OVERRIDE "
+                sed -i "s/^SRCREV_override = \".*\"/SRCREV_override = \"$CI_COMMIT_SHA\"/g" $filepath
+              else
+                echo "====> Updating SRCREV"
+                sed -i "s/^SRCREV = \".*\"/SRCREV = \"$CI_COMMIT_SHA\"/g" $filepath
+              fi
               echo "************************************************"
               echo "==> Previewing after making change "
               cat ${filepath}
