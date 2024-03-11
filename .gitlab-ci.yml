@@ -911,6 +911,7 @@ revision_update:
               echo "************************************************"
               orginal_commit_id=( $(git rev-parse HEAD))
               echo "==> Found a Match"
+              echo "==> Old Commit id $orginal_commit_id"
               echo "==> Previewing before making change "
               cat ${filepath}
               sed -i "s/^SRCREV = \".*\"/SRCREV = \"$CI_COMMIT_SHA\"/g" $filepath
@@ -923,15 +924,17 @@ revision_update:
               git status
               echo "===> GIT COMMIT MESSAGE"
               git add .
-              git commit -m "AUTO Revision Update from $repo_name"
-              git status 
+              git commit -m "Auto revision update by recipe $repo_name"
               new_commit_id=( $(git rev-parse HEAD))
+              echo "==> New Commit id $new_commit_id"
               if [[ $orginal_commit_id == $new_commit_id ]]; then
                 echo -e "Nothing to commit !! No Change dedected";
               else
                 echo -e "Commit Created successfully !!";
                 git log -1
+                echo "==> Previewing after making change "
                 git push origin $src_branch
+                echo "==> Changes Pushed !!"
               fi
             fi
           else
