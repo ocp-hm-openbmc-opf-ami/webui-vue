@@ -925,10 +925,10 @@ revision_update:
               echo $srcrev_format
               if [[ $srcrev_format =~ "override" ]]; then
                 echo "====> Updating SRCREV OVERRIDE "
-                sed -i "s/^SRCREV_override = \".*\"/SRCREV_override = \"$CI_COMMIT_SHA\"/g" $filepath
+                sed -i "s/^SRCREV_override = \".*\"/SRCREV_override = \"$CI_COMMIT_SHA\"/" $filepath
               else
                 echo "====> Updating SRCREV"
-                sed -i "s/^SRCREV = \".*\"/SRCREV = \"$CI_COMMIT_SHA\"/g" $filepath
+                sed -i "s/^SRCREV = \".*\"/SRCREV = \"$CI_COMMIT_SHA\"/" $filepath
               fi
               echo "************************************************"
               echo "==> Previewing after making change "
