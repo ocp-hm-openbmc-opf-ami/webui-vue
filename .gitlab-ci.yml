@@ -905,18 +905,18 @@ revision_update:
 
           if git ls-remote -q "$git_auth_url" &>/dev/null; then
             echo "==> Receipe Repo URL Valid"
-            RECIPE_BRANCH_CHECK=`git ls-remote --heads ${git_auth_url} $CI_COMMIT_REF_NAME | wc -l`;
-            echo "==> Branch Check $RECIPE_BRANCH_CHECK"
-            if [ $RECIPE_BRANCH_CHECK -gt 0 ];then
-              echo "===> BEFORE UPDATE:"
-              echo "==> FOUND BRANCH $CI_COMMIT_REF_NAME"
-              sed -i "s/SRCREV_override = \".*\"/SRCREV_override = \"\${AUTOREV}\"/g" $filepath
-              sed -i "s/SRCREV = \".*\"/SRCREV = \"\${AUTOREV}\"/g" $filepath
-              echo "-----------------"
-              sed -i "s|branch=[^ ;\"]\+|branch=$CI_COMMIT_REF_NAME|g" $filepath
-              cat ${filepath}
-              echo "-----------------"
-            fi
+            echo "==> CI_PROJECT_URL $CI_PROJECT_URL"
+            echo "==> CI_PROJECT_PATH_SLUG $CI_PROJECT_PATH_SLUG"
+            echo "==> CI_PROJECT_PATH $CI_PROJECT_PATH"
+            # if [ $RECIPE_BRANCH_CHECK -gt 0 ];then
+            #   echo "==> FOUND BRANCH $CI_COMMIT_REF_NAME"
+            #   sed -i "s/SRCREV_override = \".*\"/SRCREV_override = \"\${AUTOREV}\"/g" $filepath
+            #   sed -i "s/SRCREV = \".*\"/SRCREV = \"\${AUTOREV}\"/g" $filepath
+            #   echo "-----------------"
+            #   sed -i "s|branch=[^ ;\"]\+|branch=$CI_COMMIT_REF_NAME|g" $filepath
+            #   cat ${filepath}
+            #   echo "-----------------"
+            # fi
           else
              echo "==> Receipe Repo URL Invalid"
           fi
