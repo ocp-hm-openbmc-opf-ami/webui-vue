@@ -1,0 +1,15 @@
+{
+  "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Sensors/airflow_System_Airflow",
+  "@odata.type": "#Sensor.v1_2_0.Sensor",
+  "Id": "airflow_System_Airflow",
+  "Name": "System Airflow",
+  "Reading": 46.1616,
+  "ReadingRangeMax": 255.0,
+  "ReadingRangeMin": 0.0,
+  "ReadingType": "AirFlow",
+  "ReadingUnits": "cft_i/min",
+  "Status": {
+    "Health": "OK",
+    "State": "Enabled"
+  }
+}

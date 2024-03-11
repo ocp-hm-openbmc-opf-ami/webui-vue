@@ -4,8 +4,11 @@
   "Members": [
     {
       "@odata.id": "/redfish/v1/Chassis/AC_Baseboard"
+    },
+    {
+      "@odata.id": "/redfish/v1/Chassis/Cpld"
     }
   ],
-  "Members@odata.count": 1,
+  "Members@odata.count": 2,
   "Name": "Chassis Collection"
 }

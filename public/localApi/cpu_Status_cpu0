@@ -1,0 +1,19 @@
+{
+  "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Sensors/cpu_Status_cpu0",
+  "@odata.type": "#Sensor.v1_2_0.Sensor",
+  "Id": "cpu_Status_cpu0",
+  "Name": "Status cpu0",
+  "Oem": {
+    "Ami": {
+      "@odata.type": "#AMISensor.v1_0_0.AMISensor",
+      "ReadingTye": "Discrete",
+      "States": [
+        "Presence Detected"
+      ]
+    }
+  },
+  "Status": {
+    "Health": "OK",
+    "State": "Enabled"
+  }
+}

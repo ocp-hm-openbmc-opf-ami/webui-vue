@@ -1,100 +1,5753 @@
 {
-  "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries",
+  "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries",
   "@odata.type": "#LogEntryCollection.LogEntryCollection",
-  "Description": "Collection of System Event Log Entries",
+  "Description": "Collection of POST Code Log Entries",
   "Members": [
     {
-      "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1",
-      "@odata.type": "#LogEntry.v1_8_0.LogEntry",
-      "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1/attachment",
-      "Created": "2022-06-14T12:38:37+00:00",
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-1",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:23.399362+00:00",
       "EntryType": "Event",
-      "Id": "1",
-      "Message": "xyz.openbmc_project.Common.Error.InternalFailure",
-      "Modified": "2022-06-14T12:38:37+00:00",
-      "Name": "System Event Log Entry",
-      "Resolved": false,
-      "Severity": "Critical"
+      "Id": "B1-1",
+      "Message": "Boot Count: 1; Time Stamp Offset: 0.0000 seconds; POST Code: 0x50",
+      "MessageArgs": [
+        "1",
+        "0.0000",
+        "0x50"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
     },
     {
-      "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/2",
-      "@odata.type": "#LogEntry.v1_8_0.LogEntry",
-      "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/2/attachment",
-      "Created": "2022-06-15T08:29:42+00:00",
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-2",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:23.399772+00:00",
       "EntryType": "Event",
-      "Id": "2",
-      "Message": "xyz.openbmc_project.Common.Error.InternalFailure",
-      "Modified": "2022-06-15T08:29:42+00:00",
-      "Name": "System Event Log Entry",
-      "Resolved": false,
-      "Severity": "Critical"
+      "Id": "B1-2",
+      "Message": "Boot Count: 1; Time Stamp Offset: 0.0004 seconds; POST Code: 0x10",
+      "MessageArgs": [
+        "1",
+        "0.0004",
+        "0x10"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
     },
     {
-      "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/3",
-      "@odata.type": "#LogEntry.v1_8_0.LogEntry",
-      "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/3/attachment",
-      "Created": "2022-06-15T12:15:44+00:00",
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-3",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:25.560533+00:00",
       "EntryType": "Event",
-      "Id": "3",
-      "Message": "xyz.openbmc_project.Common.Error.InternalFailure",
-      "Modified": "2022-06-15T12:15:44+00:00",
-      "Name": "System Event Log Entry",
-      "Resolved": false,
-      "Severity": "Critical"
+      "Id": "B1-3",
+      "Message": "Boot Count: 1; Time Stamp Offset: 2.1612 seconds; POST Code: 0x01",
+      "MessageArgs": [
+        "1",
+        "2.1612",
+        "0x01"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
     },
     {
-      "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/4",
-      "@odata.type": "#LogEntry.v1_8_0.LogEntry",
-      "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/4/attachment",
-      "Created": "2022-06-15T20:17:49+00:00",
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-4",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:25.592093+00:00",
       "EntryType": "Event",
-      "Id": "4",
-      "Message": "xyz.openbmc_project.Common.Error.InternalFailure",
-      "Modified": "2022-06-15T20:17:49+00:00",
-      "Name": "System Event Log Entry",
-      "Resolved": false,
-      "Severity": "Critical"
+      "Id": "B1-4",
+      "Message": "Boot Count: 1; Time Stamp Offset: 2.1927 seconds; POST Code: 0x02",
+      "MessageArgs": [
+        "1",
+        "2.1927",
+        "0x02"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
     },
     {
-      "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/5",
-      "@odata.type": "#LogEntry.v1_8_0.LogEntry",
-      "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/5/attachment",
-      "Created": "2022-06-28T10:34:30+00:00",
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-5",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:25.593501+00:00",
       "EntryType": "Event",
-      "Id": "5",
-      "Message": "xyz.openbmc_project.Common.Error.InternalFailure",
-      "Modified": "2022-06-28T10:34:30+00:00",
-      "Name": "System Event Log Entry",
-      "Resolved": false,
-      "Severity": "Critical"
+      "Id": "B1-5",
+      "Message": "Boot Count: 1; Time Stamp Offset: 2.1941 seconds; POST Code: 0x02",
+      "MessageArgs": [
+        "1",
+        "2.1941",
+        "0x02"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
     },
     {
-      "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/6",
-      "@odata.type": "#LogEntry.v1_8_0.LogEntry",
-      "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/6/attachment",
-      "Created": "2022-06-28T11:43:59+00:00",
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-6",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:25.608736+00:00",
       "EntryType": "Event",
-      "Id": "6",
-      "Message": "xyz.openbmc_project.Common.Error.InternalFailure",
-      "Modified": "2022-06-28T11:43:59+00:00",
-      "Name": "System Event Log Entry",
-      "Resolved": false,
-      "Severity": "Critical"
+      "Id": "B1-6",
+      "Message": "Boot Count: 1; Time Stamp Offset: 2.2094 seconds; POST Code: 0x03",
+      "MessageArgs": [
+        "1",
+        "2.2094",
+        "0x03"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
     },
     {
-      "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/7",
-      "@odata.type": "#LogEntry.v1_8_0.LogEntry",
-      "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/7/attachment",
-      "Created": "2022-06-28T12:12:46+00:00",
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-7",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:25.609360+00:00",
       "EntryType": "Event",
-      "Id": "7",
-      "Message": "xyz.openbmc_project.Common.Error.InternalFailure",
-      "Modified": "2022-06-28T12:12:46+00:00",
-      "Name": "System Event Log Entry",
-      "Resolved": false,
-      "Severity": "Critical"
+      "Id": "B1-7",
+      "Message": "Boot Count: 1; Time Stamp Offset: 2.2100 seconds; POST Code: 0x03",
+      "MessageArgs": [
+        "1",
+        "2.2100",
+        "0x03"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-8",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:25.751474+00:00",
+      "EntryType": "Event",
+      "Id": "B1-8",
+      "Message": "Boot Count: 1; Time Stamp Offset: 2.3521 seconds; POST Code: 0x04",
+      "MessageArgs": [
+        "1",
+        "2.3521",
+        "0x04"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-9",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:25.751681+00:00",
+      "EntryType": "Event",
+      "Id": "B1-9",
+      "Message": "Boot Count: 1; Time Stamp Offset: 2.3523 seconds; POST Code: 0x04",
+      "MessageArgs": [
+        "1",
+        "2.3523",
+        "0x04"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-10",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:27.495480+00:00",
+      "EntryType": "Event",
+      "Id": "B1-10",
+      "Message": "Boot Count: 1; Time Stamp Offset: 4.0961 seconds; POST Code: 0x05",
+      "MessageArgs": [
+        "1",
+        "4.0961",
+        "0x05"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-11",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:27.510072+00:00",
+      "EntryType": "Event",
+      "Id": "B1-11",
+      "Message": "Boot Count: 1; Time Stamp Offset: 4.1107 seconds; POST Code: 0x06",
+      "MessageArgs": [
+        "1",
+        "4.1107",
+        "0x06"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-12",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:29.126988+00:00",
+      "EntryType": "Event",
+      "Id": "B1-12",
+      "Message": "Boot Count: 1; Time Stamp Offset: 5.7276 seconds; POST Code: 0x05",
+      "MessageArgs": [
+        "1",
+        "5.7276",
+        "0x05"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-13",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:30.013977+00:00",
+      "EntryType": "Event",
+      "Id": "B1-13",
+      "Message": "Boot Count: 1; Time Stamp Offset: 6.6146 seconds; POST Code: 0x03",
+      "MessageArgs": [
+        "1",
+        "6.6146",
+        "0x03"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-14",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:30.014141+00:00",
+      "EntryType": "Event",
+      "Id": "B1-14",
+      "Message": "Boot Count: 1; Time Stamp Offset: 6.6148 seconds; POST Code: 0x23",
+      "MessageArgs": [
+        "1",
+        "6.6148",
+        "0x23"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-15",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:30.014262+00:00",
+      "EntryType": "Event",
+      "Id": "B1-15",
+      "Message": "Boot Count: 1; Time Stamp Offset: 6.6149 seconds; POST Code: 0x23",
+      "MessageArgs": [
+        "1",
+        "6.6149",
+        "0x23"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-16",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:30.014375+00:00",
+      "EntryType": "Event",
+      "Id": "B1-16",
+      "Message": "Boot Count: 1; Time Stamp Offset: 6.6150 seconds; POST Code: 0x00",
+      "MessageArgs": [
+        "1",
+        "6.6150",
+        "0x00"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-17",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:30.014486+00:00",
+      "EntryType": "Event",
+      "Id": "B1-17",
+      "Message": "Boot Count: 1; Time Stamp Offset: 6.6151 seconds; POST Code: 0x02",
+      "MessageArgs": [
+        "1",
+        "6.6151",
+        "0x02"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-18",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:30.014594+00:00",
+      "EntryType": "Event",
+      "Id": "B1-18",
+      "Message": "Boot Count: 1; Time Stamp Offset: 6.6152 seconds; POST Code: 0x7f",
+      "MessageArgs": [
+        "1",
+        "6.6152",
+        "0x7f"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-19",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:30.081476+00:00",
+      "EntryType": "Event",
+      "Id": "B1-19",
+      "Message": "Boot Count: 1; Time Stamp Offset: 6.6821 seconds; POST Code: 0x48",
+      "MessageArgs": [
+        "1",
+        "6.6821",
+        "0x48"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-20",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:30.081737+00:00",
+      "EntryType": "Event",
+      "Id": "B1-20",
+      "Message": "Boot Count: 1; Time Stamp Offset: 6.6824 seconds; POST Code: 0x0e",
+      "MessageArgs": [
+        "1",
+        "6.6824",
+        "0x0e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-21",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:30.081909+00:00",
+      "EntryType": "Event",
+      "Id": "B1-21",
+      "Message": "Boot Count: 1; Time Stamp Offset: 6.6825 seconds; POST Code: 0x49",
+      "MessageArgs": [
+        "1",
+        "6.6825",
+        "0x49"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-22",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:30.094193+00:00",
+      "EntryType": "Event",
+      "Id": "B1-22",
+      "Message": "Boot Count: 1; Time Stamp Offset: 6.6948 seconds; POST Code: 0x4a",
+      "MessageArgs": [
+        "1",
+        "6.6948",
+        "0x4a"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-23",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:30.094391+00:00",
+      "EntryType": "Event",
+      "Id": "B1-23",
+      "Message": "Boot Count: 1; Time Stamp Offset: 6.6950 seconds; POST Code: 0x4d",
+      "MessageArgs": [
+        "1",
+        "6.6950",
+        "0x4d"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-24",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:30.094540+00:00",
+      "EntryType": "Event",
+      "Id": "B1-24",
+      "Message": "Boot Count: 1; Time Stamp Offset: 6.6952 seconds; POST Code: 0x15",
+      "MessageArgs": [
+        "1",
+        "6.6952",
+        "0x15"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-25",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.352007+00:00",
+      "EntryType": "Event",
+      "Id": "B1-25",
+      "Message": "Boot Count: 1; Time Stamp Offset: 7.9526 seconds; POST Code: 0x52",
+      "MessageArgs": [
+        "1",
+        "7.9526",
+        "0x52"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-26",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.352301+00:00",
+      "EntryType": "Event",
+      "Id": "B1-26",
+      "Message": "Boot Count: 1; Time Stamp Offset: 7.9529 seconds; POST Code: 0x55",
+      "MessageArgs": [
+        "1",
+        "7.9529",
+        "0x55"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-27",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.357236+00:00",
+      "EntryType": "Event",
+      "Id": "B1-27",
+      "Message": "Boot Count: 1; Time Stamp Offset: 7.9579 seconds; POST Code: 0x19",
+      "MessageArgs": [
+        "1",
+        "7.9579",
+        "0x19"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-28",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.388736+00:00",
+      "EntryType": "Event",
+      "Id": "B1-28",
+      "Message": "Boot Count: 1; Time Stamp Offset: 7.9894 seconds; POST Code: 0x31",
+      "MessageArgs": [
+        "1",
+        "7.9894",
+        "0x31"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-29",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.399027+00:00",
+      "EntryType": "Event",
+      "Id": "B1-29",
+      "Message": "Boot Count: 1; Time Stamp Offset: 7.9997 seconds; POST Code: 0x00",
+      "MessageArgs": [
+        "1",
+        "7.9997",
+        "0x00"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-30",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.399215+00:00",
+      "EntryType": "Event",
+      "Id": "B1-30",
+      "Message": "Boot Count: 1; Time Stamp Offset: 7.9999 seconds; POST Code: 0xa1",
+      "MessageArgs": [
+        "1",
+        "7.9999",
+        "0xa1"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-31",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.399365+00:00",
+      "EntryType": "Event",
+      "Id": "B1-31",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.0000 seconds; POST Code: 0xa3",
+      "MessageArgs": [
+        "1",
+        "8.0000",
+        "0xa3"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-32",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.399500+00:00",
+      "EntryType": "Event",
+      "Id": "B1-32",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.0001 seconds; POST Code: 0xa3",
+      "MessageArgs": [
+        "1",
+        "8.0001",
+        "0xa3"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-33",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.400014+00:00",
+      "EntryType": "Event",
+      "Id": "B1-33",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.0007 seconds; POST Code: 0xa3",
+      "MessageArgs": [
+        "1",
+        "8.0007",
+        "0xa3"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-34",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.400233+00:00",
+      "EntryType": "Event",
+      "Id": "B1-34",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.0009 seconds; POST Code: 0xa3",
+      "MessageArgs": [
+        "1",
+        "8.0009",
+        "0xa3"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-35",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.400429+00:00",
+      "EntryType": "Event",
+      "Id": "B1-35",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.0011 seconds; POST Code: 0xa3",
+      "MessageArgs": [
+        "1",
+        "8.0011",
+        "0xa3"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-36",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.400612+00:00",
+      "EntryType": "Event",
+      "Id": "B1-36",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.0013 seconds; POST Code: 0xa3",
+      "MessageArgs": [
+        "1",
+        "8.0013",
+        "0xa3"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-37",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.400771+00:00",
+      "EntryType": "Event",
+      "Id": "B1-37",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.0014 seconds; POST Code: 0xa3",
+      "MessageArgs": [
+        "1",
+        "8.0014",
+        "0xa3"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-38",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.400929+00:00",
+      "EntryType": "Event",
+      "Id": "B1-38",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.0016 seconds; POST Code: 0xa7",
+      "MessageArgs": [
+        "1",
+        "8.0016",
+        "0xa7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-39",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.401084+00:00",
+      "EntryType": "Event",
+      "Id": "B1-39",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.0017 seconds; POST Code: 0xa9",
+      "MessageArgs": [
+        "1",
+        "8.0017",
+        "0xa9"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-40",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.402212+00:00",
+      "EntryType": "Event",
+      "Id": "B1-40",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.0029 seconds; POST Code: 0xa9",
+      "MessageArgs": [
+        "1",
+        "8.0029",
+        "0xa9"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-41",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.404136+00:00",
+      "EntryType": "Event",
+      "Id": "B1-41",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.0048 seconds; POST Code: 0xa2",
+      "MessageArgs": [
+        "1",
+        "8.0048",
+        "0xa2"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-42",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.404363+00:00",
+      "EntryType": "Event",
+      "Id": "B1-42",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.0050 seconds; POST Code: 0xa2",
+      "MessageArgs": [
+        "1",
+        "8.0050",
+        "0xa2"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-43",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.404558+00:00",
+      "EntryType": "Event",
+      "Id": "B1-43",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.0052 seconds; POST Code: 0xab",
+      "MessageArgs": [
+        "1",
+        "8.0052",
+        "0xab"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-44",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.517886+00:00",
+      "EntryType": "Event",
+      "Id": "B1-44",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.1185 seconds; POST Code: 0xab",
+      "MessageArgs": [
+        "1",
+        "8.1185",
+        "0xab"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-45",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.518900+00:00",
+      "EntryType": "Event",
+      "Id": "B1-45",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.1195 seconds; POST Code: 0xab",
+      "MessageArgs": [
+        "1",
+        "8.1195",
+        "0xab"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-46",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.589666+00:00",
+      "EntryType": "Event",
+      "Id": "B1-46",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.1903 seconds; POST Code: 0xa7",
+      "MessageArgs": [
+        "1",
+        "8.1903",
+        "0xa7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-47",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.589876+00:00",
+      "EntryType": "Event",
+      "Id": "B1-47",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.1905 seconds; POST Code: 0xa7",
+      "MessageArgs": [
+        "1",
+        "8.1905",
+        "0xa7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-48",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.590030+00:00",
+      "EntryType": "Event",
+      "Id": "B1-48",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.1907 seconds; POST Code: 0xa7",
+      "MessageArgs": [
+        "1",
+        "8.1907",
+        "0xa7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-49",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.590194+00:00",
+      "EntryType": "Event",
+      "Id": "B1-49",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.1908 seconds; POST Code: 0xa9",
+      "MessageArgs": [
+        "1",
+        "8.1908",
+        "0xa9"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-50",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.590330+00:00",
+      "EntryType": "Event",
+      "Id": "B1-50",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.1910 seconds; POST Code: 0xa9",
+      "MessageArgs": [
+        "1",
+        "8.1910",
+        "0xa9"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-51",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.590463+00:00",
+      "EntryType": "Event",
+      "Id": "B1-51",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.1911 seconds; POST Code: 0xa9",
+      "MessageArgs": [
+        "1",
+        "8.1911",
+        "0xa9"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-52",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.590639+00:00",
+      "EntryType": "Event",
+      "Id": "B1-52",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.1913 seconds; POST Code: 0xa8",
+      "MessageArgs": [
+        "1",
+        "8.1913",
+        "0xa8"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-53",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.591066+00:00",
+      "EntryType": "Event",
+      "Id": "B1-53",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.1917 seconds; POST Code: 0xaa",
+      "MessageArgs": [
+        "1",
+        "8.1917",
+        "0xaa"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-54",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.591213+00:00",
+      "EntryType": "Event",
+      "Id": "B1-54",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.1919 seconds; POST Code: 0xae",
+      "MessageArgs": [
+        "1",
+        "8.1919",
+        "0xae"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-55",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.599502+00:00",
+      "EntryType": "Event",
+      "Id": "B1-55",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.2001 seconds; POST Code: 0xe0",
+      "MessageArgs": [
+        "1",
+        "8.2001",
+        "0xe0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-56",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.606908+00:00",
+      "EntryType": "Event",
+      "Id": "B1-56",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.2075 seconds; POST Code: 0xe0",
+      "MessageArgs": [
+        "1",
+        "8.2075",
+        "0xe0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-57",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.607131+00:00",
+      "EntryType": "Event",
+      "Id": "B1-57",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.2078 seconds; POST Code: 0xe0",
+      "MessageArgs": [
+        "1",
+        "8.2078",
+        "0xe0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-58",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.610880+00:00",
+      "EntryType": "Event",
+      "Id": "B1-58",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.2115 seconds; POST Code: 0xe1",
+      "MessageArgs": [
+        "1",
+        "8.2115",
+        "0xe1"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-59",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.652062+00:00",
+      "EntryType": "Event",
+      "Id": "B1-59",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.2527 seconds; POST Code: 0xe4",
+      "MessageArgs": [
+        "1",
+        "8.2527",
+        "0xe4"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-60",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:31.763943+00:00",
+      "EntryType": "Event",
+      "Id": "B1-60",
+      "Message": "Boot Count: 1; Time Stamp Offset: 8.3646 seconds; POST Code: 0xe3",
+      "MessageArgs": [
+        "1",
+        "8.3646",
+        "0xe3"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-61",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:32.456258+00:00",
+      "EntryType": "Event",
+      "Id": "B1-61",
+      "Message": "Boot Count: 1; Time Stamp Offset: 9.0569 seconds; POST Code: 0xe5",
+      "MessageArgs": [
+        "1",
+        "9.0569",
+        "0xe5"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-62",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:32.457135+00:00",
+      "EntryType": "Event",
+      "Id": "B1-62",
+      "Message": "Boot Count: 1; Time Stamp Offset: 9.0578 seconds; POST Code: 0xaf",
+      "MessageArgs": [
+        "1",
+        "9.0578",
+        "0xaf"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-63",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:32.457340+00:00",
+      "EntryType": "Event",
+      "Id": "B1-63",
+      "Message": "Boot Count: 1; Time Stamp Offset: 9.0580 seconds; POST Code: 0xaf",
+      "MessageArgs": [
+        "1",
+        "9.0580",
+        "0xaf"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-64",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:32.551277+00:00",
+      "EntryType": "Event",
+      "Id": "B1-64",
+      "Message": "Boot Count: 1; Time Stamp Offset: 9.1519 seconds; POST Code: 0xb0",
+      "MessageArgs": [
+        "1",
+        "9.1519",
+        "0xb0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-65",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:33.307463+00:00",
+      "EntryType": "Event",
+      "Id": "B1-65",
+      "Message": "Boot Count: 1; Time Stamp Offset: 9.9081 seconds; POST Code: 0xb5",
+      "MessageArgs": [
+        "1",
+        "9.9081",
+        "0xb5"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-66",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:33.307632+00:00",
+      "EntryType": "Event",
+      "Id": "B1-66",
+      "Message": "Boot Count: 1; Time Stamp Offset: 9.9083 seconds; POST Code: 0xb0",
+      "MessageArgs": [
+        "1",
+        "9.9083",
+        "0xb0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-67",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.844781+00:00",
+      "EntryType": "Event",
+      "Id": "B1-67",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.4454 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.4454",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-68",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.845002+00:00",
+      "EntryType": "Event",
+      "Id": "B1-68",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.4456 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.4456",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-69",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.845137+00:00",
+      "EntryType": "Event",
+      "Id": "B1-69",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.4458 seconds; POST Code: 0x73",
+      "MessageArgs": [
+        "1",
+        "11.4458",
+        "0x73"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-70",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.913136+00:00",
+      "EntryType": "Event",
+      "Id": "B1-70",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5138 seconds; POST Code: 0xcd",
+      "MessageArgs": [
+        "1",
+        "11.5138",
+        "0xcd"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-71",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.913435+00:00",
+      "EntryType": "Event",
+      "Id": "B1-71",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5141 seconds; POST Code: 0xb0",
+      "MessageArgs": [
+        "1",
+        "11.5141",
+        "0xb0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-72",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.913565+00:00",
+      "EntryType": "Event",
+      "Id": "B1-72",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5142 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.5142",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-73",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.913671+00:00",
+      "EntryType": "Event",
+      "Id": "B1-73",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5143 seconds; POST Code: 0xb0",
+      "MessageArgs": [
+        "1",
+        "11.5143",
+        "0xb0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-74",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.923722+00:00",
+      "EntryType": "Event",
+      "Id": "B1-74",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5244 seconds; POST Code: 0xc1",
+      "MessageArgs": [
+        "1",
+        "11.5244",
+        "0xc1"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-75",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.923922+00:00",
+      "EntryType": "Event",
+      "Id": "B1-75",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5246 seconds; POST Code: 0xb1",
+      "MessageArgs": [
+        "1",
+        "11.5246",
+        "0xb1"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-76",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.924073+00:00",
+      "EntryType": "Event",
+      "Id": "B1-76",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5247 seconds; POST Code: 0xb1",
+      "MessageArgs": [
+        "1",
+        "11.5247",
+        "0xb1"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-77",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.924555+00:00",
+      "EntryType": "Event",
+      "Id": "B1-77",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5252 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.5252",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-78",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.924693+00:00",
+      "EntryType": "Event",
+      "Id": "B1-78",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5253 seconds; POST Code: 0xb4",
+      "MessageArgs": [
+        "1",
+        "11.5253",
+        "0xb4"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-79",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.927682+00:00",
+      "EntryType": "Event",
+      "Id": "B1-79",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5283 seconds; POST Code: 0xb4",
+      "MessageArgs": [
+        "1",
+        "11.5283",
+        "0xb4"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-80",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.934259+00:00",
+      "EntryType": "Event",
+      "Id": "B1-80",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5349 seconds; POST Code: 0xb4",
+      "MessageArgs": [
+        "1",
+        "11.5349",
+        "0xb4"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-81",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.934460+00:00",
+      "EntryType": "Event",
+      "Id": "B1-81",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5351 seconds; POST Code: 0xc2",
+      "MessageArgs": [
+        "1",
+        "11.5351",
+        "0xc2"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-82",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.934614+00:00",
+      "EntryType": "Event",
+      "Id": "B1-82",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5353 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.5353",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-83",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.934751+00:00",
+      "EntryType": "Event",
+      "Id": "B1-83",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5354 seconds; POST Code: 0xb0",
+      "MessageArgs": [
+        "1",
+        "11.5354",
+        "0xb0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-84",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.944924+00:00",
+      "EntryType": "Event",
+      "Id": "B1-84",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5456 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.5456",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-85",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.945127+00:00",
+      "EntryType": "Event",
+      "Id": "B1-85",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5458 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.5458",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-86",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.945280+00:00",
+      "EntryType": "Event",
+      "Id": "B1-86",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5459 seconds; POST Code: 0xb1",
+      "MessageArgs": [
+        "1",
+        "11.5459",
+        "0xb1"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-87",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.945420+00:00",
+      "EntryType": "Event",
+      "Id": "B1-87",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5461 seconds; POST Code: 0xb1",
+      "MessageArgs": [
+        "1",
+        "11.5461",
+        "0xb1"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-88",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.946279+00:00",
+      "EntryType": "Event",
+      "Id": "B1-88",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5469 seconds; POST Code: 0xb1",
+      "MessageArgs": [
+        "1",
+        "11.5469",
+        "0xb1"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-89",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.946477+00:00",
+      "EntryType": "Event",
+      "Id": "B1-89",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5471 seconds; POST Code: 0xb1",
+      "MessageArgs": [
+        "1",
+        "11.5471",
+        "0xb1"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-90",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:34.946623+00:00",
+      "EntryType": "Event",
+      "Id": "B1-90",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.5473 seconds; POST Code: 0xb1",
+      "MessageArgs": [
+        "1",
+        "11.5473",
+        "0xb1"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-91",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.112054+00:00",
+      "EntryType": "Event",
+      "Id": "B1-91",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7127 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.7127",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-92",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.112214+00:00",
+      "EntryType": "Event",
+      "Id": "B1-92",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7129 seconds; POST Code: 0xb0",
+      "MessageArgs": [
+        "1",
+        "11.7129",
+        "0xb0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-93",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.122700+00:00",
+      "EntryType": "Event",
+      "Id": "B1-93",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7233 seconds; POST Code: 0xb4",
+      "MessageArgs": [
+        "1",
+        "11.7233",
+        "0xb4"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-94",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.122854+00:00",
+      "EntryType": "Event",
+      "Id": "B1-94",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7235 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.7235",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-95",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.122966+00:00",
+      "EntryType": "Event",
+      "Id": "B1-95",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7236 seconds; POST Code: 0xb4",
+      "MessageArgs": [
+        "1",
+        "11.7236",
+        "0xb4"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-96",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.126642+00:00",
+      "EntryType": "Event",
+      "Id": "B1-96",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7273 seconds; POST Code: 0xb4",
+      "MessageArgs": [
+        "1",
+        "11.7273",
+        "0xb4"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-97",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.133526+00:00",
+      "EntryType": "Event",
+      "Id": "B1-97",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7342 seconds; POST Code: 0xb4",
+      "MessageArgs": [
+        "1",
+        "11.7342",
+        "0xb4"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-98",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.133711+00:00",
+      "EntryType": "Event",
+      "Id": "B1-98",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7343 seconds; POST Code: 0xb8",
+      "MessageArgs": [
+        "1",
+        "11.7343",
+        "0xb8"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-99",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.133980+00:00",
+      "EntryType": "Event",
+      "Id": "B1-99",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7346 seconds; POST Code: 0xc5",
+      "MessageArgs": [
+        "1",
+        "11.7346",
+        "0xc5"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-100",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.134147+00:00",
+      "EntryType": "Event",
+      "Id": "B1-100",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7348 seconds; POST Code: 0xb2",
+      "MessageArgs": [
+        "1",
+        "11.7348",
+        "0xb2"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-101",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.134288+00:00",
+      "EntryType": "Event",
+      "Id": "B1-101",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7349 seconds; POST Code: 0xc6",
+      "MessageArgs": [
+        "1",
+        "11.7349",
+        "0xc6"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-102",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.134410+00:00",
+      "EntryType": "Event",
+      "Id": "B1-102",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7350 seconds; POST Code: 0xb3",
+      "MessageArgs": [
+        "1",
+        "11.7350",
+        "0xb3"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-103",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.134522+00:00",
+      "EntryType": "Event",
+      "Id": "B1-103",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7352 seconds; POST Code: 0xb3",
+      "MessageArgs": [
+        "1",
+        "11.7352",
+        "0xb3"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-104",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.134630+00:00",
+      "EntryType": "Event",
+      "Id": "B1-104",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7353 seconds; POST Code: 0xb6",
+      "MessageArgs": [
+        "1",
+        "11.7353",
+        "0xb6"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-105",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.134734+00:00",
+      "EntryType": "Event",
+      "Id": "B1-105",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7354 seconds; POST Code: 0xb6",
+      "MessageArgs": [
+        "1",
+        "11.7354",
+        "0xb6"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-106",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.141085+00:00",
+      "EntryType": "Event",
+      "Id": "B1-106",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7417 seconds; POST Code: 0xb6",
+      "MessageArgs": [
+        "1",
+        "11.7417",
+        "0xb6"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-107",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.141297+00:00",
+      "EntryType": "Event",
+      "Id": "B1-107",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7419 seconds; POST Code: 0xb0",
+      "MessageArgs": [
+        "1",
+        "11.7419",
+        "0xb0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-108",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.141461+00:00",
+      "EntryType": "Event",
+      "Id": "B1-108",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7421 seconds; POST Code: 0xb7",
+      "MessageArgs": [
+        "1",
+        "11.7421",
+        "0xb7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-109",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.141612+00:00",
+      "EntryType": "Event",
+      "Id": "B1-109",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7423 seconds; POST Code: 0xb6",
+      "MessageArgs": [
+        "1",
+        "11.7423",
+        "0xb6"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-110",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.141760+00:00",
+      "EntryType": "Event",
+      "Id": "B1-110",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7424 seconds; POST Code: 0xb6",
+      "MessageArgs": [
+        "1",
+        "11.7424",
+        "0xb6"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-111",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.142289+00:00",
+      "EntryType": "Event",
+      "Id": "B1-111",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7429 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.7429",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-112",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.142442+00:00",
+      "EntryType": "Event",
+      "Id": "B1-112",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7431 seconds; POST Code: 0xb0",
+      "MessageArgs": [
+        "1",
+        "11.7431",
+        "0xb0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-113",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.153888+00:00",
+      "EntryType": "Event",
+      "Id": "B1-113",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7545 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.7545",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-114",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.155623+00:00",
+      "EntryType": "Event",
+      "Id": "B1-114",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7563 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.7563",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-115",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.155898+00:00",
+      "EntryType": "Event",
+      "Id": "B1-115",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7565 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.7565",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-116",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.156055+00:00",
+      "EntryType": "Event",
+      "Id": "B1-116",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7567 seconds; POST Code: 0xb1",
+      "MessageArgs": [
+        "1",
+        "11.7567",
+        "0xb1"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-117",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.156180+00:00",
+      "EntryType": "Event",
+      "Id": "B1-117",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7568 seconds; POST Code: 0xb7",
+      "MessageArgs": [
+        "1",
+        "11.7568",
+        "0xb7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-118",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.156292+00:00",
+      "EntryType": "Event",
+      "Id": "B1-118",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7569 seconds; POST Code: 0xb7",
+      "MessageArgs": [
+        "1",
+        "11.7569",
+        "0xb7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-119",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.158594+00:00",
+      "EntryType": "Event",
+      "Id": "B1-119",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7592 seconds; POST Code: 0xb6",
+      "MessageArgs": [
+        "1",
+        "11.7592",
+        "0xb6"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-120",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.183323+00:00",
+      "EntryType": "Event",
+      "Id": "B1-120",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7840 seconds; POST Code: 0xb7",
+      "MessageArgs": [
+        "1",
+        "11.7840",
+        "0xb7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-121",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.183507+00:00",
+      "EntryType": "Event",
+      "Id": "B1-121",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7841 seconds; POST Code: 0xb7",
+      "MessageArgs": [
+        "1",
+        "11.7841",
+        "0xb7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-122",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.183661+00:00",
+      "EntryType": "Event",
+      "Id": "B1-122",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7843 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.7843",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-123",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.183801+00:00",
+      "EntryType": "Event",
+      "Id": "B1-123",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7844 seconds; POST Code: 0x70",
+      "MessageArgs": [
+        "1",
+        "11.7844",
+        "0x70"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-124",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.184229+00:00",
+      "EntryType": "Event",
+      "Id": "B1-124",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7849 seconds; POST Code: 0x70",
+      "MessageArgs": [
+        "1",
+        "11.7849",
+        "0x70"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-125",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.184369+00:00",
+      "EntryType": "Event",
+      "Id": "B1-125",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7850 seconds; POST Code: 0x70",
+      "MessageArgs": [
+        "1",
+        "11.7850",
+        "0x70"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-126",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.184485+00:00",
+      "EntryType": "Event",
+      "Id": "B1-126",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7851 seconds; POST Code: 0x70",
+      "MessageArgs": [
+        "1",
+        "11.7851",
+        "0x70"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-127",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.184594+00:00",
+      "EntryType": "Event",
+      "Id": "B1-127",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7852 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.7852",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-128",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.184700+00:00",
+      "EntryType": "Event",
+      "Id": "B1-128",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7853 seconds; POST Code: 0xb7",
+      "MessageArgs": [
+        "1",
+        "11.7853",
+        "0xb7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-129",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.184804+00:00",
+      "EntryType": "Event",
+      "Id": "B1-129",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7854 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.7854",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-130",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.184909+00:00",
+      "EntryType": "Event",
+      "Id": "B1-130",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7855 seconds; POST Code: 0xb0",
+      "MessageArgs": [
+        "1",
+        "11.7855",
+        "0xb0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-131",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.193610+00:00",
+      "EntryType": "Event",
+      "Id": "B1-131",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7942 seconds; POST Code: 0xb7",
+      "MessageArgs": [
+        "1",
+        "11.7942",
+        "0xb7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-132",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.193771+00:00",
+      "EntryType": "Event",
+      "Id": "B1-132",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.7944 seconds; POST Code: 0xb7",
+      "MessageArgs": [
+        "1",
+        "11.7944",
+        "0xb7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-133",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.322275+00:00",
+      "EntryType": "Event",
+      "Id": "B1-133",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.9229 seconds; POST Code: 0xbe",
+      "MessageArgs": [
+        "1",
+        "11.9229",
+        "0xbe"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-134",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.322441+00:00",
+      "EntryType": "Event",
+      "Id": "B1-134",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.9231 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.9231",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-135",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.322564+00:00",
+      "EntryType": "Event",
+      "Id": "B1-135",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.9232 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "11.9232",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-136",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.322680+00:00",
+      "EntryType": "Event",
+      "Id": "B1-136",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.9233 seconds; POST Code: 0xb0",
+      "MessageArgs": [
+        "1",
+        "11.9233",
+        "0xb0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-137",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:35.332463+00:00",
+      "EntryType": "Event",
+      "Id": "B1-137",
+      "Message": "Boot Count: 1; Time Stamp Offset: 11.9331 seconds; POST Code: 0xd2",
+      "MessageArgs": [
+        "1",
+        "11.9331",
+        "0xd2"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-138",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.904204+00:00",
+      "EntryType": "Event",
+      "Id": "B1-138",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5048 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "13.5048",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-139",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.904439+00:00",
+      "EntryType": "Event",
+      "Id": "B1-139",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5051 seconds; POST Code: 0xd2",
+      "MessageArgs": [
+        "1",
+        "13.5051",
+        "0xd2"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-140",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.904592+00:00",
+      "EntryType": "Event",
+      "Id": "B1-140",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5052 seconds; POST Code: 0xd6",
+      "MessageArgs": [
+        "1",
+        "13.5052",
+        "0xd6"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-141",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.904729+00:00",
+      "EntryType": "Event",
+      "Id": "B1-141",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5054 seconds; POST Code: 0x70",
+      "MessageArgs": [
+        "1",
+        "13.5054",
+        "0x70"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-142",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.904872+00:00",
+      "EntryType": "Event",
+      "Id": "B1-142",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5055 seconds; POST Code: 0xb9",
+      "MessageArgs": [
+        "1",
+        "13.5055",
+        "0xb9"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-143",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.905538+00:00",
+      "EntryType": "Event",
+      "Id": "B1-143",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5062 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "13.5062",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-144",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.905745+00:00",
+      "EntryType": "Event",
+      "Id": "B1-144",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5064 seconds; POST Code: 0xb7",
+      "MessageArgs": [
+        "1",
+        "13.5064",
+        "0xb7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-145",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.905902+00:00",
+      "EntryType": "Event",
+      "Id": "B1-145",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5065 seconds; POST Code: 0xb7",
+      "MessageArgs": [
+        "1",
+        "13.5065",
+        "0xb7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-146",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.906032+00:00",
+      "EntryType": "Event",
+      "Id": "B1-146",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5067 seconds; POST Code: 0xb7",
+      "MessageArgs": [
+        "1",
+        "13.5067",
+        "0xb7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-147",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.906146+00:00",
+      "EntryType": "Event",
+      "Id": "B1-147",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5068 seconds; POST Code: 0xb8",
+      "MessageArgs": [
+        "1",
+        "13.5068",
+        "0xb8"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-148",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.906254+00:00",
+      "EntryType": "Event",
+      "Id": "B1-148",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5069 seconds; POST Code: 0xb8",
+      "MessageArgs": [
+        "1",
+        "13.5069",
+        "0xb8"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-149",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.906368+00:00",
+      "EntryType": "Event",
+      "Id": "B1-149",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5070 seconds; POST Code: 0xd7",
+      "MessageArgs": [
+        "1",
+        "13.5070",
+        "0xd7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-150",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.906475+00:00",
+      "EntryType": "Event",
+      "Id": "B1-150",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5071 seconds; POST Code: 0xc9",
+      "MessageArgs": [
+        "1",
+        "13.5071",
+        "0xc9"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-151",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.906580+00:00",
+      "EntryType": "Event",
+      "Id": "B1-151",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5072 seconds; POST Code: 0xda",
+      "MessageArgs": [
+        "1",
+        "13.5072",
+        "0xda"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-152",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.906684+00:00",
+      "EntryType": "Event",
+      "Id": "B1-152",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5073 seconds; POST Code: 0xd9",
+      "MessageArgs": [
+        "1",
+        "13.5073",
+        "0xd9"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-153",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.906788+00:00",
+      "EntryType": "Event",
+      "Id": "B1-153",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5074 seconds; POST Code: 0xdb",
+      "MessageArgs": [
+        "1",
+        "13.5074",
+        "0xdb"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-154",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.906891+00:00",
+      "EntryType": "Event",
+      "Id": "B1-154",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5075 seconds; POST Code: 0xba",
+      "MessageArgs": [
+        "1",
+        "13.5075",
+        "0xba"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-155",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:36.906993+00:00",
+      "EntryType": "Event",
+      "Id": "B1-155",
+      "Message": "Boot Count: 1; Time Stamp Offset: 13.5076 seconds; POST Code: 0xb9",
+      "MessageArgs": [
+        "1",
+        "13.5076",
+        "0xb9"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-156",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.521552+00:00",
+      "EntryType": "Event",
+      "Id": "B1-156",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1222 seconds; POST Code: 0x70",
+      "MessageArgs": [
+        "1",
+        "14.1222",
+        "0x70"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-157",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.521714+00:00",
+      "EntryType": "Event",
+      "Id": "B1-157",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1224 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "14.1224",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-158",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.521828+00:00",
+      "EntryType": "Event",
+      "Id": "B1-158",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1225 seconds; POST Code: 0x70",
+      "MessageArgs": [
+        "1",
+        "14.1225",
+        "0x70"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-159",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.521935+00:00",
+      "EntryType": "Event",
+      "Id": "B1-159",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1226 seconds; POST Code: 0x70",
+      "MessageArgs": [
+        "1",
+        "14.1226",
+        "0x70"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-160",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.522036+00:00",
+      "EntryType": "Event",
+      "Id": "B1-160",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1227 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "14.1227",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-161",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.533837+00:00",
+      "EntryType": "Event",
+      "Id": "B1-161",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1345 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "14.1345",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-162",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.534065+00:00",
+      "EntryType": "Event",
+      "Id": "B1-162",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1347 seconds; POST Code: 0xcb",
+      "MessageArgs": [
+        "1",
+        "14.1347",
+        "0xcb"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-163",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.534255+00:00",
+      "EntryType": "Event",
+      "Id": "B1-163",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1349 seconds; POST Code: 0xbb",
+      "MessageArgs": [
+        "1",
+        "14.1349",
+        "0xbb"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-164",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.534400+00:00",
+      "EntryType": "Event",
+      "Id": "B1-164",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1350 seconds; POST Code: 0xbb",
+      "MessageArgs": [
+        "1",
+        "14.1350",
+        "0xbb"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-165",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.534533+00:00",
+      "EntryType": "Event",
+      "Id": "B1-165",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1352 seconds; POST Code: 0xbb",
+      "MessageArgs": [
+        "1",
+        "14.1352",
+        "0xbb"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-166",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.534664+00:00",
+      "EntryType": "Event",
+      "Id": "B1-166",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1353 seconds; POST Code: 0xbb",
+      "MessageArgs": [
+        "1",
+        "14.1353",
+        "0xbb"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-167",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.534792+00:00",
+      "EntryType": "Event",
+      "Id": "B1-167",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1354 seconds; POST Code: 0xbb",
+      "MessageArgs": [
+        "1",
+        "14.1354",
+        "0xbb"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-168",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.534920+00:00",
+      "EntryType": "Event",
+      "Id": "B1-168",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1356 seconds; POST Code: 0xbb",
+      "MessageArgs": [
+        "1",
+        "14.1356",
+        "0xbb"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-169",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.535047+00:00",
+      "EntryType": "Event",
+      "Id": "B1-169",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1357 seconds; POST Code: 0xbb",
+      "MessageArgs": [
+        "1",
+        "14.1357",
+        "0xbb"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-170",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.535263+00:00",
+      "EntryType": "Event",
+      "Id": "B1-170",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1359 seconds; POST Code: 0xbb",
+      "MessageArgs": [
+        "1",
+        "14.1359",
+        "0xbb"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-171",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.535395+00:00",
+      "EntryType": "Event",
+      "Id": "B1-171",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1360 seconds; POST Code: 0xbb",
+      "MessageArgs": [
+        "1",
+        "14.1360",
+        "0xbb"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-172",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.535510+00:00",
+      "EntryType": "Event",
+      "Id": "B1-172",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1361 seconds; POST Code: 0xbb",
+      "MessageArgs": [
+        "1",
+        "14.1361",
+        "0xbb"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-173",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.537229+00:00",
+      "EntryType": "Event",
+      "Id": "B1-173",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1379 seconds; POST Code: 0xbb",
+      "MessageArgs": [
+        "1",
+        "14.1379",
+        "0xbb"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-174",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.537612+00:00",
+      "EntryType": "Event",
+      "Id": "B1-174",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1382 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "14.1382",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-175",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.537850+00:00",
+      "EntryType": "Event",
+      "Id": "B1-175",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1385 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "14.1385",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-176",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.562732+00:00",
+      "EntryType": "Event",
+      "Id": "B1-176",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1634 seconds; POST Code: 0xd0",
+      "MessageArgs": [
+        "1",
+        "14.1634",
+        "0xd0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-177",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.562948+00:00",
+      "EntryType": "Event",
+      "Id": "B1-177",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1636 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "14.1636",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-178",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.563098+00:00",
+      "EntryType": "Event",
+      "Id": "B1-178",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1637 seconds; POST Code: 0xd0",
+      "MessageArgs": [
+        "1",
+        "14.1637",
+        "0xd0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-179",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.563234+00:00",
+      "EntryType": "Event",
+      "Id": "B1-179",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1639 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "14.1639",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-180",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.563366+00:00",
+      "EntryType": "Event",
+      "Id": "B1-180",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1640 seconds; POST Code: 0xd0",
+      "MessageArgs": [
+        "1",
+        "14.1640",
+        "0xd0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-181",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.565409+00:00",
+      "EntryType": "Event",
+      "Id": "B1-181",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1660 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "14.1660",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-182",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.565563+00:00",
+      "EntryType": "Event",
+      "Id": "B1-182",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1662 seconds; POST Code: 0xd1",
+      "MessageArgs": [
+        "1",
+        "14.1662",
+        "0xd1"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-183",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.565679+00:00",
+      "EntryType": "Event",
+      "Id": "B1-183",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1663 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "14.1663",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-184",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.565900+00:00",
+      "EntryType": "Event",
+      "Id": "B1-184",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1665 seconds; POST Code: 0xd1",
+      "MessageArgs": [
+        "1",
+        "14.1665",
+        "0xd1"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-185",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.566033+00:00",
+      "EntryType": "Event",
+      "Id": "B1-185",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1667 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "14.1667",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-186",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.566148+00:00",
+      "EntryType": "Event",
+      "Id": "B1-186",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1668 seconds; POST Code: 0x70",
+      "MessageArgs": [
+        "1",
+        "14.1668",
+        "0x70"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-187",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.566260+00:00",
+      "EntryType": "Event",
+      "Id": "B1-187",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1669 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "14.1669",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-188",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.566368+00:00",
+      "EntryType": "Event",
+      "Id": "B1-188",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1670 seconds; POST Code: 0xb7",
+      "MessageArgs": [
+        "1",
+        "14.1670",
+        "0xb7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-189",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.566473+00:00",
+      "EntryType": "Event",
+      "Id": "B1-189",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1671 seconds; POST Code: 0xca",
+      "MessageArgs": [
+        "1",
+        "14.1671",
+        "0xca"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-190",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.566581+00:00",
+      "EntryType": "Event",
+      "Id": "B1-190",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1672 seconds; POST Code: 0xca",
+      "MessageArgs": [
+        "1",
+        "14.1672",
+        "0xca"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-191",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.566686+00:00",
+      "EntryType": "Event",
+      "Id": "B1-191",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1673 seconds; POST Code: 0xdc",
+      "MessageArgs": [
+        "1",
+        "14.1673",
+        "0xdc"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-192",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.566790+00:00",
+      "EntryType": "Event",
+      "Id": "B1-192",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1674 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "14.1674",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-193",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.566950+00:00",
+      "EntryType": "Event",
+      "Id": "B1-193",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1676 seconds; POST Code: 0xcc",
+      "MessageArgs": [
+        "1",
+        "14.1676",
+        "0xcc"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-194",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.567111+00:00",
+      "EntryType": "Event",
+      "Id": "B1-194",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1677 seconds; POST Code: 0xbc",
+      "MessageArgs": [
+        "1",
+        "14.1677",
+        "0xbc"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-195",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.567276+00:00",
+      "EntryType": "Event",
+      "Id": "B1-195",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1679 seconds; POST Code: 0xbc",
+      "MessageArgs": [
+        "1",
+        "14.1679",
+        "0xbc"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-196",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.567411+00:00",
+      "EntryType": "Event",
+      "Id": "B1-196",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1680 seconds; POST Code: 0xbc",
+      "MessageArgs": [
+        "1",
+        "14.1680",
+        "0xbc"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-197",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.567598+00:00",
+      "EntryType": "Event",
+      "Id": "B1-197",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1682 seconds; POST Code: 0xbc",
+      "MessageArgs": [
+        "1",
+        "14.1682",
+        "0xbc"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-198",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.567770+00:00",
+      "EntryType": "Event",
+      "Id": "B1-198",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1684 seconds; POST Code: 0xbc",
+      "MessageArgs": [
+        "1",
+        "14.1684",
+        "0xbc"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-199",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.567935+00:00",
+      "EntryType": "Event",
+      "Id": "B1-199",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1686 seconds; POST Code: 0xce",
+      "MessageArgs": [
+        "1",
+        "14.1686",
+        "0xce"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-200",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.568075+00:00",
+      "EntryType": "Event",
+      "Id": "B1-200",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1687 seconds; POST Code: 0xc6",
+      "MessageArgs": [
+        "1",
+        "14.1687",
+        "0xc6"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-201",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.568198+00:00",
+      "EntryType": "Event",
+      "Id": "B1-201",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1688 seconds; POST Code: 0x7e",
+      "MessageArgs": [
+        "1",
+        "14.1688",
+        "0x7e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-202",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.568311+00:00",
+      "EntryType": "Event",
+      "Id": "B1-202",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1689 seconds; POST Code: 0xbf",
+      "MessageArgs": [
+        "1",
+        "14.1689",
+        "0xbf"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-203",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.568422+00:00",
+      "EntryType": "Event",
+      "Id": "B1-203",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1691 seconds; POST Code: 0xaf",
+      "MessageArgs": [
+        "1",
+        "14.1691",
+        "0xaf"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-204",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.568527+00:00",
+      "EntryType": "Event",
+      "Id": "B1-204",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1692 seconds; POST Code: 0xaf",
+      "MessageArgs": [
+        "1",
+        "14.1692",
+        "0xaf"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-205",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.568634+00:00",
+      "EntryType": "Event",
+      "Id": "B1-205",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1693 seconds; POST Code: 0xaf",
+      "MessageArgs": [
+        "1",
+        "14.1693",
+        "0xaf"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-206",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.577597+00:00",
+      "EntryType": "Event",
+      "Id": "B1-206",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1782 seconds; POST Code: 0xaf",
+      "MessageArgs": [
+        "1",
+        "14.1782",
+        "0xaf"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-207",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.577820+00:00",
+      "EntryType": "Event",
+      "Id": "B1-207",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1785 seconds; POST Code: 0xe7",
+      "MessageArgs": [
+        "1",
+        "14.1785",
+        "0xe7"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-208",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.578671+00:00",
+      "EntryType": "Event",
+      "Id": "B1-208",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1793 seconds; POST Code: 0xe9",
+      "MessageArgs": [
+        "1",
+        "14.1793",
+        "0xe9"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-209",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.578851+00:00",
+      "EntryType": "Event",
+      "Id": "B1-209",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1795 seconds; POST Code: 0xeb",
+      "MessageArgs": [
+        "1",
+        "14.1795",
+        "0xeb"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-210",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.578997+00:00",
+      "EntryType": "Event",
+      "Id": "B1-210",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1796 seconds; POST Code: 0xec",
+      "MessageArgs": [
+        "1",
+        "14.1796",
+        "0xec"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-211",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.579118+00:00",
+      "EntryType": "Event",
+      "Id": "B1-211",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1798 seconds; POST Code: 0xed",
+      "MessageArgs": [
+        "1",
+        "14.1798",
+        "0xed"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-212",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:37.579240+00:00",
+      "EntryType": "Event",
+      "Id": "B1-212",
+      "Message": "Boot Count: 1; Time Stamp Offset: 14.1799 seconds; POST Code: 0xee",
+      "MessageArgs": [
+        "1",
+        "14.1799",
+        "0xee"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-213",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:41.066977+00:00",
+      "EntryType": "Event",
+      "Id": "B1-213",
+      "Message": "Boot Count: 1; Time Stamp Offset: 17.6676 seconds; POST Code: 0x03",
+      "MessageArgs": [
+        "1",
+        "17.6676",
+        "0x03"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-214",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:41.068080+00:00",
+      "EntryType": "Event",
+      "Id": "B1-214",
+      "Message": "Boot Count: 1; Time Stamp Offset: 17.6687 seconds; POST Code: 0x23",
+      "MessageArgs": [
+        "1",
+        "17.6687",
+        "0x23"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-215",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:42.400935+00:00",
+      "EntryType": "Event",
+      "Id": "B1-215",
+      "Message": "Boot Count: 1; Time Stamp Offset: 19.0016 seconds; POST Code: 0x02",
+      "MessageArgs": [
+        "1",
+        "19.0016",
+        "0x02"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-216",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:42.447953+00:00",
+      "EntryType": "Event",
+      "Id": "B1-216",
+      "Message": "Boot Count: 1; Time Stamp Offset: 19.0486 seconds; POST Code: 0x22",
+      "MessageArgs": [
+        "1",
+        "19.0486",
+        "0x22"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-217",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:45.011374+00:00",
+      "EntryType": "Event",
+      "Id": "B1-217",
+      "Message": "Boot Count: 1; Time Stamp Offset: 21.6120 seconds; POST Code: 0x00",
+      "MessageArgs": [
+        "1",
+        "21.6120",
+        "0x00"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-218",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:45.011667+00:00",
+      "EntryType": "Event",
+      "Id": "B1-218",
+      "Message": "Boot Count: 1; Time Stamp Offset: 21.6123 seconds; POST Code: 0x02",
+      "MessageArgs": [
+        "1",
+        "21.6123",
+        "0x02"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-219",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:45.011877+00:00",
+      "EntryType": "Event",
+      "Id": "B1-219",
+      "Message": "Boot Count: 1; Time Stamp Offset: 21.6125 seconds; POST Code: 0x48",
+      "MessageArgs": [
+        "1",
+        "21.6125",
+        "0x48"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-220",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:45.012057+00:00",
+      "EntryType": "Event",
+      "Id": "B1-220",
+      "Message": "Boot Count: 1; Time Stamp Offset: 21.6127 seconds; POST Code: 0x0e",
+      "MessageArgs": [
+        "1",
+        "21.6127",
+        "0x0e"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-221",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:45.012187+00:00",
+      "EntryType": "Event",
+      "Id": "B1-221",
+      "Message": "Boot Count: 1; Time Stamp Offset: 21.6128 seconds; POST Code: 0x49",
+      "MessageArgs": [
+        "1",
+        "21.6128",
+        "0x49"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-222",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:45.022929+00:00",
+      "EntryType": "Event",
+      "Id": "B1-222",
+      "Message": "Boot Count: 1; Time Stamp Offset: 21.6236 seconds; POST Code: 0x4a",
+      "MessageArgs": [
+        "1",
+        "21.6236",
+        "0x4a"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-223",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:45.023093+00:00",
+      "EntryType": "Event",
+      "Id": "B1-223",
+      "Message": "Boot Count: 1; Time Stamp Offset: 21.6237 seconds; POST Code: 0x4d",
+      "MessageArgs": [
+        "1",
+        "21.6237",
+        "0x4d"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-224",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:45.023213+00:00",
+      "EntryType": "Event",
+      "Id": "B1-224",
+      "Message": "Boot Count: 1; Time Stamp Offset: 21.6239 seconds; POST Code: 0x15",
+      "MessageArgs": [
+        "1",
+        "21.6239",
+        "0x15"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-225",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:50.034867+00:00",
+      "EntryType": "Event",
+      "Id": "B1-225",
+      "Message": "Boot Count: 1; Time Stamp Offset: 26.6355 seconds; POST Code: 0x52",
+      "MessageArgs": [
+        "1",
+        "26.6355",
+        "0x52"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-226",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:50.035069+00:00",
+      "EntryType": "Event",
+      "Id": "B1-226",
+      "Message": "Boot Count: 1; Time Stamp Offset: 26.6357 seconds; POST Code: 0x02",
+      "MessageArgs": [
+        "1",
+        "26.6357",
+        "0x02"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-227",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:50.041757+00:00",
+      "EntryType": "Event",
+      "Id": "B1-227",
+      "Message": "Boot Count: 1; Time Stamp Offset: 26.6424 seconds; POST Code: 0x22",
+      "MessageArgs": [
+        "1",
+        "26.6424",
+        "0x22"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-228",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.387117+00:00",
+      "EntryType": "Event",
+      "Id": "B1-228",
+      "Message": "Boot Count: 1; Time Stamp Offset: 30.9878 seconds; POST Code: 0x50",
+      "MessageArgs": [
+        "1",
+        "30.9878",
+        "0x50"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-229",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.469469+00:00",
+      "EntryType": "Event",
+      "Id": "B1-229",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.0701 seconds; POST Code: 0x00",
+      "MessageArgs": [
+        "1",
+        "31.0701",
+        "0x00"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-230",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.631823+00:00",
+      "EntryType": "Event",
+      "Id": "B1-230",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.2325 seconds; POST Code: 0x04",
+      "MessageArgs": [
+        "1",
+        "31.2325",
+        "0x04"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-231",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.633626+00:00",
+      "EntryType": "Event",
+      "Id": "B1-231",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.2343 seconds; POST Code: 0x06",
+      "MessageArgs": [
+        "1",
+        "31.2343",
+        "0x06"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-232",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.635161+00:00",
+      "EntryType": "Event",
+      "Id": "B1-232",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.2358 seconds; POST Code: 0x0b",
+      "MessageArgs": [
+        "1",
+        "31.2358",
+        "0x0b"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-233",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.635308+00:00",
+      "EntryType": "Event",
+      "Id": "B1-233",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.2359 seconds; POST Code: 0x0c",
+      "MessageArgs": [
+        "1",
+        "31.2359",
+        "0x0c"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-234",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.635422+00:00",
+      "EntryType": "Event",
+      "Id": "B1-234",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.2361 seconds; POST Code: 0x0d",
+      "MessageArgs": [
+        "1",
+        "31.2361",
+        "0x0d"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-235",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.635530+00:00",
+      "EntryType": "Event",
+      "Id": "B1-235",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.2362 seconds; POST Code: 0x15",
+      "MessageArgs": [
+        "1",
+        "31.2362",
+        "0x15"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-236",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.636768+00:00",
+      "EntryType": "Event",
+      "Id": "B1-236",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.2374 seconds; POST Code: 0x7f",
+      "MessageArgs": [
+        "1",
+        "31.2374",
+        "0x7f"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-237",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.636960+00:00",
+      "EntryType": "Event",
+      "Id": "B1-237",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.2376 seconds; POST Code: 0x00",
+      "MessageArgs": [
+        "1",
+        "31.2376",
+        "0x00"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-238",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.637117+00:00",
+      "EntryType": "Event",
+      "Id": "B1-238",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.2378 seconds; POST Code: 0x7f",
+      "MessageArgs": [
+        "1",
+        "31.2378",
+        "0x7f"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-239",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.637272+00:00",
+      "EntryType": "Event",
+      "Id": "B1-239",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.2379 seconds; POST Code: 0x40",
+      "MessageArgs": [
+        "1",
+        "31.2379",
+        "0x40"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-240",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.637406+00:00",
+      "EntryType": "Event",
+      "Id": "B1-240",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.2380 seconds; POST Code: 0x41",
+      "MessageArgs": [
+        "1",
+        "31.2380",
+        "0x41"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-241",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.637524+00:00",
+      "EntryType": "Event",
+      "Id": "B1-241",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.2382 seconds; POST Code: 0x42",
+      "MessageArgs": [
+        "1",
+        "31.2382",
+        "0x42"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-242",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.640740+00:00",
+      "EntryType": "Event",
+      "Id": "B1-242",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.2414 seconds; POST Code: 0x47",
+      "MessageArgs": [
+        "1",
+        "31.2414",
+        "0x47"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-243",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.668157+00:00",
+      "EntryType": "Event",
+      "Id": "B1-243",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.2688 seconds; POST Code: 0x4f",
+      "MessageArgs": [
+        "1",
+        "31.2688",
+        "0x4f"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-244",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.993240+00:00",
+      "EntryType": "Event",
+      "Id": "B1-244",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.5939 seconds; POST Code: 0x33",
+      "MessageArgs": [
+        "1",
+        "31.5939",
+        "0x33"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-245",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:54.997065+00:00",
+      "EntryType": "Event",
+      "Id": "B1-245",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.5977 seconds; POST Code: 0x60",
+      "MessageArgs": [
+        "1",
+        "31.5977",
+        "0x60"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-246",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:55.037648+00:00",
+      "EntryType": "Event",
+      "Id": "B1-246",
+      "Message": "Boot Count: 1; Time Stamp Offset: 31.6383 seconds; POST Code: 0x61",
+      "MessageArgs": [
+        "1",
+        "31.6383",
+        "0x61"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-247",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:57.278337+00:00",
+      "EntryType": "Event",
+      "Id": "B1-247",
+      "Message": "Boot Count: 1; Time Stamp Offset: 33.8790 seconds; POST Code: 0x68",
+      "MessageArgs": [
+        "1",
+        "33.8790",
+        "0x68"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-248",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:57.342168+00:00",
+      "EntryType": "Event",
+      "Id": "B1-248",
+      "Message": "Boot Count: 1; Time Stamp Offset: 33.9428 seconds; POST Code: 0x70",
+      "MessageArgs": [
+        "1",
+        "33.9428",
+        "0x70"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-249",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.094424+00:00",
+      "EntryType": "Event",
+      "Id": "B1-249",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.6951 seconds; POST Code: 0x90",
+      "MessageArgs": [
+        "1",
+        "34.6951",
+        "0x90"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-250",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.099155+00:00",
+      "EntryType": "Event",
+      "Id": "B1-250",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.6998 seconds; POST Code: 0x91",
+      "MessageArgs": [
+        "1",
+        "34.6998",
+        "0x91"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-251",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.104373+00:00",
+      "EntryType": "Event",
+      "Id": "B1-251",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7050 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.7050",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-252",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.118621+00:00",
+      "EntryType": "Event",
+      "Id": "B1-252",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7193 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7193",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-253",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.123499+00:00",
+      "EntryType": "Event",
+      "Id": "B1-253",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7241 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7241",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-254",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.128430+00:00",
+      "EntryType": "Event",
+      "Id": "B1-254",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7291 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7291",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-255",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.133411+00:00",
+      "EntryType": "Event",
+      "Id": "B1-255",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7340 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7340",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-256",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.138362+00:00",
+      "EntryType": "Event",
+      "Id": "B1-256",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7390 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7390",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-257",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.144296+00:00",
+      "EntryType": "Event",
+      "Id": "B1-257",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7449 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7449",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-258",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.149057+00:00",
+      "EntryType": "Event",
+      "Id": "B1-258",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7497 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7497",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-259",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.154298+00:00",
+      "EntryType": "Event",
+      "Id": "B1-259",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7549 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7549",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-260",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.159325+00:00",
+      "EntryType": "Event",
+      "Id": "B1-260",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7600 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7600",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-261",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.164071+00:00",
+      "EntryType": "Event",
+      "Id": "B1-261",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7647 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7647",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-262",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.168950+00:00",
+      "EntryType": "Event",
+      "Id": "B1-262",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7696 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7696",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-263",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.173710+00:00",
+      "EntryType": "Event",
+      "Id": "B1-263",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7743 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7743",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-264",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.178678+00:00",
+      "EntryType": "Event",
+      "Id": "B1-264",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7793 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7793",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-265",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.183555+00:00",
+      "EntryType": "Event",
+      "Id": "B1-265",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7842 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7842",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-266",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.188465+00:00",
+      "EntryType": "Event",
+      "Id": "B1-266",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7891 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7891",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-267",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.193608+00:00",
+      "EntryType": "Event",
+      "Id": "B1-267",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7942 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7942",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-268",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.198558+00:00",
+      "EntryType": "Event",
+      "Id": "B1-268",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.7992 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.7992",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-269",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.203384+00:00",
+      "EntryType": "Event",
+      "Id": "B1-269",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8040 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.8040",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-270",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.208329+00:00",
+      "EntryType": "Event",
+      "Id": "B1-270",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8090 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.8090",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-271",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.213335+00:00",
+      "EntryType": "Event",
+      "Id": "B1-271",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8140 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.8140",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-272",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.218287+00:00",
+      "EntryType": "Event",
+      "Id": "B1-272",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8189 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.8189",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-273",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.223174+00:00",
+      "EntryType": "Event",
+      "Id": "B1-273",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8238 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.8238",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-274",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.228177+00:00",
+      "EntryType": "Event",
+      "Id": "B1-274",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8288 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.8288",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-275",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.233035+00:00",
+      "EntryType": "Event",
+      "Id": "B1-275",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8337 seconds; POST Code: 0x94",
+      "MessageArgs": [
+        "1",
+        "34.8337",
+        "0x94"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-276",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.240568+00:00",
+      "EntryType": "Event",
+      "Id": "B1-276",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8412 seconds; POST Code: 0x95",
+      "MessageArgs": [
+        "1",
+        "34.8412",
+        "0x95"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-277",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.249286+00:00",
+      "EntryType": "Event",
+      "Id": "B1-277",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8499 seconds; POST Code: 0x96",
+      "MessageArgs": [
+        "1",
+        "34.8499",
+        "0x96"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-278",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.249806+00:00",
+      "EntryType": "Event",
+      "Id": "B1-278",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8504 seconds; POST Code: 0xef",
+      "MessageArgs": [
+        "1",
+        "34.8504",
+        "0xef"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-279",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.272580+00:00",
+      "EntryType": "Event",
+      "Id": "B1-279",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8732 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.8732",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-280",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.277792+00:00",
+      "EntryType": "Event",
+      "Id": "B1-280",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8784 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.8784",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-281",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.282966+00:00",
+      "EntryType": "Event",
+      "Id": "B1-281",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8836 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.8836",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-282",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.288354+00:00",
+      "EntryType": "Event",
+      "Id": "B1-282",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8890 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.8890",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-283",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.293648+00:00",
+      "EntryType": "Event",
+      "Id": "B1-283",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8943 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.8943",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-284",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.298790+00:00",
+      "EntryType": "Event",
+      "Id": "B1-284",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.8994 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.8994",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-285",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.304006+00:00",
+      "EntryType": "Event",
+      "Id": "B1-285",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.9046 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.9046",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-286",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.309292+00:00",
+      "EntryType": "Event",
+      "Id": "B1-286",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.9099 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.9099",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-287",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.314624+00:00",
+      "EntryType": "Event",
+      "Id": "B1-287",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.9153 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.9153",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-288",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.319846+00:00",
+      "EntryType": "Event",
+      "Id": "B1-288",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.9205 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.9205",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-289",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.325013+00:00",
+      "EntryType": "Event",
+      "Id": "B1-289",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.9257 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.9257",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-290",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.330326+00:00",
+      "EntryType": "Event",
+      "Id": "B1-290",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.9310 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.9310",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-291",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.335543+00:00",
+      "EntryType": "Event",
+      "Id": "B1-291",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.9362 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.9362",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-292",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.340899+00:00",
+      "EntryType": "Event",
+      "Id": "B1-292",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.9415 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.9415",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-293",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.346221+00:00",
+      "EntryType": "Event",
+      "Id": "B1-293",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.9469 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.9469",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-294",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.351335+00:00",
+      "EntryType": "Event",
+      "Id": "B1-294",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.9520 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.9520",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-295",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.358552+00:00",
+      "EntryType": "Event",
+      "Id": "B1-295",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.9592 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.9592",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-296",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.362034+00:00",
+      "EntryType": "Event",
+      "Id": "B1-296",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.9627 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.9627",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-297",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.367203+00:00",
+      "EntryType": "Event",
+      "Id": "B1-297",
+      "Message": "Boot Count: 1; Time Stamp Offset: 34.9678 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "34.9678",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-298",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.506384+00:00",
+      "EntryType": "Event",
+      "Id": "B1-298",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.1070 seconds; POST Code: 0x99",
+      "MessageArgs": [
+        "1",
+        "35.1070",
+        "0x99"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-299",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:58.519037+00:00",
+      "EntryType": "Event",
+      "Id": "B1-299",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.1197 seconds; POST Code: 0x91",
+      "MessageArgs": [
+        "1",
+        "35.1197",
+        "0x91"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-300",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.184103+00:00",
+      "EntryType": "Event",
+      "Id": "B1-300",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.7847 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.7847",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-301",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.188950+00:00",
+      "EntryType": "Event",
+      "Id": "B1-301",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.7896 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.7896",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-302",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.192733+00:00",
+      "EntryType": "Event",
+      "Id": "B1-302",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.7934 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.7934",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-303",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.198188+00:00",
+      "EntryType": "Event",
+      "Id": "B1-303",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.7988 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.7988",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-304",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.203168+00:00",
+      "EntryType": "Event",
+      "Id": "B1-304",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8038 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8038",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-305",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.208370+00:00",
+      "EntryType": "Event",
+      "Id": "B1-305",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8090 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8090",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-306",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.213733+00:00",
+      "EntryType": "Event",
+      "Id": "B1-306",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8144 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8144",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-307",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.218997+00:00",
+      "EntryType": "Event",
+      "Id": "B1-307",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8196 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8196",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-308",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.224177+00:00",
+      "EntryType": "Event",
+      "Id": "B1-308",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8248 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8248",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-309",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.229567+00:00",
+      "EntryType": "Event",
+      "Id": "B1-309",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8302 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8302",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-310",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.234780+00:00",
+      "EntryType": "Event",
+      "Id": "B1-310",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8354 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8354",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-311",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.240146+00:00",
+      "EntryType": "Event",
+      "Id": "B1-311",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8408 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8408",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-312",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.245305+00:00",
+      "EntryType": "Event",
+      "Id": "B1-312",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8459 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8459",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-313",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.250624+00:00",
+      "EntryType": "Event",
+      "Id": "B1-313",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8513 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8513",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-314",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.255911+00:00",
+      "EntryType": "Event",
+      "Id": "B1-314",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8565 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8565",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-315",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.261270+00:00",
+      "EntryType": "Event",
+      "Id": "B1-315",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8619 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8619",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-316",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.266580+00:00",
+      "EntryType": "Event",
+      "Id": "B1-316",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8672 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8672",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-317",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.271659+00:00",
+      "EntryType": "Event",
+      "Id": "B1-317",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8723 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8723",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-318",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.276938+00:00",
+      "EntryType": "Event",
+      "Id": "B1-318",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8776 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8776",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-319",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.282182+00:00",
+      "EntryType": "Event",
+      "Id": "B1-319",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8828 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "35.8828",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-320",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:38:59.288262+00:00",
+      "EntryType": "Event",
+      "Id": "B1-320",
+      "Message": "Boot Count: 1; Time Stamp Offset: 35.8889 seconds; POST Code: 0x97",
+      "MessageArgs": [
+        "1",
+        "35.8889",
+        "0x97"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-321",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:01.989160+00:00",
+      "EntryType": "Event",
+      "Id": "B1-321",
+      "Message": "Boot Count: 1; Time Stamp Offset: 38.5898 seconds; POST Code: 0x98",
+      "MessageArgs": [
+        "1",
+        "38.5898",
+        "0x98"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-322",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:01.994172+00:00",
+      "EntryType": "Event",
+      "Id": "B1-322",
+      "Message": "Boot Count: 1; Time Stamp Offset: 38.5948 seconds; POST Code: 0x9d",
+      "MessageArgs": [
+        "1",
+        "38.5948",
+        "0x9d"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-323",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:01.999132+00:00",
+      "EntryType": "Event",
+      "Id": "B1-323",
+      "Message": "Boot Count: 1; Time Stamp Offset: 38.5998 seconds; POST Code: 0x9a",
+      "MessageArgs": [
+        "1",
+        "38.5998",
+        "0x9a"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-324",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:02.003235+00:00",
+      "EntryType": "Event",
+      "Id": "B1-324",
+      "Message": "Boot Count: 1; Time Stamp Offset: 38.6039 seconds; POST Code: 0x9c",
+      "MessageArgs": [
+        "1",
+        "38.6039",
+        "0x9c"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-325",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:02.555870+00:00",
+      "EntryType": "Event",
+      "Id": "B1-325",
+      "Message": "Boot Count: 1; Time Stamp Offset: 39.1565 seconds; POST Code: 0xb4",
+      "MessageArgs": [
+        "1",
+        "39.1565",
+        "0xb4"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-326",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:02.563209+00:00",
+      "EntryType": "Event",
+      "Id": "B1-326",
+      "Message": "Boot Count: 1; Time Stamp Offset: 39.1638 seconds; POST Code: 0xb4",
+      "MessageArgs": [
+        "1",
+        "39.1638",
+        "0xb4"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-327",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:02.568018+00:00",
+      "EntryType": "Event",
+      "Id": "B1-327",
+      "Message": "Boot Count: 1; Time Stamp Offset: 39.1687 seconds; POST Code: 0xb4",
+      "MessageArgs": [
+        "1",
+        "39.1687",
+        "0xb4"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-328",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:02.572339+00:00",
+      "EntryType": "Event",
+      "Id": "B1-328",
+      "Message": "Boot Count: 1; Time Stamp Offset: 39.1730 seconds; POST Code: 0xb4",
+      "MessageArgs": [
+        "1",
+        "39.1730",
+        "0xb4"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-329",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.406898+00:00",
+      "EntryType": "Event",
+      "Id": "B1-329",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.0075 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.0075",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-330",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.408582+00:00",
+      "EntryType": "Event",
+      "Id": "B1-330",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.0092 seconds; POST Code: 0xa0",
+      "MessageArgs": [
+        "1",
+        "41.0092",
+        "0xa0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-331",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.425656+00:00",
+      "EntryType": "Event",
+      "Id": "B1-331",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.0263 seconds; POST Code: 0xa0",
+      "MessageArgs": [
+        "1",
+        "41.0263",
+        "0xa0"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-332",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.425991+00:00",
+      "EntryType": "Event",
+      "Id": "B1-332",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.0266 seconds; POST Code: 0xa2",
+      "MessageArgs": [
+        "1",
+        "41.0266",
+        "0xa2"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-333",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.440227+00:00",
+      "EntryType": "Event",
+      "Id": "B1-333",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.0409 seconds; POST Code: 0xa2",
+      "MessageArgs": [
+        "1",
+        "41.0409",
+        "0xa2"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-334",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.458540+00:00",
+      "EntryType": "Event",
+      "Id": "B1-334",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.0592 seconds; POST Code: 0xa2",
+      "MessageArgs": [
+        "1",
+        "41.0592",
+        "0xa2"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-335",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.473084+00:00",
+      "EntryType": "Event",
+      "Id": "B1-335",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.0737 seconds; POST Code: 0xa2",
+      "MessageArgs": [
+        "1",
+        "41.0737",
+        "0xa2"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-336",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.489646+00:00",
+      "EntryType": "Event",
+      "Id": "B1-336",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.0903 seconds; POST Code: 0xa2",
+      "MessageArgs": [
+        "1",
+        "41.0903",
+        "0xa2"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-337",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.506230+00:00",
+      "EntryType": "Event",
+      "Id": "B1-337",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.1069 seconds; POST Code: 0xa2",
+      "MessageArgs": [
+        "1",
+        "41.1069",
+        "0xa2"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-338",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.537785+00:00",
+      "EntryType": "Event",
+      "Id": "B1-338",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.1384 seconds; POST Code: 0xa2",
+      "MessageArgs": [
+        "1",
+        "41.1384",
+        "0xa2"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-339",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.543467+00:00",
+      "EntryType": "Event",
+      "Id": "B1-339",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.1441 seconds; POST Code: 0xa2",
+      "MessageArgs": [
+        "1",
+        "41.1441",
+        "0xa2"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-340",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.556828+00:00",
+      "EntryType": "Event",
+      "Id": "B1-340",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.1575 seconds; POST Code: 0x99",
+      "MessageArgs": [
+        "1",
+        "41.1575",
+        "0x99"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-341",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.610975+00:00",
+      "EntryType": "Event",
+      "Id": "B1-341",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2116 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2116",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-342",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.611599+00:00",
+      "EntryType": "Event",
+      "Id": "B1-342",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2122 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2122",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-343",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.612206+00:00",
+      "EntryType": "Event",
+      "Id": "B1-343",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2128 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2128",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-344",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.612841+00:00",
+      "EntryType": "Event",
+      "Id": "B1-344",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2135 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2135",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-345",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.613746+00:00",
+      "EntryType": "Event",
+      "Id": "B1-345",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2144 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2144",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-346",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.614524+00:00",
+      "EntryType": "Event",
+      "Id": "B1-346",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2152 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2152",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-347",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.615120+00:00",
+      "EntryType": "Event",
+      "Id": "B1-347",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2158 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2158",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-348",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.616701+00:00",
+      "EntryType": "Event",
+      "Id": "B1-348",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2173 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2173",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-349",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.616953+00:00",
+      "EntryType": "Event",
+      "Id": "B1-349",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2176 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2176",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-350",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.617928+00:00",
+      "EntryType": "Event",
+      "Id": "B1-350",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2186 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2186",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-351",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.618134+00:00",
+      "EntryType": "Event",
+      "Id": "B1-351",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2188 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2188",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-352",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.619223+00:00",
+      "EntryType": "Event",
+      "Id": "B1-352",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2199 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2199",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-353",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.619402+00:00",
+      "EntryType": "Event",
+      "Id": "B1-353",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2200 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2200",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-354",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.619832+00:00",
+      "EntryType": "Event",
+      "Id": "B1-354",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2205 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2205",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-355",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.620493+00:00",
+      "EntryType": "Event",
+      "Id": "B1-355",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2211 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2211",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-356",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.621261+00:00",
+      "EntryType": "Event",
+      "Id": "B1-356",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2219 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2219",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-357",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.622374+00:00",
+      "EntryType": "Event",
+      "Id": "B1-357",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2230 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2230",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-358",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.623045+00:00",
+      "EntryType": "Event",
+      "Id": "B1-358",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2237 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2237",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
+    },
+    {
+      "@odata.id": "/redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-359",
+      "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+      "Created": "2024-03-11T13:39:04.623835+00:00",
+      "EntryType": "Event",
+      "Id": "B1-359",
+      "Message": "Boot Count: 1; Time Stamp Offset: 41.2245 seconds; POST Code: 0x92",
+      "MessageArgs": [
+        "1",
+        "41.2245",
+        "0x92"
+      ],
+      "MessageId": "OpenBMC.0.2.BIOSPOSTCode",
+      "Name": "POST Code Log Entry",
+      "Severity": "OK"
     }
   ],
-  "Members@odata.count": 7,
-  "Name": "System Event Log Entries"
+  "Members@odata.count": 359,
+  "Name": "BIOS POST Code Log Entries"
 }

@@ -1,0 +1,58 @@
+{
+  "@odata.id": "/redfish/v1/Chassis/Cpld",
+  "@odata.type": "#Chassis.v1_22_0.Chassis",
+  "Actions": {
+    "#Chassis.Reset": {
+      "@Redfish.ActionInfo": "/redfish/v1/Chassis/Cpld/ResetActionInfo",
+      "target": "/redfish/v1/Chassis/Cpld/Actions/Chassis.Reset"
+    }
+  },
+  "ChassisType": "RackMount",
+  "EnvironmentMetrics": {
+    "@odata.id": "/redfish/v1/Chassis/Cpld/EnvironmentMetrics"
+  },
+  "Id": "Cpld",
+  "Links": {
+    "ComputerSystems": [
+      {
+        "@odata.id": "/redfish/v1/Systems/system"
+      }
+    ],
+    "ManagedBy": [
+      {
+        "@odata.id": "/redfish/v1/Managers/bmc"
+      }
+    ]
+  },
+  "Name": "Cpld",
+  "NetworkAdapters": {
+    "@odata.id": "/redfish/v1/Chassis/Cpld/NetworkAdapters"
+  },
+  "Oem": {
+    "AMI": {
+      "@odata.id": "/redfish/v1/Chassis/Cpld#/Oem/AMI",
+      "@odata.type": "OemAMIChassis.v1_0_0.OemAMIChassis",
+      "FRU": {
+        "@odata.id": "/redfish/v1/Chassis/Cpld/FRU"
+      }
+    }
+  },
+  "PCIeDevices": {
+    "@odata.id": "/redfish/v1/Systems/system/PCIeDevices"
+  },
+  "PowerState": "On",
+  "PowerSubsystem": {
+    "@odata.id": "/redfish/v1/Chassis/Cpld/PowerSubsystem"
+  },
+  "Sensors": {
+    "@odata.id": "/redfish/v1/Chassis/Cpld/Sensors"
+  },
+  "Status": {
+    "Health": "OK",
+    "HealthRollup": "OK",
+    "State": "Enabled"
+  },
+  "ThermalSubsystem": {
+    "@odata.id": "/redfish/v1/Chassis/Cpld/ThermalSubsystem"
+  }
+}

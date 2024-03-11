@@ -1,8 +1,21 @@
 {
-  "@odata.id": "/redfish/v1/Chassis/Cpld0/Sensors",
+  "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Sensors",
   "@odata.type": "#SensorCollection.SensorCollection",
   "Description": "Collection of Sensors for this Chassis",
-  "Members": [],
-  "Members@odata.count": 0,
+  "Members": [
+    {
+      "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Sensors/acpisystem_ACPI_System_Status"
+    },
+    {
+      "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Sensors/airflow_System_Airflow"
+    },
+    {
+      "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Sensors/cpu_Status_cpu0"
+    },
+    {
+      "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Sensors/cpu_Status_cpu1"
+    }
+  ],
+  "Members@odata.count": 64,
   "Name": "Sensors"
 }

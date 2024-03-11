@@ -1,0 +1,31 @@
+{
+    "@odata.id": "/redfish/v1/Oem/Ami/AutonomousCrashDump",
+    "@odata.type": "#AMIAutonomousCrashDump.v1_0_0.AMIAutonomousCrashDump",
+    "CrashDumpLog": {
+      "DataArea": {
+        "Bigcore": true,
+        "Crashlog": true,
+        "MCA": true,
+        "TOR": true,
+        "Uncore": true
+      }
+    },
+    "Description": "Resource showing AutonomousCrashDump data",
+    "DumpFiles": [
+      {
+        "Created": "2024-01-09T05:47:18+0000",
+        "FilePath": "/redfish/v1/Oem/Ami/AutonomousCrashDump/DumpFiles/crashdump.json"
+      },
+      {
+        "Created": "2024-01-09T03:47:10+0000",
+        "FilePath": "/redfish/v1/Oem/Ami/AutonomousCrashDump/DumpFiles/sysdebug1.json"
+      },
+      {
+        "Created": "2024-01-09T03:47:10+0000",
+        "FilePath": "/redfish/v1/Oem/Ami/AutonomousCrashDump/DumpFiles/bafi_decoded1.json"
+      }
+    ],
+    "Enabled": true,
+    "Id": "AutonomousCrashDump",
+    "Name": "AutonomousCrashDump"
+  }

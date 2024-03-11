@@ -24,7 +24,7 @@ const DumpsStore = {
   actions: {
     async getBmcDumpEntries() {
       return api
-        .get('/redfish/v1/')
+        .get('/redfish/v1')
         .then((response) => api.get(response.data.Managers['@odata.id']))
         .then((response) => api.get(`${response.data['@odata.id']}/bmc`))
         .then((response) => api.get(response.data.LogServices['@odata.id']))
@@ -34,7 +34,7 @@ const DumpsStore = {
     },
     async getSystemDumpEntries() {
       return api
-        .get('/redfish/v1/')
+        .get('/redfish/v1')
         .then((response) => api.get(response.data.Systems['@odata.id']))
         .then((response) => api.get(`${response.data['@odata.id']}/system`))
         .then((response) => api.get(response.data.LogServices['@odata.id']))

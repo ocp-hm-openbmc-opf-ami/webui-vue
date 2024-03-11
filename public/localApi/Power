@@ -1,19 +1,150 @@
 {
-  "@odata.id": "/redfish/v1/Chassis/Cpld0/Power",
+  "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Power",
   "@odata.type": "#Power.v1_5_2.Power",
   "Id": "Power",
   "Name": "Power",
   "PowerControl": [
     {
-      "@odata.id": "/redfish/v1/Chassis/Cpld0/Power#/PowerControl/0",
-      "@odata.type": "#Power.v1_0_0.PowerControl",
+      "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Power/PowerControl/0",
+      "@odata.type": "#Power.v1_1_0.PowerControl",
       "MemberId": "0",
-      "Name": "Chassis Power Control",
+      "Name": "System Power Control",
+      "Oem": {
+        "OpenBmc": {
+          "@odata.type": "#OemPower.PowerControl",
+          "PowerLimitStorage": "Volatile"
+        }
+      },
+      "PowerAllocatedWatts": 0,
+      "PowerCapacityWatts": 1600.0,
+      "PowerConsumedWatts": 236.75328866383515,
       "PowerLimit": {
-        "LimitException": "NoAction",
+        "CorrectionInMs": null,
+        "LimitException": null,
         "LimitInWatts": null
+      },
+      "PowerMetrics": {
+        "AverageConsumedWatts": 237.54698299910152,
+        "IntervalInMin": 1,
+        "MaxConsumedWatts": 265.5,
+        "MinConsumedWatts": 231.0
+      },
+      "PowerRequestedWatts": 0,
+      "RelatedItem": [
+        {
+          "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Power/PowerControl/Accelerators"
+        },
+        {
+          "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Power/PowerControl/Processors"
+        },
+        {
+          "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Power/PowerControl/Memories"
+        }
+      ],
+      "RelatedItem@odata.count": 3,
+      "Status": {
+        "Health": "OK",
+        "State": "Disabled"
+      }
+    },
+    {
+      "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Power/PowerControl/Accelerators",
+      "@odata.type": "#Power.v1_1_0.PowerControl",
+      "MemberId": "Accelerators",
+      "Name": "Accelerators Power Control",
+      "Oem": {
+        "OpenBmc": {
+          "@odata.type": "#OemPower.PowerControl",
+          "PowerLimitStorage": "Volatile"
+        }
+      },
+      "PowerAllocatedWatts": 0,
+      "PowerCapacityWatts": 32767.0,
+      "PowerConsumedWatts": null,
+      "PowerLimit": {
+        "CorrectionInMs": null,
+        "LimitException": null,
+        "LimitInWatts": null
+      },
+      "PowerMetrics": {
+        "AverageConsumedWatts": null,
+        "IntervalInMin": 0,
+        "MaxConsumedWatts": null,
+        "MinConsumedWatts": null
+      },
+      "PowerRequestedWatts": 0,
+      "RelatedItem": [],
+      "RelatedItem@odata.count": 0,
+      "Status": {
+        "Health": "OK",
+        "State": "Disabled"
+      }
+    },
+    {
+      "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Power/PowerControl/Processors",
+      "@odata.type": "#Power.v1_1_0.PowerControl",
+      "MemberId": "Processors",
+      "Name": "Processors Power Control",
+      "Oem": {
+        "OpenBmc": {
+          "@odata.type": "#OemPower.PowerControl",
+          "PowerLimitStorage": "Volatile"
+        }
+      },
+      "PowerAllocatedWatts": 0,
+      "PowerCapacityWatts": 32767.0,
+      "PowerConsumedWatts": null,
+      "PowerLimit": {
+        "CorrectionInMs": null,
+        "LimitException": null,
+        "LimitInWatts": null
+      },
+      "PowerMetrics": {
+        "AverageConsumedWatts": null,
+        "IntervalInMin": 0,
+        "MaxConsumedWatts": null,
+        "MinConsumedWatts": null
+      },
+      "PowerRequestedWatts": 0,
+      "RelatedItem": [],
+      "RelatedItem@odata.count": 0,
+      "Status": {
+        "Health": "OK",
+        "State": "Disabled"
+      }
+    },
+    {
+      "@odata.id": "/redfish/v1/Chassis/AC_Baseboard/Power/PowerControl/Memories",
+      "@odata.type": "#Power.v1_1_0.PowerControl",
+      "MemberId": "Memories",
+      "Name": "Memories Power Control",
+      "Oem": {
+        "OpenBmc": {
+          "@odata.type": "#OemPower.PowerControl",
+          "PowerLimitStorage": "Volatile"
+        }
+      },
+      "PowerAllocatedWatts": 0,
+      "PowerCapacityWatts": 32767.0,
+      "PowerConsumedWatts": null,
+      "PowerLimit": {
+        "CorrectionInMs": null,
+        "LimitException": null,
+        "LimitInWatts": null
+      },
+      "PowerMetrics": {
+        "AverageConsumedWatts": null,
+        "IntervalInMin": 0,
+        "MaxConsumedWatts": null,
+        "MinConsumedWatts": null
+      },
+      "PowerRequestedWatts": 0,
+      "RelatedItem": [],
+      "RelatedItem@odata.count": 0,
+      "Status": {
+        "Health": "OK",
+        "State": "Disabled"
       }
     }
-  ],
-  "Redundancy": []
+  ]
 }

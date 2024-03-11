@@ -2,6 +2,14 @@
   "@odata.id": "/redfish/v1/Managers/bmc",
   "@odata.type": "#Manager.v1_11_0.Manager",
   "Actions": {
+    "Oem": {
+      "#AMIManager.BackupConfig": {
+        "@Redfish.ActionInfo": {}
+      },
+      "#AMIManager.RestoreConfig": {
+        "@Redfish.ActionInfo": {}
+      }
+    },
     "#Manager.Reset": {
       "@Redfish.ActionInfo": "/redfish/v1/Managers/bmc/ResetActionInfo",
       "target": "/redfish/v1/Managers/bmc/Actions/Manager.Reset"
