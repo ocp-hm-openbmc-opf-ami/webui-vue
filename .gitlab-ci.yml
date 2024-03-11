@@ -923,7 +923,7 @@ revision_update:
               git status
               echo "===> GIT COMMIT MESSAGE"
               git add .
-              git commit -m "AUTO Updated by $CI_PROJECT_URL and COMMIT $CI_COMMIT_SHA"
+              git commit -m "AUTO Updated by $repo_name"
               git status 
               new_commit_id=( $(git rev-parse HEAD))
               if [[ $orginal_commit_id == $new_commit_id ]]; then
