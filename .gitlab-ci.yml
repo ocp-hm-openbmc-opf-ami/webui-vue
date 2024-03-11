@@ -7,7 +7,7 @@ variables:
   GIT_STRATEGY: none
   # runner_tag: aws-eks-linux-ec2-ondemand
   # runner_tag: aws-eks-linux
-  runner_tag: aws-eks-linux-ec2-test-ondemand
+  runner_tag: aws-eks-linux-ec2-ot-ondemand
   # runner_tag: aws-eks-linux-ec2-spot
   # runner_tag: aws-eks-linux-ec2-memory-intensive
   DOCKER_AUTH_CONFIG: $CI_JOB_TOKEN
@@ -927,7 +927,7 @@ revision_update:
     - $runner_tag
   only:
     variables:
-      - '("main" == $CI_COMMIT_REF_NAME || "master" == $CI_COMMIT_REF_NAME || "msg-tools-revision-sync-test" == $CI_COMMIT_REF_NAME) && $DYNCI_DEPLOY_JOB == "True"'
+      - '"main" == $CI_COMMIT_REF_NAME || "master" == $CI_COMMIT_REF_NAME || "msg-tools-revision-sync-test" == $CI_COMMIT_REF_NAME'
   except:
     - schedules
   image:
