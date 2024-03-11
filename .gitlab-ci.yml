@@ -917,6 +917,18 @@ revision_update:
               echo "==> Previewing after making change "
               cat ${filepath}
               echo "************************************************"
+              cd $sync_workspace
+              echo "===> GIT STATUS"
+              git status
+              echo "===> GIT COMMIT MESSAGE"
+              git add .
+              git commit -m "AUTO Updated by $CI_PROJECT_URL and COMMIT $CI_COMMIT_SHA"
+
+              git status 
+              git log -1
+              #git push origin $src_branch
+              
+
             fi
           else
              echo "==> Receipe Repo URL Invalid"
