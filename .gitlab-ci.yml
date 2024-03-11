@@ -922,7 +922,7 @@ revision_update:
               else
                   echo "SRCREV_FORMAT not found"
               fi
-
+              echo $srcrev_format
               if [[ $srcrev_format == "override" ]]; then
                 echo "====> Updating SRCREV OVERRIDE "
                 sed -i "s/^SRCREV_override = \".*\"/SRCREV_override = \"$CI_COMMIT_SHA\"/g" $filepath
@@ -937,9 +937,8 @@ revision_update:
               cd $sync_workspace
               echo "===> GIT STATUS"
               git status
-              echo "===> GIT COMMIT MESSAGE"
               if git diff --exit-code $filepath >/dev/null; then
-                  echo "No changes in the file"
+                  echo "=====> No changes in the file"
               else
                 git add $filepath
                 git commit -m "Auto revision update by recipe $recipe_name"
