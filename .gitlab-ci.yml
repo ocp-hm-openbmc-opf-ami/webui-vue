@@ -923,7 +923,7 @@ revision_update:
                   echo "SRCREV_FORMAT not found"
               fi
 
-              if [[ srcrev_format == "override" ]]; then
+              if [[ $srcrev_format == "override" ]]; then
                 echo "====> Updating SRCREV OVERRIDE "
                 sed -i "s/^SRCREV_override = \".*\"/SRCREV_override = \"$CI_COMMIT_SHA\"/g" $filepath
               else
@@ -938,19 +938,24 @@ revision_update:
               echo "===> GIT STATUS"
               git status
               echo "===> GIT COMMIT MESSAGE"
-              git add .
-              git commit -m "Auto revision update by recipe $recipe_name"
-              new_commit_id=( $(git rev-parse HEAD))
-              echo "==> New Commit id $new_commit_id"
-              if [[ $orginal_commit_id == $new_commit_id ]]; then
-                echo -e "Nothing to commit !! No Change dedected";
+              if git diff --exit-code $filepath >/dev/null; then
+                  echo "No changes in the file"
               else
-                echo -e "Commit Created successfully !!";
-                git log -1
-                echo "==> Previewing after making change "
-                git push origin $src_branch
-                echo "==> Changes Pushed !!"
+                git add $filepath
+                git commit -m "Auto revision update by recipe $recipe_name"
+                new_commit_id=( $(git rev-parse HEAD))
+                echo "==> New Commit id $new_commit_id"
+                if [[ $orginal_commit_id == $new_commit_id ]]; then
+                  echo -e "Nothing to commit !! No Change dedected";
+                else
+                  echo -e "Commit Created successfully !!";
+                  git log -1
+                  echo "==> Previewing after making change "
+                  git push origin $src_branch
+                  echo "==> Changes Pushed !!"
+                fi
               fi
+              
             fi
           else
              echo "==> Receipe Repo URL Invalid"
