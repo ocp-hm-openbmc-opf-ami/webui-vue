@@ -881,6 +881,7 @@ revision_update:
     - cd $repo_name
     - echo "==> sync_workspace $sync_workspace"
     - echo "==> repo_name $repo_name"
+    - echo "==> CI PROJECT URL $CI_PROJECT_URL"
     - git status
     - git config --global user.email "$GUSER@ami.com"
     - git config --global user.name "$GUSER"
@@ -905,7 +906,8 @@ revision_update:
 
           if git ls-remote -q "$git_auth_url" &>/dev/null; then
             echo "==> Receipe Repo URL Valid"
-            if [ https://$repo_url =~ $CI_PROJECT_URL ];then
+            
+            if [[ $CI_PROJECT_URL =~ https://$repo_url ]];then
               echo "==> Found a Match"
               sed -i "s/SRCREV_override = \".*\"/SRCREV_override = \"\${AUTOREV}\"/g" $filepath
               sed -i "s/SRCREV = \".*\"/SRCREV = \"\${AUTOREV}\"/g" $filepath
