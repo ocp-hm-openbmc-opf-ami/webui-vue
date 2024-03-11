@@ -894,7 +894,7 @@ revision_update:
           repo_url=$(echo $line | sed -n 's/.*git@\([^;]*\).*/\1/p; s/.*git:\/\/\([^;]*\).*/\1/p')
           git_auth_url=https://$GUSER:$GPASS@$repo_url
           
-          echo "=========================================="
+          echo "================================================"
           echo "==> Filepath $filepath"
           echo "==> Line $line"
           echo "==> REPO URL ${repo_url}"
@@ -908,21 +908,20 @@ revision_update:
             echo "==> Receipe Repo URL Valid"
             
             if [[ https://$repo_url =~ $CI_PROJECT_URL ]]; then
+              echo "************************************************"
               echo "==> Found a Match"
-              echo "=========================================="
               echo "==> Previewing before making change "
               cat ${filepath}
-              echo "=========================================="
               sed -i "s/^SRCREV = \".*\"/SRCREV = \"$CI_COMMIT_SHA\"/g" $filepath
-              echo "=========================================="
+              echo "************************************************"
               echo "==> Previewing after making change "
               cat ${filepath}
-              echo "-----------------"
+              echo "************************************************"
             fi
           else
              echo "==> Receipe Repo URL Invalid"
           fi
-          echo "=========================================="
+          echo "================================================"
         done
     - echo "Update completed"
   tags:
