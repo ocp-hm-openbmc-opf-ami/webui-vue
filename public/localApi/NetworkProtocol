@@ -21,7 +21,9 @@
   },
   "Id": "NetworkProtocol",
   "NTP": {
-    "NTPServers": [],
+    "NTPServers": [
+      "ntp1.inrim.it"
+    ],
     "ProtocolEnabled": true
   },
   "Name": "Manager Network Protocol",

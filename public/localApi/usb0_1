@@ -1,5 +1,5 @@
 {
-  "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/usb0",
+  "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/usb0_1",
   "@odata.type": "#EthernetInterface.v1_9_0.EthernetInterface",
   "DHCPv4": {
     "DHCPEnabled": true,
@@ -14,38 +14,25 @@
     "UseNTPServers": true
   },
   "Description": "Management Network Interface",
-  "EthernetInterfaceType": "Physical",
+  "EthernetInterfaceType": "Virtual",
   "FQDN": "AMIOT-8e7979881808",
   "HostName": "AMIOT-8e7979881808",
-  "IPv4Addresses": [
-    {
-      "Address": "169.254.0.17",
-      "AddressOrigin": "Static",
-      "Gateway": "0.0.0.0",
-      "SubnetMask": "255.255.0.0"
-    }
-  ],
-  "IPv4StaticAddresses": [
-    {
-      "Address": "169.254.0.17",
-      "AddressOrigin": "Static",
-      "Gateway": "0.0.0.0",
-      "SubnetMask": "255.255.0.0"
-    }
-  ],
+  "IPv4Addresses": [],
+  "IPv4StaticAddresses": [],
   "IPv6AddressPolicyTable": [],
-  "IPv6Addresses": [
-    {
-      "Address": "fe80::4883:23ff:fe4b:34c3",
-      "AddressOrigin": "LinkLocal",
-      "PrefixLength": 64
-    }
-  ],
+  "IPv6Addresses": [],
   "IPv6DefaultGateway": "0:0:0:0:0:0:0:0",
   "IPv6StaticAddresses": [],
-  "Id": "usb0",
+  "Id": "usb0_1",
   "InterfaceEnabled": false,
   "LinkStatus": "NoLink",
+  "Links": {
+    "RelatedInterfaces": [
+      {
+        "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces"
+      }
+    ]
+  },
   "MACAddress": "4a:83:23:4b:34:c3",
   "MTUSize": 1500,
   "Name": "Manager Ethernet Interface",
@@ -59,5 +46,10 @@
     "Health": "OK",
     "HealthRollup": "OK",
     "State": "Disabled"
+  },
+  "VLAN": {
+    "Tagged": true,
+    "VLANEnable": true,
+    "VLANId": 1
   }
 }

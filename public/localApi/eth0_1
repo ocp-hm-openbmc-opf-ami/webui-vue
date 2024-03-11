@@ -1,5 +1,5 @@
 {
-  "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/eth0",
+  "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/eth0_1",
   "@odata.type": "#EthernetInterface.v1_9_0.EthernetInterface",
   "DHCPv4": {
     "DHCPEnabled": true,
@@ -8,23 +8,16 @@
     "UseNTPServers": true
   },
   "DHCPv6": {
-    "OperatingMode": "Disabled",
+    "OperatingMode": "Enabled",
     "UseDNSServers": true,
     "UseDomainName": true,
     "UseNTPServers": true
   },
   "Description": "Management Network Interface",
-  "EthernetInterfaceType": "Physical",
-  "FQDN": "AMIOT-8e7979881808.in.megatrends.com",
+  "EthernetInterfaceType": "Virtual",
+  "FQDN": "AMIOT-8e7979881808",
   "HostName": "AMIOT-8e7979881808",
-  "IPv4Addresses": [
-    {
-      "Address": "10.0.97.63",
-      "AddressOrigin": "DHCP",
-      "Gateway": "10.0.96.1",
-      "SubnetMask": "255.255.224.0"
-    }
-  ],
+  "IPv4Addresses": [],
   "IPv4StaticAddresses": [],
   "IPv6AddressPolicyTable": [],
   "IPv6Addresses": [
@@ -34,18 +27,22 @@
       "PrefixLength": 64
     }
   ],
-  "IPv6DefaultGateway": "fe80::e59a:5e16:24e1:77d3",
+  "IPv6DefaultGateway": "0:0:0:0:0:0:0:0",
   "IPv6StaticAddresses": [],
-  "Id": "eth0",
+  "Id": "eth0_1",
   "InterfaceEnabled": true,
   "LinkStatus": "LinkUp",
+  "Links": {
+    "RelatedInterfaces": [
+      {
+        "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces"
+      }
+    ]
+  },
   "MACAddress": "8e:79:79:88:18:08",
   "MTUSize": 1500,
   "Name": "Manager Ethernet Interface",
-  "NameServers": [
-    "10.0.0.31",
-    "10.0.0.32"
-  ],
+  "NameServers": [],
   "SpeedMbps": 1000,
   "StatelessAddressAutoConfig": {
     "IPv6AutoConfigEnabled": true
@@ -55,5 +52,10 @@
     "Health": "OK",
     "HealthRollup": "OK",
     "State": "Enabled"
+  },
+  "VLAN": {
+    "Tagged": true,
+    "VLANEnable": true,
+    "VLANId": 1
   }
 }

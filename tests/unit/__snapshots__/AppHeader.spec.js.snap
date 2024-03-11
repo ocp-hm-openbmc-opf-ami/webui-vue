@@ -54,7 +54,7 @@ exports[`AppHeader.vue should render correctly 1`] = `
           to="/"
         >
           <img
-            alt="AMI"
+            alt="ami"
             class="header-logo"
             src="../../assets/images/ami-logo-type-dark-bg.svg"
             width="100px"

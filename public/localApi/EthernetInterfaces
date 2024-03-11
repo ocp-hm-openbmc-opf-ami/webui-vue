@@ -7,12 +7,15 @@
       "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/eth0"
     },
     {
-      "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/eth1"
+      "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/eth0_1"
     },
     {
       "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/usb0"
+    },
+    {
+      "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/usb0_1"
     }
   ],
-  "Members@odata.count": 3,
+  "Members@odata.count": 4,
   "Name": "Ethernet Network Interface Collection"
 }
