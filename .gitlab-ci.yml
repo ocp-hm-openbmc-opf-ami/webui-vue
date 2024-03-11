@@ -923,7 +923,7 @@ revision_update:
                   echo "SRCREV_FORMAT not found"
               fi
               echo $srcrev_format
-              if [[ $srcrev_format = "override" ]]; then
+              if [[ "$srcrev_format" == "override" ]]; then
                 echo "====> Updating SRCREV OVERRIDE "
                 sed -i "s/^SRCREV_override = \".*\"/SRCREV_override = \"$CI_COMMIT_SHA\"/g" $filepath
               else
