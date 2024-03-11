@@ -938,4 +938,5 @@ revision_update:
   parallel:
     matrix:
       - source_repo: [$OT_META_AMI_SRC_URI]
+        source_branch: MSG-TOOLS-CI/CD-VERIFY
      
