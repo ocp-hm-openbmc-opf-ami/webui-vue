@@ -937,5 +937,5 @@ revision_update:
     GIT_STRATEGY: none
   parallel:
     matrix:
-      - source_repo: [$metami_repo]
+      - source_repo: [$OT_META_AMI_SRC_URI]
      
