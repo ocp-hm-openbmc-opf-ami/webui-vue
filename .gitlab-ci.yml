@@ -913,7 +913,7 @@ revision_update:
               echo "==> Previewing before making change "
               cat ${filepath}
               echo "=========================================="
-              sed -i "s/^SRCREV = \".*\"/SRCREV = \"\$CI_COMMIT_SHA\"/g" $filepath
+              sed -i "s/^SRCREV = \".*\"/SRCREV = \"$CI_COMMIT_SHA\"/g" $filepath
               echo "=========================================="
               echo "==> Previewing after making change "
               cat ${filepath}
