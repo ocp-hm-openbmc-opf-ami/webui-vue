@@ -918,7 +918,7 @@ revision_update:
               cat ${filepath}
 
               if grep -q '^SRCREV_FORMAT' $filepath; then
-                srcrev_format=$(grep '^SRCREV_FORMAT' $filepath | awk -F'=' '{print $2}' | tr -d ' ')
+                srcrev_format=$(grep '^SRCREV_FORMAT' $filepath | awk -F'=' '{print $2}' | tr -d '"')
               else
                   echo "SRCREV_FORMAT not found"
               fi
