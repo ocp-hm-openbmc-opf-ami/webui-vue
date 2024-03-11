@@ -870,13 +870,13 @@ revision_update:
   stage: revison_sync
   script:
     - if [ -z "$source_repo" ]; then echo "Revision update job related parallel matrix not configured in this project !!"; exit 0; fi
-    - repo_url=${!source_repo}
-    - repo_name=${repo_url##*/}
+    - src_url=${!source_repo}
+    - repo_name=${src_url##*/}
     - if [[ $source_branch ]]; then src_branch=$source_branch; else src_branch=$CI_COMMIT_REF_NAME; fi
     - if [[ $repo_sub_branch ]]; then sub_branch=$repo_sub_branch; else sub_branch=$CI_COMMIT_REF_NAME; fi
     - echo $src_branch
     - rm -rf $repo_name
-    - git clone ${repo_url} --branch $src_branch
+    - git clone ${src_url} --branch $src_branch
     - sync_workspace=`realpath $repo_name`
     - cd $repo_name
     - echo "==> sync_workspace $sync_workspace"
@@ -893,7 +893,7 @@ revision_update:
           line="${recipe#*:}"
           repo_url=$(echo $line | sed -n 's/.*git@\([^;]*\).*/\1/p; s/.*git:\/\/\([^;]*\).*/\1/p')
           git_auth_url=https://$GUSER:$GPASS@$repo_url
-          
+          recipe_name=${repo_url##*/}
           echo "================================================"
           echo "==> Filepath $filepath"
           echo "==> Line $line"
@@ -924,7 +924,7 @@ revision_update:
               git status
               echo "===> GIT COMMIT MESSAGE"
               git add .
-              git commit -m "Auto revision update by recipe $repo_name"
+              git commit -m "Auto revision update by recipe $recipe_name"
               new_commit_id=( $(git rev-parse HEAD))
               echo "==> New Commit id $new_commit_id"
               if [[ $orginal_commit_id == $new_commit_id ]]; then
