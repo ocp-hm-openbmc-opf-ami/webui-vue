@@ -940,6 +940,7 @@ revision_update:
               if git diff --exit-code $filepath >/dev/null; then
                   echo "=====> No changes in the file"
               else
+                echo "===> GIT Adding and Pushing"
                 git add $filepath
                 git commit -m "Auto revision update by recipe $recipe_name"
                 new_commit_id=( $(git rev-parse HEAD))
