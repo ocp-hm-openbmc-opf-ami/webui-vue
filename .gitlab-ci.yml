@@ -964,7 +964,7 @@ revision_update:
           fi
           echo "================================================"
         done
-    - echo "Update completed"
+    - echo "Update completed" 
   tags:
     - $runner_tag
   only:
