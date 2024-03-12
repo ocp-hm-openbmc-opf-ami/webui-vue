@@ -873,7 +873,6 @@ revision_update:
     - src_url=${!source_repo}
     - repo_name=${src_url##*/}
     - if [[ $source_branch ]]; then src_branch=$source_branch; else src_branch=$CI_COMMIT_REF_NAME; fi
-    - if [[ $repo_sub_branch ]]; then sub_branch=$repo_sub_branch; else sub_branch=$CI_COMMIT_REF_NAME; fi
     - echo $src_branch
     - rm -rf $repo_name
     - git clone ${src_url} --branch $src_branch
@@ -938,7 +937,7 @@ revision_update:
               echo "===> GIT STATUS"
               git status
               if git diff --exit-code $filepath >/dev/null; then
-                  echo "=====> No changes in the file"
+                echo "=====> No changes in the file"
               else
                 echo "===> GIT Adding and Pushing"
                 git add $filepath
@@ -950,7 +949,10 @@ revision_update:
                 else
                   echo -e "Commit Created successfully !!";
                   git log -1
-                  echo "==> Previewing after making change "
+                  echo -e "\n==> Previewing after making change "
+                  echo "-------------------------------------------------------"
+                  cat ${filepath}
+                  echo "-------------------------------------------------------"
                   git push origin $src_branch
                   echo "==> Changes Pushed !!"
                 fi
@@ -978,5 +980,4 @@ revision_update:
   parallel:
     matrix:
       - source_repo: [OT_META_AMI_SRC_URI]
-        source_branch: MSG-TOOLS-CI/CD-VERIFY
      
