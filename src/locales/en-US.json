@@ -27,7 +27,9 @@
             "create": "Create",
             "success": "Success",
             "alert": "Alert",
-            "upload": "Upload"
+            "upload": "Upload",
+            "yes": "Yes",
+            "no": "No"
         },
         "ariaLabel": {
             "clearSearch": "Clear search input",
@@ -159,7 +161,8 @@
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
-        "fireWall": "@:appPageTitle.FireWall"
+        "fireWall": "@:appPageTitle.FireWall",
+        "task": "@:appPageTitle.task"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -207,7 +210,8 @@
         "logicalDevice": "Logical Device",
         "createLogicalDevice": "Create Logical Device",
         "backupAndRestore": "Backup And Restore",
-        "FireWall": "System Firewall"
+        "FireWall": "System Firewall",
+        "task": "Task"
     },
     "pageBackupAndRestore": {
         "backup": "Backup",
@@ -1627,6 +1631,18 @@
             "errorSaveFireWall": "Error saved Firewall Rules.",
             "errorDelete": "Error deleting FireWall Rules.",
             "errorDateOrTimeSaveFireWall": "Invalid Date or Time."
+        }
+    },
+    "pageTask": {
+        "table": {
+            "taskId": "Task Id",
+            "taskDescription": "Task Description",
+            "taskStatus": "Task Status",
+            "action": "Action"
+        },
+        "modal": {
+            "cancelConfirmationMsg": "Are you sure you want to cancel the task?",
+            "cancelConfirmationTitle": "Cancel Task"
         }
     },
     "countries": {

@@ -10,6 +10,7 @@ import IconNic from '@carbon/icons-vue/es/network--2/16';
 import IconObjectStorage from '@carbon/icons-vue/es/object-storage/16';
 import IconHostSystemDiagnostics from '@carbon/icons-vue/es/laptop/16';
 import IconStorageRequest from '@carbon/icons-vue/es/storage-request/16';
+import IconTask from '@carbon/icons-vue/es/task/16';
 
 const roles = {
   administrator: 'Administrator',
@@ -32,6 +33,7 @@ const AppNavigationMixin = {
     iconObjectStorage: IconObjectStorage,
     iconHostSystemDiagnostics: IconHostSystemDiagnostics,
     iconStorageRequest: IconStorageRequest,
+    iconTask: IconTask,
   },
   data() {
     return this.renderNavigationItems();
@@ -135,6 +137,12 @@ const AppNavigationMixin = {
                 roles.operator,
                 roles.readonly,
               ],
+            },
+            {
+              id: 'task',
+              label: this.$t('appNavigation.task'),
+              icon: 'iconTask',
+              route: '/operations/task',
             },
           ],
         },

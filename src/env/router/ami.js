@@ -39,7 +39,7 @@ import Asd from '@/views/HostSystemDiagnostics/Asd';
 import BackupAndRestore from '@/views/Operations/BackupAndRestore';
 import SnmpSettings from '@/views/Settings/SNMP';
 import FireWall from '@/views/Settings/FireWall';
-
+import Task from '@/views/Operations/Task/Task.vue';
 const roles = {
   administrator: 'Administrator',
   operator: 'Operator',
@@ -365,6 +365,14 @@ const routes = [
           title: i18n.t('appPageTitle.systemFirewall'),
         },
       },
+      {
+        path: '/operations/task',
+        name: 'task',
+        component: Task,
+        meta: {
+          title: i18n.t('appPageTitle.task'),
+        },
+      },
     ],
   },
 ];
@@ -413,18 +421,18 @@ if (process.env.VUE_APP_RAID_ENABLED == 'true') {
       meta: {
         title: i18n.t('appPageTitle.logicalDevice'),
       },
-    },
-    {
-      path: '/raid/create-logical-device',
-      name: 'create-logical-device',
-      component: () =>
-        import(
-          /* webpackChunkName: "CreateLogicalStorage" */ '@/views/RAID/LogicalStorage/CreateLogicalStorage.vue'
-        ),
-      meta: {
-        title: i18n.t('appPageTitle.createLogicalDevice'),
-      },
     }
+    // {
+    //   path: '/raid/create-logical-device',
+    //   name: 'create-logical-device',
+    //   component: () =>
+    //     import(
+    //       /* webpackChunkName: "CreateLogicalStorage" */ '@/views/RAID/LogicalStorage/CreateLogicalStorage.vue'
+    //     ),
+    //   meta: {
+    //     title: i18n.t('appPageTitle.createLogicalDevice'),
+    //   },
+    // }
   );
 }
 if (process.env.VUE_APP_NVME_ENABLED == 'true') {
