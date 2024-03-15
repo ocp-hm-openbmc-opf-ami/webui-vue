@@ -1245,6 +1245,8 @@
             "errorSessionTimeout": "配置会话逾期失败",
             "errorComplexity": "改变複杂度发生错误",
             "errorPasswordHistory": "改面密码历史发生错误",
+            "errorSSDPDisabled": "禁用 SSDP 安全设置时出错.",
+            "errorSSDPEnabled": "启用 SSDP 安全设置时出错.",
             "successIpmiDisabled": "停用 IPMI 安全设定成功",
             "successIpmiEnabled": "启用 IPMI 安全设定成功",
             "successRtadDisabled": "停用 RTAD 安全设定成功",
@@ -1261,7 +1263,9 @@
             "successSOLEnabled": " 启用 SOL SSH  安全设定成功",
             "successSessionTimeout": "配置会话逾期成功",
             "successComplexity": "成功改变複杂度数字",
-            "successPasswordHistory": "成功改变密码历史数字"
+            "successPasswordHistory": "成功改变密码历史数字",
+            "successSSDPDisabled": "成功禁用 SSDP 安全设置.",
+            "successSSDPEnabled": "成功启用 SSDP 安全设置."
         },
         "options": {
             "30minutes": "30 分钟",
@@ -1281,6 +1285,9 @@
         "vmcDescription": "启用虚拟媒体为了映像重导",
         "solssh": "SOL SSH",
         "solDescription": "启用 SOL SSH",
+        "ssdpProtocol": "SSDP",
+        "SsdpPortLabel": "SSDP端口值",
+        "ssdpDescription": "启用SSDP协议",
         "complexity": "複杂度",
         "complexityDescription": "点选密码历史选单以设定密码複杂度 (停用, 低, 中, 高). 密码不能超过20 bytes长度，由于 IPMI 2.0 限制.",
         "passwordHistory": "密码历史",

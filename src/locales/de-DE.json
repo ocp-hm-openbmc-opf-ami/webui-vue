@@ -1246,6 +1246,8 @@
             "errorSessionTimeout": "Fehler beim Konfigurieren des Sitzungszeitlimits.",
             "errorComplexity": "Fehler bei der Änderung der Komplexität.",
             "errorPasswordHistory": "Fehler beim Ändern des Passwortverlaufs.",
+            "errorSSDPDisabled": "Fehler beim Deaktivieren der SSDP Sicherheitseinstellung.",
+            "errorSSDPEnabled": "Fehler beim Aktivieren der SSDP Sicherheitseinstellung.",
             "successIpmiDisabled": "IPMI Sicherheitseinstellung erfolgreich deaktiviert.",
             "successIpmiEnabled": "IPMI Sicherheitseinstellung erfolgreich aktiviert.",
             "successRtadDisabled": "Die RTAD Sicherheitseinstellung wurde erfolgreich deaktiviert.",
@@ -1262,7 +1264,9 @@
             "successSOLEnabled": "Die SOL SSH Sicherheitseinstellung wurde erfolgreich aktiviert.",
             "successSessionTimeout": "Das Sitzungszeitlimit wurde erfolgreich konfiguriert.",
             "successComplexity": "Der Komplexitätswert wurde erfolgreich geändert.",
-            "successPasswordHistory": "Der Passwortverlaufswert wurde erfolgreich geändert."
+            "successPasswordHistory": "Der Passwortverlaufswert wurde erfolgreich geändert.",
+            "successSSDPDisabled": "SSDP Sicherheitseinstellung erfolgreich deaktiviert.",
+            "successSSDPEnabled": "SSDP Sicherheitseinstellung erfolgreich aktiviert."
         },
         "options": {
             "30minutes": "30 Protokoll",
@@ -1282,6 +1286,9 @@
         "vmcDescription": "Aktivieren von Virtual Media für die Bildumleitung",
         "solssh": "SOL SSH",
         "solDescription": "SOL SSH aktivieren",
+        "ssdpProtocol": "SSDP",
+        "SsdpPortLabel": "SSDP Portwert",
+        "ssdpDescription": "SSDP-Protokoll aktivieren",
         "complexity": "Komplexität",
         "complexityDescription": "Wählen Sie die Dropdown-Liste „Passwortkomplexität“ aus, um die Passwortkomplexität festzulegen (Deaktiviert, Niedrig, Mittel, Hoch). Aufgrund von IPMI 2.0-Einschränkungen darf das Passwort nicht länger als 20 Byte sein.",
         "passwordHistory": "Passwort Verlauf",

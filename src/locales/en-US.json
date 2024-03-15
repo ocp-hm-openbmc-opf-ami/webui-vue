@@ -1277,6 +1277,8 @@
             "errorSessionTimeout": "Error configuring session timeout.",
             "errorComplexity": "Error in changing complexity.",
             "errorPasswordHistory": "Error in changing password history.",
+            "errorSSDPDisabled": "Error disabling SSDP security setting.",
+            "errorSSDPEnabled": "Error enabling SSDP security setting.",
             "successIpmiDisabled": "Successfully disabled IPMI security setting.",
             "successIpmiEnabled": "Successfully enabled IPMI security setting.",
             "successRtadDisabled": "Successfully disabled RTAD security setting.",
@@ -1293,7 +1295,9 @@
             "successSOLEnabled": "Successfully enabled SOL SSH security setting.",
             "successSessionTimeout": "Successfully configured the session timeout.",
             "successComplexity": "Successfully changed the complexity value.",
-            "successPasswordHistory": "Successfully changed the password history value."
+            "successPasswordHistory": "Successfully changed the password history value.",
+            "successSSDPDisabled": "Successfully disabled SSDP security setting.",
+            "successSSDPEnabled": "Successfully enabled SSDP security setting."
         },
         "options": {
             "30minutes": "30 Minutes",
@@ -1313,6 +1317,9 @@
         "vmcDescription": "Enabling Virtual Media for image redirection",
         "solssh": "SOL SSH",
         "solDescription": "Enabling SOL SSH",
+        "ssdpProtocol": "SSDP",
+        "SsdpPortLabel": "SSDP Port Value",
+        "ssdpDescription": "Enabling SSDP Protocol",
         "complexity": "Complexity",
         "complexityDescription": "Select the Password Complexity dropdown to set the password complexity (Disabled, Low, Medium, High). Password cannot exceed 20 bytes of length due to IPMI 2.0 restrictions.",
         "passwordHistory": "Password History",

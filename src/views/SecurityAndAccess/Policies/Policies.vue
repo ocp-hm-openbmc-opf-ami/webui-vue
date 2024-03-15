@@ -236,6 +236,46 @@
                   </b-button>
                 </b-col>
               </b-row>
+              <b-row class="setting-section">
+                <b-col
+                  lg="7"
+                  class="d-flex align-items-center justify-content-between"
+                >
+                  <dl class="mt-3 mr-3 w-75">
+                    <dt>{{ $t('pagePolicies.ssdpProtocol') }}</dt>
+                    <dd>{{ $t('pagePolicies.ssdpDescription') }}</dd>
+                  </dl>
+                </b-col>
+                <b-col lg="3" class="session-timeout">
+                  <b-form-checkbox
+                    id="ssdpSwitch"
+                    v-model="ssdpState"
+                    data-test-id="policies-toggle-sol"
+                    switch
+                    @change="changeSSDPLState"
+                  >
+                    <span class="sr-only">
+                      {{ $t('pagePolicies.ssdpProtocol') }}
+                    </span>
+                    <span v-if="ssdpState">
+                      {{ $t('global.status.enabled') }}
+                    </span>
+                    <span v-else>{{ $t('global.status.disabled') }}</span>
+                  </b-form-checkbox>
+                </b-col>
+              </b-row>
+              <b-row v-if="ssdpState" class="setting-section">
+                <b-col cols="3" class="d-flex align-items-center">
+                  <dl class="mt-3 mr-4 w-75">
+                    <dt>
+                      <b>{{ $t('pagePolicies.SsdpPortLabel') }}</b>
+                    </dt>
+                    <dd>
+                      {{ ssdpPortValue }}
+                    </dd>
+                  </dl>
+                </b-col>
+              </b-row>
             </page-section>
           </b-col>
         </b-row>
@@ -430,6 +470,14 @@ export default {
         return newValue;
       },
     },
+    ssdpState: {
+      get() {
+        return this.$store.getters['policies/ssdpProtocolEnabled'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
     solSshPortValueState: {
       get() {
         return this.$store.getters['policies/solSshPortValue'];
@@ -461,6 +509,9 @@ export default {
       set(newValue) {
         this.$store.commit('policies/setPasswordHistory', newValue);
       },
+    },
+    ssdpPortValue() {
+      return this.$store.getters['policies/ssdpPortValue'];
     },
   },
   created() {
@@ -513,6 +564,12 @@ export default {
     changeSOLState(state) {
       this.$store
         .dispatch('policies/saveSOLSshState', state ? true : false)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
+    changeSSDPLState(state) {
+      this.$store
+        .dispatch('policies/saveSSDPProtocolState', state ? true : false)
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },

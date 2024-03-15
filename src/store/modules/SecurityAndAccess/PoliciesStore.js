@@ -18,6 +18,8 @@ const PoliciesStore = {
     solEnabled: true,
     complexity: '',
     passwordHistory: null,
+    ssdpProtocolEnabled: false,
+    ssdpPortValue: null,
   },
   getters: {
     sshProtocolEnabled: (state) => state.sshProtocolEnabled,
@@ -34,6 +36,8 @@ const PoliciesStore = {
     virtualMediaServiceEnabled: (state) => state.virtualMediaServiceEnabled,
     complexity: (state) => state.complexity,
     passwordHistory: (state) => state.passwordHistory,
+    ssdpProtocolEnabled: (state) => state.ssdpProtocolEnabled,
+    ssdpPortValue: (state) => state.ssdpPortValue,
   },
   mutations: {
     setSshProtocolEnabled: (state, sshProtocolEnabled) =>
@@ -59,6 +63,10 @@ const PoliciesStore = {
     setComplexity: (state, complexity) => (state.complexity = complexity),
     setPasswordHistory: (state, passwordHistory) =>
       (state.passwordHistory = passwordHistory),
+    setSsdpProtocolEnabled: (state, ssdpProtocolEnabled) =>
+      (state.ssdpProtocolEnabled = ssdpProtocolEnabled),
+    setSsdpPort: (state, ssdpPortValue) =>
+      (state.ssdpPortValue = ssdpPortValue),
   },
   actions: {
     setSolSshPortUpdatedValue({ commit }, solSshProtocolPort) {
@@ -70,8 +78,12 @@ const PoliciesStore = {
         .then((response) => {
           const sshProtocol = response.data.SSH.ProtocolEnabled;
           const ipmiProtocol = response.data.IPMI.ProtocolEnabled;
+          const ssdpProtocol = response.data.SSDP.ProtocolEnabled;
+          const ssdpPortValue = response.data.SSDP.Port;
           commit('setSshProtocolEnabled', sshProtocol);
           commit('setIpmiProtocolEnabled', ipmiProtocol);
+          commit('setSsdpProtocolEnabled', ssdpProtocol);
+          commit('setSsdpPort', ssdpPortValue);
         })
         .catch((error) => console.log(error));
     },
@@ -325,6 +337,32 @@ const PoliciesStore = {
           commit('saveSOLSshState', solSshProtocolPortNewValue);
           if (solSshProtocolPortNewValue) {
             throw new Error(i18n.t('pagePolicies.toast.errorSolSshPort'));
+          }
+        });
+    },
+    async saveSSDPProtocolState({ commit }, protocolEnabled) {
+      commit('setSsdpProtocolEnabled', protocolEnabled);
+      const SSDP = {
+        SSDP: {
+          ProtocolEnabled: protocolEnabled,
+        },
+      };
+      return await api
+        .patch('/redfish/v1/Managers/bmc/NetworkProtocol', SSDP)
+        .then(() => {
+          if (protocolEnabled) {
+            return i18n.t('pagePolicies.toast.successSSDPEnabled');
+          } else {
+            return i18n.t('pagePolicies.toast.successSSDPDisabled');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          commit('setSsdpProtocolEnabled', !protocolEnabled);
+          if (protocolEnabled) {
+            throw new Error(i18n.t('pagePolicies.toast.errorSSDPEnabled'));
+          } else {
+            throw new Error(i18n.t('pagePolicies.toast.errorSSDPDisabled'));
           }
         });
     },
