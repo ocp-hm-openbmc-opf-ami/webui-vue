@@ -16,7 +16,6 @@ import Login from '@/views/Login';
 import LoginLayout from '@/layouts/LoginLayout';
 import SmtpSettings from '@/views/Settings/SMTP';
 import EventFilter from '@/views/PEF/EventFilter';
-import AlertDestination from '@/views/PEF/AlertDestination';
 import Network from '@/views/Settings/Network';
 import Vlan from '@/views/Settings/Vlan';
 import Overview from '@/views/Overview';
@@ -249,14 +248,6 @@ const routes = [
         component: EventFilter,
         meta: {
           title: i18n.t('appPageTitle.eventFilter'),
-        },
-      },
-      {
-        path: '/pef/alertDestination',
-        name: 'alertDestination',
-        component: AlertDestination,
-        meta: {
-          title: i18n.t('appPageTitle.alertDestination'),
         },
       },
       {

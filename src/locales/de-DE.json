@@ -145,7 +145,6 @@
         "smtpSettings": "SMTP Einstellungen",
         "pef": "Plattformereignisfilter",
         "eventFilter": "Ereignisfilter",
-        "alertDestination": "Warnungsziel",
         "nicInformation": "NIC Informationen",
         "nvmeInformation": "@:appPageTitle.nvmeInformation",
         "hostSystemDiagnostics": "Host Systemdiagnose",
@@ -193,7 +192,6 @@
         "factoryDefault": "Werkseinstellungen",
         "smtpSettings": "SMTP Einstellungen",
         "eventFilter": "Ereignisfilter",
-        "alertDestination": "Alarmziel",
         "nicInformation": "NIC Informationen",
         "nvmeInformation": "NVMe Informationen",
         "autonomousCrashDump": "ACD",
@@ -1128,19 +1126,6 @@
         "toast": {
             "successSMTPConfiguration": "SMTP Konfiguration erfolgreich aktualisiert",
             "errorSMTPConfiguration": "Fehler beim Aktualisieren der SMTP Konfiguration"
-        }
-    },
-    "pageAlertDestination": {
-        "pageDescription": "Alarm Ziele konfigurieren",
-        "sectionTitle": "Warnungsziel",
-        "alertDestinationLabel": "Konfigurieren Sie die Details des Alarmziels",
-        "sendEmailTo": "Schicke eine EMail an:",
-        "sendTestAlert": "Testalarm senden",
-        "toast": {
-            "successMsg": "Warnungsziel erfolgreich aktualisiert",
-            "errorMsg": "Fehler beim Aktualisieren des Warnungsziels",
-            "successMsgTestAlert": "Testalarm erfolgreich gesendet",
-            "errorMsgAlert": "Fehler beim Senden von Test Benachrichtigungen"
         }
     },
     "pageEventFilter": {

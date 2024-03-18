@@ -145,7 +145,6 @@
         "smtpSettings": "SMTP 设定",
         "pef": "平台事件过滤器",
         "eventFilter": "事件过滤器",
-        "alertDestination": "警告接收者",
         "nicInformation": "NIC 资讯",
         "nvmeInformation": "@:appPageTitle.nvmeInformation",
         "hostSystemDiagnostics": "主系统诊断",
@@ -193,7 +192,6 @@
         "factoryDefault": "原厂预设值",
         "smtpSettings": "SMTP 设定",
         "eventFilter": "事件过滤器",
-        "alertDestination": "警告接收者",
         "nicInformation": "NIC 资讯",
         "nvmeInformation": "NVMe 资讯",
         "autonomousCrashDump": "ACD",
@@ -1127,19 +1125,6 @@
         "toast": {
             "successSMTPConfiguration": "成功更新 SMTP 设定",
             "errorSMTPConfiguration": "更新 SMTP 发生错误"
-        }
-    },
-    "pageAlertDestination": {
-        "pageDescription": "设定警告接收者",
-        "sectionTitle": "警告接收者",
-        "alertDestinationLabel": "设定警告接收者内容",
-        "sendEmailTo": "寄送 Email 给:",
-        "sendTestAlert": "寄送测试警告",
-        "toast": {
-            "successMsg": "成功更新警告接收者",
-            "errorMsg": "更新警告接收者发生错误",
-            "successMsgTestAlert": "测试警告寄送成功",
-            "errorMsgAlert": "寄送测试警告发生错误"
         }
     },
     "pageEventFilter": {

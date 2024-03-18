@@ -38,7 +38,6 @@ import WebSocketPlugin from './plugins/WebSocketPlugin';
 import DateTimeStore from './modules/Settings/DateTimeStore';
 import VirtualMediaStore from './modules/Operations/VirtualMediaStore';
 import KvmStore from './modules/Operations/KvmStore';
-import AlertDestinationStore from './modules/Pef/alertDestinationStore';
 import NicStore from './modules/Nic/Nic';
 import NvmeInformationStore from './modules/NvmeInformation/NvmeInformationStore';
 import AutonomousCrashDumpStore from './modules/HostSystemDiagnostics/AcdStore';
@@ -73,7 +72,6 @@ export default new Vuex.Store({
     vlan: VlanStore,
     smtp: SMTPStore,
     eventFilter: EventFilterStore,
-    alertDestination: AlertDestinationStore,
     eventLog: EventLogStore,
     dumps: DumpsStore,
     sensors: SensorsStore,

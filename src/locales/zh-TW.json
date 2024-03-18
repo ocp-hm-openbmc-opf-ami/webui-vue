@@ -145,7 +145,6 @@
         "smtpSettings": "SMTP 設定",
         "pef": "平台事件過濾器",
         "eventFilter": "事件過濾器",
-        "alertDestination": "警告接收者",
         "nicInformation": "NIC 資訊",
         "nvmeInformation": "@:appPageTitle.nvmeInformation",
         "hostSystemDiagnostics": "主系統診斷",
@@ -193,7 +192,6 @@
         "factoryDefault": "原廠預設值",
         "smtpSettings": "SMTP 設定",
         "eventFilter": "事件過濾器",
-        "alertDestination": "警告接收者",
         "nicInformation": "NIC 資訊",
         "nvmeInformation": "NVMe 資訊",
         "autonomousCrashDump": "ACD",
@@ -1128,19 +1126,6 @@
         "toast": {
             "successSMTPConfiguration": "成功更新 SMTP 設定",
             "errorSMTPConfiguration": "更新 SMTP 發生錯誤"
-        }
-    },
-    "pageAlertDestination": {
-        "pageDescription": "設定警告接收者",
-        "sectionTitle": "警告接收者",
-        "alertDestinationLabel": "設定警告接收者內容",
-        "sendEmailTo": "寄送 Email 給:",
-        "sendTestAlert": "寄送測試警告",
-        "toast": {
-            "successMsg": "成功更新警告接收者",
-            "errorMsg": "更新警告接收者發生錯誤",
-            "successMsgTestAlert": "測試警告寄送成功",
-            "errorMsgAlert": "寄送測試警告發生錯誤"
         }
     },
     "pageEventFilter": {

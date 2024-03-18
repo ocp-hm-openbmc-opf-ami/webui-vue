@@ -190,11 +190,6 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.eventFilter'),
               route: '/pef/eventFilter',
             },
-            {
-              id: 'alert-destination',
-              label: this.$t('appNavigation.alertDestination'),
-              route: '/pef/alertDestination',
-            },
           ],
         },
         {

@@ -21,6 +21,7 @@ import {
   FormFilePlugin,
   FormGroupPlugin,
   FormInputPlugin,
+  FormTextareaPlugin,
   FormRadioPlugin,
   FormSelectPlugin,
   FormTagsPlugin,
@@ -112,6 +113,7 @@ Vue.use(FormDatepickerPlugin);
 Vue.use(FormFilePlugin);
 Vue.use(FormGroupPlugin);
 Vue.use(FormInputPlugin);
+Vue.use(FormTextareaPlugin);
 Vue.use(FormRadioPlugin);
 Vue.use(FormSelectPlugin);
 Vue.use(FormTagsPlugin);

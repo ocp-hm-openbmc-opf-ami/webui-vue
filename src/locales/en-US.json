@@ -27,7 +27,8 @@
             "create": "Create",
             "success": "Success",
             "alert": "Alert",
-            "upload": "Upload"
+            "upload": "Upload",
+            "send": "Send"
         },
         "ariaLabel": {
             "clearSearch": "Clear search input",
@@ -146,7 +147,6 @@
         "snmpSettings": "SNMP Settings",
         "pef": "Platform Event Filter",
         "eventFilter": "Event Filter",
-        "alertDestination": "Alert Destination",
         "nicInformation": "NIC Information",
         "nvmeInformation": "@:appPageTitle.nvmeInformation",
         "hostSystemDiagnostics": "Host System Diagnostics",
@@ -195,7 +195,6 @@
         "smtpSettings": "SMTP Settings",
         "snmp": "SNMP Settings",
         "eventFilter": "Event Filter",
-        "alertDestination": "Alert Destination",
         "nicInformation": "NIC Information",
         "nvmeInformation": "NVMe Information",
         "autonomousCrashDump": "ACD",
@@ -765,8 +764,8 @@
         "errorInGettingActiveStatus": "Error in Getting KVM active status!!",
         "disabledKVMService": "KVM service is disabled. Go to Security and Access -> Policies page to enable KVM service.",
         "toast": {
-            "success" : "Power operation executed successfully",
-            "error" : "Error in performing power operation"
+            "success": "Power operation executed successfully",
+            "error": "Error in performing power operation"
         }
     },
     "pageLdap": {
@@ -1151,25 +1150,36 @@
         "pageDescription": "Configure BMC SMTP Settings",
         "sectionTitle": "SMTP",
         "smtpLabel": "SMTP Settings",
-        "formGroupLabel": "SMTP Configuration",
+        "sendTestAlert": "Send Test Alert",
+        "alertDestination": "Alert Destination",
+        "primaryFormGroupLabel": "Primary Configuration",
+        "secondaryFormGroupLabel": "Secondary Configuration",
+        "certificate": "TLS Certificate",
         "labelServerAddress": "Server Address",
         "labelSenderEmailAddress": "Sender Email Address",
+        "labelRecipientEmailAddress": "Recipient Email Address",
+        "addRecipientEmailAddress": " Add Recipient Email Address",
         "labelPort": "Port",
+        "tlsEnable": "TLS Enable",
+        "username": "Username",
+        "password": "Password",
+        "authentication": "Authentication",
         "PortRangeRequired": "Enter valid port range between 1-65535",
+        "cacertPEM": "Cacert PEM Certificate",
+        "serverCRT": "Server CRT Certificate",
+        "serverKey": "Server Key Certificate",
+        "modal": {
+            "subject": "Subject",
+            "mailContent": "Mail Content"
+        },
         "toast": {
             "successSMTPConfiguration": "Successfully updated SMTP Configuration",
-            "errorSMTPConfiguration": "Error updating SMTP Configuration"
-        }
-    },
-    "pageAlertDestination": {
-        "pageDescription": "Configure Alert Destinations",
-        "sectionTitle": "Alert Destination",
-        "alertDestinationLabel": "Configure Alert Destination details",
-        "sendEmailTo": "Send Email to:",
-        "sendTestAlert": "send Test Alert",
-        "toast": {
-            "successMsg": "Successfully updated Alert Destination",
-            "errorMsg": "Error in updating Alert Destination",
+            "successAddCertificate": "Successfully added %{certificate}.",
+            "errorSMTPConfiguration": "Error updating SMTP Configuration",
+            "errorAddCertificate": "Error adding certificate.",
+            "errorAddPemCertificate": "Please upload the Cacert PEM certificate",
+            "errorAddCrtCertificate": "Please upload the Server CRT certificate",
+            "errorAddKeyCertificate": "Please upload the Server Key certificate",
             "successMsgTestAlert": "Test Alert send successfully",
             "errorMsgAlert": "Error in sending test alerts"
         }
@@ -1588,7 +1598,7 @@
     },
     "pageFireWall": {
         "firewallSettings": {
-            "addNewRule":"Add New Rule",
+            "addNewRule": "Add New Rule",
             "flushAll": "Flush All",
             "modal": {
                 "blockAll": "BlockAll",

@@ -567,15 +567,6 @@ exports[`AppNavigation.vue should render correctly 1`] = `
                   appNavigation.eventFilter
                 
                 </a>
-                <a
-                  class="nav-link"
-                  data-test-id="nav-item-alert-destination"
-                  href="#/pef/alertDestination"
-                >
-                  
-                  appNavigation.alertDestination
-                
-                </a>
               </li>
             </ul>
           </transition-stub>
@@ -1349,15 +1340,6 @@ exports[`AppNavigation.vue should render with nav-container open 1`] = `
                 >
                   
                   appNavigation.eventFilter
-                
-                </a>
-                <a
-                  class="nav-link"
-                  data-test-id="nav-item-alert-destination"
-                  href="#/pef/alertDestination"
-                >
-                  
-                  appNavigation.alertDestination
                 
                 </a>
               </li>
