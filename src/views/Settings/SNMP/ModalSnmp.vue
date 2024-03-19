@@ -12,28 +12,27 @@
       <b-container>
         <b-row>
           <b-form-group
-            :label="$t('pageSnmp.modal.destination')"
-            label-for="destination"
+            :label="$t('pageSnmp.modal.protocol')"
+            label-for="protocol"
             class="field-width"
           >
-            <b-form-input
-              id="destination"
-              v-model="form.destination"
-              type="text"
-              data-test-id="snmp-input-destination"
-              :state="getValidationState($v.form.destination)"
-              @input="$v.form.destination.$touch()"
-            />
-            <b-form-invalid-feedback role="alert">
-              <template v-if="!$v.form.destination.required">
-                {{ $t('global.form.fieldRequired') }}
+            <b-form-select
+              id="protocol"
+              v-model="form.selectProtocol"
+              :options="protocolType"
+              data-test-id="snmp-select-protocol"
+              :state="getValidationState($v.form.selectProtocol)"
+              @input="$v.form.selectProtocol.$touch()"
+            >
+              <template #first>
+                <b-form-select-option :value="null" disabled>
+                  {{ $t('global.form.selectAnOption') }}
+                </b-form-select-option>
               </template>
-              <template
-                v-if="
-                  $v.form.destination.required && !$v.form.destination.pattern
-                "
-              >
-                {{ $t('global.form.invalidFormat') }}
+            </b-form-select>
+            <b-form-invalid-feedback role="alert">
+              <template v-if="!$v.form.selectProtocol.required">
+                {{ $t('global.form.fieldRequired') }}
               </template>
             </b-form-invalid-feedback>
           </b-form-group>
@@ -67,27 +66,28 @@
         </b-row>
         <b-row>
           <b-form-group
-            :label="$t('pageSnmp.modal.protocol')"
-            label-for="protocol"
+            :label="$t('pageSnmp.modal.destination')"
+            label-for="destination"
             class="field-width"
           >
-            <b-form-select
-              id="protocol"
-              v-model="form.selectProtocol"
-              :options="protocolType"
-              data-test-id="snmp-select-protocol"
-              :state="getValidationState($v.form.selectProtocol)"
-              @input="$v.form.selectProtocol.$touch()"
-            >
-              <template #first>
-                <b-form-select-option :value="null" disabled>
-                  {{ $t('global.form.selectAnOption') }}
-                </b-form-select-option>
-              </template>
-            </b-form-select>
+            <b-form-input
+              id="destination"
+              v-model="form.destination"
+              type="text"
+              data-test-id="snmp-input-destination"
+              :state="getValidationState($v.form.destination)"
+              @input="$v.form.destination.$touch()"
+            />
             <b-form-invalid-feedback role="alert">
-              <template v-if="!$v.form.selectProtocol.required">
+              <template v-if="!$v.form.destination.required">
                 {{ $t('global.form.fieldRequired') }}
+              </template>
+              <template
+                v-if="
+                  $v.form.destination.required && !$v.form.destination.pattern
+                "
+              >
+                {{ $t('global.form.invalidFormat') }}
               </template>
             </b-form-invalid-feedback>
           </b-form-group>
@@ -144,7 +144,9 @@ export default {
         { value: 'SNMPTrap', text: this.$t('pageSnmp.snmpTrap') },
       ],
       protocolType: [
-        { value: 'SNMPv2c', text: this.$t('pageSnmp.snmpProtocolV1') },
+        { value: 'SNMPv1', text: this.$t('pageSnmp.snmpProtocolV1') },
+        { value: 'SNMPv2c', text: this.$t('pageSnmp.snmpProtocolV2') },
+        { value: 'SNMPv3', text: this.$t('pageSnmp.snmpProtocolV3') },
       ],
     };
   },
@@ -228,27 +230,39 @@ export default {
       this.handleSubmit();
     },
     destinationAddressValidation(value) {
-      if (
-        (!/((^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))$)|(^((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?$))/.test(
-          value
-        ) ||
-          /^localhost$|^127(?:\.[0-9]+){0,2}\.[0-9]+$|^(?:0*\\:)*?:?0*1$/.test(
+      if (this.form.selectProtocol === 'SNMPv3') {
+        if (
+          !/(^[a-zA-Z0-9._%+-]+@(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))+$/.test(
+            value
+          )
+        ) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        if (
+          (!/((^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))$)|(^((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?$))/.test(
             value
           ) ||
-          (value != undefined &&
-            value != null &&
-            (String(value).charAt(0) == '0' ||
-              '#255.255.255.0#0.24.56.4#255.255.255.255#'.indexOf(
-                '#' + value + '#'
-              ) > -1)) ||
-          value.trim() == '::') &&
-        !/^(?=.{1,253}\.?$)([a-z][a-z0-9\\-]{0,61}[a-z0-9]\.)+([a-z]{2,63}|xn--[a-z0-9\\-]{1,58}[a-z0-9])\.?$/i.test(
-          value
-        )
-      ) {
-        return false;
-      } else {
-        return true;
+            /^localhost$|^127(?:\.[0-9]+){0,2}\.[0-9]+$|^(?:0*\\:)*?:?0*1$/.test(
+              value
+            ) ||
+            (value != undefined &&
+              value != null &&
+              (String(value).charAt(0) == '0' ||
+                '#255.255.255.0#0.24.56.4#255.255.255.255#'.indexOf(
+                  '#' + value + '#'
+                ) > -1)) ||
+            value.trim() == '::') &&
+          !/^(?=.{1,253}\.?$)([a-z][a-z0-9\\-]{0,61}[a-z0-9]\.)+([a-z]{2,63}|xn--[a-z0-9\\-]{1,58}[a-z0-9])\.?$/i.test(
+            value
+          )
+        ) {
+          return false;
+        } else {
+          return true;
+        }
       }
     },
   },

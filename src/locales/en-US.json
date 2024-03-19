@@ -1122,13 +1122,15 @@
         "snmpTrap": "SNMPTrap",
         "subscriptionType": "Subscription Type",
         "protocol": "Protocol",
-        "snmpProtocolV1": "SNMPv2c",
+        "snmpProtocolV1": "SNMPv1",
+        "snmpProtocolV2": "SNMPv2",
+        "snmpProtocolV3": "SNMPv3",
         "addSubscrition": "Add Subscription",
         "editSubscrition": "Edit Subscription",
         "modal": {
             "destination": "Destination",
             "subscriptionType": "Subscription Type",
-            "protocol": "Protocal",
+            "protocol": "Protocol",
             "cancel": "Cancel",
             "addTrap": "Add Trap"
         },
@@ -1136,14 +1138,22 @@
             "destination": "Destination",
             "subscriptionType": "Subscription Type",
             "protocol": "Protocol",
-            "sino": "S.NO"
+            "sino": "S.NO",
+            "authenticationProtocol": "Authentication Protocol",
+            "delete": "Delete",
+            "authProtocolNone": "None",
+            "authProtocolsha256": "SHA256",
+            "authProtocolsha384": "SHA384",
+            "authProtocolsha512": "SHA512"
         },
         "toast": {
-            "errorInAddSubscription": "Error in Adding Subcription",
-            "errorInDeleteSubscription": "Error in Deleting Subcription",
-            "errorInEditSubscription": "Error in Editing Subcription",
+            "errorInAddSubscription": "Error in Adding Subscription",
+            "errorInDeleteSubscription": "Error in Deleting Subscription",
+            "errorInEditSubscription": "Error in Editing Subscription",
+            "errorUpdatingAuthenticationProtocal": "Error in Updating Authentication Protocol",
             "successInAddSubscription": "Successfully added SNMPTrap",
-            "successInDeleteSubscription": "Successfully deleted SNMPTrap"
+            "successInDeleteSubscription": "Successfully deleted SNMPTrap",
+            "successUpdateAuthenticationProtocal": "Successfully Updated Authentication Protocol"
         }
     },
     "pageSmtp": {

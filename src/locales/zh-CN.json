@@ -1113,6 +1113,45 @@
             "confirmMessage": "这个设定可能改变设备的IP位址，无法更进一步使用. 在确认设备 IP后, 你可以以新IP登入. 你想继续吗?"
         }
     },
+    "pageSnmp": {
+        "destination": "目的IP",
+        "snmpTrap": "SNMP陷阱",
+        "subscriptionType": "订阅类型",
+        "protocol": "协议",
+        "snmpProtocolV1": "SNMPv1",
+        "snmpProtocolV2": "SNMPv2",
+        "snmpProtocolV3": "SNMPv3",
+        "addSubscrition": "添加订阅",
+        "editSubscrition": "编辑订阅",
+        "modal": {
+            "destination": "目的地",
+            "subscriptionType": "订阅类型",
+            "protocol": "协议",
+            "cancel": "取消",
+            "addTrap": "添加陷阱"
+        },
+        "table": {
+            "destination": "目的地",
+            "subscriptionType": "订阅类型",
+            "protocol": "协议",
+            "sino": "S.NO",
+            "authenticationProtocol": "认证协议",
+            "delete": "删除",
+            "authProtocolNone": "None",
+            "authProtocolsha256": "SHA256",
+            "authProtocolsha384": "SHA384",
+            "authProtocolsha512": "SHA512"
+        },
+        "toast": {
+            "errorInAddSubscription": "添加订阅时出错",
+            "errorInDeleteSubscription": "删除订阅时出错",
+            "errorInEditSubscription": "编辑订阅时出错",
+            "errorUpdatingAuthenticationProtocal": "更新身份验证协议时出错",
+            "successInAddSubscription": "已成功添加 SNMPTrap",
+            "successInDeleteSubscription": "成功删除 SNMPTrap",
+            "successUpdateAuthenticationProtocal": "成功更新身份验证协议"
+        }
+    },
     "pageSmtp": {
         "pageDescription": "Configure BMC SMTP 设定",
         "sectionTitle": "SMTP",

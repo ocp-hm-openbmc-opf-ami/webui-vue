@@ -1114,6 +1114,45 @@
             "confirmMessage": "Diese Funktion kann die IP Adresse des Geräts ändern und einen weiteren Zugriff unmöglich machen. Nach Bestätigung der Geräte IP können Sie sich mit der neuen IP anmelden. Möchten Sie fortfahren?"
         }
     },
+    "pageSnmp": {
+        "destination": "Ziel-IP",
+        "snmpTrap": "SNMPTrap",
+        "subscriptionType": "Abonnementtyp",
+        "protocol": "Protokoll",
+        "snmpProtocolV1": "SNMPv1",
+        "snmpProtocolV2": "SNMPv2",
+        "snmpProtocolV3": "SNMPv3",
+        "addSubscrition": "Abonnement hinzufügen",
+        "editSubscrition": "Abonnement bearbeiten",
+        "modal": {
+            "destination": "Ziel",
+            "subscriptionType": "Abonnementtyp",
+            "protocol": "Protokoll",
+            "cancel": "Stornieren",
+            "addTrap": "Falle hinzufügen"
+        },
+        "table": {
+            "destination": "Ziel",
+            "subscriptionType": "Abonnementtyp",
+            "protocol": "Protokoll",
+            "sino": "S.NO",
+            "authenticationProtocol": "Authentifizierungsprotokoll",
+            "delete": "Löschen",
+            "authProtocolNone": "None",
+            "authProtocolsha256": "SHA256",
+            "authProtocolsha384": "SHA384",
+            "authProtocolsha512": "SHA512"
+        },
+        "toast": {
+            "errorInAddSubscription": "Fehler beim Hinzufügen des Abonnements",
+            "errorInDeleteSubscription": "Fehler beim Löschen des Abonnements",
+            "errorInEditSubscription": "Fehler beim Bearbeiten des Abonnements",
+            "errorUpdatingAuthenticationProtocal": "Fehler beim Aktualisieren des AuthenticationProtocol",
+            "successInAddSubscription": "SNMPTrap erfolgreich hinzugefügt",
+            "successInDeleteSubscription": "SNMPTrap wurde erfolgreich gelöscht",
+            "successUpdateAuthenticationProtocal": "AuthenticationProtocol erfolgreich aktualisiert"
+        }
+    },
     "pageSmtp": {
         "pageDescription": "Konfigurieren Sie die BMC SMTP Einstellungen",
         "sectionTitle": "SMTP",

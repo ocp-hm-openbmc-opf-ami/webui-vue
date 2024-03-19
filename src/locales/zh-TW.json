@@ -1114,6 +1114,45 @@
             "confirmMessage": "這個設定可能改變設備的IP位址，無法更進一步使用. 在確認設備 IP後, 你可以以新IP登入. 你想繼續嗎?"
         }
     },
+    "pageSnmp": {
+        "destination": "目的IP",
+        "snmpTrap": "SNMP陷阱",
+        "subscriptionType": "訂閱類型",
+        "protocol": "協定",
+        "snmpProtocolV1": "SNMPv1",
+        "snmpProtocolV2": "SNMPv2",
+        "snmpProtocolV3": "SNMPv3",
+        "addSubscrition": "新增訂閱",
+        "editSubscrition": "編輯訂閱",
+        "modal": {
+            "destination": "目的地",
+            "subscriptionType": "訂閱類型",
+            "protocol": "協定",
+            "cancel": "取消",
+            "addTrap": "添加陷阱"
+        },
+        "table": {
+            "destination": "目的地",
+            "subscriptionType": "訂閱類型",
+            "protocol": "協定",
+            "sino": "S.NO",
+            "authenticationProtocol": "認證協議",
+            "delete": "刪除",
+            "authProtocolNone": "None",
+            "authProtocolsha256": "SHA256",
+            "authProtocolsha384": "SHA384",
+            "authProtocolsha512": "SHA512"
+        },
+        "toast": {
+            "errorInAddSubscription": "新增訂閱時出錯",
+            "errorInDeleteSubscription": "刪除訂閱時出錯",
+            "errorInEditSubscription": "編輯訂閱時出錯",
+            "errorUpdatingAuthenticationProtocal": "更新身份驗證協定時發生錯誤",
+            "successInAddSubscription": "已成功新增 SNMPTrap",
+            "successInDeleteSubscription": "成功刪除 SNMPTrap",
+            "successUpdateAuthenticationProtocal": "成功更新身份驗證協議"
+        }
+    },
     "pageSmtp": {
         "pageDescription": "Configure BMC SMTP 設定",
         "sectionTitle": "SMTP",

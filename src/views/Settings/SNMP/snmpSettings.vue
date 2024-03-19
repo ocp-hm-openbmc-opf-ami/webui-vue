@@ -40,15 +40,33 @@
               <template #icon>
                 <icon-edit
                   v-if="action.value === 'edit'"
-                  :data-test-id="`userManagement-tableRowAction-edit-${index}`"
+                  :data-test-id="`snmp-tableRowAction-edit-${index}`"
                 />
                 <icon-trashcan
                   v-if="action.value === 'delete'"
-                  :data-test-id="`userManagement-tableRowAction-delete-${index}`"
+                  :data-test-id="`snmp-tableRowAction-delete-${index}`"
                   @click="deleteSnmp(item)"
                 />
               </template>
             </table-row-action>
+          </template>
+
+          <template #cell(authenticationProtocol)="{ item }">
+            <template v-if="item.protocol === 'SNMPv3'">
+              <b-form-select
+                id="snmp-authProtocalvalue"
+                v-model="selectedAuthenticationProtocol"
+                :options="item.authenticationProtocolOptions"
+                @change="saveAuthenticationProtocolValue(item, $event)"
+              >
+                <template #first>
+                  <b-form-select-option :value="null" disabled>
+                    {{ $t('global.form.selectAnOption') }}
+                  </b-form-select-option>
+                </template>
+              </b-form-select>
+            </template>
+            <template v-else> NA </template>
           </template>
         </b-table>
       </b-col>
@@ -103,6 +121,11 @@ export default {
           tdClass: 'text-nowrap',
         },
         {
+          key: 'authenticationProtocol',
+          label: this.$t('pageSnmp.table.authenticationProtocol'),
+          tdClass: 'text-nowrap',
+        },
+        {
           key: 'actions',
           label: '',
           tdClass: 'text-right text-nowrap',
@@ -122,11 +145,40 @@ export default {
             // },
             {
               value: 'delete',
-              title: this.$tc('pageUserManagement.deleteUser'),
+              title: this.$tc('pageSnmp.table.delete'),
             },
           ],
+          authenticationProtocolOptions:
+            log.protocol === 'SNMPv3'
+              ? [
+                  {
+                    value: 'None',
+                    text: this.$tc('pageSnmp.table.authProtocolNone'),
+                  },
+                  {
+                    value: 'SHA256',
+                    text: this.$tc('pageSnmp.table.authProtocolsha256'),
+                  },
+                  {
+                    value: 'SHA384',
+                    text: this.$tc('pageSnmp.table.authProtocolsha384'),
+                  },
+                  {
+                    value: 'SHA512',
+                    text: this.$tc('pageSnmp.table.authProtocolsha512'),
+                  },
+                ]
+              : ['NA'],
         };
       });
+    },
+    selectedAuthenticationProtocol: {
+      get() {
+        return this.$store.getters['snmp/authenticationProtocolValue'];
+      },
+      set(newValue) {
+        return newValue;
+      },
     },
   },
   created() {
@@ -164,10 +216,20 @@ export default {
     },
     deleteSnmp(row) {
       this.startLoader();
-      console.log(row.Id);
       this.$store
         .dispatch('snmp/deleteSNMPTrap', row.Id)
         .then((success) => this.successToast(success))
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => this.endLoader());
+    },
+    saveAuthenticationProtocolValue(row, selectedAuthenticationProtocol) {
+      this.startLoader();
+      this.$store
+        .dispatch('snmp/saveSnmpAuthenticationProtocol', {
+          authenticationProtocolValue: selectedAuthenticationProtocol,
+          snmpId: row.Id,
+        })
+        .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.endLoader());
     },
