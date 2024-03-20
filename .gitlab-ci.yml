@@ -974,6 +974,8 @@ revision_update:
               echo -e "\n==================================================================="
             done
 
+        done
+
     # - git config --global user.email "$GUSER@ami.com"
     # - git config --global user.name "$GUSER"
     # - mapfile -t recipes_list < <(grep -r git.ami.com/ --exclude-dir=".*" --include="*.bb*" $sync_workspace)
