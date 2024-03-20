@@ -874,10 +874,11 @@ revision_update:
     - echo "==> sync_all_workspace $sync_all_workspace"
     - git config --global user.email "$GUSER@ami.com"
     - git config --global user.name "$GUSER"
-    - echo -e ${REVISION_UPDATE_SRC_URI[@]}
+    - REVISION_SRC_URI=( ${REVISION_UPDATE_SRC_URI} )
+    - echo -e ${REVISION_SRC_URI[@]}
     - cd $sync_all_workspace
     - |
-      for src_url in "${REVISION_UPDATE_SRC_URI[@]}";
+      for src_url in "${REVISION_SRC_URI[@]}";
         do
           echo -e "\n==================== Cloning $src_url ===================="
           repo_name=${src_url##*/}
