@@ -874,17 +874,16 @@ revision_update:
     - echo "==> sync_all_workspace $sync_all_workspace"
     - git config --global user.email "$GUSER@ami.com"
     - git config --global user.name "$GUSER"
-    - REVISION_SRC_URI=( ${REVISION_UPDATE_SRC_URI} )
-    - echo -e ${REVISION_SRC_URI[@]}
+    - echo -e ${REVISION_UPDATE_SRC_URI[@]}
     - cd $sync_all_workspace
     - |
-      for src_url in "${REVISION_SRC_URI[@]}";
+      for src_url in "${REVISION_UPDATE_SRC_URI[@]}";
         do
           echo -e "\n==================== Cloning $src_url ===================="
           repo_name=${src_url##*/}
           # src_branch=$CI_COMMIT_REF_NAME;
-          # src_branch=main
-          src_branch=msg-tools-revision-sync-test
+          src_branch=main
+          # src_branch=msg-tools-revision-sync-test
           rm -rf $repo_name    
           git clone ${src_url} --branch $src_branch $sync_all_workspace/$repo_name
 
