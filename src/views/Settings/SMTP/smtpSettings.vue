@@ -684,6 +684,32 @@
           </b-row>
         </div>
       </page-section>
+      <page-section :section-title="$t('pageSmtp.eventSeverity')">
+        <div class="form-background p-5">
+          <b-row>
+            <b-col sm="4">
+              <b-form-group
+                id="input-group-1"
+                :label="$t('pageSmtp.updateEventSeverity')"
+                label-for="smtp-eventSeverity-options"
+              >
+                <b-form-select
+                  id="smtp-eventSeverity-options"
+                  v-model="eventSeverityStatus"
+                  :options="eventSeverityOptions"
+                  @change="saveEventSeverityValue"
+                >
+                  <template #first>
+                    <b-form-select-option :value="null" disabled>
+                      {{ $t('global.form.selectAnOption') }}
+                    </b-form-select-option>
+                  </template>
+                </b-form-select>
+              </b-form-group>
+            </b-col>
+          </b-row>
+        </div>
+      </page-section>
       <b-row class="mt-4 mb-5">
         <b-col sm="2">
           <b-button
@@ -778,7 +804,27 @@ export default {
       serverKey: '',
       loading,
       sendTestAlertDisabled: false,
+      eventSeverityOptions: [
+        { value: 'All', text: this.$t('global.action.all') },
+        {
+          value: 'Information',
+          text: this.$t('global.action.information'),
+        },
+        { value: 'OK', text: this.$t('global.action.ok') },
+        { value: 'Critical', text: this.$t('global.action.critical') },
+        { value: 'Warning', text: this.$t('global.action.warning') },
+      ],
     };
+  },
+  computed: {
+    eventSeverityStatus: {
+      get() {
+        return this.$store.getters['smtp/eventSeverityValue'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
   },
   watch: {
     isSMTPEnabled: function (value) {
@@ -921,6 +967,7 @@ export default {
   },
   created() {
     this.startLoader();
+    this.$store.dispatch('smtp/getEventSeverity');
     this.$store.dispatch('smtp/getSMTPdata').finally(() => {
       this.endLoader();
       this.primary.enableConfiguration = this.$store.getters[
@@ -1248,6 +1295,14 @@ export default {
           .catch(({ message }) => this.errorToast(message))
           .finally(() => this.endLoader());
       }
+    },
+    saveEventSeverityValue(eventSeverityStatus) {
+      this.startLoader();
+      this.$store
+        .dispatch('smtp/saveEventSeverityValue', eventSeverityStatus)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => this.endLoader());
     },
   },
 };

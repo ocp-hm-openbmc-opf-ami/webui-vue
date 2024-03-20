@@ -59,11 +59,13 @@ const SmtpStore = {
       username: '',
       password: '',
     },
+    eventSeverityValue: null,
   },
   getters: {
     isPrimaryConfig: (state) => state.primary,
     isSecondaryConfig: (state) => state.secondary,
     sendTestAlert: (state) => state.sendTestAlert,
+    eventSeverityValue: (state) => state.eventSeverityValue,
   },
   mutations: {
     setSmtpData: (state, smtpData) => {
@@ -134,6 +136,9 @@ const SmtpStore = {
         state.sendTestAlert = true;
       } else state.sendTestAlert = false;
     },
+    setEventSeverityValue(state, eventSeverityValue) {
+      state.eventSeverityValue = eventSeverityValue;
+    },
   },
   actions: {
     async getSMTPdata({ commit }) {
@@ -189,6 +194,35 @@ const SmtpStore = {
         .then(() => i18n.t('pageSmtp.toast.successMsgTestAlert'))
         .catch(() => {
           throw new Error(i18n.t('pageSmtp.toast.errorMsgAlert'));
+        });
+    },
+    async getEventSeverity({ commit }) {
+      return await api
+        .get('redfish/v1/PefService')
+        .then((response) => {
+          if (response.data?.EventSeverity === undefined) {
+            commit('setEventSeverityValue', 'null');
+          } else {
+            commit('setEventSeverityValue', response.data?.EventSeverity);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    async saveEventSeverityValue({ dispatch }, eventSeverityValue) {
+      const SeverityValue = {
+        EventSeverity: eventSeverityValue,
+      };
+      return await api
+        .patch('redfish/v1/PefService', SeverityValue)
+        .then(() => dispatch('getEventSeverity'))
+        .then(() => {
+          return i18n.t('pageSmtp.toast.successEventSeverityUpdate');
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(i18n.t('pageSmtp.toast.errorEventSeverityUpdate'));
         });
     },
   },
