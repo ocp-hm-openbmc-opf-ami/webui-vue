@@ -870,7 +870,7 @@ revision_update:
   stage: revison_sync
   script:
     - mkdir -p revision_cloning
-    - sync_all_workspace=`realpath $revision_cloning`
+    - sync_all_workspace=`realpath revision_cloning`
     - echo "==> sync_all_workspace $sync_all_workspace"
     - git config --global user.email "$GUSER@ami.com"
     - git config --global user.name "$GUSER"
