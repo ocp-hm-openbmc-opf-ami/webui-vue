@@ -874,6 +874,7 @@ revision_update:
     - echo "==> sync_all_workspace $sync_all_workspace"
     - git config --global user.email "$GUSER@ami.com"
     - git config --global user.name "$GUSER"
+    - echo $REVISION_UPDATE_SRC_URI[@]
     - |
       cd $sync_all_workspace
       for src_url in ${REVISION_UPDATE_SRC_URI[@]};
