@@ -903,7 +903,8 @@ revision_update:
 
           for recipe in "${recipes_list[@]}"; 
             do
-              echo - "===================== Recipe ((++recipe_number)) ====================================="
+              echo "===================== Recipe $recipe_number ====================================="
+              ((++recipe_number)) 
               filepath=${recipe%%:*}
               line="${recipe#*:}"
               repo_url=$(echo $line | sed -n 's/.*git@\([^;]*\).*/\1/p; s/.*git:\/\/\([^;]*\).*/\1/p')
@@ -978,7 +979,6 @@ revision_update:
               fi
               echo -e "\n==================================================================="
             done
-          echo  ">>>>>>>>>>>>>>>>>>>>>>>>>>>>> DONE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
         done
     - echo "Update completed" 
   tags:
