@@ -28,7 +28,9 @@
             "success": "Success",
             "alert": "Alert",
             "upload": "Upload",
-            "send": "Send"
+            "send": "Send",
+            "information": "Information",
+            "all": "All"
         },
         "ariaLabel": {
             "clearSearch": "Clear search input",
@@ -1207,6 +1209,8 @@
         "cacertPEM": "Cacert PEM Certificate",
         "serverCRT": "Server CRT Certificate",
         "serverKey": "Server Key Certificate",
+        "eventSeverity": "EventSeverity",
+        "updateEventSeverity": "Update Event Severity Status",
         "modal": {
             "subject": "Subject",
             "mailContent": "Mail Content"
@@ -1220,7 +1224,9 @@
             "errorAddCrtCertificate": "Please upload the Server CRT certificate",
             "errorAddKeyCertificate": "Please upload the Server Key certificate",
             "successMsgTestAlert": "Test Alert send successfully",
-            "errorMsgAlert": "Error in sending test alerts"
+            "errorMsgAlert": "Error in sending test alerts",
+            "successEventSeverityUpdate": "Successfully Updated EventSeverity",
+            "errorEventSeverityUpdate": "Error in Updated EventSeverity"
         }
     },
     "pageEventFilter": {
