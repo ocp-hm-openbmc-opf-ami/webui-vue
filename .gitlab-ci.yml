@@ -881,7 +881,7 @@ revision_update:
       for src_url in "${REVISION_SRC_URI[@]}";
         do
           cd $sync_all_workspace
-          echo -e "\n==================== Cloning $src_url ===================="
+          echo  ">>>>>>>>>>>>>>>>>>>>>>>>>>>>> Cloning $src_url <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
           repo_name=${src_url##*/}
           # src_branch=$CI_COMMIT_REF_NAME;
           src_branch=main
@@ -890,25 +890,27 @@ revision_update:
           git clone ${src_url} --branch $src_branch $sync_all_workspace/$repo_name
 
           sync_recipe_ws=$sync_all_workspace/$repo_name
-          echo $(pwd)
-          ls -la .
-          echo $src_branch
-          cd $repo_name    
+          recipe_number=0
+
+          cd $repo_name
+          mapfile -t recipes_list < <(grep -r git.ami.com/ --exclude-dir=".*" --include="*.bb*" $sync_workspace)
+
           echo "==> Cloned Repo $src_url"
           echo "==> repo_name $repo_name"
           echo "==> CI PROJECT URL $CI_PROJECT_URL"
+          echo "==> Total Recipe ${#recipes_list[@]}"
 
-          mapfile -t recipes_list < <(grep -r git.ami.com/ --exclude-dir=".*" --include="*.bb*" $sync_workspace)
 
           for recipe in "${recipes_list[@]}"; 
             do
+              echo - "===================== Recipe ((++recipe_number)) ====================================="
               filepath=${recipe%%:*}
               line="${recipe#*:}"
               repo_url=$(echo $line | sed -n 's/.*git@\([^;]*\).*/\1/p; s/.*git:\/\/\([^;]*\).*/\1/p')
               git_auth_url=https://$GUSER:$GPASS@$repo_url
               recipe_name=${repo_url##*/}
               recipe_name=$(basename "$repo_url" .git)
-              echo "====> Details of Recipe "
+              echo "====> Details of Recipe"
               echo "==> Project Name $project_name"
               echo "==> Filepath $filepath"
               echo "==> Line $line"
@@ -976,7 +978,7 @@ revision_update:
               fi
               echo -e "\n==================================================================="
             done
-
+          echo  ">>>>>>>>>>>>>>>>>>>>>>>>>>>>> DONE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
         done
     - echo "Update completed" 
   tags:
