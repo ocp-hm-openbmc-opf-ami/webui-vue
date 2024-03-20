@@ -876,7 +876,7 @@ revision_update:
     - git config --global user.name "$GUSER"
     - |
       cd $sync_all_workspace
-      for src_url in $REVISION_UPDATE_SRC_URI;
+      for src_url in ${REVISION_UPDATE_SRC_URI[@]};
         do
           echo -e "\n==================== Cloning $src_url ===================="
           repo_name=${src_url##*/}
