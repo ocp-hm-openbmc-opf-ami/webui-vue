@@ -876,10 +876,11 @@ revision_update:
     - git config --global user.name "$GUSER"
     - REVISION_SRC_URI=( ${REVISION_UPDATE_SRC_URI} )
     - echo -e ${REVISION_SRC_URI[@]}
-    - cd $sync_all_workspace
+    
     - |
       for src_url in "${REVISION_SRC_URI[@]}";
         do
+          cd $sync_all_workspace
           echo -e "\n==================== Cloning $src_url ===================="
           repo_name=${src_url##*/}
           # src_branch=$CI_COMMIT_REF_NAME;
@@ -889,7 +890,8 @@ revision_update:
           git clone ${src_url} --branch $src_branch $sync_all_workspace/$repo_name
 
           sync_recipe_ws=$sync_all_workspace/$repo_name
-
+          echo $(pwd)
+          ls -la .
           echo $src_branch
           cd $repo_name    
           echo "==> repo_name $repo_name"
