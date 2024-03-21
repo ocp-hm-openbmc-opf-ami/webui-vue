@@ -133,6 +133,9 @@ const EventFilterStore = {
         }
       }
     },
+    setCheckAll: (state, newValue) => {
+      state.checkAll = newValue;
+    },
   },
   actions: {
     async getEventFilterData({ commit }) {

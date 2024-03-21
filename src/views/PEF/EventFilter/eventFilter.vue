@@ -83,16 +83,23 @@ export default {
     return {
       alertData: this.$store.getters['eventFilter/getAlertData'],
       loading,
+      localCheckAll: this.$store.getters['eventFilter/getCheckAll'],
     };
   },
   computed: {
     checkAll: {
       get() {
-        return this.$store.getters['eventFilter/getCheckAll'];
+        return this.localCheckAll;
       },
       set(newValue) {
-        return newValue;
+        this.localCheckAll = newValue;
       },
+    },
+  },
+  watch: {
+    // Watch for changes in localCheckAll and update the store
+    localCheckAll(newValue) {
+      this.$store.commit('eventFilter/setCheckAll', newValue);
     },
   },
   created() {
@@ -108,7 +115,7 @@ export default {
         .dispatch('eventFilter/setEventFilterData', this.alertData)
         .then((success) => {
           this.successToast(success);
-          this.checkAll = this.$store.getters['eventFilter/getCheckAll'];
+          this.localCheckAll = this.$store.getters['eventFilter/getCheckAll'];
         })
         .catch(({ message }) => {
           this.errorToast(message);
@@ -121,6 +128,8 @@ export default {
       this.alertData.forEach((each) => {
         each.enableStatus = checkAll;
       });
+      // Update localCheckAll when all events are enabled/disabled
+      this.localCheckAll = checkAll;
     },
   },
 };
