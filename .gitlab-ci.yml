@@ -92,8 +92,7 @@ variables:
     # CLEARNING SSTATE CACHE FOR JVIEWER
     ###########################################################################
     - ls -la $SOURCE_WORKSPACE
-    - cd $SOURCE_WORKSPACE/poky/scripts
-    - ./sstate-cache-management.sh --cache-dir=$HOME/cache/onetree/$base_cache/sstate-cache -d -v -y
+    - $SOURCE_WORKSPACE/poky/scripts/sstate-cache-management.sh --cache-dir=$HOME/cache/onetree/$base_cache/sstate-cache -d -v -y
     - echo "===> SSTATE CACHE DIR SIZE"
     - du -h -d 2 $HOME/cache/onetree
     - du -sh $HOME/cache/onetree/$base_cache/sstate-cache
