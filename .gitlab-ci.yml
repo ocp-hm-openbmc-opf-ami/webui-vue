@@ -111,6 +111,7 @@ variables:
 
       if [ -f ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf ]; then
         cp -r ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf ${INFO_AND_LOG}
+      fi
       
     ###########################################################################
     # TEMPLATE ENV
