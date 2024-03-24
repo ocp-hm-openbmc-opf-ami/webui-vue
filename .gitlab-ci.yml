@@ -97,7 +97,18 @@ variables:
     - du -h -d 2 $HOME/cache/onetree
     - du -sh $HOME/cache/onetree/$base_cache/sstate-cache
 
-
+    
+    ###########################################################################
+    # COPY LAYERS FILES TO ARTIFACTS FOR DEBUGGING
+    ###########################################################################
+    - |
+      if [ -f ${PLATFORM_BBLAYERS} ]; then
+        cp -r $PLATFORM_BBLAYERS ${INFO_AND_LOG}/platform_bb_layer.conf
+      fi
+      if [ -f ${PLATFORM_CONF} ]; then
+        cp -r $PLATFORM_CONF ${INFO_AND_LOG}/platform_.conf
+      fi
+      
     ###########################################################################
     # TEMPLATE ENV
     ###########################################################################
@@ -142,16 +153,6 @@ variables:
         done
       fi
 
-    ###########################################################################
-    # COPY LAYERS FILES TO ARTIFACTS FOR DEBUGGING
-    ###########################################################################
-    - |
-      if [ -f ${PLATFORM_BBLAYERS} ]; then
-        cp -r $PLATFORM_BBLAYERS ${INFO_AND_LOG}/platform_bb_layer.conf
-      fi
-      if [ -f ${PLATFORM_CONF} ]; then
-        cp -r $PLATFORM_CONF ${INFO_AND_LOG}/platform_.conf
-      fi
 
     ###########################################################################
     # RUNNING DO FETCH ALONE
