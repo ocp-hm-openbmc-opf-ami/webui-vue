@@ -812,7 +812,7 @@ build_branch_coverity:
 
                   CLONE_REPO ${CL_URL} ${CL_PATH}
                   echo "#BRCM Raid and HBA management" >> $PLATFORM_CONF
-                  echo 'IMAGE_INSTALL:append = " raid-mgmt hba-mgmt raid-brcm hba-brcm"' >> $PLATFORM_CONF
+                  echo 'IMAGE_INSTALL:append = " raid-mgmt raid-brcm hba-mgmt hba-brcm"' >> $PLATFORM_CONF
 
                   HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                   ;;
@@ -1002,8 +1002,8 @@ build_branch_coverity:
 
                 ;;
               "IPERF3")
-                echo "#IPERF3 Enablement" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo 'IMAGE_INSTALL:append = " iperf3"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+                echo "#Check network performance Tools" >> $PLATFORM_CONF
+                echo 'IMAGE_INSTALL:append = " iperf3"' >>  $PLATFORM_CONF
                 HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
               ;;
               
