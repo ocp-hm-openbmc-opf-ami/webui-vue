@@ -487,7 +487,6 @@ build_branch_coverity:
     - export OUTPUT=`realpath ./output/${config}`
     - mkdir -p ${OUTPUT}/INFO_AND_LOG
     - export INFO_AND_LOG=`realpath ${OUTPUT}/INFO_AND_LOG`
-    - mkdir -p openbmc
     - SOURCE_WORKSPACE=${ENTRYPOINT_DIR}/openbmc
 
     ###########################################################################
@@ -653,7 +652,7 @@ build_branch_coverity:
     ########################################
     # OPENBMC
     ########################################
-    - CLONE_REPO ${openbmc_repo} ${SOURCE_WORKSPACE}
+    - CLONE_REPO ${openbmc_repo} ${SOURCE_WORKSPACE}/openbmc
 
     ########################################
     # OPENBMC-META-INTEL
