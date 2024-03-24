@@ -593,13 +593,13 @@ build_branch_coverity:
         log_content=$2
         log_file=$3
 
-        if [[ $log_type == *"ERROR"* ]];
+        if [[ $log_type == *"ERROR"* ]]; then
           prefix="${RED}Error:${NC}"
-        elif [[ $log_type == *"SUCCESS"* ]];
+        elif [[ $log_type == *"SUCCESS"* ]]; then
           prefix="${GREEN}Success:${NC}"
-        elif [[ $log_type == *"WARNING"* ]];
+        elif [[ $log_type == *"WARNING"* ]]; then
           prefix="${YELLOW}Warning:${NC}"
-        elif [[ $log_type == *"INFO"* ]];
+        elif [[ $log_type == *"INFO"* ]]; then
           prefix="${BLUE}Info:${NC}"
         else
           prefix="${WHITE}Log:${NC}"
