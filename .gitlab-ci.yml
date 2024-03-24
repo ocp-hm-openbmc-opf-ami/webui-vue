@@ -811,8 +811,8 @@ build_branch_coverity:
                   CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/raid-brcm"
 
                   CLONE_REPO ${CL_URL} ${CL_PATH}
-                  echo "#BRCM Raid and HBA management" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                  echo 'IMAGE_INSTALL:append = " raid-mgmt hba-mgmt raid-brcm hba-brcm"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+                  echo "#BRCM Raid and HBA management" >> $PLATFORM_CONF
+                  echo 'IMAGE_INSTALL:append = " raid-mgmt hba-mgmt raid-brcm hba-brcm"' >> $PLATFORM_CONF
 
                   HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                   ;;
@@ -821,8 +821,8 @@ build_branch_coverity:
                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/nic"
                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/nic"
                 CLONE_REPO ${CL_URL} ${CL_PATH}
-                echo "#NIC Management" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo 'IMAGE_INSTALL:append = " nic nic-mgmt"' >>${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+                echo "#NIC Management" >> $PLATFORM_CONF
+                echo 'IMAGE_INSTALL:append = " nic nic-mgmt"' >> $PLATFORM_CONF
                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
               
@@ -830,8 +830,8 @@ build_branch_coverity:
                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/nvme"
                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/nvme"
                 CLONE_REPO ${CL_URL} ${CL_PATH}
-                echo "#NVMe Management" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo 'IMAGE_INSTALL:append = " nvme nvme-mgmt"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+                echo "#NVMe Management" >> $PLATFORM_CONF
+                echo 'IMAGE_INSTALL:append = " nvme nvme-mgmt"' >> $PLATFORM_CONF
                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
               
@@ -839,8 +839,8 @@ build_branch_coverity:
                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/nvme"
                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/nvme"
                 CLONE_REPO ${CL_URL} ${CL_PATH}
-                echo "#NVMe Basic Management" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo 'IMAGE_INSTALL:append = " nvme-basic nvmebasic-mgmt"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+                echo "#NVMe Basic Management" >> $PLATFORM_CONF
+                echo 'IMAGE_INSTALL:append = " nvme-basic nvmebasic-mgmt"' >> $PLATFORM_CONF
                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
               "FWUPDATE")
@@ -848,17 +848,17 @@ build_branch_coverity:
                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/cpld"
                 CLONE_REPO ${CL_URL} ${CL_PATH}
                 # Commenting out "#IMAGE_FSTYPES += "intel-pfr"" in ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf or build/conf/local.conf
-                echo "#FWUPDATE" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo 'IMAGE_INSTALL:append = " cpld-tool"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo 'NON_PFR_UPDATE_FEATURES:append = " cpld-update"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+                echo "#FWUPDATE" >> $PLATFORM_CONF
+                echo 'IMAGE_INSTALL:append = " cpld-tool"' >> $PLATFORM_CONF
+                echo 'NON_PFR_UPDATE_FEATURES:append = " cpld-update"' >> $PLATFORM_CONF
                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
               "RTP")
                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/redfish"
                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/redfish"
                 CLONE_REPO ${CL_URL} ${CL_PATH}
-                echo "#RTP" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo 'IMAGE_INSTALL:append = " bmcweb"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+                echo "#RTP" >> $PLATFORM_CONF
+                echo 'IMAGE_INSTALL:append = " bmcweb"' >> $PLATFORM_CONF
                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
                 
@@ -870,8 +870,8 @@ build_branch_coverity:
                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-ami/raid-mscc"
                 CLONE_REPO ${CL_URL} ${CL_PATH}
 
-                echo "# ${EP}" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo 'IMAGE_INSTALL:append = "  storage-mgmt raid-mscc"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+                echo "# ${EP}" >> $PLATFORM_CONF
+                echo 'IMAGE_INSTALL:append = "  storage-mgmt raid-mscc"' >> $PLATFORM_CONF
                 HandleLog SUCCESS "Enabled ${EP}-Storage and ${EP}-Raid" ${DEBUG_LOG_FILE}
                 ;;
               
@@ -879,8 +879,8 @@ build_branch_coverity:
                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/nvidia/nvidiapacks/gp-gpu"
                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-gpgpu"
                 CLONE_REPO ${CL_URL} ${CL_PATH}
-                echo "# ${EP}" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo 'IMAGE_INSTALL:append = " nvidia-gpumgr nvidia-gpuoob"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+                echo "# ${EP}" >> $PLATFORM_CONF
+                echo 'IMAGE_INSTALL:append = " nvidia-gpumgr nvidia-gpuoob"' >> $PLATFORM_CONF
                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
               
@@ -888,8 +888,8 @@ build_branch_coverity:
                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/pciesw-brcm"
                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/pciesw-brcm"
                 CLONE_REPO ${CL_URL} ${CL_PATH}
-                echo "#BRCMPCIESW" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo 'IMAGE_INSTALL:append = " i2c-pciesw libscrutiny mctp-pciesw pciesw-service scrutiny-ifc"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+                echo "#BRCMPCIESW" >> $PLATFORM_CONF
+                echo 'IMAGE_INSTALL:append = " i2c-pciesw libscrutiny mctp-pciesw pciesw-service scrutiny-ifc"' >> $PLATFORM_CONF
                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
 
@@ -1026,7 +1026,7 @@ build_branch_coverity:
     - git clone "https://${GUSER}:${GPASS}@git.ami.com/core/rd/kvm/javasigning" -b "main" $SOURCE_WORKSPACE/JavaSigning
     - HandleLog INFO "Enabling javasigning" ${DEBUG_LOG_FILE}
     - echo '#JavaViewerSigning' >> $PLATFORM_CONF
-    - echo "JAVASIGNING_DIR=\"$SOURCE_WORKSPACE/JavaSigning\"" >> $$PLATFORM_CONF
+    - echo "JAVASIGNING_DIR=\"$SOURCE_WORKSPACE/JavaSigning\"" >> $PLATFORM_CONF
     - echo "SSTATE_SKIP_CREATION_pn-jviewer = \"1\"" >> $PLATFORM_CONF
     - echo "#CUSTOM CHANGE $CI_COMMIT_SHA" >> ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-utilities/jviewer/jviewer.bb
     - HandleLog DASH "COMPLETED" ${DEBUG_LOG_FILE}
