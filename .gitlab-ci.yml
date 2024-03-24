@@ -64,7 +64,7 @@ variables:
       if [[ ${CI_RUNNER_DESCRIPTION,,} =~ "aws" && ! "$mr_labels" =~ "OT_ENABLE_COVERITY" ]]; 
       then 
         sync_start_time=$(date +%s)
-        aws s3 sync --sse=aws:kms --quiet s3://${OT_SSTATE_BUCKET}/onetree/$base_cache $HOME/cache/onetree/$base_cache
+        # aws s3 sync --sse=aws:kms --quiet s3://${OT_SSTATE_BUCKET}/onetree/$base_cache $HOME/cache/onetree/$base_cache
         sync_end_time=$(date +%s)
         echo "AWS AUTO SCALE Runner, Cache Sync Time from S3: $(($sync_end_time-$sync_start_time)) secs"
       fi
@@ -91,6 +91,7 @@ variables:
     ###########################################################################
     # CLEARNING SSTATE CACHE FOR JVIEWER
     ###########################################################################
+    - ls -la $SOURCE_WORKSPACE
     - cd $SOURCE_WORKSPACE/poky/scripts
     - ./sstate-cache-management.sh --cache-dir=$HOME/cache/onetree/$base_cache/sstate-cache -d -v -y
     - echo "===> SSTATE CACHE DIR SIZE"
