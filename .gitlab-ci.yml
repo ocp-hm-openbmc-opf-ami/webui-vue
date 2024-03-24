@@ -19,6 +19,7 @@ variables:
     ###########################################################################
     # CUSTOM TEMPORARY CHANGES FOR DISBALIGN SPOM REPORT GEN
     ###########################################################################
+    - cd ${SOURCE_WORKSPACE}
     - |
       if [[ -f $SOURCE_WORKSPACE/poky/meta/classes/create-spdx.bbclass ]]; then 
         echo "=============== Disabling SBOM ======================="
@@ -95,7 +96,7 @@ variables:
     - echo "===> SSTATE CACHE DIR SIZE"
     - du -h -d 2 $HOME/cache/onetree
     - du -sh $HOME/cache/onetree/$base_cache/sstate-cache
-    - cd ${SOURCE_WORKSPACE}
+
 
     ###########################################################################
     # TEMPLATE ENV
@@ -773,13 +774,11 @@ build_branch_coverity:
       ls -la ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       sed -i "s/IMAGE_INSTALL:append = \" at-scale-debug\"/#IMAGE_INSTALL:append = \" at-scale-debug\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
 
-      echo "1"
       sed -i "s/IMAGE_INSTALL:append = \" ami-acd-dbus ami-asd-dbus\"/#IMAGE_INSTALL:append = \" ami-acd-dbus ami-asd-dbus\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
 
-      echo "2"
       sed -i "s/IMAGE_INSTALL:append = \" bafi-dev\"/#IMAGE_INSTALL:append = \" bafi-dev\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
 
-      echo "3"
+
       sed -i "s/EXTRA_IMAGE_FEATURES:append = \" \\\/#EXTRA_IMAGE_FEATURES:append = \" \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       
       sed -i "s/    acd-features \\\/#    acd-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
@@ -788,8 +787,6 @@ build_branch_coverity:
       sed -i "s/    ras-offload-features \\\/#    ras-offload-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       sed -i "s/    telemetry-features \\\/#    telemetry-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       sed -i "s/    \"/#    \"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
-
-      echo "3"
       
       if [ -f ${PLATFORM_BBLAYERS} ]; then
         if grep -q "##OEROOT##/openbmc-meta-intel/meta-restricted" "$PLATFORM_BBLAYERS"; then
@@ -1077,7 +1074,7 @@ build_branch_coverity:
           git_auth_url=https://$GUSER:$GPASS@$repo_url
           
           
-          HandleLog DASH "CHECKING $filepath" ${DEBUG_LOG_FILE}
+          HandleLog DASH "CHECKING $repo_url" ${DEBUG_LOG_FILE}
           HandleLog INFO "Filepath $filepath" ${DEBUG_LOG_FILE}
           HandleLog INFO "Line $line" ${DEBUG_LOG_FILE}
           HandleLog INFO "REPO URL $repo_url" ${DEBUG_LOG_FILE}
