@@ -545,6 +545,18 @@ build_branch_coverity:
       echo "------------------------"
     
 
+    - |
+      # Define color codes
+      RED='\033[0;31m'
+      GREEN='\033[0;32m'
+      YELLOW='\033[0;33m'
+      NC='\033[0m' # No Color
+
+      # Example usage
+      echo -e "${RED}Error:${NC} Something went wrong"
+      echo -e "${GREEN}Success:${NC} Task completed successfully"
+      echo -e "${YELLOW}Warning:${NC} Consider this warning"
+  
     ########################################################################################################################
     # PRINTING PRESENT DIR
     ########################################################################################################################
@@ -556,7 +568,15 @@ build_branch_coverity:
     ########################################################################################################################
     # COMMON CLONING FUNCTION
     ########################################################################################################################
-
+    - |
+      # log_type (CLONE, BUILD, DEBUG)
+      CREATE_LOG () {
+        log_content=$2
+        log_type=$1
+        if log_type
+        echo -e "\n $"
+        
+      }
     - |
       # => CLONE URL $1 
       # => CLONE DIR $2
@@ -565,7 +585,7 @@ build_branch_coverity:
         CLONE_DIR=$2
         CLONE_REPO_NAME=$(basename "$CLONE_REPO_URL" | sed 's/^.*\///')
 
-        echo "======================= PROCESSING ${CLONE_REPO_NAME} ===========================" >> ${INFO_AND_LOG}/SourceCloneInfo.log
+        echo -e "======================= PROCESSING ${CLONE_REPO_NAME} ===========================" >> ${INFO_AND_LOG}/SourceCloneInfo.log
 
         if [ -d "$2" ]; then
           echo "==> CLONE REPO_URL => ${CLONE_REPO_URL}...Already Exist !!!" >> ${INFO_AND_LOG}/SourceCloneInfo.log
