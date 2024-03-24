@@ -669,6 +669,7 @@ build_branch_coverity:
 
     - TEMPLATECONF=""
     - echo "===> PLATFORM SOURCE BRANCH EXIST ? $PLATFORM_BRANCH_CHECK"
+    - cd ${SOURCE_WORKSPACE}
     - |
       case "${config}" in
         *ArcherCity*)
