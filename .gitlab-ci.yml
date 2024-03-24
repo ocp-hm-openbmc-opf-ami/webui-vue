@@ -103,10 +103,10 @@ variables:
     ###########################################################################
     - |
       if [ -f ${PLATFORM_BBLAYERS} ]; then
-        cp -r $PLATFORM_BBLAYERS ${INFO_AND_LOG}/platform_bb_layer.conf
+        cp -r $PLATFORM_BBLAYERS ${INFO_AND_LOG}
       fi
       if [ -f ${PLATFORM_CONF} ]; then
-        cp -r $PLATFORM_CONF ${INFO_AND_LOG}/platform_.conf
+        cp -r $PLATFORM_CONF ${INFO_AND_LOG}
       fi
       
     ###########################################################################
@@ -870,7 +870,7 @@ build_branch_coverity:
                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-ami/raid-mscc"
                 CLONE_REPO ${CL_URL} ${CL_PATH}
 
-                echo "# ${EP}" >> $PLATFORM_CONF
+                echo "#MSCC Raid and HBA management" >> $PLATFORM_CONF
                 echo 'IMAGE_INSTALL:append = "  storage-mgmt raid-mscc"' >> $PLATFORM_CONF
                 HandleLog SUCCESS "Enabled ${EP}-Storage and ${EP}-Raid" ${DEBUG_LOG_FILE}
                 ;;
