@@ -108,6 +108,10 @@ variables:
       if [ -f ${PLATFORM_CONF} ]; then
         cp -r $PLATFORM_CONF ${INFO_AND_LOG}
       fi
+
+      if [ -f ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf ]; then
+        cp -r ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf ${INFO_AND_LOG}
+      fi
       
     ###########################################################################
     # TEMPLATE ENV
@@ -613,9 +617,9 @@ build_branch_coverity:
         fi
  
         if [[ $log_type == *"DASH"* ]]; then
-          echo -e "${prefix_dashes} ${log_content} ${prefix_dashes}"  | tee -a $log_file
+          echo -e "\n${prefix_dashes} ${log_content} ${prefix_dashes}"  | tee -a $log_file
         else
-          echo -e "${prefix} ===>> ${log_content}" | tee -a $log_file
+          echo -e "\n${prefix} ===>> ${log_content}" | tee -a $log_file
         fi
       }
     - |
