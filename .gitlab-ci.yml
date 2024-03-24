@@ -157,14 +157,13 @@ variables:
     # RUNNING DO FETCH ALONE
     ###########################################################################
     
-    - set +e
     # - echo -e "==========> Started do fetch <==============\n"  | tee -a ${INFO_AND_LOG}/Build_log.log
     # - bitbake -D --runonly do_fetch $executer
     
     ###########################################################################
     # BITBAKE BUILD WITH/WITHOUT COVERITY
     ###########################################################################
-    
+    - set +e
     - echo -e "==========> Started bitbake build <==============\n"  | tee -a ${INFO_AND_LOG}/Build_log.log
     - first_build_start_time=$(date +%s)
     - |
@@ -197,56 +196,55 @@ variables:
       fi
     - first_build_end_time=$(date +%s)
     - echo "===> First build time $(($first_build_end_time-$first_build_start_time)) secs <==="
+    - set -e
 
     ###########################################################################
     # BITBAKE BUILD RETRYING .........
     ###########################################################################
 
-    - set -e
-    - |
-      if ! grep -qE "$findstr" "${INFO_AND_LOG}/Build_log.log";
-      then 
-        echo -e "\n\n==========> Retrying bitbake build <==============\n"  | tee -a ${INFO_AND_LOG}/Build_log.log;
-        retry_build_start_time=$(date +%s)
-        python3 -c "import time; import random; slp=random.randint(10, 30); print('sleeping:', slp); time.sleep(random.randint(10, 20))"
-        if [[ ! "$mr_labels" =~ "OT_ENABLE_COVERITY" ]];then
-          # BB_NUMBER_THREADS=4 bitbake $executer | tee -a ${INFO_AND_LOG}/Build_log.log;
-          set +e
-          BB_NUMBER_THREADS=8 bitbake $executer | tee -a ${INFO_AND_LOG}/Build_log.log
-          set -e
-          retry_build_end_time=$(date +%s)
-          echo "===> Retry 1 build time $(($retry_build_end_time-$retry_build_start_time)) secs <==="
+    
+    # - |
+    #   if ! grep -qE "$findstr" "${INFO_AND_LOG}/Build_log.log";
+    #   then 
+    #     echo -e "\n\n==========> Retrying bitbake build <==============\n"  | tee -a ${INFO_AND_LOG}/Build_log.log;
+    #     retry_build_start_time=$(date +%s)
+    #     if [[ ! "$mr_labels" =~ "OT_ENABLE_COVERITY" ]];then
+    #       set +e
+    #       BB_NUMBER_THREADS=8 bitbake $executer | tee -a ${INFO_AND_LOG}/Build_log.log
+    #       set -e
+    #       retry_build_end_time=$(date +%s)
+    #       echo "===> Retry 1 build time $(($retry_build_end_time-$retry_build_start_time)) secs <==="
           
-          # if ! grep -qE "$findstr" "${INFO_AND_LOG}/Build_log.log";then 
-          #     echo -e "\n\n==========> Second time Retrying bitbake build <==============\n"  | tee -a ${INFO_AND_LOG}/Build_log.log;
-          #     retry_build_start_time=$(date +%s)
-          #     python3 -c "import time; import random; slp=random.randint(10, 30); print('sleeping:', slp); time.sleep(random.randint(10, 20))"
-          #     set +e
-          #     BB_NUMBER_THREADS=8 bitbake $executer | tee -a ${INFO_AND_LOG}/Build_log.log;
-          #     set -e
-          #     retry_build_end_time=$(date +%s)
-          #     echo "===> Retry 2 build time $(($retry_build_end_time-$retry_build_start_time)) secs <==="
-          #     # bitbake $executer | tee -a ${INFO_AND_LOG}/Build_log.log
-          # fi
+    #       # if ! grep -qE "$findstr" "${INFO_AND_LOG}/Build_log.log";then 
+    #       #     echo -e "\n\n==========> Second time Retrying bitbake build <==============\n"  | tee -a ${INFO_AND_LOG}/Build_log.log;
+    #       #     retry_build_start_time=$(date +%s)
+    #       #     python3 -c "import time; import random; slp=random.randint(10, 30); print('sleeping:', slp); time.sleep(random.randint(10, 20))"
+    #       #     set +e
+    #       #     BB_NUMBER_THREADS=8 bitbake $executer | tee -a ${INFO_AND_LOG}/Build_log.log;
+    #       #     set -e
+    #       #     retry_build_end_time=$(date +%s)
+    #       #     echo "===> Retry 2 build time $(($retry_build_end_time-$retry_build_start_time)) secs <==="
+    #       #     # bitbake $executer | tee -a ${INFO_AND_LOG}/Build_log.log
+    #       # fi
 
-        else
-          BB_NUMBER_THREADS=4 $HOME/coverity/bin/cov-build --dir $HOME/coverity_report bitbake $executer | tee -a ${INFO_AND_LOG}/Build_log.log
-          retry_build_end_time=$(date +%s)
-          echo "===> Retry 1 build time $(($retry_build_end_time-$retry_build_start_time)) secs <==="
-          $HOME/coverity/bin/cov-manage-emit --dir $HOME/coverity_report list | tee -a Included_list
-          $HOME/coverity/bin/cov-analyze --dir $HOME/coverity_report --enable-constraint-fpp -all
-          $HOME/coverity/bin/cov-format-errors --dir $HOME/coverity_report --json-output-v8 $HOME/coverity_report/coverity-scan.json
-          ls
-          echo ${attributes} >> mr_data.json
-          echo ${attributes}
-          cp -r $HOME/coverity_report/ $OUTPUT
-          zip coverity.zip $HOME/coverity_report/coverity-scan.json mr_data.json
-          cp coverity.zip $OUTPUT
-          ls
-          curl -F 'coverity_data=@coverity.zip' "https://devnet.ami.com/sast-bot/api/v1/coverity_ot_reports?pid=$CI_PROJECT_ID&job_url=$CI_JOB_URL&job_stage=$CI_JOB_STAGE&prj=${config}&mr_id=$MR_ID"
-        fi
+    #     else
+    #       BB_NUMBER_THREADS=4 $HOME/coverity/bin/cov-build --dir $HOME/coverity_report bitbake $executer | tee -a ${INFO_AND_LOG}/Build_log.log
+    #       retry_build_end_time=$(date +%s)
+    #       echo "===> Retry 1 build time $(($retry_build_end_time-$retry_build_start_time)) secs <==="
+    #       $HOME/coverity/bin/cov-manage-emit --dir $HOME/coverity_report list | tee -a Included_list
+    #       $HOME/coverity/bin/cov-analyze --dir $HOME/coverity_report --enable-constraint-fpp -all
+    #       $HOME/coverity/bin/cov-format-errors --dir $HOME/coverity_report --json-output-v8 $HOME/coverity_report/coverity-scan.json
+    #       ls
+    #       echo ${attributes} >> mr_data.json
+    #       echo ${attributes}
+    #       cp -r $HOME/coverity_report/ $OUTPUT
+    #       zip coverity.zip $HOME/coverity_report/coverity-scan.json mr_data.json
+    #       cp coverity.zip $OUTPUT
+    #       ls
+    #       curl -F 'coverity_data=@coverity.zip' "https://devnet.ami.com/sast-bot/api/v1/coverity_ot_reports?pid=$CI_PROJECT_ID&job_url=$CI_JOB_URL&job_stage=$CI_JOB_STAGE&prj=${config}&mr_id=$MR_ID"
+    #     fi
         
-      fi
+    #   fi
 
     ###########################################################################
     # SYNCING LOCAL SSTATE CACHE TO AWS S3 BUCKET
