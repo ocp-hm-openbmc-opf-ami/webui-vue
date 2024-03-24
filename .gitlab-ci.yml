@@ -789,10 +789,10 @@ build_branch_coverity:
       sed -i "s/    telemetry-features \\\/#    telemetry-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       sed -i "s/    \"/#    \"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
 
+      echo "3"
+      
       if [ -f ${PLATFORM_BBLAYERS} ]; then
-        grep "##OEROOT##/openbmc-meta-intel/meta-restricted " ${PLATFORM_BBLAYERS} >/dev/null
-        # If not found, add after the line ##OEROOT#/openbmc-meta-intel/meta-intel
-        if [ $? -ne 0 ]; then
+        if grep -q "##OEROOT##/openbmc-meta-intel/meta-restricted" "$PLATFORM_BBLAYERS"; then
           sed -i '/##OEROOT##\/openbmc-meta-intel\/meta-intel \\/a\  ##OEROOT##/openbmc-meta-intel/meta-restricted \\' ${PLATFORM_BBLAYERS}
         fi
       fi
