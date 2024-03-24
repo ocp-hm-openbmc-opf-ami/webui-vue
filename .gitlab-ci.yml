@@ -606,9 +606,9 @@ build_branch_coverity:
         fi
  
         if [[ $log_type == *"DASH"* ]]; then
-          echo -e "${prefix_dashes} ${log_content} ${prefix_dashes}" $log_file
+          echo -e "${prefix_dashes} ${log_content} ${prefix_dashes}" >> $log_file
         else
-          echo -e "==> ${prefix} ${log_content}" $log_file
+          echo -e "${prefix} ===>> ${log_content}" >> $log_file
         fi
         
         
@@ -759,11 +759,11 @@ build_branch_coverity:
             ;;
       esac
 
-      HandleLog HASH "CONF DETAILS" ${DEBUG_LOG_FILE}
+      HandleLog DASH "CONF DETAILS" ${DEBUG_LOG_FILE}
       HandleLog SUCCESS "TEMPLATECONF = $TEMPLATECONF" ${DEBUG_LOG_FILE}
       HandleLog SUCCESS "PLATFORM_CONF = $PLATFORM_CONF" ${DEBUG_LOG_FILE}
       HandleLog SUCCESS "PLATFORM_BBLAYERS = $PLATFORM_BBLAYERS" ${DEBUG_LOG_FILE}
-      HandleLog HASH "DONE" ${DEBUG_LOG_FILE}
+      HandleLog DASH "DONE" ${DEBUG_LOG_FILE}
 
 
     ########################################################################################################################
@@ -772,22 +772,25 @@ build_branch_coverity:
     - |
       CLONE_REPO ${meta_restricted_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted
       CLONE_REPO ${meta_intel_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-intel
+
       sed -i "s/IMAGE_INSTALL:append = \" at-scale-debug\"/#IMAGE_INSTALL:append = \" at-scale-debug\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+
       sed -i "s/IMAGE_INSTALL:append = \" ami-acd-dbus ami-asd-dbus\"/#IMAGE_INSTALL:append = \" ami-acd-dbus ami-asd-dbus\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+
       sed -i "s/IMAGE_INSTALL:append = \" bafi-dev\"/#IMAGE_INSTALL:append = \" bafi-dev\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+
       sed -i "s/EXTRA_IMAGE_FEATURES:append = \" \\\/#EXTRA_IMAGE_FEATURES:append = \" \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+      
       sed -i "s/    acd-features \\\/#    acd-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       sed -i "s/    nm-features \\\/#    nm-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       sed -i "s/    oob-config-features \\\/#    oob-config-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       sed -i "s/    ras-offload-features \\\/#    ras-offload-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       sed -i "s/    telemetry-features \\\/#    telemetry-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       sed -i "s/    \"/#    \"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
-
-      grep "##OEROOT##/openbmc-meta-intel/meta-restricted " ${PLATFORM_BBLAYERS} >/dev/null
-      # If not found, add after the line ##OEROOT#/openbmc-meta-intel/meta-intel
-      if [ $? -ne 0 ]; then
-        sed -i '/##OEROOT##\/openbmc-meta-intel\/meta-intel \\/a\  ##OEROOT##/openbmc-meta-intel/meta-restricted \\' ${PLATFORM_BBLAYERS}
+      if [ ! -f ${PLATFORM_BBLAYERS} ]; then
+          sed -i '/##OEROOT##\/openbmc-meta-intel\/meta-intel \\/a\  ##OEROOT##/openbmc-meta-intel/meta-restricted \\' ${PLATFORM_BBLAYERS}
       fi
+     
 
     ########################################################################################################################
     # AMI EXPANSTION PACK ENABLING
