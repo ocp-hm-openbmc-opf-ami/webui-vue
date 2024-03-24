@@ -796,12 +796,18 @@ build_branch_coverity:
       sed -i "s/    ras-offload-features \\\/#    ras-offload-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       sed -i "s/    telemetry-features \\\/#    telemetry-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       sed -i "s/    \"/#    \"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
-      
+      set +e
+      ls -lat $PLATFORM_BBLAYERS
       if [ -f ${PLATFORM_BBLAYERS} ]; then
-        if ! grep -q "##OEROOT##/openbmc-meta-intel/meta-restricted" "$PLATFORM_BBLAYERS"; then
+        if ! grep -qE "##OEROOT##/openbmc-meta-intel/meta-restricted" "$PLATFORM_BBLAYERS"; then
+          
           sed -i '/##OEROOT##\/openbmc-meta-intel\/meta-intel \\/a\  ##OEROOT##/openbmc-meta-intel/meta-restricted \\' ${PLATFORM_BBLAYERS}
+          HandleLog SUCCESS "Meta restricted added to openbmc-meta-intel !!" ${DEBUG_LOG_FILE}
         fi
       fi
+
+      cat $PLATFORM_BBLAYERS
+      set -e
 
     ###########################################################################
     # AMI EXPANSTION PACK ENABLING
