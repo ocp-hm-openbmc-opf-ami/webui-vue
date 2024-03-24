@@ -313,6 +313,7 @@ variables:
       fi
     - |
       HandleLog DASH "COPYING IMAGES TO ARTIFACTS !!" ${BUILD_LOG_FILE}
+      set +e
       # Copy U-BOOT file
       UbootFile=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname u-boot.bin)
       if [ -f ${UbootFile} ] && [ "${UbootFile}" != "" ]; then cp ${UbootFile} ${OUTPUT}/$(printf "${config}_${version}_u-boot".bin); fi
@@ -344,7 +345,7 @@ variables:
       # Copy JViewer.jar
       JARFile=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname utilities)
       if [ -d ${JARFile} ] && [ "${JARFile}" != "" ]; then cp -r ${JARFile} ${OUTPUT}/; fi
-
+      set -e
       HandleLog DASH " ## COPIED !! ## " ${BUILD_LOG_FILE}
 
     - echo "Build Successfully Completed !!"
