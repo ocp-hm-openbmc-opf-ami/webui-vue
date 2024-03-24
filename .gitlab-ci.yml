@@ -112,6 +112,7 @@ variables:
     ###########################################################################
     # TEMPLATE ENV
     ###########################################################################
+    - echo $(pwd)
     - echo -e "==> Initiating template ${!template}\n"  | tee -a ${INFO_AND_LOG}/Build_log.log
     - TEMPLATECONF=${!template} . openbmc-env
     - echo -e "==> Completed running env script\n"  | tee -a ${INFO_AND_LOG}/Build_log.log
