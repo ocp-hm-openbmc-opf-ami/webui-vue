@@ -652,7 +652,7 @@ build_branch_coverity:
     ########################################
     # OPENBMC
     ########################################
-    - CLONE_REPO ${openbmc_repo} ${SOURCE_WORKSPACE}/openbmc
+    - CLONE_REPO ${openbmc_repo} ${ENTRYPOINT_DIR}/openbmc
 
     ########################################
     # OPENBMC-META-INTEL
