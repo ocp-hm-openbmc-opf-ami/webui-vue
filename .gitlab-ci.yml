@@ -669,7 +669,6 @@ build_branch_coverity:
 
     - TEMPLATECONF=""
     - echo "===> PLATFORM SOURCE BRANCH EXIST ? $PLATFORM_BRANCH_CHECK"
-    - cd ${SOURCE_WORKSPACE}
     - |
       case "${config}" in
         *ArcherCity*)
@@ -762,9 +761,8 @@ build_branch_coverity:
       HandleLog SUCCESS "PLATFORM_BBLAYERS = $PLATFORM_BBLAYERS" ${DEBUG_LOG_FILE}
       HandleLog DASH "DONE" ${DEBUG_LOG_FILE}
 
-    - echo "sdsd"
+    - cd ${SOURCE_WORKSPACE}
     - ls -la $TEMPLATECONF
-    - echo "=sdsd"
     ###########################################################################
     # CUSTOM CHANGES
     ###########################################################################
@@ -772,12 +770,16 @@ build_branch_coverity:
       CLONE_REPO ${meta_restricted_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted
       CLONE_REPO ${meta_intel_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-intel
 
+      ls -la ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       sed -i "s/IMAGE_INSTALL:append = \" at-scale-debug\"/#IMAGE_INSTALL:append = \" at-scale-debug\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
 
+      echo "1"
       sed -i "s/IMAGE_INSTALL:append = \" ami-acd-dbus ami-asd-dbus\"/#IMAGE_INSTALL:append = \" ami-acd-dbus ami-asd-dbus\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
 
+      echo "2"
       sed -i "s/IMAGE_INSTALL:append = \" bafi-dev\"/#IMAGE_INSTALL:append = \" bafi-dev\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
 
+      echo "3"
       sed -i "s/EXTRA_IMAGE_FEATURES:append = \" \\\/#EXTRA_IMAGE_FEATURES:append = \" \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       
       sed -i "s/    acd-features \\\/#    acd-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
