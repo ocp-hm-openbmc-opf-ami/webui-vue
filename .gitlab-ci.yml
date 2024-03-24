@@ -1035,7 +1035,7 @@ build_branch_coverity:
     ###########################################################################
     # DEBUG MODE ENABLEMENT
     ###########################################################################
-    - sed -i 's/#EXTRA_IMAGE_FEATURES += "debug-tweaks"/EXTRA_IMAGE_FEATURES += "debug-tweaks"/g' $$PLATFORM_CONF
+    - sed -i 's/#EXTRA_IMAGE_FEATURES += "debug-tweaks"/EXTRA_IMAGE_FEATURES += "debug-tweaks"/g' $PLATFORM_CONF
     
     ###########################################################################
     # COPYING META MAI LAYER.CONF TO OUTPUT
