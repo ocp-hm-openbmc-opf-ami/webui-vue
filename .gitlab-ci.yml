@@ -111,7 +111,6 @@ variables:
 
       if [ -f ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf ]; then
         cp -r ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf ${INFO_AND_LOG}
-      fi
       
     ###########################################################################
     # TEMPLATE ENV
@@ -799,7 +798,7 @@ build_branch_coverity:
       sed -i "s/    \"/#    \"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       
       if [ -f ${PLATFORM_BBLAYERS} ]; then
-        if grep -q "##OEROOT##/openbmc-meta-intel/meta-restricted" "$PLATFORM_BBLAYERS"; then
+        if ! grep -q "##OEROOT##/openbmc-meta-intel/meta-restricted" "$PLATFORM_BBLAYERS"; then
           sed -i '/##OEROOT##\/openbmc-meta-intel\/meta-intel \\/a\  ##OEROOT##/openbmc-meta-intel/meta-restricted \\' ${PLATFORM_BBLAYERS}
         fi
       fi
