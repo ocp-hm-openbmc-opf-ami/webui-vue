@@ -385,8 +385,8 @@ variables:
        template: OT_EGS_TEMPLATE 
        executer: intel-platforms
        ami_packs: NIC NVME BRCMRAID MSCCRAID FWUPDATE
-       platform_ep: IntelSiPack IntelOnDemandSDSiPack SPDM
-       pre_options: IPERF3
+       platform_ep: IntelSiPack IntelOnDemandSDSiPack
+       pre_options: IPERF3 SPDM
      
      - config: OT_AST2600EVB_FULL1
        source_repo: OT_INTEL_SOURCE_URI
@@ -462,6 +462,20 @@ build_branch_coverity:
     GITLAB_OIDC_TOKEN:
       aud: https://git.ami.com
   before_script:
+    ########################################################################################################################
+    #                                             LOG COLORS 
+    ########################################################################################################################
+    
+    - |
+      # Define color codes
+      RED='\033[0;31m'
+      GREEN='\033[0;32m'
+      YELLOW='\033[0;33m'
+      BLUE='\033[0;34m'
+      MAGENTA='\033[0;35m'
+      CYAN='\033[0;36m'
+      WHITE='\033[0;37m'
+      NC='\033[0m' # No Color
 
     ########################################################################################################################
     #                                             SETUP LOG/OUTPUT ARTIFACT DIR
@@ -545,13 +559,7 @@ build_branch_coverity:
       echo "------------------------"
     
 
-    - |
-      # Define color codes
-      RED='\033[0;31m'
-      GREEN='\033[0;32m'
-      YELLOW='\033[0;33m'
-      NC='\033[0m' # No Color
-
+   
       # Example usage
       echo -e "${RED}Error:${NC} Something went wrong"
       echo -e "${GREEN}Success:${NC} Task completed successfully"
@@ -569,11 +577,41 @@ build_branch_coverity:
     # COMMON CLONING FUNCTION
     ########################################################################################################################
     - |
-      # log_type (CLONE, BUILD, DEBUG)
-      CREATE_LOG () {
-        log_content=$2
+      num_dashes=40  # Change this number as needed
+      prefix_dashes=$(printf -- "-%.0s" $(seq 1 $num_dashes))
+      CLONE_LOG_FILE=${INFO_AND_LOG}/SourceCloneInfo.log
+      BUILD_LOG_FILE=${INFO_AND_LOG}/BuildInfo.log
+      DEBUG_LOG_FILE=${INFO_AND_LOG}/DebugInfo.log
+
+      # log_content - content to log 
+      # log_type - ERROR, SUCCESS, INFO, WARNING
+      # log_file - CLONE, BUILD, DEBUG
+      
+
+      HandleLog () {
         log_type=$1
-        if log_type
+        log_content=$2
+        log_file=$3
+
+        if [[ $log_type == *"ERROR"* ]];
+          prefix="${RED}Error:${NC}"
+        elif [[ $log_type == *"SUCCESS"* ]];
+          prefix="${GREEN}Success:${NC}"
+        elif [[ $log_type == *"WARNING"* ]];
+          prefix="${YELLOW}Warning:${NC}"
+        elif [[ $log_type == *"INFO"* ]];
+          prefix="${BLUE}Info:${NC}"
+        else
+          prefix="${WHITE}Log:${NC}"
+        fi
+ 
+        if [[ $log_type == *"DASH"* ]]; then
+          echo -e "${prefix_dashes} ${log_content} ${prefix_dashes}" $log_file
+        else
+          echo -e "==> ${prefix} ${log_content}" $log_file
+        fi
+        
+        
         echo -e "\n $"
         
       }
@@ -585,10 +623,10 @@ build_branch_coverity:
         CLONE_DIR=$2
         CLONE_REPO_NAME=$(basename "$CLONE_REPO_URL" | sed 's/^.*\///')
 
-        echo -e "======================= PROCESSING ${CLONE_REPO_NAME} ===========================" >> ${INFO_AND_LOG}/SourceCloneInfo.log
+        HandleLog DASH "PROCESSING ${CLONE_REPO_NAME}" ${CLONE_LOG_FILE}
 
         if [ -d "$2" ]; then
-          echo "==> CLONE REPO_URL => ${CLONE_REPO_URL}...Already Exist !!!" >> ${INFO_AND_LOG}/SourceCloneInfo.log
+          HandleLog INFO "CLONE REPO_URL => ${CLONE_REPO_URL}...Already Exist !!!"  ${CLONE_LOG_FILE}
         else
           BRANCH_CHECK=`git ls-remote --heads ${CLONE_REPO_URL} $CI_COMMIT_REF_NAME | wc -l`;
 
@@ -599,15 +637,13 @@ build_branch_coverity:
           fi
           git clone $CLONE_REPO_URL --branch $CLONE_BRANCH $CLONE_DIR
           CLONED_COMMIT_SHA=$(cd $CLONE_DIR && git rev-parse HEAD && cd $ENTRYPOINT_DIR)
-
-          echo "==> CLONE REPO_URL => ${CLONE_REPO_URL}" >> ${INFO_AND_LOG}/SourceCloneInfo.log
-          echo "==> CLONE DIR => ${CLONE_DIR}" >> ${INFO_AND_LOG}/SourceCloneInfo.log
-          echo "==> CLONE BRANCH EXISTS ? => ${BRANCH_CHECK}" >> ${INFO_AND_LOG}/SourceCloneInfo.log
-          echo "==> CLONE BRANCH  => ${CLONE_BRANCH}" >> ${INFO_AND_LOG}/SourceCloneInfo.log
-          echo "==> CLONE COMMIT => ${CLONED_COMMIT_SHA}" >> ${INFO_AND_LOG}/SHA1.log 
+          HandleLog INFO "CLONE REPO_URL => ${CLONE_REPO_URL}" ${CLONE_LOG_FILE}
+          HandleLog INFO "CLONE DIR => ${CLONE_DIR}" ${CLONE_LOG_FILE}
+          HandleLog INFO "CLONE BRANCH EXISTS ? => ${BRANCH_CHECK}" ${CLONE_LOG_FILE}
+          HandleLog INFO "CLONE BRANCH  => ${CLONE_BRANCH}" ${CLONE_LOG_FILE}
+          HandleLog INFO "CLONE COMMIT => ${CLONED_COMMIT_SHA}" ${CLONE_LOG_FILE}
         fi
-        echo "======================= COMPLETED ==========================="
-
+        HandleLog DASH "COMPLETED" ${CLONE_LOG_FILE}
       }
 
 
@@ -640,6 +676,7 @@ build_branch_coverity:
     - |
       case "${config}" in
         *ArcherCity*)
+        
             CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-egs
             CLONE_REPO ${meta_restricted_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted
             CLONE_REPO ${meta_intel_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-intel
@@ -653,7 +690,7 @@ build_branch_coverity:
             PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
             PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
             ;;
-        *AvenueCity*)
+        *AvenCity*)
             CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-bhs
             CLONE_REPO ${meta_intel_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-intel          
 
@@ -722,6 +759,13 @@ build_branch_coverity:
             ;;
       esac
 
+      HandleLog HASH "CONF DETAILS" ${DEBUG_LOG_FILE}
+      HandleLog SUCCESS "TEMPLATECONF = $TEMPLATECONF" ${DEBUG_LOG_FILE}
+      HandleLog SUCCESS "PLATFORM_CONF = $PLATFORM_CONF" ${DEBUG_LOG_FILE}
+      HandleLog SUCCESS "PLATFORM_BBLAYERS = $PLATFORM_BBLAYERS" ${DEBUG_LOG_FILE}
+      HandleLog HASH "DONE" ${DEBUG_LOG_FILE}
+
+
     ########################################################################################################################
     # CUSTOM CHANGES
     ########################################################################################################################
@@ -751,8 +795,9 @@ build_branch_coverity:
     - mkdir -p ${SOURCE_WORKSPACE}/meta-ami/recipes-ami
     - |
       if [[ $ami_pack_list ]]; then
+        HandleLog DASH "AMI EP PROCESSING" ${DEBUG_LOG_FILE}
         for EP in ${ami_pack_list[@]}; do
-          echo $EP
+          HandleLog INFO "${EP} PROCESSING..." ${DEBUG_LOG_FILE}
           case "${EP}" in
               "BRCMRAID")
                   CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/raid/raid-brcm"
@@ -761,7 +806,8 @@ build_branch_coverity:
                   CLONE_REPO ${CL_URL} ${CL_PATH}
                   echo "#BRCM Raid and HBA management" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
                   echo 'IMAGE_INSTALL:append = " raid-mgmt hba-mgmt raid-brcm hba-brcm"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                  echo -e "\t==> Enabled ${EP}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+
+                  HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                   ;;
 
               "NIC")
@@ -770,7 +816,7 @@ build_branch_coverity:
                 CLONE_REPO ${CL_URL} ${CL_PATH}
                 echo "#NIC Management" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
                 echo 'IMAGE_INSTALL:append = " nic nic-mgmt"' >>${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo -e "\t==> Enabled ${EP}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
               
               "NVME")
@@ -779,7 +825,7 @@ build_branch_coverity:
                 CLONE_REPO ${CL_URL} ${CL_PATH}
                 echo "#NVMe Management" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
                 echo 'IMAGE_INSTALL:append = " nvme nvme-mgmt"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo -e "\t==> Enabled ${EP}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
               
               "NVMEBASIC")
@@ -788,7 +834,7 @@ build_branch_coverity:
                 CLONE_REPO ${CL_URL} ${CL_PATH}
                 echo "#NVMe Basic Management" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
                 echo 'IMAGE_INSTALL:append = " nvme-basic nvmebasic-mgmt"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo -e "\t==> Enabled ${EP}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
               "FWUPDATE")
                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/firmware-update"
@@ -798,7 +844,7 @@ build_branch_coverity:
                 echo "#FWUPDATE" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
                 echo 'IMAGE_INSTALL:append = " cpld-tool"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
                 echo 'NON_PFR_UPDATE_FEATURES:append = " cpld-update"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo -e "\t==> Enabled ${EP}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
               "RTP")
                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/redfish"
@@ -806,7 +852,7 @@ build_branch_coverity:
                 CLONE_REPO ${CL_URL} ${CL_PATH}
                 echo "#RTP" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
                 echo 'IMAGE_INSTALL:append = " bmcweb"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo -e "\t==> Enabled ${EP}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
                 
               "MSCCRAID")
@@ -819,7 +865,7 @@ build_branch_coverity:
 
                 echo "# ${EP}" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
                 echo 'IMAGE_INSTALL:append = "  storage-mgmt raid-mscc"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo -e "\t==> Enabled ${EP}-Storage and ${EP}-Raid " | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                HandleLog SUCCESS "Enabled ${EP}-Storage and ${EP}-Raid" ${DEBUG_LOG_FILE}
                 ;;
               
               "GPGPU")
@@ -828,7 +874,7 @@ build_branch_coverity:
                 CLONE_REPO ${CL_URL} ${CL_PATH}
                 echo "# ${EP}" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
                 echo 'IMAGE_INSTALL:append = " nvidia-gpumgr nvidia-gpuoob"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo -e "\t==> Enabled ${EP}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
               
               "BRCMPCIESW")
@@ -837,11 +883,12 @@ build_branch_coverity:
                 CLONE_REPO ${CL_URL} ${CL_PATH}
                 echo "#BRCMPCIESW" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
                 echo 'IMAGE_INSTALL:append = " i2c-pciesw libscrutiny mctp-pciesw pciesw-service scrutiny-ifc"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo -e "\t==> Enabled ${EP}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
 
           esac
         done
+        HandleLog DASH "DONE" ${DEBUG_LOG_FILE}
       fi
 
     ########################################################################################################################
@@ -849,60 +896,57 @@ build_branch_coverity:
     ########################################################################################################################
     - |
       if [[ $platform_pack_list ]]; then
+        HandleLog DASH "PLATFORM EP PROCESSING" ${DEBUG_LOG_FILE}
         CLONE_REPO ${meta_restricted_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted
         for EP in ${platform_pack_list[@]}; do
-          echo $EP
+          HandleLog INFO "EP ${EP} PROCESSING...." ${DEBUG_LOG_FILE}
           case "${EP}" in
               "ACD")
                 echo "#ACD" >> PLATFORM_CONF
                 echo 'IMAGE_INSTALL:append = " aic-crashdump crashdump ami-acd-dbus bafi-dev"' >> $PLATFORM_CONF
                 echo 'EXTRA_IMAGE_FEATURES:append = " acd-features"' >> $PLATFORM_CONF
+                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
               
               "ASD")
                 echo '#ASD' >> $PLATFORM_CONF
                 echo 'IMAGE_INSTALL:append = " at-scale-debug ami-asd-dbus"' >> $PLATFORM_CONF
-                echo -e "\t==> Enabled ${EP}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                 ;;
               "MRT")
                   echo '#MRT' >> $PLATFORM_CONF
                   echo 'IMAGE_INSTALL:append = " memory-error-collector memory-resilience-technology-engine"' >> $PLATFORM_CONF
-                  echo -e "\t==> Enabled ${EP}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                  HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                   ;;
               "PFR")      
                   # Enable 
                   echo '#PFR' >> $PLATFORM_CONF
                   echo 'IMAGE_FSTYPES += " intel-pfr"' >> $PLATFORM_CONF
                   echo 'EXTRA_IMAGE_FEATURES:append = " debug-tweaks"' >> $PLATFORM_CONF
-                  echo -e "\t==> Enabled ${EP}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                  HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                   ;;
                                     
               "IntelSiPack")
                   echo "#IntelSiPack" >> $PLATFORM_CONF
                   echo 'EXTRA_IMAGE_FEATURES:append = " nm-features telemetry-features"' >> $PLATFORM_CONF
-                  echo -e "\t==> Enabled ${EP}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                  HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                   ;;
               
               "IntelOnDemandSDSiPack")
                   echo "#IntelOnDemandSDSiPack" >> $PLATFORM_CONF
                   echo 'EXTRA_IMAGE_FEATURES:append = " oob-config-features ras-offload-features"' >> $PLATFORM_CONF
-                  echo -e "\t==> Enabled ${EP}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                  HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
                   ;;
-              
-              "SPDM")
-                echo '#SPDM' >> $PLATFORM_CONF
-                echo 'IMAGE_INSTALL:append = " spdmd"' >> $PLATFORM_CONF
-                echo -e "\t==> Enabled Option ${opt}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
-                ;;
           esac
         done
+        HandleLog DASH "DONE" ${DEBUG_LOG_FILE}
       fi
 
     ########################################################################################################################
     # ADDITIONAL OPTIONS SETTING
     ########################################################################################################################
     - |
-      if [[ $pre_options ]]; then        
+      if [[ $pre_options ]]; then    
         echo "==> Cloning secure keys repo...." | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
         SECURITY_KEY_REPO=https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/ot
         CLONE_REPO ${SECURITY_KEY_REPO} $SOURCE_WORKSPACE/secure_keys_src
@@ -911,8 +955,11 @@ build_branch_coverity:
         echo "==> Listing SECURE KEY"
         ls -lat $SECURE_KEY_REPO_DIR/GitLab/megaractwbot/megarac/secure_boot_keys
         du -h -d 5 $SECURE_KEY_REPO_DIR/GitLab/megaractwbot/megarac/secure_boot_keys
+
+        HandleLog DASH "OPTIONS PROCESSING" ${DEBUG_LOG_FILE}
+
         for pre_opt in ${pre_options[@]}; do
-          echo $pre_opt
+          HandleLog INFO "STARTED ${pre_opt}" ${DEBUG_LOG_FILE}
           case "${pre_opt}" in
                        
               "SoftwareSecureBoot")
@@ -927,7 +974,7 @@ build_branch_coverity:
                 sed -i "s|UBOOT_SIGN_KEYDIR = \"\${WORKDIR}\"|UBOOT_SIGN_KEYDIR = \"$SECURE_KEY_REPO_DIR\/GitLab\/megaractwbot\/megarac\/secure_boot_keys\/sign_keydir\"|g" ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
                 sed -i "s|SPL_SIGN_KEYDIR = \"\${WORKDIR}\"|SPL_SIGN_KEYDIR = \"$SECURE_KEY_REPO_DIR\/GitLab\/megaractwbot\/megarac\/secure_boot_keys\/sign_keydir\"|g" ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
 
-                echo -e "\t==> Enabled option ${opt}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
 
                 ;;
             
@@ -938,36 +985,44 @@ build_branch_coverity:
                 sed -i "s|OTPTOOL_CONFIGS = \"\${WORKDIR}\/ast2600_a3.json\"|OTPTOOL_CONFIGS = \"$SECURE_KEY_REPO_DIR\/GitLab\/megaractwbot\/megarac\/secure_boot_keys\/otp-key\/evbA3_RSA2048_SHA256_o1.json\"|g" ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-bsp/u-boot/u-boot-aspeed-sdk_%.bbappend
                 sed -i "s|OTPTOOL_KEY_DIR = \"\${WORKDIR}\/keys\/\"|OTPTOOL_KEY_DIR = \"$SECURE_KEY_REPO_DIR\/GitLab\/megaractwbot\/megarac\/secure_boot_keys\/otp-key\/otp_key\"|g" ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-bsp/u-boot/u-boot-aspeed-sdk_%.bbappend
                 
-                echo -e "\t==> Enabled option  ${opt}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
                 ;;
               "BrcmRaidI2cMode")
                 echo 'RAID_BRCM_CONF_FILE[RAID] = "ast2600evb-i2c-oob-mode.json"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
                 echo 'RAID_BRCM_CONF_FILE[HBA] = "ast2600evb-i2c-oob-mode.json"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
 
-                echo -e "\t==> Enabled option  ${opt}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
 
                 ;;
               "IPERF3")
                 echo "#IPERF3 Enablement" >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
                 echo 'IMAGE_INSTALL:append = " iperf3"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo -e "\t==> Enabled Option ${opt}" | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+                HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
+              ;;
+              
+              "SPDM")
+                echo '#SPDM' >> $PLATFORM_CONF
+                echo 'IMAGE_INSTALL:append = " spdmd"' >> $PLATFORM_CONF
+                HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
               ;;
           esac
         done
+        HandleLog DASH "DONE" ${DEBUG_LOG_FILE}
       fi
 
     ########################################################################################################################
     # JAVA SIGNING
     ########################################################################################################################
 
-    - echo -e "================== JAVA SIGNING ===================="
+    
+    - HandleLog DASH "JAVA SIGNING" ${DEBUG_LOG_FILE}
     - git clone "https://${GUSER}:${GPASS}@git.ami.com/core/rd/kvm/javasigning" -b "main" $SOURCE_WORKSPACE/JavaSigning
-    - echo "====> Enabling Java Viewer Singing"
+    - HandleLog INFO "Enabling javasigning" ${DEBUG_LOG_FILE}
     - echo '#JavaViewerSigning' >> $PLATFORM_CONF
     - echo "JAVASIGNING_DIR=\"$SOURCE_WORKSPACE/JavaSigning\"" >> $$PLATFORM_CONF
     - echo "SSTATE_SKIP_CREATION_pn-jviewer = \"1\"" >> $PLATFORM_CONF
     - echo "#CUSTOM CHANGE $CI_COMMIT_SHA" >> ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-utilities/jviewer/jviewer.bb
-    - echo "======================================================="
+    - HandleLog DASH "COMPLETED" ${DEBUG_LOG_FILE}
 
 
     ########################################################################################################################
@@ -1005,6 +1060,7 @@ build_branch_coverity:
         sync_end_time=$(date +%s)
         echo "Receipes Finding takes $(($sync_end_time-$sync_start_time)) secs"
         sync_start_time=$(date +%s)
+        HandleLog DASH "RECIPE CHECKING" ${DEBUG_LOG_FILE}
         for recipe in "${recipes_list[@]}"; 
         do
           filepath=${recipe%%:*}
@@ -1012,37 +1068,41 @@ build_branch_coverity:
           repo_url=$(echo $line | sed -n 's/.*git@\([^;]*\).*/\1/p; s/.*git:\/\/\([^;]*\).*/\1/p')
           git_auth_url=https://$GUSER:$GPASS@$repo_url
           
-          echo "=========================================="
-          echo "==> Filepath $filepath"
-          echo "==> Line $line"
-          echo "==> REPO URL ${repo_url}"
+          
+          HandleLog DASH "CHECKING $filepath" ${DEBUG_LOG_FILE}
+          HandleLog INFO "Filepath $filepath" ${DEBUG_LOG_FILE}
+          HandleLog INFO "Line $line" ${DEBUG_LOG_FILE}
+          HandleLog INFO "REPO URL $repo_url" ${DEBUG_LOG_FILE}
 
           if [ -z $repo_url ]; then  
-            echo "==> Invalid URL/Findiing...ignoring"
+            echo "==> "
+            HandleLog WARNING "Invalid URL/Findiing...ignoring" ${DEBUG_LOG_FILE}
             continue
           fi
 
           if git ls-remote -q "$git_auth_url" &>/dev/null; then
-            echo "==> Receipe Repo URL Valid"
             RECIPE_BRANCH_CHECK=`git ls-remote --heads ${git_auth_url} $CI_COMMIT_REF_NAME | wc -l`;
-            echo "==> Branch Check $RECIPE_BRANCH_CHECK"
+            HandleLog INFO "Receipe Repo URL Valid" ${DEBUG_LOG_FILE}
+            HandleLog INFO "Branch Check $RECIPE_BRANCH_CHECK" ${DEBUG_LOG_FILE}
             if [ $RECIPE_BRANCH_CHECK -gt 0 ];then
-              echo "===> BEFORE UPDATE:"
-              echo "==> FOUND BRANCH $CI_COMMIT_REF_NAME"
+              HandleLog SUCCESS "FOUND BRANCH $CI_COMMIT_REF_NAME" ${DEBUG_LOG_FILE}
+              
+              HandleLog INFO "PRINTING FILE BEFORE UPDATE:" ${DEBUG_LOG_FILE}
+              cat ${filepath}
               sed -i "s/SRCREV_override = \".*\"/SRCREV_override = \"\${AUTOREV}\"/g" $filepath
               sed -i "s/SRCREV = \".*\"/SRCREV = \"\${AUTOREV}\"/g" $filepath
-              echo "-----------------"
               sed -i "s|branch=[^ ;\"]\+|branch=$CI_COMMIT_REF_NAME|g" $filepath
+              HandleLog INFO "PRINTING FILE AFTER UPDATE:" ${DEBUG_LOG_FILE}
               cat ${filepath}
-              echo "-----------------"
+              HandleLog SUCCESS "UPDATED BRANCH" ${DEBUG_LOG_FILE}
             fi
           else
-             echo "==> Receipe Repo URL Invalid"
+            HandleLog ERROR "Receipe Repo URL Invalid" ${DEBUG_LOG_FILE}
           fi
-          echo "=========================================="
+          HandleLog DASH "COMPLETED $filepath" ${DEBUG_LOG_FILE}
         done
         sync_end_time=$(date +%s)
-        echo "Receipes Updating takes $(($sync_end_time-$sync_start_time)) secs"
+        HandleLog INFO "Receipes Updating takes $(($sync_end_time-$sync_start_time)) secs" ${DEBUG_LOG_FILE}
       fi
   tags:
     - $runner_tag
@@ -1095,8 +1155,8 @@ daily_build_onetree:
          template: OT_EGS_TEMPLATE 
          executer: intel-platforms
          ami_packs: NIC NVME BRCMRAID MSCCRAID FWUPDATE
-         platform_ep: IntelSiPack IntelOnDemandSDSiPack SPDM
-         pre_options: IPERF3
+         platform_ep: IntelSiPack IntelOnDemandSDSiPack
+         pre_options: IPERF3 SPDM
        
        - config: OT_AST2600EVB_FULL1
          source_repo: OT_INTEL_SOURCE_URI
