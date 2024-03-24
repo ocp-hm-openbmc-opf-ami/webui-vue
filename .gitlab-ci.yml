@@ -149,9 +149,10 @@ variables:
       if [ -f ${PLATFORM_BBLAYERS} ]; then
         cp -r $PLATFORM_BBLAYERS ${INFO_AND_LOG}/platform_bb_layer.conf
       fi
+      if [ -f ${PLATFORM_CONF} ]; then
+        cp -r $PLATFORM_CONF ${INFO_AND_LOG}/platform_.conf
+      fi
 
-    - cp -r $PLATFORM_CONF ${INFO_AND_LOG}/platform_.conf
-  
     ###########################################################################
     # RUNNING DO FETCH ALONE
     ###########################################################################
