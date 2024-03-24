@@ -640,7 +640,6 @@ build_branch_coverity:
             TEMPLATECONF="openbmc-meta-intel/meta-bhs/conf/templates/default"
             PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
             PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
-	
             ;;
         *AMD_Truin*)
             CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/meta-amd/meta-chalupa
