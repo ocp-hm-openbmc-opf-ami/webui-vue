@@ -606,14 +606,10 @@ build_branch_coverity:
         fi
  
         if [[ $log_type == *"DASH"* ]]; then
-          echo -e "${prefix_dashes} ${log_content} ${prefix_dashes}" >> $log_file
+          echo -e "${prefix_dashes} ${log_content} ${prefix_dashes}"  | tee -a $log_file
         else
-          echo -e "${prefix} ===>> ${log_content}" >> $log_file
+          echo -e "${prefix} ===>> ${log_content}" | tee -a $log_file
         fi
-        
-        
-        echo -e "\n $"
-        
       }
     - |
       # => CLONE URL $1 
@@ -787,10 +783,14 @@ build_branch_coverity:
       sed -i "s/    ras-offload-features \\\/#    ras-offload-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       sed -i "s/    telemetry-features \\\/#    telemetry-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       sed -i "s/    \"/#    \"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
-      if [ ! -f ${PLATFORM_BBLAYERS} ]; then
+
+      if [ -f ${PLATFORM_BBLAYERS} ]; then
+        grep "##OEROOT##/openbmc-meta-intel/meta-restricted " ${PLATFORM_BBLAYERS} >/dev/null
+        # If not found, add after the line ##OEROOT#/openbmc-meta-intel/meta-intel
+        if [ $? -ne 0 ]; then
           sed -i '/##OEROOT##\/openbmc-meta-intel\/meta-intel \\/a\  ##OEROOT##/openbmc-meta-intel/meta-restricted \\' ${PLATFORM_BBLAYERS}
+        fi
       fi
-     
 
     ########################################################################################################################
     # AMI EXPANSTION PACK ENABLING
