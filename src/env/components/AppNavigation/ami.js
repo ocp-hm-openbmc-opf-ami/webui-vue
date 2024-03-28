@@ -178,6 +178,11 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.fireWall'),
               route: '/settings/firewall',
             },
+            {
+              id: 'cups',
+              label: this.$t('appNavigation.cups'),
+              route: '/settings/cups',
+            },
           ],
         },
         {

@@ -157,7 +157,8 @@
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
-        "fireWall": "@:appPageTitle.FireWall"
+        "fireWall": "@:appPageTitle.FireWall",
+        "cups": "@:appPageTitle.cups"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -203,7 +204,8 @@
         "logicalDevice": "逻辑设备",
         "createLogicalDevice": "创建逻辑设备",
         "backupAndRestore": "备份还原",
-        "FireWall": "系统防火墙"
+        "FireWall": "系统防火墙",
+        "cups": "CUPS"
     },
     "pageBackupAndRestore": {
         "backup": "备份",
@@ -227,6 +229,32 @@
             "errorGettingBackupDetails": "获取属性备份功能时出错",
             "errorMessageNotConfigured": "由于配置文件不存在，操作无法完成",
             "featureNotAvailable": "未启用备份和恢复功能."
+        }
+    },
+    "pageCups": {
+        "pageDescription": "CUPS配置",
+        "dynamicLoadFactor": "动态负载系数配置",
+        "staticLoadFactor": "静态负载系数配置",
+        "cupsService": "Cups服务配置",
+        "dynamicLoadFactorCoreLoadFactor": "核心负载系数",
+        "dynamicLoadFactorMemoryLoadFactor": "内存负载系数",
+        "dynamicLoadFactorIioLoadFactor": "Iio 负载系数",
+        "staticLoadFactorCoreLoadFactor": "核心负载系数",
+        "staticLoadFactorMemoryLoadFactor": "内存负载系数",
+        "staticLoadFactorIioLoadFactor": "Iio 负载系数",
+        "cupsServiceCoreInterval": "间隔",
+        "cupsServiceAveragingPeriod": "平均周期",
+        "loadFactorConfiguration": "负载系数配置",
+        "static": "静止的",
+        "dynamic": "动态的",
+        "staticLoaderFactorSum": "三个静载荷系数之和必须等于 100",
+        "cupsIntervelHelpContent": "间隔时间应在 0.1 至 1 秒之间",
+        "cupsAveragingPeriodContent": "平均周期时间应在 1 到 10 秒之间",
+        "toast": {
+            "errorGettingIntelCups": "英特尔 CupsService 不可用",
+            "errorUpdateCupsService": "未找到名为“CupsService”类型的请求资源",
+            "successUpdateCupsService": "已成功更新 CupsService",
+            "errorAddingStaticLoadFactor": "静载荷系数之和必须等于 100"
         }
     },
     "pageOnDemand": {

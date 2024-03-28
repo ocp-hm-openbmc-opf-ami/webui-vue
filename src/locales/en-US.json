@@ -159,7 +159,8 @@
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
-        "fireWall": "@:appPageTitle.FireWall"
+        "fireWall": "@:appPageTitle.FireWall",
+        "cups": "@:appPageTitle.cups"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -206,7 +207,8 @@
         "logicalDevice": "Logical Device",
         "createLogicalDevice": "Create Logical Device",
         "backupAndRestore": "Backup And Restore",
-        "FireWall": "System Firewall"
+        "FireWall": "System Firewall",
+        "cups": "CUPS"
     },
     "pageBackupAndRestore": {
         "backup": "Backup",
@@ -230,6 +232,32 @@
             "errorGettingBackupDetails": "Error in getting the property BackupFeatures",
             "errorMessageNotConfigured": "The operation cannot be completed, since the Configuration file does not exit",
             "featureNotAvailable": "The backup and restore feature is not enabled."
+        }
+    },
+    "pageCups": {
+        "pageDescription": "CUPS Configuration",
+        "dynamicLoadFactor": "Dynamic Load Factor Configuration",
+        "staticLoadFactor": "Static Load Factor Configuration",
+        "cupsService": "Cups Service Configuration",
+        "dynamicLoadFactorCoreLoadFactor": "Core Load Factor",
+        "dynamicLoadFactorMemoryLoadFactor": "Memory Load Factor",
+        "dynamicLoadFactorIioLoadFactor": "Iio Load Factor",
+        "staticLoadFactorCoreLoadFactor": "Core Load Factor",
+        "staticLoadFactorMemoryLoadFactor": "Memory Load Factor",
+        "staticLoadFactorIioLoadFactor": "Iio Load Factor",
+        "cupsServiceCoreInterval": "Interval",
+        "cupsServiceAveragingPeriod": "Averaging Period",
+        "loadFactorConfiguration": "Load Factor Configuration",
+        "static": "Static",
+        "dynamic": "Dynamic",
+        "staticLoaderFactorSum": "The sum of three static load factors must be equal to 100",
+        "cupsIntervelHelpContent": "Interval time should be in range between 0.1 and 1 seconds(s)",
+        "cupsAveragingPeriodContent": "Averaging Period time should be in range between 1 and 10 seconds(s)",
+        "toast": {
+            "errorGettingIntelCups": "Intel CupsService not available",
+            "errorUpdateCupsService": "The requested resource of type  named 'CupsService ' was not found",
+            "successUpdateCupsService": "Successfully updated CupsService",
+            "errorAddingStaticLoadFactor": "Sum of static load factors must be equal to 100"
         }
     },
     "pageOnDemand": {

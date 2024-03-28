@@ -38,6 +38,7 @@ import Asd from '@/views/HostSystemDiagnostics/Asd';
 import BackupAndRestore from '@/views/Operations/BackupAndRestore';
 import SnmpSettings from '@/views/Settings/SNMP';
 import FireWall from '@/views/Settings/FireWall';
+import CupsConfiguration from '@/views/Settings/CUPS';
 
 const roles = {
   administrator: 'Administrator',
@@ -316,6 +317,14 @@ const routes = [
         component: SnmpSettings,
         meta: {
           title: i18n.t('appPageTitle.snmpSettings'),
+        },
+      },
+      {
+        path: '/settings/cups',
+        name: 'cups',
+        component: CupsConfiguration,
+        meta: {
+          title: i18n.t('appPageTitle.cups'),
         },
       },
       {

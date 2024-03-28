@@ -157,7 +157,8 @@
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
-        "fireWall": "@:appPageTitle.FireWall"
+        "fireWall": "@:appPageTitle.FireWall",
+        "cups": "@:appPageTitle.cups"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -203,7 +204,8 @@
         "logicalDevice": "Logisches Gerät",
         "createLogicalDevice": "Logisches Gerät erstellen",
         "backupAndRestore": "Sichern und Wiederherstellen",
-        "FireWall": "System-Firewall"
+        "FireWall": "System-Firewall",
+        "cups": "CUPS"
     },
     "pageBackupAndRestore": {
         "backup": "Sicherung",
@@ -227,6 +229,32 @@
             "errorGettingBackupDetails": "Fehler beim Abrufen der Eigenschaft BackupFeatures",
             "errorMessageNotConfigured": "Der Vorgang kann nicht abgeschlossen werden, da die Konfigurationsdatei nicht beendet wird",
             "featureNotAvailable": "Die Sicherungs- und Wiederherstellungsfunktion ist nicht aktiviert."
+        }
+    },
+    "pageCups": {
+        "pageDescription": "CUPS Konfiguration",
+        "dynamicLoadFactor": "Konfiguration des dynamischen Lastfaktors",
+        "staticLoadFactor": "Konfiguration des statischen Lastfaktors",
+        "cupsService": "Cups Servicekonfiguration",
+        "dynamicLoadFactorCoreLoadFactor": "Kernlastfaktor",
+        "dynamicLoadFactorMemoryLoadFactor": "Speicherladefaktor",
+        "dynamicLoadFactorIioLoadFactor": "Iio Lastfaktor",
+        "staticLoadFactorCoreLoadFactor": "Kernlastfaktor",
+        "staticLoadFactorMemoryLoadFactor": "Speicherladefaktor",
+        "staticLoadFactorIioLoadFactor": "Iio Lastfaktor",
+        "cupsServiceCoreInterval": "Intervall",
+        "cupsServiceAveragingPeriod": "Mittelungszeitraum",
+        "loadFactorConfiguration": "Konfiguration des Lastfaktors",
+        "static": "Statisch",
+        "dynamic": "Dynamisch",
+        "staticLoaderFactorSum": "Die Summe der drei statischen Belastungsfaktoren muss gleich 100 sein",
+        "cupsIntervelHelpContent": "Die Intervallzeit sollte im Bereich zwischen 0,1 und 1 Sekunde(n) liegen.",
+        "cupsAveragingPeriodContent": "Die Dauer des Mittelungszeitraums sollte im Bereich zwischen 1 und 10 Sekunden liegen.",
+        "toast": {
+            "errorGettingIntelCups": "Intel CupsService nicht verfügbar",
+            "errorUpdateCupsService": "Die angeforderte Ressource vom Typ „CupsService“ wurde nicht gefunden",
+            "successUpdateCupsService": "CupsService erfolgreich aktualisiert",
+            "errorAddingStaticLoadFactor": "Die Summe der statischen Belastungsfaktoren muss gleich 100 sein"
         }
     },
     "pageOnDemand": {
