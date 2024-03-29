@@ -287,7 +287,7 @@
             "errorGettingBsodApi": "Error in getting BSOD Image.",
             "errorDeleteBsodImage": "Error in deleting BSOD Image",
             "errorTriggerBsodImage": "Error in Trigger BSOD Image",
-            "successTriggerBsodImage": "Successfully triggered BSOD Image",
+            "successTriggerBsodImage": "Successfully trigged the BSOD image. Sometimes, please use the Refresh button to reflect the triggered image properly",
             "successDeleteBsodImage": "Successfully deleted BSOD Image"
         }
     },
@@ -591,6 +591,7 @@
     "PageFactoryDefault": {
         "FactoryDefaultPartialDescription": "BMC will reboot and after boot to BMC console, all configured data will be preserved.",
         "FactoryDefaultFullDescription": "BMC will reboot and after boot to BMC console, configured data will be restore to the defaults of the device firmware.",
+        "restore": "Restore",
         "toast": {
             "restoreToDefaultsSuccess": "Factory Default Restore Default successful.",
             "restoreToDefaultsError": "Factory Default Restore Default failed.",
@@ -1151,7 +1152,7 @@
         "subscriptionType": "Subscription Type",
         "protocol": "Protocol",
         "snmpProtocolV1": "SNMPv1",
-        "snmpProtocolV2": "SNMPv2",
+        "snmpProtocolV2": "SNMPv2c",
         "snmpProtocolV3": "SNMPv3",
         "addSubscrition": "Add Subscription",
         "editSubscrition": "Edit Subscription",

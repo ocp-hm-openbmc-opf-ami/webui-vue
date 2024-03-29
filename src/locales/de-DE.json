@@ -285,7 +285,9 @@
         "toast": {
             "errorGettingBsodApi": "Fehler beim Abrufen des BSOD-Images.",
             "errorDeleteBsodImage": "Fehler beim Löschen des BSOD Images",
-            "successDeleteBsodImage": "BSOD Image erfolgreich gelöscht"
+            "successDeleteBsodImage": "BSOD Image erfolgreich gelöscht",
+            "errorTriggerBsodImage": "Fehler im Trigger-BSOD-Image",
+            "successTriggerBsodImage": "Das BSOD-Image wurde erfolgreich ausgelöst. Manchmal verwenden Sie bitte die Schaltfläche „Aktualisieren“, um das ausgelöste Bild richtig wiederzugeben"
         }
     },
     "pageChangePassword": {
@@ -588,6 +590,7 @@
     "PageFactoryDefault": {
         "FactoryDefaultPartialDescription": "BMC wird neu gestartet und nach dem Booten auf der BMC-Konsole bleiben alle konfigurierten Daten erhalten.",
         "FactoryDefaultFullDescription": "BMC wird neu gestartet und nach dem Booten auf der BMC-Konsole werden die konfigurierten Daten auf die Standardeinstellungen der Geräte-Firmware zurückgesetzt.",
+        "restore": "Wiederherstellen",
         "toast": {
             "restoreToDefaultsSuccess": "Wiederherstellung der Werkseinstellungen erfolgreich.",
             "restoreToDefaultsError": "Die Wiederherstellung der Werkseinstellungen ist fehlgeschlagen.",
@@ -1148,7 +1151,7 @@
         "subscriptionType": "Abonnementtyp",
         "protocol": "Protokoll",
         "snmpProtocolV1": "SNMPv1",
-        "snmpProtocolV2": "SNMPv2",
+        "snmpProtocolV2": "SNMPv2c",
         "snmpProtocolV3": "SNMPv3",
         "addSubscrition": "Abonnement hinzufügen",
         "editSubscrition": "Abonnement bearbeiten",

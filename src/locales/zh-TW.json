@@ -284,7 +284,7 @@
             "errorGettingBsodApi": "獲取 BSOD 圖像時出錯.",
             "errorDeleteBsodImage": "刪除 BSOD 影像時出錯",
             "errorTriggerBsodImage": "觸發 BSOD 影像時出錯",
-            "successTriggerBsodImage": "成功觸發 BSOD 影像",
+            "successTriggerBsodImage": "成功觸發 BSOD 影像。有時，請使用刷新按鈕來正確反映觸發的圖像",
             "successDeleteBsodImage": "已成功刪除 BSOD 影像"
         }
     },
@@ -588,6 +588,7 @@
     "PageFactoryDefault": {
         "FactoryDefaultPartialDescription": "BMC 將重新啟動，啟動至 BMC 控制台後，所有設定的資料將會保留.",
         "FactoryDefaultFullDescription": "BMC 將重新啟動，啟動至 BMC 控制台後，配置的資料將恢復為裝置韌體的預設值.",
+        "restore": "恢復",
         "toast": {
             "restoreToDefaultsSuccess": "原廠設定恢復成功",
             "restoreToDefaultsError": "原廠設定恢復失敗",
@@ -1148,7 +1149,7 @@
         "subscriptionType": "訂閱類型",
         "protocol": "協定",
         "snmpProtocolV1": "SNMPv1",
-        "snmpProtocolV2": "SNMPv2",
+        "snmpProtocolV2": "SNMPv2c",
         "snmpProtocolV3": "SNMPv3",
         "addSubscrition": "新增訂閱",
         "editSubscrition": "編輯訂閱",

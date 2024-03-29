@@ -284,7 +284,7 @@
             "errorGettingBsodApi": "获取 BSOD 图像时出错.",
             "errorDeleteBsodImage": "删除 BSOD 图像时出错",
             "errorTriggerBsodImage": "触发 BSOD 图像时出错",
-            "successTriggerBsodImage": "成功触发 BSOD 图像",
+            "successTriggerBsodImage": "成功触发 BSOD 图像。有时，请使用刷新按钮正确反映触发的图像",
             "successDeleteBsodImage": "已成功删除 BSOD 图像"
         }
     },
@@ -588,6 +588,7 @@
     "PageFactoryDefault": {
         "FactoryDefaultPartialDescription": "BMC 将重新启动，启动至 BMC 控制台后，所有配置的数据将被保留.",
         "FactoryDefaultFullDescription": "BMC 将重新启动，启动到 BMC 控制台后，配置的数据将恢复为设备固件的默认值.",
+        "restore": "恢复",
         "toast": {
             "restoreToDefaultsSuccess": "原厂设定恢復成功",
             "restoreToDefaultsError": "原厂设定恢復失败",
@@ -1147,7 +1148,7 @@
         "subscriptionType": "订阅类型",
         "protocol": "协议",
         "snmpProtocolV1": "SNMPv1",
-        "snmpProtocolV2": "SNMPv2",
+        "snmpProtocolV2": "SNMPv2c",
         "snmpProtocolV3": "SNMPv3",
         "addSubscrition": "添加订阅",
         "editSubscrition": "编辑订阅",

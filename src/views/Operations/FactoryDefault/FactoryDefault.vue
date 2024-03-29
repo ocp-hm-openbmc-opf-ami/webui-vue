@@ -25,9 +25,9 @@
         </div>
       </b-form-radio-group>
       <div class="mt-3">
-        <b-button variant="primary" @click="onRestoreToDefaults"
-          >Restore</b-button
-        >
+        <b-button variant="primary" @click="onRestoreToDefaults">{{
+          $t('PageFactoryDefault.restore')
+        }}</b-button>
       </div>
     </b-form>
   </b-container>
