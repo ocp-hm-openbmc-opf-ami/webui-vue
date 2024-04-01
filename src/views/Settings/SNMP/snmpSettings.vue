@@ -55,7 +55,7 @@
             <template v-if="item.protocol === 'SNMPv3'">
               <b-form-select
                 id="snmp-authProtocalvalue"
-                v-model="selectedAuthenticationProtocol"
+                v-model="item.authenticationProtocol"
                 :options="item.authenticationProtocolOptions"
                 @change="saveAuthenticationProtocolValue(item, $event)"
               >
@@ -150,35 +150,42 @@ export default {
           ],
           authenticationProtocolOptions:
             log.protocol === 'SNMPv3'
-              ? [
-                  {
-                    value: 'None',
-                    text: this.$tc('pageSnmp.table.authProtocolNone'),
-                  },
-                  {
-                    value: 'SHA256',
-                    text: this.$tc('pageSnmp.table.authProtocolsha256'),
-                  },
-                  {
-                    value: 'SHA384',
-                    text: this.$tc('pageSnmp.table.authProtocolsha384'),
-                  },
-                  {
-                    value: 'SHA512',
-                    text: this.$tc('pageSnmp.table.authProtocolsha512'),
-                  },
-                ]
+              ? log.authenticationProtocol === 'None'
+                ? [
+                    {
+                      value: 'None',
+                      text: this.$tc('pageSnmp.table.authProtocolNone'),
+                    },
+                    {
+                      value: 'SHA256',
+                      text: this.$tc('pageSnmp.table.authProtocolsha256'),
+                    },
+                    {
+                      value: 'SHA384',
+                      text: this.$tc('pageSnmp.table.authProtocolsha384'),
+                    },
+                    {
+                      value: 'SHA512',
+                      text: this.$tc('pageSnmp.table.authProtocolsha512'),
+                    },
+                  ]
+                : [
+                    {
+                      value: 'SHA256',
+                      text: this.$tc('pageSnmp.table.authProtocolsha256'),
+                    },
+                    {
+                      value: 'SHA384',
+                      text: this.$tc('pageSnmp.table.authProtocolsha384'),
+                    },
+                    {
+                      value: 'SHA512',
+                      text: this.$tc('pageSnmp.table.authProtocolsha512'),
+                    },
+                  ]
               : ['NA'],
         };
       });
-    },
-    selectedAuthenticationProtocol: {
-      get() {
-        return this.$store.getters['snmp/authenticationProtocolValue'];
-      },
-      set(newValue) {
-        return newValue;
-      },
     },
   },
   created() {

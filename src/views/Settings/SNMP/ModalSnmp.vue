@@ -229,16 +229,22 @@ export default {
       bvModalEvt.preventDefault();
       this.handleSubmit();
     },
+    isValidIPv4(value) {
+      let ipv4Reg = /^[a-zA-Z0-9._%+-]+@((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+      // regex will return true for valid ipv4 addresses
+      return ipv4Reg.test(value);
+    },
+    isValidIPv6(value) {
+      let ipv6Reg = /(?:^|(?<=\s))[a-zA-Z0-9._%+-]+@(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(?=\s|$)/;
+      // regex will return true for valid ipv6 addresses
+      return ipv6Reg.test(value);
+    },
     destinationAddressValidation(value) {
       if (this.form.selectProtocol === 'SNMPv3') {
-        if (
-          !/(^[a-zA-Z0-9._%+-]+@(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))+$/.test(
-            value
-          )
-        ) {
-          return false;
-        } else {
+        if (this.isValidIPv6(value) || this.isValidIPv4(value)) {
           return true;
+        } else {
+          return false;
         }
       } else {
         if (
