@@ -12,7 +12,6 @@ const BackupAndRestore = {
     ntp: null,
     snmp: null,
     sysLog: null,
-    backupFile: {},
   },
   getters: {
     BackupDatas(state) {
@@ -25,7 +24,6 @@ const BackupAndRestore = {
     ntp: (state) => state.ntp,
     snmp: (state) => state.snmp,
     sysLog: (state) => state.sysLog,
-    backupFile: (state) => state.backupFile,
   },
   mutations: {
     setBackupDatas(state, BackupDatas) {
@@ -52,12 +50,9 @@ const BackupAndRestore = {
     setSysLog(state, sysLog) {
       state.sysLog = sysLog;
     },
-    setBackupFile(state, backupFile) {
-      state.backupFile = backupFile;
-    },
   },
   actions: {
-    async updateBackup({ dispatch, commit }, authentication) {
+    async updateBackup({ dispatch }, authentication) {
       const data = {
         BackupFeatures: authentication,
       };
@@ -67,7 +62,19 @@ const BackupAndRestore = {
           data
         )
         .then((response) => {
-          commit('setBackupFile', response.data);
+          // Create a temporary URL
+          const url = response.data['@Message.ExtendedInfo'][0].MessageArgs[0];
+
+          // Create a link element
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', 'bmc-config.tar');
+          // Append the link to the body
+          document.body.appendChild(link);
+          link.click();
+          // Cleanup
+          window.URL.revokeObjectURL(url);
+          document.body.removeChild(link);
         })
         .then(() => dispatch('getBackupConfig'))
         .then(() => {

@@ -155,7 +155,6 @@
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import IconDownload from '@carbon/icons-vue/es/document--download/20';
-import { saveAs } from 'file-saver';
 import { mapState } from 'vuex';
 export default {
   name: 'Backup',
@@ -170,8 +169,6 @@ export default {
   data() {
     return {
       SMTP: this.$store.getters['backupAndRestore/smtp'],
-      BackupFile: this.$store.getters['backupAndRestore/backupFile'],
-      fileName: 'bmc-config.tar',
       KVM: this.$store.getters['backupAndRestore/kvm'],
       IPMI: this.$store.getters['backupAndRestore/ipmi'],
       Network: this.$store.getters['backupAndRestore/network'],
@@ -212,7 +209,6 @@ export default {
       'ntp',
       'snmp',
       'sysLog',
-      'backupFile',
     ]),
   },
   watch: {
@@ -236,9 +232,6 @@ export default {
     },
     sysLog: function (value) {
       this.SysLog = value;
-    },
-    backupFile: function (value) {
-      this.BackupFile = value;
     },
     SMTP(value) {
       if (!value) {
@@ -286,10 +279,6 @@ export default {
         .then((success) => {
           if (success) {
             this.successToast(success);
-            let fileToSave = new Blob([this.BackupFile], {
-              type: 'application/x-tar',
-            });
-            saveAs(fileToSave, this.fileName);
           }
         })
         .catch(({ message }) => this.errorToast(message))
