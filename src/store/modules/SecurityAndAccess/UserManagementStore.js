@@ -188,7 +188,10 @@ const UserManagementStore = {
           if (status !== undefined) data.Enabled = status;
           if (locked !== undefined) data.Locked = locked;
         }
-      } else if (privilege === 'Operator' || privilege === 'ReadOnly') {
+      } else if (
+        globalPrivilege === 'Operator' ||
+        globalPrivilege === 'ReadOnly'
+      ) {
         if (password) data.Password = password;
       }
       /*if (PasswordChangeRequired !== undefined)

@@ -212,6 +212,7 @@ export default {
       let userData = {
         originalUsername: this.username,
         password: this.form.newPassword,
+        privilege: this.userPrivilege,
       };
 
       this.$store
