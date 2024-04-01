@@ -1301,8 +1301,9 @@ revision_update:
   stage: revison_sync
   script:
     # - if [ -z "$source_repo" ]; then echo "Revision update job related parallel matrix not configured in this project !!"; exit 0; fi
-    - src_url=${!source_repo}
-    - repo_name=${src_url##*/}
+    - echo ${!source_repo}
+    # - src_url=${!source_repo}
+    # - repo_name=${src_url##*/}
     # - if [[ $source_branch ]]; then src_branch=$source_branch; else src_branch=$CI_COMMIT_REF_NAME; fi
     # - src_branch="msg-tools-revision-sync-test"
     # - echo $src_branch
