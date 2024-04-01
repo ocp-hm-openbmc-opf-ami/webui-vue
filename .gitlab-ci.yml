@@ -1310,7 +1310,6 @@ revision_update:
     - schedules
   image:
     name: $INTERNAL_DOCKER_REGISTRY/gitotlts:new
-    entrypoint: ["/bin/bash", "-c"]
   variables:
     GIT_STRATEGY: none
   parallel:
