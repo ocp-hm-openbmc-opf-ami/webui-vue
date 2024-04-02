@@ -1319,8 +1319,9 @@ revision_update:
     # - cat receipe_file_path
     - mapfile -t recipes_list < <(grep -r git.ami.com/ --exclude-dir=".*" --include="*.bb*" $sync_workspace)
     - |
-      for recipe in "${recipes_list[@]}"; 
-        filepath=${recipe%%:*}
+      for recipe in "${recipes_list[@]}";
+        do
+          filepath=${recipe%%:*}
           line="${recipe#*:}"
           repo_url=$(echo $line | sed -n 's/.*git@\([^;]*\).*/\1/p; s/.*git:\/\/\([^;]*\).*/\1/p')
           git_auth_url=https://$GUSER:$GPASS@$repo_url
