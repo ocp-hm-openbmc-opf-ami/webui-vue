@@ -1322,81 +1322,82 @@ revision_update:
       for recipe in "${recipes_list[@]}"; 
         do
 
-          echo $recipe
-          # filepath=${recipe%%:*}
-          # line="${recipe#*:}"
-          # repo_url=$(echo $line | sed -n 's/.*git@\([^;]*\).*/\1/p; s/.*git:\/\/\([^;]*\).*/\1/p')
-          # git_auth_url=https://$GUSER:$GPASS@$repo_url
-          # recipe_name=${repo_url##*/}
-          # recipe_name=$(basename "$repo_url" .git)
-          # echo "$project_name"
-          # echo "================================================"
-          # echo "==> Filepath $filepath"
-          # echo "==> Line $line"
-          # echo "==> REPO URL ${repo_url}"
+          filepath=${recipe%%:*}
+          line="${recipe#*:}"
+          repo_url=$(echo $line | sed -n 's/.*git@\([^;]*\).*/\1/p; s/.*git:\/\/\([^;]*\).*/\1/p')
+          git_auth_url=https://$GUSER:$GPASS@$repo_url
+          recipe_name=${repo_url##*/}
+          recipe_name=$(basename "$repo_url" .git)
+          source_dir=$(dirname $filepath)
+          echo "$project_name"
+          echo "================================================"
+          echo "==> Filepath $filepath"
+          echo "==> Line $line"
+          echo "==> REPO URL ${repo_url}"
+          echo "==> Source dir ${source_dir}"
 
-          # if [ -z $repo_url ]; then  
-          #   echo "==> Invalid URL/Findiing...ignoring"
-          #   continue
-          # fi
+          if [ -z $repo_url ]; then  
+            echo "==> Invalid URL/Findiing...ignoring"
+            continue
+          fi
 
-          # if git ls-remote -q "$git_auth_url" &>/dev/null; then
-          #   echo "==> Receipe Repo URL Valid"
+          if git ls-remote -q "$git_auth_url" &>/dev/null; then
+            echo "==> Receipe Repo URL Valid"
             
-          #   if [[ https://$repo_url =~ $CI_PROJECT_URL ]]; then
-          #     echo "************************************************"
-          #     orginal_commit_id=( $(git rev-parse HEAD))
-          #     echo "==> Found a Match"
-          #     echo "==> Old Commit id $orginal_commit_id"
-          #     echo "==> Previewing before making change "
-          #     cat ${filepath}
+            if [[ https://$repo_url =~ $CI_PROJECT_URL ]]; then
+              echo "************************************************"
+              orginal_commit_id=( $(git rev-parse HEAD))
+              echo "==> Found a Match"
+              echo "==> Old Commit id $orginal_commit_id"
+              echo "==> Previewing before making change "
+              cat ${filepath}
 
-          #     if grep -q '^SRCREV_FORMAT' $filepath; then
-          #       srcrev_format=$(grep '^SRCREV_FORMAT' $filepath | awk -F'=' '{print $2}' | tr -d '"')
-          #     else
-          #         echo "SRCREV_FORMAT not found"
-          #     fi
-          #     echo $srcrev_format
-          #     if [[ $srcrev_format =~ "override" ]]; then
-          #       echo "====> Updating SRCREV OVERRIDE "
-          #       sed -i "s/^SRCREV_override = \".*\"/SRCREV_override = \"$CI_COMMIT_SHA\"/" $filepath
-          #     else
-          #       echo "====> Updating SRCREV"
-          #       sed -i "s/^SRCREV = \".*\"/SRCREV = \"$CI_COMMIT_SHA\"/" $filepath
-          #     fi
-          #     echo "************************************************"
-          #     echo "==> Previewing after making change "
-          #     cat ${filepath}
-          #     echo "************************************************"
-          #     cd $sync_workspace
-          #     echo "===> GIT STATUS"
-          #     git status
-          #     if git diff --exit-code $filepath >/dev/null; then
-          #       echo "=====> No changes in the file"
-          #     else
-          #       echo "===> GIT Adding and Pushing"
-          #       git add $filepath
-          #       git commit -m "Auto revision update by recipe $recipe_name"
-          #       new_commit_id=( $(git rev-parse HEAD))
-          #       echo "==> New Commit id $new_commit_id"
-          #       if [[ $orginal_commit_id == $new_commit_id ]]; then
-          #         echo -e "Nothing to commit !! No Change dedected";
-          #       else
-          #         echo -e "Commit Created successfully !!";
-          #         git log -1
-          #         echo -e "\n==> Previewing after making change "
-          #         echo "-------------------------------------------------------"
-          #         cat ${filepath}
-          #         echo "-------------------------------------------------------"
-          #         # git push origin $src_branch
-          #         echo "==> Changes Pushed !!"
-          #       fi
-          #     fi
+              if grep -q '^SRCREV_FORMAT' $filepath; then
+                srcrev_format=$(grep '^SRCREV_FORMAT' $filepath | awk -F'=' '{print $2}' | tr -d '"')
+              else
+                  echo "SRCREV_FORMAT not found"
+              fi
+              echo $srcrev_format
+              if [[ $srcrev_format =~ "override" ]]; then
+                echo "====> Updating SRCREV OVERRIDE "
+                sed -i "s/^SRCREV_override = \".*\"/SRCREV_override = \"$CI_COMMIT_SHA\"/" $filepath
+              else
+                echo "====> Updating SRCREV"
+                sed -i "s/^SRCREV = \".*\"/SRCREV = \"$CI_COMMIT_SHA\"/" $filepath
+              fi
+              echo "************************************************"
+              echo "==> Previewing after making change "
+              cat ${filepath}
+              echo "************************************************"
+              cd $source_dir
+              echo "===> GIT STATUS"
+              git status
+              if git diff --exit-code $filepath >/dev/null; then
+                echo "=====> No changes in the file"
+              else
+                echo "===> GIT Adding and Pushing"
+                git add $filepath
+                git commit -m "Auto revision update by recipe $recipe_name"
+                new_commit_id=( $(git rev-parse HEAD))
+                echo "==> New Commit id $new_commit_id"
+                if [[ $orginal_commit_id == $new_commit_id ]]; then
+                  echo -e "Nothing to commit !! No Change dedected";
+                else
+                  echo -e "Commit Created successfully !!";
+                  git log -1
+                  echo -e "\n==> Previewing after making change "
+                  echo "-------------------------------------------------------"
+                  cat ${filepath}
+                  echo "-------------------------------------------------------"
+                  # git push origin $src_branch
+                  echo "==> Changes Pushed !!"
+                fi
+              fi
               
-          #   fi
-          # else
-          #    echo "==> Receipe Repo URL Invalid"
-          # fi
+            fi
+          else
+             echo "==> Receipe Repo URL Invalid"
+          fi
           echo "================================================"
         done
     - echo "Update completed" 
