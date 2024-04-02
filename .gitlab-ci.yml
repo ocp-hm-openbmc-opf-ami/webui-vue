@@ -1306,6 +1306,8 @@ revision_update:
     - pip install -r utils_scripts/ot/requirements.txt
     - python3 utils_scripts/ot/identify_recipe_by_src.py ${OT_GROUP_ID} $CI_PROJECT_URL
     - sync_workspace=`realpath $entrypoint_dir/utils_scripts/core`
+    - ls -lat
+    - cat receipe_file_path
     - cd $repo_name
     - echo "==> sync_workspace $sync_workspace"
     - echo "==> repo_name $repo_name"
