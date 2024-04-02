@@ -1366,7 +1366,7 @@ revision_update:
               if [[ $srcrev_format =~ "override" ]]; then
                 echo "====> Updating SRCREV OVERRIDE "
                 sed -i "s/^SRCREV_override = \".*\"/SRCREV_override = \"$CI_COMMIT_SHA\"/" $filepath
-              else if [[ $EXISTING_SRCREV =~ "AUTOREV" ]]; then
+              elif [[ $EXISTING_SRCREV =~ "AUTOREV" ]]; then
                 echo "-----------------------------------------------------------------"
                 echo "====> AUTO REV FOUND !!!! IGNORING TO UPDATE SRC REV UPDATE !!!!!"
                 echo "-----------------------------------------------------------------"
