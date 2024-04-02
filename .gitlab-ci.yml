@@ -1320,9 +1320,7 @@ revision_update:
     - mapfile -t recipes_list < <(grep -r git.ami.com/ --exclude-dir=".*" --include="*.bb*" $sync_workspace)
     - |
       for recipe in "${recipes_list[@]}"; 
-        do
-
-          filepath=${recipe%%:*}
+        filepath=${recipe%%:*}
           line="${recipe#*:}"
           repo_url=$(echo $line | sed -n 's/.*git@\([^;]*\).*/\1/p; s/.*git:\/\/\([^;]*\).*/\1/p')
           git_auth_url=https://$GUSER:$GPASS@$repo_url
@@ -1337,7 +1335,9 @@ revision_update:
           echo "==> Source dir ${source_dir}"
 
           if [ -z $repo_url ]; then  
+            echo "-----------------------------------------------------------------"
             echo "==> Invalid URL/Findiing...ignoring"
+            echo "-----------------------------------------------------------------"
             continue
           fi
 
@@ -1347,9 +1347,12 @@ revision_update:
             if [[ https://$repo_url =~ $CI_PROJECT_URL ]]; then
               echo "************************************************"
               orginal_commit_id=( $(git rev-parse HEAD))
+              EXISTING_SRCREV=$(grep "SRCREV" $filepath | awk -F'=' '{print $2}')
               echo "==> Found a Match"
               echo "==> Old Commit id $orginal_commit_id"
               echo "==> Previewing before making change "
+              echo "==> Existing SRCREV ${EXISTING_SRCREV}"
+              
               cat ${filepath}
 
               if grep -q '^SRCREV_FORMAT' $filepath; then
@@ -1358,11 +1361,16 @@ revision_update:
                   echo "SRCREV_FORMAT not found"
               fi
               echo $srcrev_format
+              
               if [[ $srcrev_format =~ "override" ]]; then
                 echo "====> Updating SRCREV OVERRIDE "
                 sed -i "s/^SRCREV_override = \".*\"/SRCREV_override = \"$CI_COMMIT_SHA\"/" $filepath
+              else if [[ $EXISTING_SRCREV =~ "AUTOREV" ]]; then
+                echo "-----------------------------------------------------------------"
+                echo "====> AUTO REV FOUND !!!! IGNORING TO UPDATE SRC REV UPDATE !!!!!"
+                echo "-----------------------------------------------------------------"
+                continue
               else
-                echo "====> Updating SRCREV"
                 sed -i "s/^SRCREV = \".*\"/SRCREV = \"$CI_COMMIT_SHA\"/" $filepath
               fi
               cd $source_dir
@@ -1385,7 +1393,7 @@ revision_update:
                   echo "-------------------------------------------------------"
                   cat ${filepath}
                   echo "-------------------------------------------------------"
-                  # git push origin $CI_COMMIT_REF_NAME
+                  git push origin $CI_COMMIT_REF_NAME
                   echo "==> Changes Pushed !!"
                 fi
               fi
