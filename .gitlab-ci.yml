@@ -5,7 +5,8 @@ stages:
 
 variables:
   GIT_STRATEGY: none
-  runner_tag: aws-eks-linux-ec2-ot-ondemand
+  # runner_tag: aws-eks-linux-ec2-ot-ondemand
+  runner_tag: msg-tools-docker-validator
   DOCKER_AUTH_CONFIG: $CI_JOB_TOKEN
   OT_SSTATE_BUCKET: ami-gitlab-s3cache-7xhp
   OT_GROUP_ID: 19287
@@ -1308,6 +1309,7 @@ revision_update:
     - cd utils_scripts
     - pip install -r ot/requirements.txt
     - python3 ot/identify_recipe_by_src.py ${OT_GROUP_ID} $CI_PROJECT_URL
+    - sleep 1h
     - sync_workspace=`realpath core`
     - echo "==> sync_workspace $sync_workspace"
     - echo "==> repo_name $repo_name"
