@@ -1302,7 +1302,6 @@ revision_update:
   script:
     - git config --global user.email "$GUSER@ami.com"
     - git config --global user.name "$GUSER"
-    # - export GPASS=$GPASS
     - utilities_scripts=https://${GUSER}:${GPASS}@git.ami.com/tools/megarac/ci-utils
     - entrypoint_dir=$(pwd)
     - git clone ${utilities_scripts} --branch main utils_scripts
@@ -1315,6 +1314,7 @@ revision_update:
     - echo "==> sync_workspace $sync_workspace"
     - echo "==> repo_name $repo_name"
     - echo "==> CI PROJECT URL $CI_PROJECT_URL"
+    - CI_PROJECT_URL="https://git.ami.com/core/ami-bmc/one-tree/nvidia/gp-gpu"
     - ls -lat
     # - cat receipe_file_path
     - mapfile -t recipes_list < <(grep -r git.ami.com/ --exclude-dir=".*" --include="*.bb*" $sync_workspace)
@@ -1333,7 +1333,7 @@ revision_update:
           echo "================================================"
           echo "==> Filepath $filepath"
           echo "==> Line $line"
-          echo "==> REPO URL ${repo_url}"
+          echo "==> Repo URL ${repo_url}"
           echo "==> Source dir ${source_dir}"
 
           if [ -z $repo_url ]; then  
@@ -1365,10 +1365,6 @@ revision_update:
                 echo "====> Updating SRCREV"
                 sed -i "s/^SRCREV = \".*\"/SRCREV = \"$CI_COMMIT_SHA\"/" $filepath
               fi
-              echo "************************************************"
-              echo "==> Previewing after making change "
-              cat ${filepath}
-              echo "************************************************"
               cd $source_dir
               echo "===> GIT STATUS"
               git status
@@ -1389,7 +1385,7 @@ revision_update:
                   echo "-------------------------------------------------------"
                   cat ${filepath}
                   echo "-------------------------------------------------------"
-                  # git push origin $src_branch
+                  # git push origin $CI_COMMIT_REF_NAME
                   echo "==> Changes Pushed !!"
                 fi
               fi
