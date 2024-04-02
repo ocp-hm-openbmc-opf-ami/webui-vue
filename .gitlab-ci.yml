@@ -1299,22 +1299,21 @@ variables:
 revision_update:
   stage: revison_sync
   script:
+    - git config --global user.email "$GUSER@ami.com"
+    - git config --global user.name "$GUSER"
     # - export GPASS=$GPASS
     - utilities_scripts=https://${GUSER}:${GPASS}@git.ami.com/tools/megarac/ci-utils
     - entrypoint_dir=$(pwd)
     - git clone ${utilities_scripts} --branch main utils_scripts
-    - pip install -r utils_scripts/ot/requirements.txt
-    - python3 utils_scripts/ot/identify_recipe_by_src.py ${OT_GROUP_ID} $CI_PROJECT_URL
-    - sync_workspace=`realpath $entrypoint_dir/utils_scripts/core`
-    - ls -lat
-    - cat receipe_file_path
-    - cd $repo_name
+    - cd utils_scripts
+    - pip install -r ot/requirements.txt
+    - python3 ot/identify_recipe_by_src.py ${OT_GROUP_ID} $CI_PROJECT_URL
+    - sync_workspace=`realpath core`
     - echo "==> sync_workspace $sync_workspace"
     - echo "==> repo_name $repo_name"
     - echo "==> CI PROJECT URL $CI_PROJECT_URL"
-    - git status
-    - git config --global user.email "$GUSER@ami.com"
-    - git config --global user.name "$GUSER"
+    - ls -lat
+    - cat receipe_file_path
     - mapfile -t recipes_list < <(grep -r git.ami.com/ --exclude-dir=".*" --include="*.bb*" $sync_workspace)
     - |
       for recipe in "${recipes_list[@]}"; 
