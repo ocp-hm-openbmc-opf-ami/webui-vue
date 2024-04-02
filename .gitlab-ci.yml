@@ -1303,7 +1303,7 @@ revision_update:
     - utilities_scripts=https://${GUSER}:${GPASS}@git.ami.com/tools/megarac/ci-utils
     - entrypoint_dir=$(pwd)
     - git clone ${utilities_scripts} --branch main utils_scripts
-    - pip install -r requirements.txt
+    - pip install -r utils_scripts/ot/requirements.txt
     - python3 utils_scripts/ot/identify_recipe_by_src.py ${OT_GROUP_ID} $CI_PROJECT_URL
     - sync_workspace=`realpath $entrypoint_dir/utils_scripts/core`
     - cd $repo_name
