@@ -1308,7 +1308,7 @@ revision_update:
     - pip install -r requirements.txt
     - python3 identify_recipe_by_src.py ${OT_GROUP_ID} $CI_PROJECT_URL
     - echo $pwd
-    - ls -lat
+    - ls -lat core
     
     # - sync_workspace=`realpath $repo_name`
     # - cd $repo_name
