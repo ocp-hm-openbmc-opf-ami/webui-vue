@@ -1,4 +1,3 @@
-
 stages:
 - build
 - deploy
@@ -9,1398 +8,1402 @@ variables:
   runner_tag: aws-eks-linux-ec2-ot-ondemand
   DOCKER_AUTH_CONFIG: $CI_JOB_TOKEN
   OT_SSTATE_BUCKET: ami-gitlab-s3cache-7xhp
+  OT_GROUP_ID: 19287
 
 
 
-.build:
-  stage: build
-  script:
-    ###########################################################################
-    # CUSTOM TEMPORARY CHANGES FOR DISBALIGN SPOM REPORT GEN
-    ###########################################################################
-    - cd ${SOURCE_WORKSPACE}
-    - |
-      if [[ -f $SOURCE_WORKSPACE/poky/meta/classes/create-spdx.bbclass ]]; then 
-        echo "===============  ======================="
-        HandleLog DASH "Disabling SBOM" ${DEBUG_LOG_FILE}
-        cat $SOURCE_WORKSPACE/poky/meta/classes/create-spdx.bbclass
-        echo "======================================================"
-        sed -i 's|^inherit create-spdx-2.2|# inherit create-spdx-2.2|' $SOURCE_WORKSPACE/poky/meta/classes/create-spdx.bbclass
-        echo "======================================================"
-        cat $SOURCE_WORKSPACE/poky/meta/classes/create-spdx.bbclass
-        echo "======================================================"
-      fi
+# .build:
+#   stage: build
+#   script:
+#     ###########################################################################
+#     # CUSTOM TEMPORARY CHANGES FOR DISBALIGN SPOM REPORT GEN
+#     ###########################################################################
+#     - cd ${SOURCE_WORKSPACE}
+#     - |
+#       if [[ -f $SOURCE_WORKSPACE/poky/meta/classes/create-spdx.bbclass ]]; then 
+#         echo "===============  ======================="
+#         HandleLog DASH "Disabling SBOM" ${DEBUG_LOG_FILE}
+#         cat $SOURCE_WORKSPACE/poky/meta/classes/create-spdx.bbclass
+#         echo "======================================================"
+#         sed -i 's|^inherit create-spdx-2.2|# inherit create-spdx-2.2|' $SOURCE_WORKSPACE/poky/meta/classes/create-spdx.bbclass
+#         echo "======================================================"
+#         cat $SOURCE_WORKSPACE/poky/meta/classes/create-spdx.bbclass
+#         echo "======================================================"
+#       fi
 
-    ###########################################################################
-    # AWS S3 BASED SSTATE CACHE SETUP
-    ###########################################################################
-    - |
-      HandleLog DASH "S3 BUCKET CACHE FOLDER CREATE" ${DEBUG_LOG_FILE}
-      aws s3api put-object --bucket ${OT_SSTATE_BUCKET} --key onetree/EGS/sstate-cache/.keep
-      aws s3api put-object --bucket ${OT_SSTATE_BUCKET} --key onetree/BHS/sstate-cache/.keep
-      aws s3api put-object --bucket ${OT_SSTATE_BUCKET} --key onetree/AMD_TRUIN/sstate-cache/.keep
-      aws s3api put-object --bucket ${OT_SSTATE_BUCKET} --key onetree/AMPERE_MITCHELL/sstate-cache/.keep
-      aws s3api put-object --bucket ${OT_SSTATE_BUCKET} --key onetree/NVIDIA_GRACEHOPPER/sstate-cache/.keep
-      HandleLog SUCCESS "FOLDERS CREATED IN S3 Bukcet" ${DEBUG_LOG_FILE}
-    - | 
-      if [[ ${config^^} =~ "ARCHERCITY" || ${config^^} =~ "AST2600" ]]; then 
-        base_cache="EGS"
-      elif [[ ${config^^} =~ "AVEN" ]]; then
-        base_cache="BHS"
-      elif [[ ${config^^} =~ "AMD_TRUIN" ]]; then
-        base_cache="AMD_TRUIN"
-      elif [[ ${config^^} =~ "AMPERE" ]]; then
-        base_cache="AMPERE_MITCHELL"
-      elif [[ ${config^^} =~ "MGX" ]]; then
-        base_cache="NVIDIA_MGX"
-      elif [[ ${config^^} =~ "NVIDIA" ]]; then
-        base_cache="NVIDIA_GRACEHOPPER"
-      fi
+#     ###########################################################################
+#     # AWS S3 BASED SSTATE CACHE SETUP
+#     ###########################################################################
+#     - |
+#       HandleLog DASH "S3 BUCKET CACHE FOLDER CREATE" ${DEBUG_LOG_FILE}
+#       aws s3api put-object --bucket ${OT_SSTATE_BUCKET} --key onetree/EGS/sstate-cache/.keep
+#       aws s3api put-object --bucket ${OT_SSTATE_BUCKET} --key onetree/BHS/sstate-cache/.keep
+#       aws s3api put-object --bucket ${OT_SSTATE_BUCKET} --key onetree/AMD_TRUIN/sstate-cache/.keep
+#       aws s3api put-object --bucket ${OT_SSTATE_BUCKET} --key onetree/AMPERE_MITCHELL/sstate-cache/.keep
+#       aws s3api put-object --bucket ${OT_SSTATE_BUCKET} --key onetree/NVIDIA_GRACEHOPPER/sstate-cache/.keep
+#       HandleLog SUCCESS "FOLDERS CREATED IN S3 Bukcet" ${DEBUG_LOG_FILE}
+#     - | 
+#       if [[ ${config^^} =~ "ARCHERCITY" || ${config^^} =~ "AST2600" ]]; then 
+#         base_cache="EGS"
+#       elif [[ ${config^^} =~ "AVEN" ]]; then
+#         base_cache="BHS"
+#       elif [[ ${config^^} =~ "AMD_TRUIN" ]]; then
+#         base_cache="AMD_TRUIN"
+#       elif [[ ${config^^} =~ "AMPERE" ]]; then
+#         base_cache="AMPERE_MITCHELL"
+#       elif [[ ${config^^} =~ "MGX" ]]; then
+#         base_cache="NVIDIA_MGX"
+#       elif [[ ${config^^} =~ "NVIDIA" ]]; then
+#         base_cache="NVIDIA_GRACEHOPPER"
+#       fi
 
-    ###########################################################################
-    #  DOWNLOADING SSTATE CACHE FROM AWS S3 BUCKET
-    ###########################################################################
-    - |
-      HandleLog INFO "BASE CACHE SET TO $base_cache" ${DEBUG_LOG_FILE}
-      HandleLog INFO "Bucket name $OT_SSTATE_BUCKET" ${DEBUG_LOG_FILE}
-      if [[ ${CI_RUNNER_DESCRIPTION,,} =~ "aws" && ! "$mr_labels" =~ "OT_ENABLE_COVERITY" ]]; 
-      then 
-        sync_start_time=$(date +%s)
-        aws s3 sync --sse=aws:kms --quiet s3://${OT_SSTATE_BUCKET}/onetree/$base_cache $HOME/cache/onetree/$base_cache
-        sync_end_time=$(date +%s)
-        HandleLog SUCCESS "Cache Download Time from S3- $(($sync_end_time-$sync_start_time)) secs" ${DEBUG_LOG_FILE}
-      fi
-    - |
-      mkdir -p $HOME/cache/onetree/$base_cache/downloads
-      if [ -d "$HOME/cache/onetree/$base_cache/sstate-cache" ]; then
-        HandleLog INFO "Cache folders exist in local !" ${DEBUG_LOG_FILE}
-      else
-        mkdir -p $HOME/cache/onetree/$base_cache/sstate-cache
-      fi
+#     ###########################################################################
+#     #  DOWNLOADING SSTATE CACHE FROM AWS S3 BUCKET
+#     ###########################################################################
+#     - |
+#       HandleLog INFO "BASE CACHE SET TO $base_cache" ${DEBUG_LOG_FILE}
+#       HandleLog INFO "Bucket name $OT_SSTATE_BUCKET" ${DEBUG_LOG_FILE}
+#       if [[ ${CI_RUNNER_DESCRIPTION,,} =~ "aws" && ! "$mr_labels" =~ "OT_ENABLE_COVERITY" ]]; 
+#       then 
+#         sync_start_time=$(date +%s)
+#         aws s3 sync --sse=aws:kms --quiet s3://${OT_SSTATE_BUCKET}/onetree/$base_cache $HOME/cache/onetree/$base_cache
+#         sync_end_time=$(date +%s)
+#         HandleLog SUCCESS "Cache Download Time from S3- $(($sync_end_time-$sync_start_time)) secs" ${DEBUG_LOG_FILE}
+#       fi
+#     - |
+#       mkdir -p $HOME/cache/onetree/$base_cache/downloads
+#       if [ -d "$HOME/cache/onetree/$base_cache/sstate-cache" ]; then
+#         HandleLog INFO "Cache folders exist in local !" ${DEBUG_LOG_FILE}
+#       else
+#         mkdir -p $HOME/cache/onetree/$base_cache/sstate-cache
+#       fi
 
-    ###########################################################################
-    #  DOWNLOADED CACHE SIZE CHECKING AND ENABLING SSTATE
-    ###########################################################################
-    - HandleLog DASH "SSTATE CACHE FOLDER SIZE" ${BUILD_LOG_FILE}
-    - ls -lat $HOME/cache/onetree/$base_cache
-    - du -h -d 2 $HOME/cache/onetree
-    - du -sh $HOME/cache/onetree/$base_cache/sstate-cache
-    - echo $(pwd)
-    - |
-      if [[ ! "$mr_labels" =~ "OT_ENABLE_COVERITY" ]]; then
-        echo "SSTATE_DIR = \"$HOME/cache/onetree/$base_cache/sstate-cache\"" >> $TEMPLATECONF/local.conf.sample
-        HandleLog SUCCESS "SSTATE_DIR $HOME/cache/onetree/$base_cache/sstate-cache ADDED !!" ${BUILD_LOG_FILE}
-      fi
-    - HandleLog DASH "DONE" ${BUILD_LOG_FILE}
+#     ###########################################################################
+#     #  DOWNLOADED CACHE SIZE CHECKING AND ENABLING SSTATE
+#     ###########################################################################
+#     - HandleLog DASH "SSTATE CACHE FOLDER SIZE" ${BUILD_LOG_FILE}
+#     - ls -lat $HOME/cache/onetree/$base_cache
+#     - du -h -d 2 $HOME/cache/onetree
+#     - du -sh $HOME/cache/onetree/$base_cache/sstate-cache
+#     - echo $(pwd)
+#     - |
+#       if [[ ! "$mr_labels" =~ "OT_ENABLE_COVERITY" ]]; then
+#         echo "SSTATE_DIR = \"$HOME/cache/onetree/$base_cache/sstate-cache\"" >> $TEMPLATECONF/local.conf.sample
+#         HandleLog SUCCESS "SSTATE_DIR $HOME/cache/onetree/$base_cache/sstate-cache ADDED !!" ${BUILD_LOG_FILE}
+#       fi
+#     - HandleLog DASH "DONE" ${BUILD_LOG_FILE}
     
-    ###########################################################################
-    # CLEARNING SSTATE CACHE FOR JVIEWER
-    ###########################################################################
-    - ls -la $SOURCE_WORKSPACE
-    - $SOURCE_WORKSPACE/poky/scripts/sstate-cache-management.sh --cache-dir=$HOME/cache/onetree/$base_cache/sstate-cache -d -v -y
-    - echo "===> SSTATE CACHE DIR SIZE"
-    - du -h -d 2 $HOME/cache/onetree
-    - du -sh $HOME/cache/onetree/$base_cache/sstate-cache
+#     ###########################################################################
+#     # CLEARNING SSTATE CACHE FOR JVIEWER
+#     ###########################################################################
+#     - ls -la $SOURCE_WORKSPACE
+#     - $SOURCE_WORKSPACE/poky/scripts/sstate-cache-management.sh --cache-dir=$HOME/cache/onetree/$base_cache/sstate-cache -d -v -y
+#     - echo "===> SSTATE CACHE DIR SIZE"
+#     - du -h -d 2 $HOME/cache/onetree
+#     - du -sh $HOME/cache/onetree/$base_cache/sstate-cache
 
     
-    ###########################################################################
-    # COPY LAYERS FILES TO ARTIFACTS FOR DEBUGGING
-    ###########################################################################
-    - |
-      if [ -f ${PLATFORM_BBLAYERS} ]; then
-        cp -r $PLATFORM_BBLAYERS ${INFO_AND_LOG}
-      fi
-      if [ -f ${PLATFORM_CONF} ]; then
-        cp -r $PLATFORM_CONF ${INFO_AND_LOG}
-      fi
+#     ###########################################################################
+#     # COPY LAYERS FILES TO ARTIFACTS FOR DEBUGGING
+#     ###########################################################################
+#     - |
+#       if [ -f ${PLATFORM_BBLAYERS} ]; then
+#         cp -r $PLATFORM_BBLAYERS ${INFO_AND_LOG}
+#       fi
+#       if [ -f ${PLATFORM_CONF} ]; then
+#         cp -r $PLATFORM_CONF ${INFO_AND_LOG}
+#       fi
 
-      if [ -f ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf ]; then
-        cp -r ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf ${INFO_AND_LOG}
-      fi
+#       if [ -f ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf ]; then
+#         cp -r ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf ${INFO_AND_LOG}
+#       fi
       
-    ###########################################################################
-    # TEMPLATE ENV
-    ###########################################################################
-    - echo $(pwd)
-    # - TEMPLATECONF=$TEMPLATECONF . openbmc-env
-    - cd $SOURCE_WORKSPACE
-    - ls -la
-    - . ./openbmc-env
-    - HandleLog SUCCESS "ENV Script Ran !!" ${BUILD_LOG_FILE}
+#     ###########################################################################
+#     # TEMPLATE ENV
+#     ###########################################################################
+#     - echo $(pwd)
+#     # - TEMPLATECONF=$TEMPLATECONF . openbmc-env
+#     - cd $SOURCE_WORKSPACE
+#     - ls -la
+#     - . ./openbmc-env
+#     - HandleLog SUCCESS "ENV Script Ran !!" ${BUILD_LOG_FILE}
 
-    ###########################################################################
-    # POST ENV OPTIONS
-    ###########################################################################
+#     ###########################################################################
+#     # POST ENV OPTIONS
+#     ###########################################################################
 
-    - |
-      if [[ $post_options ]]; then
-        for post_opt in ${post_options[@]}; do
-          echo $post_opt
-          case "${post_opt}" in
-              "BrcmRaidI2cMode")
-                if [[ $ami_packs == *"BRCMRAID"* ]]; then
-                  devtool modify raid-brcm
-                  ls -la SOURCE_WORKSPACE/sources/raid-brcm/raid-brcm/src
-                  echo '{
-                      "OOB_MODE":"i2c",
-                      "RAID_I2C_BUS_NUM":[0,1,2,3,4,5,6,7],
-                      "RAID_I2C_SLAVE_ADDRESS":[2,2,2,2,2,2,2,2]
-                  }' > SOURCE_WORKSPACE/sources/raid-brcm/raid-brcm/src/raid-brcm.json
+#     - |
+#       if [[ $post_options ]]; then
+#         for post_opt in ${post_options[@]}; do
+#           echo $post_opt
+#           case "${post_opt}" in
+#               "BrcmRaidI2cMode")
+#                 if [[ $ami_packs == *"BRCMRAID"* ]]; then
+#                   devtool modify raid-brcm
+#                   ls -la SOURCE_WORKSPACE/sources/raid-brcm/raid-brcm/src
+#                   echo '{
+#                       "OOB_MODE":"i2c",
+#                       "RAID_I2C_BUS_NUM":[0,1,2,3,4,5,6,7],
+#                       "RAID_I2C_SLAVE_ADDRESS":[2,2,2,2,2,2,2,2]
+#                   }' > SOURCE_WORKSPACE/sources/raid-brcm/raid-brcm/src/raid-brcm.json
                   
-                  echo "---------"
-                  cat SOURCE_WORKSPACE/sources/raid-brcm/raid-brcm/src/raid-brcm.json
-                  echo "---------"
-                  devtool modify hba-brcm
-                  echo '{
-                      "SASIT_OOB_MODE":"i2c",
-                      "SASIT_I2C_BUS_NUM":[0,1,2,3,4,5,6,7],
-                      "SASIT_I2C_SLAVE_ADDRESS":[10,10,10,10,10,10,10,10]
-                  }' > SOURCE_WORKSPACE/sources/hba-brcm/hba-brcm/src/hba-brcm.json
-                  echo "---------"
-                  cat SOURCE_WORKSPACE/sources/hba-brcm/hba-brcm/src/hba-brcm.json
-                  echo "---------"
-                fi
-              ;;
-          esac
-        done
-      fi
+#                   echo "---------"
+#                   cat SOURCE_WORKSPACE/sources/raid-brcm/raid-brcm/src/raid-brcm.json
+#                   echo "---------"
+#                   devtool modify hba-brcm
+#                   echo '{
+#                       "SASIT_OOB_MODE":"i2c",
+#                       "SASIT_I2C_BUS_NUM":[0,1,2,3,4,5,6,7],
+#                       "SASIT_I2C_SLAVE_ADDRESS":[10,10,10,10,10,10,10,10]
+#                   }' > SOURCE_WORKSPACE/sources/hba-brcm/hba-brcm/src/hba-brcm.json
+#                   echo "---------"
+#                   cat SOURCE_WORKSPACE/sources/hba-brcm/hba-brcm/src/hba-brcm.json
+#                   echo "---------"
+#                 fi
+#               ;;
+#           esac
+#         done
+#       fi
 
 
-    ###########################################################################
-    # RUNNING DO FETCH ALONE
-    ###########################################################################
+#     ###########################################################################
+#     # RUNNING DO FETCH ALONE
+#     ###########################################################################
     
-    # - echo -e "==========> Started do fetch <==============\n"  | tee -a ${BUILD_LOG_FILE}
-    # - bitbake -D --runonly do_fetch $executer
+#     # - echo -e "==========> Started do fetch <==============\n"  | tee -a ${BUILD_LOG_FILE}
+#     # - bitbake -D --runonly do_fetch $executer
     
-    ###########################################################################
-    # BITBAKE BUILD WITH/WITHOUT COVERITY
-    ###########################################################################
-    - set +e
-    - HandleLog DASH "BITBAKE BUILD INITIALIZING" ${BUILD_LOG_FILE}
-    - first_build_start_time=$(date +%s)
-    - |
-      findstr="Tasks Summary: Attempted [0-9]+ tasks of which [0-9]+ didn't need to be rerun and all succeeded."
-      if [[ "$mr_labels" =~ "OT_ENABLE_COVERITY" ]]; then
-        mkdir -p $HOME/coverity_report/emit
-        chown -R gitot:gitot $HOME/coverity_report
-        $HOME/coverity/bin/cov-configure --java
-        $HOME/coverity/bin/cov-configure --gcc
-        $HOME/coverity/bin/cov-configure --compiler arm-openbmc-linux-gnueabi-gcc --comptype gcc --template
-        export CC=/usr/bin/gcc
-        $HOME/coverity/bin/cov-configure --compiler /usr/bin/gcc
-        BB_NUMBER_THREADS=4 $HOME/coverity/bin/cov-build --dir $HOME/coverity_report bitbake $executer | tee -a ${BUILD_LOG_FILE}
-        if grep -qE "$findstr" "${BUILD_LOG_FILE}";
-        then
-          $HOME/coverity/bin/cov-manage-emit --dir $HOME/coverity_report list | tee -a Included_list
-          $HOME/coverity/bin/cov-analyze --dir $HOME/coverity_report --enable-constraint-fpp -all
-          $HOME/coverity/bin/cov-format-errors --dir $HOME/coverity_report --json-output-v8 $HOME/coverity_report/coverity-scan.json
-          ls
-          echo ${attributes} >> mr_data.json
-          MR_ID=$(echo ${attributes} | jq -r '."iid"')
-          cp -r $HOME/coverity_report/coverity-scan.json $OUTPUT
-          zip coverity.zip -j $HOME/coverity_report/coverity-scan.json mr_data.json
-          cp coverity.zip $OUTPUT
-          ls
-          curl -F 'coverity_data=@coverity.zip' "https://devnet.ami.com/sast-bot/api/v1/coverity_ot_reports?pid=$CI_PROJECT_ID&job_url=$CI_JOB_URL&job_stage=$CI_JOB_STAGE&prj=${config}&mr_id=$MR_ID"
-        fi
-      else
-        HandleLog INFO "BITBAKE BUILD STARTED...." ${BUILD_LOG_FILE}
-        BB_NUMBER_THREADS=8 bitbake $executer | tee -a ${BUILD_LOG_FILE}
-        HandleLog INFO "BITBAKE BUILD FINISHED" ${BUILD_LOG_FILE}
-      fi
-    - first_build_end_time=$(date +%s)
-    - HandleLog INFO "BUILD TIME TAKEN $(($first_build_end_time-$first_build_start_time)) secs" ${BUILD_LOG_FILE}
-    - set -e
+#     ###########################################################################
+#     # BITBAKE BUILD WITH/WITHOUT COVERITY
+#     ###########################################################################
+#     - set +e
+#     - HandleLog DASH "BITBAKE BUILD INITIALIZING" ${BUILD_LOG_FILE}
+#     - first_build_start_time=$(date +%s)
+#     - |
+#       findstr="Tasks Summary: Attempted [0-9]+ tasks of which [0-9]+ didn't need to be rerun and all succeeded."
+#       if [[ "$mr_labels" =~ "OT_ENABLE_COVERITY" ]]; then
+#         mkdir -p $HOME/coverity_report/emit
+#         chown -R gitot:gitot $HOME/coverity_report
+#         $HOME/coverity/bin/cov-configure --java
+#         $HOME/coverity/bin/cov-configure --gcc
+#         $HOME/coverity/bin/cov-configure --compiler arm-openbmc-linux-gnueabi-gcc --comptype gcc --template
+#         export CC=/usr/bin/gcc
+#         $HOME/coverity/bin/cov-configure --compiler /usr/bin/gcc
+#         BB_NUMBER_THREADS=4 $HOME/coverity/bin/cov-build --dir $HOME/coverity_report bitbake $executer | tee -a ${BUILD_LOG_FILE}
+#         if grep -qE "$findstr" "${BUILD_LOG_FILE}";
+#         then
+#           $HOME/coverity/bin/cov-manage-emit --dir $HOME/coverity_report list | tee -a Included_list
+#           $HOME/coverity/bin/cov-analyze --dir $HOME/coverity_report --enable-constraint-fpp -all
+#           $HOME/coverity/bin/cov-format-errors --dir $HOME/coverity_report --json-output-v8 $HOME/coverity_report/coverity-scan.json
+#           ls
+#           echo ${attributes} >> mr_data.json
+#           MR_ID=$(echo ${attributes} | jq -r '."iid"')
+#           cp -r $HOME/coverity_report/coverity-scan.json $OUTPUT
+#           zip coverity.zip -j $HOME/coverity_report/coverity-scan.json mr_data.json
+#           cp coverity.zip $OUTPUT
+#           ls
+#           curl -F 'coverity_data=@coverity.zip' "https://devnet.ami.com/sast-bot/api/v1/coverity_ot_reports?pid=$CI_PROJECT_ID&job_url=$CI_JOB_URL&job_stage=$CI_JOB_STAGE&prj=${config}&mr_id=$MR_ID"
+#         fi
+#       else
+#         HandleLog INFO "BITBAKE BUILD STARTED...." ${BUILD_LOG_FILE}
+#         BB_NUMBER_THREADS=8 bitbake $executer | tee -a ${BUILD_LOG_FILE}
+#         HandleLog INFO "BITBAKE BUILD FINISHED" ${BUILD_LOG_FILE}
+#       fi
+#     - first_build_end_time=$(date +%s)
+#     - HandleLog INFO "BUILD TIME TAKEN $(($first_build_end_time-$first_build_start_time)) secs" ${BUILD_LOG_FILE}
+#     - set -e
 
-    ###########################################################################
-    # BITBAKE BUILD RETRYING .........
-    ###########################################################################
+#     ###########################################################################
+#     # BITBAKE BUILD RETRYING .........
+#     ###########################################################################
 
     
-    # - |
-    #   if ! grep -qE "$findstr" "${BUILD_LOG_FILE}";
-    #   then 
-    #     echo -e "\n\n==========> Retrying bitbake build <==============\n"  | tee -a ${BUILD_LOG_FILE};
-    #     retry_build_start_time=$(date +%s)
-    #     if [[ ! "$mr_labels" =~ "OT_ENABLE_COVERITY" ]];then
-    #       set +e
-    #       BB_NUMBER_THREADS=8 bitbake $executer | tee -a ${BUILD_LOG_FILE}
-    #       set -e
-    #       retry_build_end_time=$(date +%s)
-    #       echo "===> Retry 1 build time $(($retry_build_end_time-$retry_build_start_time)) secs <==="
+#     # - |
+#     #   if ! grep -qE "$findstr" "${BUILD_LOG_FILE}";
+#     #   then 
+#     #     echo -e "\n\n==========> Retrying bitbake build <==============\n"  | tee -a ${BUILD_LOG_FILE};
+#     #     retry_build_start_time=$(date +%s)
+#     #     if [[ ! "$mr_labels" =~ "OT_ENABLE_COVERITY" ]];then
+#     #       set +e
+#     #       BB_NUMBER_THREADS=8 bitbake $executer | tee -a ${BUILD_LOG_FILE}
+#     #       set -e
+#     #       retry_build_end_time=$(date +%s)
+#     #       echo "===> Retry 1 build time $(($retry_build_end_time-$retry_build_start_time)) secs <==="
           
-    #       # if ! grep -qE "$findstr" "${BUILD_LOG_FILE}";then 
-    #       #     echo -e "\n\n==========> Second time Retrying bitbake build <==============\n"  | tee -a ${BUILD_LOG_FILE};
-    #       #     retry_build_start_time=$(date +%s)
-    #       #     python3 -c "import time; import random; slp=random.randint(10, 30); print('sleeping:', slp); time.sleep(random.randint(10, 20))"
-    #       #     set +e
-    #       #     BB_NUMBER_THREADS=8 bitbake $executer | tee -a ${BUILD_LOG_FILE};
-    #       #     set -e
-    #       #     retry_build_end_time=$(date +%s)
-    #       #     echo "===> Retry 2 build time $(($retry_build_end_time-$retry_build_start_time)) secs <==="
-    #       #     # bitbake $executer | tee -a ${BUILD_LOG_FILE}
-    #       # fi
+#     #       # if ! grep -qE "$findstr" "${BUILD_LOG_FILE}";then 
+#     #       #     echo -e "\n\n==========> Second time Retrying bitbake build <==============\n"  | tee -a ${BUILD_LOG_FILE};
+#     #       #     retry_build_start_time=$(date +%s)
+#     #       #     python3 -c "import time; import random; slp=random.randint(10, 30); print('sleeping:', slp); time.sleep(random.randint(10, 20))"
+#     #       #     set +e
+#     #       #     BB_NUMBER_THREADS=8 bitbake $executer | tee -a ${BUILD_LOG_FILE};
+#     #       #     set -e
+#     #       #     retry_build_end_time=$(date +%s)
+#     #       #     echo "===> Retry 2 build time $(($retry_build_end_time-$retry_build_start_time)) secs <==="
+#     #       #     # bitbake $executer | tee -a ${BUILD_LOG_FILE}
+#     #       # fi
 
-    #     else
-    #       BB_NUMBER_THREADS=4 $HOME/coverity/bin/cov-build --dir $HOME/coverity_report bitbake $executer | tee -a ${BUILD_LOG_FILE}
-    #       retry_build_end_time=$(date +%s)
-    #       echo "===> Retry 1 build time $(($retry_build_end_time-$retry_build_start_time)) secs <==="
-    #       $HOME/coverity/bin/cov-manage-emit --dir $HOME/coverity_report list | tee -a Included_list
-    #       $HOME/coverity/bin/cov-analyze --dir $HOME/coverity_report --enable-constraint-fpp -all
-    #       $HOME/coverity/bin/cov-format-errors --dir $HOME/coverity_report --json-output-v8 $HOME/coverity_report/coverity-scan.json
-    #       ls
-    #       echo ${attributes} >> mr_data.json
-    #       echo ${attributes}
-    #       cp -r $HOME/coverity_report/ $OUTPUT
-    #       zip coverity.zip $HOME/coverity_report/coverity-scan.json mr_data.json
-    #       cp coverity.zip $OUTPUT
-    #       ls
-    #       curl -F 'coverity_data=@coverity.zip' "https://devnet.ami.com/sast-bot/api/v1/coverity_ot_reports?pid=$CI_PROJECT_ID&job_url=$CI_JOB_URL&job_stage=$CI_JOB_STAGE&prj=${config}&mr_id=$MR_ID"
-    #     fi
+#     #     else
+#     #       BB_NUMBER_THREADS=4 $HOME/coverity/bin/cov-build --dir $HOME/coverity_report bitbake $executer | tee -a ${BUILD_LOG_FILE}
+#     #       retry_build_end_time=$(date +%s)
+#     #       echo "===> Retry 1 build time $(($retry_build_end_time-$retry_build_start_time)) secs <==="
+#     #       $HOME/coverity/bin/cov-manage-emit --dir $HOME/coverity_report list | tee -a Included_list
+#     #       $HOME/coverity/bin/cov-analyze --dir $HOME/coverity_report --enable-constraint-fpp -all
+#     #       $HOME/coverity/bin/cov-format-errors --dir $HOME/coverity_report --json-output-v8 $HOME/coverity_report/coverity-scan.json
+#     #       ls
+#     #       echo ${attributes} >> mr_data.json
+#     #       echo ${attributes}
+#     #       cp -r $HOME/coverity_report/ $OUTPUT
+#     #       zip coverity.zip $HOME/coverity_report/coverity-scan.json mr_data.json
+#     #       cp coverity.zip $OUTPUT
+#     #       ls
+#     #       curl -F 'coverity_data=@coverity.zip' "https://devnet.ami.com/sast-bot/api/v1/coverity_ot_reports?pid=$CI_PROJECT_ID&job_url=$CI_JOB_URL&job_stage=$CI_JOB_STAGE&prj=${config}&mr_id=$MR_ID"
+#     #     fi
         
-    #   fi
+#     #   fi
 
-    ###########################################################################
-    # SYNCING LOCAL SSTATE CACHE TO AWS S3 BUCKET
-    ###########################################################################
+#     ###########################################################################
+#     # SYNCING LOCAL SSTATE CACHE TO AWS S3 BUCKET
+#     ###########################################################################
 
-    - |
-      rm -rf $SOURCE_WORKSPACE/JavaSigning
-      if [[ ${CI_RUNNER_DESCRIPTION,,} =~ "aws" && ! "$mr_labels" =~ "OT_ENABLE_COVERITY" ]]; 
-      then 
-        sync_start_time=$(date +%s)
-        echo "Cache sync started ..listing cache files"
-        # du -h --all $HOME/cache/onetree/$base_cache/sstate-cache
-        aws s3 sync --quiet --sse=aws:kms $HOME/cache/onetree/$base_cache/sstate-cache s3://${OT_SSTATE_BUCKET}/onetree/$base_cache/sstate-cache 
-        sync_end_time=$(date +%s)
-        HandleLog INFO "CACHE UPLOADED TIME $(($sync_end_time-$sync_start_time)) secs" ${BUILD_LOG_FILE}
-      fi
+#     - |
+#       rm -rf $SOURCE_WORKSPACE/JavaSigning
+#       if [[ ${CI_RUNNER_DESCRIPTION,,} =~ "aws" && ! "$mr_labels" =~ "OT_ENABLE_COVERITY" ]]; 
+#       then 
+#         sync_start_time=$(date +%s)
+#         echo "Cache sync started ..listing cache files"
+#         # du -h --all $HOME/cache/onetree/$base_cache/sstate-cache
+#         aws s3 sync --quiet --sse=aws:kms $HOME/cache/onetree/$base_cache/sstate-cache s3://${OT_SSTATE_BUCKET}/onetree/$base_cache/sstate-cache 
+#         sync_end_time=$(date +%s)
+#         HandleLog INFO "CACHE UPLOADED TIME $(($sync_end_time-$sync_start_time)) secs" ${BUILD_LOG_FILE}
+#       fi
 
-    ###########################################################################
-    # CAPUTURING LOG FILES TO ARTIFACTS
-    ###########################################################################
+#     ###########################################################################
+#     # CAPUTURING LOG FILES TO ARTIFACTS
+#     ###########################################################################
 
-    #- items=$(cat ${BUILD_LOG_FILE} | grep "ERROR: Logfile of failure stored in:" | awk -F"stored in:" '{print $NF}')
-    #- items=$(awk -F"stored in: " '/ERROR: Logfile of failure stored in:/ {print $NF}' ${BUILD_LOG_FILE})
-    #- echo "==> Error log files"
-    #- echo $items
-    #- for logfile in ${items[@]}; do echo "==> Log file path $logfile";cp -r $logfile ${INFO_AND_LOG}; done
-    #- cp -r /home/gitot/openbmc/build/tmp/work/intel_ast2600-openbmc-linux-gnueabi/linux-aspeed/6.1.34+git/temp/log.do_fetch.* ${INFO_AND_LOG}
+#     #- items=$(cat ${BUILD_LOG_FILE} | grep "ERROR: Logfile of failure stored in:" | awk -F"stored in:" '{print $NF}')
+#     #- items=$(awk -F"stored in: " '/ERROR: Logfile of failure stored in:/ {print $NF}' ${BUILD_LOG_FILE})
+#     #- echo "==> Error log files"
+#     #- echo $items
+#     #- for logfile in ${items[@]}; do echo "==> Log file path $logfile";cp -r $logfile ${INFO_AND_LOG}; done
+#     #- cp -r /home/gitot/openbmc/build/tmp/work/intel_ast2600-openbmc-linux-gnueabi/linux-aspeed/6.1.34+git/temp/log.do_fetch.* ${INFO_AND_LOG}
 
 
-    ###########################################################################
-    # COPYING IMAGES TO ARTIFACTS
-    ###########################################################################
-    - |
-      HandleLog DASH " ## BUILD RESULT ## " ${BUILD_LOG_FILE}
-      findstr="Tasks Summary: Attempted [0-9]+ tasks of which [0-9]+ didn't need to be rerun and all succeeded."
-      if ! grep -qE "$findstr" ${BUILD_LOG_FILE}; then
-       HandleLog ERROR "BUILD FAILED !!!!" ${BUILD_LOG_FILE}
-       exit 1
-      else
-        HandleLog SUCCESS "BUILD SUCCESS !!!!" ${BUILD_LOG_FILE}
-        HandleLog DASH " ## DONE ## " ${BUILD_LOG_FILE}
-        echo "====> Listing image folder"
-        ls -la $SOURCE_WORKSPACE/build/tmp/deploy/images
-        echo "=====> nested folders"
-        folder_path_=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images -maxdepth 1 -mindepth 1 -type d -printf '%p\n')
-        ls -la $folder_path_
-        echo "====> Calculating image folder size"
-        du -h -d 5 $SOURCE_WORKSPACE/build/tmp/deploy/images
+#     ###########################################################################
+#     # COPYING IMAGES TO ARTIFACTS
+#     ###########################################################################
+#     - |
+#       HandleLog DASH " ## BUILD RESULT ## " ${BUILD_LOG_FILE}
+#       findstr="Tasks Summary: Attempted [0-9]+ tasks of which [0-9]+ didn't need to be rerun and all succeeded."
+#       if ! grep -qE "$findstr" ${BUILD_LOG_FILE}; then
+#        HandleLog ERROR "BUILD FAILED !!!!" ${BUILD_LOG_FILE}
+#        exit 1
+#       else
+#         HandleLog SUCCESS "BUILD SUCCESS !!!!" ${BUILD_LOG_FILE}
+#         HandleLog DASH " ## DONE ## " ${BUILD_LOG_FILE}
+#         echo "====> Listing image folder"
+#         ls -la $SOURCE_WORKSPACE/build/tmp/deploy/images
+#         echo "=====> nested folders"
+#         folder_path_=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images -maxdepth 1 -mindepth 1 -type d -printf '%p\n')
+#         ls -la $folder_path_
+#         echo "====> Calculating image folder size"
+#         du -h -d 5 $SOURCE_WORKSPACE/build/tmp/deploy/images
 
-      fi
-    - |
-      HandleLog DASH "COPYING IMAGES TO ARTIFACTS !!" ${BUILD_LOG_FILE}
-      set +e
-      # Copy U-BOOT file
-      UbootFile=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname u-boot.bin)
-      if [ -f ${UbootFile} ] && [ "${UbootFile}" != "" ]; then cp ${UbootFile} ${OUTPUT}/$(printf "${config}_${version}_u-boot".bin); fi
+#       fi
+#     - |
+#       HandleLog DASH "COPYING IMAGES TO ARTIFACTS !!" ${BUILD_LOG_FILE}
+#       set +e
+#       # Copy U-BOOT file
+#       UbootFile=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname u-boot.bin)
+#       if [ -f ${UbootFile} ] && [ "${UbootFile}" != "" ]; then cp ${UbootFile} ${OUTPUT}/$(printf "${config}_${version}_u-boot".bin); fi
 
-      # Copy Kernel/FitImage file
-      FitImage=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname fitImage)
-      if [ -f ${FitImage} ] && [ "${FitImage}" != "" ]; then cp ${FitImage} ${OUTPUT}/$(printf "${config}_${version}_fitimage".bin); fi
+#       # Copy Kernel/FitImage file
+#       FitImage=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname fitImage)
+#       if [ -f ${FitImage} ] && [ "${FitImage}" != "" ]; then cp ${FitImage} ${OUTPUT}/$(printf "${config}_${version}_fitimage".bin); fi
 
-      # Copy DTB file
-      AsppedBmcIntelAst2600DtbFile=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname aspeed-bmc-intel-ast2600.dtb)
-      if [ -f ${AsppedBmcIntelAst2600DtbFile} ] && [ "${AsppedBmcIntelAst2600DtbFile}" != "" ]; then cp ${AsppedBmcIntelAst2600DtbFile} ${OUTPUT}/$(printf "${config}_${version}".dtb); fi
+#       # Copy DTB file
+#       AsppedBmcIntelAst2600DtbFile=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname aspeed-bmc-intel-ast2600.dtb)
+#       if [ -f ${AsppedBmcIntelAst2600DtbFile} ] && [ "${AsppedBmcIntelAst2600DtbFile}" != "" ]; then cp ${AsppedBmcIntelAst2600DtbFile} ${OUTPUT}/$(printf "${config}_${version}".dtb); fi
 
-      # Copy OS/Rootfs image file
-      RootfsFile=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname fitImage-rootfs-intel-ast2600.bin)
-      if [ -f ${RootfsFile} ] && [ "${RootfsFile}" != "" ]; then cp ${RootfsFile} ${OUTPUT}/$(printf "${config}_${version}_rootfs".bin); fi
+#       # Copy OS/Rootfs image file
+#       RootfsFile=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname fitImage-rootfs-intel-ast2600.bin)
+#       if [ -f ${RootfsFile} ] && [ "${RootfsFile}" != "" ]; then cp ${RootfsFile} ${OUTPUT}/$(printf "${config}_${version}_rootfs".bin); fi
 
-      # Copy tar (image-update, full) files
-      TarFiles=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* | grep intel-platforms-image-update-full-intel*)
-      if [ -f ${TarFiles} ] && [ "${TarFiles}" != "" ]; then cp ${TarFiles} ${OUTPUT}/$(printf "${config}_${version}_intel-platforms-image-update-full-intel".tar); fi
+#       # Copy tar (image-update, full) files
+#       TarFiles=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* | grep intel-platforms-image-update-full-intel*)
+#       if [ -f ${TarFiles} ] && [ "${TarFiles}" != "" ]; then cp ${TarFiles} ${OUTPUT}/$(printf "${config}_${version}_intel-platforms-image-update-full-intel".tar); fi
       
-      # Copy MTD file
-      MtdFile=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname image-mtd)
-      if [ -f ${MtdFile} ] && [ "${MtdFile}" != "" ]; then cp ${MtdFile} ${OUTPUT}/$(printf "${config}_${version}".mtd); fi
+#       # Copy MTD file
+#       MtdFile=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname image-mtd)
+#       if [ -f ${MtdFile} ] && [ "${MtdFile}" != "" ]; then cp ${MtdFile} ${OUTPUT}/$(printf "${config}_${version}".mtd); fi
       
-      # Copy PFR file
-      PFRFile=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname pfr_images)
-      if [ -f ${PFRFile} ] && [ "${PFRFile}" != "" ]; then cp ${PFRFile} ${OUTPUT}/$(printf "${config}_${version}_pfr".bin); fi
+#       # Copy PFR file
+#       PFRFile=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname pfr_images)
+#       if [ -f ${PFRFile} ] && [ "${PFRFile}" != "" ]; then cp ${PFRFile} ${OUTPUT}/$(printf "${config}_${version}_pfr".bin); fi
 
-      # Copy JViewer.jar
-      JARFile=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname utilities)
-      if [ -d ${JARFile} ] && [ "${JARFile}" != "" ]; then cp -r ${JARFile} ${OUTPUT}/; fi
-      set -e
-      HandleLog DASH " ## COPIED !! ## " ${BUILD_LOG_FILE}
+#       # Copy JViewer.jar
+#       JARFile=$(find $SOURCE_WORKSPACE/build/tmp/deploy/images/* -iname utilities)
+#       if [ -d ${JARFile} ] && [ "${JARFile}" != "" ]; then cp -r ${JARFile} ${OUTPUT}/; fi
+#       set -e
+#       HandleLog DASH " ## COPIED !! ## " ${BUILD_LOG_FILE}
 
-    - echo "Build Successfully Completed !!"
+#     - echo "Build Successfully Completed !!"
 
 
-  tags:
-    - $runner_tag
-  artifacts:
-    when: always
-    paths:
-      - output
-    expire_in: 2 weeks
-  image:
-    name: $INTERNAL_DOCKER_REGISTRY/gitotlts:new
-    #name: git.ami.com:5005/tools/internal/gitotlts:new
-  extends: .clone_project
-  timeout: 10h 00m
-  retry:
-    max: 2
-    when:
-        - runner_system_failure
-        - job_execution_timeout
-        - scheduler_failure
-  parallel:
-    matrix: 
-     - config: OT_AvenCity_FULL1
-       platform_repo: OT_INTEL_BHS_URI
-       source_repo: OT_INTEL_SOURCE_URI
-       template: OT_BHS_TEMPLATE
-       executer: intel-platforms
-       platform_ep: "PFR"
+#   tags:
+#     - $runner_tag
+#   artifacts:
+#     when: always
+#     paths:
+#       - output
+#     expire_in: 2 weeks
+#   image:
+#     name: $INTERNAL_DOCKER_REGISTRY/gitotlts:new
+#     #name: git.ami.com:5005/tools/internal/gitotlts:new
+#   extends: .clone_project
+#   timeout: 10h 00m
+#   retry:
+#     max: 2
+#     when:
+#         - runner_system_failure
+#         - job_execution_timeout
+#         - scheduler_failure
+#   parallel:
+#     matrix: 
+#      - config: OT_AvenCity_FULL1
+#        platform_repo: OT_INTEL_BHS_URI
+#        source_repo: OT_INTEL_SOURCE_URI
+#        template: OT_BHS_TEMPLATE
+#        executer: intel-platforms
+#        platform_ep: "PFR"
      
-     - config: OT_AvenCity_FULL2
-       platform_repo: OT_INTEL_BHS_URI
-       source_repo: OT_INTEL_SOURCE_URI
-       template: OT_BHS_TEMPLATE
-       executer: intel-platforms
-       ami_packs: NIC NVME BRCMRAID MSCCRAID RTP FWUPDATE
-       platform_ep: "ASD ACD IntelSiPack IntelOnDemandSDSiPack"
+#      - config: OT_AvenCity_FULL2
+#        platform_repo: OT_INTEL_BHS_URI
+#        source_repo: OT_INTEL_SOURCE_URI
+#        template: OT_BHS_TEMPLATE
+#        executer: intel-platforms
+#        ami_packs: NIC NVME BRCMRAID MSCCRAID RTP FWUPDATE
+#        platform_ep: "ASD ACD IntelSiPack IntelOnDemandSDSiPack"
        
-     - config: OT_ArcherCity_FULL1 
-       platform_repo: OT_INTEL_EGS_URI
-       source_repo: OT_INTEL_SOURCE_URI
-       template: OT_EGS_TEMPLATE
-       executer: intel-platforms
-       platform_ep: "PFR"
+#      - config: OT_ArcherCity_FULL1 
+#        platform_repo: OT_INTEL_EGS_URI
+#        source_repo: OT_INTEL_SOURCE_URI
+#        template: OT_EGS_TEMPLATE
+#        executer: intel-platforms
+#        platform_ep: "PFR"
      
-     - config: OT_ArcherCity_FULL2 
-       platform_repo: OT_INTEL_EGS_URI
-       source_repo: OT_INTEL_SOURCE_URI
-       template: OT_EGS_TEMPLATE 
-       executer: intel-platforms
-       ami_packs: NIC NVMEBASIC BRCMRAID MSCCRAID RTP FWUPDATE
-       platform_ep: "IntelSiPack IntelOnDemandSDSiPack"
-       pre_options: IPERF3
+#      - config: OT_ArcherCity_FULL2 
+#        platform_repo: OT_INTEL_EGS_URI
+#        source_repo: OT_INTEL_SOURCE_URI
+#        template: OT_EGS_TEMPLATE 
+#        executer: intel-platforms
+#        ami_packs: NIC NVMEBASIC BRCMRAID MSCCRAID RTP FWUPDATE
+#        platform_ep: "IntelSiPack IntelOnDemandSDSiPack"
+#        pre_options: IPERF3
     
-     - config: OT_ArcherCity_FULL3
-       platform_repo: OT_INTEL_EGS_URI
-       source_repo: OT_INTEL_SOURCE_URI
-       template: OT_EGS_TEMPLATE 
-       executer: intel-platforms
-       ami_packs: NIC NVME BRCMRAID MSCCRAID FWUPDATE
-       platform_ep: IntelSiPack IntelOnDemandSDSiPack
-       pre_options: IPERF3 SPDM
+#      - config: OT_ArcherCity_FULL3
+#        platform_repo: OT_INTEL_EGS_URI
+#        source_repo: OT_INTEL_SOURCE_URI
+#        template: OT_EGS_TEMPLATE 
+#        executer: intel-platforms
+#        ami_packs: NIC NVME BRCMRAID MSCCRAID FWUPDATE
+#        platform_ep: IntelSiPack IntelOnDemandSDSiPack
+#        pre_options: IPERF3 SPDM
      
-     - config: OT_AST2600EVB_FULL1
-       source_repo: OT_INTEL_SOURCE_URI
-       template: OT_AST2600EVB_TEMPLATE
-       ami_packs: "FWUPDATE NIC NVME BRCMRAID"
-       executer: obmc-phosphor-image
-       pre_options: BrcmRaidI2cMode
+#      - config: OT_AST2600EVB_FULL1
+#        source_repo: OT_INTEL_SOURCE_URI
+#        template: OT_AST2600EVB_TEMPLATE
+#        ami_packs: "FWUPDATE NIC NVME BRCMRAID"
+#        executer: obmc-phosphor-image
+#        pre_options: BrcmRaidI2cMode
     
-     - config: OT_AST2600EVB_FULL2
-       source_repo: OT_INTEL_SOURCE_URI
-       template: OT_AST2600EVB_TEMPLATE
-       ami_packs: "FWUPDATE NIC NVME BRCMPCIESW RTP"
-       executer: obmc-phosphor-image
-       pre_options: BrcmRaidI2cMode
+#      - config: OT_AST2600EVB_FULL2
+#        source_repo: OT_INTEL_SOURCE_URI
+#        template: OT_AST2600EVB_TEMPLATE
+#        ami_packs: "FWUPDATE NIC NVME BRCMPCIESW RTP"
+#        executer: obmc-phosphor-image
+#        pre_options: BrcmRaidI2cMode
     
-     - config: OT_AST2600EVB_FULL3
-       source_repo: OT_INTEL_SOURCE_URI
-       template: OT_AST2600EVB_TEMPLATE
-       ami_packs: "FWUPDATE NIC NVME BRCMPCIESW RTP"
-       executer: obmc-phosphor-image
-       pre_options: BrcmRaidI2cMode SoftwareSecureBoot HardwareSecureBoot
+#      - config: OT_AST2600EVB_FULL3
+#        source_repo: OT_INTEL_SOURCE_URI
+#        template: OT_AST2600EVB_TEMPLATE
+#        ami_packs: "FWUPDATE NIC NVME BRCMPCIESW RTP"
+#        executer: obmc-phosphor-image
+#        pre_options: BrcmRaidI2cMode SoftwareSecureBoot HardwareSecureBoot
 
-     - config: OT_AMD_Truin_FULL1
-       platform_repo: OT_AMD_TRUIN_URI
-       source_repo: OT_INTEL_SOURCE_URI
-       template: OT_AMD_TRUIN_TEMPLATE
-       executer: obmc-phosphor-image
+#      - config: OT_AMD_Truin_FULL1
+#        platform_repo: OT_AMD_TRUIN_URI
+#        source_repo: OT_INTEL_SOURCE_URI
+#        template: OT_AMD_TRUIN_TEMPLATE
+#        executer: obmc-phosphor-image
     
-     - config: OT_Ampere_Mtmitchell_FULL1
-       platform_repo: OT_AMPERE_MITCHELL_URI
-       source_repo: OT_INTEL_SOURCE_URI
-       template: OT_AMPERE_MITCHELL_TEMPLATE
-       executer: obmc-phosphor-image
+#      - config: OT_Ampere_Mtmitchell_FULL1
+#        platform_repo: OT_AMPERE_MITCHELL_URI
+#        source_repo: OT_INTEL_SOURCE_URI
+#        template: OT_AMPERE_MITCHELL_TEMPLATE
+#        executer: obmc-phosphor-image
     
-     - config: OT_Nvidia_GraceHopper_FULL1
-       platform_repo: OT_NVIDIA_GRACEHOPPER_URI
-       source_repo: OT_INTEL_SOURCE_URI
-       template: OT_NVIDIA_GRACEHOPPER_TEMPLATE
-       ami_packs: GPGPU
-       executer: obmc-phosphor-image
+#      - config: OT_Nvidia_GraceHopper_FULL1
+#        platform_repo: OT_NVIDIA_GRACEHOPPER_URI
+#        source_repo: OT_INTEL_SOURCE_URI
+#        template: OT_NVIDIA_GRACEHOPPER_TEMPLATE
+#        ami_packs: GPGPU
+#        executer: obmc-phosphor-image
 
-     - config: OT_Nvidia_MGX_CG1_FULL1
-       platform_repo: OT_NVIDIA_MGX_URI
-       source_repo: OT_INTEL_SOURCE_URI
-       template: OT_NVIDIA_MGX_CG1_TEMPLATE
-       ami_packs: GPGPU
-       executer: obmc-phosphor-image
+#      - config: OT_Nvidia_MGX_CG1_FULL1
+#        platform_repo: OT_NVIDIA_MGX_URI
+#        source_repo: OT_INTEL_SOURCE_URI
+#        template: OT_NVIDIA_MGX_CG1_TEMPLATE
+#        ami_packs: GPGPU
+#        executer: obmc-phosphor-image
 
-     - config: OT_Nvidia_MGX_C2_FULL1
-       platform_repo: OT_NVIDIA_MGX_URI
-       source_repo: OT_INTEL_SOURCE_URI
-       template: OT_NVIDIA_MGX_C2_TEMPLATE
-       ami_packs: GPGPU
-       executer: obmc-phosphor-image
+#      - config: OT_Nvidia_MGX_C2_FULL1
+#        platform_repo: OT_NVIDIA_MGX_URI
+#        source_repo: OT_INTEL_SOURCE_URI
+#        template: OT_NVIDIA_MGX_C2_TEMPLATE
+#        ami_packs: GPGPU
+#        executer: obmc-phosphor-image
 
-build_branch:
-  stage: build
-  extends: .build
-  rules:
-    - if: '"trigger_build" =~ $mr_labels && $config && $config =~ $mr_labels &&  $mr_labels !~ "OT_ENABLE_COVERITY"'
+# build_branch:
+#   stage: build
+#   extends: .build
+#   rules:
+#     - if: '"trigger_build" =~ $mr_labels && $config && $config =~ $mr_labels &&  $mr_labels !~ "OT_ENABLE_COVERITY"'
 
-build_branch_coverity:
-  stage: build
-  image:
-    name: $INTERNAL_DOCKER_REGISTRY/gitotlts:coverity
-  extends: .build
-  rules:
-    - if: '"trigger_build" =~ $mr_labels &&  $config && $config =~ $mr_labels && $mr_labels =~ "OT_ENABLE_COVERITY"'
+# build_branch_coverity:
+#   stage: build
+#   image:
+#     name: $INTERNAL_DOCKER_REGISTRY/gitotlts:coverity
+#   extends: .build
+#   rules:
+#     - if: '"trigger_build" =~ $mr_labels &&  $config && $config =~ $mr_labels && $mr_labels =~ "OT_ENABLE_COVERITY"'
 
-.clone_project:
-  stage: build
-  id_tokens:
-    GITLAB_OIDC_TOKEN:
-      aud: https://git.ami.com
-  before_script:
-    ###########################################################################
-    #                                             LOG COLORS 
-    ###########################################################################
+# .clone_project:
+#   stage: build
+#   id_tokens:
+#     GITLAB_OIDC_TOKEN:
+#       aud: https://git.ami.com
+#   before_script:
+#     ###########################################################################
+#     #                                             LOG COLORS 
+#     ###########################################################################
     
-    - |
-      # Define color codes
-      RED='\033[0;31m'
-      GREEN='\033[0;32m'
-      YELLOW='\033[0;33m'
-      BLUE='\033[0;34m'
-      MAGENTA='\033[0;35m'
-      CYAN='\033[0;36m'
-      WHITE='\033[0;37m'
-      NC='\033[0m' # No Color
+#     - |
+#       # Define color codes
+#       RED='\033[0;31m'
+#       GREEN='\033[0;32m'
+#       YELLOW='\033[0;33m'
+#       BLUE='\033[0;34m'
+#       MAGENTA='\033[0;35m'
+#       CYAN='\033[0;36m'
+#       WHITE='\033[0;37m'
+#       NC='\033[0m' # No Color
 
-    ###########################################################################
-    #                                             SETUP LOG/OUTPUT ARTIFACT DIR
-    ###########################################################################
-    - ENTRYPOINT_DIR=$(pwd)
-    - mkdir -p ./output/${config}
-    - export OUTPUT=`realpath ./output/${config}`
-    - mkdir -p ${OUTPUT}/INFO_AND_LOG
-    - export INFO_AND_LOG=`realpath ${OUTPUT}/INFO_AND_LOG`
-    - SOURCE_WORKSPACE=${ENTRYPOINT_DIR}/openbmc
+#     ###########################################################################
+#     #                                             SETUP LOG/OUTPUT ARTIFACT DIR
+#     ###########################################################################
+#     - ENTRYPOINT_DIR=$(pwd)
+#     - mkdir -p ./output/${config}
+#     - export OUTPUT=`realpath ./output/${config}`
+#     - mkdir -p ${OUTPUT}/INFO_AND_LOG
+#     - export INFO_AND_LOG=`realpath ${OUTPUT}/INFO_AND_LOG`
+#     - SOURCE_WORKSPACE=${ENTRYPOINT_DIR}/openbmc
 
-    ###########################################################################
-    #                                                   GIT CREDS SETUP
-    ###########################################################################
-    - git config --global credential.helper store
-    - echo "https://${GUSER}:${GPASS}@git.ami.com" >  ~/.git-credentials
+#     ###########################################################################
+#     #                                                   GIT CREDS SETUP
+#     ###########################################################################
+#     - git config --global credential.helper store
+#     - echo "https://${GUSER}:${GPASS}@git.ami.com" >  ~/.git-credentials
   
-    ###########################################################################
-    # AWS S3 AUTH
-    ###########################################################################
-    - echo "GITLAB_OIDC_TOKEN ${GITLAB_OIDC_TOKEN}"
-    - echo "AWS_S3_LAM_ROLE_ARN ${AWS_S3_LAM_ROLE_ARN}"
-    - export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s" $(aws sts assume-role-with-web-identity --role-arn $AWS_S3_LAM_ROLE_ARN --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}" --web-identity-token ${GITLAB_OIDC_TOKEN} --duration-seconds 28000 --query 'Credentials. [AccessKeyId, SecretAccessKey, SessionToken]' --output text)) 
-    - aws sts get-caller-identity
-    - echo $AWS_ACCESS_KEY_ID
+#     ###########################################################################
+#     # AWS S3 AUTH
+#     ###########################################################################
+#     - echo "GITLAB_OIDC_TOKEN ${GITLAB_OIDC_TOKEN}"
+#     - echo "AWS_S3_LAM_ROLE_ARN ${AWS_S3_LAM_ROLE_ARN}"
+#     - export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s" $(aws sts assume-role-with-web-identity --role-arn $AWS_S3_LAM_ROLE_ARN --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}" --web-identity-token ${GITLAB_OIDC_TOKEN} --duration-seconds 28000 --query 'Credentials. [AccessKeyId, SecretAccessKey, SessionToken]' --output text)) 
+#     - aws sts get-caller-identity
+#     - echo $AWS_ACCESS_KEY_ID
 
-    ###########################################################################
-    # SETUP SSH AUTH
-    ###########################################################################
-    - echo "Enable ssh auth"
-    - printf "%s" "${CI_US_SSH_KEY}" > ${HOME}/ci_user.key && echo >> ${HOME}/ci_user.key;
-    - chmod 400 ${HOME}/ci_user.key;
-    - eval $(ssh-agent -s);
-    - mkdir -p ${HOME}/.ssh && echo StrictHostKeyChecking=no > ${HOME}/.ssh/config
-    - ssh-add ${HOME}/ci_user.key;
-    - ssh -T git@git-ssh.ami.com;
-    - echo "SSH enabled successfully"
+#     ###########################################################################
+#     # SETUP SSH AUTH
+#     ###########################################################################
+#     - echo "Enable ssh auth"
+#     - printf "%s" "${CI_US_SSH_KEY}" > ${HOME}/ci_user.key && echo >> ${HOME}/ci_user.key;
+#     - chmod 400 ${HOME}/ci_user.key;
+#     - eval $(ssh-agent -s);
+#     - mkdir -p ${HOME}/.ssh && echo StrictHostKeyChecking=no > ${HOME}/.ssh/config
+#     - ssh-add ${HOME}/ci_user.key;
+#     - ssh -T git@git-ssh.ami.com;
+#     - echo "SSH enabled successfully"
 
-    ###########################################################################
-    # BASE URI CONSTANTS
-    ###########################################################################
-    - export openbmc_repo=$OT_BMC_SRC_URI
-    - export metami_repo="$OT_META_AMI_SRC_URI"
-    - export meta_restricted_repo="$OT_META_RESTRICTED_SRC_URI"
-    - export meta_intel_repo="$OT_META_INTEL_SRC_URI"
+#     ###########################################################################
+#     # BASE URI CONSTANTS
+#     ###########################################################################
+#     - export openbmc_repo=$OT_BMC_SRC_URI
+#     - export metami_repo="$OT_META_AMI_SRC_URI"
+#     - export meta_restricted_repo="$OT_META_RESTRICTED_SRC_URI"
+#     - export meta_intel_repo="$OT_META_INTEL_SRC_URI"
 
 
-    ###########################################################################
-    # PLATFORM EP'S CONSTANTS
-    ###########################################################################
-    - |
-      if [[ $platform_ep ]]; then 
-        platform_pack_list=( $platform_ep )
-      else 
-        platform_pack_list=( )
-      fi
+#     ###########################################################################
+#     # PLATFORM EP'S CONSTANTS
+#     ###########################################################################
+#     - |
+#       if [[ $platform_ep ]]; then 
+#         platform_pack_list=( $platform_ep )
+#       else 
+#         platform_pack_list=( )
+#       fi
   
-    ###########################################################################
-    # AMI EP'S CONSTANTS
-    ###########################################################################
-    - |
-      if [[ $ami_packs ]]; then 
-        ami_pack_list=( $ami_packs )
-      else 
-        ami_pack_list=( )
-      fi
+#     ###########################################################################
+#     # AMI EP'S CONSTANTS
+#     ###########################################################################
+#     - |
+#       if [[ $ami_packs ]]; then 
+#         ami_pack_list=( $ami_packs )
+#       else 
+#         ami_pack_list=( )
+#       fi
   
-    ###########################################################################
-    # PRINTING EP'S LIST
-    ###########################################################################
-    - |
-      echo "------------------------"
-      echo $platform_pack_list
-      echo "------------------------"
-      echo $platform_ep
-      echo "------------------------"
-      echo $ami_pack_list
-      echo "------------------------"
-      echo $ami_packs
-      echo "------------------------"
+#     ###########################################################################
+#     # PRINTING EP'S LIST
+#     ###########################################################################
+#     - |
+#       echo "------------------------"
+#       echo $platform_pack_list
+#       echo "------------------------"
+#       echo $platform_ep
+#       echo "------------------------"
+#       echo $ami_pack_list
+#       echo "------------------------"
+#       echo $ami_packs
+#       echo "------------------------"
     
 
    
-      # Example usage
-      echo -e "${RED}Error:${NC} Something went wrong"
-      echo -e "${GREEN}Success:${NC} Task completed successfully"
-      echo -e "${YELLOW}Warning:${NC} Consider this warning"
+#       # Example usage
+#       echo -e "${RED}Error:${NC} Something went wrong"
+#       echo -e "${GREEN}Success:${NC} Task completed successfully"
+#       echo -e "${YELLOW}Warning:${NC} Consider this warning"
   
-    ###########################################################################
-    # PRINTING PRESENT DIR
-    ###########################################################################
-    - cd ~
-    - whoami
-    - time=$(date)
-    - echo $(pwd)
+#     ###########################################################################
+#     # PRINTING PRESENT DIR
+#     ###########################################################################
+#     - cd ~
+#     - whoami
+#     - time=$(date)
+#     - echo $(pwd)
 
-    ###########################################################################
-    # COMMON CLONING FUNCTION
-    ###########################################################################
-    - |
-      num_dashes=40  # Change this number as needed
-      prefix_dashes=$(printf -- "-%.0s" $(seq 1 $num_dashes))
-      CLONE_LOG_FILE=${INFO_AND_LOG}/SourceCloneInfo.log
-      BUILD_LOG_FILE=${INFO_AND_LOG}/BuildInfo.log
-      DEBUG_LOG_FILE=${INFO_AND_LOG}/DebugInfo.log
+#     ###########################################################################
+#     # COMMON CLONING FUNCTION
+#     ###########################################################################
+#     - |
+#       num_dashes=40  # Change this number as needed
+#       prefix_dashes=$(printf -- "-%.0s" $(seq 1 $num_dashes))
+#       CLONE_LOG_FILE=${INFO_AND_LOG}/SourceCloneInfo.log
+#       BUILD_LOG_FILE=${INFO_AND_LOG}/BuildInfo.log
+#       DEBUG_LOG_FILE=${INFO_AND_LOG}/DebugInfo.log
 
-      # log_content - content to log 
-      # log_type - ERROR, SUCCESS, INFO, WARNING
-      # log_file - CLONE, BUILD, DEBUG
+#       # log_content - content to log 
+#       # log_type - ERROR, SUCCESS, INFO, WARNING
+#       # log_file - CLONE, BUILD, DEBUG
       
 
-      HandleLog () {
-        log_type=$1
-        log_content=$2
-        log_file=$3
+#       HandleLog () {
+#         log_type=$1
+#         log_content=$2
+#         log_file=$3
 
-        if [[ $log_type == *"ERROR"* ]]; then
-          prefix="${RED}Error:${NC}"
-        elif [[ $log_type == *"SUCCESS"* ]]; then
-          prefix="${GREEN}Success:${NC}"
-        elif [[ $log_type == *"WARNING"* ]]; then
-          prefix="${YELLOW}Warning:${NC}"
-        elif [[ $log_type == *"INFO"* ]]; then
-          prefix="${BLUE}Info:${NC}"
-        else
-          prefix="${WHITE}Log:${NC}"
-        fi
+#         if [[ $log_type == *"ERROR"* ]]; then
+#           prefix="${RED}Error:${NC}"
+#         elif [[ $log_type == *"SUCCESS"* ]]; then
+#           prefix="${GREEN}Success:${NC}"
+#         elif [[ $log_type == *"WARNING"* ]]; then
+#           prefix="${YELLOW}Warning:${NC}"
+#         elif [[ $log_type == *"INFO"* ]]; then
+#           prefix="${BLUE}Info:${NC}"
+#         else
+#           prefix="${WHITE}Log:${NC}"
+#         fi
  
-        if [[ $log_type == *"DASH"* ]]; then
-          echo -e "\n${prefix_dashes} ${log_content} ${prefix_dashes}"  | tee -a $log_file
-        else
-          echo -e "\n${prefix} ===>> ${log_content}" | tee -a $log_file
-        fi
-      }
-    - |
-      # => CLONE URL $1 
-      # => CLONE DIR $2
-      CLONE_REPO () {
-        CLONE_REPO_URL=$1
-        CLONE_DIR=$2
-        CLONE_REPO_NAME=$(basename "$CLONE_REPO_URL" | sed 's/^.*\///')
+#         if [[ $log_type == *"DASH"* ]]; then
+#           echo -e "\n${prefix_dashes} ${log_content} ${prefix_dashes}"  | tee -a $log_file
+#         else
+#           echo -e "\n${prefix} ===>> ${log_content}" | tee -a $log_file
+#         fi
+#       }
+#     - |
+#       # => CLONE URL $1 
+#       # => CLONE DIR $2
+#       CLONE_REPO () {
+#         CLONE_REPO_URL=$1
+#         CLONE_DIR=$2
+#         CLONE_REPO_NAME=$(basename "$CLONE_REPO_URL" | sed 's/^.*\///')
 
-        HandleLog DASH "PROCESSING ${CLONE_REPO_NAME}" ${CLONE_LOG_FILE}
+#         HandleLog DASH "PROCESSING ${CLONE_REPO_NAME}" ${CLONE_LOG_FILE}
 
-        if [ -d "$2" ]; then
-          HandleLog INFO "CLONE REPO_URL => ${CLONE_REPO_URL}...Already Exist !!!"  ${CLONE_LOG_FILE}
-        else
-          BRANCH_CHECK=`git ls-remote --heads ${CLONE_REPO_URL} $CI_COMMIT_REF_NAME | wc -l`;
+#         if [ -d "$2" ]; then
+#           HandleLog INFO "CLONE REPO_URL => ${CLONE_REPO_URL}...Already Exist !!!"  ${CLONE_LOG_FILE}
+#         else
+#           BRANCH_CHECK=`git ls-remote --heads ${CLONE_REPO_URL} $CI_COMMIT_REF_NAME | wc -l`;
 
-          if [ $BRANCH_CHECK -gt 0 ];then 
-            CLONE_BRANCH=$CI_COMMIT_REF_NAME
-          else 
-            CLONE_BRANCH=`git ls-remote --symref ${CLONE_REPO_URL} HEAD | head -1 | awk '{print $2}' | awk -F '[/]' '{print $3}'`  
-          fi
-          git clone $CLONE_REPO_URL --branch $CLONE_BRANCH $CLONE_DIR
-          CLONED_COMMIT_SHA=$(cd $CLONE_DIR && git rev-parse HEAD && cd $ENTRYPOINT_DIR)
-          HandleLog INFO "CLONE REPO_URL => ${CLONE_REPO_URL}" ${CLONE_LOG_FILE}
-          HandleLog INFO "CLONE DIR => ${CLONE_DIR}" ${CLONE_LOG_FILE}
-          HandleLog INFO "CLONE BRANCH EXISTS ? => ${BRANCH_CHECK}" ${CLONE_LOG_FILE}
-          HandleLog INFO "CLONE BRANCH  => ${CLONE_BRANCH}" ${CLONE_LOG_FILE}
-          HandleLog INFO "CLONE COMMIT => ${CLONED_COMMIT_SHA}" ${CLONE_LOG_FILE}
-        fi
-        HandleLog DASH "COMPLETED" ${CLONE_LOG_FILE}
-      }
+#           if [ $BRANCH_CHECK -gt 0 ];then 
+#             CLONE_BRANCH=$CI_COMMIT_REF_NAME
+#           else 
+#             CLONE_BRANCH=`git ls-remote --symref ${CLONE_REPO_URL} HEAD | head -1 | awk '{print $2}' | awk -F '[/]' '{print $3}'`  
+#           fi
+#           git clone $CLONE_REPO_URL --branch $CLONE_BRANCH $CLONE_DIR
+#           CLONED_COMMIT_SHA=$(cd $CLONE_DIR && git rev-parse HEAD && cd $ENTRYPOINT_DIR)
+#           HandleLog INFO "CLONE REPO_URL => ${CLONE_REPO_URL}" ${CLONE_LOG_FILE}
+#           HandleLog INFO "CLONE DIR => ${CLONE_DIR}" ${CLONE_LOG_FILE}
+#           HandleLog INFO "CLONE BRANCH EXISTS ? => ${BRANCH_CHECK}" ${CLONE_LOG_FILE}
+#           HandleLog INFO "CLONE BRANCH  => ${CLONE_BRANCH}" ${CLONE_LOG_FILE}
+#           HandleLog INFO "CLONE COMMIT => ${CLONED_COMMIT_SHA}" ${CLONE_LOG_FILE}
+#         fi
+#         HandleLog DASH "COMPLETED" ${CLONE_LOG_FILE}
+#       }
 
 
-    ###########################################################################
-    # CLONING CORE BASE REPO 1
-    # OPENBMC, OPENBMC-META-INTEL, META-AMI 
-    ###########################################################################
+#     ###########################################################################
+#     # CLONING CORE BASE REPO 1
+#     # OPENBMC, OPENBMC-META-INTEL, META-AMI 
+#     ###########################################################################
     
-    ########################################
-    # OPENBMC
-    ########################################
-    - CLONE_REPO ${openbmc_repo} ${ENTRYPOINT_DIR}/openbmc
+#     ########################################
+#     # OPENBMC
+#     ########################################
+#     - CLONE_REPO ${openbmc_repo} ${ENTRYPOINT_DIR}/openbmc
 
-    ########################################
-    # OPENBMC-META-INTEL
-    ########################################
-    - CLONE_REPO ${!source_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel
+#     ########################################
+#     # OPENBMC-META-INTEL
+#     ########################################
+#     - CLONE_REPO ${!source_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel
     
-    ########################################
-    # META-AMI
-    ########################################
-    - CLONE_REPO ${metami_repo} ${SOURCE_WORKSPACE}/meta-ami
+#     ########################################
+#     # META-AMI
+#     ########################################
+#     - CLONE_REPO ${metami_repo} ${SOURCE_WORKSPACE}/meta-ami
   
-    ###########################################################################
-    # CLONE REPO BASED ON PLATFORM (LABEL)
-    ###########################################################################
+#     ###########################################################################
+#     # CLONE REPO BASED ON PLATFORM (LABEL)
+#     ###########################################################################
 
-    - TEMPLATECONF=""
-    - echo "===> PLATFORM SOURCE BRANCH EXIST ? $PLATFORM_BRANCH_CHECK"
-    - |
-      case "${config}" in
-        *ArcherCity*)
+#     - TEMPLATECONF=""
+#     - echo "===> PLATFORM SOURCE BRANCH EXIST ? $PLATFORM_BRANCH_CHECK"
+#     - |
+#       case "${config}" in
+#         *ArcherCity*)
         
-            CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-egs
-            CLONE_REPO ${meta_restricted_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted
-            CLONE_REPO ${meta_intel_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-intel
+#             CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-egs
+#             CLONE_REPO ${meta_restricted_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted
+#             CLONE_REPO ${meta_intel_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-intel
             
-            TEMPLATECONF="openbmc-meta-intel/meta-egs/conf/templates/default"
-            PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
-            PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
-            ;;
-        *AST2600EVB*)
-            TEMPLATECONF="meta-ami/meta-evb/meta-evb-aspeed/meta-evb-ast2600/conf/templates/default"
-            PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
-            PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
-            ;;
-        *AvenCity*)
-            CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-bhs
-            CLONE_REPO ${meta_intel_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-intel          
+#             TEMPLATECONF="openbmc-meta-intel/meta-egs/conf/templates/default"
+#             PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
+#             PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
+#             ;;
+#         *AST2600EVB*)
+#             TEMPLATECONF="meta-ami/meta-evb/meta-evb-aspeed/meta-evb-ast2600/conf/templates/default"
+#             PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
+#             PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
+#             ;;
+#         *AvenCity*)
+#             CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-bhs
+#             CLONE_REPO ${meta_intel_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-intel          
 
-            TEMPLATECONF="openbmc-meta-intel/meta-bhs/conf/templates/default"
-            PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
-            PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
-            ;;
-        *AMD_Truin*)
-            CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/meta-amd/meta-chalupa
+#             TEMPLATECONF="openbmc-meta-intel/meta-bhs/conf/templates/default"
+#             PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
+#             PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
+#             ;;
+#         *AMD_Truin*)
+#             CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/meta-amd/meta-chalupa
 
-            AMPL_REPO="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/amd/amdpacks/apml"
-            ADDC_REPO="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/amd/amdpacks/addc"
+#             AMPL_REPO="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/amd/amdpacks/apml"
+#             ADDC_REPO="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/amd/amdpacks/addc"
 
-            CLONE_REPO ${AMPL_REPO} ${SOURCE_WORKSPACE}/meta-amd/meta-chalupa/recipes-amd/amd-apml
-            CLONE_REPO ${ADDC_REPO} ${SOURCE_WORKSPACE}/meta-amd/meta-chalupa/recipes-amd/amd-addc
+#             CLONE_REPO ${AMPL_REPO} ${SOURCE_WORKSPACE}/meta-amd/meta-chalupa/recipes-amd/amd-apml
+#             CLONE_REPO ${ADDC_REPO} ${SOURCE_WORKSPACE}/meta-amd/meta-chalupa/recipes-amd/amd-addc
 
-            TEMPLATECONF="meta-amd/meta-chalupa/conf/templates/default"
-            PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
-            PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
-            ;;
-        *Nvidia_GraceHopper*)
-            CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/meta-nvidia/meta-gh
+#             TEMPLATECONF="meta-amd/meta-chalupa/conf/templates/default"
+#             PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
+#             PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
+#             ;;
+#         *Nvidia_GraceHopper*)
+#             CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/meta-nvidia/meta-gh
 
-            TEMPLATECONF="meta-nvidia/meta-gh/conf/templates/default"
-            PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
-            PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
-            ;;
-        *Nvidia_MGX_CG1*)
-            CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/meta-nvidia/meta-mgx
+#             TEMPLATECONF="meta-nvidia/meta-gh/conf/templates/default"
+#             PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
+#             PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
+#             ;;
+#         *Nvidia_MGX_CG1*)
+#             CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/meta-nvidia/meta-mgx
 
-            TEMPLATECONF="meta-nvidia/meta-mgx/conf/templates/legocg1"
-            PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
-            PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
-            ;;
-        *Nvidia_MGX_C2*)
-            CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/meta-nvidia/meta-mgx
+#             TEMPLATECONF="meta-nvidia/meta-mgx/conf/templates/legocg1"
+#             PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
+#             PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
+#             ;;
+#         *Nvidia_MGX_C2*)
+#             CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/meta-nvidia/meta-mgx
 
-            TEMPLATECONF="meta-nvidia/meta-mgx/conf/templates/legoc2"
-            PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
-            PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
-            ;;
-        *Ampere_Mtmitchell*)
-            CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/mtmitchell
+#             TEMPLATECONF="meta-nvidia/meta-mgx/conf/templates/legoc2"
+#             PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
+#             PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
+#             ;;
+#         *Ampere_Mtmitchell*)
+#             CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/mtmitchell
 
-            COMMON_REPO="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ampere/common"
-            CLONE_REPO ${COMMON_REPO}  ${SOURCE_WORKSPACE}/mtmitchell/meta-common
+#             COMMON_REPO="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ampere/common"
+#             CLONE_REPO ${COMMON_REPO}  ${SOURCE_WORKSPACE}/mtmitchell/meta-common
 
-            TEMPLATECONF="mtmitchell/conf/templates/default"
-            PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
-            PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
-            ;;
-       *ARBEL*)
-           TEMPLATECONF="meta-evb/meta-evb-nuvoton/meta-evb-npcm845/conf/templates/default"
-           PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
-           PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
-           ;;
-       *MUSTANG*)
-           CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-mustang
-           CLONE_REPO ${meta_restricted_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted
+#             TEMPLATECONF="mtmitchell/conf/templates/default"
+#             PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
+#             PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
+#             ;;
+#        *ARBEL*)
+#            TEMPLATECONF="meta-evb/meta-evb-nuvoton/meta-evb-npcm845/conf/templates/default"
+#            PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
+#            PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
+#            ;;
+#        *MUSTANG*)
+#            CLONE_REPO ${!platform_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-mustang
+#            CLONE_REPO ${meta_restricted_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted
 
-           TEMPLATECONF="openbmc-meta-intel/meta-mustang/conf/templates/default"
-           PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
-           PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
-           ;;
-        *)
-            ;;
-      esac
+#            TEMPLATECONF="openbmc-meta-intel/meta-mustang/conf/templates/default"
+#            PLATFORM_CONF=$TEMPLATECONF"/local.conf.sample"
+#            PLATFORM_BBLAYERS=$TEMPLATECONF"/bblayers.conf.sample"
+#            ;;
+#         *)
+#             ;;
+#       esac
 
-      HandleLog DASH "CONF DETAILS" ${DEBUG_LOG_FILE}
-      HandleLog SUCCESS "TEMPLATECONF = $TEMPLATECONF" ${DEBUG_LOG_FILE}
-      HandleLog SUCCESS "PLATFORM_CONF = $PLATFORM_CONF" ${DEBUG_LOG_FILE}
-      HandleLog SUCCESS "PLATFORM_BBLAYERS = $PLATFORM_BBLAYERS" ${DEBUG_LOG_FILE}
-      HandleLog DASH "DONE" ${DEBUG_LOG_FILE}
+#       HandleLog DASH "CONF DETAILS" ${DEBUG_LOG_FILE}
+#       HandleLog SUCCESS "TEMPLATECONF = $TEMPLATECONF" ${DEBUG_LOG_FILE}
+#       HandleLog SUCCESS "PLATFORM_CONF = $PLATFORM_CONF" ${DEBUG_LOG_FILE}
+#       HandleLog SUCCESS "PLATFORM_BBLAYERS = $PLATFORM_BBLAYERS" ${DEBUG_LOG_FILE}
+#       HandleLog DASH "DONE" ${DEBUG_LOG_FILE}
 
-    - cd ${SOURCE_WORKSPACE}
-    - ls -la $TEMPLATECONF
-    ###########################################################################
-    # CUSTOM CHANGES
-    ###########################################################################
-    - |
-      CLONE_REPO ${meta_restricted_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted
-      CLONE_REPO ${meta_intel_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-intel
+#     - cd ${SOURCE_WORKSPACE}
+#     - ls -la $TEMPLATECONF
+#     ###########################################################################
+#     # CUSTOM CHANGES
+#     ###########################################################################
+#     - |
+#       CLONE_REPO ${meta_restricted_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted
+#       CLONE_REPO ${meta_intel_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-intel
 
-      ls -la ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
-      sed -i "s/IMAGE_INSTALL:append = \" at-scale-debug\"/#IMAGE_INSTALL:append = \" at-scale-debug\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+#       ls -la ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+#       sed -i "s/IMAGE_INSTALL:append = \" at-scale-debug\"/#IMAGE_INSTALL:append = \" at-scale-debug\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
 
-      sed -i "s/IMAGE_INSTALL:append = \" ami-acd-dbus ami-asd-dbus\"/#IMAGE_INSTALL:append = \" ami-acd-dbus ami-asd-dbus\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+#       sed -i "s/IMAGE_INSTALL:append = \" ami-acd-dbus ami-asd-dbus\"/#IMAGE_INSTALL:append = \" ami-acd-dbus ami-asd-dbus\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
 
-      sed -i "s/IMAGE_INSTALL:append = \" bafi-dev\"/#IMAGE_INSTALL:append = \" bafi-dev\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+#       sed -i "s/IMAGE_INSTALL:append = \" bafi-dev\"/#IMAGE_INSTALL:append = \" bafi-dev\"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
 
 
-      sed -i "s/EXTRA_IMAGE_FEATURES:append = \" \\\/#EXTRA_IMAGE_FEATURES:append = \" \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+#       sed -i "s/EXTRA_IMAGE_FEATURES:append = \" \\\/#EXTRA_IMAGE_FEATURES:append = \" \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
       
-      sed -i "s/    acd-features \\\/#    acd-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
-      sed -i "s/    nm-features \\\/#    nm-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
-      sed -i "s/    oob-config-features \\\/#    oob-config-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
-      sed -i "s/    ras-offload-features \\\/#    ras-offload-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
-      sed -i "s/    telemetry-features \\\/#    telemetry-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
-      sed -i "s/    \"/#    \"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
-      set +e
-      ls -lat $PLATFORM_BBLAYERS
-      if [ -f ${PLATFORM_BBLAYERS} ]; then
-        if ! grep -qE "##OEROOT##/openbmc-meta-intel/meta-restricted" "$PLATFORM_BBLAYERS"; then
+#       sed -i "s/    acd-features \\\/#    acd-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+#       sed -i "s/    nm-features \\\/#    nm-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+#       sed -i "s/    oob-config-features \\\/#    oob-config-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+#       sed -i "s/    ras-offload-features \\\/#    ras-offload-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+#       sed -i "s/    telemetry-features \\\/#    telemetry-features \\\/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+#       sed -i "s/    \"/#    \"/g" ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf
+#       set +e
+#       ls -lat $PLATFORM_BBLAYERS
+#       if [ -f ${PLATFORM_BBLAYERS} ]; then
+#         if ! grep -qE "##OEROOT##/openbmc-meta-intel/meta-restricted" "$PLATFORM_BBLAYERS"; then
           
-          sed -i '/##OEROOT##\/openbmc-meta-intel\/meta-intel \\/a\  ##OEROOT##/openbmc-meta-intel/meta-restricted \\' ${PLATFORM_BBLAYERS}
-          HandleLog SUCCESS "Meta restricted added to openbmc-meta-intel !!" ${DEBUG_LOG_FILE}
-        fi
-      fi
+#           sed -i '/##OEROOT##\/openbmc-meta-intel\/meta-intel \\/a\  ##OEROOT##/openbmc-meta-intel/meta-restricted \\' ${PLATFORM_BBLAYERS}
+#           HandleLog SUCCESS "Meta restricted added to openbmc-meta-intel !!" ${DEBUG_LOG_FILE}
+#         fi
+#       fi
 
-      cat $PLATFORM_BBLAYERS
-      set -e
+#       cat $PLATFORM_BBLAYERS
+#       set -e
 
-    ###########################################################################
-    # AMI EXPANSTION PACK ENABLING
-    ###########################################################################
-    - mkdir -p ${SOURCE_WORKSPACE}/meta-ami/recipes-ami
-    - |
-      if [[ $ami_pack_list ]]; then
-        HandleLog DASH "AMI EP PROCESSING" ${DEBUG_LOG_FILE}
-        for EP in ${ami_pack_list[@]}; do
-          HandleLog INFO "${EP} PROCESSING..." ${DEBUG_LOG_FILE}
-          case "${EP}" in
-              "BRCMRAID")
-                  CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/raid/raid-brcm"
-                  CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/raid-brcm"
+#     ###########################################################################
+#     # AMI EXPANSTION PACK ENABLING
+#     ###########################################################################
+#     - mkdir -p ${SOURCE_WORKSPACE}/meta-ami/recipes-ami
+#     - |
+#       if [[ $ami_pack_list ]]; then
+#         HandleLog DASH "AMI EP PROCESSING" ${DEBUG_LOG_FILE}
+#         for EP in ${ami_pack_list[@]}; do
+#           HandleLog INFO "${EP} PROCESSING..." ${DEBUG_LOG_FILE}
+#           case "${EP}" in
+#               "BRCMRAID")
+#                   CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/raid/raid-brcm"
+#                   CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/raid-brcm"
 
-                  CLONE_REPO ${CL_URL} ${CL_PATH}
-                  echo "#BRCM Raid and HBA management" >> $PLATFORM_CONF
-                  echo 'IMAGE_INSTALL:append = " raid-mgmt raid-brcm hba-mgmt hba-brcm"' >> $PLATFORM_CONF
+#                   CLONE_REPO ${CL_URL} ${CL_PATH}
+#                   echo "#BRCM Raid and HBA management" >> $PLATFORM_CONF
+#                   echo 'IMAGE_INSTALL:append = " raid-mgmt raid-brcm hba-mgmt hba-brcm"' >> $PLATFORM_CONF
 
-                  HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
-                  ;;
+#                   HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
+#                   ;;
 
-              "NIC")
-                CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/nic"
-                CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/nic"
-                CLONE_REPO ${CL_URL} ${CL_PATH}
-                echo "#NIC Management" >> $PLATFORM_CONF
-                echo 'IMAGE_INSTALL:append = " nic nic-mgmt"' >> $PLATFORM_CONF
-                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
-                ;;
+#               "NIC")
+#                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/nic"
+#                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/nic"
+#                 CLONE_REPO ${CL_URL} ${CL_PATH}
+#                 echo "#NIC Management" >> $PLATFORM_CONF
+#                 echo 'IMAGE_INSTALL:append = " nic nic-mgmt"' >> $PLATFORM_CONF
+#                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
+#                 ;;
               
-              "NVME")
-                CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/nvme"
-                CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/nvme"
-                CLONE_REPO ${CL_URL} ${CL_PATH}
-                echo "#NVMe Management" >> $PLATFORM_CONF
-                echo 'IMAGE_INSTALL:append = " nvme nvme-mgmt"' >> $PLATFORM_CONF
-                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
-                ;;
+#               "NVME")
+#                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/nvme"
+#                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/nvme"
+#                 CLONE_REPO ${CL_URL} ${CL_PATH}
+#                 echo "#NVMe Management" >> $PLATFORM_CONF
+#                 echo 'IMAGE_INSTALL:append = " nvme nvme-mgmt"' >> $PLATFORM_CONF
+#                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
+#                 ;;
               
-              "NVMEBASIC")
-                CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/nvme"
-                CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/nvme"
-                CLONE_REPO ${CL_URL} ${CL_PATH}
-                echo "#NVMe Basic Management" >> $PLATFORM_CONF
-                echo 'IMAGE_INSTALL:append = " nvme-basic nvmebasic-mgmt"' >> $PLATFORM_CONF
-                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
-                ;;
-              "FWUPDATE")
-                CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/firmware-update"
-                CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/cpld"
-                CLONE_REPO ${CL_URL} ${CL_PATH}
-                # Commenting out "#IMAGE_FSTYPES += "intel-pfr"" in ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf or build/conf/local.conf
-                echo "#FWUPDATE" >> $PLATFORM_CONF
-                echo 'IMAGE_INSTALL:append = " cpld-tool"' >> $PLATFORM_CONF
-                echo 'NON_PFR_UPDATE_FEATURES:append = " cpld-update"' >> $PLATFORM_CONF
-                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
-                ;;
-              "RTP")
-                CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/redfish"
-                CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/redfish"
-                CLONE_REPO ${CL_URL} ${CL_PATH}
-                echo "#RTP" >> $PLATFORM_CONF
-                echo 'IMAGE_INSTALL:append = " bmcweb"' >> $PLATFORM_CONF
-                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
-                ;;
+#               "NVMEBASIC")
+#                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/nvme"
+#                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/nvme"
+#                 CLONE_REPO ${CL_URL} ${CL_PATH}
+#                 echo "#NVMe Basic Management" >> $PLATFORM_CONF
+#                 echo 'IMAGE_INSTALL:append = " nvme-basic nvmebasic-mgmt"' >> $PLATFORM_CONF
+#                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
+#                 ;;
+#               "FWUPDATE")
+#                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/firmware-update"
+#                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/cpld"
+#                 CLONE_REPO ${CL_URL} ${CL_PATH}
+#                 # Commenting out "#IMAGE_FSTYPES += "intel-pfr"" in ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted/conf/layer.conf or build/conf/local.conf
+#                 echo "#FWUPDATE" >> $PLATFORM_CONF
+#                 echo 'IMAGE_INSTALL:append = " cpld-tool"' >> $PLATFORM_CONF
+#                 echo 'NON_PFR_UPDATE_FEATURES:append = " cpld-update"' >> $PLATFORM_CONF
+#                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
+#                 ;;
+#               "RTP")
+#                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/redfish"
+#                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/redfish"
+#                 CLONE_REPO ${CL_URL} ${CL_PATH}
+#                 echo "#RTP" >> $PLATFORM_CONF
+#                 echo 'IMAGE_INSTALL:append = " bmcweb"' >> $PLATFORM_CONF
+#                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
+#                 ;;
                 
-              "MSCCRAID")
-                CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/raid/storage"
-                CL_PATH="${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-ami/storage"
-                CLONE_REPO ${CL_URL} ${CL_PATH}
-                CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/raid/raid-mscc"
-                CL_PATH="${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-ami/raid-mscc"
-                CLONE_REPO ${CL_URL} ${CL_PATH}
+#               "MSCCRAID")
+#                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/raid/storage"
+#                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-ami/storage"
+#                 CLONE_REPO ${CL_URL} ${CL_PATH}
+#                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/raid/raid-mscc"
+#                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-ami/raid-mscc"
+#                 CLONE_REPO ${CL_URL} ${CL_PATH}
 
-                echo "#MSCC Raid and HBA management" >> $PLATFORM_CONF
-                echo 'IMAGE_INSTALL:append = " storage-mgmt raid-mscc"' >> $PLATFORM_CONF
-                HandleLog SUCCESS "Enabled ${EP}-Storage and ${EP}-Raid" ${DEBUG_LOG_FILE}
-                ;;
+#                 echo "#MSCC Raid and HBA management" >> $PLATFORM_CONF
+#                 echo 'IMAGE_INSTALL:append = " storage-mgmt raid-mscc"' >> $PLATFORM_CONF
+#                 HandleLog SUCCESS "Enabled ${EP}-Storage and ${EP}-Raid" ${DEBUG_LOG_FILE}
+#                 ;;
               
-              "GPGPU")
-                CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/nvidia/nvidiapacks/gp-gpu"
-                CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-gpgpu"
-                CLONE_REPO ${CL_URL} ${CL_PATH}
-                echo "# ${EP}" >> $PLATFORM_CONF
-                echo 'IMAGE_INSTALL:append = " nvidia-gpumgr nvidia-gpuoob"' >> $PLATFORM_CONF
-                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
-                ;;
+#               "GPGPU")
+#                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/nvidia/nvidiapacks/gp-gpu"
+#                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-gpgpu"
+#                 CLONE_REPO ${CL_URL} ${CL_PATH}
+#                 echo "# ${EP}" >> $PLATFORM_CONF
+#                 echo 'IMAGE_INSTALL:append = " nvidia-gpumgr nvidia-gpuoob"' >> $PLATFORM_CONF
+#                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
+#                 ;;
               
-              "BRCMPCIESW")
-                CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/pciesw-brcm"
-                CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/pciesw-brcm"
-                CLONE_REPO ${CL_URL} ${CL_PATH}
-                echo "#BRCMPCIESW" >> $PLATFORM_CONF
-                echo 'IMAGE_INSTALL:append = " i2c-pciesw libscrutiny mctp-pciesw pciesw-service scrutiny-ifc"' >> $PLATFORM_CONF
-                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
-                ;;
+#               "BRCMPCIESW")
+#                 CL_URL="https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/one-tree/ami/amipacks/pciesw-brcm"
+#                 CL_PATH="${SOURCE_WORKSPACE}/meta-ami/recipes-ami/pciesw-brcm"
+#                 CLONE_REPO ${CL_URL} ${CL_PATH}
+#                 echo "#BRCMPCIESW" >> $PLATFORM_CONF
+#                 echo 'IMAGE_INSTALL:append = " i2c-pciesw libscrutiny mctp-pciesw pciesw-service scrutiny-ifc"' >> $PLATFORM_CONF
+#                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
+#                 ;;
 
-          esac
-        done
-        HandleLog DASH "DONE" ${DEBUG_LOG_FILE}
-      fi
+#           esac
+#         done
+#         HandleLog DASH "DONE" ${DEBUG_LOG_FILE}
+#       fi
 
-    ###########################################################################
-    # PLATFORM EXPANSION/FEAUTURES PACK ENABLING
-    ###########################################################################
-    - |
-      if [[ $platform_pack_list ]]; then
-        HandleLog DASH "PLATFORM EP PROCESSING" ${DEBUG_LOG_FILE}
-        CLONE_REPO ${meta_restricted_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted
-        for EP in ${platform_pack_list[@]}; do
-          HandleLog INFO "EP ${EP} PROCESSING...." ${DEBUG_LOG_FILE}
-          case "${EP}" in
-              "ACD")
-                echo "#ACD" >> PLATFORM_CONF
-                echo 'IMAGE_INSTALL:append = " aic-crashdump crashdump ami-acd-dbus bafi-dev"' >> $PLATFORM_CONF
-                echo 'EXTRA_IMAGE_FEATURES:append = " acd-features"' >> $PLATFORM_CONF
-                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
-                ;;
+#     ###########################################################################
+#     # PLATFORM EXPANSION/FEAUTURES PACK ENABLING
+#     ###########################################################################
+#     - |
+#       if [[ $platform_pack_list ]]; then
+#         HandleLog DASH "PLATFORM EP PROCESSING" ${DEBUG_LOG_FILE}
+#         CLONE_REPO ${meta_restricted_repo} ${SOURCE_WORKSPACE}/openbmc-meta-intel/meta-restricted
+#         for EP in ${platform_pack_list[@]}; do
+#           HandleLog INFO "EP ${EP} PROCESSING...." ${DEBUG_LOG_FILE}
+#           case "${EP}" in
+#               "ACD")
+#                 echo "#ACD" >> PLATFORM_CONF
+#                 echo 'IMAGE_INSTALL:append = " aic-crashdump crashdump ami-acd-dbus bafi-dev"' >> $PLATFORM_CONF
+#                 echo 'EXTRA_IMAGE_FEATURES:append = " acd-features"' >> $PLATFORM_CONF
+#                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
+#                 ;;
               
-              "ASD")
-                echo '#ASD' >> $PLATFORM_CONF
-                echo 'IMAGE_INSTALL:append = " at-scale-debug ami-asd-dbus"' >> $PLATFORM_CONF
-                HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
-                ;;
-              "MRT")
-                  echo '#MRT' >> $PLATFORM_CONF
-                  echo 'IMAGE_INSTALL:append = " memory-error-collector memory-resilience-technology-engine"' >> $PLATFORM_CONF
-                  HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
-                  ;;
-              "PFR")      
-                  # Enable 
-                  echo '#PFR' >> $PLATFORM_CONF
-                  echo 'IMAGE_FSTYPES += " intel-pfr"' >> $PLATFORM_CONF
-                  echo 'EXTRA_IMAGE_FEATURES:append = " debug-tweaks"' >> $PLATFORM_CONF
-                  HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
-                  ;;
+#               "ASD")
+#                 echo '#ASD' >> $PLATFORM_CONF
+#                 echo 'IMAGE_INSTALL:append = " at-scale-debug ami-asd-dbus"' >> $PLATFORM_CONF
+#                 HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
+#                 ;;
+#               "MRT")
+#                   echo '#MRT' >> $PLATFORM_CONF
+#                   echo 'IMAGE_INSTALL:append = " memory-error-collector memory-resilience-technology-engine"' >> $PLATFORM_CONF
+#                   HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
+#                   ;;
+#               "PFR")      
+#                   # Enable 
+#                   echo '#PFR' >> $PLATFORM_CONF
+#                   echo 'IMAGE_FSTYPES += " intel-pfr"' >> $PLATFORM_CONF
+#                   echo 'EXTRA_IMAGE_FEATURES:append = " debug-tweaks"' >> $PLATFORM_CONF
+#                   HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
+#                   ;;
                                     
-              "IntelSiPack")
-                  echo "#IntelSiPack" >> $PLATFORM_CONF
-                  echo 'EXTRA_IMAGE_FEATURES:append = " nm-features telemetry-features"' >> $PLATFORM_CONF
-                  HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
-                  ;;
+#               "IntelSiPack")
+#                   echo "#IntelSiPack" >> $PLATFORM_CONF
+#                   echo 'EXTRA_IMAGE_FEATURES:append = " nm-features telemetry-features"' >> $PLATFORM_CONF
+#                   HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
+#                   ;;
               
-              "IntelOnDemandSDSiPack")
-                  echo "#IntelOnDemandSDSiPack" >> $PLATFORM_CONF
-                  echo 'EXTRA_IMAGE_FEATURES:append = " oob-config-features ras-offload-features"' >> $PLATFORM_CONF
-                  HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
-                  ;;
-          esac
-        done
-        HandleLog DASH "DONE" ${DEBUG_LOG_FILE}
-      fi
+#               "IntelOnDemandSDSiPack")
+#                   echo "#IntelOnDemandSDSiPack" >> $PLATFORM_CONF
+#                   echo 'EXTRA_IMAGE_FEATURES:append = " oob-config-features ras-offload-features"' >> $PLATFORM_CONF
+#                   HandleLog SUCCESS "Enabled ${EP}" ${DEBUG_LOG_FILE}
+#                   ;;
+#           esac
+#         done
+#         HandleLog DASH "DONE" ${DEBUG_LOG_FILE}
+#       fi
 
-    ###########################################################################
-    # ADDITIONAL OPTIONS SETTING
-    ###########################################################################
-    - |
-      if [[ $pre_options ]]; then    
-        echo "==> Cloning secure keys repo...." | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
-        SECURITY_KEY_REPO=https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/ot
-        CLONE_REPO ${SECURITY_KEY_REPO} $SOURCE_WORKSPACE/secure_keys_src
-        SECURE_KEY_REPO_DIR=`realpath $SOURCE_WORKSPACE/secure_keys_src`
+#     ###########################################################################
+#     # ADDITIONAL OPTIONS SETTING
+#     ###########################################################################
+#     - |
+#       if [[ $pre_options ]]; then    
+#         echo "==> Cloning secure keys repo...." | tee -a ${INFO_AND_LOG}/SourceCloneInfo.log
+#         SECURITY_KEY_REPO=https://${GUSER}:${GPASS}@git.ami.com/core/ami-bmc/ot
+#         CLONE_REPO ${SECURITY_KEY_REPO} $SOURCE_WORKSPACE/secure_keys_src
+#         SECURE_KEY_REPO_DIR=`realpath $SOURCE_WORKSPACE/secure_keys_src`
 
-        echo "==> Listing SECURE KEY"
-        ls -lat $SECURE_KEY_REPO_DIR/GitLab/megaractwbot/megarac/secure_boot_keys
-        du -h -d 5 $SECURE_KEY_REPO_DIR/GitLab/megaractwbot/megarac/secure_boot_keys
+#         echo "==> Listing SECURE KEY"
+#         ls -lat $SECURE_KEY_REPO_DIR/GitLab/megaractwbot/megarac/secure_boot_keys
+#         du -h -d 5 $SECURE_KEY_REPO_DIR/GitLab/megaractwbot/megarac/secure_boot_keys
 
-        HandleLog DASH "OPTIONS PROCESSING" ${DEBUG_LOG_FILE}
+#         HandleLog DASH "OPTIONS PROCESSING" ${DEBUG_LOG_FILE}
 
-        for pre_opt in ${pre_options[@]}; do
-          HandleLog INFO "STARTED ${pre_opt}" ${DEBUG_LOG_FILE}
-          case "${pre_opt}" in
+#         for pre_opt in ${pre_options[@]}; do
+#           HandleLog INFO "STARTED ${pre_opt}" ${DEBUG_LOG_FILE}
+#           case "${pre_opt}" in
                        
-              "SoftwareSecureBoot")
-                sed -i 's|#SPL_BINARY = "spl/u-boot-spl.bin"|SPL_BINARY = "spl/u-boot-spl.bin"|g' ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                sed -i 's|UBOOT_SIGN_ENABLE = "0"|UBOOT_SIGN_ENABLE = "1"|g' ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                sed -i 's|SPL_SIGN_ENABLE = "0"|SPL_SIGN_ENABLE = "1"|g' ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                sed -i 's|UBOOT_FITIMAGE_ENABLE = "0"|UBOOT_FITIMAGE_ENABLE = "1"|g' ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+#               "SoftwareSecureBoot")
+#                 sed -i 's|#SPL_BINARY = "spl/u-boot-spl.bin"|SPL_BINARY = "spl/u-boot-spl.bin"|g' ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+#                 sed -i 's|UBOOT_SIGN_ENABLE = "0"|UBOOT_SIGN_ENABLE = "1"|g' ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+#                 sed -i 's|SPL_SIGN_ENABLE = "0"|SPL_SIGN_ENABLE = "1"|g' ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+#                 sed -i 's|UBOOT_FITIMAGE_ENABLE = "0"|UBOOT_FITIMAGE_ENABLE = "1"|g' ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
 
-                sed -i "s|UBOOT_SIGN_KEYNAME = \"rsa_oem_fitimage_key\"|UBOOT_SIGN_KEYNAME = \"rsa2048_1\"|g" ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                sed -i "s|SPL_SIGN_KEYNAME = \"rsa_oem_fitimage_key\"|SPL_SIGN_KEYNAME = \"rsa2048_1\"|g" ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+#                 sed -i "s|UBOOT_SIGN_KEYNAME = \"rsa_oem_fitimage_key\"|UBOOT_SIGN_KEYNAME = \"rsa2048_1\"|g" ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+#                 sed -i "s|SPL_SIGN_KEYNAME = \"rsa_oem_fitimage_key\"|SPL_SIGN_KEYNAME = \"rsa2048_1\"|g" ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
 
-                sed -i "s|UBOOT_SIGN_KEYDIR = \"\${WORKDIR}\"|UBOOT_SIGN_KEYDIR = \"$SECURE_KEY_REPO_DIR\/GitLab\/megaractwbot\/megarac\/secure_boot_keys\/sign_keydir\"|g" ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                sed -i "s|SPL_SIGN_KEYDIR = \"\${WORKDIR}\"|SPL_SIGN_KEYDIR = \"$SECURE_KEY_REPO_DIR\/GitLab\/megaractwbot\/megarac\/secure_boot_keys\/sign_keydir\"|g" ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+#                 sed -i "s|UBOOT_SIGN_KEYDIR = \"\${WORKDIR}\"|UBOOT_SIGN_KEYDIR = \"$SECURE_KEY_REPO_DIR\/GitLab\/megaractwbot\/megarac\/secure_boot_keys\/sign_keydir\"|g" ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+#                 sed -i "s|SPL_SIGN_KEYDIR = \"\${WORKDIR}\"|SPL_SIGN_KEYDIR = \"$SECURE_KEY_REPO_DIR\/GitLab\/megaractwbot\/megarac\/secure_boot_keys\/sign_keydir\"|g" ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
 
-                HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
+#                 HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
 
-                ;;
+#                 ;;
             
-              "HardwareSecureBoot")
-                sed -i "s|SOCSEC_SIGN_ENABLE = \"0\"|SOCSEC_SIGN_ENABLE = \"1\"|g" ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-bsp/u-boot/u-boot-aspeed-sdk_%.bbappend
+#               "HardwareSecureBoot")
+#                 sed -i "s|SOCSEC_SIGN_ENABLE = \"0\"|SOCSEC_SIGN_ENABLE = \"1\"|g" ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-bsp/u-boot/u-boot-aspeed-sdk_%.bbappend
 
-                sed -i "s|SOCSEC_SIGN_KEY = \"\${WORKDIR}\/keys\/SIG_RSA_KEY2_private.pem\"|SOCSEC_SIGN_KEY = \"$SECURE_KEY_REPO_DIR\/GitLab\/megaractwbot\/megarac\/secure_boot_keys\/otp-key\/otp_key\/test_oem_dss_private_key_2048_1.pem\"|g" ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-bsp/u-boot/u-boot-aspeed-sdk_%.bbappend
-                sed -i "s|OTPTOOL_CONFIGS = \"\${WORKDIR}\/ast2600_a3.json\"|OTPTOOL_CONFIGS = \"$SECURE_KEY_REPO_DIR\/GitLab\/megaractwbot\/megarac\/secure_boot_keys\/otp-key\/evbA3_RSA2048_SHA256_o1.json\"|g" ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-bsp/u-boot/u-boot-aspeed-sdk_%.bbappend
-                sed -i "s|OTPTOOL_KEY_DIR = \"\${WORKDIR}\/keys\/\"|OTPTOOL_KEY_DIR = \"$SECURE_KEY_REPO_DIR\/GitLab\/megaractwbot\/megarac\/secure_boot_keys\/otp-key\/otp_key\"|g" ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-bsp/u-boot/u-boot-aspeed-sdk_%.bbappend
+#                 sed -i "s|SOCSEC_SIGN_KEY = \"\${WORKDIR}\/keys\/SIG_RSA_KEY2_private.pem\"|SOCSEC_SIGN_KEY = \"$SECURE_KEY_REPO_DIR\/GitLab\/megaractwbot\/megarac\/secure_boot_keys\/otp-key\/otp_key\/test_oem_dss_private_key_2048_1.pem\"|g" ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-bsp/u-boot/u-boot-aspeed-sdk_%.bbappend
+#                 sed -i "s|OTPTOOL_CONFIGS = \"\${WORKDIR}\/ast2600_a3.json\"|OTPTOOL_CONFIGS = \"$SECURE_KEY_REPO_DIR\/GitLab\/megaractwbot\/megarac\/secure_boot_keys\/otp-key\/evbA3_RSA2048_SHA256_o1.json\"|g" ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-bsp/u-boot/u-boot-aspeed-sdk_%.bbappend
+#                 sed -i "s|OTPTOOL_KEY_DIR = \"\${WORKDIR}\/keys\/\"|OTPTOOL_KEY_DIR = \"$SECURE_KEY_REPO_DIR\/GitLab\/megaractwbot\/megarac\/secure_boot_keys\/otp-key\/otp_key\"|g" ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-bsp/u-boot/u-boot-aspeed-sdk_%.bbappend
                 
-                HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
-                ;;
-              "BrcmRaidI2cMode")
-                echo 'RAID_BRCM_CONF_FILE[RAID] = "ast2600evb-i2c-oob-mode.json"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
-                echo 'RAID_BRCM_CONF_FILE[HBA] = "ast2600evb-i2c-oob-mode.json"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+#                 HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
+#                 ;;
+#               "BrcmRaidI2cMode")
+#                 echo 'RAID_BRCM_CONF_FILE[RAID] = "ast2600evb-i2c-oob-mode.json"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
+#                 echo 'RAID_BRCM_CONF_FILE[HBA] = "ast2600evb-i2c-oob-mode.json"' >> ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf
 
-                HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
+#                 HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
 
-                ;;
-              "IPERF3")
-                echo "#Check network performance Tools" >> $PLATFORM_CONF
-                echo 'IMAGE_INSTALL:append = " iperf3"' >>  $PLATFORM_CONF
-                HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
-              ;;
+#                 ;;
+#               "IPERF3")
+#                 echo "#Check network performance Tools" >> $PLATFORM_CONF
+#                 echo 'IMAGE_INSTALL:append = " iperf3"' >>  $PLATFORM_CONF
+#                 HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
+#               ;;
               
-              "SPDM")
-                echo '#SPDM' >> $PLATFORM_CONF
-                echo 'IMAGE_INSTALL:append = " spdmd"' >> $PLATFORM_CONF
-                HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
-              ;;
-          esac
-        done
-        HandleLog DASH "DONE" ${DEBUG_LOG_FILE}
-      fi
+#               "SPDM")
+#                 echo '#SPDM' >> $PLATFORM_CONF
+#                 echo 'IMAGE_INSTALL:append = " spdmd"' >> $PLATFORM_CONF
+#                 HandleLog SUCCESS "Enabled option ${pre_opt}" ${DEBUG_LOG_FILE}
+#               ;;
+#           esac
+#         done
+#         HandleLog DASH "DONE" ${DEBUG_LOG_FILE}
+#       fi
 
-    ###########################################################################
-    # JAVA SIGNING
-    ###########################################################################
+#     ###########################################################################
+#     # JAVA SIGNING
+#     ###########################################################################
 
     
-    - HandleLog DASH "JAVA SIGNING" ${DEBUG_LOG_FILE}
-    - git clone "https://${GUSER}:${GPASS}@git.ami.com/core/rd/kvm/javasigning" -b "main" $SOURCE_WORKSPACE/JavaSigning
-    - HandleLog INFO "Enabling javasigning" ${DEBUG_LOG_FILE}
-    - echo '#JavaViewerSigning' >> $PLATFORM_CONF
-    - echo "JAVASIGNING_DIR=\"$SOURCE_WORKSPACE/JavaSigning\"" >> $PLATFORM_CONF
-    - echo "SSTATE_SKIP_CREATION_pn-jviewer = \"1\"" >> $PLATFORM_CONF
-    - echo "#CUSTOM CHANGE $CI_COMMIT_SHA" >> ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-utilities/jviewer/jviewer.bb
-    - HandleLog DASH "COMPLETED" ${DEBUG_LOG_FILE}
+#     - HandleLog DASH "JAVA SIGNING" ${DEBUG_LOG_FILE}
+#     - git clone "https://${GUSER}:${GPASS}@git.ami.com/core/rd/kvm/javasigning" -b "main" $SOURCE_WORKSPACE/JavaSigning
+#     - HandleLog INFO "Enabling javasigning" ${DEBUG_LOG_FILE}
+#     - echo '#JavaViewerSigning' >> $PLATFORM_CONF
+#     - echo "JAVASIGNING_DIR=\"$SOURCE_WORKSPACE/JavaSigning\"" >> $PLATFORM_CONF
+#     - echo "SSTATE_SKIP_CREATION_pn-jviewer = \"1\"" >> $PLATFORM_CONF
+#     - echo "#CUSTOM CHANGE $CI_COMMIT_SHA" >> ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-utilities/jviewer/jviewer.bb
+#     - HandleLog DASH "COMPLETED" ${DEBUG_LOG_FILE}
 
 
-    ###########################################################################
-    # DEBUG MODE ENABLEMENT
-    ###########################################################################
-    - sed -i 's/#EXTRA_IMAGE_FEATURES += "debug-tweaks"/EXTRA_IMAGE_FEATURES += "debug-tweaks"/g' $PLATFORM_CONF
+#     ###########################################################################
+#     # DEBUG MODE ENABLEMENT
+#     ###########################################################################
+#     - sed -i 's/#EXTRA_IMAGE_FEATURES += "debug-tweaks"/EXTRA_IMAGE_FEATURES += "debug-tweaks"/g' $PLATFORM_CONF
     
-    ###########################################################################
-    # COPYING META MAI LAYER.CONF TO OUTPUT
-    ###########################################################################
-    - echo $(pwd)
-    - ls -la
-    - cp -r ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf ${INFO_AND_LOG}/meta-ami-layer.conf
-    - cp -r ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-bsp/u-boot ${INFO_AND_LOG}
+#     ###########################################################################
+#     # COPYING META MAI LAYER.CONF TO OUTPUT
+#     ###########################################################################
+#     - echo $(pwd)
+#     - ls -la
+#     - cp -r ${SOURCE_WORKSPACE}/meta-ami/conf/layer.conf ${INFO_AND_LOG}/meta-ami-layer.conf
+#     - cp -r ${SOURCE_WORKSPACE}/meta-ami/meta-common/recipes-bsp/u-boot ${INFO_AND_LOG}
 
-    ###########################################################################
-    # DOMAIN CHANGING
-    ###########################################################################
-    - echo $(pwd)
-    - cd $SOURCE_WORKSPACE
-    - sed -i 's/git@git.ami.com/git@git-ssh.ami.com/' ./meta-ami/github-gitlab-url.sh
-    - cat ./meta-ami/github-gitlab-url.sh
-    - ./meta-ami/github-gitlab-url.sh
-    - echo $SOURCE_WORKSPACE
+#     ###########################################################################
+#     # DOMAIN CHANGING
+#     ###########################################################################
+#     - echo $(pwd)
+#     - cd $SOURCE_WORKSPACE
+#     - sed -i 's/git@git.ami.com/git@git-ssh.ami.com/' ./meta-ami/github-gitlab-url.sh
+#     - cat ./meta-ami/github-gitlab-url.sh
+#     - ./meta-ami/github-gitlab-url.sh
+#     - echo $SOURCE_WORKSPACE
 
-    ###########################################################################
-    # RECIPE BRANCH CHECKING
-    ###########################################################################
-    - RECIPE_PATH="${CI_PROJECT_URL#*://}"
-    - echo $RECIPE_PATH
-    - |
-      if [[ $CI_PIPELINE_SOURCE != "schedule" ]]; then
-        sync_start_time=$(date +%s)
-        mapfile -t recipes_list < <(grep -r git.ami.com/ --exclude-dir=".*" --include="*.bb*" $SOURCE_WORKSPACE)
-        sync_end_time=$(date +%s)
-        echo "Receipes Finding takes $(($sync_end_time-$sync_start_time)) secs"
-        sync_start_time=$(date +%s)
-        HandleLog DASH "RECIPE CHECKING" ${DEBUG_LOG_FILE}
-        for recipe in "${recipes_list[@]}"; 
-        do
-          filepath=${recipe%%:*}
-          line="${recipe#*:}"
-          repo_url=$(echo $line | sed -n 's/.*git@\([^;]*\).*/\1/p; s/.*git:\/\/\([^;]*\).*/\1/p')
-          git_auth_url=https://$GUSER:$GPASS@$repo_url
+#     ###########################################################################
+#     # RECIPE BRANCH CHECKING
+#     ###########################################################################
+#     - RECIPE_PATH="${CI_PROJECT_URL#*://}"
+#     - echo $RECIPE_PATH
+#     - |
+#       if [[ $CI_PIPELINE_SOURCE != "schedule" ]]; then
+#         sync_start_time=$(date +%s)
+#         mapfile -t recipes_list < <(grep -r git.ami.com/ --exclude-dir=".*" --include="*.bb*" $SOURCE_WORKSPACE)
+#         sync_end_time=$(date +%s)
+#         echo "Receipes Finding takes $(($sync_end_time-$sync_start_time)) secs"
+#         sync_start_time=$(date +%s)
+#         HandleLog DASH "RECIPE CHECKING" ${DEBUG_LOG_FILE}
+#         for recipe in "${recipes_list[@]}"; 
+#         do
+#           filepath=${recipe%%:*}
+#           line="${recipe#*:}"
+#           repo_url=$(echo $line | sed -n 's/.*git@\([^;]*\).*/\1/p; s/.*git:\/\/\([^;]*\).*/\1/p')
+#           git_auth_url=https://$GUSER:$GPASS@$repo_url
           
           
-          HandleLog DASH "CHECKING $repo_url" ${DEBUG_LOG_FILE}
-          HandleLog INFO "Filepath $filepath" ${DEBUG_LOG_FILE}
-          HandleLog INFO "Line $line" ${DEBUG_LOG_FILE}
-          HandleLog INFO "REPO URL $repo_url" ${DEBUG_LOG_FILE}
+#           HandleLog DASH "CHECKING $repo_url" ${DEBUG_LOG_FILE}
+#           HandleLog INFO "Filepath $filepath" ${DEBUG_LOG_FILE}
+#           HandleLog INFO "Line $line" ${DEBUG_LOG_FILE}
+#           HandleLog INFO "REPO URL $repo_url" ${DEBUG_LOG_FILE}
 
-          if [ -z $repo_url ]; then  
-            echo "==> "
-            HandleLog WARNING "Invalid URL/Findiing...ignoring" ${DEBUG_LOG_FILE}
-            continue
-          fi
+#           if [ -z $repo_url ]; then  
+#             echo "==> "
+#             HandleLog WARNING "Invalid URL/Findiing...ignoring" ${DEBUG_LOG_FILE}
+#             continue
+#           fi
 
-          if git ls-remote -q "$git_auth_url" &>/dev/null; then
-            RECIPE_BRANCH_CHECK=`git ls-remote --heads ${git_auth_url} $CI_COMMIT_REF_NAME | wc -l`;
-            HandleLog INFO "Receipe Repo URL Valid" ${DEBUG_LOG_FILE}
-            HandleLog INFO "Branch Check $RECIPE_BRANCH_CHECK" ${DEBUG_LOG_FILE}
-            if [ $RECIPE_BRANCH_CHECK -gt 0 ];then
-              HandleLog SUCCESS "FOUND BRANCH $CI_COMMIT_REF_NAME" ${DEBUG_LOG_FILE}
+#           if git ls-remote -q "$git_auth_url" &>/dev/null; then
+#             RECIPE_BRANCH_CHECK=`git ls-remote --heads ${git_auth_url} $CI_COMMIT_REF_NAME | wc -l`;
+#             HandleLog INFO "Receipe Repo URL Valid" ${DEBUG_LOG_FILE}
+#             HandleLog INFO "Branch Check $RECIPE_BRANCH_CHECK" ${DEBUG_LOG_FILE}
+#             if [ $RECIPE_BRANCH_CHECK -gt 0 ];then
+#               HandleLog SUCCESS "FOUND BRANCH $CI_COMMIT_REF_NAME" ${DEBUG_LOG_FILE}
               
-              HandleLog INFO "PRINTING FILE BEFORE UPDATE:" ${DEBUG_LOG_FILE}
-              cat ${filepath}
-              sed -i "s/SRCREV_override = \".*\"/SRCREV_override = \"\${AUTOREV}\"/g" $filepath
-              sed -i "s/SRCREV = \".*\"/SRCREV = \"\${AUTOREV}\"/g" $filepath
-              sed -i "s|branch=[^ ;\"]\+|branch=$CI_COMMIT_REF_NAME|g" $filepath
-              HandleLog INFO "PRINTING FILE AFTER UPDATE:" ${DEBUG_LOG_FILE}
-              cat ${filepath}
-              HandleLog SUCCESS "UPDATED BRANCH" ${DEBUG_LOG_FILE}
-            fi
-          else
-            HandleLog ERROR "Receipe Repo URL Invalid" ${DEBUG_LOG_FILE}
-          fi
-          HandleLog DASH "COMPLETED $filepath" ${DEBUG_LOG_FILE}
-        done
-        sync_end_time=$(date +%s)
-        HandleLog INFO "Receipes Updating takes $(($sync_end_time-$sync_start_time)) secs" ${DEBUG_LOG_FILE}
-      fi
-  tags:
-    - $runner_tag
+#               HandleLog INFO "PRINTING FILE BEFORE UPDATE:" ${DEBUG_LOG_FILE}
+#               cat ${filepath}
+#               sed -i "s/SRCREV_override = \".*\"/SRCREV_override = \"\${AUTOREV}\"/g" $filepath
+#               sed -i "s/SRCREV = \".*\"/SRCREV = \"\${AUTOREV}\"/g" $filepath
+#               sed -i "s|branch=[^ ;\"]\+|branch=$CI_COMMIT_REF_NAME|g" $filepath
+#               HandleLog INFO "PRINTING FILE AFTER UPDATE:" ${DEBUG_LOG_FILE}
+#               cat ${filepath}
+#               HandleLog SUCCESS "UPDATED BRANCH" ${DEBUG_LOG_FILE}
+#             fi
+#           else
+#             HandleLog ERROR "Receipe Repo URL Invalid" ${DEBUG_LOG_FILE}
+#           fi
+#           HandleLog DASH "COMPLETED $filepath" ${DEBUG_LOG_FILE}
+#         done
+#         sync_end_time=$(date +%s)
+#         HandleLog INFO "Receipes Updating takes $(($sync_end_time-$sync_start_time)) secs" ${DEBUG_LOG_FILE}
+#       fi
+#   tags:
+#     - $runner_tag
 
-daily_build_onetree:
-  stage: build
-  after_script:
-    - echo ${config}
-  only:
-    refs:
-      - schedules
-  allow_failure: True
-  extends: .build
-  parallel:
-      matrix: 
-       - config: OT_AvenCity_FULL1
-         platform_repo: OT_INTEL_BHS_URI
-         source_repo: OT_INTEL_SOURCE_URI
-         template: OT_BHS_TEMPLATE
-         executer: intel-platforms
-         platform_ep: "PFR"
+# daily_build_onetree:
+#   stage: build
+#   after_script:
+#     - echo ${config}
+#   only:
+#     refs:
+#       - schedules
+#   allow_failure: True
+#   extends: .build
+#   parallel:
+#       matrix: 
+#        - config: OT_AvenCity_FULL1
+#          platform_repo: OT_INTEL_BHS_URI
+#          source_repo: OT_INTEL_SOURCE_URI
+#          template: OT_BHS_TEMPLATE
+#          executer: intel-platforms
+#          platform_ep: "PFR"
        
-       - config: OT_AvenCity_FULL2
-         platform_repo: OT_INTEL_BHS_URI
-         source_repo: OT_INTEL_SOURCE_URI
-         template: OT_BHS_TEMPLATE
-         executer: intel-platforms
-         ami_packs: NIC NVME BRCMRAID MSCCRAID RTP FWUPDATE
-         platform_ep: "ASD ACD IntelSiPack IntelOnDemandSDSiPack"
+#        - config: OT_AvenCity_FULL2
+#          platform_repo: OT_INTEL_BHS_URI
+#          source_repo: OT_INTEL_SOURCE_URI
+#          template: OT_BHS_TEMPLATE
+#          executer: intel-platforms
+#          ami_packs: NIC NVME BRCMRAID MSCCRAID RTP FWUPDATE
+#          platform_ep: "ASD ACD IntelSiPack IntelOnDemandSDSiPack"
          
-       - config: OT_ArcherCity_FULL1 
-         platform_repo: OT_INTEL_EGS_URI
-         source_repo: OT_INTEL_SOURCE_URI
-         template: OT_EGS_TEMPLATE
-         executer: intel-platforms
-         platform_ep: "PFR"
+#        - config: OT_ArcherCity_FULL1 
+#          platform_repo: OT_INTEL_EGS_URI
+#          source_repo: OT_INTEL_SOURCE_URI
+#          template: OT_EGS_TEMPLATE
+#          executer: intel-platforms
+#          platform_ep: "PFR"
        
-       - config: OT_ArcherCity_FULL2 
-         platform_repo: OT_INTEL_EGS_URI
-         source_repo: OT_INTEL_SOURCE_URI
-         template: OT_EGS_TEMPLATE 
-         executer: intel-platforms
-         ami_packs: NIC NVMEBASIC BRCMRAID MSCCRAID RTP FWUPDATE
-         platform_ep: "IntelSiPack IntelOnDemandSDSiPack"
-         pre_options: IPERF3
+#        - config: OT_ArcherCity_FULL2 
+#          platform_repo: OT_INTEL_EGS_URI
+#          source_repo: OT_INTEL_SOURCE_URI
+#          template: OT_EGS_TEMPLATE 
+#          executer: intel-platforms
+#          ami_packs: NIC NVMEBASIC BRCMRAID MSCCRAID RTP FWUPDATE
+#          platform_ep: "IntelSiPack IntelOnDemandSDSiPack"
+#          pre_options: IPERF3
       
-       - config: OT_ArcherCity_FULL3
-         platform_repo: OT_INTEL_EGS_URI
-         source_repo: OT_INTEL_SOURCE_URI
-         template: OT_EGS_TEMPLATE 
-         executer: intel-platforms
-         ami_packs: NIC NVME BRCMRAID MSCCRAID FWUPDATE
-         platform_ep: IntelSiPack IntelOnDemandSDSiPack
-         pre_options: IPERF3 SPDM
+#        - config: OT_ArcherCity_FULL3
+#          platform_repo: OT_INTEL_EGS_URI
+#          source_repo: OT_INTEL_SOURCE_URI
+#          template: OT_EGS_TEMPLATE 
+#          executer: intel-platforms
+#          ami_packs: NIC NVME BRCMRAID MSCCRAID FWUPDATE
+#          platform_ep: IntelSiPack IntelOnDemandSDSiPack
+#          pre_options: IPERF3 SPDM
        
-       - config: OT_AST2600EVB_FULL1
-         source_repo: OT_INTEL_SOURCE_URI
-         template: OT_AST2600EVB_TEMPLATE
-         ami_packs: "FWUPDATE NIC NVME BRCMRAID"
-         executer: obmc-phosphor-image
-         pre_options: BrcmRaidI2cMode
+#        - config: OT_AST2600EVB_FULL1
+#          source_repo: OT_INTEL_SOURCE_URI
+#          template: OT_AST2600EVB_TEMPLATE
+#          ami_packs: "FWUPDATE NIC NVME BRCMRAID"
+#          executer: obmc-phosphor-image
+#          pre_options: BrcmRaidI2cMode
       
-       - config: OT_AST2600EVB_FULL2
-         source_repo: OT_INTEL_SOURCE_URI
-         template: OT_AST2600EVB_TEMPLATE
-         ami_packs: "FWUPDATE NIC NVME BRCMPCIESW RTP"
-         executer: obmc-phosphor-image
-         pre_options: BrcmRaidI2cMode
+#        - config: OT_AST2600EVB_FULL2
+#          source_repo: OT_INTEL_SOURCE_URI
+#          template: OT_AST2600EVB_TEMPLATE
+#          ami_packs: "FWUPDATE NIC NVME BRCMPCIESW RTP"
+#          executer: obmc-phosphor-image
+#          pre_options: BrcmRaidI2cMode
       
-       - config: OT_AST2600EVB_FULL3
-         source_repo: OT_INTEL_SOURCE_URI
-         template: OT_AST2600EVB_TEMPLATE
-         ami_packs: "FWUPDATE NIC NVME BRCMPCIESW RTP"
-         executer: obmc-phosphor-image
-         pre_options: BrcmRaidI2cMode SoftwareSecureBoot HardwareSecureBoot
+#        - config: OT_AST2600EVB_FULL3
+#          source_repo: OT_INTEL_SOURCE_URI
+#          template: OT_AST2600EVB_TEMPLATE
+#          ami_packs: "FWUPDATE NIC NVME BRCMPCIESW RTP"
+#          executer: obmc-phosphor-image
+#          pre_options: BrcmRaidI2cMode SoftwareSecureBoot HardwareSecureBoot
   
-       - config: OT_AMD_Truin_FULL1
-         platform_repo: OT_AMD_TRUIN_URI
-         source_repo: OT_INTEL_SOURCE_URI
-         template: OT_AMD_TRUIN_TEMPLATE
-         executer: obmc-phosphor-image
+#        - config: OT_AMD_Truin_FULL1
+#          platform_repo: OT_AMD_TRUIN_URI
+#          source_repo: OT_INTEL_SOURCE_URI
+#          template: OT_AMD_TRUIN_TEMPLATE
+#          executer: obmc-phosphor-image
       
-       - config: OT_Ampere_Mtmitchell_FULL1
-         platform_repo: OT_AMPERE_MITCHELL_URI
-         source_repo: OT_INTEL_SOURCE_URI
-         template: OT_AMPERE_MITCHELL_TEMPLATE
-         executer: obmc-phosphor-image
+#        - config: OT_Ampere_Mtmitchell_FULL1
+#          platform_repo: OT_AMPERE_MITCHELL_URI
+#          source_repo: OT_INTEL_SOURCE_URI
+#          template: OT_AMPERE_MITCHELL_TEMPLATE
+#          executer: obmc-phosphor-image
       
-       - config: OT_Nvidia_GraceHopper_FULL1
-         platform_repo: OT_NVIDIA_GRACEHOPPER_URI
-         source_repo: OT_INTEL_SOURCE_URI
-         template: OT_NVIDIA_GRACEHOPPER_TEMPLATE
-         ami_packs: GPGPU
-         executer: obmc-phosphor-image
+#        - config: OT_Nvidia_GraceHopper_FULL1
+#          platform_repo: OT_NVIDIA_GRACEHOPPER_URI
+#          source_repo: OT_INTEL_SOURCE_URI
+#          template: OT_NVIDIA_GRACEHOPPER_TEMPLATE
+#          ami_packs: GPGPU
+#          executer: obmc-phosphor-image
   
-       - config: OT_Nvidia_MGX_CG1_FULL1
-         platform_repo: OT_NVIDIA_MGX_URI
-         source_repo: OT_INTEL_SOURCE_URI
-         template: OT_NVIDIA_MGX_CG1_TEMPLATE
-         ami_packs: GPGPU
-         executer: obmc-phosphor-image
+#        - config: OT_Nvidia_MGX_CG1_FULL1
+#          platform_repo: OT_NVIDIA_MGX_URI
+#          source_repo: OT_INTEL_SOURCE_URI
+#          template: OT_NVIDIA_MGX_CG1_TEMPLATE
+#          ami_packs: GPGPU
+#          executer: obmc-phosphor-image
   
-       - config: OT_Nvidia_MGX_C2_FULL1
-         platform_repo: OT_NVIDIA_MGX_URI
-         source_repo: OT_INTEL_SOURCE_URI
-         template: OT_NVIDIA_MGX_C2_TEMPLATE
-         ami_packs: GPGPU
-         executer: obmc-phosphor-image
+#        - config: OT_Nvidia_MGX_C2_FULL1
+#          platform_repo: OT_NVIDIA_MGX_URI
+#          source_repo: OT_INTEL_SOURCE_URI
+#          template: OT_NVIDIA_MGX_C2_TEMPLATE
+#          ami_packs: GPGPU
+#          executer: obmc-phosphor-image
      
 
-scheduled_deploy_onetree:
-  stage: deploy
-  script:
-    - outdir=v"$(date -d "$CI_PIPELINE_CREATED_AT" +"%Y%m%d")"
-    - echo $(pwd)
-    - ls -la $(pwd)/output
-    - rm -rf output/OT_All* output/OT_CORE* output/OT_AMI*
-    - destiny=/DATA/megarac/sftp/megarac/megarac/images/OneTree/${outdir}/
-    - echo $destiny
-# Check if Image already exist , if yes remove old and upload new image
-    - LABEL_LIST=( $(ls output) )
-    - LABEL_NAME=${LABEL_LIST[0]}
-    - ls -la output
-    - |
-      for label in "${LABEL_LIST[@]}"
-        do
-          findstr="Tasks Summary: Attempted [0-9]+ tasks of which [0-9]+ didn't need to be rerun and all succeeded."
-          log_file=$(pwd)/output/${label}/INFO_AND_LOG/Build_log.log
-          ls -la $(pwd)/output/${label}/INFO_AND_LOG
-          if [[ -f "$log_file" ]]; then
-            if ! grep -qE "$findstr" "$log_file"; then
-              rm -rf $(pwd)/output/$label
-            else
-              find $(pwd)/output/$label/images -maxdepth 5 -type f -ls >> $(pwd)/output/${label}/INFO_AND_LOG/${label}_files.log
-            fi
-          fi
-          if sshpass -p $DEVLAB_SFTP_PASS ssh root@devlab.ami.com.tw -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 12345 "[ -d ${destiny}/${label} ]"; then
-            sshpass -p $DEVLAB_SFTP_PASS ssh root@devlab.ami.com.tw -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 12345 "rm -rf ${destiny}/${label}";
-          fi
-        done
-    - curl --location --output OneTree.xlsx --request GET -g --header "PRIVATE-TOKEN:$GPASS" "https://git.ami.com/api/v4/projects/12196/repository/files/BuildNotes%2FOneTree.xlsx/raw?ref=main"
-    - cp -r OneTree.xlsx $(pwd)/output/
-    - ls -la $(pwd)/output
-    - sshpass -p $DEVLAB_SFTP_PASS ssh root@devlab.ami.com.tw -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 12345 "mkdir -p ${destiny}"
-    - sshpass -p $DEVLAB_SFTP_PASS scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P 12345 -r output/* root@devlab.ami.com.tw:${destiny}
-    - sshpass -p $DEVLAB_SFTP_PASS ssh root@devlab.ami.com.tw -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 12345 "ls -lat ${destiny}";
-    - echo $CI_COMMIT_REF_NAME
-    - rm -rf $(pwd)/output/*
-    - echo "-------------------"
-    - ls -la $(pwd)/output
-    - echo "-------------------"
-  tags:
-    - spx-daily-build
-  only:
-    refs:
-      - schedules
-    variables:
-      - '("main" == $CI_COMMIT_REF_NAME)'
-  dependencies:
-    ['daily_build_onetree']
-  timeout: 4h 00m
+# scheduled_deploy_onetree:
+#   stage: deploy
+#   script:
+#     - outdir=v"$(date -d "$CI_PIPELINE_CREATED_AT" +"%Y%m%d")"
+#     - echo $(pwd)
+#     - ls -la $(pwd)/output
+#     - rm -rf output/OT_All* output/OT_CORE* output/OT_AMI*
+#     - destiny=/DATA/megarac/sftp/megarac/megarac/images/OneTree/${outdir}/
+#     - echo $destiny
+# # Check if Image already exist , if yes remove old and upload new image
+#     - LABEL_LIST=( $(ls output) )
+#     - LABEL_NAME=${LABEL_LIST[0]}
+#     - ls -la output
+#     - |
+#       for label in "${LABEL_LIST[@]}"
+#         do
+#           findstr="Tasks Summary: Attempted [0-9]+ tasks of which [0-9]+ didn't need to be rerun and all succeeded."
+#           log_file=$(pwd)/output/${label}/INFO_AND_LOG/Build_log.log
+#           ls -la $(pwd)/output/${label}/INFO_AND_LOG
+#           if [[ -f "$log_file" ]]; then
+#             if ! grep -qE "$findstr" "$log_file"; then
+#               rm -rf $(pwd)/output/$label
+#             else
+#               find $(pwd)/output/$label/images -maxdepth 5 -type f -ls >> $(pwd)/output/${label}/INFO_AND_LOG/${label}_files.log
+#             fi
+#           fi
+#           if sshpass -p $DEVLAB_SFTP_PASS ssh root@devlab.ami.com.tw -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 12345 "[ -d ${destiny}/${label} ]"; then
+#             sshpass -p $DEVLAB_SFTP_PASS ssh root@devlab.ami.com.tw -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 12345 "rm -rf ${destiny}/${label}";
+#           fi
+#         done
+#     - curl --location --output OneTree.xlsx --request GET -g --header "PRIVATE-TOKEN:$GPASS" "https://git.ami.com/api/v4/projects/12196/repository/files/BuildNotes%2FOneTree.xlsx/raw?ref=main"
+#     - cp -r OneTree.xlsx $(pwd)/output/
+#     - ls -la $(pwd)/output
+#     - sshpass -p $DEVLAB_SFTP_PASS ssh root@devlab.ami.com.tw -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 12345 "mkdir -p ${destiny}"
+#     - sshpass -p $DEVLAB_SFTP_PASS scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P 12345 -r output/* root@devlab.ami.com.tw:${destiny}
+#     - sshpass -p $DEVLAB_SFTP_PASS ssh root@devlab.ami.com.tw -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 12345 "ls -lat ${destiny}";
+#     - echo $CI_COMMIT_REF_NAME
+#     - rm -rf $(pwd)/output/*
+#     - echo "-------------------"
+#     - ls -la $(pwd)/output
+#     - echo "-------------------"
+#   tags:
+#     - spx-daily-build
+#   only:
+#     refs:
+#       - schedules
+#     variables:
+#       - '("main" == $CI_COMMIT_REF_NAME)'
+#   dependencies:
+#     ['daily_build_onetree']
+#   timeout: 4h 00m
 
 
 revision_update:
   stage: revison_sync
   script:
-    - if [ -z "$source_repo" ]; then echo "Revision update job related parallel matrix not configured in this project !!"; exit 0; fi
-    - src_url=${!source_repo}
-    - repo_name=${src_url##*/}
-    - if [[ $source_branch ]]; then src_branch=$source_branch; else src_branch=$CI_COMMIT_REF_NAME; fi
-    - echo $src_branch
-    - rm -rf $repo_name
-    - git clone ${src_url} --branch $src_branch
-    - sync_workspace=`realpath $repo_name`
-    - cd $repo_name
-    - echo "==> sync_workspace $sync_workspace"
-    - echo "==> repo_name $repo_name"
-    - echo "==> CI PROJECT URL $CI_PROJECT_URL"
-    - git status
-    - git config --global user.email "$GUSER@ami.com"
-    - git config --global user.name "$GUSER"
-    - mapfile -t recipes_list < <(grep -r git.ami.com/ --exclude-dir=".*" --include="*.bb*" $sync_workspace)
-    - |
-      for recipe in "${recipes_list[@]}"; 
-        do
-          filepath=${recipe%%:*}
-          line="${recipe#*:}"
-          repo_url=$(echo $line | sed -n 's/.*git@\([^;]*\).*/\1/p; s/.*git:\/\/\([^;]*\).*/\1/p')
-          git_auth_url=https://$GUSER:$GPASS@$repo_url
-          recipe_name=${repo_url##*/}
-          recipe_name=$(basename "$repo_url" .git)
-          echo "$project_name"
-          echo "================================================"
-          echo "==> Filepath $filepath"
-          echo "==> Line $line"
-          echo "==> REPO URL ${repo_url}"
+    # - export GPASS=$GPASS
+    - utilities_scripts=https://${GUSER}:${GPASS}@git.ami.com/tools/megarac/ci-utils
+    - entrypoint_dir=$(pwd)
+    - git clone ${utilities_scripts} --branch main utils_scripts
+    - cd utils_scripts/ot
+    - pip install -r requirements.txt
+    - python3 identify_recipe_by_src.py ${OT_GROUP_ID} $CI_PROJECT_URL
+    - echo $pwd
+    - ls -lat
+    
+    # - sync_workspace=`realpath $repo_name`
+    # - cd $repo_name
+    # - echo "==> sync_workspace $sync_workspace"
+    # - echo "==> repo_name $repo_name"
+    # - echo "==> CI PROJECT URL $CI_PROJECT_URL"
+    # - git status
+    # - git config --global user.email "$GUSER@ami.com"
+    # - git config --global user.name "$GUSER"
+    # - mapfile -t recipes_list < <(grep -r git.ami.com/ --exclude-dir=".*" --include="*.bb*" $sync_workspace)
+    # - |
+    #   for recipe in "${recipes_list[@]}"; 
+    #     do
+    #       filepath=${recipe%%:*}
+    #       line="${recipe#*:}"
+    #       repo_url=$(echo $line | sed -n 's/.*git@\([^;]*\).*/\1/p; s/.*git:\/\/\([^;]*\).*/\1/p')
+    #       git_auth_url=https://$GUSER:$GPASS@$repo_url
+    #       recipe_name=${repo_url##*/}
+    #       recipe_name=$(basename "$repo_url" .git)
+    #       echo "$project_name"
+    #       echo "================================================"
+    #       echo "==> Filepath $filepath"
+    #       echo "==> Line $line"
+    #       echo "==> REPO URL ${repo_url}"
 
-          if [ -z $repo_url ]; then  
-            echo "==> Invalid URL/Findiing...ignoring"
-            continue
-          fi
+    #       if [ -z $repo_url ]; then  
+    #         echo "==> Invalid URL/Findiing...ignoring"
+    #         continue
+    #       fi
 
-          if git ls-remote -q "$git_auth_url" &>/dev/null; then
-            echo "==> Receipe Repo URL Valid"
+    #       if git ls-remote -q "$git_auth_url" &>/dev/null; then
+    #         echo "==> Receipe Repo URL Valid"
             
-            if [[ https://$repo_url =~ $CI_PROJECT_URL ]]; then
-              echo "************************************************"
-              orginal_commit_id=( $(git rev-parse HEAD))
-              echo "==> Found a Match"
-              echo "==> Old Commit id $orginal_commit_id"
-              echo "==> Previewing before making change "
-              cat ${filepath}
+    #         if [[ https://$repo_url =~ $CI_PROJECT_URL ]]; then
+    #           echo "************************************************"
+    #           orginal_commit_id=( $(git rev-parse HEAD))
+    #           echo "==> Found a Match"
+    #           echo "==> Old Commit id $orginal_commit_id"
+    #           echo "==> Previewing before making change "
+    #           cat ${filepath}
 
-              if grep -q '^SRCREV_FORMAT' $filepath; then
-                srcrev_format=$(grep '^SRCREV_FORMAT' $filepath | awk -F'=' '{print $2}' | tr -d '"')
-              else
-                  echo "SRCREV_FORMAT not found"
-              fi
-              echo $srcrev_format
-              if [[ $srcrev_format =~ "override" ]]; then
-                echo "====> Updating SRCREV OVERRIDE "
-                sed -i "s/^SRCREV_override = \".*\"/SRCREV_override = \"$CI_COMMIT_SHA\"/" $filepath
-              else
-                echo "====> Updating SRCREV"
-                sed -i "s/^SRCREV = \".*\"/SRCREV = \"$CI_COMMIT_SHA\"/" $filepath
-              fi
-              echo "************************************************"
-              echo "==> Previewing after making change "
-              cat ${filepath}
-              echo "************************************************"
-              cd $sync_workspace
-              echo "===> GIT STATUS"
-              git status
-              if git diff --exit-code $filepath >/dev/null; then
-                echo "=====> No changes in the file"
-              else
-                echo "===> GIT Adding and Pushing"
-                git add $filepath
-                git commit -m "Auto revision update by recipe $recipe_name"
-                new_commit_id=( $(git rev-parse HEAD))
-                echo "==> New Commit id $new_commit_id"
-                if [[ $orginal_commit_id == $new_commit_id ]]; then
-                  echo -e "Nothing to commit !! No Change dedected";
-                else
-                  echo -e "Commit Created successfully !!";
-                  git log -1
-                  echo -e "\n==> Previewing after making change "
-                  echo "-------------------------------------------------------"
-                  cat ${filepath}
-                  echo "-------------------------------------------------------"
-                  git push origin $src_branch
-                  echo "==> Changes Pushed !!"
-                fi
-              fi
+    #           if grep -q '^SRCREV_FORMAT' $filepath; then
+    #             srcrev_format=$(grep '^SRCREV_FORMAT' $filepath | awk -F'=' '{print $2}' | tr -d '"')
+    #           else
+    #               echo "SRCREV_FORMAT not found"
+    #           fi
+    #           echo $srcrev_format
+    #           if [[ $srcrev_format =~ "override" ]]; then
+    #             echo "====> Updating SRCREV OVERRIDE "
+    #             sed -i "s/^SRCREV_override = \".*\"/SRCREV_override = \"$CI_COMMIT_SHA\"/" $filepath
+    #           else
+    #             echo "====> Updating SRCREV"
+    #             sed -i "s/^SRCREV = \".*\"/SRCREV = \"$CI_COMMIT_SHA\"/" $filepath
+    #           fi
+    #           echo "************************************************"
+    #           echo "==> Previewing after making change "
+    #           cat ${filepath}
+    #           echo "************************************************"
+    #           cd $sync_workspace
+    #           echo "===> GIT STATUS"
+    #           git status
+    #           if git diff --exit-code $filepath >/dev/null; then
+    #             echo "=====> No changes in the file"
+    #           else
+    #             echo "===> GIT Adding and Pushing"
+    #             git add $filepath
+    #             git commit -m "Auto revision update by recipe $recipe_name"
+    #             new_commit_id=( $(git rev-parse HEAD))
+    #             echo "==> New Commit id $new_commit_id"
+    #             if [[ $orginal_commit_id == $new_commit_id ]]; then
+    #               echo -e "Nothing to commit !! No Change dedected";
+    #             else
+    #               echo -e "Commit Created successfully !!";
+    #               git log -1
+    #               echo -e "\n==> Previewing after making change "
+    #               echo "-------------------------------------------------------"
+    #               cat ${filepath}
+    #               echo "-------------------------------------------------------"
+    #               git push origin $src_branch
+    #               echo "==> Changes Pushed !!"
+    #             fi
+    #           fi
               
-            fi
-          else
-             echo "==> Receipe Repo URL Invalid"
-          fi
-          echo "================================================"
-        done
+    #         fi
+    #       else
+    #          echo "==> Receipe Repo URL Invalid"
+    #       fi
+    #       echo "================================================"
+    #     done
     - echo "Update completed" 
   tags:
     - $runner_tag
   only:
     variables:
-      - '"main" == $CI_COMMIT_REF_NAME'
+      - '"msg-tools-revision-sync-test" == $CI_COMMIT_REF_NAME'
   except:
     - schedules
   image:
