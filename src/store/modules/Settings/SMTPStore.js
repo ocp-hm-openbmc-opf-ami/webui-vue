@@ -140,7 +140,7 @@ const SmtpStore = {
       return await api
         .get('/redfish/v1/EventService')
         .then((response) => {
-          commit('setSmtpData', response.data.Oem.SMTP);
+          commit('setSmtpData', response.data.Oem.OpenBmc.SMTP);
         })
         .catch((error) => console.log(error));
     },

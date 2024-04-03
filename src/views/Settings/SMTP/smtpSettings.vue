@@ -941,9 +941,11 @@ export default {
       console.log('recipientEmailAddress', this.primary.recipientEmailAddress);
       let data = {
         Oem: {
-          SMTP: {
-            PrimaryConfiguration: { Enable: false },
-            SecondaryConfiguration: { Enable: false },
+          OpenBmc: {
+            SMTP: {
+              PrimaryConfiguration: { Enable: false },
+              SecondaryConfiguration: { Enable: false },
+            },
           },
         },
       };
@@ -972,7 +974,7 @@ export default {
           primaryConfig.UserName = this.primary.username;
           primaryConfig.Password = this.primary.password;
         }
-        data.Oem.SMTP.PrimaryConfiguration = primaryConfig;
+        data.Oem.OpenBmc.SMTP.PrimaryConfiguration = primaryConfig;
       }
       if (this.secondary.enableConfiguration) {
         let recipientMail = [];
@@ -999,7 +1001,7 @@ export default {
           secondaryConfig.UserName = this.secondary.username;
           secondaryConfig.Password = this.secondary.password;
         }
-        data.Oem.SMTP.SecondaryConfiguration = secondaryConfig;
+        data.Oem.OpenBmc.SMTP.SecondaryConfiguration = secondaryConfig;
       }
 
       this.startLoader();
