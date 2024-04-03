@@ -1155,6 +1155,7 @@
         "snmpProtocolV3": "SNMPv3",
         "addSubscrition": "Abonnement hinzufügen",
         "editSubscrition": "Abonnement bearbeiten",
+        "sendTestTrap": "Testfalle senden",
         "modal": {
             "destination": "Ziel",
             "subscriptionType": "Abonnementtyp",
@@ -1181,7 +1182,9 @@
             "errorUpdatingAuthenticationProtocal": "Fehler beim Aktualisieren des AuthenticationProtocol",
             "successInAddSubscription": "SNMPTrap erfolgreich hinzugefügt",
             "successInDeleteSubscription": "SNMPTrap wurde erfolgreich gelöscht",
-            "successUpdateAuthenticationProtocal": "AuthenticationProtocol erfolgreich aktualisiert"
+            "successUpdateAuthenticationProtocal": "AuthenticationProtocol erfolgreich aktualisiert",
+            "successMsgTestTrap": "Test Trap Versand erfolgreich",
+            "errorMsgAlert": "Fehler beim Senden des Test-Traps"
         }
     },
     "pageSmtp": {
@@ -1303,6 +1306,8 @@
             "errorPasswordHistory": "Fehler beim Ändern des Passwortverlaufs.",
             "errorSSDPDisabled": "Fehler beim Deaktivieren der SSDP Sicherheitseinstellung.",
             "errorSSDPEnabled": "Fehler beim Aktivieren der SSDP Sicherheitseinstellung.",
+            "errorSNMPDisabled": "Fehler beim Deaktivieren der SNMP Sicherheitseinstellung.",
+            "errorSNMPEnabled": "Fehler beim Aktivieren der SNMP Sicherheitseinstellung.",
             "successIpmiDisabled": "IPMI Sicherheitseinstellung erfolgreich deaktiviert.",
             "successIpmiEnabled": "IPMI Sicherheitseinstellung erfolgreich aktiviert.",
             "successRtadDisabled": "Die RTAD Sicherheitseinstellung wurde erfolgreich deaktiviert.",
@@ -1321,7 +1326,9 @@
             "successComplexity": "Der Komplexitätswert wurde erfolgreich geändert.",
             "successPasswordHistory": "Der Passwortverlaufswert wurde erfolgreich geändert.",
             "successSSDPDisabled": "SSDP Sicherheitseinstellung erfolgreich deaktiviert.",
-            "successSSDPEnabled": "SSDP Sicherheitseinstellung erfolgreich aktiviert."
+            "successSSDPEnabled": "SSDP Sicherheitseinstellung erfolgreich aktiviert.",
+            "successSNMPDisabled": "SNMP Sicherheitseinstellung erfolgreich deaktiviert.",
+            "successSNMPEnabled": "SNMP Sicherheitseinstellung erfolgreich aktiviert."
         },
         "options": {
             "30minutes": "30 Protokoll",
@@ -1353,7 +1360,10 @@
         "medium": "Mittel",
         "high": "Hoch",
         "configurationPolicies": "Konfigurationen",
-        "servicesPolicies": "Dienstleistungen"
+        "servicesPolicies": "Dienstleistungen",
+        "snmpProtocol": "SNMP",
+        "snmpPortLabel": "SNMP Portwert",
+        "snmpDescription": "Aktivieren des SNMP Protokolls"
     },
     "pagePower": {
         "description": "Legen Sie eine Leistungsobergrenze fest, um den Stromverbrauch auf oder unter dem angegebenen Wert in Watt zu halten",

@@ -1152,6 +1152,7 @@
         "snmpProtocolV3": "SNMPv3",
         "addSubscrition": "添加订阅",
         "editSubscrition": "编辑订阅",
+        "sendTestTrap": "发送测试陷阱",
         "modal": {
             "destination": "目的地",
             "subscriptionType": "订阅类型",
@@ -1178,7 +1179,9 @@
             "errorUpdatingAuthenticationProtocal": "更新身份验证协议时出错",
             "successInAddSubscription": "已成功添加 SNMPTrap",
             "successInDeleteSubscription": "成功删除 SNMPTrap",
-            "successUpdateAuthenticationProtocal": "成功更新身份验证协议"
+            "successUpdateAuthenticationProtocal": "成功更新身份验证协议",
+            "successMsgTestTrap": "测试陷阱发送成功",
+            "errorMsgAlert": "发送测试陷阱时出错"
         }
     },
     "pageSmtp": {
@@ -1300,6 +1303,8 @@
             "errorPasswordHistory": "改面密码历史发生错误",
             "errorSSDPDisabled": "禁用 SSDP 安全设置时出错.",
             "errorSSDPEnabled": "启用 SSDP 安全设置时出错.",
+            "errorSNMPDisabled": "禁用 SNMP 安全设置时出错.",
+            "errorSNMPEnabled": "启用 SNMP 安全设置时出错.",
             "successIpmiDisabled": "停用 IPMI 安全设定成功",
             "successIpmiEnabled": "启用 IPMI 安全设定成功",
             "successRtadDisabled": "停用 RTAD 安全设定成功",
@@ -1318,7 +1323,9 @@
             "successComplexity": "成功改变複杂度数字",
             "successPasswordHistory": "成功改变密码历史数字",
             "successSSDPDisabled": "成功禁用 SSDP 安全设置.",
-            "successSSDPEnabled": "成功启用 SSDP 安全设置."
+            "successSSDPEnabled": "成功启用 SSDP 安全设置.",
+            "successSNMPDisabled": "已成功禁用 SNMP 安全设置.",
+            "successSNMPEnabled": "已成功启用 SNMP 安全设置."
         },
         "options": {
             "30minutes": "30 分钟",
@@ -1350,7 +1357,10 @@
         "medium": "中",
         "high": "高",
         "configurationPolicies": "配置",
-        "servicesPolicies": "服务"
+        "servicesPolicies": "服务",
+        "snmpProtocol": "SNMP",
+        "snmpPortLabel": "SNMP 端口值",
+        "snmpDescription": "启用 SNMP 协议"
     },
     "pagePower": {
         "description": "设置电源上限以使功耗保持在或低于指定值",

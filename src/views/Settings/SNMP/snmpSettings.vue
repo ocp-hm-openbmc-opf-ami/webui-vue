@@ -5,6 +5,14 @@
       <b-col xl="9" class="text-right">
         <b-button
           variant="primary"
+          class="mr-2"
+          data-test-id="alertDestination-button-sendTestTrap"
+          @click="sendTestTrap"
+        >
+          {{ $t('pageSnmp.sendTestTrap') }}
+        </b-button>
+        <b-button
+          variant="primary"
           data-test-id="userManagement-button-addUser"
           @click="initModalSNMP(null)"
         >
@@ -237,6 +245,14 @@ export default {
           snmpId: row.Id,
         })
         .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => this.endLoader());
+    },
+    sendTestTrap() {
+      this.startLoader();
+      this.$store
+        .dispatch('snmp/sendTestTrap')
+        .then((success) => this.successToast(success))
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.endLoader());
     },

@@ -121,6 +121,14 @@ const SnmpStore = {
           );
         });
     },
+    async sendTestTrap() {
+      return await api
+        .post('/redfish/v1/PefService/Actions/PefService.SendAlertSNMPTrap')
+        .then(() => i18n.t('pageSnmp.toast.successMsgTestTrap'))
+        .catch(() => {
+          throw new Error(i18n.t('pageSnmp.toast.errorMsgAlert'));
+        });
+    },
   },
 };
 

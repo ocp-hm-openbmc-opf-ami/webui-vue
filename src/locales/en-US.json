@@ -1156,6 +1156,7 @@
         "snmpProtocolV3": "SNMPv3",
         "addSubscrition": "Add Subscription",
         "editSubscrition": "Edit Subscription",
+        "sendTestTrap": "Send Test Trap",
         "modal": {
             "destination": "Destination",
             "subscriptionType": "Subscription Type",
@@ -1182,7 +1183,9 @@
             "errorUpdatingAuthenticationProtocal": "Error in Updating Authentication Protocol",
             "successInAddSubscription": "Successfully added SNMPTrap",
             "successInDeleteSubscription": "Successfully deleted SNMPTrap",
-            "successUpdateAuthenticationProtocal": "Successfully Updated Authentication Protocol"
+            "successUpdateAuthenticationProtocal": "Successfully Updated Authentication Protocol",
+            "successMsgTestTrap": "Test Trap send successfully",
+            "errorMsgAlert": "Error in sending test Trap"
         }
     },
     "pageSmtp": {
@@ -1328,6 +1331,8 @@
             "errorPasswordHistory": "Error in changing password history.",
             "errorSSDPDisabled": "Error disabling SSDP security setting.",
             "errorSSDPEnabled": "Error enabling SSDP security setting.",
+            "errorSNMPDisabled": "Error disabling SNMP security setting.",
+            "errorSNMPEnabled": "Error enabling SNMP security setting.",
             "successIpmiDisabled": "Successfully disabled IPMI security setting.",
             "successIpmiEnabled": "Successfully enabled IPMI security setting.",
             "successRtadDisabled": "Successfully disabled RTAD security setting.",
@@ -1346,7 +1351,9 @@
             "successComplexity": "Successfully changed the complexity value.",
             "successPasswordHistory": "Successfully changed the password history value.",
             "successSSDPDisabled": "Successfully disabled SSDP security setting.",
-            "successSSDPEnabled": "Successfully enabled SSDP security setting."
+            "successSSDPEnabled": "Successfully enabled SSDP security setting.",
+            "successSNMPDisabled": "Successfully disabled SNMP security setting.",
+            "successSNMPEnabled": "Successfully enabled SNMP security setting."
         },
         "options": {
             "30minutes": "30 Minutes",
@@ -1378,7 +1385,10 @@
         "medium": "Medium",
         "high": "High",
         "configurationPolicies": "Configurations",
-        "servicesPolicies": "Services"
+        "servicesPolicies": "Services",
+        "snmpProtocol": "SNMP",
+        "snmpPortLabel": "SNMP Port value",
+        "snmpDescription": "Enabling SNMP Protocol"
     },
     "pagePower": {
         "description": "Set a power cap to keep power consumption at or below the specified value in watts",

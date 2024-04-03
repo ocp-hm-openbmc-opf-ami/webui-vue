@@ -276,6 +276,46 @@
                   </dl>
                 </b-col>
               </b-row>
+              <b-row class="setting-section">
+                <b-col
+                  lg="7"
+                  class="d-flex align-items-center justify-content-between"
+                >
+                  <dl class="mt-3 mr-3 w-75">
+                    <dt>{{ $t('pagePolicies.snmpProtocol') }}</dt>
+                    <dd>{{ $t('pagePolicies.snmpDescription') }}</dd>
+                  </dl>
+                </b-col>
+                <b-col lg="3" class="session-timeout">
+                  <b-form-checkbox
+                    id="snmpSwitch"
+                    v-model="snmpState"
+                    data-test-id="policies-toggle-sol"
+                    switch
+                    @change="changeSNMPState"
+                  >
+                    <span class="sr-only">
+                      {{ $t('pagePolicies.snmpProtocol') }}
+                    </span>
+                    <span v-if="snmpState">
+                      {{ $t('global.status.enabled') }}
+                    </span>
+                    <span v-else>{{ $t('global.status.disabled') }}</span>
+                  </b-form-checkbox>
+                </b-col>
+              </b-row>
+              <b-row v-if="snmpState" class="setting-section">
+                <b-col cols="3" class="d-flex align-items-center">
+                  <dl class="mt-3 mr-4 w-75">
+                    <dt>
+                      <b>{{ $t('pagePolicies.snmpPortLabel') }}</b>
+                    </dt>
+                    <dd>
+                      {{ snmpPortValue }}
+                    </dd>
+                  </dl>
+                </b-col>
+              </b-row>
             </page-section>
           </b-col>
         </b-row>
@@ -478,6 +518,17 @@ export default {
         return newValue;
       },
     },
+    snmpState: {
+      get() {
+        return this.$store.getters['policies/snmpProtocolEnabled'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    snmpPortValue() {
+      return this.$store.getters['policies/snmpPortValue'];
+    },
     solSshPortValueState: {
       get() {
         return this.$store.getters['policies/solSshPortValue'];
@@ -600,6 +651,12 @@ export default {
           'policies/savePasswordHistory',
           parseInt(this.passwordHistoryState)
         )
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
+    changeSNMPState(state) {
+      this.$store
+        .dispatch('policies/saveSnmpProtocolState', state ? true : false)
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
