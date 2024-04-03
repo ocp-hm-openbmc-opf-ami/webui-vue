@@ -1591,7 +1591,7 @@
             "deleteConfirmationTitle": "刪除邏輯設備。"
         },
         "toast": {
-            "successCreateLogicalDevice": "邏輯設備創建成功",
+            "successCreateLogicalDevice": "邏輯設備創建成功。请等待几秒钟并刷新应用程序以查看更改。",
             "errorCreateLogicalDevice": "建立邏輯設備錯誤",
             "errorRaidDeviceNotPresent": "RAID 設備不存在。",
             "errorRaidCtrlIdInvalid": "RAID 控制器 ID 無效。",
@@ -1601,7 +1601,7 @@
             "errorRaidUnsupportedPhysicalDev": "不支援的 RAID 實體設備。",
             "errorRaidUnsupportedLogicalDev": "不支援的 RAID 邏輯設備。",
             "errorRaidControllerBusy": "Raid 控制器正忙，無法處理指令。",
-            "successDeleteLogicalDevice": "成功刪除邏輯設備",
+            "successDeleteLogicalDevice": "成功刪除邏輯設備。请等待几秒钟并刷新应用程序以查看更改。",
             "errorDeleteLogicalDevice": "刪除邏輯設備時出錯",
             "errorNumberOfDrivesValidation": "驅動器數量不應高於未配置的物理設備數量！",
             "errorMinMaxSpanDepth":"最小和最大跨度深度均為 2。",

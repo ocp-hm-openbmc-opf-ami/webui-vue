@@ -1593,7 +1593,7 @@
             "deleteConfirmationTitle": "Logisches Gerät löschen."
         },
         "toast": {
-            "successCreateLogicalDevice": "Logisches Gerät erfolgreich erstellt",
+            "successCreateLogicalDevice": "Logisches Gerät erfolgreich erstellt. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
             "errorCreateLogicalDevice": "Fehler beim Erstellen des logischen Geräts",
             "errorRaidDeviceNotPresent": "RAID-Gerät nicht vorhanden.",
             "errorRaidCtrlIdInvalid": "Ungültige RAID-Controller-ID.",
@@ -1603,7 +1603,7 @@
             "errorRaidUnsupportedPhysicalDev": "Nicht unterstütztes physisches RAID-Gerät.",
             "errorRaidUnsupportedLogicalDev": "Nicht unterstütztes logisches RAID-Gerät.",
             "errorRaidControllerBusy": "Der Raid-Controller ist beschäftigt und der Befehl konnte nicht verarbeitet werden.",
-            "successDeleteLogicalDevice": "Das logische Gerät wurde erfolgreich gelöscht.",
+            "successDeleteLogicalDevice": "Das logische Gerät wurde erfolgreich gelöscht. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
             "errorDeleteLogicalDevice": "Fehler beim Löschen des logischen Geräts.",
             "errorNumberOfDrivesValidation": "Die Anzahl der Laufwerke sollte nicht höher sein als die Anzahl der nicht konfigurierten physischen Geräte!",
             "errorMinMaxSpanDepth":"Die minimale und maximale Spanntiefe beträgt 2.",

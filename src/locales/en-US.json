@@ -1618,7 +1618,7 @@
             "deleteConfirmationTitle": "Delete logical device."
         },
         "toast": {
-            "successCreateLogicalDevice": "Successfully Created Logical Device",
+            "successCreateLogicalDevice": "Successfully Created Logical Device. Please wait for few seconds and refresh the application to see the changes.",
             "errorCreateLogicalDevice": "Error in Creating Logical Device",
             "errorRaidDeviceNotPresent": "RAID Device not present.",
             "errorRaidCtrlIdInvalid": "Invalid RAID Controller ID.",
@@ -1628,7 +1628,7 @@
             "errorRaidUnsupportedPhysicalDev": "Unsupported RAID Physical Device.",
             "errorRaidUnsupportedLogicalDev": "Unsupported RAID Logical device.",
             "errorRaidControllerBusy": "Raid Controller is Busy and command could not be processed.",
-            "successDeleteLogicalDevice": "Successfully deleted the Logical Device.",
+            "successDeleteLogicalDevice": "Successfully deleted the Logical Device. Please wait for few seconds and refresh the application to see the changes.",
             "errorDeleteLogicalDevice": "Error in deleting the Logical Device.",
             "errorNumberOfDrivesValidation": "Number of Drives count should not higher than UnConfigured Physical Device count!",
             "errorMinMaxSpanDepth": "The minimum and maximum Span Depth is 2.",

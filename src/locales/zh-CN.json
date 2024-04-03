@@ -1590,7 +1590,7 @@
             "deleteConfirmationTitle": "删除逻辑设备。"
         },
         "toast": {
-            "successCreateLogicalDevice": "逻辑设备创建成功",
+            "successCreateLogicalDevice": "逻辑设备创建成功. 请等待几秒钟并刷新应用程序以查看更改。",
             "errorCreateLogicalDevice": "创建逻辑设备出错",
             "errorRaidDeviceNotPresent": "RAID 设备不存在。",
             "errorRaidCtrlIdInvalid": "RAID 控制器 ID 无效。",
@@ -1600,7 +1600,7 @@
             "errorRaidUnsupportedPhysicalDev": "不支持的 RAID 物理设备。",
             "errorRaidUnsupportedLogicalDev": "不支持的 RAID 逻辑设备。",
             "errorRaidControllerBusy": "Raid 控制器正忙，无法处理命令。",
-            "successDeleteLogicalDevice": "已成功删除逻辑设备。",
+            "successDeleteLogicalDevice": "已成功删除逻辑设备。请等待几秒钟并刷新应用程序以查看更改。",
             "errorDeleteLogicalDevice": "删除逻辑设备时出错",
             "errorNumberOfDrivesValidation": "驱动器数量不应高于未配置的物理设备数量！",
             "errorMinMaxSpanDepth":"最小和最大跨度深度均为 2。",
