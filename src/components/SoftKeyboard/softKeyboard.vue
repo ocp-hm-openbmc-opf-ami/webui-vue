@@ -3,7 +3,12 @@
     <div class="mb-2 mt-2">
       <b-dropdown variant="link" :disabled="dropdownStatus">
         <template #button-content>
-          <span class="responsive-text">{{ selectKeyboardLanguage }}</span>
+          <span class="responsive-text">
+            <icon-keyboard
+              v-if="selectKeyboardLanguage == 'Open Soft Keyboard'"
+            />
+            {{ selectKeyboardLanguage }}</span
+          >
         </template>
         <b-dropdown-item
           v-for="(languageName, index) in softKeyBoardLanguages"
@@ -37,10 +42,11 @@ import Keyboard from 'simple-keyboard';
 import 'simple-keyboard/build/css/index.css';
 import layoutValues from './keyboardLayouts';
 import IconClose from '@carbon/icons-vue/es/close/20';
+import IconKeyboard from '@carbon/icons-vue/es/keyboard/20';
 
 export default {
   name: 'KvmSoftKeyboard',
-  components: { IconClose },
+  components: { IconClose, IconKeyboard },
   data: () => ({
     ctlBtnStatus: false,
     altBtnStatus: false,
@@ -51,7 +57,7 @@ export default {
     keyboardControlPad: null,
     keyboardArrows: null,
     showSoftKeyboard: false,
-    selectKeyboardLanguage: 'Open Softkeyboard',
+    selectKeyboardLanguage: 'Open Soft Keyboard',
     softKeyBoardLanguages: [
       'English',
       'Italian',
@@ -77,12 +83,12 @@ export default {
     },
     closeSoftKeyboard() {
       this.showSoftKeyboard = false;
-      this.selectKeyboardLanguage = 'Soft Keyboard';
+      this.selectKeyboardLanguage = 'Open Soft Keyboard';
       this.$root.$emit('reset-keyboard-location');
     },
     changeKeyboardLanguage(name, val) {
       if (this.selectKeyboardLanguage == name) {
-        this.selectKeyboardLanguage = 'Soft Keyboard';
+        this.selectKeyboardLanguage = 'Open Soft Keyboard';
         this.showSoftKeyboard = false;
       } else {
         this.showSoftKeyboard = true;
