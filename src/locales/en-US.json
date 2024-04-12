@@ -1587,7 +1587,7 @@
         "initStateOptions": {
             "noInitialization": "No Initialization",
             "quickInitialization": "Quick Initialization",
-            "fastInitialization": "Fast Initialization"
+            "fullInitialization": "Full Initialization"
         },
         "readPolicyOptions": {
             "noReadAhead": "No Read Ahead",

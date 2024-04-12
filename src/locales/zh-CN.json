@@ -1559,7 +1559,7 @@
         "initStateOptions": {
             "noInitialization": "无初始化",
             "quickInitialization": "快速初始化",
-            "fastInitialization": "快速初始化"
+            "fullInitialization": "完全初始化"
         },
         "readPolicyOptions": {
             "noReadAhead": "没有预读",
