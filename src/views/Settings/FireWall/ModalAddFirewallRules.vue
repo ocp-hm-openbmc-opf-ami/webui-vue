@@ -69,6 +69,7 @@
               v-model="form.portStart"
               type="text"
               :state="getValidationState($v.form.portStart)"
+              :disabled="form.protocol == 'ALL'"
               @input="$v.form.portStart.$touch()"
             />
             <b-form-invalid-feedback role="alert">
@@ -91,6 +92,7 @@
               v-model="form.portEnd"
               type="text"
               :state="getValidationState($v.form.portEnd)"
+              :disabled="form.protocol == 'ALL'"
               @input="$v.form.portEnd.$touch()"
             />
             <b-form-invalid-feedback role="alert">
