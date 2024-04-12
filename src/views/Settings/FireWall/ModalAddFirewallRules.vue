@@ -556,12 +556,14 @@ export default {
         this.form.portStart != '' &&
         (this.form.protocol === 'TCP' || this.form.protocol === 'UDP')
       ) {
-        addrules = {
-          StartPort:
-            this.form.portStart != '' ? parseInt(this.form.portStart) : 0,
-          EndPort: this.form.portEnd != '' ? parseInt(this.form.portEnd) : 0,
-        };
+        if (this.form.portStart != '') {
+          addrules.StartPort = parseInt(this.form.portStart);
+        }
+        if (this.form.portEnd != '') {
+          addrules.EndPort = parseInt(this.form.portEnd);
+        }
       }
+
       if (this.form.protocol != '') {
         addrules.Protocol = this.form.protocol;
       }
