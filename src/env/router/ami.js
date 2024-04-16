@@ -40,6 +40,7 @@ import SnmpSettings from '@/views/Settings/SNMP';
 import FireWall from '@/views/Settings/FireWall';
 import CupsConfiguration from '@/views/Settings/CUPS';
 import Bond from '@/views/Settings/Bond';
+import License from '@/views/Settings/License';
 
 const roles = {
   administrator: 'Administrator',
@@ -372,6 +373,14 @@ const routes = [
         component: Bond,
         meta: {
           title: i18n.t('appPageTitle.bond'),
+        },
+      },
+      {
+        path: '/settings/license',
+        name: 'License',
+        component: License,
+        meta: {
+          title: i18n.t('appPageTitle.License'),
         },
       },
     ],

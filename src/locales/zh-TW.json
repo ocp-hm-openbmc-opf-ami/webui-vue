@@ -159,7 +159,8 @@
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "cups": "@:appPageTitle.cups",
-        "bond": "@:appPageTitle.Bond"
+        "bond": "@:appPageTitle.Bond",
+        "license": "@:appPageTitle.License"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -207,7 +208,8 @@
         "backupAndRestore": "備份還原",
         "FireWall": "系統防火牆",
         "cups": "CUPS",
-        "Bond": "網路債券"
+        "Bond": "網路債券",
+        "License": "管理許可證"
     },
     "pageBackupAndRestore": {
         "backup": "備份",
@@ -1675,6 +1677,19 @@
         "errorDelete": "刪除網路綁定時發生錯誤。",
         "errorGetBond": "取得網路綁定時發生錯誤。",
         "miiRangeRequired": "輸入 1-100 之間的有效毫秒"
+    },
+    "license": {
+        "add_license_key": "新增許可證密鑰",
+        "license_key": "註冊碼",
+        "userAlertCount": "用戶警報計數",
+        "userAlertCountPercentage": "用戶警報計數天數",
+        "licenseExpired": "您的模組授權已過期。請更新有效的許可證密鑰",
+        "licensePageLink": "[ 許可證頁面連結。 ]",
+        "userAlertCountRangeRequired": "請輸入有效的計數天數",
+        "toast": {
+            "successSavelicense": "已成功保存許可證。",
+            "errorsavedlicense": "保存許可證時發生錯誤。"
+        }
     },
     "countries": {
         "AF": "阿富汗",

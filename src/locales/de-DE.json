@@ -159,7 +159,8 @@
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "cups": "@:appPageTitle.cups",
-        "bond": "@:appPageTitle.Bond"
+        "bond": "@:appPageTitle.Bond",
+        "license": "@:appPageTitle.License"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -207,7 +208,8 @@
         "backupAndRestore": "Sichern und Wiederherstellen",
         "FireWall": "System-Firewall",
         "cups": "CUPS",
-        "Bond": "Netzwerkbindung"
+        "Bond": "Netzwerkbindung",
+        "License": "Lizenzen verwalten"
     },
     "pageBackupAndRestore": {
         "backup": "Sicherung",
@@ -1678,6 +1680,19 @@
         "errorDelete": "Fehler beim Löschen des Netzwerkbonds.",
         "errorGetBond": "Fehler beim Abrufen von Network Bond.",
         "miiRangeRequired": "Geben Sie gültige Millisekunden zwischen 1 und 100 ein"
+    },
+    "license": {
+        "add_license_key": "Lizenzschlüssel hinzufügen",
+        "license_key": "Lizenzschlüssel",
+        "userAlertCount": "Anzahl der Benutzerwarnungen",
+        "userAlertCountPercentage": "Benutzerwarnungsanzahl in Tagen",
+        "licenseExpired": "Ihre Modullizenz ist abgelaufen. Bitte aktualisieren Sie den gültigen Lizenzschlüssel",
+        "licensePageLink": "[Link zur Lizenzseite. ]",
+        "userAlertCountRangeRequired": "Bitte geben Sie die gültigen Zähltage ein",
+        "toast": {
+            "successSavelicense": "Lizenz erfolgreich gespeichert.",
+            "errorsavedlicense": "Fehler beim Speichern der Lizenz."
+        }
     },
     "countries": {
         "AF": "Afghanistan",

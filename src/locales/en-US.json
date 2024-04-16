@@ -161,7 +161,8 @@
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "cups": "@:appPageTitle.cups",
-        "bond": "@:appPageTitle.Bond"
+        "bond": "@:appPageTitle.Bond",
+        "license": "@:appPageTitle.License"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -210,7 +211,8 @@
         "backupAndRestore": "Backup And Restore",
         "FireWall": "System Firewall",
         "cups": "CUPS",
-        "Bond": "Network Bond"
+        "Bond": "Network Bond",
+        "License": "Manage Licenses"
     },
     "pageBackupAndRestore": {
         "backup": "Backup",
@@ -1703,6 +1705,19 @@
         "errorDelete": "Error deleting Network Bond.",
         "errorGetBond": "Error getting Network Bond.",
         "miiRangeRequired": "Enter valid milliseconds between 1-100"
+    },
+    "license": {
+        "add_license_key": "Add License Key",
+        "license_key": "License Key",
+        "userAlertCount": "User Alert Count",
+        "userAlertCountPercentage": "User Alert Count Days",
+        "licenseExpired": "Your module license expired. Kindly update the valid license key in",
+        "licensePageLink": "[ License Page Link. ]",
+        "userAlertCountRangeRequired": "Kindly enter the valid count days",
+        "toast": {
+            "successSavelicense": "Successfully saved License.",
+            "errorsavedlicense": "Error saved License."
+        }
     },
     "countries": {
         "AF": "Afghanistan",

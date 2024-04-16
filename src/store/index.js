@@ -49,6 +49,7 @@ import SNMPStore from './modules/Settings/SNMPStore';
 import FireWallStore from './modules/Settings/FireWallStore';
 import CupsStore from './modules/Settings/CupsStore';
 import BondStore from './modules/Settings/BondStore';
+import LicenseStore from './modules/Settings/LicenseStore';
 
 Vue.use(Vuex);
 
@@ -104,6 +105,7 @@ export default new Vuex.Store({
     fireWall: FireWallStore,
     cups: CupsStore,
     bond: BondStore,
+    license: LicenseStore,
   },
   plugins: [WebSocketPlugin],
 });

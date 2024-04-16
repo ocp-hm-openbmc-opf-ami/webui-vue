@@ -188,6 +188,11 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.cups'),
               route: '/settings/cups',
             },
+            {
+              id: 'license',
+              label: this.$t('appNavigation.license'),
+              route: '/settings/license',
+            },
           ],
         },
         {

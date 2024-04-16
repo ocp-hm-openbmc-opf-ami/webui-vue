@@ -159,7 +159,8 @@
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "cups": "@:appPageTitle.cups",
-        "bond": "@:appPageTitle.Bond"
+        "bond": "@:appPageTitle.Bond",
+        "license": "@:appPageTitle.License"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -207,7 +208,8 @@
         "backupAndRestore": "备份还原",
         "FireWall": "系统防火墙",
         "cups": "CUPS",
-        "Bond": "网络债券"
+        "Bond": "网络债券",
+        "License": "管理许可证"
     },
     "pageBackupAndRestore": {
         "backup": "备份",
@@ -1674,6 +1676,19 @@
         "errorDelete": "删除网络绑定时出错。",
         "errorGetBond": "获取网络绑定时出错。",
         "miiRangeRequired": "输入 1-100 之间的有效毫秒"
+    },
+    "license": {
+        "add_license_key": "添加许可证密钥",
+        "license_key": "注册码",
+        "userAlertCount": "用户警报计数",
+        "userAlertCountPercentage": "用户警报计数天数",
+        "licenseExpired": "您的模块许可证已过期。请更新有效的许可证密钥",
+        "licensePageLink": "[ 许可证页面链接。 ]",
+        "userAlertCountRangeRequired": "请输入有效的计数天数",
+        "toast": {
+            "successSavelicense": "已成功保存许可证。",
+            "errorsavedlicense": "保存许可证时出错。"
+        }
     },
     "countries": {
         "AF": "阿富汗",
