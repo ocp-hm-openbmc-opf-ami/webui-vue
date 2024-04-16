@@ -50,6 +50,7 @@ import FireWallStore from './modules/Settings/FireWallStore';
 import CupsStore from './modules/Settings/CupsStore';
 import BondStore from './modules/Settings/BondStore';
 import LicenseStore from './modules/Settings/LicenseStore';
+import SystemInfoStore from './modules/SystemInventory/SystemInventoryStore';
 
 Vue.use(Vuex);
 
@@ -106,6 +107,7 @@ export default new Vuex.Store({
     cups: CupsStore,
     bond: BondStore,
     license: LicenseStore,
+    SystemStore: SystemInfoStore,
   },
   plugins: [WebSocketPlugin],
 });

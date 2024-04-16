@@ -41,6 +41,7 @@ import FireWall from '@/views/Settings/FireWall';
 import CupsConfiguration from '@/views/Settings/CUPS';
 import Bond from '@/views/Settings/Bond';
 import License from '@/views/Settings/License';
+import systemInventory from '@/views/SystemInventory/SystemInventory';
 
 const roles = {
   administrator: 'Administrator',
@@ -381,6 +382,14 @@ const routes = [
         component: License,
         meta: {
           title: i18n.t('appPageTitle.License'),
+        },
+      },
+      {
+        path: '/system-inventory',
+        name: 'system-inventory',
+        component: systemInventory,
+        meta: {
+          title: i18n.t('appPageTitle.systemInventory'),
         },
       },
     ],
