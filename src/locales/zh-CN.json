@@ -158,7 +158,8 @@
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
-        "cups": "@:appPageTitle.cups"
+        "cups": "@:appPageTitle.cups",
+        "bond": "@:appPageTitle.Bond"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -205,7 +206,8 @@
         "createLogicalDevice": "创建逻辑设备",
         "backupAndRestore": "备份还原",
         "FireWall": "系统防火墙",
-        "cups": "CUPS"
+        "cups": "CUPS",
+        "Bond": "网络债券"
     },
     "pageBackupAndRestore": {
         "backup": "备份",
@@ -1658,6 +1660,20 @@
             "errorDelete": "删除防火墙规则时出错。",
             "errorDateOrTimeSaveFireWall": "日期或时间无效。"
         }
+    },
+    "bond": {
+        "bond": "网络债券",
+        "bondInterface": "债券接口",
+        "enableBonding": "启用绑定",
+        "mitMonitorinms": "MII监控（毫秒）",
+        "confirmOk": "好的 |好的",
+        "confirmMsg": "保存 LAN 设置将重新启动 BMC 的网络服务。应用更改后，请使用新的浏览器会话重新连接。您想继续吗？",
+        "sameBondSettings": "网络绑定配置相同，因此无需保存。",
+        "BondWithSingleInterface":"无法通过单个接口启用绑定。",
+        "errorSavebond": "保存网络债券时出错。",
+        "errorDelete": "删除网络绑定时出错。",
+        "errorGetBond": "获取网络绑定时出错。",
+        "miiRangeRequired": "输入 1-100 之间的有效毫秒"
     },
     "countries": {
         "AF": "阿富汗",

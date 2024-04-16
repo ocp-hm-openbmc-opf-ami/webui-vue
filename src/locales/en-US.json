@@ -160,7 +160,8 @@
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
-        "cups": "@:appPageTitle.cups"
+        "cups": "@:appPageTitle.cups",
+        "bond": "@:appPageTitle.Bond"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -208,7 +209,8 @@
         "createLogicalDevice": "Create Logical Device",
         "backupAndRestore": "Backup And Restore",
         "FireWall": "System Firewall",
-        "cups": "CUPS"
+        "cups": "CUPS",
+        "Bond": "Network Bond"
     },
     "pageBackupAndRestore": {
         "backup": "Backup",
@@ -1687,6 +1689,20 @@
             "errorDelete": "Error deleting FireWall Rules.",
             "errorDateOrTimeSaveFireWall": "Invalid Date or Time."
         }
+    },
+    "bond": {
+        "bond": "Network Bond",
+        "bondInterface": "Bond Interface",
+        "enableBonding": "Enable Bonding",
+        "mitMonitorinms": "MII Monitor(millisecond)",
+        "confirmOk": "Ok | Ok",
+        "confirmMsg": "Saving LAN settings will restart the BMC's network services. Please reconnect using new browser session after applying the changes. Do you want to proceed?",
+        "sameBondSettings": "Network Bond Configuration are same, so no need to save.",
+        "BondWithSingleInterface":"Bond cannot be enabled with a single interface.",
+        "errorSavebond": "Error saved Network Bond.",
+        "errorDelete": "Error deleting Network Bond.",
+        "errorGetBond": "Error getting Network Bond.",
+        "miiRangeRequired": "Enter valid milliseconds between 1-100"
     },
     "countries": {
         "AF": "Afghanistan",

@@ -158,7 +158,8 @@
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
-        "cups": "@:appPageTitle.cups"
+        "cups": "@:appPageTitle.cups",
+        "bond": "@:appPageTitle.Bond"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -205,7 +206,8 @@
         "createLogicalDevice": "創建邏輯設備",
         "backupAndRestore": "備份還原",
         "FireWall": "系統防火牆",
-        "cups": "CUPS"
+        "cups": "CUPS",
+        "Bond": "網路債券"
     },
     "pageBackupAndRestore": {
         "backup": "備份",
@@ -1659,6 +1661,20 @@
             "errorDelete": "刪除防火牆規則時發生錯誤。",
             "errorDateOrTimeSaveFireWall": "日期或時間無效。"
         }
+    },
+    "bond": {
+        "bond": "網路債券",
+        "bondInterface": "債券介面",
+        "enableBonding": "啟用綁定",
+        "mitMonitorinms": "MII監控（毫秒）",
+        "confirmOk": "好的 |好的",
+        "confirmMsg": "儲存 LAN 設定將重新啟動 BMC 的網路服務。套用變更後，請使用新的瀏覽器會話重新連線。您想繼續嗎？",
+        "sameBondSettings": "網路綁定配置相同，因此無需儲存。",
+        "BondWithSingleInterface":"無法透過單一介面啟用綁定。",
+        "errorSavebond": "保存網路債券時發生錯誤。",
+        "errorDelete": "刪除網路綁定時發生錯誤。",
+        "errorGetBond": "取得網路綁定時發生錯誤。",
+        "miiRangeRequired": "輸入 1-100 之間的有效毫秒"
     },
     "countries": {
         "AF": "阿富汗",

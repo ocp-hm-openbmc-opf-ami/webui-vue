@@ -158,7 +158,8 @@
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
-        "cups": "@:appPageTitle.cups"
+        "cups": "@:appPageTitle.cups",
+        "bond": "@:appPageTitle.Bond"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -205,7 +206,8 @@
         "createLogicalDevice": "Logisches Gerät erstellen",
         "backupAndRestore": "Sichern und Wiederherstellen",
         "FireWall": "System-Firewall",
-        "cups": "CUPS"
+        "cups": "CUPS",
+        "Bond": "Netzwerkbindung"
     },
     "pageBackupAndRestore": {
         "backup": "Sicherung",
@@ -1661,6 +1663,21 @@
             "errorDelete": "Fehler beim Löschen der FireWall-Regeln.",
             "errorDateOrTimeSaveFireWall": "Ungültiges Datum oder ungültige Uhrzeit."
         }
+    },
+    "bond": {
+        "bond": "Netzwerkbindung",
+        "addNewBond": "Neue Bindung hinzufügen",
+        "bondInterface": "Bond-Schnittstelle",
+        "enableBonding": "Bonding aktivieren",
+        "mitMonitorinms": "MII-Monitor (Millisekunde)",
+        "confirmOk": "Ok | Ok",
+        "confirmMsg": "Durch das Speichern der LAN-Einstellungen werden die Netzwerkdienste des BMC neu gestartet. Bitte stellen Sie die Verbindung mit einer neuen Browsersitzung wieder her, nachdem Sie die Änderungen übernommen haben. Möchten Sie fortfahren?",
+        "sameBondSettings": "Die Netzwerkbindungskonfiguration ist identisch, daher ist kein Speichern erforderlich.",
+        "BondWithSingleInterface":"Bond kann nicht mit einer einzelnen Schnittstelle aktiviert werden.",
+        "errorSavebond": "Fehler beim Speichern der Netzwerkbindung.",
+        "errorDelete": "Fehler beim Löschen des Netzwerkbonds.",
+        "errorGetBond": "Fehler beim Abrufen von Network Bond.",
+        "miiRangeRequired": "Geben Sie gültige Millisekunden zwischen 1 und 100 ein"
     },
     "countries": {
         "AF": "Afghanistan",

@@ -39,6 +39,7 @@ import BackupAndRestore from '@/views/Operations/BackupAndRestore';
 import SnmpSettings from '@/views/Settings/SNMP';
 import FireWall from '@/views/Settings/FireWall';
 import CupsConfiguration from '@/views/Settings/CUPS';
+import Bond from '@/views/Settings/Bond';
 
 const roles = {
   administrator: 'Administrator',
@@ -363,6 +364,14 @@ const routes = [
         component: FireWall,
         meta: {
           title: i18n.t('appPageTitle.systemFirewall'),
+        },
+      },
+      {
+        path: '/settings/bond',
+        name: 'Bond',
+        component: Bond,
+        meta: {
+          title: i18n.t('appPageTitle.bond'),
         },
       },
     ],

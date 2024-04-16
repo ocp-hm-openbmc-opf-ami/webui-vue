@@ -48,6 +48,7 @@ import BackupAndRestore from './modules/Operations/BackupAndRestore';
 import SNMPStore from './modules/Settings/SNMPStore';
 import FireWallStore from './modules/Settings/FireWallStore';
 import CupsStore from './modules/Settings/CupsStore';
+import BondStore from './modules/Settings/BondStore';
 
 Vue.use(Vuex);
 
@@ -102,6 +103,7 @@ export default new Vuex.Store({
     snmp: SNMPStore,
     fireWall: FireWallStore,
     cups: CupsStore,
+    bond: BondStore,
   },
   plugins: [WebSocketPlugin],
 });
