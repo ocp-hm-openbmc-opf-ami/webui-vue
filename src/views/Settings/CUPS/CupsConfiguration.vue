@@ -199,7 +199,7 @@
   </b-container>
 </template>
 <script>
-import { required } from 'vuelidate/lib/validators';
+import { required, requiredIf } from 'vuelidate/lib/validators';
 import PageTitle from '@/components/Global/PageTitle';
 import { mapState } from 'vuex';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
@@ -284,15 +284,6 @@ export default {
   },
   validations() {
     return {
-      StaticCoreLoadFactor: {
-        required,
-      },
-      StaticMemoryLoadFactor: {
-        required,
-      },
-      StaticIioLoadFactor: {
-        required,
-      },
       CupsServiceInterval: {
         required,
         pattern: function (val) {
@@ -307,6 +298,27 @@ export default {
       },
       LoadFactorConfiguration: {
         required,
+      },
+      StaticCoreLoadFactor: {
+        required: requiredIf(function () {
+          if (this.LoadFactorConfiguration !== 'Dynamic') {
+            return true;
+          }
+        }),
+      },
+      StaticMemoryLoadFactor: {
+        required: requiredIf(function () {
+          if (this.LoadFactorConfiguration !== 'Dynamic') {
+            return true;
+          }
+        }),
+      },
+      StaticIioLoadFactor: {
+        required: requiredIf(function () {
+          if (this.LoadFactorConfiguration !== 'Dynamic') {
+            return true;
+          }
+        }),
       },
     };
   },
