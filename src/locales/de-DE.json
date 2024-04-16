@@ -1552,6 +1552,12 @@
         "raidController": "RAID-Controller",
         "raidLevel": "RAID-Level",
         "virtualDeviceName": "Name des virtuellen Geräts",
+        "logicalDeviceName": "Logischer Gerätename",
+        "stripSize": "Streifengröße",
+        "size": "Größe in Bytes",
+        "parityGroupCount": "Anzahl der Paritätsgruppen",
+        "arrayNumber": "Array-Nummer",
+        "accelerator": "Beschleuniger",
         "spanDepth": "Spannweite",
         "numberOfDrives": "Anzahl der Laufwerke pro Span",
         "initState": "Initialisierungsstatus",
@@ -1621,7 +1627,8 @@
             "errorDeleteLogicalDevice": "Fehler beim Löschen des logischen Geräts.",
             "errorNumberOfDrivesValidation": "Die Anzahl der Laufwerke sollte nicht höher sein als die Anzahl der nicht konfigurierten physischen Geräte!",
             "errorMinMaxSpanDepth":"Die minimale und maximale Spanntiefe beträgt 2.",
-            "errorSpanDepthDrives":"Ausgewählte UnConfig-Laufwerke sollten einem Vielfachen der Span-Tiefe und der Laufwerke pro Span entsprechen."
+            "errorSpanDepthDrives":"Ausgewählte UnConfig-Laufwerke sollten einem Vielfachen der Span-Tiefe und der Laufwerke pro Span entsprechen.",
+            "errorMsccSize": "Die Größe sollte durch die Streifengröße teilbar sein."
         }
     },
     "pageFireWall": {

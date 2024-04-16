@@ -1577,6 +1577,12 @@
         "raidController": "RAID Controller",
         "raidLevel": "RAID Level",
         "virtualDeviceName": "Virtual Device Name",
+        "logicalDeviceName": "Logical Device Name",
+        "stripSize": "Strip Size",
+        "size": "Size in Bytes",
+        "parityGroupCount": "Parity Group Count",
+        "arrayNumber": "Array Number",
+        "accelerator": "Accelerator",
         "spanDepth": "Span Depth",
         "numberOfDrives": "Number of Drives per Span",
         "initState": "Initialization State",
@@ -1646,7 +1652,8 @@
             "errorDeleteLogicalDevice": "Error in deleting the Logical Device.",
             "errorNumberOfDrivesValidation": "Number of Drives count should not higher than UnConfigured Physical Device count!",
             "errorMinMaxSpanDepth": "The minimum and maximum Span Depth is 2.",
-            "errorSpanDepthDrives": "Selected UnConfig Drives should be equal to multiple of Span Depth and Drives per Span."
+            "errorSpanDepthDrives": "Selected UnConfig Drives should be equal to multiple of Span Depth and Drives per Span.",
+            "errorMsccSize": "Size should be divisible by Strip Size."
         }
     },
     "pageFireWall": {

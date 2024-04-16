@@ -1550,6 +1550,12 @@
         "raidController": "RAID控制器",
         "raidLevel": "RAID級別",
         "virtualDeviceName": "虛擬設備名稱",
+        "logicalDeviceName": "邏輯設備名稱",
+        "stripSize": "帶材尺寸",
+        "size": "大小（以位元組為單位）",
+        "parityGroupCount": "奇偶校驗組計數",
+        "arrayNumber": "數組編號",
+        "accelerator": "加速器",
         "spanDepth": "跨度深度",
         "numberOfDrives": "每個跨度的驅動器數量",
         "initState": "初始化狀態",
@@ -1619,7 +1625,8 @@
             "errorDeleteLogicalDevice": "刪除邏輯設備時出錯",
             "errorNumberOfDrivesValidation": "驅動器數量不應高於未配置的物理設備數量！",
             "errorMinMaxSpanDepth":"最小和最大跨度深度均為 2。",
-            "errorSpanDepthDrives":"選定的 UnConfig 驅動器應等於跨距深度和每個跨距的驅動器數的倍數。"
+            "errorSpanDepthDrives":"選定的 UnConfig 驅動器應等於跨距深度和每個跨距的驅動器數的倍數。",
+            "errorMsccSize": "尺寸應能除以條帶尺寸。"
         }
     },
     "pageFireWall": {
