@@ -188,11 +188,9 @@ export default {
     };
   },
   methods: {
-    mountChange(input) {
-      if (input == 'NFS') {
-        this.form.username = '';
-        this.form.password = '';
-      }
+    mountChange() {
+      this.form.username = '';
+      this.form.password = '';
     },
     handleSubmit() {
       this.$v.$touch();

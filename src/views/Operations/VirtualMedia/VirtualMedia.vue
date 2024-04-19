@@ -280,10 +280,14 @@ export default {
             this.$t('pageVirtualMedia.toast.serverClosedSuccessfully')
           );
           connectionData.isActive = false;
+          connectionData.password = '';
+          connectionData.username = '';
         })
-        .catch(() =>
-          this.errorToast(this.$t('pageVirtualMedia.toast.errorUnmounting'))
-        )
+        .catch(() => {
+          this.errorToast(this.$t('pageVirtualMedia.toast.errorUnmounting'));
+          connectionData.password = '';
+          connectionData.username = '';
+        })
         .finally(() => this.endLoader());
     },
     saveConnection(connectionData) {
