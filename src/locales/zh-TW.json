@@ -1389,6 +1389,13 @@
             "status": "狀態",
             "upperWarning": "高於值的警告",
             "upperCritical": "高於值的嚴重警告"
+        },
+        "sensorgraph": {
+            "frame": "幀（分鐘）",
+            "Interval": "間隔（秒）",
+            "Back": "後退",
+            "displayGraph": "顯示圖表"
+
         }
     },
     "pageSerialOverLan": {

@@ -1388,6 +1388,13 @@
             "status": "状态",
             "upperWarning": "高于值的警告",
             "upperCritical": "高于值的严重警告"
+        },
+        "sensorgraph": {
+            "frame": "帧（分钟）",
+            "Interval": "间隔（秒）",
+            "Back": "后退",
+            "displayGraph": "显示图表"
+
         }
     },
     "pageSerialOverLan": {

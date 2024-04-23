@@ -1,34 +1,56 @@
 <template>
   <div>
     <b-row>
-      <b-col xl="6">
-        <b-col xl="4" class="display_inline">
-          <span>History Interval(Min)</span>
+      <b-col xl="9">
+        <b-col xl="2" class="display_inline">
+          <span>{{ $t('pageSensors.sensorgraph.Interval') }}</span>
         </b-col>
-        <b-col xl="6" class="display_inline">
-          <b-form-group label-for="HInterval">
+        <b-col xl="2" class="display_inline">
+          <b-form-group label-for="hInterval">
             <b-form-select
-              id="HInterval"
-              v-model="HInterval"
+              id="hInterval"
+              v-model="form.hInterval"
               class="input"
-              :options="HIntervalOptions"
-              data-test-id="HInterval-option"
-              @change="historyinterval()"
+              :options="hIntervalOptions"
+              data-test-id="hInterval-option"
             ></b-form-select>
           </b-form-group>
         </b-col>
+        <b-col xl="2" class="display_inline">
+          <span>{{ $t('pageSensors.sensorgraph.frame') }}</span>
+        </b-col>
+        <b-col xl="2" class="display_inline">
+          <b-form-group label-for="timeFrame">
+            <b-form-select
+              id="timeFrame"
+              v-model="form.timeFrame"
+              class="input"
+              :options="timeFrameOptions"
+              data-test-id="timeFrame-option"
+            ></b-form-select>
+          </b-form-group>
+        </b-col>
+        <b-col xl="2" class="display_inline">
+          <div class="text-right mb10">
+            <b-button variant="primary" @click="historyinterval()">
+              {{ $t('pageSensors.sensorgraph.displayGraph') }}
+            </b-button>
+          </div>
+        </b-col>
       </b-col>
-      <b-col xl="5">
+      <b-col xl="2">
         <div class="text-right mb10">
-          <b-button variant="primary" @click="initBack()"> Back </b-button>
+          <b-button variant="primary" @click="initBack()">
+            {{ $t('pageSensors.sensorgraph.Back') }}
+          </b-button>
         </div>
       </b-col>
     </b-row>
     <b-row>
-      <b-col v-if="lineDatadone" xl="12">
-        <h2>{{ sensorGraphData.name }}</h2>
+      <b-col v-if="lineDataDone" xl="12">
+        <h2>{{ itemData.Name }}</h2>
         <chart
-          v-if="lineDatadone"
+          v-if="lineDataDone"
           :data="lineData"
           :options="options"
           :type="type"
@@ -58,8 +80,8 @@ export default {
   },
   data() {
     return {
-      lineDatadone: false,
-      HIntervalOptions: [
+      lineDataDone: false,
+      hIntervalOptions: [
         {
           text: '10',
           value: 10,
@@ -73,7 +95,24 @@ export default {
           value: 30,
         },
       ],
-      HInterval: 10,
+      timeFrameOptions: [
+        {
+          text: '10',
+          value: 10,
+        },
+        {
+          text: '20',
+          value: 20,
+        },
+        {
+          text: '30',
+          value: 30,
+        },
+      ],
+      form: {
+        hInterval: '',
+        timeFrame: '',
+      },
       lineData: {},
       options: {
         defaults: {
@@ -111,6 +150,9 @@ export default {
             defaults: {
               borderColor: 'red',
             },
+            ticks: {
+              autoSkip: false,
+            },
           },
           y: {
             display: true,
@@ -130,13 +172,14 @@ export default {
           },
         },
       },
-      itemdata: {},
+      itemData: {},
     };
   },
   watch: {
     lineData() {},
   },
   created() {
+    this.itemData = this.sensorGraphData;
     this.historyinterval();
   },
   methods: {
@@ -144,7 +187,7 @@ export default {
       this.$emit('BackSensorpage');
     },
     async sensorData() {
-      this.lineDatadone = false;
+      this.lineDataDone = false;
       this.lineData = {};
       var datasets = [];
       var labels = [];
@@ -153,12 +196,15 @@ export default {
       var chartdata;
       this.lineData.datasets = [];
       this.lineData.labels = [];
-      this.itemdata = this.$store.getters['sensors/GraphSensors'];
-      this.itemdata.History.forEach((val) => {
+      this.itemData = this.$store.getters['sensors/graphSensors'];
+      this.itemData.id = this.itemData['@odata.id'];
+      this.itemData.SensorReadings.forEach((val) => {
         label = this.timestammptotime(val.Time);
-        data.push(val.ReadingCelsius);
+        data.push(val.Value);
         labels.push(label);
       });
+      this.form.hInterval = this.itemData.Interval;
+      this.form.timeFrame = this.itemData.TimeFrame;
       chartdata = {
         data: data,
         fill: true,
@@ -199,18 +245,39 @@ export default {
       return HHMMSS[2];
     },
     historyinterval() {
-      let hI = {
-        id: this.sensorGraphData.id,
-        value: this.HInterval,
-      };
       this.startLoader();
-      this.$store.dispatch('sensors/getTimeInterval', hI).finally(() => {
-        this.isBusy = false;
-        this.sensorData().then(() => {
-          this.lineDatadone = true;
-        });
-        this.endLoader();
-      });
+      var historyDataParams = {};
+      if (this.form.hInterval == '') {
+        historyDataParams = {
+          id: this.itemData.id,
+        };
+        this.$store
+          .dispatch('sensors/getTimeInterval', historyDataParams)
+          .finally(() => {
+            this.sensorData().then(() => {
+              this.lineDataDone = true;
+            });
+            this.endLoader();
+          });
+      } else {
+        historyDataParams = {
+          id: this.itemData.id,
+          Interval: this.form.hInterval,
+          TimeFrame: this.form.timeFrame,
+        };
+        this.$store
+          .dispatch('sensors/setTimeInterval', historyDataParams)
+          .finally(() => {
+            this.$store
+              .dispatch('sensors/getTimeInterval', historyDataParams)
+              .finally(() => {
+                this.sensorData().then(() => {
+                  this.lineDataDone = true;
+                });
+                this.endLoader();
+              });
+          });
+      }
     },
   },
 };

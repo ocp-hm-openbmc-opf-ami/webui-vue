@@ -81,14 +81,17 @@
                 <span class="sr-only">{{ $t('global.table.selectItem') }}</span>
               </b-form-checkbox>
             </template>
-            <template #cell(name)="{ value }">
-              <u v-if="value == 'System Airflow'" class="name_air">
+            <template #cell(name)="{ value, item }">
+              <u
+                v-if="cupsSensorList.includes(value) && item.id"
+                class="name_air"
+              >
                 {{ value }} -
               </u>
 
               <span v-else> {{ value }} </span>
               <svg
-                v-if="value == 'System Airflow'"
+                v-if="cupsSensorList.includes(value) && item.id"
                 data-v-99969f6c=""
                 focusable="false"
                 preserveAspectRatio="xMidYMid meet"
@@ -132,7 +135,7 @@
       </b-row>
     </div>
     <div v-else>
-      <chart
+      <sensor-graph
         :sensor-graph-data="itemdata"
         :options="options"
         :type="type"
@@ -150,7 +153,7 @@ import TableFilter from '@/components/Global/TableFilter';
 import TableToolbar from '@/components/Global/TableToolbar';
 import TableToolbarExport from '@/components/Global/TableToolbarExport';
 import TableCellCount from '@/components/Global/TableCellCount';
-import Chart from '../../Settings/Network/SensorGraph.vue';
+import SensorGraph from '../../Settings/Network/SensorGraph.vue';
 
 import BVTableSelectableMixin, {
   selectedRows,
@@ -175,7 +178,7 @@ export default {
     TableFilter,
     TableToolbar,
     TableToolbarExport,
-    Chart,
+    SensorGraph,
   },
   mixins: [
     TableFilterMixin,
@@ -186,6 +189,7 @@ export default {
     SearchFilterMixin,
   ],
   beforeRouteLeave(to, from, next) {
+    this.$store.dispatch('sensors/setSensorGraphRefresh', true);
     this.hideLoader();
     next();
   },
@@ -309,13 +313,26 @@ export default {
         },
       },
       type: 'line',
-      showSensor: true,
       itemdata: {},
+      cupsSensorList: [
+        'AverageCupsIndex',
+        'System Airflow',
+        'AverageHostCpuUtilization',
+        'AverageHostMemoryBandwidthUtilization',
+        'AverageHostPciBandwidthUtilization',
+        'CupsIndex',
+        'HostCpuUtilization',
+        'HostMemoryBandwidthUtilization',
+        'HostPciBandwidthUtilization',
+      ],
     };
   },
   computed: {
     allSensors() {
       return this.$store.getters['sensors/sensors'];
+    },
+    showSensor() {
+      return this.$store.getters['sensors/sensorGraphRefreshget'];
     },
     filteredRows() {
       return this.searchFilter
@@ -327,11 +344,13 @@ export default {
     },
   },
   created() {
-    this.startLoader();
-    this.$store.dispatch('sensors/getAllSensors').finally(() => {
-      this.endLoader();
-      this.isBusy = false;
-    });
+    if (this.showSensor) {
+      this.startLoader();
+      this.$store.dispatch('sensors/getAllSensors').finally(() => {
+        this.endLoader();
+        this.isBusy = false;
+      });
+    }
   },
   methods: {
     sortCompare(a, b, key) {
@@ -358,16 +377,20 @@ export default {
       return this.$t('pageSensors.exportFilePrefix') + date;
     },
     onRowclick(item) {
-      if (item.name == 'System Airflow') {
-        this.showSensor = false;
+      if (this.cupsSensorList.includes(item?.name) && item.id != undefined) {
         this.itemdata = item;
+        this.$store.dispatch('sensors/setSensorGraphRefresh', false);
       }
     },
     isbackSensorpage() {
-      this.showSensor = true;
+      this.$store.dispatch('sensors/setSensorGraphRefresh', true);
+      this.searchFilter = null;
+      this.isBusy = false;
+      this.tableHeaderCheckboxModel = false;
+      this.tableHeaderCheckboxIndeterminate = false;
     },
     rowClass(item) {
-      if (item && item.name == 'System Airflow') {
+      if (this.cupsSensorList.includes(item?.name) && item.id != undefined) {
         return 'row_class';
       }
     },
