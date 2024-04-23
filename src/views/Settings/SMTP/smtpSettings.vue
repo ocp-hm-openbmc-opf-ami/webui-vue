@@ -1,712 +1,734 @@
 <template>
   <b-container fluid="xl">
     <page-title :description="$t('pageSmtp.pageDescription')" />
-    <b-form novalidate @submit.prevent="handleSubmit">
-      <page-section :section-title="$t('pageSmtp.primaryFormGroupLabel')">
-        <div class="form-background p-3">
-          <b-row>
-            <b-col sm="12">
-              <b-form-group>
-                <b-form-checkbox
-                  id="enable-primary-configuration"
-                  v-model="primary.enableConfiguration"
-                  data-test-id="primary-input-enableConfiguration"
-                  switch
-                  @change="enablePrimaryConfiguration"
-                >
-                  <span v-if="primary.enableConfiguration">
-                    {{ $t('global.status.enabled') }}
-                  </span>
-                  <span v-else>{{ $t('global.status.disabled') }}</span>
-                </b-form-checkbox>
-              </b-form-group>
-            </b-col>
-          </b-row>
-          <b-row v-if="primary.enableConfiguration">
-            <b-col sm="3">
-              <b-form-group :label="$t('pageSmtp.authentication')">
-                <b-form-checkbox
-                  id="primary-authentication-enable"
-                  v-model="primary.authentication"
-                  data-test-id="primary-enable-authentication"
-                  switch
-                  @change="primaryAuthChange($event)"
-                >
-                  <span v-if="primary.authentication">
-                    {{ $t('global.status.enabled') }}
-                  </span>
-                  <span v-else>{{ $t('global.status.disabled') }}</span>
-                </b-form-checkbox>
-              </b-form-group>
-            </b-col>
-            <b-col sm="3">
-              <b-form-group
-                v-if="primary.authentication"
-                :label="$t('pageSmtp.username')"
-              >
-                <b-form-input
-                  v-if="primary.authentication"
-                  id="primary-user-name"
-                  v-model="primary.username"
-                  data-test-id="smtp-primary-user-name"
-                  :disabled="!primary.enableConfiguration"
-                  :state="getValidationState($v.primary.username)"
-                  @input="$v.primary.username.$touch()"
-                />
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.primary.username.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                  <template
-                    v-if="
-                      $v.primary.username.required &&
-                      !$v.primary.username.pattern
-                    "
-                  >
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col sm="3">
-              <b-form-group
-                v-if="primary.authentication"
-                :label="$t('pageSmtp.password')"
-              >
-                <input-password-toggle>
-                  <b-form-input
-                    id="primary-password"
-                    v-model="primary.password"
-                    data-test-id="smtp-primary-password"
-                    type="password"
-                    :disabled="!primary.enableConfiguration"
-                    :state="getValidationState($v.primary.password)"
-                    @input="$v.primary.password.$touch()"
-                  />
-                  <b-form-invalid-feedback role="alert">
-                    <template v-if="!$v.primary.password.required">
-                      {{ $t('global.form.fieldRequired') }}
-                    </template>
-                    <template
-                      v-if="
-                        $v.primary.password.required &&
-                        !$v.primary.password.pattern
-                      "
-                    >
-                      {{ $t('global.form.invalidFormat') }}
-                    </template>
-                  </b-form-invalid-feedback>
-                </input-password-toggle>
-              </b-form-group>
-            </b-col>
-          </b-row>
-          <b-row v-if="primary.enableConfiguration">
-            <b-col sm="3">
-              <b-form-group :label="$t('pageSmtp.labelServerAddress')">
-                <b-form-input
-                  id="primary-server-address"
-                  v-model="primary.serverAddress"
-                  data-test-id="smtp-input-serverAddress"
-                  :disabled="!primary.enableConfiguration"
-                  :state="getValidationState($v.primary.serverAddress)"
-                  @input="$v.primary.serverAddress.$touch()"
-                />
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.primary.serverAddress.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                  <template
-                    v-if="
-                      $v.primary.serverAddress.required &&
-                      !$v.primary.serverAddress.pattern
-                    "
-                  >
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col sm="3">
-              <b-form-group :label="$t('pageSmtp.labelPort')">
-                <b-form-input
-                  id="port"
-                  v-model="primary.port"
-                  :disabled="!primary.enableConfiguration"
-                  :state="getValidationState($v.primary.port)"
-                  @input="$v.primary.port.$touch()"
-                />
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.primary.port.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                  <template
-                    v-if="$v.primary.port.required && !$v.primary.port.pattern"
-                  >
-                    {{ $t('pageSmtp.PortRangeRequired') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col sm="3">
-              <b-form-group :label="$t('pageSmtp.labelSenderEmailAddress')">
-                <b-form-input
-                  id="smtp-sender-email-address"
-                  v-model="primary.senderEmailAddress"
-                  data-test-id="smtp-input-senderEmailAddress"
-                  :disabled="!primary.enableConfiguration"
-                  :state="getValidationState($v.primary.senderEmailAddress)"
-                  @input="$v.primary.senderEmailAddress.$touch()"
-                />
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.primary.senderEmailAddress.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                  <template v-if="!$v.primary.senderEmailAddress.email">
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-          </b-row>
-          <b-row v-if="primary.enableConfiguration">
-            <b-col>
-              <b-button
-                variant="link"
-                :disabled="
-                  primary.recipientCount >= 4 || !primary.enableConfiguration
-                "
-                @click="addPrimaryRecipientEmail"
-              >
-                <icon-add />{{ $t('pageSmtp.addRecipientEmailAddress') }}
-              </b-button>
-            </b-col>
-          </b-row>
-          <br />
-          <b-row v-if="primary.enableConfiguration" sm="12">
-            <b-col sm="3">
-              <b-form-group
-                id="smtp-recipient-email-address-1"
-                :label="$t('pageSmtp.labelRecipientEmailAddress') + ' 1'"
-              >
-                <b-form-input
-                  id="smtp-recipient-email-address"
-                  v-model="primary.recipientEmailAddress1"
-                  data-test-id="smtp-input-recipientEmailAddress-1"
-                  :disabled="!primary.enableConfiguration"
-                  :state="getValidationState($v.primary.recipientEmailAddress1)"
-                  @input="$v.primary.recipientEmailAddress1.$touch()"
-                />
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.primary.recipientEmailAddress1.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                  <template v-if="!$v.primary.recipientEmailAddress1.email">
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col v-if="primary.recipientEmail2" sm="3">
-              <b-form-group
-                id="smtp-recipient-email-address-2"
-                :label="$t('pageSmtp.labelRecipientEmailAddress') + ' 2'"
-              >
-                <b-form-input
-                  v-model="primary.recipientEmailAddress2"
-                  data-test-id="smtp-input-recipientEmailAddress-2"
-                  :disabled="!primary.enableConfiguration"
-                  :state="getValidationState($v.primary.recipientEmailAddress2)"
-                  @input="$v.primary.recipientEmailAddress2.$touch()"
-                />
-                <b-button
-                  variant="cancel"
-                  class="input-action-btn cancel-btn"
-                  @click="cancelPrimaryRecipientEmail('2')"
-                >
-                  <icon-misuse />
-                </b-button>
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.primary.recipientEmailAddress2.email">
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col v-if="primary.recipientEmail3" sm="3">
-              <b-form-group
-                id="smtp-recipient-email-address-3"
-                :label="
-                  $t('pageSmtp.labelRecipientEmailAddress') +
-                  (primary.recipientEmail2 ? ' 3' : ' 2')
-                "
-              >
-                <b-form-input
-                  v-model="primary.recipientEmailAddress3"
-                  data-test-id="smtp-input-recipientEmailAddress-3"
-                  :disabled="!primary.enableConfiguration"
-                  :state="getValidationState($v.primary.recipientEmailAddress3)"
-                  @input="$v.primary.recipientEmailAddress3.$touch()"
-                />
-                <b-button
-                  variant="cancel"
-                  class="input-action-btn cancel-btn"
-                  @click="cancelPrimaryRecipientEmail('3')"
-                >
-                  <icon-misuse />
-                </b-button>
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.primary.recipientEmailAddress3.email">
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col v-if="primary.recipientEmail4" sm="3">
-              <b-form-group
-                id="smtp-recipient-email-address-4"
-                :label="
-                  $t('pageSmtp.labelRecipientEmailAddress') +
-                  (primary.recipientEmail2 && primary.recipientEmail3
-                    ? ' 4'
-                    : primary.recipientEmail2 || primary.recipientEmail3
-                    ? ' 3'
-                    : ' 2')
-                "
-              >
-                <b-form-input
-                  v-model="primary.recipientEmailAddress4"
-                  data-test-id="smtp-input-recipientEmailAddress-4"
-                  :disabled="!primary.enableConfiguration"
-                  :state="getValidationState($v.primary.recipientEmailAddress4)"
-                  @input="$v.primary.recipientEmailAddress4.$touch()"
-                />
-                <b-button
-                  variant="cancel"
-                  class="input-action-btn cancel-btn"
-                  @click="cancelPrimaryRecipientEmail('4')"
-                >
-                  <icon-misuse />
-                </b-button>
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.primary.recipientEmailAddress4.email">
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-          </b-row>
-          <b-row v-if="primary.enableConfiguration">
-            <b-col sm="3">
-              <b-form-group :label="$t('pageSmtp.tlsEnable')">
-                <b-form-checkbox
-                  id="primary-tls-enable"
-                  v-model="primary.tlsEnable"
-                  :disabled="!primary.enableConfiguration"
-                  data-test-id="enable-tls"
-                  switch
-                >
-                  <span v-if="primary.tlsEnable">
-                    {{ $t('global.status.enabled') }}
-                  </span>
-                  <span v-else>{{ $t('global.status.disabled') }}</span>
-                </b-form-checkbox>
-              </b-form-group>
-            </b-col>
-          </b-row>
-        </div>
-      </page-section>
-      <page-section :section-title="$t('pageSmtp.secondaryFormGroupLabel')">
-        <div class="form-background p-3">
-          <b-row>
-            <b-col sm="12">
-              <b-form-group>
-                <b-form-checkbox
-                  id="enable-secondary-configuration"
-                  v-model="secondary.enableConfiguration"
-                  data-test-id="secondary-input-enableConfiguration"
-                  switch
-                  @change="enableSecondaryConfiguration"
-                >
-                  <span v-if="secondary.enableConfiguration">
-                    {{ $t('global.status.enabled') }}
-                  </span>
-                  <span v-else>{{ $t('global.status.disabled') }}</span>
-                </b-form-checkbox>
-              </b-form-group>
-            </b-col>
-          </b-row>
-          <b-row v-if="secondary.enableConfiguration">
-            <b-col sm="3">
-              <b-form-group :label="$t('pageSmtp.authentication')">
-                <b-form-checkbox
-                  id="secondary-authentication-enable"
-                  v-model="secondary.authentication"
-                  data-test-id="secondary-enable-authentication"
-                  switch
-                  @change="secondaryAuthChange"
-                >
-                  <span v-if="secondary.authentication">
-                    {{ $t('global.status.enabled') }}
-                  </span>
-                  <span v-else>{{ $t('global.status.disabled') }}</span>
-                </b-form-checkbox>
-              </b-form-group>
-            </b-col>
-            <b-col sm="3">
-              <b-form-group
-                v-if="secondary.authentication"
-                :label="$t('pageSmtp.username')"
-              >
-                <b-form-input
-                  id="secondary-user-name"
-                  v-model="secondary.username"
-                  data-test-id="smtp-secondary-user-name"
-                  :disabled="!secondary.enableConfiguration"
-                  :state="getValidationState($v.secondary.username)"
-                  @input="$v.secondary.username.$touch()"
-                />
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.secondary.username.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                  <template
-                    v-if="
-                      $v.secondary.username.required &&
-                      !$v.secondary.username.pattern
-                    "
-                  >
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col sm="3">
-              <b-form-group
-                v-if="secondary.authentication"
-                :label="$t('pageSmtp.password')"
-              >
-                <input-password-toggle>
-                  <b-form-input
-                    id="secondary-password"
-                    v-model="secondary.password"
-                    data-test-id="smtp-secondary-password"
-                    type="password"
-                    :disabled="!secondary.enableConfiguration"
-                    :state="getValidationState($v.secondary.password)"
-                    @input="$v.secondary.password.$touch()"
-                  />
-                  <b-form-invalid-feedback role="alert">
-                    <template v-if="!$v.secondary.password.required">
-                      {{ $t('global.form.fieldRequired') }}
-                    </template>
-                    <template
-                      v-if="
-                        $v.secondary.password.required &&
-                        !$v.secondary.password.pattern
-                      "
-                    >
-                      {{ $t('global.form.invalidFormat') }}
-                    </template>
-                  </b-form-invalid-feedback>
-                </input-password-toggle>
-              </b-form-group>
-            </b-col>
-          </b-row>
-          <b-row v-if="secondary.enableConfiguration">
-            <b-col sm="3">
-              <b-form-group :label="$t('pageSmtp.labelServerAddress')">
-                <b-form-input
-                  id="secondary-server-address"
-                  v-model="secondary.serverAddress"
-                  data-test-id="smtp-input-serverAddress"
-                  :disabled="!secondary.enableConfiguration"
-                  :state="getValidationState($v.secondary.serverAddress)"
-                  @input="$v.secondary.serverAddress.$touch()"
-                />
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.secondary.serverAddress.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                  <template
-                    v-if="
-                      $v.secondary.serverAddress.required &&
-                      !$v.secondary.serverAddress.pattern
-                    "
-                  >
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col sm="3">
-              <b-form-group :label="$t('pageSmtp.labelPort')">
-                <b-form-input
-                  id="port"
-                  v-model="secondary.port"
-                  :disabled="!secondary.enableConfiguration"
-                  :state="getValidationState($v.secondary.port)"
-                  @input="$v.secondary.port.$touch()"
-                />
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.secondary.port.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                  <template
-                    v-if="
-                      $v.secondary.port.required && !$v.secondary.port.pattern
-                    "
-                  >
-                    {{ $t('pageSmtp.PortRangeRequired') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col sm="3">
-              <b-form-group :label="$t('pageSmtp.labelSenderEmailAddress')">
-                <b-form-input
-                  id="smtp-sender-email-address"
-                  v-model="secondary.senderEmailAddress"
-                  data-test-id="smtp-input-senderEmailAddress"
-                  :disabled="!secondary.enableConfiguration"
-                  :state="getValidationState($v.secondary.senderEmailAddress)"
-                  @input="$v.secondary.senderEmailAddress.$touch()"
-                />
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.secondary.senderEmailAddress.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                  <template v-if="!$v.secondary.senderEmailAddress.email">
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-          </b-row>
-          <b-row v-if="secondary.enableConfiguration">
-            <b-col>
-              <b-button
-                variant="link"
-                :disabled="
-                  secondary.recipientCount >= 4 ||
-                  !secondary.enableConfiguration
-                "
-                @click="addSecondaryRecipientEmail"
-              >
-                <icon-add />{{ $t('pageSmtp.addRecipientEmailAddress') }}
-              </b-button>
-            </b-col>
-          </b-row>
-          <br />
-          <b-row v-if="secondary.enableConfiguration" sm="12">
-            <b-col sm="3">
-              <b-form-group
-                id="smtp-recipient-email-address-1"
-                :label="$t('pageSmtp.labelRecipientEmailAddress') + ' 1'"
-              >
-                <b-form-input
-                  v-model="secondary.recipientEmailAddress1"
-                  data-test-id="smtp-input-recipientEmailAddress-1"
-                  :disabled="!secondary.enableConfiguration"
-                  :state="
-                    getValidationState($v.secondary.recipientEmailAddress1)
-                  "
-                  @input="$v.secondary.recipientEmailAddress1.$touch()"
-                />
-                <b-form-invalid-feedback role="alert">
-                  <template
-                    v-if="!$v.secondary.recipientEmailAddress1.required"
-                  >
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                  <template v-if="!$v.secondary.recipientEmailAddress1.email">
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col v-if="secondary.recipientEmail2" sm="3">
-              <b-form-group
-                id="smtp-recipient-email-address-2"
-                :label="$t('pageSmtp.labelRecipientEmailAddress') + ' 2'"
-              >
-                <b-form-input
-                  v-model="secondary.recipientEmailAddress2"
-                  data-test-id="smtp-input-recipientEmailAddress-2"
-                  :disabled="!secondary.enableConfiguration"
-                  :state="
-                    getValidationState($v.secondary.recipientEmailAddress2)
-                  "
-                  @input="$v.secondary.recipientEmailAddress2.$touch()"
-                />
-                <b-button
-                  variant="cancel"
-                  class="input-action-btn cancel-btn"
-                  @click="cancelSecondaryRecipientEmail('2')"
-                >
-                  <icon-misuse />
-                </b-button>
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.secondary.recipientEmailAddress2.email">
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col v-if="secondary.recipientEmail3" sm="3">
-              <b-form-group
-                id="smtp-recipient-email-address-3"
-                :label="
-                  $t('pageSmtp.labelRecipientEmailAddress') +
-                  (secondary.recipientEmail2 ? ' 3' : ' 2')
-                "
-              >
-                <b-form-input
-                  v-model="secondary.recipientEmailAddress3"
-                  data-test-id="smtp-input-recipientEmailAddress-3"
-                  :disabled="!secondary.enableConfiguration"
-                  :state="
-                    getValidationState($v.secondary.recipientEmailAddress3)
-                  "
-                  @input="$v.secondary.recipientEmailAddress3.$touch()"
-                />
-                <b-button
-                  variant="cancel"
-                  class="input-action-btn cancel-btn"
-                  @click="cancelSecondaryRecipientEmail('3')"
-                >
-                  <icon-misuse />
-                </b-button>
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.secondary.recipientEmailAddress3.email">
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col v-if="secondary.recipientEmail4" sm="3">
-              <b-form-group
-                id="smtp-recipient-email-address-4"
-                :label="
-                  $t('pageSmtp.labelRecipientEmailAddress') +
-                  (secondary.recipientEmail2 && secondary.recipientEmail3
-                    ? ' 4'
-                    : secondary.recipientEmail2 || secondary.recipientEmail3
-                    ? ' 3'
-                    : ' 2')
-                "
-              >
-                <b-form-input
-                  v-model="secondary.recipientEmailAddress4"
-                  data-test-id="smtp-input-recipientEmailAddress-4"
-                  :disabled="!secondary.enableConfiguration"
-                  :state="
-                    getValidationState($v.secondary.recipientEmailAddress4)
-                  "
-                  @input="$v.secondary.recipientEmailAddress4.$touch()"
-                />
-                <b-button
-                  variant="cancel"
-                  class="input-action-btn cancel-btn"
-                  @click="cancelSecondaryRecipientEmail('4')"
-                >
-                  <icon-misuse />
-                </b-button>
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.secondary.recipientEmailAddress4.email">
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-          </b-row>
-          <b-row v-if="secondary.enableConfiguration">
-            <b-col sm="3">
-              <b-form-group :label="$t('pageSmtp.tlsEnable')">
-                <b-form-checkbox
-                  id="secondary-tls-enable"
-                  v-model="secondary.tlsEnable"
-                  :disabled="!secondary.enableConfiguration"
-                  data-test-id="secondary-enable-tls"
-                  switch
-                >
-                  <span v-if="secondary.tlsEnable">
-                    {{ $t('global.status.enabled') }}
-                  </span>
-                  <span v-else>{{ $t('global.status.disabled') }}</span>
-                </b-form-checkbox>
-              </b-form-group>
-            </b-col>
-          </b-row>
-        </div>
-      </page-section>
-      <page-section
-        v-if="
-          (primary.enableConfiguration && primary.tlsEnable) ||
-          (secondary.enableConfiguration && secondary.tlsEnable)
-        "
-        :section-title="$t('pageSmtp.certificate')"
+    <div v-if="!LicenseState(licenseName)">
+      <b-alert show variant="warning"
+        >{{ $t('license.licenseExpired') }}
+        <a href="#/settings/license">{{
+          $t('license.licensePageLink')
+        }}</a></b-alert
       >
-        <div class="form-background p-3">
-          <b-row>
-            <b-col sm="4">
-              <b-form-group :label="$t('pageSmtp.cacertPEM')">
-                <form-file
-                  id="certificate-cacertPEM"
-                  v-model="cacertPEM"
-                  accept=".pem"
-                  @input="onFileUpload($event, 'CacertPEM')"
+    </div>
+    <div v-else>
+      <b-form novalidate @submit.prevent="handleSubmit">
+        <page-section :section-title="$t('pageSmtp.primaryFormGroupLabel')">
+          <div class="form-background p-3">
+            <b-row>
+              <b-col sm="12">
+                <b-form-group>
+                  <b-form-checkbox
+                    id="enable-primary-configuration"
+                    v-model="primary.enableConfiguration"
+                    data-test-id="primary-input-enableConfiguration"
+                    switch
+                    @change="enablePrimaryConfiguration"
+                  >
+                    <span v-if="primary.enableConfiguration">
+                      {{ $t('global.status.enabled') }}
+                    </span>
+                    <span v-else>{{ $t('global.status.disabled') }}</span>
+                  </b-form-checkbox>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row v-if="primary.enableConfiguration">
+              <b-col sm="3">
+                <b-form-group :label="$t('pageSmtp.authentication')">
+                  <b-form-checkbox
+                    id="primary-authentication-enable"
+                    v-model="primary.authentication"
+                    data-test-id="primary-enable-authentication"
+                    switch
+                    @change="primaryAuthChange($event)"
+                  >
+                    <span v-if="primary.authentication">
+                      {{ $t('global.status.enabled') }}
+                    </span>
+                    <span v-else>{{ $t('global.status.disabled') }}</span>
+                  </b-form-checkbox>
+                </b-form-group>
+              </b-col>
+              <b-col sm="3">
+                <b-form-group
+                  v-if="primary.authentication"
+                  :label="$t('pageSmtp.username')"
                 >
-                </form-file>
-              </b-form-group>
-            </b-col>
-            <b-col sm="4">
-              <b-form-group :label="$t('pageSmtp.serverCRT')">
-                <form-file
-                  id="certificate-serverCRT"
-                  v-model="primary.serverCRT"
-                  accept=".crt"
-                  @input="onFileUpload($event, 'ServerCRT')"
+                  <b-form-input
+                    v-if="primary.authentication"
+                    id="primary-user-name"
+                    v-model="primary.username"
+                    data-test-id="smtp-primary-user-name"
+                    :disabled="!primary.enableConfiguration"
+                    :state="getValidationState($v.primary.username)"
+                    @input="$v.primary.username.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.primary.username.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                    <template
+                      v-if="
+                        $v.primary.username.required &&
+                        !$v.primary.username.pattern
+                      "
+                    >
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+              <b-col sm="3">
+                <b-form-group
+                  v-if="primary.authentication"
+                  :label="$t('pageSmtp.password')"
                 >
-                </form-file>
-              </b-form-group>
-            </b-col>
-            <b-col sm="4">
-              <b-form-group :label="$t('pageSmtp.serverKey')">
-                <form-file
-                  id="certificate-serverKey"
-                  v-model="serverKey"
-                  accept=".key"
-                  @input="onFileUpload($event, 'ServerKey')"
+                  <input-password-toggle>
+                    <b-form-input
+                      id="primary-password"
+                      v-model="primary.password"
+                      data-test-id="smtp-primary-password"
+                      type="password"
+                      :disabled="!primary.enableConfiguration"
+                      :state="getValidationState($v.primary.password)"
+                      @input="$v.primary.password.$touch()"
+                    />
+                    <b-form-invalid-feedback role="alert">
+                      <template v-if="!$v.primary.password.required">
+                        {{ $t('global.form.fieldRequired') }}
+                      </template>
+                      <template
+                        v-if="
+                          $v.primary.password.required &&
+                          !$v.primary.password.pattern
+                        "
+                      >
+                        {{ $t('global.form.invalidFormat') }}
+                      </template>
+                    </b-form-invalid-feedback>
+                  </input-password-toggle>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row v-if="primary.enableConfiguration">
+              <b-col sm="3">
+                <b-form-group :label="$t('pageSmtp.labelServerAddress')">
+                  <b-form-input
+                    id="primary-server-address"
+                    v-model="primary.serverAddress"
+                    data-test-id="smtp-input-serverAddress"
+                    :disabled="!primary.enableConfiguration"
+                    :state="getValidationState($v.primary.serverAddress)"
+                    @input="$v.primary.serverAddress.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.primary.serverAddress.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                    <template
+                      v-if="
+                        $v.primary.serverAddress.required &&
+                        !$v.primary.serverAddress.pattern
+                      "
+                    >
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+              <b-col sm="3">
+                <b-form-group :label="$t('pageSmtp.labelPort')">
+                  <b-form-input
+                    id="port"
+                    v-model="primary.port"
+                    :disabled="!primary.enableConfiguration"
+                    :state="getValidationState($v.primary.port)"
+                    @input="$v.primary.port.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.primary.port.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                    <template
+                      v-if="
+                        $v.primary.port.required && !$v.primary.port.pattern
+                      "
+                    >
+                      {{ $t('pageSmtp.PortRangeRequired') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+              <b-col sm="3">
+                <b-form-group :label="$t('pageSmtp.labelSenderEmailAddress')">
+                  <b-form-input
+                    id="smtp-sender-email-address"
+                    v-model="primary.senderEmailAddress"
+                    data-test-id="smtp-input-senderEmailAddress"
+                    :disabled="!primary.enableConfiguration"
+                    :state="getValidationState($v.primary.senderEmailAddress)"
+                    @input="$v.primary.senderEmailAddress.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.primary.senderEmailAddress.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                    <template v-if="!$v.primary.senderEmailAddress.email">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row v-if="primary.enableConfiguration">
+              <b-col>
+                <b-button
+                  variant="link"
+                  :disabled="
+                    primary.recipientCount >= 4 || !primary.enableConfiguration
+                  "
+                  @click="addPrimaryRecipientEmail"
                 >
-                </form-file>
-              </b-form-group>
-            </b-col>
-          </b-row>
-        </div>
-      </page-section>
-      <b-row class="mt-4 mb-5">
-        <b-col sm="2">
-          <b-button
-            variant="primary"
-            type="submit"
-            data-test-id="smtp-button-saveSettings"
-          >
-            {{ $t('global.action.saveSettings') }}
-          </b-button>
-        </b-col>
-        <b-col sm="3">
-          <b-button
-            variant="primary"
-            data-test-id="alertDestination-button-sendTestAlert"
-            :disabled="!sendTestAlertDisabled"
-            @click="sendTestAlert"
-          >
-            {{ $t('pageSmtp.sendTestAlert') }}
-          </b-button>
-        </b-col>
-      </b-row>
-    </b-form>
-    <modal-send-alert />
+                  <icon-add />{{ $t('pageSmtp.addRecipientEmailAddress') }}
+                </b-button>
+              </b-col>
+            </b-row>
+            <br />
+            <b-row v-if="primary.enableConfiguration" sm="12">
+              <b-col sm="3">
+                <b-form-group
+                  id="smtp-recipient-email-address-1"
+                  :label="$t('pageSmtp.labelRecipientEmailAddress') + ' 1'"
+                >
+                  <b-form-input
+                    id="smtp-recipient-email-address"
+                    v-model="primary.recipientEmailAddress1"
+                    data-test-id="smtp-input-recipientEmailAddress-1"
+                    :disabled="!primary.enableConfiguration"
+                    :state="
+                      getValidationState($v.primary.recipientEmailAddress1)
+                    "
+                    @input="$v.primary.recipientEmailAddress1.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template
+                      v-if="!$v.primary.recipientEmailAddress1.required"
+                    >
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                    <template v-if="!$v.primary.recipientEmailAddress1.email">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+              <b-col v-if="primary.recipientEmail2" sm="3">
+                <b-form-group
+                  id="smtp-recipient-email-address-2"
+                  :label="$t('pageSmtp.labelRecipientEmailAddress') + ' 2'"
+                >
+                  <b-form-input
+                    v-model="primary.recipientEmailAddress2"
+                    data-test-id="smtp-input-recipientEmailAddress-2"
+                    :disabled="!primary.enableConfiguration"
+                    :state="
+                      getValidationState($v.primary.recipientEmailAddress2)
+                    "
+                    @input="$v.primary.recipientEmailAddress2.$touch()"
+                  />
+                  <b-button
+                    variant="cancel"
+                    class="input-action-btn cancel-btn"
+                    @click="cancelPrimaryRecipientEmail('2')"
+                  >
+                    <icon-misuse />
+                  </b-button>
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.primary.recipientEmailAddress2.email">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+              <b-col v-if="primary.recipientEmail3" sm="3">
+                <b-form-group
+                  id="smtp-recipient-email-address-3"
+                  :label="
+                    $t('pageSmtp.labelRecipientEmailAddress') +
+                    (primary.recipientEmail2 ? ' 3' : ' 2')
+                  "
+                >
+                  <b-form-input
+                    v-model="primary.recipientEmailAddress3"
+                    data-test-id="smtp-input-recipientEmailAddress-3"
+                    :disabled="!primary.enableConfiguration"
+                    :state="
+                      getValidationState($v.primary.recipientEmailAddress3)
+                    "
+                    @input="$v.primary.recipientEmailAddress3.$touch()"
+                  />
+                  <b-button
+                    variant="cancel"
+                    class="input-action-btn cancel-btn"
+                    @click="cancelPrimaryRecipientEmail('3')"
+                  >
+                    <icon-misuse />
+                  </b-button>
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.primary.recipientEmailAddress3.email">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+              <b-col v-if="primary.recipientEmail4" sm="3">
+                <b-form-group
+                  id="smtp-recipient-email-address-4"
+                  :label="
+                    $t('pageSmtp.labelRecipientEmailAddress') +
+                    (primary.recipientEmail2 && primary.recipientEmail3
+                      ? ' 4'
+                      : primary.recipientEmail2 || primary.recipientEmail3
+                      ? ' 3'
+                      : ' 2')
+                  "
+                >
+                  <b-form-input
+                    v-model="primary.recipientEmailAddress4"
+                    data-test-id="smtp-input-recipientEmailAddress-4"
+                    :disabled="!primary.enableConfiguration"
+                    :state="
+                      getValidationState($v.primary.recipientEmailAddress4)
+                    "
+                    @input="$v.primary.recipientEmailAddress4.$touch()"
+                  />
+                  <b-button
+                    variant="cancel"
+                    class="input-action-btn cancel-btn"
+                    @click="cancelPrimaryRecipientEmail('4')"
+                  >
+                    <icon-misuse />
+                  </b-button>
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.primary.recipientEmailAddress4.email">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row v-if="primary.enableConfiguration">
+              <b-col sm="3">
+                <b-form-group :label="$t('pageSmtp.tlsEnable')">
+                  <b-form-checkbox
+                    id="primary-tls-enable"
+                    v-model="primary.tlsEnable"
+                    :disabled="!primary.enableConfiguration"
+                    data-test-id="enable-tls"
+                    switch
+                  >
+                    <span v-if="primary.tlsEnable">
+                      {{ $t('global.status.enabled') }}
+                    </span>
+                    <span v-else>{{ $t('global.status.disabled') }}</span>
+                  </b-form-checkbox>
+                </b-form-group>
+              </b-col>
+            </b-row>
+          </div>
+        </page-section>
+        <page-section :section-title="$t('pageSmtp.secondaryFormGroupLabel')">
+          <div class="form-background p-3">
+            <b-row>
+              <b-col sm="12">
+                <b-form-group>
+                  <b-form-checkbox
+                    id="enable-secondary-configuration"
+                    v-model="secondary.enableConfiguration"
+                    data-test-id="secondary-input-enableConfiguration"
+                    switch
+                    @change="enableSecondaryConfiguration"
+                  >
+                    <span v-if="secondary.enableConfiguration">
+                      {{ $t('global.status.enabled') }}
+                    </span>
+                    <span v-else>{{ $t('global.status.disabled') }}</span>
+                  </b-form-checkbox>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row v-if="secondary.enableConfiguration">
+              <b-col sm="3">
+                <b-form-group :label="$t('pageSmtp.authentication')">
+                  <b-form-checkbox
+                    id="secondary-authentication-enable"
+                    v-model="secondary.authentication"
+                    data-test-id="secondary-enable-authentication"
+                    switch
+                    @change="secondaryAuthChange"
+                  >
+                    <span v-if="secondary.authentication">
+                      {{ $t('global.status.enabled') }}
+                    </span>
+                    <span v-else>{{ $t('global.status.disabled') }}</span>
+                  </b-form-checkbox>
+                </b-form-group>
+              </b-col>
+              <b-col sm="3">
+                <b-form-group
+                  v-if="secondary.authentication"
+                  :label="$t('pageSmtp.username')"
+                >
+                  <b-form-input
+                    id="secondary-user-name"
+                    v-model="secondary.username"
+                    data-test-id="smtp-secondary-user-name"
+                    :disabled="!secondary.enableConfiguration"
+                    :state="getValidationState($v.secondary.username)"
+                    @input="$v.secondary.username.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.secondary.username.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                    <template
+                      v-if="
+                        $v.secondary.username.required &&
+                        !$v.secondary.username.pattern
+                      "
+                    >
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+              <b-col sm="3">
+                <b-form-group
+                  v-if="secondary.authentication"
+                  :label="$t('pageSmtp.password')"
+                >
+                  <input-password-toggle>
+                    <b-form-input
+                      id="secondary-password"
+                      v-model="secondary.password"
+                      data-test-id="smtp-secondary-password"
+                      type="password"
+                      :disabled="!secondary.enableConfiguration"
+                      :state="getValidationState($v.secondary.password)"
+                      @input="$v.secondary.password.$touch()"
+                    />
+                    <b-form-invalid-feedback role="alert">
+                      <template v-if="!$v.secondary.password.required">
+                        {{ $t('global.form.fieldRequired') }}
+                      </template>
+                      <template
+                        v-if="
+                          $v.secondary.password.required &&
+                          !$v.secondary.password.pattern
+                        "
+                      >
+                        {{ $t('global.form.invalidFormat') }}
+                      </template>
+                    </b-form-invalid-feedback>
+                  </input-password-toggle>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row v-if="secondary.enableConfiguration">
+              <b-col sm="3">
+                <b-form-group :label="$t('pageSmtp.labelServerAddress')">
+                  <b-form-input
+                    id="secondary-server-address"
+                    v-model="secondary.serverAddress"
+                    data-test-id="smtp-input-serverAddress"
+                    :disabled="!secondary.enableConfiguration"
+                    :state="getValidationState($v.secondary.serverAddress)"
+                    @input="$v.secondary.serverAddress.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.secondary.serverAddress.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                    <template
+                      v-if="
+                        $v.secondary.serverAddress.required &&
+                        !$v.secondary.serverAddress.pattern
+                      "
+                    >
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+              <b-col sm="3">
+                <b-form-group :label="$t('pageSmtp.labelPort')">
+                  <b-form-input
+                    id="port"
+                    v-model="secondary.port"
+                    :disabled="!secondary.enableConfiguration"
+                    :state="getValidationState($v.secondary.port)"
+                    @input="$v.secondary.port.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.secondary.port.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                    <template
+                      v-if="
+                        $v.secondary.port.required && !$v.secondary.port.pattern
+                      "
+                    >
+                      {{ $t('pageSmtp.PortRangeRequired') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+              <b-col sm="3">
+                <b-form-group :label="$t('pageSmtp.labelSenderEmailAddress')">
+                  <b-form-input
+                    id="smtp-sender-email-address"
+                    v-model="secondary.senderEmailAddress"
+                    data-test-id="smtp-input-senderEmailAddress"
+                    :disabled="!secondary.enableConfiguration"
+                    :state="getValidationState($v.secondary.senderEmailAddress)"
+                    @input="$v.secondary.senderEmailAddress.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.secondary.senderEmailAddress.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                    <template v-if="!$v.secondary.senderEmailAddress.email">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row v-if="secondary.enableConfiguration">
+              <b-col>
+                <b-button
+                  variant="link"
+                  :disabled="
+                    secondary.recipientCount >= 4 ||
+                    !secondary.enableConfiguration
+                  "
+                  @click="addSecondaryRecipientEmail"
+                >
+                  <icon-add />{{ $t('pageSmtp.addRecipientEmailAddress') }}
+                </b-button>
+              </b-col>
+            </b-row>
+            <br />
+            <b-row v-if="secondary.enableConfiguration" sm="12">
+              <b-col sm="3">
+                <b-form-group
+                  id="smtp-recipient-email-address-1"
+                  :label="$t('pageSmtp.labelRecipientEmailAddress') + ' 1'"
+                >
+                  <b-form-input
+                    v-model="secondary.recipientEmailAddress1"
+                    data-test-id="smtp-input-recipientEmailAddress-1"
+                    :disabled="!secondary.enableConfiguration"
+                    :state="
+                      getValidationState($v.secondary.recipientEmailAddress1)
+                    "
+                    @input="$v.secondary.recipientEmailAddress1.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template
+                      v-if="!$v.secondary.recipientEmailAddress1.required"
+                    >
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                    <template v-if="!$v.secondary.recipientEmailAddress1.email">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+              <b-col v-if="secondary.recipientEmail2" sm="3">
+                <b-form-group
+                  id="smtp-recipient-email-address-2"
+                  :label="$t('pageSmtp.labelRecipientEmailAddress') + ' 2'"
+                >
+                  <b-form-input
+                    v-model="secondary.recipientEmailAddress2"
+                    data-test-id="smtp-input-recipientEmailAddress-2"
+                    :disabled="!secondary.enableConfiguration"
+                    :state="
+                      getValidationState($v.secondary.recipientEmailAddress2)
+                    "
+                    @input="$v.secondary.recipientEmailAddress2.$touch()"
+                  />
+                  <b-button
+                    variant="cancel"
+                    class="input-action-btn cancel-btn"
+                    @click="cancelSecondaryRecipientEmail('2')"
+                  >
+                    <icon-misuse />
+                  </b-button>
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.secondary.recipientEmailAddress2.email">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+              <b-col v-if="secondary.recipientEmail3" sm="3">
+                <b-form-group
+                  id="smtp-recipient-email-address-3"
+                  :label="
+                    $t('pageSmtp.labelRecipientEmailAddress') +
+                    (secondary.recipientEmail2 ? ' 3' : ' 2')
+                  "
+                >
+                  <b-form-input
+                    v-model="secondary.recipientEmailAddress3"
+                    data-test-id="smtp-input-recipientEmailAddress-3"
+                    :disabled="!secondary.enableConfiguration"
+                    :state="
+                      getValidationState($v.secondary.recipientEmailAddress3)
+                    "
+                    @input="$v.secondary.recipientEmailAddress3.$touch()"
+                  />
+                  <b-button
+                    variant="cancel"
+                    class="input-action-btn cancel-btn"
+                    @click="cancelSecondaryRecipientEmail('3')"
+                  >
+                    <icon-misuse />
+                  </b-button>
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.secondary.recipientEmailAddress3.email">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+              <b-col v-if="secondary.recipientEmail4" sm="3">
+                <b-form-group
+                  id="smtp-recipient-email-address-4"
+                  :label="
+                    $t('pageSmtp.labelRecipientEmailAddress') +
+                    (secondary.recipientEmail2 && secondary.recipientEmail3
+                      ? ' 4'
+                      : secondary.recipientEmail2 || secondary.recipientEmail3
+                      ? ' 3'
+                      : ' 2')
+                  "
+                >
+                  <b-form-input
+                    v-model="secondary.recipientEmailAddress4"
+                    data-test-id="smtp-input-recipientEmailAddress-4"
+                    :disabled="!secondary.enableConfiguration"
+                    :state="
+                      getValidationState($v.secondary.recipientEmailAddress4)
+                    "
+                    @input="$v.secondary.recipientEmailAddress4.$touch()"
+                  />
+                  <b-button
+                    variant="cancel"
+                    class="input-action-btn cancel-btn"
+                    @click="cancelSecondaryRecipientEmail('4')"
+                  >
+                    <icon-misuse />
+                  </b-button>
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.secondary.recipientEmailAddress4.email">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row v-if="secondary.enableConfiguration">
+              <b-col sm="3">
+                <b-form-group :label="$t('pageSmtp.tlsEnable')">
+                  <b-form-checkbox
+                    id="secondary-tls-enable"
+                    v-model="secondary.tlsEnable"
+                    :disabled="!secondary.enableConfiguration"
+                    data-test-id="secondary-enable-tls"
+                    switch
+                  >
+                    <span v-if="secondary.tlsEnable">
+                      {{ $t('global.status.enabled') }}
+                    </span>
+                    <span v-else>{{ $t('global.status.disabled') }}</span>
+                  </b-form-checkbox>
+                </b-form-group>
+              </b-col>
+            </b-row>
+          </div>
+        </page-section>
+        <page-section
+          v-if="
+            (primary.enableConfiguration && primary.tlsEnable) ||
+            (secondary.enableConfiguration && secondary.tlsEnable)
+          "
+          :section-title="$t('pageSmtp.certificate')"
+        >
+          <div class="form-background p-3">
+            <b-row>
+              <b-col sm="4">
+                <b-form-group :label="$t('pageSmtp.cacertPEM')">
+                  <form-file
+                    id="certificate-cacertPEM"
+                    v-model="cacertPEM"
+                    accept=".pem"
+                    @input="onFileUpload($event, 'CacertPEM')"
+                  >
+                  </form-file>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group :label="$t('pageSmtp.serverCRT')">
+                  <form-file
+                    id="certificate-serverCRT"
+                    v-model="primary.serverCRT"
+                    accept=".crt"
+                    @input="onFileUpload($event, 'ServerCRT')"
+                  >
+                  </form-file>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group :label="$t('pageSmtp.serverKey')">
+                  <form-file
+                    id="certificate-serverKey"
+                    v-model="serverKey"
+                    accept=".key"
+                    @input="onFileUpload($event, 'ServerKey')"
+                  >
+                  </form-file>
+                </b-form-group>
+              </b-col>
+            </b-row>
+          </div>
+        </page-section>
+        <b-row class="mt-4 mb-5">
+          <b-col sm="2">
+            <b-button
+              variant="primary"
+              type="submit"
+              data-test-id="smtp-button-saveSettings"
+            >
+              {{ $t('global.action.saveSettings') }}
+            </b-button>
+          </b-col>
+          <b-col sm="3">
+            <b-button
+              variant="primary"
+              data-test-id="alertDestination-button-sendTestAlert"
+              :disabled="!sendTestAlertDisabled"
+              @click="sendTestAlert"
+            >
+              {{ $t('pageSmtp.sendTestAlert') }}
+            </b-button>
+          </b-col>
+        </b-row>
+      </b-form>
+      <modal-send-alert />
+    </div>
   </b-container>
 </template>
 
@@ -722,6 +744,8 @@ import IconMisuse from '@carbon/icons-vue/es/misuse/20';
 import ModalSendAlert from './ModalSendAlert.vue';
 import FormFile from '@/components/Global/FormFile';
 import InputPasswordToggle from '@/components/Global/InputPasswordToggle';
+//license checking
+import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
 
 export default {
   name: 'SmtpSettings',
@@ -734,7 +758,7 @@ export default {
     FormFile,
     InputPasswordToggle,
   },
-  mixins: [BVToastMixin, VuelidateMixin, LoadingBarMixin],
+  mixins: [BVToastMixin, VuelidateMixin, LoadingBarMixin, LicensecheckMixin],
   data() {
     return {
       primary: {
@@ -778,6 +802,7 @@ export default {
       serverKey: '',
       loading,
       sendTestAlertDisabled: false,
+      licenseName: 'SMTP',
     };
   },
   watch: {

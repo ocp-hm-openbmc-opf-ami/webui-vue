@@ -349,6 +349,10 @@ export default {
             val[key] = '-';
           }
         }
+        if (val.StartPort == undefined || val.EndPort == undefined) {
+          val.StartPort = '-';
+          val.EndPort = '-';
+        }
         val.EndTime = val.EndTime.replace(/T/g, ' ');
         val.StartTime = val.StartTime.replace(/T/g, ' ');
         val.NetworkType = 'IPv4';
@@ -366,6 +370,10 @@ export default {
           if (val[key] === '') {
             val[key] = '-';
           }
+        }
+        if (val.StartPort == undefined || val.EndPort == undefined) {
+          val.StartPort = '-';
+          val.EndPort = '-';
         }
         val.EndTime = val.EndTime.replace(/T/g, ' ');
         val.StartTime = val.StartTime.replace(/T/g, ' ');

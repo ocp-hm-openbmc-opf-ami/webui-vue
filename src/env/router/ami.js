@@ -39,6 +39,9 @@ import BackupAndRestore from '@/views/Operations/BackupAndRestore';
 import SnmpSettings from '@/views/Settings/SNMP';
 import FireWall from '@/views/Settings/FireWall';
 import CupsConfiguration from '@/views/Settings/CUPS';
+import Bond from '@/views/Settings/Bond';
+import License from '@/views/Settings/License';
+import systemInventory from '@/views/SystemInventory/SystemInventory';
 
 const roles = {
   administrator: 'Administrator',
@@ -365,6 +368,30 @@ const routes = [
           title: i18n.t('appPageTitle.systemFirewall'),
         },
       },
+      {
+        path: '/settings/bond',
+        name: 'Bond',
+        component: Bond,
+        meta: {
+          title: i18n.t('appPageTitle.bond'),
+        },
+      },
+      {
+        path: '/settings/license',
+        name: 'License',
+        component: License,
+        meta: {
+          title: i18n.t('appPageTitle.License'),
+        },
+      },
+      {
+        path: '/system-inventory',
+        name: 'system-inventory',
+        component: systemInventory,
+        meta: {
+          title: i18n.t('appPageTitle.systemInventory'),
+        },
+      },
     ],
   },
 ];
@@ -415,11 +442,22 @@ if (process.env.VUE_APP_RAID_ENABLED == 'true') {
       },
     },
     {
-      path: '/raid/create-logical-device',
+      path: '/raid/brcm-create-logical-device',
       name: 'create-logical-device',
       component: () =>
         import(
-          /* webpackChunkName: "CreateLogicalStorage" */ '@/views/RAID/LogicalStorage/CreateLogicalStorage.vue'
+          /* webpackChunkName: "CreateLogicalStorage" */ '@/views/RAID/LogicalStorage/BrcmCreateLogicalStorage.vue'
+        ),
+      meta: {
+        title: i18n.t('appPageTitle.createLogicalDevice'),
+      },
+    },
+    {
+      path: '/raid/mscc-create-logical-device',
+      name: 'create-logical-device',
+      component: () =>
+        import(
+          /* webpackChunkName: "CreateLogicalStorage" */ '@/views/RAID/LogicalStorage/MsccCreateLogicalStorage.vue'
         ),
       meta: {
         title: i18n.t('appPageTitle.createLogicalDevice'),

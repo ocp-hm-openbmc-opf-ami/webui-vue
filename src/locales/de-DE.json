@@ -158,7 +158,10 @@
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
-        "cups": "@:appPageTitle.cups"
+        "cups": "@:appPageTitle.cups",
+        "bond": "@:appPageTitle.Bond",
+        "license": "@:appPageTitle.License",
+        "systemInventory":"@:appPageTitle.systemInventory"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -205,7 +208,194 @@
         "createLogicalDevice": "Logisches Gerät erstellen",
         "backupAndRestore": "Sichern und Wiederherstellen",
         "FireWall": "System-Firewall",
-        "cups": "CUPS"
+        "cups": "CUPS",
+        "Bond": "Netzwerkbindung",
+        "License": "Lizenzen verwalten",
+        "systemInventory":"Systeminventar"
+    },
+    "pageSystemInventory": {
+        "system": {
+            "system": "System",
+            "systemInfo": "Systeminformationen",
+            "name": "Name",
+            "description": "Beschreibung",
+            "model": "Modell",
+            "indicatorLED": "Anzeige LED",
+            "manufacture": "Herstellung",
+            "powerState": "Machtzustand",
+            "serialNumuber": "Seriennummer",
+            "partNumuber": "Artikelnummer",
+            "systemType": "Systemtyp",
+            "assetTag": "Asset Tag",
+            "biosVersion": "Bios Version",
+            "state": "Zustand"
+        },
+        "processor": {
+            "processor": "Prozessor",
+            "processorInfo": "Prozessorinformationen",
+            "id": "Id",
+            "name": "Name",
+            "manufacture": "Herstellung",
+            "maxSpeedMHz": "MaxSpeed MHz",
+            "model": "Modell",
+            "processorArchitecture": "Prozessorarchitektur",
+            "processorType": "Prozessortyp",
+            "socket": "Socket",
+            "effectiveFamily": "Effektive Familie",
+            "totalCores": "Gesamtkerne",
+            "state": "Zustand"
+        },
+        "memoryController": {
+            "memoryController": "Speichercontroller",
+            "memoryControllerInfo": "Informationen zum Speichercontroller",
+            "id": "Id",
+            "name": "Name",
+            "capacityMiB": "Kapazität MiB",
+            "manufacturer": "Herstellung",
+            "serialNumuber": "Seriennummer",
+            "partNumuber": "Artikelnummer",
+            "state": "Zustand",
+            "operatingSpeedMhz": "Betriebsgeschwindigkeit Mhz",
+            "memoryType": "Speichertyp",
+            "description": "Beschreibung",
+            "allowedSpeedsMHz": "Zulässige Geschwindigkeiten MHz",
+            "serviceLabel": "ServiceLabel"
+        },
+        "baseBoard": {
+            "baseBoard": "BaseBoard",
+            "baseBoardInfo": "BaseBoard Info",
+            "name": "Name",
+            "model": "Modell",
+            "state": "Zustand",
+            "powerState": "Machtzustand",
+            "assetTag": "Asset Tag",
+            "indicatorLED": "Anzeige LED",
+            "locationIndicatorActive": "Standortanzeige aktiv",
+            "manufacturer": "Herstellung",
+            "partNumber": "Artikelnummer",
+            "serialNumber": "Seriennummer"
+        },
+        "networkInterfaces": {
+            "networkInterfacesInfo": "Informationen zu Netzwerkschnittstellen",
+            "id": "Id",
+            "mACAddress": "MAC Adresse",
+            "interfaceEnabled": "Schnittstelle aktiviert",
+            "iPv4Addresses": "IPv4 Adressen",
+            "hostName": "HostName",
+            "state": "Zustand"
+        },
+        "networkInterfaceIPv6": {
+            "networkInterfaceIPv6Info": "Informationen zu IPv6 Adressen",
+            "address": "Adresse",
+            "prefixLength": "PrefixLength",
+            "addressOrigin": "AdresseUrsprung",
+            "id": "Id",
+            "name": "Name"
+        },
+        "power": {
+            "power": "Leistung",
+            "powerInfo": "Informationen zur Leistungssteuerung",
+            "name": "Name",
+            "maxConsumedWatts": "Maximal verbrauchte Watt",
+            "minConsumedWatts": "Min. verbrauchte Watt",
+            "manufacturer": "Herstellung",
+            "model": "Modell",
+            "plugType": "Steckertyp",
+            "powerCapacityWatts": "Leistungskapazität Watt",
+            "PowerSupplyType": "Netzteiltyp",
+            "SerialNumber": "Seriennummer",
+            "state": "Zustand"
+        },
+        "voltage": {
+            "voltageControlInfo": "Spannungsinformationen",
+            "name": "Name",
+            "state": "Zustand",
+            "readingUnits": "Reading Leseeinheiten",
+            "reading": "Lektüre",
+            "minReadingRange": "Min Lesereichweite",
+            "maxReadingRange": "Maximaler Lesebereich",
+            "readingType": "Lesetyp",
+            "upperThresholdFatal": "UF",
+            "upperThresholdCritical": "UC",
+            "lowerThresholdCritical": "LC",
+            "lowerThresholdFatal": "LF"
+        },
+        "thermal": {
+            "thermal": "Thermal",
+            "fanINFO": "Fan Info",
+            "name": "Name",
+            "sensorNumber": "Sensornummer",
+            "state": "Zustand",
+            "readingRPM": "ReadingRPM",
+            "minReadingRange": "Min Lesereichweite",
+            "maxReadingRange": "Maximaler Lesebereich"
+        },
+        "temperature": {
+            "temperatureInfo": "Temperaturinformationen",
+            "name": "Name",
+            "physicalContext": "Physischer Kontext",
+            "state": "Zustand",
+            "readingUnits": "Leseeinheiten",
+            "reading": "Lektüre",
+            "minReadingRange": "Min Lesereichweite",
+            "maxReadingRange": "Maximaler Lesebereich",
+            "readingType": "Lesetyp",
+            "upperThresholdFatal": "UF",
+            "upperThresholdCritical": "UC",
+            "lowerThresholdCritical": "LC",
+            "lowerThresholdFatal": "LF"
+        },
+        "pcieDevice": {
+            "pcieDevice": "PCIE Gerät",
+            "pcieDeviceInfo": "PCIE Geräteinformationen",
+            "name": "Name",
+            "id": "Id",
+            "manufacturer": "Herstellung",
+            "assetTag": "AssetTag",
+            "deviceType": "Gerätetyp",
+            "state": "Zustand"
+        },
+        "pcieFunction": {
+            "pcieFunction": "PCIE Funktion",
+            "pcieFunctionInfo": "PCIE Funktionsinformationen",
+            "id": "Id",
+            "name": "Name",
+            "deviceLinked": "Gerät verknüpft",
+            "deviceClass": "Geräteklasse",
+            "classCode": "Klassencode",
+            "deviceId": "Geräte ID",
+            "vendorId": "Hersteller ID",
+            "functionId": "Funktions ID",
+            "functionType": "Funktionstyp",
+            "revisionId": "Revisions ID",
+            "subSystemId": "Subsystem ID",
+            "subSystemVendorId": "Subsystem Anbieter ID",
+            "state": "Zustand"
+        },
+        "storage": {
+            "storage": "Lagerung",
+            "storageDriveInfo": "Informationen zum Speicherlaufwerk",
+            "id": "Id",
+            "name": "Name",
+            "serialNumuber": "Seriennummer",
+            "manufacturer": "Herstellung",
+            "protocol": "Protokoll",
+            "model": "Modell",
+            "revision": "Revision",
+            "encryptionStatus": "Verschlüsselungsstatus",
+            "mediaType": "Medientyp",
+            "state": "Zustand"
+        },
+        "storageController": {
+            "storageControllerInfo": "Informationen zum Speichercontroller",
+            "memberId": "Mitgliedsnummer",
+            "name": "Name",
+            "serialNumuber": "Seriennummer",
+            "model": "Modell",
+            "firmwareVersion": "Firmware Version",
+            "speedGbs": "Geschwindigkeit Gbs",
+            "state": "Zustand"
+        }
     },
     "pageBackupAndRestore": {
         "backup": "Sicherung",
@@ -1555,6 +1745,12 @@
         "raidController": "RAID-Controller",
         "raidLevel": "RAID-Level",
         "virtualDeviceName": "Name des virtuellen Geräts",
+        "logicalDeviceName": "Logischer Gerätename",
+        "stripSize": "Streifengröße",
+        "size": "Größe in Bytes",
+        "parityGroupCount": "Anzahl der Paritätsgruppen",
+        "arrayNumber": "Array-Nummer",
+        "accelerator": "Beschleuniger",
         "spanDepth": "Spannweite",
         "numberOfDrives": "Anzahl der Laufwerke pro Span",
         "initState": "Initialisierungsstatus",
@@ -1569,7 +1765,7 @@
         "initStateOptions": {
             "noInitialization": "Keine Initialisierung",
             "quickInitialization": "Schnelle Initialisierung",
-            "fastInitialization": "Schnelle Initialisierung"
+            "fullInitialization": "Vollständige Initialisierung"
         },
         "readPolicyOptions": {
             "noReadAhead": "Kein Vorauslesen",
@@ -1624,7 +1820,8 @@
             "errorDeleteLogicalDevice": "Fehler beim Löschen des logischen Geräts.",
             "errorNumberOfDrivesValidation": "Die Anzahl der Laufwerke sollte nicht höher sein als die Anzahl der nicht konfigurierten physischen Geräte!",
             "errorMinMaxSpanDepth":"Die minimale und maximale Spanntiefe beträgt 2.",
-            "errorSpanDepthDrives":"Ausgewählte UnConfig-Laufwerke sollten einem Vielfachen der Span-Tiefe und der Laufwerke pro Span entsprechen."
+            "errorSpanDepthDrives":"Ausgewählte UnConfig-Laufwerke sollten einem Vielfachen der Span-Tiefe und der Laufwerke pro Span entsprechen.",
+            "errorMsccSize": "Die Größe sollte durch die Streifengröße teilbar sein."
         }
     },
     "pageFireWall": {
@@ -1667,6 +1864,34 @@
             "errorSaveFireWall": "Fehler beim Speichern der Firewall-Regeln.",
             "errorDelete": "Fehler beim Löschen der FireWall-Regeln.",
             "errorDateOrTimeSaveFireWall": "Ungültiges Datum oder ungültige Uhrzeit."
+        }
+    },
+    "bond": {
+        "bond": "Netzwerkbindung",
+        "addNewBond": "Neue Bindung hinzufügen",
+        "bondInterface": "Bond-Schnittstelle",
+        "enableBonding": "Bonding aktivieren",
+        "mitMonitorinms": "MII-Monitor (Millisekunde)",
+        "confirmOk": "Ok | Ok",
+        "confirmMsg": "Durch das Speichern der LAN-Einstellungen werden die Netzwerkdienste des BMC neu gestartet. Bitte stellen Sie die Verbindung mit einer neuen Browsersitzung wieder her, nachdem Sie die Änderungen übernommen haben. Möchten Sie fortfahren?",
+        "sameBondSettings": "Die Netzwerkbindungskonfiguration ist identisch, daher ist kein Speichern erforderlich.",
+        "BondWithSingleInterface":"Bond kann nicht mit einer einzelnen Schnittstelle aktiviert werden.",
+        "errorSavebond": "Fehler beim Speichern der Netzwerkbindung.",
+        "errorDelete": "Fehler beim Löschen des Netzwerkbonds.",
+        "errorGetBond": "Fehler beim Abrufen von Network Bond.",
+        "miiRangeRequired": "Geben Sie gültige Millisekunden zwischen 1 und 100 ein"
+    },
+    "license": {
+        "add_license_key": "Lizenzschlüssel hinzufügen",
+        "license_key": "Lizenzschlüssel",
+        "userAlertCount": "Anzahl der Benutzerwarnungen",
+        "userAlertCountPercentage": "Benutzerwarnungsanzahl in Tagen",
+        "licenseExpired": "Ihre Modullizenz ist abgelaufen. Bitte aktualisieren Sie den gültigen Lizenzschlüssel",
+        "licensePageLink": "[Link zur Lizenzseite. ]",
+        "userAlertCountRangeRequired": "Bitte geben Sie die gültigen Zähltage ein",
+        "toast": {
+            "successSavelicense": "Lizenz erfolgreich gespeichert.",
+            "errorsavedlicense": "Fehler beim Speichern der Lizenz."
         }
     },
     "countries": {

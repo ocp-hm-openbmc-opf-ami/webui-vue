@@ -160,7 +160,10 @@
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
-        "cups": "@:appPageTitle.cups"
+        "cups": "@:appPageTitle.cups",
+        "bond": "@:appPageTitle.Bond",
+        "license": "@:appPageTitle.License",
+        "systemInventory":"@:appPageTitle.systemInventory"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -208,7 +211,196 @@
         "createLogicalDevice": "Create Logical Device",
         "backupAndRestore": "Backup And Restore",
         "FireWall": "System Firewall",
-        "cups": "CUPS"
+        "cups": "CUPS",
+        "Bond": "Network Bond",
+        "License": "Manage Licenses",
+        "systemInventory":"System Inventory"
+    },
+    "pageSystemInventory": {
+        "system": {
+            "system": "System",
+            "systemInfo": "System Info",
+            "name": "Name",
+            "description": "Description",
+            "model": "Model",
+            "indicatorLED": "Indicator LED",
+            "manufacture": "Manufacture",
+            "powerState": "Power State",
+            "serialNumuber": "Serial Number",
+            "partNumuber": "Part Number",
+            "systemType": "System Type",
+            "assetTag": "Asset Tag",
+            "biosVersion": "Bios Version",
+            "state": "State"
+        },
+        "processor": {
+            "processor": "Processor",
+            "processorInfo": "Processor Info",
+            "id": "Id",
+            "name": "Name",
+            "manufacture": "Manufacture",
+            "maxSpeedMHz": "MaxSpeed MHz",
+            "model": "Model",
+            "processorArchitecture": "Processor Architecture",
+            "processorType": "ProcessorType",
+            "socket": "Socket",
+            "effectiveFamily": "Effective Family",
+            "totalCores": "Total Cores",
+            "state": "State"
+        },
+        "memoryController": {
+            "memoryController": "Memory Controller",
+            "memoryControllerInfo": "Memory Controller Info",
+            "id": "Id",
+            "name": "Name",
+            "capacityMiB": "Capacity MiB",
+            "manufacturer": "Manufacturer",
+            "serialNumuber": "Serial Number",
+            "partNumuber": "Part Number",
+            "state": "State",
+            "operatingSpeedMhz": "OperatingSpeed Mhz",
+            "memoryType": "Memory Type",
+            "description": "Description",
+            "allowedSpeedsMHz": "AllowedSpeeds MHz",
+            "serviceLabel": "ServiceLabel"
+        },
+        "baseBoard": {
+            "baseBoard": "BaseBoard",
+            "baseBoardInfo": "BaseBoard Info",
+            "name": "Name",
+            "model": "Model",
+            "state": "State",
+            "powerState": "Power State",
+            "assetTag": "Asset Tag",
+            "indicatorLED": "Indicator LED",
+            "locationIndicatorActive": "LocationIndicatorActive",
+            "manufacturer": "Manufacturer",
+            "partNumber": "Part Number",
+            "serialNumber": "Serial Number"
+        },
+        "networkInterfaces": {
+            "networkInterfacesInfo": "Network Interfaces Info",
+            "id": "Id",
+            "mACAddress": "MAC Address",
+            "interfaceEnabled": "Interface Enabled",
+            "iPv4Addresses": "IPv4 Addresses",
+            "hostName": "HostName",
+            "state": "State"
+        },
+        "networkInterfaceIPv6": {
+            "networkInterfaceIPv6Info": "IPv6 Addresses Info",
+            "address": "Address",
+            "prefixLength": "PrefixLength",
+            "addressOrigin": "AddressOrigin",
+            "id": "Id",
+            "name": "Name"
+        },
+        "power": {
+            "power": "Power",
+            "powerInfo": "Power control Info",
+            "name": "Name",
+            "maxConsumedWatts": "MaxConsumedWatts",
+            "minConsumedWatts": "MinConsumedWatts",
+            "manufacturer": "Manufacturer",
+            "model": "Model",
+            "plugType": "Plug Type",
+            "powerCapacityWatts": "Power Capacity Watts",
+            "PowerSupplyType": "Power SupplyType",
+            "SerialNumber": "Serial Number",
+            "state": "State"
+        },
+        "voltage": {
+            "voltageControlInfo": "Voltage Info",
+            "name": "Name",
+            "state": "State",
+            "readingUnits": "Reading Units",
+            "reading": "Reading",
+            "minReadingRange": "MinReadingRange",
+            "maxReadingRange": "MaxReadingRange",
+            "readingType": "Reading Type",
+            "upperThresholdFatal": "UF",
+            "upperThresholdCritical": "UC",
+            "lowerThresholdCritical": "LC",
+            "lowerThresholdFatal": "LF"
+        },
+        "thermal": {
+            "thermal": "Thermal",
+            "fanINFO": "Fan Info",
+            "name": "Name",
+            "sensorNumber": "SensorNumber",
+            "state": "State",
+            "readingRPM": "ReadingRPM",
+            "minReadingRange": "MinReadingRange",
+            "maxReadingRange": "MaxReadingRange"
+        },
+        "temperature": {
+            "temperatureInfo": "Temperature Info",
+            "name": "Name",
+            "physicalContext": "PhysicalContext",
+            "state": "State",
+            "readingUnits": "Reading Units",
+            "reading": "Reading",
+            "minReadingRange": "MinReadingRange",
+            "maxReadingRange": "MaxReadingRange",
+            "readingType": "Reading Type",
+            "upperThresholdFatal": "UF",
+            "upperThresholdCritical": "UC",
+            "lowerThresholdCritical": "LC",
+            "lowerThresholdFatal": "LF"
+        },
+        "pcieDevice": {
+            "pcieDevice": "PCIE Device",
+            "pcieDeviceInfo": "PCIE Device Info",
+            "name": "Name",
+            "id": "Id",
+            "description": "Description",
+            "manufacturer": "Manufacturer",
+            "assetTag": "AssetTag",
+            "deviceType": "DeviceType",
+            "firmwareVersion": "FirmwareVersion",
+            "state": "State"
+        },
+        "pcieFunction": {
+            "pcieFunction": "PCIE Function",
+            "pcieFunctionInfo": "PCIE Function Info",
+            "id": "Id",
+            "name": "Name",
+            "deviceLinked": "DeviceLinked",
+            "deviceClass": "DeviceClass",
+            "classCode": "ClassCode",
+            "deviceId": "DeviceId",
+            "vendorId": "VendorId",
+            "functionId": "FunctionId",
+            "functionType": "FunctionType",
+            "revisionId": "RevisionId",
+            "subSystemId": "SubSystemId",
+            "subSystemVendorId": "SubSystemVendorId",
+            "state": "State"
+        },
+        "storage": {
+            "storage": "Storage",
+            "storageDriveInfo": "Storage Drive Info",
+            "id": "Id",
+            "name": "Name",
+            "serialNumuber": "Serial Number",
+            "manufacturer": "Manufacturer",
+            "protocol": "Protocol",
+            "model": "Model",
+            "revision": "Revision",
+            "encryptionStatus": "EncryptionStatus",
+            "mediaType": "MediaType",
+            "state": "State"
+        },
+        "storageController": {
+            "storageControllerInfo": "Storage Controller Info",
+            "memberId": "MemberId",
+            "name": "Name",
+            "serialNumuber": "Serial Number",
+            "model": "Model",
+            "firmwareVersion": "FirmwareVersion",
+            "speedGbs": "SpeedGbs",
+            "state": "State"
+        }
     },
     "pageBackupAndRestore": {
         "backup": "Backup",
@@ -1580,6 +1772,12 @@
         "raidController": "RAID Controller",
         "raidLevel": "RAID Level",
         "virtualDeviceName": "Virtual Device Name",
+        "logicalDeviceName": "Logical Device Name",
+        "stripSize": "Strip Size",
+        "size": "Size in Bytes",
+        "parityGroupCount": "Parity Group Count",
+        "arrayNumber": "Array Number",
+        "accelerator": "Accelerator",
         "spanDepth": "Span Depth",
         "numberOfDrives": "Number of Drives per Span",
         "initState": "Initialization State",
@@ -1594,7 +1792,7 @@
         "initStateOptions": {
             "noInitialization": "No Initialization",
             "quickInitialization": "Quick Initialization",
-            "fastInitialization": "Fast Initialization"
+            "fullInitialization": "Full Initialization"
         },
         "readPolicyOptions": {
             "noReadAhead": "No Read Ahead",
@@ -1649,7 +1847,8 @@
             "errorDeleteLogicalDevice": "Error in deleting the Logical Device.",
             "errorNumberOfDrivesValidation": "Number of Drives count should not higher than UnConfigured Physical Device count!",
             "errorMinMaxSpanDepth": "The minimum and maximum Span Depth is 2.",
-            "errorSpanDepthDrives": "Selected UnConfig Drives should be equal to multiple of Span Depth and Drives per Span."
+            "errorSpanDepthDrives": "Selected UnConfig Drives should be equal to multiple of Span Depth and Drives per Span.",
+            "errorMsccSize": "Size should be divisible by Strip Size."
         }
     },
     "pageFireWall": {
@@ -1693,6 +1892,33 @@
             "errorSaveFireWall": "Error saved Firewall Rules.",
             "errorDelete": "Error deleting FireWall Rules.",
             "errorDateOrTimeSaveFireWall": "Invalid Date or Time."
+        }
+    },
+    "bond": {
+        "bond": "Network Bond",
+        "bondInterface": "Bond Interface",
+        "enableBonding": "Enable Bonding",
+        "mitMonitorinms": "MII Monitor(millisecond)",
+        "confirmOk": "Ok | Ok",
+        "confirmMsg": "Saving LAN settings will restart the BMC's network services. Please reconnect using new browser session after applying the changes. Do you want to proceed?",
+        "sameBondSettings": "Network Bond Configuration are same, so no need to save.",
+        "BondWithSingleInterface":"Bond cannot be enabled with a single interface.",
+        "errorSavebond": "Error saved Network Bond.",
+        "errorDelete": "Error deleting Network Bond.",
+        "errorGetBond": "Error getting Network Bond.",
+        "miiRangeRequired": "Enter valid milliseconds between 1-100"
+    },
+    "license": {
+        "add_license_key": "Add License Key",
+        "license_key": "License Key",
+        "userAlertCount": "User Alert Count",
+        "userAlertCountPercentage": "User Alert Count Days",
+        "licenseExpired": "Your module license expired. Kindly update the valid license key in",
+        "licensePageLink": "[ License Page Link. ]",
+        "userAlertCountRangeRequired": "Kindly enter the valid count days",
+        "toast": {
+            "successSavelicense": "Successfully saved License.",
+            "errorsavedlicense": "Error saved License."
         }
     },
     "countries": {

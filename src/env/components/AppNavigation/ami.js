@@ -159,6 +159,11 @@ const AppNavigationMixin = {
               route: '/settings/network',
             },
             {
+              id: 'network_bond',
+              label: this.$t('appNavigation.bond'),
+              route: '/settings/bond',
+            },
+            {
               id: 'vlan',
               label: this.$t('appNavigation.vlan'),
               route: '/settings/vlan',
@@ -182,6 +187,11 @@ const AppNavigationMixin = {
               id: 'cups',
               label: this.$t('appNavigation.cups'),
               route: '/settings/cups',
+            },
+            {
+              id: 'license',
+              label: this.$t('appNavigation.license'),
+              route: '/settings/license',
             },
           ],
         },
@@ -245,6 +255,12 @@ const AppNavigationMixin = {
               route: '/host-system-diagnostics/asd',
             },
           ],
+        },
+        {
+          id: 'system-inventory',
+          label: this.$t('appNavigation.systemInventory'),
+          route: '/system-inventory',
+          icon: 'iconLogs',
         },
         {
           id: 'resource-management',

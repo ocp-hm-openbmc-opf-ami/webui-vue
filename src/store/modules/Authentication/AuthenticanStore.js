@@ -88,6 +88,12 @@ const AuthenticationStore = {
       state.xsrfCookie = Cookies.get('XSRF-TOKEN');
       state.isAuthenticatedCookie = Cookies.get('IsAuthenticated');
     },
+    customizedResetLogout({ commit }) {
+      commit('setConsoleWindow', false);
+      commit('logout');
+      localStorage.removeItem('storedLanguage');
+      router.push('/login');
+    },
   },
 };
 
