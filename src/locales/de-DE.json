@@ -1581,6 +1581,13 @@
             "status": "Status",
             "upperWarning": "Obere Warnung",
             "upperCritical": "Oberer kritischer"
+        },
+        "sensorgraph": {
+            "frame": "Rahmen (Minuten)",
+            "Interval": "Intervall (Sekunden)",
+            "Back": "Zurück",
+            "displayGraph": "Diagramm anzeigen"
+
         }
     },
     "pageSerialOverLan": {
