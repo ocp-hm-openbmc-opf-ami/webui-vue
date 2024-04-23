@@ -26,9 +26,7 @@ const FirmwareStore = {
       );
     },
     backupBmcFirmware: (state) => {
-      return state.bmcFirmware.find(
-        (firmware) => firmware.id !== state.bmcActiveFirmwareId
-      );
+      return state.bmcFirmware.find((firmware) => firmware.id === 'bmc_bkup');
     },
     backupHostFirmware: (state) => {
       return state.hostFirmware.find(
