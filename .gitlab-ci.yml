@@ -55,7 +55,7 @@ variables:
       echo "Bucket name $OT_SSTATE_BUCKET"
       #aws s3 sync s3://ami-gitlab-s3cache-7xhp/onetree $/HOME/cache/onetree
       # if [[ ${CI_RUNNER_TAGS,,} =~ "aws" && ! "$mr_labels" =~ "OT_ENABLE_COVERITY" ]];
-      if [[ ${CI_RUNNER_TAGS,,} =~ "aws"]];
+      if [[ ${CI_RUNNER_TAGS,,} =~ "aws" ]];
       then 
         sync_start_time=$(date +%s)
         # mkdir -p $HOME/cache/onetree
