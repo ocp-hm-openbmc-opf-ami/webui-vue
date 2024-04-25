@@ -31,11 +31,14 @@
           id="table-session-logs"
           ref="table"
           responsive="md"
-          selectable
-          no-select-on-click
           hover
           show-empty
+          sort-icon-left
+          no-sort-reset
+          sort-desc
+          selectable
           sort-by="sessionID"
+          no-select-on-click
           :busy="isBusy"
           :fields="fields"
           :items="allConnections"
@@ -78,7 +81,14 @@
               :btn-icon-only="false"
               :data-test-id="`sessions-button-disconnect-${row.index}`"
               @click-table-action="onTableRowAction($event, row.item)"
-            ></table-row-action>
+            >
+              <template #icon>
+                <icon-trashcan
+                  v-if="action.value === 'delete'"
+                  :data-test-id="`userManagement-tableRowAction-delete-${index}`"
+                />
+              </template>
+            </table-row-action>
           </template>
         </b-table>
       </b-col>
@@ -119,7 +129,7 @@ import Search from '@/components/Global/Search';
 import TableCellCount from '@/components/Global/TableCellCount';
 import TableRowAction from '@/components/Global/TableRowAction';
 import TableToolbar from '@/components/Global/TableToolbar';
-
+import IconTrashcan from '@carbon/icons-vue/es/trash-can/20';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import BVPaginationMixin, {
   currentPage,
@@ -143,6 +153,7 @@ export default {
     TableCellCount,
     TableRowAction,
     TableToolbar,
+    IconTrashcan,
   },
   mixins: [
     BVPaginationMixin,
@@ -164,26 +175,43 @@ export default {
         {
           key: 'checkbox',
           class: 'text-center',
+          sortable: false,
         },
         {
           key: 'sessionID',
           label: this.$t('pageSessions.table.sessionID'),
           class: 'text-center',
+          sortable: true,
         },
         {
-          key: 'context',
-          label: this.$t('pageSessions.table.context'),
+          key: 'sessionType',
+          label: this.$t('pageSessions.table.sessionType'),
           class: 'text-center',
+          sortable: true,
+        },
+        {
+          key: 'userID',
+          label: this.$t('pageSessions.table.userID'),
+          class: 'text-center',
+          sortable: true,
         },
         {
           key: 'username',
           label: this.$t('pageSessions.table.username'),
           class: 'text-center',
+          sortable: true,
         },
         {
           key: 'ipAddress',
           label: this.$t('pageSessions.table.ipAddress'),
           class: 'text-center',
+          sortable: true,
+        },
+        {
+          key: 'privilege',
+          label: this.$t('pageSessions.table.privilege'),
+          class: 'text-center',
+          sortable: true,
         },
         {
           key: 'actions',
@@ -191,10 +219,16 @@ export default {
           class: 'text-center',
         },
       ],
+      tableToolbarActions: [
+        {
+          value: 'delete',
+          label: this.$t('global.action.delete'),
+        },
+      ],
       batchActions: [
         {
-          value: 'disconnect',
-          label: this.$t('pageSessions.action.disconnect'),
+          value: 'delete',
+          label: this.$t('global.action.delete'),
         },
       ],
       currentPage: currentPage,
@@ -219,8 +253,8 @@ export default {
           ...session,
           actions: [
             {
-              value: 'disconnect',
-              title: this.$t('pageSessions.action.disconnect'),
+              value: 'delete',
+              title: this.$t('pageSessions.action.delete'),
             },
           ],
         };
@@ -254,22 +288,22 @@ export default {
           });
         });
     },
-    onTableRowAction(action, { uri }) {
-      if (action === 'disconnect') {
+    onTableRowAction(action, row) {
+      if (action === 'delete') {
         this.$bvModal
           .msgBoxConfirm(this.$tc('pageSessions.modal.disconnectMessage'), {
             title: this.$tc('pageSessions.modal.disconnectTitle'),
-            okTitle: this.$t('pageSessions.action.disconnect'),
+            okTitle: this.$t('pageSessions.action.delete'),
             cancelTitle: this.$t('global.action.cancel'),
           })
           .then((deleteConfirmed) => {
-            if (deleteConfirmed) this.disconnectSessions([uri]);
+            if (deleteConfirmed) this.disconnectSessions([row]);
           });
       }
     },
     onBatchAction(action) {
-      if (action === 'disconnect') {
-        const uris = this.selectedRows.map((row) => row.uri);
+      if (action === 'delete') {
+        const uris = this.selectedRows.map((row) => row);
         this.$bvModal
           .msgBoxConfirm(
             this.$tc(
@@ -281,7 +315,7 @@ export default {
                 'pageSessions.modal.disconnectTitle',
                 this.selectedRows.length
               ),
-              okTitle: this.$t('pageSessions.action.disconnect'),
+              okTitle: this.$t('pageSessions.action.delete'),
               cancelTitle: this.$t('global.action.cancel'),
             }
           )

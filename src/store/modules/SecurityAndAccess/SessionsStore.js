@@ -27,11 +27,11 @@ const SessionsStore = {
           const allConnectionsData = sessionUris.map((sessionUri) => {
             return {
               sessionID: sessionUri.data?.Id,
-              context: sessionUri.data?.Context
-                ? sessionUri.data?.Context
-                : '-',
+              sessionType: sessionUri.data?.SessionType,
+              userID: sessionUri.data?.UserId ? sessionUri.data?.UserId : 'NA',
               username: sessionUri.data?.UserName,
               ipAddress: sessionUri.data?.ClientOriginIPAddress,
+              privilege: sessionUri.data?.Roles,
               uri: sessionUri.data['@odata.id'],
             };
           });
@@ -41,13 +41,38 @@ const SessionsStore = {
           console.log('Client Session Data:', error);
         });
     },
-    async disconnectSessions({ dispatch }, uris = []) {
-      const promises = uris.map((uri) =>
-        api.delete(uri).catch((error) => {
-          console.log(error);
-          return error;
-        })
-      );
+    async disconnectSessions({ dispatch }, sessions = []) {
+      let promises = [];
+      let webUrls = [];
+      let mediaUrls = [];
+      if (Array.isArray(sessions)) {
+        for (const data of sessions) {
+          if (data.sessionType === 'KVM' || data.sessionType === 'VMEDIA') {
+            mediaUrls.push(data.uri);
+          } else {
+            webUrls.push(data.uri);
+          }
+        }
+        for (const uri of mediaUrls) {
+          promises.push(
+            api.post(uri).catch((error) => {
+              console.log(error);
+              return error;
+            })
+          );
+        }
+        for (const uri of webUrls) {
+          promises.push(
+            api.delete(uri).catch((error) => {
+              console.log(error);
+              return error;
+            })
+          );
+        }
+      }
+      if (promises.length === 0) {
+        return [];
+      }
       return await api
         .all(promises)
         .then((response) => {

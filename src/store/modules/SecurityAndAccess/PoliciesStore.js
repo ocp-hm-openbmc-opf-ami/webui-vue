@@ -22,6 +22,8 @@ const PoliciesStore = {
     ssdpPortValue: null,
     snmpProtocolEnabled: false,
     snmpPortValue: null,
+    kvmSessionTimeout: null,
+    kvmPortValue: null,
   },
   getters: {
     sshProtocolEnabled: (state) => state.sshProtocolEnabled,
@@ -42,6 +44,8 @@ const PoliciesStore = {
     ssdpPortValue: (state) => state.ssdpPortValue,
     snmpProtocolEnabled: (state) => state.snmpProtocolEnabled,
     snmpPortValue: (state) => state.snmpPortValue,
+    kvmSessionTimeout: (state) => state.kvmSessionTimeout,
+    kvmPortValue: (state) => state.kvmPortValue,
   },
   mutations: {
     setSshProtocolEnabled: (state, sshProtocolEnabled) =>
@@ -75,6 +79,10 @@ const PoliciesStore = {
       (state.snmpProtocolEnabled = snmpProtocolEnabled),
     setSnmpPort: (state, snmpPortValue) =>
       (state.snmpPortValue = snmpPortValue),
+    setKvmSessionTimeout: (state, kvmSessionTimeout) =>
+      (state.kvmSessionTimeout = kvmSessionTimeout),
+    setKvmPortValue: (state, kvmPortValue) =>
+      (state.kvmPortValue = kvmPortValue),
   },
   actions: {
     setSolSshPortUpdatedValue({ commit }, solSshProtocolPort) {
@@ -131,7 +139,13 @@ const PoliciesStore = {
         .get('/redfish/v1/SessionService')
         .then((response) => {
           const sessionTimeoutValue = response.data.SessionTimeout;
+          const kvmSessionTimeoutValue = Math.floor(
+            response.data?.Oem?.OpenBmc?.KVMSessionTimeout / 60
+          );
+          const kvmPortValue = response.data?.Oem?.OpenBmc?.BMCwebPort;
           commit('setSessionTimeoutValue', sessionTimeoutValue);
+          commit('setKvmSessionTimeout', kvmSessionTimeoutValue);
+          commit('setKvmPortValue', kvmPortValue);
         })
         .catch((error) => console.log(error));
     },
@@ -464,6 +478,45 @@ const PoliciesStore = {
           if (passwordHistoryValue) {
             throw new Error(i18n.t('pagePolicies.toast.errorPasswordHistory'));
           }
+        });
+    },
+    async saveKVMSessionTimeout({ dispatch }, KVMSessionTimeoutValue) {
+      const KVMSessionTimeout = Math.ceil(KVMSessionTimeoutValue * 60);
+      const Oem = {
+        Oem: {
+          OpenBmc: {
+            KVMSessionTimeout: KVMSessionTimeout,
+          },
+        },
+      };
+      return await api
+        .patch('/redfish/v1/SessionService', Oem)
+        .then(() => dispatch('getSessionTimeout'))
+        .then(() => {
+          return i18n.t('pagePolicies.toast.successKVMSessionTimeout');
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(i18n.t('pagePolicies.toast.errorKVMSessionTimeout'));
+        });
+    },
+    async saveKVMPortValue({ dispatch }, kvmPortValue) {
+      const Oem = {
+        Oem: {
+          OpenBmc: {
+            BMCwebPort: kvmPortValue,
+          },
+        },
+      };
+      return await api
+        .patch('/redfish/v1/SessionService', Oem)
+        .then(() => dispatch('getSessionTimeout'))
+        .then(() => {
+          return i18n.t('pagePolicies.toast.successKVMPort');
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(i18n.t('pagePolicies.toast.errorKVMPort'));
         });
     },
   },

@@ -492,7 +492,7 @@
     },
     "pageSessions": {
         "action": {
-            "disconnect": "取消連結"
+            "delete": "刪除"
         },
         "modal": {
             "disconnectTitle": "取消連結對談| 取消連結對談們",
@@ -500,9 +500,11 @@
         },
         "table": {
             "sessionID": "對談 ID",
-            "context": "內容",
+            "sessionType": "會話類型",
+            "userID": "使用者 ID",
             "username": "使用者名稱",
             "ipAddress": "IP 位址",
+            "privilege": "特權",
             "searchSessions": "搜尋對談們"
         },
         "toast": {
@@ -1498,6 +1500,8 @@
             "errorSSDPEnabled": "啟用 SSDP 安全設定時出錯.",
             "errorSNMPDisabled": "停用 SNMP 安全設定時出錯.",
             "errorSNMPEnabled": "啟用 SNMP 安全設定時發生錯誤.",
+            "errorKVMPort": "設定 KVM 連接埠值錯誤.",
+            "errorKVMSessionTimeout": "配置 KVM 會話逾時時發生錯誤.",
             "successIpmiDisabled": "停用 IPMI 安全設定成功",
             "successIpmiEnabled": "啟用 IPMI 安全設定成功",
             "successRtadDisabled": "停用 RTAD 安全設定成功",
@@ -1518,7 +1522,9 @@
             "successSSDPDisabled": "成功停用 SSDP 安全性設定.",
             "successSSDPEnabled": "成功啟用 SSDP 安全性設定.",
             "successSNMPDisabled": "已成功停用 SNMP 安全性設定.",
-            "successSNMPEnabled": "已成功啟用 SNMP 安全性設定."
+            "successSNMPEnabled": "已成功啟用 SNMP 安全性設定.",
+            "successKVMPort": "成功更新 KVM 連接埠值。.",
+            "successKVMSessionTimeout": "成功配置 KVM 會話逾時。."
         },
         "options": {
             "30minutes": "30 分鐘",
@@ -1553,7 +1559,10 @@
         "servicesPolicies": "服務",
         "snmpProtocol": "SNMP",
         "snmpPortLabel": "SNMP 連接埠值",
-        "snmpDescription": "啟用 SNMP 協定"
+        "snmpDescription": "啟用 SNMP 協定",
+        "kvmSessionTimeOut": "KVM 會話逾時",
+        "kvmSessionTimeOutDescription": "將 kvm 會話逾時變更為 1 分鐘到 30 分鐘的時間延遲",
+        "kvmPortValue": "KVM 連接埠值（以數字表示）"
     },
     "pagePower": {
         "description": "設置電源上限以使功耗保持在或低於指定值",

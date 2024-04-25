@@ -492,7 +492,7 @@
     },
     "pageSessions": {
         "action": {
-            "disconnect": "Trennen"
+            "delete": "Löschen"
         },
         "modal": {
             "disconnectTitle": "Sitzung trennen| Sitzungen trennen",
@@ -500,9 +500,11 @@
         },
         "table": {
             "sessionID": "Sitzung ID",
-            "context": "Kontext",
+            "sessionType": "Sitzungstyp",
+            "userID": "Benutzer ID",
             "username": "Nutzername",
             "ipAddress": "IP Adresse",
+            "privilege": "Privileg",
             "searchSessions": "Suchsitzungen"
         },
         "toast": {
@@ -1498,6 +1500,8 @@
             "errorSSDPEnabled": "Fehler beim Aktivieren der SSDP Sicherheitseinstellung.",
             "errorSNMPDisabled": "Fehler beim Deaktivieren der SNMP Sicherheitseinstellung.",
             "errorSNMPEnabled": "Fehler beim Aktivieren der SNMP Sicherheitseinstellung.",
+            "errorKVMPort": "Fehler beim Festlegen des KVM-Portwerts.",
+            "errorKVMSessionTimeout": "Fehler beim Konfigurieren des KVM-Sitzungs-Timeouts.",
             "successIpmiDisabled": "IPMI Sicherheitseinstellung erfolgreich deaktiviert.",
             "successIpmiEnabled": "IPMI Sicherheitseinstellung erfolgreich aktiviert.",
             "successRtadDisabled": "Die RTAD Sicherheitseinstellung wurde erfolgreich deaktiviert.",
@@ -1518,7 +1522,9 @@
             "successSSDPDisabled": "SSDP Sicherheitseinstellung erfolgreich deaktiviert.",
             "successSSDPEnabled": "SSDP Sicherheitseinstellung erfolgreich aktiviert.",
             "successSNMPDisabled": "SNMP Sicherheitseinstellung erfolgreich deaktiviert.",
-            "successSNMPEnabled": "SNMP Sicherheitseinstellung erfolgreich aktiviert."
+            "successSNMPEnabled": "SNMP Sicherheitseinstellung erfolgreich aktiviert.",
+            "successKVMPort": "Wert des KVM-Ports erfolgreich aktualisiert.",
+            "successKVMSessionTimeout": "Das KVM-Sitzungs-Timeout wurde erfolgreich konfiguriert.."
         },
         "options": {
             "30minutes": "30 Protokoll",
@@ -1553,7 +1559,10 @@
         "servicesPolicies": "Dienstleistungen",
         "snmpProtocol": "SNMP",
         "snmpPortLabel": "SNMP Portwert",
-        "snmpDescription": "Aktivieren des SNMP Protokolls"
+        "snmpDescription": "Aktivieren des SNMP Protokolls",
+        "kvmSessionTimeOut": "Zeitüberschreitung der KVM-Sitzung",
+        "kvmSessionTimeOutDescription": "Ändern Sie das Zeitlimit für die KVM-Sitzung zwischen 1 Minute und 30 Minuten Zeitverzögerung",
+        "kvmPortValue": "KVM-Portwert (in Zahlen)"
     },
     "pagePower": {
         "description": "Legen Sie eine Leistungsobergrenze fest, um den Stromverbrauch auf oder unter dem angegebenen Wert in Watt zu halten",

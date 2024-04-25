@@ -495,7 +495,7 @@
     },
     "pageSessions": {
         "action": {
-            "disconnect": "Disconnect"
+            "delete": "Delete"
         },
         "modal": {
             "disconnectTitle": "Disconnect session| Disconnect sessions",
@@ -503,9 +503,11 @@
         },
         "table": {
             "sessionID": "Session ID",
-            "context": "Context",
-            "username": "Username",
+            "sessionType": "Session Type",
+            "userID": "User ID",
+            "username": "User Name",
             "ipAddress": "IP address",
+            "privilege": "Privilege",
             "searchSessions": "Search sessions"
         },
         "toast": {
@@ -1525,6 +1527,8 @@
             "errorSSDPEnabled": "Error enabling SSDP security setting.",
             "errorSNMPDisabled": "Error disabling SNMP security setting.",
             "errorSNMPEnabled": "Error enabling SNMP security setting.",
+            "errorKVMPort": "Error in setting KVM port value.",
+            "errorKVMSessionTimeout": "Error configuring KVM session timeout.",
             "successIpmiDisabled": "Successfully disabled IPMI security setting.",
             "successIpmiEnabled": "Successfully enabled IPMI security setting.",
             "successRtadDisabled": "Successfully disabled RTAD security setting.",
@@ -1545,7 +1549,9 @@
             "successSSDPDisabled": "Successfully disabled SSDP security setting.",
             "successSSDPEnabled": "Successfully enabled SSDP security setting.",
             "successSNMPDisabled": "Successfully disabled SNMP security setting.",
-            "successSNMPEnabled": "Successfully enabled SNMP security setting."
+            "successSNMPEnabled": "Successfully enabled SNMP security setting.",
+            "successKVMPort": "Successfully update KVM Port value.",
+            "successKVMSessionTimeout": "Successfully configured the KVM session timeout."
         },
         "options": {
             "30minutes": "30 Minutes",
@@ -1580,7 +1586,11 @@
         "servicesPolicies": "Services",
         "snmpProtocol": "SNMP",
         "snmpPortLabel": "SNMP Port value",
-        "snmpDescription": "Enabling SNMP Protocol"
+        "snmpDescription": "Enabling SNMP Protocol",
+        "kvmSessionTimeOut": "KVM Session Timeout",
+        "kvmSessionTimeOutDescription": "Change the kvm session timeout in between 1 Minutes to 30 Minutes time delay",
+        "kvmPortValue": "KVM Port Value (in numbers)"
+
     },
     "pagePower": {
         "description": "Set a power cap to keep power consumption at or below the specified value in watts",

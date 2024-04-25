@@ -489,7 +489,7 @@
     },
     "pageSessions": {
         "action": {
-            "disconnect": "取消连结"
+            "delete": "删除"
         },
         "modal": {
             "disconnectTitle": "取消连结对谈| 取消连结对谈们",
@@ -497,9 +497,11 @@
         },
         "table": {
             "sessionID": "对谈 ID",
-            "context": "内容",
+            "sessionType": "会话类型",
+            "userID": "用户 ID",
             "username": "使用者名称",
             "ipAddress": "IP 位址",
+            "privilege": "特权",
             "searchSessions": "搜寻对谈们"
         },
         "toast": {
@@ -1494,6 +1496,8 @@
             "errorSSDPEnabled": "启用 SSDP 安全设置时出错.",
             "errorSNMPDisabled": "禁用 SNMP 安全设置时出错.",
             "errorSNMPEnabled": "启用 SNMP 安全设置时出错.",
+            "errorKVMPort": "KVM 端口值设置错误。",
+            "errorKVMSessionTimeout": "配置 KVM 会话超时时出错。",
             "successIpmiDisabled": "停用 IPMI 安全设定成功",
             "successIpmiEnabled": "启用 IPMI 安全设定成功",
             "successRtadDisabled": "停用 RTAD 安全设定成功",
@@ -1514,7 +1518,9 @@
             "successSSDPDisabled": "成功禁用 SSDP 安全设置.",
             "successSSDPEnabled": "成功启用 SSDP 安全设置.",
             "successSNMPDisabled": "已成功禁用 SNMP 安全设置.",
-            "successSNMPEnabled": "已成功启用 SNMP 安全设置."
+            "successSNMPEnabled": "已成功启用 SNMP 安全设置.",
+            "successKVMPort": "成功更新 KVM 端口值。",
+            "successKVMSessionTimeout": "成功配置 KVM 会话超时。"
         },
         "options": {
             "30minutes": "30 分钟",
@@ -1549,7 +1555,10 @@
         "servicesPolicies": "服务",
         "snmpProtocol": "SNMP",
         "snmpPortLabel": "SNMP 端口值",
-        "snmpDescription": "启用 SNMP 协议"
+        "snmpDescription": "启用 SNMP 协议",
+        "kvmSessionTimeOut": "KVM 会话超时",
+        "kvmSessionTimeOutDescription": "将 kvm 会话超时更改为 1 分钟到 30 分钟的时间延迟",
+        "kvmPortValue": "KVM 端口值（以数字表示）"
     },
     "pagePower": {
         "description": "设置电源上限以使功耗保持在或低于指定值",

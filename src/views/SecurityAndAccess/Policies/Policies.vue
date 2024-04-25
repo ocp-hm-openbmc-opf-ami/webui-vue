@@ -149,6 +149,33 @@
                   </b-form-checkbox>
                 </b-col>
               </b-row>
+              <b-row v-if="kvmState" class="setting-section">
+                <b-col cols="3" class="d-flex align-items-center">
+                  <b-form-group
+                    id="input-group-kvm-port"
+                    :label="$t('pagePolicies.kvmPortValue')"
+                    label-for="input-kvm-port"
+                  >
+                    <b-form-input
+                      id="input-kvm-port"
+                      v-model.number="kvmPort"
+                      data-test-id="input-kvmPort"
+                      type="number"
+                      aria-describedby="power-help-text"
+                    ></b-form-input>
+                  </b-form-group>
+                </b-col>
+                <b-col class="d-flex align-items-center">
+                  <b-button
+                    variant="primary"
+                    type="submit"
+                    data-test-id="button-saveKVMPortValue"
+                    @click="saveKVMPortValue"
+                  >
+                    {{ $t('global.action.save') }}
+                  </b-button>
+                </b-col>
+              </b-row>
               <b-row class="setting-section">
                 <b-col
                   lg="7"
@@ -357,6 +384,48 @@
                   class="d-flex align-items-center justify-content-between"
                 >
                   <dl class="mt-3 mr-3 w-75">
+                    <dt>{{ $t('pagePolicies.kvmSessionTimeOut') }}</dt>
+                    <dd>
+                      {{ $t('pagePolicies.kvmSessionTimeOutDescription') }}
+                    </dd>
+                  </dl>
+                </b-col>
+                <b-col lg="3" class="session-timeout text-right">
+                  <b-form-group>
+                    <b-form-input
+                      id="kvm-session"
+                      v-model="kvmSessionTimeOutValue"
+                      data-test-id="kvm-session-timeout"
+                      type="number"
+                      aria-describedby="power-help-text"
+                      :state="getValidationState($v.kvmSessionTimeOutValue)"
+                      @input="$v.kvmSessionTimeOutValue.$touch()"
+                    ></b-form-input>
+                    <b-form-invalid-feedback role="alert">
+                      <template v-if="!$v.kvmSessionTimeOutValue.required">
+                        {{ $t('global.form.fieldRequired') }}
+                      </template>
+                      <template v-else-if="!$v.kvmSessionTimeOutValue.pattern">
+                        {{ $t('global.form.invalidFormat') }}
+                      </template>
+                    </b-form-invalid-feedback>
+                  </b-form-group>
+                  <b-button
+                    variant="primary"
+                    type="submit"
+                    data-test-id="power-button-saveIpmiPortValue"
+                    @click="saveKVMSessionTimeoutValue"
+                  >
+                    {{ $t('global.action.save') }}
+                  </b-button>
+                </b-col>
+              </b-row>
+              <b-row class="setting-section">
+                <b-col
+                  lg="7"
+                  class="d-flex align-items-center justify-content-between"
+                >
+                  <dl class="mt-3 mr-3 w-75">
                     <dt>{{ $t('pagePolicies.complexity') }}</dt>
                     <dd>
                       {{ $t('pagePolicies.complexityDescription') }}
@@ -407,11 +476,13 @@ import PageTitle from '@/components/Global/PageTitle';
 import PageSection from '@/components/Global/PageSection';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
-
+import { required } from 'vuelidate/lib/validators';
+import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
+import { mapState } from 'vuex';
 export default {
   name: 'Policies',
   components: { PageTitle, PageSection },
-  mixins: [LoadingBarMixin, BVToastMixin],
+  mixins: [LoadingBarMixin, BVToastMixin, VuelidateMixin],
   beforeRouteLeave(to, from, next) {
     this.hideLoader();
     next();
@@ -440,6 +511,8 @@ export default {
         { value: 4, text: 4 },
         { value: 5, text: 5 },
       ],
+      kvmSessionTimeOutValue: this.$store.getters['policies/kvmSessionTimeout'],
+      kvmPort: this.$store.getters['policies/kvmPortValue'],
       modifySSHPolicyDisabled:
         process.env.VUE_APP_MODIFY_SSH_POLICY_DISABLED === 'true',
       DisplaySection: false,
@@ -564,6 +637,15 @@ export default {
     ssdpPortValue() {
       return this.$store.getters['policies/ssdpPortValue'];
     },
+    ...mapState('policies', ['kvmSessionTimeout', 'kvmPortValue']),
+  },
+  watch: {
+    kvmSessionTimeout: function (value) {
+      this.kvmSessionTimeOutValue = value;
+    },
+    kvmPortValue: function (value) {
+      this.kvmPort = value;
+    },
   },
   created() {
     this.startLoader();
@@ -574,6 +656,16 @@ export default {
       this.$store.dispatch('policies/getKvmServiceStatus'),
       this.$store.dispatch('policies/getAccountService'),
     ]).finally(() => this.endLoader());
+  },
+  validations() {
+    return {
+      kvmSessionTimeOutValue: {
+        required,
+        pattern: function (pw) {
+          return this.timeoutValidation(pw);
+        },
+      },
+    };
   },
   methods: {
     changeIpmiProtocolState(state) {
@@ -659,6 +751,29 @@ export default {
         .dispatch('policies/saveSnmpProtocolState', state ? true : false)
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
+    },
+    saveKVMSessionTimeoutValue() {
+      this.$v.$touch();
+      if (this.$v.$invalid) return;
+      this.$store
+        .dispatch(
+          'policies/saveKVMSessionTimeout',
+          parseInt(this.kvmSessionTimeOutValue)
+        )
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
+    saveKVMPortValue() {
+      this.$store
+        .dispatch('policies/saveKVMPortValue', parseInt(this.kvmPort))
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
+    timeoutValidation(val) {
+      if (!/^([1-9]|[1-2][0-9]|30)$/.test(val)) {
+        return false;
+      }
+      return true;
     },
   },
 };
