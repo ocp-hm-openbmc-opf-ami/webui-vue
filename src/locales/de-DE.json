@@ -402,7 +402,7 @@
         "restore": "Wiederherstellen",
         "authentication": "Authentifizierung",
         "ipmi": "IPMI",
-        "kvm": "KVM",
+        "virtualMedia": "Virtuelle Medien",
         "network": "Netzwerk",
         "ntp": "NTP",
         "smtp": "SMTP",

@@ -1,6 +1,6 @@
 <template>
   <b-container fluid="xl">
-    <div class="form-background p-5">
+    <div class="form-background p-8">
       <b-row>
         <b-col md="9" lg="8" xl="9">
           <b-form-group :label="$t('pageBackupAndRestore.checkAll')">
@@ -49,13 +49,13 @@
         <b-col class="d-flex" cols="2">
           <dl class="mr-3 w-10">
             <dd class="font_style">
-              {{ $t('pageBackupAndRestore.kvm') }}
+              {{ $t('pageBackupAndRestore.virtualMedia') }}
             </dd>
           </dl>
         </b-col>
         <b-col cols="10">
-          <b-form-checkbox id="kvm" v-model="KVM" switch>
-            <span v-if="KVM">{{ $t('global.status.enabled') }}</span>
+          <b-form-checkbox id="virtualMedia" v-model="VirtualMedia" switch>
+            <span v-if="VirtualMedia">{{ $t('global.status.enabled') }}</span>
             <span v-else>{{ $t('global.status.disabled') }}</span>
           </b-form-checkbox>
         </b-col>
@@ -169,7 +169,7 @@ export default {
   data() {
     return {
       SMTP: this.$store.getters['backupAndRestore/smtp'],
-      KVM: this.$store.getters['backupAndRestore/kvm'],
+      VirtualMedia: this.$store.getters['backupAndRestore/virtualMedia'],
       IPMI: this.$store.getters['backupAndRestore/ipmi'],
       Network: this.$store.getters['backupAndRestore/network'],
       NTP: this.$store.getters['backupAndRestore/ntp'],
@@ -182,20 +182,20 @@ export default {
   computed: {
     allSelected: {
       get() {
-        return this.SMTP && this.KVM && this.Network;
+        return this.SMTP && this.VirtualMedia && this.Network;
       },
       set(value) {
         this.checkAll = value;
         if (value) {
           this.SMTP = value;
-          this.KVM = value;
+          this.VirtualMedia = value;
           this.Network = value;
         } else {
-          if (!(this.SMTP && this.KVM && this.Network)) {
+          if (!(this.SMTP && this.VirtualMedia && this.Network)) {
             this.checkAll = false;
           } else {
             this.SMTP = value;
-            this.KVM = value;
+            this.VirtualMedia = value;
             this.Network = value;
           }
         }
@@ -204,7 +204,7 @@ export default {
     ...mapState('backupAndRestore', [
       'smtp',
       'ipmi',
-      'kvm',
+      'virtualMedia',
       'network',
       'ntp',
       'snmp',
@@ -218,8 +218,8 @@ export default {
     ipmi: function (value) {
       this.IPMI = value;
     },
-    kvm: function (value) {
-      this.KVM = value;
+    virtualMedia: function (value) {
+      this.VirtualMedia = value;
     },
     network: function (value) {
       this.Network = value;
@@ -238,7 +238,7 @@ export default {
         this.checkAll = false;
       }
     },
-    KVM(value) {
+    VirtualMedia(value) {
       if (!value) {
         this.checkAll = false;
       }
@@ -256,8 +256,8 @@ export default {
       if (this.SMTP) {
         data.push('SMTP');
       }
-      if (this.KVM) {
-        data.push('KVM');
+      if (this.VirtualMedia) {
+        data.push('Virtual-media');
       }
       if (this.IPMI) {
         data.push('IPMI');

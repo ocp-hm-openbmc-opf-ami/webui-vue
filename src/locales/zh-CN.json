@@ -401,7 +401,7 @@
         "restore": "恢复",
         "authentication": "验证",
         "ipmi": "IPMI",
-        "kvm": "KVM",
+        "virtualMedia": "虚拟媒体",
         "network": "网络",
         "ntp": "NTP",
         "smtp": "SMTP",

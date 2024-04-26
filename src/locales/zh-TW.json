@@ -404,7 +404,7 @@
         "restore": "恢復",
         "authentication": "驗證",
         "ipmi": "IPMI",
-        "kvm": "KVM",
+        "virtualMedia": "虛擬媒體",
         "network": "網路",
         "ntp": "NTP",
         "smtp": "SMTP",

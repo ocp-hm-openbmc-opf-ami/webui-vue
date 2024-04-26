@@ -407,7 +407,7 @@
         "restore": "Restore",
         "authentication": "Authentication",
         "ipmi": "IPMI",
-        "kvm": "KVM",
+        "virtualMedia": "Virtual media",
         "network": "Network",
         "ntp": "NTP",
         "smtp": "SMTP",

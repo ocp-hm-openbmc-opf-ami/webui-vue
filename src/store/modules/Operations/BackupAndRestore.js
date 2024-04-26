@@ -7,7 +7,7 @@ const BackupAndRestore = {
     BackupDatas: [],
     smtp: null,
     ipmi: null,
-    kvm: null,
+    virtualMedia: null,
     network: null,
     ntp: null,
     snmp: null,
@@ -19,7 +19,7 @@ const BackupAndRestore = {
     },
     smtp: (state) => state.smtp,
     ipmi: (state) => state.ipmi,
-    kvm: (state) => state.kvm,
+    virtualMedia: (state) => state.virtualMedia,
     network: (state) => state.network,
     ntp: (state) => state.ntp,
     snmp: (state) => state.snmp,
@@ -35,8 +35,8 @@ const BackupAndRestore = {
     setIPMI(state, ipmi) {
       state.ipmi = ipmi;
     },
-    setKvm(state, kvm) {
-      state.kvm = kvm;
+    setVirtualMedia(state, virtualMedia) {
+      state.virtualMedia = virtualMedia;
     },
     setNetwork(state, network) {
       state.network = network;
@@ -104,7 +104,10 @@ const BackupAndRestore = {
             'setIPMI',
             response.data.Oem.Ami?.SelectedBackupFeatures?.IPMI
           );
-          commit('setKvm', response.data.Oem.Ami?.SelectedBackupFeatures?.KVM);
+          commit(
+            'setVirtualMedia',
+            response.data.Oem.Ami?.SelectedBackupFeatures?.['Virtual-media']
+          );
           commit(
             'setNetwork',
             response.data.Oem.Ami?.SelectedBackupFeatures?.Network
