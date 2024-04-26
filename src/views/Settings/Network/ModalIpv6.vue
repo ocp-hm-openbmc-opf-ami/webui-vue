@@ -23,7 +23,11 @@
               <template v-if="!$v.form.ipAddress.required">
                 {{ $t('global.form.fieldRequired') }}
               </template>
-              <template v-if="!$v.form.ipAddress.ipAddress">
+              <template
+                v-if="
+                  $v.form.ipAddress.required && !$v.form.ipAddress.ipAddress
+                "
+              >
                 {{ $t('global.form.invalidFormat') }}
               </template>
             </b-form-invalid-feedback>
@@ -45,7 +49,11 @@
               <template v-if="!$v.form.prefixLength.required">
                 {{ $t('global.form.fieldRequired') }}
               </template>
-              <template v-if="!$v.form.prefixLength.ipAddress">
+              <template
+                v-if="
+                  $v.form.prefixLength.required && !$v.form.prefixLength.pattern
+                "
+              >
                 {{ $t('global.form.invalidFormat') }}
               </template>
             </b-form-invalid-feedback>
@@ -69,7 +77,9 @@
               <template v-if="!$v.form.gateway.required">
                 {{ $t('global.form.fieldRequired') }}
               </template>
-              <template v-if="!$v.form.gateway.ipAddress">
+              <template
+                v-if="$v.form.gateway.required && !$v.form.gateway.ipAddress"
+              >
                 {{ $t('global.form.invalidFormat') }}
               </template>
             </b-form-invalid-feedback>
@@ -90,7 +100,7 @@
 
 <script>
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
-import { helpers, required } from 'vuelidate/lib/validators';
+import { required } from 'vuelidate/lib/validators';
 
 export default {
   mixins: [VuelidateMixin],
@@ -141,20 +151,21 @@ export default {
       form: {
         ipAddress: {
           required,
-          pattern: helpers.regex(
-            'pattern',
-            /^(?:(?:[0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}(?::[0-9a-fA-F]{1,4}){1,1}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|(?:[0-9a-fA-F]{1,4}:){1,1}(?::[0-9a-fA-F]{1,4}){1,6}|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(?::[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(?:ffff(?::0{1,4}){0,1}:){0,1}(?:(?:2(?:5[0-5]|[0-4][0-9])|1[0-9]{2,2}|0?[0-9]{0,2})\.){3,3}(?:2(?:5[0-5]|[0-4][0-9])|1[0-9]{2,2}|0?[0-9]{0,2})|(?:[0-9a-fA-F]{1,4}:){1,4}:(?:(?:2(?:5[0-5]|[0-4][0-9])|1[0-9]{2,2}|0?[0-9]{0,2})\.){3,3}(?:2(?:5[0-5]|[0-4][0-9])|1[0-9]{2,2}|0?[0-9]{0,2}))$/i
-          ),
+          pattern: function (val) {
+            return this.ipv6addressValidation(val);
+          },
         },
         prefixLength: {
           required,
+          pattern: function (val) {
+            return this.ipv6prefixValidation(val);
+          },
         },
         gateway: {
           required,
-          pattern: helpers.regex(
-            'pattern',
-            /^(?:(?:[0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}(?::[0-9a-fA-F]{1,4}){1,1}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|(?:[0-9a-fA-F]{1,4}:){1,1}(?::[0-9a-fA-F]{1,4}){1,6}|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(?::[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(?:ffff(?::0{1,4}){0,1}:){0,1}(?:(?:2(?:5[0-5]|[0-4][0-9])|1[0-9]{2,2}|0?[0-9]{0,2})\.){3,3}(?:2(?:5[0-5]|[0-4][0-9])|1[0-9]{2,2}|0?[0-9]{0,2})|(?:[0-9a-fA-F]{1,4}:){1,4}:(?:(?:2(?:5[0-5]|[0-4][0-9])|1[0-9]{2,2}|0?[0-9]{0,2})\.){3,3}(?:2(?:5[0-5]|[0-4][0-9])|1[0-9]{2,2}|0?[0-9]{0,2}))$/i
-          ),
+          pattern: function (val) {
+            return this.ipv6gatewayValidation(val);
+          },
         },
       },
     };
@@ -195,6 +206,52 @@ export default {
       // prevent modal close
       bvModalEvt.preventDefault();
       this.handleSubmit();
+    },
+    ipv6addressValidation(value) {
+      if (
+        !/^((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?$/.test(
+          value
+        ) ||
+        /^localhost$|^127(?:\.[0-9]+){0,2}\.[0-9]+$|^(?:0*\\:)*?:?0*1$/.test(
+          value
+        ) ||
+        /[fF][eE][8][0]::|[fF][eE][bB]::/.test(value) ||
+        /[fF][eE][cC][0]::|[fF][eE][fF]::/.test(value) ||
+        /[2][0][0][1]::/.test(value) ||
+        /[2][0][0][1]:[dD][bB][8]::/.test(value) ||
+        /::[fF][fF][fF][fF]:0:0/.test(value) ||
+        (value != undefined &&
+          value != null &&
+          (String(value).charAt(0) == '0' || String(value).charAt(0) == ':'))
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+    ipv6prefixValidation(value) {
+      if (!(/^\d+$/.test(value) && value >= 0 && value <= 128)) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+    ipv6gatewayValidation(value) {
+      if (
+        !/^((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?$/.test(
+          value
+        ) ||
+        /^localhost$|^127(?:\.[0-9]+){0,2}\.[0-9]+$|^(?:0*\\:)*?:?0*1$/.test(
+          value
+        ) ||
+        (value != undefined &&
+          value != null &&
+          (String(value).charAt(0) == '0' || String(value).charAt(0) == ':'))
+      ) {
+        return false;
+      } else {
+        return true;
+      }
     },
   },
 };

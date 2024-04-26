@@ -277,7 +277,10 @@ const NetworkStore = {
           );
         });
     },
-    async saveIpv6Address({ state }, ipv6Data) {
+    async saveIpv6Address({ state }, { dhcpv6State, ipv6Data, modalFormData }) {
+      let DHCPv6 = {
+        OperatingMode: 'Disabled',
+      };
       let IPv6StaticAddresses = [];
       let IPv6StaticDefaultGateways = [];
       ipv6Data.forEach((rowData) => {
@@ -285,8 +288,50 @@ const NetworkStore = {
           Address: rowData.Address,
           PrefixLength: parseInt(rowData.PrefixLength),
         });
-        IPv6StaticDefaultGateways.push({
-          Address: rowData.Gateway,
+      });
+      IPv6StaticDefaultGateways.push({
+        Address: modalFormData.Gateway,
+        PrefixLength: parseInt(modalFormData.PrefixLength),
+      });
+      var StaticIpv6 = {};
+
+      if (dhcpv6State == 'Enabled') {
+        StaticIpv6 = {
+          DHCPv6,
+          IPv6StaticAddresses: IPv6StaticAddresses,
+          IPv6StaticDefaultGateways: IPv6StaticDefaultGateways,
+        };
+      } else {
+        StaticIpv6 = {
+          IPv6StaticAddresses: IPv6StaticAddresses,
+          IPv6StaticDefaultGateways: IPv6StaticDefaultGateways,
+        };
+      }
+
+      return api
+        .patch(
+          `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
+          StaticIpv6
+        )
+        .then(() => {
+          return i18n.t('pageNetwork.toast.successSaveNetworkSettings', {
+            setting: i18n.t('pageNetwork.ipv6'),
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(
+            i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
+              setting: i18n.t('pageNetwork.ipv6'),
+            })
+          );
+        });
+    },
+    async deleteIpv6Address({ state }, ipv6Data) {
+      let IPv6StaticAddresses = [];
+      ipv6Data.forEach((rowData) => {
+        IPv6StaticAddresses.push({
+          Address: rowData.Address,
           PrefixLength: parseInt(rowData.PrefixLength),
         });
       });
@@ -296,7 +341,6 @@ const NetworkStore = {
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
           {
             IPv6StaticAddresses: IPv6StaticAddresses,
-            IPv6StaticDefaultGateways: IPv6StaticDefaultGateways,
           }
         )
         .then(() => {

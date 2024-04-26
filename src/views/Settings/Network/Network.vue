@@ -231,8 +231,14 @@ export default {
       } else {
         this.ipv6TableData[this.ipv6Index] = modalFormData;
       }
+      const dhcpv6State = this.ethernetData[this.tabIndex].DHCPv6.OperatingMode;
+      const ipv6Data = this.ipv6TableData;
       this.$store
-        .dispatch('network/saveIpv6Address', this.ipv6TableData)
+        .dispatch('network/saveIpv6Address', {
+          dhcpv6State,
+          ipv6Data,
+          modalFormData,
+        })
         .then((message) => {
           setTimeout(() => {
             this.$store.dispatch('network/getEthernetData');
@@ -241,8 +247,11 @@ export default {
           }, 5000);
         })
         .catch(({ message }) => {
-          this.endLoader();
-          this.errorToast(message);
+          this.$store.dispatch('network/getEthernetData');
+          setTimeout(() => {
+            this.endLoader();
+            this.errorToast(message);
+          }, 7000); // Giving a maximum delay time of 7000 ms due to a network service restart.
         });
     },
     saveDnsAddress(modalFormData) {

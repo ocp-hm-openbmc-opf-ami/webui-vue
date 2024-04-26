@@ -193,7 +193,7 @@ export default {
     deleteIpv6TableRow(index) {
       this.form.ipv6TableItems.splice(index, 1);
       this.$store
-        .dispatch('network/saveIpv6Address', this.form.ipv6TableItems)
+        .dispatch('network/deleteIpv6Address', this.form.ipv6TableItems)
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
