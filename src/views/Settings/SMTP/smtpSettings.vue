@@ -334,6 +334,68 @@
                 </b-form-group>
               </b-col>
             </b-row>
+            <b-row v-if="primary.enableConfiguration && primary.tlsEnable">
+              <b-col sm="4">
+                <b-form-group :label="$t('pageSmtp.cacertPEM')">
+                  <span v-if="primaryCacertModifiedDate">
+                    Last Modified Date: {{ primaryCacertModifiedDate }}
+                  </span>
+                  <form-file
+                    id="primary-certificate-cacertPEM"
+                    v-model="primary.cacertPEM"
+                    accept=".pem"
+                    :state="getValidationState($v.primary.cacertPEM)"
+                    @input="onFileUpload($event, 'CacertPEM', 'primary')"
+                  >
+                    <template #invalid>
+                      <b-form-invalid-feedback role="alert">
+                        {{ $t('global.form.required') }}
+                      </b-form-invalid-feedback>
+                    </template>
+                  </form-file>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group :label="$t('pageSmtp.serverCRT')">
+                  <span v-if="primaryServerCRTModifiedDate">
+                    Last Modified Date: {{ primaryServerCRTModifiedDate }}
+                  </span>
+                  <form-file
+                    id="primary-certificate-serverCRT"
+                    v-model="primary.serverCRT"
+                    accept=".crt"
+                    :state="getValidationState($v.primary.serverCRT)"
+                    @input="onFileUpload($event, 'ServerCRT', 'primary')"
+                  >
+                    <template #invalid>
+                      <b-form-invalid-feedback role="alert">
+                        {{ $t('global.form.required') }}
+                      </b-form-invalid-feedback>
+                    </template>
+                  </form-file>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group :label="$t('pageSmtp.serverKey')">
+                  <span v-if="primaryServerKeyModifiedDate">
+                    Last Modified Date: {{ primaryServerKeyModifiedDate }}
+                  </span>
+                  <form-file
+                    id="primary-certificate-serverKey"
+                    v-model="primary.serverKey"
+                    accept=".key"
+                    :state="getValidationState($v.primary.serverKey)"
+                    @input="onFileUpload($event, 'ServerKey', 'primary')"
+                  >
+                    <template #invalid>
+                      <b-form-invalid-feedback role="alert">
+                        {{ $t('global.form.required') }}
+                      </b-form-invalid-feedback>
+                    </template>
+                  </form-file>
+                </b-form-group>
+              </b-col>
+            </b-row>
           </div>
         </page-section>
         <page-section :section-title="$t('pageSmtp.secondaryFormGroupLabel')">
@@ -658,47 +720,64 @@
                 </b-form-group>
               </b-col>
             </b-row>
-          </div>
-        </page-section>
-        <page-section
-          v-if="
-            (primary.enableConfiguration && primary.tlsEnable) ||
-            (secondary.enableConfiguration && secondary.tlsEnable)
-          "
-          :section-title="$t('pageSmtp.certificate')"
-        >
-          <div class="form-background p-3">
-            <b-row>
+            <b-row v-if="secondary.enableConfiguration && secondary.tlsEnable">
               <b-col sm="4">
                 <b-form-group :label="$t('pageSmtp.cacertPEM')">
+                  <span v-if="secondaryCacertModifiedDate">
+                    Last Modified Date: {{ secondaryCacertModifiedDate }}
+                  </span>
                   <form-file
-                    id="certificate-cacertPEM"
-                    v-model="cacertPEM"
+                    id="secondary-certificate-cacertPEM"
+                    v-model="secondary.cacertPEM"
                     accept=".pem"
-                    @input="onFileUpload($event, 'CacertPEM')"
+                    :state="getValidationState($v.secondary.cacertPEM)"
+                    @input="onFileUpload($event, 'CacertPEM', 'secondary')"
                   >
+                    <template #invalid>
+                      <b-form-invalid-feedback role="alert">
+                        {{ $t('global.form.required') }}
+                      </b-form-invalid-feedback>
+                    </template>
                   </form-file>
                 </b-form-group>
               </b-col>
               <b-col sm="4">
                 <b-form-group :label="$t('pageSmtp.serverCRT')">
+                  <span v-if="secondaryServerCRTModifiedDate">
+                    Last Modified Date: {{ secondaryServerCRTModifiedDate }}
+                  </span>
                   <form-file
-                    id="certificate-serverCRT"
-                    v-model="primary.serverCRT"
+                    id="secondary-certificate-serverCRT"
+                    v-model="secondary.serverCRT"
                     accept=".crt"
-                    @input="onFileUpload($event, 'ServerCRT')"
+                    :state="getValidationState($v.secondary.serverCRT)"
+                    @input="onFileUpload($event, 'ServerCRT', 'secondary')"
                   >
+                    <template #invalid>
+                      <b-form-invalid-feedback role="alert">
+                        {{ $t('global.form.required') }}
+                      </b-form-invalid-feedback>
+                    </template>
                   </form-file>
                 </b-form-group>
               </b-col>
               <b-col sm="4">
                 <b-form-group :label="$t('pageSmtp.serverKey')">
+                  <span v-if="secondaryServerKeyModifiedDate">
+                    Last Modified Date: {{ secondaryServerKeyModifiedDate }}
+                  </span>
                   <form-file
-                    id="certificate-serverKey"
-                    v-model="serverKey"
+                    id="secondary-certificate-serverKey"
+                    v-model="secondary.serverKey"
                     accept=".key"
-                    @input="onFileUpload($event, 'ServerKey')"
+                    :state="getValidationState($v.secondary.serverKey)"
+                    @input="onFileUpload($event, 'ServerKey', 'secondary')"
                   >
+                    <template #invalid>
+                      <b-form-invalid-feedback role="alert">
+                        {{ $t('global.form.required') }}
+                      </b-form-invalid-feedback>
+                    </template>
                   </form-file>
                 </b-form-group>
               </b-col>
@@ -778,6 +857,12 @@ export default {
         recipientEmail2: false,
         recipientEmail3: false,
         recipientEmail4: false,
+        cacertPEM: '',
+        serverCRT: '',
+        serverKey: '',
+        cacertModifiedDate: '',
+        serverKeyModifiedDate: '',
+        serverCRTModifiedDate: '',
       },
       secondary: {
         serverAddress: '',
@@ -796,18 +881,39 @@ export default {
         recipientEmail2: false,
         recipientEmail3: false,
         recipientEmail4: false,
+        cacertPEM: '',
+        serverCRT: '',
+        serverKey: '',
+        cacertModifiedDate: '',
+        serverKeyModifiedDate: '',
+        serverCRTModifiedDate: '',
       },
-      cacertPEM: '',
-      serverCRT: '',
-      serverKey: '',
+
       loading,
       sendTestAlertDisabled: false,
       licenseName: 'SMTP',
     };
   },
-  watch: {
-    isSMTPEnabled: function (value) {
-      this.primary.enableConfiguration = value;
+  computed: {
+    primaryCacertModifiedDate() {
+      return this.$store.getters['smtp/isPrimaryConfig'].cacertModifiedDate;
+    },
+    primaryServerCRTModifiedDate() {
+      return this.$store.getters['smtp/isPrimaryConfig'].serverCrtModifiedDate;
+    },
+    primaryServerKeyModifiedDate() {
+      return this.$store.getters['smtp/isPrimaryConfig'].serverKeyModifiedDate;
+    },
+    secondaryCacertModifiedDate() {
+      return this.$store.getters['smtp/isSecondaryConfig'].cacertModifiedDate;
+    },
+    secondaryServerCRTModifiedDate() {
+      return this.$store.getters['smtp/isSecondaryConfig']
+        .serverCrtModifiedDate;
+    },
+    secondaryServerKeyModifiedDate() {
+      return this.$store.getters['smtp/isSecondaryConfig']
+        .serverKeyModifiedDate;
     },
   },
   validations() {
@@ -876,6 +982,39 @@ export default {
             }
           }),
         },
+        cacertPEM: {
+          required: requiredIf(function (primary) {
+            if (
+              primary.enableConfiguration &&
+              primary.tlsEnable &&
+              !this.primaryCacertModifiedDate
+            ) {
+              return true;
+            }
+          }),
+        },
+        serverCRT: {
+          required: requiredIf(function (primary) {
+            if (
+              primary.enableConfiguration &&
+              primary.tlsEnable &&
+              !this.primaryServerCRTModifiedDate
+            ) {
+              return true;
+            }
+          }),
+        },
+        serverKey: {
+          required: requiredIf(function (primary) {
+            if (
+              primary.enableConfiguration &&
+              primary.tlsEnable &&
+              !this.primaryServerKeyModifiedDate
+            ) {
+              return true;
+            }
+          }),
+        },
       },
       secondary: {
         serverAddress: {
@@ -937,6 +1076,39 @@ export default {
         password: {
           required: requiredIf(function (secondary) {
             if (secondary.enableConfiguration && secondary.authentication) {
+              return true;
+            }
+          }),
+        },
+        cacertPEM: {
+          required: requiredIf(function (secondary) {
+            if (
+              secondary.enableConfiguration &&
+              secondary.tlsEnable &&
+              !this.secondaryCacertModifiedDate
+            ) {
+              return true;
+            }
+          }),
+        },
+        serverCRT: {
+          required: requiredIf(function (secondary) {
+            if (
+              secondary.enableConfiguration &&
+              secondary.tlsEnable &&
+              !this.secondaryServerCRTModifiedDate
+            ) {
+              return true;
+            }
+          }),
+        },
+        serverKey: {
+          required: requiredIf(function (secondary) {
+            if (
+              secondary.enableConfiguration &&
+              secondary.tlsEnable &&
+              !this.secondaryServerKeyModifiedDate
+            ) {
               return true;
             }
           }),
@@ -1098,6 +1270,15 @@ export default {
       this.primary.password = this.$store.getters[
         'smtp/isPrimaryConfig'
       ].password;
+      this.primary.cacertModifiedDate = this.$store.getters[
+        'smtp/isPrimaryConfig'
+      ].cacertModifiedDate;
+      this.primary.serverKeyModifiedDate = this.$store.getters[
+        'smtp/isPrimaryConfig'
+      ].serverKeyModifiedDate;
+      this.primary.serverCRTModifiedDate = this.$store.getters[
+        'smtp/isPrimaryConfig'
+      ].serverCrtModifiedDate;
       this.primary.recipientEmail2 = this.primary.recipientEmailAddress2
         ? true
         : false;
@@ -1150,6 +1331,15 @@ export default {
       this.secondary.password = this.$store.getters[
         'smtp/isSecondaryConfig'
       ].password;
+      this.secondary.cacertModifiedDate = this.$store.getters[
+        'smtp/isSecondaryConfig'
+      ].cacertModifiedDate;
+      this.secondary.serverKeyModifiedDate = this.$store.getters[
+        'smtp/isSecondaryConfig'
+      ].serverKeyModifiedDate;
+      this.secondary.serverCRTModifiedDate = this.$store.getters[
+        'smtp/isSecondaryConfig'
+      ].serverCrtModifiedDate;
       this.secondary.recipientEmail2 = this.secondary.recipientEmailAddress2
         ? true
         : false;
@@ -1266,12 +1456,18 @@ export default {
     sendTestAlert() {
       this.$bvModal.show('modal-send-alert');
     },
-    onFileUpload(file, type) {
+    onFileUpload(file, type, config) {
       if (file) {
         this.startLoader();
         this.$store
-          .dispatch('smtp/addNewCertificate', { file, type })
-          .then((success) => this.successToast(success))
+          .dispatch('smtp/addNewCertificate', { file, type, config })
+          .then((success) => {
+            this.updateSMTPPrimaryData();
+            this.updateSMTPSecondaryData();
+            if (config == 'primary') this.primary.tlsEnable = true;
+            else this.secondary.tlsEnable = true;
+            this.successToast(success);
+          })
           .catch(({ message }) => this.errorToast(message))
           .finally(() => this.endLoader());
       }

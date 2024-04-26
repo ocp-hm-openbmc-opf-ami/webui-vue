@@ -1379,14 +1379,38 @@
         "pageDescription": "Configure BMC SMTP 设定",
         "sectionTitle": "SMTP",
         "smtpLabel": "SMTP 设定",
-        "formGroupLabel": "SMTP 设定",
+        "sendTestAlert": "发送测试警报",
+        "alertDestination": "警报目的地",
+        "primaryFormGroupLabel": "主要配置",
+        "secondaryFormGroupLabel": "辅助配置",
+        "certificate": "TLS证书",
         "labelServerAddress": "伺服器位址",
         "labelSenderEmailAddress": "传送者 Email 位址",
         "labelPort": "端口",
+        "labelRecipientEmailAddress": "收件人电子邮件地址",
+        "addRecipientEmailAddress": " 添加收件人电子邮件地址",
         "PortRangeRequired": "输入 1-65535 之间的有效端口范围",
+        "tlsEnable": "启用 TLS",
+        "username": "用户名",
+        "password": "密码",
+        "authentication": "验证",
+        "cacertPEM": "Cacert PEM 证书",
+        "serverCRT": "服务器CRT证书",
+        "serverKey": "服务器密钥证书",
+        "modal": {
+            "subject": "主题",
+            "mailContent": "邮件内容"
+        },
         "toast": {
             "successSMTPConfiguration": "成功更新 SMTP 设定",
-            "errorSMTPConfiguration": "更新 SMTP 发生错误"
+            "errorSMTPConfiguration": "更新 SMTP 发生错误",
+            "successAddCertificate": "添加成功 %{certificate}.",
+            "errorAddCertificate": "添加证书时出错.",
+            "errorAddPemCertificate": "请上传Cacert PEM证书",
+            "errorAddCrtCertificate": "请上传服务器CRT证书",
+            "errorAddKeyCertificate": "请上传服务器密钥证书",
+            "successMsgTestAlert": "测试警报发送成功",
+            "errorMsgAlert": "发送测试警报时出错"
         }
     },
     "pageEventFilter": {

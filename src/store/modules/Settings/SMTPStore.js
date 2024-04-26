@@ -4,20 +4,14 @@ import i18n from '@/i18n';
 export const CERTIFICATE_TYPES = [
   {
     type: 'CacertPEM',
-    location:
-      '/redfish/v1/EventService/Actions/Oem/Ami/SMTP.CacertPEMCertificate',
     label: i18n.t('pageSmtp.cacertPEM'),
   },
   {
     type: 'ServerCRT',
-    location:
-      '/redfish/v1/EventService/Actions/Oem/Ami/SMTP.ServerCRTCertificate',
     label: i18n.t('pageSmtp.serverCRT'),
   },
   {
     type: 'ServerKey',
-    location:
-      '/redfish/v1/EventService/Actions/Oem/Ami/SMTP.ServerKeyCertificate',
     label: i18n.t('pageSmtp.serverKey'),
   },
 ];
@@ -44,6 +38,9 @@ const SmtpStore = {
       authentication: false,
       username: '',
       password: '',
+      cacertModifiedDate: '',
+      serverKeyModifiedDate: '',
+      serverCrtModifiedDate: '',
     },
     secondary: {
       smtpServiceEnabled: null,
@@ -58,6 +55,9 @@ const SmtpStore = {
       authentication: false,
       username: '',
       password: '',
+      cacertModifiedDate: '',
+      serverKeyModifiedDate: '',
+      serverCrtModifiedDate: '',
     },
   },
   getters: {
@@ -95,6 +95,12 @@ const SmtpStore = {
           smtpData.PrimaryConfiguration?.Authentication;
         state.primary.username = smtpData.PrimaryConfiguration?.UserName;
         state.primary.password = smtpData.PrimaryConfiguration?.Password;
+        state.primary.cacertModifiedDate =
+          smtpData.PrimaryConfiguration?.primaryCACERTModifiedDate;
+        state.primary.serverCrtModifiedDate =
+          smtpData.PrimaryConfiguration?.primaryserverCRTModifiedDate;
+        state.primary.serverKeyModifiedDate =
+          smtpData.PrimaryConfiguration?.primaryServerKeyModifiedDate;
       }
       if (smtpData.SecondaryConfiguration) {
         state.secondary.smtpServiceEnabled =
@@ -124,6 +130,12 @@ const SmtpStore = {
           smtpData.SecondaryConfiguration?.Authentication;
         state.secondary.username = smtpData.SecondaryConfiguration?.UserName;
         state.secondary.password = smtpData.SecondaryConfiguration?.Password;
+        state.secondary.cacertModifiedDate =
+          smtpData.SecondaryConfiguration?.secondaryCACERTModifiedDate;
+        state.secondary.serverCrtModifiedDate =
+          smtpData.SecondaryConfiguration?.secondaryserverCRTModifiedDate;
+        state.secondary.serverKeyModifiedDate =
+          smtpData.SecondaryConfiguration?.secondaryServerKeyModifiedDate;
       }
       if (
         (smtpData.PrimaryConfiguration.Enable &&
@@ -161,20 +173,27 @@ const SmtpStore = {
             throw new Error(i18n.t('pageSmtp.toast.errorSMTPConfiguration'));
         });
     },
-    async addNewCertificate(_, { file, type }) {
+    async addNewCertificate({ dispatch }, { file, type, config }) {
       let uploadData = new FormData();
-      uploadData.append('conf_file', file);
+      uploadData.append('', file);
+      let uri =
+        '/redfish/v1/EventService/Actions/Oem/Ami/SMTP.PrimarySSLCertificateUpload';
+      if (config == 'secondary') {
+        uri =
+          '/redfish/v1/EventService/Actions/Oem/Ami/SMTP.SecondarySSLCertificateUpload';
+      }
       return await api
-        .post(getCertificateProp(type, 'location'), uploadData, {
+        .post(uri, uploadData, {
           headers: {
             'Content-Type': 'multipart/form-data;',
           },
         })
-        .then(() =>
-          i18n.t('pageSmtp.toast.successAddCertificate', {
+        .then(() => {
+          dispatch('getSMTPdata');
+          return i18n.t('pageSmtp.toast.successAddCertificate', {
             certificate: getCertificateProp(type, 'label'),
-          })
-        )
+          });
+        })
         .catch((error) => {
           console.log(error);
           throw new Error(i18n.t('pageSmtp.toast.errorAddCertificate'));
