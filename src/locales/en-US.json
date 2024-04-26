@@ -1618,6 +1618,13 @@
             "status": "Status",
             "upperWarning": "Upper warning",
             "upperCritical": "Upper critical"
+        },
+        "sensorgraph": {
+            "frame": "Frame (minutes)",
+            "interval": "Interval (seconds)",
+            "back": "Back",
+            "displayGraph": "Go"
+
         }
     },
     "pageSerialOverLan": {

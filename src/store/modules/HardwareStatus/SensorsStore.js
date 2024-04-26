@@ -5,13 +5,23 @@ const SensorsStore = {
   namespaced: true,
   state: {
     sensors: [],
+    graphSensors: {},
+    sensorGraphRefresh: true,
   },
   getters: {
     sensors: (state) => state.sensors,
+    graphSensors: (state) => state.graphSensors,
+    sensorGraphRefreshGet: (state) => state.sensorGraphRefresh,
   },
   mutations: {
     setSensors: (state, sensors) => {
       state.sensors = uniqBy([...sensors, ...state.sensors], 'name');
+    },
+    setGraphSensors: (state, sensors) => {
+      state.graphSensors = sensors;
+    },
+    setSensorGraph: (state, sensorGraphRefresh) => {
+      state.sensorGraphRefresh = sensorGraphRefresh;
     },
   },
   actions: {
@@ -51,6 +61,7 @@ const SensorsStore = {
         responses.forEach((response) => {
           if (response.data) {
             sensorData.push({
+              id: response.data.Oem?.Ami['@odata.id'],
               name: response.data.Name,
               status: response.data.Status?.Health,
               currentValue: response.data.Reading,
@@ -117,6 +128,26 @@ const SensorsStore = {
           commit('setSensors', sensorData);
         })
         .catch((error) => console.log(error));
+    },
+    async getTimeInterval({ commit, state }, val) {
+      let id = val.id == undefined ? state.graphSensors.id : val.id;
+      return await api
+        .get(id)
+        .then((response) => {
+          if (response.data) {
+            commit('setGraphSensors', response.data);
+          }
+        })
+        .catch((error) => console.log(error));
+    },
+    async setTimeInterval(_, val) {
+      return await api
+        .patch(val.id, { Interval: val.Interval, TimeFrame: val.TimeFrame })
+        .then(() => {})
+        .catch((error) => console.log(error));
+    },
+    setSensorGraphRefresh({ commit }, val) {
+      commit('setSensorGraph', val);
     },
   },
 };
