@@ -303,14 +303,6 @@ export default {
               deleteRowVal.EndTime =
                 rowItem.EndTime != '-' ? rowItem.EndTime.replace(' ', 'T') : '';
             }
-            if (rowItem.Control != '-') {
-              deleteRowVal.Control =
-                rowItem.Control != '-' ? rowItem.Control : '';
-            }
-            if (rowItem.PreLoad != '-') {
-              deleteRowVal.PreLoad =
-                rowItem.PreLoad != '-' ? rowItem.PreLoad : '';
-            }
             let deleteval = {};
             Object.assign(deleteval, deleteRowVal);
             this.$store

@@ -53,9 +53,9 @@ const FireWallStore = {
     },
     async deleteFireWallRules({ state, dispatch }, items) {
       return await api
-        .delete(
+        .post(
           `${state.FirstInterfaceId}/Actions/Oem/Ami/EthernetInterface.DeleteFirewallRules`,
-          { data: items }
+          items
         )
         .then(() => dispatch('getFireWallData'))
         .then(() => i18n.t('pageFireWall.toast.successDeleteFireWall'))
@@ -65,9 +65,9 @@ const FireWallStore = {
     },
     async deleteFlushAll({ state, dispatch }, items) {
       return await api
-        .delete(
+        .post(
           `${state.FirstInterfaceId}/Actions/Oem/Ami/EthernetInterface.FlushFirewallRules`,
-          { data: items }
+          items
         )
         .then(() => dispatch('getFireWallData'))
         .then(() => i18n.t('pageFireWall.toast.successDeleteFireWall'))
