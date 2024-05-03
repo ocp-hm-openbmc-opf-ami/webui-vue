@@ -161,8 +161,7 @@
         "cups": "@:appPageTitle.cups",
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
-        "systemInventory":"@:appPageTitle.systemInventory",
-        "networkDDNS": "網路 DDNS"
+        "systemInventory":"@:appPageTitle.systemInventory"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -212,50 +211,7 @@
         "cups": "CUPS",
         "Bond": "網路債券",
         "License": "管理許可證",
-        "systemInventory":"系統庫存",
-        "ddnsConfiguration": "DDNS 配置"
-    },
-    "pageDDNSNetwork": {
-        "ddnsConfiguration": {
-            "ddnsConfiguration": "DDNS 配置",
-            "dhcpConfiguration": "DHCP 配置",
-            "sendHostNameEnabled": "發送主機名",
-            "sendNsupdateEnabled": "發送 Nsupdate",
-            "domainConfiguration": "域配置",
-            "domainNameSetting": "網域",
-            "iPPriority": "IP優先權",
-            "staticDomainName": "靜態域名",
-            "hostConfiguration": "主機配置",
-            "hostNameSetting": "Host Name",
-            "staticHostName": "靜態主機名",
-            "interfacesConfiguration": "介面",
-            "ddnsMethod": "DDNS 方法",
-            "nsUpdateEnable": "NS 更新啟用",
-            "useTSIG": "使用 TSIG",
-            "doNsupdate": "拒絕更新",
-            "manual": "手動的",
-            "auto": "汽車",
-            "register": "登記",
-            "deregister": "註銷",
-            "ipv4IPPriority": "Ipv4",
-            "ipv6IPPriority": "Ipv6",
-            "tsigFileUpload": "上傳 TSIG 金鑰文件",
-            "tsigFileUploadDiscription": "僅上傳（.private）文件"
-        },
-        "toast": {
-            "errorNsUpdate": "NSUpdate 錯誤",
-            "errorInterfaceConfiguration": "更新 DDNS 介面配置時出錯",
-            "errorEnableHostName": "啟用主機名稱設定時發生錯誤",
-            "errorEnableNsUpdate": "啟用 NSUpdate 設定時發生錯誤",
-            "errorUpdateTsig": "上傳 TSIG 檔案時發生錯誤",
-            "errorSaveConfiguratin": "更新 DDNS 配置時出錯",
-            "successNsUpdate": "NS更新成功",
-            "successInterfaceConfiguration": "成功更新 DDNS 介面配置",
-            "successEnableHostName": "成功啟用主機名稱設定",
-            "successEnableNsUpdate": "成功啟用 NSUpdate 設定",
-            "successUpdateTsig": "成功上傳 TSIG 文件",
-            "successSaveConfiguratin": "成功更新 DDNS 配置"
-        }
+        "systemInventory":"系統庫存"
     },
     "pageSystemInventory": {
         "system": {

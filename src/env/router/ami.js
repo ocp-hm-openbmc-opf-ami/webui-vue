@@ -42,7 +42,6 @@ import CupsConfiguration from '@/views/Settings/CUPS';
 import Bond from '@/views/Settings/Bond';
 import License from '@/views/Settings/License';
 import systemInventory from '@/views/SystemInventory/SystemInventory';
-import DDNS from '../../views/Settings/NetworkDDNS';
 
 const roles = {
   administrator: 'Administrator',
@@ -265,14 +264,6 @@ const routes = [
         component: Network,
         meta: {
           title: i18n.t('appPageTitle.network'),
-        },
-      },
-      {
-        path: '/settings/network-ddns',
-        name: 'ddns-Configuration',
-        component: DDNS,
-        meta: {
-          title: i18n.t('appPageTitle.ddnsConfiguration'),
         },
       },
       {
