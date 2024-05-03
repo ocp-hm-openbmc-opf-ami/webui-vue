@@ -132,10 +132,11 @@ variables:
     # - mkdir -p $HOME/cache/onetree/$base_cache/downloads
     # - mkdir -p $HOME/cache/onetree/$base_cache/sstate-cache
     # - echo "DL_DIR = \"$HOME/cache/onetree/$base_cache/downloads\"" >> conf/local.conf
-    - |
-      if [[ ! "$mr_labels" =~ "OT_ENABLE_COVERITY" ]]; then
-        echo "SSTATE_DIR = \"$HOME/cache/onetree/$base_cache/sstate-cache\"" >> conf/local.conf
-      fi
+    # - |
+    #   if [[ ! "$mr_labels" =~ "OT_ENABLE_COVERITY" ]]; then
+    #     echo "SSTATE_DIR = \"$HOME/cache/onetree/$base_cache/sstate-cache\"" >> conf/local.conf
+    #   fi
+    - echo "SSTATE_DIR = \"$HOME/cache/onetree/$base_cache/sstate-cache\"" >> conf/local.conf
     # - echo "EXTRA_IMAGE_FEATURES += \"debug-tweaks\"" >> conf/local.conf
     - |
       if [[ ${config^^} != *"AVENCITY_FULL1"* && ${config^^} != *"ARCHERCITY_FULL1"* ]]; then
