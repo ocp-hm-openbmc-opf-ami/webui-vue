@@ -159,11 +159,6 @@ const AppNavigationMixin = {
               route: '/settings/network',
             },
             {
-              id: 'network_ddns',
-              label: this.$t('appNavigation.networkDDNS'),
-              route: '/settings/network-ddns',
-            },
-            {
               id: 'network_bond',
               label: this.$t('appNavigation.bond'),
               route: '/settings/bond',

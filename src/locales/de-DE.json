@@ -161,8 +161,7 @@
         "cups": "@:appPageTitle.cups",
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
-        "systemInventory":"@:appPageTitle.systemInventory",
-        "networkDDNS": "Netzwerk DDNS"
+        "systemInventory":"@:appPageTitle.systemInventory"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -212,50 +211,7 @@
         "cups": "CUPS",
         "Bond": "Netzwerkbindung",
         "License": "Lizenzen verwalten",
-        "systemInventory":"Systeminventar",
-        "ddnsConfiguration": "DDNS Konfiguration"
-    },
-    "pageDDNSNetwork": {
-        "ddnsConfiguration": {
-            "ddnsConfiguration": "DDNS-Konfiguration",
-            "dhcpConfiguration": "DHCP-Konfiguration",
-            "sendHostNameEnabled": "Hostnamen senden",
-            "sendNsupdateEnabled": "Senden Sie Nsupdate",
-            "domainConfiguration": "Domänenkonfiguration",
-            "domainNameSetting": "Domainname",
-            "iPPriority": "IP Priorität",
-            "staticDomainName": "Statischer Domänenname",
-            "hostConfiguration": "Host Konfiguration",
-            "hostNameSetting": "Hostname",
-            "staticHostName": "Statischer Hostname",
-            "interfacesConfiguration": "Schnittstellen",
-            "ddnsMethod": "DDNS-Methode",
-            "nsUpdateEnable": "NS Update aktivieren",
-            "useTSIG": "Verwenden Sie TSIG",
-            "doNsupdate": "DoNsUpdate",
-            "manual": "Handbuch",
-            "auto": "Auto",
-            "register": "Registrieren",
-            "deregister": "Abmelden",
-            "ipv4IPPriority": "Ipv4",
-            "ipv6IPPriority": "Ipv6",
-            "tsigFileUpload": "Laden Sie die TSIG-Schlüsseldatei hoch",
-            "tsigFileUploadDiscription": "Laden Sie nur (.private) Dateien hoch"
-        },
-        "toast": {
-            "errorNsUpdate": "Fehler in NSUpdate",
-            "errorInterfaceConfiguration": "Fehler beim Aktualisieren der DDNS Schnittstellenkonfiguration",
-            "errorEnableHostName": "Fehler beim Aktivieren der Hostnameneinstellungen",
-            "errorEnableNsUpdate": "Fehler beim Aktivieren der NSUpdate-Einstellungen",
-            "errorUpdateTsig": "Fehler beim Hochladen der TSIG-Datei",
-            "errorSaveConfiguratin": "Fehler beim Aktualisieren der DDNS Konfigurationen",
-            "successNsUpdate": "NSUpdate erfolgreich",
-            "successInterfaceConfiguration": "DDNS Schnittstellenkonfiguration erfolgreich aktualisiert",
-            "successEnableHostName": "Hostnamen Einstellungen erfolgreich aktiviert",
-            "successEnableNsUpdate": "NSUpdate Einstellungen erfolgreich aktiviert",
-            "successUpdateTsig": "TSIG Datei erfolgreich hochgeladen",
-            "successSaveConfiguratin": "DDNS Konfigurationen erfolgreich aktualisiert"
-        }
+        "systemInventory":"Systeminventar"
     },
     "pageSystemInventory": {
         "system": {

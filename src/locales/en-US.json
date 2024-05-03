@@ -163,8 +163,7 @@
         "cups": "@:appPageTitle.cups",
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
-        "systemInventory":"@:appPageTitle.systemInventory",
-        "networkDDNS": "Network DDNS"
+        "systemInventory":"@:appPageTitle.systemInventory"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -215,50 +214,7 @@
         "cups": "CUPS",
         "Bond": "Network Bond",
         "License": "Manage Licenses",
-        "systemInventory":"System Inventory",
-        "ddnsConfiguration": "DDNS Configuration"
-    },
-    "pageDDNSNetwork": {
-        "ddnsConfiguration": {
-            "ddnsConfiguration": "DDNS Configuration",
-            "dhcpConfiguration": "DHCP Configuration",
-            "sendHostNameEnabled": "Send HostName",
-            "sendNsupdateEnabled": "Send Nsupdate",
-            "domainConfiguration": "Domain Configuration",
-            "domainNameSetting": "Domain Name",
-            "iPPriority": "IP Priority",
-            "staticDomainName": "Static Domain Name",
-            "hostConfiguration": "Host Configuration",
-            "hostNameSetting": "Host Name",
-            "staticHostName": "Static Host Name",
-            "interfacesConfiguration": "Interfaces",
-            "ddnsMethod": "DDNS Method",
-            "nsUpdateEnable": "NS Update Enable",
-            "useTSIG": "Use TSIG",
-            "doNsupdate": "DoNsUpdate",
-            "manual": "Manual",
-            "auto": "Auto",
-            "register": "Register",
-            "deregister": "Deregister",
-            "ipv4IPPriority": "Ipv4",
-            "ipv6IPPriority": "Ipv6",
-            "tsigFileUpload": "Upload TSIG Key File",
-            "tsigFileUploadDiscription": "Upload (.private) files only"
-        },
-        "toast": {
-            "errorNsUpdate": "Error in NSUpdate",
-            "errorInterfaceConfiguration": "Error Updating DDNS Interface Configuration",
-            "errorEnableHostName": "Error Enabling Host Name Settings",
-            "errorEnableNsUpdate": "Error Enabling NSUpdate Settings",
-            "errorUpdateTsig": "Error Uploading TSIG File",
-            "errorSaveConfiguratin": "Error Updating DDNS configurations",
-            "successNsUpdate": "Successfully NSUpdate",
-            "successInterfaceConfiguration": "Successfully Updated DDNS Interface Configuration",
-            "successEnableHostName": "Successfully Enabled Host Name Settings",
-            "successEnableNsUpdate": "Successfully Enabled NSUpdate Settings",
-            "successUpdateTsig": "Successfully Upload TSIG File",
-            "successSaveConfiguratin": "Successfully Updated DDNS configurations"
-        }
+        "systemInventory":"System Inventory"
     },
     "pageSystemInventory": {
         "system": {
