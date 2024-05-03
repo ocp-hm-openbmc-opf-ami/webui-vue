@@ -51,6 +51,7 @@ import CupsStore from './modules/Settings/CupsStore';
 import BondStore from './modules/Settings/BondStore';
 import LicenseStore from './modules/Settings/LicenseStore';
 import SystemInfoStore from './modules/SystemInventory/SystemInventoryStore';
+import NetworkDDNSStore from './modules/Settings/NetworkDDNSStore';
 
 Vue.use(Vuex);
 
@@ -108,6 +109,7 @@ export default new Vuex.Store({
     bond: BondStore,
     license: LicenseStore,
     SystemStore: SystemInfoStore,
+    ddnsNetwork: NetworkDDNSStore,
   },
   plugins: [WebSocketPlugin],
 });
