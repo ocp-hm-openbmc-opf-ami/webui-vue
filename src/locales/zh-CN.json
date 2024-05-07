@@ -161,7 +161,8 @@
         "cups": "@:appPageTitle.cups",
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
-        "systemInventory":"@:appPageTitle.systemInventory"
+        "systemInventory":"@:appPageTitle.systemInventory",
+        "networkDDNS": "网络 DDNS"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -211,7 +212,50 @@
         "cups": "CUPS",
         "Bond": "网络债券",
         "License": "管理许可证",
-        "systemInventory":"系统库存"
+        "systemInventory":"系统库存",
+        "ddnsConfiguration": "DDNS 配置"
+    },
+    "pageDDNSNetwork": {
+        "ddnsConfiguration": {
+            "ddnsConfiguration": "DDNS 配置",
+            "dhcpConfiguration": "DHCP 配置",
+            "sendHostNameEnabled": "发送主机名",
+            "sendNsupdateEnabled": "发送 Nsupdate",
+            "domainConfiguration": "域配置",
+            "domainNameSetting": "域名",
+            "iPPriority": "IP优先级",
+            "staticDomainName": "静态域名",
+            "hostConfiguration": "主机配置",
+            "hostNameSetting": "主机名",
+            "staticHostName": "静态主机名",
+            "interfacesConfiguration": "接口",
+            "ddnsMethod": "DDNS 方法",
+            "nsUpdateEnable": "NS 更新启用",
+            "useTSIG": "使用 TSIG",
+            "doNsupdate": "拒绝更新",
+            "manual": "手动的",
+            "auto": "汽车",
+            "register": "登记",
+            "deregister": "注销",
+            "ipv4IPPriority": "Ipv4",
+            "ipv6IPPriority": "Ipv6",
+            "tsigFileUpload": "上传 TSIG 密钥文件",
+            "tsigFileUploadDiscription": "仅上传（.private）文件"
+        },
+        "toast": {
+            "errorNsUpdate": "NSUpdate 错误",
+            "errorInterfaceConfiguration": "更新 DDNS 接口配置时出错",
+            "errorEnableHostName": "启用主机名设置时出错",
+            "errorEnableNsUpdate": "启用 NSUpdate 设置时出错",
+            "errorUpdateTsig": "上传 TSIG 文件时出错",
+            "errorSaveConfiguratin": "更新 DDNS 配置时出错",
+            "successNsUpdate": "NS更新成功",
+            "successInterfaceConfiguration": "成功更新 DDNS 接口配置",
+            "successEnableHostName": "成功启用主机名设置",
+            "successEnableNsUpdate": "成功启用 NSUpdate 设置",
+            "successUpdateTsig": "成功上传 TSIG 文件",
+            "successSaveConfiguratin": "成功更新 DDNS 配置"
+        }
     },
     "pageSystemInventory": {
         "system": {
