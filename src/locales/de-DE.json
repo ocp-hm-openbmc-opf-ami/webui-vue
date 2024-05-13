@@ -877,7 +877,8 @@
             "updateFirmwareInfo": "Der BMC wird während des Aktualisierungsvorgangs neu gestartet. Der Server kann erst eingeschaltet werden, wenn das Update abgeschlossen ist.",
             "updateFirmwareInfo2": "Das laufende Bild (%{running}) wird ins Backup kopiert. Das Backup-Image wird gelöscht.",
             "updateFirmwareInfo3": "Sind Sie sicher, dass Sie mit dem Update fortfahren möchten?",
-            "updateFirmwareInfoDefault": "Das neue Bild wird hochgeladen und aktiviert. Danach wird der BMC oder Host automatisch neu gestartet, um mit dem neuen Image zu starten."
+            "updateFirmwareInfoDefault": "Das neue Bild wird hochgeladen und aktiviert. Danach wird der BMC oder Host automatisch neu gestartet, um mit dem neuen Image zu starten.",
+            "firmwareResetCalled": "Firmware-Reset wurde aufgerufen. Schließen Sie die aktuelle Sitzung und öffnen Sie nach ein paar Minuten eine neue Sitzung."
         },
         "toast": {
             "errorSwitchImages": "Fehler beim Umschalten von laufenden und Backup-Images.",

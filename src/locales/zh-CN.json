@@ -874,7 +874,8 @@
             "updateFirmwareInfo": "在更新期间，BMC将会重新启定。伺服器将无法启动直到更新结束。",
             "updateFirmwareInfo2": "执行中的映像(%{running})将被备份。备份映像将被删除",
             "updateFirmwareInfo3": "确定要执行这次更新?",
-            "updateFirmwareInfoDefault": "新的映像将被上传且启用。此后，BMC跟主机将会自动开机去执行新的映像。"
+            "updateFirmwareInfoDefault": "新的映像将被上传且启用。此后，BMC跟主机将会自动开机去执行新的映像。",
+            "firmwareResetCalled": "已调用固件重置。关闭当前会话，并在几分钟后打开新会话。"
         },
         "toast": {
             "errorSwitchImages": "切换执行中备份映像失败",

@@ -1,5 +1,12 @@
 <template>
   <div>
+    <div v-if="firmwareOverlay">
+      <b-overlay :show="true" opacity="0.6" no-wrap fixed class="full-overlay">
+        <template #overlay>
+          <div></div>
+        </template>
+      </b-overlay>
+    </div>
     <div class="form-background p-3">
       <b-form @submit.prevent="onSubmitUpload">
         <b-form-group
@@ -69,6 +76,14 @@
 
     <!-- Modals -->
     <modal-update-firmware @ok="updateFirmware" />
+    <div v-if="isProgress">
+      <b-progress :max="progressMax" show-progress animated>
+        <b-progress-bar
+          :value="progressValue"
+          :label="`${progressValue}%`"
+        ></b-progress-bar>
+      </b-progress>
+    </div>
   </div>
 </template>
 
@@ -78,7 +93,7 @@ import { requiredIf } from 'vuelidate/lib/validators';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
-
+import i18n from '@/i18n';
 import FormFile from '@/components/Global/FormFile';
 import ModalUpdateFirmware from './FirmwareModalUpdateFirmware';
 
@@ -104,6 +119,11 @@ export default {
       tftpFileAddress: null,
       isServerPowerOffRequired:
         process.env.VUE_APP_SERVER_OFF_REQUIRED === 'true',
+      progressValue: 0,
+      progressMax: 100,
+      isProgress: false,
+      firmwareOverlay: false,
+      modalReset: 0,
     };
   },
   computed: {
@@ -138,40 +158,65 @@ export default {
   methods: {
     updateFirmware() {
       this.startLoader();
-      const timerId = setTimeout(() => {
-        this.endLoader();
-        this.infoToast(this.$t('pageFirmware.toast.verifyUpdateMessage'), {
-          title: this.$t('pageFirmware.toast.verifyUpdate'),
-          refreshAction: true,
-        });
-      }, 360000);
       this.infoToast(this.$t('pageFirmware.toast.updateStartedMessage'), {
         title: this.$t('pageFirmware.toast.updateStarted'),
         timestamp: true,
       });
       if (this.isWorkstationSelected) {
-        this.dispatchWorkstationUpload(timerId);
+        this.dispatchWorkstationUpload();
       } else {
-        this.dispatchTftpUpload(timerId);
+        this.dispatchTftpUpload();
       }
     },
-    dispatchWorkstationUpload(timerId) {
+    dispatchWorkstationUpload() {
       this.$store
         .dispatch('firmware/uploadFirmware', this.file)
+        .then((response) => {
+          this.checkStatus(response.data['@odata.id']);
+        })
         .catch(({ message }) => {
           this.endLoader();
           this.errorToast(message);
-          clearTimeout(timerId);
         });
     },
-    dispatchTftpUpload(timerId) {
+    dispatchTftpUpload() {
       this.$store
         .dispatch('firmware/uploadFirmwareTFTP', this.tftpFileAddress)
         .catch(({ message }) => {
           this.endLoader();
           this.errorToast(message);
-          clearTimeout(timerId);
         });
+    },
+    checkStatus(data) {
+      var interval = setInterval(() => {
+        this.$store.dispatch('firmware/checkStatus', data).then((response) => {
+          this.isProgress = true;
+          this.progressValue = response.PercentComplete;
+          if (response.TaskState != 'New') {
+            clearInterval(interval);
+            this.endLoader();
+            if (response.TaskState == 'Completed') {
+              this.modalReset++;
+              if (this.modalReset == 1)
+                this.$bvModal
+                  .msgBoxOk(
+                    this.$tc('pageFirmware.modal.firmwareResetCalled'),
+                    {
+                      title: this.$tc('global.action.success'),
+                    }
+                  )
+                  .then((confirmed) => {
+                    if (confirmed) {
+                      this.firmwareOverlay = true;
+                    }
+                  });
+            } else {
+              this.isProgress = false;
+              this.errorToast(i18n.t('pageFirmware.toast.errorUpdateFirmware'));
+            }
+          }
+        });
+      }, 300);
     },
     onSubmitUpload() {
       this.$v.$touch();

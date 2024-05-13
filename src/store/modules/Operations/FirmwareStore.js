@@ -186,6 +186,11 @@ const FirmwareStore = {
           throw new Error(i18n.t('pageFirmware.toast.errorSwitchImages'));
         });
     },
+    async checkStatus(_, uri) {
+      return await api.get(uri).then((response) => {
+        return response.data;
+      });
+    },
   },
 };
 
