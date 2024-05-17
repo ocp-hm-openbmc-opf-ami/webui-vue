@@ -97,7 +97,7 @@
     },
     "appHeader": {
         "applicationHeader": "应用程式标头",
-        "health": "状态",
+        "health": "健康状态",
         "logOut": "登出",
         "power": "电源",
         "profileSettings": "@:appPageTitle.profileSettings",
@@ -168,7 +168,7 @@
         "bsod": "BSOD",
         "changePassword": "变更密码",
         "power": "电源",
-        "sessions": "对谈",
+        "sessions": "会话",
         "dateTime": "日期与时间",
         "dumps": "转储",
         "eventLogs": "事件纪录",
@@ -177,7 +177,7 @@
         "inventory": "清单",
         "kvm": "KVM",
         "ldap": "LDAP",
-        "userManagement": "使用者管理",
+        "userManagement": "用户管理",
         "login": "登入",
         "network": "网路",
         "vlan": "VLAN",
@@ -210,7 +210,7 @@
         "backupAndRestore": "备份还原",
         "FireWall": "系统防火墙",
         "cups": "CUPS",
-        "Bond": "网络债券",
+        "Bond": "绑定",
         "License": "管理许可证",
         "systemInventory":"系统库存",
         "ddnsConfiguration": "DDNS 配置"
@@ -232,9 +232,9 @@
             "ddnsMethod": "DDNS 方法",
             "nsUpdateEnable": "NS 更新启用",
             "useTSIG": "使用 TSIG",
-            "doNsupdate": "拒绝更新",
-            "manual": "手动的",
-            "auto": "汽车",
+            "doNsupdate": "NS更新",
+            "manual": "手动",
+            "auto": "自动",
             "register": "登记",
             "deregister": "注销",
             "ipv4IPPriority": "Ipv4",
@@ -263,9 +263,9 @@
             "systemInfo": "系统信息",
             "name": "姓名",
             "description": "描述",
-            "model": "模型",
+            "model": "型号",
             "indicatorLED": "LED指示灯",
-            "manufacture": "生产",
+            "manufacture": "制造商",
             "powerState": "电源状态",
             "serialNumuber": "序列号",
             "partNumuber": "零件号",
@@ -279,9 +279,9 @@
             "processorInfo": "处理器信息",
             "id": "Id",
             "name": "姓名",
-            "manufacture": "生产",
+            "manufacture": "制造商",
             "maxSpeedMHz": "最大速度 MHz",
-            "model": "模型",
+            "model": "型号",
             "processorArchitecture": "处理器架构",
             "processorType": "处理器类型",
             "socket": "插座",
@@ -295,7 +295,7 @@
             "id": "Id",
             "name": "姓名",
             "capacityMiB": "容量MiB",
-            "manufacturer": "生产",
+            "manufacturer": "制造商",
             "serialNumuber": "序列号",
             "partNumuber": "零件号",
             "state": "状态",
@@ -309,13 +309,13 @@
             "baseBoard": "底板",
             "baseBoardInfo": "底板信息",
             "name": "姓名",
-            "model": "模型",
+            "model": "型号",
             "state": "状态",
             "powerState": "电源状态",
             "assetTag": "资产标签",
             "indicatorLED": "LED指示灯",
             "locationIndicatorActive": "位置指示器激活",
-            "manufacturer": "生产",
+            "manufacturer": "制造商",
             "partNumber": "零件号",
             "serialNumber": "序列号"
         },
@@ -337,13 +337,13 @@
             "name": "姓名"
         },
         "power": {
-            "power": "力量",
+            "power": "电源",
             "powerInfo": "电源控制信息",
             "name": "姓名",
             "maxConsumedWatts": "最大消耗瓦数",
             "minConsumedWatts": "最小消耗瓦数",
-            "manufacturer": "生产",
-            "model": "模型",
+            "manufacturer": "制造商",
+            "model": "型号",
             "plugType": "插头类型",
             "powerCapacityWatts": "电源容量 瓦",
             "PowerSupplyType": "电源类型",
@@ -354,11 +354,11 @@
             "voltageControlInfo": "电压信息",
             "name": "姓名",
             "state": "状态",
-            "readingUnits": "阅读单位",
-            "reading": "阅读",
+            "readingUnits": "读数单位",
+            "reading": "读数",
             "minReadingRange": "最小读数范围",
             "maxReadingRange": "最大读取范围",
-            "readingType": "阅读类型",
+            "readingType": "读数类型",
             "upperThresholdFatal": "UF",
             "upperThresholdCritical": "UC",
             "lowerThresholdCritical": "LC",
@@ -366,8 +366,8 @@
         },
         "thermal": {
             "thermal": "热的",
-            "fanINFO": "粉丝信息",
-            "name": "姓名",
+            "fanINFO": "风扇信息",
+            "name": "名称",
             "sensorNumber": "传感器编号",
             "state": "状态",
             "readingRPM": "读取转速",
@@ -376,14 +376,14 @@
         },
         "temperature": {
             "temperatureInfo": "温度信息",
-            "name": "姓名",
+            "name": "名称",
             "physicalContext": "物理环境",
             "state": "状态",
-            "readingUnits": "阅读单位",
-            "reading": "阅读",
+            "readingUnits": "读数单位",
+            "reading": "读数",
             "minReadingRange": "最小读数范围",
             "maxReadingRange": "最大读取范围",
-            "readingType": "阅读类型",
+            "readingType": "读数类型",
             "upperThresholdFatal": "UF",
             "upperThresholdCritical": "UC",
             "lowerThresholdCritical": "LC",
@@ -392,9 +392,9 @@
         "pcieDevice": {
             "pcieDevice": "PCIE设备",
             "pcieDeviceInfo": "PCIE 设备信息",
-            "name": "姓名",
+            "name": "名称",
             "id": "Id",
-            "manufacturer": "生产",
+            "manufacturer": "制造商",
             "deviceType": "设备类型",
             "state": "状态"
         },
@@ -402,14 +402,14 @@
             "pcieFunction": "PCIE功能",
             "pcieFunctionInfo": "PCIE功能信息",
             "id": "Id",
-            "name": "姓名",
+            "name": "名称",
             "deviceLinked": "设备链接",
             "deviceClass": "设备类别",
             "classCode": "班级代码",
             "deviceId": "设备ID",
             "vendorId": "供应商 ID",
             "functionId": "功能ID",
-            "functionType": "函数类型",
+            "functionType": "功能类型",
             "revisionId": "修订 ID",
             "subSystemId": "子系统ID",
             "subSystemVendorId": "子系统供应商 ID",
@@ -419,11 +419,11 @@
             "storage": "贮存",
             "storageDriveInfo": "存储驱动器信息",
             "id": "Id",
-            "name": "姓名",
+            "name": "名称",
             "serialNumuber": "序列号",
-            "manufacturer": "生产",
+            "manufacturer": "制造商",
             "protocol": "协议",
-            "model": "模型",
+            "model": "型号",
             "revision": "修订",
             "encryptionStatus": "加密状态",
             "mediaType": "媒体类型",
@@ -431,10 +431,10 @@
         },
         "storageController": {
             "storageControllerInfo": "存储控制器信息",
-            "memberId": "会员ID",
-            "name": "姓名",
+            "memberId": "成员ID",
+            "name": "名称",
             "serialNumuber": "序列号",
-            "model": "模型",
+            "model": "型号",
             "firmwareVersion": "固件版本",
             "speedGbs": "速度Gbs",
             "state": "状态"
@@ -495,7 +495,7 @@
         "availableCPU": "可用CPU",
         "all": "全部",
         "table": {
-            "name": "姓名",
+            "name": "名称",
             "dynamicFeature": "动态状态",
             "meteringFeature": "测光状态",
             "provisionFeature": "供给状态",
@@ -503,15 +503,15 @@
         },
         "toast": {
             "errorGettingCpus": "CPU 信息不可用。",
-            "errorShowingOnDemandInfo": "显示点播信息时出错。"
+            "errorShowingOnDemandInfo": "显示一经请求信息时出错。"
         }
     },
     "pageBsod": {
         "capturedBsod": "捕获的 Bsod",
         "downloadBsodImage": "下载",
         "deleteBsodImage": "删除",
-        "triggerBsodImage": "扳机",
-        "lastBsodCaptured": "最后捕获的 Bsod 屏幕.",
+        "triggerBsodImage": "触发",
+        "lastBsodCaptured": "最后捕获的 BSOD 屏幕.",
         "bsodImageNotAvailable": "BSOD 屏幕不可用.",
         "toast": {
             "errorGettingBsodApi": "获取 BSOD 图像时出错.",
@@ -529,7 +529,7 @@
         "goBack": "回到上一页",
         "submit": "提交",
         "newPassword": "新密码",
-        "username": "使用者名称"
+        "username": "用户名称"
     },
     "pageSessions": {
         "action": {
@@ -540,17 +540,17 @@
             "disconnectMessage": "你确定要取消连结 %{count} 对谈? 执行此动作以后不可恢復。 | 你确定要取消连结 %{count} 对谈们? 执行此动作以后不可恢復。"
         },
         "table": {
-            "sessionID": "对谈 ID",
+            "sessionID": "会话 ID",
             "sessionType": "会话类型",
             "userID": "用户 ID",
-            "username": "使用者名称",
+            "username": "用户名称",
             "ipAddress": "IP 位址",
-            "privilege": "特权",
-            "searchSessions": "搜寻对谈们"
+            "privilege": "权限",
+            "searchSessions": "搜寻会话们"
         },
         "toast": {
-            "errorDelete": "错误取消连结 %{count} 对谈 | 错误取消连结 %{count} 对谈们",
-            "successDelete": "成功取消连结 %{count} 对谈 | 成功取消连结 %{count} 对谈们"
+            "errorDelete": "错误取消连结 %{count} 会话 | 错误取消连结 %{count} 会话们",
+            "successDelete": "成功取消连结 %{count} 会话 | 成功取消连结 %{count} 会话们"
         }
     },
     "pageNic": {
@@ -564,11 +564,11 @@
         "flowControlConfiguration": "流量控制配置",
         "signalDetected": "检测到信号",
         "physicalPortNumber": "物理端口号",
-        "health": "健康",
+        "health": "状态",
         "getBootConfigProperties": "引导配置属性",
         "getNCCapabilitiesAndSettings": "网络控制器功能和设置",
         "getPFAssignmentProperties": "PF 分配属性",
-        "getPackageStatus": "包裹状态",
+        "getPackageStatus": "封包状态",
         "getPartitionStatisticsProperties": "分区统计属性",
         "getPortConfigurationProperties": "端口配置属性",
         "macAddressCount": "MAC地址计数",
@@ -576,16 +576,16 @@
         "MCTP_over_SMBUS_EID": "MCTP_over_SMBUS_EID",
         "manufacturerId": "制造商 Id",
         "NCSIVersion": "NCSI版本",
-        "OEMMacAddress": "OEM Mac 地址",
+        "OEMMacAddress": "OEM MAC 地址",
         "noInformationAvailable":"NIC 信息不可用",
         "headers": {
-            "MacAddress":"MAC地址"
+            "MacAddress":"MAC 地址"
         }
     },
     "pageNvmeInformation": {
         "nvmeSolidStateDrive": "NVMe 固体状态驱动状态",
         "nvmeInformation": "NVMe 资讯",
-        "model": "模型",
+        "model": "型号",
         "serialNumber": "序列数字",
         "pcie0LinkSpeed": "PCIe 0 连结速度",
         "pcie1LinkSpeed": "PCIe 1 连结速度",
@@ -600,7 +600,7 @@
         "deviceSubClass": "设备子类型",
         "deviceProgrammingIntfc": "设备工作介面",
         "driveLifeConsumed": "设备已使用週期",
-        "manufacturer": "製造商",
+        "manufacturer": "制造商",
         "deviceLocation": "设备地点",
         "firmwareVersion": "韧体版本",
         "toast": {
@@ -610,12 +610,12 @@
     "pageDateTime": {
         "alert": {
             "message": "如需改变时间或日期(UTC或网页偏移量) 请透过应用程式 ",
-            "link": "人物简介设定"
+            "link": "用户资讯"
         },
         "configureSettings": "配置设定",
         "form": {
             "date": "日期",
-            "manual": "手册",
+            "manual": "手动",
             "timezone": "时区",
             "time": {
                 "label": "24小时制时间",
@@ -762,7 +762,7 @@
                 "item1": "所有手动设定将会被删除",
                 "item2": "要是备份存在，配置分割和平台钥匙储存可能会被恢復",
                 "item3": "所有BMC纪录将被移除",
-                "item4": "将停止连结目前在网路接口的可可用session",
+                "item4": "将停止连结目前在网路接口的可用会话",
                 "item5": "BMC的预设帐户密码将被恢復"
             },
             "resetWarningMessage": "重新设定时，若没有关闭系统，将有可能发生不可回復的错误",
@@ -779,14 +779,14 @@
         "acd": "ACD 伺服器",
         "action": {
             "download": "下载所有日志",
-            "generate": "一般",
+            "generate": "产生",
             "close": "关闭",
-            "view": "典籍后请等待一分钟，JSON Viewer跳出视窗正在载入..",
+            "view": "点击后请等待一分钟，JSON Viewer跳出视窗正在载入..",
             "logInProgress": "日志生成正在进行中"
         },
         "modal": {
             "jsonViewer": "已选择档案: %{fileName}",
-            "confirmTitle": "确认？",
+            "confirmTitle": "确认吗？",
             "confirmMessage":"您确定要生成故障转储日志吗？有时可能需要 10 到 15 分钟才能生成日志."
         },
         "table": {
@@ -827,8 +827,8 @@
         "toast": {
             "restoreToDefaultsSuccess": "原厂设定恢復成功",
             "restoreToDefaultsError": "原厂设定恢復失败",
-            "FactoryDefaultConfirmationFull": "此动作无法未完成。所有远端对谈将结束，所有使用者及网路介面将停用。点击OK以继续或点击Cancel停止",
-            "FactoryDefaultConfirmationPartial": "此动作无法未完成。所有远端对谈将结束，所有使用者及LAN设定将回復到原厂设定。 点击OK以继续或点击Cancel停止",
+            "FactoryDefaultConfirmationFull": "此动作无法未完成。所有远端对谈将结束，所有用户及网路介面将停用。点击OK以继续或点击Cancel停止",
+            "FactoryDefaultConfirmationPartial": "此动作无法未完成。所有远端对谈将结束，所有用户及LAN设定将回復到原厂设定。 点击OK以继续或点击Cancel停止",
             "title": "原厂设定",
             "okTitle": "ok"
         }
@@ -910,10 +910,10 @@
             "baseModuleType": "基本模组型态",
             "busWidthBits": "汇流排宽度",
             "bmcDateTime": "BMC 日期与时间",
-            "capacityMiB": "容量",
+            "capacityMiB": "容量 MiB",
             "chassisType": "Chassis 型态",
             "connectTypesSupported": "连接可支援型态",
-            "coreCount": "中心数量",
+            "coreCount": "核心数量",
             "count": "数量",
             "dataWidthBits": "资料宽度",
             "description": "叙述",
@@ -932,15 +932,15 @@
             "lastResetTime": "最后重新设定时间",
             "locationNumber": "地点数字",
             "managerType": "管理者型态",
-            "manufacturer": "製造商",
-            "maxConcurrentSessions": "最大同时对谈",
+            "manufacturer": "制造商",
+            "maxConcurrentSessions": "最大同时会话",
             "maxSpeedMHz": "最大速度",
             "maxPowerWatts": "最大电源",
             "memoryType": "记忆体型态",
             "memorySummary": "记忆体概论",
             "minPowerWatts": "最小电源",
             "minSpeedMHz": "最小速度",
-            "model": "模型",
+            "model": "型号",
             "name": "名称",
             "operatingSpeedMhz": "运作速度",
             "partNumber": "部分数字",
@@ -956,7 +956,7 @@
             "sparePartNumber": "剩馀部分数字",
             "statusHealthRollup": "状态 (状态捲)",
             "statusState": "状态 (状态)",
-            "subModel": "子模型",
+            "subModel": "子型号",
             "systemType": "系统型态",
             "totalCores": "总核心",
             "totalSystemMemoryGiB": "系统总记忆体",
@@ -1004,15 +1004,15 @@
     "pageKvm": {
         "openNewTab": "在新的标籤页开启",
         "buttonCtrlAltDelete": "送出 Ctrl+Alt+Delete",
-        "power": "力量",
+        "power": "电源",
         "powerOperation": {
-            "powerOn": "打开",
+            "powerOn": "开机",
             "gracefulShutdown": "优雅关机",
             "gracefulRestart": "优雅重启",
             "forcedShutdown": "强制关机",
             "forcedRestart": "强制重启"
         },
-        "powerOnTooltip": "打开服务器",
+        "powerOnTooltip": "开启服务器",
         "gracefulShutdownTooltip": "操作系统关闭，然后服务器关闭",
         "gracefulRestartTooltip": "操作系统关闭，然后服务器重新启动",
         "forcedShutdownTooltip": "服务器关闭，操作系统不关闭；可能会导致数据损坏",
@@ -1021,8 +1021,8 @@
         "connected": "已结接",
         "connecting": "连结中",
         "disconnected": "已断连",
-        "alreadyActiveSession": "主KVM对谈正在运转 请稍后再试 ",
-        "alreadyInMasterSession": "主对谈正在运转",
+        "alreadyActiveSession": "主KVM会话正在运转 请稍后再试 ",
+        "alreadyInMasterSession": "主会话正在运转",
         "errorInGettingActiveStatus": "取得KVM活跃状态发生错误!",
         "disabledKVMService": "KVM服务被禁用。进入安全和访问 -> 策略页面启用 KVM 服务。",
         "toast": {
@@ -1053,7 +1053,7 @@
             "serverUri": "URI伺服器",
             "serverUriTooltip": "正在启用LDAP改变URI方案到ldaps",
             "serviceType": "服务型态",
-            "userIdAttribute": "使用者ID属性"
+            "userIdAttribute": "用户ID属性"
         },
         "modal": {
             "addNewRoleGroup": "新增角色群组",
@@ -1062,12 +1062,12 @@
             "deleteRoleGroup": "删除角色群组",
             "editRoleGroup": "编辑角色群组",
             "groupName": "群组名称",
-            "groupPrivilege": "群组特权"
+            "groupPrivilege": "群组权限"
         },
         "tableRoleGroups": {
             "alertContent": "LDAP 授权必须被启用以修改角色群组",
             "groupName": "群组名称",
-            "groupPrivilege": "群组特权"
+            "groupPrivilege": "群组权限"
         },
         "toast": {
             "errorAddRoleGroup": "新增角色群组发生错误",
@@ -1084,71 +1084,71 @@
     },
     "pageUserManagement": {
         "accountPolicySettings": "帐户政策设定",
-        "addUser": "新增使用者",
-        "deleteUser": "删除使用者 | 删除使用者们",
-        "editUser": "编辑使用者",
-        "viewPrivilegeRoleDescriptions": "检视群特权描述",
+        "addUser": "新增用户",
+        "deleteUser": "删除用户 | 删除用户们",
+        "editUser": "编辑用户",
+        "viewPrivilegeRoleDescriptions": "检视群权限描述",
         "passwordComplexityRules": "密码複杂度规则",
         "note": "检视或修改密码複杂度请至安全性与存取权->政策页面",        
         "modal": {
             "accountLocked": "帐号被上锁",
             "accountStatus": "帐号状态",
             "automaticAfterTimeout": "超时以后将自动",
-            "batchDeleteConfirmMessage": "确定要删除 %{count} 使用者? 此动作是不可逆的 | 确定要删除 %{count} 使用者们? 此动作是不可逆的",
+            "batchDeleteConfirmMessage": "确定要删除 %{count} 用户? 此动作是不可逆的 | 确定要删除 %{count} 用户们? 此动作是不可逆的",
             "cannotStartWithANumber": "开头不能使用数字",
             "clickSaveToUnlockAccount": "点击 \"Save\" 解锁帐户",
-            "confirmUserPassword": "确认使用者密码",
-            "deleteConfirmMessage": "确定要删除使用者 '%{user}'? 此动作是不可逆的",
+            "confirmUserPassword": "确认用户密码",
+            "deleteConfirmMessage": "确定要删除用户 '%{user}'? 此动作是不可逆的",
             "manual": "手动",
             "maxFailedLoginAttempts": "最大失败登入尝试",
             "noSpecialCharactersExceptUnderscore": "没有特殊字元除了下底线",
             "passwordMustBeBetween": "密码必须有 %{min} – %{max} 字元",
             "passwordsDoNotMatch": "密码不相符",
-            "privilege": "特权",
+            "privilege": "权限",
             "timeoutDurationSeconds": "超时期间 (秒)",
             "unlock": "未锁",
-            "username": "使用者名称",
-            "userPassword": "使用者密码",
-            "userUnlockMethod": "使用者解锁方法",
+            "username": "用户名称",
+            "userPassword": "用户密码",
+            "userUnlockMethod": "用户解锁方法",
             "vmediaAccess": "视频媒体访问"
         },
         "table": {
-            "privilege": "特权",
+            "privilege": "权限",
             "status": "状态",
-            "username": "使用者名称"
+            "username": "用户名称"
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "配置此服务所管理的元件",
             "configureManagerResources": "配置管理者资源",
-            "configureUsersAndTheirAccounts": "配置使用者及他们的帐户",
+            "configureUsersAndTheirAccounts": "配置用户及他们的帐户",
             "logInToTheServiceAndReadResources": "登入至服务及阅读政策",
-            "updatePasswordForCurrentUserAccount": "更新目前使用者密码",
-            "privilege": "特权",
+            "updatePasswordForCurrentUserAccount": "更新目前用户密码",
+            "privilege": "权限",
             "administrator": "管理人",
             "operator": "操作者",
             "readOnly": "唯读",
             "noAccess": "没有权限"
         },
         "toast": {
-            "errorBatchDelete": "删除 %{count} 使用者发生错误 | 删除  %{count} 使用者们发生错误",
-            "errorBatchDisable": "停用 %{count} 使用者发生错误 | 停用 %{count} 使用者们发生错误",
-            "errorBatchEnable": "启用 %{count} 使用者发生错误 | 启用 %{count} 使用者们发生错误",
-            "errorCreateUser": "使用者名称 '%{username}' 已经存在",
-            "errorAlreadyExistUser": "使用者名称 '%{username}'已经存在",
-            "errorDeleteUser": "删除使用者'%{username}'发生错误",
-            "errorDeleteLoggedUser": "使用者 '%{username}' 目前已登入其他对话",
+            "errorBatchDelete": "删除 %{count} 用户发生错误 | 删除  %{count} 用户们发生错误",
+            "errorBatchDisable": "停用 %{count} 用户发生错误 | 停用 %{count} 用户们发生错误",
+            "errorBatchEnable": "启用 %{count} 用户发生错误 | 启用 %{count} 用户们发生错误",
+            "errorCreateUser": "用户名称 '%{username}' 已经存在",
+            "errorAlreadyExistUser": "用户名称 '%{username}'已经存在",
+            "errorDeleteUser": "删除用户'%{username}'发生错误",
+            "errorDeleteLoggedUser": "用户 '%{username}' 目前已登入其他对话",
             "errorLoadAccountSettings": "载入帐户设定发生错误",
-            "errorLoadUsers": "载入使用者们发生错误",
+            "errorLoadUsers": "载入用户们发生错误",
             "errorSaveSettings": "储存帐户设定发生错误",
-            "errorUpdateUser": "更新使用者'%{username}'发生错误",
+            "errorUpdateUser": "更新用户'%{username}'发生错误",
             "errorInvalidPassword": "无效密码 请确认密码规则",
-            "successBatchDelete": "成功删除 %{count} 使用者 | 成功删除 %{count} 使用者们",
-            "successBatchDisable": "成功停用 %{count} 使用者 | 成功停用 %{count} 使用者们",
-            "successBatchEnable": "成功启用 %{count} 使用者 | 成功启用 %{count} 使用者们",
-            "successCreateUser": "使用者 '%{username}'已建立",
-            "successDeleteUser": "使用者'%{username}'已删除",
+            "successBatchDelete": "成功删除 %{count} 用户 | 成功删除 %{count} 用户们",
+            "successBatchDisable": "成功停用 %{count} 用户 | 成功停用 %{count} 用户们",
+            "successBatchEnable": "成功启用 %{count} 用户 | 成功启用 %{count} 用户们",
+            "successCreateUser": "用户 '%{username}'已建立",
+            "successDeleteUser": "用户'%{username}'已删除",
             "successSaveSettings": "成功储存帐户设定",
-            "successUpdateUser": "使用者 '%{username}'已更新",
+            "successUpdateUser": "用户 '%{username}'已更新",
             "successPasswordChanged": "密码变更成功，请使用新密码重新登入"
         },
         "passwordRules": {
@@ -1162,7 +1162,7 @@
                 "rule6": "包含一个小写字母(e.g. a, g)",
                 "rule7": "包含数字(e.g. 1, 6)",
                 "rule8": "至少包含一个空格或符号（例如 $、&）.",
-                "rule9": "不能包含使用者名称或是倒反的使用者名称(字母没有大小写之分).",
+                "rule9": "不能包含用户名称或是倒反的用户名称(字母没有大小写之分).",
                 "rule10": "不能包含三个或三个以上连续数字 (e.g. BMC(123)ste, BMC(654)sfc 是不被允许)",
                 "rule11": "不能包含超过或等于 3 个字符的连续区分大小写的字母（例如，不允许 (AbC)3478!,57$(DeF)68k）.",
                 "rule12": "符号不能包含超过 3 个字符（例如不允许使用 34Mgs57(?!$#)68k））",
@@ -1174,13 +1174,13 @@
                 "rule1": "它应该只包含可打印字符.",
                 "rule2": "密码长度不能短于八个字元",
                 "rule3": "必须包含至少 5 个唯一字符（不允许使用 abcabcabc）",
-                "rule4": "不能包含使用者名称或是倒反的使用者名称",
+                "rule4": "不能包含用户名称或是倒反的用户名称",
                 "rule5": "须符合以下四个标准:",
                 "rule6": "包含一个大写字母(e.g. A, G).",
                 "rule7": "包含一个小写字母 (e.g. a, g).",
                 "rule8": "包含数字 (e.g. 1, 6).",
                 "rule9": "至少包含一个空格或符号（例如 $、&）.",
-                "rule10": "不能包含使用者名称或是倒反的使用者名称(字母没有大小写之分) (eg,username=Hello, Password=th12(oLleH)_78 是不被允许)."
+                "rule10": "不能包含用户名称或是倒反的用户名称(字母没有大小写之分) (eg,username=Hello, Password=th12(oLleH)_78 是不被允许)."
               },
             "passwordForLow": {
               "passwordComplexityForLow": "密码複杂度低",
@@ -1192,10 +1192,10 @@
               "rule6": "包含一个小写字母 (e.g. a, g).",
               "rule7": "包含数字 (e.g. 1, 6).",
               "rule8": "至少包含一个空格或符号（例如 $、&）.",
-              "rule9": "不能包含使用者名称或是倒反的使用者名称 (pam_cracklib将会检查两者) (字母没有大小写之分) (eg, username=Hello,  Password=th12(heLLo)_78 和 Password=th12(oLleH)_78是不被允许,跟密码複杂度中高一样)."
+              "rule9": "不能包含用户名称或是倒反的用户名称 (pam_cracklib将会检查两者) (字母没有大小写之分) (eg, username=Hello,  Password=th12(heLLo)_78 和 Password=th12(oLleH)_78是不被允许,跟密码複杂度中高一样)."
             },
             "passwordForDisabled": {
-                "passwordComplexityForDisabled": "残疾人密码复杂性",
+                "passwordComplexityForDisabled": "停用密码复杂性",
                 "rule1": "它应该只包含可打印字符.",
                 "rule2": "密码长度不能短于6个字符.",
                 "rule3": "不能与用户名或用户名倒序相同.",
@@ -1208,9 +1208,9 @@
         "language": "语言",
         "logIn": "登入",
         "password": "密码",
-        "username": "使用者名称",
+        "username": "用户名称",
         "alert": {
-            "message": "无效的使用者名称跟密码"
+            "message": "无效的用户名称跟密码"
         }
     },
     "pageOverview": {
@@ -1285,7 +1285,7 @@
         "timezone": "时区",
         "timezoneDisplay": "时区显示选项",
         "timezoneDisplayDesc": "选择整个应用程序中时间的显示方式",
-        "username": "使用者名称",
+        "username": "用户名称",
         "userPrivilege": "用户权限",
         "toast": {
             "successUpdatingTimeZone": "更新时区成功.",
@@ -1580,7 +1580,7 @@
             "successVmcDisabled": "禁用的虚拟媒体服务已成功保存。请等待 10-20 秒以进行禁用",
             "successVmcEnabled": "启用的虚拟媒体服务已成功保存。请等待最多 10-20 秒以启用..",
             "successSOLDisabled": "停用 SOL SSH  安全设定成功",
-            "successSOLEnabled": " 启用 SOL SSH  安全设定成功",
+            "successSOLEnabled": "启用 SOL SSH  安全设定成功",
             "successSessionTimeout": "配置会话逾期成功",
             "successComplexity": "成功改变複杂度数字",
             "successPasswordHistory": "成功改变密码历史数字",
@@ -1615,7 +1615,7 @@
         "complexity": "複杂度",
         "complexityDescription": "点选密码历史选单以设定密码複杂度 (停用, 低, 中, 高). 密码不能超过20 bytes长度，由于 IPMI 2.0 限制.",
         "passwordHistory": "密码历史",
-        "passwordHistoryDescription": "点选密码历史选单以设定密码历史 (0 to 5). 使用者储存至少 N(0~5) 密码，为了限制密码改变历史和避免频繁变更相同使用者密码",
+        "passwordHistoryDescription": "点选密码历史选单以设定密码历史 (0 to 5). 用户储存至少 N(0~5) 密码，为了限制密码改变历史和避免频繁变更相同用户密码",
         "disabled": "停用",
         "low": "低",
         "medium": "中",
@@ -1776,7 +1776,7 @@
             "password": "密码",
             "serverUri": "外部伺服器 URI",
             "title": "传统模式配置",
-            "username": "使用者名称",
+            "username": "用户名称",
             "mount": "Mount 型态",
             "imagePath": "路径至映像"
         },
@@ -1792,8 +1792,8 @@
     },
     "pageAdapter": {
         "firmwareVersion": "固件版本 :",
-        "memberId": "会员ID :",
-        "name": "姓名 :",
+        "memberId": "成员ID :",
+        "name": "名称 :",
         "serialNumber": "序列号 :",
         "supportedRaidTypes": "支持的 RAID 类型 :",
         "viewPhysicalDevices": "查看物理设备",
@@ -1810,7 +1810,7 @@
             "protocol": "协议",
             "revision": "修订",
             "serialNumber": "序列号",
-            "health": "健康"
+            "health": "状态"
         },
         "noPhysicalDevice": "目前不存在物理设备信息。"
     },
@@ -1820,7 +1820,7 @@
         "raidLevel": "RAID级别",
         "virtualDeviceName": "虚拟设备名称",
         "logicalDeviceName": "逻辑设备名称",
-        "stripSize": "带材尺寸",
+        "stripSize": "条带尺寸",
         "size": "大小（以字节为单位）",
         "parityGroupCount": "奇偶校验组计数",
         "arrayNumber": "数组编号",
@@ -1832,7 +1832,7 @@
         "readPolicy": "阅读政策",
         "writePolicy": "写策略",
         "ioPolicy": "IO政策",
-        "accessPolicy": "准入政策",
+        "accessPolicy": "存取机制",
         "diskCacheCapacity": "磁盘缓存容量",
         "unConfiguredPhysicalDrive": "未配置的物理驱动器",
         "noLogicalDevice": "此时不存在逻辑设备信息。",
@@ -1842,7 +1842,7 @@
             "fullInitialization": "完全初始化"
         },
         "readPolicyOptions": {
-            "noReadAhead": "没有预读",
+            "noReadAhead": "不预读",
             "alwaysReadAhead": "始终提前阅读"
         },
         "writePolicyOptions": {
@@ -1862,17 +1862,17 @@
         "diskCacheCapacityOptions": {
             "unchanged": "不变",
             "enabled": "启用",
-            "disabled": "残疾人"
+            "disabled": "禁用"
         },
         "table": {
-            "name": "姓名",
+            "name": "名称",
             "raidType": "磁盘阵列类型",
             "stripSizeBytes": "条带大小字节",
             "readCachePolicyType": "读取缓存策略类型",
             "writeCachePolicyType": "写入缓存策略类型",
             "capacityBytes": "容量字节",
             "numberOfPhysicalDevices": "物理设备数量",
-            "health": "健康"
+            "health": "状态"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "没有可配置的物理设备！",
@@ -1895,13 +1895,13 @@
             "errorNumberOfDrivesValidation": "驱动器数量不应高于未配置的物理设备数量！",
             "errorMinMaxSpanDepth":"最小和最大跨度深度均为 2。",
             "errorSpanDepthDrives":"选定的 UnConfig 驱动器应等于跨度深度和每个跨度的驱动器数的倍数。",
-            "errorMsccSize": "尺寸应能除以条带尺寸。"
+            "errorMsccSize": "尺寸应能被条带尺寸整除。"
         }
     },
     "pageFireWall": {
         "firewallSettings": {
             "addNewRule":"添加新规则",
-            "flushAll": "冲洗全部",
+            "flushAll": "刷新全部",
             "modal": {
                 "blockAll": "全部封锁",
                 "addFirewallSettings": "添加新的防火墙规则",
@@ -1941,15 +1941,15 @@
         }
     },
     "bond": {
-        "bond": "网络债券",
-        "bondInterface": "债券接口",
+        "bond": "绑定",
+        "bondInterface": "绑定接口",
         "enableBonding": "启用绑定",
         "mitMonitorinms": "MII监控（毫秒）",
         "confirmOk": "好的 |好的",
         "confirmMsg": "保存 LAN 设置将重新启动 BMC 的网络服务。应用更改后，请使用新的浏览器会话重新连接。您想继续吗？",
         "sameBondSettings": "网络绑定配置相同，因此无需保存。",
         "BondWithSingleInterface":"无法通过单个接口启用绑定。",
-        "errorSavebond": "保存网络债券时出错。",
+        "errorSavebond": "保存网络绑定时出错。",
         "errorDelete": "删除网络绑定时出错。",
         "errorGetBond": "获取网络绑定时出错。",
         "miiRangeRequired": "输入 1-100 之间的有效毫秒"

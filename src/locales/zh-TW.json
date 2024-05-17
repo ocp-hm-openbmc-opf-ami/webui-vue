@@ -96,7 +96,7 @@
         }
     },
     "appHeader": {
-        "applicationHeader": "應用程式標頭",
+        "applicationHeader": "應用程式標題",
         "health": "狀態",
         "logOut": "登出",
         "power": "電源",
@@ -168,7 +168,7 @@
         "bsod": "BSOD",
         "changePassword": "變更密碼",
         "power": "電源",
-        "sessions": "對談",
+        "sessions": "會話",
         "dateTime": "日期與時間",
         "dumps": "轉儲",
         "eventLogs": "事件紀錄",
@@ -210,7 +210,7 @@
         "backupAndRestore": "備份還原",
         "FireWall": "系統防火牆",
         "cups": "CUPS",
-        "Bond": "網路債券",
+        "Bond": "綁定",
         "License": "管理許可證",
         "systemInventory":"系統庫存",
         "ddnsConfiguration": "DDNS 配置"
@@ -232,9 +232,9 @@
             "ddnsMethod": "DDNS 方法",
             "nsUpdateEnable": "NS 更新啟用",
             "useTSIG": "使用 TSIG",
-            "doNsupdate": "拒絕更新",
-            "manual": "手動的",
-            "auto": "汽車",
+            "doNsupdate": "NS更新",
+            "manual": "手動",
+            "auto": "自動",
             "register": "登記",
             "deregister": "註銷",
             "ipv4IPPriority": "Ipv4",
@@ -337,7 +337,7 @@
             "name": "姓名"
         },
         "power": {
-            "power": "力量",
+            "power": "電源",
             "powerInfo": "電源控制訊息",
             "name": "姓名",
             "maxConsumedWatts": "最大消耗瓦數",
@@ -354,11 +354,11 @@
             "voltageControlInfo": "電壓資訊",
             "name": "姓名",
             "state": "狀態",
-            "readingUnits": "閱讀單位",
-            "reading": "閱讀",
+            "readingUnits": "讀數單位",
+            "reading": "讀數",
             "minReadingRange": "最小讀數範圍",
             "maxReadingRange": "最大讀取範圍",
-            "readingType": "閱讀類型",
+            "readingType": "讀數類型",
             "upperThresholdFatal": "UF",
             "upperThresholdCritical": "UC",
             "lowerThresholdCritical": "LC",
@@ -366,7 +366,7 @@
         },
         "thermal": {
             "thermal": "熱的",
-            "fanINFO": "粉絲訊息",
+            "fanINFO": "風扇訊息",
             "name": "姓名",
             "sensorNumber": "感測器數量",
             "state": "狀態",
@@ -379,11 +379,11 @@
             "name": "姓名",
             "physicalContext": "物理環境",
             "state": "狀態",
-            "readingUnits": "閱讀單位",
-            "reading": "閱讀",
+            "readingUnits": "讀數單位",
+            "reading": "讀數",
             "minReadingRange": "最小讀數範圍",
             "maxReadingRange": "最大讀取範圍",
-            "readingType": "閱讀類型",
+            "readingType": "讀數類型",
             "upperThresholdFatal": "UF",
             "upperThresholdCritical": "UC",
             "lowerThresholdCritical": "LC",
@@ -419,7 +419,7 @@
             "state": "狀態"
         },
         "storage": {
-            "storage": "貯存",
+            "storage": "儲存",
             "storageDriveInfo": "儲存驅動器資訊",
             "id": "Id",
             "name": "姓名",
@@ -506,14 +506,14 @@
         },
         "toast": {
             "errorGettingCpus": "CPU 信息不可用。",
-            "errorShowingOnDemandInfo": "顯示點播信息時出錯。"
+            "errorShowingOnDemandInfo": "顯示一經請求信息時出錯。"
         }
     },
     "pageBsod": {
         "capturedBsod": "捕獲的 Bsod",
         "downloadBsodImage": "下載",
         "deleteBsodImage": "刪除",
-        "triggerBsodImage": "扳機",
+        "triggerBsodImage": "觸發",
         "lastBsodCaptured": "最後捕獲的 Bsod 屏幕.",
         "bsodImageNotAvailable": "BSOD 屏幕不可用.",
         "toast": {
@@ -543,17 +543,17 @@
             "disconnectMessage": "你確定要取消連結 %{count} 對談? 執行此動作以後不可恢復。 | 你確定要取消連結 %{count} 對談們? 執行此動作以後不可恢復。"
         },
         "table": {
-            "sessionID": "對談 ID",
+            "sessionID": "會話 ID",
             "sessionType": "會話類型",
             "userID": "使用者 ID",
             "username": "使用者名稱",
             "ipAddress": "IP 位址",
             "privilege": "特權",
-            "searchSessions": "搜尋對談們"
+            "searchSessions": "搜尋會話們"
         },
         "toast": {
-            "errorDelete": "錯誤取消連結 %{count} 對談 | 錯誤取消連結 %{count} 對談們",
-            "successDelete": "成功取消連結 %{count} 對談 | 成功取消連結 %{count} 對談們"
+            "errorDelete": "錯誤取消連結 %{count} 會話 | 錯誤取消連結 %{count} 會話們",
+            "successDelete": "成功取消連結 %{count} 會話 | 成功取消連結 %{count} 會話們"
         }
     },
     "pageNic": {
@@ -567,11 +567,11 @@
         "flowControlConfiguration": "流量控製配置",
         "signalDetected": "偵測到訊號",
         "physicalPortNumber": "實體連接埠號",
-        "health": "健康",
+        "health": "狀態",
         "getBootConfigProperties": "引導配置屬性",
         "getNCCapabilitiesAndSettings": "網路控制器功能和設定",
         "getPFAssignmentProperties": "PF 分配屬性",
-        "getPackageStatus": "包裹狀態",
+        "getPackageStatus": "封包狀態",
         "getPartitionStatisticsProperties": "分區統計屬性",
         "getPortConfigurationProperties": "連接埠配置屬性",
         "macAddressCount": "MAC位址計數",
@@ -613,12 +613,12 @@
     "pageDateTime": {
         "alert": {
             "message": "如需改變時間或日期(UTC或網頁偏移量) 請透過應用程式 ",
-            "link": "人物簡介設定"
+            "link": "使用者資訊"
         },
         "configureSettings": "配置設定",
         "form": {
             "date": "日期",
-            "manual": "手冊",
+            "manual": "手動",
             "timezone": "時區",
             "time": {
                 "label": "24小時制時間",
@@ -765,7 +765,7 @@
                 "item1": "所有手動設定將會被刪除",
                 "item2": "要是備份存在，配置分割和平台鑰匙儲存可能會被恢復",
                 "item3": "所有BMC紀錄將被移除",
-                "item4": "將停止連結目前在網路接口的可可用session",
+                "item4": "將停止連結目前在網路接口的可用會話",
                 "item5": "BMC的預設帳戶密碼將被恢復"
             },
             "resetWarningMessage": "重新設定時，若沒有關閉系統，將有可能發生不可回復的錯誤",
@@ -782,14 +782,14 @@
         "acd": "ACD 伺服器",
         "action": {
             "download": "下載所有日誌",
-            "generate": "一般",
+            "generate": "產生",
             "close": "關閉",
-            "view": "典籍後請等待一分鐘，JSON Viewer跳出視窗正在載入..",
+            "view": "點擊後請等待一分鐘，JSON Viewer跳出視窗正在載入..",
             "logInProgress": "日誌生成正在進行中"
         },
         "modal": {
             "jsonViewer": "已選擇檔案: %{fileName}",
-            "confirmTitle": "確認？",
+            "confirmTitle": "確認嗎？",
             "confirmMessage":"您確定要生成故障轉儲日誌嗎？有時可能需要 10 到 15 分鐘才能生成日誌."
         },
         "table": {
@@ -820,7 +820,7 @@
             "successAsdEnabled": "成功啟用 ASD 伺服器",
             "errorAsdDbusEnable": "無法獲取 TLS 和 JTAG 信息",
             "errorAsdCertificate": "無法取得 TLS 憑證可用性.",
-            "errorAsdCertInfo": "無法取得 TLS 證書信息."
+            "errorAsdCertInfo": "無法取得 TLS 憑證信息."
         }
     },
     "PageFactoryDefault": {
@@ -916,7 +916,7 @@
             "capacityMiB": "容量",
             "chassisType": "Chassis 型態",
             "connectTypesSupported": "連接可支援型態",
-            "coreCount": "中心數量",
+            "coreCount": "核心數量",
             "count": "數量",
             "dataWidthBits": "資料寬度",
             "description": "敘述",
@@ -936,7 +936,7 @@
             "locationNumber": "地點數字",
             "managerType": "管理者型態",
             "manufacturer": "製造商",
-            "maxConcurrentSessions": "最大同時對談",
+            "maxConcurrentSessions": "最大同時會話",
             "maxSpeedMHz": "最大速度",
             "maxPowerWatts": "最大電源",
             "memoryType": "記憶體型態",
@@ -1007,9 +1007,9 @@
     "pageKvm": {
         "openNewTab": "在新的標籤頁開啟",
         "buttonCtrlAltDelete": "送出 Ctrl+Alt+Delete",
-        "power": "力量",
+        "power": "電源",
         "powerOperation": {
-            "powerOn": "打開",
+            "powerOn": "開機",
             "gracefulShutdown": "優雅關機",
             "gracefulRestart": "優雅重啟",
             "forcedShutdown": "強制關機",
@@ -1024,8 +1024,8 @@
         "connected": "已結接",
         "connecting": "連結中",
         "disconnected": "已斷連",
-        "alreadyActiveSession": "主KVM對談正在運轉 請稍後再試 ",
-        "alreadyInMasterSession": "主對談正在運轉",
+        "alreadyActiveSession": "主KVM會話正在運轉 請稍後再試 ",
+        "alreadyInMasterSession": "主會話正在運轉",
         "errorInGettingActiveStatus": "取得KVM活躍狀態發生錯誤!",
         "disabledKVMService": "KVM服務已停用。進入安全性和存取 -> 策略頁面啟用 KVM 服務。",
         "toast": {
@@ -1199,7 +1199,7 @@
               "rule9": "不能包含使用者名稱或是倒反的使用者名稱 (pam_cracklib將會檢查兩者) (字母沒有大小寫之分) (eg, username=Hello,  Password=th12(heLLo)_78 和 Password=th12(oLleH)_78是不被允許,跟密碼複雜度中高一樣)."
             },
             "passwordForDisabled": {
-                "passwordComplexityForDisabled": "殘障者密碼複雜性",
+                "passwordComplexityForDisabled": "停用密碼複雜性",
                 "rule1": "它應該只包含可列印字符.",
                 "rule2": "密碼長度不能短於6個字符.",
                 "rule3": "不能與使用者名稱或使用者名稱倒序相同.",
@@ -1814,7 +1814,7 @@
             "protocol": "協議",
             "revision": "修訂",
             "serialNumber": "序列號",
-            "health": "健康"
+            "health": "狀態"
         },
         "noPhysicalDevice": "目前不存在物理設備信息。"
     },
@@ -1824,7 +1824,7 @@
         "raidLevel": "RAID級別",
         "virtualDeviceName": "虛擬設備名稱",
         "logicalDeviceName": "邏輯設備名稱",
-        "stripSize": "帶材尺寸",
+        "stripSize": "條帶尺寸",
         "size": "大小（以位元組為單位）",
         "parityGroupCount": "奇偶校驗組計數",
         "arrayNumber": "數組編號",
@@ -1866,7 +1866,7 @@
         "diskCacheCapacityOptions": {
             "unchanged": "不變",
             "enabled": "啟用",
-            "disabled": "殘疾人"
+            "disabled": "禁用"
         },
         "table": {
             "name": "姓名",
@@ -1876,7 +1876,7 @@
             "writeCachePolicyType": "寫入緩存策略類型",
             "capacityBytes": "容量字節",
             "numberOfPhysicalDevices": "物理設備數量",
-            "health": "健康"
+            "health": "狀態"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "沒有可配置的物理設備！",
@@ -1899,13 +1899,13 @@
             "errorNumberOfDrivesValidation": "驅動器數量不應高於未配置的物理設備數量！",
             "errorMinMaxSpanDepth":"最小和最大跨度深度均為 2。",
             "errorSpanDepthDrives":"選定的 UnConfig 驅動器應等於跨距深度和每個跨距的驅動器數的倍數。",
-            "errorMsccSize": "尺寸應能除以條帶尺寸。"
+            "errorMsccSize": "尺寸應能被條帶尺寸整除。"
         }
     },
     "pageFireWall": {
         "firewallSettings": {
             "addNewRule":"新增規則",
-            "flushAll": "沖洗全部",
+            "flushAll": "刷新全部",
             "modal": {
                 "blockAll": "全部封鎖",
                 "addFirewallSettings": "新增新的防火牆規則",
@@ -1945,15 +1945,15 @@
         }
     },
     "bond": {
-        "bond": "網路債券",
-        "bondInterface": "債券介面",
+        "bond": "綁定",
+        "bondInterface": "绑定介面",
         "enableBonding": "啟用綁定",
         "mitMonitorinms": "MII監控（毫秒）",
         "confirmOk": "好的 |好的",
         "confirmMsg": "儲存 LAN 設定將重新啟動 BMC 的網路服務。套用變更後，請使用新的瀏覽器會話重新連線。您想繼續嗎？",
         "sameBondSettings": "網路綁定配置相同，因此無需儲存。",
         "BondWithSingleInterface":"無法透過單一介面啟用綁定。",
-        "errorSavebond": "保存網路債券時發生錯誤。",
+        "errorSavebond": "保存網路绑定時發生錯誤。",
         "errorDelete": "刪除網路綁定時發生錯誤。",
         "errorGetBond": "取得網路綁定時發生錯誤。",
         "miiRangeRequired": "輸入 1-100 之間的有效毫秒"
