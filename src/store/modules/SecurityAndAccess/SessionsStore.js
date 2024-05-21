@@ -41,38 +41,13 @@ const SessionsStore = {
           console.log('Client Session Data:', error);
         });
     },
-    async disconnectSessions({ dispatch }, sessions = []) {
-      let promises = [];
-      let webUrls = [];
-      let mediaUrls = [];
-      if (Array.isArray(sessions)) {
-        for (const data of sessions) {
-          if (data.sessionType === 'KVM' || data.sessionType === 'VMEDIA') {
-            mediaUrls.push(data.uri);
-          } else {
-            webUrls.push(data.uri);
-          }
-        }
-        for (const uri of mediaUrls) {
-          promises.push(
-            api.post(uri).catch((error) => {
-              console.log(error);
-              return error;
-            })
-          );
-        }
-        for (const uri of webUrls) {
-          promises.push(
-            api.delete(uri).catch((error) => {
-              console.log(error);
-              return error;
-            })
-          );
-        }
-      }
-      if (promises.length === 0) {
-        return [];
-      }
+    async disconnectSessions({ dispatch }, uris = []) {
+      const promises = uris.map((uri) =>
+        api.delete(uri).catch((error) => {
+          console.log(error);
+          return error;
+        })
+      );
       return await api
         .all(promises)
         .then((response) => {

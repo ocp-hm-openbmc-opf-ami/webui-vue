@@ -288,7 +288,7 @@ export default {
           });
         });
     },
-    onTableRowAction(action, row) {
+    onTableRowAction(action, { uri }) {
       if (action === 'delete') {
         this.$bvModal
           .msgBoxConfirm(this.$tc('pageSessions.modal.disconnectMessage'), {
@@ -297,13 +297,13 @@ export default {
             cancelTitle: this.$t('global.action.cancel'),
           })
           .then((deleteConfirmed) => {
-            if (deleteConfirmed) this.disconnectSessions([row]);
+            if (deleteConfirmed) this.disconnectSessions([uri]);
           });
       }
     },
     onBatchAction(action) {
       if (action === 'delete') {
-        const uris = this.selectedRows.map((row) => row);
+        const uris = this.selectedRows.map((row) => row.uri);
         this.$bvModal
           .msgBoxConfirm(
             this.$tc(
