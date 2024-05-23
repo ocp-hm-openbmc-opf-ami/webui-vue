@@ -138,7 +138,7 @@ export default {
     },
     initprocessdata() {
       this.valueAllData = this.$store.getters['license/getLicenseData'];
-      const licenseFeature = this.valueAllData.data.Oem?.AMI.LicenseKey.split(
+      const licenseFeature = this.valueAllData.data.Oem?.Ami.LicenseKey.split(
         ';'
       );
       this.items = [];
@@ -147,12 +147,12 @@ export default {
         if (licenseVal[1] != undefined) {
           var validLicenseDays =
             parseInt(
-              licenseVal[1] - this.valueAllData.data.Oem.AMI.ServicesUpCountDays
+              licenseVal[1] - this.valueAllData.data.Oem.Ami.ServicesUpCountDays
             ) < 0
               ? 0
               : parseInt(
                   licenseVal[1] -
-                    this.valueAllData.data.Oem.AMI.ServicesUpCountDays
+                    this.valueAllData.data.Oem.Ami.ServicesUpCountDays
                 );
         }
         if (licenseVal[0] != '' && licenseVal[1] != undefined) {
@@ -160,14 +160,14 @@ export default {
             feature: licenseVal[0],
             uploadKeyValidity: licenseVal[1],
             validity: parseInt(validLicenseDays),
-            userAlertCount: this.valueAllData.data.Oem.AMI.userAlertCount,
-            ServicesUpCountDays: this.valueAllData.data.Oem.AMI
+            userAlertCount: this.valueAllData.data.Oem.Ami.UserAlertCount,
+            ServicesUpCountDays: this.valueAllData.data.Oem.Ami
               .ServicesUpCountDays,
-            GlobalLicenseValidity: this.valueAllData.data.Oem.AMI
+            GlobalLicenseValidity: this.valueAllData.data.Oem.Ami
               .GlobalLicenseValidity,
           };
           this.items.push(itemAdded);
-          this.userAlertCountValue = this.valueAllData.data.Oem.AMI.userAlertCount;
+          this.userAlertCountValue = this.valueAllData.data.Oem.Ami.UserAlertCount;
         }
       });
     },

@@ -23,9 +23,9 @@ const LicenseStore = {
   actions: {
     async getUserAlertCount({ commit }) {
       return await api
-        .get('/redfish/v1/Oem/AMI/LicenseControl')
+        .get('/redfish/v1/Oem/Ami/LicenseControl')
         .then((licenseControl) => {
-          let licenseFeature = licenseControl.data.Oem?.AMI.LicenseKey.split(
+          let licenseFeature = licenseControl.data.Oem?.Ami.LicenseKey.split(
             ';'
           );
           var items = [];
@@ -39,12 +39,12 @@ const LicenseStore = {
               const validLicenseDays =
                 parseInt(
                   licenseVal[1] -
-                    licenseControl.data.Oem?.AMI.ServicesUpCountDays
+                    licenseControl.data.Oem?.Ami.ServicesUpCountDays
                 ) < 0
                   ? 0
                   : parseInt(
                       licenseVal[1] -
-                        licenseControl.data.Oem?.AMI.ServicesUpCountDays
+                        licenseControl.data.Oem?.Ami.ServicesUpCountDays
                     );
               if (licenseVal[0] != '' && validLicenseDays > 0) {
                 items.push(licenseVal[0]);
@@ -62,7 +62,7 @@ const LicenseStore = {
     },
     async setUserAlertCount({ dispatch }, percentageVal) {
       return await api
-        .patch('/redfish/v1/Oem/AMI/LicenseControl', percentageVal)
+        .patch('/redfish/v1/Oem/Ami/LicenseControl', percentageVal)
         .then(() => dispatch('getUserAlertCount'))
         .then(() => i18n.t('license.toast.successSavelicense'))
         .catch(() => {
@@ -78,7 +78,7 @@ const LicenseStore = {
         },
       };
       return await api
-        .post('/redfish/v1/Oem/AMI/LicenseControl', uploadData, config)
+        .post('/redfish/v1/Oem/Ami/LicenseControl', uploadData, config)
         .then(() => dispatch('getUserAlertCount'))
         .then(() => i18n.t('license.toast.successSavelicense'))
         .catch(() => {
