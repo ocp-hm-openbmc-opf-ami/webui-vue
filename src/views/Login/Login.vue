@@ -196,7 +196,6 @@ export default {
             this.$router.push('/change-password');
           } else {
             this.$router.push('/');
-            this.$store.dispatch('license/getUserAlertCount');
           }
           if (RoleId) {
             this.$store.commit('global/setPrivilege', RoleId);

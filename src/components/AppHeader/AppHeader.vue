@@ -213,6 +213,7 @@ export default {
     // Reset auth state to check if user is authenticated based
     // on available browser cookies
     this.$store.dispatch('authentication/resetStoreState');
+    this.$store.dispatch('license/getUserAlertCount');
     this.getSystemInfo();
     this.getEvents();
   },

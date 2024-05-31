@@ -13,12 +13,21 @@ import PageTitle from '@/components/Global/PageTitle';
 import PageSection from '@/components/Global/PageSection';
 import SerialOverLanConsole from './SerialOverLanConsole';
 
+import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+
 export default {
   name: 'SerialOverLan',
   components: {
     PageSection,
     PageTitle,
     SerialOverLanConsole,
+  },
+  mixins: [LoadingBarMixin],
+  created() {
+    this.startLoader();
+    this.$store
+      .dispatch('global/getSystemInfo')
+      .finally(() => this.endLoader());
   },
 };
 </script>

@@ -28,13 +28,15 @@ import KvmConsole from './KvmConsole';
 import { mapState } from 'vuex';
 
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
+import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
 
 export default {
   name: 'Kvm',
   components: { PageTitle, KvmConsole },
-  mixins: [LicensecheckMixin],
+  mixins: [LicensecheckMixin, LoadingBarMixin],
   data() {
     return {
+      loading,
       licenseName: 'KVM',
     };
   },
@@ -42,7 +44,9 @@ export default {
     ...mapState('global', ['kvmServiceEnabledAccess']),
   },
   created() {
+    this.startLoader();
     this.$store.dispatch('global/getSystemInfo');
+    this.$store.dispatch('kvm/getData').finally(() => this.endLoader());
   },
 };
 </script>
