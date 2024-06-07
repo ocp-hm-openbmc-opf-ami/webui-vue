@@ -25,7 +25,6 @@ var pseudoEncodingKeyboardLedState = -131072; // 0xFFFE0000 (Reference:(libvncse
 
 /* var used for indicating indivisual LED state */
 var NUM_LOCK_LED_ON = 1 << 0; // 0th bit of output report set [0000 0001]
-var CAPS_LOCK_LED_ON = 1 << 1; // 1st bit of output report set [0000 0010]
 var SCROLL_LOCK_LED_ON = 1 << 2; // 2nd bit of output report set [0000 0100]
 
 /* Uncomment to enable logging in browser debug console
@@ -213,14 +212,6 @@ export default class AMI_RFB extends RFB {
     ) {
       super.sendKey(KeyTable.XK_Num_Lock, _key(XtScancode.NumLock), true);
       super.sendKey(KeyTable.XK_Num_Lock, _key(XtScancode.NumLock), false);
-    }
-    /* syncing CAPS_LOCK LEDstate of Host to client */
-    if (
-      (clientLEDstate & CAPS_LOCK_LED_ON) !=
-      (hostLEDstate & CAPS_LOCK_LED_ON)
-    ) {
-      super.sendKey(KeyTable.XK_Caps_Lock, _key(XtScancode.CapsLock), true);
-      super.sendKey(KeyTable.XK_Caps_Lock, _key(XtScancode.CapsLock), false);
     }
     /* syncing SCROLL_LOCK LEDstate of Host to client*/
     if (
