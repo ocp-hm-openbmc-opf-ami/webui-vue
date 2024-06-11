@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import BVToastMixin from '@/components/Mixins/BVToastMixin';
 
 //Do not change store or routes import.
 //Exact match alias set to support
@@ -41,6 +42,16 @@ function allowRouterToNavigate(to, next, currentUserRole) {
 }
 
 router.beforeEach((to, from, next) => {
+  if (from.matched.length) {
+    from.matched.forEach((record) => {
+      const mixins = record.instances.default.$options.mixins || [];
+      mixins.forEach((mixin) => {
+        if (mixin === BVToastMixin && record.instances.default.clearToast) {
+          record.instances.default.clearToast();
+        }
+      });
+    });
+  }
   let currentUserRole = store.getters['global/userPrivilege'];
   // condition will get satisfied if user refreshed after login
   if (!currentUserRole && store.getters['authentication/isLoggedIn']) {
