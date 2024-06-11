@@ -165,6 +165,53 @@ exports[`AppHeader.vue should render correctly 1`] = `
               appHeader.refresh
             </span>
           </b-button>
+           
+          <!---->
+           
+          <b-modal
+            centered=""
+            id="modal-center"
+            size="lg"
+            title="appHeader.setupTwoFactorAuthentication"
+          >
+            <p
+              class="my-4"
+            >
+              
+              appHeader.qrCodeLabel
+            
+            </p>
+             
+            <div
+              class="align-center"
+            >
+              <div
+                background="#fff"
+                class=""
+                foreground="#000"
+                level="L"
+                value=""
+              >
+                <canvas
+                  height="300"
+                  style="width: 300px; height: 300px;"
+                  width="300"
+                />
+              </div>
+            </div>
+             
+            <hr />
+             
+            <p
+              class="mt-4"
+            >
+              
+              appHeader.backupCodeLable
+            
+            </p>
+             
+            <ul />
+          </b-modal>
         </li>
          
         <li

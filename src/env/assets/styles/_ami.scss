@@ -16,6 +16,7 @@ $red: #cb2026;
 $baby-blue: #bfdff6;
 $salmon: #f0b396;
 $green: #6ba86d;
+$dark-green:#03fc62;
 $gold: #d99b51;
 $charcoal: #545863;
 
@@ -169,6 +170,9 @@ body {
 .iconRenew,
 .iconAvatar {
   color: $gold;
+}
+.enableTfa {
+  color: $dark-green
 }
 *::-ms-reveal {
   display: none;

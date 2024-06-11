@@ -1,5 +1,6 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import ChangePassword from '@/views/ChangePassword';
+import TwoFactorAuthentication from '@/views/TwoFactorAuthentication';
 import Sessions from '@/views/SecurityAndAccess/Sessions';
 import ConsoleLayout from '@/layouts/ConsoleLayout.vue';
 import Bsod from '@/views/Settings/Bsod';
@@ -70,6 +71,15 @@ const routes = [
         component: ChangePassword,
         meta: {
           title: i18n.t('appPageTitle.changePassword'),
+          requiresAuth: true,
+        },
+      },
+      {
+        path: '/two-factor-authentication',
+        name: 'tfa',
+        component: TwoFactorAuthentication,
+        meta: {
+          title: i18n.t('appPageTitle.tfa'),
           requiresAuth: true,
         },
       },

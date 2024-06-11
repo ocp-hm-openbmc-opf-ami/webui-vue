@@ -79,6 +79,53 @@
               />
               <span class="responsive-text">{{ $t('appHeader.refresh') }}</span>
             </b-button>
+            <b-button
+              v-if="tfaFeatureEnabled"
+              id="app-header-tfa"
+              variant="link"
+              data-test-id="appHeader-button-tfa"
+              @click="clickTfa"
+            >
+              <enable-tfa-icon v-if="tfaUserEnabled" class="enableTfa" />
+              <disable-tfa-icon v-if="!tfaUserEnabled" class="iconRenew" />
+              <span class="responsive-text">{{ $t('appHeader.2fa') }}</span>
+            </b-button>
+            <b-modal
+              id="modal-center"
+              centered
+              :title="$t('appHeader.setupTwoFactorAuthentication')"
+              size="lg"
+              @hidden="resetForm"
+            >
+              <p class="my-4">
+                {{ $t('appHeader.qrCodeLabel') }}
+              </p>
+              <div class="align-center">
+                <qrcode-vue :value="qrCodeUrl" :size="QrCodeSize"></qrcode-vue>
+              </div>
+              <hr />
+              <p class="mt-4">
+                {{ $t('appHeader.backupCodeLable') }}
+              </p>
+              <ul>
+                <li
+                  v-for="(code, index) in recoveryCode"
+                  :key="index"
+                  class="my-1"
+                >
+                  {{ code }}
+                </li>
+              </ul>
+              <template #modal-footer="{ close }">
+                <b-button
+                  variant="secondary"
+                  data-test-id="2fa-close-button"
+                  @click="close()"
+                >
+                  {{ $t('global.action.close') }}
+                </b-button>
+              </template>
+            </b-modal>
           </li>
           <li class="nav-item">
             <b-dropdown
@@ -120,8 +167,12 @@ import IconAvatar from '@carbon/icons-vue/es/user--avatar/20';
 import IconClose from '@carbon/icons-vue/es/close/20';
 import IconMenu from '@carbon/icons-vue/es/menu/20';
 import IconRenew from '@carbon/icons-vue/es/renew/20';
+import EnableTfaIcon from '@carbon/icons-vue/es/locked/20';
+import DisableTfaIcon from '@carbon/icons-vue/es/unlocked/20';
 import StatusIcon from '@/components/Global/StatusIcon';
 import LoadingBar from '@/components/Global/LoadingBar';
+import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import QrcodeVue from 'qrcode.vue';
 
 export default {
   name: 'AppHeader',
@@ -130,10 +181,13 @@ export default {
     IconClose,
     IconMenu,
     IconRenew,
+    EnableTfaIcon,
+    DisableTfaIcon,
     StatusIcon,
     LoadingBar,
+    QrcodeVue,
   },
-  mixins: [BVToastMixin],
+  mixins: [BVToastMixin, LoadingBarMixin],
   props: {
     routerKey: {
       type: Number,
@@ -142,6 +196,13 @@ export default {
   },
   data() {
     return {
+      QrCodeSize: 300,
+      tfaUserEnabled: this.$store.getters['authentication/tfaEnabled'],
+      tfaFeatureEnabled:
+        process.env.VUE_APP_TFA &&
+        this.$store.getters['authentication/tfaFeatureEnabled'],
+      qrCodeUrl: '',
+      recoveryCode: [],
       isNavigationOpen: false,
       altLogo: process.env.VUE_APP_COMPANY_NAME || 'AMI',
     };
@@ -233,6 +294,44 @@ export default {
     refresh() {
       this.$emit('refresh');
     },
+    clickTfa() {
+      if (this.tfaUserEnabled) {
+        this.$bvModal
+          .msgBoxConfirm(this.$tc('pageTfa.modal.confirmMessage'), {
+            title: this.$tc('pageTfa.modal.confirmation'),
+            okTitle: this.$tc('global.action.yes'),
+            cancelTitle: this.$t('global.action.no'),
+          })
+          .then((disable) => {
+            if (disable) {
+              this.startLoader();
+              this.$store
+                .dispatch('authentication/disableTfa')
+                .then(() => {
+                  this.tfaUserEnabled = this.$store.getters[
+                    'authentication/tfaEnabled'
+                  ];
+                })
+                .catch(({ message }) => this.errorToast(message))
+                .finally(() => this.endLoader());
+            }
+          });
+      } else {
+        this.startLoader();
+        this.$store
+          .dispatch('authentication/enableTfa')
+          .then((response) => {
+            this.tfaUserEnabled = this.$store.getters[
+              'authentication/tfaEnabled'
+            ];
+            this.recoveryCode = response.RecoveryCodes;
+            this.qrCodeUrl = response.Url;
+            this.$bvModal.show('modal-center');
+          })
+          .catch(({ message }) => this.errorToast(message))
+          .finally(() => this.endLoader());
+      }
+    },
     logout() {
       this.$store.dispatch('authentication/logout');
     },
@@ -242,6 +341,9 @@ export default {
     setFocus(event) {
       event.preventDefault();
       this.$root.$emit('skip-navigation');
+    },
+    resetForm() {
+      this.tfaUserEnabled = true;
     },
   },
 };
@@ -395,5 +497,8 @@ export default {
     color: #d99b51;
     background-color: #ffffff;
   }
+}
+.align-center {
+  text-align: center;
 }
 </style>

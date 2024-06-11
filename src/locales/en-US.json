@@ -28,7 +28,10 @@
             "success": "Success",
             "alert": "Alert",
             "upload": "Upload",
-            "send": "Send"
+            "send": "Send",
+            "close": "Close",
+            "yes": "Yes",
+            "no": "No"
         },
         "ariaLabel": {
             "clearSearch": "Clear search input",
@@ -107,7 +110,11 @@
         "titleHideNavigation": "Hide navigation",
         "titleShowNavigation": "Show navigation",
         "titleProfile": "Show profile menu",
-        "titleRefresh": "Refresh application data"
+        "titleRefresh": "Refresh application data",
+        "2fa":"2FA",
+        "setupTwoFactorAuthentication":"Setup Two Factor Authentication",
+        "qrCodeLabel":"Add the following to your Authetication app of choice,and verify it below to enable.",
+        "backupCodeLable":"Please save your backup codes for emergency use."
     },
     "appNavigation": {
         "bsod": "@:appPageTitle.bsod",
@@ -163,12 +170,13 @@
         "cups": "@:appPageTitle.cups",
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
-        "systemInventory":"@:appPageTitle.systemInventory",
+        "systemInventory": "@:appPageTitle.systemInventory",
         "networkDDNS": "Network DDNS"
     },
     "appPageTitle": {
         "bsod": "BSOD",
         "changePassword": "Change password",
+        "tfa": "Two factor authentication",
         "power": "Power",
         "sessions": "Sessions",
         "dateTime": "Date and time",
@@ -215,7 +223,7 @@
         "cups": "CUPS",
         "Bond": "Network Bond",
         "License": "Manage Licenses",
-        "systemInventory":"System Inventory",
+        "systemInventory": "System Inventory",
         "ddnsConfiguration": "DDNS Configuration"
     },
     "pageDDNSNetwork": {
@@ -536,6 +544,18 @@
         "submit": "Submit",
         "newPassword": "New password",
         "username": "Username"
+    },
+    "pageTfa": {
+        "submit": "Submit",
+        "verificationCode": "Verification Code",
+        "verificationCodeMessage": "Please enter the verification code generated from google authentication. NOTE: OTP will be expired after 30 seconds.",
+        "modal": {
+            "confirmation": "Confirmation",
+            "confirmMessage": "Do you want to disable the Two Factor Authentication?"
+        },
+        "toast": {
+            "tfaFailed": "Two factor authentication failed"
+        }
     },
     "pageSessions": {
         "action": {
@@ -1158,57 +1178,57 @@
             "successPasswordChanged": "Password has been changed successfully.Please relogin with the new password"
         },
         "passwordRules": {
-          "passwordForHigh": {
-            "passwordComplexityForHigh": "Password Complexity for high",
-            "rule1": "It should contain printable characters only.",
-            "rule2": "Password length should not be shorter than 8 characters.",
-            "rule3": "Must contain at least 5 unique characters (abcabcabc not allowed)",
-            "rule4":"Meets following 4 criteria:" ,
-            "rule5": "Contains upper case (e.g. A, G).",
-            "rule6": "Contains lower case (e.g. a, g).",
-            "rule7": "Contains digit numbers (e.g. 1, 6).",
-            "rule8": "Contains at least a space or symbols (e.g. $, &).",
-            "rule9": "Could not contains username or the username in reverse order (case insensitive).",
-            "rule10": "Could not contains continuous digits longer than or equal to 3 characters (e.g. BMC(123)ste, BMC(654)sfc are not allowed).",
-            "rule11": "Could not contains continuous case sensitive alphabets longer than or equal to 3 characters (e.g. (AbC)3478!,57$(DeF)68k are not allowed).",
-            "rule12": "Symbols could contain no longer than 3 characters (e.g. 34Mgs57(?!$#)68k are not allowed))",
-            "rule13": "Digits could no longer than 3 characters (e.g. Fgke(1245)#@, (4390)FGL$ are not allowed)",
-            "rule14": "Alphabet could contain no longer than 3 characters (case sensitive) (e.g. Fg1s3as(FDGB), GleOp34!(asbd) are not allowed)"
-          },
-          "passwordFormedium": {
-            "passwordComplexityFormedium": "Password Complexity for Medium",
-            "rule1": "It should contain printable characters only.",
-            "rule2": "Password length should not be shorter than 8 characters.",
-            "rule3": "Must contain at least 5 unique characters (abcabcabc not allowed)",
-            "rule4": "Cannot be the same as the username or the username in reverse order.",
-            "rule5": "Meets following 4 criteria:",
-            "rule6": "Contains upper case (e.g. A, G).",
-            "rule7": "Contains lower case (e.g. a, g).",
-            "rule8": "Contains digit numbers (e.g. 1, 6).",
-            "rule9": "Contains at least a space or symbols (e.g. $, &).",
-            "rule10": "Could not contains username or the username in reverse order (case insensitive) (eg,username=Hello, Password=th12(oLleH)_78 is not allowed)."
-          },
-          "passwordForLow": {
-            "passwordComplexityForLow": "Password Complexity for Low",
-            "rule1": "It should contain printable characters only.",
-            "rule2": "Password length should not be shorter than 6 characters.",
-            "rule3": "Must contain at least 5 unique characters (abcabcabc not allowed)",
-            "rule4": "Meets following 4 criteria:",
-            "rule5": "Contains upper case (e.g. A, G).",
-            "rule6": "Contains lower case (e.g. a, g).",
-            "rule7": "Contains digit numbers (e.g. 1, 6).",
-            "rule8": "Contains at least a space or symbols (e.g. $, &).",
-            "rule9": "Could not contains username or the username in reverse order (pam_cracklib will check both) (case insensitive) (eg, username=Hello, both Password=th12(heLLo)_78 and Password=th12(oLleH)_78 is not allowed)."
-          },
-          "passwordForDisabled": {
-            "passwordComplexityForDisabled": "Password Complexity for Disabled",
-            "rule1": "It should contain printable characters only.",
-            "rule2": "Password length should not be shorter than 6 characters.",
-            "rule3": "Cannot be the same as the username or the username in reverse order.",
-            "rule4": "Must contain at least 5 unique characters (abcabcabc not allowed)",
-            "rule5": "Cannot be simple passwords like 'password'"
-          }
-     }        
+            "passwordForHigh": {
+                "passwordComplexityForHigh": "Password Complexity for high",
+                "rule1": "It should contain printable characters only.",
+                "rule2": "Password length should not be shorter than 8 characters.",
+                "rule3": "Must contain at least 5 unique characters (abcabcabc not allowed)",
+                "rule4": "Meets following 4 criteria:",
+                "rule5": "Contains upper case (e.g. A, G).",
+                "rule6": "Contains lower case (e.g. a, g).",
+                "rule7": "Contains digit numbers (e.g. 1, 6).",
+                "rule8": "Contains at least a space or symbols (e.g. $, &).",
+                "rule9": "Could not contains username or the username in reverse order (case insensitive).",
+                "rule10": "Could not contains continuous digits longer than or equal to 3 characters (e.g. BMC(123)ste, BMC(654)sfc are not allowed).",
+                "rule11": "Could not contains continuous case sensitive alphabets longer than or equal to 3 characters (e.g. (AbC)3478!,57$(DeF)68k are not allowed).",
+                "rule12": "Symbols could contain no longer than 3 characters (e.g. 34Mgs57(?!$#)68k are not allowed))",
+                "rule13": "Digits could no longer than 3 characters (e.g. Fgke(1245)#@, (4390)FGL$ are not allowed)",
+                "rule14": "Alphabet could contain no longer than 3 characters (case sensitive) (e.g. Fg1s3as(FDGB), GleOp34!(asbd) are not allowed)"
+            },
+            "passwordFormedium": {
+                "passwordComplexityFormedium": "Password Complexity for Medium",
+                "rule1": "It should contain printable characters only.",
+                "rule2": "Password length should not be shorter than 8 characters.",
+                "rule3": "Must contain at least 5 unique characters (abcabcabc not allowed)",
+                "rule4": "Cannot be the same as the username or the username in reverse order.",
+                "rule5": "Meets following 4 criteria:",
+                "rule6": "Contains upper case (e.g. A, G).",
+                "rule7": "Contains lower case (e.g. a, g).",
+                "rule8": "Contains digit numbers (e.g. 1, 6).",
+                "rule9": "Contains at least a space or symbols (e.g. $, &).",
+                "rule10": "Could not contains username or the username in reverse order (case insensitive) (eg,username=Hello, Password=th12(oLleH)_78 is not allowed)."
+            },
+            "passwordForLow": {
+                "passwordComplexityForLow": "Password Complexity for Low",
+                "rule1": "It should contain printable characters only.",
+                "rule2": "Password length should not be shorter than 6 characters.",
+                "rule3": "Must contain at least 5 unique characters (abcabcabc not allowed)",
+                "rule4": "Meets following 4 criteria:",
+                "rule5": "Contains upper case (e.g. A, G).",
+                "rule6": "Contains lower case (e.g. a, g).",
+                "rule7": "Contains digit numbers (e.g. 1, 6).",
+                "rule8": "Contains at least a space or symbols (e.g. $, &).",
+                "rule9": "Could not contains username or the username in reverse order (pam_cracklib will check both) (case insensitive) (eg, username=Hello, both Password=th12(heLLo)_78 and Password=th12(oLleH)_78 is not allowed)."
+            },
+            "passwordForDisabled": {
+                "passwordComplexityForDisabled": "Password Complexity for Disabled",
+                "rule1": "It should contain printable characters only.",
+                "rule2": "Password length should not be shorter than 6 characters.",
+                "rule3": "Cannot be the same as the username or the username in reverse order.",
+                "rule4": "Must contain at least 5 unique characters (abcabcabc not allowed)",
+                "rule5": "Cannot be simple passwords like 'password'"
+            }
+        }
     },
     "pageLogin": {
         "language": "Language",
@@ -1635,7 +1655,6 @@
         "kvmSessionTimeOut": "KVM Session Timeout",
         "kvmSessionTimeOutDescription": "Change the kvm session timeout in between 1 Minutes to 30 Minutes time delay",
         "kvmPortValue": "KVM Port Value (in numbers)"
-
     },
     "pagePower": {
         "description": "Set a power cap to keep power consumption at or below the specified value in watts",
@@ -1669,7 +1688,6 @@
             "interval": "Interval (seconds)",
             "back": "Back",
             "displayGraph": "Go"
-
         }
     },
     "pageSerialOverLan": {
@@ -1957,7 +1975,7 @@
         "confirmOk": "Ok | Ok",
         "confirmMsg": "Saving LAN settings will restart the BMC's network services. Please reconnect using new browser session after applying the changes. Do you want to proceed?",
         "sameBondSettings": "Network Bond Configuration are same, so no need to save.",
-        "BondWithSingleInterface":"Bond cannot be enabled with a single interface.",
+        "BondWithSingleInterface": "Bond cannot be enabled with a single interface.",
         "errorSavebond": "Error saved Network Bond.",
         "errorDelete": "Error deleting Network Bond.",
         "errorGetBond": "Error getting Network Bond.",

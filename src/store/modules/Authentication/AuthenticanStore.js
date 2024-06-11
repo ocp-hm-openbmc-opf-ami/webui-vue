@@ -1,6 +1,7 @@
 import api from '@/store/api';
 import Cookies from 'js-cookie';
 import router from '@/router';
+import i18n from '@/i18n';
 
 const AuthenticationStore = {
   namespaced: true,
@@ -10,6 +11,8 @@ const AuthenticationStore = {
     authLocked: false,
     xsrfCookie: Cookies.get('XSRF-TOKEN'),
     isAuthenticatedCookie: Cookies.get('IsAuthenticated'),
+    tfaEnabled: false,
+    tfaFeatureEnabled: false,
   },
   getters: {
     consoleWindow: (state) => state.consoleWindow,
@@ -21,6 +24,8 @@ const AuthenticationStore = {
       );
     },
     token: (state) => state.xsrfCookie,
+    tfaEnabled: (state) => state.tfaEnabled,
+    tfaFeatureEnabled: (state) => state.tfaFeatureEnabled,
   },
   mutations: {
     authSuccess(state) {
@@ -43,13 +48,24 @@ const AuthenticationStore = {
       state.isAuthenticatedCookie = undefined;
     },
     setConsoleWindow: (state, window) => (state.consoleWindow = window),
+    setTfaEnabled: (state, tfaEnabled) => (state.tfaEnabled = tfaEnabled),
+    setTfaFeatureEnabled: (state, tfaFeatureEnabled) =>
+      (state.tfaFeatureEnabled = tfaFeatureEnabled),
   },
   actions: {
     login({ commit }, { username, password }) {
       commit('authError', false);
       return api
         .post('/login', { data: [username, password] })
-        .then(() => commit('authSuccess'))
+        .then((response) => {
+          commit('authSuccess');
+          if (response.data.TwoFacEnableStatus == 'N/A') {
+            commit('setTfaFeatureEnabled', false);
+          } else {
+            commit('setTfaEnabled', response.data.TwoFacEnableStatus);
+            commit('setTfaFeatureEnabled', true);
+          }
+        })
         .catch((error) => {
           if (error.response.status == 423) {
             commit('authLocked');
@@ -80,6 +96,47 @@ const AuthenticationStore = {
               RoleId: 'Administrator',
             });
           }
+        });
+    },
+
+    async enableTfa({ commit }) {
+      const username = localStorage.getItem('storedUsername');
+      return await api
+        .post(
+          `/redfish/v1/AccountService/Accounts/${username}/Actions/Oem/Ami/TwoFactorAuthentication`
+        )
+        .then(({ data }) => {
+          commit('setTfaEnabled', true);
+          return data;
+        })
+        .catch((error) => console.log(error));
+    },
+    async disableTfa({ commit }) {
+      const username = localStorage.getItem('storedUsername');
+      return await api
+        .delete(
+          `/redfish/v1/AccountService/Accounts/${username}/Actions/Oem/Ami/TwoFactorAuthentication`
+        )
+        .then(() => {
+          commit('setTfaEnabled', false);
+        })
+        .catch((error) => console.log(error));
+    },
+    async verifyOtp(_, verifyData) {
+      const data = {
+        username: verifyData.username,
+        verificationcode: verifyData.verificationcode,
+      };
+      return await api
+        .post('/verify_otp', data)
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error.response.data.error) {
+            throw new Error(error.response.data.error);
+          } else throw new Error(i18n.t('pageTfa.toast.tfaFailed'));
         });
     },
     resetStoreState({ state }) {

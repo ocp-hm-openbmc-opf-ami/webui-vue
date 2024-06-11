@@ -27,7 +27,11 @@
             "create": "Erstellen",
             "success": "Erfolg",
             "alert": "Alarm",
-            "upload": "Hochladen"
+            "upload": "Hochladen",
+            "send": "发送",
+            "close": "关闭",
+            "yes": "是的",
+            "no": "不"
         },
         "ariaLabel": {
             "clearSearch": "Sucheingabe löschen",
@@ -106,7 +110,9 @@
         "titleHideNavigation": "Navigation ausblenden",
         "titleShowNavigation": "Navigation anzeigen",
         "titleProfile": "Profilmenü anzeigen",
-        "titleRefresh": "Anwendungsdaten aktualisieren"
+        "titleRefresh": "Anwendungsdaten aktualisieren",
+        "qrCodeLabel":"Fügen Sie Folgendes zur Authentifizierungs-App Ihrer Wahl hinzu und überprüfen Sie es unten, um es zu aktivieren.",
+        "backupCodeLable":"Bitte bewahren Sie Ihre Backup-Codes für den Notfall auf."
     },
     "appNavigation": {
         "bsod": "@:appPageTitle.bsod",
@@ -167,6 +173,7 @@
     "appPageTitle": {
         "bsod": "BSOD",
         "changePassword": "Kennwort ändern",
+        "tfa": "Zwei-Faktor-Authentifizierung",
         "power": "Leistung",
         "sessions": "Sitzungen",
         "dateTime": "Datum und Uhrzeit",
@@ -533,6 +540,18 @@
         "submit": "Einreichen",
         "newPassword": "Neues Kennwort",
         "username": "Nutzername"
+    },
+    "pageTfa": {
+        "submit": "Einreichen",
+        "verificationCode": "Bestätigungscode",
+        "verificationCodeMessage":"Bitte geben Sie den durch die Google-Authentifizierung generierten Bestätigungscode ein. HINWEIS: OTP läuft nach 30 Sekunden ab.",
+        "modal": {
+            "confirmation": "Bestätigung",
+            "confirmMessage": "Möchten Sie die Zwei-Faktor-Authentifizierung deaktivieren?"
+        },
+        "toast": {
+            "tfaFailed": "Die Zwei-Faktor-Authentifizierung ist fehlgeschlagen"
+        }
     },
     "pageSessions": {
         "action": {

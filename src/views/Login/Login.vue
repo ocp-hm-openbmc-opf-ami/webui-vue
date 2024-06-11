@@ -195,7 +195,13 @@ export default {
           if (PasswordChangeRequired) {
             this.$router.push('/change-password');
           } else {
-            this.$router.push('/');
+            const tfaEnabled = this.$store.getters['authentication/tfaEnabled'];
+            if (tfaEnabled) {
+              this.$router.push('/two-factor-authentication');
+            } else {
+              this.$router.push('/');
+              this.$store.dispatch('license/getUserAlertCount');
+            }
           }
           if (RoleId) {
             this.$store.commit('global/setPrivilege', RoleId);
