@@ -3,7 +3,6 @@ import ChangePassword from '@/views/ChangePassword';
 import TwoFactorAuthentication from '@/views/TwoFactorAuthentication';
 import Sessions from '@/views/SecurityAndAccess/Sessions';
 import ConsoleLayout from '@/layouts/ConsoleLayout.vue';
-import Bsod from '@/views/Settings/Bsod';
 import DateTime from '@/views/Settings/DateTime';
 import EventLogs from '@/views/Logs/EventLogs';
 import Firmware from '@/views/Operations/Firmware';
@@ -15,13 +14,11 @@ import KvmConsole from '@/views/Operations/Kvm/KvmConsole';
 import UserManagement from '@/views/SecurityAndAccess/UserManagement';
 import Login from '@/views/Login';
 import LoginLayout from '@/layouts/LoginLayout';
-import SmtpSettings from '@/views/Settings/SMTP';
 import EventFilter from '@/views/PEF/EventFilter';
 import Network from '@/views/Settings/Network';
 import Vlan from '@/views/Settings/Vlan';
 import Overview from '@/views/Overview';
 import PageNotFound from '@/views/PageNotFound';
-import PostCodeLogs from '@/views/Logs/PostCodeLogs';
 import ProfileSettings from '@/views/ProfileSettings';
 import RebootBmc from '@/views/Operations/RebootBmc';
 import Policies from '@/views/SecurityAndAccess/Policies';
@@ -34,19 +31,7 @@ import VirtualMedia from '@/views/Operations/VirtualMedia';
 import Power from '@/views/ResourceManagement/Power';
 import i18n from '@/i18n';
 import Dumps from '@/views/Logs/Dumps';
-import ADDC from '@/views/HostSystemDiagnostics/Addc';
-import ACD from '@/views/HostSystemDiagnostics/ACD';
-import Asd from '@/views/HostSystemDiagnostics/Asd';
-import BackupAndRestore from '@/views/Operations/BackupAndRestore';
-import SnmpSettings from '@/views/Settings/SNMP';
-import FireWall from '@/views/Settings/FireWall';
-import CupsConfiguration from '@/views/Settings/CUPS';
-import Bond from '@/views/Settings/Bond';
-import License from '@/views/Settings/License';
 import systemInventory from '@/views/SystemInventory/SystemInventory';
-import DDNS from '../../views/Settings/NetworkDDNS';
-import NetworkLink from '@/views/Settings/NetworkLink/NetworkLink';
-import Ncsi from '@/views/Settings/Ncsi';
 
 const roles = {
   administrator: 'Administrator',
@@ -153,14 +138,6 @@ const routes = [
         },
       },
       {
-        path: '/logs/post-code-logs',
-        name: 'post-code-logs',
-        component: PostCodeLogs,
-        meta: {
-          title: i18n.t('appPageTitle.postCodeLogs'),
-        },
-      },
-      {
         path: '/hardware-status/inventory',
         name: 'inventory',
         component: Inventory,
@@ -225,14 +202,6 @@ const routes = [
         },
       },
       {
-        path: '/settings/bsod',
-        name: 'bsod',
-        component: Bsod,
-        meta: {
-          title: i18n.t('appPageTitle.bsod'),
-        },
-      },
-      {
         path: '/operations/kvm',
         name: 'kvm',
         component: Kvm,
@@ -257,14 +226,6 @@ const routes = [
         },
       },
       {
-        path: '/settings/smtp',
-        name: 'smtpSettings',
-        component: SmtpSettings,
-        meta: {
-          title: i18n.t('appPageTitle.smtpSettings'),
-        },
-      },
-      {
         path: '/pef/eventFilter',
         name: 'eventFilter',
         component: EventFilter,
@@ -281,43 +242,11 @@ const routes = [
         },
       },
       {
-        path: '/settings/network-ddns',
-        name: 'network-DDNS',
-        component: DDNS,
-        meta: {
-          title: i18n.t('appPageTitle.networkDDNS'),
-        },
-      },
-      {
         path: '/settings/vlan',
         name: 'vlan',
         component: Vlan,
         meta: {
           title: i18n.t('appPageTitle.vlan'),
-        },
-      },
-      {
-        path: '/host-system-diagnostics/addc',
-        name: 'addc',
-        component: ADDC,
-        meta: {
-          title: i18n.t('appPageTitle.addc'),
-        },
-      },
-      {
-        path: '/host-system-diagnostics/acd',
-        name: 'autonomous-crash-dump',
-        component: ACD,
-        meta: {
-          title: i18n.t('appPageTitle.autonomousCrashDump'),
-        },
-      },
-      {
-        path: '/host-system-diagnostics/asd',
-        name: 'asd',
-        component: Asd,
-        meta: {
-          title: i18n.t('appPageTitle.asd'),
         },
       },
       {
@@ -334,30 +263,6 @@ const routes = [
         component: RebootBmc,
         meta: {
           title: i18n.t('appPageTitle.rebootBmc'),
-        },
-      },
-      {
-        path: '/operations/backup-and-restore',
-        name: 'backup-and-restore',
-        component: BackupAndRestore,
-        meta: {
-          title: i18n.t('appPageTitle.backupAndRestore'),
-        },
-      },
-      {
-        path: '/settings/snmp',
-        name: 'snmp',
-        component: SnmpSettings,
-        meta: {
-          title: i18n.t('appPageTitle.snmpSettings'),
-        },
-      },
-      {
-        path: '/settings/cups',
-        name: 'cups',
-        component: CupsConfiguration,
-        meta: {
-          title: i18n.t('appPageTitle.cups'),
         },
       },
       {
@@ -391,38 +296,6 @@ const routes = [
         },
       },
       {
-        path: '/settings/firewall',
-        name: 'FireWall',
-        component: FireWall,
-        meta: {
-          title: i18n.t('appPageTitle.systemFirewall'),
-        },
-      },
-      {
-        path: '/settings/bond',
-        name: 'Bond',
-        component: Bond,
-        meta: {
-          title: i18n.t('appPageTitle.bond'),
-        },
-      },
-      {
-        path: '/settings/ncsi',
-        name: 'ncsi',
-        component: Ncsi,
-        meta: {
-          title: i18n.t('appPageTitle.ncsi'),
-        },
-      },
-      {
-        path: '/settings/license',
-        name: 'License',
-        component: License,
-        meta: {
-          title: i18n.t('appPageTitle.License'),
-        },
-      },
-      {
         path: '/system-inventory',
         name: 'system-inventory',
         component: systemInventory,
@@ -430,17 +303,201 @@ const routes = [
           title: i18n.t('appPageTitle.systemInventory'),
         },
       },
-      {
-        path: '/settings/network-link',
-        name: 'networkLink',
-        component: NetworkLink,
-        meta: {
-          title: i18n.t('appPageTitle.networkLink'),
-        },
-      },
     ],
   },
 ];
+if (process.env.VUE_APP_ONDEMAND_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/on-demand',
+    name: 'on-demand',
+    component: () =>
+      import(
+        /* webpackChunkName: "OnDemandInformation" */ '@/views/Settings/OnDemand'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.onDemand'),
+    },
+  });
+}
+if (process.env.VUE_APP_BSOD_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/bsod',
+    name: 'bsod',
+    component: () =>
+      import(/* webpackChunkName: "BsodInformation" */ '@/views/Settings/Bsod'),
+    meta: {
+      title: i18n.t('appPageTitle.bsod'),
+    },
+  });
+}
+if (process.env.VUE_APP_SMTP_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/smtp',
+    name: 'smtpSettings',
+    component: () =>
+      import(/* webpackChunkName: "SmtpSettings" */ '@/views/Settings/SMTP'),
+    meta: {
+      title: i18n.t('appPageTitle.smtpSettings'),
+    },
+  });
+}
+if (process.env.VUE_APP_SNMP_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/snmp',
+    name: 'snmp',
+    component: () =>
+      import(/* webpackChunkName: "SnmpSettings" */ '@/views/Settings/SNMP'),
+    meta: {
+      title: i18n.t('appPageTitle.snmpSettings'),
+    },
+  });
+}
+if (process.env.VUE_APP_SYSTEM_FIREWALL_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/firewall',
+    name: 'FireWall',
+    component: () =>
+      import(
+        /* webpackChunkName: "FirewallInformation" */ '@/views/Settings/FireWall'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.systemFirewall'),
+    },
+  });
+}
+if (process.env.VUE_APP_CUPS_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/cups',
+    name: 'cups',
+    component: () =>
+      import(/* webpackChunkName: "CupsInformation" */ '@/views/Settings/CUPS'),
+    meta: {
+      title: i18n.t('appPageTitle.cups'),
+    },
+  });
+}
+if (process.env.VUE_APP_MANAGE_LICENSES_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/license',
+    name: 'License',
+    component: () =>
+      import(
+        /* webpackChunkName: "LicenseInformation" */ '@/views/Settings/License'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.License'),
+    },
+  });
+}
+if (process.env.VUE_APP_ADDC_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/host-system-diagnostics/addc',
+    name: 'addc',
+    component: () =>
+      import(
+        /* webpackChunkName: "ACD" */ '@/views/HostSystemDiagnostics/Addc'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.addc'),
+    },
+  });
+}
+if (process.env.VUE_APP_ACD_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/host-system-diagnostics/acd',
+    name: 'autonomous-crash-dump',
+    component: () =>
+      import(/* webpackChunkName: "ACD" */ '@/views/HostSystemDiagnostics/ACD'),
+    meta: {
+      title: i18n.t('appPageTitle.autonomousCrashDump'),
+    },
+  });
+}
+if (process.env.VUE_APP_ASD_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/host-system-diagnostics/asd',
+    name: 'asd',
+    component: () =>
+      import(/* webpackChunkName: "ASD" */ '@/views/HostSystemDiagnostics/Asd'),
+    meta: {
+      title: i18n.t('appPageTitle.asd'),
+    },
+  });
+}
+if (process.env.VUE_APP_POST_CODE_LOGS_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/logs/post-code-logs',
+    name: 'post-code-logs',
+    component: () =>
+      import(
+        /* webpackChunkName: "PostCodeLogs" */ '@/views/Logs/PostCodeLogs'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.postCodeLogs'),
+    },
+  });
+}
+if (process.env.VUE_APP_BACKUP_AND_RESTORE_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/operations/backup-and-restore',
+    name: 'backup-and-restore',
+    component: () =>
+      import(
+        /* webpackChunkName: "BackupAndRestore" */ '@/views/Operations/BackupAndRestore'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.backupAndRestore'),
+    },
+  });
+}
+if (process.env.VUE_APP_NETWORK_DDNS_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/network-ddns',
+    name: 'ddns-Configuration',
+    component: () =>
+      import(
+        /* webpackChunkName: "NetworkDDNS" */ '../../views/Settings/NetworkDDNS'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.ddnsConfiguration'),
+    },
+  });
+}
+if (process.env.VUE_APP_NETWORK_BOND_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/bond',
+    name: 'Bond',
+    component: () =>
+      import(/* webpackChunkName: "NetworkBond" */ '@/views/Settings/Bond'),
+    meta: {
+      title: i18n.t('appPageTitle.bond'),
+    },
+  });
+}
+if (process.env.VUE_APP_NETWORK_LINK_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/network-link',
+    name: 'networkLink',
+    component: () =>
+      import(
+        /* webpackChunkName: "NetworkBond" */ '@/views/Settings/NetworkLink/NetworkLink'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.networkLink'),
+    },
+  });
+}
+if (process.env.VUE_APP_NCSI_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/ncsi',
+    name: 'ncsi',
+    component: () =>
+      import(/* webpackChunkName: "NetworkBond" */ '@/views/Settings/Ncsi'),
+    meta: {
+      title: i18n.t('appPageTitle.ncsi'),
+    },
+  });
+}
 if (process.env.VUE_APP_RAID_ENABLED == 'true') {
   routes[2].children.push(
     {
