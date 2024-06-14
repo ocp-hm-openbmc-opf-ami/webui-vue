@@ -973,6 +973,7 @@
             "serviceEnabled": "已启用服务",
             "serviceEntryPointUuid": "服务进入点 UUID",
             "sparePartNumber": "剩馀部分数字",
+            "state": "状态",
             "statusHealthRollup": "状态 (状态捲)",
             "statusState": "状态 (状态)",
             "subModel": "子型号",
@@ -1058,7 +1059,7 @@
             "ldapSettings": "LDAP 设定"
         },
         "form": {
-            "activeDirectory": "Active Directory",
+            "activeDirectory": "活动目录",
             "baseDn": "基础 DN",
             "bindDn": "绑定DN",
             "bindPassword": "绑定密码",
@@ -1067,6 +1068,7 @@
             "ldapAuthentication": "LDAP 验证",
             "ldapCertificateValidUntil": "有效LDAP凭证直到",
             "manageSslCertificates": "管理 SSL 凭证",
+            "openLDAP": "开放LDAP",
             "secureLdapHelper": "启用安全LDAP时，必须有一个CA凭证和一个LDAP凭证",
             "secureLdapUsingSsl": "安全LDAP 正使用 SSL",
             "serverUri": "URI伺服器",

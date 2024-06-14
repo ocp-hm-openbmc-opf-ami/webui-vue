@@ -980,6 +980,7 @@
             "serviceEnabled": "Service enabled",
             "serviceEntryPointUuid": "Service entry point UUID",
             "sparePartNumber": "Spare part number",
+            "state": "State",
             "statusHealthRollup": "Status (Health rollup)",
             "statusState": "Status (State)",
             "subModel": "Sub model",
@@ -1065,6 +1066,7 @@
             "ldapSettings": "LDAP settings"
         },
         "form": {
+            "activeDirectory": "Active Directory",
             "baseDn": "Base DN",
             "bindDn": "Bind DN",
             "bindPassword": "Bind password",
@@ -1073,6 +1075,7 @@
             "ldapAuthentication": "LDAP authentication",
             "ldapCertificateValidUntil": "LDAP Certificate valid until",
             "manageSslCertificates": "Manage SSL certificates",
+            "openLDAP": "OpenLDAP",
             "secureLdapHelper": "A CA certificate and an LDAP certificate are required to enable secure LDAP",
             "secureLdapUsingSsl": "Secure LDAP using SSL",
             "serverUri": "Server URI",

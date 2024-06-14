@@ -976,6 +976,7 @@
             "serviceEnabled": "已啟用服務",
             "serviceEntryPointUuid": "服務進入點 UUID",
             "sparePartNumber": "剩餘部分數字",
+            "state": "狀態",
             "statusHealthRollup": "狀態 (狀態捲)",
             "statusState": "狀態 (狀態)",
             "subModel": "子模型",
@@ -1061,7 +1062,7 @@
             "ldapSettings": "LDAP 設定"
         },
         "form": {
-            "activeDirectory": "Active Directory",
+            "activeDirectory": "活動目錄",
             "baseDn": "基礎 DN",
             "bindDn": "綁定DN",
             "bindPassword": "綁定密碼",
@@ -1070,6 +1071,7 @@
             "ldapAuthentication": "LDAP 驗證",
             "ldapCertificateValidUntil": "有效LDAP憑證直到",
             "manageSslCertificates": "管理 SSL 憑證",
+            "openLDAP": "開放LDAP",
             "secureLdapHelper": "啟用安全LDAP時，必須有一個CA憑證和一個LDAP憑證",
             "secureLdapUsingSsl": "安全LDAP 正使用 SSL",
             "serverUri": "URI伺服器",

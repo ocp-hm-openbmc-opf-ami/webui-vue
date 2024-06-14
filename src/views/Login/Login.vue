@@ -130,10 +130,6 @@ export default {
           text: 'US - English',
         },
         {
-          value: 'es',
-          text: 'Spanish - Español',
-        },
-        {
           value: 'ru',
           text: 'Russian - Русский',
         },

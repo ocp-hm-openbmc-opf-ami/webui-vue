@@ -436,6 +436,7 @@
             "serviceEnabled": "Включённые сервисы",
             "serviceEntryPointUuid": "UUID точки входа сервиса",
             "sparePartNumber": "Шифр свободного компонента",
+            "state": "Состояние",
             "statusHealthRollup": "Статус (Сводное состояние)",
             "statusState": "Статус (Состояние)",
             "subModel": "Подмодель",
@@ -504,6 +505,7 @@
             "ldapSettings": "Настройки LDAP"
         },
         "form": {
+            "activeDirectory": "Активный каталог",
             "baseDn": "Базовый DN",
             "bindDn": "Привязать DN",
             "bindPassword": "Привязать пароль",
@@ -512,6 +514,7 @@
             "ldapAuthentication": "Аутентификация LDAP",
             "ldapCertificateValidUntil": "Сертификат LDAP действителен до",
             "manageSslCertificates": "Управление SSL сертификатами",
+            "openLDAP": "OpenLDAP",
             "secureLdapHelper": "Сертификат CA и сертификат LDAP необходимы для включения защищённого LDAP",
             "secureLdapUsingSsl": "Использовать SSL для подключения к LDAP",
             "serverUri": "URI сервера",
@@ -685,6 +688,7 @@
         "confirmPassword": "Подтвердите новый пароль",
         "defaultUTC": "По умолчанию (UTC)",
         "newPassword": "Новый пароль",
+        "currentPassword": "Текущий пароль",
         "newPassLabelTextInfo": "Пароль должен быть от %{min} до %{max} символов",
         "passwordsDoNotMatch": "Пароли не совпадают",
         "profileInfoTitle": "Информация о профиле",
@@ -693,7 +697,8 @@
         "timezoneDisplayDesc": "Выберите, как будет отображаться время на всех страницах",
         "username": "Имя пользователя",
         "toast": {
-            "successUpdatingTimeZone": "Часовой пояс успешно обновлён."
+            "successUpdatingTimeZone": "Часовой пояс успешно обновлён.",
+            "wrongCredentials": "Неверные учётные данные"
         }
     },
     "pageNetwork": {

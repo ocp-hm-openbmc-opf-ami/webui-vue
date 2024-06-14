@@ -976,6 +976,7 @@
             "serviceEnabled": "Dienst aktiviert",
             "serviceEntryPointUuid": "Dienst Einstiegspunkt UUID",
             "sparePartNumber": "Ersatzteilnummer",
+            "state": "Zustand",
             "statusHealthRollup": "Status (Gesundheits Rollup)",
             "statusState": "Status (Zustand)",
             "subModel": "Untermodell",
@@ -1061,6 +1062,7 @@
             "ldapSettings": "LDAP Einstellungen"
         },
         "form": {
+            "activeDirectory": "Active Directory",
             "baseDn": "Base DN",
             "bindDn": "DN binden",
             "bindPassword": "Passwort binden",
@@ -1069,6 +1071,7 @@
             "ldapAuthentication": "LDAP Authentifizierung",
             "ldapCertificateValidUntil": "LDAP Zertifikat gültig bis",
             "manageSslCertificates": "SSL Zertifikate verwalten",
+            "openLDAP": "OpenLDAP",
             "secureLdapHelper": "Um sicheres LDAP zu ermöglichen, sind ein CA Zertifikat und ein LDAP Zertifikat erforderlich",
             "secureLdapUsingSsl": "Sicheres LDAP mit SSL",
             "serverUri": "Server URI",
