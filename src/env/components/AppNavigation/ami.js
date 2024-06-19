@@ -169,6 +169,11 @@ const AppNavigationMixin = {
               route: '/settings/bond',
             },
             {
+              id: 'ncsi',
+              label: this.$t('appNavigation.ncsi'),
+              route: '/settings/ncsi',
+            },
+            {
               id: 'vlan',
               label: this.$t('appNavigation.vlan'),
               route: '/settings/vlan',
