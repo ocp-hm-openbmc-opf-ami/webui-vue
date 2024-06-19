@@ -168,8 +168,7 @@
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
         "systemInventory":"@:appPageTitle.systemInventory",
-        "networkDDNS": "網路 DDNS",
-        "ncsi": "@:appPageTitle.ncsi"
+        "networkDDNS": "網路 DDNS"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -221,8 +220,7 @@
         "Bond": "綁定",
         "License": "管理許可證",
         "systemInventory":"系統庫存",
-        "ddnsConfiguration": "DDNS 配置",
-        "ncsi": "NCSI"
+        "ddnsConfiguration": "DDNS 配置"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -1385,24 +1383,6 @@
             "successSaveNetworkSettings": "更新 %{setting} 設定成功"
         }
     },
-    "pageNcsi": {
-        "pageDescription": "邊帶接口 (NC-SI)",
-        "ncsiInterfaceOptions": "NCSI介面",
-        "packageId": "封裝ID",
-        "channelNumber": "頻道數",
-        "ncsiMode": "NCSI模式",
-        "autoFailOverMode": "自動故障轉移模式",
-        "manualSwitchMode": "手動切換模式",
-        "options": {
-            "packageOption": "0 (active)"
-        },
-        "toast": {
-            "errorSavinNcsiInterface": "儲存 NCSI 介面設定時發生錯誤",
-            "errorGettingNcsi": "取得 NCSi 介面資訊時出錯",
-            "successSavingNcsiInterface": "成功保存 NCSi 介面設置",
-            "featureNotEnabled": "NCSI 功能未啟用。"
-        }
-    },
     "pageVlan": {
         "vlan": "VLAN 設定",
         "table": {
@@ -1501,19 +1481,6 @@
             "errorAddKeyCertificate": "請上傳伺服器密鑰證書",
             "successMsgTestAlert": "測試警報發送成功",
             "errorMsgAlert": "發送測試警報時出錯"
-        }
-    },
-    "pageAlertDestination": {
-        "pageDescription": "設定警告接收者",
-        "sectionTitle": "警告接收者",
-        "alertDestinationLabel": "設定警告接收者內容",
-        "sendEmailTo": "寄送 Email 給:",
-        "sendTestAlert": "寄送測試警告",
-        "toast": {
-            "successMsg": "成功更新警告接收者",
-            "errorMsg": "更新警告接收者發生錯誤",
-            "successMsgTestAlert": "測試警告寄送成功",
-            "errorMsgAlert": "寄送測試警告發生錯誤"
         }
     },
     "pageEventFilter": {
