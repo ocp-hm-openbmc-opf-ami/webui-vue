@@ -45,6 +45,33 @@
             {{ $t('pageFirmware.cardActionSwitchToRunning') }}
           </b-btn>
         </b-card>
+        <b-card>
+          <template #header>
+            <p class="font-weight-bold m-0">
+              {{ $t('pageFirmware.cardTitleClearConfig') }}
+            </p>
+          </template>
+          <dl class="mb-0">
+            <b-form-checkbox
+              id="ClearConfigSwitch"
+              v-model="clearConfigState"
+              data-test-id="firmware-toggle-clear-Config"
+              switch
+              @change="changeClearConfigState"
+            >
+              <span class="sr-only">
+                {{ $t('pageFirmware.ClearConfig') }}
+              </span>
+              <span v-if="clearConfigState">
+                {{ $t('global.status.enabled') }}
+              </span>
+              <span v-else>{{ $t('global.status.disabled') }}</span>
+            </b-form-checkbox>
+            <dd>
+              {{ $t('pageFirmware.clearConfigDescription') }}
+            </dd>
+          </dl>
+        </b-card>
       </b-card-group>
     </page-section>
     <modal-switch-to-running :backup="backupVersion" @ok="switchToRunning" />
@@ -77,6 +104,14 @@ export default {
     };
   },
   computed: {
+    clearConfigState: {
+      get() {
+        return this.$store.getters['firmware/clearConfigState'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
     isSingleFileUploadEnabled() {
       return this.$store.getters['firmware/isSingleFileUploadEnabled'];
     },
@@ -130,6 +165,12 @@ export default {
           clearTimeout(timerId);
           this.endLoader();
         });
+    },
+    changeClearConfigState(state) {
+      this.$store
+        .dispatch('firmware/saveClearConfig', state ? true : false)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
     },
   },
 };

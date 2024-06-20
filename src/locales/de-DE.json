@@ -870,6 +870,8 @@
         "sectionTitleBmcCardsCombined": "BMC und Server",
         "sectionTitleHostCards": "Gastgeber",
         "sectionTitleUpdateFirmware": "Firmware aktualisieren",
+        "cardTitleClearConfig": "Konfiguration löschen",
+        "clearConfigDescription": "Aktivieren der Clear-Konfiguration",
         "alert": {
             "operationInProgress": "Serverstrombetrieb läuft.",
             "serverMustBePoweredOffTo": "Der Server muss ausgeschaltet sein:",
@@ -909,7 +911,11 @@
             "verifySwitch": "Schalter überprüfen",
             "verifySwitchMessage": "Aktualisieren Sie die Anwendung, um die laufenden und vertauschten Backup-Images zu überprüfen.",
             "verifyUpdate": "Aktualisierung überprüfen",
-            "verifyUpdateMessage": "Aktualisieren Sie die Anwendung, um zu überprüfen, ob die Firmware erfolgreich aktualisiert wurde"
+            "verifyUpdateMessage": "Aktualisieren Sie die Anwendung, um zu überprüfen, ob die Firmware erfolgreich aktualisiert wurde",
+            "successEnabledClearConfig": "Konfiguration löschen erfolgreich aktiviert.",
+            "successDisabledClearConfig": "Konfiguration löschen erfolgreich deaktiviert.",
+            "errorEnabledClearConfig": "Fehler beim Aktivieren der Konfiguration löschen.",
+            "errorDisabledClearConfig": "Fehler beim Deaktivieren der Konfiguration löschen."
         }
     },
     "pageInventory": {

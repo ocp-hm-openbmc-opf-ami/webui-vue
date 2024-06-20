@@ -870,6 +870,8 @@
         "sectionTitleBmcCardsCombined": "BMC 和伺服器",
         "sectionTitleHostCards": "主機",
         "sectionTitleUpdateFirmware": "更新韌體",
+        "cardTitleClearConfig": "清晰的配置",
+        "clearConfigDescription": "啟用清晰配置",
         "alert": {
             "operationInProgress": "正在執行伺服器電源運作",
             "serverMustBePoweredOffTo": "伺服器必須關閉電源至:",
@@ -909,7 +911,11 @@
             "verifySwitch": "認證切換",
             "verifySwitchMessage": "刷新應用程式以證實執行中及備份映像已更換",
             "verifyUpdate": "認證更新",
-            "verifyUpdateMessage": "刷新應用程式以證實韌體更新成功"
+            "verifyUpdateMessage": "刷新應用程式以證實韌體更新成功",
+            "successEnabledClearConfig": "已成功啟用清除配置。",
+            "successDisabledClearConfig": "已成功停用清除配置。",
+            "errorEnabledClearConfig": "啟用清除配置時發生錯誤。",
+            "errorDisabledClearConfig": "停用清除配置時發生錯誤。"
         }
     },
     "pageInventory": {

@@ -867,6 +867,8 @@
         "sectionTitleBmcCardsCombined": "BMC 和伺服器",
         "sectionTitleHostCards": "主机",
         "sectionTitleUpdateFirmware": "更新韧体",
+        "cardTitleClearConfig": "清晰的配置",
+        "clearConfigDescription": "启用清晰配置",
         "alert": {
             "operationInProgress": "正在执行伺服器电源运作",
             "serverMustBePoweredOffTo": "伺服器必须关闭电源至:",
@@ -906,7 +908,11 @@
             "verifySwitch": "认证切换",
             "verifySwitchMessage": "刷新应用程式以证实执行中及备份映像已更换",
             "verifyUpdate": "认证更新",
-            "verifyUpdateMessage": "刷新应用程式以证实韧体更新成功"
+            "verifyUpdateMessage": "刷新应用程式以证实韧体更新成功",
+            "successEnabledClearConfig": "已成功启用清除配置。",
+            "successDisabledClearConfig": "已成功禁用清除配置。",
+            "errorEnabledClearConfig": "启用清除配置时出错。",
+            "errorDisabledClearConfig": "禁用清除配置时出错。"
         }
     },
     "pageInventory": {

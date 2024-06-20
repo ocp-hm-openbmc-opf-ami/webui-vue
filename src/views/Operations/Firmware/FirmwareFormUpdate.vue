@@ -9,6 +9,28 @@
     </div>
     <div class="form-background p-3">
       <b-form @submit.prevent="onSubmitUpload">
+        <b-row v-if="bmcBackupEnabledStatus" class="choose-images">
+          <b-col sm="3">
+            <b-form-checkbox
+              v-model="activeImage"
+              value="bmc_active"
+              :disabled="activeImageDisabled"
+              @change="changeActiveImage"
+            >
+              {{ $t('pageFirmware.form.updateFirmware.activeImage') }}
+            </b-form-checkbox>
+          </b-col>
+          <b-col sm="3">
+            <b-form-checkbox
+              v-model="backupImage"
+              value="bmc_bkup"
+              :disabled="activeImageDisabled"
+              @change="changeBackupImage"
+            >
+              {{ $t('pageFirmware.form.updateFirmware.backupImage') }}
+            </b-form-checkbox>
+          </b-col>
+        </b-row>
         <b-form-group
           v-if="isTftpUploadAvailable"
           :label="$t('pageFirmware.form.updateFirmware.fileSource')"
@@ -113,6 +135,11 @@ export default {
   },
   data() {
     return {
+      bmcActiveBackupSelected: [],
+      bmcActiveEnabledStatusValue: '',
+      activeImage: false,
+      backupImage: false,
+      activeImageDisabled: false,
       loading,
       isWorkstationSelected: true,
       file: null,
@@ -129,6 +156,12 @@ export default {
   computed: {
     isTftpUploadAvailable() {
       return this.$store.getters['firmware/isTftpUploadAvailable'];
+    },
+    bmcBackupEnabledStatus() {
+      return this.$store.getters['firmware/bmcBackupEnabledStatus'];
+    },
+    httpPushUriTargetsBusyStatus() {
+      return this.$store.getters['firmware/httpBusyStatus'];
     },
   },
   watch: {
@@ -153,19 +186,75 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch('firmware/getUpdateServiceSettings');
+    this.updateFirmwareInit();
   },
   methods: {
+    updateFirmwareInit() {
+      this.$store.dispatch('firmware/getUpdateServiceSettings').then(() => {
+        this.bmcActiveEnabledStatusValue =
+          this.$store.getters['firmware/bmcActiveEnabledStatus'];
+        if (!this.bmcActiveEnabledStatusValue) {
+          this.activeImage = 'bmc_active';
+        }
+        if (this.bmcBackupEnabledStatus) {
+          if (this.httpPushUriTargetsBusyStatus) {
+            let PushUriTargetsValue =
+              this.$store.getters['firmware/httpPushUriTargetsValue'];
+            PushUriTargetsValue?.forEach((val) => {
+              if (val == 'bmc_active') {
+                this.activeImage = 'bmc_active';
+              }
+              if (val == 'bmc_bkup') {
+                this.backupImage = 'bmc_bkup';
+              }
+            });
+            if (
+              this.bmcBackupEnabledStatus &&
+              this.httpPushUriTargetsBusyStatus
+            ) {
+              this.activeImageDisabled = true;
+            }
+          }
+        }
+      });
+    },
     updateFirmware() {
       this.startLoader();
-      this.infoToast(this.$t('pageFirmware.toast.updateStartedMessage'), {
-        title: this.$t('pageFirmware.toast.updateStarted'),
-        timestamp: true,
-      });
-      if (this.isWorkstationSelected) {
-        this.dispatchWorkstationUpload();
+      this.bmcActiveBackupSelected = [];
+      if (this.activeImage) {
+        this.bmcActiveBackupSelected.push('bmc_active');
+      }
+      if (this.backupImage) {
+        this.bmcActiveBackupSelected.push('bmc_bkup');
+      }
+      if (this.bmcBackupEnabledStatus && !this.httpPushUriTargetsBusyStatus) {
+        this.$store
+          .dispatch(
+            'firmware/setFirmwarUpdateActive',
+            this.bmcActiveBackupSelected,
+          )
+          .then(() => {
+            this.activeImageDisabled = true;
+            this.infoToast(this.$t('pageFirmware.toast.updateStartedMessage'), {
+              title: this.$t('pageFirmware.toast.updateStarted'),
+              timestamp: true,
+            });
+            if (this.isWorkstationSelected) {
+              this.dispatchWorkstationUpload();
+            } else {
+              this.dispatchTftpUpload();
+            }
+          });
       } else {
-        this.dispatchTftpUpload();
+        this.infoToast(this.$t('pageFirmware.toast.updateStartedMessage'), {
+          title: this.$t('pageFirmware.toast.updateStarted'),
+          timestamp: true,
+        });
+        if (this.isWorkstationSelected) {
+          this.dispatchWorkstationUpload();
+        } else {
+          this.dispatchTftpUpload();
+        }
       }
     },
     dispatchWorkstationUpload() {
@@ -175,6 +264,7 @@ export default {
           this.checkStatus(response.data['@odata.id']);
         })
         .catch(({ message }) => {
+          this.updateFirmwareInit();
           this.endLoader();
           this.errorToast(message);
         });
@@ -183,6 +273,7 @@ export default {
       this.$store
         .dispatch('firmware/uploadFirmwareTFTP', this.tftpFileAddress)
         .catch(({ message }) => {
+          this.updateFirmwareInit();
           this.endLoader();
           this.errorToast(message);
         });
@@ -227,6 +318,25 @@ export default {
       this.file = file;
       this.$v.file.$touch();
     },
+    changeActiveImage(val) {
+      if (val == false) {
+        this.backupImage = 'bmc_bkup';
+      }
+    },
+    changeBackupImage(val) {
+      if (val == false) {
+        this.activeImage = 'bmc_active';
+      }
+    },
   },
 };
 </script>
+<style>
+.choose-images {
+  padding-top: 15px;
+  padding-bottom: 25px;
+}
+.inline-alignment {
+  display: inline-flex;
+}
+</style>

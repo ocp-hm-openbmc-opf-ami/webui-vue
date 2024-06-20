@@ -874,6 +874,8 @@
         "sectionTitleBmcCardsCombined": "BMC and server",
         "sectionTitleHostCards": "Host",
         "sectionTitleUpdateFirmware": "Update firmware",
+        "cardTitleClearConfig": "Clear Configuration",
+        "clearConfigDescription": "Enabling Clear Configuration",
         "alert": {
             "operationInProgress": "Server power operation in progress.",
             "serverMustBePoweredOffTo": "Server must be powered off to:",
@@ -889,7 +891,9 @@
                 "imageFile": "Image file",
                 "startUpdate": "Start update",
                 "tftpServer": "TFTP server",
-                "workstation": "Workstation"
+                "workstation": "Workstation",
+                "activeImage": "Active Image",
+                "backupImage": "Backup Image"
             }
         },
         "modal": {
@@ -913,7 +917,11 @@
             "verifySwitch": "Verify switch",
             "verifySwitchMessage": "Refresh the application to verify the running and backup images switched.",
             "verifyUpdate": "Verify update",
-            "verifyUpdateMessage": "Refresh the application to verify firmware updated successfully"
+            "verifyUpdateMessage": "Refresh the application to verify firmware updated successfully",
+            "successEnabledClearConfig": "Successfully enabled Clear configuration.",
+            "successDisabledClearConfig": "Successfully disabled Clear configuration.",
+            "errorEnabledClearConfig": "Error enabling Clear configuration.",
+            "errorDisabledClearConfig": "Error disabling Clear configuration."
         }
     },
     "pageInventory": {
