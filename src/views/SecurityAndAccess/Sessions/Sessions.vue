@@ -276,6 +276,9 @@ export default {
       this.searchFilter = event;
     },
     disconnectSessions(uris) {
+      uris.forEach((uri, index) => {
+        uris[index] = '/redfish/v1/SessionService/Sessions/' + uri;
+      });
       this.$store
         .dispatch('sessions/disconnectSessions', uris)
         .then((messages) => {

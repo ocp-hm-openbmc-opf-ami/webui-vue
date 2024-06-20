@@ -25,6 +25,7 @@ const SessionsStore = {
         )
         .then((sessionUris) => {
           const allConnectionsData = sessionUris.map((sessionUri) => {
+            let lastElement = sessionUri.data['@odata.id'].split('/').pop();
             return {
               sessionID: sessionUri.data?.Id,
               sessionType: sessionUri.data?.SessionType,
@@ -32,7 +33,7 @@ const SessionsStore = {
               username: sessionUri.data?.UserName,
               ipAddress: sessionUri.data?.ClientOriginIPAddress,
               privilege: sessionUri.data?.Roles,
-              uri: sessionUri.data['@odata.id'],
+              uri: lastElement,
             };
           });
           commit('setAllConnections', allConnectionsData);
