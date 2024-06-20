@@ -29,7 +29,10 @@ const SessionsStore = {
             return {
               sessionID: sessionUri.data?.Id,
               sessionType: sessionUri.data?.SessionType,
-              userID: sessionUri.data?.UserId ? sessionUri.data?.UserId : 'NA',
+              userID:
+                (sessionUri.data?.UserId ?? '') === ''
+                  ? 'NA'
+                  : sessionUri.data?.UserId,
               username: sessionUri.data?.UserName,
               ipAddress: sessionUri.data?.ClientOriginIPAddress,
               privilege: sessionUri.data?.Roles,
