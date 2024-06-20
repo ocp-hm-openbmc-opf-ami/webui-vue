@@ -232,8 +232,8 @@ export default {
           status: user.Locked
             ? 'Locked'
             : user.Enabled
-            ? 'Enabled'
-            : 'Disabled',
+              ? 'Enabled'
+              : 'Disabled',
           actions: [
             {
               value: 'edit',
@@ -246,8 +246,8 @@ export default {
                 user.UserName === this.$store.getters['global/username']
                   ? false
                   : true && user.UserName === 'root'
-                  ? false
-                  : true,
+                    ? false
+                    : true,
               title: this.$tc('pageUserManagement.deleteUser'),
             },
           ],
@@ -302,7 +302,7 @@ export default {
             title: this.$tc('pageUserManagement.deleteUser'),
             okTitle: this.$tc('pageUserManagement.deleteUser'),
             cancelTitle: this.$t('global.action.cancel'),
-          }
+          },
         )
         .then((deleteConfirmed) => {
           if (deleteConfirmed) {
@@ -358,7 +358,7 @@ export default {
             this.errorToast(
               i18n.t('pageUserManagement.toast.errorDeleteLoggedUser', {
                 username,
-              })
+              }),
             );
           }
         });
@@ -370,19 +370,19 @@ export default {
             .msgBoxConfirm(
               this.$tc(
                 'pageUserManagement.modal.batchDeleteConfirmMessage',
-                this.selectedRows.length
+                this.selectedRows.length,
               ),
               {
                 title: this.$tc(
                   'pageUserManagement.deleteUser',
-                  this.selectedRows.length
+                  this.selectedRows.length,
                 ),
                 okTitle: this.$tc(
                   'pageUserManagement.deleteUser',
-                  this.selectedRows.length
+                  this.selectedRows.length,
                 ),
                 cancelTitle: this.$t('global.action.cancel'),
-              }
+              },
             )
             .then((deleteConfirmed) => {
               if (deleteConfirmed) {

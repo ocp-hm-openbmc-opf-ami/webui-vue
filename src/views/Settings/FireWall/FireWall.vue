@@ -250,13 +250,13 @@ export default {
           this.$t('pageFireWall.firewallSettings.modal.deleteConfirmMessage'),
           {
             title: this.$tc(
-              'pageFireWall.firewallSettings.modal.deleteFireWall'
+              'pageFireWall.firewallSettings.modal.deleteFireWall',
             ),
             okTitle: this.$tc(
-              'pageFireWall.firewallSettings.modal.deleteFireWall'
+              'pageFireWall.firewallSettings.modal.deleteFireWall',
             ),
             cancelTitle: this.$t('global.action.cancel'),
-          }
+          },
         )
         .then((deleteConfirmed) => {
           if (deleteConfirmed) {

@@ -190,7 +190,7 @@ export default {
     window.removeEventListener('resize', this.resizeKvmWindow);
     window.removeEventListener(
       'beforeunload',
-      this.handleChildWindowBeforeUnload
+      this.handleChildWindowBeforeUnload,
     );
     this.closeTerminal();
   },
@@ -211,7 +211,7 @@ export default {
       this.rfb = new AMI_RFB(
         this.$refs.panel,
         `wss://${window.location.host}/kvm/0`,
-        { wsProtocols: [token] }
+        { wsProtocols: [token] },
       );
 
       this.rfb.scaleViewport = true;
@@ -273,7 +273,7 @@ export default {
       this.isConsoleWindow = window.open(
         '#/console/kvm',
         'kvmConsoleWindow',
-        'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=700,height=550'
+        'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=700,height=550',
       );
       this.$store.commit('kvm/setIsConsoleWindow', {
         isconsolewindowOpen: this.isConsoleWindow,

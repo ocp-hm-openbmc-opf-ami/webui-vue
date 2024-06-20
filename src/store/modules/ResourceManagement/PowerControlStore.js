@@ -33,7 +33,7 @@ const PowerControlStore = {
         .get('/redfish/v1/')
         .then((response) => api.get(response.data.Chassis['@odata.id']))
         .then(({ data: { Members } }) =>
-          Members.map((member) => member['@odata.id'])
+          Members.map((member) => member['@odata.id']),
         )
         .catch((error) => console.log(error));
     },
@@ -67,12 +67,12 @@ const PowerControlStore = {
       return await api
         .patch(state.powerCapUri, data)
         .then(() =>
-          i18n.t('pageServerPowerOperations.toast.successSaveSettings')
+          i18n.t('pageServerPowerOperations.toast.successSaveSettings'),
         )
         .catch((error) => {
           console.log(error);
           throw new Error(
-            i18n.t('pageServerPowerOperations.toast.errorSaveSettings')
+            i18n.t('pageServerPowerOperations.toast.errorSaveSettings'),
           );
         });
     },
@@ -106,7 +106,7 @@ const PowerControlStore = {
             throw new Error(i18n.t('pagePower.toast.errorApplyPowerCapEnable'));
           } else {
             throw new Error(
-              i18n.t('pagePower.toast.errorApplyPowerCapDisable')
+              i18n.t('pagePower.toast.errorApplyPowerCapDisable'),
             );
           }
         });

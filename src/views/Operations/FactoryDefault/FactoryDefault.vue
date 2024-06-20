@@ -56,14 +56,14 @@ export default {
               title: this.$tc('PageFactoryDefault.toast.title'),
               okTitle: this.$tc('PageFactoryDefault.toast.okTitle'),
               cancelTitle: this.$t('global.action.cancel'),
-            }
+            },
           )
           .then((RestoreConfirmation) => {
             if (RestoreConfirmation) {
               this.$store
                 .dispatch(
                   'FactoryDefault/restoreToDefaults',
-                  this.restoreOption
+                  this.restoreOption,
                 )
                 .then((message) => {
                   this.successToast(message);
@@ -76,20 +76,20 @@ export default {
         this.$bvModal
           .msgBoxConfirm(
             this.$tc(
-              'PageFactoryDefault.toast.FactoryDefaultConfirmationPartial'
+              'PageFactoryDefault.toast.FactoryDefaultConfirmationPartial',
             ),
             {
               title: this.$tc('PageFactoryDefault.toast.title'),
               okTitle: this.$tc('PageFactoryDefault.toast.okTitle'),
               cancelTitle: this.$t('global.action.cancel'),
-            }
+            },
           )
           .then((RestoreConfirmation) => {
             if (RestoreConfirmation) {
               this.$store
                 .dispatch(
                   'FactoryDefault/restoreToDefaults',
-                  this.restoreOption
+                  this.restoreOption,
                 )
                 .then((message) => {
                   this.successToast(message);

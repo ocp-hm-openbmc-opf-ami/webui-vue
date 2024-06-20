@@ -137,7 +137,7 @@ export default {
   created() {
     this.startLoader();
     Promise.all([this.$store.dispatch('network/getEthernetData')]).finally(() =>
-      this.endLoader()
+      this.endLoader(),
     );
   },
   methods: {
@@ -171,24 +171,27 @@ export default {
       this.addIpv4 = false;
     },
     getModalInfo() {
-      this.defaultGateway = this.$store.getters[
-        'network/globalNetworkSettings'
-      ][this.tabIndex].defaultGateway;
+      this.defaultGateway =
+        this.$store.getters['network/globalNetworkSettings'][
+          this.tabIndex
+        ].defaultGateway;
 
-      this.currentHostname = this.$store.getters[
-        'network/globalNetworkSettings'
-      ][this.tabIndex].hostname;
+      this.currentHostname =
+        this.$store.getters['network/globalNetworkSettings'][
+          this.tabIndex
+        ].hostname;
 
-      this.currentMacAddress = this.$store.getters[
-        'network/globalNetworkSettings'
-      ][this.tabIndex].macAddress;
+      this.currentMacAddress =
+        this.$store.getters['network/globalNetworkSettings'][
+          this.tabIndex
+        ].macAddress;
     },
     getTabIndex(selectedIndex) {
       this.tabIndex = selectedIndex;
       this.$store.dispatch('network/setSelectedTabIndex', this.tabIndex);
       this.$store.dispatch(
         'network/setSelectedTabId',
-        this.ethernetData[selectedIndex].Id
+        this.ethernetData[selectedIndex].Id,
       );
       this.getModalInfo();
     },

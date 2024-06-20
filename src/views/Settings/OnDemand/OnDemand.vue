@@ -8,8 +8,8 @@
       >
         <b-form-select
           id="table-style-variant"
-          class="form-select"
           v-model="tableVariantState"
+          class="form-select"
           :options="tableVariantOptions"
           @change="tableVariantValue"
         >

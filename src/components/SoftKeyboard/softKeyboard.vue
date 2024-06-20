@@ -71,10 +71,10 @@ export default {
   mounted() {
     this.renderSoftkeyboard('displayObjEnglish');
     this.$root.$on('enable-softkeyboard-btn', () =>
-      this.handleSoftkeyboardDropdown(false)
+      this.handleSoftkeyboardDropdown(false),
     );
     this.$root.$on('disable-softkeyboard-btn', () =>
-      this.handleSoftkeyboardDropdown(true)
+      this.handleSoftkeyboardDropdown(true),
     );
   },
   methods: {
@@ -184,8 +184,8 @@ export default {
         this.handleCaps(keyId, keyValue);
       } else if (button === '{XK_Control_L}') {
         // handle Control button
-        this.ctlBtnStatus = !this.$store.getters['kvm/getSoftKeyboardStatus']
-          .ctlKeyStatus;
+        this.ctlBtnStatus =
+          !this.$store.getters['kvm/getSoftKeyboardStatus'].ctlKeyStatus;
         this.$emit('onKeyPress', keyId, keyValue, this.ctlBtnStatus);
         if (this.ctlBtnStatus) {
           this.updateKeyValues(button, 'grey', true, 'ctlKeyStatus');
@@ -194,8 +194,8 @@ export default {
         }
       } else if (button === '{XK_Alt_L}') {
         // handle alt buttom
-        this.altBtnStatus = !this.$store.getters['kvm/getSoftKeyboardStatus']
-          .altKeyStatus;
+        this.altBtnStatus =
+          !this.$store.getters['kvm/getSoftKeyboardStatus'].altKeyStatus;
         this.$emit('onKeyPress', keyId, keyValue, this.altBtnStatus);
         if (this.altBtnStatus) {
           this.updateKeyValues(button, 'grey', true, 'altKeyStatus');
@@ -204,8 +204,8 @@ export default {
         }
       } else if (button === '{XK_Meta_L}') {
         // handle command buttom
-        this.cmdBtnStatus = !this.$store.getters['kvm/getSoftKeyboardStatus']
-          .cmdKeyStatus;
+        this.cmdBtnStatus =
+          !this.$store.getters['kvm/getSoftKeyboardStatus'].cmdKeyStatus;
         this.$emit('onKeyPress', keyId, keyValue, this.cmdBtnStatus);
         if (this.cmdBtnStatus) {
           this.updateKeyValues(button, 'grey', true, 'cmdKeyStatus');

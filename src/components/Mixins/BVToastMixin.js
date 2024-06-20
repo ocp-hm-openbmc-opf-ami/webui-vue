@@ -12,14 +12,14 @@ const BVToastMixin = {
       const titleWithIcon = this.$createElement(
         'strong',
         { class: 'toast-icon' },
-        [statusIcon, title]
+        [statusIcon, title],
       );
       return titleWithIcon;
     },
     $_BVToastMixin_createBody(messageBody) {
       if (Array.isArray(messageBody)) {
         return messageBody.map((message) =>
-          this.$createElement('p', { class: 'mb-0' }, message)
+          this.$createElement('p', { class: 'mb-0' }, message),
         );
       } else {
         return [this.$createElement('p', { class: 'mb-0' }, messageBody)];
@@ -40,7 +40,7 @@ const BVToastMixin = {
             },
           },
         },
-        this.$t('global.action.refresh')
+        this.$t('global.action.refresh'),
       );
     },
     $_BVToastMixin_initToast(body, title, variant) {
@@ -61,7 +61,7 @@ const BVToastMixin = {
         title: t = this.$t('global.status.success'),
         timestamp,
         refreshAction,
-      } = {}
+      } = {},
     ) {
       const body = this.$_BVToastMixin_createBody(message);
       const title = this.$_BVToastMixin_createTitle(t, 'success');
@@ -75,7 +75,7 @@ const BVToastMixin = {
         title: t = this.$t('global.status.error'),
         timestamp,
         refreshAction,
-      } = {}
+      } = {},
     ) {
       const body = this.$_BVToastMixin_createBody(message);
       const title = this.$_BVToastMixin_createTitle(t, 'danger');
@@ -89,7 +89,7 @@ const BVToastMixin = {
         title: t = this.$t('global.status.warning'),
         timestamp,
         refreshAction,
-      } = {}
+      } = {},
     ) {
       const body = this.$_BVToastMixin_createBody(message);
       const title = this.$_BVToastMixin_createTitle(t, 'warning');
@@ -103,7 +103,7 @@ const BVToastMixin = {
         title: t = this.$t('global.status.informational'),
         timestamp,
         refreshAction,
-      } = {}
+      } = {},
     ) {
       const body = this.$_BVToastMixin_createBody(message);
       const title = this.$_BVToastMixin_createTitle(t, 'info');

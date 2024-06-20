@@ -202,7 +202,7 @@ export default {
         `wss://${window.location.host}${device.websocket}`,
         device.file,
         device.id,
-        token
+        token,
       );
       device.nbd.socketStarted = () =>
         this.successToast(this.$t('pageVirtualMedia.toast.serverRunning'));
@@ -211,11 +211,11 @@ export default {
       device.nbd.socketClosed = (code) => {
         if (code === 1000)
           this.successToast(
-            this.$t('pageVirtualMedia.toast.serverClosedSuccessfully')
+            this.$t('pageVirtualMedia.toast.serverClosedSuccessfully'),
           );
         else
           this.errorToast(
-            this.$t('pageVirtualMedia.toast.serverClosedWithErrors')
+            this.$t('pageVirtualMedia.toast.serverClosedWithErrors'),
           );
         device.file = null;
         device.isActive = false;
@@ -261,7 +261,7 @@ export default {
         .then(() => {
           this.$store.state.virtualMedia.legacyStarted = ++this.legacyStarted;
           this.successToast(
-            this.$t('pageVirtualMedia.toast.serverConnectionEstablished')
+            this.$t('pageVirtualMedia.toast.serverConnectionEstablished'),
           );
           connectionData.isActive = true;
         })
@@ -277,7 +277,7 @@ export default {
         .then(() => {
           this.$store.state.virtualMedia.legacyStarted = --this.legacyStarted;
           this.successToast(
-            this.$t('pageVirtualMedia.toast.serverClosedSuccessfully')
+            this.$t('pageVirtualMedia.toast.serverClosedSuccessfully'),
           );
           connectionData.isActive = false;
           connectionData.password = '';

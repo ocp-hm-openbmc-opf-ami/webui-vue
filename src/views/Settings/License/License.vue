@@ -138,21 +138,21 @@ export default {
     },
     initprocessdata() {
       this.valueAllData = this.$store.getters['license/getLicenseData'];
-      const licenseFeature = this.valueAllData.data.Oem?.Ami.LicenseKey.split(
-        ';'
-      );
+      const licenseFeature =
+        this.valueAllData.data.Oem?.Ami.LicenseKey.split(';');
       this.items = [];
       licenseFeature?.forEach((val) => {
         const licenseVal = val.split(':');
         if (licenseVal[1] != undefined) {
           var validLicenseDays =
             parseInt(
-              licenseVal[1] - this.valueAllData.data.Oem.Ami.ServicesUpCountDays
+              licenseVal[1] -
+                this.valueAllData.data.Oem.Ami.ServicesUpCountDays,
             ) < 0
               ? 0
               : parseInt(
                   licenseVal[1] -
-                    this.valueAllData.data.Oem.Ami.ServicesUpCountDays
+                    this.valueAllData.data.Oem.Ami.ServicesUpCountDays,
                 );
         }
         if (licenseVal[0] != '' && licenseVal[1] != undefined) {
@@ -161,13 +161,14 @@ export default {
             uploadKeyValidity: licenseVal[1],
             validity: parseInt(validLicenseDays),
             userAlertCount: this.valueAllData.data.Oem.Ami.UserAlertCount,
-            ServicesUpCountDays: this.valueAllData.data.Oem.Ami
-              .ServicesUpCountDays,
-            GlobalLicenseValidity: this.valueAllData.data.Oem.Ami
-              .GlobalLicenseValidity,
+            ServicesUpCountDays:
+              this.valueAllData.data.Oem.Ami.ServicesUpCountDays,
+            GlobalLicenseValidity:
+              this.valueAllData.data.Oem.Ami.GlobalLicenseValidity,
           };
           this.items.push(itemAdded);
-          this.userAlertCountValue = this.valueAllData.data.Oem.Ami.UserAlertCount;
+          this.userAlertCountValue =
+            this.valueAllData.data.Oem.Ami.UserAlertCount;
         }
       });
     },
@@ -180,7 +181,7 @@ export default {
           this.$t('pageCertificates.alert.incorrectCertificateFileType'),
           {
             title: this.$t('pageCertificates.toast.errorAddCertificate'),
-          }
+          },
         );
       }
     },

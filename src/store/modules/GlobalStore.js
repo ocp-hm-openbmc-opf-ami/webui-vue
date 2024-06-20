@@ -93,7 +93,7 @@ const GlobalStore = {
     },
     setVirtualMediaServiceEnabledAccess: (
       state,
-      virtualMediaServiceEnabledAccess
+      virtualMediaServiceEnabledAccess,
     ) => {
       state.virtualMediaServiceEnabledAccess = virtualMediaServiceEnabledAccess;
     },
@@ -157,11 +157,11 @@ const GlobalStore = {
             commit('setModelType', Model);
             commit(
               'setVirtualMediaServiceEnabledAccess',
-              VirtualMediaConfig.ServiceEnabled
+              VirtualMediaConfig.ServiceEnabled,
             );
             commit(
               'setkvmServiceEnabledAccess',
-              GraphicalConsole.ServiceEnabled
+              GraphicalConsole.ServiceEnabled,
             );
             if (State === 'Quiesced' || State === 'InTest') {
               // OpenBMC's host state interface is mapped to 2 Redfish
@@ -171,7 +171,7 @@ const GlobalStore = {
             } else {
               commit('setServerStatus', PowerState);
             }
-          }
+          },
         )
         .catch((error) => console.log(error));
     },

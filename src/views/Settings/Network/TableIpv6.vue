@@ -231,7 +231,7 @@ export default {
             this.$tc('pageNetwork.modal.ipv6Confirmation'),
             {
               title: this.$tc('pageNetwork.modal.confirm'),
-            }
+            },
           );
           const data = { dhcpEnable: dhcpEnable, index: this.tabIndex };
           this.$store.commit('network/setIpv6Dhcp', data);

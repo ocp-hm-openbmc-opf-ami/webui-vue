@@ -185,7 +185,7 @@ export default {
                       this.$tc('pageNetwork.modal.informationMessage'),
                       {
                         title: this.$tc('pageNetwork.modal.informatiomTitle'),
-                      }
+                      },
                     )
                     .then((addConfirmed) => {
                       if (addConfirmed) {
@@ -209,7 +209,7 @@ export default {
             this.$tc('pageNetwork.modal.ipv4Confirmation'),
             {
               title: this.$tc('pageNetwork.modal.confirm'),
-            }
+            },
           );
           const data = { dhcpEnable: dhcpEnable, index: this.tabIndex };
           this.$store.commit('network/setIpv4Dhcp', data);

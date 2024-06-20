@@ -281,7 +281,7 @@ export default {
   mounted() {
     this.$root.$on(
       'change-is-navigation-open',
-      (isNavigationOpen) => (this.isNavigationOpen = isNavigationOpen)
+      (isNavigationOpen) => (this.isNavigationOpen = isNavigationOpen),
     );
   },
   methods: {
@@ -308,9 +308,8 @@ export default {
               this.$store
                 .dispatch('authentication/disableTfa')
                 .then(() => {
-                  this.tfaUserEnabled = this.$store.getters[
-                    'authentication/tfaEnabled'
-                  ];
+                  this.tfaUserEnabled =
+                    this.$store.getters['authentication/tfaEnabled'];
                 })
                 .catch(({ message }) => this.errorToast(message))
                 .finally(() => this.endLoader());
@@ -321,9 +320,8 @@ export default {
         this.$store
           .dispatch('authentication/enableTfa')
           .then((response) => {
-            this.tfaUserEnabled = this.$store.getters[
-              'authentication/tfaEnabled'
-            ];
+            this.tfaUserEnabled =
+              this.$store.getters['authentication/tfaEnabled'];
             this.recoveryCode = response.RecoveryCodes;
             this.qrCodeUrl = response.Url;
             this.$bvModal.show('modal-center');
@@ -351,7 +349,9 @@ export default {
 
 <style lang="scss">
 @mixin focus-box-shadow($padding-color: $navbar-color, $outline-color: $white) {
-  box-shadow: inset 0 0 0 3px $padding-color, inset 0 0 0 5px $outline-color;
+  box-shadow:
+    inset 0 0 0 3px $padding-color,
+    inset 0 0 0 5px $outline-color;
 }
 .app-header {
   .link-skip-nav {
@@ -488,7 +488,9 @@ export default {
   height: $header-height;
   line-height: 1;
   &:focus {
-    box-shadow: inset 0 0 0 3px $navbar-color, inset 0 0 0 5px color('white');
+    box-shadow:
+      inset 0 0 0 3px $navbar-color,
+      inset 0 0 0 5px color('white');
     outline: 0;
   }
 }

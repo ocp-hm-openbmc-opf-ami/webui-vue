@@ -55,13 +55,13 @@ export default {
         {
           key: 'upperThresholdCritical',
           label: this.$t(
-            'pageSystemInventory.temperature.upperThresholdCritical'
+            'pageSystemInventory.temperature.upperThresholdCritical',
           ),
         },
         {
           key: 'lowerThresholdCritical',
           label: this.$t(
-            'pageSystemInventory.temperature.lowerThresholdCritical'
+            'pageSystemInventory.temperature.lowerThresholdCritical',
           ),
         },
         {

@@ -20,19 +20,19 @@ const NetworkStore = {
         .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
         .then((response) =>
           response.data.Members.map(
-            (ethernetInterface) => ethernetInterface['@odata.id']
-          )
+            (ethernetInterface) => ethernetInterface['@odata.id'],
+          ),
         )
         .then((ethernetInterfaceIds) =>
           api.all(
             ethernetInterfaceIds.map((ethernetInterface) =>
-              api.get(ethernetInterface)
-            )
-          )
+              api.get(ethernetInterface),
+            ),
+          ),
         )
         .then((ethernetInterfaces) => {
           const vlanAllData = ethernetInterfaces.map(
-            (ethernetInterface) => ethernetInterface.data
+            (ethernetInterface) => ethernetInterface.data,
           );
           commit('setVlanAllData', vlanAllData);
           const vlanTableData = [];
@@ -75,7 +75,7 @@ const NetworkStore = {
     async deleteVlan({ dispatch }, { VirtualInterface }) {
       return await api
         .delete(
-          `/redfish/v1/Managers/bmc/EthernetInterfaces/${VirtualInterface}`
+          `/redfish/v1/Managers/bmc/EthernetInterfaces/${VirtualInterface}`,
         )
         .then(() => dispatch('getEthernetData'))
         .then(() => i18n.t('pageVlan.toast.successDeleteVlan'))

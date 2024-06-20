@@ -47,7 +47,7 @@ export default {
         {
           key: 'operatingSpeedMhz',
           label: this.$t(
-            'pageSystemInventory.memoryController.operatingSpeedMhz'
+            'pageSystemInventory.memoryController.operatingSpeedMhz',
           ),
         },
         {
@@ -57,7 +57,7 @@ export default {
         {
           key: 'allowedSpeedsMHz',
           label: this.$t(
-            'pageSystemInventory.memoryController.allowedSpeedsMHz'
+            'pageSystemInventory.memoryController.allowedSpeedsMHz',
           ),
         },
         {

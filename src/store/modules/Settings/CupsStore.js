@@ -56,33 +56,33 @@ const CupsStore = {
         .then(({ data }) => {
           commit(
             'setStaticCoreLoadFactor',
-            data.StaticLoadFactors?.CoreLoadFactor
+            data.StaticLoadFactors?.CoreLoadFactor,
           );
           commit(
             'setStaticMemoryLoadFactor',
-            data.StaticLoadFactors?.MemoryLoadFactor
+            data.StaticLoadFactors?.MemoryLoadFactor,
           );
           commit(
             'setStaticIioLoadFactor',
-            data.StaticLoadFactors?.IioLoadFactor
+            data.StaticLoadFactors?.IioLoadFactor,
           );
           commit(
             'setDynamicCoreLoadFactor',
             data.DynamicLoadFactors?.CoreLoadFactor
               ? data.DynamicLoadFactors?.CoreLoadFactor.toFixed(4)
-              : 'NA'
+              : 'NA',
           );
           commit(
             'setDynamicMemoryLoadFactor',
             data.DynamicLoadFactors?.MemoryLoadFactor
               ? data.DynamicLoadFactors?.MemoryLoadFactor.toFixed(4)
-              : 'NA'
+              : 'NA',
           );
           commit(
             'setDynamicIioLoadFactor',
             data.DynamicLoadFactors?.IioLoadFactor
               ? data.DynamicLoadFactors?.IioLoadFactor.toFixed(4)
-              : 'NA'
+              : 'NA',
           );
           const intervalString = data.Interval;
           const Interval = parseFloat(intervalString.replace(/[^\d.]/g, ''));
@@ -90,7 +90,7 @@ const CupsStore = {
           commit('setCupsServiceInterval', Interval);
           const averagingPeriodString = data.AveragingPeriod;
           const AveragingPeriod = parseFloat(
-            averagingPeriodString.replace(/[^\d.]/g, '')
+            averagingPeriodString.replace(/[^\d.]/g, ''),
           );
           console.log(AveragingPeriod);
           commit('setCupsServiceAveragingPeriod', AveragingPeriod);
@@ -106,7 +106,7 @@ const CupsStore = {
     },
     async updateCupsService(
       { dispatch },
-      { AveragingPeriod, Interval, LoadFactorConfiguration, StaticLoadFactors }
+      { AveragingPeriod, Interval, LoadFactorConfiguration, StaticLoadFactors },
     ) {
       const data = {};
       if (AveragingPeriod) data.AveragingPeriod = `PT${AveragingPeriod}S`;

@@ -203,7 +203,7 @@ export default {
                     this.$tc('pageFirmware.modal.firmwareResetCalled'),
                     {
                       title: this.$tc('global.action.success'),
-                    }
+                    },
                   )
                   .then((confirmed) => {
                     if (confirmed) {

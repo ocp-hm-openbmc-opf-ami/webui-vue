@@ -293,13 +293,13 @@ export default {
         this.allDumps,
         this.filterStartDate,
         this.filterEndDate,
-        'dateTime'
+        'dateTime',
       );
     },
     filteredDumps() {
       return this.getFilteredTableData(
         this.filteredDumpsByDate,
-        this.activeFilters
+        this.activeFilters,
       );
     },
   },
@@ -355,19 +355,19 @@ export default {
           .msgBoxConfirm(
             this.$tc(
               'pageDumps.modal.deleteDumpConfirmation',
-              this.selectedRows.length
+              this.selectedRows.length,
             ),
             {
               title: this.$tc(
                 'pageDumps.modal.deleteDump',
-                this.selectedRows.length
+                this.selectedRows.length,
               ),
               okTitle: this.$tc(
                 'pageDumps.modal.deleteDump',
-                this.selectedRows.length
+                this.selectedRows.length,
               ),
               cancelTitle: this.$t('global.action.cancel'),
-            }
+            },
           )
           .then((deleteConfrimed) => {
             if (deleteConfrimed) {

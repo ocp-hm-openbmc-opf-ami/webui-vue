@@ -58,7 +58,7 @@ const SystemStore = {
       return await api
         .get('/redfish/v1')
         .then((response) =>
-          api.get(`${response.data.Systems['@odata.id']}/system`)
+          api.get(`${response.data.Systems['@odata.id']}/system`),
         )
         .then(({ data }) => {
           commit('setSystemInfo', data);
@@ -83,11 +83,11 @@ const SystemStore = {
           console.log('error', error);
           if (ledState) {
             throw new Error(
-              i18n.t('pageInventory.toast.errorEnableIdentifyLed')
+              i18n.t('pageInventory.toast.errorEnableIdentifyLed'),
             );
           } else {
             throw new Error(
-              i18n.t('pageInventory.toast.errorDisableIdentifyLed')
+              i18n.t('pageInventory.toast.errorDisableIdentifyLed'),
             );
           }
         });

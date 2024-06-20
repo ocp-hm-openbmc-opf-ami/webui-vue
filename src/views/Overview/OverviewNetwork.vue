@@ -37,7 +37,7 @@
               dataFormatter(
                 network.dhcpAddress.length !== 0
                   ? network.dhcpAddress[0].Address
-                  : null
+                  : null,
               )
             }}
           </dd>
@@ -67,7 +67,7 @@ export default {
             if (network.id == 'eth0') {
               networkData = network;
             }
-          }
+          },
         );
       }
       return networkData;

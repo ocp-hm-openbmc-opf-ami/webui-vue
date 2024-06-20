@@ -113,7 +113,7 @@ export default {
     window.removeEventListener('resize', this.resizeConsoleWindow);
     window.removeEventListener(
       'beforeunload',
-      this.handleChildWindowBeforeUnload
+      this.handleChildWindowBeforeUnload,
     );
     clearInterval(this.intervalId);
     this.closeTerminal();
@@ -164,7 +164,7 @@ export default {
             'websocket console0/ closed. code: ' +
               event.code +
               ' reason: ' +
-              event.reason
+              event.reason,
           );
         };
       } catch (error) {
@@ -205,7 +205,7 @@ export default {
       window.isConsoleWindow = window.open(
         '#/console/serial-over-lan-console',
         '_blank',
-        'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=600,height=550'
+        'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=600,height=550',
       );
       this.timeTrack();
       this.disable = true;

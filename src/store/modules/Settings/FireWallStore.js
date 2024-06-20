@@ -22,7 +22,7 @@ const FireWallStore = {
           state.FirstInterfaceId = response.data.Members[0]['@odata.id'];
         })
         .then(() =>
-          api.get(`${state.FirstInterfaceId}/Oem/Ami/GetFirewallRules`)
+          api.get(`${state.FirstInterfaceId}/Oem/Ami/GetFirewallRules`),
         )
         .then((firewallallRules) => {
           commit('setFireWallData', firewallallRules);
@@ -33,7 +33,7 @@ const FireWallStore = {
       return await api
         .post(
           `${state.FirstInterfaceId}/Actions/Oem/Ami/EthernetInterface.AddFirewallRules`,
-          data
+          data,
         )
         .then(() => dispatch('getFireWallData'))
         .then(() => i18n.t('pageFireWall.toast.successSaveFireWall'))
@@ -44,7 +44,7 @@ const FireWallStore = {
             error.response.data['StartTime@Message.ExtendedInfo']
           ) {
             throw new Error(
-              i18n.t('pageFireWall.toast.errorDateOrTimeSaveFireWall')
+              i18n.t('pageFireWall.toast.errorDateOrTimeSaveFireWall'),
             );
           } else {
             throw new Error(i18n.t('pageFireWall.toast.errorSaveFireWall'));
@@ -55,7 +55,7 @@ const FireWallStore = {
       return await api
         .post(
           `${state.FirstInterfaceId}/Actions/Oem/Ami/EthernetInterface.DeleteFirewallRules`,
-          items
+          items,
         )
         .then(() => dispatch('getFireWallData'))
         .then(() => i18n.t('pageFireWall.toast.successDeleteFireWall'))
@@ -67,7 +67,7 @@ const FireWallStore = {
       return await api
         .post(
           `${state.FirstInterfaceId}/Actions/Oem/Ami/EthernetInterface.FlushFirewallRules`,
-          items
+          items,
         )
         .then(() => dispatch('getFireWallData'))
         .then(() => i18n.t('pageFireWall.toast.successDeleteFireWall'))

@@ -308,16 +308,16 @@ export default {
           .msgBoxConfirm(
             this.$tc(
               'pageSessions.modal.disconnectMessage',
-              this.selectedRows.length
+              this.selectedRows.length,
             ),
             {
               title: this.$tc(
                 'pageSessions.modal.disconnectTitle',
-                this.selectedRows.length
+                this.selectedRows.length,
               ),
               okTitle: this.$t('pageSessions.action.delete'),
               cancelTitle: this.$t('global.action.cancel'),
-            }
+            },
           )
           .then((deleteConfirmed) => {
             if (deleteConfirmed) {

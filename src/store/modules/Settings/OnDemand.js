@@ -38,25 +38,25 @@ const OnDemand = {
                       response.data?.Oem?.Intel?.MeteringFeature['@odata.id'];
                     const MeteringFeatureData = await dispatch(
                       'getMeteringFeature',
-                      MeteringFeatureUrl
+                      MeteringFeatureUrl,
                     );
                     const StateFeatureUrl =
                       response.data?.Oem?.Intel?.StateFeature['@odata.id'];
                     const StateFeatureData = await dispatch(
                       'getStateFeature',
-                      StateFeatureUrl
+                      StateFeatureUrl,
                     );
                     const DynamicFeatureUrl =
                       response.data?.Oem?.Intel?.DynamicFeature['@odata.id'];
                     const DynamicFeatureData = await dispatch(
                       'getDynamicFeature',
-                      DynamicFeatureUrl
+                      DynamicFeatureUrl,
                     );
                     const ProvisionFeatureUrl =
                       response.data?.Oem?.Intel?.ProvisionFeature['@odata.id'];
                     const ProvisionFeatureData = await dispatch(
                       'getProvisionFeature',
-                      ProvisionFeatureUrl
+                      ProvisionFeatureUrl,
                     );
                     tableVariants.push(response.data.Id);
                     Processors.Name = response.data.Id;
@@ -78,7 +78,7 @@ const OnDemand = {
             } else {
               commit(
                 'setOndemand',
-                i18n.t('pageOnDemand.toast.errorGettingCpus')
+                i18n.t('pageOnDemand.toast.errorGettingCpus'),
               );
               state.loader = true;
             }
@@ -89,7 +89,7 @@ const OnDemand = {
           console.log(err);
           state.loader = true;
           throw new Error(
-            i18n.t('pageOnDemand.toast.errorShowingOnDemandInfo')
+            i18n.t('pageOnDemand.toast.errorShowingOnDemandInfo'),
           );
         });
     },
@@ -156,25 +156,25 @@ const OnDemand = {
             response.data.Oem.Intel.MeteringFeature['@odata.id'];
           const MeteringFeatureData = await dispatch(
             'getMeteringFeature',
-            MeteringFeatureUrl
+            MeteringFeatureUrl,
           );
           const StateFeatureUrl =
             response.data.Oem.Intel.StateFeature['@odata.id'];
           const StateFeatureData = await dispatch(
             'getMeteringFeature',
-            StateFeatureUrl
+            StateFeatureUrl,
           );
           const DynamicFeatureUrl =
             response.data?.Oem?.Intel?.DynamicFeature['@odata.id'];
           const DynamicFeatureData = await dispatch(
             'getDynamicFeature',
-            DynamicFeatureUrl
+            DynamicFeatureUrl,
           );
           const ProvisionFeatureUrl =
             response.data?.Oem?.Intel?.ProvisionFeature['@odata.id'];
           const ProvisionFeatureData = await dispatch(
             'getProvisionFeature',
-            ProvisionFeatureUrl
+            ProvisionFeatureUrl,
           );
           Processors.Name = response.data.Id;
           Processors.MeteringFeature = MeteringFeatureData.FeatureStatus;
@@ -188,7 +188,7 @@ const OnDemand = {
           console.log(error);
           commit('setOndemand', '');
           throw new Error(
-            i18n.t('pageOnDemand.toast.errorShowingOnDemandInfo')
+            i18n.t('pageOnDemand.toast.errorShowingOnDemandInfo'),
           );
         });
     },

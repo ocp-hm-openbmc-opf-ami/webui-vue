@@ -48,7 +48,7 @@ const KvmStore = {
         /* Get the current browser display language and set it as keyboard
          * layout value */
         // TODO: remove this after menu implementation
-        window.navigator.language.toLocaleLowerCase()
+        window.navigator.language.toLocaleLowerCase(),
       );
       return await api
         .get('/kvm/kvmActiveStatus')

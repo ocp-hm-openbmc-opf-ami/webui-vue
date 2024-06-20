@@ -17,7 +17,7 @@ export const CERTIFICATE_TYPES = [
 ];
 const getCertificateProp = (type, prop) => {
   const certificate = CERTIFICATE_TYPES.find(
-    (certificate) => certificate.type === type
+    (certificate) => certificate.type === type,
   );
   return certificate ? certificate[prop] : null;
 };
@@ -203,7 +203,7 @@ const SmtpStore = {
       return await api
         .post(
           '/redfish/v1/PefService/Actions/PefService.SendAlertMail',
-          properties
+          properties,
         )
         .then(() => i18n.t('pageSmtp.toast.successMsgTestAlert'))
         .catch(() => {

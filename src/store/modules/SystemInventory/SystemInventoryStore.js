@@ -42,9 +42,10 @@ const SystemInventoryStore = {
       (state.basebordInfoNetworkinterfaces = basebordInfoNetworkinterfaces),
     setBasebordInfoNetworkInterfacesIpv6: (
       state,
-      basebordInfoNetworkInterfacesIpv6
+      basebordInfoNetworkInterfacesIpv6,
     ) =>
-      (state.basebordInfoNetworkInterfacesIpv6 = basebordInfoNetworkInterfacesIpv6),
+      (state.basebordInfoNetworkInterfacesIpv6 =
+        basebordInfoNetworkInterfacesIpv6),
     setPcieDevice: (state, pcieDevice) => (state.pcieDevice = pcieDevice),
     setPcieFunction: (state, pcieFunction) =>
       (state.pcieFunction = pcieFunction),
@@ -67,8 +68,8 @@ const SystemInventoryStore = {
           systemData.indicatorLED = response.data?.LocationIndicatorActive
             ? response.data?.LocationIndicatorActive
             : response.data?.LocationIndicatorActive === false
-            ? response.data?.LocationIndicatorActive
-            : 'NA';
+              ? response.data?.LocationIndicatorActive
+              : 'NA';
           systemData.manufacturer = response.data?.Manufacturer
             ? response.data?.Manufacturer
             : 'NA';
@@ -100,7 +101,7 @@ const SystemInventoryStore = {
       return await api
         .get('/redfish/v1/Systems/system/Processors')
         .then(({ data: { Members = [] } = {} }) =>
-          Members.map((member) => api.get(member['@odata.id']))
+          Members.map((member) => api.get(member['@odata.id'])),
         )
         .then((promises) => api.all(promises))
         .then((response) => {
@@ -112,8 +113,8 @@ const SystemInventoryStore = {
               maxSpeedMHz: data.MaxSpeedMHz
                 ? data.MaxSpeedMHz
                 : data.MaxSpeedMHz === 0 || 0.0
-                ? data.MaxSpeedMHz
-                : 'NA',
+                  ? data.MaxSpeedMHz
+                  : 'NA',
               model: data.Model ? data.Model : 'NA',
               processorArchitecture: data.ProcessorArchitecture
                 ? data.ProcessorArchitecture
@@ -132,7 +133,7 @@ const SystemInventoryStore = {
       return await api
         .get('/redfish/v1/Systems/system/Memory')
         .then(({ data: { Members = [] } = {} }) =>
-          Members.map((member) => api.get(member['@odata.id']))
+          Members.map((member) => api.get(member['@odata.id'])),
         )
         .then((promises) => api.all(promises))
         .then((response) => {
@@ -143,8 +144,8 @@ const SystemInventoryStore = {
               capacityMiB: data.CapacityMiB
                 ? data.CapacityMiB
                 : data.CapacityMiB === 0 || 0.0
-                ? data.CapacityMiB
-                : 'NA',
+                  ? data.CapacityMiB
+                  : 'NA',
               manufacturer: data.Manufacturer ? data.Manufacturer : 'NA',
               serialNumuber: data.SerialNumber ? data.SerialNumber : 'NA',
               partNumuber: data.PartNumber ? data.PartNumber : 'NA',
@@ -152,8 +153,8 @@ const SystemInventoryStore = {
               operatingSpeedMhz: data.OperatingSpeedMhz
                 ? data.OperatingSpeedMhz
                 : data.OperatingSpeedMhz === 0 || 0.0
-                ? data.OperatingSpeedMhz
-                : 'NA',
+                  ? data.OperatingSpeedMhz
+                  : 'NA',
               memoryType: data.MemoryType ? data.MemoryType : 'NA',
               allowedSpeedsMHz: data.AllowedSpeedsMHz
                 ? data.AllowedSpeedsMHz
@@ -178,8 +179,8 @@ const SystemInventoryStore = {
             ?.LocationIndicatorActive
             ? response.data?.LocationIndicatorActive
             : response.data?.LocationIndicatorActive === false
-            ? response.data?.LocationIndicatorActive
-            : 'NA';
+              ? response.data?.LocationIndicatorActive
+              : 'NA';
           baseBoard.indicatorLED = response.data?.IndicatorLED
             ? response.data?.IndicatorLED
             : 'NA';
@@ -213,15 +214,15 @@ const SystemInventoryStore = {
         .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
         .then((response) =>
           response.data.Members.map(
-            (ethernetInterface) => ethernetInterface['@odata.id']
-          )
+            (ethernetInterface) => ethernetInterface['@odata.id'],
+          ),
         )
         .then((ethernetInterfaceIds) =>
           api.all(
             ethernetInterfaceIds.map((ethernetInterface) =>
-              api.get(ethernetInterface)
-            )
-          )
+              api.get(ethernetInterface),
+            ),
+          ),
         )
         .then((ethernetInterfaces) => {
           ethernetInterfaces.forEach(({ data }) => {
@@ -248,15 +249,15 @@ const SystemInventoryStore = {
         .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
         .then((response) =>
           response.data.Members.map(
-            (ethernetInterface) => ethernetInterface['@odata.id']
-          )
+            (ethernetInterface) => ethernetInterface['@odata.id'],
+          ),
         )
         .then((ethernetInterfaceIds) =>
           api.all(
             ethernetInterfaceIds.map((ethernetInterface) =>
-              api.get(ethernetInterface)
-            )
-          )
+              api.get(ethernetInterface),
+            ),
+          ),
         )
         .then((ethernetInterfaces) => {
           ethernetInterfaces.forEach(({ data }) => {
@@ -269,8 +270,8 @@ const SystemInventoryStore = {
                   ? ipv6.AddressOrigin === 'SLAAC'
                     ? 'Global'
                     : ipv6.AddressOrigin === 'LinkLocal'
-                    ? 'LinkLocal'
-                    : ''
+                      ? 'LinkLocal'
+                      : ''
                   : 'NA',
               };
               ipv6AddressInfo.push(ipv6Address);
@@ -284,7 +285,7 @@ const SystemInventoryStore = {
       return await api
         .get('/redfish/v1/Systems/system/PCIeDevices')
         .then(({ data: { Members = [] } = {} }) =>
-          Members.map((member) => api.get(member['@odata.id']))
+          Members.map((member) => api.get(member['@odata.id'])),
         )
         .then((promises) => api.all(promises))
         .then((response) => {
@@ -304,11 +305,11 @@ const SystemInventoryStore = {
       return await api
         .get('/redfish/v1/Systems/system/PCIeDevices')
         .then(({ data: { Members = [] } = {} }) =>
-          Members.map((member) => api.get(member['@odata.id']))
+          Members.map((member) => api.get(member['@odata.id'])),
         )
         .then((promises) => api.all(promises))
         .then((response) =>
-          response.map(({ data }) => api.get(data.PCIeFunctions['@odata.id']))
+          response.map(({ data }) => api.get(data.PCIeFunctions['@odata.id'])),
         )
         .then((promises) => api.all(promises))
         .then((response) => {
@@ -336,8 +337,8 @@ const SystemInventoryStore = {
                   functionId: pcieFunction.data?.FunctionId
                     ? pcieFunction.data?.FunctionId
                     : pcieFunction.data?.FunctionId === 0
-                    ? pcieFunction.data?.FunctionId
-                    : 'NA',
+                      ? pcieFunction.data?.FunctionId
+                      : 'NA',
                   functionType: pcieFunction.data?.FunctionType
                     ? pcieFunction.data?.FunctionType
                     : 'NA',
@@ -349,7 +350,7 @@ const SystemInventoryStore = {
                     : 'NA',
                 };
                 return PcieResponse;
-              })
+              }),
           );
           return Promise.all(PciePromises).then((pcieFunctionInfo) => {
             commit('setPcieFunction', pcieFunctionInfo);
@@ -365,14 +366,14 @@ const SystemInventoryStore = {
         })
         .then(({ data: { Members } }) => {
           const promises = Members.map((member) =>
-            api.get(member['@odata.id'])
+            api.get(member['@odata.id']),
           );
           return api.all(promises);
         })
         .then((response) => {
           const data = response.map(({ data }) => data);
           const promises = data.map((member) =>
-            api.get(member.SpeedPercent.DataSourceUri)
+            api.get(member.SpeedPercent.DataSourceUri),
           );
           return api.all(promises);
         })
@@ -384,18 +385,18 @@ const SystemInventoryStore = {
               readingRPM: data.Reading
                 ? data.Reading
                 : data.Reading === 0 || 0.0
-                ? data.Reading
-                : 'NA',
+                  ? data.Reading
+                  : 'NA',
               minReadingRange: data.ReadingRangeMin
                 ? data.ReadingRangeMin
                 : data.ReadingRangeMin === 0 || 0.0
-                ? data.ReadingRangeMin
-                : 'NA',
+                  ? data.ReadingRangeMin
+                  : 'NA',
               maxReadingRange: data.ReadingRangeMax
                 ? data.ReadingRangeMax
                 : data.ReadingRangeMax === 0 || 0.0
-                ? data.ReadingRangeMax
-                : 'NA',
+                  ? data.ReadingRangeMax
+                  : 'NA',
             };
           });
           commit('setFans', thermalFanInfo);
@@ -410,7 +411,7 @@ const SystemInventoryStore = {
         })
         .then(({ data: { Members } }) => {
           const promises = Members.map((member) =>
-            api.get(member['@odata.id'])
+            api.get(member['@odata.id']),
           );
           return api.all(promises);
         })
@@ -424,8 +425,8 @@ const SystemInventoryStore = {
               powerCapacityWatts: data.PowerCapacityWatts
                 ? data.PowerCapacityWatts
                 : data.PowerCapacityWatts === 0 || 0.0
-                ? data.PowerCapacityWatts
-                : 'NA',
+                  ? data.PowerCapacityWatts
+                  : 'NA',
               PowerSupplyType: data.PowerSupplyType
                 ? data.PowerSupplyType
                 : 'NA',
@@ -442,7 +443,7 @@ const SystemInventoryStore = {
         .get('/redfish/v1/Chassis/AC_Baseboard/Sensors')
         .then(({ data: { Members = [] } = {} }) => {
           const promises = Members.filter((member) =>
-            member['@odata.id'].includes('temperature')
+            member['@odata.id'].includes('temperature'),
           ).map((member) => api.get(member['@odata.id']));
           return api.all(promises);
         })
@@ -457,39 +458,39 @@ const SystemInventoryStore = {
               reading: data.Reading
                 ? data.Reading
                 : data.Reading === 0 || 0.0
-                ? data.Reading
-                : 'NA',
+                  ? data.Reading
+                  : 'NA',
               readingRangeMin: data.ReadingRangeMin
                 ? data.ReadingRangeMin
                 : data.ReadingRangeMin === 0 || 0.0
-                ? data.ReadingRangeMin
-                : 'NA',
+                  ? data.ReadingRangeMin
+                  : 'NA',
               readingRangeMax: data.ReadingRangeMax
                 ? data.ReadingRangeMax
                 : data.ReadingRangeMax === 0 || 0.0
-                ? data.ReadingRangeMax
-                : 'NA',
+                  ? data.ReadingRangeMax
+                  : 'NA',
               readingType: data.ReadingType ? data.ReadingType : 'NA',
               upperThresholdFatal: data.Thresholds?.UpperCaution?.Reading
                 ? data.Thresholds?.UpperCaution?.Reading
                 : data.Thresholds?.UpperCaution?.Reading === 0 || 0.0
-                ? data.Thresholds?.UpperCaution?.Reading
-                : 'NA',
+                  ? data.Thresholds?.UpperCaution?.Reading
+                  : 'NA',
               upperThresholdCritical: data.Thresholds?.UpperCritical?.Reading
                 ? data.Thresholds?.UpperCritical?.Reading
                 : data.Thresholds?.UpperCritical?.Reading === 0 || 0.0
-                ? data.Thresholds?.UpperCritical?.Reading
-                : 'NA',
+                  ? data.Thresholds?.UpperCritical?.Reading
+                  : 'NA',
               lowerThresholdCritical: data.Thresholds?.LowerCritical?.Reading
                 ? data.Thresholds?.LowerCritical?.Reading
                 : data.Thresholds?.LowerCritical?.Reading === 0 || 0.0
-                ? data.Thresholds?.LowerCritical?.Reading
-                : 'NA',
+                  ? data.Thresholds?.LowerCritical?.Reading
+                  : 'NA',
               lowerThresholdFatal: data.Thresholds?.LowerCaution?.Reading
                 ? data.Thresholds?.LowerCaution?.Reading
                 : data.Thresholds?.LowerCaution?.Reading === 0 || 0.0
-                ? data.Thresholds?.LowerCaution?.Reading
-                : 'NA',
+                  ? data.Thresholds?.LowerCaution?.Reading
+                  : 'NA',
               state: data.Status?.State ? data.Status?.State : 'NA',
             };
           });
@@ -502,7 +503,7 @@ const SystemInventoryStore = {
         .get('/redfish/v1/Chassis/AC_Baseboard/Sensors')
         .then(({ data: { Members = [] } = {} }) => {
           const promises = Members.filter((member) =>
-            member['@odata.id'].includes('voltage')
+            member['@odata.id'].includes('voltage'),
           ).map((member) => api.get(member['@odata.id']));
           return api.all(promises);
         })
@@ -514,39 +515,39 @@ const SystemInventoryStore = {
               reading: data.Reading
                 ? data.Reading
                 : data.Reading === 0 || 0.0
-                ? data.Reading
-                : 'NA',
+                  ? data.Reading
+                  : 'NA',
               readingRangeMin: data.ReadingRangeMin
                 ? data.ReadingRangeMin
                 : data.ReadingRangeMin === 0 || 0.0
-                ? data.ReadingRangeMin
-                : 'NA',
+                  ? data.ReadingRangeMin
+                  : 'NA',
               readingRangeMax: data.ReadingRangeMax
                 ? data.ReadingRangeMax
                 : data.ReadingRangeMax === 0 || 0.0
-                ? data.ReadingRangeMax
-                : 'NA',
+                  ? data.ReadingRangeMax
+                  : 'NA',
               readingType: data.ReadingType ? data.ReadingType : 'NA',
               upperThresholdFatal: data.Thresholds?.UpperCaution?.Reading
                 ? data.Thresholds?.UpperCaution?.Reading
                 : data.Thresholds?.UpperCaution?.Reading === 0 || 0.0
-                ? data.Thresholds?.UpperCaution?.Reading
-                : 'NA',
+                  ? data.Thresholds?.UpperCaution?.Reading
+                  : 'NA',
               upperThresholdCritical: data.Thresholds?.UpperCritical?.Reading
                 ? data.Thresholds?.UpperCritical?.Reading
                 : data.Thresholds?.UpperCritical?.Reading === 0 || 0.0
-                ? data.Thresholds?.UpperCritical?.Reading
-                : 'NA',
+                  ? data.Thresholds?.UpperCritical?.Reading
+                  : 'NA',
               lowerThresholdCritical: data.Thresholds?.LowerCritical?.Reading
                 ? data.Thresholds?.LowerCritical?.Reading
                 : data.Thresholds?.LowerCritical?.Reading === 0 || 0.0
-                ? data.Thresholds?.LowerCritical?.Reading
-                : 'NA',
+                  ? data.Thresholds?.LowerCritical?.Reading
+                  : 'NA',
               lowerThresholdFatal: data.Thresholds?.LowerCaution?.Reading
                 ? data.Thresholds?.LowerCaution?.Reading
                 : data.Thresholds?.LowerCaution?.Reading === 0 || 0.0
-                ? data.Thresholds?.LowerCaution?.Reading
-                : 'NA',
+                  ? data.Thresholds?.LowerCaution?.Reading
+                  : 'NA',
               state: data.Status?.State ? data.Status?.State : 'NA',
             };
           });

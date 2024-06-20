@@ -64,7 +64,7 @@ export default {
   created() {
     this.startLoader();
     Promise.all([this.$store.dispatch('vlan/getEthernetData')]).finally(() =>
-      this.endLoader()
+      this.endLoader(),
     );
   },
   methods: {

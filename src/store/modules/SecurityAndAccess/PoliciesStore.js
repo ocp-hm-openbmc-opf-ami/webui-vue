@@ -140,7 +140,7 @@ const PoliciesStore = {
         .then((response) => {
           const sessionTimeoutValue = response.data.SessionTimeout;
           const kvmSessionTimeoutValue = Math.floor(
-            response.data?.Oem?.OpenBmc?.KVMSessionTimeout / 60
+            response.data?.Oem?.OpenBmc?.KVMSessionTimeout / 60,
           );
           const kvmPortValue = response.data?.Oem?.OpenBmc?.BMCwebPort;
           commit('setSessionTimeoutValue', sessionTimeoutValue);

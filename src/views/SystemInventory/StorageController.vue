@@ -34,7 +34,7 @@ export default {
         {
           key: 'firmwareVersion',
           label: this.$t(
-            'pageSystemInventory.storageController.firmwareVersion'
+            'pageSystemInventory.storageController.firmwareVersion',
           ),
         },
         {

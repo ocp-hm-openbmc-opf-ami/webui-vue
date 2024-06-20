@@ -52,7 +52,7 @@ const checkForServerStatus = function (serverStatus, isKvm) {
           unwatch();
           clearTimeout(timer);
         }
-      }
+      },
     );
   });
 };

@@ -57,10 +57,10 @@ const UserManagementStore = {
       return await api
         .get('/redfish/v1/SessionService/Sessions')
         .then((response) =>
-          response.data.Members.map((sessionLogs) => sessionLogs['@odata.id'])
+          response.data.Members.map((sessionLogs) => sessionLogs['@odata.id']),
         )
         .then((sessionUris) =>
-          api.all(sessionUris.map((sessionUri) => api.get(sessionUri)))
+          api.all(sessionUris.map((sessionUri) => api.get(sessionUri))),
         )
         .then((sessionUris) => {
           const allSessionsData = sessionUris.map((sessionUri) => {
@@ -76,7 +76,7 @@ const UserManagementStore = {
       return await api
         .get('/redfish/v1/AccountService/Accounts')
         .then((response) =>
-          response.data.Members.map((user) => user['@odata.id'])
+          response.data.Members.map((user) => user['@odata.id']),
         )
         .then((userIds) => {
           const userRequests = userIds.map((user) => {
@@ -111,7 +111,7 @@ const UserManagementStore = {
         .catch((error) => {
           console.log(error);
           const message = i18n.t(
-            'pageUserManagement.toast.errorLoadAccountSettings'
+            'pageUserManagement.toast.errorLoadAccountSettings',
           );
           throw new Error(message);
         });
@@ -136,7 +136,7 @@ const UserManagementStore = {
         status,
         PasswordChangeRequired,
         vmediaAccess,
-      }
+      },
     ) {
       const data = {
         UserName: username,
@@ -152,7 +152,7 @@ const UserManagementStore = {
         .then(() =>
           i18n.t('pageUserManagement.toast.successCreateUser', {
             username,
-          })
+          }),
         )
         .catch(async (error) => {
           console.log(error);
@@ -172,7 +172,7 @@ const UserManagementStore = {
         // PasswordChangeRequired,
         routerPath,
         vmediaAccess,
-      }
+      },
     ) {
       const data = {};
       const globalPrivilege = store.getters.userPrivilege(store.state);
@@ -221,7 +221,7 @@ const UserManagementStore = {
         .then(() =>
           i18n.t('pageUserManagement.toast.successDeleteUser', {
             username,
-          })
+          }),
         )
         .catch((error) => {
           console.log(error);
@@ -254,7 +254,7 @@ const UserManagementStore = {
             if (successCount) {
               const message = i18n.tc(
                 'pageUserManagement.toast.successBatchDelete',
-                successCount
+                successCount,
               );
               toastMessages.push({ type: 'success', message });
             }
@@ -262,13 +262,13 @@ const UserManagementStore = {
             if (errorCount) {
               const message = i18n.tc(
                 'pageUserManagement.toast.errorBatchDelete',
-                errorCount
+                errorCount,
               );
               toastMessages.push({ type: 'error', message });
             }
 
             return toastMessages;
-          })
+          }),
         );
     },
     async enableUsers({ dispatch }, users) {
@@ -297,7 +297,7 @@ const UserManagementStore = {
             if (successCount) {
               const message = i18n.tc(
                 'pageUserManagement.toast.successBatchEnable',
-                successCount
+                successCount,
               );
               toastMessages.push({ type: 'success', message });
             }
@@ -305,13 +305,13 @@ const UserManagementStore = {
             if (errorCount) {
               const message = i18n.tc(
                 'pageUserManagement.toast.errorBatchEnable',
-                errorCount
+                errorCount,
               );
               toastMessages.push({ type: 'error', message });
             }
 
             return toastMessages;
-          })
+          }),
         );
     },
     async disableUsers({ dispatch }, users) {
@@ -340,7 +340,7 @@ const UserManagementStore = {
             if (successCount) {
               const message = i18n.tc(
                 'pageUserManagement.toast.successBatchDisable',
-                successCount
+                successCount,
               );
               toastMessages.push({ type: 'success', message });
             }
@@ -348,18 +348,18 @@ const UserManagementStore = {
             if (errorCount) {
               const message = i18n.tc(
                 'pageUserManagement.toast.errorBatchDisable',
-                errorCount
+                errorCount,
               );
               toastMessages.push({ type: 'error', message });
             }
 
             return toastMessages;
-          })
+          }),
         );
     },
     async saveAccountSettings(
       { dispatch },
-      { lockoutThreshold, lockoutDuration }
+      { lockoutThreshold, lockoutDuration },
     ) {
       const data = {};
       if (lockoutThreshold !== undefined) {
@@ -396,7 +396,7 @@ const UserManagementStore = {
               {
                 username,
                 originalUsername,
-              }
+              },
             );
             return errorMessage;
           }
@@ -407,7 +407,7 @@ const UserManagementStore = {
           'pageUserManagement.toast.errorCreateUser',
           {
             username,
-          }
+          },
         );
         return errorMessage;
       }
@@ -416,7 +416,7 @@ const UserManagementStore = {
           'pageUserManagement.toast.errorUpdateUser',
           {
             username: originalUsername,
-          }
+          },
         );
         return errorMessage;
       }

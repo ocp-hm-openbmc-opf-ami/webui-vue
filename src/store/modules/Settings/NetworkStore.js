@@ -48,7 +48,7 @@ const NetworkStore = {
         return {
           defaultGateway: IPv4StaticAddresses[0]?.Gateway, //First static gateway is the default gateway
           dhcpAddress: IPv4Addresses.filter(
-            (ipv4) => ipv4.AddressOrigin === 'DHCP'
+            (ipv4) => ipv4.AddressOrigin === 'DHCP',
           ),
           hostname: HostName,
           macAddress: MACAddress,
@@ -75,19 +75,19 @@ const NetworkStore = {
         .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
         .then((response) =>
           response.data.Members.map(
-            (ethernetInterface) => ethernetInterface['@odata.id']
-          )
+            (ethernetInterface) => ethernetInterface['@odata.id'],
+          ),
         )
         .then((ethernetInterfaceIds) =>
           api.all(
             ethernetInterfaceIds.map((ethernetInterface) =>
-              api.get(ethernetInterface)
-            )
-          )
+              api.get(ethernetInterface),
+            ),
+          ),
         )
         .then((ethernetInterfaces) => {
           const ethernetData = ethernetInterfaces.map(
-            (ethernetInterface) => ethernetInterface.data
+            (ethernetInterface) => ethernetInterface.data,
           );
           const firstInterfaceId = ethernetData[0].Id;
           commit('setEthernetData', ethernetData);
@@ -111,7 +111,7 @@ const NetworkStore = {
       return api
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.firstInterfaceId}`,
-          data
+          data,
         )
         .then(() => {
           return i18n.t('pageNetwork.toast.successSaveNetworkSettings', {
@@ -124,7 +124,7 @@ const NetworkStore = {
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.domainName'),
-            })
+            }),
           );
         });
     },
@@ -140,7 +140,7 @@ const NetworkStore = {
       return api
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.firstInterfaceId}`,
-          data
+          data,
         )
         .then(() => {
           return i18n.t('pageNetwork.toast.successSaveNetworkSettings', {
@@ -153,7 +153,7 @@ const NetworkStore = {
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.dns'),
-            })
+            }),
           );
         });
     },
@@ -169,7 +169,7 @@ const NetworkStore = {
       return api
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.firstInterfaceId}`,
-          data
+          data,
         )
         .then(() => {
           return i18n.t('pageNetwork.toast.successSaveNetworkSettings', {
@@ -182,7 +182,7 @@ const NetworkStore = {
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.ntp'),
-            })
+            }),
           );
         });
     },
@@ -207,7 +207,7 @@ const NetworkStore = {
       return api
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
-          { IPv4StaticAddresses: originalAddresses.concat(newAddress) }
+          { IPv4StaticAddresses: originalAddresses.concat(newAddress) },
         )
         .then(dispatch('getEthernetData'))
         .then(() => {
@@ -220,7 +220,7 @@ const NetworkStore = {
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.ipv4'),
-            })
+            }),
           );
         });
     },
@@ -234,7 +234,7 @@ const NetworkStore = {
       return api
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
-          DHCPv4
+          DHCPv4,
         )
         .then(dispatch('getEthernetData'))
         .then(() => {
@@ -247,7 +247,7 @@ const NetworkStore = {
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.ipv4'),
-            })
+            }),
           );
         });
     },
@@ -261,7 +261,7 @@ const NetworkStore = {
       return api
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
-          DHCPv6
+          DHCPv6,
         )
         .then(() => {
           return i18n.t('pageNetwork.toast.successSaveNetworkSettings', {
@@ -273,7 +273,7 @@ const NetworkStore = {
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.ipv6'),
-            })
+            }),
           );
         });
     },
@@ -311,7 +311,7 @@ const NetworkStore = {
       return api
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
-          StaticIpv6
+          StaticIpv6,
         )
         .then(() => {
           return i18n.t('pageNetwork.toast.successSaveNetworkSettings', {
@@ -323,7 +323,7 @@ const NetworkStore = {
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.ipv6'),
-            })
+            }),
           );
         });
     },
@@ -341,7 +341,7 @@ const NetworkStore = {
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
           {
             IPv6StaticAddresses: IPv6StaticAddresses,
-          }
+          },
         )
         .then(() => {
           return i18n.t('pageNetwork.toast.successSaveNetworkSettings', {
@@ -353,7 +353,7 @@ const NetworkStore = {
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.ipv6'),
-            })
+            }),
           );
         });
     },
@@ -366,7 +366,7 @@ const NetworkStore = {
               DHCPEnabled: false,
             },
             IPv4StaticAddresses: ipv4TableData,
-          }
+          },
         )
         .then(dispatch('getEthernetData'))
         .then(() => {
@@ -379,7 +379,7 @@ const NetworkStore = {
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.ipv4'),
-            })
+            }),
           );
         });
     },
@@ -387,7 +387,7 @@ const NetworkStore = {
       return api
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
-          interfaceSettingsForm
+          interfaceSettingsForm,
         )
         .then(dispatch('getEthernetData'))
         .then(() => {
@@ -400,7 +400,7 @@ const NetworkStore = {
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.network'),
-            })
+            }),
           );
         });
     },
@@ -412,7 +412,7 @@ const NetworkStore = {
       return api
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
-          { StaticNameServers: newDnsArray }
+          { StaticNameServers: newDnsArray },
         )
         .then(dispatch('getEthernetData'))
         .then(() => {
@@ -425,7 +425,7 @@ const NetworkStore = {
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.dns'),
-            })
+            }),
           );
         });
     },
@@ -433,7 +433,7 @@ const NetworkStore = {
       return api
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
-          { StaticNameServers: dnsTableData }
+          { StaticNameServers: dnsTableData },
         )
         .then(dispatch('getEthernetData'))
         .then(() => {
@@ -446,7 +446,7 @@ const NetworkStore = {
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.dns'),
-            })
+            }),
           );
         });
     },

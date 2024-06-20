@@ -39,7 +39,7 @@ const BondStore = {
       return await api
         .post(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${data.bondInterface}/Actions/Oem/Ami/EthernetInterface.CreateBond`,
-          { MIIMonitorinms: parseInt(data.miiMonitorinms) }
+          { MIIMonitorinms: parseInt(data.miiMonitorinms) },
         )
         .catch((error) => {
           console.log(error);
@@ -54,7 +54,7 @@ const BondStore = {
             ActiveSlave: {
               '@odata.id': `/redfish/v1/Managers/bmc/EthernetInterfaces/${data.bondInterface}`,
             },
-          }
+          },
         )
         .catch((error) => {
           console.log(error);

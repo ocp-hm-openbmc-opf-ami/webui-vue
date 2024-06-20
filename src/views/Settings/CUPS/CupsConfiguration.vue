@@ -212,22 +212,18 @@ export default {
   data() {
     return {
       StaticCoreLoadFactor: this.$store.getters['cups/staticCoreLoadFactor'],
-      StaticMemoryLoadFactor: this.$store.getters[
-        'cups/staticMemoryLoadFactor'
-      ],
+      StaticMemoryLoadFactor:
+        this.$store.getters['cups/staticMemoryLoadFactor'],
       StaticIioLoadFactor: this.$store.getters['cups/staticIioLoadFactor'],
       DynamicCoreLoadFactor: this.$store.getters['cups/dynamicCoreLoadFactor'],
-      DynamicMemoryLoadFactor: this.$store.getters[
-        'cups/dynamicMemoryLoadFactor'
-      ],
+      DynamicMemoryLoadFactor:
+        this.$store.getters['cups/dynamicMemoryLoadFactor'],
       DynamicIioLoadFactor: this.$store.getters['cups/dynamicIioLoadFactor'],
       CupsServiceInterval: this.$store.getters['cups/cupsServiceInterval'],
-      CupsServiceAveragingPeriod: this.$store.getters[
-        'cups/cupsServiceAveragingPeriod'
-      ],
-      LoadFactorConfiguration: this.$store.getters[
-        'cups/loadFactorConfiguration'
-      ],
+      CupsServiceAveragingPeriod:
+        this.$store.getters['cups/cupsServiceAveragingPeriod'],
+      LoadFactorConfiguration:
+        this.$store.getters['cups/loadFactorConfiguration'],
       cupsService: null,
     };
   },
@@ -346,7 +342,7 @@ export default {
         }
         if (this.$v.StaticMemoryLoadFactor.$dirty) {
           staticLoadFactors.MemoryLoadFactor = Number(
-            this.StaticMemoryLoadFactor
+            this.StaticMemoryLoadFactor,
           );
         }
       }
@@ -358,7 +354,7 @@ export default {
         if (Math.round(totalSum * 1e8) / 1e8 !== 100) {
           // Handle the error, display a message, or prevent further processing
           this.errorToast(
-            this.$t('pageCups.toast.errorAddingStaticLoadFactor')
+            this.$t('pageCups.toast.errorAddingStaticLoadFactor'),
           );
           return;
         } else {

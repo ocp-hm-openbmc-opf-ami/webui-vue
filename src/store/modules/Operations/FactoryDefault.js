@@ -19,7 +19,7 @@ const FactoryDefaultStore = {
           commit('val', !restoreOption);
           if (restoreOption) {
             throw new Error(
-              i18n.t('PageFactoryDefault.toast.restoreToDefaultsError')
+              i18n.t('PageFactoryDefault.toast.restoreToDefaultsError'),
             );
           }
         });

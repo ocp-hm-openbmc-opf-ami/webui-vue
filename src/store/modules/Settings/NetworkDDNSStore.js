@@ -82,19 +82,19 @@ const NetworkDDNSStore = {
         .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
         .then((response) =>
           response.data.Members.map(
-            (ethernetInterface) => ethernetInterface['@odata.id']
-          )
+            (ethernetInterface) => ethernetInterface['@odata.id'],
+          ),
         )
         .then((ethernetInterfaceIds) =>
           api.all(
             ethernetInterfaceIds.map((ethernetInterface) =>
-              api.get(ethernetInterface)
-            )
-          )
+              api.get(ethernetInterface),
+            ),
+          ),
         )
         .then(async (ethernetInterfaces) => {
           const ethernetData = ethernetInterfaces.map(
-            (ethernetInterface) => ethernetInterface.data
+            (ethernetInterface) => ethernetInterface.data,
           );
           const firstEtherData = ethernetData[0];
           const firstInterfaceId = ethernetData[0].Id;
@@ -113,7 +113,7 @@ const NetworkDDNSStore = {
     async nsUpdate({ state, dispatch }) {
       return await api
         .post(
-          `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.ddnsFirstInterfaceId}/Actions/Oem/Ami/EthernetInterface.DoNsupdate`
+          `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.ddnsFirstInterfaceId}/Actions/Oem/Ami/EthernetInterface.DoNsupdate`,
         )
         .then(() => dispatch('getDDNSEthernetData'))
         .then(() => {
@@ -129,7 +129,7 @@ const NetworkDDNSStore = {
     },
     async saveInterfaceConfiguration(
       { state, dispatch },
-      { DDNSMethod, NSUpdateEnable, UseTSIG }
+      { DDNSMethod, NSUpdateEnable, UseTSIG },
     ) {
       const ddnsData = {
         Oem: {
@@ -147,7 +147,7 @@ const NetworkDDNSStore = {
       return await api
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.ddnsSelectedInterfaceId}`,
-          ddnsData
+          ddnsData,
         )
         .then(() => dispatch('getDDNSEthernetData'))
         .then(() => {
@@ -156,7 +156,7 @@ const NetworkDDNSStore = {
         .catch((error) => {
           console.log(error);
           throw new Error(
-            i18n.t('pageDDNSNetwork.toast.errorInterfaceConfiguration')
+            i18n.t('pageDDNSNetwork.toast.errorInterfaceConfiguration'),
           );
         });
     },
@@ -175,7 +175,7 @@ const NetworkDDNSStore = {
       return await api
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.ddnsFirstInterfaceId}`,
-          dhcpState
+          dhcpState,
         )
         .then(() => dispatch('getDDNSEthernetData'))
         .then(() => {
@@ -201,7 +201,7 @@ const NetworkDDNSStore = {
       return await api
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.ddnsFirstInterfaceId}`,
-          dhcpState
+          dhcpState,
         )
         .then(() => dispatch('getDDNSEthernetData'))
         .then(() => {
@@ -224,7 +224,7 @@ const NetworkDDNSStore = {
         .post(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.ddnsSelectedInterfaceId}/Actions/Oem/Ami/EthernetInterface.TSIGUpload`,
           uploadData,
-          config
+          config,
         )
         .then(() => {
           return i18n.t('pageDDNSNetwork.toast.successUpdateTsig');
@@ -270,7 +270,7 @@ const NetworkDDNSStore = {
       return await api
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.ddnsSelectedInterfaceId}`,
-          ddnsData
+          ddnsData,
         )
         .then(() => dispatch('getDDNSEthernetData'))
         .then(() => {
@@ -279,7 +279,7 @@ const NetworkDDNSStore = {
         .catch((error) => {
           console.log(error);
           throw new Error(
-            i18n.t('pageDDNSNetwork.toast.errorSaveConfiguratin')
+            i18n.t('pageDDNSNetwork.toast.errorSaveConfiguratin'),
           );
         });
     },

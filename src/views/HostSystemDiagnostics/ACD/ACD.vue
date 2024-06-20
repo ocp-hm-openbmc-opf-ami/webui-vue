@@ -20,22 +20,25 @@
             <span class="mb-0">{{ value | formatDate }}</span>
             <span class="mb-0 pl-1">{{ value | formatTime }}</span>
           </template>
-          <template #cell(actions)="row" class="ml-3">
-            <table-row-action
-              v-for="(action, index) in row.item.actions"
-              :key="index"
-              :value="action.value"
-              :title="action.title"
-              :row-data="row.item"
-              @click-table-action="onTableRowAction($event, row.item)"
-              ><template #icon>
-                <icon-view
-                  v-if="action.value === 'view'"
-                  :data-test-id="`AutonomousCrashDump-tableRowAction-view-${index}`"
-                  @click="onClickView(row.item)"
-                />
-              </template>
-            </table-row-action>
+          <!-- Fixed the issue by moving the class to the actual element -->
+          <template #cell(actions)="row">
+            <div class="ml-3">
+              <table-row-action
+                v-for="(action, index) in row.item.actions"
+                :key="index"
+                :value="action.value"
+                :title="action.title"
+                :row-data="row.item"
+                @click-table-action="onTableRowAction($event, row.item)"
+                ><template #icon>
+                  <icon-view
+                    v-if="action.value === 'view'"
+                    :data-test-id="`AutonomousCrashDump-tableRowAction-view-${index}`"
+                    @click="onClickView(row.item)"
+                  />
+                </template>
+              </table-row-action>
+            </div>
           </template>
         </b-table>
       </b-col>
@@ -191,7 +194,7 @@ export default {
     polling(newPolling) {
       if (newPolling === 'Running') {
         this.emptyTableText = this.$t(
-          'pageAutonomousCrashDump.action.logInProgress'
+          'pageAutonomousCrashDump.action.logInProgress',
         );
       } else {
         this.emptyTableText = this.$t('global.table.emptyMessage');
@@ -202,7 +205,7 @@ export default {
     this.startLoader();
     this.polling = this.TaskState;
     Promise.all([this.$store.dispatch('acd/getAcdServerStatus')]).finally(() =>
-      this.endLoader()
+      this.endLoader(),
     );
     this.isBusy = false;
     const pollingFromLocalStorage = localStorage.getItem('polling');
@@ -220,7 +223,7 @@ export default {
             title: this.$tc('pageAutonomousCrashDump.modal.confirmTitle'),
             okTitle: this.$t('global.action.ok'),
             cancelTitle: this.$t('global.action.cancel'),
-          }
+          },
         )
         .then((createCrashDump) => {
           if (createCrashDump) {
@@ -308,6 +311,7 @@ export default {
   },
 };
 </script>
+
 <style scoped lang="scss">
 #table-ACD {
   td .btn-link {

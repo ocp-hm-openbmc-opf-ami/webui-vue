@@ -64,11 +64,11 @@ export default class AMI_RFB extends RFB {
     }
     Log.Debug(
       `>> AMI_RFB._handleKeyEvent -> ${keyboardlayout} ` +
-        `keysym:${keysym} code:${code} down:${down}`
+        `keysym:${keysym} code:${code} down:${down}`,
     );
     Log.Debug(
       `>> AMI_RFB._handleKeyEvent -> keyboard LED State: ` +
-        `[CLIENT]:${clientLEDstate}  [HOST]:${this._hostLEDstate}`
+        `[CLIENT]:${clientLEDstate}  [HOST]:${this._hostLEDstate}`,
     );
 
     switch (keyboardlayout) {
@@ -94,7 +94,7 @@ export default class AMI_RFB extends RFB {
 
     Log.Debug(
       `<< AMI_RFB._handleKeyEvent -> ${keyboardlayout} ` +
-        `keysym:${keysym} code:${code} down:${down}`
+        `keysym:${keysym} code:${code} down:${down}`,
     );
 
     /* KeyboardLED sync to client function call. */
@@ -109,7 +109,7 @@ export default class AMI_RFB extends RFB {
       }
     } else {
       Log.Debug(
-        `<< AMI_RFB._handleKeyEvent -> LED sync not supported by server`
+        `<< AMI_RFB._handleKeyEvent -> LED sync not supported by server`,
       );
     }
     super.sendKey(keysym, code, down);
@@ -186,7 +186,7 @@ export default class AMI_RFB extends RFB {
     this._hostLEDstate = LEDState;
     Log.Debug(
       '<< AMI_RFB._handleKeyboardLedState-KeyboardLedState:',
-      this._hostLEDstate
+      this._hostLEDstate,
     );
     return true;
   }
@@ -199,7 +199,7 @@ export default class AMI_RFB extends RFB {
     if (hostLEDstate == clientLEDstate) {
       Log.Debug(
         `>> AMI_RFB._keyboardLedSynctoClient -> HOST AND CLIENT are  in sync ` +
-          `HostLEDstate:${hostLEDstate} clientLEDstate:${clientLEDstate}`
+          `HostLEDstate:${hostLEDstate} clientLEDstate:${clientLEDstate}`,
       );
       return;
     }
@@ -222,7 +222,7 @@ export default class AMI_RFB extends RFB {
       super.sendKey(
         KeyTable.XK_Scroll_Lock,
         _key(XtScancode.ScrollLock),
-        false
+        false,
       );
     }
   }

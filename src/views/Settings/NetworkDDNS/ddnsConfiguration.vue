@@ -57,7 +57,7 @@
               <b-form-text>
                 {{
                   $t(
-                    'pageDDNSNetwork.ddnsConfiguration.tsigFileUploadDiscription'
+                    'pageDDNSNetwork.ddnsConfiguration.tsigFileUploadDiscription',
                   )
                 }}
               </b-form-text>

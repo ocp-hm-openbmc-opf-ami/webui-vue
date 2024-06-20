@@ -234,7 +234,7 @@
               >
                 {{
                   $t(
-                    'pageFireWall.firewallSettings.modal.endTimeCanNotBeEqualToStartTime'
+                    'pageFireWall.firewallSettings.modal.endTimeCanNotBeEqualToStartTime',
                   )
                 }}
               </template>
@@ -266,7 +266,7 @@
                 >
                   {{
                     $t(
-                      'pageFireWall.firewallSettings.modal.endDateCanNotBeLessThanStartDate'
+                      'pageFireWall.firewallSettings.modal.endDateCanNotBeLessThanStartDate',
                     )
                   }}
                 </template>
@@ -317,7 +317,7 @@
               >
                 {{
                   $t(
-                    'pageFireWall.firewallSettings.modal.endTimeCanNotBeEqualToStartTime'
+                    'pageFireWall.firewallSettings.modal.endTimeCanNotBeEqualToStartTime',
                   )
                 }}
               </template>
@@ -330,7 +330,7 @@
               >
                 {{
                   $t(
-                    'pageFireWall.firewallSettings.modal.endTimeCanNotBeEqualToStartTime'
+                    'pageFireWall.firewallSettings.modal.endTimeCanNotBeEqualToStartTime',
                   )
                 }}
               </template>
@@ -550,7 +550,7 @@ export default {
       if (this.form.startDate != '') {
         startdateval = this.getUtcDate(
           this.form.startDate,
-          this.form.startTime
+          this.form.startTime,
         );
         enddateval = this.getUtcDate(this.form.endDate, this.form.endTime);
       }
@@ -602,18 +602,18 @@ export default {
     ipStartValidation(value) {
       if (
         (!/((^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))$)|(^((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?$))/.test(
-          value
+          value,
         ) ||
           /^localhost$|^127(?:\.[0-9]+){0,2}\.[0-9]+$|^(?:0*\\:)*?:?0*1$/.test(
-            value
+            value,
           ) ||
           String(value).charAt(0) == '0' ||
           '#255.255.255.0#0.24.56.4#255.255.255.255#'.indexOf(
-            '#' + value + '#'
+            '#' + value + '#',
           ) > -1 ||
           value.trim() == '::') &&
         !/^(?=.{1,254}$)((?=[a-z0-9-]{1 ,63}\.)(xn--+)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}$/i.test(
-          value
+          value,
         ) &&
         value.length != 0
       ) {
@@ -625,20 +625,20 @@ export default {
     ipEndValidation(value) {
       if (
         ((!/((^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))$)|(^((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?$))/.test(
-          value
+          value,
         ) ||
           /^localhost$|^127(?:\.[0-9]+){0,2}\.[0-9]+$|^(?:0*\\:)*?:?0*1$/.test(
-            value
+            value,
           ) ||
           (value != undefined &&
             value != null &&
             (String(value).charAt(0) == '0' ||
               '#255.255.255.0#0.24.56.4#255.255.255.255#'.indexOf(
-                '#' + value + '#'
+                '#' + value + '#',
               ) > -1)) ||
           value.trim() == '::') &&
           !/^(?=.{1,254}$)((?=[a-z0-9-]{1 ,63}\.)(xn--+)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}$/i.test(
-            value
+            value,
           ) &&
           value.length != 0) ||
         (value.length != 0 && value < this.form.ipStart)
@@ -695,7 +695,7 @@ export default {
         parseInt(datesArray[1]) - 1, // User input month
         datesArray[2], // User input day
         timeArray[0], // User input hour
-        timeArray[1] // User input minute
+        timeArray[1], // User input minute
       );
       return new Date(utcDate);
     },

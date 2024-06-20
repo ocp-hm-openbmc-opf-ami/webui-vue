@@ -31,7 +31,7 @@ const AutonomousCrashDumpStore = {
             localStorage.removeItem('polling');
             dispatch('getAcdServerStatus');
             return i18n.t(
-              'pageAutonomousCrashDump.toast.successGenerateCrashDumpLog'
+              'pageAutonomousCrashDump.toast.successGenerateCrashDumpLog',
             );
           }
         }
@@ -44,7 +44,7 @@ const AutonomousCrashDumpStore = {
           {
             DiagnosticDataType: 'OEM',
             OEMDiagnosticDataType: 'OnDemand',
-          }
+          },
         )
         .then((response) => {
           const data = response.data['@odata.id'];
@@ -95,11 +95,11 @@ const AutonomousCrashDumpStore = {
           commit('setAcdServerEnabled', !acdServerEnabled);
           if (acdServerEnabled) {
             throw new Error(
-              i18n.t('pageAutonomousCrashDump.toast.errorACDEnabled')
+              i18n.t('pageAutonomousCrashDump.toast.errorACDEnabled'),
             );
           } else {
             throw new Error(
-              i18n.t('pageAutonomousCrashDump.toast.errorACDDisabled')
+              i18n.t('pageAutonomousCrashDump.toast.errorACDDisabled'),
             );
           }
         });

@@ -44,9 +44,9 @@ const FanStore = {
         .then(({ data: { Members } }) =>
           api.all(
             Members.map((member) =>
-              api.get(member['@odata.id']).then((response) => response.data)
-            )
-          )
+              api.get(member['@odata.id']).then((response) => response.data),
+            ),
+          ),
         )
         .catch((error) => console.log(error));
     },

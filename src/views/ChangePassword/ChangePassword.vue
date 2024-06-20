@@ -166,7 +166,7 @@ export default {
     passwordValidation(val) {
       if (
         /([a-zA-Z0-9])\1\1+|(sshd|bin|daemon|sys|adm|asdfghjk|asdfghjkl|sync|shutdown|halt|mail|news|uucp operator|games|ftp|man|nobody|stunnel4|password|Password|qwertyui|qwertyuiop)+/gi.test(
-          val
+          val,
         ) ||
         /^[!@#$%^&*)(+=._-]+$/gi.test(val) ||
         this.form.password.indexOf(this.username) !== -1 ||

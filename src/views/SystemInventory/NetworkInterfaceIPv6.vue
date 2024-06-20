@@ -27,13 +27,13 @@ export default {
         {
           key: 'prefixLength',
           label: this.$t(
-            'pageSystemInventory.networkInterfaceIPv6.prefixLength'
+            'pageSystemInventory.networkInterfaceIPv6.prefixLength',
           ),
         },
         {
           key: 'scope',
           label: this.$t(
-            'pageSystemInventory.networkInterfaceIPv6.addressOrigin'
+            'pageSystemInventory.networkInterfaceIPv6.addressOrigin',
           ),
         },
       ],

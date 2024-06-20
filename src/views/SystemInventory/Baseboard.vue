@@ -27,7 +27,7 @@ export default {
         {
           key: 'locationIndicatorActive',
           label: this.$t(
-            'pageSystemInventory.baseBoard.locationIndicatorActive'
+            'pageSystemInventory.baseBoard.locationIndicatorActive',
           ),
         },
         {

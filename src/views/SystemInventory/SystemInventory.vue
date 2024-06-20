@@ -34,7 +34,7 @@
             <network-interfaces></network-interfaces
             >{{
               $t(
-                'pageSystemInventory.networkInterfaceIPv6.networkInterfaceIPv6Info'
+                'pageSystemInventory.networkInterfaceIPv6.networkInterfaceIPv6Info',
               )
             }}
             <network-interface-ipv6></network-interface-ipv6

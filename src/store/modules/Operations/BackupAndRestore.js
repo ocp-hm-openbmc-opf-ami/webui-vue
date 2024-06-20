@@ -59,7 +59,7 @@ const BackupAndRestore = {
       return await api
         .post(
           '/redfish/v1/Managers/bmc/Actions/Oem/AMIManager.BackupConfig',
-          data
+          data,
         )
         .then((response) => {
           // Create a temporary URL
@@ -85,7 +85,7 @@ const BackupAndRestore = {
           const errorMessage = error.response.data?.error?.message || '';
           if (errorMessage.includes('Configuration file doesnot exit')) {
             throw new Error(
-              i18n.t('pageBackupAndRestore.toast.errorMessageNotConfigured')
+              i18n.t('pageBackupAndRestore.toast.errorMessageNotConfigured'),
             );
           } else {
             throw new Error(i18n.t('pageBackupAndRestore.toast.errorMessage'));
@@ -98,30 +98,30 @@ const BackupAndRestore = {
         .then((response) => {
           commit(
             'setSmtp',
-            response.data.Oem.Ami?.SelectedBackupFeatures?.SMTP
+            response.data.Oem.Ami?.SelectedBackupFeatures?.SMTP,
           );
           commit(
             'setIPMI',
-            response.data.Oem.Ami?.SelectedBackupFeatures?.IPMI
+            response.data.Oem.Ami?.SelectedBackupFeatures?.IPMI,
           );
           commit(
             'setVirtualMedia',
-            response.data.Oem.Ami?.SelectedBackupFeatures?.['Virtual-media']
+            response.data.Oem.Ami?.SelectedBackupFeatures?.['Virtual-media'],
           );
           commit(
             'setNetwork',
-            response.data.Oem.Ami?.SelectedBackupFeatures?.Network
+            response.data.Oem.Ami?.SelectedBackupFeatures?.Network,
           );
           commit(
             'setSnmp',
-            response.data.Oem.Ami?.SelectedBackupFeatures?.SNMP
+            response.data.Oem.Ami?.SelectedBackupFeatures?.SNMP,
           );
           commit('setNtp', response.data.Oem.Ami?.SelectedBackupFeatures?.NTP);
         })
         .catch((error) => {
           console.log(error);
           throw new Error(
-            i18n.t('pageBackupAndRestore.toast.errorGettingBackupDetails')
+            i18n.t('pageBackupAndRestore.toast.errorGettingBackupDetails'),
           );
         });
     },
@@ -137,7 +137,7 @@ const BackupAndRestore = {
         .post(
           'redfish/v1/Managers/bmc/Actions/Oem/AMIManager.RestoreConfig',
           uploadData,
-          config
+          config,
         )
         .then(() => {
           return i18n.t('pageBackupAndRestore.toast.fileUploadedSuccessfully');
@@ -145,7 +145,7 @@ const BackupAndRestore = {
         .catch((error) => {
           console.log(error);
           throw new Error(
-            i18n.t('pageBackupAndRestore.toast.fileUploadedError')
+            i18n.t('pageBackupAndRestore.toast.fileUploadedError'),
           );
         });
     },

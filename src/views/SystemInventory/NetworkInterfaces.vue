@@ -27,7 +27,7 @@ export default {
         {
           key: 'interfaceEnabled',
           label: this.$t(
-            'pageSystemInventory.networkInterfaces.interfaceEnabled'
+            'pageSystemInventory.networkInterfaces.interfaceEnabled',
           ),
         },
         {

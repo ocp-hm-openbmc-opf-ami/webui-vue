@@ -720,7 +720,7 @@ export default {
       this.$store
         .dispatch(
           'policies/saveSolSshPortState',
-          parseInt(this.solSshPortValueState)
+          parseInt(this.solSshPortValueState),
         )
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
@@ -741,7 +741,7 @@ export default {
       this.$store
         .dispatch(
           'policies/savePasswordHistory',
-          parseInt(this.passwordHistoryState)
+          parseInt(this.passwordHistoryState),
         )
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
@@ -758,7 +758,7 @@ export default {
       this.$store
         .dispatch(
           'policies/saveKVMSessionTimeout',
-          parseInt(this.kvmSessionTimeOutValue)
+          parseInt(this.kvmSessionTimeOutValue),
         )
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));

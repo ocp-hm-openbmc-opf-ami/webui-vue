@@ -6,7 +6,7 @@
           <h5 class="bold">
             {{
               $t(
-                'pageUserManagement.passwordRules.passwordForHigh.passwordComplexityForHigh'
+                'pageUserManagement.passwordRules.passwordForHigh.passwordComplexityForHigh',
               )
             }}
           </h5>
@@ -77,7 +77,7 @@
           <h5 class="bold">
             {{
               $t(
-                'pageUserManagement.passwordRules.passwordFormedium.passwordComplexityFormedium'
+                'pageUserManagement.passwordRules.passwordFormedium.passwordComplexityFormedium',
               )
             }}
           </h5>
@@ -110,28 +110,28 @@
                 <li>
                   {{
                     $t(
-                      'pageUserManagement.passwordRules.passwordFormedium.rule6'
+                      'pageUserManagement.passwordRules.passwordFormedium.rule6',
                     )
                   }}
                 </li>
                 <li>
                   {{
                     $t(
-                      'pageUserManagement.passwordRules.passwordFormedium.rule7'
+                      'pageUserManagement.passwordRules.passwordFormedium.rule7',
                     )
                   }}.
                 </li>
                 <li>
                   {{
                     $t(
-                      'pageUserManagement.passwordRules.passwordFormedium.rule8'
+                      'pageUserManagement.passwordRules.passwordFormedium.rule8',
                     )
                   }}
                 </li>
                 <li>
                   {{
                     $t(
-                      'pageUserManagement.passwordRules.passwordFormedium.rule9'
+                      'pageUserManagement.passwordRules.passwordFormedium.rule9',
                     )
                   }}
                 </li>
@@ -146,7 +146,7 @@
           <h5 class="bold">
             {{
               $t(
-                'pageUserManagement.passwordRules.passwordForLow.passwordComplexityForLow'
+                'pageUserManagement.passwordRules.passwordForLow.passwordComplexityForLow',
               )
             }}
           </h5>
@@ -192,7 +192,7 @@
           <h5 class="bold">
             {{
               $t(
-                'pageUserManagement.passwordRules.passwordForDisabled.passwordComplexityForDisabled'
+                'pageUserManagement.passwordRules.passwordForDisabled.passwordComplexityForDisabled',
               )
             }}
           </h5>
