@@ -82,6 +82,10 @@ export default {
       this.dropdownStatus = status;
     },
     closeSoftKeyboard() {
+      /* Deactivate the Shift key before closing the SoftKeyboard if it is currently active */
+      if (this.$store.getters['kvm/getSoftKeyboardStatus'].shiftKeyStatus) {
+        this.releaseShift();
+      }
       this.showSoftKeyboard = false;
       this.selectKeyboardLanguage = 'Open Soft Keyboard';
       this.$root.$emit('reset-keyboard-location');
