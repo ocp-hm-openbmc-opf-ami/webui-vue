@@ -1711,8 +1711,9 @@
         "snmpPortLabel": "SNMP 端口值",
         "snmpDescription": "启用 SNMP 协议",
         "kvmSessionTimeOut": "KVM 会话超时",
-        "kvmSessionTimeOutDescription": "将 kvm 会话超时更改为 1 分钟到 30 分钟的时间延迟",
-        "kvmPortValue": "KVM 端口值（以数字表示）"
+        "kvmSessionTimeOutDescription": "将 KVM 会话超时更改为 1 分钟到 1440 分钟（1 天）时间延迟",
+        "kvmPortValue": "KVM 端口值（以数字表示）",
+        "kvmTimeoutValueLimits": "请输入 %{min} 和 %{max} 之间的分钟数"
     },
     "pagePower": {
         "description": "设置电源上限以使功耗保持在或低于指定值",

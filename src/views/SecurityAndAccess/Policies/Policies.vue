@@ -398,6 +398,8 @@
                       data-test-id="kvm-session-timeout"
                       type="number"
                       aria-describedby="power-help-text"
+                      :min="1"
+                      :max="1440"
                       :state="getValidationState($v.kvmSessionTimeOutValue)"
                       @input="$v.kvmSessionTimeOutValue.$touch()"
                     ></b-form-input>
@@ -406,7 +408,12 @@
                         {{ $t('global.form.fieldRequired') }}
                       </template>
                       <template v-else-if="!$v.kvmSessionTimeOutValue.pattern">
-                        {{ $t('global.form.invalidFormat') }}
+                        {{
+                          $t('pagePolicies.kvmTimeoutValueLimits', {
+                            min: 1,
+                            max: 1440,
+                          })
+                        }}
                       </template>
                     </b-form-invalid-feedback>
                   </b-form-group>
@@ -662,7 +669,7 @@ export default {
       kvmSessionTimeOutValue: {
         required,
         pattern: function (pw) {
-          return this.timeoutValidation(pw);
+          return this.kvmSessionTimeoutValidation(pw);
         },
       },
     };
@@ -769,8 +776,12 @@ export default {
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
-    timeoutValidation(val) {
-      if (!/^([1-9]|[1-2][0-9]|30)$/.test(val)) {
+    kvmSessionTimeoutValidation(val) {
+      if (
+        !/^([1-9]|[1-9][0-9]{0,2}|1[0-3][0-9]{0,2}|14[0-3][0-9]|1440)$/.test(
+          val,
+        )
+      ) {
         return false;
       }
       return true;
