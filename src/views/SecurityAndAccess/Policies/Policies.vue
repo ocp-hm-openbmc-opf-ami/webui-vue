@@ -2,6 +2,16 @@
   <b-container fluid="xl">
     <page-title />
     <b-row>
+      <b-col class="text-right">
+        <!-- <help-content :id="'collapse-a'" :visible.sync="visible"></help-content> -->
+        <help-content
+          :id="'collapse-a'"
+          :visible="visible"
+          @toggle-visibility="toggleVisibility"
+        ></help-content>
+      </b-col>
+    </b-row>
+    <b-row>
       <b-col md="12">
         <b-row>
           <b-col>
@@ -34,6 +44,18 @@
                   </b-form-checkbox>
                 </b-col>
               </b-row>
+              <div v-if="visible" class="help-section">
+                <b-collapse
+                  id="policies-help-content"
+                  v-model="visible"
+                  class="mt-2"
+                  ><div class="ml-3">
+                    <p>
+                      {{ $t('pagePolicies.helpText.ipmi') }}
+                    </p>
+                  </div>
+                </b-collapse>
+              </div>
               <b-row class="setting-section">
                 <b-col
                   lg="7"
@@ -119,6 +141,18 @@
                   </b-form-checkbox>
                 </b-col>
               </b-row>
+              <div v-if="visible" class="help-section">
+                <b-collapse
+                  id="policies-help-content"
+                  v-model="visible"
+                  class="setting-section mt-2"
+                  ><div class="ml-3">
+                    <p>
+                      {{ $t('pagePolicies.helpText.kvm') }}
+                    </p>
+                  </div>
+                </b-collapse>
+              </div>
               <b-row class="setting-section">
                 <b-col
                   lg="7"
@@ -149,6 +183,18 @@
                   </b-form-checkbox>
                 </b-col>
               </b-row>
+              <div v-if="visible && kvmState" class="help-section">
+                <b-collapse
+                  id="policies-help-content"
+                  v-model="visible"
+                  class="setting-section mt-2"
+                  ><div class="ml-3">
+                    <p>
+                      {{ $t('pagePolicies.helpText.virtualMedia') }}
+                    </p>
+                  </div>
+                </b-collapse>
+              </div>
               <b-row v-if="kvmState" class="setting-section">
                 <b-col cols="3" class="d-flex align-items-center">
                   <b-form-group
@@ -176,6 +222,18 @@
                   </b-button>
                 </b-col>
               </b-row>
+              <div v-if="visible" class="help-section">
+                <b-collapse
+                  id="policies-help-content"
+                  v-model="visible"
+                  class="setting-section mt-2"
+                  ><div class="ml-3">
+                    <p>
+                      {{ $t('pagePolicies.helpText.virtualMedia') }}
+                    </p>
+                  </div>
+                </b-collapse>
+              </div>
               <b-row class="setting-section">
                 <b-col
                   lg="7"
@@ -206,6 +264,18 @@
                   </b-form-checkbox>
                 </b-col>
               </b-row>
+              <div v-if="visible" class="help-section">
+                <b-collapse
+                  id="policies-help-content"
+                  v-model="visible"
+                  class="setting-section mt-2"
+                  ><div class="ml-3">
+                    <p>
+                      {{ $t('pagePolicies.helpText.solssh') }}
+                    </p>
+                  </div>
+                </b-collapse>
+              </div>
               <b-row class="setting-section">
                 <b-col
                   lg="7"
@@ -236,6 +306,25 @@
                   </b-form-checkbox>
                 </b-col>
               </b-row>
+              <div v-if="visible && solState" class="help-section">
+                <b-collapse
+                  id="policies-help-content"
+                  v-model="visible"
+                  class="setting-section mt-2"
+                  ><div class="ml-3">
+                    <p>
+                      Allow remote management of the platform via IPMI. Tools
+                      such as ipmitool require this setting to be enabled.
+                    </p>
+                    <ul>
+                      <li>
+                        Change the kvm session timeout in between 1 Minutes to
+                        30 Minutes time delay
+                      </li>
+                    </ul>
+                  </div>
+                </b-collapse>
+              </div>
               <b-row v-if="solState" class="setting-section">
                 <b-col cols="3" class="d-flex align-items-center">
                   <b-form-group
@@ -263,6 +352,18 @@
                   </b-button>
                 </b-col>
               </b-row>
+              <div v-if="visible" class="help-section">
+                <b-collapse
+                  id="policies-help-content"
+                  v-model="visible"
+                  class="setting-section mt-2"
+                  ><div class="ml-3">
+                    <p>
+                      {{ $t('pagePolicies.helpText.ssdp') }}
+                    </p>
+                  </div>
+                </b-collapse>
+              </div>
               <b-row class="setting-section">
                 <b-col
                   lg="7"
@@ -291,6 +392,25 @@
                   </b-form-checkbox>
                 </b-col>
               </b-row>
+              <div v-if="visible && ssdpState" class="help-section">
+                <b-collapse
+                  id="policies-help-content"
+                  v-model="visible"
+                  class="setting-section mt-2"
+                  ><div class="ml-3">
+                    <p>
+                      Allow remote management of the platform via IPMI. Tools
+                      such as ipmitool require this setting to be enabled.
+                    </p>
+                    <ul>
+                      <li>
+                        Change the kvm session timeout in between 1 Minutes to
+                        30 Minutes time delay
+                      </li>
+                    </ul>
+                  </div>
+                </b-collapse>
+              </div>
               <b-row v-if="ssdpState" class="setting-section">
                 <b-col cols="3" class="d-flex align-items-center">
                   <dl class="mt-3 mr-4 w-75">
@@ -303,6 +423,18 @@
                   </dl>
                 </b-col>
               </b-row>
+              <div v-if="visible" class="help-section">
+                <b-collapse
+                  id="policies-help-content"
+                  v-model="visible"
+                  class="setting-section mt-2"
+                  ><div class="ml-3">
+                    <p>
+                      {{ $t('pagePolicies.helpText.snmp') }}
+                    </p>
+                  </div>
+                </b-collapse>
+              </div>
               <b-row class="setting-section">
                 <b-col
                   lg="7"
@@ -351,6 +483,18 @@
             <page-section
               :section-title="$t('pagePolicies.configurationPolicies')"
             >
+              <div v-if="visible" class="help-section">
+                <b-collapse
+                  id="policies-help-content"
+                  v-model="visible"
+                  class="setting-section mt-2"
+                  ><div class="ml-3">
+                    <p>
+                      {{ $t('pagePolicies.helpText.webSessionTimeOut') }}
+                    </p>
+                  </div>
+                </b-collapse>
+              </div>
               <b-row class="setting-section">
                 <b-col
                   lg="7"
@@ -404,6 +548,18 @@
                   </b-button>
                 </b-col>
               </b-row>
+              <div v-if="visible" class="help-section">
+                <b-collapse
+                  id="policies-help-content"
+                  v-model="visible"
+                  class="setting-section mt-2"
+                  ><div class="ml-3">
+                    <p>
+                      {{ $t('pagePolicies.helpText.kvmSessionTimeOut') }}
+                    </p>
+                  </div>
+                </b-collapse>
+              </div>
               <b-row class="setting-section">
                 <b-col
                   lg="7"
@@ -424,8 +580,6 @@
                       data-test-id="kvm-session-timeout"
                       type="text"
                       aria-describedby="power-help-text"
-                      :min="1"
-                      :max="1440"
                       :state="getValidationState($v.kvmSessionTimeOutValue)"
                       @input="$v.kvmSessionTimeOutValue.$touch()"
                     ></b-form-input>
@@ -434,12 +588,7 @@
                         {{ $t('global.form.fieldRequired') }}
                       </template>
                       <template v-else-if="!$v.kvmSessionTimeOutValue.pattern">
-                        {{
-                          $t('pagePolicies.kvmTimeoutValueLimits', {
-                            min: 1,
-                            max: 1440,
-                          })
-                        }}
+                        {{ $t('global.form.invalidFormat') }}
                       </template>
                     </b-form-invalid-feedback>
                   </b-form-group>
@@ -453,6 +602,18 @@
                   </b-button>
                 </b-col>
               </b-row>
+              <div v-if="visible" class="help-section">
+                <b-collapse
+                  id="policies-help-content"
+                  v-model="visible"
+                  class="setting-section mt-2"
+                  ><div class="ml-3">
+                    <p>
+                      {{ $t('pagePolicies.helpText.passwordComplexity') }}
+                    </p>
+                  </div>
+                </b-collapse>
+              </div>
               <b-row class="setting-section">
                 <b-col
                   lg="7"
@@ -475,6 +636,18 @@
                   </b-form-select>
                 </b-col>
               </b-row>
+              <div v-if="visible" class="help-section">
+                <b-collapse
+                  id="policies-help-content"
+                  v-model="visible"
+                  class="setting-section mt-2"
+                  ><div class="ml-3">
+                    <p>
+                      {{ $t('pagePolicies.helpText.passwordHistory') }}
+                    </p>
+                  </div>
+                </b-collapse>
+              </div>
               <b-row class="setting-section">
                 <b-col
                   lg="7"
@@ -495,8 +668,9 @@
                     @change="changePasswordHistory"
                   >
                   </b-form-select>
-                </b-col> </b-row
-            ></page-section>
+                </b-col>
+              </b-row>
+            </page-section>
           </b-col>
         </b-row>
       </b-col>
@@ -512,9 +686,10 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import { required } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { mapState } from 'vuex';
+import HelpContent from '@/components/Global/HelpContent.vue';
 export default {
   name: 'Policies',
-  components: { PageTitle, PageSection },
+  components: { PageTitle, PageSection, HelpContent },
   mixins: [LoadingBarMixin, BVToastMixin, VuelidateMixin],
   beforeRouteLeave(to, from, next) {
     this.hideLoader();
@@ -551,6 +726,7 @@ export default {
       modifySSHPolicyDisabled:
         process.env.VUE_APP_MODIFY_SSH_POLICY_DISABLED === 'true',
       DisplaySection: false,
+      visible: false,
     };
   },
   computed: {
@@ -841,6 +1017,9 @@ export default {
       }
       return true;
     },
+    toggleVisibility() {
+      this.visible = !this.visible;
+    },
   },
 };
 </script>
@@ -855,5 +1034,9 @@ export default {
 }
 .page-section {
   margin-bottom: 1rem;
+}
+.help-section {
+  width: 67%;
+  background: #bfdff6;
 }
 </style>

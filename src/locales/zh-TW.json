@@ -1304,6 +1304,19 @@
                 "rule4": "必須包含至少 5 個唯一字元（不允許使用 abcabcabc）",
                 "rule5": "不能是「password」等簡單密碼"
               }
+        },
+        "helpText": {
+            "RoleDescriptions": "按一下圖示可查看可設定 UI 的使用者權限。",
+            "ComplexityRules": "按一下圖示以查看規則，以及如何根據密碼複雜度建立密碼。",
+            "accountStatus": "使用者帳戶可以透過選擇啟用和停用 ",
+            "username": "使用者名稱不能以數字開頭且不能包含下劃線以外的特殊字符",
+            "privilege": "為建立存取權的新使用者選擇權限類型，並根據權限類型設定WebUI",
+            "passwordChange": "為建立的使用者選擇passwordChangeRequired啟用/停用，當使用者第一次登入時會要求變更密碼。",
+            "virtualMedia": "如果啟用表示使用者可以存取虛擬媒體頁面，請選擇「VMedia Access 啟用/停用」。",
+            "createPassword": "為新使用者建立密碼，建立密碼前請檢查密碼複雜度規則",
+            "confirmPasswoed": "提供相同的密碼進行確認",
+            "lockoutThreshold": "這裡我們可以設定可以嘗試登入多少次，我們可以設定範圍在0到65535之間",
+            "unlockMethod": "選擇類型“手動/自動”以恢復鎖定的用戶解鎖，如果“自動”意味著在給定的超時後給定持續時間以解鎖用戶帳戶"
         }
     },
     "pageLogin": {
@@ -1731,7 +1744,19 @@
         "kvmSessionTimeOut": "KVM 會話逾時",
         "kvmSessionTimeOutDescription": "將 KVM 會話逾時變更為 1 分鐘到 1440 分鐘（1 天）時間延遲",
         "kvmPortValue": "KVM 連接埠值（以數字表示）",
-        "kvmTimeoutValueLimits": "請輸入 %{min} 和 %{max} 之間的分鐘數"
+        "kvmTimeoutValueLimits": "請輸入 %{min} 和 %{max} 之間的分鐘數",
+        "helpText": {
+            "ipmi": "使用網路 ipmi 啟用切換按鈕，如果不想使用則停用切換按鈕",
+            "kvm": "按一下「操作」功能表中的「啟用/停用」切換按鈕以使用 KVM 頁面",
+            "virtualMedia": "點擊切換按鈕以啟用/停用以在「動作」功能表中使用虛擬媒體頁面進行影像重定向",
+            "solssh": "點擊啟用/停用切換按鈕以設定 SOL SSH 連接埠值",
+            "ssdp": "點擊啟用/停用切換按鈕以查看 SSDP 連接埠值",
+            "snmp": "點擊切換按鈕啟用/停用以讀取 SNMP 連接埠值",
+            "webSessionTimeOut": "將 Web 會話逾時變更為 30 秒到 86400 秒（1 天）的持續時間",
+            "kvmSessionTimeOut": "將 kvm 會話逾時改為 1 分鐘到 1440 分鐘（1 天）時間延遲",
+            "passwordComplexity": "選擇密碼複雜性下拉清單以設定密碼複雜性（停用、低、中、高）。由於 IPMI 2.0 限制，密碼長度不能超過 20 個位元組",
+            "passwordHistory": "選擇密碼歷史記錄下拉清單以設定密碼歷史記錄（0 到 5）。保存每個使用者最近的 N(0~5) 個密碼，以強制更改密碼歷史記錄並防止使用者過於頻繁地交替使用相同的密碼"
+        }
     },
     "pagePower": {
         "description": "設置電源上限以使功耗保持在或低於指定值",
@@ -1865,6 +1890,23 @@
             "successAddCertificate": "新增 %{certificate} 成功",
             "successDeleteCertificate": "刪除 %{certificate} 成功",
             "successReplaceCertificate": "置換 %{certificate} 成功"
+        },
+        "helpText": {
+            "certificateType": "Select the Certificate type user want",
+            "uploadFile": "Upload the file the related to the Certificate type user selected",
+            "country": "Select the country region were your location having",
+            "state": "Give the state of which country you selected",
+            "city": "Give the city name of the given state",
+            "companyName": "Give the company name",
+            "companyUnit": "Give the Company unit For which you need",
+            "commonName": "Give the Company unit comman name",
+            "challengePassword": "Give the Challenge Password if required it was optional",
+            "contactPerson": "Enter the Contact Person detail if required it was optional",
+            "emailAddress": "Enter the Email Address of the organisation if required it was optional",
+            "alternateName": "Give any alternate name if required it was optional",
+            "keyPairAlgorithm": "Select any one of the key Pair Algorithm",
+            "keyCurveId": "Select the key Curve ID for selected key Pair Algorithm",
+            "keyBitLength": "Select the key Bit Length for selected key Pair Algorithm"
         }
     },
     "pageVirtualMedia": {

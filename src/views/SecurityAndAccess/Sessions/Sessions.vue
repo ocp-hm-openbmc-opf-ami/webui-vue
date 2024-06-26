@@ -1,6 +1,15 @@
 <template>
   <b-container fluid="xl">
     <page-title />
+    <b-row>
+      <b-col class="text-right">
+        <help-content
+          :id="'collapse-a'"
+          :visible="visible"
+          @toggle-visibility="toggleVisibility"
+        ></help-content>
+      </b-col>
+    </b-row>
     <b-row class="align-items-end">
       <b-col sm="6" md="5" xl="4">
         <search
@@ -17,6 +26,20 @@
         ></table-cell-count>
       </b-col>
     </b-row>
+    <div v-if="visible" class="help-section mt-4 mb-4">
+      <b-collapse id="session-help-content" v-model="visible" class="mt-2"
+        ><div class="ml-3">
+          <p>
+            Below is a list of Users Created on this BMC. Also provided the
+            users Privilleges and other basic information about each Users.<br />
+            <b>NOTE</b>: Only Administrator User can delete other users, root
+            user Cannot be deleted.<br />
+            Click on <icon-trashcan></icon-trashcan> icon to Delete the Created
+            Users.
+          </p>
+        </div>
+      </b-collapse>
+    </div>
     <b-row>
       <b-col>
         <table-toolbar
@@ -144,6 +167,7 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import SearchFilterMixin, {
   searchFilter,
 } from '@/components/Mixins/SearchFilterMixin';
+import HelpContent from '@/components/Global/HelpContent.vue';
 
 export default {
   components: {
@@ -153,6 +177,7 @@ export default {
     TableRowAction,
     TableToolbar,
     IconTrashcan,
+    HelpContent,
   },
   mixins: [
     BVPaginationMixin,
@@ -242,6 +267,7 @@ export default {
       tableHeaderCheckboxModel: tableHeaderCheckboxModel,
       tableHeaderCheckboxIndeterminate: tableHeaderCheckboxIndeterminate,
       searchFilter: searchFilter,
+      visible: false,
     };
   },
   computed: {
@@ -332,6 +358,9 @@ export default {
           });
       }
     },
+    toggleVisibility() {
+      this.visible = !this.visible;
+    },
   },
 };
 </script>
@@ -341,5 +370,8 @@ export default {
     width: auto !important;
     color: rgb(1, 70, 159);
   }
+}
+.help-section {
+  background: #bfdff6;
 }
 </style>

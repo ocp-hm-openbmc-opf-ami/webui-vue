@@ -10,12 +10,36 @@
       @cancel="resetForm"
       @hidden="$v.$reset()"
     >
+      <b-row>
+        <b-col xl="11" class="text-right">
+          <help-content
+            :id="'collapse-a'"
+            :visible="visible"
+            @toggle-visibility="toggleVisibility"
+          ></help-content>
+        </b-col>
+      </b-row>
       <b-form id="generate-csr-form" novalidate>
         <b-container fluid>
           <b-row>
             <b-col lg="9">
               <b-row>
                 <b-col lg="6">
+                  <div
+                    v-if="visible"
+                    class="help-section field-width mt-2 mb-2"
+                  >
+                    <b-collapse
+                      id="certificates-generate-help-content"
+                      v-model="visible"
+                      class="setting-section mt-2"
+                      ><div class="ml-3">
+                        <p>
+                          {{ $t('pageCertificates.helpText.certificateType') }}
+                        </p>
+                      </div>
+                    </b-collapse>
+                  </div>
                   <b-form-group
                     :label="$t('pageCertificates.modal.certificateType')"
                     label-for="certificate-type"
@@ -40,6 +64,21 @@
                   </b-form-group>
                 </b-col>
                 <b-col lg="6">
+                  <div
+                    v-if="visible"
+                    class="help-section field-width mt-2 mb-2"
+                  >
+                    <b-collapse
+                      id="certificates-generate-help-content"
+                      v-model="visible"
+                      class="setting-section mt-2"
+                      ><div class="ml-3">
+                        <p>
+                          {{ $t('pageCertificates.helpText.country') }}
+                        </p>
+                      </div>
+                    </b-collapse>
+                  </div>
                   <b-form-group
                     :label="$t('pageCertificates.modal.country')"
                     label-for="country"
@@ -66,6 +105,21 @@
               </b-row>
               <b-row>
                 <b-col lg="6">
+                  <div
+                    v-if="visible"
+                    class="help-section field-width mt-2 mb-2"
+                  >
+                    <b-collapse
+                      id="certificates-generate-help-content"
+                      v-model="visible"
+                      class="setting-section mt-2"
+                      ><div class="ml-3">
+                        <p>
+                          {{ $t('pageCertificates.helpText.state') }}
+                        </p>
+                      </div>
+                    </b-collapse>
+                  </div>
                   <b-form-group
                     :label="$t('pageCertificates.modal.state')"
                     label-for="state"
@@ -83,6 +137,21 @@
                   </b-form-group>
                 </b-col>
                 <b-col lg="6">
+                  <div
+                    v-if="visible"
+                    class="help-section field-width mt-2 mb-2"
+                  >
+                    <b-collapse
+                      id="certificates-generate-help-content"
+                      v-model="visible"
+                      class="setting-section mt-2"
+                      ><div class="ml-3">
+                        <p>
+                          {{ $t('pageCertificates.helpText.city') }}
+                        </p>
+                      </div>
+                    </b-collapse>
+                  </div>
                   <b-form-group
                     :label="$t('pageCertificates.modal.city')"
                     label-for="city"
@@ -102,6 +171,21 @@
               </b-row>
               <b-row>
                 <b-col lg="6">
+                  <div
+                    v-if="visible"
+                    class="help-section field-width mt-2 mb-2"
+                  >
+                    <b-collapse
+                      id="certificates-generate-help-content"
+                      v-model="visible"
+                      class="setting-section mt-2"
+                      ><div class="ml-3">
+                        <p>
+                          {{ $t('pageCertificates.helpText.companyName') }}
+                        </p>
+                      </div>
+                    </b-collapse>
+                  </div>
                   <b-form-group
                     :label="$t('pageCertificates.modal.companyName')"
                     label-for="company-name"
@@ -119,6 +203,21 @@
                   </b-form-group>
                 </b-col>
                 <b-col lg="6">
+                  <div
+                    v-if="visible"
+                    class="help-section field-width mt-2 mb-2"
+                  >
+                    <b-collapse
+                      id="certificates-generate-help-content"
+                      v-model="visible"
+                      class="setting-section mt-2"
+                      ><div class="ml-3">
+                        <p>
+                          {{ $t('pageCertificates.helpText.companyUnit') }}
+                        </p>
+                      </div>
+                    </b-collapse>
+                  </div>
                   <b-form-group
                     :label="$t('pageCertificates.modal.companyUnit')"
                     label-for="company-unit"
@@ -138,6 +237,21 @@
               </b-row>
               <b-row>
                 <b-col lg="6">
+                  <div
+                    v-if="visible"
+                    class="help-section field-width mt-2 mb-2"
+                  >
+                    <b-collapse
+                      id="certificates-generate-help-content"
+                      v-model="visible"
+                      class="setting-section mt-2"
+                      ><div class="ml-3">
+                        <p>
+                          {{ $t('pageCertificates.helpText.commonName') }}
+                        </p>
+                      </div>
+                    </b-collapse>
+                  </div>
                   <b-form-group
                     :label="$t('pageCertificates.modal.commonName')"
                     label-for="common-name"
@@ -155,6 +269,23 @@
                   </b-form-group>
                 </b-col>
                 <b-col lg="6">
+                  <div
+                    v-if="visible"
+                    class="help-section field-width mt-2 mb-2"
+                  >
+                    <b-collapse
+                      id="certificates-generate-help-content"
+                      v-model="visible"
+                      class="setting-section mt-2"
+                      ><div class="ml-3">
+                        <p>
+                          {{
+                            $t('pageCertificates.helpText.challengePassword')
+                          }}
+                        </p>
+                      </div>
+                    </b-collapse>
+                  </div>
                   <b-form-group label-for="challenge-password">
                     <template #label>
                       {{ $t('pageCertificates.modal.challengePassword') }} -
@@ -173,6 +304,21 @@
               </b-row>
               <b-row>
                 <b-col lg="6">
+                  <div
+                    v-if="visible"
+                    class="help-section field-width mt-2 mb-2"
+                  >
+                    <b-collapse
+                      id="certificates-generate-help-content"
+                      v-model="visible"
+                      class="setting-section mt-2"
+                      ><div class="ml-3">
+                        <p>
+                          {{ $t('pageCertificates.helpText.contactPerson') }}
+                        </p>
+                      </div>
+                    </b-collapse>
+                  </div>
                   <b-form-group label-for="contact-person">
                     <template #label>
                       {{ $t('pageCertificates.modal.contactPerson') }} -
@@ -189,6 +335,21 @@
                   </b-form-group>
                 </b-col>
                 <b-col lg="6">
+                  <div
+                    v-if="visible"
+                    class="help-section field-width mt-2 mb-2"
+                  >
+                    <b-collapse
+                      id="certificates-generate-help-content"
+                      v-model="visible"
+                      class="setting-section mt-2"
+                      ><div class="ml-3">
+                        <p>
+                          {{ $t('pageCertificates.helpText.emailAddress') }}
+                        </p>
+                      </div>
+                    </b-collapse>
+                  </div>
                   <b-form-group label-for="email-address">
                     <template #label>
                       {{ $t('pageCertificates.modal.emailAddress') }} -
@@ -207,6 +368,21 @@
               </b-row>
               <b-row>
                 <b-col lg="12">
+                  <div
+                    v-if="visible"
+                    class="help-section field-width mt-2 mb-2"
+                  >
+                    <b-collapse
+                      id="certificates-generate-help-content"
+                      v-model="visible"
+                      class="setting-section mt-2"
+                      ><div class="ml-3">
+                        <p>
+                          {{ $t('pageCertificates.helpText.alternateName') }}
+                        </p>
+                      </div>
+                    </b-collapse>
+                  </div>
                   <b-form-group label-for="alternate-name">
                     <template #label>
                       {{ $t('pageCertificates.modal.alternateName') }} -
@@ -244,6 +420,21 @@
             <b-col lg="3">
               <b-row>
                 <b-col lg="12">
+                  <div
+                    v-if="visible"
+                    class="help-section field-width mt-2 mb-2"
+                  >
+                    <b-collapse
+                      id="certificates-generate-help-content"
+                      v-model="visible"
+                      class="setting-section mt-2"
+                      ><div class="ml-3">
+                        <p>
+                          {{ $t('pageCertificates.helpText.keyPairAlgorithm') }}
+                        </p>
+                      </div>
+                    </b-collapse>
+                  </div>
                   <p class="col-form-label">
                     {{ $t('pageCertificates.modal.privateKey') }}
                   </p>
@@ -274,6 +465,21 @@
               <b-row>
                 <b-col lg="12">
                   <template v-if="$v.form.keyPairAlgorithm.$model === 'EC'">
+                    <div
+                      v-if="visible && $v.form.keyPairAlgorithm.$model === 'EC'"
+                      class="help-section field-width mt-2 mb-2"
+                    >
+                      <b-collapse
+                        id="certificates-generate-help-content"
+                        v-model="visible"
+                        class="setting-section mt-2"
+                        ><div class="ml-3">
+                          <p>
+                            {{ $t('pageCertificates.helpText.keyCurveId') }}
+                          </p>
+                        </div>
+                      </b-collapse>
+                    </div>
                     <b-form-group
                       :label="$t('pageCertificates.modal.keyCurveId')"
                       label-for="key-curve-id"
@@ -298,6 +504,23 @@
                     </b-form-group>
                   </template>
                   <template v-if="$v.form.keyPairAlgorithm.$model === 'RSA'">
+                    <div
+                      v-if="
+                        visible && $v.form.keyPairAlgorithm.$model === 'RSA'
+                      "
+                      class="help-section field-width mt-2 mb-2"
+                    >
+                      <b-collapse
+                        id="certificates-generate-help-content"
+                        v-model="visible"
+                        class="setting-section mt-2"
+                        ><div class="ml-3">
+                          <p>
+                            {{ $t('pageCertificates.helpText.keyBitLength') }}
+                          </p>
+                        </div>
+                      </b-collapse>
+                    </div>
                     <b-form-group
                       :label="$t('pageCertificates.modal.keyBitLength')"
                       label-for="key-bit-length"
@@ -385,10 +608,11 @@ import { COUNTRY_LIST } from './CsrCountryCodes';
 import { CERTIFICATE_TYPES } from '@/store/modules/SecurityAndAccess/CertificatesStore';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
+import HelpContent from '@/components/Global/HelpContent.vue';
 
 export default {
   name: 'ModalGenerateCsr',
-  components: { IconAdd, IconCheckmark },
+  components: { IconAdd, IconCheckmark, HelpContent },
   mixins: [BVToastMixin, VuelidateMixin],
   data() {
     return {
@@ -425,6 +649,7 @@ export default {
       keyBitLengthOptions: [2048],
       csrString: '',
       csrStringCopied: false,
+      visible: false,
     };
   },
   validations: {
@@ -494,6 +719,14 @@ export default {
         }, 5000 /*5 seconds*/);
       });
     },
+    toggleVisibility() {
+      this.visible = !this.visible;
+    },
   },
 };
 </script>
+<style scoped>
+.help-section {
+  background: #bfdff6;
+}
+</style>

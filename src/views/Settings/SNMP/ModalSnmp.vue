@@ -11,6 +11,28 @@
     <b-form id="form-snmp" novalidate @submit.prevent="handleSubmit">
       <b-container>
         <b-row>
+          <b-col class="text-right">
+            <help-content
+              :id="'collapse-a'"
+              :visible="visible"
+              @toggle-visibility="toggleVisibility"
+            ></help-content>
+          </b-col>
+        </b-row>
+        <b-row>
+          <div v-if="visible" class="help-section field-width mt-2 mb-2">
+            <b-collapse
+              id="snmp-model-help-content"
+              v-model="visible"
+              class="mt-2"
+              ><div class="ml-3">
+                <p>
+                  There are three types of protocols available for SNMP Settings
+                  select any on from the option to create a SNMP Subscription
+                </p>
+              </div>
+            </b-collapse>
+          </div>
           <b-form-group
             :label="$t('pageSnmp.modal.protocol')"
             label-for="protocol"
@@ -38,6 +60,18 @@
           </b-form-group>
         </b-row>
         <b-row>
+          <div v-if="visible" class="help-section field-width mt-2 mb-2">
+            <b-collapse
+              id="snmp-model-help-content"
+              v-model="visible"
+              class="setting-section mt-2"
+              ><div class="ml-3">
+                <p>
+                  There is only one subscriptionType is now availble select that
+                </p>
+              </div>
+            </b-collapse>
+          </div>
           <b-form-group
             :label="$t('pageSnmp.modal.subscriptionType')"
             label-for="subscriptionType"
@@ -65,6 +99,20 @@
           </b-form-group>
         </b-row>
         <b-row>
+          <div v-if="visible" class="help-section field-width mt-2 mb-2">
+            <b-collapse
+              id="snmp-model-help-content"
+              v-model="visible"
+              class="mt-2"
+              ><div class="ml-3">
+                <p>
+                  Give destination Ip, you can give both ipv4 and ipv6. if the
+                  protocolType is SNMPv3 need use this format to give ip address
+                  (username@ipAddress).
+                </p>
+              </div>
+            </b-collapse>
+          </div>
           <b-form-group
             :label="$t('pageSnmp.modal.destination')"
             label-for="destination"
@@ -123,9 +171,10 @@
 <script>
 import { required } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
+import HelpContent from '@/components/Global/HelpContent.vue';
 
 export default {
-  components: {},
+  components: { HelpContent },
   mixins: [VuelidateMixin],
   props: {
     snmp: {
@@ -148,6 +197,7 @@ export default {
         { value: 'SNMPv2c', text: this.$t('pageSnmp.snmpProtocolV2') },
         { value: 'SNMPv3', text: this.$t('pageSnmp.snmpProtocolV3') },
       ],
+      visible: false,
     };
   },
   computed: {
@@ -273,11 +323,17 @@ export default {
         }
       }
     },
+    toggleVisibility() {
+      this.visible = !this.visible;
+    },
   },
 };
 </script>
 <style scoped>
 .field-width {
   width: 220%;
+}
+.help-section {
+  background: #bfdff6;
 }
 </style>

@@ -1299,7 +1299,20 @@
             "rule4": "Es müssen mindestens 5 eindeutige Zeichen enthalten (abcabcabc nicht zulässig)",
             "rule5": "Es dürfen keine einfachen Passwörter wie „Passwort“ sein."
           }
-     }
+        },
+        "helpText": {
+            "RoleDescriptions": "Klicken Sie auf das Symbol, um die Benutzerrechte anzuzeigen, mit denen die Benutzeroberfläche konfiguriert werden kann..",
+            "ComplexityRules": "Klicken Sie auf das Symbol, um die Regeln zum Erstellen von Passwörtern basierend auf der Passwortkomplexität anzuzeigen.",
+            "accountStatus": "Das Benutzerkonto kann durch Auswahl aktiviert und deaktiviert werden.",
+            "username": "Der Benutzername darf nicht mit einer Zahl beginnen und darf keine Sonderzeichen außer dem Unterstrich enthalten",
+            "privilege": "Wählen Sie den Berechtigungstyp für den Zugriff des neuen Benutzers aus und konfigurieren Sie die WebUI basierend auf dem Berechtigungstyp",
+            "passwordChange": "Wählen Sie „passwordChangeRequired“ (Aktivieren/Deaktivieren) für den Benutzer, der erstellt wird. Wenn sich der Benutzer zum ersten Mal anmeldet, werden Sie aufgefordert, das Passwort zu ändern.",
+            "virtualMedia": "Wählen Sie „VMedia-Zugriff aktivieren/deaktivieren“, wenn „Aktivieren“ bedeutet, dass der Benutzer auf die virtuelle Medienseite zugreifen kann.",
+            "createPassword": "Erstellen Sie ein Passwort für den neuen Benutzer. Bevor Sie ein Passwort erstellen, überprüfen Sie bitte die Regeln zur Passwortkomplexität",
+            "confirmPasswoed": "Geben Sie zur Bestätigung dasselbe Passwort ein",
+            "lockoutThreshold": "Hier können wir festlegen, wie oft die Anmeldung mit dem abgenutzten Versuch erfolgen kann. Wir können den Bereich zwischen 0 und 65535 festlegen",
+            "unlockMethod": "Wählen Sie den Typ „Manuell/Automatisch“, um den gesperrten Benutzer zum Entsperren wiederherzustellen. Wenn „Automatisch“ bedeutet, geben Sie Zeit, um das Benutzerkonto nach einer bestimmten Zeitspanne zu entsperren"
+        }
     },
     "pageLogin": {
         "language": "Sprache",
@@ -1727,7 +1740,19 @@
         "kvmSessionTimeOut": "Zeitüberschreitung der KVM-Sitzung",
         "kvmSessionTimeOutDescription": "Ändern Sie das KVM-Sitzungs-Timeout zwischen 1 Minute und 1440 Minuten (1 Tag) Zeitverzögerung",
         "kvmPortValue": "KVM-Portwert (in Zahlen)",
-        "kvmTimeoutValueLimits": "Bitte geben Sie die Minuten zwischen %{min} und %{max} ein."
+        "kvmTimeoutValueLimits": "Bitte geben Sie die Minuten zwischen %{min} und %{max} ein.",
+        "helpText": {
+            "ipmi": "Um Netzwerk-IPMI zu verwenden, aktivieren Sie die Umschalttaste. Wenn Sie die Option nicht verwenden möchten, deaktivieren Sie die Umschalttaste",
+            "kvm": "Klicken Sie auf die Umschaltfläche zum Aktivieren/Deaktivieren, um die KVM-Seite im Menü „Operationen“ zu verwenden",
+            "virtualMedia": "Klicken Sie auf die Umschalttaste zum Aktivieren/Deaktivieren, um die Virtual Media-Seite für die Bildumleitung im Menü „Operationen“ zu verwenden",
+            "solssh": "Klicken Sie auf die Umschaltfläche zum Aktivieren/Deaktivieren, um den SOL-SSH-Portwert festzulegen",
+            "ssdp": "Klicken Sie auf die Umschaltfläche zum Aktivieren/Deaktivieren, um den SSDP-Portwert anzuzeigen",
+            "snmp": "Klicken Sie auf die Umschaltfläche „Aktivieren/Deaktivieren“, um den SNMP-Portwert zu lesen",
+            "webSessionTimeOut": "Ändern Sie das Websitzungs-Timeout zwischen 30 Sekunden und 86.400 Sekunden (1 Tag).",
+            "kvmSessionTimeOut": "Ändern Sie das KVM-Sitzungs-Timeout zwischen 1 Minute und 1440 Minuten (1 Tag) Zeitverzögerung",
+            "passwordComplexity": "Wählen Sie die Dropdown-Liste „Passwortkomplexität“ aus, um die Passwortkomplexität festzulegen (Deaktiviert, Niedrig, Mittel, Hoch). Aufgrund von IPMI 2.0-Einschränkungen darf das Passwort eine Länge von 20 Byte nicht überschreiten",
+            "passwordHistory": "Wählen Sie das Dropdown-Menü „Passwortverlauf“ aus, um den Passwortverlauf festzulegen (0 bis 5). Speichert die letzten N(0~5) Passwörter für jeden Benutzer, um den Passwortänderungsverlauf zu erzwingen und zu verhindern, dass der Benutzer zu häufig zwischen denselben Passwörtern wechselt"
+        }
     },
     "pagePower": {
         "description": "Legen Sie eine Leistungsobergrenze fest, um den Stromverbrauch auf oder unter dem angegebenen Wert in Watt zu halten",
@@ -1861,6 +1886,23 @@
             "successAddCertificate": "Erfolgreich hinzugefügt %{certificate}.",
             "successDeleteCertificate": "Erfolgreich gelöscht %{certificate}.",
             "successReplaceCertificate": "Erfolgreich ersetzt %{certificate}."
+        },
+        "helpText": {
+            "certificateType": "Select the Certificate type user want",
+            "uploadFile": "Upload the file the related to the Certificate type user selected",
+            "country": "Select the country region were your location having",
+            "state": "Give the state of which country you selected",
+            "city": "Give the city name of the given state",
+            "companyName": "Give the company name",
+            "companyUnit": "Give the Company unit For which you need",
+            "commonName": "Give the Company unit comman name",
+            "challengePassword": "Give the Challenge Password if required it was optional",
+            "contactPerson": "Enter the Contact Person detail if required it was optional",
+            "emailAddress": "Enter the Email Address of the organisation if required it was optional",
+            "alternateName": "Give any alternate name if required it was optional",
+            "keyPairAlgorithm": "Select any one of the key Pair Algorithm",
+            "keyCurveId": "Select the key Curve ID for selected key Pair Algorithm",
+            "keyBitLength": "Select the key Bit Length for selected key Pair Algorithm"
         }
     },
     "pageVirtualMedia": {

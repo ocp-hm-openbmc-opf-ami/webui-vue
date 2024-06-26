@@ -1307,6 +1307,19 @@
                 "rule4": "Must contain at least 5 unique characters (abcabcabc not allowed)",
                 "rule5": "Cannot be simple passwords like 'password'"
             }
+        },
+        "helpText": {
+            "RoleDescriptions": "Click on <icon-chevron /> icon to view the user privileges that can configure the UI.",
+            "ComplexityRules": "Click on <icon-chevron /> icon to see the rules, how to create Passwords based on the Password complexity.",
+            "accountStatus": "The user account can be Enable and Disable by choosing ",
+            "username": "Username cannot start with a number and no special characters except underscore",
+            "privilege": "Select the Privilege type for the new user creating to access and Configure the WebUI based on the Privilege type",
+            "passwordChange": "Select passwordChangeRequired Enable/Disable for the user creating, When the user login very first time it ask to Change the password.",
+            "virtualMedia": "Select VMedia Access Enable/Disable, if Enable means the user can access the virtual media page.",
+            "createPassword": "Create an password for the new user, before creating password please check the password complexity rules",
+            "confirmPasswoed": "Give same password to confirm",
+            "lockoutThreshold": "Here we can set the how many time can the use login with the worng attempt, we can set the range between 0 to 65535",
+            "unlockMethod": "Select the type Manual/Automatic to recover the locked user to unlock, if Automatic means give time duration to unloack the user account after given timeout"
         }
     },
     "pageLogin": {
@@ -1735,8 +1748,19 @@
         "kvmSessionTimeOut": "KVM Session Timeout",
         "kvmSessionTimeOutDescription": "Change the kvm session timeout in between 1 minute to 1440 minutes (1 day) time delay",
         "kvmPortValue": "KVM Port Value (in numbers)",
-        "kvmTimeoutValueLimits": "Kindly enter the minutes between %{min} and %{max}"
-
+        "kvmTimeoutValueLimits": "Kindly enter the minutes between %{min} and %{max}",
+        "helpText": {
+            "ipmi": "To use network ipmi Enable the toggle button, if not want to use means Disable the toggle button",
+            "kvm": "Click the toggle button to Enable/Disable to use the KVM page in Operations menu",
+            "virtualMedia": "Click the toggle button to Enable/Disable to use the Virtual Meadia Page for image redirection in Operations menu",
+            "solssh": "Click the toggle button to Enable/Disable to set the SOL SSH port value",
+            "ssdp": "Click the toggle button to Enable/Disable to see the SSDP port value",
+            "snmp": "Click the toggle button to Enable/Disable to read the SNMP port value",
+            "webSessionTimeOut": "Change the Web session timeout in between 30 seconds to 86400 seconds (1 day) time duration",
+            "kvmSessionTimeOut": "Change the kvm session timeout in between 1 minute to 1440 minutes (1 day) time delay",
+            "passwordComplexity": "Select the Password Complexity dropdown to set the password complexity (Disabled, Low, Medium, High). Password cannot exceed 20 bytes of length due to IPMI 2.0 restrictions",
+            "passwordHistory": "Select the Password History dropdown to set the password History (0 to 5). saves the last N(0~5) passwords for each user in order to force password change history and keep the user from alternating between the same password too frequently"
+        }
     },
     "pagePower": {
         "description": "Set a power cap to keep power consumption at or below the specified value in watts",
@@ -1870,6 +1894,23 @@
             "successAddCertificate": "Successfully added %{certificate}.",
             "successDeleteCertificate": "Successfully deleted %{certificate}.",
             "successReplaceCertificate": "Successfully replaced %{certificate}."
+        },
+        "helpText": {
+            "certificateType": "Select the Certificate type user want",
+            "uploadFile": "Upload the file the related to the Certificate type user selected",
+            "country": "Select the country region were your location having",
+            "state": "Give the state of which country you selected",
+            "city": "Give the city name of the given state",
+            "companyName": "Give the company name",
+            "companyUnit": "Give the Company unit For which you need",
+            "commonName": "Give the Company unit comman name",
+            "challengePassword": "Give the Challenge Password if required it was optional",
+            "contactPerson": "Enter the Contact Person detail if required it was optional",
+            "emailAddress": "Enter the Email Address of the organisation if required it was optional",
+            "alternateName": "Give any alternate name if required it was optional",
+            "keyPairAlgorithm": "Select any one of the key Pair Algorithm",
+            "keyCurveId": "Select the key Curve ID for selected key Pair Algorithm",
+            "keyBitLength": "Select the key Bit Length for selected key Pair Algorithm"
         }
     },
     "pageVirtualMedia": {

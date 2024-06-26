@@ -12,6 +12,30 @@
     <div v-else>
       <b-row>
         <b-col xl="9" class="text-right">
+          <help-content
+            :id="'collapse-a'"
+            :visible="visible"
+            @toggle-visibility="toggleVisibility"
+          ></help-content>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col xl="9" class="text-right">
+          <div
+            v-if="visible"
+            class="help-section text-left field-width mt-3 mb-2"
+          >
+            <b-collapse id="snmp-help-content" v-model="visible" class="mt-2"
+              ><div class="ml-3">
+                <p>
+                  Below is a list of Created SNMP Subscription are showing. Also
+                  provided the basic information about each Users.<br />
+                  Click on <icon-trashcan></icon-trashcan> icon to Delete the
+                  Created SNMP Traps.
+                </p>
+              </div>
+            </b-collapse>
+          </div>
           <b-button
             variant="primary"
             class="mr-2"
@@ -30,6 +54,7 @@
           </b-button>
         </b-col>
       </b-row>
+
       <b-row>
         <b-col xl="9">
           <b-table
@@ -104,6 +129,7 @@ import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import ModalSnmp from './ModalSnmp.vue';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
+import HelpContent from '@/components/Global/HelpContent.vue';
 
 export default {
   name: 'SnmpSettings',
@@ -114,6 +140,7 @@ export default {
     IconTrashcan,
     IconEdit,
     ModalSnmp,
+    HelpContent,
   },
   mixins: [LoadingBarMixin, BVToastMixin, LicensecheckMixin],
   data() {
@@ -151,6 +178,7 @@ export default {
         },
       ],
       licenseName: 'SNMP',
+      visible: false,
     };
   },
   computed: {
@@ -268,6 +296,14 @@ export default {
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.endLoader());
     },
+    toggleVisibility() {
+      this.visible = !this.visible;
+    },
   },
 };
 </script>
+<style scoped>
+.help-section {
+  background: #bfdff6;
+}
+</style>

@@ -1300,6 +1300,19 @@
                 "rule4": "必须包含至少 5 个唯一字符（不允许使用 abcabcabc）",
                 "rule5": "不能是“password”等简单密码"
               }
+        },
+        "helpText": {
+            "RoleDescriptions": "单击图标可查看可配置 UI 的用户权限。",
+            "ComplexityRules": "单击图标查看规则，以及如何根据密码复杂性创建密码。",
+            "accountStatus": "用户帐户可以通过选择启用和禁用 ",
+            "username": "用户名不能以数字开头且不能包含下划线以外的特殊字符",
+            "privilege": "为创建访问权限的新用户选择权限类型，并根据权限类型配置WebUI",
+            "passwordChange": "为创建的用户选择passwordChangeRequired启用/禁用，当用户第一次登录时会要求更改密码。",
+            "virtualMedia": "如果启用表示用户可以访问虚拟媒体页面，请选择“VMedia Access 启用/禁用”。",
+            "createPassword": "为新用户创建密码，创建密码前请检查密码复杂度规则",
+            "confirmPasswoed": "提供相同的密码进行确认",
+            "lockoutThreshold": "这里我们可以设置可以尝试登录多少次，我们可以设置范围在0到65535之间",
+            "unlockMethod": "选择类型“手动/自动”以恢复锁定的用户解锁，如果“自动”意味着在给定的超时后给定持续时间以解锁用户帐户"
         }
     },
     "pageLogin": {
@@ -1727,7 +1740,19 @@
         "kvmSessionTimeOut": "KVM 会话超时",
         "kvmSessionTimeOutDescription": "将 KVM 会话超时更改为 1 分钟到 1440 分钟（1 天）时间延迟",
         "kvmPortValue": "KVM 端口值（以数字表示）",
-        "kvmTimeoutValueLimits": "请输入 %{min} 和 %{max} 之间的分钟数"
+        "kvmTimeoutValueLimits": "请输入 %{min} 和 %{max} 之间的分钟数",
+        "helpText": {
+            "ipmi": "使用网络 ipmi 启用切换按钮，如果不想使用则禁用切换按钮",
+            "kvm": "单击“操作”菜单中的“启用/禁用”切换按钮以使用 KVM 页面",
+            "virtualMedia": "单击切换按钮以启用/禁用以在“操作”菜单中使用虚拟媒体页面进行图像重定向",
+            "solssh": "单击启用/禁用切换按钮以设置 SOL SSH 端口值",
+            "ssdp": "单击启用/禁用切换按钮以查看 SSDP 端口值",
+            "snmp": "单击切换按钮启用/禁用以读取 SNMP 端口值",
+            "webSessionTimeOut": "将 Web 会话超时更改为 30 秒到 86400 秒（1 天）的持续时间",
+            "kvmSessionTimeOut": "将 kvm 会话超时更改为 1 分钟到 1440 分钟（1 天）时间延迟",
+            "passwordComplexity": "选择密码复杂性下拉列表以设置密码复杂性（禁用、低、中、高）。由于 IPMI 2.0 限制，密码长度不能超过 20 个字节",
+            "passwordHistory": "选择密码历史记录下拉列表以设置密码历史记录（0 到 5）。保存每个用户最后 N(0~5) 个密码，以强制密码更改历史记录并防止用户过于频繁地在同一密码之间切换"
+        }
     },
     "pagePower": {
         "description": "设置电源上限以使功耗保持在或低于指定值",
@@ -1861,6 +1886,23 @@
             "successAddCertificate": "新增 %{certificate} 成功",
             "successDeleteCertificate": "删除 %{certificate} 成功",
             "successReplaceCertificate": "置换 %{certificate} 成功"
+        },
+        "helpText": {
+            "certificateType": "Select the Certificate type user want",
+            "uploadFile": "Upload the file the related to the Certificate type user selected",
+            "country": "Select the country region were your location having",
+            "state": "Give the state of which country you selected",
+            "city": "Give the city name of the given state",
+            "companyName": "Give the company name",
+            "companyUnit": "Give the Company unit For which you need",
+            "commonName": "Give the Company unit comman name",
+            "challengePassword": "Give the Challenge Password if required it was optional",
+            "contactPerson": "Enter the Contact Person detail if required it was optional",
+            "emailAddress": "Enter the Email Address of the organisation if required it was optional",
+            "alternateName": "Give any alternate name if required it was optional",
+            "keyPairAlgorithm": "Select any one of the key Pair Algorithm",
+            "keyCurveId": "Select the key Curve ID for selected key Pair Algorithm",
+            "keyBitLength": "Select the key Bit Length for selected key Pair Algorithm"
         }
     },
     "pageVirtualMedia": {

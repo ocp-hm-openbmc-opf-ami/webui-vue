@@ -10,6 +10,15 @@
     </template>
     <b-form id="form-user" novalidate @submit.prevent="handleSubmit">
       <b-container>
+        <b-row>
+          <b-col class="text-right">
+            <help-content
+              :id="'collapse-a'"
+              :visible="visible"
+              @toggle-visibility="toggleVisibility"
+            ></help-content>
+          </b-col>
+        </b-row>
         <!-- Manual unlock form control -->
         <b-row v-if="!newUser && manualUnlockPolicy && user.Locked">
           <b-col sm="9">
@@ -38,6 +47,18 @@
         </b-row>
         <b-row>
           <b-col>
+            <div v-if="visible" class="help-section mt-4">
+              <b-collapse
+                id="userManagement-modal-help-content"
+                v-model="visible"
+                class="mt-2"
+                ><div class="ml-3">
+                  <p>
+                    {{ $t('pageUserManagement.helpText.accountStatus') }}
+                  </p>
+                </div>
+              </b-collapse>
+            </div>
             <b-form-group :label="$t('pageUserManagement.modal.accountStatus')">
               <b-form-radio
                 v-model="form.status"
@@ -62,6 +83,18 @@
                 {{ $t('global.status.disabled') }}
               </b-form-radio>
             </b-form-group>
+            <div v-if="visible" class="help-section mt-4">
+              <b-collapse
+                id="userManagement-modal-help-content"
+                v-model="visible"
+                class="mt-2"
+                ><div class="ml-3">
+                  <p>
+                    {{ $t('pageUserManagement.helpText.username') }}
+                  </p>
+                </div>
+              </b-collapse>
+            </div>
             <b-form-group
               :label="$t('pageUserManagement.modal.username')"
               label-for="username"
@@ -103,6 +136,18 @@
                 </template>
               </b-form-invalid-feedback>
             </b-form-group>
+            <div v-if="visible" class="help-section mt-4">
+              <b-collapse
+                id="userManagement-modal-help-content"
+                v-model="visible"
+                class="mt-2"
+                ><div class="ml-3">
+                  <p>
+                    {{ $t('pageUserManagement.helpText.privilege') }}
+                  </p>
+                </div>
+              </b-collapse>
+            </div>
             <b-form-group
               :label="$t('pageUserManagement.modal.privilege')"
               label-for="privilege"
@@ -128,6 +173,18 @@
                 </template>
               </b-form-invalid-feedback>
             </b-form-group>
+            <div v-if="visible" class="help-section mt-4">
+              <b-collapse
+                id="userManagement-modal-help-content"
+                v-model="visible"
+                class="mt-2"
+                ><div class="ml-3">
+                  <p>
+                    {{ $t('pageUserManagement.helpText.passwordChange') }}
+                  </p>
+                </div>
+              </b-collapse>
+            </div>
             <b-form-group
               :label="$t('pageUserManagement.modal.passwordChangeRequired')"
             >
@@ -152,6 +209,18 @@
                 {{ $t('global.status.disabled') }}
               </b-form-radio>
             </b-form-group>
+            <div v-if="visible" class="help-section mt-4">
+              <b-collapse
+                id="userManagement-modal-help-content"
+                v-model="visible"
+                class="mt-2"
+                ><div class="ml-3">
+                  <p>
+                    {{ $t('pageUserManagement.helpText.virtualMedia') }}
+                  </p>
+                </div>
+              </b-collapse>
+            </div>
             <b-form-group :label="$t('pageUserManagement.modal.vmediaAccess')">
               <b-form-radio
                 v-model="form.vmediaAccess"
@@ -176,6 +245,18 @@
             </b-form-group>
           </b-col>
           <b-col>
+            <div v-if="visible" class="help-section mt-4">
+              <b-collapse
+                id="userManagement-modal-help-content"
+                v-model="visible"
+                class="mt-2"
+                ><div class="ml-3">
+                  <p>
+                    {{ $t('pageUserManagement.helpText.createPassword') }}
+                  </p>
+                </div>
+              </b-collapse>
+            </div>
             <b-form-group
               :label="$t('pageUserManagement.modal.userPassword')"
               label-for="password"
@@ -210,6 +291,18 @@
                 </b-form-invalid-feedback>
               </input-password-toggle>
             </b-form-group>
+            <div v-if="visible" class="help-section mt-4">
+              <b-collapse
+                id="userManagement-modal-help-content"
+                v-model="visible"
+                class="mt-2"
+                ><div class="ml-3">
+                  <p>
+                    {{ $t('pageUserManagement.helpText.confirmPasswoed') }}
+                  </p>
+                </div>
+              </b-collapse>
+            </div>
             <b-form-group
               :label="$t('pageUserManagement.modal.confirmUserPassword')"
               label-for="password-confirmation"
@@ -279,9 +372,10 @@ import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import InputPasswordToggle from '@/components/Global/InputPasswordToggle';
 import Alert from '@/components/Global/Alert';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
+import HelpContent from '@/components/Global/HelpContent.vue';
 
 export default {
-  components: { Alert, InputPasswordToggle },
+  components: { Alert, InputPasswordToggle, HelpContent },
   mixins: [VuelidateMixin, BVToastMixin],
   props: {
     user: {
@@ -307,6 +401,7 @@ export default {
         vmediaAccess: true,
       },
       disabled: this.$store.getters['global/username'],
+      visible: false,
     };
   },
   computed: {
@@ -460,6 +555,14 @@ export default {
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.closeModal());
     },
+    toggleVisibility() {
+      this.visible = !this.visible;
+    },
   },
 };
 </script>
+<style scoped>
+.help-section {
+  background: #bfdff6;
+}
+</style>

@@ -8,7 +8,28 @@
     <b-form id="form-settings" novalidate @submit.prevent="handleSubmit">
       <b-container>
         <b-row>
+          <b-col class="text-right">
+            <help-content
+              :id="'collapse-a'"
+              :visible="visible"
+              @toggle-visibility="toggleVisibility"
+            ></help-content>
+          </b-col>
+        </b-row>
+        <b-row>
           <b-col>
+            <div v-if="visible" class="help-section mt-4">
+              <b-collapse
+                id="userManagement-settings-help-content"
+                v-model="visible"
+                class="mt-2"
+                ><div class="ml-3">
+                  <p>
+                    {{ $t('pageUserManagement.helpText.lockoutThreshold') }}
+                  </p>
+                </div>
+              </b-collapse>
+            </div>
             <b-form-group
               :label="$t('pageUserManagement.modal.maxFailedLoginAttempts')"
               label-for="lockout-threshold"
@@ -51,6 +72,18 @@
             </b-form-group>
           </b-col>
           <b-col>
+            <div v-if="visible" class="help-section mt-4">
+              <b-collapse
+                id="userManagement-settings-help-content"
+                v-model="visible"
+                class="mt-2"
+                ><div class="ml-3">
+                  <p>
+                    {{ $t('pageUserManagement.helpText.unlockMethod') }}
+                  </p>
+                </div>
+              </b-collapse>
+            </div>
             <b-form-group
               :label="$t('pageUserManagement.modal.userUnlockMethod')"
             >
@@ -129,8 +162,10 @@ import {
   minValue,
   maxValue,
 } from 'vuelidate/lib/validators';
+import HelpContent from '@/components/Global/HelpContent.vue';
 
 export default {
+  components: { HelpContent },
   mixins: [VuelidateMixin],
   props: {
     settings: {
@@ -145,6 +180,7 @@ export default {
         unlockMethod: 0,
         lockoutDuration: null,
       },
+      visible: false,
     };
   },
   watch: {
@@ -210,6 +246,14 @@ export default {
         : null;
       this.$v.$reset(); // clear validations
     },
+    toggleVisibility() {
+      this.visible = !this.visible;
+    },
   },
 };
 </script>
+<style scoped>
+.help-section {
+  background: #bfdff6;
+}
+</style>

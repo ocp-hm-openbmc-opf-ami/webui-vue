@@ -3,6 +3,35 @@
     <page-title />
     <b-row>
       <b-col xl="9" class="text-right">
+        <help-content
+          :id="'collapse-a'"
+          :visible="visible"
+          @toggle-visibility="toggleVisibility"
+        ></help-content>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col xl="9" class="text-right">
+        <div v-if="visible" class="help-section text-left mt-4">
+          <b-collapse
+            id="userManagement-help-content"
+            v-model="visible"
+            class="mt-2"
+            ><div class="ml-3">
+              <p>
+                Below is a list of Users Created on this BMC. Also provided the
+                users Privilleges and other basic information about each
+                Users.<br />
+                <b>NOTE</b>: Only Administrator User can delete other users,
+                root user Cannot be deleted.<br />
+                Click on <icon-edit></icon-edit> icon to modify the users
+                Configurations and Password.<br />
+                Click on <icon-trashcan></icon-trashcan> icon to Delete the
+                Created Users.
+              </p>
+            </div>
+          </b-collapse>
+        </div>
         <b-button variant="link" @click="initModalSettings">
           <icon-settings />
           {{ $t('pageUserManagement.accountPolicySettings') }}
@@ -87,6 +116,18 @@
     </b-row>
     <b-row>
       <b-col xl="8">
+        <div v-if="visible" class="help-section mt-4">
+          <b-collapse
+            id="userManagement-help-content"
+            v-model="visible"
+            class="mt-2"
+            ><div class="ml-3">
+              <p>
+                {{ $t('pageUserManagement.helpText.RoleDescriptions') }}
+              </p>
+            </div>
+          </b-collapse>
+        </div>
         <b-button
           v-b-toggle.collapse-role-table
           data-test-id="userManagement-button-viewPrivilegeRoleDescriptions"
@@ -103,6 +144,18 @@
     </b-row>
     <b-row>
       <b-col xl="8">
+        <div v-if="visible" class="help-section mt-4">
+          <b-collapse
+            id="userManagement-help-content"
+            v-model="visible"
+            class="mt-2"
+            ><div class="ml-3">
+              <p>
+                {{ $t('pageUserManagement.helpText.RoleDescriptions') }}
+              </p>
+            </div>
+          </b-collapse>
+        </div>
         <b-button
           v-b-toggle.collapse-Password-rules
           data-test-id="userManagement-button-passwordComplexityRules"
@@ -142,6 +195,7 @@ import TableRoles from './TableRoles';
 import TableToolbar from '@/components/Global/TableToolbar';
 import TableRowAction from '@/components/Global/TableRowAction';
 import PasswordComplexityRules from './PasswordComplexityRules.vue';
+import HelpContent from '@/components/Global/HelpContent.vue';
 
 import BVTableSelectableMixin, {
   selectedRows,
@@ -167,6 +221,7 @@ export default {
     TableRowAction,
     TableToolbar,
     PasswordComplexityRules,
+    HelpContent,
   },
   mixins: [BVTableSelectableMixin, BVToastMixin, LoadingBarMixin],
   beforeRouteLeave(to, from, next) {
@@ -217,6 +272,7 @@ export default {
       selectedRows: selectedRows,
       tableHeaderCheckboxModel: tableHeaderCheckboxModel,
       tableHeaderCheckboxIndeterminate: tableHeaderCheckboxIndeterminate,
+      visible: false,
     };
   },
   computed: {
@@ -445,6 +501,9 @@ export default {
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.endLoader());
     },
+    toggleVisibility() {
+      this.visible = !this.visible;
+    },
   },
 };
 </script>
@@ -454,5 +513,8 @@ export default {
   svg {
     transform: rotate(180deg);
   }
+}
+.help-section {
+  background: #bfdff6;
 }
 </style>

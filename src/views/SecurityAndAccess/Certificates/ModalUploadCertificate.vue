@@ -10,6 +10,15 @@
     </template>
     <b-form>
       <!-- Replace Certificate type -->
+      <b-row>
+        <b-col xl="11" class="text-right">
+          <help-content
+            :id="'collapse-a'"
+            :visible="visible"
+            @toggle-visibility="toggleVisibility"
+          ></help-content>
+        </b-col>
+      </b-row>
       <template v-if="certificate !== null">
         <dl class="mb-4">
           <dt>{{ $t('pageCertificates.modal.certificateType') }}</dt>
@@ -19,6 +28,18 @@
 
       <!-- Add new Certificate type -->
       <template v-else>
+        <div v-if="visible" class="help-section field-width mt-2 mb-2">
+          <b-collapse
+            id="certificates-upload-help-content"
+            v-model="visible"
+            class="setting-section mt-2"
+            ><div class="ml-3">
+              <p>
+                {{ $t('pageCertificates.helpText.certificateType') }}
+              </p>
+            </div>
+          </b-collapse>
+        </div>
         <b-form-group
           :label="$t('pageCertificates.modal.certificateType')"
           label-for="certificate-type"
@@ -38,7 +59,18 @@
           </b-form-invalid-feedback>
         </b-form-group>
       </template>
-
+      <div v-if="visible" class="help-section field-width mt-2 mb-2">
+        <b-collapse
+          id="certificates-upload-help-content"
+          v-model="visible"
+          class="setting-section mt-2"
+          ><div class="ml-3">
+            <p>
+              {{ $t('pageCertificates.helpText.uploadFile') }}
+            </p>
+          </div>
+        </b-collapse>
+      </div>
       <b-form-group :label="$t('pageCertificates.modal.certificateFile')">
         <form-file
           id="certificate-file"
@@ -73,9 +105,10 @@ import { required, requiredIf } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 
 import FormFile from '@/components/Global/FormFile';
+import HelpContent from '@/components/Global/HelpContent.vue';
 
 export default {
-  components: { FormFile },
+  components: { FormFile, HelpContent },
   mixins: [VuelidateMixin],
   props: {
     certificate: {
@@ -96,6 +129,7 @@ export default {
         certificateType: null,
         file: null,
       },
+      visible: false,
     };
   },
   computed: {
@@ -163,6 +197,14 @@ export default {
       bvModalEvt.preventDefault();
       this.handleSubmit();
     },
+    toggleVisibility() {
+      this.visible = !this.visible;
+    },
   },
 };
 </script>
+<style scoped>
+.help-section {
+  background: #bfdff6;
+}
+</style>

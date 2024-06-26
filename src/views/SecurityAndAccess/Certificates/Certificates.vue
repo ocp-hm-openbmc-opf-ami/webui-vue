@@ -2,6 +2,15 @@
   <b-container fluid="xl">
     <page-title />
     <b-row>
+      <b-col xl="11" class="text-right">
+        <help-content
+          :id="'collapse-a'"
+          :visible="visible"
+          @toggle-visibility="toggleVisibility"
+        ></help-content>
+      </b-col>
+    </b-row>
+    <b-row>
       <b-col xl="11">
         <!-- Expired certificates banner -->
         <alert :show="expiredCertificateTypes.length > 0" variant="danger">
@@ -33,6 +42,26 @@
     </b-row>
     <b-row>
       <b-col xl="11" class="text-right">
+        <div v-if="visible" class="help-section text-left mt-4">
+          <b-collapse
+            id="certificates-help-content"
+            v-model="visible"
+            class="mt-2"
+            ><div class="ml-3">
+              <p>
+                Below is a list of Users Created on this BMC. Also provided the
+                users Privilleges and other basic information about each
+                Users.<br />
+                <b>NOTE</b>: Only Administrator User can delete other users,
+                root user Cannot be deleted.<br />
+                Click on <icon-replace></icon-replace> icon to modify the users
+                Configurations and Password.<br />
+                Click on <icon-trashcan></icon-trashcan> icon to Delete the
+                Created Users.
+              </p>
+            </div>
+          </b-collapse>
+        </div>
         <b-button
           v-b-modal.generate-csr
           data-test-id="certificates-button-generateCsr"
@@ -113,6 +142,7 @@ import Alert from '@/components/Global/Alert';
 
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import HelpContent from '@/components/Global/HelpContent.vue';
 
 export default {
   name: 'Certificates',
@@ -126,6 +156,7 @@ export default {
     PageTitle,
     StatusIcon,
     TableRowAction,
+    HelpContent,
   },
   mixins: [BVToastMixin, LoadingBarMixin],
   beforeRouteLeave(to, from, next) {
@@ -164,6 +195,7 @@ export default {
           tdClass: 'text-right text-nowrap',
         },
       ],
+      visible: false,
     };
   },
   computed: {
@@ -334,6 +366,14 @@ export default {
       const fileTypeExtension = file.name.split('.').pop();
       return fileTypeExtension === 'pem';
     },
+    toggleVisibility() {
+      this.visible = !this.visible;
+    },
   },
 };
 </script>
+<style scoped>
+.help-section {
+  background: #bfdff6;
+}
+</style>
