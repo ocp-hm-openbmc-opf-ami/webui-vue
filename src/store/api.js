@@ -21,7 +21,6 @@ api.interceptors.response.use(undefined, (error) => {
       isConsoleWindow.isconsolewindowOpen.close();
     }
     if (response.config.url != '/login') {
-      window.location = '/login';
       // Commit logout to remove XSRF-TOKEN cookie
       store.commit('authentication/logout');
     }

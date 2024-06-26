@@ -46,6 +46,7 @@ const AuthenticationStore = {
       localStorage.removeItem('storedUsername');
       state.xsrfCookie = undefined;
       state.isAuthenticatedCookie = undefined;
+      router.push('/login');
     },
     setConsoleWindow: (state, window) => (state.consoleWindow = window),
     setTfaEnabled: (state, tfaEnabled) => (state.tfaEnabled = tfaEnabled),
@@ -75,14 +76,13 @@ const AuthenticationStore = {
           throw new Error(error);
         });
     },
-    logout({ commit }) {
-      api
+    async logout({ commit }) {
+      return await api
         .post('/logout', { data: [] })
         .then(() => {
           commit('setConsoleWindow', false);
           commit('logout');
         })
-        .then(() => router.push('/login'))
         .catch((error) => console.log(error));
     },
     getUserInfo(_, username) {

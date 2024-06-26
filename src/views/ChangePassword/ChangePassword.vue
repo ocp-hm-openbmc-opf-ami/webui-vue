@@ -34,7 +34,7 @@
                 type="password"
                 :state="getValidationState($v.form.password)"
                 autocomplete="new-password"
-                @change="$v.form.password.$touch()"
+                @input="$v.form.password.$touch()"
               >
               </b-form-input>
               <b-form-invalid-feedback role="alert">
@@ -68,7 +68,7 @@
                 type="password"
                 :state="getValidationState($v.form.passwordConfirm)"
                 autocomplete="new-password"
-                @change="$v.form.passwordConfirm.$touch()"
+                @input="$v.form.passwordConfirm.$touch()"
               >
               </b-form-input>
               <b-form-invalid-feedback role="alert">
@@ -159,7 +159,12 @@ export default {
         .dispatch('userManagement/updateUser', data)
         .then((success) => this.successToast(success))
         .catch(({ message }) => this.errorToast(message))
-        .finally(() => (this.disableSubmitButton = false))
+        .finally(() => {
+          this.disableSubmitButton = false;
+          setTimeout(() => {
+            this.$store.dispatch('authentication/logout');
+          }, 2000);
+        })
         .then(() => this.$router.push('/login'))
         .catch(() => (this.changePasswordError = true));
     },
