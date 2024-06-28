@@ -52,7 +52,6 @@ import BondStore from './modules/Settings/BondStore';
 import LicenseStore from './modules/Settings/LicenseStore';
 import SystemInfoStore from './modules/SystemInventory/SystemInventoryStore';
 import NetworkDDNSStore from './modules/Settings/NetworkDDNSStore';
-import Ncsi from './modules/Settings/NcsiStore';
 
 Vue.use(Vuex);
 
@@ -111,7 +110,6 @@ export default new Vuex.Store({
     license: LicenseStore,
     SystemStore: SystemInfoStore,
     ddnsNetwork: NetworkDDNSStore,
-    ncsi: Ncsi,
   },
   plugins: [WebSocketPlugin],
 });

@@ -171,8 +171,7 @@
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
         "systemInventory": "@:appPageTitle.systemInventory",
-        "networkDDNS": "Network DDNS",
-        "ncsi": "@:appPageTitle.ncsi"
+        "networkDDNS": "Network DDNS"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -225,8 +224,7 @@
         "Bond": "Network Bond",
         "License": "Manage Licenses",
         "systemInventory": "System Inventory",
-        "ddnsConfiguration": "DDNS Configuration",
-        "ncsi": "NCSI"
+        "ddnsConfiguration": "DDNS Configuration"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -1456,24 +1454,6 @@
             "successSaveNetworkSettings": "Successfully updated %{setting} settings."
         }
     },
-    "pageNcsi": {
-        "pageDescription": "Sideband Interface (NC-SI)",
-        "ncsiInterfaceOptions": "NCSI Interface",
-        "packageId": "Package ID",
-        "channelNumber": "Channel Number",
-        "ncsiMode": "NCSI Mode",
-        "autoFailOverMode": "Auto Failover Mode",
-        "manualSwitchMode": "Manual Switch Mode",
-        "options": {
-            "packageOption": "0 (active)"
-        },
-        "toast": {
-            "errorSavinNcsiInterface": "Error Saving NCSI Interface Settings",
-            "errorGettingNcsi": "Error in getting NCSi Interface informations",
-            "successSavingNcsiInterface": "Successfully Saved NCSi Interface Settings",
-            "featureNotEnabled": "The NCSI feature is not enabled."
-        }
-    },
     "pageVlan": {
         "vlan": "VLAN Settings",
         "table": {
@@ -1569,18 +1549,7 @@
             "errorAddCertificate": "Error adding certificate.",
             "errorAddPemCertificate": "Please upload the Cacert PEM certificate",
             "errorAddCrtCertificate": "Please upload the Server CRT certificate",
-            "errorAddKeyCertificate": "Please upload the Server Key certificate"
-        }
-    },
-    "pageAlertDestination": {
-        "pageDescription": "Configure Alert Destinations",
-        "sectionTitle": "Alert Destination",
-        "alertDestinationLabel": "Configure Alert Destination details",
-        "sendEmailTo": "Send Email to:",
-        "sendTestAlert": "send Test Alert",
-        "toast": {
-            "successMsg": "Successfully updated Alert Destination",
-            "errorMsg": "Error in updating Alert Destination",
+            "errorAddKeyCertificate": "Please upload the Server Key certificate",
             "successMsgTestAlert": "Test Alert send successfully",
             "errorMsgAlert": "Error in sending test alerts"
         }
