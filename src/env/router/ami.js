@@ -44,6 +44,7 @@ import Bond from '@/views/Settings/Bond';
 import License from '@/views/Settings/License';
 import systemInventory from '@/views/SystemInventory/SystemInventory';
 import DDNS from '../../views/Settings/NetworkDDNS';
+import Ncsi from '@/views/Settings/Ncsi';
 
 const roles = {
   administrator: 'Administrator',
@@ -393,6 +394,14 @@ const routes = [
         component: Bond,
         meta: {
           title: i18n.t('appPageTitle.bond'),
+        },
+      },
+      {
+        path: '/settings/ncsi',
+        name: 'ncsi',
+        component: Ncsi,
+        meta: {
+          title: i18n.t('appPageTitle.ncsi'),
         },
       },
       {

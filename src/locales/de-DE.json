@@ -168,7 +168,8 @@
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
         "systemInventory":"@:appPageTitle.systemInventory",
-        "networkDDNS": "Netzwerk DDNS"
+        "networkDDNS": "Netzwerk DDNS",
+        "ncsi": "@:appPageTitle.ncsi"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -220,7 +221,8 @@
         "Bond": "Netzwerkbindung",
         "License": "Lizenzen verwalten",
         "systemInventory":"Systeminventar",
-        "ddnsConfiguration": "DDNS Konfiguration"
+        "ddnsConfiguration": "DDNS Konfiguration",
+        "ncsi": "NCSI"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -1446,6 +1448,24 @@
         "toast": {
             "errorSaveNetworkSettings": "Fehler beim Aktualisieren der %{setting} Einstellungen.",
             "successSaveNetworkSettings": "Erfolgreich aktualisiert %{setting} Einstellungen."
+        }
+    },
+    "pageNcsi": {
+        "pageDescription": "Seitenbandschnittstelle (NC-SI)",
+        "ncsiInterfaceOptions": "NCSI-Schnittstelle",
+        "packageId": "Paket-ID",
+        "channelNumber": "Kanal Nummer",
+        "ncsiMode": "NCSI-Modus",
+        "autoFailOverMode": "Automatischer Failover-Modus",
+        "manualSwitchMode": "Manueller Schaltmodus",
+        "options": {
+            "packageOption": "0 (active)"
+        },
+        "toast": {
+            "errorSavinNcsiInterface": "Fehler beim Speichern der NCSI-Schnittstelleneinstellungen",
+            "errorGettingNcsi": "Fehler beim Abrufen der NCSi-Schnittstelleninformationen",
+            "successSavingNcsiInterface": "NCSi-Schnittstelleneinstellungen erfolgreich gespeichert",
+            "featureNotEnabled": "Die NCSI-Funktion ist nicht aktiviert."
         }
     },
     "pageVlan": {
