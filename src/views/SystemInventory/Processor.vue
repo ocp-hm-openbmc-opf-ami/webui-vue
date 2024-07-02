@@ -33,6 +33,10 @@ export default {
           label: this.$t('pageSystemInventory.processor.maxSpeedMHz'),
         },
         {
+          key: 'OperatingSpeedMHz',
+          label: this.$t('pageSystemInventory.processor.operatingSpeedMHz'),
+        },
+        {
           key: 'model',
           label: this.$t('pageSystemInventory.processor.model'),
         },
@@ -51,6 +55,10 @@ export default {
         {
           key: 'totalCores',
           label: this.$t('pageSystemInventory.processor.totalCores'),
+        },
+        {
+          key: 'totalEnabledCores',
+          label: this.$t('pageSystemInventory.processor.totalEnabledCores'),
         },
         {
           key: 'state',

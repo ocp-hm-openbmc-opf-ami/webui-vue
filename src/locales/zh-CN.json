@@ -305,7 +305,21 @@
             "socket": "插座",
             "effectiveFamily": "高效家庭",
             "totalCores": "总核心数",
-            "state": "状态"
+            "state": "状态",
+            "operatingSpeedMHz": "工作速度MHz",
+            "totalEnabledCores": "启用的核心总数"
+        },
+        "processorFPGA": {
+            "info": "FPGA信息",
+            "id": "Id",
+            "name": "姓名",
+            "firmwareId": "固件 ID",
+            "firmwareManufacturer": "固件制造商",
+            "fpgaType": "FPGA类型",
+            "interfaceType": "接口类型",
+            "model": "模型",
+            "pcieVirtualFunctions": "PCIe 虚拟功能",
+            "programmableFromHost": "可从主机编程"
         },
         "memoryController": {
             "memoryController": "内存控制器",

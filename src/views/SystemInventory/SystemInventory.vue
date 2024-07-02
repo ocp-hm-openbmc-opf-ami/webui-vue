@@ -14,8 +14,10 @@
             >{{ $t('pageSystemInventory.system.systemInfo') }} <system></system
           ></b-tab>
           <b-tab :title="$t('pageSystemInventory.processor.processor')">
-            {{ $t('pageSystemInventory.processor.processorInfo') }}
-            <processor></processor>
+            <b>{{ $t('pageSystemInventory.processor.processorInfo') }}</b>
+            <processor class="mt-2"></processor>
+            <b>{{ $t('pageSystemInventory.processorFPGA.info') }}</b>
+            <fpga class="mt-2"></fpga>
           </b-tab>
           <b-tab
             :title="$t('pageSystemInventory.memoryController.memoryController')"
@@ -92,6 +94,7 @@ import PcieFunction from './PcieFunction.vue';
 import StorageDrive from './StorageDrive.vue';
 import StorageController from './StorageController.vue';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import Fpga from './FPGA.vue';
 export default {
   name: 'SystemInventory',
   components: {
@@ -110,6 +113,7 @@ export default {
     PcieFunction,
     StorageDrive,
     StorageController,
+    Fpga,
   },
   mixins: [LoadingBarMixin],
   data() {

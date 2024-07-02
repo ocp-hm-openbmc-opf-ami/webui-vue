@@ -15,6 +15,7 @@ const SystemInventoryStore = {
     power: [],
     temperature: [],
     voltage: [],
+    fpga: [],
   },
   getters: {
     systems: (state) => state.systems,
@@ -31,6 +32,7 @@ const SystemInventoryStore = {
     power: (state) => state.power,
     temperature: (state) => state.temperature,
     voltage: (state) => state.voltage,
+    fpga: (state) => state.fpga,
   },
   mutations: {
     setSystems: (state, systems) => (state.systems = systems),
@@ -53,6 +55,7 @@ const SystemInventoryStore = {
     setPower: (state, power) => (state.power = power),
     setTemperature: (state, temperature) => (state.temperature = temperature),
     setvoltage: (state, voltage) => (state.voltage = voltage),
+    setFpga: (state, fpga) => (state.fpga = fpga),
   },
   actions: {
     async getSystemsInfo({ commit }) {
@@ -98,6 +101,7 @@ const SystemInventoryStore = {
         .catch((error) => console.log(error));
     },
     async getProcessorsInfo({ commit }) {
+      const fpgaInfo = [];
       return await api
         .get('/redfish/v1/Systems/system/Processors')
         .then(({ data: { Members = [] } = {} }) =>
@@ -106,23 +110,50 @@ const SystemInventoryStore = {
         .then((promises) => api.all(promises))
         .then((response) => {
           const proccessorInfo = response.map(({ data }) => {
+            if (data?.FPGA) {
+              const fpgaData = {
+                id: data.Id || 'NA',
+                name: data.Name || 'NA',
+                firmwareId: data?.FPGA?.FirmwareId || 'NA',
+                firmwareManufacturer: data?.FPGA?.FirmwareManufacturer || 'NA',
+                fpgaType: data?.FPGA?.FpgaType || 'NA',
+                interfaceType: data?.FPGA?.HostInterface?.InterfaceType || 'NA',
+                fpgaModel: data?.FPGA?.Model || 'NA',
+                pcieVirtualFunctions: data?.FPGA?.PCIeVirtualFunctions
+                  ? data?.FPGA?.PCIeVirtualFunctions
+                  : data?.FPGA?.PCIeVirtualFunctions === 0 || 0.0
+                    ? data?.FPGA?.PCIeVirtualFunctions
+                    : 'NA',
+                programmableFromHost: data?.FPGA?.ProgrammableFromHost
+                  ? data?.FPGA?.ProgrammableFromHost
+                  : data?.FPGA?.ProgrammableFromHost === false
+                    ? data?.FPGA?.ProgrammableFromHost
+                    : 'NA',
+              };
+              fpgaInfo.push(fpgaData);
+              commit('setFpga', fpgaInfo);
+            }
             return {
-              id: data.Id ? data.Id : 'NA',
-              name: data.Name ? data.Name : 'NA',
-              manufacturer: data.Manufacturer ? data.Manufacturer : 'NA',
+              id: data.Id || 'NA',
+              name: data.Name || 'NA',
+              manufacturer: data.Manufacturer || 'NA',
               maxSpeedMHz: data.MaxSpeedMHz
                 ? data.MaxSpeedMHz
                 : data.MaxSpeedMHz === 0 || 0.0
                   ? data.MaxSpeedMHz
                   : 'NA',
-              model: data.Model ? data.Model : 'NA',
-              processorArchitecture: data.ProcessorArchitecture
-                ? data.ProcessorArchitecture
-                : 'NA',
-              processorType: data.ProcessorType ? data.ProcessorType : 'NA',
-              socket: data.Socket ? data.Socket : 'NA',
-              totalCores: data.TotalCores ? data.TotalCores : 'NA',
-              state: data.Status?.State ? data.Status?.State : 'NA',
+              model: data.Model || 'NA',
+              processorArchitecture: data.ProcessorArchitecture || 'NA',
+              processorType: data.ProcessorType || 'NA',
+              socket: data.Socket || 'NA',
+              totalCores: data.TotalCores || 'NA',
+              state: data.Status?.State || 'NA',
+              totalEnabledCores: data?.TotalEnabledCores || 'NA',
+              OperatingSpeedMHz: data?.OperatingSpeedMHz
+                ? data?.OperatingSpeedMHz
+                : data?.OperatingSpeedMHz === 0 || 0.0
+                  ? data?.OperatingSpeedMHz
+                  : 'NA',
             };
           });
           commit('setProcessors', proccessorInfo);
