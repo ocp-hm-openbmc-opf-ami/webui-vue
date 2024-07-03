@@ -31,7 +31,8 @@
             "send": "Send",
             "close": "Close",
             "yes": "Yes",
-            "no": "No"
+            "no": "No",
+            "same_session_running_infomation": "Already a session is running in this browser, so opening the same session"
         },
         "ariaLabel": {
             "clearSearch": "Clear search input",

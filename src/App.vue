@@ -6,6 +6,7 @@
 
 <script>
 import store from './store';
+import Cookies from 'js-cookie';
 export default {
   name: 'App',
   watch: {
@@ -14,8 +15,21 @@ export default {
     },
   },
   created() {
+    Cookies.set('loginSessionSuccess', 'true');
     document.title = this.$route.meta.title || 'Page is missing title';
     window.addEventListener('beforeunload', this.handleRefresh);
+    setTimeout(() => {
+      if (
+        Cookies.get('XSRF-TOKEN') &&
+        Cookies.get('loginSessionSuccess') === 'false' &&
+        window.name != 'kvmConsoleWindow' &&
+        window.location.href.indexOf('serial-over-lan-console') == -1
+      ) {
+        this.$bvModal.msgBoxOk(
+          this.$tc('global.action.same_session_running_infomation'),
+        );
+      }
+    }, 2000); // wait to read the XSRF-TOKEN
   },
   beforeDestroy() {
     window.removeEventListener('beforeunload', this.handleRefresh);

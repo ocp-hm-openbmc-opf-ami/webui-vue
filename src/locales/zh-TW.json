@@ -31,7 +31,8 @@
             "send": "傳送",
             "close": "關閉",
             "yes": "是的",
-            "no": "不"
+            "no": "不",
+            "same_session_running_infomation": "該瀏覽器中已經有一個會話正在運行，因此打開同一個會話"
         },
         "ariaLabel": {
             "clearSearch": "清除搜索條件",

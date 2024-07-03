@@ -43,10 +43,11 @@ const AuthenticationStore = {
     logout(state) {
       Cookies.remove('XSRF-TOKEN');
       Cookies.remove('IsAuthenticated');
+      Cookies.remove('loginSessionSuccess');
       localStorage.removeItem('storedUsername');
       state.xsrfCookie = undefined;
       state.isAuthenticatedCookie = undefined;
-      router.push('/login');
+      router.push('/login').catch(() => {});
     },
     setConsoleWindow: (state, window) => (state.consoleWindow = window),
     setTfaEnabled: (state, tfaEnabled) => (state.tfaEnabled = tfaEnabled),
@@ -149,6 +150,7 @@ const AuthenticationStore = {
       commit('setConsoleWindow', false);
       commit('logout');
       localStorage.removeItem('storedLanguage');
+      Cookies.remove('loginSessionSuccess');
       router.push('/login');
     },
   },

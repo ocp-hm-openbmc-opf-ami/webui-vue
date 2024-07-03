@@ -110,6 +110,7 @@ import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import i18n from '@/i18n';
 import Alert from '@/components/Global/Alert';
 import InputPasswordToggle from '@/components/Global/InputPasswordToggle';
+import Cookies from 'js-cookie';
 
 export default {
   name: 'Login',
@@ -175,36 +176,41 @@ export default {
     login: function () {
       this.$v.$touch();
       if (this.$v.$invalid) return;
-      this.disableSubmitButton = true;
-      const username = this.userInfo.username;
-      const password = this.userInfo.password;
-      this.$store
-        .dispatch('authentication/login', { username, password })
-        .then(() => {
-          localStorage.setItem('storedLanguage', i18n.locale);
-          localStorage.setItem('storedUsername', username);
-          this.$store.commit('global/setUsername', username);
-          this.$store.commit('global/setLanguagePreference', i18n.locale);
-          return this.$store.dispatch('authentication/getUserInfo', username);
-        })
-        .then(({ PasswordChangeRequired, RoleId }) => {
-          if (PasswordChangeRequired) {
-            this.$router.push('/change-password');
-          } else {
-            const tfaEnabled = this.$store.getters['authentication/tfaEnabled'];
-            if (tfaEnabled) {
-              this.$router.push('/two-factor-authentication');
+      if (!Cookies.get('XSRF-TOKEN')) {
+        this.disableSubmitButton = true;
+        const username = this.userInfo.username;
+        const password = this.userInfo.password;
+        this.$store
+          .dispatch('authentication/login', { username, password })
+          .then(() => {
+            localStorage.setItem('storedLanguage', i18n.locale);
+            localStorage.setItem('storedUsername', username);
+            this.$store.commit('global/setUsername', username);
+            this.$store.commit('global/setLanguagePreference', i18n.locale);
+            return this.$store.dispatch('authentication/getUserInfo', username);
+          })
+          .then(({ PasswordChangeRequired, RoleId }) => {
+            if (PasswordChangeRequired) {
+              this.$router.push('/change-password');
             } else {
-              this.$router.push('/');
-              this.$store.dispatch('license/getUserAlertCount');
+              const tfaEnabled =
+                this.$store.getters['authentication/tfaEnabled'];
+              if (tfaEnabled) {
+                this.$router.push('/two-factor-authentication');
+              } else {
+                this.$router.push('/');
+                this.$store.dispatch('license/getUserAlertCount');
+              }
             }
-          }
-          if (RoleId) {
-            this.$store.commit('global/setPrivilege', RoleId);
-          }
-        })
-        .catch((error) => console.log(error))
-        .finally(() => (this.disableSubmitButton = false));
+            if (RoleId) {
+              this.$store.commit('global/setPrivilege', RoleId);
+            }
+          })
+          .catch((error) => console.log(error))
+          .finally(() => (this.disableSubmitButton = false));
+      } else {
+        window.location.href = '/';
+      }
     },
   },
 };

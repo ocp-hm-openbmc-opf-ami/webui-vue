@@ -31,7 +31,8 @@
             "send": "发送",
             "close": "关闭",
             "yes": "是的",
-            "no": "不"
+            "no": "不",
+            "same_session_running_infomation": "In diesem Browser läuft bereits eine Sitzung, daher wird dieselbe Sitzung geöffnet"
         },
         "ariaLabel": {
             "clearSearch": "Sucheingabe löschen",
