@@ -31,7 +31,7 @@ const PoliciesStore = {
     solSshPortValue: (state) => state.solSshPortValue,
     rtadEnabled: (state) => state.rtadEnabled,
     vtpmEnabled: (state) => state.vtpmEnabled,
-    getSessionTimeoutValue: (state) => state.sessionTimeoutValue,
+    sessionTimeoutValue: (state) => state.sessionTimeoutValue,
     kvmEnabled: (state) => state.kvmEnabled,
     vmcEnabled: (state) => state.vmcEnabled,
     solEnabled: (state) => state.solEnabled,
@@ -140,9 +140,9 @@ const PoliciesStore = {
         .then((response) => {
           const sessionTimeoutValue = response.data.SessionTimeout;
           const kvmSessionTimeoutValue = Math.floor(
-            response.data?.Oem?.OpenBmc?.KVMSessionTimeout / 60,
+            response.data?.Oem?.Ami?.KVMSessionTimeout / 60,
           );
-          const kvmPortValue = response.data?.Oem?.OpenBmc?.BMCwebPort;
+          const kvmPortValue = response.data?.Oem?.Ami?.BMCwebPort;
           commit('setSessionTimeoutValue', sessionTimeoutValue);
           commit('setKvmSessionTimeout', kvmSessionTimeoutValue);
           commit('setKvmPortValue', kvmPortValue);
@@ -419,9 +419,9 @@ const PoliciesStore = {
           }
         });
     },
-    async saveSessionTimeoutValue({ dispatch }, sessionTimeoutNewValue) {
+    async saveWebSessionTimeoutValue({ dispatch }, webSessionTimeoutValue) {
       const sessionValue = {
-        SessionTimeout: sessionTimeoutNewValue,
+        SessionTimeout: webSessionTimeoutValue,
       };
       return await api
         .patch('/redfish/v1/SessionService', sessionValue)
@@ -484,7 +484,7 @@ const PoliciesStore = {
       const KVMSessionTimeout = Math.ceil(KVMSessionTimeoutValue * 60);
       const Oem = {
         Oem: {
-          OpenBmc: {
+          Ami: {
             KVMSessionTimeout: KVMSessionTimeout,
           },
         },
@@ -503,7 +503,7 @@ const PoliciesStore = {
     async saveKVMPortValue({ dispatch }, kvmPortValue) {
       const Oem = {
         Oem: {
-          OpenBmc: {
+          Ami: {
             BMCwebPort: kvmPortValue,
           },
         },

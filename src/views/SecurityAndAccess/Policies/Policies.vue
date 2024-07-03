@@ -363,19 +363,45 @@
                     </dd>
                   </dl>
                 </b-col>
-                <b-col lg="3" class="session-timeout">
-                  <b-form-select
-                    id="session-timeout-options"
-                    v-model="sessionTimeoutState"
-                    :options="sessionTimeOutOptions"
-                    @change="saveSessionTimeoutValue"
+                <b-col lg="3" class="session-timeout text-right mb-3">
+                  <b-form-group>
+                    <b-form-input
+                      id="web-session-timeout"
+                      v-model="webSessionTimeoutValue"
+                      data-test-id="web-session-timeout"
+                      aria-describedby="power-help-text"
+                      type="text"
+                      :state="getValidationState($v.webSessionTimeoutValue)"
+                      @input="$v.webSessionTimeoutValue.$touch()"
+                    >
+                      <template #first>
+                        <b-form-select-option :value="null" disabled>
+                          {{ $t('global.form.selectAnOption') }}
+                        </b-form-select-option>
+                      </template>
+                    </b-form-input>
+                    <b-form-invalid-feedback role="alert">
+                      <template v-if="!$v.webSessionTimeoutValue.required">
+                        {{ $t('global.form.fieldRequired') }}
+                      </template>
+                      <template v-else-if="!$v.webSessionTimeoutValue.pattern">
+                        {{
+                          $t('pagePolicies.webSessionTimeoutLimits', {
+                            min: 30,
+                            max: 86400,
+                          })
+                        }}
+                      </template>
+                    </b-form-invalid-feedback>
+                  </b-form-group>
+                  <b-button
+                    variant="primary"
+                    type="submit"
+                    data-test-id="button-webSessionTimeoutValue"
+                    @click="saveWebSessionTimeoutValue"
                   >
-                    <template #first>
-                      <b-form-select-option :value="null" disabled>
-                        {{ $t('global.form.selectAnOption') }}
-                      </b-form-select-option>
-                    </template>
-                  </b-form-select>
+                    {{ $t('global.action.save') }}
+                  </b-button>
                 </b-col>
               </b-row>
               <b-row class="setting-section">
@@ -390,13 +416,13 @@
                     </dd>
                   </dl>
                 </b-col>
-                <b-col lg="3" class="session-timeout text-right">
+                <b-col lg="3" class="session-timeout text-right mt-3">
                   <b-form-group>
                     <b-form-input
                       id="kvm-session"
                       v-model="kvmSessionTimeOutValue"
                       data-test-id="kvm-session-timeout"
-                      type="number"
+                      type="text"
                       aria-describedby="power-help-text"
                       :min="1"
                       :max="1440"
@@ -519,6 +545,8 @@ export default {
         { value: 5, text: 5 },
       ],
       kvmSessionTimeOutValue: this.$store.getters['policies/kvmSessionTimeout'],
+      webSessionTimeoutValue:
+        this.$store.getters['policies/sessionTimeoutValue'],
       kvmPort: this.$store.getters['policies/kvmPortValue'],
       modifySSHPolicyDisabled:
         process.env.VUE_APP_MODIFY_SSH_POLICY_DISABLED === 'true',
@@ -617,14 +645,6 @@ export default {
         this.$store.dispatch('policies/setSolSshPortUpdatedValue', newValue);
       },
     },
-    sessionTimeoutState: {
-      get() {
-        return this.$store.getters['policies/getSessionTimeoutValue'];
-      },
-      set(newValue) {
-        return newValue;
-      },
-    },
     complexityState: {
       get() {
         return this.$store.getters['policies/complexity'];
@@ -644,7 +664,11 @@ export default {
     ssdpPortValue() {
       return this.$store.getters['policies/ssdpPortValue'];
     },
-    ...mapState('policies', ['kvmSessionTimeout', 'kvmPortValue']),
+    ...mapState('policies', [
+      'kvmSessionTimeout',
+      'kvmPortValue',
+      'sessionTimeoutValue',
+    ]),
   },
   watch: {
     kvmSessionTimeout: function (value) {
@@ -652,6 +676,9 @@ export default {
     },
     kvmPortValue: function (value) {
       this.kvmPort = value;
+    },
+    sessionTimeoutValue: function (value) {
+      this.webSessionTimeoutValue = value;
     },
   },
   created() {
@@ -670,6 +697,12 @@ export default {
         required,
         pattern: function (pw) {
           return this.kvmSessionTimeoutValidation(pw);
+        },
+      },
+      webSessionTimeoutValue: {
+        required,
+        pattern: function (pw) {
+          return this.webSessionTimeoutValidation(pw);
         },
       },
     };
@@ -732,9 +765,14 @@ export default {
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
-    saveSessionTimeoutValue(sessionTimeoutState) {
+    saveWebSessionTimeoutValue() {
+      this.$v.$touch();
+      if (this.$v.$invalid) return;
       this.$store
-        .dispatch('policies/saveSessionTimeoutValue', sessionTimeoutState)
+        .dispatch(
+          'policies/saveWebSessionTimeoutValue',
+          parseInt(this.webSessionTimeoutValue),
+        )
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
@@ -779,6 +817,16 @@ export default {
     kvmSessionTimeoutValidation(val) {
       if (
         !/^([1-9]|[1-9][0-9]{0,2}|1[0-3][0-9]{0,2}|14[0-3][0-9]|1440)$/.test(
+          val,
+        )
+      ) {
+        return false;
+      }
+      return true;
+    },
+    webSessionTimeoutValidation(val) {
+      if (
+        !/^(3[0-9]|[4-9][0-9]|[1-9][0-9]{2}|[1-8][0-9]{3}|[1-7][0-9]{4}|8[0-5][0-9]{3}|86[0-3][0-9]{2}|86400)$/.test(
           val,
         )
       ) {
