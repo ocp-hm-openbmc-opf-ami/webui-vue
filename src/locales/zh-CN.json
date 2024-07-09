@@ -317,7 +317,7 @@
             "firmwareManufacturer": "固件制造商",
             "fpgaType": "FPGA类型",
             "interfaceType": "接口类型",
-            "model": "模型",
+            "model": "型号",
             "pcieVirtualFunctions": "PCIe 虚拟功能",
             "programmableFromHost": "可从主机编程"
         },

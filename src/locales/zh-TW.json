@@ -317,7 +317,7 @@
             "firmwareManufacturer": "韌體製造商",
             "fpgaType": "FPGA類型",
             "interfaceType": "介面類型",
-            "model": "模型",
+            "model": "型號",
             "pcieVirtualFunctions": "PCIe 虛擬功能",
             "programmableFromHost": "可從主機編程"
         },
