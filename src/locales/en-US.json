@@ -573,7 +573,8 @@
             "username": "User Name",
             "ipAddress": "IP address",
             "privilege": "Privilege",
-            "searchSessions": "Search sessions"
+            "searchSessions": "Search sessions",
+            "mountType": "Mount Type"
         },
         "toast": {
             "errorDelete": "Error disconnecting %{count} session. | Error disconnecting %{count} sessions.",

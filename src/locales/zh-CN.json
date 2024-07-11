@@ -566,7 +566,8 @@
             "username": "用户名称",
             "ipAddress": "IP 位址",
             "privilege": "权限",
-            "searchSessions": "搜寻会话们"
+            "searchSessions": "搜寻会话们",
+            "mountType": "安装类型"
         },
         "toast": {
             "errorDelete": "错误取消连结 %{count} 会话 | 错误取消连结 %{count} 会话们",

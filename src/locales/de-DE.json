@@ -569,7 +569,8 @@
             "username": "Nutzername",
             "ipAddress": "IP Adresse",
             "privilege": "Privileg",
-            "searchSessions": "Suchsitzungen"
+            "searchSessions": "Suchsitzungen",
+            "mountType": "Mount Typ"
         },
         "toast": {
             "errorDelete": "Fehler beim Trennen der Verbindung %{count} Sitzung. | Fehler beim Trennen der Verbindung %{count} Sitzungen.",

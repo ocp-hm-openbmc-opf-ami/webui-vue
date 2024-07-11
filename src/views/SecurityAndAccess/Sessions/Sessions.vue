@@ -214,6 +214,11 @@ export default {
           sortable: true,
         },
         {
+          key: 'mountType',
+          label: this.$t('pageSessions.table.mountType'),
+          class: 'text-center',
+        },
+        {
           key: 'actions',
           label: '',
           class: 'text-center',

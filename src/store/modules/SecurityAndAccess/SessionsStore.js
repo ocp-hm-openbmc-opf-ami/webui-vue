@@ -35,8 +35,12 @@ const SessionsStore = {
                   : sessionUri.data?.UserId,
               username: sessionUri.data?.UserName,
               ipAddress: sessionUri.data?.ClientOriginIPAddress,
-              privilege: sessionUri.data?.Roles,
+              privilege: sessionUri.data?.Roles[0],
               uri: lastElement,
+              mountType:
+                sessionUri.data?.Oem?.Ami?.MountType === '' || undefined
+                  ? 'NA'
+                  : sessionUri.data?.Oem?.Ami?.MountType,
             };
           });
           commit('setAllConnections', allConnectionsData);
