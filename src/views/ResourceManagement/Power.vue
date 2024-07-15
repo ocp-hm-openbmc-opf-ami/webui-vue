@@ -26,7 +26,6 @@
                 v-model="isPowerCapFieldEnabled"
                 data-test-id="power-checkbox-togglePowerCapField"
                 name="power-cap-setting"
-                @change="changePowerCapState"
               >
                 {{ $t('pagePower.powerCapSettingData') }}
               </b-form-checkbox>
@@ -140,14 +139,6 @@ export default {
         this.$store.dispatch('powerControl/setPowerCapUpdatedValue', value);
       },
     },
-    powerCapEnable: {
-      get() {
-        return this.$store.getters['powerControl/powerCapEnable'];
-      },
-      set(newValue) {
-        return newValue;
-      },
-    },
   },
   created() {
     this.startLoader();
@@ -173,12 +164,6 @@ export default {
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.endLoader());
-    },
-    changePowerCapState(state) {
-      this.$store
-        .dispatch('powerControl/setPowerCapEnable', state)
-        .then((message) => this.successToast(message))
-        .catch(({ message }) => this.errorToast(message));
     },
   },
 };
