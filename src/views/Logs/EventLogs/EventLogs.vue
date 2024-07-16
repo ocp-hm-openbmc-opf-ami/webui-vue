@@ -266,7 +266,6 @@ import TableFilterMixin from '@/components/Mixins/TableFilterMixin';
 import BVPaginationMixin, {
   currentPage,
   perPage,
-  itemsPerPageOptions,
 } from '@/components/Mixins/BVPaginationMixin';
 import BVTableSelectableMixin, {
   selectedRows,
@@ -276,9 +275,7 @@ import BVTableSelectableMixin, {
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
 import TableSortMixin from '@/components/Mixins/TableSortMixin';
-import TableRowExpandMixin, {
-  expandRowLabel,
-} from '@/components/Mixins/TableRowExpandMixin';
+import TableRowExpandMixin from '@/components/Mixins/TableRowExpandMixin';
 import SearchFilterMixin, {
   searchFilter,
 } from '@/components/Mixins/SearchFilterMixin';
@@ -386,7 +383,6 @@ export default {
                 values: ['Resolved', 'Unresolved'],
               },
             ],
-      expandRowLabel,
       activeFilters: [],
       batchActions:
         process.env.VUE_APP_EVENT_LOGS_DELETE_BUTTON_DISABLED === 'true'
@@ -400,7 +396,6 @@ export default {
       currentPage: currentPage,
       filterStartDate: null,
       filterEndDate: null,
-      itemsPerPageOptions: itemsPerPageOptions,
       perPage: perPage,
       searchFilter: searchFilter,
       searchTotalFilteredRows: 0,

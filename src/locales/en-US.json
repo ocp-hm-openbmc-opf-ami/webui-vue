@@ -152,7 +152,7 @@
         "keyClear": "@:appPageTitle.keyClear",
         "factoryDefault": "Factory Default",
         "smtpSettings": "SMTP Settings",
-        "snmpSettings": "SNMP Settings",
+        "snmpSettings": "@:appPageTitle.snmp",
         "pef": "Platform Event Filter",
         "eventFilter": "Event Filter",
         "nicInformation": "NIC Information",
@@ -2039,6 +2039,19 @@
             "errorSaveFireWall": "Error saved Firewall Rules.",
             "errorDelete": "Error deleting FireWall Rules.",
             "errorDateOrTimeSaveFireWall": "Invalid Date or Time."
+        },
+        "table": {
+            "startIP": "Start IP",
+            "endIP": "End IP",
+            "startPort": "Start Port",
+            "endPort": "End Port",
+            "macAddress": "MAC Address",
+            "protocol": "Protocol",
+            "startDuration": "Start Duration",
+            "endDuration": "End Duration",
+            "preLoad": "PreLoad",
+            "target": "Target",
+            "networkType": "Network Type"
         }
     },
     "bond": {
@@ -2066,6 +2079,12 @@
         "toast": {
             "successSavelicense": "Successfully saved License.",
             "errorsavedlicense": "Error saved License."
+        },
+        "table": {
+            "feature": "Feature",
+            "validityDays": "Validity(days)",
+            "servicesUpCountDays": "Services Up Count Days",
+            "userUploadedKeyDays": "User Uploaded Key(days)"
         }
     },
     "countries": {

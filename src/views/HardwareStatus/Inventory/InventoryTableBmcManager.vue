@@ -152,9 +152,7 @@ import PageSection from '@/components/Global/PageSection';
 import IconChevron from '@carbon/icons-vue/es/chevron--down/20';
 import StatusIcon from '@/components/Global/StatusIcon';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
-import TableRowExpandMixin, {
-  expandRowLabel,
-} from '@/components/Mixins/TableRowExpandMixin';
+import TableRowExpandMixin from '@/components/Mixins/TableRowExpandMixin';
 import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
 
 export default {
@@ -190,7 +188,6 @@ export default {
           formatter: this.dataFormatter,
         },
       ],
-      expandRowLabel: expandRowLabel,
     };
   },
   computed: {

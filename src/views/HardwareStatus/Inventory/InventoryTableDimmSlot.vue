@@ -184,9 +184,7 @@ import Search from '@/components/Global/Search';
 import SearchFilterMixin, {
   searchFilter,
 } from '@/components/Mixins/SearchFilterMixin';
-import TableRowExpandMixin, {
-  expandRowLabel,
-} from '@/components/Mixins/TableRowExpandMixin';
+import TableRowExpandMixin from '@/components/Mixins/TableRowExpandMixin';
 
 export default {
   components: { IconChevron, PageSection, StatusIcon, Search, TableCellCount },
@@ -235,7 +233,6 @@ export default {
       ],
       searchFilter: searchFilter,
       searchTotalFilteredRows: 0,
-      expandRowLabel: expandRowLabel,
     };
   },
   computed: {

@@ -150,6 +150,7 @@
         "keyClear": "@:appPageTitle.keyClear",
         "factoryDefault": "原廠預設值",
         "smtpSettings": "SMTP 設定",
+        "snmpSettings": "@:appPageTitle.snmp",
         "pef": "平台事件過濾器",
         "eventFilter": "事件過濾器",
         "nicInformation": "NIC 資訊",
@@ -204,6 +205,7 @@
         "keyClear": "清除鑰匙",
         "factoryDefault": "原廠預設值",
         "smtpSettings": "SMTP 設定",
+        "snmp": "SNMP 設定",
         "eventFilter": "事件過濾器",
         "nicInformation": "NIC 資訊",
         "nvmeInformation": "NVMe 資訊",
@@ -947,7 +949,9 @@
                 "imageFile": "映像檔案",
                 "startUpdate": "開始更新",
                 "tftpServer": "TFTP 伺服器",
-                "workstation": "工作臺"
+                "workstation": "工作臺",
+                "activeImage": "活動影像",
+                "backupImage": "備份映像"
             }
         },
         "modal": {
@@ -2031,6 +2035,19 @@
             "errorSaveFireWall": "已儲存的防火牆規則出錯。",
             "errorDelete": "刪除防火牆規則時發生錯誤。",
             "errorDateOrTimeSaveFireWall": "日期或時間無效。"
+        },
+        "table": {
+            "startIP": "起始IP",
+            "endIP": "結束IP",
+            "startPort": "起始連接埠",
+            "endPort": "結束連接埠",
+            "macAddress": "MAC位址",
+            "protocol": "協定",
+            "startDuration": "開始持續時間",
+            "endDuration": "結束持續時間",
+            "preLoad": "預先載入",
+            "target": "目標",
+            "networkType": "網路類型"
         }
     },
     "bond": {
@@ -2058,6 +2075,12 @@
         "toast": {
             "successSavelicense": "已成功保存許可證。",
             "errorsavedlicense": "保存許可證時發生錯誤。"
+        },
+        "table": {
+            "feature": "特徵",
+            "validityDays": "有效期限（天）",
+            "servicesUpCountDays": "服務累計天數",
+            "userUploadedKeyDays": "用戶上傳密鑰（天）"
         }
     },
     "countries": {

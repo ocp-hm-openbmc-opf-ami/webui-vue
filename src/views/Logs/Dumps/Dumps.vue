@@ -162,7 +162,6 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import BVPaginationMixin, {
   currentPage,
   perPage,
-  itemsPerPageOptions,
 } from '@/components/Mixins/BVPaginationMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import SearchFilterMixin, {
@@ -256,7 +255,6 @@ export default {
       currentPage: currentPage,
       filterEndDate: null,
       filterStartDate: null,
-      itemsPerPageOptions: itemsPerPageOptions,
       perPage: perPage,
       searchFilter,
       searchTotalFilteredRows: 0,

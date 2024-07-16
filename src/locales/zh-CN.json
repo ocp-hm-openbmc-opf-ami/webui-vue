@@ -150,6 +150,7 @@
         "keyClear": "@:appPageTitle.keyClear",
         "factoryDefault": "原厂预设值",
         "smtpSettings": "SMTP 设定",
+        "snmpSettings": "@:appPageTitle.snmp",
         "pef": "平台事件过滤器",
         "eventFilter": "事件过滤器",
         "nicInformation": "NIC 资讯",
@@ -204,6 +205,7 @@
         "keyClear": "清除钥匙",
         "factoryDefault": "原厂预设值",
         "smtpSettings": "SMTP 设定",
+        "snmp": "SNMP 设置",
         "eventFilter": "事件过滤器",
         "nicInformation": "NIC 资讯",
         "nvmeInformation": "NVMe 资讯",
@@ -944,7 +946,9 @@
                 "imageFile": "映像档案",
                 "startUpdate": "开始更新",
                 "tftpServer": "TFTP 伺服器",
-                "workstation": "工作臺"
+                "workstation": "工作臺",
+                "activeImage": "活动图像",
+                "backupImage": "备份图像"
             }
         },
         "modal": {
@@ -2027,6 +2031,19 @@
             "errorSaveFireWall": "保存的防火墙规则出错。",
             "errorDelete": "删除防火墙规则时出错。",
             "errorDateOrTimeSaveFireWall": "日期或时间无效。"
+        },
+        "table": {
+            "startIP": "起始IP",
+            "endIP": "结束IP",
+            "startPort": "起始端口",
+            "endPort": "结束端口",
+            "macAddress": "MAC地址",
+            "protocol": "协议",
+            "startDuration": "开始持续时间",
+            "endDuration": "结束持续时间",
+            "preLoad": "预加载",
+            "target": "目标",
+            "networkType": "网络类型"
         }
     },
     "bond": {
@@ -2054,6 +2071,12 @@
         "toast": {
             "successSavelicense": "已成功保存许可证。",
             "errorsavedlicense": "保存许可证时出错。"
+        },
+        "table": {
+            "feature": "特征",
+            "validityDays": "有效期（天）",
+            "servicesUpCountDays": "服务累计天数",
+            "userUploadedKeyDays": "用户上传密钥（天）"
         }
     },
     "countries": {

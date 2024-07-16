@@ -78,22 +78,22 @@ export default {
       fields: [
         {
           key: 'feature',
-          label: 'Feature',
+          label: this.$t('license.table.feature'),
           class: 'text-center',
         },
         {
           key: 'validity',
-          label: 'Validity(days)',
+          label: this.$t('license.table.validityDays'),
           class: 'text-center',
         },
         {
           key: 'ServicesUpCountDays',
-          label: 'Services Up Count Days',
+          label: this.$t('license.table.servicesUpCountDays'),
           class: 'text-center',
         },
         {
           key: 'uploadKeyValidity',
-          label: 'User Uploaded Key(days)',
+          label: this.$t('license.table.userUploadedKeyDays'),
           class: 'text-center',
         },
       ],

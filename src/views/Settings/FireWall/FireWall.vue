@@ -119,7 +119,6 @@ import SearchFilterMixin, {
 import BVPaginationMixin, {
   currentPage,
   perPage,
-  itemsPerPageOptions,
 } from '@/components/Mixins/BVPaginationMixin';
 import { mapState } from 'vuex';
 
@@ -140,64 +139,64 @@ export default {
       fields: [
         {
           key: 'StartSourceIPAddress',
-          label: 'Start IP',
+          label: this.$t('pageFireWall.table.startIP'),
           class: 'text-center',
         },
         {
           key: 'EndSourceIPAddress',
-          label: 'End IP',
+          label: this.$t('pageFireWall.table.endIP'),
           class: 'text-center',
         },
         {
           key: 'StartPort',
-          label: 'Start Port',
+          label: this.$t('pageFireWall.table.startPort'),
           sortable: true,
           class: 'text-center',
         },
         {
           key: 'EndPort',
-          label: 'End Port',
+          label: this.$t('pageFireWall.table.endPort'),
           sortable: true,
           class: 'text-center',
         },
         {
           key: 'SourceMACAddress',
-          label: 'MAC Address',
+          label: this.$t('pageFireWall.table.macAddress'),
           class: 'text-center',
         },
         {
           key: 'Protocol',
-          label: 'Protocol',
+          label: this.$t('pageFireWall.table.protocol'),
           sortable: true,
           class: 'text-center',
         },
         {
           key: 'StartTime',
-          label: 'Start Duration',
+          label: this.$t('pageFireWall.table.startDuration'),
           sortable: true,
           class: 'text-center',
         },
         {
           key: 'EndTime',
-          label: 'End Duration',
+          label: this.$t('pageFireWall.table.endDuration'),
           sortable: true,
           class: 'text-center',
         },
         {
           key: 'PreLoad',
-          label: 'PreLoad',
+          label: this.$t('pageFireWall.table.preLoad'),
           sortable: true,
           class: 'text-center',
         },
         {
           key: 'Target',
-          label: 'Target',
+          label: this.$t('pageFireWall.table.target'),
           sortable: true,
           class: 'text-center',
         },
         {
           key: 'NetworkType',
-          label: 'Network Type',
+          label: this.$t('pageFireWall.table.networkType'),
           sortable: true,
           class: 'text-center',
         },
@@ -211,7 +210,6 @@ export default {
       items: [],
       loading,
       currentPage: currentPage,
-      itemsPerPageOptions: itemsPerPageOptions,
       perPage: perPage,
       searchTotalFilteredRows: 0,
       searchFilter: searchFilter,

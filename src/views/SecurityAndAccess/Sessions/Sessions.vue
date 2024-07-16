@@ -134,7 +134,6 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import BVPaginationMixin, {
   currentPage,
   perPage,
-  itemsPerPageOptions,
 } from '@/components/Mixins/BVPaginationMixin';
 import BVTableSelectableMixin, {
   selectedRows,
@@ -237,7 +236,6 @@ export default {
         },
       ],
       currentPage: currentPage,
-      itemsPerPageOptions: itemsPerPageOptions,
       perPage: perPage,
       selectedRows: selectedRows,
       searchTotalFilteredRows: 0,

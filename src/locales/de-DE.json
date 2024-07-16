@@ -150,6 +150,7 @@
         "keyClear": "@:appPageTitle.keyClear",
         "factoryDefault": "Werkseinstellung",
         "smtpSettings": "SMTP Einstellungen",
+        "snmpSettings": "@:appPageTitle.snmp",
         "pef": "Plattformereignisfilter",
         "eventFilter": "Ereignisfilter",
         "nicInformation": "NIC Informationen",
@@ -204,6 +205,7 @@
         "keyClear": "Schlüssel klar",
         "factoryDefault": "Werkseinstellungen",
         "smtpSettings": "SMTP Einstellungen",
+        "snmp": "SNMP Einstellungen",
         "eventFilter": "Ereignisfilter",
         "nicInformation": "NIC Informationen",
         "nvmeInformation": "NVMe Informationen",
@@ -947,7 +949,9 @@
                 "imageFile": "Bilddatei",
                 "startUpdate": "Update starten",
                 "tftpServer": "TFTP server",
-                "workstation": "Arbeitsplatz"
+                "workstation": "Arbeitsplatz",
+                "activeImage": "Aktives Bild",
+                "backupImage": "Backup Image"
             }
         },
         "modal": {
@@ -2032,6 +2036,19 @@
             "errorSaveFireWall": "Fehler beim Speichern der Firewall-Regeln.",
             "errorDelete": "Fehler beim Löschen der FireWall-Regeln.",
             "errorDateOrTimeSaveFireWall": "Ungültiges Datum oder ungültige Uhrzeit."
+        },
+        "table": {
+            "startIP": "IP starten",
+            "endIP": "End IP",
+            "startPort": "Start Port",
+            "endPort": "End Port",
+            "macAddress": "MAC-Adresse",
+            "protocol": "Protokoll",
+            "startDuration": "Startdauer",
+            "endDuration": "Enddauer",
+            "preLoad": "Vorladen",
+            "target": "Ziel",
+            "networkType": "Netzwerkart"
         }
     },
     "bond": {
@@ -2060,6 +2077,12 @@
         "toast": {
             "successSavelicense": "Lizenz erfolgreich gespeichert.",
             "errorsavedlicense": "Fehler beim Speichern der Lizenz."
+        },
+        "table": {
+            "feature": "Besonderheit",
+            "validityDays": "Gültigkeit(Tage)",
+            "servicesUpCountDays": "Anzahl der Tage für Dienstleistungen",
+            "userUploadedKeyDays": "Vom Benutzer hochgeladener Schlüssel (Tage)"
         }
     },
     "countries": {

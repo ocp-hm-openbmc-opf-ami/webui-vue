@@ -26,6 +26,7 @@
         :items="AllOnDemand"
         :fields="fields"
         :table-variant="tableVariantState"
+        :empty-text="$t('global.table.emptyMessage')"
       ></b-table>
     </div>
   </b-container>

@@ -1,13 +1,28 @@
 import i18n from '@/i18n';
-export const expandRowLabel = i18n.t('global.table.expandTableRow');
 
 const TableRowExpandMixin = {
+  data() {
+    return {
+      expandRowLabel: this.getExpandRowLabel(true),
+    };
+  },
   methods: {
     toggleRowDetails(row) {
       row.toggleDetails();
-      row.detailsShowing
-        ? (this.expandRowLabel = this.$t('global.table.expandTableRow'))
-        : (this.expandRowLabel = this.$t('global.table.collapseTableRow'));
+      this.expandRowLabel = this.getExpandRowLabel(row.detailsShowing);
+    },
+    getExpandRowLabel(isExpanded) {
+      return isExpanded
+        ? i18n.t('global.table.expandTableRow')
+        : i18n.t('global.table.collapseTableRow');
+    },
+    updateExpandRowLabel() {
+      this.expandRowLabel = this.getExpandRowLabel(true);
+    },
+  },
+  watch: {
+    '$i18n.locale'() {
+      this.updateExpandRowLabel();
     },
   },
 };
