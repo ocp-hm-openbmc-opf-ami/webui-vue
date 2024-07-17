@@ -1,84 +1,94 @@
 <template>
   <b-container fluid="xl">
     <page-title />
-    <b-row>
-      <b-col xl="9" class="text-right">
-        <b-button
-          variant="primary"
-          class="mr-2"
-          data-test-id="alertDestination-button-sendTestTrap"
-          @click="sendTestTrap"
-        >
-          {{ $t('pageSnmp.sendTestTrap') }}
-        </b-button>
-        <b-button
-          variant="primary"
-          data-test-id="userManagement-button-addUser"
-          @click="initModalSNMP(null)"
-        >
-          <icon-add />
-          {{ $t('pageSnmp.addSubscrition') }}
-        </b-button>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col xl="9">
-        <b-table
-          id="table-AutonomousCrashDump"
-          ref="table"
-          responsive="md"
-          no-select-on-click
-          hover
-          show-empty
-          :busy="isBusy"
-          :fields="fields"
-          :items="allConnections"
-          :empty-text="$t('global.table.emptyMessage')"
-          @row-selected="onRowSelected($event, allConnections.length)"
-        >
-          <template #cell(actions)="{ item }">
-            <table-row-action
-              v-for="(action, index) in item.actions"
-              :key="index"
-              :value="action.value"
-              :enabled="action.enabled"
-              :title="action.title"
-              @click-table-action="onTableRowAction($event, item)"
-            >
-              <template #icon>
-                <icon-edit
-                  v-if="action.value === 'edit'"
-                  :data-test-id="`snmp-tableRowAction-edit-${index}`"
-                />
-                <icon-trashcan
-                  v-if="action.value === 'delete'"
-                  :data-test-id="`snmp-tableRowAction-delete-${index}`"
-                  @click="deleteSnmp(item)"
-                />
-              </template>
-            </table-row-action>
-          </template>
-
-          <template #cell(authenticationProtocol)="{ item }">
-            <template v-if="item.protocol === 'SNMPv3'">
-              <b-form-select
-                id="snmp-authProtocalvalue"
-                v-model="item.authenticationProtocol"
-                :options="item.authenticationProtocolOptions"
-                @change="saveAuthenticationProtocolValue(item, $event)"
+    <div v-if="!LicenseState(licenseName)">
+      <b-alert show variant="warning"
+        >{{ $t('license.licenseExpired') }}
+        <a href="#/settings/license">{{
+          $t('license.licensePageLink')
+        }}</a></b-alert
+      >
+    </div>
+    <div v-else>
+      <b-row>
+        <b-col xl="9" class="text-right">
+          <b-button
+            variant="primary"
+            class="mr-2"
+            data-test-id="alertDestination-button-sendTestTrap"
+            @click="sendTestTrap"
+          >
+            {{ $t('pageSnmp.sendTestTrap') }}
+          </b-button>
+          <b-button
+            variant="primary"
+            data-test-id="userManagement-button-addUser"
+            @click="initModalSNMP(null)"
+          >
+            <icon-add />
+            {{ $t('pageSnmp.addSubscrition') }}
+          </b-button>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col xl="9">
+          <b-table
+            id="table-AutonomousCrashDump"
+            ref="table"
+            responsive="md"
+            no-select-on-click
+            hover
+            show-empty
+            :busy="isBusy"
+            :fields="fields"
+            :items="allConnections"
+            :empty-text="$t('global.table.emptyMessage')"
+            @row-selected="onRowSelected($event, allConnections.length)"
+          >
+            <template #cell(actions)="{ item }">
+              <table-row-action
+                v-for="(action, index) in item.actions"
+                :key="index"
+                :value="action.value"
+                :enabled="action.enabled"
+                :title="action.title"
+                @click-table-action="onTableRowAction($event, item)"
               >
-                <template #first>
-                  <b-form-select-option :value="null" disabled>
-                    {{ $t('global.form.selectAnOption') }}
-                  </b-form-select-option>
+                <template #icon>
+                  <icon-edit
+                    v-if="action.value === 'edit'"
+                    :data-test-id="`snmp-tableRowAction-edit-${index}`"
+                  />
+                  <icon-trashcan
+                    v-if="action.value === 'delete'"
+                    :data-test-id="`snmp-tableRowAction-delete-${index}`"
+                    @click="deleteSnmp(item)"
+                  />
                 </template>
-              </b-form-select>
+              </table-row-action>
             </template>
-            <template v-else> NA </template>
-          </template>
-        </b-table>
-      </b-col>
-    </b-row>
+
+            <template #cell(authenticationProtocol)="{ item }">
+              <template v-if="item.protocol === 'SNMPv3'">
+                <b-form-select
+                  id="snmp-authProtocalvalue"
+                  v-model="item.authenticationProtocol"
+                  :options="item.authenticationProtocolOptions"
+                  @change="saveAuthenticationProtocolValue(item, $event)"
+                >
+                  <template #first>
+                    <b-form-select-option :value="null" disabled>
+                      {{ $t('global.form.selectAnOption') }}
+                    </b-form-select-option>
+                  </template>
+                </b-form-select>
+              </template>
+              <template v-else> NA </template>
+            </template>
+          </b-table>
+        </b-col>
+      </b-row>
+    </div>
     <!-- Modals -->
     <modal-snmp :snmp="snmpData" @ok="saveSnmpTrap" @hidden="snmpData = null" />
   </b-container>
@@ -93,6 +103,7 @@ import IconEdit from '@carbon/icons-vue/es/edit/20';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import ModalSnmp from './ModalSnmp.vue';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
+import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
 
 export default {
   name: 'SnmpSettings',
@@ -104,7 +115,7 @@ export default {
     IconEdit,
     ModalSnmp,
   },
-  mixins: [LoadingBarMixin, BVToastMixin],
+  mixins: [LoadingBarMixin, BVToastMixin, LicensecheckMixin],
   data() {
     return {
       isBusy: true,
@@ -139,6 +150,7 @@ export default {
           tdClass: 'text-right text-nowrap',
         },
       ],
+      licenseName: 'SNMP',
     };
   },
   computed: {
