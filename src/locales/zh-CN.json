@@ -170,7 +170,8 @@
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
         "systemInventory":"@:appPageTitle.systemInventory",
-        "networkDDNS": "网络 DDNS"
+        "networkDDNS": "网络 DDNS",
+        "networkLink": "@:appPageTitle.networkLink"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -223,7 +224,8 @@
         "Bond": "绑定",
         "License": "管理许可证",
         "systemInventory":"系统库存",
-        "ddnsConfiguration": "DDNS 配置"
+        "ddnsConfiguration": "DDNS 配置",
+        "networkLink": "网络链接"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -2077,6 +2079,23 @@
             "validityDays": "有效期（天）",
             "servicesUpCountDays": "服务累计天数",
             "userUploadedKeyDays": "用户上传密钥（天）"
+        }
+    },
+    "networkLink":{
+        "lanInterface": "局域网接口",
+        "autonegotiation": "自动协商",
+        "linkSpeed": "链接速度",
+        "duplexMode": "双工模式",
+        "fullDuplex": "全双工",
+        "halfDuplex": "半双工",
+        "duplex": "复式",
+        "Mbps": "Mbps",
+        "sameNetworkLinkSettings": "网络链接配置相同，因此无需保存。",
+        "modifyNetworkLinkSettings": "如果用户需要更改这些接口配置，请修改父接口的值。",
+        "networkLinkFeatureNotAvailable": "网络链接功能未启用。",
+        "toast": {
+            "successSaveNetworkLink": "已成功保存网络链接。",
+            "errorSavedNetworkLink": "保存网络链接时出错。"
         }
     },
     "countries": {

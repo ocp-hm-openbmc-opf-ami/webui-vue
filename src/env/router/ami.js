@@ -44,6 +44,7 @@ import Bond from '@/views/Settings/Bond';
 import License from '@/views/Settings/License';
 import systemInventory from '@/views/SystemInventory/SystemInventory';
 import DDNS from '../../views/Settings/NetworkDDNS';
+import NetworkLink from '@/views/Settings/NetworkLink/NetworkLink';
 
 const roles = {
   administrator: 'Administrator',
@@ -409,6 +410,14 @@ const routes = [
         component: systemInventory,
         meta: {
           title: i18n.t('appPageTitle.systemInventory'),
+        },
+      },
+      {
+        path: '/settings/network-link',
+        name: 'networkLink',
+        component: NetworkLink,
+        meta: {
+          title: i18n.t('appPageTitle.networkLink'),
         },
       },
     ],

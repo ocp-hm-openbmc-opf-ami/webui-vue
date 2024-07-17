@@ -170,7 +170,8 @@
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
         "systemInventory":"@:appPageTitle.systemInventory",
-        "networkDDNS": "網路 DDNS"
+        "networkDDNS": "網路 DDNS",
+        "networkLink": "@:appPageTitle.networkLink"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -223,7 +224,8 @@
         "Bond": "綁定",
         "License": "管理許可證",
         "systemInventory":"系統庫存",
-        "ddnsConfiguration": "DDNS 配置"
+        "ddnsConfiguration": "DDNS 配置",
+        "networkLink": "網路連結"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -2081,6 +2083,23 @@
             "validityDays": "有效期限（天）",
             "servicesUpCountDays": "服務累計天數",
             "userUploadedKeyDays": "用戶上傳密鑰（天）"
+        }
+    },
+    "networkLink":{
+        "lanInterface": "區域網路介面",
+        "autonegotiation": "自動協商",
+        "linkSpeed": "連結速度",
+        "duplexMode": "雙工模式",
+        "fullDuplex": "全雙工",
+        "halfDuplex": "半雙工",
+        "duplex": "複式",
+        "Mbps": "Mbps",
+        "sameNetworkLinkSettings": "網路連結配置相同，因此無需儲存。",
+        "modifyNetworkLinkSettings": "如果使用者需要變更這些介面配置，請修改父介面的值。",
+        "networkLinkFeatureNotAvailable": "網路連結功能未啟用。",
+        "toast": {
+            "successSaveNetworkLink": "已成功儲存網頁連結。",
+            "errorSavedNetworkLink": "儲存網頁連結時發生錯誤。"
         }
     },
     "countries": {

@@ -172,7 +172,8 @@
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
         "systemInventory": "@:appPageTitle.systemInventory",
-        "networkDDNS": "Network DDNS"
+        "networkDDNS": "Network DDNS",
+        "networkLink": "@:appPageTitle.networkLink"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -225,7 +226,8 @@
         "Bond": "Network Bond",
         "License": "Manage Licenses",
         "systemInventory": "System Inventory",
-        "ddnsConfiguration": "DDNS Configuration"
+        "ddnsConfiguration": "DDNS Configuration",
+        "networkLink": "Network Link"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -2085,6 +2087,23 @@
             "validityDays": "Validity(days)",
             "servicesUpCountDays": "Services Up Count Days",
             "userUploadedKeyDays": "User Uploaded Key(days)"
+        }
+    },
+    "networkLink":{
+        "lanInterface": "LAN Interface",
+        "autonegotiation": "Auto Negotiation",
+        "linkSpeed": "Link Speed",
+        "duplexMode": "Duplex Mode",
+        "fullDuplex": "Full Duplex",
+        "halfDuplex": "Half Duplex",
+        "duplex": "Duplex",
+        "Mbps": "Mbps",
+        "sameNetworkLinkSettings": "The Network Link Configurations are the same, so there is no need to save.",
+        "modifyNetworkLinkSettings": "If users need to change these interface configurations, please modify the values of the parent interface instead.",
+        "networkLinkFeatureNotAvailable": "The Network Link feature is not enabled.",
+        "toast": {
+            "successSaveNetworkLink": "Successfully saved Network Link.",
+            "errorSavedNetworkLink": "Error saved Network Link."
         }
     },
     "countries": {

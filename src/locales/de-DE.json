@@ -170,7 +170,8 @@
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
         "systemInventory":"@:appPageTitle.systemInventory",
-        "networkDDNS": "Netzwerk DDNS"
+        "networkDDNS": "Netzwerk DDNS",
+        "networkLink": "@:appPageTitle.networkLink"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -223,7 +224,8 @@
         "Bond": "Netzwerkbindung",
         "License": "Lizenzen verwalten",
         "systemInventory":"Systeminventar",
-        "ddnsConfiguration": "DDNS Konfiguration"
+        "ddnsConfiguration": "DDNS Konfiguration",
+        "networkLink": "Netzwerkverbindung"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -2083,6 +2085,23 @@
             "validityDays": "Gültigkeit(Tage)",
             "servicesUpCountDays": "Anzahl der Tage für Dienstleistungen",
             "userUploadedKeyDays": "Vom Benutzer hochgeladener Schlüssel (Tage)"
+        }
+    },
+    "networkLink":{
+        "lanInterface": "LAN-Schnittstelle",
+        "autonegotiation": "Auto-Negotiation",
+        "linkSpeed": "Verbindungsgeschwindigkeit",
+        "duplexMode": "Duplexmodus",
+        "fullDuplex": "Vollduplex",
+        "halfDuplex": "Halbduplex",
+        "duplex": "Duplex",
+        "Mbps": "Mbit/s",
+        "sameNetworkLinkSettings": "Die Netzwerkverbindungskonfigurationen sind identisch und müssen daher nicht gespeichert werden.",
+        "modifyNetworkLinkSettings": "Wenn Benutzer diese Schnittstellenkonfigurationen ändern müssen, ändern Sie bitte stattdessen die Werte der übergeordneten Schnittstelle.",
+        "networkLinkFeatureNotAvailable": "Die Netzwerkverbindungsfunktion ist nicht aktiviert.",
+        "toast": {
+            "successSaveNetworkLink": "Netzwerklink erfolgreich gespeichert.",
+            "errorSavedNetworkLink": "Fehler beim Speichern der Netzwerkverbindung."
         }
     },
     "countries": {
