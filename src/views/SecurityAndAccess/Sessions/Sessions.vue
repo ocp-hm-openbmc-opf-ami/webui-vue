@@ -189,6 +189,11 @@ export default {
           sortable: true,
         },
         {
+          key: 'mountType',
+          label: this.$t('pageSessions.table.mountType'),
+          class: 'text-center',
+        },
+        {
           key: 'userID',
           label: this.$t('pageSessions.table.userID'),
           class: 'text-center',
@@ -211,11 +216,6 @@ export default {
           label: this.$t('pageSessions.table.privilege'),
           class: 'text-center',
           sortable: true,
-        },
-        {
-          key: 'mountType',
-          label: this.$t('pageSessions.table.mountType'),
-          class: 'text-center',
         },
         {
           key: 'actions',

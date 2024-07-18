@@ -37,10 +37,7 @@ const SessionsStore = {
               ipAddress: sessionUri.data?.ClientOriginIPAddress,
               privilege: sessionUri.data?.Roles[0],
               uri: lastElement,
-              mountType:
-                sessionUri.data?.Oem?.Ami?.MountType === '' || undefined
-                  ? 'NA'
-                  : sessionUri.data?.Oem?.Ami?.MountType,
+              mountType: sessionUri.data?.Oem?.Ami?.MountType || 'NA',
             };
           });
           commit('setAllConnections', allConnectionsData);
