@@ -37,8 +37,8 @@
           >
             <img
               class="header-logo"
-              width="100px"
-              src="../../assets/images/ami-logo-type-dark-bg.svg"
+              width="250px"
+              src="../../assets/images/MegaRAC_OneTree_white-text.svg"
               :alt="altLogo"
             />
           </b-navbar-brand>

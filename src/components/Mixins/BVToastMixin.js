@@ -4,6 +4,11 @@ const BVToastMixin = {
   components: {
     StatusIcon,
   },
+  data() {
+    return {
+      toastId: null, // Store the current toast ID
+    };
+  },
   methods: {
     $_BVToastMixin_createTitle(title, status) {
       const statusIcon = this.$createElement('StatusIcon', {
@@ -43,17 +48,19 @@ const BVToastMixin = {
         this.$t('global.action.refresh'),
       );
     },
-    $_BVToastMixin_initToast(body, title, variant) {
-      this.$root.$bvToast.toast(body, {
-        title,
-        variant,
-        autoHideDelay:
-          variant === 'danger' || variant === 'info' ? 20000 : 10000,
-        noAutoHide:
-          variant !== 'success' && variant !== 'danger' && variant !== 'info',
-        isStatus: true,
-        solid: true,
-      });
+    $_BVToastMixin_initToast(body, title, variant, id) {
+      (this.toastId = id), // Store the toast ID
+        this.$root.$bvToast.toast(body, {
+          title,
+          variant,
+          autoHideDelay:
+            variant === 'danger' || variant === 'info' ? 20000 : 10000,
+          noAutoHide:
+            variant !== 'success' && variant !== 'danger' && variant !== 'info',
+          isStatus: true,
+          solid: true,
+          id: id, // Assign the custom ID to the toast
+        });
     },
     successToast(
       message,
@@ -65,9 +72,10 @@ const BVToastMixin = {
     ) {
       const body = this.$_BVToastMixin_createBody(message);
       const title = this.$_BVToastMixin_createTitle(t, 'success');
+      const id = `toast-${new Date().getTime()}`; // Unique ID for the toast
       if (refreshAction) body.push(this.$_BVToastMixin_createRefreshAction());
       if (timestamp) body.push(this.$_BVToastMixin_createTimestamp());
-      this.$_BVToastMixin_initToast(body, title, 'success');
+      this.$_BVToastMixin_initToast(body, title, 'success', id);
     },
     errorToast(
       message,
@@ -79,9 +87,10 @@ const BVToastMixin = {
     ) {
       const body = this.$_BVToastMixin_createBody(message);
       const title = this.$_BVToastMixin_createTitle(t, 'danger');
+      const id = `toast-${new Date().getTime()}`; // Unique ID for the toast
       if (refreshAction) body.push(this.$_BVToastMixin_createRefreshAction());
       if (timestamp) body.push(this.$_BVToastMixin_createTimestamp());
-      this.$_BVToastMixin_initToast(body, title, 'danger');
+      this.$_BVToastMixin_initToast(body, title, 'danger', id);
     },
     warningToast(
       message,
@@ -93,9 +102,10 @@ const BVToastMixin = {
     ) {
       const body = this.$_BVToastMixin_createBody(message);
       const title = this.$_BVToastMixin_createTitle(t, 'warning');
+      const id = `toast-${new Date().getTime()}`; // Unique ID for the toast
       if (refreshAction) body.push(this.$_BVToastMixin_createRefreshAction());
       if (timestamp) body.push(this.$_BVToastMixin_createTimestamp());
-      this.$_BVToastMixin_initToast(body, title, 'warning');
+      this.$_BVToastMixin_initToast(body, title, 'warning', id);
     },
     infoToast(
       message,
@@ -107,9 +117,16 @@ const BVToastMixin = {
     ) {
       const body = this.$_BVToastMixin_createBody(message);
       const title = this.$_BVToastMixin_createTitle(t, 'info');
+      const id = `toast-${new Date().getTime()}`; // Unique ID for the toast
       if (refreshAction) body.push(this.$_BVToastMixin_createRefreshAction());
       if (timestamp) body.push(this.$_BVToastMixin_createTimestamp());
-      this.$_BVToastMixin_initToast(body, title, 'info');
+      this.$_BVToastMixin_initToast(body, title, 'info', id);
+    },
+    clearToast() {
+      if (this.toastId) {
+        this.$root.$bvToast.hide(this.toastId); // Hide the toast by ID
+        this.toastId = null; // Clear the stored ID
+      }
     },
   },
 };

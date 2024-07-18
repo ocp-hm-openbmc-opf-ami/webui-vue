@@ -33,7 +33,7 @@ export default {
         i++;
       }
       this.title = i18n.t('appPageTitle.' + title);
-      document.title = this.title;
+      document.title = i18n.t('global.ariaLabel.megaracOneTree') + this.title;
     }
   },
 };

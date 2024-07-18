@@ -7,16 +7,21 @@
 <script>
 import store from './store';
 import Cookies from 'js-cookie';
+import i18n from '@/i18n';
 export default {
   name: 'App',
   watch: {
     $route: function (to) {
-      document.title = to.meta.title || 'Page is missing title';
+      document.title =
+        i18n.t('global.ariaLabel.megaracOneTree') + to.meta.title ||
+        'Page is missing title';
     },
   },
   created() {
     Cookies.set('loginSessionSuccess', 'true');
-    document.title = this.$route.meta.title || 'Page is missing title';
+    document.title =
+      i18n.t('global.ariaLabel.megaracOneTree') + this.$route.meta.title ||
+      'Page is missing title';
     window.addEventListener('beforeunload', this.handleRefresh);
     setTimeout(() => {
       if (
