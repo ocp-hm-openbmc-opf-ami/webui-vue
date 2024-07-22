@@ -494,7 +494,14 @@
         "alreadyActiveSession": "Мастер-сессия KVM уже запущена! Пожалуйста, попробуйте через некоторое время.",
         "alreadyInMasterSession": "основная сессия запущена",
         "errorInGettingActiveStatus": "Ошибка при получении активного статуса KVM!!",
-        "disabledKVMService": "Служба KVM отключена. Перейдите на страницу «Безопасность и доступ» -> «Политики», чтобы включить службу KVM."
+        "disabledKVMService": "Служба KVM отключена. Перейдите на страницу «Безопасность и доступ» -> «Политики», чтобы включить службу KVM.",
+        "bootSettings":{
+            "buttonBootSettings" : "Настройки загрузки",
+            "bootSettingsHdr": "Настройки загрузки",
+            "bootSettingsOverride": "Переопределение параметров загрузки",
+            "enableOneTimeBoot": "Включить однократную загрузку",
+            "bootOptionsToolTips" : "Выберите из списка вариант источника загрузки"
+        }
     },
     "pageLdap": {
         "pageDescription": "Настройка параметров LDAP и управление группами",

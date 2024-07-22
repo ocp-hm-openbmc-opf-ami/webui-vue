@@ -1216,6 +1216,13 @@
     "pageKvm": {
         "openNewTab": "In neuem Tab öffnen",
         "buttonCtrlAltDelete": "Schicken Ctrl+Alt+Delete",
+        "bootSettings":{
+            "buttonBootSettings" : "Boot Einstellungen",
+            "bootSettingsHdr": "Boot Einstellungen",
+            "bootSettingsOverride": "Boot Einstellungen Überschreiben",
+            "enableOneTimeBoot": "Einmaliges Booten aktivieren",
+            "bootOptionsToolTips" : "Выберите из списка опцию Boot Source (Источник загрузки)"
+        },
         "power": "Leistung",
         "powerOperation": {
             "powerOn": "Ein",

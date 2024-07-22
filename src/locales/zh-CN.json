@@ -1218,6 +1218,13 @@
     "pageKvm": {
         "openNewTab": "在新的标籤页开启",
         "buttonCtrlAltDelete": "送出 Ctrl+Alt+Delete",
+        "bootSettings":{
+            "buttonBootSettings" : "启动设置",
+            "bootSettingsHdr": "启动设置",
+            "bootSettingsOverride": "引导设置覆盖",
+            "enableOneTimeBoot": "启用一次性引导",
+            "bootOptionsToolTips" : "从列表中选择启动源选项"
+        },
         "power": "电源",
         "powerOperation": {
             "powerOn": "开机",

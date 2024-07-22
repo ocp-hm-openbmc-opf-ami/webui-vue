@@ -33,17 +33,21 @@
             <icon-launch />
             {{ $t('pageKvm.openNewTab') }}
           </b-button>
-          <b-button variant="link" class="bootSettingsBtn" @click="openModal">
+          <b-button
+            variant="link"
+            class="bootSettingsBtn"
+            :disabled="buttonStatus"
+            @click="openBootModal"
+          >
             <icon-settings />
             {{ $t('pageKvm.bootSettings.buttonBootSettings') }}</b-button
           >
-          <div v-if="isModalOpen" class="modal">
+          <div v-if="isBootModalOpen" class="modal">
             <div class="modal-content">
-              <span class="close" @click="closeModal">&times;</span>
+              <span class="close" @click="closeBootModal">&times;</span>
               <h2>
-                {{ $t('pageKvm.bootSettings.buttonBootSettings') }}
+                {{ $t('pageKvm.bootSettings.bootSettingsHdr') }}
               </h2>
-
               <b-form novalidate @submit.prevent="handleSubmit">
                 <b-form-group
                   :label="$t('pageKvm.bootSettings.bootSettingsOverride')"
@@ -61,24 +65,20 @@
                   <b-tooltip target="boot-option" placement="right">
                     {{ $t('pageKvm.bootSettings.bootOptionsToolTips') }}
                   </b-tooltip>
-
-                  <b-dropdown-item
-                    v-for="(option, index) in options"
-                    :key="index"
-                    v-b-tooltip.hover.rightbottom="getBootTooltipText(option)"
-                    @click="handleBootOptionChange(option)"
-                  >
-                    {{ option }}
-                  </b-dropdown-item>
                 </b-form-group>
                 <b-form-checkbox
                   v-model="form.oneTimeBoot"
                   class="mb-4"
-                  :disabled="form.bootOption === 'None'"
+                  :disabled="
+                    form.bootOption === 'None' || bootSourceOptions.length === 0
+                  "
                   @change="$v.form.oneTimeBoot.$touch()"
                 >
                   {{ $t('pageKvm.bootSettings.enableOneTimeBoot') }}
                 </b-form-checkbox>
+                <b-button variant="primary" type="submit" class="mb-3 save">
+                  {{ $t('global.action.save') }}
+                </b-button>
                 <b-button
                   variant="secondary"
                   type="cancel"
@@ -87,14 +87,11 @@
                 >
                   {{ $t('global.action.cancel') }}
                 </b-button>
-                <b-button variant="primary" type="submit" class="mb-3 save">
-                  {{ $t('global.action.save') }}
-                </b-button>
               </b-form>
             </div>
           </div>
           <div class="serverPowerBtn">
-            <b-dropdown variant="link">
+            <b-dropdown variant="link" :disabled="buttonStatus">
               <template #button-content>
                 <span class="responsive-text">
                   <b-icon icon="power"></b-icon>
@@ -135,7 +132,7 @@ import Keys from '@novnc/novnc/core/input/keysym';
 import StatusIcon from '@/components/Global/StatusIcon';
 import IconLaunch from '@carbon/icons-vue/es/launch/20';
 import IconArrowDown from '@carbon/icons-vue/es/arrow--down/16';
-import IconSettings from '@carbon/icons-vue/es/settings/20';
+import IconSettings from '@carbon/icons-vue/es/settings--adjust/20';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import softKeyBoard from '@/components/SoftKeyboard/softKeyboard';
@@ -185,11 +182,11 @@ export default {
         this.$t('pageKvm.powerOperation.forcedShutdown'),
         this.$t('pageKvm.powerOperation.forcedRestart'),
       ],
-      isModalOpen: false,
+      buttonStatus: true,
+      isBootModalOpen: false,
       form: {
         bootOption: this.$store.getters['serverBootSettings/bootSource'],
         oneTimeBoot: this.$store.getters['serverBootSettings/overrideEnabled'],
-        tpmPolicyOn: this.$store.getters['serverBootSettings/tpmEnabled'],
       },
     };
   },
@@ -215,24 +212,23 @@ export default {
     serverStatus() {
       if (this.status === Connected) {
         this.$root.$emit('enable-softkeyboard-btn');
+        this.$root.$emit('enable-button');
         this.updatePowerActionDropDown(this.powerStatus);
         return this.$t('pageKvm.connected');
       } else if (this.status === Disconnected) {
         this.$root.$emit('disable-softkeyboard-btn');
+        this.$root.$emit('disable-button');
         this.updatePowerActionDropDown(this.powerStatus);
         return this.$t('pageKvm.disconnected');
       } else if (this.getKvmActiveData()) {
         this.$root.$emit('disable-softkeyboard-btn');
+        this.$root.$emit('disable-button');
         this.updatePowerActionDropDown(this.powerStatus);
         return this.$t('pageKvm.alreadyInMasterSession');
       }
       this.$root.$emit('disable-softkeyboard-btn');
+      this.$root.$emit('disable-button');
       return this.$t('pageKvm.connecting');
-    },
-    bootOptionText() {
-      return this.bootOption === 'Select Option'
-        ? 'Select Option'
-        : this.bootOption;
     },
   },
   watch: {
@@ -244,11 +240,6 @@ export default {
     },
     overrideEnabled: function (value) {
       this.form.oneTimeBoot = value;
-      this.oneTimeBoot =
-        this.$store.getters['serverBootSettings/overrideEnabled'];
-    },
-    tpmEnabled: function (value) {
-      this.form.tpmPolicyOn = value;
     },
   },
   validations: {
@@ -257,14 +248,20 @@ export default {
     form: {
       bootOption: {},
       oneTimeBoot: {},
-      tpmPolicyOn: {},
     },
   },
   created() {
-    this.bootOption = this.$store.getters['serverBootSettings/bootSource'];
-    this.oneTimeBoot =
-      this.$store.getters['serverBootSettings/overrideEnabled'];
-    this.$store.dispatch('serverBootSettings/getBootSettings');
+    this.startLoader();
+    const bootSettingsPromise = new Promise((resolve) => {
+      this.$root.$on('server-power-operations-boot-settings-complete', () =>
+        resolve(),
+      );
+    });
+    Promise.all([
+      this.$store.dispatch('serverBootSettings/getBootSettings'),
+      this.$store.dispatch('controls/getLastPowerOperationTime'),
+      bootSettingsPromise,
+    ]).finally(() => this.endLoader());
     this.$store.dispatch('controls/getLastPowerOperationTime');
     this.$store.dispatch('global/getSystemInfo');
     window.addEventListener('beforeunload', this.handleChildWindowBeforeUnload);
@@ -288,6 +285,9 @@ export default {
           this.endLoader();
         });
     }, 500);
+
+    this.$root.$on('enable-button', () => this.handleButtonStatus(false));
+    this.$root.$on('disable-button', () => this.handleButtonStatus(true));
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeKvmWindow);
@@ -408,21 +408,22 @@ export default {
       return isDisabled;
     },
 
-    openModal() {
-      this.isModalOpen = true;
+    handleButtonStatus(status) {
+      this.buttonStatus = status;
+    },
+
+    openBootModal() {
+      this.isBootModalOpen = true;
       this.form.bootOption =
         this.$store.getters['serverBootSettings/bootSource'];
       this.form.oneTimeBoot =
         this.$store.getters['serverBootSettings/overrideEnabled'];
     },
-    closeModal() {
-      this.$v.$reset();
-      this.isModalOpen = false;
+
+    closeBootModal() {
+      this.isBootModalOpen = false;
     },
-    saveSettings() {
-      console.log('Boot Settings Saved:', this.settings);
-      this.closeModal();
-    },
+
     handleSubmit() {
       this.startLoader();
       //const tpmPolicyChanged = this.$v.form.tpmPolicyOn.$dirty;
@@ -431,7 +432,7 @@ export default {
       let overrideEnabled = this.form.oneTimeBoot;
       let tpmEnabled = null;
       tpmEnabled = this.$store.getters['serverBootSettings/tpmEnabled'];
-      //if (tpmPolicyChanged) tpmEnabled = this.form.tpmPolicyOn;
+
       settings = { bootSource, overrideEnabled, tpmEnabled };
       console.log('current:', settings);
       this.$store
@@ -440,24 +441,21 @@ export default {
         .catch(({ message }) => this.errorToast(message))
         .finally(() => {
           this.$v.form.$reset();
-          this.closeModal();
+          this.closeBootModal();
           this.endLoader();
         });
     },
+
     onChangeSelect(selectedOption) {
       this.$v.form.bootOption.$touch();
       // Disable one time boot if selected boot option is 'None'
       if (selectedOption === 'None') this.form.oneTimeBoot = false;
     },
+
     handleCancel() {
-      this.closeModal();
+      this.closeBootModal();
     },
-    getTooltip(key) {
-      if (this.tooltips[key]) {
-        return this.tooltips[key].join('<br>');
-      }
-      return '';
-    },
+
     handleNewDropdownClick(value) {
       switch (value) {
         case this.$t('pageKvm.powerOperation.powerOn'):
@@ -551,26 +549,6 @@ export default {
           return '';
       }
     },
-    getBootTooltipText(option) {
-      switch (option) {
-        case this.$t('pageKvm.bootSettings.bootOptions.None'):
-          return this.$t('pageKvm.bootSettings.bootOptionsToolTips.None');
-        case this.$t('pageKvm.bootSettings.bootOptions.Pxe'):
-          return this.$t('pageKvm.bootSettings.bootOptionsToolTips.Pxe');
-        case this.$t('pageKvm.bootSettings.bootOptions.Hdd'):
-          return this.$t('pageKvm.bootSettings.bootOptionsToolTips.Hdd');
-        case this.$t('pageKvm.bootSettings.bootOptions.Cd'):
-          return this.$t('pageKvm.bootSettings.bootOptionsToolTips.Cd');
-        case this.$t('pageKvm.bootSettings.bootOptions.Safe'):
-          return this.$t('pageKvm.bootSettings.bootOptionsToolTips.Safe');
-        case this.$t('pageKvm.bootSettings.bootOptions.Diags'):
-          return this.$t('pageKvm.bootSettings.bootOptionsToolTips.Diags');
-        case this.$t('pageKvm.bootSettings.bootOptions.BiosSetup'):
-          return this.$t('pageKvm.bootSettings.bootOptionsToolTips.BiosSetup');
-        case this.$t('pageKvm.bootSettings.bootOptions.Usb'):
-          return this.$t('pageKvm.bootSettings.bootOptionsToolTips.Usb');
-      }
-    },
   },
 };
 </script>
@@ -600,51 +578,31 @@ export default {
 .serverPowerBtn:hover {
   background-color: #e6e6e6;
 }
+
 .bootSettingsBtn {
   padding-top: 16px !important;
 }
-.custom-color {
-  color: rgb(255, 128, 0); /* You can define your custom color here */
-}
-.custom-dropdown-button {
-  padding-top: 1px !important;
-}
-
-.custom-dropdown-button .dropdown-toggle {
-  padding-top: 38px !important;
-  background-color: white;
-  color: azure;
-  border: 1px solid #ccc; /* Optional: for better visibility */
-}
-
-.custom-dropdown-button .dropdown-toggle:focus,
-.custom-dropdown-button .dropdown-toggle:hover {
-  background-color: #f8f9fa; /* Optional: slightly different color on hover/focus */
-}
 
 .modal {
-  display: block;
+  display: flex;
   position: fixed;
   z-index: 1;
-  left: 0;
-  top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
+  background-color: rgba(0, 0, 0, 0.5);
   align-items: center;
   justify-content: center;
 }
 
 .modal-content {
-  background-color: #fefefe;
   padding: 30px;
   border: 1px solid #888;
   width: 400px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 .close {
   color: #aaa;
   float: right;
@@ -655,18 +613,19 @@ export default {
   top: 10px;
   right: 20px;
 }
+
 .close:focus {
   color: black;
   text-decoration: none;
 }
+
 .save {
-  position: absolute;
-  bottom: 0.5px;
-  right: 20px;
+  float: right;
+  margin-left: 2.5px;
 }
+
 .cancel {
-  position: absolute;
-  bottom: 0.5px;
-  right: 90px;
+  float: right;
+  margin-right: 2.5px;
 }
 </style>

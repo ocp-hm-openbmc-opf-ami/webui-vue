@@ -1226,21 +1226,10 @@
         "buttonCtrlAltDelete": "Send Ctrl+Alt+Delete",
         "bootSettings":{
             "buttonBootSettings" : "Boot Settings",
+            "bootSettingsHdr": "Boot Settings",
             "bootSettingsOverride": "Boot settings override",
             "enableOneTimeBoot": "Enable one time boot",
-            "bootOptionDesc" :"Boot Up Source",
-            "oneTimeBootDesc" :"Enable one time",
-            "bootOptions": {
-                    "None":"None",
-                    "Pxe": "Pxe",
-                    "Hdd" : "Hdd",
-                    "Cd":"Cd",
-                    "Safe":"Safe",
-                    "Diags":"Diags",
-                    "BiosSetup":"BiosSetup",
-                    "Usb" : "Usb"
-            },
-            "bootOptionsToolTips" : "Select Boot Settings Override option from the list"
+            "bootOptionsToolTips" : "Select Boot Source option from the list"
         },
         "power": "Power",
         "powerOperation": {

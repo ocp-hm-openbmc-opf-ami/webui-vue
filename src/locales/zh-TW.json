@@ -1221,6 +1221,13 @@
     "pageKvm": {
         "openNewTab": "在新的標籤頁開啟",
         "buttonCtrlAltDelete": "送出 Ctrl+Alt+Delete",
+        "bootSettings":{
+            "buttonBootSettings" : "啟動設定",
+            "bootSettingsHdr": "啟動設定",
+            "bootSettingsOverride": "啟動設定覆蓋",
+            "enableOneTimeBoot": "啟用一次啟動",
+            "bootOptionsToolTips" : "從清單中選擇啟動來源選項"
+        },
         "power": "電源",
         "powerOperation": {
             "powerOn": "開機",
