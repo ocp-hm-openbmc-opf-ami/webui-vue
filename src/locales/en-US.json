@@ -1757,6 +1757,7 @@
             "lowerCritical": "Lower critical",
             "name": "Name",
             "status": "Status",
+            "state": "State",
             "upperWarning": "Upper warning",
             "upperCritical": "Upper critical"
         },

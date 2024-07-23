@@ -110,8 +110,13 @@
                 ></path>
               </svg>
             </template>
+            <!-- Sensor Status column -->
             <template #cell(status)="{ value }">
               <status-icon :status="statusIcon(value)" /> {{ value }}
+            </template>
+            <!-- Sensor State column -->
+            <template #cell(filterByStatus)="{ value }">
+              {{ value }}
             </template>
             <template #cell(currentValue)="data">
               {{ data.value }} {{ data.item.units }}
@@ -206,6 +211,11 @@ export default {
           label: this.$t('pageSensors.table.name'),
         },
         {
+          key: 'state',
+          sortable: true,
+          label: this.$t('pageSensors.table.state'),
+        },
+        {
           key: 'status',
           sortable: true,
           label: this.$t('pageSensors.table.status'),
@@ -247,6 +257,11 @@ export default {
             this.$t('global.action.warning'),
             this.$t('global.action.critical'),
           ],
+        },
+        {
+          key: 'state',
+          label: this.$t('pageSensors.table.state'),
+          values: ['Enabled', 'Disabled'],
         },
       ],
       activeFilters: [],

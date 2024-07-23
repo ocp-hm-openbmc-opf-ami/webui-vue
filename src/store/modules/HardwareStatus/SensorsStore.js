@@ -64,6 +64,7 @@ const SensorsStore = {
               id: response.data.Oem?.Ami['@odata.id'],
               name: response.data.Name,
               status: response.data.Status?.Health,
+              state: response.data.Status?.State,
               currentValue: response.data.Reading,
               lowerCaution: response.data.Thresholds?.LowerCaution?.Reading,
               upperCaution: response.data.Thresholds?.UpperCaution?.Reading,
@@ -85,6 +86,7 @@ const SensorsStore = {
             sensorData.push({
               name: sensor.Name,
               status: sensor.Status.Health,
+              state: sensor.Status.State,
               currentValue: sensor.Reading,
               lowerCaution: sensor.LowerThresholdNonCritical,
               upperCaution: sensor.UpperThresholdNonCritical,
@@ -97,6 +99,7 @@ const SensorsStore = {
             sensorData.push({
               name: sensor.Name,
               status: sensor.Status.Health,
+              state: sensor.Status.State,
               currentValue: sensor.ReadingCelsius,
               lowerCaution: sensor.LowerThresholdNonCritical,
               upperCaution: sensor.UpperThresholdNonCritical,
@@ -117,6 +120,7 @@ const SensorsStore = {
             return {
               name: sensor.Name,
               status: sensor.Status.Health,
+              state: sensor.Status.State,
               currentValue: sensor.ReadingVolts,
               lowerCaution: sensor.LowerThresholdNonCritical,
               upperCaution: sensor.UpperThresholdNonCritical,
