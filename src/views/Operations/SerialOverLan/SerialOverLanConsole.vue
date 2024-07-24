@@ -154,7 +154,14 @@ export default {
         fitAddon.fit();
       }, 1000);
       window.addEventListener('resize', this.resizeConsoleWindow);
-
+      this.term.onData((data) => {
+        if (data.charCodeAt(0) === 127) {
+          // ASCII 127 is the delete (DEL) character
+          this.ws.send('\b');
+        } else {
+          this.term.write(data);
+        }
+      });
       try {
         this.ws.onopen = function () {
           console.log('websocket console0/ opened');
