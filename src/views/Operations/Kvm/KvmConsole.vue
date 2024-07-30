@@ -413,11 +413,13 @@ export default {
     },
 
     openBootModal() {
-      this.isBootModalOpen = true;
+      this.$store.dispatch('serverBootSettings/getBootSettings');
       this.form.bootOption =
         this.$store.getters['serverBootSettings/bootSource'];
       this.form.oneTimeBoot =
         this.$store.getters['serverBootSettings/overrideEnabled'];
+
+      this.isBootModalOpen = true;
     },
 
     closeBootModal() {
@@ -430,8 +432,9 @@ export default {
       let settings;
       let bootSource = this.form.bootOption;
       let overrideEnabled = this.form.oneTimeBoot;
+      /* Currently TPM support is not enabled from KVM boot Setttings
+        modal hence providing null for the request message */
       let tpmEnabled = null;
-      tpmEnabled = this.$store.getters['serverBootSettings/tpmEnabled'];
 
       settings = { bootSource, overrideEnabled, tpmEnabled };
       console.log('current:', settings);
@@ -570,10 +573,10 @@ export default {
 
 .softkeyboardBtn {
   z-index: 0;
-  padding-bottom: 55px;
+  padding-top: 10px !important;
 }
 .serverPowerBtn {
-  padding-top: 8px !important;
+  padding-top: 20px !important;
 }
 .serverPowerBtn:hover {
   background-color: #e6e6e6;
