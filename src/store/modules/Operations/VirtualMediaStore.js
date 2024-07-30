@@ -20,15 +20,24 @@ const VirtualMediaStore = {
     legacyDevices: [],
     connections: [],
     vmStarted: 0,
+    slot0Started: false,
+    slot1Started: false,
+    slot0Nbd: null,
+    slot1Nbd: null,
     legacyStarted: 0,
     virtualMediaAccess: true,
+    virtualMediaPolicies: false,
+    mediaAlreadyRedirected: [],
   },
   getters: {
     proxyDevices: (state) => state.proxyDevices,
     legacyDevices: (state) => state.legacyDevices,
     vmStarted: (state) => state.vmStarted,
+    slot0Started: (state) => state.slot0Started,
+    slot1Started: (state) => state.slot1Started,
     legacyStarted: (state) => state.legacyStarted,
     virtualMediaAccess: (state) => state.virtualMediaAccess,
+    mediaAlreadyRedirected: (state) => state.mediaAlreadyRedirected,
   },
   mutations: {
     setProxyDevicesData: (state, deviceData) =>
@@ -37,9 +46,15 @@ const VirtualMediaStore = {
       (state.legacyDevices = deviceData),
     setVirtualMediaAccess: (state, keyState) =>
       (state.virtualMediaAccess = keyState),
+    setVirtualMediaPolicies: (state, keyState) =>
+      (state.virtualMediaPolicies = keyState),
+    setMediaAlreadyRedirected: (state, slot) =>
+      (state.mediaAlreadyRedirected = slot),
+    setSlot0Started: (state, start) => (state.slot0Started = start),
+    setSlot1Started: (state, start) => (state.Slot1Started = start),
   },
   actions: {
-    async getData({ commit }) {
+    async getData({ commit, state }) {
       const virtualMediaListEnabled =
         process.env.VUE_APP_VIRTUAL_MEDIA_LIST_ENABLED === 'true'
           ? true
@@ -55,7 +70,7 @@ const VirtualMediaStore = {
         commit('setProxyDevicesData', [device]);
         return;
       }
-
+      commit('setMediaAlreadyRedirected', []);
       return await api
         .get('/redfish/v1/Managers/bmc/VirtualMedia')
         .then((response) =>
@@ -65,8 +80,22 @@ const VirtualMediaStore = {
         )
         .then((devices) => api.all(devices.map((device) => api.get(device))))
         .then((devices) => {
+          var slot = [];
           const deviceData = devices.map((device) => {
             const isActive = device.data?.Inserted === true ? true : false;
+            if (
+              device.data.Id == 'Slot_0' &&
+              device.data?.Inserted &&
+              !state.slot0Nbd
+            ) {
+              slot.push(device.data.Id);
+            } else if (
+              device.data.Id == 'Slot_1' &&
+              device.data?.Inserted &&
+              !state.slot1Nbd
+            ) {
+              slot.push(device.data.Id);
+            }
             return {
               id: device.data?.Id,
               transferProtocolType: device.data?.TransferProtocolType,
@@ -74,13 +103,27 @@ const VirtualMediaStore = {
               isActive: isActive,
             };
           });
+          commit('setMediaAlreadyRedirected', slot);
           const proxyDevices = deviceData
             .filter((d) => d.transferProtocolType === transferProtocolType.OEM)
             .map((device) => {
-              return {
-                ...device,
-                file: null,
-              };
+              if (state.slot0Nbd || state.slot1Nbd) {
+                return {
+                  ...device,
+                  file: null,
+                  nbd:
+                    device.id == 'Slot_0' && state.slot0Nbd
+                      ? state.slot0Nbd
+                      : device.id == 'Slot_1' && state.slot1Nbd
+                        ? state.slot1Nbd
+                        : null,
+                };
+              } else {
+                return {
+                  ...device,
+                  file: null,
+                };
+              }
             });
           const legacyDevices = deviceData
             .filter((d) => d.transferProtocolType !== transferProtocolType.OEM)
@@ -96,6 +139,7 @@ const VirtualMediaStore = {
           commit('setProxyDevicesData', proxyDevices);
           commit('setLegacyDevicesData', legacyDevices);
           commit('setVirtualMediaAccess', true);
+          commit('setVirtualMediaPolicies', false);
         })
         .catch((error) => {
           console.log('Virtual Media:', error);
@@ -103,6 +147,7 @@ const VirtualMediaStore = {
             commit('setVirtualMediaAccess', false);
           } else {
             commit('setVirtualMediaAccess', true);
+            throw new Error();
           }
         });
     },

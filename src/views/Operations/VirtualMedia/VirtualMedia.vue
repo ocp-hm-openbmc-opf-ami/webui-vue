@@ -29,6 +29,15 @@
                   $t('pageVirtualMedia.virtualMediaSubTitleFirst')
                 "
               >
+                <div v-if="mediaAlreadyRedirected.length">
+                  <b-alert show variant="warning"
+                    >{{
+                      $t('pageVirtualMedia.mediaAlreadyRedirected', {
+                        Slot: slotString(),
+                      })
+                    }}
+                  </b-alert>
+                </div>
                 <b-row>
                   <b-col
                     v-for="(dev, $index) in proxyDevices"
@@ -59,7 +68,13 @@
                     <b-button
                       v-if="dev.isActive"
                       variant="primary"
-                      :disabled="!dev.file"
+                      :disabled="
+                        dev.id == 'Slot_0'
+                          ? !slot0Started
+                          : dev.id == 'Slot_1'
+                            ? !slot1Started
+                            : !dev.file
+                      "
                       @click="stopVM(dev)"
                     >
                       {{ $t('pageVirtualMedia.stop') }}
@@ -163,12 +178,31 @@ export default {
     virtualMediaAccess() {
       return this.$store.getters['virtualMedia/virtualMediaAccess'];
     },
+    mediaAlreadyRedirected() {
+      return this.$store.getters['virtualMedia/mediaAlreadyRedirected'];
+    },
     legacyDevices() {
       return this.$store.getters['virtualMedia/legacyDevices'];
     },
     vmStarted: {
       get() {
         return this.$store.getters['virtualMedia/vmStarted'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    slot0Started: {
+      get() {
+        return this.$store.getters['virtualMedia/slot0Started'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    slot1Started: {
+      get() {
+        return this.$store.getters['virtualMedia/slot1Started'];
       },
       set(newValue) {
         return newValue;
@@ -185,17 +219,33 @@ export default {
   },
   created() {
     this.$store.dispatch('global/getSystemInfo');
-    if (
-      (this.proxyDevices.length > 0 || this.legacyDevices.length > 0) &&
-      this.vmStarted > 0
-    )
-      return;
-    this.startLoader();
-    this.$store
-      .dispatch('virtualMedia/getData')
-      .finally(() => this.endLoader());
+    this.getVirtualMedia();
+    this.$root.$on('stop-vmedia', () => {
+      this.proxyDevices.forEach((dev) => this.stopVM(dev));
+    });
   },
   methods: {
+    getVirtualMedia() {
+      this.startLoader();
+      this.$store
+        .dispatch('virtualMedia/getData')
+        .then(() => {
+          this.proxyDevices.forEach((dev) => {
+            if (dev.nbd && !dev.isActive) {
+              this.stopVM(dev);
+            }
+          });
+        })
+        .catch(() => {
+          this.errorToast(this.$t('pageVirtualMedia.toast.errorVirtualMedia'));
+        })
+        .finally(() => this.endLoader());
+    },
+    slotString() {
+      if (this.mediaAlreadyRedirected.length == 1) {
+        return this.mediaAlreadyRedirected[0];
+      } else return 'Slot_0 and Slot_1';
+    },
     startVM(device) {
       const token = this.$store.getters['authentication/token'];
       device.nbd = new NbdServer(
@@ -204,10 +254,26 @@ export default {
         device.id,
         token,
       );
-      device.nbd.socketStarted = () =>
+      device.nbd.socketStarted = () => {
         this.successToast(this.$t('pageVirtualMedia.toast.serverRunning'));
-      device.nbd.errorReadingFile = () =>
+        if (device.id == 'Slot_0') {
+          this.$store.state.virtualMedia.slot0Started = true;
+          this.$store.state.virtualMedia.slot0Nbd = device.nbd;
+        } else if (device.id == 'Slot_1') {
+          this.$store.state.virtualMedia.slot1Started = true;
+          this.$store.state.virtualMedia.slot1Nbd = device.nbd;
+        }
+      };
+      device.nbd.errorReadingFile = () => {
         this.errorToast(this.$t('pageVirtualMedia.toast.errorReadingFile'));
+        if (device.id == 'Slot_0') {
+          this.$store.state.virtualMedia.slot0Started = false;
+          this.$store.state.virtualMedia.slot0Nbd = null;
+        } else if (device.id == 'Slot_1') {
+          this.$store.state.virtualMedia.slot1Started = false;
+          this.$store.state.virtualMedia.slot1Nbd = null;
+        }
+      };
       device.nbd.socketClosed = (code) => {
         if (code === 1000)
           this.successToast(
@@ -217,6 +283,14 @@ export default {
           this.errorToast(
             this.$t('pageVirtualMedia.toast.serverClosedWithErrors'),
           );
+        if (device.id == 'Slot_0') {
+          this.$store.state.virtualMedia.slot0Started = false;
+          this.$store.state.virtualMedia.slot0Nbd = null;
+        } else if (device.id == 'Slot_1') {
+          this.$store.state.virtualMedia.slot1Started = false;
+          this.$store.state.virtualMedia.slot1Nbd = null;
+        }
+        this.getVirtualMedia();
         device.file = null;
         device.isActive = false;
         this.$store.state.virtualMedia.vmStarted = --this.vmStarted;
@@ -226,7 +300,9 @@ export default {
       device.isActive = true;
     },
     stopVM(device) {
-      device.nbd.stop();
+      if (device.nbd) {
+        device.nbd.stop();
+      }
     },
     startLegacy(connectionData) {
       var data = {};

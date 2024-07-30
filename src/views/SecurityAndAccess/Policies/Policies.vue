@@ -741,7 +741,14 @@ export default {
     changeVmcState(state) {
       this.$store
         .dispatch('policies/saveVmcState', state ? true : false)
-        .then((message) => this.successToast(message))
+        .then((message) => {
+          if (!state) {
+            if (this.$store.state.virtualMedia.vmStarted > 0) {
+              this.$root.$emit('stop-vmedia');
+            }
+          }
+          this.successToast(message);
+        })
         .catch(({ message }) => this.errorToast(message));
     },
     changeSOLState(state) {

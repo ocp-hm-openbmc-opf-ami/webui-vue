@@ -1876,6 +1876,7 @@
         "virtualMediaSubTitleSecond": "Load image from external server",
         "permissionRestricted": "You don't have a permission to view this page",
         "disabledVirtualMediaService": " Virtual Media service is disabled. Go to Security and Access -> Policies page to enable Virtual Media service.",
+        "mediaAlreadyRedirected": "Already media redirection in progress for %{Slot}. Please navigate to Security and Access -> Sessions page and disconnect the VMEDIA mount type console session to stop media redirection.",
         "modal": {
             "password": "Password",
             "serverUri": "External server URI",
@@ -1888,6 +1889,7 @@
             "errorMounting": "Error mounting",
             "errorReadingFile": "Error reading file. Closing server.",
             "errorUnmounting": "Error unmounting",
+            "errorVirtualMedia": "Error in virtual media",
             "serverRunning": "Server running",
             "serverConnectionEstablished": "Server connection established",
             "serverClosedSuccessfully": "Server closed successfully",
