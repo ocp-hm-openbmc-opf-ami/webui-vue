@@ -91,6 +91,15 @@ module.exports = {
         }),
       );
     }
+    config.module.rules.forEach((rule) => {
+      if (rule.test && rule.test.toString().includes('svg')) {
+        rule.use.forEach((use) => {
+          if (use.loader && use.loader.includes('file-loader')) {
+            use.options.name = 'img/[name].[ext]';
+          }
+        });
+      }
+    });
   },
   pluginOptions: {
     i18n: {
