@@ -84,6 +84,7 @@
         "table": {
             "collapseTableRow": "Collapse table row",
             "emptyMessage": "No items available",
+            "noRecordsMessage": "There are no records to show",
             "emptySearchMessage": "No items match the search query",
             "expandTableRow": "Expand table row",
             "fromDate": "From date",
@@ -781,7 +782,11 @@
             "dumpType": "Dump type",
             "id": "ID",
             "searchDumps": "Search dumps",
-            "size": "Size"
+            "size": "Size",
+            "bmcDumpEntry":"BMC Dump Entry",
+            "hostbootDumpEntry": "Hostboot Dump Entry",
+            "resourceDumpEntry": "Resource Dump Entry",
+            "systemDumpEntry": "System Dump Entry"
         },
         "toast": {
             "errorDeleteDump": "Error deleting %{count} dump. | Error deleting %{count} dumps.",
@@ -2036,7 +2041,9 @@
                 "accept": "Accept",
                 "ipv4": "IPv4",
                 "ipv6": "IPv6",
-                "both": "Both"
+                "both": "Both",
+                "networkType": "Network Type",
+                "preLoad":"PreLoad"
             }
         },
         "toast": {

@@ -166,7 +166,18 @@
           <!-- Severity column -->
           <template #cell(severity)="{ value }">
             <status-icon v-if="value" :status="statusIcon(value)" />
-            {{ value }}
+            <span v-if="value === 'OK'">
+              {{ $t('global.action.ok') }}
+            </span>
+            <span v-else-if="value === 'Warning'">
+              {{ $t('global.action.warning') }}
+            </span>
+            <span v-else-if="value === 'Critical'">
+              {{ $t('global.action.critical') }}
+            </span>
+            <span v-else>
+              {{ value }}
+            </span>
           </template>
           <!-- Date column -->
           <template #cell(date)="{ value }">
@@ -368,19 +379,30 @@ export default {
               {
                 key: 'severity',
                 label: this.$t('pageEventLogs.table.severity'),
-                values: ['OK', 'Warning', 'Critical'],
+                values: [
+                  this.$t('global.action.ok'),
+                  this.$t('global.action.warning'),
+                  this.$t('global.action.critical'),
+                ],
               },
             ]
           : [
               {
                 key: 'severity',
                 label: this.$t('pageEventLogs.table.severity'),
-                values: ['OK', 'Warning', 'Critical'],
+                values: [
+                  this.$t('global.action.ok'),
+                  this.$t('global.action.warning'),
+                  this.$t('global.action.critical'),
+                ],
               },
               {
                 key: 'filterByStatus',
                 label: this.$t('pageEventLogs.table.status'),
-                values: ['Resolved', 'Unresolved'],
+                values: [
+                  this.$t('pageEventLogs.resolved'),
+                  this.$t('pageEventLogs.unresolved'),
+                ],
               },
             ],
       activeFilters: [],

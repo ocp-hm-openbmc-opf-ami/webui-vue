@@ -83,6 +83,7 @@
         "table": {
             "collapseTableRow": "摺叠表格栏位",
             "emptyMessage": "没有可用的项目",
+            "noRecordsMessage": "无纪录",
             "emptySearchMessage": "没有与搜索条件匹配的项目",
             "expandTableRow": "展开表格栏位",
             "fromDate": "表格日期",
@@ -150,7 +151,7 @@
         "keyClear": "@:appPageTitle.keyClear",
         "factoryDefault": "原厂预设值",
         "smtpSettings": "SMTP 设定",
-        "snmpSettings": "@:appPageTitle.snmp",
+        "snmpSettings": "SNMP 设定",
         "pef": "平台事件过滤器",
         "eventFilter": "事件过滤器",
         "nicInformation": "NIC 资讯",
@@ -206,7 +207,7 @@
         "keyClear": "清除钥匙",
         "factoryDefault": "原厂预设值",
         "smtpSettings": "SMTP 设定",
-        "snmp": "SNMP 设置",
+        "snmp": "SNMP 设定",
         "eventFilter": "事件过滤器",
         "nicInformation": "NIC 资讯",
         "nvmeInformation": "NVMe 资讯",
@@ -238,7 +239,7 @@
             "iPPriority": "IP优先级",
             "staticDomainName": "静态域名",
             "hostConfiguration": "主机配置",
-            "hostNameSetting": "主机名",
+            "hostNameSetting": "主机名称",
             "staticHostName": "静态主机名",
             "interfacesConfiguration": "接口",
             "ddnsMethod": "DDNS 方法",
@@ -775,7 +776,11 @@
             "dumpType": "转储型态",
             "id": "ID",
             "searchDumps": "搜寻转储",
-            "size": "尺寸"
+            "size": "尺寸",
+            "bmcDumpEntry":"BMC转储",
+            "hostbootDumpEntry": "主机启动转储",
+            "resourceDumpEntry": "资源转储",
+            "systemDumpEntry": "系统转储"
         },
         "toast": {
             "errorDeleteDump": "删除转储 %{count} | 删除转储们 %{count}",
@@ -986,7 +991,7 @@
         "fans": "风扇",
         "powerSupplies": "电源供应",
         "bmcManager": "BMC 管理员",
-        "chassis": "Chassis",
+        "chassis": "机箱",
         "processors": "处理器",
         "quicklinkTitle": "硬体元件捷径",
         "system": "系统",
@@ -1002,7 +1007,7 @@
             "busWidthBits": "汇流排宽度",
             "bmcDateTime": "BMC 日期与时间",
             "capacityMiB": "容量 MiB",
-            "chassisType": "Chassis 型态",
+            "chassisType": "机箱型态",
             "connectTypesSupported": "连接可支援型态",
             "coreCount": "核心数量",
             "count": "数量",
@@ -1566,7 +1571,7 @@
         "fanRedundancyFailure": "风扇过多错误",
         "processorPresence": "处理器概论 ",
         "voltageSensorOutOfRange": "容量感测超过范围",
-        "chassisIntrusion": "Chassis 入侵",
+        "chassisIntrusion": "机箱入侵",
         "memoryError": "记忆体错误",
         "frbFailure": "FRB 错误",
         "watchdogTimer": "看门狗计时器",
@@ -2024,7 +2029,9 @@
                 "accept": "接受",
                 "ipv4": "IPv4",
                 "ipv6": "IPv6",
-                "both": "两个都"
+                "both": "两个都",
+                "networkType": "网路类型",
+                "preLoad":"预先载入"
             }
         },
         "toast": {

@@ -34,7 +34,7 @@
                   sm="6"
                   xl="4"
                 >
-                  <b-form-group :label="events.eventName">
+                  <b-form-group :label="$t(events.eventName)">
                     <b-form-checkbox
                       v-model="events.enableStatus"
                       data-test-id="alert-input-enable"

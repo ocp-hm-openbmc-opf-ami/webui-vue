@@ -83,6 +83,7 @@
         "table": {
             "collapseTableRow": "摺疊表格欄位",
             "emptyMessage": "沒有可用的項目",
+            "noRecordsMessage": "無紀錄",
             "emptySearchMessage": "沒有與搜索條件匹配的項目",
             "expandTableRow": "展開表格欄位",
             "fromDate": "表格日期",
@@ -150,7 +151,7 @@
         "keyClear": "@:appPageTitle.keyClear",
         "factoryDefault": "原廠預設值",
         "smtpSettings": "SMTP 設定",
-        "snmpSettings": "@:appPageTitle.snmp",
+        "snmpSettings": "SNMP 設定",
         "pef": "平台事件過濾器",
         "eventFilter": "事件過濾器",
         "nicInformation": "NIC 資訊",
@@ -238,7 +239,7 @@
             "iPPriority": "IP優先權",
             "staticDomainName": "靜態域名",
             "hostConfiguration": "主機配置",
-            "hostNameSetting": "Host Name",
+            "hostNameSetting": "主機名稱",
             "staticHostName": "靜態主機名",
             "interfacesConfiguration": "介面",
             "ddnsMethod": "DDNS 方法",
@@ -778,7 +779,11 @@
             "dumpType": "轉儲型態",
             "id": "ID",
             "searchDumps": "搜尋轉儲",
-            "size": "尺寸"
+            "size": "尺寸",
+            "bmcDumpEntry":"BMC轉儲",
+            "hostbootDumpEntry": "主機啟動轉儲",
+            "resourceDumpEntry": "資源轉儲",
+            "systemDumpEntry": "系統轉儲"
         },
         "toast": {
             "errorDeleteDump": "刪除轉儲 %{count} | 刪除轉儲們 %{count}",
@@ -989,7 +994,7 @@
         "fans": "風扇",
         "powerSupplies": "電源供應",
         "bmcManager": "BMC 管理員",
-        "chassis": "Chassis",
+        "chassis": "機箱",
         "processors": "處理器",
         "quicklinkTitle": "硬體元件捷徑",
         "system": "系統",
@@ -1005,7 +1010,7 @@
             "busWidthBits": "匯流排寬度",
             "bmcDateTime": "BMC 日期與時間",
             "capacityMiB": "容量",
-            "chassisType": "Chassis 型態",
+            "chassisType": "機箱型態",
             "connectTypesSupported": "連接可支援型態",
             "coreCount": "核心數量",
             "count": "數量",
@@ -1570,7 +1575,7 @@
         "fanRedundancyFailure": "風扇過多錯誤",
         "processorPresence": "處理器概論 ",
         "voltageSensorOutOfRange": "容量感測超過範圍",
-        "chassisIntrusion": "Chassis 入侵",
+        "chassisIntrusion": "機箱入侵",
         "memoryError": "記憶體錯誤",
         "frbFailure": "FRB 錯誤",
         "watchdogTimer": "看門狗計時器",
@@ -2028,7 +2033,9 @@
                 "accept": "接受",
                 "ipv4": "IPv4",
                 "ipv6": "IPv6",
-                "both": "兩個都"
+                "both": "兩個都",
+                "networkType": "網路類型",
+                "preLoad":"預先載入"
             }
         },
         "toast": {
