@@ -1733,9 +1733,9 @@
         "snmpPortLabel": "SNMP Port value",
         "snmpDescription": "Enabling SNMP Protocol",
         "kvmSessionTimeOut": "KVM Session Timeout",
-        "kvmSessionTimeOutDescription": "Change the kvm session timeout in between 1 minute to 1440 minutes (1 day) time delay",
+        "kvmSessionTimeOutDescription": "Change the kvm session timeout in between 30 Seconds to 86400 seconds time delay",
         "kvmPortValue": "KVM Port Value (in numbers)",
-        "kvmTimeoutValueLimits": "Kindly enter the minutes between %{min} and %{max}"
+        "kvmTimeoutValueLimits": "Kindly enter the Seconds between %{min} and %{max}"
 
     },
     "pagePower": {

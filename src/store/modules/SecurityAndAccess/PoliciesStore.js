@@ -139,9 +139,8 @@ const PoliciesStore = {
         .get('/redfish/v1/SessionService')
         .then((response) => {
           const sessionTimeoutValue = response.data.SessionTimeout;
-          const kvmSessionTimeoutValue = Math.floor(
-            response.data?.Oem?.Ami?.KVMSessionTimeout / 60,
-          );
+          const kvmSessionTimeoutValue =
+            response.data?.Oem?.Ami?.KVMSessionTimeout;
           const kvmPortValue = response.data?.Oem?.Ami?.BMCwebPort;
           commit('setSessionTimeoutValue', sessionTimeoutValue);
           commit('setKvmSessionTimeout', kvmSessionTimeoutValue);
@@ -480,8 +479,7 @@ const PoliciesStore = {
           }
         });
     },
-    async saveKVMSessionTimeout({ dispatch }, KVMSessionTimeoutValue) {
-      const KVMSessionTimeout = Math.ceil(KVMSessionTimeoutValue * 60);
+    async saveKVMSessionTimeout({ dispatch }, KVMSessionTimeout) {
       const Oem = {
         Oem: {
           Ami: {

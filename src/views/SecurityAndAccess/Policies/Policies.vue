@@ -424,8 +424,6 @@
                       data-test-id="kvm-session-timeout"
                       type="text"
                       aria-describedby="power-help-text"
-                      :min="1"
-                      :max="1440"
                       :state="getValidationState($v.kvmSessionTimeOutValue)"
                       @input="$v.kvmSessionTimeOutValue.$touch()"
                     ></b-form-input>
@@ -436,8 +434,8 @@
                       <template v-else-if="!$v.kvmSessionTimeOutValue.pattern">
                         {{
                           $t('pagePolicies.kvmTimeoutValueLimits', {
-                            min: 1,
-                            max: 1440,
+                            min: 30,
+                            max: 86400,
                           })
                         }}
                       </template>
@@ -823,7 +821,7 @@ export default {
     },
     kvmSessionTimeoutValidation(val) {
       if (
-        !/^([1-9]|[1-9][0-9]{0,2}|1[0-3][0-9]{0,2}|14[0-3][0-9]|1440)$/.test(
+        !/^(3[0-9]|[4-9][0-9]|[1-9][0-9]{2}|[1-8][0-9]{3}|[1-7][0-9]{4}|8[0-5][0-9]{3}|86[0-3][0-9]{2}|86400)$/.test(
           val,
         )
       ) {
