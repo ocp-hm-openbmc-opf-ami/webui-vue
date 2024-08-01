@@ -437,7 +437,7 @@ export default {
       let tpmEnabled = null;
 
       settings = { bootSource, overrideEnabled, tpmEnabled };
-      console.log('current:', settings);
+
       this.$store
         .dispatch('serverBootSettings/saveSettings', settings)
         .then((message) => this.successToast(message))
