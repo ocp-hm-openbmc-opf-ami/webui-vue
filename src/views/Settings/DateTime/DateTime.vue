@@ -608,7 +608,8 @@ export default {
 
         date = this.getUtcDate(this.form.manual.date, this.form.manual.time);
 
-        dateTimeForm.updatedDateTime = date.toISOString();
+        dateTimeForm.updatedDateTime =
+          date.toISOString().split('.')[0] + dateTimeForm.dateTimeLocalOffset;
       } else {
         dateTimeForm.ntpProtocolEnabled = true;
 
@@ -646,6 +647,7 @@ export default {
         .then(() => {
           setTimeout(() => {
             this.$store.dispatch('global/getBmcTime');
+            this.$store.dispatch('dateTime/getNtpData');
           }, 5000);
         })
         .catch(({ message }) => this.errorToast(message))
