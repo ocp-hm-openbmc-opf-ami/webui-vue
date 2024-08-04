@@ -38,7 +38,7 @@
             <img
               class="header-logo"
               width="250px"
-              src="../../assets/images/MegaRAC_OneTree_white-text.svg"
+              src="../../assets/images/dashboard_header_product_logo.svg"
               :alt="altLogo"
             />
           </b-navbar-brand>

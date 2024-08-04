@@ -8,7 +8,7 @@
           <img
             class="imges"
             width="100px"
-            src="@/assets/images/ami-logo-no-tag-dark-bg.svg"
+            src="@/assets/images/login_form_company_logo.svg"
             :alt="altLogo"
           />
         </b-container>
@@ -16,7 +16,7 @@
           <img
             class="img-margin"
             width="350px"
-            src="@/assets/images/megarac_onetree.svg"
+            src="@/assets/images/login_form_product_logo.svg"
             alt="MegaRAC OneTree"
           />
         </h1>

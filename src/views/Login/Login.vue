@@ -8,14 +8,14 @@
           <img
             class="imges"
             width="100px"
-            src="@/assets/images/ami-logo-no-tag-dark-bg.svg"
+            src="@/assets/images/login_form_company_logo.svg"
             :alt="altLogo"
           />
         </b-container>
         <h1 v-if="customizableGuiName" class="h4 mt-3 mb-3">
           <img
             width="350px"
-            src="@/assets/images/megarac_onetree.svg"
+            src="@/assets/images/login_form_product_logo.svg"
             alt="MegaRAC OneTree"
           />
         </h1>

@@ -56,8 +56,8 @@ exports[`AppHeader.vue should render correctly 1`] = `
           <img
             alt="AMI"
             class="header-logo"
-            src="../../assets/images/ami-logo-type-dark-bg.svg"
-            width="100px"
+            src="../../assets/images/dashboard_header_product_logo.svg"
+            width="250px"
           />
         </b-navbar-brand>
          
