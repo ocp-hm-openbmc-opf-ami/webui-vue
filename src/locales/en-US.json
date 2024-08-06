@@ -1643,7 +1643,9 @@
             "enableMessage": {
                 "ipmi": "Are you sure you want to enable @:pagePolicies.ipmi?",
                 "ssh": "Are you sure you want to enable @:pagePolicies.ssh?"
-            }
+            },
+            "confirmTitle": "Confirm?",
+            "informationMessage": "OpenSSL FIPS Mode has been updated successfully. Close the current session and open a new session after a couple of minutes."
         },
         "toast": {
             "errorIpmiPort": "Error in setting IPMI port value.",
@@ -1669,6 +1671,9 @@
             "errorPasswordHistory": "Error in changing password history.",
             "errorSSDPDisabled": "Error disabling SSDP security setting.",
             "errorSSDPEnabled": "Error enabling SSDP security setting.",
+            "errorOpenSSLFIPSDisabled": "Error disabling OpenSSL FIPS security setting.",
+            "errorOpenSSLFIPSEnabled": "Error enabling OpenSSL FIPS security setting.",
+            "openSSLFIPSConfirmation": "On Enabling/Disabling OpenSSL FIPS Mode, the BMC will reboot. Are you sure you want to change OpenSSL FIPS Mode?",
             "errorSNMPDisabled": "Error disabling SNMP security setting.",
             "errorSNMPEnabled": "Error enabling SNMP security setting.",
             "errorKVMPort": "Error in setting KVM port value.",
@@ -1692,6 +1697,8 @@
             "successPasswordHistory": "Successfully changed the password history value.",
             "successSSDPDisabled": "Successfully disabled SSDP security setting.",
             "successSSDPEnabled": "Successfully enabled SSDP security setting.",
+            "successOpenSSLFIPSDisabled": "Successfully disabled OpenSSL FIPS security setting.",
+            "successOpenSSLFIPSEnabled": "Successfully enabled OpenSSL FIPS security setting.",
             "successSNMPDisabled": "Successfully disabled SNMP security setting.",
             "successSNMPEnabled": "Successfully enabled SNMP security setting.",
             "successKVMPort": "Successfully update KVM Port value.",
@@ -1732,6 +1739,8 @@
         "snmpProtocol": "SNMP",
         "snmpPortLabel": "SNMP Port value",
         "snmpDescription": "Enabling SNMP Protocol",
+        "openSslFipsLable": "OpenSSL FIPS Mode",
+        "openSslFipsDescription": "Enabling OpenSSL FIPS Mode",
         "kvmSessionTimeOut": "KVM Session Timeout",
         "kvmSessionTimeOutDescription": "Change the kvm session timeout in between 30 Seconds to 86400 seconds time delay",
         "kvmPortValue": "KVM Port Value (in numbers)",

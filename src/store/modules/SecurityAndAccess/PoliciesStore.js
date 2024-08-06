@@ -21,6 +21,7 @@ const PoliciesStore = {
     ssdpProtocolEnabled: false,
     ssdpPortValue: null,
     snmpProtocolEnabled: false,
+    sslFipsProtocolEnabled: false,
     snmpPortValue: null,
     kvmSessionTimeout: null,
     kvmPortValue: null,
@@ -43,6 +44,7 @@ const PoliciesStore = {
     ssdpProtocolEnabled: (state) => state.ssdpProtocolEnabled,
     ssdpPortValue: (state) => state.ssdpPortValue,
     snmpProtocolEnabled: (state) => state.snmpProtocolEnabled,
+    sslFipsProtocolEnabled: (state) => state.sslFipsProtocolEnabled,
     snmpPortValue: (state) => state.snmpPortValue,
     kvmSessionTimeout: (state) => state.kvmSessionTimeout,
     kvmPortValue: (state) => state.kvmPortValue,
@@ -77,6 +79,8 @@ const PoliciesStore = {
       (state.ssdpPortValue = ssdpPortValue),
     setSnmpProtocolEnabled: (state, snmpProtocolEnabled) =>
       (state.snmpProtocolEnabled = snmpProtocolEnabled),
+    setSslFipsProtocolEnabled: (state, sslFipsProtocolEnabled) =>
+      (state.sslFipsProtocolEnabled = sslFipsProtocolEnabled),
     setSnmpPort: (state, snmpPortValue) =>
       (state.snmpPortValue = snmpPortValue),
     setKvmSessionTimeout: (state, kvmSessionTimeout) =>
@@ -113,6 +117,17 @@ const PoliciesStore = {
         .then((response) => {
           commit('setRtadEnabled', response.data.Attributes.pvm_rtad);
           commit('setVtpmEnabled', response.data.Attributes.pvm_vtpm);
+        })
+        .catch((error) => console.log(error));
+    },
+    async getSslFipsStatus({ commit }) {
+      return await api
+        .get('/redfish/v1/Managers/bmc')
+        .then((response) => {
+          commit(
+            'setSslFipsProtocolEnabled',
+            response.data.Oem.Ami?.OpensslFIPSStatus.Enabled,
+          );
         })
         .catch((error) => console.log(error));
     },
@@ -415,6 +430,38 @@ const PoliciesStore = {
             throw new Error(i18n.t('pagePolicies.toast.errorSNMPEnabled'));
           } else {
             throw new Error(i18n.t('pagePolicies.toast.errorSNMPDisabled'));
+          }
+        });
+    },
+    async saveSslFipsProtocolState({ commit, dispatch }, protocolEnabled) {
+      commit('setSslFipsProtocolEnabled', protocolEnabled);
+      const SslFipsMode = {
+        Enabled: protocolEnabled,
+      };
+      return await api
+        .post(
+          '/redfish/v1/Managers/bmc/Actions/Oem/AMIManager.ChangeOpensslFIPSStatus',
+          SslFipsMode,
+        )
+        .then(() => dispatch('getSslFipsStatus'))
+        .then(() => {
+          if (protocolEnabled) {
+            return i18n.t('pagePolicies.toast.successOpenSSLFIPSEnabled');
+          } else {
+            return i18n.t('pagePolicies.toast.successOpenSSLFIPSDisabled');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          commit('setSslFipsProtocolEnabled', !protocolEnabled);
+          if (protocolEnabled) {
+            throw new Error(
+              i18n.t('pagePolicies.toast.errorOpenSSLFIPSEnabled'),
+            );
+          } else {
+            throw new Error(
+              i18n.t('pagePolicies.toast.errorOpenSSLFIPSDisabled'),
+            );
           }
         });
     },

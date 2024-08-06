@@ -1635,7 +1635,9 @@
             "enableMessage": {
                 "ipmi": "Sind Sie sicher, dass Sie es aktivieren möchten @:pagePolicies.ipmi?",
                 "ssh": "Sind Sie sicher, dass Sie es aktivieren möchten @:pagePolicies.ssh?"
-            }
+            },
+            "confirmTitle": "Bestätigen?",
+            "informationMessage": "Der OpenSSL FIPS-Modus wurde erfolgreich aktualisiert. Schließen Sie die aktuelle Sitzung und öffnen Sie nach ein paar Minuten eine neue Sitzung."
         },
         "toast": {
             "errorIpmiPort": "Fehler beim Festlegen des IPMI Portwerts.",
@@ -1661,6 +1663,9 @@
             "errorPasswordHistory": "Fehler beim Ändern des Passwortverlaufs.",
             "errorSSDPDisabled": "Fehler beim Deaktivieren der SSDP Sicherheitseinstellung.",
             "errorSSDPEnabled": "Fehler beim Aktivieren der SSDP Sicherheitseinstellung.",
+            "errorOpenSSLFIPSDisabled": "Fehler beim Deaktivieren der OpenSSL FIPS-Sicherheitseinstellung.",
+            "errorOpenSSLFIPSEnabled": "Fehler beim Aktivieren der OpenSSL FIPS-Sicherheitseinstellung.",
+            "openSSLFIPSConfirmation": "Beim Aktivieren/Deaktivieren des OpenSSL FIPS-Modus wird der BMC neu gestartet. Möchten Sie den OpenSSL FIPS-Modus wirklich ändern?",
             "errorSNMPDisabled": "Fehler beim Deaktivieren der SNMP Sicherheitseinstellung.",
             "errorSNMPEnabled": "Fehler beim Aktivieren der SNMP Sicherheitseinstellung.",
             "errorKVMPort": "Fehler beim Festlegen des KVM-Portwerts.",
@@ -1684,6 +1689,8 @@
             "successPasswordHistory": "Der Passwortverlaufswert wurde erfolgreich geändert.",
             "successSSDPDisabled": "SSDP Sicherheitseinstellung erfolgreich deaktiviert.",
             "successSSDPEnabled": "SSDP Sicherheitseinstellung erfolgreich aktiviert.",
+            "successOpenSSLFIPSDisabled": "OpenSSL FIPS-Sicherheitseinstellung erfolgreich deaktiviert.",
+            "successOpenSSLFIPSEnabled": "OpenSSL FIPS-Sicherheitseinstellung erfolgreich aktiviert.",
             "successSNMPDisabled": "SNMP Sicherheitseinstellung erfolgreich deaktiviert.",
             "successSNMPEnabled": "SNMP Sicherheitseinstellung erfolgreich aktiviert.",
             "successKVMPort": "Wert des KVM-Ports erfolgreich aktualisiert.",
@@ -1724,6 +1731,8 @@
         "snmpProtocol": "SNMP",
         "snmpPortLabel": "SNMP Portwert",
         "snmpDescription": "Aktivieren des SNMP Protokolls",
+        "openSslFipsLable": "OpenSSL FIPS-Modus",
+        "openSslFipsDescription": "Aktivieren des OpenSSL FIPS-Modus",
         "kvmSessionTimeOut": "Zeitüberschreitung der KVM-Sitzung",
         "kvmSessionTimeOutDescription": "Ändern Sie das Zeitlimit für die KVM-Sitzung zwischen 30 Sekunden und 86.400 Sekunden Zeitverzögerung.",
         "kvmPortValue": "KVM-Portwert (in Zahlen)",

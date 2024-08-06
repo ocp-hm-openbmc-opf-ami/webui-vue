@@ -1635,7 +1635,9 @@
             "enableMessage": {
                 "ipmi": "您确定要启用 @:pagePolicies.ipmi?",
                 "ssh": "您确定要启用 @:pagePolicies.ssh?"
-            }
+            },
+            "confirmTitle": "确定?",
+            "informationMessage": "OpenSSL FIPS 模式已成功更新。关闭当前会话并在几分钟后打开新会话。"
         },
         "toast": {
             "errorIpmiPort": "设定 IPMI 端口数字发生错误",
@@ -1661,6 +1663,9 @@
             "errorPasswordHistory": "改面密码历史发生错误",
             "errorSSDPDisabled": "禁用 SSDP 安全设置时出错.",
             "errorSSDPEnabled": "启用 SSDP 安全设置时出错.",
+            "errorOpenSSLFIPSDisabled": "禁用 OpenSSL FIPS 安全设置时出错。",
+            "errorOpenSSLFIPSEnabled": "启用 OpenSSL FIPS 安全设置时出错。",
+            "openSSLFIPSConfirmation": "启用/禁用 OpenSSL FIPS 模式后，BMC 将重新启动。您确定要更改 OpenSSL FIPS 模式吗？",
             "errorSNMPDisabled": "禁用 SNMP 安全设置时出错.",
             "errorSNMPEnabled": "启用 SNMP 安全设置时出错.",
             "errorKVMPort": "KVM 端口值设置错误。",
@@ -1684,6 +1689,8 @@
             "successPasswordHistory": "成功改变密码历史数字",
             "successSSDPDisabled": "成功禁用 SSDP 安全设置.",
             "successSSDPEnabled": "成功启用 SSDP 安全设置.",
+            "successOpenSSLFIPSDisabled": "成功禁用 OpenSSL FIPS 安全设置。",
+            "successOpenSSLFIPSEnabled": "已成功启用 OpenSSL FIPS 安全设置。",
             "successSNMPDisabled": "已成功禁用 SNMP 安全设置.",
             "successSNMPEnabled": "已成功启用 SNMP 安全设置.",
             "successKVMPort": "成功更新 KVM 端口值。",
@@ -1724,6 +1731,8 @@
         "snmpProtocol": "SNMP",
         "snmpPortLabel": "SNMP 端口值",
         "snmpDescription": "启用 SNMP 协议",
+        "openSslFipsLable": "OpenSSL FIPS 模式",
+        "openSslFipsDescription": "启用 OpenSSL FIPS 模式",
         "kvmSessionTimeOut": "KVM 会话超时",
         "kvmSessionTimeOutDescription": "将 kvm 会话超时更改为 30 秒到 86400 秒的时间延迟。",
         "kvmPortValue": "KVM 端口值（以数字表示）",

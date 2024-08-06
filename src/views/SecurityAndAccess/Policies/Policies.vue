@@ -1,505 +1,548 @@
 <template>
-  <b-container fluid="xl">
-    <page-title />
-    <b-row>
-      <b-col md="12">
-        <b-row>
-          <b-col>
-            <page-section
-              class="page-section"
-              :section-title="$t('pagePolicies.servicesPolicies')"
-            >
-              <b-row v-if="!modifySSHPolicyDisabled" class="setting-section">
-                <b-col class="d-flex align-items-center">
-                  <dl class="mr-4 w-75">
-                    <dt>{{ $t('pagePolicies.ssh') }}</dt>
-                    <dd>
-                      {{ $t('pagePolicies.sshDescription') }}
-                    </dd>
-                  </dl>
-                  <b-form-checkbox
-                    id="sshSwitch"
-                    v-model="sshProtocolState"
-                    data-test-id="policies-toggle-bmcShell"
-                    switch
-                    @change="changeSshProtocolState"
-                  >
-                    <span class="sr-only">
-                      {{ $t('pagePolicies.ssh') }}
-                    </span>
-                    <span v-if="sshProtocolState">
-                      {{ $t('global.status.enabled') }}
-                    </span>
-                    <span v-else>{{ $t('global.status.disabled') }}</span>
-                  </b-form-checkbox>
-                </b-col>
-              </b-row>
-              <b-row class="setting-section">
-                <b-col
-                  lg="7"
-                  class="d-flex align-items-center justify-content-between"
-                >
-                  <dl class="mt-3 mr-4 w-75">
-                    <dt>{{ $t('pagePolicies.ipmi') }}</dt>
-                    <dd>
-                      {{ $t('pagePolicies.ipmiDescription') }}
-                    </dd>
-                  </dl>
-                </b-col>
-                <b-col lg="3" class="session-timeout">
-                  <b-form-checkbox
-                    id="ipmiSwitch"
-                    v-model="ipmiProtocolState"
-                    data-test-id="polices-toggle-networkIpmi"
-                    switch
-                    @change="changeIpmiProtocolState"
-                  >
-                    <span class="sr-only">
-                      {{ $t('pagePolicies.ipmi') }}
-                    </span>
-                    <span v-if="ipmiProtocolState">
-                      {{ $t('global.status.enabled') }}
-                    </span>
-                    <span v-else>{{ $t('global.status.disabled') }}</span>
-                  </b-form-checkbox>
-                </b-col>
-              </b-row>
-              <b-row v-if="DisplaySection" class="setting-section">
-                <b-col
-                  lg="7"
-                  class="d-flex align-items-center justify-content-between"
-                >
-                  <dl class="mt-3 mr-4 w-75">
-                    <dt>{{ $t('pagePolicies.vtpm') }}</dt>
-                    <dd>
-                      {{ $t('pagePolicies.vtpmDescription') }}
-                    </dd>
-                  </dl>
-                </b-col>
-                <b-col lg="3" class="session-timeout">
-                  <b-form-checkbox
-                    id="vtpmSwitch"
-                    v-model="vtpmState"
-                    data-test-id="policies-toggle-vtpm"
-                    switch
-                    @change="changeVtpmState"
-                  >
-                    <span class="sr-only">
-                      {{ $t('pagePolicies.vtpm') }}
-                    </span>
-                    <span v-if="vtpmState">
-                      {{ $t('global.status.enabled') }}
-                    </span>
-                    <span v-else>{{ $t('global.status.disabled') }}</span>
-                  </b-form-checkbox>
-                </b-col>
-              </b-row>
-              <b-row v-if="DisplaySection" class="setting-section">
-                <b-col class="d-flex align-items-center">
-                  <dl class="mt-3 mr-4 w-75">
-                    <dt>{{ $t('pagePolicies.rtad') }}</dt>
-                    <dd>
-                      {{ $t('pagePolicies.rtadDescription') }}
-                    </dd>
-                  </dl>
-                  <b-form-checkbox
-                    id="rtadSwitch"
-                    v-model="rtadState"
-                    data-test-id="policies-toggle-rtad"
-                    switch
-                    @change="changeRtadState"
-                  >
-                    <span class="sr-only">
-                      {{ $t('pagePolicies.rtad') }}
-                    </span>
-                    <span v-if="rtadState">
-                      {{ $t('global.status.enabled') }}
-                    </span>
-                    <span v-else>{{ $t('global.status.disabled') }}</span>
-                  </b-form-checkbox>
-                </b-col>
-              </b-row>
-              <b-row class="setting-section">
-                <b-col
-                  lg="7"
-                  class="d-flex align-items-center justify-content-between"
-                >
-                  <dl class="mt-3 mr-4 w-75">
-                    <dt>{{ $t('pagePolicies.kvm') }}</dt>
-                    <dd>
-                      {{ $t('pagePolicies.kvmDescription') }}
-                    </dd>
-                  </dl>
-                </b-col>
-                <b-col lg="3" class="session-timeout">
-                  <b-form-checkbox
-                    id="kvmSwitch"
-                    v-model="kvmState"
-                    data-test-id="policies-toggle-kvm"
-                    switch
-                    @change="changeKmvState"
-                  >
-                    <span class="sr-only">
-                      {{ $t('pagePolicies.kvm') }}
-                    </span>
-                    <span v-if="kvmState">
-                      {{ $t('global.status.enabled') }}
-                    </span>
-                    <span v-else>{{ $t('global.status.disabled') }}</span>
-                  </b-form-checkbox>
-                </b-col>
-              </b-row>
-              <b-row v-if="kvmState" class="setting-section">
-                <b-col cols="3" class="d-flex align-items-center">
-                  <b-form-group
-                    id="input-group-kvm-port"
-                    :label="$t('pagePolicies.kvmPortValue')"
-                    label-for="input-kvm-port"
-                  >
-                    <b-form-input
-                      id="input-kvm-port"
-                      v-model.number="kvmPort"
-                      data-test-id="input-kvmPort"
-                      type="number"
-                      aria-describedby="power-help-text"
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-                <b-col class="d-flex align-items-center">
-                  <b-button
-                    variant="primary"
-                    type="submit"
-                    data-test-id="button-saveKVMPortValue"
-                    @click="saveKVMPortValue"
-                  >
-                    {{ $t('global.action.save') }}
-                  </b-button>
-                </b-col>
-              </b-row>
-              <b-row class="setting-section">
-                <b-col
-                  lg="7"
-                  class="d-flex align-items-center justify-content-between"
-                >
-                  <dl class="mt-3 mr-4 w-75">
-                    <dt>{{ $t('pagePolicies.vmc') }}</dt>
-                    <dd>
-                      {{ $t('pagePolicies.vmcDescription') }}
-                    </dd>
-                  </dl>
-                </b-col>
-                <b-col lg="3" class="session-timeout">
-                  <b-form-checkbox
-                    id="vmcSwitch"
-                    v-model="vmcState"
-                    data-test-id="policies-toggle-vmc"
-                    switch
-                    @change="changeVmcState"
-                  >
-                    <span class="sr-only">
-                      {{ $t('pagePolicies.vmc') }}
-                    </span>
-                    <span v-if="vmcState">
-                      {{ $t('global.status.enabled') }}
-                    </span>
-                    <span v-else>{{ $t('global.status.disabled') }}</span>
-                  </b-form-checkbox>
-                </b-col>
-              </b-row>
-              <b-row class="setting-section">
-                <b-col
-                  lg="7"
-                  class="d-flex align-items-center justify-content-between"
-                >
-                  <dl class="mt-3 mr-4 w-75">
-                    <dt>{{ $t('pagePolicies.solssh') }}</dt>
-                    <dd>
-                      {{ $t('pagePolicies.solDescription') }}
-                    </dd>
-                  </dl>
-                </b-col>
-                <b-col lg="3" class="session-timeout">
-                  <b-form-checkbox
-                    id="solSwitch"
-                    v-model="solState"
-                    data-test-id="policies-toggle-sol"
-                    switch
-                    @change="changeSOLState"
-                  >
-                    <span class="sr-only">
-                      {{ $t('pagePolicies.solssh') }}
-                    </span>
-                    <span v-if="solState">
-                      {{ $t('global.status.enabled') }}
-                    </span>
-                    <span v-else>{{ $t('global.status.disabled') }}</span>
-                  </b-form-checkbox>
-                </b-col>
-              </b-row>
-              <b-row v-if="solState" class="setting-section">
-                <b-col cols="3" class="d-flex align-items-center">
-                  <b-form-group
-                    id="input-group-1"
-                    :label="$t('pagePolicies.solSshPortLabel')"
-                    label-for="input-1"
-                  >
-                    <b-form-input
-                      id="input-1"
-                      v-model.number="solSshPortValueState"
-                      data-test-id="power-input-solSshPort"
-                      type="number"
-                      aria-describedby="power-help-text"
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-                <b-col class="d-flex align-items-center">
-                  <b-button
-                    variant="primary"
-                    type="submit"
-                    data-test-id="power-button-saveIpmiPortValue"
-                    @click="saveSolSshPortValue"
-                  >
-                    {{ $t('global.action.save') }}
-                  </b-button>
-                </b-col>
-              </b-row>
-              <b-row class="setting-section">
-                <b-col
-                  lg="7"
-                  class="d-flex align-items-center justify-content-between"
-                >
-                  <dl class="mt-3 mr-3 w-75">
-                    <dt>{{ $t('pagePolicies.ssdpProtocol') }}</dt>
-                    <dd>{{ $t('pagePolicies.ssdpDescription') }}</dd>
-                  </dl>
-                </b-col>
-                <b-col lg="3" class="session-timeout">
-                  <b-form-checkbox
-                    id="ssdpSwitch"
-                    v-model="ssdpState"
-                    data-test-id="policies-toggle-sol"
-                    switch
-                    @change="changeSSDPLState"
-                  >
-                    <span class="sr-only">
-                      {{ $t('pagePolicies.ssdpProtocol') }}
-                    </span>
-                    <span v-if="ssdpState">
-                      {{ $t('global.status.enabled') }}
-                    </span>
-                    <span v-else>{{ $t('global.status.disabled') }}</span>
-                  </b-form-checkbox>
-                </b-col>
-              </b-row>
-              <b-row v-if="ssdpState" class="setting-section">
-                <b-col cols="3" class="d-flex align-items-center">
-                  <dl class="mt-3 mr-4 w-75">
-                    <dt>
-                      <b>{{ $t('pagePolicies.SsdpPortLabel') }}</b>
-                    </dt>
-                    <dd>
-                      {{ ssdpPortValue }}
-                    </dd>
-                  </dl>
-                </b-col>
-              </b-row>
-              <b-row class="setting-section">
-                <b-col
-                  lg="7"
-                  class="d-flex align-items-center justify-content-between"
-                >
-                  <dl class="mt-3 mr-3 w-75">
-                    <dt>{{ $t('pagePolicies.snmpProtocol') }}</dt>
-                    <dd>{{ $t('pagePolicies.snmpDescription') }}</dd>
-                  </dl>
-                </b-col>
-                <b-col lg="3" class="session-timeout">
-                  <b-form-checkbox
-                    id="snmpSwitch"
-                    v-model="snmpState"
-                    data-test-id="policies-toggle-sol"
-                    switch
-                    @change="changeSNMPState"
-                  >
-                    <span class="sr-only">
-                      {{ $t('pagePolicies.snmpProtocol') }}
-                    </span>
-                    <span v-if="snmpState">
-                      {{ $t('global.status.enabled') }}
-                    </span>
-                    <span v-else>{{ $t('global.status.disabled') }}</span>
-                  </b-form-checkbox>
-                </b-col>
-              </b-row>
-              <b-row v-if="snmpState" class="setting-section">
-                <b-col cols="3" class="d-flex align-items-center">
-                  <dl class="mt-3 mr-4 w-75">
-                    <dt>
-                      <b>{{ $t('pagePolicies.snmpPortLabel') }}</b>
-                    </dt>
-                    <dd>
-                      {{ snmpPortValue }}
-                    </dd>
-                  </dl>
-                </b-col>
-              </b-row>
-            </page-section>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col>
-            <page-section
-              :section-title="$t('pagePolicies.configurationPolicies')"
-            >
-              <b-row class="setting-section">
-                <b-col
-                  lg="7"
-                  class="d-flex align-items-center justify-content-between"
-                >
-                  <dl class="mt-3 mr-3 w-75">
-                    <dt>{{ $t('pagePolicies.webSessionTimeOut') }}</dt>
-                    <dd>
-                      {{ $t('pagePolicies.webSessionTimeOutDescription') }}
-                    </dd>
-                  </dl>
-                </b-col>
-                <b-col lg="3" class="session-timeout text-right mb-3">
-                  <b-form-group>
-                    <b-form-input
-                      id="web-session-timeout"
-                      v-model="webSessionTimeoutValue"
-                      data-test-id="web-session-timeout"
-                      aria-describedby="power-help-text"
-                      type="text"
-                      :state="getValidationState($v.webSessionTimeoutValue)"
-                      @input="$v.webSessionTimeoutValue.$touch()"
+  <div>
+    <div v-if="policiesOverlay">
+      <b-overlay :show="true" opacity="0.6" no-wrap fixed class="full-overlay">
+        <template #overlay>
+          <div></div>
+        </template>
+      </b-overlay>
+    </div>
+    <b-container fluid="xl">
+      <page-title />
+      <b-row>
+        <b-col md="12">
+          <b-row>
+            <b-col>
+              <page-section
+                class="page-section"
+                :section-title="$t('pagePolicies.servicesPolicies')"
+              >
+                <b-row v-if="!modifySSHPolicyDisabled" class="setting-section">
+                  <b-col class="d-flex align-items-center">
+                    <dl class="mr-4 w-75">
+                      <dt>{{ $t('pagePolicies.ssh') }}</dt>
+                      <dd>
+                        {{ $t('pagePolicies.sshDescription') }}
+                      </dd>
+                    </dl>
+                    <b-form-checkbox
+                      id="sshSwitch"
+                      v-model="sshProtocolState"
+                      data-test-id="policies-toggle-bmcShell"
+                      switch
+                      @change="changeSshProtocolState"
                     >
-                      <template #first>
-                        <b-form-select-option :value="null" disabled>
-                          {{ $t('global.form.selectAnOption') }}
-                        </b-form-select-option>
-                      </template>
-                    </b-form-input>
-                    <b-form-invalid-feedback role="alert">
-                      <template v-if="!$v.webSessionTimeoutValue.required">
-                        {{ $t('global.form.fieldRequired') }}
-                      </template>
-                      <template v-else-if="!$v.webSessionTimeoutValue.pattern">
-                        {{
-                          $t('pagePolicies.webSessionTimeoutLimits', {
-                            min: 30,
-                            max: 86400,
-                          })
-                        }}
-                      </template>
-                    </b-form-invalid-feedback>
-                  </b-form-group>
-                  <b-button
-                    variant="primary"
-                    type="submit"
-                    data-test-id="button-webSessionTimeoutValue"
-                    @click="saveWebSessionTimeoutValue"
+                      <span class="sr-only">
+                        {{ $t('pagePolicies.ssh') }}
+                      </span>
+                      <span v-if="sshProtocolState">
+                        {{ $t('global.status.enabled') }}
+                      </span>
+                      <span v-else>{{ $t('global.status.disabled') }}</span>
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+                <b-row class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
                   >
-                    {{ $t('global.action.save') }}
-                  </b-button>
-                </b-col>
-              </b-row>
-              <b-row class="setting-section">
-                <b-col
-                  lg="7"
-                  class="d-flex align-items-center justify-content-between"
-                >
-                  <dl class="mt-3 mr-3 w-75">
-                    <dt>{{ $t('pagePolicies.kvmSessionTimeOut') }}</dt>
-                    <dd>
-                      {{ $t('pagePolicies.kvmSessionTimeOutDescription') }}
-                    </dd>
-                  </dl>
-                </b-col>
-                <b-col lg="3" class="session-timeout text-right mt-3">
-                  <b-form-group>
-                    <b-form-input
-                      id="kvm-session"
-                      v-model="kvmSessionTimeOutValue"
-                      data-test-id="kvm-session-timeout"
-                      type="text"
-                      aria-describedby="power-help-text"
-                      :state="getValidationState($v.kvmSessionTimeOutValue)"
-                      @input="$v.kvmSessionTimeOutValue.$touch()"
-                    ></b-form-input>
-                    <b-form-invalid-feedback role="alert">
-                      <template v-if="!$v.kvmSessionTimeOutValue.required">
-                        {{ $t('global.form.fieldRequired') }}
-                      </template>
-                      <template v-else-if="!$v.kvmSessionTimeOutValue.pattern">
-                        {{
-                          $t('pagePolicies.kvmTimeoutValueLimits', {
-                            min: 30,
-                            max: 86400,
-                          })
-                        }}
-                      </template>
-                    </b-form-invalid-feedback>
-                  </b-form-group>
-                  <b-button
-                    variant="primary"
-                    type="submit"
-                    data-test-id="power-button-saveIpmiPortValue"
-                    @click="saveKVMSessionTimeoutValue"
+                    <dl class="mt-3 mr-4 w-75">
+                      <dt>{{ $t('pagePolicies.ipmi') }}</dt>
+                      <dd>
+                        {{ $t('pagePolicies.ipmiDescription') }}
+                      </dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout">
+                    <b-form-checkbox
+                      id="ipmiSwitch"
+                      v-model="ipmiProtocolState"
+                      data-test-id="polices-toggle-networkIpmi"
+                      switch
+                      @change="changeIpmiProtocolState"
+                    >
+                      <span class="sr-only">
+                        {{ $t('pagePolicies.ipmi') }}
+                      </span>
+                      <span v-if="ipmiProtocolState">
+                        {{ $t('global.status.enabled') }}
+                      </span>
+                      <span v-else>{{ $t('global.status.disabled') }}</span>
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+                <b-row v-if="DisplaySection" class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
                   >
-                    {{ $t('global.action.save') }}
-                  </b-button>
-                </b-col>
-              </b-row>
-              <b-row class="setting-section">
-                <b-col
-                  lg="7"
-                  class="d-flex align-items-center justify-content-between"
-                >
-                  <dl class="mt-3 mr-3 w-75">
-                    <dt>{{ $t('pagePolicies.complexity') }}</dt>
-                    <dd>
-                      {{ $t('pagePolicies.complexityDescription') }}
-                    </dd>
-                  </dl>
-                </b-col>
-                <b-col lg="3" class="session-timeout">
-                  <b-form-select
-                    id="complexity"
-                    v-model="complexityState"
-                    :options="complexityOptions"
-                    @change="changeComplexity"
+                    <dl class="mt-3 mr-4 w-75">
+                      <dt>{{ $t('pagePolicies.vtpm') }}</dt>
+                      <dd>
+                        {{ $t('pagePolicies.vtpmDescription') }}
+                      </dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout">
+                    <b-form-checkbox
+                      id="vtpmSwitch"
+                      v-model="vtpmState"
+                      data-test-id="policies-toggle-vtpm"
+                      switch
+                      @change="changeVtpmState"
+                    >
+                      <span class="sr-only">
+                        {{ $t('pagePolicies.vtpm') }}
+                      </span>
+                      <span v-if="vtpmState">
+                        {{ $t('global.status.enabled') }}
+                      </span>
+                      <span v-else>{{ $t('global.status.disabled') }}</span>
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+                <b-row v-if="DisplaySection" class="setting-section">
+                  <b-col class="d-flex align-items-center">
+                    <dl class="mt-3 mr-4 w-75">
+                      <dt>{{ $t('pagePolicies.rtad') }}</dt>
+                      <dd>
+                        {{ $t('pagePolicies.rtadDescription') }}
+                      </dd>
+                    </dl>
+                    <b-form-checkbox
+                      id="rtadSwitch"
+                      v-model="rtadState"
+                      data-test-id="policies-toggle-rtad"
+                      switch
+                      @change="changeRtadState"
+                    >
+                      <span class="sr-only">
+                        {{ $t('pagePolicies.rtad') }}
+                      </span>
+                      <span v-if="rtadState">
+                        {{ $t('global.status.enabled') }}
+                      </span>
+                      <span v-else>{{ $t('global.status.disabled') }}</span>
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+                <b-row class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
                   >
-                  </b-form-select>
-                </b-col>
-              </b-row>
-              <b-row class="setting-section">
-                <b-col
-                  lg="7"
-                  class="d-flex align-items-center justify-content-between"
-                >
-                  <dl class="mt-3 mr-3 w-75">
-                    <dt>{{ $t('pagePolicies.passwordHistory') }}</dt>
-                    <dd>
-                      {{ $t('pagePolicies.passwordHistoryDescription') }}
-                    </dd>
-                  </dl>
-                </b-col>
-                <b-col lg="3" class="session-timeout">
-                  <b-form-select
-                    id="password-history"
-                    v-model="passwordHistoryState"
-                    :options="passwordHistoryOptions"
-                    @change="changePasswordHistory"
+                    <dl class="mt-3 mr-4 w-75">
+                      <dt>{{ $t('pagePolicies.kvm') }}</dt>
+                      <dd>
+                        {{ $t('pagePolicies.kvmDescription') }}
+                      </dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout">
+                    <b-form-checkbox
+                      id="kvmSwitch"
+                      v-model="kvmState"
+                      data-test-id="policies-toggle-kvm"
+                      switch
+                      @change="changeKmvState"
+                    >
+                      <span class="sr-only">
+                        {{ $t('pagePolicies.kvm') }}
+                      </span>
+                      <span v-if="kvmState">
+                        {{ $t('global.status.enabled') }}
+                      </span>
+                      <span v-else>{{ $t('global.status.disabled') }}</span>
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+                <b-row v-if="kvmState" class="setting-section">
+                  <b-col cols="3" class="d-flex align-items-center">
+                    <b-form-group
+                      id="input-group-kvm-port"
+                      :label="$t('pagePolicies.kvmPortValue')"
+                      label-for="input-kvm-port"
+                    >
+                      <b-form-input
+                        id="input-kvm-port"
+                        v-model.number="kvmPort"
+                        data-test-id="input-kvmPort"
+                        type="number"
+                        aria-describedby="power-help-text"
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                  <b-col class="d-flex align-items-center">
+                    <b-button
+                      variant="primary"
+                      type="submit"
+                      data-test-id="button-saveKVMPortValue"
+                      @click="saveKVMPortValue"
+                    >
+                      {{ $t('global.action.save') }}
+                    </b-button>
+                  </b-col>
+                </b-row>
+                <b-row class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
                   >
-                  </b-form-select>
-                </b-col> </b-row
-            ></page-section>
-          </b-col>
-        </b-row>
-      </b-col>
-    </b-row>
-  </b-container>
+                    <dl class="mt-3 mr-4 w-75">
+                      <dt>{{ $t('pagePolicies.vmc') }}</dt>
+                      <dd>
+                        {{ $t('pagePolicies.vmcDescription') }}
+                      </dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout">
+                    <b-form-checkbox
+                      id="vmcSwitch"
+                      v-model="vmcState"
+                      data-test-id="policies-toggle-vmc"
+                      switch
+                      @change="changeVmcState"
+                    >
+                      <span class="sr-only">
+                        {{ $t('pagePolicies.vmc') }}
+                      </span>
+                      <span v-if="vmcState">
+                        {{ $t('global.status.enabled') }}
+                      </span>
+                      <span v-else>{{ $t('global.status.disabled') }}</span>
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+                <b-row class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <dl class="mt-3 mr-4 w-75">
+                      <dt>{{ $t('pagePolicies.solssh') }}</dt>
+                      <dd>
+                        {{ $t('pagePolicies.solDescription') }}
+                      </dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout">
+                    <b-form-checkbox
+                      id="solSwitch"
+                      v-model="solState"
+                      data-test-id="policies-toggle-sol"
+                      switch
+                      @change="changeSOLState"
+                    >
+                      <span class="sr-only">
+                        {{ $t('pagePolicies.solssh') }}
+                      </span>
+                      <span v-if="solState">
+                        {{ $t('global.status.enabled') }}
+                      </span>
+                      <span v-else>{{ $t('global.status.disabled') }}</span>
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+                <b-row v-if="solState" class="setting-section">
+                  <b-col cols="3" class="d-flex align-items-center">
+                    <b-form-group
+                      id="input-group-1"
+                      :label="$t('pagePolicies.solSshPortLabel')"
+                      label-for="input-1"
+                    >
+                      <b-form-input
+                        id="input-1"
+                        v-model.number="solSshPortValueState"
+                        data-test-id="power-input-solSshPort"
+                        type="number"
+                        aria-describedby="power-help-text"
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                  <b-col class="d-flex align-items-center">
+                    <b-button
+                      variant="primary"
+                      type="submit"
+                      data-test-id="power-button-saveIpmiPortValue"
+                      @click="saveSolSshPortValue"
+                    >
+                      {{ $t('global.action.save') }}
+                    </b-button>
+                  </b-col>
+                </b-row>
+                <b-row class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <dl class="mt-3 mr-3 w-75">
+                      <dt>{{ $t('pagePolicies.ssdpProtocol') }}</dt>
+                      <dd>{{ $t('pagePolicies.ssdpDescription') }}</dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout">
+                    <b-form-checkbox
+                      id="ssdpSwitch"
+                      v-model="ssdpState"
+                      data-test-id="policies-toggle-sol"
+                      switch
+                      @change="changeSSDPLState"
+                    >
+                      <span class="sr-only">
+                        {{ $t('pagePolicies.ssdpProtocol') }}
+                      </span>
+                      <span v-if="ssdpState">
+                        {{ $t('global.status.enabled') }}
+                      </span>
+                      <span v-else>{{ $t('global.status.disabled') }}</span>
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+                <b-row v-if="ssdpState" class="setting-section">
+                  <b-col cols="3" class="d-flex align-items-center">
+                    <dl class="mt-3 mr-4 w-75">
+                      <dt>
+                        <b>{{ $t('pagePolicies.SsdpPortLabel') }}</b>
+                      </dt>
+                      <dd>
+                        {{ ssdpPortValue }}
+                      </dd>
+                    </dl>
+                  </b-col>
+                </b-row>
+                <b-row class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <dl class="mt-3 mr-3 w-75">
+                      <dt>{{ $t('pagePolicies.snmpProtocol') }}</dt>
+                      <dd>{{ $t('pagePolicies.snmpDescription') }}</dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout">
+                    <b-form-checkbox
+                      id="snmpSwitch"
+                      v-model="snmpState"
+                      data-test-id="policies-toggle-sol"
+                      switch
+                      @change="changeSNMPState"
+                    >
+                      <span class="sr-only">
+                        {{ $t('pagePolicies.snmpProtocol') }}
+                      </span>
+                      <span v-if="snmpState">
+                        {{ $t('global.status.enabled') }}
+                      </span>
+                      <span v-else>{{ $t('global.status.disabled') }}</span>
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+                <b-row v-if="snmpState" class="setting-section">
+                  <b-col cols="3" class="d-flex align-items-center">
+                    <dl class="mt-3 mr-4 w-75">
+                      <dt>
+                        <b>{{ $t('pagePolicies.snmpPortLabel') }}</b>
+                      </dt>
+                      <dd>
+                        {{ snmpPortValue }}
+                      </dd>
+                    </dl>
+                  </b-col>
+                </b-row>
+                <b-row class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <dl class="mt-3 mr-3 w-75">
+                      <dt>{{ $t('pagePolicies.openSslFipsLable') }}</dt>
+                      <dd>{{ $t('pagePolicies.openSslFipsDescription') }}</dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout">
+                    <b-form-checkbox
+                      id="sslFipsSwitch"
+                      v-model="openSslFipsState"
+                      data-test-id="policies-toggle-sol"
+                      switch
+                      @change="changeOpenSslFipsState"
+                    >
+                      <span class="sr-only">
+                        {{ $t('pagePolicies.openSslFipsLable') }}
+                      </span>
+                      <span v-if="openSslFipsState">
+                        {{ $t('global.status.enabled') }}
+                      </span>
+                      <span v-else>{{ $t('global.status.disabled') }}</span>
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+              </page-section>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <page-section
+                :section-title="$t('pagePolicies.configurationPolicies')"
+              >
+                <b-row class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <dl class="mt-3 mr-3 w-75">
+                      <dt>{{ $t('pagePolicies.webSessionTimeOut') }}</dt>
+                      <dd>
+                        {{ $t('pagePolicies.webSessionTimeOutDescription') }}
+                      </dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout text-right mb-3">
+                    <b-form-group>
+                      <b-form-input
+                        id="web-session-timeout"
+                        v-model="webSessionTimeoutValue"
+                        data-test-id="web-session-timeout"
+                        aria-describedby="power-help-text"
+                        type="text"
+                        :state="getValidationState($v.webSessionTimeoutValue)"
+                        @input="$v.webSessionTimeoutValue.$touch()"
+                      >
+                        <template #first>
+                          <b-form-select-option :value="null" disabled>
+                            {{ $t('global.form.selectAnOption') }}
+                          </b-form-select-option>
+                        </template>
+                      </b-form-input>
+                      <b-form-invalid-feedback role="alert">
+                        <template v-if="!$v.webSessionTimeoutValue.required">
+                          {{ $t('global.form.fieldRequired') }}
+                        </template>
+                        <template
+                          v-else-if="!$v.webSessionTimeoutValue.pattern"
+                        >
+                          {{
+                            $t('pagePolicies.webSessionTimeoutLimits', {
+                              min: 30,
+                              max: 86400,
+                            })
+                          }}
+                        </template>
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                    <b-button
+                      variant="primary"
+                      type="submit"
+                      data-test-id="button-webSessionTimeoutValue"
+                      @click="saveWebSessionTimeoutValue"
+                    >
+                      {{ $t('global.action.save') }}
+                    </b-button>
+                  </b-col>
+                </b-row>
+                <b-row class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <dl class="mt-3 mr-3 w-75">
+                      <dt>{{ $t('pagePolicies.kvmSessionTimeOut') }}</dt>
+                      <dd>
+                        {{ $t('pagePolicies.kvmSessionTimeOutDescription') }}
+                      </dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout text-right mt-3">
+                    <b-form-group>
+                      <b-form-input
+                        id="kvm-session"
+                        v-model="kvmSessionTimeOutValue"
+                        data-test-id="kvm-session-timeout"
+                        type="text"
+                        aria-describedby="power-help-text"
+                        :min="1"
+                        :max="1440"
+                        :state="getValidationState($v.kvmSessionTimeOutValue)"
+                        @input="$v.kvmSessionTimeOutValue.$touch()"
+                      ></b-form-input>
+                      <b-form-invalid-feedback role="alert">
+                        <template v-if="!$v.kvmSessionTimeOutValue.required">
+                          {{ $t('global.form.fieldRequired') }}
+                        </template>
+                        <template
+                          v-else-if="!$v.kvmSessionTimeOutValue.pattern"
+                        >
+                          {{
+                            $t('pagePolicies.kvmTimeoutValueLimits', {
+                              min: 1,
+                              max: 1440,
+                            })
+                          }}
+                        </template>
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                    <b-button
+                      variant="primary"
+                      type="submit"
+                      data-test-id="power-button-saveIpmiPortValue"
+                      @click="saveKVMSessionTimeoutValue"
+                    >
+                      {{ $t('global.action.save') }}
+                    </b-button>
+                  </b-col>
+                </b-row>
+                <b-row class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <dl class="mt-3 mr-3 w-75">
+                      <dt>{{ $t('pagePolicies.complexity') }}</dt>
+                      <dd>
+                        {{ $t('pagePolicies.complexityDescription') }}
+                      </dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout">
+                    <b-form-select
+                      id="complexity"
+                      v-model="complexityState"
+                      :options="complexityOptions"
+                      @change="changeComplexity"
+                    >
+                    </b-form-select>
+                  </b-col>
+                </b-row>
+                <b-row class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <dl class="mt-3 mr-3 w-75">
+                      <dt>{{ $t('pagePolicies.passwordHistory') }}</dt>
+                      <dd>
+                        {{ $t('pagePolicies.passwordHistoryDescription') }}
+                      </dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout">
+                    <b-form-select
+                      id="password-history"
+                      v-model="passwordHistoryState"
+                      :options="passwordHistoryOptions"
+                      @change="changePasswordHistory"
+                    >
+                    </b-form-select>
+                  </b-col> </b-row
+              ></page-section>
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
+    </b-container>
+  </div>
 </template>
 
 <script>
@@ -520,6 +563,7 @@ export default {
   },
   data() {
     return {
+      policiesOverlay: false,
       sessionTimeOutOptions: [
         { value: 1800, text: this.$t('pagePolicies.options.30minutes') },
         { value: 3600, text: this.$t('pagePolicies.options.1hour') },
@@ -635,6 +679,14 @@ export default {
     snmpPortValue() {
       return this.$store.getters['policies/snmpPortValue'];
     },
+    openSslFipsState: {
+      get() {
+        return this.$store.getters['policies/sslFipsProtocolEnabled'];
+      },
+      set(newValue) {
+        this.$store.commit('policies/setSslFipsProtocolEnabled', newValue);
+      },
+    },
     solSshPortValueState: {
       get() {
         return this.$store.getters['policies/solSshPortValue'];
@@ -687,6 +739,7 @@ export default {
       this.$store.dispatch('policies/getSessionTimeout'),
       this.$store.dispatch('policies/getKvmServiceStatus'),
       this.$store.dispatch('policies/getAccountService'),
+      this.$store.dispatch('policies/getSslFipsStatus'),
     ]).finally(() => this.endLoader());
   },
   validations() {
@@ -801,6 +854,43 @@ export default {
         .dispatch('policies/saveSnmpProtocolState', state ? true : false)
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
+    },
+    changeOpenSslFipsState(state) {
+      this.$bvModal
+        .msgBoxConfirm(this.$tc('pagePolicies.toast.openSSLFIPSConfirmation'), {
+          title: this.$tc('pagePolicies.modal.confirmTitle'),
+          okTitle: this.$t('global.action.ok'),
+          cancelTitle: this.$t('global.action.cancel'),
+        })
+        .then((confirmed) => {
+          if (confirmed) {
+            console.log('confirmed');
+            this.$store.commit(
+              'policies/setSslFipsProtocolEnabled',
+              state ? true : false,
+            );
+            this.$store
+              .dispatch(
+                'policies/saveSslFipsProtocolState',
+                state ? true : false,
+              )
+              .then((message) => {
+                this.successToast(message);
+                this.$bvModal
+                  .msgBoxOk(this.$tc('pagePolicies.modal.informationMessage'), {
+                    title: this.$tc('global.action.success'),
+                  })
+                  .then((addConfirmed) => {
+                    if (addConfirmed) {
+                      this.policiesOverlay = true;
+                    }
+                  });
+              })
+              .catch(({ message }) => this.errorToast(message));
+          } else {
+            this.$store.commit('policies/setSslFipsProtocolEnabled', !state);
+          }
+        });
     },
     saveKVMSessionTimeoutValue() {
       this.$v.$touch();
