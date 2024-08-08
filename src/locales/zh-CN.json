@@ -2080,7 +2080,8 @@
             "successDeleteFireWall": "成功删除防火墙规则。",
             "errorSaveFireWall": "保存的防火墙规则出错。",
             "errorDelete": "删除防火墙规则时出错。",
-            "errorDateOrTimeSaveFireWall": "日期或时间无效。"
+            "errorDateOrTimeSaveFireWall": "日期或时间无效。",
+            "featureNotAvailable": "系统防火墙功能未启用。"
         },
         "table": {
             "startIP": "起始IP",
@@ -2108,7 +2109,8 @@
         "errorSavebond": "保存网络绑定时出错。",
         "errorDelete": "删除网络绑定时出错。",
         "errorGetBond": "获取网络绑定时出错。",
-        "miiRangeRequired": "输入 1-100 之间的有效毫秒"
+        "miiRangeRequired": "输入 1-100 之间的有效毫秒",
+        "featureNotAvailable": "网络绑定功能未启用。"
     },
     "license": {
         "add_license_key": "添加许可证密钥",

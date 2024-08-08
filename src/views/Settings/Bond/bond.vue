@@ -1,7 +1,12 @@
 <template>
   <b-container fluid="xl">
     <page-title />
-    <div v-if="interfacechecking">
+    <div v-if="!enabledNetworkBond">
+      <b-alert show variant="danger">{{
+        $t('bond.featureNotAvailable')
+      }}</b-alert>
+    </div>
+    <div v-else-if="interfacechecking">
       <b-col xl="6" class="p0">
         <b-alert show variant="warning">{{
           $t('bond.BondWithSingleInterface')
@@ -142,6 +147,9 @@ export default {
       } else {
         return false;
       }
+    },
+    enabledNetworkBond() {
+      return this.$store.getters['network/getNetworkBond'];
     },
   },
   watch: {

@@ -2078,7 +2078,8 @@
             "successDeleteFireWall": "Firewall-Regeln erfolgreich löschen.",
             "errorSaveFireWall": "Fehler beim Speichern der Firewall-Regeln.",
             "errorDelete": "Fehler beim Löschen der FireWall-Regeln.",
-            "errorDateOrTimeSaveFireWall": "Ungültiges Datum oder ungültige Uhrzeit."
+            "errorDateOrTimeSaveFireWall": "Ungültiges Datum oder ungültige Uhrzeit.",
+            "featureNotAvailable": "Die System-Firewall-Funktion ist nicht aktiviert."
         },
         "table": {
             "startIP": "IP starten",
@@ -2107,7 +2108,8 @@
         "errorSavebond": "Fehler beim Speichern der Netzwerkbindung.",
         "errorDelete": "Fehler beim Löschen des Netzwerkbonds.",
         "errorGetBond": "Fehler beim Abrufen von Network Bond.",
-        "miiRangeRequired": "Geben Sie gültige Millisekunden zwischen 1 und 100 ein"
+        "miiRangeRequired": "Geben Sie gültige Millisekunden zwischen 1 und 100 ein",
+        "featureNotAvailable": "Die Netzwerkbindungsfunktion ist nicht aktiviert."
     },
     "license": {
         "add_license_key": "Lizenzschlüssel hinzufügen",

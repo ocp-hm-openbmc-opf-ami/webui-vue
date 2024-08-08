@@ -9,6 +9,8 @@ const NetworkStore = {
     globalNetworkSettings: [],
     selectedInterfaceId: '', // which tab is selected
     selectedInterfaceIndex: 0, // which tab is selected
+    networkBond: null,
+    systemFirewall: null,
   },
   getters: {
     ethernetData: (state) => state.ethernetData,
@@ -16,6 +18,8 @@ const NetworkStore = {
     globalNetworkSettings: (state) => state.globalNetworkSettings,
     selectedInterfaceId: (state) => state.selectedInterfaceId,
     selectedInterfaceIndex: (state) => state.selectedInterfaceIndex,
+    getNetworkBond: (state) => state.networkBond,
+    getSystemFirewall: (state) => state.systemFirewall,
   },
   mutations: {
     setDomainNameState: (state, domainState) =>
@@ -68,6 +72,12 @@ const NetworkStore = {
       (state.selectedInterfaceId = selectedInterfaceId),
     setSelectedInterfaceIndex: (state, selectedInterfaceIndex) =>
       (state.selectedInterfaceIndex = selectedInterfaceIndex),
+    setNetworkBond: (state, networkBond) => {
+      state.networkBond = networkBond;
+    },
+    setSystemFirewall: (state, systemFirewall) => {
+      state.systemFirewall = systemFirewall;
+    },
   },
   actions: {
     async getEthernetData({ commit }) {
@@ -94,6 +104,25 @@ const NetworkStore = {
           commit('setFirstInterfaceId', firstInterfaceId);
           commit('setSelectedInterfaceId', firstInterfaceId);
           commit('setGlobalNetworkSettings', ethernetInterfaces);
+          commit(
+            'setNetworkBond',
+            ethernetData[0].Actions?.Oem?.Ami[
+              '#EthernetInterface.CreateBond'
+            ] ||
+              ethernetData[0].Actions?.Oem?.Ami[
+                '#EthernetInterface.ChangeActiveSlave'
+              ]
+              ? true
+              : false,
+          );
+          commit(
+            'setSystemFirewall',
+            ethernetData[0].Actions?.Oem?.Ami[
+              '#EthernetInterface.AddFirewallRules'
+            ]
+              ? true
+              : false,
+          );
         })
         .catch((error) => {
           console.log('Network Data:', error);

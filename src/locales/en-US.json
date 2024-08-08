@@ -2092,7 +2092,8 @@
             "successDeleteFireWall": "Successfully Delete Firewall Rules.",
             "errorSaveFireWall": "Error saved Firewall Rules.",
             "errorDelete": "Error deleting FireWall Rules.",
-            "errorDateOrTimeSaveFireWall": "Invalid Date or Time."
+            "errorDateOrTimeSaveFireWall": "Invalid Date or Time.",
+            "featureNotAvailable": "The system firewall feature is not enabled."
         },
         "table": {
             "startIP": "Start IP",
@@ -2120,7 +2121,8 @@
         "errorSavebond": "Error saved Network Bond.",
         "errorDelete": "Error deleting Network Bond.",
         "errorGetBond": "Error getting Network Bond.",
-        "miiRangeRequired": "Enter valid milliseconds between 1-100"
+        "miiRangeRequired": "Enter valid milliseconds between 1-100",
+        "featureNotAvailable": "The network bond feature is not enabled."
     },
     "license": {
         "add_license_key": "Add License Key",
