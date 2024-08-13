@@ -60,8 +60,8 @@
                     <b-button
                       v-if="!dev.isActive"
                       variant="primary"
-                      :disabled="!dev.file"
-                      @click="startVM(dev)"
+                      :disabled="!dev.file || isButtonDisabled"
+                      @click="handleActionClick(startVM, dev)"
                     >
                       {{ $t('pageVirtualMedia.start') }}
                     </b-button>
@@ -69,13 +69,14 @@
                       v-if="dev.isActive"
                       variant="primary"
                       :disabled="
-                        dev.id == 'Slot_0'
+                        isButtonDisabled ||
+                        (dev.id == 'Slot_0'
                           ? !slot0Started
                           : dev.id == 'Slot_1'
                             ? !slot1Started
-                            : !dev.file
+                            : !dev.file)
                       "
-                      @click="stopVM(dev)"
+                      @click="handleActionClick(stopVM, dev)"
                     >
                       {{ $t('pageVirtualMedia.stop') }}
                     </b-button>
@@ -114,8 +115,8 @@
                         v-if="!device.isActive"
                         variant="primary"
                         class="float-right"
-                        :disabled="!device.serverUri"
-                        @click="startLegacy(device)"
+                        :disabled="!device.serverUri || isButtonDisabled"
+                        @click="handleActionClick(startLegacy, device)"
                       >
                         {{ $t('pageVirtualMedia.start') }}
                       </b-button>
@@ -123,7 +124,8 @@
                         v-if="device.isActive"
                         variant="primary"
                         class="float-right"
-                        @click="stopLegacy(device)"
+                        :disabled="isButtonDisabled"
+                        @click="handleActionClick(stopLegacy, device)"
                       >
                         {{ $t('pageVirtualMedia.stop') }}
                       </b-button>
@@ -162,6 +164,7 @@ export default {
   mixins: [BVToastMixin, LoadingBarMixin, LicensecheckMixin],
   data() {
     return {
+      isButtonDisabled: false,
       modalConfigureConnection: null,
       loadImageFromExternalServer:
         process.env.VUE_APP_VIRTUAL_MEDIA_LIST_ENABLED === 'true'
@@ -381,6 +384,16 @@ export default {
     },
     concatId(val) {
       return val.split(' ').join('_').toLowerCase();
+    },
+    handleActionClick(action, param) {
+      this.disableButtonsforTime(5000);
+      action(param);
+    },
+    disableButtonsforTime(delay) {
+      this.isButtonDisabled = true;
+      setTimeout(() => {
+        this.isButtonDisabled = false;
+      }, delay);
     },
   },
 };
