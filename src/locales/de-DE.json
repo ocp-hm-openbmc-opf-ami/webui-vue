@@ -1897,6 +1897,7 @@
         },
         "toast": {
             "errorAddCertificate": "Fehler beim Hinzufügen des Zertifikats.",
+            "errorGenerateCSR": "Fehler beim Generieren der Zertifikatsignaturanforderung.",
             "errorDeleteCertificate": "Fehler beim Löschen des Zertifikats.",
             "errorReplaceCertificate": "Fehler beim Ersetzen des Zertifikats.",
             "successAddCertificate": "Erfolgreich hinzugefügt %{certificate}.",

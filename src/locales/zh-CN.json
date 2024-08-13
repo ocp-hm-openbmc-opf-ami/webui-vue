@@ -1897,6 +1897,7 @@
         },
         "toast": {
             "errorAddCertificate": "新增凭证失败",
+            "errorGenerateCSR": "生成证书签名请求时出错。",
             "errorDeleteCertificate": "删除凭证失败",
             "errorReplaceCertificate": "置换凭证失败",
             "successAddCertificate": "新增 %{certificate} 成功",

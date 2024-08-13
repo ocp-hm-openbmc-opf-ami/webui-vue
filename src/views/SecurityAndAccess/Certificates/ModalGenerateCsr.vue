@@ -6,11 +6,10 @@
       size="lg"
       no-stacking
       :title="$t('pageCertificates.modal.generateACertificateSigningRequest')"
-      @ok="onOkGenerateCsrModal"
       @cancel="resetForm"
       @hidden="$v.$reset()"
     >
-      <b-form id="generate-csr-form" novalidate>
+      <b-form id="generate-csr-form" novalidate @submit.prevent="handleSubmit">
         <b-container fluid>
           <b-row>
             <b-col lg="9">
@@ -327,7 +326,7 @@
           </b-row>
         </b-container>
       </b-form>
-      <template #modal-footer="{ ok, cancel }">
+      <template #modal-footer="{ cancel }">
         <b-button variant="secondary" @click="cancel()">
           {{ $t('global.action.cancel') }}
         </b-button>
@@ -336,7 +335,7 @@
           type="submit"
           variant="primary"
           data-test-id="modalGenerateCsr-button-ok"
-          @click="ok()"
+          @click="onOkGenerateCsrModal"
         >
           {{ $t('pageCertificates.generateCsr') }}
         </b-button>
@@ -463,7 +462,8 @@ export default {
           this.csrString = CSRString;
           this.$bvModal.show('csr-string');
           this.$v.$reset();
-        });
+        })
+        .catch(({ message }) => this.errorToast(message));
     },
     resetForm() {
       for (let key of Object.keys(this.form)) {

@@ -1906,6 +1906,7 @@
         },
         "toast": {
             "errorAddCertificate": "Error adding certificate.",
+            "errorGenerateCSR": "Error generating Certificate Signing Request.",
             "errorDeleteCertificate": "Error deleting certificate.",
             "errorReplaceCertificate": "Error replacing certificate.",
             "successAddCertificate": "Successfully added %{certificate}.",
