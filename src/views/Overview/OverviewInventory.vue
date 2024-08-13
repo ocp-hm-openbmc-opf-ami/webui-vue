@@ -62,6 +62,7 @@
 <script>
 import OverviewCard from './OverviewCard';
 import { BIcon } from 'bootstrap-vue';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Inventory',
@@ -83,16 +84,16 @@ export default {
     };
   },
   computed: {
-    systems() {
-      let systemData = this.$store.getters['system/systems'][0];
-      return systemData ? systemData : {};
-    },
+    ...mapState({
+      systems: (state) => {
+        let systemData = state.system.systems[0];
+        return systemData ? systemData : {};
+      },
+    }),
   },
   created() {
-    this.$store.dispatch('system/getSystem').finally(() => {
-      this.updateStatusLed();
-      this.$root.$emit('overview-inventory-complete');
-    });
+    this.updateStatusLed();
+    this.$root.$emit('overview-inventory-complete');
   },
   methods: {
     toggleIdentifyLedSwitch(state) {

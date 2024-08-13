@@ -47,7 +47,9 @@ exports[`AppHeader.vue should render correctly 1`] = `
         </svg>
       </b-button>
        
-      <b-navbar-nav>
+      <b-navbar-nav
+        class="navbar-logo"
+      >
         <b-navbar-brand
           class="mr-0"
           data-test-id="appHeader-container-overview"

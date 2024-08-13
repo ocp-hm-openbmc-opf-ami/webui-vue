@@ -29,7 +29,7 @@
             :title="$t('appHeader.titleShowNavigation')"
           />
         </b-button>
-        <b-navbar-nav>
+        <b-navbar-nav class="navbar-logo">
           <b-navbar-brand
             class="mr-0"
             to="/"
@@ -173,6 +173,7 @@ import StatusIcon from '@/components/Global/StatusIcon';
 import LoadingBar from '@/components/Global/LoadingBar';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import QrcodeVue from 'qrcode.vue';
+import { mapState } from 'vuex';
 
 export default {
   name: 'AppHeader',
@@ -205,6 +206,7 @@ export default {
       recoveryCode: [],
       isNavigationOpen: false,
       altLogo: process.env.VUE_APP_COMPANY_NAME || 'AMI',
+      licenseStatus: this.$store.getters['license/isLicense'],
     };
   },
   computed: {
@@ -227,7 +229,7 @@ export default {
       return this.$store.getters['global/userPrivilege'];
     },
     serverStatus() {
-      return this.$store.getters['global/serverStatus'];
+      return this.$store.getters['system/serverStatus'];
     },
     healthStatus() {
       return this.$store.getters['eventLog/healthStatus'];
@@ -260,6 +262,7 @@ export default {
     username() {
       return this.$store.getters['global/username'];
     },
+    ...mapState('license', ['isLicense']),
   },
   watch: {
     isAuthorized(value) {
@@ -269,14 +272,17 @@ export default {
         });
       }
     },
+    isLicense: function (value) {
+      this.licenseStatus = value;
+    },
   },
   created() {
     // Reset auth state to check if user is authenticated based
     // on available browser cookies
     this.$store.dispatch('authentication/resetStoreState');
-    this.$store.dispatch('license/getUserAlertCount');
-    this.getSystemInfo();
-    this.getEvents();
+    if (this.licenseStatus) {
+      this.$store.dispatch('license/getUserAlertCount');
+    }
   },
   mounted() {
     this.$root.$on(
@@ -285,12 +291,6 @@ export default {
     );
   },
   methods: {
-    getSystemInfo() {
-      this.$store.dispatch('global/getSystemInfo');
-    },
-    getEvents() {
-      this.$store.dispatch('eventLog/getEventLogData');
-    },
     refresh() {
       this.$emit('refresh');
     },
@@ -414,6 +414,9 @@ export default {
           @include sr-only;
         }
       }
+    }
+    .navbar-logo {
+      padding-left: 1px;
     }
   }
 
