@@ -1783,6 +1783,7 @@
         "description": "Set a power cap to keep power consumption at or below the specified value in watts",
         "powerCapLabel": "Power cap value (in watts)",
         "powerCapLabelTextInfo": " Value must be between %{min} and %{max}",
+        "powerCapDisablesState": "  PowerCap is disabled (0 Watt state).",
         "powerCapSettingData": "Apply power cap",
         "powerCapSettingLabel": "Power cap setting",
         "powerConsumption": "Current power consumption",
@@ -1791,7 +1792,8 @@
             "successApplyPowerCapEnable": "successfully enabled apply powerCap ",
             "successApplyPowerCapDisable": "successfully disabled apply powerCap",
             "errorApplyPowerCapEnable": "error enabling apply powerCap",
-            "errorApplyPowerCapDisable": "error disabling apply powerCap"
+            "errorApplyPowerCapDisable": "error disabling apply powerCap",
+            "featureNotAvailable":"Power Cap is not supported on this platform."
         }
     },
     "pageSensors": {

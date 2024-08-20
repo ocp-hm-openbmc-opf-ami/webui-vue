@@ -1774,6 +1774,7 @@
         "description": "Legen Sie eine Leistungsobergrenze fest, um den Stromverbrauch auf oder unter dem angegebenen Wert in Watt zu halten",
         "powerCapLabel": "Wert der Leistungsobergrenze (in Watt)",
         "powerCapLabelTextInfo": " Der Wert muss zwischen liegen %{min} Und %{max}",
+        "powerCapDisablesState": "PowerCap ist deaktiviert (0-Watt-Zustand).",
         "powerCapSettingData": "Setzen Sie eine Leistungsbegrenzung ein",
         "powerCapSettingLabel": "Einstellung der Leistungsobergrenze",
         "powerConsumption": "Aktueller Stromverbrauch",
@@ -1782,7 +1783,8 @@
             "successApplyPowerCapEnable": "erfolgreich aktiviert, PowerCap anwenden ",
             "successApplyPowerCapDisable": "PowerCap anwenden wurde erfolgreich deaktiviert",
             "errorApplyPowerCapEnable": "Fehler beim Aktivieren von PowerCap anwenden",
-            "errorApplyPowerCapDisable": "Fehler beim Deaktivieren der Anwendung von PowerCap"
+            "errorApplyPowerCapDisable": "Fehler beim Deaktivieren der Anwendung von PowerCap",
+            "featureNotAvailable":"Power Cap wird auf dieser Plattform nicht unterstützt."
         }
     },
     "pageSensors": {

@@ -1778,6 +1778,7 @@
         "description": "設置電源上限以使功耗保持在或低於指定值",
         "powerCapLabel": "電源上限值 (以瓦為單位)",
         "powerCapLabelTextInfo": " 值必須介於 %{min} 和 %{max} 之間",
+        "powerCapDisablesState": "PowerCap 已停用（0 瓦狀態）。",
         "powerCapSettingData": "套用電源上限",
         "powerCapSettingLabel": "電源上限設定",
         "powerConsumption": "目前電源消耗",
@@ -1786,7 +1787,8 @@
             "successApplyPowerCapEnable": "成功啟用powerCap ",
             "successApplyPowerCapDisable": "成功停用powerCap",
             "errorApplyPowerCapEnable": "啟用powerCap發生錯誤",
-            "errorApplyPowerCapDisable": "停用 powerCap發生錯誤"
+            "errorApplyPowerCapDisable": "停用 powerCap發生錯誤",
+            "featureNotAvailable":"此平台不支援功率上限。"
         }
     },
     "pageSensors": {

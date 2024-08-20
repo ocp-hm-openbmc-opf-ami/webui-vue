@@ -42,6 +42,7 @@ const GlobalStore = {
       : true,
     username: localStorage.getItem('storedUsername'),
     isAuthorized: true,
+    isAmdPlatform: false,
     userPrivilege: null,
     backupAndRestore: null,
     virtualMediaServiceEnabledAccess: true,
@@ -61,6 +62,7 @@ const GlobalStore = {
     isAuthorized: (state) => state.isAuthorized,
     userPrivilege: (state) => state.userPrivilege,
     backupAndRestore: (state) => state.backupAndRestore,
+    isAmdPlatform: (state) => state.isAmdPlatform,
     virtualMediaServiceEnabledAccess: (state) =>
       state.virtualMediaServiceEnabledAccess,
     kvmServiceEnabledAccess: (state) => state.kvmServiceEnabledAccess,
@@ -99,6 +101,9 @@ const GlobalStore = {
     },
     setkvmServiceEnabledAccess: (state, kvmServiceEnabledAccess) => {
       state.kvmServiceEnabledAccess = kvmServiceEnabledAccess;
+    },
+    setIsAmdPlatform: (state, isAmdPlatform) => {
+      state.isAmdPlatform = isAmdPlatform;
     },
   },
   actions: {

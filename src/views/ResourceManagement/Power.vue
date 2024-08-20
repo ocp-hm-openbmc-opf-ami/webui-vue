@@ -1,86 +1,65 @@
 <template>
   <b-container fluid="xl">
     <page-title :description="$t('pagePower.description')" />
-
-    <b-row>
-      <b-col sm="8" md="6" xl="12">
-        <dl>
-          <dt>{{ $t('pagePower.powerConsumption') }}</dt>
-          <dd>
-            {{
-              powerConsumptionValue
-                ? `${powerConsumptionValue} W`
-                : $t('global.status.notAvailable')
-            }}
-          </dd>
-        </dl>
-      </b-col>
-    </b-row>
-
-    <b-form @submit.prevent="submitForm">
-      <b-form-group :disabled="loading">
-        <b-row>
-          <b-col sm="8" md="6" xl="12">
-            <b-form-group :label="$t('pagePower.powerCapSettingLabel')">
-              <b-form-checkbox
-                v-model="isPowerCapFieldEnabled"
-                data-test-id="power-checkbox-togglePowerCapField"
-                name="power-cap-setting"
-                @change="changePowerCapState"
+    <div v-if="!IsAmdPlatform">
+      <b-alert show variant="danger">{{
+        $t('pagePower.toast.featureNotAvailable')
+      }}</b-alert>
+    </div>
+    <div v-if="IsAmdPlatform">
+      <b-form @submit.prevent="submitForm">
+        <b-form-group :disabled="loading"
+          ><b-row>
+            <b-col sm="8" md="6" xl="3">
+              <b-form-group
+                id="input-group-1"
+                :label="$t('pagePower.powerCapLabel')"
+                label-for="input-1"
               >
-                {{ $t('pagePower.powerCapSettingData') }}
-              </b-form-checkbox>
-            </b-form-group>
-          </b-col>
-        </b-row>
+                <b-form-text id="power-help-text">
+                  {{
+                    $t('pagePower.powerCapLabelTextInfo', {
+                      min: 0,
+                      max: 1000,
+                    })
+                  }}
+                </b-form-text>
+                <b-form-text id="power-help-text">
+                  {{ $t('pagePower.powerCapDisablesState') }}
+                </b-form-text>
 
-        <b-row>
-          <b-col sm="8" md="6" xl="3">
-            <b-form-group
-              id="input-group-1"
-              :label="$t('pagePower.powerCapLabel')"
-              label-for="input-1"
-            >
-              <b-form-text id="power-help-text">
-                {{
-                  $t('pagePower.powerCapLabelTextInfo', {
-                    min: 1,
-                    max: 10000,
-                  })
-                }}
-              </b-form-text>
+                <b-form-input
+                  id="input-1"
+                  v-model.number="powerCapValue"
+                  :disabled="!isPowerCapFieldEnabled"
+                  data-test-id="power-input-powerCapValue"
+                  type="number"
+                  aria-describedby="power-help-text"
+                  :state="getValidationState($v.powerCapValue)"
+                ></b-form-input>
 
-              <b-form-input
-                id="input-1"
-                v-model.number="powerCapValue"
-                :disabled="!isPowerCapFieldEnabled"
-                data-test-id="power-input-powerCapValue"
-                type="number"
-                aria-describedby="power-help-text"
-                :state="getValidationState($v.powerCapValue)"
-              ></b-form-input>
+                <b-form-invalid-feedback id="input-live-feedback" role="alert">
+                  <template v-if="!$v.powerCapValue.required">
+                    {{ $t('global.form.fieldRequired') }}
+                  </template>
+                  <template v-else-if="!$v.powerCapValue.between">
+                    {{ $t('global.form.invalidValue') }}
+                  </template>
+                </b-form-invalid-feedback>
+              </b-form-group>
+            </b-col>
+          </b-row>
 
-              <b-form-invalid-feedback id="input-live-feedback" role="alert">
-                <template v-if="!$v.powerCapValue.required">
-                  {{ $t('global.form.fieldRequired') }}
-                </template>
-                <template v-else-if="!$v.powerCapValue.between">
-                  {{ $t('global.form.invalidValue') }}
-                </template>
-              </b-form-invalid-feedback>
-            </b-form-group>
-          </b-col>
-        </b-row>
-
-        <b-button
-          variant="primary"
-          type="submit"
-          data-test-id="power-button-savePowerCapValue"
-        >
-          {{ $t('global.action.save') }}
-        </b-button>
-      </b-form-group>
-    </b-form>
+          <b-button
+            variant="primary"
+            type="submit"
+            data-test-id="power-button-savePowerCapValue"
+          >
+            {{ $t('global.action.save') }}
+          </b-button>
+        </b-form-group>
+      </b-form>
+    </div>
   </b-container>
 </template>
 
@@ -103,6 +82,7 @@ export default {
   data() {
     return {
       loading,
+      IsAmdPlatform: null,
     };
   },
   computed: {
@@ -150,14 +130,17 @@ export default {
     },
   },
   created() {
-    this.startLoader();
-    this.$store
-      .dispatch('powerControl/getPowerControl')
-      .finally(() => this.endLoader());
+    this.checkIsAmdPlatform();
+    if (this.IsAmdPlatform === true) {
+      this.startLoader();
+      this.$store
+        .dispatch('powerControl/getPowerControl')
+        .finally(() => this.endLoader());
+    }
   },
   validations: {
     powerCapValue: {
-      between: between(1, 10000),
+      between: between(0, 1000),
       required: requiredIf(function () {
         return this.isPowerCapFieldEnabled;
       }),
@@ -179,6 +162,9 @@ export default {
         .dispatch('powerControl/setPowerCapEnable', state)
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
+    },
+    checkIsAmdPlatform() {
+      this.IsAmdPlatform = this.$store.getters['global/isAmdPlatform'];
     },
   },
 };

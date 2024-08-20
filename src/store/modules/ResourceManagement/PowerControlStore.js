@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store';
 
 const PowerControlStore = {
   namespaced: true,
@@ -7,13 +8,11 @@ const PowerControlStore = {
     powerCapValue: null,
     powerCapUri: '',
     powerConsumptionValue: null,
-    powerCapEnable: null,
   },
   getters: {
     powerCapValue: (state) => state.powerCapValue,
     powerCapUri: (state) => state.powerCapUri,
     powerConsumptionValue: (state) => state.powerConsumptionValue,
-    powerCapEnable: (state) => state.powerCapEnable,
   },
   mutations: {
     setPowerCapValue: (state, powerCapValue) =>
@@ -21,8 +20,6 @@ const PowerControlStore = {
     setPowerCapUri: (state, powerCapUri) => (state.powerCapUri = powerCapUri),
     setPowerConsumptionValue: (state, powerConsumptionValue) =>
       (state.powerConsumptionValue = powerConsumptionValue),
-    setPowerCapEnableValue: (state, powerCapEnable) =>
-      (state.powerCapEnable = powerCapEnable),
   },
   actions: {
     setPowerCapUpdatedValue({ commit }, value) {
@@ -39,22 +36,27 @@ const PowerControlStore = {
     },
     async getPowerControl({ dispatch, commit }) {
       const collection = await dispatch('getChassisCollection');
+      const amdApi = '/redfish/v1/Chassis/Chalupa_Baseboard';
+      const isAmdPlatform = Object.values(collection).includes(amdApi);
+      const powerCapApi = isAmdPlatform ? amdApi : collection[0];
+
+      // Store flag in global store
+      store.commit('global/setIsAmdPlatform', isAmdPlatform);
+
       if (!collection || collection.length === 0) return;
       return await api
-        .get(`${collection[0]}`)
+        .get(powerCapApi)
         .then((response) => api.get(response.data.Power['@odata.id']))
         .then((response) => {
           const powerControl = response.data.PowerControl;
           if (!powerControl || powerControl.length === 0) return;
           const powerCapUri = response.data['@odata.id'];
           const powerCap = powerControl[0].PowerLimit.LimitInWatts;
-          const powerCapEnable = powerControl[0].Oem.OpenBmc.PowerCapEnable;
           // If system is powered off, power consumption does not exist in the PowerControl
           const powerConsumption = powerControl[0].PowerConsumedWatts || null;
           commit('setPowerCapUri', powerCapUri);
           commit('setPowerCapValue', powerCap);
           commit('setPowerConsumptionValue', powerConsumption);
-          commit('setPowerCapEnableValue', powerCapEnable);
         })
         .catch((error) => {
           console.log('Power control', error);
@@ -74,41 +76,6 @@ const PowerControlStore = {
           throw new Error(
             i18n.t('pageServerPowerOperations.toast.errorSaveSettings'),
           );
-        });
-    },
-    async setPowerCapEnable({ state, commit, dispatch }, powerCapEnable) {
-      commit('setPowerCapEnableValue', powerCapEnable);
-      const data = {
-        PowerControl: [
-          {
-            Oem: {
-              OpenBmc: {
-                PowerCapEnable: powerCapEnable,
-              },
-            },
-          },
-        ],
-      };
-      return await api
-        .patch(state.powerCapUri, data)
-        .then(dispatch('getPowerControl'))
-        .then(() => {
-          if (powerCapEnable) {
-            return i18n.t('pagePower.toast.successApplyPowerCapEnable');
-          } else {
-            return i18n.t('pagePower.toast.successApplyPowerCapDisable');
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          commit('setPowerCapEnableValue', !powerCapEnable);
-          if (powerCapEnable) {
-            throw new Error(i18n.t('pagePower.toast.errorApplyPowerCapEnable'));
-          } else {
-            throw new Error(
-              i18n.t('pagePower.toast.errorApplyPowerCapDisable'),
-            );
-          }
         });
     },
   },
