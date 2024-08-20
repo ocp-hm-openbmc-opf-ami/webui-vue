@@ -174,7 +174,7 @@
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
         "systemInventory": "@:appPageTitle.systemInventory",
-        "networkDDNS": "Network DDNS",
+        "networkDDNS": "@:appPageTitle.networkDDNS",
         "networkLink": "@:appPageTitle.networkLink"
     },
     "appPageTitle": {
@@ -193,7 +193,7 @@
         "ldap": "LDAP",
         "userManagement": "User management",
         "login": "Login",
-        "network": "Network",
+        "network": "Network Settings",
         "vlan": "VLAN",
         "overview": "Overview",
         "pageNotFound": "Page not found",
@@ -228,7 +228,7 @@
         "Bond": "Network Bond",
         "License": "Manage Licenses",
         "systemInventory": "System Inventory",
-        "ddnsConfiguration": "DDNS Configuration",
+        "networkDDNS": "Network DDNS",
         "networkLink": "Network Link"
     },
     "pageDDNSNetwork": {
@@ -240,7 +240,7 @@
             "domainConfiguration": "Domain Configuration",
             "domainNameSetting": "Domain Name",
             "iPPriority": "IP Priority",
-            "staticDomainName": "Static Domain Name",
+            "domainName": "Domain Name",
             "hostConfiguration": "Host Configuration",
             "hostNameSetting": "Host Name",
             "staticHostName": "Static Host Name",
@@ -256,7 +256,8 @@
             "ipv4IPPriority": "Ipv4",
             "ipv6IPPriority": "Ipv6",
             "tsigFileUpload": "Upload TSIG Key File",
-            "tsigFileUploadDiscription": "Upload (.private) files only"
+            "tsigFileUploadDiscription": "Upload (.private) files only",
+            "addDomainNames": "Add Domain Names"
         },
         "toast": {
             "errorNsUpdate": "Error in NSUpdate",
@@ -1437,9 +1438,9 @@
         "fqdn": "FQDN",
         "hostname": "Hostname",
         "interfaceSection": "Interface settings",
-        "ipv4": "IPv4",
+        "ipv4": "IPv4 Settings",
         "ipv4Addresses": "IPv4 addresses",
-        "ipv6": "IPv6",
+        "ipv6": "IPv6 Settings",
         "ipv6Addresses": "IPv6 addresses",
         "linkStatus": "Link status",
         "macAddress": "MAC address",
@@ -1447,9 +1448,9 @@
         "networkSettings": "Network settings",
         "ntp": "NTP server",
         "pageDescription": "Configure BMC network settings",
-        "useDns": "Use DNS servers",
-        "useDomainName": "Use domain name",
-        "useNtp": "Use NTP servers",
+        "useDns": "Use DNS Servers",
+        "useDomainName": "Use Domain Name",
+        "useNtp": "Use NTP Servers",
         "speed": "Speed (mbps)",
         "staticDns": "Static DNS",
         "modal": {

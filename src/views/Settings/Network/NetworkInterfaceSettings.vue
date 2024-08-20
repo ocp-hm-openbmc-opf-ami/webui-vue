@@ -39,6 +39,7 @@
               <b-button
                 variant="link"
                 class="p-1"
+                :disabled="interfaceId === 'hostusb0'"
                 @click="initMacAddressModal()"
               >
                 <icon-edit
@@ -61,6 +62,7 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import IconEdit from '@carbon/icons-vue/es/edit/16';
 import PageSection from '@/components/Global/PageSection';
 import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Ipv4Table',
@@ -82,9 +84,11 @@ export default {
       linkSpeed: '',
       fqdn: '',
       macAddress: '',
+      interfaceId: this.$store.getters['network/selectedInterfaceId'],
     };
   },
   computed: {
+    ...mapState('network', ['selectedInterfaceId']),
     ethernetData() {
       return this.$store.getters['network/ethernetData'][this.tabIndex];
     },
@@ -93,6 +97,9 @@ export default {
     // Watch for change in tab index
     tabIndex() {
       this.getSettings();
+    },
+    selectedInterfaceId: function (value) {
+      this.interfaceId = value;
     },
   },
   created() {

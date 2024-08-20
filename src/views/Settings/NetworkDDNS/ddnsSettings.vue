@@ -85,77 +85,6 @@
         </b-col>
       </b-row>
     </page-section>
-    <page-section
-      :section-title="
-        $t('pageDDNSNetwork.ddnsConfiguration.domainConfiguration')
-      "
-    >
-      <b-row>
-        <b-col sm="4">
-          <b-form-group
-            :label="$t('pageDDNSNetwork.ddnsConfiguration.domainNameSetting')"
-          >
-            <b-row>
-              <b-col md="4">
-                <b-form-radio
-                  v-model="domainNameSetting"
-                  name="Domain-Name-Setting"
-                  data-test-id="ddns-domainNameSetting-manual"
-                  value="Manual"
-                  :disabled="useDnsServers"
-                >
-                  {{ $t('pageDDNSNetwork.ddnsConfiguration.manual') }}
-                </b-form-radio>
-              </b-col>
-              <b-col>
-                <b-form-radio
-                  v-model="domainNameSetting"
-                  name="Domain-Name-Setting"
-                  data-test-id="ddns-domainNameSetting-Auto"
-                  value="Auto"
-                  :disabled="!useDnsServers"
-                >
-                  {{ $t('pageDDNSNetwork.ddnsConfiguration.auto') }}
-                </b-form-radio>
-              </b-col>
-            </b-row>
-          </b-form-group>
-        </b-col>
-        <b-col sm="3">
-          <b-form-group
-            :label="$t('pageDDNSNetwork.ddnsConfiguration.iPPriority')"
-            label-for="IP-Priority"
-          >
-            <b-form-select
-              id="subscriptionType"
-              v-model="IPriority"
-              :options="ipPriorityType"
-              data-test-id="ddns-select-IPpriority"
-              :disabled="domainNameSetting === 'Manual'"
-            >
-              <template #first>
-                <b-form-select-option :value="null" disabled>
-                  {{ $t('global.form.selectAnOption') }}
-                </b-form-select-option>
-              </template>
-            </b-form-select>
-          </b-form-group>
-        </b-col>
-        <b-col sm="3">
-          <b-form-group
-            :label="$t('pageDDNSNetwork.ddnsConfiguration.staticDomainName')"
-            label-for="Static-Domain-Name"
-          >
-            <b-form-input
-              id="Static-Domain-Name"
-              v-model="StaticDomainName"
-              type="text"
-              :disabled="domainNameSetting == 'Auto'"
-            />
-          </b-form-group>
-        </b-col>
-      </b-row>
-    </page-section>
     <page-section>
       <b-button type="submit" variant="primary" @click="saveConfigurations">
         {{ $t('global.action.save') }}
@@ -187,21 +116,13 @@ export default {
           text: this.$t('pageDDNSNetwork.ddnsConfiguration.ipv6IPPriority'),
         },
       ],
-      domainNameSetting: this.$store.getters['ddnsNetwork/domainName'],
       IPriority: this.$store.getters['ddnsNetwork/ipPriority'],
-      StaticDomainName: this.$store.getters['ddnsNetwork/staticDomainName'],
       hostNameSetting: this.$store.getters['ddnsNetwork/hostName'],
       StaticHostName: this.$store.getters['ddnsNetwork/staticHostName'],
     };
   },
   computed: {
-    ...mapState('ddnsNetwork', [
-      'domainName',
-      'ipPriority',
-      'staticDomainName',
-      'hostName',
-      'staticHostName',
-    ]),
+    ...mapState('ddnsNetwork', ['ipPriority', 'hostName', 'staticHostName']),
     sendHostNameEnabled: {
       get() {
         return this.$store.getters['ddnsNetwork/hostNameEnabled'];
@@ -218,19 +139,10 @@ export default {
         return newValue;
       },
     },
-    useDnsServers() {
-      return this.$store.getters['ddnsNetwork/dnsServer'];
-    },
   },
   watch: {
-    domainName: function (value) {
-      this.domainNameSetting = value;
-    },
     ipPriority: function (value) {
       this.IPriority = value;
-    },
-    staticDomainName: function (value) {
-      this.StaticDomainName = value;
     },
     hostName: function (value) {
       this.hostNameSetting = value;
@@ -273,17 +185,9 @@ export default {
       if (this.hostNameSetting === 'Auto') {
         data.HostNameSetting = this.hostNameSetting;
       }
-      //if useDnsServers is false only able to do domainConfigurations
-      if (this.useDnsServers === false) {
-        if (this.domainNameSetting === 'Manual') {
-          data.DomainNameSetting = this.domainNameSetting;
-          data.IPPriority = 0;
-          data.StaticDomainName = this.StaticDomainName;
-        }
-      }
       this.startLoader();
       this.$store
-        .dispatch('ddnsNetwork/saveConfigurations', data)
+        .dispatch('ddnsNetwork/saveHostConfigurations', data)
         .then((success) => {
           if (success) {
             this.successToast(success);

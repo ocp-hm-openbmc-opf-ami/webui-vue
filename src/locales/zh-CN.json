@@ -171,7 +171,7 @@
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
         "systemInventory":"@:appPageTitle.systemInventory",
-        "networkDDNS": "网络 DDNS",
+        "networkDDNS": "@:appPageTitle.networkDDNS",
         "networkLink": "@:appPageTitle.networkLink"
     },
     "appPageTitle": {
@@ -190,7 +190,7 @@
         "ldap": "LDAP",
         "userManagement": "用户管理",
         "login": "登入",
-        "network": "网路",
+        "network": "网络设置",
         "vlan": "VLAN",
         "overview": "概要",
         "pageNotFound": "找不到页面",
@@ -225,7 +225,7 @@
         "Bond": "绑定",
         "License": "管理许可证",
         "systemInventory":"系统库存",
-        "ddnsConfiguration": "DDNS 配置",
+        "networkDDNS": "Network DDNS",
         "networkLink": "网络链接"
     },
     "pageDDNSNetwork": {
@@ -240,7 +240,7 @@
             "staticDomainName": "静态域名",
             "hostConfiguration": "主机配置",
             "hostNameSetting": "主机名称",
-            "staticHostName": "静态主机名",
+            "domainName": "域名",
             "interfacesConfiguration": "接口",
             "ddnsMethod": "DDNS 方法",
             "nsUpdateEnable": "NS 更新启用",
@@ -253,7 +253,8 @@
             "ipv4IPPriority": "Ipv4",
             "ipv6IPPriority": "Ipv6",
             "tsigFileUpload": "上传 TSIG 密钥文件",
-            "tsigFileUploadDiscription": "仅上传（.private）文件"
+            "tsigFileUploadDiscription": "仅上传（.private）文件",
+            "addDomainNames": "添加域名"
         },
         "toast": {
             "errorNsUpdate": "NSUpdate 错误",
@@ -1429,9 +1430,9 @@
         "fqdn": "FQDN",
         "hostname": "主机名称",
         "interfaceSection": "网卡设定",
-        "ipv4": "IPv4",
+        "ipv4": "IPv4 设置",
         "ipv4Addresses": "IPv4 网址",
-        "ipv6": "IPv6",
+        "ipv6": "IPv6 设置",
         "ipv6Addresses": "IPv6 位址",
         "linkStatus": "链接状态",
         "macAddress": "MAC 地址",
@@ -1439,9 +1440,9 @@
         "networkSettings": "网路设定",
         "ntp": "NTP 伺服器",
         "pageDescription": "配置 BMC 网路设定",
-        "useDns": "使用 DNS 伺服器群",
-        "useDomainName": "使用网域名称",
-        "useNtp": "使用 NTP 伺服器群",
+        "useDns": "使用 DNS 服务器",
+        "useDomainName": "使用域名",
+        "useNtp": "使用 NTP 服务器",
         "speed": "速度 (mbps)",
         "staticDns": "固定 DNS",
         "modal": {

@@ -170,7 +170,7 @@
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
         "systemInventory":"@:appPageTitle.systemInventory",
-        "networkDDNS": "Netzwerk DDNS",
+        "networkDDNS": "@:appPageTitle.networkDDNS",
         "networkLink": "@:appPageTitle.networkLink"
     },
     "appPageTitle": {
@@ -189,7 +189,7 @@
         "ldap": "LDAP",
         "userManagement": "Benutzerverwaltung",
         "login": "Anmeldung",
-        "network": "Netzwerk",
+        "network": "Netzwerkeinstellungen",
         "vlan": "VLAN",
         "overview": "Überblick",
         "pageNotFound": "Seite nicht gefunden",
@@ -224,7 +224,7 @@
         "Bond": "Netzwerkbindung",
         "License": "Lizenzen verwalten",
         "systemInventory":"Systeminventar",
-        "ddnsConfiguration": "DDNS Konfiguration",
+        "networkDDNS": "Network DDNS",
         "networkLink": "Netzwerkverbindung"
     },
     "pageDDNSNetwork": {
@@ -239,7 +239,7 @@
             "staticDomainName": "Statischer Domänenname",
             "hostConfiguration": "Host Konfiguration",
             "hostNameSetting": "Hostname",
-            "staticHostName": "Statischer Hostname",
+            "domainName": "Domain Name",
             "interfacesConfiguration": "Schnittstellen",
             "ddnsMethod": "DDNS-Methode",
             "nsUpdateEnable": "NS Update aktivieren",
@@ -252,7 +252,8 @@
             "ipv4IPPriority": "Ipv4",
             "ipv6IPPriority": "Ipv6",
             "tsigFileUpload": "Laden Sie die TSIG-Schlüsseldatei hoch",
-            "tsigFileUploadDiscription": "Laden Sie nur (.private) Dateien hoch"
+            "tsigFileUploadDiscription": "Laden Sie nur (.private) Dateien hoch",
+            "addDomainNames": "Domänennamen hinzufügen"
         },
         "toast": {
             "errorNsUpdate": "Fehler in NSUpdate",
@@ -1429,9 +1430,9 @@
         "fqdn": "FQDN",
         "hostname": "Hostname",
         "interfaceSection": "Schnittstelle einstellungen",
-        "ipv4": "IPv4",
+        "ipv4": "IPv4 Einstellungen",
         "ipv4Addresses": "IPv4 Adressen",
-        "ipv6": "IPv6",
+        "ipv6": "IPv6 Einstellungen",
         "ipv6Addresses": "IPv6 Adressen",
         "linkStatus": "Link status",
         "macAddress": "MAC Adresse",
@@ -1439,8 +1440,8 @@
         "networkSettings": "Netzwerkeinstellungen",
         "ntp": "NTP server",
         "pageDescription": "Konfigurieren Sie die BMC Netzwerkeinstellungen",
-        "useDns": "Verwenden Sie DNS Serve",
-        "useDomainName": "Domänennamen verwenden",
+        "useDns": "Verwenden Sie DNS Server",
+        "useDomainName": "Verwenden Sie den Domänennamen",
         "useNtp": "Verwenden Sie NTP Server",
         "speed": "Geschwindigkeit (mbps)",
         "staticDns": "Statisches DNS",

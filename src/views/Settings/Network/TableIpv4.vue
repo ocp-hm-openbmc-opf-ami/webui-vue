@@ -1,6 +1,65 @@
 <template>
   <page-section :section-title="$t('pageNetwork.ipv4')">
     <b-row>
+      <b-col md="3">
+        <dl>
+          <dt>{{ $t('pageNetwork.useDomainName') }}</dt>
+          <dd>
+            <b-form-checkbox
+              v-model="useDomainNameState"
+              data-test-id="DHCPv4-switch-useDomainName"
+              switch
+              :disabled="interfaceId === 'hostusb0'"
+              @change="changeDhcpv4DomainNameState"
+            >
+              <span v-if="useDomainNameState">
+                {{ $t('global.status.enabled') }}
+              </span>
+              <span v-else>{{ $t('global.status.disabled') }}</span>
+            </b-form-checkbox>
+          </dd>
+        </dl>
+      </b-col>
+      <b-col md="3">
+        <dl>
+          <dt>{{ $t('pageNetwork.useDns') }}</dt>
+          <dd>
+            <b-form-checkbox
+              v-model="useDnsState"
+              data-test-id="DHCPv4-switch-useDns"
+              switch
+              :disabled="interfaceId === 'hostusb0'"
+              @change="changeDhcpv4DnsState"
+            >
+              <span v-if="useDnsState">
+                {{ $t('global.status.enabled') }}
+              </span>
+              <span v-else>{{ $t('global.status.disabled') }}</span>
+            </b-form-checkbox>
+          </dd>
+        </dl>
+      </b-col>
+      <b-col md="3">
+        <dl>
+          <dt>{{ $t('pageNetwork.useNtp') }}</dt>
+          <dd>
+            <b-form-checkbox
+              v-model="useNtpState"
+              data-test-id="DHCPv4-switch-useNtp"
+              switch
+              :disabled="interfaceId === 'hostusb0'"
+              @change="changeDhcpv4NtpState"
+            >
+              <span v-if="useNtpState">
+                {{ $t('global.status.enabled') }}
+              </span>
+              <span v-else>{{ $t('global.status.disabled') }}</span>
+            </b-form-checkbox>
+          </dd>
+        </dl>
+      </b-col>
+    </b-row>
+    <b-row>
       <b-col>
         <h3 class="h5">
           {{ $t('pageNetwork.ipv4Addresses') }}
@@ -12,6 +71,7 @@
             <b-form-checkbox
               v-model="globalNetworkSettings[tabIndex].ipv4DhcpEnabled"
               switch
+              :disabled="interfaceId === 'hostusb0'"
               @change="changeDhcpIpv4State"
             >
               <span>
@@ -103,11 +163,45 @@ export default {
         },
         { key: 'actions', label: '', tdClass: 'text-right' },
       ],
+      interfaceId: this.$store.getters['network/selectedInterfaceId'],
     };
   },
   computed: {
-    ...mapState('network', ['ethernetData']),
-    ...mapState('network', ['globalNetworkSettings']),
+    ...mapState('network', [
+      'ethernetData',
+      'globalNetworkSettings',
+      'selectedInterfaceId',
+    ]),
+    useDomainNameState: {
+      get() {
+        return this.$store.getters['network/globalNetworkSettings'][
+          this.tabIndex
+        ].dhcpv4.useDomainNameEnabled;
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    useDnsState: {
+      get() {
+        return this.$store.getters['network/globalNetworkSettings'][
+          this.tabIndex
+        ].dhcpv4.useDnsEnabled;
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    useNtpState: {
+      get() {
+        return this.$store.getters['network/globalNetworkSettings'][
+          this.tabIndex
+        ].dhcpv4.useNtpEnabled;
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
   },
   watch: {
     // Watch for change in tab index
@@ -116,6 +210,9 @@ export default {
     },
     ethernetData() {
       this.getIpv4TableItems();
+    },
+    selectedInterfaceId: function (value) {
+      this.interfaceId = value;
     },
   },
   created() {
@@ -224,6 +321,26 @@ export default {
           });
         }
       }
+    },
+    changeDhcpv4DomainNameState(state) {
+      this.$store
+        .dispatch('network/saveDhcpv4DomainNameState', state)
+        .then((success) => {
+          this.successToast(success);
+        })
+        .catch(({ message }) => this.errorToast(message));
+    },
+    changeDhcpv4DnsState(state) {
+      this.$store
+        .dispatch('network/saveDhcpv4DnsState', state)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
+    changeDhcpv4NtpState(state) {
+      this.$store
+        .dispatch('network/saveDhcpv4NtpState', state)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
     },
   },
 };

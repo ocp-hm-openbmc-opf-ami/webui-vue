@@ -58,6 +58,16 @@ const NetworkStore = {
           macAddress: MACAddress,
           linkStatus: LinkStatus,
           staticAddress: IPv4StaticAddresses[0]?.Address, // Display first static address on overview page
+          dhcpv4: {
+            useDnsEnabled: DHCPv4.UseDNSServers,
+            useDomainNameEnabled: DHCPv4.UseDomainName,
+            useNtpEnabled: DHCPv4.UseNTPServers,
+          },
+          dhcpv6: {
+            useDnsEnabled: DHCPv6.UseDNSServers,
+            useDomainNameEnabled: DHCPv6.UseDomainName,
+            useNtpEnabled: DHCPv6.UseNTPServers,
+          },
           useDnsEnabled: DHCPv4.UseDNSServers,
           useDomainNameEnabled: DHCPv4.UseDomainName,
           useNtpEnabled: DHCPv4.UseNTPServers,
@@ -128,7 +138,7 @@ const NetworkStore = {
           console.log('Network Data:', error);
         });
     },
-    async saveDomainNameState({ commit, state }, domainState) {
+    async saveDhcpv4DomainNameState({ commit, state }, domainState) {
       commit('setDomainNameState', domainState);
       const data = {
         DHCPv4: {
@@ -139,7 +149,7 @@ const NetworkStore = {
       // on all interfaces
       return api
         .patch(
-          `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.firstInterfaceId}`,
+          `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
           data,
         )
         .then(() => {
@@ -157,7 +167,7 @@ const NetworkStore = {
           );
         });
     },
-    async saveDnsState({ commit, state }, dnsState) {
+    async saveDhcpv4DnsState({ commit, state }, dnsState) {
       commit('setDnsState', dnsState);
       const data = {
         DHCPv4: {
@@ -168,7 +178,7 @@ const NetworkStore = {
       // on all interfaces
       return api
         .patch(
-          `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.firstInterfaceId}`,
+          `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
           data,
         )
         .then(() => {
@@ -186,7 +196,7 @@ const NetworkStore = {
           );
         });
     },
-    async saveNtpState({ commit, state }, ntpState) {
+    async saveDhcpv4NtpState({ commit, state }, ntpState) {
       commit('setNtpState', ntpState);
       const data = {
         DHCPv4: {
@@ -197,7 +207,7 @@ const NetworkStore = {
       // on all interfaces
       return api
         .patch(
-          `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.firstInterfaceId}`,
+          `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
           data,
         )
         .then(() => {
@@ -475,6 +485,93 @@ const NetworkStore = {
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.dns'),
+            }),
+          );
+        });
+    },
+    async saveDhcpv6DomainNameState({ commit, state }, domainState) {
+      commit('setDomainNameState', domainState);
+      const data = {
+        DHCPv6: {
+          UseDomainName: domainState,
+        },
+      };
+      // Saving to the first interface automatically updates DHCPv4 and DHCPv6
+      // on all interfaces
+      return api
+        .patch(
+          `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
+          data,
+        )
+        .then(() => {
+          return i18n.t('pageNetwork.toast.successSaveNetworkSettings', {
+            setting: i18n.t('pageNetwork.domainName'),
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          commit('setDomainNameState', !domainState);
+          throw new Error(
+            i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
+              setting: i18n.t('pageNetwork.domainName'),
+            }),
+          );
+        });
+    },
+    async saveDhcpv6DnsState({ commit, state }, dnsState) {
+      commit('setDnsState', dnsState);
+      const data = {
+        DHCPv6: {
+          UseDNSServers: dnsState,
+        },
+      };
+      // Saving to the first interface automatically updates DHCPv4 and DHCPv6
+      // on all interfaces
+      return api
+        .patch(
+          `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
+          data,
+        )
+        .then(() => {
+          return i18n.t('pageNetwork.toast.successSaveNetworkSettings', {
+            setting: i18n.t('pageNetwork.dns'),
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          commit('setDnsState', !dnsState);
+          throw new Error(
+            i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
+              setting: i18n.t('pageNetwork.dns'),
+            }),
+          );
+        });
+    },
+    async saveDhcpv6NtpState({ commit, state }, ntpState) {
+      commit('setNtpState', ntpState);
+      const data = {
+        DHCPv6: {
+          UseNTPServers: ntpState,
+        },
+      };
+      // Saving to the first interface automatically updates DHCPv4 and DHCPv6
+      // on all interfaces
+      return api
+        .patch(
+          `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
+          data,
+        )
+        .then(() => {
+          return i18n.t('pageNetwork.toast.successSaveNetworkSettings', {
+            setting: i18n.t('pageNetwork.ntp'),
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          commit('setNtpState', !ntpState);
+          throw new Error(
+            i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
+              setting: i18n.t('pageNetwork.ntp'),
             }),
           );
         });

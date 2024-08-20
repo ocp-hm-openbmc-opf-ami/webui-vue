@@ -280,10 +280,10 @@ const routes = [
       },
       {
         path: '/settings/network-ddns',
-        name: 'ddns-Configuration',
+        name: 'network-DDNS',
         component: DDNS,
         meta: {
-          title: i18n.t('appPageTitle.ddnsConfiguration'),
+          title: i18n.t('appPageTitle.networkDDNS'),
         },
       },
       {

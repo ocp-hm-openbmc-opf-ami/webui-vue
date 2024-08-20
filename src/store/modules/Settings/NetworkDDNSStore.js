@@ -12,10 +12,9 @@ const NetworkDDNSStore = {
     nsUpdateEnabled: false,
     domainName: '',
     ipPriority: null,
-    staticDomainName: null,
     hostName: '',
     staticHostName: null,
-    dnsServer: null,
+    domainNameServer: [],
   },
   getters: {
     ddnsEthernetData: (state) => state.ddnsEthernetData,
@@ -26,10 +25,9 @@ const NetworkDDNSStore = {
     nsUpdateEnabled: (state) => state.nsUpdateEnabled,
     domainName: (state) => state.domainName,
     ipPriority: (state) => state.ipPriority,
-    staticDomainName: (state) => state.staticDomainName,
     hostName: (state) => state.hostName,
     staticHostName: (state) => state.staticHostName,
-    dnsServer: (state) => state.dnsServer,
+    domainNameServer: (state) => state.domainNameServer,
   },
   mutations: {
     setDDNSEthernetData: (state, ddnsEthernetData) =>
@@ -46,12 +44,24 @@ const NetworkDDNSStore = {
       (state.hostNameEnabled = hostNameEnabled),
     setDomainName: (state, domainName) => (state.domainName = domainName),
     setIpPriority: (state, ipPriority) => (state.ipPriority = ipPriority),
-    setStaticDomainName: (state, staticDomainName) =>
-      (state.staticDomainName = staticDomainName),
     setHostName: (state, hostName) => (state.hostName = hostName),
     setStaticHostName: (state, staticHostName) =>
       (state.staticHostName = staticHostName),
-    setDNSServer: (state, dnsServer) => (state.dnsServer = dnsServer),
+    setDomainNameServer: (state, data) => {
+      state.domainNameServer = data.map(({ data }) => {
+        const { DHCPv4, DHCPv6 } = data;
+        return {
+          dhcpv4: {
+            useDnsEnabled: DHCPv4.UseDNSServers,
+            useDomainNameEnabled: DHCPv4.UseDomainName,
+          },
+          dhcpv6: {
+            useDnsEnabled: DHCPv6.UseDNSServers,
+            useDomainNameEnabled: DHCPv6.UseDomainName,
+          },
+        };
+      });
+    },
   },
   actions: {
     async getfirstEtherData({ commit }, firstEtherData) {
@@ -65,15 +75,12 @@ const NetworkDDNSStore = {
         FirstEtherData?.DomainConfiguration?.IPPriority === 0
           ? null
           : FirstEtherData?.DomainConfiguration?.IPPriority;
-      const staticDomainName =
-        FirstEtherData?.DomainConfiguration?.StaticDomainName;
       const hostName = FirstEtherData?.HostConfiguration?.HostNameSetting;
       const staticHostName = FirstEtherData?.HostConfiguration?.StaticHostName;
       commit('setNsUpdateEnabled', nsUpdateEnabled);
       commit('setHostNameEnabled', hostNameEnabled);
       commit('setDomainName', domainName);
       commit('setIpPriority', ipPriority);
-      commit('setStaticDomainName', staticDomainName);
       commit('setHostName', hostName);
       commit('setStaticHostName', staticHostName);
     },
@@ -98,12 +105,11 @@ const NetworkDDNSStore = {
           );
           const firstEtherData = ethernetData[0];
           const firstInterfaceId = ethernetData[0].Id;
-          const useDNSServer = ethernetData[0].DHCPv4?.UseDNSServers;
           commit('setDDNSSelectedInterfaceId', firstInterfaceId);
           commit('setDDNSEthernetData', ethernetData);
           commit('setDDNSFirstInterfaceId', firstInterfaceId);
           commit('setDDNSFirstEtherData', firstEtherData);
-          commit('setDNSServer', useDNSServer);
+          commit('setDomainNameServer', ethernetInterfaces);
           await dispatch('getfirstEtherData', firstEtherData);
         })
         .catch((error) => {
@@ -234,7 +240,7 @@ const NetworkDDNSStore = {
           throw new Error(i18n.t('pageDDNSNetwork.toast.errorUpdateTsig'));
         });
     },
-    async saveConfigurations({ state, dispatch }, data) {
+    async saveHostConfigurations({ state, dispatch }, data) {
       const ddnsData = {
         Oem: {
           Ami: {
@@ -246,21 +252,6 @@ const NetworkDDNSStore = {
           },
         },
       };
-      if (
-        data.DomainNameSetting !== undefined &&
-        data.IPPriority !== undefined
-      ) {
-        ddnsData.Oem.Ami.DNSConfiguration.DomainConfiguration = {
-          DomainNameSetting: data.DomainNameSetting,
-          IPPriority: data.IPPriority,
-        };
-      }
-      // Add StaticDomainName only if it's not undefined
-      if (data.StaticDomainName !== undefined) {
-        ddnsData.Oem.Ami.DNSConfiguration.DomainConfiguration.StaticDomainName =
-          data.StaticDomainName;
-      }
-
       // Add StaticHostName only if it's not undefined
       if (data.StaticHostName !== undefined) {
         ddnsData.Oem.Ami.DNSConfiguration.HostConfiguration.StaticHostName =
@@ -271,6 +262,34 @@ const NetworkDDNSStore = {
         .patch(
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.ddnsSelectedInterfaceId}`,
           ddnsData,
+        )
+        .then(() => dispatch('getDDNSEthernetData'))
+        .then(() => {
+          return i18n.t('pageDDNSNetwork.toast.successSaveConfiguratin');
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(
+            i18n.t('pageDDNSNetwork.toast.errorSaveConfiguratin'),
+          );
+        });
+    },
+    async saveDomainNameConfigurations({ state, dispatch }, DomainNames) {
+      const DomainNameUpdate = {
+        Oem: {
+          Ami: {
+            DNSConfiguration: {
+              DomainConfiguration: {
+                DomainNames: DomainNames,
+              },
+            },
+          },
+        },
+      };
+      return await api
+        .patch(
+          `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.ddnsSelectedInterfaceId}`,
+          DomainNameUpdate,
         )
         .then(() => dispatch('getDDNSEthernetData'))
         .then(() => {

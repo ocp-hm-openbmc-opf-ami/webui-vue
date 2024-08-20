@@ -1,6 +1,63 @@
 <template>
   <page-section :section-title="$t('pageNetwork.ipv6')">
     <b-row>
+      <b-col md="3">
+        <dl>
+          <dt>{{ $t('pageNetwork.useDomainName') }}</dt>
+          <dd>
+            <b-form-checkbox
+              v-model="useDomainNameState"
+              data-test-id="DHCPv6-switch-useDomainName"
+              switch
+              :disabled="interfaceId === 'hostusb0'"
+              @change="changeDhcpv6DomainNameState"
+            >
+              <span v-if="useDomainNameState">
+                {{ $t('global.status.enabled') }}
+              </span>
+              <span v-else>{{ $t('global.status.disabled') }}</span>
+            </b-form-checkbox>
+          </dd>
+        </dl>
+      </b-col>
+      <b-col md="3">
+        <dl>
+          <dt>{{ $t('pageNetwork.useDns') }}</dt>
+          <dd>
+            <b-form-checkbox
+              v-model="useDnsState"
+              switch
+              :disabled="interfaceId === 'hostusb0'"
+              @change="changeDhcpv6DnsState"
+            >
+              <span v-if="useDnsState">
+                {{ $t('global.status.enabled') }}
+              </span>
+              <span v-else>{{ $t('global.status.disabled') }}</span>
+            </b-form-checkbox>
+          </dd>
+        </dl>
+      </b-col>
+      <b-col md="3">
+        <dl>
+          <dt>{{ $t('pageNetwork.useNtp') }}</dt>
+          <dd>
+            <b-form-checkbox
+              v-model="useNtpState"
+              switch
+              :disabled="interfaceId === 'hostusb0'"
+              @change="changeDhcpv6NtpState"
+            >
+              <span v-if="useNtpState">
+                {{ $t('global.status.enabled') }}
+              </span>
+              <span v-else>{{ $t('global.status.disabled') }}</span>
+            </b-form-checkbox>
+          </dd>
+        </dl>
+      </b-col>
+    </b-row>
+    <b-row>
       <b-col>
         <h3 class="h5">
           {{ $t('pageNetwork.ipv6Addresses') }}
@@ -8,7 +65,7 @@
       </b-col>
       <b-col class="text-right">
         <b-button
-          :disabled="ipv6BtnDisable"
+          :disabled="ipv6BtnDisable || interfaceId === 'hostusb0'"
           variant="primary"
           @click="initAddIpv6Address()"
         >
@@ -22,6 +79,7 @@
             <b-form-checkbox
               v-model="globalNetworkSettings[tabIndex].ipv6DhcpEnabled"
               switch
+              :disabled="interfaceId === 'hostusb0'"
               @change="changeDhcpIpv6State"
             >
               <span>
@@ -117,11 +175,45 @@ export default {
         },
         { key: 'actions', label: '', tdClass: 'text-right' },
       ],
+      interfaceId: this.$store.getters['network/selectedInterfaceId'],
     };
   },
   computed: {
-    ...mapState('network', ['ethernetData']),
-    ...mapState('network', ['globalNetworkSettings']),
+    ...mapState('network', [
+      'ethernetData',
+      'globalNetworkSettings',
+      'selectedInterfaceId',
+    ]),
+    useDomainNameState: {
+      get() {
+        return this.$store.getters['network/globalNetworkSettings'][
+          this.tabIndex
+        ].dhcpv6.useDomainNameEnabled;
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    useDnsState: {
+      get() {
+        return this.$store.getters['network/globalNetworkSettings'][
+          this.tabIndex
+        ].dhcpv6.useDnsEnabled;
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    useNtpState: {
+      get() {
+        return this.$store.getters['network/globalNetworkSettings'][
+          this.tabIndex
+        ].dhcpv6.useNtpEnabled;
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
   },
   watch: {
     // Watch for change in tab index
@@ -130,6 +222,9 @@ export default {
     },
     ethernetData() {
       this.getIpv6TableItems();
+    },
+    selectedInterfaceId: function (value) {
+      this.interfaceId = value;
     },
   },
   created() {
@@ -251,6 +346,26 @@ export default {
           });
         }
       }
+    },
+    changeDhcpv6DomainNameState(state) {
+      this.$store
+        .dispatch('network/saveDhcpv6DomainNameState', state)
+        .then((success) => {
+          this.successToast(success);
+        })
+        .catch(({ message }) => this.errorToast(message));
+    },
+    changeDhcpv6DnsState(state) {
+      this.$store
+        .dispatch('network/saveDhcpv6DnsState', state)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
+    changeDhcpv6NtpState(state) {
+      this.$store
+        .dispatch('network/saveDhcpv6NtpState', state)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
     },
   },
 };

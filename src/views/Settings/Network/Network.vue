@@ -7,7 +7,7 @@
         </template>
       </b-overlay>
     </div>
-    <page-title :description="$t('pageNetwork.pageDescription')" />
+    <page-title />
     <!-- Global settings for all interfaces -->
     <network-global-settings />
     <!-- Interface tabs -->

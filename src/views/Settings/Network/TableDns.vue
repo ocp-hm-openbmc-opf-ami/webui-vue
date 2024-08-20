@@ -3,7 +3,11 @@
     <b-row>
       <b-col lg="6">
         <div class="text-right">
-          <b-button variant="primary" @click="initDnsModal()">
+          <b-button
+            :disabled="interfaceId === 'hostusb0'"
+            variant="primary"
+            @click="initDnsModal()"
+          >
             <icon-add />
             {{ $t('pageNetwork.table.addDnsAddress') }}
           </b-button>
@@ -85,10 +89,11 @@ export default {
         },
         { key: 'actions', label: '', tdClass: 'text-right' },
       ],
+      interfaceId: this.$store.getters['network/selectedInterfaceId'],
     };
   },
   computed: {
-    ...mapState('network', ['ethernetData']),
+    ...mapState('network', ['ethernetData', 'selectedInterfaceId']),
   },
   watch: {
     // Watch for change in tab index
@@ -97,6 +102,9 @@ export default {
     },
     ethernetData() {
       this.getStaticDnsItems();
+    },
+    selectedInterfaceId: function (value) {
+      this.interfaceId = value;
     },
   },
   created() {
