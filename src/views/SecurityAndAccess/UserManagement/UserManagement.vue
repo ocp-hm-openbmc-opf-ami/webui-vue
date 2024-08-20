@@ -54,6 +54,7 @@
             <b-form-checkbox
               v-model="row.rowSelected"
               data-test-id="userManagement-checkbox-toggleSelectRow"
+              :disabled="isCheckboxDisabled(row.item)"
               @change="toggleSelectRow($refs.table, row.index)"
             >
               <span class="sr-only">{{ $t('global.table.selectItem') }}</span>
@@ -227,6 +228,7 @@ export default {
       // transform user data to table data
       return this.allUsers.map((user) => {
         return {
+          rowSelected: false, // Ensure rowSelected is initialized
           username: user.UserName,
           privilege: user.RoleId,
           status: user.Locked
@@ -444,6 +446,27 @@ export default {
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.endLoader());
+    },
+    isCheckboxDisabled(item) {
+      // Disable checkbox if the row belongs to the 'root' user or the current logged-in user
+      return (
+        item.UserName === 'root' ||
+        item.UserName === this.$store.getters['global/username']
+      );
+    },
+    onChangeHeaderCheckbox(tableRef) {
+      if (tableRef) {
+        if (this.tableHeaderCheckboxModel) {
+          // Select all rows except for the root user and the logged-in user
+          this.allUsers.forEach((user, index) => {
+            if (!this.isCheckboxDisabled(user)) {
+              tableRef.selectRow(index);
+            }
+          });
+        } else {
+          tableRef.clearSelected();
+        }
+      }
     },
   },
 };
