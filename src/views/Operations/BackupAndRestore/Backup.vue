@@ -167,6 +167,9 @@ export default {
     },
   },
   data() {
+    const smtp = this.$store.getters['backupAndRestore/smtp'];
+    const virtualMedia = this.$store.getters['backupAndRestore/virtualMedia'];
+    const network = this.$store.getters['backupAndRestore/network'];
     return {
       SMTP: this.$store.getters['backupAndRestore/smtp'],
       VirtualMedia: this.$store.getters['backupAndRestore/virtualMedia'],
@@ -175,7 +178,7 @@ export default {
       NTP: this.$store.getters['backupAndRestore/ntp'],
       SNMP: this.$store.getters['backupAndRestore/snmp'],
       SysLog: this.$store.getters['backupAndRestore/sysLog'],
-      checkAll: false,
+      checkAll: smtp && virtualMedia && network,
       hide: false,
     };
   },
