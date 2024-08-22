@@ -1670,7 +1670,11 @@
                 "ssh": "Sind Sie sicher, dass Sie es aktivieren möchten @:pagePolicies.ssh?"
             },
             "confirmTitle": "Bestätigen?",
-            "informationMessage": "Der OpenSSL FIPS-Modus wurde erfolgreich aktualisiert. Schließen Sie die aktuelle Sitzung und öffnen Sie nach ein paar Minuten eine neue Sitzung."
+            "informationMessage": "Der OpenSSL FIPS-Modus wurde erfolgreich aktualisiert. Schließen Sie die aktuelle Sitzung und öffnen Sie nach ein paar Minuten eine neue Sitzung.",
+            "webPortTitle": "Bestätigung des Webports",
+            "webPortConfirmation": "Bei einer Änderung der Konfiguration sind bereits geöffnete Sitzungen für den Dienst betroffen, außerdem wird der Dienst neu gestartet. Klicken Sie auf OK, wenn Sie fortfahren möchten. HINWEIS: Die Anmeldesitzung wird abgemeldet. Bitte melden Sie sich nach dem Schließen dieser Seite erneut an.",
+            "kvmPortTitle": "Bestätigung des KVM-Ports",
+            "kvmPortConfirmation": "Bei einer Änderung der Konfiguration sind bereits geöffnete KVM-Sitzungen für den Dienst betroffen, außerdem wird der Dienst neu gestartet. Klicken Sie auf OK, wenn Sie fortfahren möchten."
         },
         "toast": {
             "errorIpmiPort": "Fehler beim Festlegen des IPMI Portwerts.",
@@ -1702,6 +1706,7 @@
             "errorSNMPDisabled": "Fehler beim Deaktivieren der SNMP Sicherheitseinstellung.",
             "errorSNMPEnabled": "Fehler beim Aktivieren der SNMP Sicherheitseinstellung.",
             "errorKVMPort": "Fehler beim Festlegen des KVM-Portwerts.",
+            "errorWebPort": "Fehler beim Festlegen des Web-Port-Werts.",
             "errorKVMSessionTimeout": "Fehler beim Konfigurieren des KVM-Sitzungs-Timeouts.",
             "successIpmiDisabled": "IPMI Sicherheitseinstellung erfolgreich deaktiviert.",
             "successIpmiEnabled": "IPMI Sicherheitseinstellung erfolgreich aktiviert.",
@@ -1726,7 +1731,8 @@
             "successOpenSSLFIPSEnabled": "OpenSSL FIPS-Sicherheitseinstellung erfolgreich aktiviert.",
             "successSNMPDisabled": "SNMP Sicherheitseinstellung erfolgreich deaktiviert.",
             "successSNMPEnabled": "SNMP Sicherheitseinstellung erfolgreich aktiviert.",
-            "successKVMPort": "Wert des KVM-Ports erfolgreich aktualisiert.",
+            "successKVMPort": "Der KVM-Portwert wurde erfolgreich aktualisiert.",
+            "successWebPort": "Der Web-Port-Wert wurde erfolgreich aktualisiert.",
             "successKVMSessionTimeout": "Das KVM-Sitzungs-Timeout wurde erfolgreich konfiguriert.."
         },
         "options": {
@@ -1769,6 +1775,7 @@
         "kvmSessionTimeOut": "Zeitüberschreitung der KVM-Sitzung",
         "kvmSessionTimeOutDescription": "Ändern Sie das Zeitlimit für die KVM-Sitzung zwischen 30 Sekunden und 86.400 Sekunden Zeitverzögerung.",
         "kvmPortValue": "KVM-Portwert (in Zahlen)",
+        "webPortValue": "Web-Port-Wert (in Zahlen)",
         "kvmTimeoutValueLimits": "Bitte geben Sie die Sekunden zwischen %{min} und %{max} ein."
     },
     "pagePower": {

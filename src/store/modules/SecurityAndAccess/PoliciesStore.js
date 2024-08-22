@@ -25,6 +25,7 @@ const PoliciesStore = {
     snmpPortValue: null,
     kvmSessionTimeout: null,
     kvmPortValue: null,
+    webPortValue: null,
   },
   getters: {
     sshProtocolEnabled: (state) => state.sshProtocolEnabled,
@@ -48,6 +49,7 @@ const PoliciesStore = {
     snmpPortValue: (state) => state.snmpPortValue,
     kvmSessionTimeout: (state) => state.kvmSessionTimeout,
     kvmPortValue: (state) => state.kvmPortValue,
+    webPortValue: (state) => state.webPortValue,
   },
   mutations: {
     setSshProtocolEnabled: (state, sshProtocolEnabled) =>
@@ -87,6 +89,8 @@ const PoliciesStore = {
       (state.kvmSessionTimeout = kvmSessionTimeout),
     setKvmPortValue: (state, kvmPortValue) =>
       (state.kvmPortValue = kvmPortValue),
+    setWebPortValue: (state, webPortValue) =>
+      (state.webPortValue = webPortValue),
   },
   actions: {
     setSolSshPortUpdatedValue({ commit }, solSshProtocolPort) {
@@ -156,10 +160,12 @@ const PoliciesStore = {
           const sessionTimeoutValue = response.data.SessionTimeout;
           const kvmSessionTimeoutValue =
             response.data?.Oem?.Ami?.KVMSessionTimeout;
-          const kvmPortValue = response.data?.Oem?.Ami?.BMCwebPort;
+          const kvmPortValue = response.data?.Oem?.Ami?.KVMPort;
+          const webPortValue = response.data?.Oem?.Ami?.BMCwebPort;
           commit('setSessionTimeoutValue', sessionTimeoutValue);
           commit('setKvmSessionTimeout', kvmSessionTimeoutValue);
           commit('setKvmPortValue', kvmPortValue);
+          commit('setWebPortValue', webPortValue);
         })
         .catch((error) => console.log(error));
     },
@@ -549,7 +555,7 @@ const PoliciesStore = {
       const Oem = {
         Oem: {
           Ami: {
-            BMCwebPort: kvmPortValue,
+            KVMPort: kvmPortValue,
           },
         },
       };
@@ -562,6 +568,25 @@ const PoliciesStore = {
         .catch((error) => {
           console.log(error);
           throw new Error(i18n.t('pagePolicies.toast.errorKVMPort'));
+        });
+    },
+    async saveWebPortValue({ dispatch }, webPortValue) {
+      const Oem = {
+        Oem: {
+          Ami: {
+            BMCwebPort: webPortValue,
+          },
+        },
+      };
+      return await api
+        .patch('/redfish/v1/SessionService', Oem)
+        .then(() => dispatch('getSessionTimeout'))
+        .then(() => {
+          return i18n.t('pagePolicies.toast.successWebPort');
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(i18n.t('pagePolicies.toast.errorWebPort'));
         });
     },
   },

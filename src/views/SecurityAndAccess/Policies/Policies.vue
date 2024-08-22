@@ -170,7 +170,14 @@
                         data-test-id="input-kvmPort"
                         type="number"
                         aria-describedby="power-help-text"
+                        :state="getValidationState($v.kvmPort)"
+                        @input="$v.kvmPort.$touch()"
                       ></b-form-input>
+                      <b-form-invalid-feedback role="alert">
+                        <template v-if="!$v.kvmPort.required">
+                          {{ $t('global.form.fieldRequired') }}
+                        </template>
+                      </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
                   <b-col class="d-flex align-items-center">
@@ -179,6 +186,40 @@
                       type="submit"
                       data-test-id="button-saveKVMPortValue"
                       @click="saveKVMPortValue"
+                    >
+                      {{ $t('global.action.save') }}
+                    </b-button>
+                  </b-col>
+                </b-row>
+                <b-row class="setting-section">
+                  <b-col cols="3" class="d-flex align-items-center">
+                    <b-form-group
+                      id="input-group-web-port"
+                      :label="$t('pagePolicies.webPortValue')"
+                      label-for="input-web-port"
+                    >
+                      <b-form-input
+                        id="input-web-port"
+                        v-model.number="webPort"
+                        data-test-id="input-webPort"
+                        type="number"
+                        aria-describedby="power-help-text"
+                        :state="getValidationState($v.webPort)"
+                        @input="$v.webPort.$touch()"
+                      ></b-form-input>
+                      <b-form-invalid-feedback role="alert">
+                        <template v-if="!$v.webPort.required">
+                          {{ $t('global.form.fieldRequired') }}
+                        </template>
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                  </b-col>
+                  <b-col class="d-flex align-items-center">
+                    <b-button
+                      variant="primary"
+                      type="submit"
+                      data-test-id="button-saveWebPortValue"
+                      @click="saveWebPortValue"
                     >
                       {{ $t('global.action.save') }}
                     </b-button>
@@ -590,6 +631,7 @@ export default {
       webSessionTimeoutValue:
         this.$store.getters['policies/sessionTimeoutValue'],
       kvmPort: this.$store.getters['policies/kvmPortValue'],
+      webPort: this.$store.getters['policies/webPortValue'],
       modifySSHPolicyDisabled:
         process.env.VUE_APP_MODIFY_SSH_POLICY_DISABLED === 'true',
       DisplaySection: false,
@@ -717,6 +759,7 @@ export default {
     ...mapState('policies', [
       'kvmSessionTimeout',
       'kvmPortValue',
+      'webPortValue',
       'sessionTimeoutValue',
     ]),
   },
@@ -726,6 +769,9 @@ export default {
     },
     kvmPortValue: function (value) {
       this.kvmPort = value;
+    },
+    webPortValue: function (value) {
+      this.webPort = value;
     },
     sessionTimeoutValue: function (value) {
       this.webSessionTimeoutValue = value;
@@ -755,6 +801,12 @@ export default {
         pattern: function (pw) {
           return this.webSessionTimeoutValidation(pw);
         },
+      },
+      kvmPort: {
+        required,
+      },
+      webPort: {
+        required,
       },
     };
   },
@@ -904,10 +956,43 @@ export default {
         .catch(({ message }) => this.errorToast(message));
     },
     saveKVMPortValue() {
-      this.$store
-        .dispatch('policies/saveKVMPortValue', parseInt(this.kvmPort))
-        .then((message) => this.successToast(message))
-        .catch(({ message }) => this.errorToast(message));
+      this.$v.kvmPort.$touch();
+      if (this.$v.kvmPort.$invalid) return;
+      this.$bvModal
+        .msgBoxConfirm(this.$tc('pagePolicies.modal.kvmPortConfirmation'), {
+          title: this.$tc('pagePolicies.modal.kvmPortTitle'),
+          okTitle: this.$tc('global.action.ok'),
+          cancelTitle: this.$t('global.action.cancel'),
+        })
+        .then((confirmation) => {
+          if (confirmation) {
+            this.$store
+              .dispatch('policies/saveKVMPortValue', parseInt(this.kvmPort))
+              .then((message) => this.successToast(message))
+              .catch(({ message }) => this.errorToast(message));
+          }
+        });
+    },
+    saveWebPortValue() {
+      this.$v.webPort.$touch();
+      if (this.$v.webPort.$invalid) return;
+      this.$bvModal
+        .msgBoxConfirm(this.$tc('pagePolicies.modal.webPortConfirmation'), {
+          title: this.$tc('pagePolicies.modal.webPortTitle'),
+          okTitle: this.$tc('global.action.ok'),
+          cancelTitle: this.$t('global.action.cancel'),
+        })
+        .then((confirmation) => {
+          if (confirmation) {
+            this.$store
+              .dispatch('policies/saveWebPortValue', parseInt(this.webPort))
+              .then((message) => {
+                this.successToast(message);
+                this.$store.dispatch('authentication/logout');
+              })
+              .catch(({ message }) => this.errorToast(message));
+          }
+        });
     },
     kvmSessionTimeoutValidation(val) {
       if (

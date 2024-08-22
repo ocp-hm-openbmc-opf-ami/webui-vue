@@ -1678,7 +1678,11 @@
                 "ssh": "Are you sure you want to enable @:pagePolicies.ssh?"
             },
             "confirmTitle": "Confirm?",
-            "informationMessage": "OpenSSL FIPS Mode has been updated successfully. Close the current session and open a new session after a couple of minutes."
+            "informationMessage": "OpenSSL FIPS Mode has been updated successfully. Close the current session and open a new session after a couple of minutes.",
+            "webPortTitle": "Web port confirmation",
+            "webPortConfirmation": "On changing the configuration, already opened sessions for the service will be affected, also the service will be restarted. Click OK if you want to continue. NOTE: Login session will be logged out. Please relogin after closing this page.",
+            "kvmPortTitle": "KVM port confirmation",
+            "kvmPortConfirmation": "On changing the configuration, already opened KVM sessions for the service will be affected, also the service will be restarted. Click OK if you want to continue."
         },
         "toast": {
             "errorIpmiPort": "Error in setting IPMI port value.",
@@ -1710,6 +1714,7 @@
             "errorSNMPDisabled": "Error disabling SNMP security setting.",
             "errorSNMPEnabled": "Error enabling SNMP security setting.",
             "errorKVMPort": "Error in setting KVM port value.",
+            "errorWebPort": "Error in setting Web port value.",
             "errorKVMSessionTimeout": "Error configuring KVM session timeout.",
             "successIpmiDisabled": "Successfully disabled IPMI security setting.",
             "successIpmiEnabled": "Successfully enabled IPMI security setting.",
@@ -1734,7 +1739,8 @@
             "successOpenSSLFIPSEnabled": "Successfully enabled OpenSSL FIPS security setting.",
             "successSNMPDisabled": "Successfully disabled SNMP security setting.",
             "successSNMPEnabled": "Successfully enabled SNMP security setting.",
-            "successKVMPort": "Successfully update KVM Port value.",
+            "successKVMPort": "Successfully updated the KVM Port value.",
+            "successWebPort": "Successfully updated the Web Port value.",
             "successKVMSessionTimeout": "Successfully configured the KVM session timeout."
         },
         "options": {
@@ -1777,6 +1783,7 @@
         "kvmSessionTimeOut": "KVM Session Timeout",
         "kvmSessionTimeOutDescription": "Change the kvm session timeout in between 30 Seconds to 86400 seconds time delay",
         "kvmPortValue": "KVM Port Value (in numbers)",
+        "webPortValue": "Web Port Value (in numbers)",
         "kvmTimeoutValueLimits": "Kindly enter the Seconds between %{min} and %{max}"
 
     },

@@ -1670,7 +1670,11 @@
                 "ssh": "您确定要启用 @:pagePolicies.ssh?"
             },
             "confirmTitle": "确定?",
-            "informationMessage": "OpenSSL FIPS 模式已成功更新。关闭当前会话并在几分钟后打开新会话。"
+            "informationMessage": "OpenSSL FIPS 模式已成功更新。关闭当前会话并在几分钟后打开新会话。",
+            "webPortTitle": "Web端口确认",
+            "webPortConfirmation": "更改配置时，已打开的服务会话将受到影响，并且服务将重新启动。如果您想继续，请单击“确定”。注意：登录会话将被注销。请关闭本页面后重新登录。",
+            "kvmPortTitle": "KVM端口确认",
+            "kvmPortConfirmation": "更改配置时，已打开的服务 KVM 会话将受到影响，并且服务将重新启动。如果您想继续，请单击“确定”。"
         },
         "toast": {
             "errorIpmiPort": "设定 IPMI 端口数字发生错误",
@@ -1702,6 +1706,7 @@
             "errorSNMPDisabled": "禁用 SNMP 安全设置时出错.",
             "errorSNMPEnabled": "启用 SNMP 安全设置时出错.",
             "errorKVMPort": "KVM 端口值设置错误。",
+            "errorWebPort": "设置 Web 端口值时出错。",
             "errorKVMSessionTimeout": "配置 KVM 会话超时时出错。",
             "successIpmiDisabled": "停用 IPMI 安全设定成功",
             "successIpmiEnabled": "启用 IPMI 安全设定成功",
@@ -1726,7 +1731,8 @@
             "successOpenSSLFIPSEnabled": "已成功启用 OpenSSL FIPS 安全设置。",
             "successSNMPDisabled": "已成功禁用 SNMP 安全设置.",
             "successSNMPEnabled": "已成功启用 SNMP 安全设置.",
-            "successKVMPort": "成功更新 KVM 端口值。",
+            "successKVMPort": "已成功更新 KVM 端口值。",
+            "successWebPort": "已成功更新 Web 端口值。",
             "successKVMSessionTimeout": "成功配置 KVM 会话超时。"
         },
         "options": {
@@ -1769,6 +1775,7 @@
         "kvmSessionTimeOut": "KVM 会话超时",
         "kvmSessionTimeOutDescription": "将 kvm 会话超时更改为 30 秒到 86400 秒的时间延迟。",
         "kvmPortValue": "KVM 端口值（以数字表示）",
+        "webPortValue": "Web 端口值（以数字表示）",
         "kvmTimeoutValueLimits": "请输入 %{min} 和 %{max} 之间的秒数。"
     },
     "pagePower": {
