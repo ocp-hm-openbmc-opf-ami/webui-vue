@@ -53,6 +53,7 @@ import LicenseStore from './modules/Settings/LicenseStore';
 import SystemInfoStore from './modules/SystemInventory/SystemInventoryStore';
 import NetworkDDNSStore from './modules/Settings/NetworkDDNSStore';
 import NetworkLinkStore from './modules/Settings/NetworkLinkStore';
+import ADDCStore from './modules/Settings/ADDCStore';
 
 Vue.use(Vuex);
 
@@ -112,6 +113,7 @@ export default new Vuex.Store({
     SystemStore: SystemInfoStore,
     ddnsNetwork: NetworkDDNSStore,
     networkLink: NetworkLinkStore,
+    addc: ADDCStore,
   },
   plugins: [WebSocketPlugin],
 });

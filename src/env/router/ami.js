@@ -34,6 +34,7 @@ import VirtualMedia from '@/views/Operations/VirtualMedia';
 import Power from '@/views/ResourceManagement/Power';
 import i18n from '@/i18n';
 import Dumps from '@/views/Logs/Dumps';
+import ADDC from '@/views/HostSystemDiagnostics/Addc';
 import ACD from '@/views/HostSystemDiagnostics/ACD';
 import Asd from '@/views/HostSystemDiagnostics/Asd';
 import BackupAndRestore from '@/views/Operations/BackupAndRestore';
@@ -292,6 +293,14 @@ const routes = [
         component: Vlan,
         meta: {
           title: i18n.t('appPageTitle.vlan'),
+        },
+      },
+      {
+        path: '/host-system-diagnostics/addc',
+        name: 'addc',
+        component: ADDC,
+        meta: {
+          title: i18n.t('appPageTitle.addc'),
         },
       },
       {

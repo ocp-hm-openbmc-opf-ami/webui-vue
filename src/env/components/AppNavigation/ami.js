@@ -255,6 +255,11 @@ const AppNavigationMixin = {
           icon: 'iconLogs',
           children: [
             {
+              id: 'addc',
+              label: this.$t('appNavigation.addc'),
+              route: '/host-system-diagnostics/addc',
+            },
+            {
               id: 'acd',
               label: this.$t('appNavigation.autonomousCrashDump'),
               route: '/host-system-diagnostics/acd',

@@ -160,6 +160,7 @@
         "nicInformation": "NIC Information",
         "nvmeInformation": "@:appPageTitle.nvmeInformation",
         "hostSystemDiagnostics": "Host System Diagnostics",
+        "addc": "@:appPageTitle.addc",
         "autonomousCrashDump": "ACD",
         "asd": "@:appPageTitle.asd",
         "onDemand": "@:appPageTitle.onDemand",
@@ -214,6 +215,7 @@
         "eventFilter": "Event Filter",
         "nicInformation": "NIC Information",
         "nvmeInformation": "NVMe Information",
+        "addc": "ADDC",
         "autonomousCrashDump": "ACD",
         "asd": "ASD",
         "onDemand": "OnDemand",
@@ -900,6 +902,38 @@
             "resetBiosError": "Factory reset of server settings failed.",
             "resetToDefaultsSuccess": "Factory reset of BMC and server settings successful.",
             "resetToDefaultsError": "Factory reset of BMC and server settings failed."
+        }
+    },
+    "pageAddc": {
+        "pageDescription": "Autonomous Debug Data Collection",
+        "errorRecoveryMode": {
+            "errorRecoveryModeTitle": "Error Recovery Mode",
+            "none": "None",
+            "warmReset": "Warm Reset",
+            "coldReset": "Cold Reset"
+        },
+        "table": {
+            "fileName": "File Name",
+            "fileInformation": "File Information ",
+            "id": "Id"
+        },
+        "harvestUcode": "Harvest uCode",
+        "harvestPpin": "Harvest PPIN",
+        "mcaPolling": "MCA Polling",
+        "dramCeccPolling": "DramCecc Polling",
+        "PCIeAerPolling": "PCIeAer Polling",
+        "period": "Period",
+        "retry": "Retry",
+        "clearlog": "Clear Logs",
+        "downloadTitle":"Click to download ADDC file",
+        "clickConfirmDeletion" : "You are about to the clear the CPER files. Do you really want to clear the CPER files?",
+        "toast": {
+            "successSaveAddc": "ADDC Configurations Saved Successfully.",
+            "errorSavedAddc": "Error saved ADDC  Configurations.",
+            "successAddcDownload": "ADDC Log Downloaded Successfully.",
+            "errorAddcDownload": "Error saved ADDC  Configurations.",
+            "successAddcLogCleared": "CPER files deleted Successfully.",
+            "errorAddcLogCleared": "Error occurred while Clear Log files"
         }
     },
     "pageAutonomousCrashDump": {

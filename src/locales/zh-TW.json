@@ -157,6 +157,7 @@
         "nicInformation": "NIC 資訊",
         "nvmeInformation": "@:appPageTitle.nvmeInformation",
         "hostSystemDiagnostics": "主系統診斷",
+        "addc": "@:appPageTitle.addc",
         "autonomousCrashDump": "ACD",
         "asd": "@:appPageTitle.asd",
         "onDemand":"@:appPageTitle.onDemand",
@@ -211,6 +212,7 @@
         "eventFilter": "事件過濾器",
         "nicInformation": "NIC 資訊",
         "nvmeInformation": "NVMe 資訊",
+        "addc": "ADDC",
         "autonomousCrashDump": "ACD",
         "asd": "ASD",
         "onDemand":"一經請求",
@@ -897,6 +899,38 @@
             "resetBiosError": "恢復原廠伺服器設定失敗",
             "resetToDefaultsSuccess": "成功恢復BMC與原廠伺服器設定",
             "resetToDefaultsError": "恢復BMC與原廠伺服器設定失敗"
+        }
+    },
+    "pageAddc": {
+        "pageDescription": "自主調試資料收集",
+        "errorRecoveryMode": {
+            "errorRecoveryModeTitle": "錯誤恢復模式",
+            "none": "沒有任何",
+            "warmReset": "熱復位",
+            "coldReset": "冷重置"
+        },
+        "table": {
+            "fileName": "檔案名稱",
+            "fileInformation": "檔案資訊",
+            "sino": "S.NO"
+        },
+        "harvestUcode": "收穫u碼",
+        "harvestPpin": "收穫PPIN",
+        "mcaPolling": "馬華民調",
+        "dramCeccPolling": "DramCecc 投票",
+        "PCIeAerPolling": "PCIeAer 輪詢",
+        "period": "時期",
+        "retry": "重試",
+        "clearlog": "清除日志",
+        "downloadTitle":"点击下载ADDC文件",
+        "clickConfirmDeletion" : "您即将清除 CPER 文件。您确实要清除 CPER 文件吗？",
+        "toast": {
+            "successSaveAddc": "ADDC 配置已成功儲存。",
+            "errorSavedAddc": "儲存 ADDC 配置時發生錯誤。",
+            "successAddcDownload": "ADDC 日志下载成功。",
+            "errorAddcDownload": "保存 ADDC 配置时出错。",
+            "successAddcLogCleared": "CPER 文件删除成功。",
+            "errorAddcLogCleared": "清除日志文件时发生错误"
         }
     },
     "pageAutonomousCrashDump": {

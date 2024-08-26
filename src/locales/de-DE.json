@@ -156,6 +156,7 @@
         "nicInformation": "NIC Informationen",
         "nvmeInformation": "@:appPageTitle.nvmeInformation",
         "hostSystemDiagnostics": "Host Systemdiagnose",
+        "addc": "@:appPageTitle.addc",
         "autonomousCrashDump": "ACD",
         "asd": "@:appPageTitle.asd",
         "onDemand":"@:appPageTitle.onDemand",
@@ -210,6 +211,7 @@
         "eventFilter": "Ereignisfilter",
         "nicInformation": "NIC Informationen",
         "nvmeInformation": "NVMe Informationen",
+        "addc": "ADDC",
         "autonomousCrashDump": "ACD",
         "asd": "ASD",
         "onDemand":"Auf Anfrage",
@@ -892,6 +894,38 @@
             "resetBiosError": "Das Zurücksetzen der Servereinstellungen auf die Werkseinstellungen ist fehlgeschlagen.",
             "resetToDefaultsSuccess": "Zurücksetzen der BMC und Servereinstellungen auf die Werkseinstellungen erfolgreich.",
             "resetToDefaultsError": "Das Zurücksetzen der BMC und Servereinstellungen auf die Werkseinstellungen ist fehlgeschlagen."
+        }
+    },
+    "pageAddc": {
+        "pageDescription": "Autonome Debug-Datenerfassung",
+        "errorRecoveryMode": {
+            "errorRecoveryModeTitle": "Fehlerbehebungsmodus",
+            "none": "Keiner",
+            "warmReset": "Warm Reset",
+            "coldReset": "Kaltstart"
+        },
+        "table": {
+            "fileName": "Dateinamen",
+            "fileInformation": "Dateiinformationen ",
+            "sino": "S.NO"
+        },
+        "harvestUcode": "Ernte uCode",
+        "harvestPpin": "PPIN ernten",
+        "mcaPolling": "MCA-Umfrage",
+        "dramCeccPolling": "DramCecc-Umfrage",
+        "PCIeAerPolling": "PCIeAer-Polling",
+        "period": "Zeitraum",
+        "retry": "Wiederholen",
+        "clearlog": "Protokolle löschen",
+        "downloadTitle":"Klicken Sie hier, um die ADDC-Datei herunterzuladen",
+        "clickConfirmDeletion" : "Sie sind dabei, die CPER-Dateien zu löschen. Möchten Sie die CPER-Dateien wirklich löschen?",
+        "toast": {
+            "successSaveAddc": "ADDC-Konfigurationen erfolgreich gespeichert.",
+            "errorSavedAddc": "Fehler beim Speichern der ADDC-Konfigurationen.",
+            "successAddcDownload": "ADDC-Protokoll erfolgreich heruntergeladen.",
+            "errorAddcDownload": "Fehler beim Speichern der ADDC-Konfigurationen.",
+            "successAddcLogCleared": "CPER-Dateien erfolgreich gelöscht.",
+            "errorAddcLogCleared": "Beim Löschen der Protokolldateien ist ein Fehler aufgetreten"            
         }
     },
     "pageAutonomousCrashDump": {
