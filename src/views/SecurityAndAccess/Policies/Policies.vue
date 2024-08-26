@@ -503,8 +503,6 @@
                         data-test-id="kvm-session-timeout"
                         type="text"
                         aria-describedby="power-help-text"
-                        :min="1"
-                        :max="1440"
                         :state="getValidationState($v.kvmSessionTimeOutValue)"
                         @input="$v.kvmSessionTimeOutValue.$touch()"
                       ></b-form-input>
@@ -517,8 +515,8 @@
                         >
                           {{
                             $t('pagePolicies.kvmTimeoutValueLimits', {
-                              min: 1,
-                              max: 1440,
+                              min: 30,
+                              max: 86400,
                             })
                           }}
                         </template>
