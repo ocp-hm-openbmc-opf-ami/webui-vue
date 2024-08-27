@@ -1855,7 +1855,10 @@
             "frame": "Frame (minutes)",
             "interval": "Interval (seconds)",
             "back": "Back",
-            "displayGraph": "Go"
+            "displayGraph": "Go",
+            "max": "Max",
+            "min": "Min",
+            "average": "Average"
         }
     },
     "pageSerialOverLan": {

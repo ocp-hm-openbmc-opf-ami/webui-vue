@@ -1849,7 +1849,10 @@
             "frame": "幀（分鐘）",
             "interval": "間隔（秒）",
             "back": "後退",
-            "displayGraph": "去"
+            "displayGraph": "去",
+            "max": "最大限度",
+            "min": "最小",
+            "average": "平均的"
 
         }
     },

@@ -1845,7 +1845,10 @@
             "frame": "Rahmen (Minuten)",
             "interval": "Intervall (Sekunden)",
             "back": "Zurück",
-            "displayGraph": "gehen"
+            "displayGraph": "gehen",
+            "max": "Max",
+            "min": "Min",
+            "average": "Durchschnitt"
 
         }
     },

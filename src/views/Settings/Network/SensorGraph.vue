@@ -57,6 +57,18 @@
         />
       </b-col>
     </b-row>
+    <b-row v-if="powerConsumptionSensors.includes(itemData.Name)">
+      <b-col xl="12">
+        <b-table
+          responsive="md"
+          hover
+          :fields="fields"
+          :items="averageVal"
+          :empty-text="$t('global.table.emptyMessage')"
+        >
+        </b-table>
+      </b-col>
+    </b-row>
   </div>
 </template>
 <script>
@@ -178,6 +190,36 @@ export default {
         },
       },
       itemData: {},
+      fields: [
+        {
+          key: 'average',
+          label: this.$t('pageSensors.sensorgraph.average'),
+          class: 'text-center',
+        },
+        {
+          key: 'maximum',
+          label: this.$t('pageSensors.sensorgraph.max'),
+          class: 'text-center',
+        },
+        {
+          key: 'minimum',
+          label: this.$t('pageSensors.sensorgraph.min'),
+          class: 'text-center',
+        },
+      ],
+      averageVal: [],
+      powerConsumptionSensors: [
+        'PSU2 Input Power',
+        'PSU2 Output Power',
+        'Cpu Power Average CPU2',
+        'PSU1 Input Power',
+        'PSU1 Output Power',
+        'Platform Power Average CPU1',
+        'Platform Power Average CPU2',
+        'Dimm Power Average CPU1',
+        'Dimm Power Average CPU2',
+        'Cpu Power Average CPU1',
+      ],
     };
   },
   watch: {
@@ -221,6 +263,7 @@ export default {
         labels: labels,
         datasets: datasets,
       };
+      this.averageFindingValues();
     },
     getTimeStamp(timeInSeconds) {
       var evtTimeStamp = '';
@@ -283,6 +326,20 @@ export default {
               });
           });
       }
+    },
+    averageFindingValues() {
+      this.averageVal = [];
+      const max = Math.max(...this.lineData.datasets[0].data);
+      const min = Math.min(...this.lineData.datasets[0].data);
+      const aveg =
+        this.lineData.datasets[0].data.reduce((acc, c) => acc + c, 0) /
+        this.lineData.datasets[0].data.length;
+      const averageList = {
+        average: aveg.toFixed(2),
+        minimum: min.toFixed(2),
+        maximum: max.toFixed(2),
+      };
+      this.averageVal.push(averageList);
     },
   },
 };
