@@ -54,6 +54,7 @@ import SystemInfoStore from './modules/SystemInventory/SystemInventoryStore';
 import NetworkDDNSStore from './modules/Settings/NetworkDDNSStore';
 import NetworkLinkStore from './modules/Settings/NetworkLinkStore';
 import ADDCStore from './modules/Settings/ADDCStore';
+import Ncsi from './modules/Settings/NcsiStore';
 
 Vue.use(Vuex);
 
@@ -114,6 +115,7 @@ export default new Vuex.Store({
     ddnsNetwork: NetworkDDNSStore,
     networkLink: NetworkLinkStore,
     addc: ADDCStore,
+    ncsi: Ncsi,
   },
   plugins: [WebSocketPlugin],
 });
