@@ -11,7 +11,8 @@
           content-class="mt-3"
         >
           <b-tab :title="$t('pageSystemInventory.system.system')"
-            >{{ $t('pageSystemInventory.system.systemInfo') }} <system></system
+            ><b>{{ $t('pageSystemInventory.system.systemInfo') }}</b>
+            <system class="mt-2"></system
           ></b-tab>
           <b-tab :title="$t('pageSystemInventory.processor.processor')">
             <b>{{ $t('pageSystemInventory.processor.processorInfo') }}</b>
@@ -22,55 +23,61 @@
           <b-tab
             :title="$t('pageSystemInventory.memoryController.memoryController')"
           >
-            {{
+            <b>{{
               $t('pageSystemInventory.memoryController.memoryControllerInfo')
-            }}
-            <memory-controller></memory-controller>
+            }}</b>
+            <memory-controller class="mt-2"></memory-controller>
+            <b>{{ $t('pageSystemInventory.memoryAssembly.assemblyInfo') }}</b>
+            <memory-assembly class="mt-2"></memory-assembly>
+            <b>{{
+              $t('pageSystemInventory.memoryMetrics.memortMetricsInfo')
+            }}</b>
+            <memory-metrics class="mt-2"></memory-metrics>
           </b-tab>
           <b-tab :title="$t('pageSystemInventory.baseBoard.baseBoard')">
-            {{ $t('pageSystemInventory.baseBoard.baseBoardInfo')
-            }}<baseboard></baseboard
-            >{{
+            <b>{{ $t('pageSystemInventory.baseBoard.baseBoardInfo') }}</b
+            ><baseboard class="mt-2"></baseboard
+            ><b>{{
               $t('pageSystemInventory.networkInterfaces.networkInterfacesInfo')
-            }}
-            <network-interfaces></network-interfaces
-            >{{
+            }}</b>
+            <network-interfaces class="mt-2"></network-interfaces
+            ><b>{{
               $t(
                 'pageSystemInventory.networkInterfaceIPv6.networkInterfaceIPv6Info',
               )
-            }}
-            <network-interface-ipv6></network-interface-ipv6
+            }}</b>
+            <network-interface-ipv6 class="mt-2"></network-interface-ipv6
           ></b-tab>
           <b-tab :title="$t('pageSystemInventory.power.power')">
-            {{ $t('pageSystemInventory.power.powerInfo')
-            }}<power-control></power-control
-            >{{ $t('pageSystemInventory.voltage.voltageControlInfo') }}
-            <voltage-control></voltage-control
+            <b>{{ $t('pageSystemInventory.power.powerInfo') }}</b
+            ><power-control class="mt-2"></power-control
+            ><b>{{ $t('pageSystemInventory.voltage.voltageControlInfo') }}</b>
+            <voltage-control class="mt-2"></voltage-control
           ></b-tab>
           <b-tab :title="$t('pageSystemInventory.thermal.thermal')">
-            {{ $t('pageSystemInventory.thermal.fanINFO') }}
-            <thermal></thermal
-            >{{ $t('pageSystemInventory.temperature.temperatureInfo') }}
-            <temperature></temperature>
+            <b>{{ $t('pageSystemInventory.thermal.fanINFO') }}</b>
+            <thermal class="mt-2"></thermal
+            ><b>{{ $t('pageSystemInventory.temperature.temperatureInfo') }}</b>
+            <temperature class="mt-2"></temperature>
           </b-tab>
           <b-tab :title="$t('pageSystemInventory.pcieDevice.pcieDevice')">
-            {{ $t('pageSystemInventory.pcieDevice.pcieDeviceInfo')
-            }}<pcie-device></pcie-device
+            <b>{{ $t('pageSystemInventory.pcieDevice.pcieDeviceInfo') }}</b
+            ><pcie-device class="mt-2"></pcie-device
           ></b-tab>
           <b-tab :title="$t('pageSystemInventory.pcieFunction.pcieFunction')">
-            {{ $t('pageSystemInventory.pcieFunction.pcieFunctionInfo')
-            }}<pcie-function></pcie-function>
+            <b>{{ $t('pageSystemInventory.pcieFunction.pcieFunctionInfo') }}</b
+            ><pcie-function class="mt-2"></pcie-function>
           </b-tab>
           <b-tab
             v-if="hideTab"
             :title="$t('pageSystemInventory.storage.storage')"
           >
-            {{ $t('pageSystemInventory.storage.storageDriveInfo') }}
-            <storage-drive></storage-drive>
-            {{
+            <b>{{ $t('pageSystemInventory.storage.storageDriveInfo') }}</b>
+            <storage-drive class="mt-2"></storage-drive>
+            <b>{{
               $t('pageSystemInventory.storageController.storageControllerInfo')
-            }}
-            <storage-controller></storage-controller>
+            }}</b>
+            <storage-controller class="mt-2"></storage-controller>
           </b-tab>
         </b-tabs>
       </b-card>
@@ -95,6 +102,8 @@ import StorageDrive from './StorageDrive.vue';
 import StorageController from './StorageController.vue';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import Fpga from './FPGA.vue';
+import MemoryAssembly from './Assembly.vue';
+import MemoryMetrics from './MemoryMetrics.vue';
 export default {
   name: 'SystemInventory',
   components: {
@@ -114,6 +123,8 @@ export default {
     StorageDrive,
     StorageController,
     Fpga,
+    MemoryAssembly,
+    MemoryMetrics,
   },
   mixins: [LoadingBarMixin],
   data() {
@@ -124,20 +135,24 @@ export default {
   },
   created() {
     this.startLoader();
-    Promise.all([
-      this.$store.dispatch('SystemStore/getSystemsInfo'),
-      this.$store.dispatch('SystemStore/getBaseBoardInfo'),
-      this.$store.dispatch('SystemStore/getMemoryControllersInfo'),
-      this.$store.dispatch('SystemStore/getProcessorsInfo'),
-      this.$store.dispatch('SystemStore/getBasebordInfoNetworkInterfacesIpv6'),
-      this.$store.dispatch('SystemStore/getBasebordInfoNetworkinterfaces'),
-      this.$store.dispatch('SystemStore/getPcieDeviceInfo'),
-      this.$store.dispatch('SystemStore/getPcieFunctionInfo'),
-      this.$store.dispatch('SystemStore/getPowerInfo'),
-      this.$store.dispatch('SystemStore/getTemperatureInfo'),
-      this.$store.dispatch('SystemStore/getFansInfo'),
-      this.$store.dispatch('SystemStore/getVoltageInfo'),
-    ]).finally(() => this.endLoader());
+    this.$store.dispatch('SystemStore/ChassisCollection').then(() => {
+      Promise.all([
+        this.$store.dispatch('SystemStore/getSystemsInfo'),
+        this.$store.dispatch('SystemStore/getBaseBoardInfo'),
+        this.$store.dispatch('SystemStore/getMemoryControllersInfo'),
+        this.$store.dispatch('SystemStore/getProcessorsInfo'),
+        this.$store.dispatch(
+          'SystemStore/getBasebordInfoNetworkInterfacesIpv6',
+        ),
+        this.$store.dispatch('SystemStore/getBasebordInfoNetworkinterfaces'),
+        this.$store.dispatch('SystemStore/getPcieDeviceInfo'),
+        this.$store.dispatch('SystemStore/getPcieFunctionInfo'),
+        this.$store.dispatch('SystemStore/getPowerInfo'),
+        this.$store.dispatch('SystemStore/getTemperatureInfo'),
+        this.$store.dispatch('SystemStore/getFansInfo'),
+        this.$store.dispatch('SystemStore/getVoltageInfo'),
+      ]).finally(() => this.endLoader());
+    });
   },
 };
 </script>

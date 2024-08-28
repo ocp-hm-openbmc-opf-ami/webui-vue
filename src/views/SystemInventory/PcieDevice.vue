@@ -29,6 +29,10 @@ export default {
           label: this.$t('pageSystemInventory.pcieDevice.manufacturer'),
         },
         {
+          key: 'assetTag',
+          label: this.$t('pageSystemInventory.pcieDevice.assetTag'),
+        },
+        {
           key: 'state',
           label: this.$t('pageSystemInventory.pcieDevice.state'),
         },
