@@ -136,8 +136,8 @@ const VirtualMediaStore = {
                 isRW: false,
               };
             });
-          commit('setProxyDevicesData', proxyDevices);
-          commit('setLegacyDevicesData', legacyDevices);
+          commit('setProxyDevicesData', [...proxyDevices].reverse());
+          commit('setLegacyDevicesData', [...legacyDevices].reverse());
           commit('setVirtualMediaAccess', true);
           commit('setVirtualMediaPolicies', false);
         })
