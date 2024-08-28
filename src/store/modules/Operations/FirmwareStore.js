@@ -16,6 +16,8 @@ const FirmwareStore = {
     bmcActiveEnabled: true,
     backupHttpBusyStatus: false,
     backupHttpPushUriTargetsValue: [],
+    bmcDateTime: '',
+    applyTimeSetValue: {},
   },
   getters: {
     isTftpUploadAvailable: (state) => state.tftpAvailable,
@@ -43,6 +45,8 @@ const FirmwareStore = {
     bmcActiveEnabledStatus: (state) => state.bmcActiveEnabled,
     httpBusyStatus: (state) => state.backupHttpBusyStatus,
     httpPushUriTargetsValue: (state) => state.backupHttpPushUriTargetsValue,
+    getFirmwareBmcDateTime: (state) => state.bmcDateTime,
+    getApplyTimeSetValue: (state) => state.applyTimeSetValue,
   },
   mutations: {
     setActiveBmcFirmwareId: (state, id) => (state.bmcActiveFirmwareId = id),
@@ -63,6 +67,10 @@ const FirmwareStore = {
       (state.backupHttpBusyStatus = backupHttpBusyStatus),
     setHttpPushUriTargetsValue: (state, backupHttpPushUriTargetsValue) =>
       (state.backupHttpPushUriTargetsValue = backupHttpPushUriTargetsValue),
+    setFirmwareBmcDateTime: (state, bmcDateTime) =>
+      (state.bmcDateTime = bmcDateTime),
+    setApplyTimeSetValue: (state, applyTimeSetValue) =>
+      (state.applyTimeSetValue = applyTimeSetValue),
   },
   actions: {
     async getFirmwareInformation({ dispatch }) {
@@ -73,8 +81,9 @@ const FirmwareStore = {
     getActiveBmcFirmware({ commit }) {
       return api
         .get('/redfish/v1/Managers/bmc')
-        .then(({ data: { Links } }) => {
+        .then(({ data: { Links, DateTime } }) => {
           const id = Links?.ActiveSoftwareImage['@odata.id'].split('/').pop();
+          commit('setFirmwareBmcDateTime', DateTime);
           commit('setActiveBmcFirmwareId', id);
         })
         .catch((error) => console.log(error));
@@ -162,28 +171,22 @@ const FirmwareStore = {
             data?.HttpPushUriTargetsBusy,
           );
           commit('setHttpPushUriTargetsValue', data?.HttpPushUriTargets);
+
+          const applyTimeFirmwareValue = {
+            applyTimeMode:
+              data.HttpPushUriOptions.HttpPushUriApplyTime.ApplyTime,
+            endDateTime:
+              data.HttpPushUriOptions.HttpPushUriApplyTime
+                .MaintenanceWindowStartTime,
+            timeSlot:
+              data.HttpPushUriOptions.HttpPushUriApplyTime
+                .MaintenanceWindowDurationInSeconds,
+          };
+          commit('setApplyTimeSetValue', applyTimeFirmwareValue);
         })
         .catch((error) => console.log(error));
     },
-    setApplyTimeImmediate({ commit }) {
-      const data = {
-        HttpPushUriOptions: {
-          HttpPushUriApplyTime: {
-            ApplyTime: 'Immediate',
-          },
-        },
-      };
-      return api
-        .patch('/redfish/v1/UpdateService', data)
-        .then(() => commit('setApplyTime', 'Immediate'))
-        .catch((error) => console.log(error));
-    },
-    async uploadFirmware({ state, dispatch }, image) {
-      if (state.applyTime !== 'Immediate') {
-        // ApplyTime must be set to Immediate before making
-        // request to update firmware
-        await dispatch('setApplyTimeImmediate');
-      }
+    async uploadFirmware({ state }, image) {
       return await api
         .post(state.httpPushUri, image, {
           headers: { 'Content-Type': 'application/octet-stream' },
@@ -193,16 +196,11 @@ const FirmwareStore = {
           throw new Error(i18n.t('pageFirmware.toast.errorUpdateFirmware'));
         });
     },
-    async uploadFirmwareTFTP({ state, dispatch }, fileAddress) {
+    async uploadFirmwareTFTP(_, fileAddress) {
       const data = {
         TransferProtocol: 'TFTP',
         ImageURI: fileAddress,
       };
-      if (state.applyTime !== 'Immediate') {
-        // ApplyTime must be set to Immediate before making
-        // request to update firmware
-        await dispatch('setApplyTimeImmediate');
-      }
       return await api
         .post(
           '/redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate',
@@ -235,12 +233,8 @@ const FirmwareStore = {
       });
     },
     async setFirmwarUpdateActive(_, data) {
-      let activeValue = {
-        HttpPushUriTargets: data,
-        HttpPushUriTargetsBusy: true,
-      };
       return await api
-        .patch('/redfish/v1/UpdateService', activeValue)
+        .patch('/redfish/v1/UpdateService', data)
         .catch((error) => {
           console.log(error);
           throw new Error(i18n.t('pageFirmware.toast.errorSwitchImages'));

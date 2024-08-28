@@ -1038,7 +1038,20 @@
                 "tftpServer": "TFTP 伺服器",
                 "workstation": "工作臺",
                 "activeImage": "活动图像",
-                "backupImage": "备份图像"
+                "backupImage": "备份图像",
+                "applyTime": "申请时间",
+                "immediate": "即时",
+                "onReset": "复位时",
+                "atMaintenanceWindowStart": "维护时段开始时",
+                "inMaintenanceWindowOnReset": "处于维护窗口重置时",
+                "maintenanceWindowDurationInSeconds": "持续时间（秒）",
+                "maintenanceWindowStartDate": "开始日期",
+                "maintenanceWindowStartTime": "开始时间((24 小时制 HH:MM:SS)",
+                "dateValidation": "开始日期应晚于 BMC 日期",
+                "timeValidation": "开始时间应大于 BMC 时间",
+                "onResetinfo": "BMC 将重新启动，并在启动后进入 BMC 控制台以获取所选选项。",
+                "atMaintenanceWindowStartinfo": "固件更新将根据所选选项配置的开始日期/时间开始。",
+                "inMaintenanceWindowOnResetinfo": "BMC 重新启动应根据所选选项的配置开始日期/时间和持续时间进行。"
             }
         },
         "modal": {

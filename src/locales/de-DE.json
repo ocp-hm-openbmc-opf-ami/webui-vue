@@ -1036,7 +1036,20 @@
                 "tftpServer": "TFTP server",
                 "workstation": "Arbeitsplatz",
                 "activeImage": "Aktives Bild",
-                "backupImage": "Backup Image"
+                "backupImage": "Backup Image",
+                "applyTime": "Zeit anwenden",
+                "immediate": "Sofort",
+                "onReset": "Beim Zurücksetzen",
+                "atMaintenanceWindowStart": "Beim Start des Wartungsfensters",
+                "inMaintenanceWindowOnReset": "Im Wartungsfenster beim Zurücksetzen",
+                "maintenanceWindowDurationInSeconds": "Dauer in Sekunden",
+                "maintenanceWindowStartDate": "Startdatum",
+                "maintenanceWindowStartTime": "Startzeit ((24-Stunden-Zeit HH:MM:SS)",
+                "dateValidation": "Das Startdatum sollte größer als das BMC-Datum sein",
+                "timeValidation": "Die Startzeit sollte größer als die BMC-Zeit sein",
+                "onResetinfo": "BMC wird neu gestartet und nach dem Booten wird die BMC-Konsole für die ausgewählte Option gestartet.",
+                "atMaintenanceWindowStartinfo": "Das Firmware-Update wird basierend auf dem konfigurierten Startdatum/der Startzeit für die ausgewählte Option gestartet.",
+                "inMaintenanceWindowOnResetinfo": "Der BMC-Neustart sollte basierend auf dem konfigurierten Startdatum/der Startzeit und der Dauer für die ausgewählte Option erfolgen."
             }
         },
         "modal": {

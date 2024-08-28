@@ -22,11 +22,23 @@
       :section-title="$t('pageFirmware.sectionTitleUpdateFirmware')"
     >
       <b-row>
-        <b-col sm="10" md="8" xl="6">
-          <!-- Update form -->
+        <b-col sm="6" md="6" xl="6">
+          <firmware-card-time-apply
+            :current-bmc-time-value="currentBmcTime"
+            :set-apply-time-status="setApplyTimeValue"
+            @validationSuccess="isValidationSuccess"
+            @applyTimeForm="isApplyTimeForm"
+          ></firmware-card-time-apply>
+        </b-col>
+        <!-- Update form -->
+        <b-col sm="6" md="6" xl="6">
           <form-update
             :is-server-off="isServerOff"
             :is-page-disabled="isPageDisabled"
+            :is-validation-status="validationStatus"
+            :apply-time-form-value="applyTimeFormvalues"
+            @onSubmitUploadOk="isOnSubmitUploadOk"
+            @onGetApplyTimeSetValue="isOnGetApplyTimeSetValue"
           />
         </b-col>
       </b-row>
@@ -41,6 +53,7 @@ import FormUpdate from './FirmwareFormUpdate';
 import HostCards from './FirmwareCardsHost';
 import PageSection from '@/components/Global/PageSection';
 import PageTitle from '@/components/Global/PageTitle';
+import FirmwareCardTimeApply from './FirmwareCardTimeApply';
 
 import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
 
@@ -53,6 +66,7 @@ export default {
     HostCards,
     PageSection,
     PageTitle,
+    FirmwareCardTimeApply,
   },
   mixins: [LoadingBarMixin],
   beforeRouteLeave(to, from, next) {
@@ -64,6 +78,10 @@ export default {
       loading,
       isServerPowerOffRequired:
         process.env.VUE_APP_SERVER_OFF_REQUIRED === 'true',
+      validationStatus: true,
+      applyTimeFormvalues: {},
+      currentBmcTime: '',
+      setApplyTimeValue: {},
     };
   },
   computed: {
@@ -88,6 +106,20 @@ export default {
     this.$store
       .dispatch('firmware/getFirmwareInformation')
       .finally(() => this.endLoader());
+  },
+  methods: {
+    isApplyTimeForm(val) {
+      this.applyTimeFormvalues = val;
+    },
+    isValidationSuccess(val) {
+      this.validationStatus = val;
+    },
+    isOnSubmitUploadOk(val) {
+      this.currentBmcTime = val;
+    },
+    isOnGetApplyTimeSetValue(val) {
+      this.setApplyTimeValue = val;
+    },
   },
 };
 </script>
