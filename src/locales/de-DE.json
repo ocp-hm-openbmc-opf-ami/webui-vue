@@ -304,7 +304,21 @@
             "socket": "Socket",
             "effectiveFamily": "Effektive Familie",
             "totalCores": "Gesamtkerne",
-            "state": "Zustand"
+            "state": "Zustand",
+            "operatingSpeedMHz": "BetriebsgeschwindigkeitMHz",
+            "totalEnabledCores": "Insgesamt aktivierte Kerne"
+        },
+        "processorFPGA": {
+            "info": "FPGA Info",
+            "id": "Id",
+            "name": "Name",
+            "firmwareId": "Firmware Id",
+            "firmwareManufacturer": "Firmware Hersteller",
+            "fpgaType": "Fpga Typ",
+            "interfaceType": "Oberflächentyp",
+            "model": "Modell",
+            "pcieVirtualFunctions": "Virtuelle PCIe Funktionen",
+            "programmableFromHost": "Vom Host aus programmierbar"
         },
         "memoryController": {
             "memoryController": "Speichercontroller",
