@@ -402,13 +402,39 @@ const UserManagementStore = {
           }
         }
       }
-      if (username && username != undefined) {
-        const errorMessage = i18n.t(
-          'pageUserManagement.toast.errorCreateUser',
-          {
+      if (username && username !== undefined) {
+        let errorMessage;
+
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data['UserName@Message.ExtendedInfo']
+        ) {
+          const extendedInfo =
+            error.response.data['UserName@Message.ExtendedInfo'];
+          for (let key in extendedInfo) {
+            if (
+              extendedInfo[key].Message &&
+              extendedInfo[key].Message.includes('already exists')
+            ) {
+              errorMessage = i18n.t(
+                'pageUserManagement.toast.errorAlreadyExistUser',
+                {
+                  username,
+                },
+              );
+              break; // Stop the loop once the message is found
+            }
+          }
+        }
+
+        // If errorMessage is not set by the above logic, use the default errorCreateUser message.
+        if (!errorMessage) {
+          errorMessage = i18n.t('pageUserManagement.toast.errorCreateUser', {
             username,
-          },
-        );
+          });
+        }
+
         return errorMessage;
       }
       if (originalUsername && originalUsername != undefined) {

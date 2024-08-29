@@ -1366,7 +1366,7 @@
             "errorBatchDelete": "删除 %{count} 用户发生错误 | 删除  %{count} 用户们发生错误",
             "errorBatchDisable": "停用 %{count} 用户发生错误 | 停用 %{count} 用户们发生错误",
             "errorBatchEnable": "启用 %{count} 用户发生错误 | 启用 %{count} 用户们发生错误",
-            "errorCreateUser": "用户名称 '%{username}' 已经存在",
+            "errorCreateUser": "创建用户“%{username}”时出错",
             "errorAlreadyExistUser": "用户名称 '%{username}'已经存在",
             "errorDeleteUser": "删除用户'%{username}'发生错误",
             "errorDeleteLoggedUser": "用户 '%{username}' 目前已登入其他对话",
@@ -1418,7 +1418,7 @@
             "passwordForLow": {
               "passwordComplexityForLow": "密码複杂度低",
               "rule1": "它应该只包含可打印字符.",
-              "rule2": "密码长度不能短于六个字元",
+              "rule2": "密码长度不能短于8个字符",
               "rule3": "必须包含至少 5 个唯一字符（不允许使用 abcabcabc）",
               "rule4": "须符合以下四个标准:",
               "rule5": "包含一个大写字母(e.g. A, G).",
@@ -1430,7 +1430,7 @@
             "passwordForDisabled": {
                 "passwordComplexityForDisabled": "停用密码复杂性",
                 "rule1": "它应该只包含可打印字符.",
-                "rule2": "密码长度不能短于6个字符.",
+                "rule2": "密码长度不能短于8个字符.",
                 "rule3": "不能与用户名或用户名倒序相同.",
                 "rule4": "必须包含至少 5 个唯一字符（不允许使用 abcabcabc）",
                 "rule5": "不能是“password”等简单密码"

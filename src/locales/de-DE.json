@@ -1365,7 +1365,7 @@
             "errorBatchDelete": "Fehler beim Löschen des %{count} Benutzers. | Fehler beim Löschen von %{count} Benutzern.",
             "errorBatchDisable": "Fehler beim Deaktivieren %{count} Benutzerin. | Fehler beim Deaktivieren von %{count} Benutzern.",
             "errorBatchEnable": "Fehler beim Aktivieren %{count} Benutzerin. | Fehler beim Aktivieren %{count} Benutzer.",
-            "errorCreateUser": "Nutzername '%{username}' ist bereits vorhanden.",
+            "errorCreateUser": "Fehler beim Erstellen des Benutzers „%{username}“.",
             "errorAlreadyExistUser": "Nutzername '%{username}' ist bereits vorhanden.",
             "errorDeleteUser": "Fehler beim Löschen des Benutzers '%{username}'.",
             "errorDeleteLoggedUser": "Benutzer '%{username}' Derzeit in einer anderen Sitzung angemeldet",
@@ -1417,7 +1417,7 @@
           "passwordForLow": {
             "passwordComplexityForLow": "Passwortkomplexität für Niedrig",
             "rule1": "Es sollte nur druckbare Zeichen enthalten.",
-            "rule2": "Die Länge des Passworts sollte nicht kürzer als 6 Zeichen sein.",
+            "rule2": "Das Passwort sollte nicht kürzer als 8 Zeichen sein.",
             "rule3": "Es müssen mindestens 5 eindeutige Zeichen enthalten (abcabcabc nicht zulässig)",
             "rule4": "Erfüllt die folgenden 4 Kriterien:",
             "rule5": "Enthält Großbuchstaben (e.g. A, G).",
@@ -1429,7 +1429,7 @@
           "passwordForDisabled": {
             "passwordComplexityForDisabled": "Passwortkomplexität für Behinderte",
             "rule1": "Es sollte nur druckbare Zeichen enthalten.",
-            "rule2": "Das Passwort sollte nicht kürzer als 6 Zeichen sein.",
+            "rule2": "Das Passwort sollte nicht kürzer als 8 Zeichen sein.",
             "rule3": "Darf nicht mit dem Benutzernamen oder dem Benutzernamen in umgekehrter Reihenfolge identisch sein.",
             "rule4": "Es müssen mindestens 5 eindeutige Zeichen enthalten (abcabcabc nicht zulässig)",
             "rule5": "Es dürfen keine einfachen Passwörter wie „Passwort“ sein."

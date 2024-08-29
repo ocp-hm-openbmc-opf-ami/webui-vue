@@ -55,6 +55,7 @@
                 :value="false"
                 :disabled="
                   (!newUser && originalUsername === disabled) ||
+                  globalPrivilege !== 'Administrator' ||
                   form.username === 'root'
                 "
                 @input="$v.form.status.$touch()"
@@ -84,6 +85,7 @@
                 :state="getValidationState($v.form.username)"
                 :disabled="
                   (!newUser && originalUsername === disabled) ||
+                  globalPrivilege !== 'Administrator' ||
                   newUser === 'root'
                 "
                 autocomplete="new-username"
@@ -113,7 +115,10 @@
                 :options="privilegeTypes"
                 data-test-id="userManagement-select-privilege"
                 :state="getValidationState($v.form.privilege)"
-                :disabled="!newUser && originalUsername === 'root'"
+                :disabled="
+                  (!newUser && originalUsername === 'root') ||
+                  globalPrivilege !== 'Administrator'
+                "
                 @input="$v.form.privilege.$touch()"
               >
                 <template #first>
@@ -136,7 +141,10 @@
                 name="Password-change-status"
                 :value="true"
                 data-test-id="userManagement-radioButton-statusEnabled"
-                :disabled="form.username === 'root'"
+                :disabled="
+                  form.username === 'root' ||
+                  globalPrivilege !== 'Administrator'
+                "
                 @input="$v.form.PasswordChangeRequired.$touch()"
               >
                 {{ $t('global.status.enabled') }}
@@ -146,7 +154,10 @@
                 name="Password-change-status"
                 data-test-id="userManagement-radioButton-statusDisabled"
                 :value="false"
-                :disabled="form.username === 'root'"
+                :disabled="
+                  form.username === 'root' ||
+                  globalPrivilege !== 'Administrator'
+                "
                 @input="$v.form.PasswordChangeRequired.$touch()"
               >
                 {{ $t('global.status.disabled') }}
@@ -158,7 +169,10 @@
                 name="vmediaAccess-change-status"
                 :value="true"
                 data-test-id="userManagement-vmediaAccess-statusEnabled"
-                :disabled="form.username === 'root'"
+                :disabled="
+                  form.username === 'root' ||
+                  globalPrivilege !== 'Administrator'
+                "
                 @input="$v.form.vmediaAccess.$touch()"
               >
                 {{ $t('global.status.enabled') }}
@@ -168,7 +182,10 @@
                 name="vmediaAccess-change-status"
                 data-test-id="userManagement-vmediaAccess-statusDisabled"
                 :value="false"
-                :disabled="form.username === 'root'"
+                :disabled="
+                  form.username === 'root' ||
+                  globalPrivilege !== 'Administrator'
+                "
                 @input="$v.form.vmediaAccess.$touch()"
               >
                 {{ $t('global.status.disabled') }}
@@ -307,6 +324,7 @@ export default {
         vmediaAccess: true,
       },
       disabled: this.$store.getters['global/username'],
+      globalPrivilege: this.$store.getters['global/userPrivilege'],
     };
   },
   computed: {

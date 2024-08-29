@@ -1373,7 +1373,7 @@
             "errorBatchDelete": "Error deleting %{count} user. | Error deleting %{count} users.",
             "errorBatchDisable": "Error disabling %{count} user. | Error disabling %{count} users.",
             "errorBatchEnable": "Error enabling %{count} user. | Error enabling %{count} users.",
-            "errorCreateUser": "Username '%{username}' already exists.",
+            "errorCreateUser": "Error creating user '%{username}'.",
             "errorAlreadyExistUser": "Username '%{username}' already exists.",
             "errorDeleteUser": "Error deleting user '%{username}'.",
             "errorDeleteLoggedUser": "User '%{username}' currently logged-in another session",
@@ -1425,7 +1425,7 @@
             "passwordForLow": {
                 "passwordComplexityForLow": "Password Complexity for Low",
                 "rule1": "It should contain printable characters only.",
-                "rule2": "Password length should not be shorter than 6 characters.",
+                "rule2": "Password length should not be shorter than 8 characters.",
                 "rule3": "Must contain at least 5 unique characters (abcabcabc not allowed)",
                 "rule4": "Meets following 4 criteria:",
                 "rule5": "Contains upper case (e.g. A, G).",
@@ -1437,7 +1437,7 @@
             "passwordForDisabled": {
                 "passwordComplexityForDisabled": "Password Complexity for Disabled",
                 "rule1": "It should contain printable characters only.",
-                "rule2": "Password length should not be shorter than 6 characters.",
+                "rule2": "Password length should not be shorter than 8 characters.",
                 "rule3": "Cannot be the same as the username or the username in reverse order.",
                 "rule4": "Must contain at least 5 unique characters (abcabcabc not allowed)",
                 "rule5": "Cannot be simple passwords like 'password'"

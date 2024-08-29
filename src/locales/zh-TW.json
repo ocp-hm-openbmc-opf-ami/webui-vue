@@ -1370,7 +1370,7 @@
             "errorBatchDelete": "刪除 %{count} 使用者發生錯誤 | 刪除  %{count} 使用者們發生錯誤",
             "errorBatchDisable": "停用 %{count} 使用者發生錯誤 | 停用 %{count} 使用者們發生錯誤",
             "errorBatchEnable": "啟用 %{count} 使用者發生錯誤 | 啟用 %{count} 使用者們發生錯誤",
-            "errorCreateUser": "使用者名稱 '%{username}' 已經存在",
+            "errorCreateUser": "建立使用者「%{username}」時發生錯誤",
             "errorAlreadyExistUser": "使用者名稱 '%{username}'已經存在",
             "errorDeleteUser": "刪除使用者'%{username}'發生錯誤",
             "errorDeleteLoggedUser": "使用者 '%{username}' 目前已登入其他對話",
@@ -1422,7 +1422,7 @@
             "passwordForLow": {
               "passwordComplexityForLow": "密碼複雜度低",
               "rule1": "它應該只包含可列印字符.",
-              "rule2": "密碼長度不能短於六個字元",
+              "rule2": "密碼長度不能短於8個字符",
               "rule3": "必須包含至少 5 個唯一字元（不允許使用 abcabcabc）",
               "rule4": "須符合以下四個標準:",
               "rule5": "包含一個大寫字母(e.g. A, G).",
@@ -1434,7 +1434,7 @@
             "passwordForDisabled": {
                 "passwordComplexityForDisabled": "停用密碼複雜性",
                 "rule1": "它應該只包含可列印字符.",
-                "rule2": "密碼長度不能短於6個字符.",
+                "rule2": "密碼長度不能短於8個字符.",
                 "rule3": "不能與使用者名稱或使用者名稱倒序相同.",
                 "rule4": "必須包含至少 5 個唯一字元（不允許使用 abcabcabc）",
                 "rule5": "不能是「password」等簡單密碼"

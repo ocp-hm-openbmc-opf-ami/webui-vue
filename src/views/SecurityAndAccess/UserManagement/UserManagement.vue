@@ -3,13 +3,18 @@
     <page-title />
     <b-row>
       <b-col xl="9" class="text-right">
-        <b-button variant="link" @click="initModalSettings">
+        <b-button
+          variant="link"
+          :disabled="globalPrivilege !== 'Administrator'"
+          @click="initModalSettings"
+        >
           <icon-settings />
           {{ $t('pageUserManagement.accountPolicySettings') }}
         </b-button>
         <b-button
           variant="primary"
           data-test-id="userManagement-button-addUser"
+          :disabled="globalPrivilege !== 'Administrator'"
           @click="initModalUser(null)"
         >
           <icon-add />
@@ -218,6 +223,7 @@ export default {
       selectedRows: selectedRows,
       tableHeaderCheckboxModel: tableHeaderCheckboxModel,
       tableHeaderCheckboxIndeterminate: tableHeaderCheckboxIndeterminate,
+      globalPrivilege: this.$store.getters['global/userPrivilege'],
     };
   },
   computed: {
