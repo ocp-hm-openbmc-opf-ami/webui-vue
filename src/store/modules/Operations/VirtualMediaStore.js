@@ -143,11 +143,13 @@ const VirtualMediaStore = {
         })
         .catch((error) => {
           console.log('Virtual Media:', error);
-          if (error.response.status != 500) {
+          if (error.response.status == 404) {
+            throw new Error(i18n.t('pageVirtualMedia.toast.errorVirtualMedia'));
+          } else if (error.response.status != 500) {
             commit('setVirtualMediaAccess', false);
           } else {
             commit('setVirtualMediaAccess', true);
-            throw new Error();
+            throw new Error(i18n.t('pageVirtualMedia.toast.errorVirtualMedia'));
           }
         });
     },

@@ -239,8 +239,8 @@ export default {
             }
           });
         })
-        .catch(() => {
-          this.errorToast(this.$t('pageVirtualMedia.toast.errorVirtualMedia'));
+        .catch(({ message }) => {
+          this.errorToast(message);
         })
         .finally(() => this.endLoader());
     },
