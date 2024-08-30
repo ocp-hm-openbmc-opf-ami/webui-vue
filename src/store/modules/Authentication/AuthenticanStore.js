@@ -2,6 +2,7 @@ import api from '@/store/api';
 import Cookies from 'js-cookie';
 import router from '@/router';
 import i18n from '@/i18n';
+import store from '../../index';
 
 const AuthenticationStore = {
   namespaced: true,
@@ -45,6 +46,7 @@ const AuthenticationStore = {
       Cookies.remove('IsAuthenticated');
       Cookies.remove('loginSessionSuccess');
       localStorage.removeItem('storedUsername');
+      store.commit('global/setUtcTime', true);
       state.xsrfCookie = undefined;
       state.isAuthenticatedCookie = undefined;
       router.push('/login').catch(() => {});

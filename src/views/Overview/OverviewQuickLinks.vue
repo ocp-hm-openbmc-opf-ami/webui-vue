@@ -39,7 +39,7 @@ export default {
   computed: {
     bmcTime() {
       let dateTime = this.$store.getters['global/bmcDateTime'];
-      if (localStorage.getItem('storedUtcDisplay') == 'false') {
+      if (this.$store.getters['global/isUtcDisplay'] == false) {
         return dateTime ? this.offsetDateTime(dateTime) : null;
       } else {
         return dateTime
