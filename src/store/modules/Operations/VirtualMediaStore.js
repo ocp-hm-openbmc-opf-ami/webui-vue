@@ -28,6 +28,7 @@ const VirtualMediaStore = {
     virtualMediaAccess: true,
     virtualMediaPolicies: false,
     mediaAlreadyRedirected: [],
+    slotArray: [],
   },
   getters: {
     proxyDevices: (state) => state.proxyDevices,
@@ -38,6 +39,12 @@ const VirtualMediaStore = {
     legacyStarted: (state) => state.legacyStarted,
     virtualMediaAccess: (state) => state.virtualMediaAccess,
     mediaAlreadyRedirected: (state) => state.mediaAlreadyRedirected,
+    slotData: (state) => {
+      const filtered = state.slotArray.filter(
+        (slot) => slot.id === 'Slot_2' || slot.id === 'Slot_3',
+      );
+      return filtered;
+    },
   },
   mutations: {
     setProxyDevicesData: (state, deviceData) =>
@@ -52,6 +59,16 @@ const VirtualMediaStore = {
       (state.mediaAlreadyRedirected = slot),
     setSlot0Started: (state, start) => (state.slot0Started = start),
     setSlot1Started: (state, start) => (state.Slot1Started = start),
+    setSlotData(state, { slotId, slotData }) {
+      const slotIndex = state.slotArray.findIndex((slot) => slot.id === slotId);
+      if (slotIndex !== -1) {
+        state.slotArray.splice(slotIndex, 1, { id: slotId, data: slotData });
+      } else {
+        if (slotId === 'Slot_2' || slotId === 'Slot_3') {
+          state.slotArray.push({ id: slotId, data: slotData });
+        }
+      }
+    },
   },
   actions: {
     async getData({ commit, state }) {

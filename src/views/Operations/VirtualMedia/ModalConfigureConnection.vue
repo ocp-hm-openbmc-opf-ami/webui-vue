@@ -197,6 +197,10 @@ export default {
       if (this.$v.$invalid) return;
       let connectionData = {};
       Object.assign(connectionData, this.form);
+      this.$store.commit('virtualMedia/setSlotData', {
+        slotId: connectionData.id,
+        slotData: connectionData,
+      });
       this.$emit('ok', connectionData);
       this.closeModal();
     },

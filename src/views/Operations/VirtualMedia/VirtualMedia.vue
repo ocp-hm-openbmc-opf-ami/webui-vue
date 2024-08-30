@@ -379,6 +379,14 @@ export default {
         connectionData.transferProtocolType;
     },
     configureConnection(connectionData) {
+      const storeData = this.$store.getters['virtualMedia/slotData'];
+      const matchedElement = storeData.find(
+        (element) => element.data.id === connectionData.id,
+      );
+      if (matchedElement) {
+        Object.assign(connectionData, matchedElement.data);
+      }
+      connectionData.password = '';
       this.modalConfigureConnection = connectionData;
       this.$bvModal.show('configure-connection');
     },
