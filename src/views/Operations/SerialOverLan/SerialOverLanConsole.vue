@@ -154,11 +154,30 @@ export default {
         fitAddon.fit();
       }, 1000);
       window.addEventListener('resize', this.resizeConsoleWindow);
+      this.term.attachCustomKeyEventHandler((event) => {
+        if (event.type === 'keydown') {
+          this.isKeyPressed = true;
+          return true;
+        } else if (event.type === 'keyup') {
+          this.isKeyPressed = false;
+          event.preventDefault();
+          return false;
+        }
+        return true;
+      });
       this.term.onData((data) => {
+        if (!this.isKeyPressed) {
+          return;
+        }
+
         if (data.charCodeAt(0) === 127) {
           // ASCII 127 is the delete (DEL) character
           this.ws.send('\b');
         } else {
+          let cursorX = this.term.buffer.active.cursorX;
+          if (cursorX === 0) {
+            this.term.write('\r\n');
+          }
           this.term.write(data);
         }
       });
