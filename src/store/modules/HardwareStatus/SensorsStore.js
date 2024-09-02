@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import { uniqBy } from 'lodash';
+import i18n from '@/i18n';
 
 const SensorsStore = {
   namespaced: true,
@@ -66,6 +67,10 @@ const SensorsStore = {
               status: response.data.Status?.Health,
               state: response.data.Status?.State,
               currentValue: response.data.Reading,
+              thresholdsId:
+                (response.data?.Oem?.Ami?.SensorThreshold ?? '') === ''
+                  ? null
+                  : response.data?.Oem?.Ami?.SensorThreshold['@odata.id'],
               lowerCaution: response.data.Thresholds?.LowerCaution?.Reading,
               upperCaution: response.data.Thresholds?.UpperCaution?.Reading,
               lowerCritical: response.data.Thresholds?.LowerCritical?.Reading,
@@ -152,6 +157,18 @@ const SensorsStore = {
     },
     setSensorGraphRefresh({ commit }, val) {
       commit('setSensorGraph', val);
+    },
+    async setSensorThresholdValue(_, { val, thresholdsUrlId }) {
+      return await api
+        .patch(thresholdsUrlId, { Thresholds: val })
+        .then(() =>
+          i18n.t('pageSensors.sensorThreshold.toast.successSaveThreshold'),
+        )
+        .catch(() => {
+          throw new Error(
+            i18n.t('pageSensors.sensorThreshold.toast.errorSaveThreshold'),
+          );
+        });
     },
   },
 };

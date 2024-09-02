@@ -1956,6 +1956,24 @@
             "max": "Max",
             "min": "Min",
             "average": "Average"
+        },
+        "sensorThreshold": {
+            "modal": {
+                "sensorThresholds": "Change Threshold Values",
+                "sesnorHistory": "Sensor History",
+                "lowerCaution": "Lower Caution",
+                "lowerCritical": "Lower Critical",
+                "upperCaution": "Upper Caution",
+                "upperCritical": "Upper Critical",
+                "lowerCautionValidationInfo": "Invalid Lower Caution values.",
+                "lowerCriticalValidationInfo": "Invalid Lower Critical values.",
+                "upperCautionValidationInfo": "Invalid Upper Caution values.",
+                "upperCriticalValidationInfo": "Invalid Upper Critical values."
+            },
+            "toast": {
+                "successSaveThreshold": "Sensor Thresholds has been saved successfully.",
+                "errorSaveThreshold": "Error in saving Sensor Thresholds."
+            }
         }
     },
     "pageSerialOverLan": {

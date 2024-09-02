@@ -1949,6 +1949,24 @@
             "min": "分钟",
             "average": "平均的"
 
+        },
+        "sensorThreshold": {
+            "modal": {
+                "sensorThresholds": "更改阈值",
+                "sesnorHistory": "传感器历史",
+                "lowerCaution": "降低警惕",
+                "lowerCritical": "较低临界值",
+                "upperCaution": "上层注意事项",
+                "upperCritical": "上临界",
+                "lowerCautionValidationInfo": "下警告值无效。",
+                "lowerCriticalValidationInfo": "下临界值无效。",
+                "upperCautionValidationInfo": "警告上限值无效。",
+                "upperCriticalValidationInfo": "上临界值无效。"
+            },
+            "toast": {
+                "successSaveThreshold": "传感器阈值已成功保存。",
+                "errorSaveThreshold": "保存传感器阈值时出错。"
+            }
         }
     },
     "pageSerialOverLan": {

@@ -1936,6 +1936,24 @@
             "min": "Min",
             "average": "Durchschnitt"
 
+        },
+        "sensorThreshold": {
+            "modal": {
+                "sensorThresholds": "Schwellenwerte ändern",
+                "sesnorHistory": "Sensorhistorie",
+                "lowerCaution": "Niedrigere Vorsicht",
+                "lowerCritical": "Niedrigerer kritischer Wert",
+                "upperCaution": "Obere Vorsicht",
+                "upperCritical": "Oberer kritischer Wert",
+                "lowerCautionValidationInfo": "Ungültige untere Warnwerte.",
+                "lowerCriticalValidationInfo": "Ungültige untere kritische Werte.",
+                "upperCautionValidationInfo": "Ungültige obere Warnwerte.",
+                "upperCriticalValidationInfo": "Ungültige obere kritische Werte."
+            },
+            "toast": {
+                "successSaveThreshold": "Sensorschwellenwerte wurden erfolgreich gespeichert.",
+                "errorSaveThreshold": "Fehler beim Speichern der Sensorschwellenwerte."
+            }
         }
     },
     "pageSerialOverLan": {

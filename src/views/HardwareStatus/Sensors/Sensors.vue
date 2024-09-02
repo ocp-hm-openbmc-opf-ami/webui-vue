@@ -61,7 +61,6 @@
             :tbody-tr-class="rowClass"
             @filtered="onFiltered"
             @row-selected="onRowSelected($event, filteredSensors.length)"
-            @row-clicked="onRowclick($event)"
           >
             <!-- Checkbox column -->
             <template #head(checkbox)>
@@ -81,36 +80,6 @@
                 <span class="sr-only">{{ $t('global.table.selectItem') }}</span>
               </b-form-checkbox>
             </template>
-            <template #cell(name)="{ value, item }">
-              <u
-                v-if="historyViewSensors.includes(value) && item.id"
-                class="name_air"
-              >
-                {{ value }} -
-              </u>
-
-              <span v-else> {{ value }} </span>
-              <svg
-                v-if="historyViewSensors.includes(value) && item.id"
-                data-v-99969f6c=""
-                focusable="false"
-                preserveAspectRatio="xMidYMid meet"
-                xmlns="http://www.w3.org/2000/svg"
-                class="svg_graph"
-                viewBox="0 0 32 32"
-                aria-hidden="true"
-              >
-                <path
-                  data-v-99969f6c=""
-                  d="M8 10H16V12H8zM8 6H20V8H8zM8 2H20V4H8z"
-                ></path>
-                <path
-                  data-v-99969f6c=""
-                  d="M4.7111,28l5.6312-9.9961,7.4341,6.49A2,2,0,0,0,20.86,23.96l6.9707-10.4034-1.6622-1.1132-7,10.4472-.07.1035-7.4345-6.4907a2.0032,2.0032,0,0,0-3.0806.5308L4,25.1826V2H2V28a2.0023,2.0023,0,0,0,2,2H30V28Z"
-                ></path>
-              </svg>
-            </template>
-            <!-- Sensor Status column -->
             <template #cell(status)="{ value }">
               <status-icon :status="statusIcon(value)" /> {{ value }}
             </template>
@@ -133,6 +102,47 @@
             <template #cell(upperCritical)="data">
               {{ data.value }} {{ data.item.units }}
             </template>
+            <template #cell(actions)="{ item }">
+              <svg
+                v-if="historyViewSensors.includes(item.name) && item.id"
+                data-v-99969f6c=""
+                focusable="false"
+                preserveAspectRatio="xMidYMid meet"
+                xmlns="http://www.w3.org/2000/svg"
+                class="svg_graph m10"
+                viewBox="0 0 32 32"
+                aria-hidden="true"
+                @click="onRowclick(item)"
+              >
+                <title>
+                  {{ $t('pageSensors.sensorThreshold.modal.sesnorHistory') }}
+                </title>
+                <path
+                  data-v-99969f6c=""
+                  d="M8 10H16V12H8zM8 6H20V8H8zM8 2H20V4H8z"
+                ></path>
+                <path
+                  data-v-99969f6c=""
+                  d="M4.7111,28l5.6312-9.9961,7.4341,6.49A2,2,0,0,0,20.86,23.96l6.9707-10.4034-1.6622-1.1132-7,10.4472-.07.1035-7.4345-6.4907a2.0032,2.0032,0,0,0-3.0806.5308L4,25.1826V2H2V28a2.0023,2.0023,0,0,0,2,2H30V28Z"
+                ></path>
+              </svg>
+              <icon-edit
+                v-if="item.thresholdsId != null"
+                class="svg_graph"
+                :title="
+                  $t('pageSensors.sensorThreshold.modal.sensorThresholds')
+                "
+                @click="initModalSensorThresholdModal(item)"
+              />
+              <span
+                v-if="
+                  !historyViewSensors.includes(item.name) &&
+                  !item.id &&
+                  item.thresholdsId == null
+                "
+                >-</span
+              >
+            </template>
           </b-table>
         </b-col>
       </b-row>
@@ -145,6 +155,12 @@
         @backSensorPage="isBackSensorPage"
       />
     </div>
+    <modal-sensor-threshold
+      :modal-sensor-threshold="modalSensorThresholdValue"
+      :modal-success="isModalSuccess"
+      @setSensorThresholdOk="isSetSensorThresholdUpdateValue"
+      @closeAddModal="iscloseAddModal"
+    ></modal-sensor-threshold>
   </b-container>
 </template>
 
@@ -156,8 +172,7 @@ import TableFilter from '@/components/Global/TableFilter';
 import TableToolbar from '@/components/Global/TableToolbar';
 import TableToolbarExport from '@/components/Global/TableToolbarExport';
 import TableCellCount from '@/components/Global/TableCellCount';
-import SensorGraph from '../../Settings/Network/SensorGraph.vue';
-
+import SensorGraph from './SensorGraph.vue';
 import BVTableSelectableMixin, {
   selectedRows,
   tableHeaderCheckboxModel,
@@ -170,6 +185,9 @@ import TableSortMixin from '@/components/Mixins/TableSortMixin';
 import SearchFilterMixin, {
   searchFilter,
 } from '@/components/Mixins/SearchFilterMixin';
+import ModalSensorThreshold from './ModalSensorThreshold.vue';
+import IconEdit from '@carbon/icons-vue/es/edit/20';
+import BVToastMixin from '@/components/Mixins/BVToastMixin';
 
 export default {
   name: 'Sensors',
@@ -182,6 +200,8 @@ export default {
     TableToolbar,
     TableToolbarExport,
     SensorGraph,
+    ModalSensorThreshold,
+    IconEdit,
   },
   mixins: [
     TableFilterMixin,
@@ -190,6 +210,7 @@ export default {
     DataFormatterMixin,
     TableSortMixin,
     SearchFilterMixin,
+    BVToastMixin,
   ],
   beforeRouteLeave(to, from, next) {
     this.$store.dispatch('sensors/setSensorGraphRefresh', true);
@@ -246,6 +267,11 @@ export default {
           key: 'upperCritical',
           formatter: this.dataFormatter,
           label: this.$t('pageSensors.table.upperCritical'),
+        },
+        {
+          key: 'actions',
+          label: '',
+          class: 'text-center',
         },
       ],
       tableFilters: [
@@ -348,6 +374,8 @@ export default {
         'Dimm Power Average CPU2',
         'Cpu Power Average CPU1',
       ],
+      modalSensorThresholdValue: {},
+      isModalSuccess: false,
     };
   },
   computed: {
@@ -368,14 +396,17 @@ export default {
   },
   created() {
     if (this.showSensor) {
+      this.initSensorLoad();
+    }
+  },
+  methods: {
+    initSensorLoad() {
       this.startLoader();
       this.$store.dispatch('sensors/getAllSensors').finally(() => {
         this.endLoader();
         this.isBusy = false;
       });
-    }
-  },
-  methods: {
+    },
     sortCompare(a, b, key) {
       if (key === 'status') {
         return this.sortStatus(a, b, key);
@@ -423,6 +454,28 @@ export default {
         return 'row_class';
       }
     },
+    initModalSensorThresholdModal(val) {
+      this.modalSensorThresholdValue = {};
+      this.modalSensorThresholdValue = val;
+      this.$bvModal.show('modal-sensor-threshold');
+    },
+    isSetSensorThresholdUpdateValue(val) {
+      const thresholdsUrlId = this.modalSensorThresholdValue.thresholdsId;
+      this.$store
+        .dispatch('sensors/setSensorThresholdValue', {
+          val,
+          thresholdsUrlId,
+        })
+        .then((success) => {
+          this.successToast(success);
+          this.isModalSuccess = true;
+          this.initSensorLoad();
+        })
+        .catch(({ message }) => this.errorToast(message));
+    },
+    iscloseAddModal(val) {
+      this.isModalSuccess = val;
+    },
   },
 };
 </script>
@@ -436,7 +489,11 @@ export default {
 }
 .svg_graph {
   fill: #416f89 !important;
-  height: 15px !important;
-  width: 15px !important;
+  height: 20px !important;
+  width: 25px !important;
+  cursor: pointer;
+}
+.m10 {
+  margin-right: 10px;
 }
 </style>
