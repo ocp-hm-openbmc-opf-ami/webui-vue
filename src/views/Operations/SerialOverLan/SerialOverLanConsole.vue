@@ -74,6 +74,7 @@ export default {
     return {
       resizeConsoleWindow: null,
       disable: false,
+      isKeyPressed: false,
     };
   },
   computed: {
