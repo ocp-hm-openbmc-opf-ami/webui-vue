@@ -160,7 +160,6 @@
         "addc": "@:appPageTitle.addc",
         "autonomousCrashDump": "ACD",
         "asd": "@:appPageTitle.asd",
-        "onDemand":"@:appPageTitle.onDemand",
         "raidManagement": "@:appPageTitle.raidManagement",
         "adapter": "@:appPageTitle.adapter",
         "physicalDevice": "@:appPageTitle.physicalDevice",
@@ -216,7 +215,6 @@
         "addc": "ADDC",
         "autonomousCrashDump": "ACD",
         "asd": "ASD",
-        "onDemand":"一經請求",
         "raidManagement": "磁盤陣列管理",
         "adapter": "適配器",
         "physicalDevice": "物理設備",
@@ -562,22 +560,6 @@
             "errorUpdateCupsService": "未找到名為「CupsService」類型的請求資源",
             "successUpdateCupsService": "已成功更新 CupsService",
             "errorAddingStaticLoadFactor": "靜載係數總和必須等於 100"
-        }
-    },
-    "pageOnDemand": {
-        "onDemand":"一經請求",
-        "availableCPU": "可用CPU",
-        "all": "全部",
-        "table": {
-            "name": "姓名",
-            "dynamicFeature": "動態狀態",
-            "meteringFeature": "測光狀態",
-            "provisionFeature": "供給狀態",
-            "stateFeature": "狀態特徵"
-        },
-        "toast": {
-            "errorGettingCpus": "CPU 信息不可用。",
-            "errorShowingOnDemandInfo": "顯示一經請求信息時出錯。"
         }
     },
     "pageBsod": {

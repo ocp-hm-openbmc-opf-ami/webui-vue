@@ -42,7 +42,6 @@ import NicStore from './modules/Nic/Nic';
 import NvmeInformationStore from './modules/NvmeInformation/NvmeInformationStore';
 import AutonomousCrashDumpStore from './modules/HostSystemDiagnostics/AcdStore';
 import AsdStore from './modules/HostSystemDiagnostics/AsdStore';
-import OnDemand from './modules/Settings/OnDemand';
 import RaidStore from './modules/Raid/RaidStore';
 import BackupAndRestore from './modules/Operations/BackupAndRestore';
 import SNMPStore from './modules/Settings/SNMPStore';
@@ -103,7 +102,6 @@ export default new Vuex.Store({
     nvme: NvmeInformationStore,
     acd: AutonomousCrashDumpStore,
     asd: AsdStore,
-    ondemand: OnDemand,
     raid: RaidStore,
     backupAndRestore: BackupAndRestore,
     snmp: SNMPStore,

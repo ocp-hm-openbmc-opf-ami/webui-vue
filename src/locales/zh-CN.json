@@ -160,7 +160,6 @@
         "addc": "@:appPageTitle.addc",
         "autonomousCrashDump": "ACD",
         "asd": "@:appPageTitle.asd",
-        "onDemand":"@:appPageTitle.onDemand",
         "raidManagement": "@:appPageTitle.raidManagement",
         "adapter": "@:appPageTitle.adapter",
         "physicalDevice": "@:appPageTitle.physicalDevice",
@@ -216,7 +215,6 @@
         "addc": "ADDC",
         "autonomousCrashDump": "ACD",
         "asd": "ASD",
-        "onDemand":"一经请求",
         "raidManagement": "RAID管理",
         "adapter": "适配器",
         "physicalDevice": "物理设备",
@@ -559,22 +557,6 @@
             "errorUpdateCupsService": "未找到名为“CupsService”类型的请求资源",
             "successUpdateCupsService": "已成功更新 CupsService",
             "errorAddingStaticLoadFactor": "静载荷系数之和必须等于 100"
-        }
-    },
-    "pageOnDemand": {
-        "onDemand":"一经请求",
-        "availableCPU": "可用CPU",
-        "all": "全部",
-        "table": {
-            "name": "名称",
-            "dynamicFeature": "动态状态",
-            "meteringFeature": "测光状态",
-            "provisionFeature": "供给状态",
-            "stateFeature": "状态特征"
-        },
-        "toast": {
-            "errorGettingCpus": "CPU 信息不可用。",
-            "errorShowingOnDemandInfo": "显示一经请求信息时出错。"
         }
     },
     "pageBsod": {

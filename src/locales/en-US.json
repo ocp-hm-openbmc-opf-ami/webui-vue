@@ -163,7 +163,6 @@
         "addc": "@:appPageTitle.addc",
         "autonomousCrashDump": "ACD",
         "asd": "@:appPageTitle.asd",
-        "onDemand": "@:appPageTitle.onDemand",
         "raidManagement": "@:appPageTitle.raidManagement",
         "adapter": "@:appPageTitle.adapter",
         "physicalDevice": "@:appPageTitle.physicalDevice",
@@ -219,7 +218,6 @@
         "addc": "ADDC",
         "autonomousCrashDump": "ACD",
         "asd": "ASD",
-        "onDemand": "OnDemand",
         "raidManagement": "RAID Management",
         "adapter": "Adapter",
         "physicalDevice": "Physical Device",
@@ -565,22 +563,6 @@
             "errorUpdateCupsService": "The requested resource of type  named 'CupsService ' was not found",
             "successUpdateCupsService": "Successfully updated CupsService",
             "errorAddingStaticLoadFactor": "Sum of static load factors must be equal to 100"
-        }
-    },
-    "pageOnDemand": {
-        "onDemand": "OnDemand",
-        "availableCPU": "Available CPUs",
-        "all": "All",
-        "table": {
-            "name": "Name",
-            "dynamicFeature": "Dynamic State",
-            "meteringFeature": "Metering State",
-            "provisionFeature": "Provision State",
-            "stateFeature": "State Feature"
-        },
-        "toast": {
-            "errorGettingCpus": "The CPUs informations not available.",
-            "errorShowingOnDemandInfo": "Error in displaying OnDemand Information."
         }
     },
     "pageBsod": {

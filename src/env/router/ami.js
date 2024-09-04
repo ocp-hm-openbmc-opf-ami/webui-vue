@@ -441,19 +441,6 @@ const routes = [
     ],
   },
 ];
-if (process.env.VUE_APP_ONDEMAND_ENABLED == 'true') {
-  routes[2].children.push({
-    path: '/settings/on-demand',
-    name: 'on-demand',
-    component: () =>
-      import(
-        /* webpackChunkName: "OnDemandInformation" */ '@/views/Settings/OnDemand'
-      ),
-    meta: {
-      title: i18n.t('appPageTitle.onDemand'),
-    },
-  });
-}
 if (process.env.VUE_APP_RAID_ENABLED == 'true') {
   routes[2].children.push(
     {
