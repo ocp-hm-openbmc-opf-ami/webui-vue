@@ -2092,7 +2092,8 @@
             "serverRunning": "伺服器运行中",
             "serverConnectionEstablished": "伺服器已连线",
             "serverClosedSuccessfully": "关闭伺服器成功",
-            "serverClosedWithErrors": "伺服器已关闭但有错误发生"
+            "serverClosedWithErrors": "伺服器已关闭但有错误发生",
+            "invalidFileType": "图片文件类型无效"
         }
     },
     "pageAdapter": {
