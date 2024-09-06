@@ -12,7 +12,7 @@
       </b-card-group>
       <b-card-group deck>
         <overview-network />
-        <overview-power v-if="IsAmdPlatform" />
+        <overview-power v-if="isAmdPlatform" />
       </b-card-group>
     </page-section>
     <page-section :section-title="$t('pageOverview.statusInformation')">
@@ -92,7 +92,7 @@ export default {
       quicklinksPromise,
       serverPromise,
     ];
-    if (this.IsAmdPlatform) {
+    if (this.isAmdPlatform) {
       const powerPromise = new Promise((resolve) => {
         this.$root.$on('overview-power-complete', () => resolve());
       });
@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     checkIsAmdPlatform() {
-      this.IsAmdPlatform = this.$store.getters['global/isAmdPlatform'];
+      this.isAmdPlatform = this.$store.getters['global/isAmdPlatform'];
     },
   },
 };
