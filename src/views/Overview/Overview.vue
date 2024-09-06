@@ -56,7 +56,7 @@ export default {
   data() {
     return {
       showDumps: process.env.VUE_APP_ENV_NAME === 'intel',
-      IsAmdPlatform: null,
+      isAmdPlatform: null,
     };
   },
   created() {
