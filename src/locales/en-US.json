@@ -176,7 +176,8 @@
         "systemInventory": "@:appPageTitle.systemInventory",
         "networkDDNS": "@:appPageTitle.networkDDNS",
         "networkLink": "@:appPageTitle.networkLink",
-        "ncsi": "@:appPageTitle.ncsi"
+        "ncsi": "@:appPageTitle.ncsi",
+        "pam": "@:appPageTitle.pam"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -231,7 +232,8 @@
         "systemInventory": "System Inventory",
         "networkDDNS": "Network DDNS",
         "networkLink": "Network Link",
-        "ncsi": "NCSI"
+        "ncsi": "NCSI",
+        "pam": "PAM Order"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -2333,6 +2335,16 @@
         "toast": {
             "successSaveNetworkLink": "Successfully saved Network Link.",
             "errorSavedNetworkLink": "Error saved Network Link."
+        }
+    },
+    "pagePamOrder": {
+        "pam": "pam",
+        "samePamOrder": "Pam Order Configuration are same, so no need to save.",
+        "informationMessage": "Drag and drop the PAM modules to change their position in the sequence.",
+        "toast": {
+            "errorSavingPamOrder": "Error in updating PAM order",
+            "successSavingPamOrder": "Successfully updated the PAM order",
+            "errorGettingPamorder": "Error fetching PAM Order data"
         }
     },
     "countries": {

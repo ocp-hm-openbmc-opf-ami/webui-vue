@@ -173,7 +173,8 @@
         "systemInventory":"@:appPageTitle.systemInventory",
         "networkDDNS": "@:appPageTitle.networkDDNS",
         "networkLink": "@:appPageTitle.networkLink",
-        "ncsi": "@:appPageTitle.ncsi"
+        "ncsi": "@:appPageTitle.ncsi",
+        "pam": "@:appPageTitle.pam"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -228,7 +229,8 @@
         "systemInventory":"系統庫存",
         "networkDDNS": "Network DDNS",
         "networkLink": "網路連結",
-        "ncsi": "NCSI"
+        "ncsi": "NCSI",
+        "pam": "PAM 訂單設定"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -2326,6 +2328,16 @@
         "toast": {
             "successSaveNetworkLink": "已成功儲存網頁連結。",
             "errorSavedNetworkLink": "儲存網頁連結時發生錯誤。"
+        }
+    },
+    "pagePamOrder": {
+        "pam": "帕姆",
+        "samePamOrder": "Pam訂單配置相同，因此無需儲存.",
+        "informationMessage": "拖放 PAM 模組以變更其在序列中的位置.",
+        "toast": {
+            "errorSavingPamOrder": "更新 PAM 訂單時出錯",
+            "successSavingPamOrder": "已成功更新 PAM 訂單",
+            "errorGettingPamorder": "取得 PAM 訂單資料時發生錯誤"
         }
     },
     "countries": {

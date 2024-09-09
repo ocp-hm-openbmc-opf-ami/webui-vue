@@ -173,7 +173,8 @@
         "systemInventory":"@:appPageTitle.systemInventory",
         "networkDDNS": "@:appPageTitle.networkDDNS",
         "networkLink": "@:appPageTitle.networkLink",
-        "ncsi": "@:appPageTitle.ncsi"
+        "ncsi": "@:appPageTitle.ncsi",
+        "pam": "@:appPageTitle.pam"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -228,7 +229,8 @@
         "systemInventory":"系统库存",
         "networkDDNS": "Network DDNS",
         "networkLink": "网络链接",
-        "ncsi": "NCSI"
+        "ncsi": "NCSI",
+        "pam": "PAM 订单设置"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -2322,6 +2324,16 @@
         "toast": {
             "successSaveNetworkLink": "已成功保存网络链接。",
             "errorSavedNetworkLink": "保存网络链接时出错。"
+        }
+    },
+    "pagePamOrder": {
+        "pam": "帕姆",
+        "samePamOrder": "Pam订单配置相同，因此无需保存.",
+        "informationMessage": "拖放 PAM 模块以更改其在序列中的位置.",
+        "toast": {
+            "errorSavingPamOrder": "更新 PAM 订单时出错",
+            "successSavingPamOrder": "已成功更新 PAM 订单",
+            "errorGettingPamorder": "获取 PAM 订单数据时出错"
         }
     },
     "countries": {

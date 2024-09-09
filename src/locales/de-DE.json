@@ -172,7 +172,8 @@
         "systemInventory":"@:appPageTitle.systemInventory",
         "networkDDNS": "@:appPageTitle.networkDDNS",
         "networkLink": "@:appPageTitle.networkLink",
-        "ncsi": "@:appPageTitle.ncsi"
+        "ncsi": "@:appPageTitle.ncsi",
+        "pam": "@:appPageTitle.pam"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -227,7 +228,8 @@
         "systemInventory":"Systeminventar",
         "networkDDNS": "Network DDNS",
         "networkLink": "Netzwerkverbindung",
-        "ncsi": "NCSI"
+        "ncsi": "NCSI",
+        "pam": "PAM-Bestelleinstellungen"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -2308,6 +2310,16 @@
         "toast": {
             "successSaveNetworkLink": "Netzwerklink erfolgreich gespeichert.",
             "errorSavedNetworkLink": "Fehler beim Speichern der Netzwerkverbindung."
+        }
+    },
+    "pagePamOrder": {
+        "pam": "pam",
+        "samePamOrder": "Die Pam-Bestellkonfigurationen sind identisch und müssen daher nicht gespeichert werden.",
+        "informationMessage": "Ziehen Sie die PAM-Module per Drag-and-Drop, um ihre Position in der Reihenfolge zu ändern.",
+        "toast": {
+            "errorSavingPamOrder": "Fehler beim Aktualisieren der PAM-Reihenfolge",
+            "successSavingPamOrder": "Die PAM-Bestellung wurde erfolgreich aktualisiert",
+            "errorGettingPamorder": "Fehler beim Abrufen der PAM-Bestelldaten"
         }
     },
     "countries": {
