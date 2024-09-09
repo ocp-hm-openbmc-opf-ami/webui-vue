@@ -1,5 +1,6 @@
 <template>
   <overview-card
+    v-if="isAmdPlatform"
     :title="$t('pageOverview.powerInformation')"
     :to="`/resource-management/power`"
   >
@@ -33,6 +34,11 @@ export default {
     OverviewCard,
   },
   mixins: [DataFormatterMixin],
+  data() {
+    return {
+      isAmdPlatform: null,
+    };
+  },
   computed: {
     ...mapGetters({
       powerCapValue: 'powerControl/powerCapValue',
@@ -42,7 +48,13 @@ export default {
   created() {
     this.$store.dispatch('powerControl/getPowerControl').finally(() => {
       this.$root.$emit('overview-power-complete');
+      this.checkIsAmdPlatform();
     });
+  },
+  methods: {
+    checkIsAmdPlatform() {
+      this.isAmdPlatform = this.$store.getters['global/isAmdPlatform'];
+    },
   },
 };
 </script>

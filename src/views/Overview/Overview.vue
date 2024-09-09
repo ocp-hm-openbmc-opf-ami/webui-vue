@@ -12,7 +12,7 @@
       </b-card-group>
       <b-card-group deck>
         <overview-network />
-        <overview-power v-if="isAmdPlatform" />
+        <overview-power />
       </b-card-group>
     </page-section>
     <page-section :section-title="$t('pageOverview.statusInformation')">
@@ -56,15 +56,10 @@ export default {
   data() {
     return {
       showDumps: process.env.VUE_APP_ENV_NAME === 'intel',
-      isAmdPlatform: null,
     };
   },
   created() {
     this.startLoader();
-    this.$store.dispatch('powerControl/getPowerControl').finally(() => {
-      this.checkIsAmdPlatform();
-      this.endLoader();
-    });
     const dumpsPromise = new Promise((resolve) => {
       this.$root.$on('overview-dumps-complete', () => resolve());
     });
@@ -80,6 +75,9 @@ export default {
     const networkPromise = new Promise((resolve) => {
       this.$root.$on('overview-network-complete', () => resolve());
     });
+    const powerPromise = new Promise((resolve) => {
+      this.$root.$on('overview-power-complete', () => resolve());
+    });
     const quicklinksPromise = new Promise((resolve) => {
       this.$root.$on('overview-quicklinks-complete', () => resolve());
     });
@@ -92,22 +90,12 @@ export default {
       firmwarePromise,
       inventoryPromise,
       networkPromise,
+      powerPromise,
       quicklinksPromise,
       serverPromise,
     ];
-    if (this.isAmdPlatform) {
-      const powerPromise = new Promise((resolve) => {
-        this.$root.$on('overview-power-complete', () => resolve());
-      });
-      promises.push(powerPromise);
-    }
     if (this.showDumps) promises.push(dumpsPromise);
     Promise.all(promises).finally(() => this.endLoader());
-  },
-  methods: {
-    checkIsAmdPlatform() {
-      this.isAmdPlatform = this.$store.getters['global/isAmdPlatform'];
-    },
   },
 };
 </script>
