@@ -34,7 +34,6 @@ import PoliciesStore from './modules/SecurityAndAccess/PoliciesStore';
 import FactoryResetStore from './modules/Operations/FactoryResetStore';
 import KeyClearStore from './modules/Operations/KeyClearStore';
 import FactoryDefaultStore from './modules/Operations/FactoryDefault';
-import WebSocketPlugin from './plugins/WebSocketPlugin';
 import DateTimeStore from './modules/Settings/DateTimeStore';
 import VirtualMediaStore from './modules/Operations/VirtualMediaStore';
 import KvmStore from './modules/Operations/KvmStore';
@@ -115,5 +114,4 @@ export default new Vuex.Store({
     addc: ADDCStore,
     ncsi: Ncsi,
   },
-  plugins: [WebSocketPlugin],
 });
