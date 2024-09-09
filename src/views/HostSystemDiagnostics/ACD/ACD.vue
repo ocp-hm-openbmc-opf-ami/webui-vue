@@ -223,6 +223,7 @@ export default {
             title: this.$tc('pageAutonomousCrashDump.modal.confirmTitle'),
             okTitle: this.$t('global.action.ok'),
             cancelTitle: this.$t('global.action.cancel'),
+            autoFocusButton: 'cancel',
           },
         )
         .then((createCrashDump) => {

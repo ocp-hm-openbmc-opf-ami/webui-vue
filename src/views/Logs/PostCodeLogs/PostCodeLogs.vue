@@ -316,6 +316,7 @@ export default {
           okTitle: this.$t('global.action.delete'),
           okVariant: 'danger',
           cancelTitle: this.$t('global.action.cancel'),
+          autoFocusButton: 'ok',
         })
         .then((deleteConfirmed) => {
           if (deleteConfirmed) {

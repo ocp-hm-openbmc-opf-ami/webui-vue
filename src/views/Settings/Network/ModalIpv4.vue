@@ -177,6 +177,7 @@ export default {
           title: this.$tc('pageNetwork.modal.confirmTitle'),
           okTitle: this.$t('global.action.ok'),
           cancelTitle: this.$t('global.action.cancel'),
+          autoFocusButton: 'ok',
         })
         .then((addConfirmed) => {
           if (addConfirmed) {

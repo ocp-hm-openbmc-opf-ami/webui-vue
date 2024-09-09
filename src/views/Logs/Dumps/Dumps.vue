@@ -329,6 +329,7 @@ export default {
             title: this.$tc('pageDumps.modal.deleteDump'),
             okTitle: this.$tc('pageDumps.modal.deleteDump'),
             cancelTitle: this.$t('global.action.cancel'),
+            autoFocusButton: 'ok',
           })
           .then((deleteConfrimed) => {
             if (deleteConfrimed) {
@@ -365,6 +366,7 @@ export default {
                 this.selectedRows.length,
               ),
               cancelTitle: this.$t('global.action.cancel'),
+              autoFocusButton: 'ok',
             },
           )
           .then((deleteConfrimed) => {

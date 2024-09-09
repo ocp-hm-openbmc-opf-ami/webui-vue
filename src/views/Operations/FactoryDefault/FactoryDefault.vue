@@ -56,6 +56,7 @@ export default {
               title: this.$tc('PageFactoryDefault.toast.title'),
               okTitle: this.$tc('PageFactoryDefault.toast.okTitle'),
               cancelTitle: this.$t('global.action.cancel'),
+              autoFocusButton: 'ok',
             },
           )
           .then((RestoreConfirmation) => {
@@ -82,6 +83,7 @@ export default {
               title: this.$tc('PageFactoryDefault.toast.title'),
               okTitle: this.$tc('PageFactoryDefault.toast.okTitle'),
               cancelTitle: this.$t('global.action.cancel'),
+              autoFocusButton: 'ok',
             },
           )
           .then((RestoreConfirmation) => {

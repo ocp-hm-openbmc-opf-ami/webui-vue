@@ -188,6 +188,7 @@ export default {
           title: this.$tc('pageVlan.modal.confirmTitle'),
           okTitle: this.$t('global.action.ok'),
           cancelTitle: this.$t('global.action.cancel'),
+          autoFocusButton: 'ok',
         })
         .then((addConfirmed) => {
           if (addConfirmed) {
@@ -220,6 +221,7 @@ export default {
           title: this.$tc('pageVlan.modal.confirmTitle'),
           okTitle: this.$t('global.action.ok'),
           cancelTitle: this.$t('global.action.cancel'),
+          autoFocusButton: 'ok',
         })
         .then((deleteConfirmed) => {
           if (deleteConfirmed) {
