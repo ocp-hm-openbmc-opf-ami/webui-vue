@@ -60,8 +60,11 @@ export default {
     };
   },
   created() {
-    this.checkIsAmdPlatform();
     this.startLoader();
+    this.$store.dispatch('powerControl/getPowerControl').finally(() => {
+      this.checkIsAmdPlatform();
+      this.endLoader();
+    });
     const dumpsPromise = new Promise((resolve) => {
       this.$root.$on('overview-dumps-complete', () => resolve());
     });
