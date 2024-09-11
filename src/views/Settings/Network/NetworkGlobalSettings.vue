@@ -9,7 +9,9 @@
               <icon-edit :title="$t('pageNetwork.modal.editHostnameTitle')" />
             </b-button>
           </dt>
-          <dd>{{ dataFormatter(firstInterface.hostname) }}</dd>
+          <dd style="word-break: break-all">
+            {{ dataFormatter(firstInterface.hostname) }}
+          </dd>
         </dl>
       </b-col>
     </b-row>
