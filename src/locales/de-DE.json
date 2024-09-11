@@ -1878,7 +1878,8 @@
         "kvmSessionTimeOutDescription": "Ändern Sie das Zeitlimit für die KVM-Sitzung zwischen 30 Sekunden und 86.400 Sekunden Zeitverzögerung.",
         "kvmPortValue": "KVM-Portwert (in Zahlen)",
         "webPortValue": "Web-Port-Wert (in Zahlen)",
-        "kvmTimeoutValueLimits": "Bitte geben Sie die Sekunden zwischen %{min} und %{max} ein."
+        "kvmTimeoutValueLimits": "Bitte geben Sie die Sekunden zwischen %{min} und %{max} ein.",
+        "kvmPortValueLimits": "Bitte geben Sie die Werte zwischen %{min} und %{max} ein"
     },
     "pagePower": {
         "description": "Legen Sie eine Leistungsobergrenze fest, um den Stromverbrauch auf oder unter dem angegebenen Wert in Watt zu halten",

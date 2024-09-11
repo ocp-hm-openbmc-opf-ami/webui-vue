@@ -177,6 +177,14 @@
                         <template v-if="!$v.kvmPort.required">
                           {{ $t('global.form.fieldRequired') }}
                         </template>
+                        <template v-else-if="!$v.kvmPort.pattern">
+                          {{
+                            $t('pagePolicies.kvmPortValueLimits', {
+                              min: 0,
+                              max: 65535,
+                            })
+                          }}
+                        </template>
                       </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
@@ -802,6 +810,9 @@ export default {
       },
       kvmPort: {
         required,
+        pattern: function (pw) {
+          return this.kvmPortValueValidation(pw);
+        },
       },
       webPort: {
         required,
@@ -995,6 +1006,16 @@ export default {
     kvmSessionTimeoutValidation(val) {
       if (
         !/^(3[0-9]|[4-9][0-9]|[1-9][0-9]{2}|[1-8][0-9]{3}|[1-7][0-9]{4}|8[0-5][0-9]{3}|86[0-3][0-9]{2}|86400)$/.test(
+          val,
+        )
+      ) {
+        return false;
+      }
+      return true;
+    },
+    kvmPortValueValidation(val) {
+      if (
+        !/^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/.test(
           val,
         )
       ) {

@@ -1891,7 +1891,8 @@
         "kvmSessionTimeOutDescription": "将 kvm 会话超时更改为 30 秒到 86400 秒的时间延迟。",
         "kvmPortValue": "KVM 端口值（以数字表示）",
         "webPortValue": "Web 端口值（以数字表示）",
-        "kvmTimeoutValueLimits": "请输入 %{min} 和 %{max} 之间的秒数。"
+        "kvmTimeoutValueLimits": "请输入 %{min} 和 %{max} 之间的秒数。",
+        "kvmPortValueLimits": "请输入 %{min} 和 %{max} 之间的值"
     },
     "pagePower": {
         "description": "设置电源上限以使功耗保持在或低于指定值",

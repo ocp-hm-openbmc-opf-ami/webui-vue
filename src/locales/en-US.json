@@ -1897,7 +1897,8 @@
         "kvmSessionTimeOutDescription": "Change the kvm session timeout in between 30 Seconds to 86400 seconds time delay",
         "kvmPortValue": "KVM Port Value (in numbers)",
         "webPortValue": "Web Port Value (in numbers)",
-        "kvmTimeoutValueLimits": "Kindly enter the Seconds between %{min} and %{max}"
+        "kvmTimeoutValueLimits": "Kindly enter the Seconds between %{min} and %{max}",
+        "kvmPortValueLimits": "Kindly enter the Values between %{min} and %{max}"
 
     },
     "pagePower": {
