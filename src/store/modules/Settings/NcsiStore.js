@@ -64,10 +64,10 @@ const NcsiStore = {
     async getNcsiData({ commit }, ethernetData) {
       let ncsiInterfaces = [];
       ethernetData.forEach((ethernet) => {
-        if (ethernet.Id != 'usb0') {
+        if (ethernet.Id != 'hostusb0') {
           if (
             ethernet?.Oem?.Ami?.NCSIConfiguration &&
-            ethernet?.Oem?.Ami?.NCSIConfiguration?.ChannelId
+            ethernet?.Oem?.Ami?.NCSIConfiguration?.ChannelId !== undefined
           ) {
             ncsiInterfaces.push(ethernet);
             commit('setNcsiEnable', true);
