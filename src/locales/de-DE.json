@@ -2226,6 +2226,7 @@
             "errorSaveFireWall": "Fehler beim Speichern der Firewall-Regeln.",
             "errorDelete": "Fehler beim Löschen der FireWall-Regeln.",
             "errorDateOrTimeSaveFireWall": "Ungültiges Datum oder ungültige Uhrzeit.",
+            "errorStartorEndIpSaveFireWall": "Ungültige Bereichsanfangs- oder Bereichsend-IP.",
             "featureNotAvailable": "Die System-Firewall-Funktion ist nicht aktiviert."
         },
         "table": {

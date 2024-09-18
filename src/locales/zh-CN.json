@@ -2241,6 +2241,7 @@
             "errorSaveFireWall": "保存的防火墙规则出错。",
             "errorDelete": "删除防火墙规则时出错。",
             "errorDateOrTimeSaveFireWall": "日期或时间无效。",
+            "errorStartorEndIpSaveFireWall": "范围起始或范围结束 IP 无效。",
             "featureNotAvailable": "系统防火墙功能未启用。"
         },
         "table": {

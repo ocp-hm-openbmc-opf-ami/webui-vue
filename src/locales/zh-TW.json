@@ -2245,6 +2245,7 @@
             "errorSaveFireWall": "已儲存的防火牆規則出錯。",
             "errorDelete": "刪除防火牆規則時發生錯誤。",
             "errorDateOrTimeSaveFireWall": "日期或時間無效。",
+            "errorStartorEndIpSaveFireWall": "範圍起始或範圍結束 IP 無效。",
             "featureNotAvailable": "系統防火牆功能未啟用。"
         },
         "table": {

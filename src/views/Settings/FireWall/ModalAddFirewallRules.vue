@@ -641,12 +641,18 @@ export default {
             value,
           ) &&
           value.length != 0) ||
-        (value.length != 0 && value < this.form.ipStart)
+        (value.length != 0 &&
+          this.ipToInt(value) < this.ipToInt(this.form.ipStart))
       ) {
         return false;
       } else {
         return true;
       }
+    },
+    ipToInt(ip) {
+      return ip
+        .split('.')
+        .reduce((acc, octet) => (acc << 8) + parseInt(octet, 10), 0);
     },
     portStartValidation(value) {
       if (

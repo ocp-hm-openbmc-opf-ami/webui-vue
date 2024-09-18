@@ -46,6 +46,19 @@ const FireWallStore = {
             throw new Error(
               i18n.t('pageFireWall.toast.errorDateOrTimeSaveFireWall'),
             );
+          } else if (
+            error.response.data['StartSourceIPAddress@Message.ExtendedInfo'] ||
+            error.response.data['EndSourceIPAddress@Message.ExtendedInfo'] ||
+            error.response.data.error[
+              '@Message.ExtendedInfo'
+            ][0].Message.includes('EndSourceIPAddress') ||
+            error.response.data.error[
+              '@Message.ExtendedInfo'
+            ][0].Message.includes('StartSourceIPAddress')
+          ) {
+            throw new Error(
+              i18n.t('pageFireWall.toast.errorStartorEndIpSaveFireWall'),
+            );
           } else {
             throw new Error(i18n.t('pageFireWall.toast.errorSaveFireWall'));
           }

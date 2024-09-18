@@ -2250,6 +2250,7 @@
             "errorSaveFireWall": "Error saved Firewall Rules.",
             "errorDelete": "Error deleting FireWall Rules.",
             "errorDateOrTimeSaveFireWall": "Invalid Date or Time.",
+            "errorStartorEndIpSaveFireWall": "Invalid Range Start or Range End IP.",
             "featureNotAvailable": "The system firewall feature is not enabled."
         },
         "table": {
