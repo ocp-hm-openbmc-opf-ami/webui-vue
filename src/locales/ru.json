@@ -991,6 +991,27 @@
             "serverClosedWithErrors": "Соединение разорвано"
         }
     },
+    "pageAdapter": {
+        "generic": "Агульны",
+        "mA": "міліампер",
+        "mV": "Мілівольт",
+        "celsius": "градус Цэльсія",
+        "id": "Ідэнтыфікатар",
+        "type": "Тып",
+        "health": "Здароўе",
+        "status": "Стан",
+        "current": "Бягучы",
+        "temperature": "Тэмпэратура",
+        "voltage": "Напружанне",
+        "firmwareVersion": "Версія прашыўкі",
+        "memberId": "Ідэнтыфікатар удзельніка",
+        "name": "Імя",
+        "serialNumber": "Сэрыйны нумар",
+        "supportedRaidTypes": "Тыпы RAID, якія падтрымліваюцца",
+        "viewPhysicalDevices": "Праглядзець фізічныя прылады",
+        "viewLogicalDevices": "Праглядзець лагічныя прылады",
+        "noRaidControllerAvailable": "Няма даступных кантролераў RAID."
+    },
     "countries": {
         "AF": "Афганистан",
         "AL": "Албания",
