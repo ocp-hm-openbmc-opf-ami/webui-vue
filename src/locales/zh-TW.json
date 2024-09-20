@@ -173,7 +173,8 @@
         "systemInventory":"@:appPageTitle.systemInventory",
         "networkDDNS": "@:appPageTitle.networkDDNS",
         "networkLink": "@:appPageTitle.networkLink",
-        "ncsi": "@:appPageTitle.ncsi"
+        "ncsi": "@:appPageTitle.ncsi",
+        "radius": "@:appPageTitle.radius"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -228,7 +229,8 @@
         "systemInventory":"系統庫存",
         "networkDDNS": "Network DDNS",
         "networkLink": "網路連結",
-        "ncsi": "NCSI"
+        "ncsi": "NCSI",
+        "radius": "Radius"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -1298,6 +1300,21 @@
             "successSaveActiveDirectorySettings": "成功儲存Active Directory 設定.",
             "successSaveLdapSettings": "成功儲存 Open LDAP 設定.",
             "successSaveRoleGroup": "成功儲存角色群組'%{groupName}'."
+        }
+    },
+    "pageRadius": {
+        "pageGeneralRadius": "一般 RADIUS 設置",
+        "pageAdvancedRadius": "進階 RADIUS 設置",
+        "enableRadiusAuthentication": " 啟用 RADIUS 認證",
+        "form": {
+            "serviceAddress": "伺服器位址",
+            "port": "埠號",
+            "secret": "密碼",
+            "administrator": "管理者",
+            "operator": "操作者",
+            "user": "使用者",
+            "oemProprietary": "OEM 所有權",
+            "noAccess": "無法存取"
         }
     },
     "pageUserManagement": {

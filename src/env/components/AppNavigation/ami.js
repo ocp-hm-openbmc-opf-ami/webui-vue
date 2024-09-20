@@ -238,6 +238,11 @@ const AppNavigationMixin = {
               route: '/security-and-access/ldap',
             },
             {
+              id: 'radius',
+              label: this.$t('appNavigation.radius'),
+              route: '/security-and-access/radius',
+            },
+            {
               id: 'user-management',
               label: this.$t('appNavigation.userManagement'),
               route: '/security-and-access/user-management',

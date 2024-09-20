@@ -176,7 +176,8 @@
         "systemInventory": "@:appPageTitle.systemInventory",
         "networkDDNS": "@:appPageTitle.networkDDNS",
         "networkLink": "@:appPageTitle.networkLink",
-        "ncsi": "@:appPageTitle.ncsi"
+        "ncsi": "@:appPageTitle.ncsi",
+        "radius": "@:appPageTitle.radius"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -231,7 +232,8 @@
         "systemInventory": "System Inventory",
         "networkDDNS": "Network DDNS",
         "networkLink": "Network Link",
-        "ncsi": "NCSI"
+        "ncsi": "NCSI",
+        "radius": "Radius"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -1301,6 +1303,21 @@
             "successSaveActiveDirectorySettings": "Successfully saved Active Directory settings.",
             "successSaveLdapSettings": "Successfully saved Open LDAP settings.",
             "successSaveRoleGroup": "Successfully saved role group '%{groupName}'."
+        }
+    },
+    "pageRadius": {
+        "pageGeneralRadius": "General RADIUS Settings",
+        "pageAdvancedRadius": "Advanced RADIUS Settings",
+        "enableRadiusAuthentication": " Enable RADIUS Authentication",
+        "form": {
+            "serviceAddress": "Server Address",
+            "port": "Port",
+            "secret": "Secret",
+            "administrator": "Administrator",
+            "operator": "Operator",
+            "user": "User",
+            "oemProprietary": "OEM Proprietary",
+            "noAccess": "No Access"
         }
     },
     "pageUserManagement": {
