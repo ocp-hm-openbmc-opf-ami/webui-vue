@@ -922,6 +922,7 @@ export default {
           title: this.$tc('pagePolicies.modal.confirmTitle'),
           okTitle: this.$t('global.action.ok'),
           cancelTitle: this.$t('global.action.cancel'),
+          autoFocusButton: 'ok',
         })
         .then((confirmed) => {
           if (confirmed) {
@@ -972,6 +973,7 @@ export default {
           title: this.$tc('pagePolicies.modal.kvmPortTitle'),
           okTitle: this.$tc('global.action.ok'),
           cancelTitle: this.$t('global.action.cancel'),
+          autoFocusButton: 'ok',
         })
         .then((confirmation) => {
           if (confirmation) {
@@ -990,6 +992,7 @@ export default {
           title: this.$tc('pagePolicies.modal.webPortTitle'),
           okTitle: this.$tc('global.action.ok'),
           cancelTitle: this.$t('global.action.cancel'),
+          autoFocusButton: 'ok',
         })
         .then((confirmation) => {
           if (confirmation) {

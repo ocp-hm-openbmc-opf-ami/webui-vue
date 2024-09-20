@@ -205,6 +205,7 @@ export default {
             title: this.$tc('bond.bond'),
             okTitle: this.$tc('bond.confirmOk'),
             cancelTitle: this.$t('global.action.cancel'),
+            autoFocusButton: 'ok',
           })
           .then((deleteConfirmed) => {
             if (deleteConfirmed) {

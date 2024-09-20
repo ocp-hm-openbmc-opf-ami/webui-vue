@@ -264,6 +264,7 @@ export default {
               'pageFireWall.firewallSettings.modal.deleteFireWall',
             ),
             cancelTitle: this.$t('global.action.cancel'),
+            autoFocusButton: 'ok',
           },
         )
         .then((deleteConfirmed) => {

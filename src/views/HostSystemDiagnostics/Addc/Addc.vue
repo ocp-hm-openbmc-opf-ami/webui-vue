@@ -519,6 +519,7 @@ export default {
           title: this.$tc('pageAddc.clearlog'),
           okTitle: this.$tc('global.action.ok'),
           cancelTitle: this.$t('global.action.cancel'),
+          autoFocusButton: 'cancel',
         })
         .then((deleteConfirmed) => {
           if (deleteConfirmed) {

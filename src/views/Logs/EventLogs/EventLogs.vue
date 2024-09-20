@@ -506,6 +506,7 @@ export default {
           okTitle: this.$t('global.action.delete'),
           okVariant: 'danger',
           cancelTitle: this.$t('global.action.cancel'),
+          autoFocusButton: 'cancel',
         })
         .then((deleteConfirmed) => {
           if (deleteConfirmed) {
@@ -552,6 +553,7 @@ export default {
             title: this.$tc('pageEventLogs.modal.deleteTitle'),
             okTitle: this.$t('global.action.delete'),
             cancelTitle: this.$t('global.action.cancel'),
+            autoFocusButton: 'cancel',
           })
           .then((deleteConfirmed) => {
             if (deleteConfirmed) this.deleteLogs([uri]);
@@ -574,6 +576,7 @@ export default {
               ),
               okTitle: this.$t('global.action.delete'),
               cancelTitle: this.$t('global.action.cancel'),
+              autoFocusButton: 'cancel',
             },
           )
           .then((deleteConfirmed) => {
