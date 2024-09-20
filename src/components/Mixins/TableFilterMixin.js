@@ -50,8 +50,8 @@ const TableFilterMixin = {
 
       return tableData.filter((row) => {
         const date = row[propertyKey];
-        if (!(date instanceof Date)) return;
-        const dateInMs = date.getTime();
+        if (!(new Date(date) instanceof Date)) return;
+        const dateInMs = new Date(date).getTime();
         if (dateInMs >= startDateInMs && dateInMs <= endDateInMs) return row;
       });
     },

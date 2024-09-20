@@ -172,7 +172,9 @@
         "systemInventory":"@:appPageTitle.systemInventory",
         "networkDDNS": "@:appPageTitle.networkDDNS",
         "networkLink": "@:appPageTitle.networkLink",
-        "ncsi": "@:appPageTitle.ncsi"
+        "ncsi": "@:appPageTitle.ncsi",
+        "autoVideo":"@:appPageTitle.autoVideo",
+        "videoLog":"@:appPageTitle.videoLog"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -227,7 +229,9 @@
         "systemInventory":"Systeminventar",
         "networkDDNS": "Network DDNS",
         "networkLink": "Netzwerkverbindung",
-        "ncsi": "NCSI"
+        "ncsi": "NCSI",
+        "autoVideo":"Automatische Videoeinstellungen",
+        "videoLog":"Videoprotokoll"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -2308,6 +2312,71 @@
         "toast": {
             "successSaveNetworkLink": "Netzwerklink erfolgreich gespeichert.",
             "errorSavedNetworkLink": "Fehler beim Speichern der Netzwerkverbindung."
+        }
+    },
+    "pageVideo": {
+        "autoVideo":"Automatische Videoeinstellungen",
+        "video": "Video-Trigger-Einstellungen",
+        "videoRemote": "Video-Remote-Speicher",
+        "preEventVideoRecord":"Videoaufzeichnungen vor der Veranstaltung",
+        "videoTriggerSettings": {
+            "critical": "Kritische Ereignisse (Temperatur/Spannung)",
+            "nonCritical": "Nicht kritische Ereignisse (Temperatur/Spannung)",
+            "nonRecoverable": "Nicht wiederherstellbare Ereignisse (Temperatur/Spannung)",
+            "fanStateChanged": "Geänderte Fan-Status-Ereignisse",
+            "watchdogTimer": "Watchdog-Timer-Ereignisse",
+            "chassisPowerOn": "Gehäuse-Einschaltereignisse",
+            "chassisPowerOff": "Gehäuse-Ausschaltereignisse",
+            "chassisReset": "Chassis-Reset-Ereignisse",
+            "LPCReset": "LPC-Reset-Ereignisse",
+            "dateAndTime": "Datum und Uhrzeit des Ereignisses",
+            "crashReset": "Absturz-Reset",
+            "precrash": "Vor dem Absturz",
+            "preReset": "Vorab zurückgesetzt"
+        },
+        "videoRemoteSettings": {
+            "recordVideotoRemoteServer": "Video auf Remote-Server aufzeichnen",
+            "videoRemoteMaximumDumps":"Maximale Dumps",
+            "videoRemoteMaximumDuration": "Maximale Dauer (Sek.)",
+            "videoRemoteMaximumSize":"Maximale Größe (MB)",
+            "videoRemoteServerAddress": "Serveradresse",
+            "videoRemotePathInServer": "Pfad im Server",
+            "videoRemoteShareType": "Freigabetyp",
+            "nfs": "NFS",
+            "cifs": "CIFS",
+            "domainName": "Domainname",
+            "username": "Benutzername",
+            "password": "Passwort"
+        },
+        "preEventVideoRecordSettings": {
+            "videoQuality": "Videoqualität",
+            "videoQualityVeryLow": "Sehr niedrig",
+            "preEventLow": "Niedrig",
+            "videoQualityAverage": "Durchschnitt",
+            "preEventNormal": "Normal",
+            "preEventHigh": "Hoch",
+            "compressionMode":"Komprimierungsmodus",
+            "compressionModeNo":"no",
+            "framesPerSecond": "Bilder pro Sekunde",
+            "videoDuration":"Videodauer"
+        }
+    },    
+    "videoLog":{
+        "table": {
+            "date": "Datum",
+            "downloadTitle":"Klicken Sie hier, um das Videoprotokoll herunterzuladen",
+            "deleteTitle":"Klicken Sie hier, um das Videoprotokoll zu löschen",
+            "fileName": "Dateiname",
+            "id": "AUSWEIS",
+            "searchLogs": "Protokolle durchsuchen"
+        },
+        "modal": {
+            "deleteMessage": "Sind Sie sicher, dass Sie das %{count}-Protokoll löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden. | Sind Sie sicher, dass Sie %{count} Protokolle löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
+        },
+        "toast": {
+            "errorDelete": "Fehler beim Löschen der Videoprotokolle.",
+            "successVideoDownload": "Videoprotokoll erfolgreich heruntergeladen.",
+            "successVideoLogCleared": "Videoprotokoll erfolgreich gelöscht."
         }
     },
     "countries": {

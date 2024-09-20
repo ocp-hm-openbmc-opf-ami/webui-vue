@@ -53,6 +53,8 @@ import NetworkDDNSStore from './modules/Settings/NetworkDDNSStore';
 import NetworkLinkStore from './modules/Settings/NetworkLinkStore';
 import ADDCStore from './modules/Settings/ADDCStore';
 import Ncsi from './modules/Settings/NcsiStore';
+import VideoLogStore from './modules/Logs/VideoLogStore';
+import AutoVideoStore from './modules/Settings/AutoVideoStore';
 
 Vue.use(Vuex);
 
@@ -113,5 +115,7 @@ export default new Vuex.Store({
     networkLink: NetworkLinkStore,
     addc: ADDCStore,
     ncsi: Ncsi,
+    videoLog: VideoLogStore,
+    autoVideo: AutoVideoStore,
   },
 });

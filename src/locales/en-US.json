@@ -176,7 +176,9 @@
         "systemInventory": "@:appPageTitle.systemInventory",
         "networkDDNS": "@:appPageTitle.networkDDNS",
         "networkLink": "@:appPageTitle.networkLink",
-        "ncsi": "@:appPageTitle.ncsi"
+        "ncsi": "@:appPageTitle.ncsi",
+        "autoVideo":"@:appPageTitle.autoVideo",
+        "videoLog":"@:appPageTitle.videoLog"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -231,7 +233,9 @@
         "systemInventory": "System Inventory",
         "networkDDNS": "Network DDNS",
         "networkLink": "Network Link",
-        "ncsi": "NCSI"
+        "ncsi": "NCSI",
+        "autoVideo":"Auto Video Settings",
+        "videoLog":"Video Log"
     },
     "pageDDNSNetwork": {
         "ddnsConfiguration": {
@@ -2333,6 +2337,71 @@
         "toast": {
             "successSaveNetworkLink": "Successfully saved Network Link.",
             "errorSavedNetworkLink": "Error saved Network Link."
+        }
+    },
+    "pageVideo": {
+        "autoVideo":"Auto Video Settings",
+        "video": "Video Trigger Settings",
+        "videoRemote": "Video Remote Storage",
+        "preEventVideoRecord":"Pre-Event Video Recordings",
+        "videoTriggerSettings": {
+            "critical": "Critical Events (Temperature/Voltage)",
+            "nonCritical": "Non Critical Events (Temperature/Voltage)",
+            "nonRecoverable": "Non Recoverable Events (Temperature/Voltage)",
+            "fanStateChanged": "Fan State Changed Events",
+            "watchdogTimer": "Watchdog Timer Events",
+            "chassisPowerOn": "Chassis Power On Events",
+            "chassisPowerOff": "Chassis Power Off Events",
+            "chassisReset": "Chassis Reset Events",
+            "LPCReset": "LPC Reset Events",
+            "dateAndTime": "Date and Time Event",
+            "crashReset": "Crash Reset",
+            "precrash": "Pre-crash",
+            "preReset": "Pre-reset "
+        },
+        "videoRemoteSettings": {
+            "recordVideotoRemoteServer": "Record Video to Remote Server",
+            "videoRemoteMaximumDumps":"Maximum Dumps",
+            "videoRemoteMaximumDuration": "Maximum Duration (Sec)",
+            "videoRemoteMaximumSize":"Maximum Size (MB)",
+            "videoRemoteServerAddress": "Server Address",
+            "videoRemotePathInServer": "Path in Server",
+            "videoRemoteShareType": "Share Type",
+            "nfs": "NFS",
+            "cifs": "CIFS",
+            "domainName": "Domain Name",
+            "username": "Username",
+            "password": "Password"
+        },
+        "preEventVideoRecordSettings": {
+            "videoQuality": "Video Quality",
+            "videoQualityVeryLow": "Very Low",
+            "preEventLow": "Low",
+            "videoQualityAverage": "Average",
+            "preEventNormal": "Normal",
+            "preEventHigh": "High",
+            "compressionMode":"Compression Mode",
+            "compressionModeNo":"no",
+            "framesPerSecond": "Frames Per Second",
+            "videoDuration":"Video Duration"
+        }
+    },
+    "videoLog":{
+        "table": {
+            "date": "Date",
+            "downloadTitle":"Click to download video Log",
+            "deleteTitle":"Click to delete video Log",
+            "fileName": "File Name",
+            "id": "ID",
+            "searchLogs": "Search logs"
+        },
+        "modal": {
+            "deleteMessage": "Are you sure you want to delete %{count} log? This action cannot be undone. | Are you sure you want to delete %{count} logs? This action cannot be undone."
+        },
+        "toast": {
+            "errorDelete": "Error deleting Video logs.",
+            "successVideoDownload": "Video Log Downloaded Successfully.",
+            "successVideoLogCleared": "Video Log deleted Successfully."
         }
     },
     "countries": {

@@ -47,6 +47,8 @@ import systemInventory from '@/views/SystemInventory/SystemInventory';
 import DDNS from '../../views/Settings/NetworkDDNS';
 import NetworkLink from '@/views/Settings/NetworkLink/NetworkLink';
 import Ncsi from '@/views/Settings/Ncsi';
+import AutoVideoSettings from '@/views/Settings/AutoVideoSettings';
+import VideoLogs from '@/views/Logs/VideoLogs';
 
 const roles = {
   administrator: 'Administrator',
@@ -436,6 +438,22 @@ const routes = [
         component: NetworkLink,
         meta: {
           title: i18n.t('appPageTitle.networkLink'),
+        },
+      },
+      {
+        path: '/settings/auto-video',
+        name: 'auto-video',
+        component: AutoVideoSettings,
+        meta: {
+          title: i18n.t('appPageTitle.autoVideo'),
+        },
+      },
+      {
+        path: '/logs/video-log',
+        name: 'video-log',
+        component: VideoLogs,
+        meta: {
+          title: i18n.t('appPageTitle.videoLog'),
         },
       },
     ],
