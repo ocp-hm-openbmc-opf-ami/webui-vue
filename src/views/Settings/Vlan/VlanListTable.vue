@@ -36,6 +36,7 @@
             <b-form-input
               id="vlanId"
               v-model="form.vlanId"
+              type="number"
               :state="getValidationState($v.form.vlanId)"
             >
             </b-form-input>
@@ -43,8 +44,42 @@
               <template v-if="!$v.form.vlanId.required">
                 {{ $t('global.form.fieldRequired') }}
               </template>
-              <template v-if="!$v.form.vlanId.numeric">
-                {{ $t('global.form.invalidFormat') }}
+              <template v-else-if="!$v.form.vlanId.pattern">
+                {{
+                  $t('pageVlan.vlanRangeLimits', {
+                    min: 2,
+                    max: 4094,
+                  })
+                }}
+              </template>
+            </b-form-invalid-feedback>
+          </b-form-group>
+        </b-col>
+      </b-row>
+      <b-row class="w-50 mb-2">
+        <b-col class="d-sm-flex"
+          ><span>{{ $t('pageVlan.table.vlanPriority') }}</span></b-col
+        >
+        <b-col class="d-sm-flex">
+          <b-form-group>
+            <b-form-input
+              id="vlanPriority"
+              v-model="form.vlanPriority"
+              type="number"
+              :state="getValidationState($v.form.vlanPriority)"
+            >
+            </b-form-input>
+            <b-form-invalid-feedback role="alert">
+              <template v-if="!$v.form.vlanPriority.required">
+                {{ $t('global.form.fieldRequired') }}
+              </template>
+              <template v-else-if="!$v.form.vlanPriority.pattern">
+                {{
+                  $t('pageVlan.vlanRangeLimits', {
+                    min: 0,
+                    max: 7,
+                  })
+                }}
               </template>
             </b-form-invalid-feedback>
           </b-form-group>
@@ -63,7 +98,7 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import IconTrashcan from '@carbon/icons-vue/es/trash-can/20';
 import TableRowAction from '@/components/Global/TableRowAction';
 import { mapState } from 'vuex';
-import { required, numeric } from 'vuelidate/lib/validators';
+import { required } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 
 export default {
@@ -82,6 +117,7 @@ export default {
       form: {
         tableItems: [],
         vlanId: null,
+        vlanPriority: null,
       },
       actions: [
         {
@@ -97,6 +133,10 @@ export default {
         {
           key: 'VLANId',
           label: this.$t('pageVlan.table.id'),
+        },
+        {
+          key: 'VLANPriority',
+          label: this.$t('pageVlan.table.vlanPriority'),
         },
         { key: 'actions', label: '', tdClass: 'text-right' },
       ],
@@ -122,7 +162,15 @@ export default {
       form: {
         vlanId: {
           required,
-          numeric,
+          pattern: function (pw) {
+            return this.vlanIdValidation(pw);
+          },
+        },
+        vlanPriority: {
+          required,
+          pattern: function (pw) {
+            return this.vlanPriorityValidation(pw);
+          },
         },
       },
     };
@@ -145,6 +193,7 @@ export default {
             VLANEnable: rowData.VLANEnable,
             VirtualInterface: rowData.Id,
             VLANId: rowData.VLANId,
+            VLANPriority: rowData.VLANPriority,
             actions: [
               {
                 value: 'delete',
@@ -161,6 +210,7 @@ export default {
           VLANEnable: null,
           VirtualInterface: '~',
           VLANId: '~',
+          VLANPriority: '~',
           actions: [
             {
               value: '~',
@@ -174,11 +224,9 @@ export default {
     },
     onRowSelected(rowData) {
       this.rowSelected = true;
-      if (rowData.VLANId == '~') {
-        this.form.vlanId = null;
-      } else {
-        this.form.vlanId = rowData.VLANId;
-      }
+      this.form.vlanId = rowData.VLANId === '~' ? null : rowData.VLANId;
+      this.form.vlanPriority =
+        rowData.VLANPriority === '~' ? null : rowData.VLANPriority;
     },
     addVlan() {
       this.$v.$touch();
@@ -192,10 +240,11 @@ export default {
         })
         .then((addConfirmed) => {
           if (addConfirmed) {
-            if (this.form.vlanId != '') {
+            if (this.form.vlanId != '' && this.form.vlanPriority != '') {
               this.startLoader();
               const vlanInputData = {
                 VLANId: parseInt(this.form.vlanId),
+                VLANPriority: parseInt(this.form.vlanPriority),
                 VLANEnable: true,
                 TabId: this.tabIdFn(),
               };
@@ -242,6 +291,18 @@ export default {
               });
           }
         });
+    },
+    vlanIdValidation(val) {
+      if (!/^(?:[2-9]|[1-3][0-9]{1,3}|40[0-8][0-9]|409[0-4])$/.test(val)) {
+        return false;
+      }
+      return true;
+    },
+    vlanPriorityValidation(val) {
+      if (!/^[0-7]$/.test(val)) {
+        return false;
+      }
+      return true;
     },
   },
 };

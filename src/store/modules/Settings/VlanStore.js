@@ -49,11 +49,12 @@ const NetworkStore = {
           console.log(error);
         });
     },
-    async addVlan({ dispatch }, { VLANEnable, VLANId, TabId }) {
+    async addVlan({ dispatch }, { VLANEnable, VLANId, VLANPriority, TabId }) {
       const data = {
         VLAN: {
           VLANEnable: VLANEnable,
           VLANId: VLANId,
+          VLANPriority: VLANPriority,
         },
         Links: {
           RelatedInterfaces: [

@@ -1601,9 +1601,11 @@
     },
     "pageVlan": {
         "vlan": "VLAN Settings",
+        "vlanRangeLimits": "Kindly enter the Values between %{min} and %{max}",
         "table": {
             "virtualInterface": "Virtual Interface",
             "id": "VLAN ID",
+            "vlanPriority": "VLAN Priority",
             "add": "Add",
             "deleteVlan": "Delete Vlan Id"
         },

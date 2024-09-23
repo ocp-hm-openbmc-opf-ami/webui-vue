@@ -1593,9 +1593,11 @@
     },
     "pageVlan": {
         "vlan": "VLAN Einstellungen",
+        "vlanRangeLimits": "Bitte geben Sie die Werte zwischen %{min} und %{max} ein",
         "table": {
             "virtualInterface": "Virtuelle Schnittstelle",
             "id": "VLAN ID",
+            "vlanPriority": "VLAN-Priorität",
             "add": "Hinzufügen",
             "deleteVlan": "VLAN ID löschen"
         },

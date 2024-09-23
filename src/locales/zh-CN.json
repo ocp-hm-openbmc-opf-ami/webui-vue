@@ -1593,9 +1593,11 @@
     },
     "pageVlan": {
         "vlan": "VLAN 设定",
+        "vlanRangeLimits": "请输入 %{min} 和 %{max} 之间的值",
         "table": {
             "virtualInterface": "虚拟介面",
             "id": "VLAN ID",
+            "vlanPriority": "VLAN 优先权",
             "add": "新增",
             "deleteVlan": "删除 Vlan Id"
         },
