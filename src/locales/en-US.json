@@ -1690,6 +1690,8 @@
         "toast": {
             "successSMTPConfiguration": "Successfully updated SMTP Configuration",
             "successAddCertificate": "Successfully added %{certificate}.",
+            "successMsgTestAlert": "Test Alert send successfully",
+            "errorMsgAlert": "Error in sending test alerts",
             "errorSMTPConfiguration": "Error updating SMTP Configuration",
             "errorAddCertificate": "Error adding certificate.",
             "errorAddPemCertificate": "Please upload the Cacert PEM certificate",

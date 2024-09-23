@@ -141,7 +141,7 @@ const SmtpStore = {
         (smtpData.PrimaryConfiguration.Enable &&
           smtpData.PrimaryConfiguration?.Host != '') ||
         (smtpData.SecondaryConfiguration.Enable &&
-          smtpData.PrimaryConfiguration?.Host != '')
+          smtpData.SecondaryConfiguration?.Host != '')
       ) {
         state.sendTestAlert = true;
       } else state.sendTestAlert = false;
