@@ -1303,6 +1303,7 @@
         "pageGeneralRadius": "一般 RADIUS 设置",
         "pageAdvancedRadius": "高级 RADIUS 设置",
         "enableRadiusAuthentication": " 启用 RADIUS 认证",
+        "RadiusConfiguration": "Radius 配置未启用。",
         "form": {
             "serviceAddress": "服务器地址",
             "port": "端口",

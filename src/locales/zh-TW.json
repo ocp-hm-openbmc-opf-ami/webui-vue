@@ -1306,6 +1306,7 @@
         "pageGeneralRadius": "一般 RADIUS 設置",
         "pageAdvancedRadius": "進階 RADIUS 設置",
         "enableRadiusAuthentication": " 啟用 RADIUS 認證",
+        "RadiusConfiguration": "未啟用半徑配置。",
         "form": {
             "serviceAddress": "伺服器位址",
             "port": "埠號",

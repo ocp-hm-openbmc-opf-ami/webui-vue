@@ -1309,8 +1309,9 @@
         "pageGeneralRadius": "General RADIUS Settings",
         "pageAdvancedRadius": "Advanced RADIUS Settings",
         "enableRadiusAuthentication": " Enable RADIUS Authentication",
+        "RadiusConfiguration": " Radius configuration is not enabled.",
         "form": {
-            "serviceAddress": "Server Address",
+            "serverAddress": "Server Address",
             "port": "Port",
             "secret": "Secret",
             "administrator": "Administrator",

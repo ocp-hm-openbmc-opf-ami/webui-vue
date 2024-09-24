@@ -238,11 +238,6 @@ const AppNavigationMixin = {
               route: '/security-and-access/ldap',
             },
             {
-              id: 'radius',
-              label: this.$t('appNavigation.radius'),
-              route: '/security-and-access/radius',
-            },
-            {
               id: 'user-management',
               label: this.$t('appNavigation.userManagement'),
               route: '/security-and-access/user-management',
@@ -338,6 +333,14 @@ const AppNavigationMixin = {
           label: this.$t('appNavigation.nicInformation'),
           icon: 'iconNic',
           route: '/nic',
+        });
+      }
+      if (process.env.VUE_APP_RADIUS_SUPPORT === 'true') {
+        navigationItemsList.navigationItems[6].children.push({
+          id: 'radius',
+          label: this.$t('appNavigation.radius'),
+          icon: 'iconRadius',
+          route: '/security-and-access/radius',
         });
       }
       return navigationItemsList;

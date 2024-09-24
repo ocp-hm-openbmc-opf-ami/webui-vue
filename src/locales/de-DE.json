@@ -1301,6 +1301,7 @@
         "pageGeneralRadius": "Allgemeine RADIUS-Einstellungen",
         "pageAdvancedRadius": "Erweiterte RADIUS-Einstellungen",
         "enableRadiusAuthentication": " RADIUS-Authentifizierung aktivieren",
+        "RadiusConfiguration": "Die Radius-Konfiguration ist nicht aktiviert.",
         "form": {
             "serviceAddress": "Serveradresse",
             "port": "Hafen",

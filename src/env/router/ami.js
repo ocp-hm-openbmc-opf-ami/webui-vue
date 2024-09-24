@@ -523,6 +523,20 @@ if (process.env.VUE_APP_NIC_ENABLED == 'true') {
     },
   });
 }
+console.log('radius support', process.env.VUE_APP_RADIUS_SUPPORT);
+if (process.env.VUE_APP_RADIUS_SUPPORT == 'true') {
+  routes[2].children.push({
+    path: '/security-and-access/radius',
+    name: 'radius',
+    component: () =>
+      import(
+        /* webpackChunkName: "radius" */ '@/views/SecurityAndAccess/Radius'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.radius'),
+    },
+  });
+}
 routes[2].children.push({
   path: '*',
   name: 'page-not-found',
