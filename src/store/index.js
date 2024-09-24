@@ -42,6 +42,7 @@ import NvmeInformationStore from './modules/NvmeInformation/NvmeInformationStore
 import AutonomousCrashDumpStore from './modules/HostSystemDiagnostics/AcdStore';
 import AsdStore from './modules/HostSystemDiagnostics/AsdStore';
 import RaidStore from './modules/Raid/RaidStore';
+import PhysicalStore from './modules/Raid/PhysicalStore';
 import BackupAndRestore from './modules/Operations/BackupAndRestore';
 import SNMPStore from './modules/Settings/SNMPStore';
 import FireWallStore from './modules/Settings/FireWallStore';
@@ -102,6 +103,7 @@ export default new Vuex.Store({
     acd: AutonomousCrashDumpStore,
     asd: AsdStore,
     raid: RaidStore,
+    physical: PhysicalStore,
     backupAndRestore: BackupAndRestore,
     snmp: SNMPStore,
     fireWall: FireWallStore,

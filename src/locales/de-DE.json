@@ -97,7 +97,8 @@
         },
         "toast": {
             "unAuthTitle": "Nicht autorisiert",
-            "unAuthDescription": "Auf die versuchte Aktion kann über das angemeldete Konto nicht zugegriffen werden. Wenden Sie sich an Ihren Systemadministrator, um Ihre Berechtigungsrolle zu überprüfen."
+            "unAuthDescription": "Auf die versuchte Aktion kann über das angemeldete Konto nicht zugegriffen werden. Wenden Sie sich an Ihren Systemadministrator, um Ihre Berechtigungsrolle zu überprüfen.",
+            "errorMessage": "Fehlermeldung"
         }
     },
     "appHeader": {
@@ -2115,7 +2116,28 @@
             "serialNumber": "Seriennummer",
             "health": "Gesundheit"
         },
-        "noPhysicalDevice": "Derzeit sind keine Informationen zum physischen Gerät vorhanden."
+        "noPhysicalDevice": "Derzeit sind keine Informationen zum physischen Gerät vorhanden.",
+        "startLocatePhysicalDevice": "Ortung des physischen Geräts starten.",
+        "startLocatePhysicalDeviceSuccess": "Ortung des physischen Geräts erfolgreich starten.",
+        "startLocatePhysicalDeviceFail": "Ortung des physischen Geräts starten fehlgeschlagen.",
+        "stopLocatePhysicalDevice": "Ortung des physischen Geräts beenden.",
+        "stopLocatePhysicalDeviceSuccess": "Ortung des physischen Geräts beenden fehlgeschlagen.",
+        "stopLocatePhysicalDeviceFail": "Ortung des physischen Geräts beenden fehlgeschlagen.",
+        "prepreRemoval":"Physisches Gerät auf ‚Entfernung vorbereiten‘ setzen.",
+        "prepreRemovalSuccess":"Physisches Gerät erfolgreich auf ‚Entfernung vorbereiten‘ setzen.",
+        "prepreRemovalFail":"Physisches Gerät auf ‚Entfernung vorbereiten‘ setzen fehlgeschlagen.",
+        "unDoPrepreRemoval":"Physisches Gerät auf ‚Entfernung vorbereiten rückgängig machen‘ setzen.",
+        "unDoPrepreRemovalSuccess":"Das physische Gerät erfolgreich auf 'Entfernung rückgängig machen - Vorbereitung rückgängig machen' setzen.",
+        "unDoPrepreRemovalFail":"Das physische Gerät erfolgreich auf 'Entfernung rückgängig machen - Vorbereitung rückgängig machen' setzen.",
+        "labelPrepareRemoval": "Entfernung vorbereiten",
+        "labelUndoPrepareToRemoval": "Entfernung vorbereiten rückgängig machen",
+        "labelStartLocate": "Lokalisierung starten",
+        "labelStopLocate": "Lokalisierung beenden",
+        "physicalDeviceActionTitle": "Aktualisieren der physischen Geräteeinstellungen",
+        "prepareRemovalConfirmationMsg": "Möchten Sie den Status des physischen Geräts mit der ID {pdId} auf 'Entfernung vorbereiten' setzen?",
+        "unDoPrepareRemovalConfirmationMsg": "Möchten Sie den Status des physischen Geräts mit der ID {pdId} auf 'Entfernung vorbereiten rückgängig machen' setzen?",
+        "startLocateConfirmationMsg": "Möchten Sie mit der Ortung des physischen Geräts mit der ID {pdId} beginnen?",
+        "stopLocateConfirmationMsg": "Möchten Sie die Ortung des physischen Geräts mit der ID {pdId} beenden?"
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "Logisches Gerät erstellen",
