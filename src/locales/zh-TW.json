@@ -98,7 +98,8 @@
         },
         "toast": {
             "unAuthTitle": "未認證",
-            "unAuthDescription": "無法從登錄帳戶訪問嘗試的操作。 請聯繫您的系統管理員檢查您的權限角色。"
+            "unAuthDescription": "無法從登錄帳戶訪問嘗試的操作。 請聯繫您的系統管理員檢查您的權限角色。",
+            "errorMessage": "错误资讯"
         }
     },
     "appHeader": {
@@ -217,7 +218,7 @@
         "asd": "ASD",
         "raidManagement": "磁盤陣列管理",
         "adapter": "適配器",
-        "physicalDevice": "物理設備",
+        "physicalDevice": "實體裝置",
         "logicalDevice": "邏輯設備",
         "createLogicalDevice": "創建邏輯設備",
         "backupAndRestore": "備份還原",
@@ -2103,7 +2104,7 @@
         "name": "名稱",
         "serialNumber": "序列號",
         "supportedRaidTypes": "支持的 RAID 類型",
-        "viewPhysicalDevices": "查看物理設備",
+        "viewPhysicalDevices": "查看實體裝置",
         "viewLogicalDevices": "查看邏輯設備",
         "noRaidControllerAvailable": "沒有可用的 RAID 控制器。"
     },
@@ -2119,7 +2120,28 @@
             "serialNumber": "序列號",
             "health": "狀態"
         },
-        "noPhysicalDevice": "目前不存在物理設備信息。"
+        "noPhysicalDevice": "目前不存在實體裝置信息。",
+        "startLocatePhysicalDevice": "開始定位實體裝置",
+        "startLocatePhysicalDeviceSuccess": "開始定位實體裝置成功。",
+        "startLocatePhysicalDeviceFail": "開始定位實體裝置失敗。",
+        "stopLocatePhysicalDevice": "停止定位實體裝置。",
+        "stopLocatePhysicalDeviceSuccess": "停止定位實體裝置成功。",
+        "stopLocatePhysicalDeviceFail": "停止定位實體裝置失敗。",
+        "prepreRemoval":"實體裝置設定為'準備移除'。",
+        "prepreRemovalSuccess":"實體裝置設定為'準備移除'成功。",
+        "prepreRemovalFail":"實體裝置設定為'準備移除'失敗。",
+        "unDoPrepreRemoval":"實體裝置設定為'取消準備移除'。",
+        "unDoPrepreRemovalSuccess":"實體裝置設定為'取消準備移除'成功。",
+        "unDoPrepreRemovalFail":"實體裝置設定為'取消準備移除'失敗。",
+        "labelPrepareRemoval": "準備移除",
+        "labelUndoPrepareToRemoval": "取消準備移除",
+        "labelStartLocate": "開始定位",
+        "labelStopLocate": "停止定位",
+        "physicalDeviceActionTitle": "變更實體設備設定",
+        "prepareRemovalConfirmationMsg": "將序號 {pdId} 的實體設備，設定為準備刪除?",
+        "unDoPrepareRemovalConfirmationMsg":  "將序號 {pdId} 的實體設備，設定為取消準備刪除?",
+        "startLocateConfirmationMsg":  "開始定位序號 {pdId} 的實體設備?",
+        "stopLocateConfirmationMsg":  "停止定位序號 {pdId} 的實體設備?"
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "創建邏輯設備",
@@ -2178,11 +2200,11 @@
             "readCachePolicyType": "讀取緩存策略類型",
             "writeCachePolicyType": "寫入緩存策略類型",
             "capacityBytes": "容量字節",
-            "numberOfPhysicalDevices": "物理設備數量",
+            "numberOfPhysicalDevices": "實體裝置數量",
             "health": "狀態"
         },
         "modal": {
-            "noPhysicalDeviceAvailable": "沒有可配置的物理設備！",
+            "noPhysicalDeviceAvailable": "沒有可配置的實體裝置！",
             "deleteConfirmationMsg": "您確定要刪除邏輯設備嗎？單擊“確定”繼續，或單擊“取消”立即停止。",
             "deleteConfirmationTitle": "刪除邏輯設備。"
         },
@@ -2199,7 +2221,7 @@
             "errorRaidControllerBusy": "Raid 控制器正忙，無法處理指令。",
             "successDeleteLogicalDevice": "成功刪除邏輯設備。请等待几秒钟并刷新应用程序以查看更改。",
             "errorDeleteLogicalDevice": "刪除邏輯設備時出錯",
-            "errorNumberOfDrivesValidation": "驅動器數量不應高於未配置的物理設備數量！",
+            "errorNumberOfDrivesValidation": "驅動器數量不應高於未配置的實體裝置數量！",
             "errorMinMaxSpanDepth":"最小和最大跨度深度均為 2。",
             "errorSpanDepthDrives":"選定的 UnConfig 驅動器應等於跨距深度和每個跨距的驅動器數的倍數。",
             "errorMsccSize": "尺寸應能被條帶尺寸整除。"
