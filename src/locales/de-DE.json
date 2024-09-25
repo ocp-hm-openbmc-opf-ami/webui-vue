@@ -1625,12 +1625,19 @@
         "addSubscrition": "Abonnement hinzufügen",
         "editSubscrition": "Abonnement bearbeiten",
         "sendTestTrap": "Testfalle senden",
+        "readOnly": "Nur lesen",
+        "readWrite": "Lesen, Schreiben",
         "modal": {
             "destination": "Ziel",
             "subscriptionType": "Abonnementtyp",
             "protocol": "Protokoll",
             "cancel": "Stornieren",
-            "addTrap": "Falle hinzufügen"
+            "addTrap": "Falle hinzufügen",
+            "bmcUser": "BMC-Benutzer",
+            "password": "Passwort",
+            "encryption": "Verschlüsselung",
+            "algorithm": "Algorithmus",
+            "readOnlyPermission": "Nur Leseberechtigung"
         },
         "table": {
             "destination": "Ziel",
@@ -1640,9 +1647,13 @@
             "authenticationProtocol": "Authentifizierungsprotokoll",
             "delete": "Löschen",
             "authProtocolNone": "None",
-            "authProtocolsha256": "SHA256",
-            "authProtocolsha384": "SHA384",
-            "authProtocolsha512": "SHA512"
+            "authProtocolsha256": "SHA-256",
+            "authProtocolsha384": "SHA-384",
+            "authProtocolsha512": "SHA-512",
+            "authProtocolsha": "SHA",
+            "bmcUser": "BMC-Benutzer",
+            "encryption": "Verschlüsselung",
+            "readOnlyPermission": "Nur Leseberechtigung"
         },
         "toast": {
             "errorInAddSubscription": "Fehler beim Hinzufügen des Abonnements",
@@ -1653,7 +1664,9 @@
             "successInDeleteSubscription": "SNMPTrap wurde erfolgreich gelöscht",
             "successUpdateAuthenticationProtocal": "AuthenticationProtocol erfolgreich aktualisiert",
             "successMsgTestTrap": "Test Trap Versand erfolgreich",
-            "errorMsgAlert": "Fehler beim Senden des Test-Traps"
+            "errorMsgAlert": "Fehler beim Senden des Test-Traps",
+            "errorInUpdatingSubscription": "Fehler beim Aktualisieren des Abonnements",
+            "successInUpdatingSubscription": "Abonnement erfolgreich aktualisiert"
         }
     },
     "pageSmtp": {

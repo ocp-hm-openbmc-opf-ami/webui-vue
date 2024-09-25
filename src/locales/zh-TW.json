@@ -1629,12 +1629,19 @@
         "addSubscrition": "新增訂閱",
         "editSubscrition": "編輯訂閱",
         "sendTestTrap": "發送測試陷阱",
+        "readOnly": "只讀",
+        "readWrite": "讀寫",
         "modal": {
             "destination": "目的地",
             "subscriptionType": "訂閱類型",
             "protocol": "協定",
             "cancel": "取消",
-            "addTrap": "添加陷阱"
+            "addTrap": "添加陷阱",
+            "bmcUser": "BMC用戶",
+            "password": "密碼",
+            "encryption": "加密",
+            "algorithm": "演算法",
+            "readOnlyPermission": "只讀權限"
         },
         "table": {
             "destination": "目的地",
@@ -1644,9 +1651,13 @@
             "authenticationProtocol": "認證協議",
             "delete": "刪除",
             "authProtocolNone": "None",
-            "authProtocolsha256": "SHA256",
-            "authProtocolsha384": "SHA384",
-            "authProtocolsha512": "SHA512"
+            "authProtocolsha256": "SHA-256",
+            "authProtocolsha384": "SHA-384",
+            "authProtocolsha512": "SHA-512",
+            "authProtocolsha": "SHA",
+            "bmcUser": "BMC用戶",
+            "encryption": "加密",
+            "readOnlyPermission": "只讀權限"
         },
         "toast": {
             "errorInAddSubscription": "新增訂閱時出錯",
@@ -1657,7 +1668,9 @@
             "successInDeleteSubscription": "成功刪除 SNMPTrap",
             "successUpdateAuthenticationProtocal": "成功更新身份驗證協議",
             "successMsgTestTrap": "測試陷阱發送成功",
-            "errorMsgAlert": "發送測試陷阱時出錯"
+            "errorMsgAlert": "發送測試陷阱時出錯",
+            "errorInUpdatingSubscription": "更新訂閱時出錯",
+            "successInUpdatingSubscription": "已成功更新訂閱"
         }
     },
     "pageSmtp": {
