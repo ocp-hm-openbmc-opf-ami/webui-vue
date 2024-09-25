@@ -2133,11 +2133,11 @@
         "labelUndoPrepareToRemoval": "取消准备移除",
         "labelStartLocate": "开始定位",
         "labelStopLocate": "停止定位",
-        "physicalDeviceActionTitle": "变更实体设备设定",
-        "prepareRemovalConfirmationMsg": "将序号 {pdId} 的实体设备，设定为准备删除?",
-        "unDoPrepareRemovalConfirmationMsg":  "将序号 {pdId} 的实体设备，设定为取消准备删除?",
-        "startLocateConfirmationMsg":  "开始定位序号 {pdId} 的实体设备?",
-        "stopLocateConfirmationMsg":  "停止定位序号 {pdId} 的实体设备?"
+        "physicalDeviceActionTitle": "变更物理设备设定",
+        "prepareRemovalConfirmationMsg": "将序号 {pdId} 的物理设备，设定为准备删除?",
+        "unDoPrepareRemovalConfirmationMsg":  "将序号 {pdId} 的物理设备，设定为取消准备删除?",
+        "startLocateConfirmationMsg":  "开始定位序号 {pdId} 的物理设备?",
+        "stopLocateConfirmationMsg":  "停止定位序号 {pdId} 的物理设备?"
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "创建逻辑设备",
