@@ -67,24 +67,6 @@
                 </template>
               </table-row-action>
             </template>
-
-            <template #cell(authenticationProtocol)="{ item }">
-              <template v-if="item.protocol === 'SNMPv3'">
-                <b-form-select
-                  id="snmp-authProtocalvalue"
-                  v-model="item.authenticationProtocol"
-                  :options="item.authenticationProtocolOptions"
-                  @change="saveAuthenticationProtocolValue(item, $event)"
-                >
-                  <template #first>
-                    <b-form-select-option :value="null" disabled>
-                      {{ $t('global.form.selectAnOption') }}
-                    </b-form-select-option>
-                  </template>
-                </b-form-select>
-              </template>
-              <template v-else> NA </template>
-            </template>
           </b-table>
         </b-col>
       </b-row>
@@ -145,6 +127,21 @@ export default {
           tdClass: 'text-nowrap',
         },
         {
+          key: 'encryption',
+          label: this.$t('pageSnmp.table.encryption'),
+          tdClass: 'text-nowrap',
+        },
+        {
+          key: 'bmcUser',
+          label: this.$t('pageSnmp.table.bmcUser'),
+          tdClass: 'text-nowrap',
+        },
+        {
+          key: 'readOnlyPermission',
+          label: this.$t('pageSnmp.table.readOnlyPermission'),
+          tdClass: 'text-nowrap',
+        },
+        {
           key: 'actions',
           label: '',
           tdClass: 'text-right text-nowrap',
@@ -158,59 +155,34 @@ export default {
       return this.$store.getters['snmp/allSubscriptions'].map((log) => {
         return {
           ...log,
-          actions: [
-            // {
-            //   value: 'edit',
-            //   title: this.$t('pageUserManagement.editUser'),
-            // },
-            {
-              value: 'delete',
-              title: this.$tc('pageSnmp.table.delete'),
-            },
-          ],
-          authenticationProtocolOptions:
+          actions:
             log.protocol === 'SNMPv3'
-              ? log.authenticationProtocol === 'None'
-                ? [
-                    {
-                      value: 'None',
-                      text: this.$tc('pageSnmp.table.authProtocolNone'),
-                    },
-                    {
-                      value: 'SHA256',
-                      text: this.$tc('pageSnmp.table.authProtocolsha256'),
-                    },
-                    {
-                      value: 'SHA384',
-                      text: this.$tc('pageSnmp.table.authProtocolsha384'),
-                    },
-                    {
-                      value: 'SHA512',
-                      text: this.$tc('pageSnmp.table.authProtocolsha512'),
-                    },
-                  ]
-                : [
-                    {
-                      value: 'SHA256',
-                      text: this.$tc('pageSnmp.table.authProtocolsha256'),
-                    },
-                    {
-                      value: 'SHA384',
-                      text: this.$tc('pageSnmp.table.authProtocolsha384'),
-                    },
-                    {
-                      value: 'SHA512',
-                      text: this.$tc('pageSnmp.table.authProtocolsha512'),
-                    },
-                  ]
-              : ['NA'],
+              ? [
+                  {
+                    value: 'edit',
+                    title: this.$t('pageUserManagement.editUser'),
+                  },
+                  {
+                    value: 'delete',
+                    title: this.$tc('pageSnmp.table.delete'),
+                  },
+                ]
+              : [
+                  {
+                    value: 'delete',
+                    title: this.$tc('pageSnmp.table.delete'),
+                  },
+                ],
         };
       });
     },
   },
   created() {
     this.startLoader();
-    this.$store.dispatch('snmp/getSubscriptions').finally(() => {
+    Promise.all([
+      this.$store.dispatch('snmp/getSubscriptions'),
+      this.$store.dispatch('snmp/getBmcUsers'),
+    ]).finally(() => {
       this.endLoader();
       this.isBusy = false;
     });
@@ -225,6 +197,12 @@ export default {
       if (isNewTrap) {
         this.$store
           .dispatch('snmp/createSubscriptions', SnmpTrap)
+          .then((success) => this.successToast(success))
+          .catch(({ message }) => this.errorToast(message))
+          .finally(() => this.endLoader());
+      } else {
+        this.$store
+          .dispatch('snmp/saveSnmpv3Subscriptions', SnmpTrap)
           .then((success) => this.successToast(success))
           .catch(({ message }) => this.errorToast(message))
           .finally(() => this.endLoader());
@@ -246,17 +224,6 @@ export default {
       this.$store
         .dispatch('snmp/deleteSNMPTrap', row.Id)
         .then((success) => this.successToast(success))
-        .catch(({ message }) => this.errorToast(message))
-        .finally(() => this.endLoader());
-    },
-    saveAuthenticationProtocolValue(row, selectedAuthenticationProtocol) {
-      this.startLoader();
-      this.$store
-        .dispatch('snmp/saveSnmpAuthenticationProtocol', {
-          authenticationProtocolValue: selectedAuthenticationProtocol,
-          snmpId: row.Id,
-        })
-        .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.endLoader());
     },
