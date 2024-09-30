@@ -1,16 +1,17 @@
 <template>
   <overview-card
+    v-if="isAmdPlatform"
     :title="$t('pageOverview.powerInformation')"
     :to="`/resource-management/power`"
   >
     <b-row class="mt-3">
       <b-col sm="6">
         <dl>
-          <dt>{{ $t('pageOverview.powerConsumption') }}</dt>
+          <!-- <dt>{{ $t('pageOverview.powerConsumption') }}</dt>
           <dd v-if="powerConsumptionValue == null">
             {{ $t('global.status.notAvailable') }}
           </dd>
-          <dd v-else>{{ powerConsumptionValue }} W</dd>
+          <dd v-else>{{ powerConsumptionValue }} W</dd> -->
           <dt>{{ $t('pageOverview.powerCap') }}</dt>
           <dd v-if="powerCapValue == null">
             {{ $t('global.status.disabled') }}
@@ -33,6 +34,11 @@ export default {
     OverviewCard,
   },
   mixins: [DataFormatterMixin],
+  data() {
+    return {
+      isAmdPlatform: null,
+    };
+  },
   computed: {
     ...mapGetters({
       powerCapValue: 'powerControl/powerCapValue',
@@ -42,7 +48,13 @@ export default {
   created() {
     this.$store.dispatch('powerControl/getPowerControl').finally(() => {
       this.$root.$emit('overview-power-complete');
+      this.checkIsAmdPlatform();
     });
+  },
+  methods: {
+    checkIsAmdPlatform() {
+      this.isAmdPlatform = this.$store.getters['global/isAmdPlatform'];
+    },
   },
 };
 </script>
