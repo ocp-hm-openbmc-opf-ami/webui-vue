@@ -49,6 +49,8 @@
                         v-if="!dev.isActive"
                         :id="concatId(dev.id)"
                         v-model="dev.file"
+                        accept=".iso, .img, .ima, .nrg"
+                        @input="validateFile(dev)"
                       >
                         <template #invalid>
                           <b-form-invalid-feedback role="alert">
@@ -402,6 +404,17 @@ export default {
       setTimeout(() => {
         this.isButtonDisabled = false;
       }, delay);
+    },
+    validateFile(dev) {
+      const validExtensions = ['iso', 'img', 'ima', 'nrg'];
+      const file = dev.file;
+      if (file) {
+        const fileExtension = file.name.split('.').pop().toLowerCase();
+        if (!validExtensions.includes(fileExtension)) {
+          dev.file = null;
+          this.errorToast(this.$t('pageVirtualMedia.toast.invalidFileType'));
+        }
+      }
     },
   },
 };

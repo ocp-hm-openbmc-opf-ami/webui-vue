@@ -2079,7 +2079,8 @@
             "serverRunning": "Server läuft",
             "serverConnectionEstablished": "Serververbindung hergestellt",
             "serverClosedSuccessfully": "Der Server wurde erfolgreich geschlossen",
-            "serverClosedWithErrors": "Server mit Fehlern geschlossen"
+            "serverClosedWithErrors": "Server mit Fehlern geschlossen",
+            "invalidFileType": "Ungültiger Bilddateityp"
         }
     },
     "pageAdapter": {
