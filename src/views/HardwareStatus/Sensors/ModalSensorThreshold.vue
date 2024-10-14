@@ -71,37 +71,6 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col v-if="form.lowerCritical != undefined" sm="6">
-          <b-form-group
-            :label="$t('pageSensors.sensorThreshold.modal.lowerCritical')"
-            label-for="lowerCritical"
-          >
-            <b-form-input
-              id="lowerCritical"
-              v-model="form.lowerCritical"
-              type="text"
-              :state="getValidationState($v.form.lowerCritical)"
-              @input="$v.form.lowerCritical.$touch()"
-            />
-            <b-form-invalid-feedback role="alert">
-              <template v-if="!$v.form.lowerCritical.required">
-                {{ $t('global.form.fieldRequired') }}
-              </template>
-              <template
-                v-if="
-                  $v.form.lowerCritical.required &&
-                  !$v.form.lowerCritical.pattern
-                "
-              >
-                {{
-                  $t(
-                    'pageSensors.sensorThreshold.modal.lowerCriticalValidationInfo',
-                  )
-                }}
-              </template>
-            </b-form-invalid-feedback>
-          </b-form-group>
-        </b-col>
         <b-col v-if="form.lowerCaution != undefined" sm="6">
           <b-form-group
             :label="$t('pageSensors.sensorThreshold.modal.lowerCaution')"
@@ -127,6 +96,37 @@
                 {{
                   $t(
                     'pageSensors.sensorThreshold.modal.lowerCautionValidationInfo',
+                  )
+                }}
+              </template>
+            </b-form-invalid-feedback>
+          </b-form-group>
+        </b-col>
+        <b-col v-if="form.lowerCritical != undefined" sm="6">
+          <b-form-group
+            :label="$t('pageSensors.sensorThreshold.modal.lowerCritical')"
+            label-for="lowerCritical"
+          >
+            <b-form-input
+              id="lowerCritical"
+              v-model="form.lowerCritical"
+              type="text"
+              :state="getValidationState($v.form.lowerCritical)"
+              @input="$v.form.lowerCritical.$touch()"
+            />
+            <b-form-invalid-feedback role="alert">
+              <template v-if="!$v.form.lowerCritical.required">
+                {{ $t('global.form.fieldRequired') }}
+              </template>
+              <template
+                v-if="
+                  $v.form.lowerCritical.required &&
+                  !$v.form.lowerCritical.pattern
+                "
+              >
+                {{
+                  $t(
+                    'pageSensors.sensorThreshold.modal.lowerCriticalValidationInfo',
                   )
                 }}
               </template>
@@ -320,7 +320,7 @@ export default {
         return true;
       }
     },
-    lowerCriticalValidation(value) {
+    lowerCautionValidation(value) {
       if (value != undefined && !/^-?\d{1,}(\.\d{1,2})?$/.test(value)) {
         return false;
       } else if (
@@ -331,21 +331,21 @@ export default {
         return false;
       } else if (
         value != undefined &&
-        this.form.lowerCaution != undefined &&
-        parseFloat(value) < parseFloat(this.form.lowerCaution)
+        this.form.lowerCritical != undefined &&
+        parseFloat(value) < parseFloat(this.form.lowerCritical)
       ) {
         return false;
       } else {
         return true;
       }
     },
-    lowerCautionValidation(value) {
+    lowerCriticalValidation(value) {
       if (value != undefined && !/^-?\d{1,}(\.\d{1,2})?$/.test(value)) {
         return false;
       } else if (
         value != undefined &&
-        this.form.lowerCritical != undefined &&
-        parseFloat(value) > parseFloat(this.form.lowerCritical)
+        this.form.lowerCaution != undefined &&
+        parseFloat(value) > parseFloat(this.form.lowerCaution)
       ) {
         return false;
       } else {
