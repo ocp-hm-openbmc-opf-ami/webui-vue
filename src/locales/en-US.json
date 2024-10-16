@@ -2094,7 +2094,14 @@
             "title": "Legacy mode configuration",
             "username": "Username",
             "mount": "Mount Type",
-            "imagePath": "Path to Image"
+            "imagePath": "Path to Image",
+            "serverUriSupportFollowing":"Support the following:",
+            "serverUriSupport": {
+                "item1": "IP Address (Both IPv4 and IPv6 format).",
+                "item2": "FQDN (Fully qualified domain name) format."
+            },
+            "imagePathSupport":"Path must be alpha-numeric and the following special characters are only allowed: '/'(backward slash), '\\'(forward slash), '_'(underscore) , '.'(dot).",
+            "imagePathSupportCharacter":"NOTE: This field will not allow more than 256 characters."
         },
         "toast": {
             "errorMounting": "Error mounting",

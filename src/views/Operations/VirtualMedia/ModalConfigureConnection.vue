@@ -14,6 +14,21 @@
         :label="$t('pageVirtualMedia.modal.serverUri')"
         label-for="serverUri"
       >
+        <b-form-text class="font-italic">
+          {{ $t('pageVirtualMedia.modal.serverUriSupportFollowing') }}
+        </b-form-text>
+        <ul class="pl-3 mb-4">
+          <li
+            v-for="(item, index) in $t(
+              `pageVirtualMedia.modal.serverUriSupport`,
+            )"
+            :key="index"
+          >
+            <b-form-text class="font-italic">
+              {{ $t(item) }}
+            </b-form-text>
+          </li>
+        </ul>
         <b-form-input
           id="serverUri"
           v-model="form.serverUri"
@@ -26,16 +41,28 @@
           <template v-if="!$v.form.serverUri.required">
             {{ $t('global.form.fieldRequired') }}
           </template>
+          <template
+            v-if="$v.form.serverUri.required && !$v.form.serverUri.pattern"
+          >
+            {{ $t('global.form.invalidFormat') }}
+          </template>
         </b-form-invalid-feedback>
       </b-form-group>
       <b-form-group
         :label="$t('pageVirtualMedia.modal.imagePath')"
         label-for="imagePath"
       >
+        <b-form-text class="font-italic">
+          {{ $t('pageVirtualMedia.modal.imagePathSupport') }}
+        </b-form-text>
+        <b-form-text class="font-italic">
+          {{ $t('pageVirtualMedia.modal.imagePathSupportCharacter') }}
+        </b-form-text>
         <b-form-input
           id="imagePath"
           v-model="form.imagePath"
           type="text"
+          maxlength="256"
           :state="getValidationState($v.form.imagePath)"
           data-test-id="configureConnection-input-imagePath"
           @input="$v.form.imagePath.$touch()"
@@ -43,6 +70,11 @@
         <b-form-invalid-feedback role="alert">
           <template v-if="!$v.form.imagePath.required">
             {{ $t('global.form.fieldRequired') }}
+          </template>
+          <template
+            v-if="$v.form.imagePath.required && !$v.form.imagePath.pattern"
+          >
+            {{ $t('global.form.invalidFormat') }}
           </template>
         </b-form-invalid-feedback>
       </b-form-group>
@@ -121,7 +153,7 @@
 </template>
 
 <script>
-import { required, requiredIf } from 'vuelidate/lib/validators';
+import { required, requiredIf, helpers } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 export default {
@@ -164,9 +196,11 @@ export default {
       form: {
         serverUri: {
           required,
+          pattern: helpers.regex('pattern', /^[a-zA-Z0-9/\\_.:]+$/),
         },
         imagePath: {
           required,
+          pattern: helpers.regex('pattern', /^[a-zA-Z0-9/\\_.]+$/),
         },
         username: {
           required: requiredIf(function () {

@@ -2084,7 +2084,14 @@
             "title": "传统模式配置",
             "username": "用户名称",
             "mount": "Mount 型态",
-            "imagePath": "路径至映像"
+            "imagePath": "路径至映像",
+            "serverUriSupportFollowing":"支持以下内容：",
+            "serverUriSupport": {
+                "item1": "IP 地址（IPv4 和 IPv6 格式）。",
+                "item2": "FQDN（完全限定域名）格式。"
+            },
+            "imagePathSupport":"路径必须是字母数字，并且仅允许使用以下特殊字符：“/”（反斜杠）、“\\”（正斜杠）、“_”（下划线）、“.”（点）。",
+            "imagePathSupportCharacter":"注意：此字段不允许超过 256 个字符。"
         },
         "toast": {
             "errorMounting": "挂载失败",

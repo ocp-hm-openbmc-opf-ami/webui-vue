@@ -2071,7 +2071,14 @@
             "title": "Konfiguration des Legacy Modus",
             "username": "Nutzername",
             "mount": "Mount Typ",
-            "imagePath": "Pfad zum Bild"
+            "imagePath": "Pfad zum Bild",
+            "serverUriSupportFollowing":"Unterstützen Sie Folgendes:",
+            "serverUriSupport": {
+                "item1": "IP-Adresse (sowohl IPv4- als auch IPv6-Format).",
+                "item2": "FQDN-Format (vollqualifizierter Domänenname)."
+            },
+            "imagePathSupport":"Der Pfad muss alphanumerisch sein und die folgenden Sonderzeichen sind nur zulässig: „/“ (Schrägstrich), „\\“ (Schrägstrich), „_“ (Unterstrich), „.“ (Punkt).",
+            "imagePathSupportCharacter":"HINWEIS: In diesem Feld sind nicht mehr als 256 Zeichen zulässig."
         },
         "toast": {
             "errorMounting": "Fehler beim Montieren",
