@@ -208,6 +208,11 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.license'),
               route: '/settings/license',
             },
+            {
+              id: 'pam',
+              label: this.$t('appNavigation.pam'),
+              route: '/settings/pam',
+            },
           ],
         },
         {

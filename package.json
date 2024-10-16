@@ -37,6 +37,7 @@
         "vue-i18n": "8.24.2",
         "vue-json-pretty": "1.9.4",
         "vue-router": "3.5.1",
+        "vuedraggable": "2.24.3",
         "vuelidate": "0.7.6",
         "vuex": "3.6.2",
         "xterm": "4.11.0",

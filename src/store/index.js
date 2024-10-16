@@ -53,6 +53,7 @@ import NetworkDDNSStore from './modules/Settings/NetworkDDNSStore';
 import NetworkLinkStore from './modules/Settings/NetworkLinkStore';
 import ADDCStore from './modules/Settings/ADDCStore';
 import Ncsi from './modules/Settings/NcsiStore';
+import PamOrderStore from './modules/Settings/PamOrderStore';
 
 Vue.use(Vuex);
 
@@ -113,5 +114,6 @@ export default new Vuex.Store({
     networkLink: NetworkLinkStore,
     addc: ADDCStore,
     ncsi: Ncsi,
+    pamOrder: PamOrderStore,
   },
 });
