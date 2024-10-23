@@ -40,6 +40,7 @@ import Asd from '@/views/HostSystemDiagnostics/Asd';
 import BackupAndRestore from '@/views/Operations/BackupAndRestore';
 import SnmpSettings from '@/views/Settings/SNMP';
 import FireWall from '@/views/Settings/FireWall';
+import Tasks from '@/views/Operations/Task/Tasks.vue';
 import CupsConfiguration from '@/views/Settings/CUPS';
 import Bond from '@/views/Settings/Bond';
 import License from '@/views/Settings/License';
@@ -371,6 +372,14 @@ const routes = [
         },
       },
       {
+        path: '/settings/bond',
+        name: 'Bond',
+        component: Bond,
+        meta: {
+          title: i18n.t('appPageTitle.bond'),
+        },
+      },
+      {
         path: '/operations/server-power-operations',
         name: 'server-power-operations',
         component: ServerPowerOperations,
@@ -400,11 +409,11 @@ const routes = [
         },
       },
       {
-        path: '/settings/bond',
-        name: 'Bond',
-        component: Bond,
+        path: '/operations/tasks',
+        name: 'tasks',
+        component: Tasks,
         meta: {
-          title: i18n.t('appPageTitle.bond'),
+          title: i18n.t('appPageTitle.tasks'),
         },
       },
       {

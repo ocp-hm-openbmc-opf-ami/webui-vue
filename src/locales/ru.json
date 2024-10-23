@@ -126,6 +126,7 @@
         "postCodeLogs": "@:appPageTitle.postCodeLogs",
         "powerRestorePolicy": "@:appPageTitle.powerRestorePolicy",
         "rebootBmc": "@:appPageTitle.rebootBmc",
+        "tasks": "@:appPageTitle.tasks",
         "policies": "@:appPageTitle.policies",
         "sensors": "@:appPageTitle.sensors",
         "serialOverLan": "Консоль SOL",
@@ -150,6 +151,7 @@
         "userManagement": "Управление пользователями",
         "login": "Логин",
         "network": "Сеть",
+        "tasks": "Задачи",
         "overview": "Обзор",
         "pageNotFound": "Страница не найдена",
         "postCodeLogs": "Логи POST кодов",
@@ -1047,6 +1049,27 @@
         "unDoPrepareRemovalConfirmationMsg": "Жадаеце ўсталяваць стан фізічнай прылады з ідэнтыфікатарам {pdId} на адмену падрыхтоўкі да выдалення?",
         "startLocateConfirmationMsg": "Жадаеце пачаць пошук фізічнай прылады з ідэнтыфікатарам {pdId}?",
         "stopLocateConfirmationMsg": "Жадаеце спыніць пошук фізічнай прылады з ідэнтыфікатарам {pdId}?"
+    },
+    "pageTask": {
+        "table": {
+            "taskDescription": "Описание задачи",
+            "percentComplete": "Процент завершения",
+            "startTime": "Время начала",
+            "endTime": "Время окончания",
+            "targetUri": "Таргет Ури",
+            "httpOperation": "Http Operation",
+            "action": "Действие",
+            "cancel":"Отмена",
+            "completed": "завершенный"
+        },
+        "modal": {
+            "cancelConfirmationMsg": "Вы уверены, что хотите отменить задачу?",
+            "cancelConfirmationTitle": "Отменить задачу"
+        },
+        "toast": {
+            "successfullyCancelledTask":"Задача успешно отменена",
+            "errorCancellingTask":"Ошибка при отмене задачи"
+        }
     },
     "countries": {
         "AF": "Афганистан",

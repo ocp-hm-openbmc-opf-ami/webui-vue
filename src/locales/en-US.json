@@ -171,6 +171,7 @@
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
+        "tasks": "@:appPageTitle.tasks",
         "cups": "@:appPageTitle.cups",
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
@@ -227,6 +228,7 @@
         "createLogicalDevice": "Create Logical Device",
         "backupAndRestore": "Backup And Restore",
         "FireWall": "System Firewall",
+        "tasks": "Tasks",
         "cups": "CUPS",
         "Bond": "Network Bond",
         "License": "Manage Licenses",
@@ -2375,6 +2377,27 @@
             "errorSavingPamOrder": "Error in updating PAM order",
             "successSavingPamOrder": "Successfully updated the PAM order",
             "errorGettingPamorder": "Error fetching PAM Order data"
+        }
+    },
+    "pageTask": {
+        "table": {
+            "taskDescription": "Task Description",
+            "percentComplete": "Percent Complete",
+            "startTime": "Start Time",
+            "endTime": "End Time",
+            "targetUri": "Target Uri",
+            "httpOperation": "Http Operation",
+            "action": "Action",
+            "cancel":"Cancel",
+            "completed": "completed"
+        },
+        "modal": {
+            "cancelConfirmationMsg": "Are you sure you want to cancel the task?",
+            "cancelConfirmationTitle": "Cancel Task"
+        },
+        "toast": {
+            "successfullyCancelledTask":"Successfully cancelled the task",
+            "errorCancellingTask":"Error in canceling task"
         }
     },
     "countries": {

@@ -167,6 +167,7 @@
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
+        "tasks": "@:appPageTitle.tasks",
         "cups": "@:appPageTitle.cups",
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
@@ -190,6 +191,7 @@
         "inventory": "Inventar und LEDs",
         "kvm": "KVM",
         "ldap": "LDAP",
+        "tasks": "Aufgaben",
         "userManagement": "Benutzerverwaltung",
         "login": "Anmeldung",
         "network": "Netzwerkeinstellungen",
@@ -2350,6 +2352,27 @@
             "errorSavingPamOrder": "Fehler beim Aktualisieren der PAM-Reihenfolge",
             "successSavingPamOrder": "Die PAM-Bestellung wurde erfolgreich aktualisiert",
             "errorGettingPamorder": "Fehler beim Abrufen der PAM-Bestelldaten"
+        }
+    },
+    "pageTask": {
+        "table": {
+            "taskDescription": "Aufgabenbeschreibung",
+            "percentComplete": "Prozentsatz abgeschlossen",
+            "startTime": "Start zeit",
+            "endTime": "End zeit",
+            "targetUri": "Target Uri",
+            "httpOperation": "Http Operation",
+            "action": "Aktion",
+            "cancel":"Stornieren",
+            "completed": "vollendet"
+        },
+        "modal": {
+            "cancelConfirmationMsg": "Sind Sie sicher, dass Sie die Aufgabe abbrechen möchten?",
+            "cancelConfirmationTitle": "Aufgabe abbrechen"
+        },
+        "toast": {
+            "successfullyCancelledTask":"Die Aufgabe wurde erfolgreich abgebrochen",
+            "errorCancellingTask":"Fehler beim Abbrechen der Aufgabe"
         }
     },
     "countries": {

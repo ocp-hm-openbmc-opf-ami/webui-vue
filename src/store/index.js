@@ -55,6 +55,7 @@ import NetworkLinkStore from './modules/Settings/NetworkLinkStore';
 import ADDCStore from './modules/Settings/ADDCStore';
 import Ncsi from './modules/Settings/NcsiStore';
 import PamOrderStore from './modules/Settings/PamOrderStore';
+import TaskStore from './modules/Operations/TaskStore';
 
 Vue.use(Vuex);
 
@@ -117,5 +118,6 @@ export default new Vuex.Store({
     addc: ADDCStore,
     ncsi: Ncsi,
     pamOrder: PamOrderStore,
+    task: TaskStore,
   },
 });

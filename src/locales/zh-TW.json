@@ -168,6 +168,7 @@
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
+        "tasks": "@:appPageTitle.tasks",
         "cups": "@:appPageTitle.cups",
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
@@ -186,6 +187,7 @@
         "dateTime": "日期與時間",
         "dumps": "轉儲",
         "eventLogs": "事件紀錄",
+        "tasks": "任務",
         "factoryReset": "恢復原廠設定",
         "firmware": "韌體",
         "inventory": "清單",
@@ -2368,6 +2370,27 @@
             "errorSavingPamOrder": "更新 PAM 訂單時出錯",
             "successSavingPamOrder": "已成功更新 PAM 訂單",
             "errorGettingPamorder": "取得 PAM 訂單資料時發生錯誤"
+        }
+    },
+    "pageTask": {
+        "table": {
+            "taskDescription": "任務說明",
+            "percentComplete": "完成百分比",
+            "startTime": "開始時間",
+            "endTime": "結束時間",
+            "targetUri": "目標 Uri",
+            "httpOperation": "Http 操作",
+            "action": "行動",
+            "cancel":"取消",
+            "completed": "完全的"
+        },
+        "modal": {
+            "cancelConfirmationMsg": "您確定要取消任務嗎？",
+            "cancelConfirmationTitle": "取消任務"
+        },
+        "toast": {
+            "successfullyCancelledTask":"成功取消任務",
+            "errorCancellingTask":"取消任務時出錯"
         }
     },
     "countries": {

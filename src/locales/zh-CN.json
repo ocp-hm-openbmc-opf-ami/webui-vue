@@ -168,6 +168,7 @@
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
+        "tasks": "@:appPageTitle.tasks",
         "cups": "@:appPageTitle.cups",
         "bond": "@:appPageTitle.Bond",
         "license": "@:appPageTitle.License",
@@ -186,6 +187,7 @@
         "dateTime": "日期与时间",
         "dumps": "转储",
         "eventLogs": "事件纪录",
+        "tasks": "任务",
         "factoryReset": "恢復原厂设定",
         "firmware": "韧体",
         "inventory": "清单",
@@ -2364,6 +2366,27 @@
             "errorSavingPamOrder": "更新 PAM 订单时出错",
             "successSavingPamOrder": "已成功更新 PAM 订单",
             "errorGettingPamorder": "获取 PAM 订单数据时出错"
+        }
+    },
+    "pageTask": {
+        "table": {
+            "taskDescription": "任务描述",
+            "percentComplete": "完成百分比",
+            "startTime": "开始时间",
+            "endTime": "结束时间",
+            "targetUri": "目标Uri",
+            "httpOperation": "Http操作",
+            "action": "行动",
+            "cancel":"取消",
+            "completed": "完全的"
+        },
+        "modal": {
+            "cancelConfirmationMsg": "您确定要取消任务吗？",
+            "cancelConfirmationTitle": "取消任务"
+        },
+        "toast": {
+            "successfullyCancelledTask":"成功取消任务",
+            "errorCancellingTask":"取消任务时出错"
         }
     },
     "countries": {
