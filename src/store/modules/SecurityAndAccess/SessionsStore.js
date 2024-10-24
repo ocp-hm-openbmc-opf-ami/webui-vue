@@ -30,14 +30,15 @@ const SessionsStore = {
               sessionID: sessionUri.data?.Id,
               sessionType: sessionUri.data?.SessionType,
               userID:
-                (sessionUri.data?.UserId ?? '') === ''
+                (sessionUri.data?.Oem?.AMI_WebSession?.UserId ?? '') === ''
                   ? 'NA'
-                  : sessionUri.data?.UserId,
+                  : sessionUri.data?.Oem?.AMI_WebSession?.UserId,
               username: sessionUri.data?.UserName,
               ipAddress: sessionUri.data?.ClientOriginIPAddress,
               privilege: sessionUri.data?.Roles[0],
               uri: lastElement,
-              mountType: sessionUri.data?.Oem?.Ami?.MountType || 'NA',
+              mountType:
+                sessionUri.data?.Oem?.AMI_WebSession?.MountType || 'NA',
             };
           });
           commit('setAllConnections', allConnectionsData);
