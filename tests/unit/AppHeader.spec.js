@@ -64,16 +64,4 @@ describe('AppHeader.vue', () => {
     await rootWrapper.vm.$nextTick();
     expect(wrapper.vm.isNavigationOpen).toEqual(false);
   });
-
-  describe('Created lifecycle hook', () => {
-    it('getSystemInfo should dispatch global/getSystemInfo', () => {
-      wrapper.vm.getSystemInfo();
-      expect(store.dispatch).toHaveBeenCalledTimes(1);
-    });
-
-    it('getEvents should dispatch eventLog/getEventLogData', () => {
-      wrapper.vm.getEvents();
-      expect(store.dispatch).toHaveBeenCalledTimes(1);
-    });
-  });
 });

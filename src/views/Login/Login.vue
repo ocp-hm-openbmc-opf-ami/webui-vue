@@ -200,6 +200,7 @@ export default {
               } else {
                 this.$router.push('/');
                 this.$store.dispatch('license/getUserAlertCount');
+                this.$store.commit('license/setisLicense', false);
               }
             }
             if (RoleId) {

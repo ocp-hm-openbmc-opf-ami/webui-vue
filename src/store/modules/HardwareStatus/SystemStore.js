@@ -1,6 +1,8 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
 
+import { serverStateMapper } from '@/store/modules/GlobalStore';
+
 const SystemStore = {
   namespaced: true,
   state: {
@@ -8,12 +10,14 @@ const SystemStore = {
     greenLedStatus: null,
     amberLedStatus: null,
     susackLedStatus: null,
+    serverStatus: 'unreachable',
   },
   getters: {
     systems: (state) => state.systems,
     getGreenLedStatus: (state) => state.greenLedStatus,
     getAmberLedStatus: (state) => state.amberLedStatus,
     getSusackLedStatus: (state) => state.susackLedStatus,
+    serverStatus: (state) => state.serverStatus,
   },
   mutations: {
     setSystemInfo: (state, data) => {
@@ -52,6 +56,8 @@ const SystemStore = {
       state.amberLedStatus = data.AmberLED;
       state.susackLedStatus = data.SusackLED;
     },
+    setServerStatus: (state, serverState) =>
+      (state.serverStatus = serverStateMapper(serverState)),
   },
   actions: {
     async getSystem({ commit }) {
@@ -62,6 +68,17 @@ const SystemStore = {
         )
         .then(({ data }) => {
           commit('setSystemInfo', data);
+          if (
+            data.Status?.State === 'Quiesced' ||
+            data.Status?.State === 'InTest'
+          ) {
+            // OpenBMC's host state interface is mapped to 2 Redfish
+            // properties "Status""State" and "PowerState". Look first
+            // at State for certain cases.
+            commit('setServerStatus', data.Status?.State);
+          } else {
+            commit('setServerStatus', data?.PowerState);
+          }
           if (
             Object.keys(data).includes('Oem') &&
             Object.keys(data.Oem).includes('OpenBmc')

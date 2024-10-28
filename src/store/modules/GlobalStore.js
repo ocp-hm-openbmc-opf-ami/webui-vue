@@ -182,5 +182,6 @@ const GlobalStore = {
     },
   },
 };
+export { GlobalStore, serverStateMapper };
 
 export default GlobalStore;

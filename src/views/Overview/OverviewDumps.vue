@@ -34,9 +34,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('dumps/getAllDumps').finally(() => {
-      this.$root.$emit('overview-dumps-complete');
-    });
+    this.$root.$emit('overview-dumps-complete');
   },
   methods: {
     exportFileNameByDate() {

@@ -7,11 +7,13 @@ const LicenseStore = {
     licenseData: {},
     licenseExpireData: {},
     licenseMinData: '',
+    isLicense: true,
   },
   getters: {
     getLicenseData: (state) => state.licenseData,
     getLicenseExpireData: (state) => state.licenseExpireData,
     getLicenseMinData: (state) => state.licenseMinData,
+    isLicense: (state) => state.isLicense,
   },
   mutations: {
     setLicenseData: (state, licenseData) => (state.licenseData = licenseData),
@@ -19,6 +21,7 @@ const LicenseStore = {
       (state.licenseExpireData = licenseExpireData),
     setLicenseMinData: (state, licenseMinData) =>
       (state.licenseMinData = licenseMinData),
+    setisLicense: (state, isLicense) => (state.isLicense = isLicense),
   },
   actions: {
     async getUserAlertCount({ commit }) {
@@ -57,7 +60,9 @@ const LicenseStore = {
           commit('setLicenseData', licenseControl);
           commit('setLicenseExpireData', items);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+        });
     },
     async setUserAlertCount({ dispatch }, percentageVal) {
       return await api
