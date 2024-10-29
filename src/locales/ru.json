@@ -1013,7 +1013,13 @@
         "supportedRaidTypes": "Тыпы RAID, якія падтрымліваюцца",
         "viewPhysicalDevices": "Праглядзець фізічныя прылады",
         "viewLogicalDevices": "Праглядзець лагічныя прылады",
-        "noRaidControllerAvailable": "Няма даступных кантролераў RAID."
+        "noRaidControllerAvailable": "Няма даступных кантролераў RAID.",
+        "physicalDeviceCount": "Количество физических устройств",
+        "maxPhysicalDeviceCount": "Максимальное количество физических устройств",
+        "logicalDevicesCount": "Количество логических устройств",
+        "maxLogicalDevicesCount": "Максимальное количество логических устройств",
+        "maxPhysicalDevicesCountPerLogicalDevicesCount": "Максимальное количество физических устройств на логическое устройство",
+        "hotSparesCount": "Количество горячих резервов"
     },
     "pagePhysicalDevice": {
         "table": {

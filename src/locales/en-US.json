@@ -2137,7 +2137,13 @@
         "supportedRaidTypes": "Supported RAID Types",
         "viewPhysicalDevices": "View Physical Devices",
         "viewLogicalDevices": "View Logical Devices",
-        "noRaidControllerAvailable": "There are no RAID Controller Available."
+        "noRaidControllerAvailable": "There are no RAID Controller Available.",
+        "physicalDeviceCount": "Physical Device Count",
+        "maxPhysicalDeviceCount": "Max Physical Devices Count",
+        "logicalDevicesCount": "Logical Devices Count",
+        "maxLogicalDevicesCount": "Max Logical Devices Count",
+        "maxPhysicalDevicesCountPerLogicalDevicesCount": "Max Physical Devices Count Per Logical Devices Count",
+        "hotSparesCount": "Hot Spares Count"
     },
     "pagePhysicalDevice": {
         "table": {

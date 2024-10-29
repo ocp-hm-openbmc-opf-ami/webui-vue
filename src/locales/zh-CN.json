@@ -221,7 +221,7 @@
         "asd": "ASD",
         "raidManagement": "RAID管理",
         "adapter": "适配器",
-        "physicalDevice": "物理设备",
+        "physicalDevice": "实体设备",
         "logicalDevice": "逻辑设备",
         "createLogicalDevice": "创建逻辑设备",
         "backupAndRestore": "备份还原",
@@ -634,7 +634,7 @@
         "firmwareVersion": "固件版本",
         "flowControlConfiguration": "流量控制配置",
         "signalDetected": "检测到信号",
-        "physicalPortNumber": "物理端口号",
+        "physicalPortNumber": "实体端口号",
         "health": "状态",
         "getBootConfigProperties": "引导配置属性",
         "getNCCapabilitiesAndSettings": "网络控制器功能和设置",
@@ -2125,9 +2125,15 @@
         "name": "名称",
         "serialNumber": "序列号",
         "supportedRaidTypes": "支持的 RAID 类型",
-        "viewPhysicalDevices": "查看物理设备",
+        "viewPhysicalDevices": "查看实体设备",
         "viewLogicalDevices": "查看逻辑设备",
-        "noRaidControllerAvailable": "没有可用的 RAID 控制器。"
+        "noRaidControllerAvailable": "没有可用的 RAID 控制器。",
+        "physicalDeviceCount": "实体设备数量",
+        "maxPhysicalDeviceCount": "最大实体设备数量",
+        "logicalDevicesCount": "逻辑设备数量",
+        "maxLogicalDevicesCount": "最大逻辑设备数量",
+        "maxPhysicalDevicesCountPerLogicalDevicesCount": "每个逻辑设备的最大实体设备数量",
+        "hotSparesCount": "热备份数量"
     },
     "pagePhysicalDevice": {
         "table": {
@@ -2184,7 +2190,7 @@
         "ioPolicy": "IO政策",
         "accessPolicy": "存取机制",
         "diskCacheCapacity": "磁盘缓存容量",
-        "unConfiguredPhysicalDrive": "未配置的物理驱动器",
+        "unConfiguredPhysicalDrive": "未配置的实体驱动器",
         "noLogicalDevice": "此时不存在逻辑设备信息。",
         "initStateOptions": {
             "noInitialization": "无初始化",
@@ -2221,11 +2227,11 @@
             "readCachePolicyType": "读取缓存策略类型",
             "writeCachePolicyType": "写入缓存策略类型",
             "capacityBytes": "容量字节",
-            "numberOfPhysicalDevices": "物理设备数量",
+            "numberOfPhysicalDevices": "实体设备数量",
             "health": "状态"
         },
         "modal": {
-            "noPhysicalDeviceAvailable": "没有可配置的物理设备！",
+            "noPhysicalDeviceAvailable": "没有可配置的实体设备！",
             "deleteConfirmationMsg": "您确定要删除逻辑设备吗？单击“确定”继续，或单击“取消”立即停止",
             "deleteConfirmationTitle": "删除逻辑设备。"
         },
@@ -2237,12 +2243,12 @@
             "errorRaidCtrlDevIdInvalid": "RAID 控制器设备 ID 无效。",
             "errorRaidNoVirtualDevicePresent": "不存在 RAID 逻辑设备。",
             "errorRaidOperationNotPermitted": "不允许 RAID 操作。",
-            "errorRaidUnsupportedPhysicalDev": "不支持的 RAID 物理设备。",
+            "errorRaidUnsupportedPhysicalDev": "不支持的 RAID 实体设备。",
             "errorRaidUnsupportedLogicalDev": "不支持的 RAID 逻辑设备。",
             "errorRaidControllerBusy": "Raid 控制器正忙，无法处理命令。",
             "successDeleteLogicalDevice": "已成功删除逻辑设备。请等待几秒钟并刷新应用程序以查看更改。",
             "errorDeleteLogicalDevice": "删除逻辑设备时出错",
-            "errorNumberOfDrivesValidation": "驱动器数量不应高于未配置的物理设备数量！",
+            "errorNumberOfDrivesValidation": "驱动器数量不应高于未配置的实体设备数量！",
             "errorMinMaxSpanDepth":"最小和最大跨度深度均为 2。",
             "errorSpanDepthDrives":"选定的 UnConfig 驱动器应等于跨度深度和每个跨度的驱动器数的倍数。",
             "errorMsccSize": "尺寸应能被条带尺寸整除。"

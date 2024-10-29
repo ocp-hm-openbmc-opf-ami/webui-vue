@@ -221,7 +221,7 @@
         "asd": "ASD",
         "raidManagement": "磁盤陣列管理",
         "adapter": "適配器",
-        "physicalDevice": "實體裝置",
+        "physicalDevice": "實體設備",
         "logicalDevice": "邏輯設備",
         "createLogicalDevice": "創建邏輯設備",
         "backupAndRestore": "備份還原",
@@ -2129,9 +2129,15 @@
         "name": "名稱",
         "serialNumber": "序列號",
         "supportedRaidTypes": "支持的 RAID 類型",
-        "viewPhysicalDevices": "查看實體裝置",
+        "viewPhysicalDevices": "查看實體設備",
         "viewLogicalDevices": "查看邏輯設備",
-        "noRaidControllerAvailable": "沒有可用的 RAID 控制器。"
+        "noRaidControllerAvailable": "沒有可用的 RAID 控制器。",
+        "physicalDeviceCount": "實體設備數量",
+        "maxPhysicalDeviceCount": "最大實體設備數量",
+        "logicalDevicesCount": "邏輯設備數量",
+        "maxLogicalDevicesCount": "最大邏輯設備數量",
+        "maxPhysicalDevicesCountPerLogicalDevicesCount": "每個邏輯設備的最大實體設備數量",
+        "hotSparesCount": "熱備援數量"
     },
     "pagePhysicalDevice": {
         "table": {
@@ -2188,7 +2194,7 @@
         "ioPolicy": "IO政策",
         "accessPolicy": "准入政策",
         "diskCacheCapacity": "磁盤緩存容量",
-        "unConfiguredPhysicalDrive": "未配置的物理驅動器",
+        "unConfiguredPhysicalDrive": "未配置的實體驅動器",
         "noLogicalDevice": "此時不存在邏輯設備信息。",
         "initStateOptions": {
             "noInitialization": "無初始化",
