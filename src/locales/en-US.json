@@ -2242,8 +2242,13 @@
         },
         "modal": {
             "noPhysicalDeviceAvailable": "No Physical Device is available to configure!",
-            "deleteConfirmationMsg": "Are you sure you want to delete the logical device? Click Ok to continue, or click Cancel to stop now.",
-            "deleteConfirmationTitle": "Delete logical device."
+            "deleteConfirmationMsg": "Are you sure you want to delete the logical device with ID {ldId} ?",
+            "deleteConfirmationTitle": "Delete logical device.",
+            "logicalCommonActionTitle": "Manage Logical Device Actions",
+            "startLocateLogicalDriveActionConfirmationMsg": "Are you sure you want to start locating the Logical Drive with ID {ldId}?",
+            "startLocateLogicalDriveActionTitle": "Start Locate Logical Drive",
+            "stopLocateLogicalDriveActionConfirmationMsg": "Are you sure you want to stop locating the Logical Drive with ID {ldId}?",
+            "stopLocateLogicalDriveActionTitle": "Stop Locate Logical Drive"
         },
         "toast": {
             "successCreateLogicalDevice": "Successfully Created Logical Device. Please wait for few seconds and refresh the application to see the changes.",
@@ -2261,7 +2266,17 @@
             "errorNumberOfDrivesValidation": "Number of Drives count should not higher than UnConfigured Physical Device count!",
             "errorMinMaxSpanDepth": "The minimum and maximum Span Depth is 2.",
             "errorSpanDepthDrives": "Selected UnConfig Drives should be equal to multiple of Span Depth and Drives per Span.",
-            "errorMsccSize": "Size should be divisible by Strip Size."
+            "errorMsccSize": "Size should be divisible by Strip Size.",
+            "successStartLocateLogicalDevice": "Successfully starting the Logical Device.",
+            "successStopLocateLogicalDevice": "Successfully stopping the Logical Device.",
+            "errorStartLocateLogicalDevice": "Error in starting the Logical Device.",
+            "errorStopLocateLogicalDevice": "Error in stopping the Logical Device."
+            
+        },
+        "actions": {
+            "startLocate":"start Locate",
+            "stopLocate":"stop Locate",
+            "delete":"delete"
         }
     },
     "pageFireWall": {

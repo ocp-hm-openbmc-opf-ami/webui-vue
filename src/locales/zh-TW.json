@@ -2235,9 +2235,14 @@
             "health": "狀態"
         },
         "modal": {
-            "noPhysicalDeviceAvailable": "沒有可配置的實體裝置！",
-            "deleteConfirmationMsg": "您確定要刪除邏輯設備嗎？單擊“確定”繼續，或單擊“取消”立即停止。",
-            "deleteConfirmationTitle": "刪除邏輯設備。"
+            "noPhysicalDeviceAvailable": "沒有可配置的物理設備！",
+            "deleteConfirmationTitle": "刪除邏輯設備。",
+            "deleteConfirmationMsg": "您確定要刪除 ID 為 {ldId} 的邏輯設備嗎？",
+            "logicalCommonActionTitle": "管理邏輯設備操作",
+            "startLocateLogicalDriveActionConfirmationMsg": "您確定要啟動 ID 為 {ldId} 的邏輯驅動器定位嗎？",
+            "startLocateLogicalDriveActionTitle": "啟動定位邏輯驅動器",
+            "stopLocateLogicalDriveActionConfirmationMsg": "您確定要停止 ID 為 {ldId} 的邏輯驅動器定位嗎？",
+            "stopLocateLogicalDriveActionTitle": "停止定位邏輯驅動器"
         },
         "toast": {
             "successCreateLogicalDevice": "邏輯設備創建成功。请等待几秒钟并刷新应用程序以查看更改。",
@@ -2255,7 +2260,16 @@
             "errorNumberOfDrivesValidation": "驅動器數量不應高於未配置的實體裝置數量！",
             "errorMinMaxSpanDepth":"最小和最大跨度深度均為 2。",
             "errorSpanDepthDrives":"選定的 UnConfig 驅動器應等於跨距深度和每個跨距的驅動器數的倍數。",
-            "errorMsccSize": "尺寸應能被條帶尺寸整除。"
+            "errorMsccSize": "尺寸應能被條帶尺寸整除。",
+            "successStartLocateLogicalDevice": "成功啟動定位邏輯驅動器。",
+            "successStopLocateLogicalDevice": "成功停止定位邏輯設備。",
+            "errorStartLocateLogicalDevice": "啟動定位邏輯設備時發生錯誤。",
+            "errorStopLocateLogicalDevice": "停止定位邏輯設備時發生錯誤。"
+        },
+        "actions": {
+            "startLocate": "啟動定位",
+            "stopLocate": "停止定位",
+            "delete": "刪除"
         }
     },
     "pageFireWall": {

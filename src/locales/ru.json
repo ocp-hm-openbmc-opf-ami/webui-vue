@@ -1021,6 +1021,104 @@
         "maxPhysicalDevicesCountPerLogicalDevicesCount": "Максимальное количество физических устройств на логическое устройство",
         "hotSparesCount": "Количество горячих резервов"
     },
+    "pageLogicalDevice": {
+        "createLogicalDevice": "Создать логическое устройство",
+        "raidController": "RAID контроллер",
+        "raidLevel": "RAID уровень",
+        "virtualDeviceName": "Имя виртуального устройства",
+        "logicalDeviceName": "Имя логического устройства",
+        "stripSize": "Размер полосы",
+        "size": "Размер в байтах",
+        "parityGroupCount": "Количество групп четности",
+        "arrayNumber": "Номер массива",
+        "accelerator": "Ускоритель",
+        "spanDepth": "Глубина охвата",
+        "numberOfDrives": "Количество дисков на охват",
+        "initState": "Состояние инициализации",
+        "stripeSize": "Размер полосы",
+        "readPolicy": "Политика чтения",
+        "writePolicy": "Политика записи",
+        "ioPolicy": "Политика ввода-вывода",
+        "accessPolicy": "Политика доступа",
+        "diskCacheCapacity": "Ёмкость кэша диска",
+        "unConfiguredPhysicalDrive": "Неконфигурированные физические диски",
+        "noLogicalDevice": "В данный момент информация о логических устройствах отсутствует.",
+        "initStateOptions": {
+            "noInitialization": "Без инициализации",
+            "quickInitialization": "Быстрая инициализация",
+            "fullInitialization": "Полная инициализация"
+        },
+        "readPolicyOptions": {
+            "noReadAhead": "Без предварительного чтения",
+            "alwaysReadAhead": "Всегда предварительное чтение"
+        },
+        "writePolicyOptions": {
+            "writeThrough": "Запись через",
+            "alwaysWriteBack": "Всегда запись обратно",
+            "writeBackWithBBU": "Запись обратно с BBU"
+        },
+        "ioPolicyOptions": {
+            "directIO": "Прямой ввод-вывод",
+            "cachedIO": "Кэшированный ввод-вывод"
+        },
+        "accessPolicyOptions": {
+            "readWrite": "Чтение и запись",
+            "readOnly": "Только чтение",
+            "blocked": "Заблокировано"
+        },
+        "diskCacheCapacityOptions": {
+            "unchanged": "Без изменений",
+            "enabled": "Включено",
+            "disabled": "Выключено"
+        },
+        "table": {
+            "name": "Имя",
+            "raidType": "Тип RAID",
+            "stripSizeBytes": "Размер полосы в байтах",
+            "readCachePolicyType": "Тип политики кэша чтения",
+            "writeCachePolicyType": "Тип политики кэша записи",
+            "capacityBytes": "Ёмкость в байтах",
+            "numberOfPhysicalDevices": "Количество физических устройств",
+            "health": "Состояние"
+        },
+        "modal": {
+            "noPhysicalDeviceAvailable": "Нет доступных физических устройств для настройки!",
+            "deleteConfirmationMsg": "Вы уверены, что хотите удалить логическое устройство с ID {ldId}?",
+            "deleteConfirmationTitle": "Удаление логического устройства.",
+            "logicalCommonActionTitle": "Управление действиями логического устройства",
+            "startLocateLogicalDriveActionConfirmationMsg": "Вы уверены, что хотите начать поиск логического диска с ID {ldId}?",
+            "startLocateLogicalDriveActionTitle": "Начать поиск логического диска",
+            "stopLocateLogicalDriveActionConfirmationMsg": "Вы уверены, что хотите остановить поиск логического диска с ID {ldId}?",
+            "stopLocateLogicalDriveActionTitle": "Остановить поиск логического диска"
+        },
+        "toast": {
+            "successCreateLogicalDevice": "Логическое устройство успешно создано. Пожалуйста, подождите несколько секунд и обновите приложение, чтобы увидеть изменения.",
+            "errorCreateLogicalDevice": "Ошибка при создании логического устройства.",
+            "errorRaidDeviceNotPresent": "RAID устройство отсутствует.",
+            "errorRaidCtrlIdInvalid": "Недопустимый ID RAID контроллера.",
+            "errorRaidCtrlDevIdInvalid": "Недопустимый ID устройства RAID контроллера.",
+            "errorRaidNoVirtualDevicePresent": "Нет RAID логического устройства.",
+            "errorRaidOperationNotPermitted": "Операция RAID не разрешена.",
+            "errorRaidUnsupportedPhysicalDev": "Неподдерживаемое физическое устройство RAID.",
+            "errorRaidUnsupportedLogicalDev": "Неподдерживаемое логическое устройство RAID.",
+            "errorRaidControllerBusy": "RAID контроллер занят, команда не может быть обработана.",
+            "successDeleteLogicalDevice": "Логическое устройство успешно удалено. Пожалуйста, подождите несколько секунд и обновите приложение, чтобы увидеть изменения.",
+            "errorDeleteLogicalDevice": "Ошибка при удалении логического устройства.",
+            "errorNumberOfDrivesValidation": "Количество дисков не должно превышать количество неконфигурированных физических устройств!",
+            "errorMinMaxSpanDepth": "Минимальная и максимальная глубина охвата - 2.",
+            "errorSpanDepthDrives": "Выбранные неконфигурированные диски должны быть кратны глубине охвата и количеству дисков на охват.",
+            "errorMsccSize": "Размер должен быть кратен размеру полосы.",
+            "successStartLocateLogicalDevice": "Логическое устройство успешно запущено.",
+            "successStopLocateLogicalDevice": "Логическое устройство успешно остановлено.",
+            "errorStartLocateLogicalDevice": "Ошибка при запуске логического устройства.",
+            "errorStopLocateLogicalDevice": "Ошибка при остановке логического устройства."
+        },
+        "actions": {
+            "startLocate": "Начать локализацию",
+            "stopLocate": "Остановить локализацию",
+            "delete": "Удалить"
+        }
+    },
     "pagePhysicalDevice": {
         "table": {
             "id": "Ідэнтыфікатар",

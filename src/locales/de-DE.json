@@ -2219,8 +2219,13 @@
         },
         "modal": {
             "noPhysicalDeviceAvailable": "Es ist kein physisches Gerät zum Konfigurieren verfügbar!",
-            "deleteConfirmationMsg": "Sind Sie sicher, dass Sie das logische Gerät löschen möchten? Klicken Sie auf „OK“, um fortzufahren, oder auf „Abbrechen“, um den Vorgang jetzt abzubrechen.",
-            "deleteConfirmationTitle": "Logisches Gerät löschen."
+            "deleteConfirmationMsg": "Sind Sie sicher, dass Sie das logische Gerät mit der ID {ldId} löschen möchten?",
+    "deleteConfirmationTitle": "Logisches Gerät löschen.",
+    "logicalCommonActionTitle": "Logische Geräteaktionen verwalten",
+    "startLocateLogicalDriveActionConfirmationMsg": "Sind Sie sicher, dass Sie mit der Lokalisierung des logischen Laufwerks mit der ID {ldId} beginnen möchten?",
+    "startLocateLogicalDriveActionTitle": "Lokalisierung des logischen Laufwerks starten",
+    "stopLocateLogicalDriveActionConfirmationMsg": "Sind Sie sicher, dass Sie die Lokalisierung des logischen Laufwerks mit der ID {ldId} stoppen möchten?",
+    "stopLocateLogicalDriveActionTitle": "Lokalisierung des logischen Laufwerks stoppen"
         },
         "toast": {
             "successCreateLogicalDevice": "Logisches Gerät erfolgreich erstellt. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
@@ -2238,7 +2243,15 @@
             "errorNumberOfDrivesValidation": "Die Anzahl der Laufwerke sollte nicht höher sein als die Anzahl der nicht konfigurierten physischen Geräte!",
             "errorMinMaxSpanDepth":"Die minimale und maximale Spanntiefe beträgt 2.",
             "errorSpanDepthDrives":"Ausgewählte UnConfig-Laufwerke sollten einem Vielfachen der Span-Tiefe und der Laufwerke pro Span entsprechen.",
-            "errorMsccSize": "Die Größe sollte durch die Streifengröße teilbar sein."
+            "errorMsccSize": "Die Größe sollte durch die Streifengröße teilbar sein.",
+            "successStartLocateLogicalDevice": "Logisches Gerät erfolgreich gestartet.",
+    "successStopLocateLogicalDevice": "Logisches Gerät erfolgreich gestoppt.",
+    "errorStartLocateLogicalDevice": "Fehler beim Starten des logischen Geräts.",
+    "errorStopLocateLogicalDevice": "Fehler beim Stoppen des logischen Geräts."},
+    "actions": {
+        "startLocate": "Starten der Lokalisierung",
+        "stopLocate": "Stoppen der Lokalisierung",
+        "delete": "Löschen"
         }
     },
     "pageFireWall": {

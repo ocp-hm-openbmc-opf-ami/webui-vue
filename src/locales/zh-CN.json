@@ -2232,8 +2232,13 @@
         },
         "modal": {
             "noPhysicalDeviceAvailable": "没有可配置的实体设备！",
-            "deleteConfirmationMsg": "您确定要删除逻辑设备吗？单击“确定”继续，或单击“取消”立即停止",
-            "deleteConfirmationTitle": "删除逻辑设备。"
+            "deleteConfirmationMsg": "您确定要删除 ID 为 {ldId} 的逻辑设备吗？",
+            "deleteConfirmationTitle": "删除逻辑设备。",
+            "logicalCommonActionTitle": "管理逻辑设备操作",
+            "startLocateLogicalDriveActionConfirmationMsg": "您确定要启动 ID 为 {ldId} 的逻辑驱动器定位吗？",
+            "startLocateLogicalDriveActionTitle": "启动定位逻辑驱动器",
+            "stopLocateLogicalDriveActionConfirmationMsg": "您确定要停止 ID 为 {ldId} 的逻辑驱动器定位吗？",
+            "stopLocateLogicalDriveActionTitle": "停止定位逻辑驱动器"
         },
         "toast": {
             "successCreateLogicalDevice": "逻辑设备创建成功. 请等待几秒钟并刷新应用程序以查看更改。",
@@ -2251,7 +2256,16 @@
             "errorNumberOfDrivesValidation": "驱动器数量不应高于未配置的实体设备数量！",
             "errorMinMaxSpanDepth":"最小和最大跨度深度均为 2。",
             "errorSpanDepthDrives":"选定的 UnConfig 驱动器应等于跨度深度和每个跨度的驱动器数的倍数。",
-            "errorMsccSize": "尺寸应能被条带尺寸整除。"
+            "errorMsccSize": "尺寸应能被条带尺寸整除。",
+            "successStartLocateLogicalDevice": "成功启动逻辑驱动器定位。",
+    "successStopLocateLogicalDevice": "成功停止逻辑逻辑驱动器定位。",
+    "errorStartLocateLogicalDevice": "启动逻辑驱动器定位时发生错误。",
+    "errorStopLocateLogicalDevice": "停止逻辑驱动器定位时发生错误。"
+    },
+    "actions": {
+        "startLocate": "启动逻辑驱动器定位",
+        "stopLocate": "停止逻辑驱动器定位",
+        "delete": "删除"
         }
     },
     "pageFireWall": {
