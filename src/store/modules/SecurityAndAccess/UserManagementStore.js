@@ -169,7 +169,7 @@ const UserManagementStore = {
         privilege,
         status,
         locked,
-        // PasswordChangeRequired,
+        PasswordChangeRequired,
         routerPath,
         vmediaAccess,
       },
@@ -187,6 +187,8 @@ const UserManagementStore = {
             data.OEMAccountTypes = vmediaAccess ? ['media'] : [];
           if (status !== undefined) data.Enabled = status;
           if (locked !== undefined) data.Locked = locked;
+          if (PasswordChangeRequired !== undefined)
+            data.PasswordChangeRequired = PasswordChangeRequired;
         }
       } else if (
         globalPrivilege === 'Operator' ||
@@ -194,8 +196,6 @@ const UserManagementStore = {
       ) {
         if (password) data.Password = password;
       }
-      /*if (PasswordChangeRequired !== undefined)
-        data.PasswordChangeRequired = PasswordChangeRequired;*/
       return await api
         .patch(`/redfish/v1/AccountService/Accounts/${originalUsername}`, data)
         .then(() => dispatch('getUsers'))
