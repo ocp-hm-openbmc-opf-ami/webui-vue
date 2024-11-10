@@ -4,6 +4,7 @@
       responsive="md"
       hover
       sticky-header
+      show-empty
       :fields="networkInterfacesIpv6Fields"
       :items="networkinterfacesIpv6Info"
       head-variant="light"

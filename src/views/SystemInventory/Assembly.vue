@@ -4,6 +4,7 @@
       responsive="md"
       hover
       sticky-header
+      show-empty
       :fields="assemblyFields"
       :items="memoryAssemblyInfo"
       head-variant="light"

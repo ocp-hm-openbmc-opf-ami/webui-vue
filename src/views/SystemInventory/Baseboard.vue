@@ -4,6 +4,7 @@
       responsive="md"
       hover
       sticky-header
+      show-empty
       :fields="baseBoardFields"
       :items="baseBoardInfo"
       head-variant="light"

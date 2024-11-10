@@ -4,6 +4,7 @@
       responsive="md"
       hover
       sticky-header
+      show-empty
       :fields="pcieFunctionFields"
       :items="pcieFunctionInfo"
       head-variant="light"

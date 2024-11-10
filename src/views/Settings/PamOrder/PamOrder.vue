@@ -22,7 +22,7 @@
           <transition-group type="transition" name="flip-list">
             <li
               v-for="(name, index) in pamList"
-              :key="index"
+              :key="name"
               class="list-group-item"
             >
               {{ index + 1 }} - {{ name.includes('LDAP') ? 'LDAP/AD' : name }}

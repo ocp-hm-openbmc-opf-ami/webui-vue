@@ -16,7 +16,7 @@
         }}</b-alert>
       </div>
       <div v-else class="terminal-container">
-        <kvm-console :is-full-window="false" />
+        <kvm-console :is-full-window="true" />
       </div>
     </div>
   </b-container>

@@ -35,7 +35,7 @@ const PowerControlStore = {
         .catch((error) => console.log(error));
     },
     async getPowerControl({ dispatch, commit }) {
-      const collection = await dispatch('getChassisCollection');
+      const collection = (await dispatch('getChassisCollection')) || [];
       const amdApi = '/redfish/v1/Chassis/Chalupa_Baseboard';
       const isAmdPlatform = Object.values(collection).includes(amdApi);
       const powerCapApi = isAmdPlatform ? amdApi : collection[0];

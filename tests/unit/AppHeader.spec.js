@@ -13,10 +13,26 @@ describe('AppHeader.vue', () => {
     'global/getServerStatus': jest.fn(),
     'eventLog/getEventLogData': jest.fn(),
     'authentication/resetStoreState': jest.fn(),
+    'license/getUserAlertCount': jest.fn(),
     'global/getSystemInfo': jest.fn(),
   };
+  let state;
 
-  const store = new Vuex.Store({ actions });
+  beforeEach(() => {
+    // Define the state for the license module
+    state = {
+      isLicense: true, // Set to true or false depending on your test scenario
+    };
+  });
+  const store = new Vuex.Store({
+    actions,
+    modules: {
+      license: {
+        namespaced: true,
+        state,
+      },
+    },
+  });
   const wrapper = mount(AppHeader, {
     store,
     localVue,

@@ -25,7 +25,7 @@
             {{ $t('pageKvm.buttonCtrlAltDelete') }}
           </b-button>
           <b-button
-            v-if="!isFullWindow"
+            v-if="isFullWindow"
             variant="link"
             type="button"
             @click="openConsoleWindow()"

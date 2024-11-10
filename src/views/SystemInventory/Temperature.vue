@@ -4,6 +4,7 @@
       responsive="md"
       hover
       sticky-header
+      show-empty
       :fields="temperatureFields"
       :items="temperatureInfo"
       head-variant="light"

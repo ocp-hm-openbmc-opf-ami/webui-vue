@@ -4,6 +4,7 @@
       responsive="md"
       hover
       sticky-header
+      show-empty
       :fields="processorFields"
       :items="processorInfo"
       head-variant="light"

@@ -4,6 +4,7 @@
       responsive="md"
       hover
       sticky-header
+      show-empty
       :fields="systemFields"
       :items="systemInfo"
       head-variant="light"

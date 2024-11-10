@@ -4,6 +4,7 @@
       responsive="md"
       hover
       sticky-header
+      show-empty
       :fields="storageFields"
       head-variant="light"
     ></b-table>

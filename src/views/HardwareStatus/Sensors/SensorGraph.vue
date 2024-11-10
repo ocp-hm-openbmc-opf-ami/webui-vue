@@ -192,8 +192,8 @@ export default {
       itemData: {},
       fields: [
         {
-          key: 'average',
-          label: this.$t('pageSensors.sensorgraph.average'),
+          key: 'minimum',
+          label: this.$t('pageSensors.sensorgraph.min'),
           class: 'text-center',
         },
         {
@@ -202,8 +202,8 @@ export default {
           class: 'text-center',
         },
         {
-          key: 'minimum',
-          label: this.$t('pageSensors.sensorgraph.min'),
+          key: 'average',
+          label: this.$t('pageSensors.sensorgraph.average'),
           class: 'text-center',
         },
       ],

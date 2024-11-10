@@ -4,6 +4,7 @@
       responsive="md"
       hover
       sticky-header
+      show-empty
       :fields="processorFpgaFields"
       :items="processorFpgaInfo"
       head-variant="light"

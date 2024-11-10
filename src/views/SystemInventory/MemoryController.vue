@@ -4,6 +4,7 @@
       responsive="md"
       hover
       sticky-header
+      show-empty
       :fields="memoryControllerFields"
       :items="memoryControllerInfo"
       head-variant="light"

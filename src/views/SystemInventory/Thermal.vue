@@ -4,6 +4,7 @@
       responsive="md"
       hover
       sticky-header
+      show-empty
       :fields="thermalFields"
       :items="thermalFanInfo"
       head-variant="light"
