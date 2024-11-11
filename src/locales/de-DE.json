@@ -165,6 +165,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "raidTopology": "@:appPageTitle.raidTopology",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "tasks": "@:appPageTitle.tasks",
@@ -223,6 +224,7 @@
         "physicalDevice": "Physisches Gerät",
         "logicalDevice": "Logisches Gerät",
         "createLogicalDevice": "Logisches Gerät erstellen",
+        "raidTopology": "Topologieinformationen",
         "backupAndRestore": "Sichern und Wiederherstellen",
         "FireWall": "System-Firewall",
         "cups": "CUPS",
@@ -2252,6 +2254,94 @@
         "startLocate": "Starten der Lokalisierung",
         "stopLocate": "Stoppen der Lokalisierung",
         "delete": "Löschen"
+        }
+    },
+    "pageTopology": {
+        "raidTopology": "Topologieinformationen",
+        "protocolRole": "Protokollrolle",
+        "devicePort": "Geräteport",
+        "deviceId": "Geräte-ID",
+        "deviceTypeIocController": "IOC (Controller)",
+        "deviceTypeEdgeExpander": "Edge Expander",
+        "deviceTypeFANoutExpander": "FANout Expander",
+        "deviceTypeEndDevice": "Physisches Endgerät",
+        "deviceTypeNvmeDevice": "NVMe-Gerät",
+        "protocolRoleSspIniator": "SSP-Initiator",
+        "protocolRoleStpIniator": "STP-Initiator",
+        "protocolRoleSmpIniator": "SMP-Initiator",
+        "protocolRoleSataHost": "SATA-Host",
+        "protocolRoleSspTarget": "SSP-Ziel",
+        "protocolRoleStpTarget": "STP-Ziel",
+        "protocolRoleSmpTarget": "SMP-Ziel",
+        "protocolRoleSataDevice": "SATA-Gerät",
+        "toast" : {
+            "errorGetTopologyDevice": "Fehler beim Abrufen des Topologiegeräts."
+        }
+    },
+    "pageTopology": {
+        "raidTopology": "Topologieinformationen",
+        "protocolRole": "Protokollrolle",
+        "devicePort": "Geräteport",
+        "deviceId": "Geräte-ID",
+        "deviceTypeIocController": "IOC (Controller)",
+        "deviceTypeEdgeExpander": "Edge Expander",
+        "deviceTypeFANoutExpander": "FANout Expander",
+        "deviceTypeEndDevice": "Physisches Endgerät",
+        "deviceTypeNvmeDevice": "NVMe-Gerät",
+        "protocolRoleSspIniator": "SSP-Initiator",
+        "protocolRoleStpIniator": "STP-Initiator",
+        "protocolRoleSmpIniator": "SMP-Initiator",
+        "protocolRoleSataHost": "SATA-Host",
+        "protocolRoleSspTarget": "SSP-Ziel",
+        "protocolRoleStpTarget": "STP-Ziel",
+        "protocolRoleSmpTarget": "SMP-Ziel",
+        "protocolRoleSataDevice": "SATA-Gerät",
+        "toast" : {
+            "errorGetTopologyDevice": "Fehler beim Abrufen des Topologiegeräts."
+        }
+    },
+    "pageTopology": {
+        "raidTopology": "Topologieinformationen",
+        "protocolRole": "Protokollrolle",
+        "devicePort": "Geräteport",
+        "deviceId": "Geräte-ID",
+        "deviceTypeIocController": "IOC (Controller)",
+        "deviceTypeEdgeExpander": "Edge Expander",
+        "deviceTypeFANoutExpander": "FANout Expander",
+        "deviceTypeEndDevice": "Physisches Endgerät",
+        "deviceTypeNvmeDevice": "NVMe-Gerät",
+        "protocolRoleSspIniator": "SSP-Initiator",
+        "protocolRoleStpIniator": "STP-Initiator",
+        "protocolRoleSmpIniator": "SMP-Initiator",
+        "protocolRoleSataHost": "SATA-Host",
+        "protocolRoleSspTarget": "SSP-Ziel",
+        "protocolRoleStpTarget": "STP-Ziel",
+        "protocolRoleSmpTarget": "SMP-Ziel",
+        "protocolRoleSataDevice": "SATA-Gerät",
+        "toast" : {
+            "errorGetTopologyDevice": "Fehler beim Abrufen des Topologiegeräts."
+        }
+    },
+    "pageTopology": {
+        "raidTopology": "Topologieinformationen",
+        "protocolRole": "Protokollrolle",
+        "devicePort": "Geräteport",
+        "deviceId": "Geräte-ID",
+        "deviceTypeIocController": "IOC (Controller)",
+        "deviceTypeEdgeExpander": "Edge Expander",
+        "deviceTypeFANoutExpander": "FANout Expander",
+        "deviceTypeEndDevice": "Physisches Endgerät",
+        "deviceTypeNvmeDevice": "NVMe-Gerät",
+        "protocolRoleSspIniator": "SSP-Initiator",
+        "protocolRoleStpIniator": "STP-Initiator",
+        "protocolRoleSmpIniator": "SMP-Initiator",
+        "protocolRoleSataHost": "SATA-Host",
+        "protocolRoleSspTarget": "SSP-Ziel",
+        "protocolRoleStpTarget": "STP-Ziel",
+        "protocolRoleSmpTarget": "SMP-Ziel",
+        "protocolRoleSataDevice": "SATA-Gerät",
+        "toast" : {
+            "errorGetTopologyDevice": "Fehler beim Abrufen des Topologiegeräts."
         }
     },
     "pageFireWall": {

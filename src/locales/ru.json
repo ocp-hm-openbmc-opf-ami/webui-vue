@@ -164,7 +164,8 @@
         "serverPowerOperations": "Управление питанием сервера",
         "certificates": "Сертификаты",
         "virtualMedia": "Виртуальные носители",
-        "keyClear": "Удаление ключей"
+        "keyClear": "Удаление ключей",
+        "raidTopology": "Информация о топологии"
     },
     "pageChangePassword": {
         "changePassword": "Изменить пароль",
@@ -1153,6 +1154,28 @@
         "unDoPrepareRemovalConfirmationMsg": "Жадаеце ўсталяваць стан фізічнай прылады з ідэнтыфікатарам {pdId} на адмену падрыхтоўкі да выдалення?",
         "startLocateConfirmationMsg": "Жадаеце пачаць пошук фізічнай прылады з ідэнтыфікатарам {pdId}?",
         "stopLocateConfirmationMsg": "Жадаеце спыніць пошук фізічнай прылады з ідэнтыфікатарам {pdId}?"
+    },
+    "pageTopology": {
+        "raidTopology": "Информация о топологии",
+        "protocolRole": "Роль протокола",
+        "devicePort": "Порт устройства",
+        "deviceId": "ID устройства",
+        "deviceTypeIocController": "МОК (Контроллер)",
+        "deviceTypeEdgeExpander": "Расширитель периферии",
+        "deviceTypeFANoutExpander": "Расширитель FANout",
+        "deviceTypeEndDevice": "Физическое устройство",
+        "deviceTypeNvmeDevice": "Устройство NVMe",
+        "protocolRoleSspIniator": "Инициатор SSP",
+        "protocolRoleStpIniator": "Инициатор STP",
+        "protocolRoleSmpIniator": "Инициатор SMP",
+        "protocolRoleSataHost": "Хост SATA",
+        "protocolRoleSspTarget": "Цель SSP",
+        "protocolRoleStpTarget": "Цель STP",
+        "protocolRoleSmpTarget": "Цель SMP",
+        "protocolRoleSataDevice": "Устройство SATA",
+        "toast" : {
+            "errorGetTopologyDevice": "Ошибка при получении топологического устройства."
+        }
     },
     "pageTask": {
         "table": {

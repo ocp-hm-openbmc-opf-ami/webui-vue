@@ -329,6 +329,11 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.logicalDevice'),
               route: '/raid/logical-device',
             },
+            {
+              id: 'raid-topology',
+              label: this.$t('appNavigation.raidTopology'),
+              route: '/raid/topology',
+            },
           ],
         });
       }

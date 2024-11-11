@@ -514,6 +514,17 @@ if (process.env.VUE_APP_RAID_ENABLED == 'true') {
         title: i18n.t('appPageTitle.createLogicalDevice'),
       },
     },
+    {
+      path: '/raid/topology',
+      name: 'raid-topology',
+      component: () =>
+        import(
+          /* webpackChunkName: "RaidTopology" */ '@/views/RAID/Topology/Topology.vue'
+        ),
+      meta: {
+        title: i18n.t('appPageTitle.raidTopology'),
+      },
+    },
   );
 }
 if (process.env.VUE_APP_NVME_ENABLED == 'true') {

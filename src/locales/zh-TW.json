@@ -166,6 +166,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "raidTopology": "@:appPageTitle.raidTopology",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "tasks": "@:appPageTitle.tasks",
@@ -224,6 +225,7 @@
         "physicalDevice": "實體設備",
         "logicalDevice": "邏輯設備",
         "createLogicalDevice": "創建邏輯設備",
+        "raidTopology": "拓樸資訊",
         "backupAndRestore": "備份還原",
         "FireWall": "系統防火牆",
         "cups": "CUPS",
@@ -2270,6 +2272,94 @@
             "startLocate": "啟動定位",
             "stopLocate": "停止定位",
             "delete": "刪除"
+        }
+    },
+    "pageTopology": {
+        "raidTopology": "拓樸資訊",
+        "protocolRole": "協定角色",
+        "devicePort": "設備埠",
+        "deviceId": "設備 ID",
+        "deviceTypeIocController": "IOC (控制器)",
+        "deviceTypeEdgeExpander" : "邊緣擴展器",
+        "deviceTypeFANoutExpander": "扇出擴展器",
+        "deviceTypeEndDevice": "實體終端裝置",
+        "deviceTypeNvmeDevice": "NVMe 裝置",
+        "protocolRoleSspIniator": "SSP 發送端",
+        "protocolRoleStpIniator": "STP 發送端",
+        "protocolRoleSmpIniator": "SMP 發送端",
+        "protocolRoleSataHost": "SATA 主機",
+        "protocolRoleSspTarget": "SSP 目標端",
+        "protocolRoleStpTarget": "STP 目標端",
+        "protocolRoleSmpTarget": "SMP 目標端",
+        "protocolRoleSataDevice": "SATA 裝置",
+        "toast" : {
+            "errorGetTopologyDevice": "取得拓樸設備時發生錯誤。"
+        }
+    },
+    "pageTopology": {
+        "raidTopology": "拓樸資訊",
+        "protocolRole": "協定角色",
+        "devicePort": "設備埠",
+        "deviceId": "設備 ID",
+        "deviceTypeIocController": "IOC (控制器)",
+        "deviceTypeEdgeExpander" : "邊緣擴展器",
+        "deviceTypeFANoutExpander": "扇出擴展器",
+        "deviceTypeEndDevice": "實體終端裝置",
+        "deviceTypeNvmeDevice": "NVMe 裝置",
+        "protocolRoleSspIniator": "SSP 發送端",
+        "protocolRoleStpIniator": "STP 發送端",
+        "protocolRoleSmpIniator": "SMP 發送端",
+        "protocolRoleSataHost": "SATA 主機",
+        "protocolRoleSspTarget": "SSP 目標端",
+        "protocolRoleStpTarget": "STP 目標端",
+        "protocolRoleSmpTarget": "SMP 目標端",
+        "protocolRoleSataDevice": "SATA 裝置",
+        "toast" : {
+            "errorGetTopologyDevice": "取得拓樸設備時發生錯誤。"
+        }
+    },
+    "pageTopology": {
+        "raidTopology": "拓樸資訊",
+        "protocolRole": "協定角色",
+        "devicePort": "設備埠",
+        "deviceId": "設備 ID",
+        "deviceTypeIocController": "IOC (控制器)",
+        "deviceTypeEdgeExpander" : "邊緣擴展器",
+        "deviceTypeFANoutExpander": "扇出擴展器",
+        "deviceTypeEndDevice": "實體終端裝置",
+        "deviceTypeNvmeDevice": "NVMe 裝置",
+        "protocolRoleSspIniator": "SSP 發送端",
+        "protocolRoleStpIniator": "STP 發送端",
+        "protocolRoleSmpIniator": "SMP 發送端",
+        "protocolRoleSataHost": "SATA 主機",
+        "protocolRoleSspTarget": "SSP 目標端",
+        "protocolRoleStpTarget": "STP 目標端",
+        "protocolRoleSmpTarget": "SMP 目標端",
+        "protocolRoleSataDevice": "SATA 裝置",
+        "toast" : {
+            "errorGetTopologyDevice": "取得拓樸設備時發生錯誤。"
+        }
+    },
+    "pageTopology": {
+        "raidTopology": "拓樸資訊",
+        "protocolRole": "協定角色",
+        "devicePort": "設備埠",
+        "deviceId": "設備 ID",
+        "deviceTypeIocController": "IOC (控制器)",
+        "deviceTypeEdgeExpander" : "邊緣擴展器",
+        "deviceTypeFANoutExpander": "扇出擴展器",
+        "deviceTypeEndDevice": "實體終端裝置",
+        "deviceTypeNvmeDevice": "NVMe 裝置",
+        "protocolRoleSspIniator": "SSP 發送端",
+        "protocolRoleStpIniator": "STP 發送端",
+        "protocolRoleSmpIniator": "SMP 發送端",
+        "protocolRoleSataHost": "SATA 主機",
+        "protocolRoleSspTarget": "SSP 目標端",
+        "protocolRoleStpTarget": "STP 目標端",
+        "protocolRoleSmpTarget": "SMP 目標端",
+        "protocolRoleSataDevice": "SATA 裝置",
+        "toast" : {
+            "errorGetTopologyDevice": "取得拓樸設備時發生錯誤。"
         }
     },
     "pageFireWall": {

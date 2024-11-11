@@ -166,6 +166,7 @@
         "asd": "@:appPageTitle.asd",
         "raidManagement": "@:appPageTitle.raidManagement",
         "adapter": "@:appPageTitle.adapter",
+        "raidTopology": "@:appPageTitle.raidTopology",
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
@@ -226,6 +227,7 @@
         "physicalDevice": "Physical Device",
         "logicalDevice": "Logical Device",
         "createLogicalDevice": "Create Logical Device",
+        "raidTopology": "Topology Information",
         "backupAndRestore": "Backup And Restore",
         "FireWall": "System Firewall",
         "tasks": "Tasks",
@@ -2277,6 +2279,94 @@
             "startLocate":"start Locate",
             "stopLocate":"stop Locate",
             "delete":"delete"
+        }
+    },
+    "pageTopology": {
+        "raidTopology": "Topology Information",
+        "protocolRole": "Protocol Role",
+        "devicePort": "Device Port",
+        "deviceId": "Device ID",
+        "deviceTypeIocController": "IOC (Controller)",
+        "deviceTypeEdgeExpander": "Edge Expander",
+        "deviceTypeFANoutExpander": "FANout Expander",
+        "deviceTypeEndDevice": "Physical End Device",
+        "deviceTypeNvmeDevice": "NVMe Device",
+        "protocolRoleSspIniator": "SSP Iniator",
+        "protocolRoleStpIniator": "STP Iniator",
+        "protocolRoleSmpIniator": "SMP Iniator",
+        "protocolRoleSataHost": "SATA Host",
+        "protocolRoleSspTarget": "SSP Target",
+        "protocolRoleStpTarget": "STP Target",
+        "protocolRoleSmpTarget": "SMP Target",
+        "protocolRoleSataDevice": "SATA Device",
+        "toast" : {
+            "errorGetTopologyDevice": "Error in getting the topology device."
+        }
+    },
+    "pageTopology": {
+        "raidTopology": "Topology Information",
+        "protocolRole": "Protocol Role",
+        "devicePort": "Device Port",
+        "deviceId": "Device ID",
+        "deviceTypeIocController": "IOC (Controller)",
+        "deviceTypeEdgeExpander": "Edge Expander",
+        "deviceTypeFANoutExpander": "FANout Expander",
+        "deviceTypeEndDevice": "Physical End Device",
+        "deviceTypeNvmeDevice": "NVMe Device",
+        "protocolRoleSspIniator": "SSP Iniator",
+        "protocolRoleStpIniator": "STP Iniator",
+        "protocolRoleSmpIniator": "SMP Iniator",
+        "protocolRoleSataHost": "SATA Host",
+        "protocolRoleSspTarget": "SSP Target",
+        "protocolRoleStpTarget": "STP Target",
+        "protocolRoleSmpTarget": "SMP Target",
+        "protocolRoleSataDevice": "SATA Device",
+        "toast" : {
+            "errorGetTopologyDevice": "Error in getting the topology device."
+        }
+    },
+    "pageTopology": {
+        "raidTopology": "Topology Information",
+        "protocolRole": "Protocol Role",
+        "devicePort": "Device Port",
+        "deviceId": "Device ID",
+        "deviceTypeIocController": "IOC (Controller)",
+        "deviceTypeEdgeExpander": "Edge Expander",
+        "deviceTypeFANoutExpander": "FANout Expander",
+        "deviceTypeEndDevice": "Physical End Device",
+        "deviceTypeNvmeDevice": "NVMe Device",
+        "protocolRoleSspIniator": "SSP Iniator",
+        "protocolRoleStpIniator": "STP Iniator",
+        "protocolRoleSmpIniator": "SMP Iniator",
+        "protocolRoleSataHost": "SATA Host",
+        "protocolRoleSspTarget": "SSP Target",
+        "protocolRoleStpTarget": "STP Target",
+        "protocolRoleSmpTarget": "SMP Target",
+        "protocolRoleSataDevice": "SATA Device",
+        "toast" : {
+            "errorGetTopologyDevice": "Error in getting the topology device."
+        }
+    },
+    "pageTopology": {
+        "raidTopology": "Topology Information",
+        "protocolRole": "Protocol Role",
+        "devicePort": "Device Port",
+        "deviceId": "Device ID",
+        "deviceTypeIocController": "IOC (Controller)",
+        "deviceTypeEdgeExpander": "Edge Expander",
+        "deviceTypeFANoutExpander": "FANout Expander",
+        "deviceTypeEndDevice": "Physical End Device",
+        "deviceTypeNvmeDevice": "NVMe Device",
+        "protocolRoleSspIniator": "SSP Iniator",
+        "protocolRoleStpIniator": "STP Iniator",
+        "protocolRoleSmpIniator": "SMP Iniator",
+        "protocolRoleSataHost": "SATA Host",
+        "protocolRoleSspTarget": "SSP Target",
+        "protocolRoleStpTarget": "STP Target",
+        "protocolRoleSmpTarget": "SMP Target",
+        "protocolRoleSataDevice": "SATA Device",
+        "toast" : {
+            "errorGetTopologyDevice": "Error in getting the topology device."
         }
     },
     "pageFireWall": {
