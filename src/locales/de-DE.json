@@ -2176,6 +2176,7 @@
         "stripeSize": "Streifengröße",
         "readPolicy": "Lesen Sie die Richtlinie",
         "writePolicy": "Richtlinien schreiben",
+        "cachePolicy": "Cache-Strategie",
         "ioPolicy": "IO-Richtlinie",
         "accessPolicy": "Zugangsrichtlinien",
         "diskCacheCapacity": "Festplatten-Cache-Kapazität",
@@ -2217,7 +2218,11 @@
             "writeCachePolicyType": "Cache-Richtlinientyp schreiben",
             "capacityBytes": "Kapazität Bytes",
             "numberOfPhysicalDevices": "Anzahl physischer Geräte",
-            "health": "Gesundheit"
+            "health": "Gesundheit",
+            "badBlockStatus": "Status von fehlerhaften Blöcken",
+            "deviceGroup": "Gerätegruppe",
+            "percentage": "Prozentsatz",
+            "progress": "Fortschritt"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "Es ist kein physisches Gerät zum Konfigurieren verfügbar!",

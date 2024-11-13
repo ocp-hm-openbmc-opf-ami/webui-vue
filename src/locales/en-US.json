@@ -2199,6 +2199,7 @@
         "stripeSize": "Stripe Size",
         "readPolicy": "Read Policy",
         "writePolicy": "Write Policy",
+        "cachePolicy": "Cache Policy",
         "ioPolicy": "IO Policy",
         "accessPolicy": "Access Policy",
         "diskCacheCapacity": "Disk Cache Capacity",
@@ -2240,7 +2241,11 @@
             "writeCachePolicyType": "Write Cache Policy Type",
             "capacityBytes": "Capacity Bytes",
             "numberOfPhysicalDevices": "Number Of Physical Devices",
-            "health": "Health"
+            "health": "Health",
+            "badBlockStatus": "Bad Block Status",
+            "deviceGroup": "Device Group",
+            "percentage": "Percentage",
+            "progress" : "Progress"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "No Physical Device is available to configure!",

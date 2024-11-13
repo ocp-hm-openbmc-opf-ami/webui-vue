@@ -2193,6 +2193,7 @@
         "stripeSize": "條紋尺寸",
         "readPolicy": "閱讀政策",
         "writePolicy": "寫策略",
+        "cachePolicy": "快取策略",
         "ioPolicy": "IO政策",
         "accessPolicy": "准入政策",
         "diskCacheCapacity": "磁盤緩存容量",
@@ -2234,7 +2235,11 @@
             "writeCachePolicyType": "寫入緩存策略類型",
             "capacityBytes": "容量字節",
             "numberOfPhysicalDevices": "實體裝置數量",
-            "health": "狀態"
+            "health": "健康狀態",
+            "badBlockStatus": "壞區塊狀態",
+            "deviceGroup": "裝置群組",
+            "percentage": "百分比",
+            "progress": "進度"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "沒有可配置的物理設備！",

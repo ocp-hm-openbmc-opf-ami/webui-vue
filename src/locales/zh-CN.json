@@ -2189,6 +2189,7 @@
         "stripeSize": "条纹尺寸",
         "readPolicy": "阅读政策",
         "writePolicy": "写策略",
+        "cachePolicy": "缓存策略",
         "ioPolicy": "IO政策",
         "accessPolicy": "存取机制",
         "diskCacheCapacity": "磁盘缓存容量",
@@ -2230,7 +2231,11 @@
             "writeCachePolicyType": "写入缓存策略类型",
             "capacityBytes": "容量字节",
             "numberOfPhysicalDevices": "实体设备数量",
-            "health": "状态"
+            "health": "状态",
+            "badBlockStatus": "坏块状态",
+            "deviceGroup": "设备组",
+            "percentage": "百分比",
+            "progress": "进度"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "没有可配置的实体设备！",

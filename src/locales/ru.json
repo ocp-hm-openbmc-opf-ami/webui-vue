@@ -1039,6 +1039,7 @@
         "stripeSize": "Размер полосы",
         "readPolicy": "Политика чтения",
         "writePolicy": "Политика записи",
+        "cachePolicy": "Политика кэширования",
         "ioPolicy": "Политика ввода-вывода",
         "accessPolicy": "Политика доступа",
         "diskCacheCapacity": "Ёмкость кэша диска",
@@ -1080,7 +1081,11 @@
             "writeCachePolicyType": "Тип политики кэша записи",
             "capacityBytes": "Ёмкость в байтах",
             "numberOfPhysicalDevices": "Количество физических устройств",
-            "health": "Состояние"
+            "health": "Состояние",
+            "badBlockStatus": "Статус повреждённых блоков",
+            "deviceGroup": "Группа устройств",
+            "percentage": "Процент",
+            "progress": "Прогресс"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "Нет доступных физических устройств для настройки!",
