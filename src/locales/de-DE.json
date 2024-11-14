@@ -1408,7 +1408,7 @@
             "rule1": "Es sollte nur druckbare Zeichen enthalten.",
             "rule2": "Das Passwort sollte nicht kürzer als 8 Zeichen sein.",
             "rule3": "Es müssen mindestens 5 eindeutige Zeichen enthalten (abcabcabc nicht zulässig)",
-            "rule4": "Erfüllt die folgenden 4 Kriterien:",
+            "rule4": "Erfüllt drei der folgenden vier Kriterien:",
             "rule5": "Enthält Großbuchstaben (e.g. A, G).",
             "rule6": "Enthält Kleinbuchstaben (e.g. a, g).",
             "rule7": "Enthält Ziffern (e.g. 1, 6).",

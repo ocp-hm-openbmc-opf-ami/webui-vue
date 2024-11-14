@@ -1416,7 +1416,7 @@
                 "rule1": "It should contain printable characters only.",
                 "rule2": "Password length should not be shorter than 8 characters.",
                 "rule3": "Must contain at least 5 unique characters (abcabcabc not allowed)",
-                "rule4": "Meets following 4 criteria:",
+                "rule4": "Meets any three out of following 4 criteria:",
                 "rule5": "Contains upper case (e.g. A, G).",
                 "rule6": "Contains lower case (e.g. a, g).",
                 "rule7": "Contains digit numbers (e.g. 1, 6).",
