@@ -47,7 +47,7 @@
         </b-col>
         <b-col cols="10">
           <span>
-            {{ firstLetterUpperCase(TLSAuthentication) }}
+            {{ TLSAuthentication }}
           </span>
         </b-col>
       </b-row>

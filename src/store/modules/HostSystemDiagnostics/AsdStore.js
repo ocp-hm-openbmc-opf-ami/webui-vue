@@ -34,7 +34,13 @@ const AsdStore = {
         .then((response) => {
           commit('setAsdServerEnabled', response.data.Enabled);
           const TLSAuthentication = response.data.TLSAuthentication;
-          commit('setTLSAuthentication', TLSAuthentication);
+          if (TLSAuthentication.toLowerCase() == 'disable') {
+            commit('setTLSAuthentication', i18n.t('global.action.disable'));
+          } else if (TLSAuthentication.toLowerCase() == 'enable') {
+            commit('setTLSAuthentication', i18n.t('global.action.enable'));
+          } else {
+            commit('setTLSAuthentication', TLSAuthentication);
+          }
           const JTagInformation = response.data.JTagInformation;
           commit('setJTagInformation', JTagInformation);
         })

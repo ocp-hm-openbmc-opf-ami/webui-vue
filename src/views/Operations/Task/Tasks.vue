@@ -6,6 +6,7 @@
         <b-table
           responsive="md"
           show-empty
+          :empty-text="$t('global.table.emptyMessage')"
           class="mb-0 text-center"
           :fields="fields"
           :items="tableItems"
