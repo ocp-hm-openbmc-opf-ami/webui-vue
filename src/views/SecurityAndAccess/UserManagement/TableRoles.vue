@@ -15,11 +15,6 @@
         <checkmark20 />
       </template>
     </template>
-    <template #cell(noaccess)="data">
-      <template v-if="data.value">
-        <checkmark20 />
-      </template>
-    </template>
   </b-table>
 </template>
 
@@ -40,7 +35,6 @@ export default {
           administrator: true,
           operator: true,
           readonly: false,
-          noaccess: false,
         },
         {
           description: this.$t(
@@ -49,7 +43,6 @@ export default {
           administrator: true,
           operator: false,
           readonly: false,
-          noaccess: false,
         },
         {
           description: this.$t(
@@ -58,7 +51,6 @@ export default {
           administrator: true,
           operator: true,
           readonly: true,
-          noaccess: false,
         },
         {
           description: this.$t(
@@ -67,7 +59,6 @@ export default {
           administrator: true,
           operator: false,
           readonly: false,
-          noaccess: false,
         },
         {
           description: this.$t(
@@ -76,7 +67,6 @@ export default {
           administrator: true,
           operator: true,
           readonly: true,
-          noaccess: false,
         },
       ],
       fields: [
@@ -97,11 +87,6 @@ export default {
         {
           key: 'readonly',
           label: this.$t('pageUserManagement.tableRoles.readOnly'),
-          class: 'text-center',
-        },
-        {
-          key: 'noaccess',
-          label: this.$t('pageUserManagement.tableRoles.noAccess'),
           class: 'text-center',
         },
       ],
