@@ -1391,12 +1391,12 @@
                 "rule6": "Contains lower case (e.g. a, g).",
                 "rule7": "Contains digit numbers (e.g. 1, 6).",
                 "rule8": "Contains at least a space or symbols (e.g. $, &).",
-                "rule9": "Could not contains username or the username in reverse order (case insensitive).",
-                "rule10": "Could not contains continuous digits longer than or equal to 3 characters (e.g. BMC(123)ste, BMC(654)sfc are not allowed).",
-                "rule11": "Could not contains continuous case sensitive alphabets longer than or equal to 3 characters (e.g. (AbC)3478!,57$(DeF)68k are not allowed).",
-                "rule12": "Symbols could contain no longer than 3 characters (e.g. 34Mgs57(?!$#)68k are not allowed))",
-                "rule13": "Digits could no longer than 3 characters (e.g. Fgke(1245)#@, (4390)FGL$ are not allowed)",
-                "rule14": "Alphabet could contain no longer than 3 characters (case sensitive) (e.g. Fg1s3as(FDGB), GleOp34!(asbd) are not allowed)"
+                "rule9": "Could not contain username or the username in reverse order (case-insensitive).",
+                "rule10": "Could not contain digits in continuous or reverse continuous order longer than or equal to 3 characters (e.g. BMC(123)ste, BMC(654)sfc, BMC(4567)ste, BMC(9876)sfc  are not allowed).",
+                "rule11": "Could not contain case-sensitive alphabets in continuous or reverse continuous order longer than or equal to 3 characters (e.g. (ABC)347!,57$(fed)68k, (GHIJ)347!, 57$(kjih)68k are not allowed).",
+                "rule12": "Could not contain symbols longer than 3 characters (e.g. 34Mgs57(?!$#)68k are not allowed).",
+                "rule13": "Could not contain digits longer than 3 characters (e.g. Fgke(1245)#@, (4390)FGL$ are not allowed).",
+                "rule14": "The Alphabet can contain no longer than 3 characters (case-sensitive) (e.g. Fg1s3as(FDGB), GleOp34!(asbd) are not allowed)."
             },
             "passwordFormedium": {
                 "passwordComplexityFormedium": "Password Complexity for Medium",

@@ -1383,12 +1383,12 @@
             "rule6": "Enthält Kleinbuchstaben (e.g. a, g).",
             "rule7": "Enthält Ziffern (e.g. 1, 6).",
             "rule8": "Enthält mindestens ein Leerzeichen oder Symbole (z. B. $, &).",
-            "rule9": "Der Benutzername oder der Benutzername konnte nicht in umgekehrter Reihenfolge enthalten sein (Groß  und Kleinschreibung wird nicht beachtet).",
-            "rule10": "Konnte keine fortlaufenden Ziffern enthalten, die länger als oder gleich 3 Zeichen sind (e.g. BMC(123)ste, BMC(654)sfc sind nicht erlaubt).",
-            "rule11": "Konnte keine fortlaufenden Alphabete enthalten, bei denen die Groß- und Kleinschreibung beachtet wird und die länger als oder gleich 3 Zeichen sind (z. B. (AbC)3478!,57$(DeF)68k sind nicht zulässig).",
-            "rule12": "Symbole dürfen nicht länger als 3 Zeichen enthalten (z. B. 34Mgs57(?!$#)68k sind nicht zulässig)).",
-            "rule13": "Ziffern dürfen nicht länger als 3 Zeichen sein (z. B. Fgke(1245)#@, (4390)FGL$ sind nicht zulässig).",
-            "rule14": "Das Alphabet darf nicht länger als 3 Zeichen enthalten (Groß- und Kleinschreibung beachten) (z. B. Fg1s3as(FDGB), GleOp34!(asbd) sind nicht zulässig)."
+            "rule9": "Darf keinen Benutzernamen oder den Benutzernamen in umgekehrter Reihenfolge enthalten (ohne Berücksichtigung der Groß-/Kleinschreibung).",
+            "rule10": "Darf keine Ziffern in fortlaufender oder umgekehrt fortlaufender Reihenfolge enthalten, die länger als oder gleich 3 Zeichen sind (z. B. sind BMC(123)ste, BMC(654)sfc, BMC(4567)ste, BMC(9876)sfc nicht zulässig).",
+            "rule11": "Darf keine Groß-/Kleinschreibung beachtenden Buchstaben in fortlaufender oder umgekehrt fortlaufender Reihenfolge enthalten, die länger als oder gleich 3 Zeichen sind (z. B. sind (ABC)347!,57$(fed)68k, (GHIJ)347!, 57$(kjih)68k nicht zulässig).",
+            "rule12": "Darf keine Symbole enthalten, die länger als 3 Zeichen sind (z. B. sind 34Mgs57(?!$#)68k nicht zulässig).",
+            "rule13": "Darf keine Ziffern, die länger als 3 Zeichen sind (z. B. Fgke(1245)#@, (4390)FGL$ sind nicht zulässig).",
+            "rule14": "Das Alphabet darf nicht länger als 3 Zeichen sein (Groß-/Kleinschreibung beachten) (z. B. Fg1s3as(FDGB), GleOp34!(asbd) sind nicht zulässig)."
           },
           "passwordFormedium": {
             "passwordComplexityFormedium": "Passwortkomplexität für Medium",
