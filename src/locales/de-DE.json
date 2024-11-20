@@ -2116,6 +2116,7 @@
         "supportedRaidTypes": "Unterstützte RAID-Typen",
         "viewPhysicalDevices": "Physische Geräte anzeigen",
         "viewLogicalDevices": "Logische Geräte anzeigen",
+        "controller": "Controller",
         "noRaidControllerAvailable": "Es sind keine RAID-Controller verfügbar.",
         "physicalDeviceCount": "Anzahl der physischen Geräte",
         "maxPhysicalDeviceCount": "Maximale Anzahl physischer Geräte",
@@ -2165,6 +2166,7 @@
         "raidLevel": "RAID-Level",
         "virtualDeviceName": "Name des virtuellen Geräts",
         "logicalDeviceName": "Logischer Gerätename",
+        "logicalDevices": "Logische Geräte",
         "stripSize": "Streifengröße",
         "size": "Größe in Bytes",
         "parityGroupCount": "Anzahl der Paritätsgruppen",
@@ -2188,10 +2190,16 @@
             "fullInitialization": "Vollständige Initialisierung"
         },
         "readPolicyOptions": {
+            "readAhead": "Vorablesen",
+            "off": "Aus",
+            "adaptiveReadAhead": "Adaptive Vorab-Lesevorschau",
             "noReadAhead": "Kein Vorauslesen",
             "alwaysReadAhead": "Lesen Sie immer im Voraus"
         },
         "writePolicyOptions": {
+            "off": "Aus",
+            "protectedWriteBack": "Geschützte Rückschreibung",
+            "unprotectedWriteBack": "Ungeschützte Rückschreibung",
             "writeThrough": "Durchschreiben",
             "alwaysWriteBack": "Schreiben Sie immer zurück",
             "writeBackWithBBU": "Schreiben Sie mit BBU zurück"

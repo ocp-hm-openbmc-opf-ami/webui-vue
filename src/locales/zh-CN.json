@@ -2129,6 +2129,7 @@
         "supportedRaidTypes": "支持的 RAID 类型",
         "viewPhysicalDevices": "查看实体设备",
         "viewLogicalDevices": "查看逻辑设备",
+        "controller": "控制器",
         "noRaidControllerAvailable": "没有可用的 RAID 控制器。",
         "physicalDeviceCount": "实体设备数量",
         "maxPhysicalDeviceCount": "最大实体设备数量",
@@ -2178,6 +2179,7 @@
         "raidLevel": "RAID级别",
         "virtualDeviceName": "虚拟设备名称",
         "logicalDeviceName": "逻辑设备名称",
+        "logicalDevices": "逻辑设备",
         "stripSize": "条带尺寸",
         "size": "大小（以字节为单位）",
         "parityGroupCount": "奇偶校验组计数",
@@ -2201,10 +2203,16 @@
             "fullInitialization": "完全初始化"
         },
         "readPolicyOptions": {
+            "readAhead":"预读",
+            "off": "关闭",
+            "adaptiveReadAhead": "调适预先读取",
             "noReadAhead": "不预读",
             "alwaysReadAhead": "始终提前阅读"
         },
         "writePolicyOptions": {
+            "off": "关闭",
+            "protectedWriteBack": "保护回写",
+            "unprotectedWriteBack": "不保护回写",
             "writeThrough": "直写",
             "alwaysWriteBack": "总是回信",
             "writeBackWithBBU": "用BBU回写"

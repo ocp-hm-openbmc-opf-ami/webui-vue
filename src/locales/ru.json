@@ -1014,6 +1014,7 @@
         "supportedRaidTypes": "Тыпы RAID, якія падтрымліваюцца",
         "viewPhysicalDevices": "Праглядзець фізічныя прылады",
         "viewLogicalDevices": "Праглядзець лагічныя прылады",
+        "controller": "Контроллер",
         "noRaidControllerAvailable": "Няма даступных кантролераў RAID.",
         "physicalDeviceCount": "Количество физических устройств",
         "maxPhysicalDeviceCount": "Максимальное количество физических устройств",
@@ -1028,6 +1029,7 @@
         "raidLevel": "RAID уровень",
         "virtualDeviceName": "Имя виртуального устройства",
         "logicalDeviceName": "Имя логического устройства",
+        "logicalDevices": "Логические устройства",
         "stripSize": "Размер полосы",
         "size": "Размер в байтах",
         "parityGroupCount": "Количество групп четности",
@@ -1051,10 +1053,16 @@
             "fullInitialization": "Полная инициализация"
         },
         "readPolicyOptions": {
+            "readAhead": "Предварительное чтение",
+            "off": "Выключено",
+            "adaptiveReadAhead": "Адаптивное предзагрузочное чтение",
             "noReadAhead": "Без предварительного чтения",
             "alwaysReadAhead": "Всегда предварительное чтение"
         },
         "writePolicyOptions": {
+            "off": "Выключено",
+            "protectedWriteBack": "Защищенная запись назад",
+            "unprotectedWriteBack": "Незащищенная запись назад",
             "writeThrough": "Запись через",
             "alwaysWriteBack": "Всегда запись обратно",
             "writeBackWithBBU": "Запись обратно с BBU"

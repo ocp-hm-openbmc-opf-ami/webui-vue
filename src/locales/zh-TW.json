@@ -2133,6 +2133,7 @@
         "supportedRaidTypes": "支持的 RAID 類型",
         "viewPhysicalDevices": "查看實體設備",
         "viewLogicalDevices": "查看邏輯設備",
+        "controller": "控制器",
         "noRaidControllerAvailable": "沒有可用的 RAID 控制器。",
         "physicalDeviceCount": "實體設備數量",
         "maxPhysicalDeviceCount": "最大實體設備數量",
@@ -2182,6 +2183,7 @@
         "raidLevel": "RAID級別",
         "virtualDeviceName": "虛擬設備名稱",
         "logicalDeviceName": "邏輯設備名稱",
+        "logicalDevices": "邏輯設備",
         "stripSize": "條帶尺寸",
         "size": "大小（以位元組為單位）",
         "parityGroupCount": "奇偶校驗組計數",
@@ -2205,10 +2207,16 @@
             "fullInitialization": "完全初始化"
         },
         "readPolicyOptions": {
+            "readAhead": "預讀",
+            "off": "關閉",
+            "adaptiveReadAhead": "調適預先讀取",
             "noReadAhead": "沒有預讀",
             "alwaysReadAhead": "始終提前閱讀"
         },
         "writePolicyOptions": {
+            "off":"關閉",
+            "protectedWriteBack":"保護回寫",
+            "unprotectedWriteBack": "不保護回寫",
             "writeThrough": "直寫",
             "alwaysWriteBack": "總是回信",
             "writeBackWithBBU": "用BBU回寫"
