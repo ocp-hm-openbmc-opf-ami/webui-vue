@@ -78,6 +78,7 @@
             <b-button
               variant="primary"
               data-test-id="serverPowerOperations-button-powerOn"
+              :disabled="globalPrivilege !== 'Administrator'"
               @click="powerOn"
             >
               {{ $t('pageServerPowerOperations.powerOn') }}
@@ -110,6 +111,7 @@
                 variant="primary"
                 type="submit"
                 data-test-id="serverPowerOperations-button-reboot"
+                :disabled="globalPrivilege !== 'Administrator'"
               >
                 {{ $t('pageServerPowerOperations.reboot') }}
               </b-button>
@@ -140,6 +142,7 @@
                 variant="primary"
                 type="submit"
                 data-test-id="serverPowerOperations-button-shutDown"
+                :disabled="globalPrivilege !== 'Administrator'"
               >
                 {{ $t('pageServerPowerOperations.shutDown') }}
               </b-button>
@@ -173,6 +176,7 @@ export default {
         rebootOption: 'orderly',
         shutdownOption: 'orderly',
       },
+      globalPrivilege: this.$store.getters['global/userPrivilege'],
     };
   },
   computed: {

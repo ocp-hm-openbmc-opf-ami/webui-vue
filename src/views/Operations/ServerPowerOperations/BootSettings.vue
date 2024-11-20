@@ -42,7 +42,12 @@
           {{ $t('global.status.enabled') }}
         </b-form-checkbox>
       </b-form-group>
-      <b-button variant="primary" type="submit" class="mb-3">
+      <b-button
+        variant="primary"
+        type="submit"
+        class="mb-3"
+        :disabled="globalPrivilege !== 'Administrator'"
+      >
         {{ $t('global.action.save') }}
       </b-button>
     </b-form>
@@ -64,6 +69,7 @@ export default {
         oneTimeBoot: this.$store.getters['serverBootSettings/overrideEnabled'],
         tpmPolicyOn: this.$store.getters['serverBootSettings/tpmEnabled'],
       },
+      globalPrivilege: this.$store.getters['global/userPrivilege'],
     };
   },
   computed: {
