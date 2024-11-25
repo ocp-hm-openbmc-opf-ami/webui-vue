@@ -226,6 +226,10 @@ export default class AMI_RFB extends RFB {
       );
     }
   }
+
+  _setDesktopName(name) {
+    this._fbName = name;
+  }
 }
 
 /* Note: new keyboard layout should follow naming convention

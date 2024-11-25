@@ -1249,7 +1249,8 @@
         "toast": {
             "success" : "Der Stromvorgang wurde erfolgreich ausgeführt",
             "error" : "Fehler beim Ausführen des Strombetriebs"
-        }
+        },
+        "viewonly" : "(Nur ansehen)"
     },
     "pageLdap": {
         "pageDescription": "Konfigurieren Sie LDAP Einstellungen und verwalten Sie Rollengruppen",

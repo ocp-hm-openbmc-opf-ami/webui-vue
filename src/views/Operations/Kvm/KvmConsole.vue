@@ -140,17 +140,17 @@ export default {
     },
     serverStatus() {
       if (this.status === Connected) {
-        this.$root.$emit('enable-softkeyboard-btn');
-        this.updatePowerActionDropDown(this.powerStatus);
-        return this.$t('pageKvm.connected');
+        if (this.rfb._fbName.indexOf('(View Only)') == -1) {
+          this.$root.$emit('enable-softkeyboard-btn');
+          this.updatePowerActionDropDown(this.powerStatus);
+          return this.$t('pageKvm.connected');
+        }
+        this.$root.$emit('disable-softkeyboard-btn');
+        return this.$t('pageKvm.connected') + ' ' + this.$t('pageKvm.viewonly');
       } else if (this.status === Disconnected) {
         this.$root.$emit('disable-softkeyboard-btn');
         this.updatePowerActionDropDown(this.powerStatus);
         return this.$t('pageKvm.disconnected');
-      } else if (this.getKvmActiveData()) {
-        this.$root.$emit('disable-softkeyboard-btn');
-        this.updatePowerActionDropDown(this.powerStatus);
-        return this.$t('pageKvm.alreadyInMasterSession');
       }
       this.$root.$emit('disable-softkeyboard-btn');
       return this.$t('pageKvm.connecting');
@@ -167,24 +167,7 @@ export default {
     window.addEventListener('beforeunload', this.handleChildWindowBeforeUnload);
   },
   mounted() {
-    setTimeout(() => {
-      this.$store
-        .dispatch('kvm/getData')
-        .then(() => {
-          if (this.getKvmActiveData()) {
-            this.errorToast(this.$t('pageKvm.alreadyActiveSession'));
-          } else {
-            this.openTerminal();
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          this.errorToast(this.$t('pageKvm.errorInGettingActiveStatus'));
-        })
-        .finally(() => {
-          this.endLoader();
-        });
-    }, 500);
+    this.openTerminal();
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeKvmWindow);
@@ -201,10 +184,6 @@ export default {
     closeTerminal() {
       this.rfb.disconnect();
       this.rfb = null;
-    },
-    getKvmActiveData() {
-      let kvmData = this.$store.getters['kvm/getKvmActiveStatus'];
-      return kvmData;
     },
     openTerminal() {
       const token = this.$store.getters['authentication/token'];

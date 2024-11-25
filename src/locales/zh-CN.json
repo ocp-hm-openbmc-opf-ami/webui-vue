@@ -1251,7 +1251,8 @@
         "toast": {
             "success" : "电源操作成功",
             "error" : "执行电源操作时出错"
-        }
+        },
+        "viewonly" : "（仅供查看）"
     },
     "pageLdap": {
         "pageDescription": "配置LDAP设定和管理角色群",

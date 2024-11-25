@@ -1254,7 +1254,8 @@
         "toast": {
             "success" : "電源操作成功執行",
             "error" : "執行電源操作時發生錯誤"
-        }
+        },
+        "viewonly" : "（僅供查看）"
     },
     "pageLdap": {
         "pageDescription": "配置LDAP設定和管理角色群",

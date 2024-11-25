@@ -1257,7 +1257,8 @@
         "toast": {
             "success": "Power operation executed successfully",
             "error": "Error in performing power operation"
-        }
+        },
+        "viewonly" : "(View Only)"
     },
     "pageLdap": {
         "pageDescription": "Configure LDAP settings and manage role groups",
