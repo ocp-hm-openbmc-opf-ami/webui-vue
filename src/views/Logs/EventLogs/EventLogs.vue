@@ -432,7 +432,9 @@ export default {
   },
   computed: {
     href() {
-      return `data:text/json;charset=utf-8,${this.exportAllLogs()}`;
+      const data = this.exportAllLogs();
+      const blob = new Blob([data], { type: 'application/json' });
+      return URL.createObjectURL(blob); // Create a Blob URL for download
     },
     filteredRows() {
       return this.searchFilter
@@ -531,12 +533,8 @@ export default {
         });
     },
     exportAllLogs() {
-      {
-        return this.$store.getters['eventLog/allEvents'].map((eventLogs) => {
-          const allEventLogsString = JSON.stringify(eventLogs);
-          return allEventLogsString;
-        });
-      }
+      const allLogsData = this.$store.getters['eventLog/allEvents'];
+      return JSON.stringify(allLogsData, null, 2); // Pretty print with indentation
     },
     onFilterChange({ activeFilters }) {
       this.activeFilters = activeFilters;

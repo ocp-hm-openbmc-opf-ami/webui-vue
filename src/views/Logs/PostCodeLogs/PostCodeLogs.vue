@@ -258,7 +258,9 @@ export default {
   },
   computed: {
     href() {
-      return `data:text/json;charset=utf-8,${this.exportAllLogsString()}`;
+      const data = this.exportAllLogsString();
+      const blob = new Blob([data], { type: 'application/json' });
+      return URL.createObjectURL(blob); // Create a Blob URL for download
     },
     filteredRows() {
       return this.searchFilter
@@ -328,14 +330,8 @@ export default {
         });
     },
     exportAllLogsString() {
-      {
-        return this.$store.getters['postCodeLogs/allPostCodes'].map(
-          (postCodes) => {
-            const allLogsString = JSON.stringify(postCodes);
-            return allLogsString;
-          },
-        );
-      }
+      const allPostLogData = this.$store.getters['postCodeLogs/allPostCodes'];
+      return JSON.stringify(allPostLogData, null, 2);
     },
     onFilterChange({ activeFilters }) {
       this.activeFilters = activeFilters;
