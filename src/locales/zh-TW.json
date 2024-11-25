@@ -876,7 +876,7 @@
         }
     },
     "pageEventLogs": {
-        "additionalDataUri": "下載額外資料",
+        "additionalDataUri": "附加數據",
         "resolve": "解決",
         "resolved": "已解決的",
         "unresolve": "尚未解決",
@@ -903,6 +903,8 @@
             "errorLogStatusUpdate": "更新紀錄狀態發生錯誤",
             "errorResolveLogs": "解決 %{count} 紀錄發生錯誤 | 解決 %{count} 紀錄發生錯誤",
             "errorUnresolveLogs": "未解決 %{count} 紀錄發生錯誤 | 未解決 %{count} 紀錄發生錯誤",
+            "errorDownloadEventEntry": "下載事件日誌條目時發生錯誤。",
+            "successDownloadEventEntry": "已成功下載事件日誌條目。",
             "successDelete": "成功刪除 %{count} 紀錄 | 成功刪除 %{count} 紀錄",
             "successResolveLogs": "成功解決 %{count} 紀錄 | 成功解決 %{count} 紀錄",
             "successUnresolveLogs": "成功未解決 %{count} 紀錄 | 成功未解決 %{count} 紀錄"

@@ -871,7 +871,7 @@
         }
     },
     "pageEventLogs": {
-        "additionalDataUri": "Laden Sie zusätzliche Daten herunter",
+        "additionalDataUri": "Zusätzliche Daten",
         "resolve": "Beschließen",
         "resolved": "Beschlossen",
         "unresolve": "Unlösbar",
@@ -898,6 +898,8 @@
             "errorLogStatusUpdate": "Fehler beim Aktualisieren des Protokollstatus.",
             "errorResolveLogs": "Fehlerbehebung %{count} Protokoll. | Fehlerbehebung %{count} Protokoll.",
             "errorUnresolveLogs": "Fehler nicht behoben %{count} Protokoll. | Fehler nicht behoben %{count} Protokoll.",
+            "errorDownloadEventEntry": "Fehler beim Herunterladen des Ereignisprotokolleintrags.",
+            "successDownloadEventEntry": "Ereignisprotokolleintrag erfolgreich heruntergeladen.",
             "successDelete": "Erfolgreich gelöscht %{count} Protokoll. | Erfolgreich gelöscht %{count} Protokolle.",
             "successResolveLogs": "Erfolgreich gelöst %{count} Protokoll. | Erfolgreich gelöst %{count} Protokolle.",
             "successUnresolveLogs": "Erfolgreich ungelöst %{count} Protokoll. | Erfolgreich ungelöst %{count} Protokolle."

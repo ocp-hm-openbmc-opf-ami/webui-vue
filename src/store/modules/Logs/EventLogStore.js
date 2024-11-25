@@ -218,6 +218,22 @@ const EventLogStore = {
           throw new Error(i18n.t('pageEventLogs.toast.errorLogStatusUpdate'));
         });
     },
+    async downloadEntry(_, uri) {
+      return await api
+        .get(uri)
+        .then((response) => {
+          const blob = new Blob([JSON.stringify(response.data, null, 2)], {
+            type: response.headers['content-type'],
+          });
+          return blob;
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(
+            i18n.t('pageEventLogs.toast.errorDownloadEventEntry'),
+          );
+        });
+    },
   },
 };
 

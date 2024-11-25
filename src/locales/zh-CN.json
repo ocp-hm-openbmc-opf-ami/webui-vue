@@ -873,7 +873,7 @@
         }
     },
     "pageEventLogs": {
-        "additionalDataUri": "下载额外资料",
+        "additionalDataUri": "附加数据",
         "resolve": "解决",
         "resolved": "已解决的",
         "unresolve": "尚未解决",
@@ -900,6 +900,8 @@
             "errorLogStatusUpdate": "更新纪录状态发生错误",
             "errorResolveLogs": "解决 %{count} 纪录发生错误 | 解决 %{count} 纪录发生错误",
             "errorUnresolveLogs": "未解决 %{count} 纪录发生错误 | 未解决 %{count} 纪录发生错误",
+            "errorDownloadEventEntry": "下载事件日志条目时出错。",
+            "successDownloadEventEntry": "已成功下载事件日志条目。",
             "successDelete": "成功删除 %{count} 纪录 | 成功删除 %{count} 纪录",
             "successResolveLogs": "成功解决 %{count} 纪录 | 成功解决 %{count} 纪录",
             "successUnresolveLogs": "成功未解决 %{count} 纪录 | 成功未解决 %{count} 纪录"
