@@ -18,6 +18,7 @@ const FirmwareStore = {
     backupHttpPushUriTargetsValue: [],
     bmcDateTime: '',
     applyTimeSetValue: {},
+    bmcActiveFeatureEnabled: true,
   },
   getters: {
     isTftpUploadAvailable: (state) => state.tftpAvailable,
@@ -47,6 +48,7 @@ const FirmwareStore = {
     httpPushUriTargetsValue: (state) => state.backupHttpPushUriTargetsValue,
     getFirmwareBmcDateTime: (state) => state.bmcDateTime,
     getApplyTimeSetValue: (state) => state.applyTimeSetValue,
+    getActiveFeatureEnabledStatus: (state) => state.bmcActiveFeatureEnabled,
   },
   mutations: {
     setActiveBmcFirmwareId: (state, id) => (state.bmcActiveFirmwareId = id),
@@ -71,6 +73,8 @@ const FirmwareStore = {
       (state.bmcDateTime = bmcDateTime),
     setApplyTimeSetValue: (state, applyTimeSetValue) =>
       (state.applyTimeSetValue = applyTimeSetValue),
+    setBmcActiveFeatureEnabled: (state, bmcActiveFeatureEnabled) =>
+      (state.bmcActiveFeatureEnabled = bmcActiveFeatureEnabled),
   },
   actions: {
     async getFirmwareInformation({ dispatch }) {
@@ -105,6 +109,7 @@ const FirmwareStore = {
         )
         .catch((error) => console.log(error));
       let bmcBackupEnabled = false;
+      let bmcActiveFeatureEnabled = false;
       await api
         .all(inventoryList)
         .then((response) => {
@@ -120,6 +125,14 @@ const FirmwareStore = {
               location: data?.['@odata.id'],
               status: data?.Status?.Health,
             };
+            // Check if bmc_active is available
+            if (
+              data?.['@odata.id'] ===
+              '/redfish/v1/UpdateService/FirmwareInventory/bmc_active'
+            ) {
+              bmcActiveFeatureEnabled = true;
+            }
+            commit('setBmcActiveFeatureEnabled', bmcActiveFeatureEnabled);
             // Check if bmc_bkup is available
             if (
               data?.['@odata.id'] ===

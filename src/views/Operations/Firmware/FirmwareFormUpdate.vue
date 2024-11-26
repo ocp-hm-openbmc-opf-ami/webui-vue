@@ -9,8 +9,8 @@
     </div>
     <div class="form-background p-3">
       <b-form @submit.prevent="onSubmitUpload">
-        <b-row v-if="bmcBackupEnabledStatus" class="choose-images">
-          <b-col sm="3">
+        <b-row class="choose-images">
+          <b-col v-if="activeFeatureEnabledStatus" sm="3">
             <b-form-checkbox
               v-model="activeImage"
               value="bmc_active"
@@ -20,7 +20,7 @@
               {{ $t('pageFirmware.form.updateFirmware.activeImage') }}
             </b-form-checkbox>
           </b-col>
-          <b-col sm="4">
+          <b-col v-if="bmcBackupEnabledStatus" sm="4">
             <b-form-checkbox
               v-model="backupImage"
               value="bmc_bkup"
@@ -177,6 +177,9 @@ export default {
     firmwareDateTime() {
       return this.$store.getters['firmware/getFirmwareBmcDateTime'];
     },
+    activeFeatureEnabledStatus() {
+      return this.$store.getters['firmware/getActiveFeatureEnabledStatus'];
+    },
   },
   watch: {
     isWorkstationSelected: function () {
@@ -207,27 +210,39 @@ export default {
       this.$store.dispatch('firmware/getUpdateServiceSettings').then(() => {
         this.bmcActiveEnabledStatusValue =
           this.$store.getters['firmware/bmcActiveEnabledStatus'];
-        if (!this.bmcActiveEnabledStatusValue) {
+        // For Active and Backup Feature Enable
+        if (
+          !this.bmcActiveEnabledStatusValue &&
+          this.activeFeatureEnabledStatus
+        ) {
           this.activeImage = 'bmc_active';
         }
-        if (this.bmcBackupEnabledStatus) {
-          if (this.httpPushUriTargetsBusyStatus) {
-            let PushUriTargetsValue =
-              this.$store.getters['firmware/httpPushUriTargetsValue'];
-            PushUriTargetsValue?.forEach((val) => {
-              if (val == 'bmc_active') {
-                this.activeImage = 'bmc_active';
-              }
-              if (val == 'bmc_bkup') {
-                this.backupImage = 'bmc_bkup';
-              }
-            });
-            if (
-              this.bmcBackupEnabledStatus &&
-              this.httpPushUriTargetsBusyStatus
-            ) {
-              this.activeImageDisabled = true;
+        // For Backup Feature Enable
+        if (!this.activeFeatureEnabledStatus && this.bmcBackupEnabledStatus) {
+          this.backupImage = 'bmc_bkup';
+          this.activeImageDisabled = true;
+        }
+        // For Active Feature Enable
+        if (this.activeFeatureEnabledStatus && !this.bmcBackupEnabledStatus) {
+          this.activeImage = 'bmc_active';
+          this.activeImageDisabled = true;
+        }
+        if (this.httpPushUriTargetsBusyStatus) {
+          let PushUriTargetsValue =
+            this.$store.getters['firmware/httpPushUriTargetsValue'];
+          PushUriTargetsValue?.forEach((val) => {
+            if (val == 'bmc_active') {
+              this.activeImage = 'bmc_active';
             }
+            if (val == 'bmc_bkup') {
+              this.backupImage = 'bmc_bkup';
+            }
+          });
+          if (
+            this.bmcBackupEnabledStatus &&
+            this.httpPushUriTargetsBusyStatus
+          ) {
+            this.activeImageDisabled = true;
           }
         }
         this.$emit(
@@ -246,7 +261,7 @@ export default {
       if (this.backupImage) {
         this.bmcActiveBackupSelected.push('bmc_bkup');
       }
-      if (this.bmcBackupEnabledStatus && !this.httpPushUriTargetsBusyStatus) {
+      if (!this.httpPushUriTargetsBusyStatus) {
         this.updateServiceData.HttpPushUriTargets =
           this.bmcActiveBackupSelected;
         this.updateServiceData.HttpPushUriTargetsBusy = true;
