@@ -2132,7 +2132,9 @@
             "serverConnectionEstablished": "Server connection established",
             "serverClosedSuccessfully": "Server closed successfully",
             "serverClosedWithErrors": "Server closed with errors",
-            "invalidFileType": "Invalid image file type"
+            "invalidFileType": "Invalid image file type",
+            "infoTitle": "External server start button",
+            "infoMessage": "The Start button is enabled only if a password is set and the mount type is CIFS or HTTPS"
         }
     },
     "pageAdapter": {

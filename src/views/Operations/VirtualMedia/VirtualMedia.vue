@@ -117,7 +117,11 @@
                         v-if="!device.isActive"
                         variant="primary"
                         class="float-right"
-                        :disabled="!device.serverUri || isButtonDisabled"
+                        :disabled="
+                          !device.serverUri ||
+                          isButtonDisabled ||
+                          isPasswordRequired(device)
+                        "
                         @click="handleActionClick(startLegacy, device)"
                       >
                         {{ $t('pageVirtualMedia.start') }}
@@ -363,6 +367,16 @@ export default {
           connectionData.isActive = false;
           connectionData.password = '';
           connectionData.username = '';
+          if (
+            connectionData.transferProtocolType === 'CIFS' ||
+            connectionData.transferProtocolType === 'HTTPS'
+          ) {
+            if (connectionData.password === '') {
+              this.infoToast(this.$t('pageVirtualMedia.toast.infoMessage'), {
+                title: this.$t('pageVirtualMedia.toast.infoTitle'),
+              });
+            }
+          }
         })
         .catch(() => {
           this.errorToast(this.$t('pageVirtualMedia.toast.errorUnmounting'));
@@ -415,6 +429,13 @@ export default {
           this.errorToast(this.$t('pageVirtualMedia.toast.invalidFileType'));
         }
       }
+    },
+    isPasswordRequired(device) {
+      // Check if password is required for CIFS or HTTPS
+      const needsPassword =
+        ['CIFS', 'HTTPS'].includes(device.transferProtocolType) &&
+        (!device.password || device.password.trim() === '');
+      return needsPassword;
     },
   },
 };

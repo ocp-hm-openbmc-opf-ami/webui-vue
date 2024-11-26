@@ -200,7 +200,10 @@ export default {
         },
         imagePath: {
           required,
-          pattern: helpers.regex('pattern', /^[a-zA-Z0-9/\\_.]+$/),
+          pattern: helpers.regex(
+            'pattern',
+            /^[a-zA-Z0-9/\\_.]+(\.(iso|nrg|ima|img))$/,
+          ),
         },
         username: {
           required: requiredIf(function () {
