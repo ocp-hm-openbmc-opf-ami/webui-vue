@@ -212,6 +212,11 @@ const AppNavigationMixin = {
               route: '/settings/cups',
             },
             {
+              id: 'node_manager',
+              label: this.$t('appNavigation.nodeManager'),
+              route: '/settings/node-manager',
+            },
+            {
               id: 'license',
               label: this.$t('appNavigation.license'),
               route: '/settings/license',

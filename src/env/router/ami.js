@@ -49,6 +49,7 @@ import DDNS from '../../views/Settings/NetworkDDNS';
 import NetworkLink from '@/views/Settings/NetworkLink/NetworkLink';
 import Ncsi from '@/views/Settings/Ncsi';
 import PAM from '../../views/Settings/PamOrder/PamOrder';
+import NodeManager from '@/views/Settings/NodeManager';
 
 const roles = {
   administrator: 'Administrator',
@@ -454,6 +455,14 @@ const routes = [
         component: PAM,
         meta: {
           title: i18n.t('appPageTitle.pam'),
+        },
+      },
+      {
+        path: '/settings/node-manager',
+        name: 'nodeManager',
+        component: NodeManager,
+        meta: {
+          title: i18n.t('appPageTitle.nodeManager'),
         },
       },
     ],

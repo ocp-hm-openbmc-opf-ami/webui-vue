@@ -57,6 +57,7 @@ import ADDCStore from './modules/Settings/ADDCStore';
 import Ncsi from './modules/Settings/NcsiStore';
 import PamOrderStore from './modules/Settings/PamOrderStore';
 import TaskStore from './modules/Operations/TaskStore';
+import NodeManagerStore from './modules/Settings/NodeManagerStore';
 
 Vue.use(Vuex);
 
@@ -121,5 +122,6 @@ export default new Vuex.Store({
     ncsi: Ncsi,
     pamOrder: PamOrderStore,
     task: TaskStore,
+    nmConfiguration: NodeManagerStore,
   },
 });
