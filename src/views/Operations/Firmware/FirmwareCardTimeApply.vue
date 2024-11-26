@@ -235,6 +235,7 @@ export default {
         timeSlot: '',
       },
       applyTimeSetValueStatus: {},
+      isPFREnable: process.env.VUE_APP_PFR_SUPPORT === 'true' ? true : false,
     };
   },
   computed: {
@@ -389,6 +390,19 @@ export default {
       this.form.applyTimeMode = this.applyTimeSetValueStatus.applyTimeMode;
       this.form.timeSlot = this.applyTimeSetValueStatus.timeSlot;
       this.applyTimeModeChange();
+      if (this.isPFREnable) {
+        this.applyTimeModeOptions = [];
+        this.applyTimeModeOptions = [
+          {
+            text: this.$t('pageFirmware.form.updateFirmware.immediate'),
+            value: 'Immediate',
+          },
+          {
+            text: this.$t('pageFirmware.form.updateFirmware.onReset'),
+            value: 'OnReset',
+          },
+        ];
+      }
     },
   },
 };
