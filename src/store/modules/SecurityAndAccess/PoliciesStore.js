@@ -20,9 +20,7 @@ const PoliciesStore = {
     passwordHistory: null,
     ssdpProtocolEnabled: false,
     ssdpPortValue: null,
-    snmpProtocolEnabled: false,
     sslFipsProtocolEnabled: false,
-    snmpPortValue: null,
     kvmSessionTimeout: null,
     kvmPortValue: null,
     webPortValue: null,
@@ -44,9 +42,7 @@ const PoliciesStore = {
     passwordHistory: (state) => state.passwordHistory,
     ssdpProtocolEnabled: (state) => state.ssdpProtocolEnabled,
     ssdpPortValue: (state) => state.ssdpPortValue,
-    snmpProtocolEnabled: (state) => state.snmpProtocolEnabled,
     sslFipsProtocolEnabled: (state) => state.sslFipsProtocolEnabled,
-    snmpPortValue: (state) => state.snmpPortValue,
     kvmSessionTimeout: (state) => state.kvmSessionTimeout,
     kvmPortValue: (state) => state.kvmPortValue,
     webPortValue: (state) => state.webPortValue,
@@ -79,12 +75,8 @@ const PoliciesStore = {
       (state.ssdpProtocolEnabled = ssdpProtocolEnabled),
     setSsdpPort: (state, ssdpPortValue) =>
       (state.ssdpPortValue = ssdpPortValue),
-    setSnmpProtocolEnabled: (state, snmpProtocolEnabled) =>
-      (state.snmpProtocolEnabled = snmpProtocolEnabled),
     setSslFipsProtocolEnabled: (state, sslFipsProtocolEnabled) =>
       (state.sslFipsProtocolEnabled = sslFipsProtocolEnabled),
-    setSnmpPort: (state, snmpPortValue) =>
-      (state.snmpPortValue = snmpPortValue),
     setKvmSessionTimeout: (state, kvmSessionTimeout) =>
       (state.kvmSessionTimeout = kvmSessionTimeout),
     setKvmPortValue: (state, kvmPortValue) =>
@@ -104,14 +96,10 @@ const PoliciesStore = {
           const ipmiProtocol = response.data?.IPMI?.ProtocolEnabled;
           const ssdpProtocol = response.data?.SSDP?.ProtocolEnabled;
           const ssdpPortValue = response.data?.SSDP?.Port;
-          const snmpProtocol = response.data?.SNMP?.ProtocolEnabled;
-          const snmpPortValue = response.data?.SNMP?.Port;
           commit('setSshProtocolEnabled', sshProtocol);
           commit('setIpmiProtocolEnabled', ipmiProtocol);
           commit('setSsdpProtocolEnabled', ssdpProtocol);
           commit('setSsdpPort', ssdpPortValue);
-          commit('setSnmpProtocolEnabled', snmpProtocol);
-          commit('setSnmpPort', snmpPortValue);
         })
         .catch((error) => console.log(error));
     },
@@ -409,33 +397,6 @@ const PoliciesStore = {
             throw new Error(i18n.t('pagePolicies.toast.errorSSDPEnabled'));
           } else {
             throw new Error(i18n.t('pagePolicies.toast.errorSSDPDisabled'));
-          }
-        });
-    },
-    async saveSnmpProtocolState({ commit, dispatch }, protocolEnabled) {
-      commit('setSnmpProtocolEnabled', protocolEnabled);
-      const SNMP = {
-        SNMP: {
-          ProtocolEnabled: protocolEnabled,
-        },
-      };
-      return await api
-        .patch('/redfish/v1/Managers/bmc/NetworkProtocol', SNMP)
-        .then(() => dispatch('getNetworkProtocolStatus'))
-        .then(() => {
-          if (protocolEnabled) {
-            return i18n.t('pagePolicies.toast.successSNMPEnabled');
-          } else {
-            return i18n.t('pagePolicies.toast.successSNMPDisabled');
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          commit('setSnmpProtocolEnabled', !protocolEnabled);
-          if (protocolEnabled) {
-            throw new Error(i18n.t('pagePolicies.toast.errorSNMPEnabled'));
-          } else {
-            throw new Error(i18n.t('pagePolicies.toast.errorSNMPDisabled'));
           }
         });
     },

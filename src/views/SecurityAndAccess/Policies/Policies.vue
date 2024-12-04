@@ -389,6 +389,87 @@
                   </b-col>
                 </b-row>
                 <b-row v-if="snmpState" class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <dl class="mt-3 mr-3 w-75">
+                      <dd>{{ $t('pagePolicies.snmpv1Description') }}</dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout">
+                    <b-form-checkbox
+                      id="snmpv1Switch"
+                      v-model="snmpv1State"
+                      data-test-id="policies-toggle-sol"
+                      switch
+                      @change="changeSNMPv1State"
+                    >
+                      <span class="sr-only">
+                        {{ $t('pagePolicies.snmpv1') }}
+                      </span>
+                      <span v-if="snmpv1State">
+                        {{ $t('global.status.enabled') }}
+                      </span>
+                      <span v-else>{{ $t('global.status.disabled') }}</span>
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+                <b-row v-if="snmpState" class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <dl class="mt-3 mr-3 w-75">
+                      <dd>{{ $t('pagePolicies.snmpv2cDescription') }}</dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout">
+                    <b-form-checkbox
+                      id="snmpv2cSwitch"
+                      v-model="snmpv2cState"
+                      data-test-id="policies-toggle-sol"
+                      switch
+                      @change="changeSNMPv2cState"
+                    >
+                      <span class="sr-only">
+                        {{ $t('pagePolicies.snmpv2c') }}
+                      </span>
+                      <span v-if="snmpv2cState">
+                        {{ $t('global.status.enabled') }}
+                      </span>
+                      <span v-else>{{ $t('global.status.disabled') }}</span>
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+                <b-row v-if="snmpState" class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <dl class="mt-3 mr-3 w-75">
+                      <dd>{{ $t('pagePolicies.snmpv3Description') }}</dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout">
+                    <b-form-checkbox
+                      id="snmpv3Switch"
+                      v-model="snmpv3State"
+                      data-test-id="policies-toggle-sol"
+                      switch
+                      @change="changeSNMPv3State"
+                    >
+                      <span class="sr-only">
+                        {{ $t('pagePolicies.snmpv3') }}
+                      </span>
+                      <span v-if="snmpv3State">
+                        {{ $t('global.status.enabled') }}
+                      </span>
+                      <span v-else>{{ $t('global.status.disabled') }}</span>
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+                <b-row v-if="snmpState" class="setting-section">
                   <b-col cols="3" class="d-flex align-items-center">
                     <dl class="mt-3 mr-4 w-75">
                       <dt>
@@ -718,14 +799,38 @@ export default {
     },
     snmpState: {
       get() {
-        return this.$store.getters['policies/snmpProtocolEnabled'];
+        return this.$store.getters['snmp/snmpProtocolEnabled'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    snmpv1State: {
+      get() {
+        return this.$store.getters['snmp/snmpv1Enabled'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    snmpv2cState: {
+      get() {
+        return this.$store.getters['snmp/snmpv2cEnabled'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    snmpv3State: {
+      get() {
+        return this.$store.getters['snmp/snmpv3Enabled'];
       },
       set(newValue) {
         return newValue;
       },
     },
     snmpPortValue() {
-      return this.$store.getters['policies/snmpPortValue'];
+      return this.$store.getters['snmp/snmpPortValue'];
     },
     openSslFipsState: {
       get() {
@@ -792,6 +897,7 @@ export default {
       this.$store.dispatch('policies/getKvmServiceStatus'),
       this.$store.dispatch('policies/getAccountService'),
       this.$store.dispatch('policies/getSslFipsStatus'),
+      this.$store.dispatch('snmp/getSNMPProtocolStatus'),
     ]).finally(() => this.endLoader());
   },
   validations() {
@@ -912,9 +1018,36 @@ export default {
     },
     changeSNMPState(state) {
       this.$store
-        .dispatch('policies/saveSnmpProtocolState', state ? true : false)
+        .dispatch('snmp/saveSnmpProtocolState', state ? true : false)
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
+    },
+    changeSNMPv1State(state) {
+      const snmpversion = {};
+      snmpversion.versionType = 1;
+      snmpversion.snmpVersionEnabled = state ? true : false;
+      this.$store
+        .dispatch('snmp/saveSnmpVersionState', snmpversion)
+        .then((message) => this.successToast(message + ': SNMPv1.'))
+        .catch(({ message }) => this.errorToast(message + ': SNMPv1.'));
+    },
+    changeSNMPv2cState(state) {
+      const snmpversion = {};
+      snmpversion.versionType = 2;
+      snmpversion.snmpVersionEnabled = state ? true : false;
+      this.$store
+        .dispatch('snmp/saveSnmpVersionState', snmpversion)
+        .then((message) => this.successToast(message + ': SNMPv2c.'))
+        .catch(({ message }) => this.errorToast(message + ': SNMPv2c.'));
+    },
+    changeSNMPv3State(state) {
+      const snmpversion = {};
+      snmpversion.versionType = 3;
+      snmpversion.snmpVersionEnabled = state ? true : false;
+      this.$store
+        .dispatch('snmp/saveSnmpVersionState', snmpversion)
+        .then((message) => this.successToast(message + ': SNMPv3.'))
+        .catch(({ message }) => this.errorToast(message + ': SNMPv3.'));
     },
     changeOpenSslFipsState(state) {
       this.$bvModal
