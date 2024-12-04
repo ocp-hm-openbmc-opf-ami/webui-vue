@@ -1144,7 +1144,13 @@
             "protocol": "Пратакол",
             "revision": "Рэвізія",
             "serialNumber": "Сэрыйны нумар",
-            "health": "Здароўе"
+            "health": "Здароўе",
+            "mediaType": "Тип носителя",
+            "PDrivestate": "Состояние PDrive",
+            "powerState": "Состояние питания",
+            "productId": "Идентификатор продукта",
+            "temperature": "Температура",
+            "readyToRemove": "Готово к удалению"
         },
         "noPhysicalDevice": "У гэты час няма інфармацыі аб фізічнай прыладзе.",
         "startLocatePhysicalDevice": "Пачаць пошук фізічнай прылады.",

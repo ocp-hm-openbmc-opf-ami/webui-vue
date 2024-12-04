@@ -2259,7 +2259,13 @@
             "protocol": "协议",
             "revision": "修订",
             "serialNumber": "序列号",
-            "health": "状态"
+            "health": "状态",
+            "mediaType": "媒体类型",
+            "PDrivestate": "实体驱动器状态",
+            "powerState": "电源状态",
+            "productId": "产品编号",
+            "temperature": "温度",
+            "readyToRemove": "准备移除"
         },
         "noPhysicalDevice": "目前不存在物理设备信息。",
         "startLocatePhysicalDevice": "开始定位物理设备",

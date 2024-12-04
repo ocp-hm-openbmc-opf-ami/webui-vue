@@ -2269,7 +2269,13 @@
             "protocol": "Protocol",
             "revision": "Revision",
             "serialNumber": "Serial Number",
-            "health": "Health"
+            "health": "Health",
+            "mediaType": "Media Type",
+            "PDrivestate": "PDrive State",
+            "powerState": "Power State",
+            "productId": "Product Id",
+            "temperature": "Temperature",
+            "readyToRemove": "Ready To Remove"
         },
         "noPhysicalDevice": "There are no Physical Device information present at this time.",
         "startLocatePhysicalDevice": "Start locating the physical device.",

@@ -2263,7 +2263,13 @@
             "protocol": "協議",
             "revision": "修訂",
             "serialNumber": "序列號",
-            "health": "狀態"
+            "health": "狀態",
+            "mediaType": "媒體類型",
+            "PDrivestate": "實體驅動器狀態",
+            "powerState": "電源狀態",
+            "productId": "產品編號",
+            "temperature": "溫度",
+            "readyToRemove": "準備移除"
         },
         "noPhysicalDevice": "目前不存在實體裝置信息。",
         "startLocatePhysicalDevice": "開始定位實體裝置",

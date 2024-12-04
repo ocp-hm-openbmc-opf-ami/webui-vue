@@ -2246,7 +2246,13 @@
             "protocol": "Protokoll",
             "revision": "Revision",
             "serialNumber": "Seriennummer",
-            "health": "Gesundheit"
+            "health": "Gesundheit",
+            "mediaType": "Medientyp",
+            "PDrivestate": "PDrive-Status",
+            "powerState": "Stromstatus",
+            "productId": "Produkt-ID",
+            "temperature": "Temperatur",
+            "readyToRemove": "Bereit zum Entfernen"
         },
         "noPhysicalDevice": "Derzeit sind keine Informationen zum physischen Gerät vorhanden.",
         "startLocatePhysicalDevice": "Ortung des physischen Geräts starten.",
