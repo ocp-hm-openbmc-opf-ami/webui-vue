@@ -25,7 +25,7 @@
             {{ $t('pageKvm.buttonCtrlAltDelete') }}
           </b-button>
           <b-button
-            v-if="isFullWindow"
+            v-if="isFullWindow && !isPopup && !isConsoleWindowOpen"
             variant="link"
             type="button"
             @click="openConsoleWindow()"
@@ -106,6 +106,8 @@ export default {
   data() {
     return {
       isConsoleWindow: null,
+      isConsoleWindowOpen: false, // Flag to track if the console window is open
+      checkConsoleWindowInterval: null, // Interval ID for checking window status
       isSoftkeyboardSupported:
         process.env.VUE_APP_KVM_SOFT_KEYBOARD_SUPPORT === 'true' ? true : false,
       rfb: null,
@@ -127,6 +129,9 @@ export default {
   },
   computed: {
     ...mapState('authentication', ['consoleWindow']),
+    isPopup() {
+      return this.$route.query.popup === 'true';
+    },
     serverStatusIcon() {
       if (this.status === Connected) {
         return 'success';
@@ -167,9 +172,21 @@ export default {
     window.addEventListener('beforeunload', this.handleChildWindowBeforeUnload);
   },
   mounted() {
+    // Start periodic check when component is mounted
+    this.checkConsoleWindowInterval = setInterval(() => {
+      if (this.isConsoleWindow) {
+        if (this.isConsoleWindow.closed) {
+          this.isConsoleWindowOpen = false; // Update flag if window is closed
+        }
+      }
+    }, 1000); // Check every second
     this.openTerminal();
   },
   beforeDestroy() {
+    // Clear interval to prevent memory leaks
+    if (this.checkConsoleWindowInterval) {
+      clearInterval(this.checkConsoleWindowInterval);
+    }
     window.removeEventListener('resize', this.resizeKvmWindow);
     window.removeEventListener(
       'beforeunload',
@@ -182,8 +199,10 @@ export default {
       this.rfb.sendCtrlAltDel();
     },
     closeTerminal() {
-      this.rfb.disconnect();
-      this.rfb = null;
+      if (this.rfb) {
+        this.rfb.disconnect();
+        this.rfb = null;
+      }
     },
     openTerminal() {
       const token = this.$store.getters['authentication/token'];
@@ -224,21 +243,11 @@ export default {
       }
     },
     openConsoleWindow() {
-      // If isConsoleWindow is not null
-      // Check the newly opened window is closed or not
-      if (this.isConsoleWindow) {
-        // If window is not closed set focus to new window
-        // If window is closed, do open new window
-        if (!this.isConsoleWindow.closed) {
-          this.isConsoleWindow.focus();
-          return;
-        } else {
-          this.openNewWindow();
-        }
-      } else {
-        // If isConsoleWindow is null, open new window
-        this.openNewWindow();
+      if (this.isConsoleWindow && !this.isConsoleWindow.closed) {
+        this.isConsoleWindow.focus();
+        return;
       }
+      this.openNewWindow();
     },
     openNewWindow() {
       if (this.rfb != null) {
@@ -250,10 +259,11 @@ export default {
         }
       }
       this.isConsoleWindow = window.open(
-        '#/console/kvm',
+        '#/console/kvm?popup=true', // Added query parameter
         'kvmConsoleWindow',
         'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=700,height=550',
       );
+      this.isConsoleWindowOpen = true; // Set flag to true when the window opens
       this.$store.commit('kvm/setIsConsoleWindow', {
         isconsolewindowOpen: this.isConsoleWindow,
       });
@@ -261,6 +271,7 @@ export default {
     handleChildWindowBeforeUnload() {
       if (this.isConsoleWindow && !this.isConsoleWindow.closed) {
         this.isConsoleWindow.close();
+        this.isConsoleWindowOpen = false; // Reset the flag when window closes
       }
     },
     onKeyPress(keyId, keyValue, status) {
