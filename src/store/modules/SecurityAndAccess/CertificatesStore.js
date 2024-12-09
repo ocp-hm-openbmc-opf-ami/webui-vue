@@ -122,7 +122,7 @@ const CertificatesStore = {
     ) {
       const data = {};
       data.CertificateString = certificateString;
-      data.CertificateType = 'PEM';
+      data.CertificateType = 'PEMchain';
       data.CertificateUri = { '@odata.id': location };
 
       return await api

@@ -407,14 +407,12 @@ export default {
         keyCurveId: null,
         keyBitLength: null,
       },
-      certificateOptions: CERTIFICATE_TYPES.reduce((arr, cert) => {
-        if (cert.type === 'TrustStore Certificate') return arr;
-        arr.push({
-          text: cert.label,
-          value: cert.type,
-        });
-        return arr;
-      }, []),
+      certificateOptions: CERTIFICATE_TYPES.filter(
+        (cert) => cert.type === 'HTTPS Certificate',
+      ).map((cert) => ({
+        text: cert.label,
+        value: cert.type,
+      })),
       countryOptions: COUNTRY_LIST.map((country) => ({
         text: country.label,
         value: country.code,
