@@ -657,7 +657,7 @@ export default {
     portStartValidation(value) {
       if (
         (value.length != '' &&
-          !(parseInt(value) >= 0 && parseInt(value) <= 65535)) ||
+          !(parseInt(value) > 0 && parseInt(value) <= 65535)) ||
         parseInt(value) == 80 ||
         !/^[0-9]*$/.test(value)
       ) {
@@ -669,7 +669,7 @@ export default {
     portEndValidation(value) {
       if (
         value.length != '' &&
-        (!(parseInt(value) >= 0 && parseInt(value) <= 65535) ||
+        (!(parseInt(value) > 0 && parseInt(value) <= 65535) ||
           parseInt(value) < parseInt(this.form.portStart) ||
           value == 80 ||
           !/^[0-9]*$/.test(value))
