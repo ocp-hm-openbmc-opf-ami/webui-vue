@@ -627,6 +627,34 @@
                     class="d-flex align-items-center justify-content-between"
                   >
                     <dl class="mt-3 mr-3 w-75">
+                      {{ $t('pagePolicies.solBitRate') }}
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout text-right mt-5">
+                    <b-form-group>
+                      <b-form-select
+                        id="sol-baudRate"
+                        v-model="baudRateState"
+                        data-test-id="sol-select-baudRate"
+                        :options="baudRateOptions"
+                      ></b-form-select>
+                    </b-form-group>
+                    <b-button
+                      variant="primary"
+                      type="submit"
+                      data-test-id="sol-button-saveBaudRateValue"
+                      @click="saveBaudRateValue"
+                    >
+                      {{ $t('global.action.save') }}
+                    </b-button>
+                  </b-col>
+                </b-row>
+                <b-row class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <dl class="mt-3 mr-3 w-75">
                       <dt>{{ $t('pagePolicies.complexity') }}</dt>
                       <dd>
                         {{ $t('pagePolicies.complexityDescription') }}
@@ -692,6 +720,7 @@ export default {
   data() {
     return {
       policiesOverlay: false,
+      baudRate: '',
       sessionTimeOutOptions: [
         { value: 1800, text: this.$t('pagePolicies.options.30minutes') },
         { value: 3600, text: this.$t('pagePolicies.options.1hour') },
@@ -713,6 +742,13 @@ export default {
         { value: 3, text: 3 },
         { value: 4, text: 4 },
         { value: 5, text: 5 },
+      ],
+      baudRateOptions: [
+        { value: 9600, text: '9600' },
+        { value: 19200, text: '19200' },
+        { value: 38400, text: '38400' },
+        { value: 57600, text: '57600' },
+        { value: 115200, text: '115200' },
       ],
       kvmSessionTimeOutValue: this.$store.getters['policies/kvmSessionTimeout'],
       webSessionTimeoutValue:
@@ -864,6 +900,14 @@ export default {
         this.$store.commit('policies/setPasswordHistory', newValue);
       },
     },
+    baudRateState: {
+      get() {
+        return this.$store.getters['policies/solBitRate'];
+      },
+      set(newValue) {
+        this.$store.commit('policies/setSolBitRate', newValue);
+      },
+    },
     ssdpPortValue() {
       return this.$store.getters['policies/ssdpPortValue'];
     },
@@ -898,6 +942,7 @@ export default {
       this.$store.dispatch('policies/getAccountService'),
       this.$store.dispatch('policies/getSslFipsStatus'),
       this.$store.dispatch('snmp/getSNMPProtocolStatus'),
+      this.$store.dispatch('policies/getSolBitRateData'),
     ]).finally(() => this.endLoader());
   },
   validations() {
@@ -1138,6 +1183,12 @@ export default {
               .catch(({ message }) => this.errorToast(message));
           }
         });
+    },
+    saveBaudRateValue() {
+      this.$store
+        .dispatch('policies/saveSolBitRateValue', this.baudRateState)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
     },
     kvmSessionTimeoutValidation(val) {
       if (

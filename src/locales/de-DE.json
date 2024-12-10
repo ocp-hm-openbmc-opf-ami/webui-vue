@@ -1931,6 +1931,7 @@
             "errorKVMPort": "Fehler beim Festlegen des KVM-Portwerts.",
             "errorWebPort": "Fehler beim Festlegen des Web-Port-Werts.",
             "errorKVMSessionTimeout": "Fehler beim Konfigurieren des KVM-Sitzungs-Timeouts.",
+            "errorSolBitRate": "Fehler beim Konfigurieren der nichtflüchtigen SOL-Bitrate.",
             "successIpmiDisabled": "IPMI Sicherheitseinstellung erfolgreich deaktiviert.",
             "successIpmiEnabled": "IPMI Sicherheitseinstellung erfolgreich aktiviert.",
             "successRtadDisabled": "Die RTAD Sicherheitseinstellung wurde erfolgreich deaktiviert.",
@@ -1958,7 +1959,8 @@
             "successSNMPVersionEnabled": "SNMP-Versionstyp erfolgreich aktiviert",
             "successKVMPort": "Der KVM-Portwert wurde erfolgreich aktualisiert.",
             "successWebPort": "Der Web-Port-Wert wurde erfolgreich aktualisiert.",
-            "successKVMSessionTimeout": "Das KVM-Sitzungs-Timeout wurde erfolgreich konfiguriert.."
+            "successKVMSessionTimeout": "Das KVM-Sitzungs-Timeout wurde erfolgreich konfiguriert..",
+            "successSolBitRate": "Die nichtflüchtige SOL-Bitrate wurde erfolgreich konfiguriert."
         },
         "options": {
             "30minutes": "30 Protokoll",
@@ -2008,7 +2010,8 @@
         "kvmPortValue": "KVM-Portwert (in Zahlen)",
         "webPortValue": "Web-Port-Wert (in Zahlen)",
         "kvmTimeoutValueLimits": "Bitte geben Sie die Sekunden zwischen %{min} und %{max} ein.",
-        "kvmPortValueLimits": "Bitte geben Sie die Werte zwischen %{min} und %{max} ein"
+        "kvmPortValueLimits": "Bitte geben Sie die Werte zwischen %{min} und %{max} ein",
+        "solBitRate": "SOL Nichtflüchtige Bitrate"
     },
     "pagePower": {
         "description": "Legen Sie eine Leistungsobergrenze fest, um den Stromverbrauch auf oder unter dem angegebenen Wert in Watt zu halten",

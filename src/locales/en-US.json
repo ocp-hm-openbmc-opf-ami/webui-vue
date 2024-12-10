@@ -1952,6 +1952,7 @@
             "errorKVMPort": "Error in setting KVM port value.",
             "errorWebPort": "Error in setting Web port value.",
             "errorKVMSessionTimeout": "Error configuring KVM session timeout.",
+            "errorSolBitRate": "Error in configuring SOL Non-Volatile Bit Rate.",
             "successIpmiDisabled": "Successfully disabled IPMI security setting.",
             "successIpmiEnabled": "Successfully enabled IPMI security setting.",
             "successRtadDisabled": "Successfully disabled RTAD security setting.",
@@ -1979,7 +1980,8 @@
             "successSNMPVersionEnabled": "Successfully enabled SNMP version type",
             "successKVMPort": "Successfully updated the KVM Port value.",
             "successWebPort": "Successfully updated the Web Port value.",
-            "successKVMSessionTimeout": "Successfully configured the KVM session timeout."
+            "successKVMSessionTimeout": "Successfully configured the KVM session timeout.",
+            "successSolBitRate": "Successfully configured the SOL Non-Volatile Bit Rate."
         },
         "options": {
             "30minutes": "30 Minutes",
@@ -2029,7 +2031,8 @@
         "kvmPortValue": "KVM Port Value (in numbers)",
         "webPortValue": "Web Port Value (in numbers)",
         "kvmTimeoutValueLimits": "Kindly enter the Seconds between %{min} and %{max}",
-        "kvmPortValueLimits": "Kindly enter the Values between %{min} and %{max}"
+        "kvmPortValueLimits": "Kindly enter the Values between %{min} and %{max}",
+        "solBitRate": "SOL Non-Volatile Bit Rate"
 
     },
     "pagePower": {

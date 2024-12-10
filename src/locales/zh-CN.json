@@ -1944,6 +1944,7 @@
             "errorKVMPort": "KVM 端口值设置错误。",
             "errorWebPort": "设置 Web 端口值时出错。",
             "errorKVMSessionTimeout": "配置 KVM 会话超时时出错。",
+            "errorSolBitRate": "配置 SOL 非易失性比特率时出错。",
             "successIpmiDisabled": "停用 IPMI 安全设定成功",
             "successIpmiEnabled": "启用 IPMI 安全设定成功",
             "successRtadDisabled": "停用 RTAD 安全设定成功",
@@ -1971,7 +1972,8 @@
             "successSNMPVersionEnabled": "成功启用 SNMP 版本类型",
             "successKVMPort": "已成功更新 KVM 端口值。",
             "successWebPort": "已成功更新 Web 端口值。",
-            "successKVMSessionTimeout": "成功配置 KVM 会话超时。"
+            "successKVMSessionTimeout": "成功配置 KVM 会话超时。",
+            "successSolBitRate": "已成功配置 SOL 非易失性比特率。"
         },
         "options": {
             "30minutes": "30 分钟",
@@ -2021,7 +2023,8 @@
         "kvmPortValue": "KVM 端口值（以数字表示）",
         "webPortValue": "Web 端口值（以数字表示）",
         "kvmTimeoutValueLimits": "请输入 %{min} 和 %{max} 之间的秒数。",
-        "kvmPortValueLimits": "请输入 %{min} 和 %{max} 之间的值"
+        "kvmPortValueLimits": "请输入 %{min} 和 %{max} 之间的值",
+        "solBitRate": "SOL 非易失性比特率"
     },
     "pagePower": {
         "description": "设置电源上限以使功耗保持在或低于指定值",

@@ -24,6 +24,7 @@ const PoliciesStore = {
     kvmSessionTimeout: null,
     kvmPortValue: null,
     webPortValue: null,
+    solBitRate: null,
   },
   getters: {
     sshProtocolEnabled: (state) => state.sshProtocolEnabled,
@@ -46,6 +47,7 @@ const PoliciesStore = {
     kvmSessionTimeout: (state) => state.kvmSessionTimeout,
     kvmPortValue: (state) => state.kvmPortValue,
     webPortValue: (state) => state.webPortValue,
+    solBitRate: (state) => state.solBitRate,
   },
   mutations: {
     setSshProtocolEnabled: (state, sshProtocolEnabled) =>
@@ -83,6 +85,7 @@ const PoliciesStore = {
       (state.kvmPortValue = kvmPortValue),
     setWebPortValue: (state, webPortValue) =>
       (state.webPortValue = webPortValue),
+    setSolBitRate: (state, solBitRate) => (state.solBitRate = solBitRate),
   },
   actions: {
     setSolSshPortUpdatedValue({ commit }, solSshProtocolPort) {
@@ -548,6 +551,29 @@ const PoliciesStore = {
         .catch((error) => {
           console.log(error);
           throw new Error(i18n.t('pagePolicies.toast.errorWebPort'));
+        });
+    },
+    async getSolBitRateData({ commit }) {
+      return await api
+        .get('/redfish/v1/Managers/bmc/SerialInterfaces/IPMI-SOL')
+        .then((response) => {
+          const bitRateValue = response.data.BitRate;
+          commit('setSolBitRate', bitRateValue);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    async saveSolBitRateValue({ commit }, BitRate) {
+      commit('setSolBitRate', BitRate);
+      return await api
+        .patch('/redfish/v1/Managers/bmc/SerialInterfaces/IPMI-SOL', {
+          BitRate: BitRate,
+        })
+        .then(() => commit('setSolBitRate', BitRate))
+        .then(() => i18n.t('pagePolicies.toast.successSolBitRate'))
+        .catch(() => {
+          throw new Error(i18n.t('pagePolicies.toast.errorSolBitRate'));
         });
     },
   },
