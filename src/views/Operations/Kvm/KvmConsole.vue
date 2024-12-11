@@ -205,32 +205,34 @@ export default {
       }
     },
     openTerminal() {
-      const token = this.$store.getters['authentication/token'];
-      this.rfb = new AMI_RFB(
-        this.$refs.panel,
-        `wss://${window.location.host}/kvm/0`,
-        { wsProtocols: [token] },
-      );
+      setTimeout(() => {
+        const token = this.$store.getters['authentication/token'];
+        this.rfb = new AMI_RFB(
+          this.$refs.panel,
+          `wss://${window.location.host}/kvm/0`,
+          { wsProtocols: [token] },
+        );
 
-      this.rfb.scaleViewport = true;
-      this.rfb.clipViewport = true;
-      const that = this;
+        this.rfb.scaleViewport = true;
+        this.rfb.clipViewport = true;
+        const that = this;
 
-      this.resizeKvmWindow = throttle(() => {
-        setTimeout(that.setWidthToolbar, 0);
-      }, 1000);
-      window.addEventListener('resize', this.resizeKvmWindow);
+        this.resizeKvmWindow = throttle(() => {
+          setTimeout(that.setWidthToolbar, 0);
+        }, 1000);
+        window.addEventListener('resize', this.resizeKvmWindow);
 
-      this.rfb.addEventListener('connect', () => {
-        that.isConnected = true;
-        that.status = Connected;
-        that.setWidthToolbar();
-      });
+        this.rfb.addEventListener('connect', () => {
+          that.isConnected = true;
+          that.status = Connected;
+          that.setWidthToolbar();
+        });
 
-      this.rfb.addEventListener('disconnect', () => {
-        this.isConnected = false;
-        that.status = Disconnected;
-      });
+        this.rfb.addEventListener('disconnect', () => {
+          this.isConnected = false;
+          that.status = Disconnected;
+        });
+      }, 5000);
     },
     setWidthToolbar() {
       if (
