@@ -177,7 +177,9 @@
         "networkLink": "@:appPageTitle.networkLink",
         "ncsi": "@:appPageTitle.ncsi",
         "pam": "@:appPageTitle.pam",
-        "nodeManager": "@:appPageTitle.nodeManager"
+        "nodeManager": "@:appPageTitle.nodeManager",
+        "autoVideo":"@:appPageTitle.autoVideo",
+        "videoLog":"@:appPageTitle.videoLog"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -236,7 +238,9 @@
         "networkLink": "Netzwerkverbindung",
         "ncsi": "NCSI",
         "pam": "PAM-Bestelleinstellungen",
-        "nodeManager": "Knotenmanager"
+        "nodeManager": "Knotenmanager",
+        "autoVideo":"Automatische Videoeinstellungen",
+        "videoLog":"Videoprotokoll"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM-Konfiguration",
@@ -2559,6 +2563,84 @@
         "toast": {
             "successfullyCancelledTask":"Die Aufgabe wurde erfolgreich abgebrochen",
             "errorCancellingTask":"Fehler beim Abbrechen der Aufgabe"
+        }
+    },
+    "pageVideo": {
+        "autoVideo":"Automatische Videoeinstellungen",
+        "video": "Video-Trigger-Einstellungen",
+        "videoRemote": "Video-Remote-Speicher",
+        "preEventVideoRecord":"Videoaufzeichnungen vor der Veranstaltung",
+        "videoTriggerSettings": {
+            "critical": "Kritische Ereignisse (Temperatur/Spannung)",
+            "nonCritical": "Nicht kritische Ereignisse (Temperatur/Spannung)",
+            "nonRecoverable": "Nicht wiederherstellbare Ereignisse (Temperatur/Spannung)",
+            "fanStateChanged": "Geänderte Fan-Status-Ereignisse",
+            "watchdogTimer": "Watchdog-Timer-Ereignisse",
+            "chassisPowerOn": "Gehäuse-Einschaltereignisse",
+            "chassisPowerOff": "Gehäuse-Ausschaltereignisse",
+            "chassisReset": "Chassis-Reset-Ereignisse",
+            "LPCReset": "LPC-Reset-Ereignisse",
+            "dateAndTime": "Datum und Uhrzeit des Ereignisses",
+            "crashReset": "Absturz-Reset",
+            "precrash": "Vor dem Absturz",
+            "preReset": "Vorab zurückgesetzt"
+        },
+        "videoRemoteSettings": {
+            "recordVideotoRemoteServer": "Video auf Remote-Server aufzeichnen",
+            "videoRemoteMaximumDumps":"Maximale Dumps",
+            "videoRemoteMaximumDuration": "Maximale Dauer (Sek.)",
+            "videoRemoteMaximumSize":"Maximale Größe (MB)",
+            "videoRemoteServerAddress": "Serveradresse",
+            "videoRemotePathInServer": "Pfad im Server",
+            "videoRemoteShareType": "Freigabetyp",
+            "nfs": "NFS",
+            "cifs": "CIFS",
+            "domainName": "Domainname",
+            "username": "Benutzername",
+            "password": "Passwort"
+        },
+        "preEventVideoRecordSettings": {
+            "videoQuality": "Videoqualität",
+            "videoQualityVeryLow": "Sehr niedrig",
+            "preEventLow": "Niedrig",
+            "videoQualityAverage": "Durchschnitt",
+            "preEventNormal": "Normal",
+            "preEventHigh": "Hoch",
+            "compressionMode":"Komprimierungsmodus",
+            "compressionModeNo":"no",
+            "framesPerSecond": "Bilder pro Sekunde",
+            "videoDuration":"Videodauer"
+        },
+        "form":{
+            "maxDumpRangeRequired": "Der maximale Wert für Dumps sollte zwischen 1 und 1 liegen",
+            "maxDurationRangeRequired": "Die maximale Dauer sollte zwischen 1 und 20 Sekunden liegen",
+            "maxSizeRangeRequired": "Die maximale Größe sollte zwischen 1 und 10 MB liegen"
+        },
+        "toast": {
+            "successSaveVideoTriggerSettings": "Video-Trigger-Einstellungen erfolgreich gespeichert.",
+            "successSaveVideoRemoteSettings": "Successfully saved Video Remote Storage.",
+            "errorsavedVideoTriggerSettings": "Fehler beim Speichern der Video-Trigger-Einstellungen.",
+            "errorsavedVideoRemoteSettings": "Fehler beim Speichern des Video-Remote-Speichers."
+        }
+    },    
+    "videoLog":{
+        "table": {
+            "date": "Datum",
+            "downloadTitle":"Klicken Sie hier, um das Videoprotokoll herunterzuladen",
+            "fileName": "Dateiname",
+            "id": "AUSWEIS",
+            "searchLogs": "Protokolle durchsuchen"
+        },
+        "modal": {
+            "deleteTitle":"Klicken Sie hier, um das Videoprotokoll zu löschen",
+            "deleteMessage": "Sind Sie sicher, dass Sie das %{count}-Protokoll löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden. | Sind Sie sicher, dass Sie %{count} Protokolle löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
+        },
+        "toast": {
+            "errorDelete": "Fehler beim Löschen der Videoprotokolle.",
+            "successVideoDownload": "Videoprotokoll erfolgreich heruntergeladen.",
+            "successVideoLogCleared": "Videoprotokoll erfolgreich gelöscht.",
+            "errorVideoLogDownload": "Das Herunterladen des Videoprotokolls ist fehlgeschlagen.",
+            "errorGettingVideoLog": "Fehler beim Abrufen der Videoprotokolle."
         }
     },
     "countries": {

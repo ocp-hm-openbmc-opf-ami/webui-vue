@@ -68,6 +68,11 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.postCodeLogs'),
               route: '/logs/post-code-logs',
             },
+            {
+              id: 'video-log',
+              label: this.$t('appNavigation.videoLog'),
+              route: '/logs/video-log',
+            },
           ],
         },
         {
@@ -225,6 +230,11 @@ const AppNavigationMixin = {
               id: 'pam',
               label: this.$t('appNavigation.pam'),
               route: '/settings/pam',
+            },
+            {
+              id: 'auto-video-settings',
+              label: this.$t('appNavigation.autoVideo'),
+              route: '/settings/auto-video',
             },
           ],
         },

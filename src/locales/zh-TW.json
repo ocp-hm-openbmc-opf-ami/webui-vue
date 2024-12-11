@@ -178,7 +178,9 @@
         "networkLink": "@:appPageTitle.networkLink",
         "ncsi": "@:appPageTitle.ncsi",
         "pam": "@:appPageTitle.pam",
-        "nodeManager": "@:appPageTitle.nodeManager"
+        "nodeManager": "@:appPageTitle.nodeManager",
+        "autoVideo":"@:appPageTitle.autoVideo",
+        "videoLog":"@:appPageTitle.videoLog"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -237,7 +239,9 @@
         "networkLink": "網路連結",
         "ncsi": "NCSI",
         "pam": "PAM 訂單設定",
-        "nodeManager": "節點管理員"
+        "nodeManager": "節點管理員",
+        "autoVideo":"自動影像設定",
+        "videoLog":"視訊日誌"
     },
     "pageNodeManager": {
         "nmConfiguration": "網管設定",
@@ -2578,6 +2582,84 @@
         "toast": {
             "successfullyCancelledTask":"成功取消任務",
             "errorCancellingTask":"取消任務時出錯"
+        }
+    },
+    "pageVideo": {
+        "autoVideo":"自動影像設定",
+        "video": "影像觸發設定",
+        "videoRemote": "影像遠端儲存",
+        "preEventVideoRecord":"Pre-Event 影像錄製",
+        "videoTriggerSettings": {
+            "critical": "嚴重事件 (溫度/電壓)",
+            "nonCritical": "非嚴重事件 (溫度/電壓)",
+            "nonRecoverable": "不可恢復事件 (溫度/電壓)",
+            "fanStateChanged": "風扇狀態變更事件",
+            "watchdogTimer": "看門狗計時器事件",
+            "chassisPowerOn": "機箱開機事件",
+            "chassisPowerOff": "機箱關機事件",
+            "chassisReset": "機箱重置事件",
+            "LPCReset": "LPC 重置事件",
+            "dateAndTime": "日期與時間事件",
+            "crashReset": "崩潰重置",
+            "precrash": "預碰撞",
+            "preReset": "預重設"
+        },
+        "videoRemoteSettings": {
+            "recordVideotoRemoteServer": "錄製影像到遠端伺服器",
+            "videoRemoteMaximumDumps":"最大轉儲",
+            "videoRemoteMaximumDuration": "最大持續時間 (秒)",
+            "videoRemoteMaximumSize":"最大容量 (MB)",
+            "videoRemoteServerAddress": "伺服器位址",
+            "videoRemotePathInServer": "伺服器路徑",
+            "videoRemoteShareType": "分享類型",
+            "nfs": "NFS",
+            "cifs": "CIFS",
+            "domainName": "網域",
+            "username": "使用者名稱",
+            "password": "密碼"
+        },
+        "preEventVideoRecordSettings": {
+            "videoQuality": "影像品質",
+            "videoQualityVeryLow": "非常低",
+            "preEventLow": "低",
+            "videoQualityAverage": "平均",
+            "preEventNormal": "一般",
+            "preEventHigh": "高",
+            "compressionMode":"壓縮模式",
+            "compressionModeNo":"no",
+            "framesPerSecond": "每秒幀數",
+            "videoDuration":"影像時長"
+        },
+        "form":{
+            "maxDumpRangeRequired": "最大轉儲值的範圍應為 1",
+            "maxDurationRangeRequired": "最大持續時間範圍應為 1 到 20 秒",
+            "maxSizeRangeRequired": "最大大小範圍應為 1 到 10 MB"
+        },
+        "toast": {
+            "successSaveVideoTriggerSettings": "已成功儲存視訊觸發設定。",
+            "successSaveVideoRemoteSettings": "成功保存視訊遠端儲存。",
+            "errorsavedVideoTriggerSettings": "儲存視訊觸發設定時發生錯誤。",
+            "errorsavedVideoRemoteSettings": "保存視訊遠端儲存時發生錯誤。"
+        }
+    },
+    "videoLog":{
+        "table": {
+            "date": "日期",
+            "downloadTitle":"點擊下載影片日誌",
+            "fileName": "檔案名稱",
+            "id": "ID",
+            "searchLogs": "搜尋日誌"
+        },
+        "modal": {
+            "deleteTitle":"點選刪除影片日誌",
+            "deleteMessage": "您確定要刪除 %{count} 條日誌嗎？此操作無法撤銷。 |您確定要刪除 %{count} 條日誌嗎？此操作無法撤銷。"
+        },
+        "toast": {
+            "errorDelete": "刪除視訊日誌時發生錯誤。",
+            "successVideoDownload": "視訊日誌下載成功。",
+            "successVideoLogCleared": "視訊日誌刪除成功。",
+            "errorVideoLogDownload": "視訊日誌下載失敗。",
+            "errorGettingVideoLog": "取得視訊日誌時發生錯誤。"
         }
     },
     "countries": {

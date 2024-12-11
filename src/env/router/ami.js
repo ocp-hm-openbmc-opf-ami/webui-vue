@@ -50,6 +50,8 @@ import NetworkLink from '@/views/Settings/NetworkLink/NetworkLink';
 import Ncsi from '@/views/Settings/Ncsi';
 import PAM from '../../views/Settings/PamOrder/PamOrder';
 import NodeManager from '@/views/Settings/NodeManager';
+import AutoVideoSettings from '@/views/Settings/AutoVideoSettings';
+import VideoLogs from '@/views/Logs/VideoLogs';
 
 const roles = {
   administrator: 'Administrator',
@@ -463,6 +465,22 @@ const routes = [
         component: NodeManager,
         meta: {
           title: i18n.t('appPageTitle.nodeManager'),
+        },
+      },
+      {
+        path: '/settings/auto-video',
+        name: 'auto-video',
+        component: AutoVideoSettings,
+        meta: {
+          title: i18n.t('appPageTitle.autoVideo'),
+        },
+      },
+      {
+        path: '/logs/video-log',
+        name: 'video-log',
+        component: VideoLogs,
+        meta: {
+          title: i18n.t('appPageTitle.videoLog'),
         },
       },
     ],

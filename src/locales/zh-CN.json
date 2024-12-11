@@ -178,7 +178,9 @@
         "networkLink": "@:appPageTitle.networkLink",
         "ncsi": "@:appPageTitle.ncsi",
         "pam": "@:appPageTitle.pam",
-        "nodeManager": "@:appPageTitle.nodeManager"
+        "nodeManager": "@:appPageTitle.nodeManager",
+        "autoVideo":"@:appPageTitle.autoVideo",
+        "videoLog":"@:appPageTitle.videoLog"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -237,7 +239,9 @@
         "networkLink": "网络链接",
         "ncsi": "NCSI",
         "pam": "PAM 订单设置",
-        "nodeManager": "节点管理器"
+        "nodeManager": "节点管理器",
+        "autoVideo":"自动视频设置",
+        "videoLog":"视频日志"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM 配置",
@@ -2574,6 +2578,84 @@
         "toast": {
             "successfullyCancelledTask":"成功取消任务",
             "errorCancellingTask":"取消任务时出错"
+        }
+    },
+    "pageVideo": {
+        "autoVideo":"自动视频设置",
+        "video": "视频触发设置",
+        "videoRemote": "视频远程存储",
+        "preEventVideoRecord":"Pre-Event 视频录制",
+        "videoTriggerSettings": {
+            "critical": "严重事件 (温度/电压)",
+            "nonCritical": "非严重事件 (温度/电压)",
+            "nonRecoverable": "不可恢复事件 (温度/电压)",
+            "fanStateChanged": "风扇状态变更事件",
+            "watchdogTimer": "看门狗计时器事件",
+            "chassisPowerOn": "机箱开机事件",
+            "chassisPowerOff": "机箱关机事件",
+            "chassisReset": "机箱重置事件",
+            "LPCReset": "LPC 重置事件",
+            "dateAndTime": "日期与时间事件",
+            "crashReset": "崩溃重置",
+            "precrash": "预碰撞",
+            "preReset": "预复位"
+        },
+        "videoRemoteSettings": {
+            "recordVideotoRemoteServer": "录制视频到远程服务器",
+            "videoRemoteMaximumDumps":"最大转储",
+            "videoRemoteMaximumDuration": "最大持续时间 (秒)",
+            "videoRemoteMaximumSize":"最大容量 (MB)",
+            "videoRemoteServerAddress": "服务器位址",
+            "videoRemotePathInServer": "服务器路径",
+            "videoRemoteShareType": "分享类型",
+            "nfs": "NFS",
+            "cifs": "CIFS",
+            "domainName": "域名",
+            "username": "用户名",
+            "password": "密码"
+        },
+        "preEventVideoRecordSettings": {
+            "videoQuality": "视频质量",
+            "videoQualityVeryLow": "非常低",
+            "preEventLow": "低",
+            "videoQualityAverage": "平均",
+            "preEventNormal": "一般",
+            "preEventHigh": "高",
+            "compressionMode":"压缩模式",
+            "compressionModeNo":"no",
+            "framesPerSecond": "每秒帧数",
+            "videoDuration":"视频时长"
+        },
+        "form":{
+            "maxDumpRangeRequired": "最大转储值的范围应为 1",
+            "maxDurationRangeRequired": "最大持续时间范围应为 1 到 20 秒",
+            "maxSizeRangeRequired": "最大大小范围应为 1 到 10 MB"
+        },
+        "toast": {
+            "successSaveVideoTriggerSettings": "已成功保存视频触发设置。",
+            "successSaveVideoRemoteSettings": "成功保存视频远程存储。",
+            "errorsavedVideoTriggerSettings": "保存视频触发设置时出错。",
+            "errorsavedVideoRemoteSettings": "保存视频远程存储时出错。"
+        }
+    },
+    "videoLog":{
+        "table": {
+            "date": "日期",
+            "downloadTitle":"点击下载视频日志",
+            "fileName": "文件名",
+            "id": "ID",
+            "searchLogs": "搜索日志"
+        },
+        "modal": {
+            "deleteTitle":"点击删除视频日志",
+            "deleteMessage": "您确定要删除 %{count} 条日志吗？此操作无法撤消。 |您确定要删除 %{count} 条日志吗？此操作无法撤消。"
+        },
+        "toast": {
+            "errorDelete": "删除视频日志时出错。",
+            "successVideoDownload": "视频日志下载成功。",
+            "successVideoLogCleared": "视频日志删除成功。",
+            "errorVideoLogDownload": "视频日志下载失败。",
+            "errorGettingVideoLog": "获取视频日志时出错。"
         }
     },
     "countries": {

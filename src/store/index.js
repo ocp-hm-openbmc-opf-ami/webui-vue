@@ -58,6 +58,8 @@ import Ncsi from './modules/Settings/NcsiStore';
 import PamOrderStore from './modules/Settings/PamOrderStore';
 import TaskStore from './modules/Operations/TaskStore';
 import NodeManagerStore from './modules/Settings/NodeManagerStore';
+import VideoLogStore from './modules/Logs/VideoLogStore';
+import AutoVideoStore from './modules/Settings/AutoVideoStore';
 
 Vue.use(Vuex);
 
@@ -123,5 +125,7 @@ export default new Vuex.Store({
     pamOrder: PamOrderStore,
     task: TaskStore,
     nmConfiguration: NodeManagerStore,
+    videoLog: VideoLogStore,
+    autoVideo: AutoVideoStore,
   },
 });
