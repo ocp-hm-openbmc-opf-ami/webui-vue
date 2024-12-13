@@ -108,6 +108,11 @@ const AppNavigationMixin = {
               route: '/operations/factory-default',
             },
             {
+              id: 'preserve-configuration',
+              label: this.$t('appNavigation.preserveConfiguration'),
+              route: '/operations/preserve-configuration',
+            },
+            {
               id: 'firmware',
               label: this.$t('appNavigation.firmware'),
               route: '/operations/firmware',

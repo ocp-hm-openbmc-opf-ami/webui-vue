@@ -129,6 +129,7 @@
         "eventLogs": "@:appPageTitle.eventLogs",
         "factoryReset": "@:appPageTitle.factoryReset",
         "firmware": "@:appPageTitle.firmware",
+        "preserveConfiguration": "@:appPageTitle.PreserveConfiguration",
         "hardwareStatus": "硬体设备状态",
         "inventory": "@:appPageTitle.inventory",
         "kvm": "@:appPageTitle.kvm",
@@ -194,6 +195,7 @@
         "tasks": "任务",
         "factoryReset": "恢復原厂设定",
         "firmware": "韧体",
+        "PreserveConfiguration": "Preserve",
         "inventory": "清单",
         "kvm": "KVM",
         "ldap": "LDAP",
@@ -1148,7 +1150,7 @@
         "sectionTitleHostCards": "主机",
         "sectionTitleUpdateFirmware": "更新韧体",
         "cardTitleClearConfig": "清晰的配置",
-        "clearConfigDescription": "启用清晰配置",
+        "clearConfigDescription": "启用 BIOS 清除配置",
         "alert": {
             "operationInProgress": "正在执行伺服器电源运作",
             "serverMustBePoweredOffTo": "伺服器必须关闭电源至:",
@@ -1208,6 +1210,24 @@
             "successDisabledClearConfig": "已成功禁用清除配置。",
             "errorEnabledClearConfig": "启用清除配置时出错。",
             "errorDisabledClearConfig": "禁用清除配置时出错。"
+        }
+    },
+    "pagePreserveConfiguration": {
+        "pageDescription": "BMC 保留配置",
+        "authentication": "验证",
+        "fru": "FRU",
+        "kvm": "KVM",
+        "smtp": "SMTP",
+        "network": "网络",
+        "redfish": "Redfish",
+        "sdr": "SDR",
+        "sel": "SEL",
+        "snmp": "SNMP",
+        "ubootEnv": "ubootEnv",
+        "toast": {
+            "successPreserveConfiguration": "保留配置设置已成功保存。",
+            "errorPreserveConfiguration": "设置保留配置时出错。",
+            "errorGettingPreserveConfig": "获取保留配置时出错。"
         }
     },
     "pageInventory": {

@@ -60,6 +60,7 @@ import TaskStore from './modules/Operations/TaskStore';
 import NodeManagerStore from './modules/Settings/NodeManagerStore';
 import VideoLogStore from './modules/Logs/VideoLogStore';
 import AutoVideoStore from './modules/Settings/AutoVideoStore';
+import PreserveConfigStore from './modules/Operations/PreserveConfigurationStore';
 
 Vue.use(Vuex);
 
@@ -127,5 +128,6 @@ export default new Vuex.Store({
     nmConfiguration: NodeManagerStore,
     videoLog: VideoLogStore,
     autoVideo: AutoVideoStore,
+    preserveConfig: PreserveConfigStore,
   },
 });

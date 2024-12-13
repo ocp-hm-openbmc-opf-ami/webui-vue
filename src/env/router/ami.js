@@ -7,6 +7,7 @@ import Bsod from '@/views/Settings/Bsod';
 import DateTime from '@/views/Settings/DateTime';
 import EventLogs from '@/views/Logs/EventLogs';
 import Firmware from '@/views/Operations/Firmware';
+import PreserveConfiguration from '@/views/Operations/PreserveConfiguration';
 import Inventory from '@/views/HardwareStatus/Inventory';
 import Ldap from '@/views/SecurityAndAccess/Ldap';
 import Kvm from '@/views/Operations/Kvm';
@@ -259,6 +260,14 @@ const routes = [
         component: Firmware,
         meta: {
           title: i18n.t('appPageTitle.firmware'),
+        },
+      },
+      {
+        path: '/operations/preserve-configuration',
+        name: 'PreserveConfiguration',
+        component: PreserveConfiguration,
+        meta: {
+          title: i18n.t('appPageTitle.PreserveConfiguration'),
         },
       },
       {

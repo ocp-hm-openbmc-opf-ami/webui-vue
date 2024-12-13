@@ -132,6 +132,7 @@
         "eventLogs": "@:appPageTitle.eventLogs",
         "factoryReset": "@:appPageTitle.factoryReset",
         "firmware": "@:appPageTitle.firmware",
+        "preserveConfiguration": "@:appPageTitle.PreserveConfiguration",
         "hardwareStatus": "Hardware status",
         "inventory": "@:appPageTitle.inventory",
         "kvm": "@:appPageTitle.kvm",
@@ -196,6 +197,7 @@
         "eventLogs": "Event logs",
         "factoryReset": "Factory reset",
         "firmware": "Firmware",
+        "PreserveConfiguration": "Preserve",
         "inventory": "Inventory and LEDs",
         "kvm": "KVM",
         "ldap": "LDAP",
@@ -1154,7 +1156,7 @@
         "sectionTitleHostCards": "Host",
         "sectionTitleUpdateFirmware": "Update firmware",
         "cardTitleClearConfig": "Clear Configuration",
-        "clearConfigDescription": "Enabling Clear Configuration",
+        "clearConfigDescription": "Enabling BIOS Clear Configuration",
         "alert": {
             "operationInProgress": "Server power operation in progress.",
             "serverMustBePoweredOffTo": "Server must be powered off to:",
@@ -1214,6 +1216,24 @@
             "successDisabledClearConfig": "Successfully disabled Clear configuration.",
             "errorEnabledClearConfig": "Error enabling Clear configuration.",
             "errorDisabledClearConfig": "Error disabling Clear configuration."
+        }
+    },
+    "pagePreserveConfiguration": {
+        "pageDescription": "BMC Preserve Configuration",
+        "authentication": "Authentication",
+        "fru": "FRU",
+        "kvm": "KVM",
+        "smtp": "SMTP",
+        "network": "Network",
+        "redfish": "Redfish",
+        "sdr": "SDR",
+        "sel": "SEL",
+        "snmp": "SNMP",
+        "ubootEnv": "ubootEnv",
+        "toast": {
+            "successPreserveConfiguration": "Preserve configuration settings have been saved successfully.",
+            "errorPreserveConfiguration": "Error in setting Preserve configuration.",
+            "errorGettingPreserveConfig": "Error in getting Preserve Configuration."
         }
     },
     "pageInventory": {

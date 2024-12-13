@@ -32,21 +32,58 @@
           </dd>
         </dl>
       </b-card>
+      <b-card>
+        <template #header>
+          <p class="font-weight-bold m-0">
+            {{ $t('pageFirmware.cardTitleClearConfig') }}
+          </p>
+        </template>
+        <dl class="mb-0">
+          <b-form-checkbox
+            id="ClearConfigSwitch"
+            v-model="clearConfigState"
+            data-test-id="firmware-toggle-clear-Config"
+            switch
+            @change="changeClearConfigState"
+          >
+            <span class="sr-only">
+              {{ $t('pageFirmware.ClearConfig') }}
+            </span>
+            <span v-if="clearConfigState">
+              {{ $t('global.status.enabled') }}
+            </span>
+            <span v-else>{{ $t('global.status.disabled') }}</span>
+          </b-form-checkbox>
+          <dd>
+            {{ $t('pageFirmware.clearConfigDescription') }}
+          </dd>
+        </dl>
+      </b-card>
     </b-card-group>
   </page-section>
 </template>
 
 <script>
 import PageSection from '@/components/Global/PageSection';
+import BVToastMixin from '@/components/Mixins/BVToastMixin';
 
 export default {
   components: { PageSection },
+  mixins: [BVToastMixin],
   computed: {
     running() {
       return this.$store.getters['firmware/activeHostFirmware'];
     },
     backup() {
       return this.$store.getters['firmware/backupHostFirmware'];
+    },
+    clearConfigState: {
+      get() {
+        return this.$store.getters['firmware/clearConfigState'];
+      },
+      set(newValue) {
+        return newValue;
+      },
     },
     runningVersion() {
       if (this.running?.version === 'NA') {
@@ -65,6 +102,14 @@ export default {
       return (
         this.backupStatus === 'Critical' || this.backupStatus === 'Warning'
       );
+    },
+  },
+  methods: {
+    changeClearConfigState(state) {
+      this.$store
+        .dispatch('firmware/saveClearConfig', state ? true : false)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
     },
   },
 };

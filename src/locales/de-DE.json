@@ -128,6 +128,7 @@
         "eventLogs": "@:appPageTitle.eventLogs",
         "factoryReset": "@:appPageTitle.factoryReset",
         "firmware": "@:appPageTitle.firmware",
+        "preserveConfiguration": "@:appPageTitle.PreserveConfiguration",
         "hardwareStatus": "Hardware status",
         "inventory": "@:appPageTitle.inventory",
         "kvm": "@:appPageTitle.kvm",
@@ -192,6 +193,7 @@
         "eventLogs": "Ereignisprotokolle",
         "factoryReset": "Werkseinstellungen zurückgesetzt",
         "firmware": "Firmware",
+        "PreserveConfiguration": "Preserve",
         "inventory": "Inventar und LEDs",
         "kvm": "KVM",
         "ldap": "LDAP",
@@ -1146,7 +1148,7 @@
         "sectionTitleHostCards": "Gastgeber",
         "sectionTitleUpdateFirmware": "Firmware aktualisieren",
         "cardTitleClearConfig": "Konfiguration löschen",
-        "clearConfigDescription": "Aktivieren der Clear-Konfiguration",
+        "clearConfigDescription": "Aktivieren der BIOS-Clear-Konfiguration",
         "alert": {
             "operationInProgress": "Serverstrombetrieb läuft.",
             "serverMustBePoweredOffTo": "Der Server muss ausgeschaltet sein:",
@@ -1206,6 +1208,24 @@
             "successDisabledClearConfig": "Konfiguration löschen erfolgreich deaktiviert.",
             "errorEnabledClearConfig": "Fehler beim Aktivieren der Konfiguration löschen.",
             "errorDisabledClearConfig": "Fehler beim Deaktivieren der Konfiguration löschen."
+        }
+    },
+    "pagePreserveConfiguration": {
+        "pageDescription": "BMC Preserve-Konfiguration",
+        "authentication": "Authentifizierung",
+        "fru": "FRU",
+        "kvm": "KVM",
+        "smtp": "SMTP",
+        "network": "Netzwerk",
+        "redfish": "Redfish",
+        "sdr": "SDR",
+        "sel": "SEL",
+        "snmp": "SNMP",
+        "ubootEnv": "ubootEnv",
+        "toast": {
+            "successPreserveConfiguration": "Die Konfigurationseinstellungen wurden erfolgreich gespeichert.",
+            "errorPreserveConfiguration": "Fehler beim Einstellen der Option „Konfiguration beibehalten“.",
+            "errorGettingPreserveConfig": "Fehler beim Abrufen der beibehaltenen Konfiguration."
         }
     },
     "pageInventory": {
