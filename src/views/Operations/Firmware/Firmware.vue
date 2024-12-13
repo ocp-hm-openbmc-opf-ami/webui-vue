@@ -82,6 +82,7 @@ export default {
       applyTimeFormvalues: {},
       currentBmcTime: '',
       setApplyTimeValue: {},
+      globalPrivilege: this.$store.getters['global/userPrivilege'],
     };
   },
   computed: {
@@ -95,7 +96,9 @@ export default {
       return this.$store.getters['firmware/isSingleFileUploadEnabled'];
     },
     isPageDisabled() {
-      if (this.isServerPowerOffRequired) {
+      if (this.globalPrivilege !== 'Administrator') {
+        return true;
+      } else if (this.isServerPowerOffRequired) {
         return !this.isServerOff || this.loading || this.isOperationInProgress;
       }
       return this.loading || this.isOperationInProgress;
