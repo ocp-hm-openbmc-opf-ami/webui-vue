@@ -744,11 +744,11 @@ export default {
         { value: 5, text: 5 },
       ],
       baudRateOptions: [
-        { value: 9600, text: '9600' },
-        { value: 19200, text: '19200' },
-        { value: 38400, text: '38400' },
-        { value: 57600, text: '57600' },
-        { value: 115200, text: '115200' },
+        { value: '9600', text: '9600' },
+        { value: '19200', text: '19200' },
+        { value: '38400', text: '38400' },
+        { value: '57600', text: '57600' },
+        { value: '115200', text: '115200' },
       ],
       kvmSessionTimeOutValue: this.$store.getters['policies/kvmSessionTimeout'],
       webSessionTimeoutValue:
