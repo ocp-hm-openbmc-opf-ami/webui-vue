@@ -78,6 +78,7 @@
                   id="destination"
                   v-model="form.destination"
                   type="text"
+                  :disabled="!snmpData"
                   data-test-id="snmp-input-destination"
                   :state="getValidationState($v.form.destination)"
                   @input="$v.form.destination.$touch()"
@@ -137,6 +138,7 @@
                   id="password"
                   v-model="form.password"
                   type="password"
+                  :disabled="!snmpData"
                   data-test-id="snmp-input-password"
                   :state="getValidationState($v.form.password)"
                   @input="$v.form.password.$touch()"
@@ -202,33 +204,6 @@
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-row>
-            <b-row v-if="form.selectProtocol === 'SNMPv3'">
-              <b-form-group
-                :label="$t('pageSnmp.modal.readOnlyPermission')"
-                label-for="readOnlyPermission"
-                class="field-width"
-              >
-                <b-form-select
-                  id="readOnlyPermission"
-                  v-model="form.readOnlyPermission"
-                  :options="readOnlyPermissionType"
-                  data-test-id="snmp-input-readOnlyPermission"
-                  :state="getValidationState($v.form.readOnlyPermission)"
-                  @input="$v.form.readOnlyPermission.$touch()"
-                >
-                  <template #first>
-                    <b-form-select-option :value="null" disabled>
-                      {{ $t('global.form.selectAnOption') }}
-                    </b-form-select-option>
-                  </template>
-                </b-form-select>
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.form.readOnlyPermission.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-row>
           </b-col>
         </b-row>
       </b-container>
@@ -260,7 +235,7 @@
 </template>
 
 <script>
-import { required } from 'vuelidate/lib/validators';
+import { required, requiredIf } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 
 export default {
@@ -282,7 +257,6 @@ export default {
         password: '',
         encryption: null,
         algorithm: null,
-        readOnlyPermission: null,
       },
       subscriptionType: [
         { value: 'SNMPTrap', text: this.$t('pageSnmp.snmpTrap') },
@@ -295,10 +269,6 @@ export default {
       encryptionType: [
         { value: 'DES', text: 'DES' },
         { value: 'AES', text: 'AES' },
-      ],
-      readOnlyPermissionType: [
-        { value: false, text: this.$t('pageSnmp.readOnly') },
-        { value: true, text: this.$t('pageSnmp.readWrite') },
       ],
       algorithmType: [
         {
@@ -338,7 +308,6 @@ export default {
       this.form.algorithm = value.authenticationProtocol;
       this.snmpId = value.Id;
       this.form.encryption = value.encryption;
-      this.form.readOnlyPermission = value.readOnlyPermission;
       this.form.bmcUser = value.bmcUser;
     },
   },
@@ -355,10 +324,15 @@ export default {
     if (this.form.selectProtocol === 'SNMPv3') {
       Object.assign(baseValidations, {
         bmcUser: { required },
-        password: { required },
+        password: {
+          required: requiredIf(function () {
+            if (this.snmpData) {
+              return true;
+            }
+          }),
+        },
         encryption: { required },
         algorithm: { required },
-        readOnlyPermission: { required },
       });
     }
 
@@ -380,7 +354,6 @@ export default {
           SnmpTrap.password = this.form.password;
           SnmpTrap.encryption = this.form.encryption;
           SnmpTrap.algorithm = this.form.algorithm;
-          SnmpTrap.readOnlyPermission = this.form.readOnlyPermission;
         } else {
           SnmpTrap.destination = this.form.destination;
           SnmpTrap.selectSubscriptionType = this.form.selectSubscriptionType;
@@ -409,9 +382,6 @@ export default {
         if (this.$v.form.algorithm.$dirty) {
           SnmpTrap.algorithm = this.form.algorithm;
         }
-        if (this.$v.form.readOnlyPermission.$dirty) {
-          SnmpTrap.readOnlyPermission = this.form.readOnlyPermission;
-        }
         if (Object.entries(SnmpTrap).length === 1) {
           this.closeModal();
           return;
@@ -433,7 +403,6 @@ export default {
       this.form.password = '';
       this.form.algorithm = null;
       this.form.encryption = null;
-      this.form.readOnlyPermission = null;
       this.$v.$reset();
       this.$emit('hidden');
     },

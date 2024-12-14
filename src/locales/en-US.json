@@ -1782,8 +1782,6 @@
         "addSubscrition": "Add Subscription",
         "editSubscrition": "Edit Subscription",
         "sendTestTrap": "Send Test Trap",
-        "readOnly": "Read Only",
-        "readWrite": "Read Write",
         "modal": {
             "destination": "Destination",
             "subscriptionType": "Subscription Type",
@@ -1793,8 +1791,7 @@
             "bmcUser": "BMC Users",
             "password": "Password",
             "encryption": "Encryption",
-            "algorithm": "Algorithm",
-            "readOnlyPermission": "Read Only Permission"
+            "algorithm": "Algorithm"
         },
         "table": {
             "destination": "Destination",
@@ -1809,8 +1806,7 @@
             "authProtocolsha512": "SHA-512",
             "authProtocolsha": "SHA",
             "encryption": "Encryption",
-            "bmcUser": "BMC Users",
-            "readOnlyPermission": "Read Only Permission"
+            "bmcUser": "BMC Users"
         },
         "toast": {
             "errorInAddSubscription": "Error in Adding Subscription",

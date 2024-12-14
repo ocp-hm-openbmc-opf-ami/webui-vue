@@ -1776,8 +1776,6 @@
         "addSubscrition": "新增訂閱",
         "editSubscrition": "編輯訂閱",
         "sendTestTrap": "發送測試陷阱",
-        "readOnly": "只讀",
-        "readWrite": "讀寫",
         "modal": {
             "destination": "目的地",
             "subscriptionType": "訂閱類型",
@@ -1787,8 +1785,7 @@
             "bmcUser": "BMC用戶",
             "password": "密碼",
             "encryption": "加密",
-            "algorithm": "演算法",
-            "readOnlyPermission": "只讀權限"
+            "algorithm": "演算法"
         },
         "table": {
             "destination": "目的地",
@@ -1803,8 +1800,7 @@
             "authProtocolsha512": "SHA-512",
             "authProtocolsha": "SHA",
             "bmcUser": "BMC用戶",
-            "encryption": "加密",
-            "readOnlyPermission": "只讀權限"
+            "encryption": "加密"
         },
         "toast": {
             "errorInAddSubscription": "新增訂閱時出錯",

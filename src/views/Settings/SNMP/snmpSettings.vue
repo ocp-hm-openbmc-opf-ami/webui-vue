@@ -137,11 +137,6 @@ export default {
           tdClass: 'text-nowrap',
         },
         {
-          key: 'readOnlyPermission',
-          label: this.$t('pageSnmp.table.readOnlyPermission'),
-          tdClass: 'text-nowrap',
-        },
-        {
           key: 'actions',
           label: '',
           tdClass: 'text-right text-nowrap',

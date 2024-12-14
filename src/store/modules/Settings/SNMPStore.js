@@ -172,6 +172,8 @@ const SnmpStore = {
             if (match) {
               ipAddress = match[0];
             }
+            let userName =
+              data.Destination?.match(/snmp:\/\/(.*?)@/)?.[1] || 'NA';
             return {
               destination: ipAddress,
               subscriptionType: data.SubscriptionType,
@@ -182,12 +184,10 @@ const SnmpStore = {
                 ? data?.SNMP?.AuthenticationProtocol
                 : 'NA',
               encryption:
-                (data?.Encryption ?? '') === '' ? 'NA' : data?.Encryption,
-              readOnlyPermission:
-                (data?.Readonlypermission ?? '') === ''
+                (data?.SNMP?.EncryptionProtocol ?? '') === ''
                   ? 'NA'
-                  : data?.Readonlypermission,
-              bmcUser: (data?.User ?? '') === '' ? 'NA' : data?.User,
+                  : data?.SNMP?.EncryptionProtocol,
+              bmcUser: userName,
             };
           });
           commit('setAllSubscriptions', data);
@@ -207,9 +207,10 @@ const SnmpStore = {
             SubscriptionType: snmpTrap.selectSubscriptionType,
             Protocol: snmpTrap.selectProtocol,
             Password: snmpTrap.password,
-            Encryption: snmpTrap.encryption,
-            Algorithm: snmpTrap.algorithm,
-            ReadOnlyPermission: snmpTrap.readOnlyPermission,
+            SNMP: {
+              AuthenticationProtocol: snmpTrap.algorithm,
+              EncryptionProtocol: snmpTrap.encryption,
+            },
           };
         } else {
           data = {
@@ -227,9 +228,10 @@ const SnmpStore = {
             SubscriptionType: snmpTrap.selectSubscriptionType,
             Protocol: snmpTrap.selectProtocol,
             Password: snmpTrap.password,
-            Encryption: snmpTrap.encryption,
-            Algorithm: snmpTrap.algorithm,
-            ReadOnlyPermission: snmpTrap.readOnlyPermission,
+            SNMP: {
+              AuthenticationProtocol: snmpTrap.algorithm,
+              EncryptionProtocol: snmpTrap.encryption,
+            },
           };
         } else {
           data = {
@@ -257,32 +259,14 @@ const SnmpStore = {
         });
     },
     async saveSnmpv3Subscriptions({ dispatch }, snmpTrap) {
-      const ipv6Regex =
-        /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/;
       let data;
-      if (!ipv6Regex.test(snmpTrap.destination)) {
-        if (snmpTrap.selectProtocol === 'SNMPv3') {
-          data = {
-            Destination: `snmp://${snmpTrap.destination}`,
-            Password: snmpTrap.password,
-            Encryption: snmpTrap.encryption,
-            Algorithm: snmpTrap.algorithm,
-            ReadOnlyPermission: snmpTrap.readOnlyPermission,
-          };
-        }
-      } else {
-        if (snmpTrap.selectProtocol === 'SNMPv3') {
-          var ipv6Address = snmpTrap.destination;
-          var snmpv3IPV6 = ipv6Address.split('@');
-          data = {
-            Destination: `snmp://${snmpv3IPV6[0]}@[${snmpv3IPV6[1]}]`,
-            Password: snmpTrap.password,
-            Encryption: snmpTrap.encryption,
-            Algorithm: snmpTrap.algorithm,
-            ReadOnlyPermission: snmpTrap.readOnlyPermission,
-          };
-        }
-      }
+      data = {
+        SNMP: {
+          AuthenticationProtocol: snmpTrap.algorithm,
+          EncryptionProtocol: snmpTrap.encryption,
+        },
+      };
+
       return await api
         .patch(
           `/redfish/v1/EventService/Subscriptions/${snmpTrap.snmpId}`,

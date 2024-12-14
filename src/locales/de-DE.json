@@ -1772,8 +1772,6 @@
         "addSubscrition": "Abonnement hinzufügen",
         "editSubscrition": "Abonnement bearbeiten",
         "sendTestTrap": "Testfalle senden",
-        "readOnly": "Nur lesen",
-        "readWrite": "Lesen, Schreiben",
         "modal": {
             "destination": "Ziel",
             "subscriptionType": "Abonnementtyp",
@@ -1783,8 +1781,7 @@
             "bmcUser": "BMC-Benutzer",
             "password": "Passwort",
             "encryption": "Verschlüsselung",
-            "algorithm": "Algorithmus",
-            "readOnlyPermission": "Nur Leseberechtigung"
+            "algorithm": "Algorithmus"
         },
         "table": {
             "destination": "Ziel",
@@ -1799,8 +1796,7 @@
             "authProtocolsha512": "SHA-512",
             "authProtocolsha": "SHA",
             "bmcUser": "BMC-Benutzer",
-            "encryption": "Verschlüsselung",
-            "readOnlyPermission": "Nur Leseberechtigung"
+            "encryption": "Verschlüsselung"
         },
         "toast": {
             "errorInAddSubscription": "Fehler beim Hinzufügen des Abonnements",
