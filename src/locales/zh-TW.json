@@ -412,7 +412,15 @@
             "totalCores": "總核心數",
             "state": "狀態",
             "operatingSpeedMHz": "工作速度MHz",
-            "totalEnabledCores": "啟用的核心總數"
+            "totalEnabledCores": "啟用的核心總數",
+            "sparePartNumber": "備用零件編號",
+            "instructionSet": "指令集",
+            "version": "版本",
+            "assetTag": "資產標籤",
+            "totalThreads": "總線程數",
+            "serialNumuber": "序號",
+            "partNumuber": "零件編號",
+            "health": "Health"
         },
         "processorFPGA": {
             "info": "FPGA資訊",
@@ -440,7 +448,12 @@
             "memoryType": "記憶體型",
             "description": "描述",
             "allowedSpeedsMHz": "允許速度 MHz",
-            "serviceLabel": "服務標籤"
+            "serviceLabel": "服務標籤",
+            "baseModuleType": "基本模組類型",
+            "busWidthBits": "總線寬度位",
+            "dataWidthBits": "資料寬度位",
+            "sparePartNumber": "備用零件編號",
+            "health": "健康"
         },
         "baseBoard": {
             "baseBoard": "底板",
@@ -485,7 +498,12 @@
             "powerCapacityWatts": "電源容量 瓦",
             "PowerSupplyType": "電源類型",
             "SerialNumber": "序號",
-            "state": "狀態"
+            "state": "狀態",
+            "partNumber": "零件編號",
+            "sparePartNumber": "備用零件編號",
+            "efficiencyPercent": "效率百分比",
+            "firmwareVersion": "韌體版本",
+            "health": "健康"
         },
         "voltage": {
             "voltageControlInfo": "電壓資訊",
@@ -509,7 +527,8 @@
             "state": "狀態",
             "readingRPM": "讀取轉速",
             "minReadingRange": "最小讀數範圍",
-            "maxReadingRange": "最大讀取範圍"
+            "maxReadingRange": "最大讀取範圍",
+            "health": "健康"
         },
         "temperature": {
             "temperatureInfo": "溫度資訊",
@@ -597,7 +616,8 @@
             "sparePartNumber": "備用零件編號",
             "state": "狀態",
             "vendor": "小販",
-            "version": "版本"
+            "version": "版本",
+            "health": "健康"
         },
         "memoryMetrics": {
             "memortMetricsInfo": "記憶體指標資訊",

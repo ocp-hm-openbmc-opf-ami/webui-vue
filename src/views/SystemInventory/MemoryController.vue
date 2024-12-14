@@ -8,12 +8,22 @@
       :fields="memoryControllerFields"
       :items="memoryControllerInfo"
       head-variant="light"
-    ></b-table>
+    >
+      <!-- Health -->
+      <template #cell(health)="{ value }">
+        <status-icon :status="statusIcon(value)" />
+        {{ value }}
+      </template>
+    </b-table>
   </div>
 </template>
 
 <script>
+import StatusIcon from '@/components/Global/StatusIcon';
+import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
 export default {
+  components: { StatusIcon },
+  mixins: [DataFormatterMixin],
   data() {
     return {
       memoryControllerFields: [
@@ -40,6 +50,29 @@ export default {
         {
           key: 'partNumuber',
           label: this.$t('pageSystemInventory.memoryController.partNumuber'),
+        },
+        {
+          key: 'sparePartNumber',
+          label: this.$t(
+            'pageSystemInventory.memoryController.sparePartNumber',
+          ),
+        },
+        {
+          key: 'baseModuleType',
+          label: this.$t('pageSystemInventory.memoryController.baseModuleType'),
+        },
+        {
+          key: 'busWidthBits',
+          label: this.$t('pageSystemInventory.memoryController.busWidthBits'),
+        },
+        {
+          key: 'dataWidthBits',
+          label: this.$t('pageSystemInventory.memoryController.dataWidthBits'),
+        },
+        {
+          key: 'health',
+          label: this.$t('pageSystemInventory.memoryController.health'),
+          formatter: this.dataFormatter,
         },
         {
           key: 'state',

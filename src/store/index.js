@@ -22,13 +22,8 @@ import DumpsStore from './modules/Logs/DumpsStore';
 import SensorsStore from './modules/HardwareStatus/SensorsStore';
 import ServerLedStore from './modules/HardwareStatus/ServerLedStore';
 import SystemStore from './modules/HardwareStatus/SystemStore';
-import PowerSupplyStore from './modules/HardwareStatus/PowerSupplyStore';
-import MemoryStore from './modules/HardwareStatus/MemoryStore';
-import FanStore from './modules/HardwareStatus/FanStore';
 import ChassisStore from './modules/HardwareStatus/ChassisStore';
 import BmcStore from './modules/HardwareStatus/BmcStore';
-import ProcessorStore from './modules/HardwareStatus/ProcessorStore';
-import AssemblyStore from './modules/HardwareStatus/AssemblyStore';
 import PostCodeLogsStore from './modules/Logs/PostCodeLogsStore';
 import PoliciesStore from './modules/SecurityAndAccess/PoliciesStore';
 import FactoryResetStore from './modules/Operations/FactoryResetStore';
@@ -81,7 +76,6 @@ export default new Vuex.Store({
     controls: ControlStore,
     powerControl: PowerControlStore,
     powerPolicy: PowerPolicyStore,
-    powerSupply: PowerSupplyStore,
     network: NetworkStore,
     vlan: VlanStore,
     smtp: SMTPStore,
@@ -92,12 +86,8 @@ export default new Vuex.Store({
     serverLed: ServerLedStore,
     certificates: CertificatesStore,
     system: SystemStore,
-    memory: MemoryStore,
-    fan: FanStore,
     chassis: ChassisStore,
     bmc: BmcStore,
-    processors: ProcessorStore,
-    assemblies: AssemblyStore,
     postCodeLogs: PostCodeLogsStore,
     virtualMedia: VirtualMediaStore,
     kvm: KvmStore,

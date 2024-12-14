@@ -412,7 +412,15 @@
             "totalCores": "总核心数",
             "state": "状态",
             "operatingSpeedMHz": "工作速度MHz",
-            "totalEnabledCores": "启用的核心总数"
+            "totalEnabledCores": "启用的核心总数",
+            "sparePartNumber": "备件编号",
+            "instructionSet": "指令集",
+            "version": "版本",
+            "assetTag": "资产标签",
+            "totalThreads": "总线程数",
+            "serialNumuber": "序列号",
+            "partNumuber": "零件编号",
+            "health": "健康"
         },
         "processorFPGA": {
             "info": "FPGA信息",
@@ -440,7 +448,12 @@
             "memoryType": "内存类型",
             "description": "描述",
             "allowedSpeedsMHz": "允许速度 MHz",
-            "serviceLabel": "服务标签"
+            "serviceLabel": "服务标签",
+            "baseModuleType": "基本模块类型",
+            "busWidthBits": "总线宽度位",
+            "dataWidthBits": "数据宽度位",
+            "sparePartNumber": "备件编号",
+            "health": "健康"
         },
         "baseBoard": {
             "baseBoard": "底板",
@@ -485,7 +498,12 @@
             "powerCapacityWatts": "电源容量 瓦",
             "PowerSupplyType": "电源类型",
             "SerialNumber": "序列号",
-            "state": "状态"
+            "state": "状态",
+            "partNumber": "零件编号",
+            "sparePartNumber": "备件编号",
+            "efficiencyPercent": "效率百分比",
+            "firmwareVersion": "固件版本",
+            "health": "健康"
         },
         "voltage": {
             "voltageControlInfo": "电压信息",
@@ -509,7 +527,8 @@
             "state": "状态",
             "readingRPM": "读取转速",
             "minReadingRange": "最小读数范围",
-            "maxReadingRange": "最大读取范围"
+            "maxReadingRange": "最大读取范围",
+            "health": "健康"
         },
         "temperature": {
             "temperatureInfo": "温度信息",
@@ -594,7 +613,8 @@
             "sparePartNumber": "备件编号",
             "state": "状态",
             "vendor": "小贩",
-            "version": "版本"
+            "version": "版本",
+            "health": "健康"
         },
         "memoryMetrics": {
             "memortMetricsInfo": "内存指标信息",

@@ -8,7 +8,8 @@
       :fields="systemFields"
       :items="systemInfo"
       head-variant="light"
-    ></b-table>
+    >
+    </b-table>
   </div>
 </template>
 <script>

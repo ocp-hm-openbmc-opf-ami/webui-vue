@@ -8,18 +8,34 @@
       :fields="thermalFields"
       :items="thermalFanInfo"
       head-variant="light"
-    ></b-table>
+    >
+      <!-- Health -->
+      <template #cell(health)="{ value }">
+        <status-icon :status="statusIcon(value)" />
+        {{ value }}
+      </template>
+    </b-table>
   </div>
 </template>
 
 <script>
+import StatusIcon from '@/components/Global/StatusIcon';
+import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
+
 export default {
+  components: { StatusIcon },
+  mixins: [DataFormatterMixin],
   data() {
     return {
       thermalFields: [
         {
           key: 'name',
           label: this.$t('pageSystemInventory.thermal.name'),
+        },
+        {
+          key: 'health',
+          label: this.$t('pageSystemInventory.thermal.health'),
+          formatter: this.dataFormatter,
         },
         {
           key: 'state',

@@ -30,21 +30,6 @@
 
     <!-- Chassis table -->
     <table-chassis ref="chassis" />
-
-    <!-- DIMM slot table -->
-    <table-dimm-slot ref="dimms" />
-
-    <!-- Fans table -->
-    <table-fans ref="fans" />
-
-    <!-- Power supplies table -->
-    <table-power-supplies ref="powerSupply" />
-
-    <!-- Processors table -->
-    <table-processors ref="processors" />
-
-    <!-- Assembly table -->
-    <table-assembly ref="assembly" />
   </b-container>
 </template>
 
@@ -52,13 +37,8 @@
 import PageTitle from '@/components/Global/PageTitle';
 import ServiceIndicator from './InventoryServiceIndicator';
 import TableSystem from './InventoryTableSystem';
-import TablePowerSupplies from './InventoryTablePowerSupplies';
-import TableDimmSlot from './InventoryTableDimmSlot';
-import TableFans from './InventoryTableFans';
 import TableBmcManager from './InventoryTableBmcManager';
 import TableChassis from './InventoryTableChassis';
-import TableProcessors from './InventoryTableProcessors';
-import TableAssembly from './InventoryTableAssembly';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import PageSection from '@/components/Global/PageSection';
 import JumpLink16 from '@carbon/icons-vue/es/jump-link/16';
@@ -69,14 +49,9 @@ export default {
   components: {
     PageTitle,
     ServiceIndicator,
-    TableDimmSlot,
-    TablePowerSupplies,
     TableSystem,
-    TableFans,
     TableBmcManager,
     TableChassis,
-    TableProcessors,
-    TableAssembly,
     PageSection,
     JumpLink: JumpLink16,
   },
@@ -108,36 +83,6 @@ export default {
           href: '#chassis',
           linkText: this.$t('pageInventory.chassis'),
         },
-        {
-          id: 'dimms',
-          dataRef: 'dimms',
-          href: '#dimms',
-          linkText: this.$t('pageInventory.dimmSlot'),
-        },
-        {
-          id: 'fans',
-          dataRef: 'fans',
-          href: '#fans',
-          linkText: this.$t('pageInventory.fans'),
-        },
-        {
-          id: 'powerSupply',
-          dataRef: 'powerSupply',
-          href: '#powerSupply',
-          linkText: this.$t('pageInventory.powerSupplies'),
-        },
-        {
-          id: 'processors',
-          dataRef: 'processors',
-          href: '#processors',
-          linkText: this.$t('pageInventory.processors'),
-        },
-        {
-          id: 'assembly',
-          dataRef: 'assembly',
-          href: '#assembly',
-          linkText: this.$t('pageInventory.assemblies'),
-        },
       ],
     };
   },
@@ -155,41 +100,19 @@ export default {
     const chassisTablePromise = new Promise((resolve) => {
       this.$root.$on('hardware-status-chassis-complete', () => resolve());
     });
-    const dimmSlotTablePromise = new Promise((resolve) => {
-      this.$root.$on('hardware-status-dimm-slot-complete', () => resolve());
-    });
-    const fansTablePromise = new Promise((resolve) => {
-      this.$root.$on('hardware-status-fans-complete', () => resolve());
-    });
-    const powerSuppliesTablePromise = new Promise((resolve) => {
-      this.$root.$on('hardware-status-power-supplies-complete', () =>
-        resolve(),
-      );
-    });
-    const processorsTablePromise = new Promise((resolve) => {
-      this.$root.$on('hardware-status-processors-complete', () => resolve());
-    });
     const serviceIndicatorPromise = new Promise((resolve) => {
       this.$root.$on('hardware-status-service-complete', () => resolve());
     });
     const systemTablePromise = new Promise((resolve) => {
       this.$root.$on('hardware-status-system-complete', () => resolve());
     });
-    const assemblyTablePromise = new Promise((resolve) => {
-      this.$root.$on('hardware-status-assembly-complete', () => resolve());
-    });
     // Combine all child component Promises to indicate
     // when page data load complete
     Promise.all([
       bmcManagerTablePromise,
       chassisTablePromise,
-      dimmSlotTablePromise,
-      fansTablePromise,
-      powerSuppliesTablePromise,
-      processorsTablePromise,
       serviceIndicatorPromise,
       systemTablePromise,
-      assemblyTablePromise,
     ]).finally(() => this.endLoader());
   },
 };

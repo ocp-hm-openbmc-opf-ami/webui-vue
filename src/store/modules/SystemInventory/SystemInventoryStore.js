@@ -90,6 +90,7 @@ const SystemInventoryStore = {
           systemData.assetTag = response.data?.AssetTag || 'NA';
           systemData.biosVersion = response.data?.BiosVersion || 'NA';
           systemData.state = response.data?.Status?.State || 'NA';
+          systemData.health = response.data?.Status?.Health || 'NA';
           systemInfo.push(systemData);
           commit('setSystems', systemInfo);
         })
@@ -143,14 +144,23 @@ const SystemInventoryStore = {
               socket: data.Socket || 'NA',
               totalCores: data.TotalCores || 'NA',
               state: data.Status?.State || 'NA',
+              health: data?.Status?.Health || 'NA',
               totalEnabledCores: data?.TotalEnabledCores || 'NA',
               OperatingSpeedMHz: data?.OperatingSpeedMHz
                 ? data?.OperatingSpeedMHz
                 : data?.OperatingSpeedMHz === 0 || 0.0
                   ? data?.OperatingSpeedMHz
                   : 'NA',
+              sparePartNumber: data.SparePartNumber,
+              instructionSet: data.InstructionSet,
+              version: data.Version,
+              assetTag: data.AssetTag,
+              totalThreads: data.TotalThreads,
+              partNumber: data.PartNumber,
+              serialNumber: data.SerialNumber,
             };
           });
+          console.log(proccessorInfo);
           commit('setProcessors', proccessorInfo);
         })
         .catch((error) => console.log(error));
@@ -188,14 +198,15 @@ const SystemInventoryStore = {
                       state: assemblies?.Status?.State || 'NA',
                       vendor: assemblies?.Vendor || 'NA',
                       version: assemblies?.Version || 'NA',
+                      health: data?.Status?.Health || 'NA',
                     };
                     assembliesInfo.push(assembliesData);
                   });
                 });
               }
-              if (data?.MemoryMetrics != undefined) {
+              if (data?.Metrics != undefined) {
                 await api
-                  .get(data?.MemoryMetrics['@odata.id'])
+                  .get(data?.Metrics['@odata.id'])
                   .then((metricsresponse) => {
                     const MetricsData = {
                       id: metricsresponse?.data?.Id || 'NA',
@@ -333,6 +344,11 @@ const SystemInventoryStore = {
                 memoryType: data.MemoryType || 'NA',
                 allowedSpeedsMHz: data.AllowedSpeedsMHz[0] || 'NA',
                 serviceLabel: data.Location?.PartLocation?.ServiceLabel || 'NA',
+                baseModuleType: data.BaseModuleType,
+                busWidthBits: data.BusWidthBits,
+                dataWidthBits: data.DataWidthBits,
+                sparePartNumber: data.SparePartNumber || 'NA',
+                health: data?.Status?.Health || 'NA',
               };
             }),
           );
@@ -364,6 +380,7 @@ const SystemInventoryStore = {
           baseBoard.model = response.data?.Model || 'NA';
           baseBoard.assetTag = response.data?.AssetTag || 'NA';
           baseBoard.state = response.data?.Status?.State || 'NA';
+          baseBoard.health = response.data?.Status?.Health || 'NA';
           baseBoardInfo.push(baseBoard);
           commit('setBaseboard', baseBoardInfo);
         })
@@ -533,6 +550,7 @@ const SystemInventoryStore = {
             return {
               name: data.Name || 'NA',
               state: data.Status?.State || 'NA',
+              health: data?.Status?.Health || 'NA',
               readingRPM: data.Reading
                 ? data.Reading
                 : data.Reading === 0 || 0.0
@@ -581,6 +599,15 @@ const SystemInventoryStore = {
               PowerSupplyType: data.PowerSupplyType || 'NA',
               SerialNumber: data.SerialNumber || 'NA',
               state: data.Status?.State || 'NA',
+              partNumber: data.PartNumber,
+              sparePartNumber: data.SparePartNumber,
+              efficiencyPercent: data.EfficiencyRatings[0].EfficiencyPercent
+                ? data.EfficiencyRatings[0].EfficiencyPercent
+                : data.EfficiencyRatings[0].EfficiencyPercent === 0 || 0.0
+                  ? data.EfficiencyRatings[0].EfficiencyPercent
+                  : 'NA',
+              firmwareVersion: data.FirmwareVersion,
+              health: data?.Status?.Health || 'NA',
             };
           });
           commit('setPower', powerInfo);

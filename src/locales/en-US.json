@@ -398,7 +398,8 @@
             "systemType": "System Type",
             "assetTag": "Asset Tag",
             "biosVersion": "Bios Version",
-            "state": "State"
+            "state": "State",
+            "health": "Health"
         },
         "processor": {
             "processor": "Processor",
@@ -415,7 +416,15 @@
             "totalCores": "Total Cores",
             "state": "State",
             "operatingSpeedMHz": "Operating SpeedMHz",
-            "totalEnabledCores": "Total Enabled Cores"
+            "totalEnabledCores": "Total Enabled Cores",
+            "sparePartNumber": "Spare Part Number",
+            "instructionSet": "Instruction Set",
+            "version": "Version",
+            "assetTag": "AssetTag",
+            "totalThreads": "Total Threads",
+            "serialNumuber": "Serial Number",
+            "partNumuber": "Part Number",
+            "health": "Health"
         },
         "processorFPGA": {
             "info": "FPGA Info",
@@ -443,7 +452,12 @@
             "memoryType": "Memory Type",
             "description": "Description",
             "allowedSpeedsMHz": "AllowedSpeeds MHz",
-            "serviceLabel": "ServiceLabel"
+            "serviceLabel": "ServiceLabel",
+            "baseModuleType": "Base module type",
+            "busWidthBits": "Bus Width Bits",
+            "dataWidthBits": "Data Width Bits",
+            "sparePartNumber": "Spare Part Number",
+            "health": "Health"
         },
         "baseBoard": {
             "baseBoard": "BaseBoard",
@@ -451,6 +465,7 @@
             "name": "Name",
             "model": "Model",
             "state": "State",
+            "health": "Health",
             "powerState": "Power State",
             "assetTag": "Asset Tag",
             "indicatorLED": "Indicator LED",
@@ -488,7 +503,12 @@
             "powerCapacityWatts": "Power Capacity Watts",
             "PowerSupplyType": "Power SupplyType",
             "SerialNumber": "Serial Number",
-            "state": "State"
+            "state": "State",
+            "partNumber": "Part Number",
+            "sparePartNumber": "Spare Part Number",
+            "efficiencyPercent": "Efficiency Percent",
+            "firmwareVersion": "Firmware Version",
+            "health": "Health"
         },
         "voltage": {
             "voltageControlInfo": "Voltage Info",
@@ -512,7 +532,8 @@
             "state": "State",
             "readingRPM": "ReadingRPM",
             "minReadingRange": "MinReadingRange",
-            "maxReadingRange": "MaxReadingRange"
+            "maxReadingRange": "MaxReadingRange",
+            "health": "Health"
         },
         "temperature": {
             "temperatureInfo": "Temperature Info",
@@ -600,7 +621,8 @@
             "sparePartNumber": "Spare Part Number",
             "state": "State",
             "vendor": "Vendor",
-            "version": "Version"
+            "version": "Version",
+            "health": "Health"
         },
         "memoryMetrics": {
             "memortMetricsInfo": "Memory Metrics Info",

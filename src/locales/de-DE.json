@@ -411,7 +411,15 @@
             "totalCores": "Gesamtkerne",
             "state": "Zustand",
             "operatingSpeedMHz": "BetriebsgeschwindigkeitMHz",
-            "totalEnabledCores": "Insgesamt aktivierte Kerne"
+            "totalEnabledCores": "Insgesamt aktivierte Kerne",
+            "sparePartNumber": "Ersatzteilnummer",
+            "instructionSet": "Befehlssatz",
+            "version": "Version",
+            "assetTag": "AssetTag",
+            "totalThreads": "Gesamtzahl der Threads",
+            "serialNumuber": "Seriennummer",
+            "partNumuber": "Teilenummer",
+            "health": "Gesundheit"
         },
         "processorFPGA": {
             "info": "FPGA Info",
@@ -439,7 +447,12 @@
             "memoryType": "Speichertyp",
             "description": "Beschreibung",
             "allowedSpeedsMHz": "Zulässige Geschwindigkeiten MHz",
-            "serviceLabel": "ServiceLabel"
+            "serviceLabel": "ServiceLabel",
+            "baseModuleType": "Basismodultyp",
+            "busWidthBits": "Busbreiten-Bits",
+            "dataWidthBits": "Datenbreitenbits",
+            "sparePartNumber": "Ersatzteilnummer",
+            "health": "Gesundheit"
         },
         "baseBoard": {
             "baseBoard": "BaseBoard",
@@ -484,7 +497,12 @@
             "powerCapacityWatts": "Leistungskapazität Watt",
             "PowerSupplyType": "Netzteiltyp",
             "SerialNumber": "Seriennummer",
-            "state": "Zustand"
+            "state": "Zustand",
+            "partNumber": "Teilenummer",
+            "sparePartNumber": "Ersatzteilnummer",
+            "efficiencyPercent": "Effizienzprozent",
+            "firmwareVersion": "Firmware Version",
+            "health": "Gesundheit"
         },
         "voltage": {
             "voltageControlInfo": "Spannungsinformationen",
@@ -508,7 +526,8 @@
             "state": "Zustand",
             "readingRPM": "ReadingRPM",
             "minReadingRange": "Min Lesereichweite",
-            "maxReadingRange": "Maximaler Lesebereich"
+            "maxReadingRange": "Maximaler Lesebereich",
+            "health": "Gesundheit"
         },
         "temperature": {
             "temperatureInfo": "Temperaturinformationen",
@@ -594,7 +613,8 @@
             "sparePartNumber": "Ersatzteilnummer",
             "state": "Zustand",
             "vendor": "Verkäufer",
-            "version": "Ausführung"
+            "version": "Ausführung",
+            "health": "Gesundheit"
         },
         "memoryMetrics": {
             "memortMetricsInfo": "Informationen zu Speichermetriken",

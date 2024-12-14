@@ -8,12 +8,22 @@
       :fields="assemblyFields"
       :items="memoryAssemblyInfo"
       head-variant="light"
-    ></b-table>
+    >
+      <!-- Health -->
+      <template #cell(health)="{ value }">
+        <status-icon :status="statusIcon(value)" />
+        {{ value }}
+      </template>
+    </b-table>
   </div>
 </template>
 
 <script>
+import StatusIcon from '@/components/Global/StatusIcon';
+import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
 export default {
+  components: { StatusIcon },
+  mixins: [DataFormatterMixin],
   data() {
     return {
       assemblyFields: [
@@ -58,6 +68,11 @@ export default {
         {
           key: 'sparePartNumber',
           label: this.$t('pageSystemInventory.memoryAssembly.sparePartNumber'),
+        },
+        {
+          key: 'health',
+          label: this.$t('pageSystemInventory.memoryAssembly.health'),
+          formatter: this.dataFormatter,
         },
         {
           key: 'state',

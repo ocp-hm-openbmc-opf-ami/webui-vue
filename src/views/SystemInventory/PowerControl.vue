@@ -8,12 +8,22 @@
       :fields="powerControlFields"
       :items="powerInfo"
       head-variant="light"
-    ></b-table>
+    >
+      <!-- Health -->
+      <template #cell(health)="{ value }">
+        <status-icon :status="statusIcon(value)" />
+        {{ value }}
+      </template>
+    </b-table>
   </div>
 </template>
 
 <script>
+import StatusIcon from '@/components/Global/StatusIcon';
+import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
 export default {
+  components: { StatusIcon },
+  mixins: [DataFormatterMixin],
   data() {
     return {
       powerControlFields: [
@@ -32,8 +42,16 @@ export default {
           label: this.$t('pageSystemInventory.power.model'),
         },
         {
-          key: 'plugType',
-          label: this.$t('pageSystemInventory.power.plugType'),
+          key: 'model',
+          label: this.$t('pageSystemInventory.power.model'),
+        },
+        {
+          key: 'efficiencyPercent',
+          label: this.$t('pageSystemInventory.power.efficiencyPercent'),
+        },
+        {
+          key: 'firmwareVersion',
+          label: this.$t('pageSystemInventory.power.firmwareVersion'),
         },
         {
           key: 'powerCapacityWatts',
@@ -46,6 +64,19 @@ export default {
         {
           key: 'SerialNumber',
           label: this.$t('pageSystemInventory.power.SerialNumber'),
+        },
+        {
+          key: 'partNumber',
+          label: this.$t('pageSystemInventory.power.partNumber'),
+        },
+        {
+          key: 'sparePartNumber',
+          label: this.$t('pageSystemInventory.power.sparePartNumber'),
+        },
+        {
+          key: 'health',
+          label: this.$t('pageSystemInventory.power.health'),
+          formatter: this.dataFormatter,
         },
         {
           key: 'state',

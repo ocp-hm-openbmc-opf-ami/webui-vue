@@ -8,12 +8,22 @@
       :fields="processorFields"
       :items="processorInfo"
       head-variant="light"
-    ></b-table>
+    >
+      <!-- Health -->
+      <template #cell(health)="{ value }">
+        <status-icon :status="statusIcon(value)" />
+        {{ value }}
+      </template>
+    </b-table>
   </div>
 </template>
 
 <script>
+import StatusIcon from '@/components/Global/StatusIcon';
+import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
 export default {
+  components: { StatusIcon },
+  mixins: [DataFormatterMixin],
   data() {
     return {
       processorFields: [
@@ -54,12 +64,37 @@ export default {
           label: this.$t('pageSystemInventory.processor.socket'),
         },
         {
+          key: 'serialNumber',
+          label: this.$t('pageSystemInventory.processor.serialNumuber'),
+        },
+        {
+          key: 'partNumber',
+          label: this.$t('pageSystemInventory.processor.partNumuber'),
+        },
+        {
+          key: 'instructionSet',
+          label: this.$t('pageSystemInventory.processor.instructionSet'),
+        },
+        {
+          key: 'version',
+          label: this.$t('pageSystemInventory.processor.version'),
+        },
+        {
           key: 'totalCores',
           label: this.$t('pageSystemInventory.processor.totalCores'),
         },
         {
           key: 'totalEnabledCores',
           label: this.$t('pageSystemInventory.processor.totalEnabledCores'),
+        },
+        {
+          key: 'totalThreads',
+          label: this.$t('pageSystemInventory.processor.totalThreads'),
+        },
+        {
+          key: 'health',
+          label: this.$t('pageSystemInventory.processor.health'),
+          formatter: this.dataFormatter,
         },
         {
           key: 'state',
