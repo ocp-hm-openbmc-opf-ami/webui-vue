@@ -2132,7 +2132,7 @@
                 "lowerCautionValidationInfo1": "Lower Caution cannot be bigger than or equal to Upper Critical value.",
                 "lowerCautionValidationInfo2": "Lower Caution cannot be bigger than or equal to Upper Caution value.",
                 "lowerCautionValidationInfo3": "Lower Caution cannot be smaller than or equal to Lower Critical value.",
-                "lowerCriticalValidationInfo": "Invalid Lower Critical value",
+                "lowerCriticalValidationInfo": "Invalid Lower Critical value.",
                 "lowerCriticalValidationInfo1": "Lower Critical cannot be bigger than or equal to Upper Critical value.",
                 "lowerCriticalValidationInfo2": "Lower Critical cannot be bigger than or equal to Upper Caution value.",
                 "lowerCriticalValidationInfo3": "Lower Critical cannot be bigger than or equal to Lower Caution value.",
