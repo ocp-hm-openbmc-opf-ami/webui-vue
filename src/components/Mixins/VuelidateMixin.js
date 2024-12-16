@@ -4,6 +4,9 @@ const VuelidateMixin = {
       const { $dirty, $error } = model;
       return $dirty ? !$error : null;
     },
+    validateRange(val, min, max) {
+      return /^\d+$/.test(val) && val >= min && val <= max;
+    },
   },
 };
 

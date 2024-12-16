@@ -25,6 +25,7 @@ const PoliciesStore = {
     kvmPortValue: null,
     webPortValue: null,
     solBitRate: null,
+    vmReconnectData: {},
   },
   getters: {
     sshProtocolEnabled: (state) => state.sshProtocolEnabled,
@@ -48,6 +49,7 @@ const PoliciesStore = {
     kvmPortValue: (state) => state.kvmPortValue,
     webPortValue: (state) => state.webPortValue,
     solBitRate: (state) => state.solBitRate,
+    vmReconnectData: (state) => state.vmReconnectData,
   },
   mutations: {
     setSshProtocolEnabled: (state, sshProtocolEnabled) =>
@@ -86,6 +88,8 @@ const PoliciesStore = {
     setWebPortValue: (state, webPortValue) =>
       (state.webPortValue = webPortValue),
     setSolBitRate: (state, solBitRate) => (state.solBitRate = solBitRate),
+    setVMReconnectValues: (state, vmReconnectData) =>
+      (state.vmReconnectData = vmReconnectData),
   },
   actions: {
     setSolSshPortUpdatedValue({ commit }, solSshProtocolPort) {
@@ -574,6 +578,52 @@ const PoliciesStore = {
         .then(() => i18n.t('pagePolicies.toast.successSolBitRate'))
         .catch(() => {
           throw new Error(i18n.t('pagePolicies.toast.errorSolBitRate'));
+        });
+    },
+    async getVMReconnect({ commit }) {
+      return await api
+        .get('/redfish/v1/Managers/bmc/VirtualMedia')
+        .then((response) =>
+          response.data.Members.map(
+            (virtualMedia) => virtualMedia['@odata.id'],
+          ),
+        )
+        .then((devices) => api.all(devices.map((device) => api.get(device))))
+        .then((devices) => {
+          devices.some((virtualMedia) => {
+            if (virtualMedia.data.TransferProtocolType !== 'OEM') {
+              const config = virtualMedia.data.Oem?.OpenBMC || {};
+              const vmValues = {
+                RetryCount: config?.RetryCount || 3,
+                RetryInterval: config?.RetryInterval || 15,
+                vmReconnectUrl: config['@odata.id'],
+              };
+              commit('setVMReconnectValues', vmValues);
+              return true; // stops further iteration
+            }
+            return false;
+          });
+        })
+        .catch((error) => console.log(error));
+    },
+    async saveVMReconnectValue({ dispatch, state }, vmReconnectValue) {
+      const payLoad = {
+        Oem: {
+          OpenBMC: {
+            RetryCount: parseInt(vmReconnectValue.vmCount),
+            RetryInterval: parseInt(vmReconnectValue.vmInterval),
+          },
+        },
+      };
+      return await api
+        .patch(state.vmReconnectData.vmReconnectUrl, payLoad)
+        .then(() => dispatch('getVMReconnect'))
+        .then(() => {
+          return i18n.t('pagePolicies.toast.successVMReconnect');
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(i18n.t('pagePolicies.toast.errorVMReconnect'));
         });
     },
   },

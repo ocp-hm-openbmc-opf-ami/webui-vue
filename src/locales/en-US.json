@@ -1959,7 +1959,9 @@
             "webPortTitle": "Web port confirmation",
             "webPortConfirmation": "On changing the configuration, already opened sessions for the service will be affected, also the service will be restarted. Click OK if you want to continue. NOTE: Login session will be logged out. Please relogin after closing this page.",
             "kvmPortTitle": "KVM port confirmation",
-            "kvmPortConfirmation": "On changing the configuration, already opened KVM sessions for the service will be affected, also the service will be restarted. Click OK if you want to continue."
+            "kvmPortConfirmation": "On changing the configuration, already opened KVM sessions for the service will be affected, also the service will be restarted. Click OK if you want to continue.",
+            "vmReconnectTitle": "Virtual Media Reconnect confirmation",
+            "vmReconnectConfirmation": "On changing the configuration, already opened Virtual Media sessions for the service will be affected, also the service will be restarted. Click OK if you want to continue."
         },
         "toast": {
             "errorIpmiPort": "Error in setting IPMI port value.",
@@ -1996,6 +1998,7 @@
             "errorWebPort": "Error in setting Web port value.",
             "errorKVMSessionTimeout": "Error configuring KVM session timeout.",
             "errorSolBitRate": "Error in configuring SOL Non-Volatile Bit Rate.",
+            "errorVMReconnect": "Error in setting Virtual Media Reconnect value.",
             "successIpmiDisabled": "Successfully disabled IPMI security setting.",
             "successIpmiEnabled": "Successfully enabled IPMI security setting.",
             "successRtadDisabled": "Successfully disabled RTAD security setting.",
@@ -2024,7 +2027,8 @@
             "successKVMPort": "Successfully updated the KVM Port value.",
             "successWebPort": "Successfully updated the Web Port value.",
             "successKVMSessionTimeout": "Successfully configured the KVM session timeout.",
-            "successSolBitRate": "Successfully configured the SOL Non-Volatile Bit Rate."
+            "successSolBitRate": "Successfully configured the SOL Non-Volatile Bit Rate.",
+            "successVMReconnect": "Successfully updated the Virtual Media Reconnect value."
         },
         "options": {
             "30minutes": "30 Minutes",
@@ -2075,7 +2079,10 @@
         "webPortValue": "Web Port Value (in numbers)",
         "kvmTimeoutValueLimits": "Kindly enter the Seconds between %{min} and %{max}",
         "kvmPortValueLimits": "Kindly enter the Values between %{min} and %{max}",
-        "solBitRate": "SOL Non-Volatile Bit Rate"
+        "solBitRate": "SOL Non-Volatile Bit Rate",
+        "retryCount": "Retry Count",
+        "retryInterval": "Retry Interval",
+        "vmVMValueLimits": "Kindly enter the Values between %{min} to %{max}"
 
     },
     "pagePower": {

@@ -1936,7 +1936,9 @@
             "webPortTitle": "Bestätigung des Webports",
             "webPortConfirmation": "Bei einer Änderung der Konfiguration sind bereits geöffnete Sitzungen für den Dienst betroffen, außerdem wird der Dienst neu gestartet. Klicken Sie auf OK, wenn Sie fortfahren möchten. HINWEIS: Die Anmeldesitzung wird abgemeldet. Bitte melden Sie sich nach dem Schließen dieser Seite erneut an.",
             "kvmPortTitle": "Bestätigung des KVM-Ports",
-            "kvmPortConfirmation": "Bei einer Änderung der Konfiguration sind bereits geöffnete KVM-Sitzungen für den Dienst betroffen, außerdem wird der Dienst neu gestartet. Klicken Sie auf OK, wenn Sie fortfahren möchten."
+            "kvmPortConfirmation": "Bei einer Änderung der Konfiguration sind bereits geöffnete KVM-Sitzungen für den Dienst betroffen, außerdem wird der Dienst neu gestartet. Klicken Sie auf OK, wenn Sie fortfahren möchten.",
+             "vmReconnectTitle": "Bestätigung der erneuten Verbindung virtueller Medien",
+            "vmReconnectConfirmation": "Bei einer Änderung der Konfiguration sind bereits geöffnete Virtual Media-Sitzungen für den Dienst betroffen, außerdem wird der Dienst neu gestartet. Klicken Sie auf OK, wenn Sie fortfahren möchten."
         },
         "toast": {
             "errorIpmiPort": "Fehler beim Festlegen des IPMI Portwerts.",
@@ -1973,6 +1975,7 @@
             "errorWebPort": "Fehler beim Festlegen des Web-Port-Werts.",
             "errorKVMSessionTimeout": "Fehler beim Konfigurieren des KVM-Sitzungs-Timeouts.",
             "errorSolBitRate": "Fehler beim Konfigurieren der nichtflüchtigen SOL-Bitrate.",
+            "errorVMReconnect": "Fehler beim Festlegen des Virtual Media Reconnect-Werts.",
             "successIpmiDisabled": "IPMI Sicherheitseinstellung erfolgreich deaktiviert.",
             "successIpmiEnabled": "IPMI Sicherheitseinstellung erfolgreich aktiviert.",
             "successRtadDisabled": "Die RTAD Sicherheitseinstellung wurde erfolgreich deaktiviert.",
@@ -2001,7 +2004,8 @@
             "successKVMPort": "Der KVM-Portwert wurde erfolgreich aktualisiert.",
             "successWebPort": "Der Web-Port-Wert wurde erfolgreich aktualisiert.",
             "successKVMSessionTimeout": "Das KVM-Sitzungs-Timeout wurde erfolgreich konfiguriert..",
-            "successSolBitRate": "Die nichtflüchtige SOL-Bitrate wurde erfolgreich konfiguriert."
+            "successSolBitRate": "Die nichtflüchtige SOL-Bitrate wurde erfolgreich konfiguriert.",
+             "successVMReconnect": "Der Virtual Media Reconnect-Wert wurde erfolgreich aktualisiert."
         },
         "options": {
             "30minutes": "30 Protokoll",
@@ -2052,7 +2056,10 @@
         "webPortValue": "Web-Port-Wert (in Zahlen)",
         "kvmTimeoutValueLimits": "Bitte geben Sie die Sekunden zwischen %{min} und %{max} ein.",
         "kvmPortValueLimits": "Bitte geben Sie die Werte zwischen %{min} und %{max} ein",
-        "solBitRate": "SOL Nichtflüchtige Bitrate"
+        "solBitRate": "SOL Nichtflüchtige Bitrate",
+        "retryCount": "Anzahl der Wiederholungen",
+        "retryInterval": "Wiederholungsintervall",
+        "vmVMValueLimits": "Bitte geben Sie die Werte zwischen %{min} und %{max} ein."
     },
     "pagePower": {
         "description": "Legen Sie eine Leistungsobergrenze fest, um den Stromverbrauch auf oder unter dem angegebenen Wert in Watt zu halten",

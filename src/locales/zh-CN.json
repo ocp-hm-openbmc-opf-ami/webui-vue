@@ -1949,7 +1949,9 @@
             "webPortTitle": "Web端口确认",
             "webPortConfirmation": "更改配置时，已打开的服务会话将受到影响，并且服务将重新启动。如果您想继续，请单击“确定”。注意：登录会话将被注销。请关闭本页面后重新登录。",
             "kvmPortTitle": "KVM端口确认",
-            "kvmPortConfirmation": "更改配置时，已打开的服务 KVM 会话将受到影响，并且服务将重新启动。如果您想继续，请单击“确定”。"
+            "kvmPortConfirmation": "更改配置时，已打开的服务 KVM 会话将受到影响，并且服务将重新启动。如果您想继续，请单击“确定”。",
+            "vmReconnectTitle": "虚拟媒体重新连接确认",
+            "vmReconnectConfirmation": "更改配置时，已打开的服务虚拟媒体会话将受到影响，服务也将重新启动。如果您想继续，请单击“确定”。"
         },
         "toast": {
             "errorIpmiPort": "设定 IPMI 端口数字发生错误",
@@ -1986,6 +1988,7 @@
             "errorWebPort": "设置 Web 端口值时出错。",
             "errorKVMSessionTimeout": "配置 KVM 会话超时时出错。",
             "errorSolBitRate": "配置 SOL 非易失性比特率时出错。",
+            "errorVMReconnect": "设置虚拟媒体重新连接值时出错。",
             "successIpmiDisabled": "停用 IPMI 安全设定成功",
             "successIpmiEnabled": "启用 IPMI 安全设定成功",
             "successRtadDisabled": "停用 RTAD 安全设定成功",
@@ -2014,7 +2017,8 @@
             "successKVMPort": "已成功更新 KVM 端口值。",
             "successWebPort": "已成功更新 Web 端口值。",
             "successKVMSessionTimeout": "成功配置 KVM 会话超时。",
-            "successSolBitRate": "已成功配置 SOL 非易失性比特率。"
+            "successSolBitRate": "已成功配置 SOL 非易失性比特率。",
+            "successVMReconnect": "已成功更新虚拟媒体重新连接值。"
         },
         "options": {
             "30minutes": "30 分钟",
@@ -2065,7 +2069,10 @@
         "webPortValue": "Web 端口值（以数字表示）",
         "kvmTimeoutValueLimits": "请输入 %{min} 和 %{max} 之间的秒数。",
         "kvmPortValueLimits": "请输入 %{min} 和 %{max} 之间的值",
-        "solBitRate": "SOL 非易失性比特率"
+        "solBitRate": "SOL 非易失性比特率",
+        "retryCount": "重试次数",
+        "retryInterval": "重试间隔",
+        "vmVMValueLimits": "请输入 %{min} 到 %{max} 之间的值"
     },
     "pagePower": {
         "description": "设置电源上限以使功耗保持在或低于指定值",

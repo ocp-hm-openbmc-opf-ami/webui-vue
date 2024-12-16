@@ -263,6 +263,96 @@
                     </b-form-checkbox>
                   </b-col>
                 </b-row>
+                <div v-if="vmcState">
+                  <b-row>
+                    <b-col cols="3" class="d-flex align-items-center">
+                      <b-form-group
+                        id="input-group-vm-interval"
+                        :label="$t('pagePolicies.retryInterval')"
+                        label-for="input-vm-interval"
+                      >
+                        <b-form-input
+                          id="input-vm-interval"
+                          v-model="vmReconnectValues.vmInterval"
+                          data-test-id="input-vminterval"
+                          aria-describedby="power-help-text"
+                          :state="
+                            getValidationState($v.vmReconnectValues.vmInterval)
+                          "
+                          @input="$v.vmReconnectValues.vmInterval.$touch()"
+                        ></b-form-input>
+                        <b-form-invalid-feedback role="alert">
+                          <template
+                            v-if="!$v.vmReconnectValues.vmInterval.required"
+                          >
+                            {{ $t('global.form.fieldRequired') }}
+                          </template>
+                          <template
+                            v-else-if="
+                              $v.vmReconnectValues.vmInterval.required &&
+                              !$v.vmReconnectValues.vmInterval.pattern
+                            "
+                          >
+                            {{
+                              $t('pagePolicies.vmVMValueLimits', {
+                                min: 15,
+                                max: 30,
+                              })
+                            }}
+                          </template>
+                        </b-form-invalid-feedback>
+                      </b-form-group>
+                    </b-col>
+                    <b-col cols="3" class="d-flex align-items-center">
+                      <b-form-group
+                        id="input-group-vm-count"
+                        :label="$t('pagePolicies.retryCount')"
+                        label-for="input-vm-count"
+                      >
+                        <b-form-input
+                          id="input-vm-count"
+                          v-model="vmReconnectValues.vmCount"
+                          data-test-id="input-vmcount"
+                          aria-describedby="power-help-text"
+                          :state="
+                            getValidationState($v.vmReconnectValues.vmCount)
+                          "
+                          @input="$v.vmReconnectValues.vmCount.$touch()"
+                        ></b-form-input>
+                        <b-form-invalid-feedback role="alert">
+                          <template
+                            v-if="!$v.vmReconnectValues.vmCount.required"
+                          >
+                            {{ $t('global.form.fieldRequired') }}
+                          </template>
+                          <template
+                            v-else-if="
+                              $v.vmReconnectValues.vmCount.required &&
+                              !$v.vmReconnectValues.vmCount.pattern
+                            "
+                          >
+                            {{
+                              $t('pagePolicies.vmVMValueLimits', {
+                                min: 3,
+                                max: 6,
+                              })
+                            }}
+                          </template>
+                        </b-form-invalid-feedback>
+                      </b-form-group>
+                    </b-col>
+                    <b-col class="d-flex align-items-center">
+                      <b-button
+                        variant="primary"
+                        type="submit"
+                        data-test-id="button-saveVMReconnectValues"
+                        @click="saveVMReconnectValues"
+                      >
+                        {{ $t('global.action.save') }}
+                      </b-button>
+                    </b-col>
+                  </b-row>
+                </div>
                 <b-row class="setting-section">
                   <b-col
                     lg="7"
@@ -758,6 +848,10 @@ export default {
       modifySSHPolicyDisabled:
         process.env.VUE_APP_MODIFY_SSH_POLICY_DISABLED === 'true',
       DisplaySection: false,
+      vmReconnectValues: {
+        vmCount: '',
+        vmInterval: '',
+      },
     };
   },
   computed: {
@@ -916,6 +1010,7 @@ export default {
       'kvmPortValue',
       'webPortValue',
       'sessionTimeoutValue',
+      'vmReconnectData',
     ]),
   },
   watch: {
@@ -931,6 +1026,10 @@ export default {
     sessionTimeoutValue: function (value) {
       this.webSessionTimeoutValue = value;
     },
+    vmReconnectData: function (value) {
+      this.vmReconnectValues.vmCount = value.RetryCount;
+      this.vmReconnectValues.vmInterval = value.RetryInterval;
+    },
   },
   created() {
     this.startLoader();
@@ -943,6 +1042,7 @@ export default {
       this.$store.dispatch('policies/getSslFipsStatus'),
       this.$store.dispatch('snmp/getSNMPProtocolStatus'),
       this.$store.dispatch('policies/getSolBitRateData'),
+      this.$store.dispatch('policies/getVMReconnect'),
     ]).finally(() => this.endLoader());
   },
   validations() {
@@ -967,6 +1067,20 @@ export default {
       },
       webPort: {
         required,
+      },
+      vmReconnectValues: {
+        vmInterval: {
+          required,
+          pattern: function (pw) {
+            return this.vmRetryIntervalValidation(pw);
+          },
+        },
+        vmCount: {
+          required,
+          pattern: function (pw) {
+            return this.vmRetryCountValidation(pw);
+          },
+        },
       },
     };
   },
@@ -1002,6 +1116,7 @@ export default {
         .catch(({ message }) => this.errorToast(message));
     },
     changeVmcState(state) {
+      this.startLoader();
       this.$store
         .dispatch('policies/saveVmcState', state ? true : false)
         .then((message) => {
@@ -1009,10 +1124,21 @@ export default {
             if (this.$store.state.virtualMedia.vmStarted > 0) {
               this.$root.$emit('stop-vmedia');
             }
+            this.endLoader();
+          } else {
+            setTimeout(() => {
+              this.$store
+                .dispatch('policies/getVMReconnect')
+                .catch(() => this.endLoader())
+                .finally(() => this.endLoader());
+            }, 20000); // wait for the Virtual media service configuration success
           }
           this.successToast(message);
         })
-        .catch(({ message }) => this.errorToast(message));
+        .catch(({ message }) => {
+          this.errorToast(message);
+          this.endLoader();
+        });
     },
     changeSOLState(state) {
       this.$store
@@ -1190,6 +1316,15 @@ export default {
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
+    saveVMReconnectValues() {
+      this.$v.vmReconnectValues.$touch();
+      if (this.$v.vmReconnectValues.$invalid) return;
+
+      this.$store
+        .dispatch('policies/saveVMReconnectValue', this.vmReconnectValues)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
     kvmSessionTimeoutValidation(val) {
       if (
         !/^(3[0-9]|[4-9][0-9]|[1-9][0-9]{2}|[1-8][0-9]{3}|[1-7][0-9]{4}|8[0-5][0-9]{3}|86[0-3][0-9]{2}|86400)$/.test(
@@ -1219,6 +1354,12 @@ export default {
         return false;
       }
       return true;
+    },
+    vmRetryIntervalValidation(val) {
+      return this.validateRange(val, 15, 30);
+    },
+    vmRetryCountValidation(val) {
+      return this.validateRange(val, 3, 6);
     },
   },
 };
