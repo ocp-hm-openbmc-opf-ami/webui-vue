@@ -359,26 +359,33 @@ export default {
     checkStatus(data) {
       var interval = setInterval(() => {
         this.$store.dispatch('firmware/checkStatus', data).then((response) => {
+          const imageName = this.$store.getters['firmware/getImageName'];
           this.isProgress = true;
           this.progressValue = response.PercentComplete;
           if (response.TaskState != 'New') {
             clearInterval(interval);
             this.endLoader();
             if (response.TaskState == 'Completed') {
-              this.modalReset++;
-              if (this.modalReset == 1)
-                this.$bvModal
-                  .msgBoxOk(
-                    this.$tc('pageFirmware.modal.firmwareResetCalled'),
-                    {
-                      title: this.$tc('global.action.success'),
-                    },
-                  )
-                  .then((confirmed) => {
-                    if (confirmed) {
-                      this.firmwareOverlay = true;
-                    }
-                  });
+              if (imageName === 'BMC') {
+                this.modalReset++;
+                if (this.modalReset == 1)
+                  this.$bvModal
+                    .msgBoxOk(
+                      this.$tc('pageFirmware.modal.firmwareResetCalled'),
+                      {
+                        title: this.$tc('global.action.success'),
+                      },
+                    )
+                    .then((confirmed) => {
+                      if (confirmed) {
+                        this.firmwareOverlay = true;
+                      }
+                    });
+              } else {
+                this.successToast(
+                  i18n.t('pageFirmware.toast.successUpdateFirmware'),
+                );
+              }
             } else {
               this.isProgress = false;
               this.errorToast(i18n.t('pageFirmware.toast.errorUpdateFirmware'));

@@ -1221,7 +1221,7 @@
             "updateFirmwareInfo2": "The running image (%{running}) will be copied to backup. The backup image will be deleted.",
             "updateFirmwareInfo3": "Are you sure you want to proceed with the update?",
             "updateFirmwareInfoDefault": "The new image will be uploaded and activated. After that, the BMC or host will reboot automatically to run from the new image.",
-            "firmwareResetCalled": "Firmware reset has been called. Close the current session, and open a new session after a couple of minutes."
+            "firmwareResetCalled": "BMC firmware reset has been called. Close the current session, and open a new session after a couple of minutes."
         },
         "toast": {
             "errorSwitchImages": "Error switching running and backup images.",
@@ -1236,6 +1236,7 @@
             "verifyUpdateMessage": "Refresh the application to verify firmware updated successfully",
             "successEnabledClearConfig": "Successfully enabled Clear configuration.",
             "successDisabledClearConfig": "Successfully disabled Clear configuration.",
+            "successUpdateFirmware": "Successfully updated the firmware.",
             "errorEnabledClearConfig": "Error enabling Clear configuration.",
             "errorDisabledClearConfig": "Error disabling Clear configuration."
         }

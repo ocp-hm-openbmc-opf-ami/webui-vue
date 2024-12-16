@@ -19,6 +19,7 @@ const FirmwareStore = {
     bmcDateTime: '',
     applyTimeSetValue: {},
     bmcActiveFeatureEnabled: true,
+    imageName: '',
   },
   getters: {
     isTftpUploadAvailable: (state) => state.tftpAvailable,
@@ -49,6 +50,7 @@ const FirmwareStore = {
     getFirmwareBmcDateTime: (state) => state.bmcDateTime,
     getApplyTimeSetValue: (state) => state.applyTimeSetValue,
     getActiveFeatureEnabledStatus: (state) => state.bmcActiveFeatureEnabled,
+    getImageName: (state) => state.imageName,
   },
   mutations: {
     setActiveBmcFirmwareId: (state, id) => (state.bmcActiveFirmwareId = id),
@@ -75,6 +77,7 @@ const FirmwareStore = {
       (state.applyTimeSetValue = applyTimeSetValue),
     setBmcActiveFeatureEnabled: (state, bmcActiveFeatureEnabled) =>
       (state.bmcActiveFeatureEnabled = bmcActiveFeatureEnabled),
+    setImageName: (state, imageName) => (state.imageName = imageName),
   },
   actions: {
     async getFirmwareInformation({ dispatch }) {
@@ -199,10 +202,14 @@ const FirmwareStore = {
         })
         .catch((error) => console.log(error));
     },
-    async uploadFirmware({ state }, image) {
+    async uploadFirmware({ state, commit }, image) {
       return await api
         .post(state.httpPushUri, image, {
           headers: { 'Content-Type': 'application/octet-stream' },
+        })
+        .then((response) => {
+          commit('setImageName', response.data.Oem.ImageName);
+          return response;
         })
         .catch((error) => {
           console.log(error);
@@ -241,9 +248,15 @@ const FirmwareStore = {
         });
     },
     async checkStatus(_, uri) {
-      return await api.get(uri).then((response) => {
-        return response.data;
-      });
+      return await api
+        .get(uri)
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(i18n.t('pageFirmware.toast.errorUpdateFirmware'));
+        });
     },
     async setFirmwarUpdateActive(_, data) {
       return await api

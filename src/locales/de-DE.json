@@ -1211,7 +1211,7 @@
             "updateFirmwareInfo2": "Das laufende Bild (%{running}) wird ins Backup kopiert. Das Backup-Image wird gelöscht.",
             "updateFirmwareInfo3": "Sind Sie sicher, dass Sie mit dem Update fortfahren möchten?",
             "updateFirmwareInfoDefault": "Das neue Bild wird hochgeladen und aktiviert. Danach wird der BMC oder Host automatisch neu gestartet, um mit dem neuen Image zu starten.",
-            "firmwareResetCalled": "Firmware-Reset wurde aufgerufen. Schließen Sie die aktuelle Sitzung und öffnen Sie nach ein paar Minuten eine neue Sitzung."
+            "firmwareResetCalled": "BMC Firmware-Reset wurde aufgerufen. Schließen Sie die aktuelle Sitzung und öffnen Sie nach ein paar Minuten eine neue Sitzung."
         },
         "toast": {
             "errorSwitchImages": "Fehler beim Umschalten von laufenden und Backup-Images.",
@@ -1226,6 +1226,7 @@
             "verifyUpdateMessage": "Aktualisieren Sie die Anwendung, um zu überprüfen, ob die Firmware erfolgreich aktualisiert wurde",
             "successEnabledClearConfig": "Konfiguration löschen erfolgreich aktiviert.",
             "successDisabledClearConfig": "Konfiguration löschen erfolgreich deaktiviert.",
+            "successUpdateFirmware": "Die Firmware wurde erfolgreich aktualisiert.",
             "errorEnabledClearConfig": "Fehler beim Aktivieren der Konfiguration löschen.",
             "errorDisabledClearConfig": "Fehler beim Deaktivieren der Konfiguration löschen."
         }

@@ -1216,7 +1216,7 @@
             "updateFirmwareInfo2": "執行中的映像(%{running})將被備份。備份映像將被刪除",
             "updateFirmwareInfo3": "確定要執行這次更新?",
             "updateFirmwareInfoDefault": "新的映像將被上傳且啟用。此後，BMC跟主機將會自動開機去執行新的映像。",
-            "firmwareResetCalled": "已調用韌體重置。關閉目前會話，並在幾分鐘後開啟新會話。"
+            "firmwareResetCalled": "BMC 已調用韌體重置。關閉目前會話，並在幾分鐘後開啟新會話。"
         },
         "toast": {
             "errorSwitchImages": "切換執行中備份映像失敗",
@@ -1231,6 +1231,7 @@
             "verifyUpdateMessage": "刷新應用程式以證實韌體更新成功",
             "successEnabledClearConfig": "已成功啟用清除配置。",
             "successDisabledClearConfig": "已成功停用清除配置。",
+            "successUpdateFirmware": "成功更新韌體。",
             "errorEnabledClearConfig": "啟用清除配置時發生錯誤。",
             "errorDisabledClearConfig": "停用清除配置時發生錯誤。"
         }
