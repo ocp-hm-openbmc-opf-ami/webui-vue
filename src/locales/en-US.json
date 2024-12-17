@@ -372,13 +372,17 @@
             "errorNsUpdate": "Error in NSUpdate",
             "errorInterfaceConfiguration": "Error Updating DDNS Interface Configuration",
             "errorEnableHostName": "Error Enabling Host Name Settings",
+            "errorDisableHostName": "Error Disabling Host Name Settings",
             "errorEnableNsUpdate": "Error Enabling NSUpdate Settings",
+            "errorDisableNsUpdate": "Error Disabling NSUpdate Settings",
             "errorUpdateTsig": "Error Uploading TSIG File",
             "errorSaveConfiguratin": "Error Updating DDNS configurations",
             "successNsUpdate": "Successfully NSUpdate",
             "successInterfaceConfiguration": "Successfully Updated DDNS Interface Configuration",
             "successEnableHostName": "Successfully Enabled Host Name Settings",
+            "successDisableeHostName": "Successfully Disabled Host Name Settings",
             "successEnableNsUpdate": "Successfully Enabled NSUpdate Settings",
+            "successDisableNsUpdate": "Successfully Disabled NSUpdate Settings",
             "successUpdateTsig": "Successfully Upload TSIG File",
             "successSaveConfiguratin": "Successfully Updated DDNS configurations"
         }

@@ -368,13 +368,17 @@
             "errorNsUpdate": "Fehler in NSUpdate",
             "errorInterfaceConfiguration": "Fehler beim Aktualisieren der DDNS Schnittstellenkonfiguration",
             "errorEnableHostName": "Fehler beim Aktivieren der Hostnameneinstellungen",
+            "errorDisableHostName": "Fehler beim Deaktivieren der Hostnameneinstellungen",
             "errorEnableNsUpdate": "Fehler beim Aktivieren der NSUpdate-Einstellungen",
+            "errorDisableNsUpdate": "Fehler beim Deaktivieren der NSUpdate-Einstellungen",
             "errorUpdateTsig": "Fehler beim Hochladen der TSIG-Datei",
             "errorSaveConfiguratin": "Fehler beim Aktualisieren der DDNS Konfigurationen",
             "successNsUpdate": "NSUpdate erfolgreich",
             "successInterfaceConfiguration": "DDNS Schnittstellenkonfiguration erfolgreich aktualisiert",
             "successEnableHostName": "Hostnamen Einstellungen erfolgreich aktiviert",
+            "successDisableeHostName": "Hostnameneinstellungen erfolgreich deaktiviert",
             "successEnableNsUpdate": "NSUpdate Einstellungen erfolgreich aktiviert",
+            "successDisableNsUpdate": "NSUpdate-Einstellungen erfolgreich deaktiviert",
             "successUpdateTsig": "TSIG Datei erfolgreich hochgeladen",
             "successSaveConfiguratin": "DDNS Konfigurationen erfolgreich aktualisiert"
         }

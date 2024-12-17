@@ -185,11 +185,23 @@ const NetworkDDNSStore = {
         )
         .then(() => dispatch('getDDNSEthernetData'))
         .then(() => {
-          return i18n.t('pageDDNSNetwork.toast.successEnableHostName');
+          if (SendHostNameEnabled) {
+            return i18n.t('pageDDNSNetwork.toast.successEnableHostName');
+          } else {
+            return i18n.t('pageDDNSNetwork.toast.successDisableeHostName');
+          }
         })
         .catch((error) => {
           console.log(error);
-          throw new Error(i18n.t('pageDDNSNetwork.toast.errorEnableHostName'));
+          if (SendHostNameEnabled) {
+            throw new Error(
+              i18n.t('pageDDNSNetwork.toast.errorEnableHostName'),
+            );
+          } else {
+            throw new Error(
+              i18n.t('pageDDNSNetwork.toast.errorDisableHostName'),
+            );
+          }
         });
     },
     async saveNsupdateEnabled({ state, dispatch }, SendNsupdateEnabled) {
@@ -211,11 +223,23 @@ const NetworkDDNSStore = {
         )
         .then(() => dispatch('getDDNSEthernetData'))
         .then(() => {
-          return i18n.t('pageDDNSNetwork.toast.successEnableNsUpdate');
+          if (SendNsupdateEnabled) {
+            return i18n.t('pageDDNSNetwork.toast.successEnableNsUpdate');
+          } else {
+            return i18n.t('pageDDNSNetwork.toast.successDisableNsUpdate');
+          }
         })
         .catch((error) => {
           console.log(error);
-          throw new Error(i18n.t('pageDDNSNetwork.toast.errorEnableNsUpdate'));
+          if (SendNsupdateEnabled) {
+            throw new Error(
+              i18n.t('pageDDNSNetwork.toast.errorEnableNsUpdate'),
+            );
+          } else {
+            throw new Error(
+              i18n.t('pageDDNSNetwork.toast.errorDisableNsUpdate'),
+            );
+          }
         });
     },
     async uploadTSIGFile({ state }, uploadTSIGFile) {
