@@ -104,6 +104,7 @@
     "appHeader": {
         "applicationHeader": "Anwendungsheader",
         "health": "Gesundheit",
+        "bios": "BIOS",
         "logOut": "Ausloggen",
         "power": "Leistung",
         "profileSettings": "@:appPageTitle.profileSettings",

@@ -52,6 +52,16 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto helper-menu">
           <b-nav-item
+            v-if="biosFeatureEnabled"
+            data-test-id="appHeader-container-bios"
+            @click="openBios()"
+          >
+            <div>
+              <icon-info class="iconInfo" :title="$t('appHeader.bios')" />
+              <span class="responsive-text">{{ $t('appHeader.bios') }}</span>
+            </div>
+          </b-nav-item>
+          <b-nav-item
             to="/logs/event-logs"
             data-test-id="appHeader-container-health"
           >
@@ -174,6 +184,7 @@ import LoadingBar from '@/components/Global/LoadingBar';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import QrcodeVue from 'qrcode.vue';
 import { mapState } from 'vuex';
+import IconInfo from '@carbon/icons-vue/es/information--filled/20';
 
 export default {
   name: 'AppHeader',
@@ -182,6 +193,7 @@ export default {
     IconClose,
     IconMenu,
     IconRenew,
+    IconInfo,
     EnableTfaIcon,
     DisableTfaIcon,
     StatusIcon,
@@ -202,6 +214,7 @@ export default {
       tfaFeatureEnabled:
         process.env.VUE_APP_TFA &&
         this.$store.getters['authentication/tfaFeatureEnabled'],
+      biosFeatureEnabled: process.env.VUE_APP_BIOS_ENABLED,
       qrCodeUrl: '',
       recoveryCode: [],
       isNavigationOpen: false,
@@ -291,6 +304,9 @@ export default {
     );
   },
   methods: {
+    openBios() {
+      window.open('/bios/Index.html', 'BIOS');
+    },
     refresh() {
       this.$emit('refresh');
     },
@@ -348,6 +364,10 @@ export default {
 </script>
 
 <style lang="scss">
+.iconInfo {
+  margin-bottom: 3px;
+  margin-right: 3px;
+}
 @mixin focus-box-shadow($padding-color: $navbar-color, $outline-color: $white) {
   box-shadow:
     inset 0 0 0 3px $padding-color,

@@ -69,6 +69,8 @@ exports[`AppHeader.vue should render correctly 1`] = `
       <b-navbar-nav
         class="ml-auto helper-menu"
       >
+        <!---->
+         
         <b-nav-item
           data-test-id="appHeader-container-health"
           to="/logs/event-logs"

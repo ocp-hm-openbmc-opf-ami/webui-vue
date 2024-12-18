@@ -105,6 +105,7 @@
     "appHeader": {
         "applicationHeader": "應用程式標題",
         "health": "狀態",
+        "bios": "BIOS",
         "logOut": "登出",
         "power": "電源",
         "profileSettings": "@:appPageTitle.profileSettings",
