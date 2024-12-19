@@ -28,8 +28,7 @@ const LicenseStore = {
       return await api
         .get('/redfish/v1/Oem/Ami/LicenseControl')
         .then((licenseControl) => {
-          let licenseFeature =
-            licenseControl.data.Oem?.Ami.LicenseKey.split(';');
+          let licenseFeature = licenseControl.data.LicenseKey.split(';');
           var items = [];
           var minItems = [];
           licenseFeature?.forEach((val) => {
@@ -40,13 +39,11 @@ const LicenseStore = {
             if (licenseVal[1] > 0) {
               const validLicenseDays =
                 parseInt(
-                  licenseVal[1] -
-                    licenseControl.data.Oem?.Ami.ServicesUpCountDays,
+                  licenseVal[1] - licenseControl.data.ServicesUpCountDays,
                 ) < 0
                   ? 0
                   : parseInt(
-                      licenseVal[1] -
-                        licenseControl.data.Oem?.Ami.ServicesUpCountDays,
+                      licenseVal[1] - licenseControl.data.ServicesUpCountDays,
                     );
               if (licenseVal[0] != '' && validLicenseDays > 0) {
                 items.push(licenseVal[0]);
