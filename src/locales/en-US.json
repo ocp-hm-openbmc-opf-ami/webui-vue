@@ -185,7 +185,8 @@
         "pam": "@:appPageTitle.pam",
         "nodeManager": "@:appPageTitle.nodeManager",
         "autoVideo":"@:appPageTitle.autoVideo",
-        "videoLog":"@:appPageTitle.videoLog"
+        "videoLog":"@:appPageTitle.videoLog",
+        "radius":"RADIUS"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -247,7 +248,8 @@
         "pam": "PAM Order",
         "nodeManager": "Node Manager",
         "autoVideo":"Auto Video Settings",
-        "videoLog":"Video Log"
+        "videoLog":"Video Log",
+        "radius": "RADIUS"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM Configuration",
@@ -1457,6 +1459,27 @@
             "successSaveActiveDirectorySettings": "Successfully saved Active Directory settings.",
             "successSaveLdapSettings": "Successfully saved Open LDAP settings.",
             "successSaveRoleGroup": "Successfully saved role group '%{groupName}'."
+        }
+    },
+    "pageRadius": {
+        "enableRadiusAuthentication": " Enable RADIUS Authentication",
+        "radiusConfiguration": " RADIUS configuration is not enabled.",
+        "radiusPortValueLimits": "Kindly enter the Values between %{min} and %{max}",
+        "form": {
+            "serverAddress": "Server Address",
+            "port": "Port",
+            "secret": "Secret",
+            "groupName1": "Group Name1 - optional",
+            "groupName2": "Group Name2 - optional",
+            "groupName3": "Group Name3 - optional",
+            "privilege1": "Privilege 1",
+            "privilege2": "Privilege 2",
+            "privilege3": "Privilege 3"
+        },
+        "toast": {
+            "successRadiusConfiguration": "RADIUS Settings has been saved successfully.",
+            "errorRadiusConfiguration": "Error in setting RADIUS configuration.",
+            "errorGettingRadiusConfig": "Error in getting RADIUS configuration."
         }
     },
     "pageUserManagement": {

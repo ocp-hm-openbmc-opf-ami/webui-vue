@@ -182,7 +182,8 @@
         "pam": "@:appPageTitle.pam",
         "nodeManager": "@:appPageTitle.nodeManager",
         "autoVideo":"@:appPageTitle.autoVideo",
-        "videoLog":"@:appPageTitle.videoLog"
+        "videoLog":"@:appPageTitle.videoLog",
+        "radius": "RADIUS"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -244,7 +245,8 @@
         "pam": "PAM 訂單設定",
         "nodeManager": "節點管理員",
         "autoVideo":"自動影像設定",
-        "videoLog":"視訊日誌"
+        "videoLog":"視訊日誌",
+        "radius": "RADIUS"
     },
     "pageNodeManager": {
         "nmConfiguration": "網管設定",
@@ -1452,6 +1454,27 @@
             "successSaveActiveDirectorySettings": "成功儲存Active Directory 設定.",
             "successSaveLdapSettings": "成功儲存 Open LDAP 設定.",
             "successSaveRoleGroup": "成功儲存角色群組'%{groupName}'."
+        }
+    },
+    "pageRadius": {
+        "enableRadiusAuthentication": " 啟用 RADIUS 認證",
+        "radiusConfiguration": "未啟用半徑配置。",
+        "radiusPortValueLimits": "請輸入 %{min} 和 %{max} 之間的數值",
+        "form": {
+            "serviceAddress": "伺服器位址",
+            "port": "埠號",
+            "secret": "密碼",
+            "groupName1": "群組名稱 1 - 可選",
+            "groupName2": "組名稱2 - 可選",
+            "groupName3": "組名稱3 - 可選",
+            "privilege1": "特權 1",
+            "privilege2": "特權 2",
+            "privilege3": "特權 3"
+        },
+        "toast": {
+            "successRadiusConfiguration": "RADIUS 設定已成功儲存。",
+            "errorRadiusConfiguration": "設定半徑配置時發生錯誤。",
+            "errorGettingRadiusConfig": "取得 RADIUS 配置時發生錯誤。"
         }
     },
     "pageUserManagement": {

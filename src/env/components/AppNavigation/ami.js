@@ -373,6 +373,13 @@ const AppNavigationMixin = {
           route: '/nic',
         });
       }
+      if (process.env.VUE_APP_RADIUS_SUPPORT === 'true') {
+        navigationItemsList.navigationItems[6].children.push({
+          id: 'radius',
+          label: this.$t('appNavigation.radius'),
+          route: '/security-and-access/radius',
+        });
+      }
       return navigationItemsList;
     },
   },

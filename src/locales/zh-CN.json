@@ -182,7 +182,8 @@
         "pam": "@:appPageTitle.pam",
         "nodeManager": "@:appPageTitle.nodeManager",
         "autoVideo":"@:appPageTitle.autoVideo",
-        "videoLog":"@:appPageTitle.videoLog"
+        "videoLog":"@:appPageTitle.videoLog",
+        "radius": "RADIUS"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -244,7 +245,8 @@
         "pam": "PAM 订单设置",
         "nodeManager": "节点管理器",
         "autoVideo":"自动视频设置",
-        "videoLog":"视频日志"
+        "videoLog":"视频日志",
+        "radius": "RADIUS"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM 配置",
@@ -1449,6 +1451,27 @@
             "successSaveActiveDirectorySettings": "成功储存Active Directory 设定.",
             "successSaveLdapSettings": "成功储存 Open LDAP 设定.",
             "successSaveRoleGroup": "成功储存角色群组'%{groupName}'."
+        }
+    },
+    "pageRadius": {
+        "enableRadiusAuthentication": " 启用 RADIUS 认证",
+        "radiusConfiguration": "RADIUS 配置未启用。",
+        "radiusPortValueLimits": "请输入 %{min} 和 %{max} 之间的值",
+        "form": {
+            "serviceAddress": "服务器地址",
+            "port": "端口",
+            "secret": "密码",
+            "groupName1": "组名 1 - 可选",
+            "groupName2": "组名 2 - 可选",
+            "groupName3": "组名 3 - 可选",
+            "privilege1": "特权 1",
+            "privilege2": "特权 2",
+            "privilege3": "特权 3"
+        },
+        "toast": {
+            "successRadiusConfiguration": "RADIUS 设置已成功保存。",
+            "errorRadiusConfiguration": "设置 RADIUS 配置错误。",
+            "errorGettingRadiusConfig": "获取 RADIUS 配置时出错。"
         }
     },
     "pageUserManagement": {

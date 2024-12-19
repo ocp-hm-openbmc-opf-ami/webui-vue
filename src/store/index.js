@@ -56,6 +56,7 @@ import NodeManagerStore from './modules/Settings/NodeManagerStore';
 import VideoLogStore from './modules/Logs/VideoLogStore';
 import AutoVideoStore from './modules/Settings/AutoVideoStore';
 import PreserveConfigStore from './modules/Operations/PreserveConfigurationStore';
+import RadiusStore from './modules/SecurityAndAccess/RadiusStore';
 
 Vue.use(Vuex);
 
@@ -119,5 +120,6 @@ export default new Vuex.Store({
     videoLog: VideoLogStore,
     autoVideo: AutoVideoStore,
     preserveConfig: PreserveConfigStore,
+    radius: RadiusStore,
   },
 });

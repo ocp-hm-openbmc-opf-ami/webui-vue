@@ -11,6 +11,7 @@ import FactoryDefault from '@/views/Operations/FactoryDefault';
 import KvmConsole from '@/views/Operations/Kvm/KvmConsole';
 import Sessions from '../views/SecurityAndAccess/Sessions';
 import Ldap from '@/views/SecurityAndAccess/Ldap';
+import Radius from '@/views/SecurityAndAccess/Radius';
 import UserManagement from '@/views/SecurityAndAccess/UserManagement';
 import Login from '@/views/Login';
 import LoginLayout from '@/layouts/LoginLayout';
@@ -160,6 +161,14 @@ const routes = [
         component: Ldap,
         meta: {
           title: i18n.t('appPageTitle.ldap'),
+        },
+      },
+      {
+        path: '/security-and-access/radius',
+        name: 'radius',
+        component: Radius,
+        meta: {
+          title: i18n.t('appPageTitle.radius'),
         },
       },
       {

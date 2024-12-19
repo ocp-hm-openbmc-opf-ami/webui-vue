@@ -181,7 +181,8 @@
         "pam": "@:appPageTitle.pam",
         "nodeManager": "@:appPageTitle.nodeManager",
         "autoVideo":"@:appPageTitle.autoVideo",
-        "videoLog":"@:appPageTitle.videoLog"
+        "videoLog":"@:appPageTitle.videoLog",
+        "radius": "RADIUS"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -243,7 +244,8 @@
         "pam": "PAM-Bestelleinstellungen",
         "nodeManager": "Knotenmanager",
         "autoVideo":"Automatische Videoeinstellungen",
-        "videoLog":"Videoprotokoll"
+        "videoLog":"Videoprotokoll",
+        "radius":  "RADIUS"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM-Konfiguration",
@@ -1447,6 +1449,27 @@
             "successSaveActiveDirectorySettings": "Active Directory Einstellungen erfolgreich gespeichert.",
             "successSaveLdapSettings": "Open LDAP Einstellungen erfolgreich gespeichert.",
             "successSaveRoleGroup": "Rollengruppe erfolgreich gespeichert '%{groupName}'."
+        }
+    },
+    "pageRadius": {
+        "enableRadiusAuthentication": " RADIUS-Authentifizierung aktivieren",
+        "radiusConfiguration": "Die RADIUS-Konfiguration ist nicht aktiviert.",
+        "radiusPortValueLimits": "Bitte geben Sie die Werte zwischen %{min} und %{max} ein",
+        "form": {
+            "serviceAddress": "Serveradresse",
+            "port": "Hafen",
+            "secret": "Geheimnis",
+            "groupName1": "Gruppenname1 – optional",
+            "groupName2": "Gruppenname2 - optional",
+            "groupName3": "Gruppenname3 - optional",
+            "privilege1": "Privileg 1",
+            "privilege2": "Privileg 2",
+            "privilege3": "Privileg 3"
+        },
+        "toast": {
+            "successRadiusConfiguration": "Die RADIUS-Einstellungen wurden erfolgreich gespeichert.",
+            "errorRadiusConfiguration": "Fehler beim Einstellen der RADIUS-Konfiguration.",
+            "errorGettingRadiusConfig": "Fehler beim Abrufen der RADIUS-Konfiguration."
         }
     },
     "pageUserManagement": {
