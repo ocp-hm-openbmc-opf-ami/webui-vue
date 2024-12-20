@@ -134,7 +134,7 @@ const GlobalStore = {
             isRestoreConfigAvailable !== undefined;
           const bmcDateTime = response.data.DateTime;
           const date = new Date(bmcDateTime);
-          const timeZone = response.data.DateTimeLocalOffset;
+          const timeZone = response.data.TimeZoneName;
           commit('setBmcTime', date);
           commit('setBmcDateTime', bmcDateTime);
           commit('setTimeZone', timeZone);

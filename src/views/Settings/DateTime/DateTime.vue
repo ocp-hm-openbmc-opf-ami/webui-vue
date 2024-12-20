@@ -126,21 +126,6 @@
               </b-form-group>
             </b-col>
           </b-row>
-          <b-row class="mt-3 ml-3">
-            <b-col xl="6">
-              <b-form-group
-                :label="$t('pageDateTime.form.timezone')"
-                label-for="timeZone"
-              >
-                <b-form-select
-                  id="timeZone"
-                  v-model="form.manual.dateTimeLocalOffset"
-                  :options="timeZoneOptions"
-                >
-                </b-form-select>
-              </b-form-group>
-            </b-col>
-          </b-row>
           <b-form-radio
             v-model="form.configurationSelected"
             value="ntp"
@@ -148,6 +133,23 @@
           >
             NTP
           </b-form-radio>
+          <b-row class="mt-3 ml-3">
+            <b-col xl="6">
+              <b-form-group
+                :label="$t('pageDateTime.form.timezone')"
+                label-for="timeZone"
+              >
+                <v-select
+                  v-model="form.ntp.timeZoneName"
+                  :options="timeZoneOptions"
+                  placeholder="Select an option"
+                  :disabled="!ntpOptionSelected"
+                  class="select-timeZone"
+                  :class="{ disabled: !ntpOptionSelected }"
+                />
+              </b-form-group>
+            </b-col>
+          </b-row>
           <b-row class="mt-3 ml-3">
             <b-col sm="6" lg="4" xl="3">
               <b-form-group
@@ -242,7 +244,7 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
 import LocalTimezoneLabelMixin from '@/components/Mixins/LocalTimezoneLabelMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
-
+import timezone from '@/locales/time-zone.json';
 import { mapState } from 'vuex';
 import { requiredIf, helpers } from 'vuelidate/lib/validators';
 
@@ -272,163 +274,16 @@ export default {
           time: this.isTime(false),
           dateOffset: this.isDate(),
           timeOffset: this.isTime(true),
-          dateTimeLocalOffset: this.isDateTimeLocalOffset(),
         },
-        ntp: { firstAddress: '', secondAddress: '', thirdAddress: '' },
+        ntp: {
+          firstAddress: '',
+          secondAddress: '',
+          thirdAddress: '',
+          timeZoneName: this.$store.getters['global/timeZone'],
+        },
       },
       loading,
-      timeZoneOptions: [
-        {
-          value: '-11:00',
-          text: this.$t('pageDateTime.timeZone.MIDWAY'),
-        },
-        {
-          value: '-10:00',
-          text: this.$t('pageDateTime.timeZone.HONOLULU'),
-        },
-        {
-          value: '-09:00',
-          text: this.$t('pageDateTime.timeZone.ANCHORAGE'),
-        },
-        {
-          value: '-08:00',
-          text: this.$t('pageDateTime.timeZone.LOSANGELES_TIJUANA'),
-        },
-        {
-          value: '-07:00',
-          text: this.$t('pageDateTime.timeZone.PHOENIX_CHIHUAHUA_DENVER'),
-        },
-        {
-          value: '-06:00',
-          text: this.$t(
-            'pageDateTime.timeZone.COSTARICA_CHICAGO_MEXICOCITY_REGINA',
-          ),
-        },
-        {
-          value: '-05:00',
-          text: this.$t('pageDateTime.timeZone.BOGOTA'),
-        },
-        {
-          value: '-04:30',
-          text: this.$t('pageDateTime.timeZone.CARACAS'),
-        },
-        {
-          value: '-04:00',
-          text: this.$t('pageDateTime.timeZone.BARBADOS_HALIFAX_MANAUS'),
-        },
-        {
-          value: '-03:30',
-          text: this.$t('pageDateTime.timeZone.STJOHNS'),
-        },
-        {
-          value: '-03:00',
-          text: this.$t(
-            'pageDateTime.timeZone.SANTIAGO_RECIFE_BUENOSAIRES_NUUK_MONTEVIDEO',
-          ),
-        },
-        {
-          value: '-02:00',
-          text: this.$t('pageDateTime.timeZone.SAOPAULO'),
-        },
-        {
-          value: '-01:00',
-          text: this.$t('pageDateTime.timeZone.AZORES_CAPEVERDE'),
-        },
-        {
-          value: '+00:00',
-          text: this.$t('pageDateTime.timeZone.CASABLANCA_LONDON'),
-        },
-        {
-          value: '+01:00',
-          text: this.$t(
-            'pageDateTime.timeZone.AMSTERDAM_BELGRADE_BRUSSELS_MADRID_SARAJEVO_BRAZZAVILLE',
-          ),
-        },
-        {
-          value: '+02:00',
-          text: this.$t(
-            'pageDateTime.timeZone.WINDHOEK_AMMAN_ATHENS_ISTANBUL_BEIRUT_CAIRO_HELSINKI_JERUSALEM_HARARE',
-          ),
-        },
-        {
-          value: '+03:00',
-          text: this.$t(
-            'pageDateTime.timeZone.MINSK_BAGHDAD_MOSCOW_KUWAIT_NAIROBI',
-          ),
-        },
-        {
-          value: '+03:30',
-          text: this.$t('pageDateTime.timeZone.TEHRAN'),
-        },
-        {
-          value: '+04:00',
-          text: this.$t('pageDateTime.timeZone.BAKU_TBILISI_YEREVAN_DUBAI'),
-        },
-        {
-          value: '+04:30',
-          text: this.$t('pageDateTime.timeZone.KABUL'),
-        },
-        {
-          value: '+05:00',
-          text: this.$t('pageDateTime.timeZone.KARACHI_ORAL_YEKATERINBURG'),
-        },
-        {
-          value: '+05:30',
-          text: this.$t('pageDateTime.timeZone.KOLKATA_COLOMBO'),
-        },
-        {
-          value: '+05:45',
-          text: this.$t('pageDateTime.timeZone.KATHMANDU'),
-        },
-        {
-          value: '+06:00',
-          text: this.$t('pageDateTime.timeZone.ALMATY'),
-        },
-        {
-          value: '+06:30',
-          text: this.$t('pageDateTime.timeZone.RANGOON'),
-        },
-        {
-          value: '+07:00',
-          text: this.$t('pageDateTime.timeZone.KRASNOYARSK_BANGKOK_JAKARTA'),
-        },
-        {
-          value: '+08:00',
-          text: this.$t(
-            'pageDateTime.timeZone.SHANGHAI_HONGKONG_IRKUTSK_KUALALUMPUR_PERTH_TAIPEI',
-          ),
-        },
-        {
-          value: '+09:00',
-          text: this.$t('pageDateTime.timeZone.SEOUL_TOKYO_YAKUTSK'),
-        },
-        {
-          value: '+09:30',
-          text: this.$t('pageDateTime.timeZone.DARWIN'),
-        },
-        {
-          value: '+10:00',
-          text: this.$t(
-            'pageDateTime.timeZone.BRISBANE_VLADIVOSTOK_GUAM_MAGADAN',
-          ),
-        },
-        {
-          value: '+10:30',
-          text: this.$t('pageDateTime.timeZone.ADELAIDE'),
-        },
-        {
-          value: '+11:00',
-          text: this.$t('pageDateTime.timeZone.HOBART_SYDNEY_NOUMEA'),
-        },
-        {
-          value: '+12:00',
-          text: this.$t('pageDateTime.timeZone.MAJURO'),
-        },
-        {
-          value: '+13:00',
-          text: this.$t('pageDateTime.timeZone.AUCKLAND'),
-        },
-      ],
+      timeZoneOptions: this.combinedUniqueTimeZoneOptions(),
       dateMin: '1970-01-02',
       dateMax: '2038-01-18',
     };
@@ -478,7 +333,7 @@ export default {
     bmcTime() {
       return this.$store.getters['global/bmcDateTime'];
     },
-    dateTimeLocalOffset() {
+    timeZoneOffset() {
       return this.$store.getters['global/timeZone'];
     },
     ntpOptionSelected() {
@@ -510,8 +365,8 @@ export default {
       this.form.manual.dateOffset = this.isDate();
       this.form.manual.timeOffset = this.isTime(true);
     },
-    dateTimeLocalOffset() {
-      this.form.manual.dateTimeLocalOffset = this.isDateTimeLocalOffset();
+    timeZoneOffset() {
+      this.form.ntp.timezoneName = this.$store.getters['global/timeZone'];
     },
   },
   created() {
@@ -523,6 +378,15 @@ export default {
     ]).finally(() => this.endLoader());
   },
   methods: {
+    combinedUniqueTimeZoneOptions() {
+      const combinedUniqueTimeZone = [
+        ...new Set([
+          ...Intl.supportedValuesOf('timeZone'),
+          ...timezone.missingTimeZones,
+        ]),
+      ].sort();
+      return combinedUniqueTimeZone;
+    },
     isDate() {
       const bmcDateTime = this.$store.getters['global/bmcDateTime'];
       var date = null;
@@ -567,15 +431,6 @@ export default {
       }
       return time;
     },
-    isDateTimeLocalOffset() {
-      if (localStorage.getItem('storedUtcDisplay') == 'false') {
-        const timezone = this.localOffset().split('UTC')[1];
-        if (timezone.length > 3) {
-          return timezone.substring(0, 1) + '0' + timezone.substring(1);
-        } else
-          return timezone.substring(0, 1) + '0' + timezone.substring(1) + ':00';
-      } else return this.$store.getters['global/timeZone'];
-    },
     emitChange() {
       if (this.$v.$invalid) return;
       this.$v.$reset(); //reset to re-validate on blur
@@ -600,7 +455,6 @@ export default {
 
       let dateTimeForm = {};
       let isNTPEnabled = this.form.configurationSelected === 'ntp';
-      dateTimeForm.dateTimeLocalOffset = this.form.manual.dateTimeLocalOffset;
       if (!isNTPEnabled) {
         let date;
 
@@ -608,10 +462,10 @@ export default {
 
         date = this.getUtcDate(this.form.manual.date, this.form.manual.time);
 
-        dateTimeForm.updatedDateTime =
-          date.toISOString().split('.')[0] + dateTimeForm.dateTimeLocalOffset;
+        dateTimeForm.updatedDateTime = date.toISOString().split('.')[0];
       } else {
         dateTimeForm.ntpProtocolEnabled = true;
+        dateTimeForm.TimeZoneName = this.form.ntp.timeZoneName;
 
         const ntpArray = [
           this.form.ntp.firstAddress,
@@ -697,3 +551,10 @@ export default {
   },
 };
 </script>
+<style scoped lang="scss">
+.select-timeZone.disabled {
+  background-color: #ccc;
+  color: #999;
+  opacity: 0.6;
+}
+</style>

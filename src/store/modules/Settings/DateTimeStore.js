@@ -43,9 +43,9 @@ const DateTimeStore = {
         .patch(`/redfish/v1/Managers/bmc/NetworkProtocol`, ntpData)
         .then(async () => {
           let dateTimePayload = {};
-          dateTimePayload.DateTimeLocalOffset =
-            dateTimeForm.dateTimeLocalOffset;
-          if (!dateTimeForm.ntpProtocolEnabled) {
+          if (dateTimeForm.ntpProtocolEnabled) {
+            dateTimePayload.TimeZoneName = dateTimeForm.TimeZoneName;
+          } else {
             dateTimePayload.DateTime = dateTimeForm.updatedDateTime;
           }
           /**

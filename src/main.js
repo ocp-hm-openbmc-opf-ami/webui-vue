@@ -44,6 +44,8 @@ import {
 import Vuelidate from 'vuelidate';
 import i18n from './i18n';
 import { format } from 'date-fns-tz';
+import vSelect from 'vue-select';
+import 'vue-select/dist/vue-select.css';
 
 // Filters
 Vue.filter('shortTimeZone', function (value) {
@@ -134,6 +136,7 @@ Vue.use(TooltipPlugin);
 Vue.use(Vuelidate);
 Vue.use(OverlayPlugin);
 Vue.use(BootstrapVueIcons);
+Vue.component('VSelect', vSelect);
 
 new Vue({
   router,
