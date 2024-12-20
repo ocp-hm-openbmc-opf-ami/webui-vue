@@ -178,11 +178,6 @@ export default {
           formatter: this.dataFormatter,
         },
         {
-          key: 'locationNumber',
-          label: this.$t('pageInventory.table.locationNumber'),
-          formatter: this.dataFormatter,
-        },
-        {
           key: 'identifyLed',
           label: this.$t('pageInventory.table.identifyLed'),
           formatter: this.dataFormatter,
@@ -216,7 +211,23 @@ export default {
           uri: row.uri,
           identifyLed: row.identifyLed,
         })
-        .catch(({ message }) => this.errorToast(message));
+        .then(() => {
+          if (row.identifyLed) {
+            this.successToast(
+              this.$t('pageInventory.toast.successEnableIdentifyLed'),
+            );
+          } else {
+            this.successToast(
+              this.$t('pageInventory.toast.successDisableIdentifyLed'),
+            );
+          }
+        })
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => {
+          this.$store.dispatch('system/getSystem');
+          this.$store.dispatch('bmc/getBmcInfo');
+          this.$store.dispatch('chassis/getChassisInfo');
+        });
     },
     // TO DO: remove hasIdentifyLed method once the following story is merged:
     // https://gerrit.openbmc-project.xyz/c/openbmc/bmcweb/+/43179

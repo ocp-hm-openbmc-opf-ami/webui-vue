@@ -189,11 +189,6 @@ export default {
           tdClass: 'text-nowrap',
         },
         {
-          key: 'locationNumber',
-          label: this.$t('pageInventory.table.locationNumber'),
-          formatter: this.dataFormatter,
-        },
-        {
           key: 'locationIndicatorActive',
           label: this.$t('pageInventory.table.identifyLed'),
           formatter: this.dataFormatter,
@@ -217,7 +212,23 @@ export default {
     toggleIdentifyLedSwitch(state) {
       this.$store
         .dispatch('system/changeIdentifyLedState', state)
-        .catch(({ message }) => this.errorToast(message));
+        .then(() => {
+          if (state) {
+            this.successToast(
+              this.$t('pageInventory.toast.successEnableIdentifyLed'),
+            );
+          } else {
+            this.successToast(
+              this.$t('pageInventory.toast.successDisableIdentifyLed'),
+            );
+          }
+        })
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => {
+          this.$store.dispatch('system/getSystem');
+          this.$store.dispatch('bmc/getBmcInfo');
+          this.$store.dispatch('chassis/getChassisInfo');
+        });
     },
   },
 };

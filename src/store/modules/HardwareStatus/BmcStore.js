@@ -46,27 +46,21 @@ const BmcStore = {
         .then(({ data }) => commit('setBmcInfo', data))
         .catch((error) => console.log(error));
     },
-    async updateIdentifyLedValue({ dispatch }, led) {
+    async updateIdentifyLedValue(_, led) {
       const uri = led.uri;
       const updatedIdentifyLedValue = {
         LocationIndicatorActive: led.identifyLed,
       };
-      return await api
-        .patch(uri, updatedIdentifyLedValue)
-        .then(() => dispatch('getBmcInfo'))
-        .catch((error) => {
-          dispatch('getBmcInfo');
-          console.log('error', error);
-          if (led.identifyLed) {
-            throw new Error(
-              i18n.t('pageInventory.toast.errorEnableIdentifyLed'),
-            );
-          } else {
-            throw new Error(
-              i18n.t('pageInventory.toast.errorDisableIdentifyLed'),
-            );
-          }
-        });
+      return await api.patch(uri, updatedIdentifyLedValue).catch((error) => {
+        console.log('error', error);
+        if (led.identifyLed) {
+          throw new Error(i18n.t('pageInventory.toast.errorEnableIdentifyLed'));
+        } else {
+          throw new Error(
+            i18n.t('pageInventory.toast.errorDisableIdentifyLed'),
+          );
+        }
+      });
     },
   },
 };

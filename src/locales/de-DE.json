@@ -1332,6 +1332,8 @@
             "version": "Ausführung"
         },
         "toast": {
+            "successDisableIdentifyLed": "Identifizierungs-LED erfolgreich deaktiviert.",
+            "successEnableIdentifyLed": "Identifizierungs-LED erfolgreich aktiviert.",
             "errorDisableIdentifyLed": "Fehler beim Deaktivieren der Identifikations LED.",
             "errorEnableIdentifyLed": "Fehler beim Aktivieren der Identifizierungs LED."
         }

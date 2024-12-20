@@ -1334,6 +1334,8 @@
             "version": "版本"
         },
         "toast": {
+            "successDisableIdentifyLed": "成功禁用识别 LED。",
+            "successEnableIdentifyLed": "成功启用识别 LED。",
             "errorDisableIdentifyLed": "停用识别LED发生错误",
             "errorEnableIdentifyLed": "启用识别LED发生错误"
         }
