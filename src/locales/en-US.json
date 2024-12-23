@@ -2387,11 +2387,21 @@
         "labelUndoPrepareToRemoval": "Undo Prepare Removal",
         "labelStartLocate": "Start Locate",
         "labelStopLocate": "Stop Locate",
+        "labelAddGlobalHotSpare": "Assign Global Hot Spare",
+        "labelDeleteGlobalHotSpare": "Unassign Global Hot Spare",
         "physicalDeviceActionTitle": "Update physical device settings",
         "prepareRemovalConfirmationMsg": "Want to set the state of the physical device with ID {pdId} to Prepare Removal?",
         "unDoPrepareRemovalConfirmationMsg":  "Want to set the state of the physical device with ID {pdId} to Undo Prepare Removal?",
         "startLocateConfirmationMsg":  "Want to start locating the physical device with ID {pdId} ?",
-        "stopLocateConfirmationMsg":  "Want to stop locating the physical device with ID {pdId} ?"
+        "stopLocateConfirmationMsg":  "Want to stop locating the physical device with ID {pdId} ?",
+        "addGlobalHotSpareConfirmationMsg": "Do you want to assign ID {pdId} as a global hot spare?",
+        "addGlobalHotSpareSuccess": "The drive was successfully assigned as a global hot spare.",
+        "addGlobalHotSpareFail": "Failed to assign the drive as a global hot spare.",
+        "addGlobalHotSpare": "Assign the drive as a global hot spare.",
+        "deleteGlobalHotSpareConfirmationMsg": "Do you want to unassign ID {pdId} as a global hot spare?",
+        "deleteGlobalHotSpareSuccess": "The drive was successfully unassigned as a global hot spare.",
+        "deleteGlobalHotSpareFail": "Failed to unassign the drive as a global hot spare.",
+        "deleteGlobalHotSpare": "Unassign the drive as a global hot spare."
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "Create Logical Device",

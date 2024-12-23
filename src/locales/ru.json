@@ -1169,11 +1169,21 @@
         "labelUndoPrepareToRemoval": "Адмяніць падрыхтоўку да выдалення",
         "labelStartLocate": "Пачаць пошук",
         "labelStopLocate": "Спыніць пошук",
+        "labelAddGlobalHotSpare": "Добавить глобальный горячий резерв",
+        "labelDeleteGlobalHotSpare": "Удалить глобальный горячий резерв",
         "physicalDeviceActionTitle": "Абнавіце налады фізічнай прылады",
         "prepareRemovalConfirmationMsg": "Жадаеце ўсталяваць стан фізічнай прылады з ідэнтыфікатарам {pdId} на падрыхтоўку да выдалення?",
         "unDoPrepareRemovalConfirmationMsg": "Жадаеце ўсталяваць стан фізічнай прылады з ідэнтыфікатарам {pdId} на адмену падрыхтоўкі да выдалення?",
         "startLocateConfirmationMsg": "Жадаеце пачаць пошук фізічнай прылады з ідэнтыфікатарам {pdId}?",
-        "stopLocateConfirmationMsg": "Жадаеце спыніць пошук фізічнай прылады з ідэнтыфікатарам {pdId}?"
+        "stopLocateConfirmationMsg": "Жадаеце спыніць пошук фізічнай прылады з ідэнтыфікатарам {pdId}?",
+        "addGlobalHotSpareConfirmationMsg": "Вы хотите назначить {pdId} как глобальный горячий резерв?",
+        "addGlobalHotSpareSuccess": "Диск успешно назначен как глобальный горячий резерв.",
+        "addGlobalHotSpareFail": "Не удалось назначить диск как глобальный горячий резерв.",
+        "addGlobalHotSpare": "Назначить диск как глобальный горячий резерв.",
+        "deleteGlobalHotSpareConfirmationMsg": "Вы хотите отменить назначение {pdId} как глобального горячего резерва?",
+        "deleteGlobalHotSpareSuccess": "Назначение диска как глобального горячего резерва успешно отменено.",
+        "deleteGlobalHotSpareFail": "Не удалось отменить назначение диска как глобального горячего резерва.",
+        "deleteGlobalHotSpare": "Отменить назначение диска как глобального горячего резерва."
     },
     "pageTopology": {
         "raidTopology": "Информация о топологии",

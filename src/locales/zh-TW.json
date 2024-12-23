@@ -2379,11 +2379,21 @@
         "labelUndoPrepareToRemoval": "取消準備移除",
         "labelStartLocate": "開始定位",
         "labelStopLocate": "停止定位",
+        "labelAddGlobalHotSpare": "新增全域熱備援",
+        "labelDeleteGlobalHotSpare": "取消全域熱備援",
         "physicalDeviceActionTitle": "變更實體設備設定",
         "prepareRemovalConfirmationMsg": "將序號 {pdId} 的實體設備，設定為準備刪除?",
         "unDoPrepareRemovalConfirmationMsg":  "將序號 {pdId} 的實體設備，設定為取消準備刪除?",
         "startLocateConfirmationMsg":  "開始定位序號 {pdId} 的實體設備?",
-        "stopLocateConfirmationMsg":  "停止定位序號 {pdId} 的實體設備?"
+        "stopLocateConfirmationMsg":  "停止定位序號 {pdId} 的實體設備?",
+        "addGlobalHotSpareConfirmationMsg": "是否要將 {pdId} 設置為全域熱備援？",
+        "addGlobalHotSpareSuccess": "磁碟已成功設置為全域熱備援。",
+        "addGlobalHotSpareFail": "設置磁碟為全域熱備援失敗。",
+        "addGlobalHotSpare": "設置磁碟為全域熱備援。",
+        "deleteGlobalHotSpareConfirmationMsg": "是否要取消 {pdId} 的全域熱備援設置？",
+        "deleteGlobalHotSpareSuccess": "磁碟的全域熱備援設置已成功取消。",
+        "deleteGlobalHotSpareFail": "取消磁碟的全域熱備援設置失敗。",
+        "deleteGlobalHotSpare": "取消磁碟的全域熱備援設置。"
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "創建邏輯設備",

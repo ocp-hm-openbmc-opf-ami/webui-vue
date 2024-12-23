@@ -2375,11 +2375,21 @@
         "labelUndoPrepareToRemoval": "取消准备移除",
         "labelStartLocate": "开始定位",
         "labelStopLocate": "停止定位",
+        "labelAddGlobalHotSpare": "新增全局热备盘",
+        "labelDeleteGlobalHotSpare": "取消全局热备盘",
         "physicalDeviceActionTitle": "变更物理设备设定",
         "prepareRemovalConfirmationMsg": "将序号 {pdId} 的物理设备，设定为准备删除?",
         "unDoPrepareRemovalConfirmationMsg":  "将序号 {pdId} 的物理设备，设定为取消准备删除?",
         "startLocateConfirmationMsg":  "开始定位序号 {pdId} 的物理设备?",
-        "stopLocateConfirmationMsg":  "停止定位序号 {pdId} 的物理设备?"
+        "stopLocateConfirmationMsg":  "停止定位序号 {pdId} 的物理设备?",
+        "addGlobalHotSpareConfirmationMsg": "是否要将 {pdId} 设置为全局热备盘？",
+        "addGlobalHotSpareSuccess": "磁盘已成功设置为全局热备盘。",
+        "addGlobalHotSpareFail": "设置磁盘为全局热备盘失败。",
+        "addGlobalHotSpare": "设置磁盘为全局热备盘。",
+        "deleteGlobalHotSpareConfirmationMsg": "是否要取消 {pdId} 的全局热备盘设置？",
+        "deleteGlobalHotSpareSuccess": "磁盘的全局热备盘设置已成功取消。",
+        "deleteGlobalHotSpareFail": "取消磁盘的全局热备盘设置失败。",
+        "deleteGlobalHotSpare": "取消磁盘的全局热备盘设置。"
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "创建逻辑设备",
