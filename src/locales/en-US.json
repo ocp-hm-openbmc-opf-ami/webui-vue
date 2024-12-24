@@ -372,7 +372,7 @@
             "addDomainNames": "Add Domain Names"
         },
         "toast": {
-            "errorNsUpdate": "Error in NSUpdate",
+            "errorNsUpdate": "Error in updating action DoNsUpdate",
             "errorInterfaceConfiguration": "Error Updating DDNS Interface Configuration",
             "errorEnableHostName": "Error Enabling Host Name Settings",
             "errorDisableHostName": "Error Disabling Host Name Settings",
@@ -380,7 +380,7 @@
             "errorDisableNsUpdate": "Error Disabling NSUpdate Settings",
             "errorUpdateTsig": "Error Uploading TSIG File",
             "errorSaveConfiguratin": "Error Updating DDNS configurations",
-            "successNsUpdate": "Successfully NSUpdate",
+            "successNsUpdate": "Successfully updated action DoNsUpdate",
             "successInterfaceConfiguration": "Successfully Updated DDNS Interface Configuration",
             "successEnableHostName": "Successfully Enabled Host Name Settings",
             "successDisableeHostName": "Successfully Disabled Host Name Settings",

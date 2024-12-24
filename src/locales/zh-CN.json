@@ -369,7 +369,7 @@
             "addDomainNames": "添加域名"
         },
         "toast": {
-            "errorNsUpdate": "NSUpdate 错误",
+            "errorNsUpdate": "更新操作 DoNsUpdate 时出错",
             "errorInterfaceConfiguration": "更新 DDNS 接口配置时出错",
             "errorEnableHostName": "启用主机名设置时出错",
             "errorDisableHostName": "禁用主机名设置时出错",
@@ -377,7 +377,7 @@
             "errorDisableNsUpdate": "禁用 NSUpdate 设置时出错",
             "errorUpdateTsig": "上传 TSIG 文件时出错",
             "errorSaveConfiguratin": "更新 DDNS 配置时出错",
-            "successNsUpdate": "NS更新成功",
+            "successNsUpdate": "已成功更新操作 DoNsUpdate",
             "successInterfaceConfiguration": "成功更新 DDNS 接口配置",
             "successEnableHostName": "成功启用主机名设置",
             "successDisableeHostName": "成功禁用主机名设置",

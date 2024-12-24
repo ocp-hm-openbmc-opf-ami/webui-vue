@@ -368,7 +368,7 @@
             "addDomainNames": "Domänennamen hinzufügen"
         },
         "toast": {
-            "errorNsUpdate": "Fehler in NSUpdate",
+            "errorNsUpdate": "Fehler bei der Aktualisierungsaktion DoNsUpdate",
             "errorInterfaceConfiguration": "Fehler beim Aktualisieren der DDNS Schnittstellenkonfiguration",
             "errorEnableHostName": "Fehler beim Aktivieren der Hostnameneinstellungen",
             "errorDisableHostName": "Fehler beim Deaktivieren der Hostnameneinstellungen",
@@ -376,7 +376,7 @@
             "errorDisableNsUpdate": "Fehler beim Deaktivieren der NSUpdate-Einstellungen",
             "errorUpdateTsig": "Fehler beim Hochladen der TSIG-Datei",
             "errorSaveConfiguratin": "Fehler beim Aktualisieren der DDNS Konfigurationen",
-            "successNsUpdate": "NSUpdate erfolgreich",
+            "successNsUpdate": "Aktion DoNsUpdate erfolgreich aktualisiert",
             "successInterfaceConfiguration": "DDNS Schnittstellenkonfiguration erfolgreich aktualisiert",
             "successEnableHostName": "Hostnamen Einstellungen erfolgreich aktiviert",
             "successDisableeHostName": "Hostnameneinstellungen erfolgreich deaktiviert",

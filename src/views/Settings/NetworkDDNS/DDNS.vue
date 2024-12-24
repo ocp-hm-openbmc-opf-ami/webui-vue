@@ -24,12 +24,7 @@
         </b-col>
       </b-row>
     </page-section>
-    <b-button
-      v-if="hideNsupdate"
-      type="submit"
-      variant="primary"
-      @click="doNSUpdate"
-    >
+    <b-button type="submit" variant="primary" @click="doNSUpdate">
       {{ $t('pageDDNSNetwork.ddnsConfiguration.doNsupdate') }}
     </b-button>
   </b-container>
@@ -56,7 +51,6 @@ export default {
     return {
       tabIndex: 0,
       tabId: '',
-      hideNsupdate: false,
     };
   },
   computed: {
