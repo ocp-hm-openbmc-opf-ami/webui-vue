@@ -78,9 +78,6 @@ export default {
       greenLedStatus: null,
       amberLedStatus: null,
       susackLedStatus: null,
-      greenLed: '',
-      amberLed: '',
-      susackLed: '',
     };
   },
   computed: {
@@ -90,20 +87,19 @@ export default {
         return systemData ? systemData : {};
       },
     }),
-  },
-  created() {
-    this.updateStatusLed();
-    this.$root.$emit('overview-inventory-complete');
-  },
-  methods: {
-    toggleIdentifyLedSwitch(state) {
-      this.$store
-        .dispatch('system/changeIdentifyLedState', state)
-        .catch(({ message }) => this.errorToast(message));
+    greenLed() {
+      return this.$store.getters['system/getGreenLedStatus'];
     },
-    updateStatusLed() {
+    amberLed() {
+      return this.$store.getters['system/getAmberLedStatus'];
+    },
+    susackLed() {
+      return this.$store.getters['system/getSusackLedStatus'];
+    },
+  },
+  watch: {
+    greenLed() {
       // Handle Green LED status
-      this.greenLed = this.$store.getters['system/getGreenLedStatus'];
       if (this.greenLed == 'Blinking') {
         this.greenBlinkStatus = 'throb';
         this.greenLedStatus = 'color: #008000; margin: 5px';
@@ -117,8 +113,9 @@ export default {
         this.greenLedStatus =
           'color: #8fbc8f; margin: 5px; filter: brightness(0.9)';
       }
+    },
+    amberLed() {
       // Handle Amber LED status
-      this.amberLed = this.$store.getters['system/getAmberLedStatus'];
       if (this.amberLed == 'Blinking') {
         this.amberBlinkStatus = 'throb';
         this.amberLedStatus = 'color: #ffbf00; margin: 5px';
@@ -132,8 +129,9 @@ export default {
         this.amberLedStatus =
           'color: #cc9900; margin: 5px; filter: brightness(0.9)';
       }
+    },
+    susackLed() {
       // Handle Susack LED status
-      this.susackLed = this.$store.getters['system/getSusackLedStatus'];
       if (this.susackLed == 'Blinking') {
         this.susackBlinkStatus = 'throb';
         this.susackLedStatus = 'color: #00bfff; margin: 5px';
@@ -147,6 +145,16 @@ export default {
         this.susackLedStatus =
           'color: #617f89; margin: 5px; filter: brightness(0.9)';
       }
+    },
+  },
+  created() {
+    this.$root.$emit('overview-inventory-complete');
+  },
+  methods: {
+    toggleIdentifyLedSwitch(state) {
+      this.$store
+        .dispatch('system/changeIdentifyLedState', state)
+        .catch(({ message }) => this.errorToast(message));
     },
   },
 };
