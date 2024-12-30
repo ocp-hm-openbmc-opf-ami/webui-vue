@@ -243,12 +243,7 @@ export default {
         {
           key: 'dumpType',
           label: this.$t('pageDumps.table.dumpType'),
-          values: [
-            this.$t('pageDumps.table.bmcDumpEntry'),
-            this.$t('pageDumps.table.hostbootDumpEntry'),
-            this.$t('pageDumps.table.resourceDumpEntry'),
-            this.$t('pageDumps.table.systemDumpEntry'),
-          ],
+          values: [this.$t('pageDumps.table.bmcDumpEntry')],
         },
       ],
       activeFilters: [],

@@ -983,10 +983,7 @@
             "id": "ID",
             "searchDumps": "搜寻转储",
             "size": "尺寸",
-            "bmcDumpEntry":"BMC转储",
-            "hostbootDumpEntry": "主机启动转储",
-            "resourceDumpEntry": "资源转储",
-            "systemDumpEntry": "系统转储"
+            "bmcDumpEntry":"BMC转储"
         },
         "toast": {
             "errorDeleteDump": "删除转储 %{count} | 删除转储们 %{count}",

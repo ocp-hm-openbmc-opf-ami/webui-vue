@@ -984,7 +984,8 @@
             "dumpType": "Dump type",
             "id": "ID",
             "searchDumps": "Dumps durchsuchen",
-            "size": "Größe"
+            "size": "Größe",
+            "bmcDumpEntry":"BMC Dump Eintrag"
         },
         "toast": {
             "errorDeleteDump": "Fehler beim Löschen %{count} entsorgen. | Fehler beim Löschen %{count} dumps.",

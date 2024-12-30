@@ -991,10 +991,7 @@
             "id": "ID",
             "searchDumps": "Search dumps",
             "size": "Size",
-            "bmcDumpEntry":"BMC Dump Entry",
-            "hostbootDumpEntry": "Hostboot Dump Entry",
-            "resourceDumpEntry": "Resource Dump Entry",
-            "systemDumpEntry": "System Dump Entry"
+            "bmcDumpEntry":"BMC Dump Entry"
         },
         "toast": {
             "errorDeleteDump": "Error deleting %{count} dump. | Error deleting %{count} dumps.",

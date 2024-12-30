@@ -986,10 +986,7 @@
             "id": "ID",
             "searchDumps": "搜尋轉儲",
             "size": "尺寸",
-            "bmcDumpEntry":"BMC轉儲",
-            "hostbootDumpEntry": "主機啟動轉儲",
-            "resourceDumpEntry": "資源轉儲",
-            "systemDumpEntry": "系統轉儲"
+            "bmcDumpEntry":"BMC轉儲"
         },
         "toast": {
             "errorDeleteDump": "刪除轉儲 %{count} | 刪除轉儲們 %{count}",
