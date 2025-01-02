@@ -1150,7 +1150,20 @@
             "powerState": "Состояние питания",
             "productId": "Идентификатор продукта",
             "temperature": "Температура",
-            "readyToRemove": "Готово к удалению"
+            "readyToRemove": "Готово к удалению",
+            "state": {
+                "hotspare": "Горячий Резерв",
+                "unconfiguredGood": "Неконфигурированный Хороший",
+                "unknownState": "Неизвестный",
+                "copyback": "Копибэк"
+            }
+        },
+        "modal": {
+        "sourcePDriveId": "ID",
+        "destinationPDriveId": "Выберите заменяющий диск",
+        "sourcePDIdHelperText": "Отображает выбранный идентификатор исходного устройства.",
+        "destinationPDIdHelperText": "Выберите диск из списка. Выбранный диск станет заменяющим.",
+        "enableCopybackConfig": "Функция «Восстановление» на этом контроллере в настоящее время отключена. Чтобы выполнить эту операцию на физическом устройстве, нажмите «ОК» для активации функции."
         },
         "noPhysicalDevice": "У гэты час няма інфармацыі аб фізічнай прыладзе.",
         "startLocatePhysicalDevice": "Пачаць пошук фізічнай прылады.",
@@ -1169,6 +1182,8 @@
         "labelUndoPrepareToRemoval": "Адмяніць падрыхтоўку да выдалення",
         "labelStartLocate": "Пачаць пошук",
         "labelStopLocate": "Спыніць пошук",
+        "labelStartCopyback": "Начать восстановление",
+        "labelStopCopyback": "Остановить восстановление",
         "labelAddGlobalHotSpare": "Добавить глобальный горячий резерв",
         "labelDeleteGlobalHotSpare": "Удалить глобальный горячий резерв",
         "physicalDeviceActionTitle": "Абнавіце налады фізічнай прылады",
@@ -1176,6 +1191,17 @@
         "unDoPrepareRemovalConfirmationMsg": "Жадаеце ўсталяваць стан фізічнай прылады з ідэнтыфікатарам {pdId} на адмену падрыхтоўкі да выдалення?",
         "startLocateConfirmationMsg": "Жадаеце пачаць пошук фізічнай прылады з ідэнтыфікатарам {pdId}?",
         "stopLocateConfirmationMsg": "Жадаеце спыніць пошук фізічнай прылады з ідэнтыфікатарам {pdId}?",
+        "startCopybackConfirmationMsg": "Вы хотите начать восстановление данных для физического устройства с ID {pdId}?",
+        "stopCopybackConfirmationMsg": "Вы хотите остановить восстановление данных для физического устройства с ID {pdId}?",
+        "startCopybackSuccess": "Диск успешно начал восстановление данных.",
+        "startCopybackFail": "Не удалось запустить диск в режиме восстановления данных.",
+        "stopCopybackSuccess": "Диск успешно остановил восстановление данных.",
+        "stopCopybackFail": "Не удалось остановить диск в режиме восстановления данных.",
+        "startCopyback": "Запустить физическое устройство в статус 'Восстановление'.",
+        "stopCopyback": "Остановить физическое устройство в статусе 'Восстановление'.",
+        "copybackConfigSuccess": "Функция 'Copyback' успешно включена.",
+        "copybackConfigFail": "Не удалось включить функцию 'Copyback'.",
+        "copybackConfig": "Включить функцию 'Copyback'.",
         "addGlobalHotSpareConfirmationMsg": "Вы хотите назначить {pdId} как глобальный горячий резерв?",
         "addGlobalHotSpareSuccess": "Диск успешно назначен как глобальный горячий резерв.",
         "addGlobalHotSpareFail": "Не удалось назначить диск как глобальный горячий резерв.",

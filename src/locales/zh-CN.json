@@ -2353,7 +2353,20 @@
             "powerState": "电源状态",
             "productId": "产品编号",
             "temperature": "温度",
-            "readyToRemove": "准备移除"
+            "readyToRemove": "准备移除",
+            "state": {
+                "hotspare": "热备盘",
+                "unconfiguredGood": "未配置良好",
+                "unknownState": "未知",
+                "copyback": "回拷"
+            }
+        },
+        "modal": {
+        "sourcePDriveId": "设备 ID",
+        "destinationPDriveId": "选择替换物理设备",
+        "sourcePDIdHelperText": "显示所选的源设备 ID。",
+        "destinationPDIdHelperText": "从列表中选择一个物理设备。所选设将替换源设备。",
+        "enableCopybackConfig": "当前此控制器的 '回拷数据' 功能尚未启用。如需对该物理设备执行操作，请点击「确定」以启用此功能。"
         },
         "noPhysicalDevice": "目前不存在物理设备信息。",
         "startLocatePhysicalDevice": "开始定位物理设备",
@@ -2372,6 +2385,8 @@
         "labelUndoPrepareToRemoval": "取消准备移除",
         "labelStartLocate": "开始定位",
         "labelStopLocate": "停止定位",
+        "labelStartCopyback": "开始回拷数据",
+        "labelStopCopyback": "停止回拷数据",
         "labelAddGlobalHotSpare": "新增全局热备盘",
         "labelDeleteGlobalHotSpare": "取消全局热备盘",
         "physicalDeviceActionTitle": "变更物理设备设定",
@@ -2379,6 +2394,17 @@
         "unDoPrepareRemovalConfirmationMsg":  "将序号 {pdId} 的物理设备，设定为取消准备删除?",
         "startLocateConfirmationMsg":  "开始定位序号 {pdId} 的物理设备?",
         "stopLocateConfirmationMsg":  "停止定位序号 {pdId} 的物理设备?",
+        "startCopybackConfirmationMsg": "是否要开始 '回拷' 物理设备 ID 为 {pdId} 的数据？",
+        "stopCopybackConfirmationMsg": "是否要停止 '回拷' 物理设备 ID 为 {pdId} 的数据？",
+        "startCopybackSuccess": "物理设备成功开始 '回拷' 数据。",
+        "startCopybackFail": "无法开始物理设备 '回拷' 数据。",
+        "stopCopybackSuccess": "物理设备成功停止 '回拷' 数据。",
+        "stopCopybackFail": "无法停止物理设备 '回拷' 数据。",
+        "startCopyback": "开始物理设备 '回拷' 数据。",
+        "stopCopyback": "停止物理设备 '回拷' 数据。",
+        "copybackConfigSuccess": "'回拷' 功能已成功启用。",
+        "copybackConfigFail": "无法启用 '回拷' 功能。",
+        "copybackConfig": "启用 '回拷' 功能。",
         "addGlobalHotSpareConfirmationMsg": "是否要将 {pdId} 设置为全局热备盘？",
         "addGlobalHotSpareSuccess": "磁盘已成功设置为全局热备盘。",
         "addGlobalHotSpareFail": "设置磁盘为全局热备盘失败。",

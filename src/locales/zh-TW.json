@@ -2357,7 +2357,20 @@
             "powerState": "電源狀態",
             "productId": "產品編號",
             "temperature": "溫度",
-            "readyToRemove": "準備移除"
+            "readyToRemove": "準備移除",
+            "state": {
+                "hotspare": "熱備援",
+                "unconfiguredGood": "未配置良好",
+                "unknownState": "未知",
+                "copyback": "回寫"
+            }
+        },
+        "modal": {
+            "sourcePDriveId": "設備 ID",
+            "destinationPDriveId": "選擇替換實體裝置",
+            "sourcePDIdHelperText": "顯示所選的源裝置 ID。",
+            "destinationPDIdHelperText": "從列表中選擇一個裝置。所選裝置將替換源裝置。",
+            "enableCopybackConfig": "目前此控制器的「回寫數據」功能尚未啟用。如需對此實體裝置執行操作，請點擊「確定」以啟用此功能。"
         },
         "noPhysicalDevice": "目前不存在實體裝置信息。",
         "startLocatePhysicalDevice": "開始定位實體裝置",
@@ -2376,6 +2389,8 @@
         "labelUndoPrepareToRemoval": "取消準備移除",
         "labelStartLocate": "開始定位",
         "labelStopLocate": "停止定位",
+        "labelStartCopyback": "開始回寫數據",
+        "labelStopCopyback": "停止回寫數據",
         "labelAddGlobalHotSpare": "新增全域熱備援",
         "labelDeleteGlobalHotSpare": "取消全域熱備援",
         "physicalDeviceActionTitle": "變更實體設備設定",
@@ -2383,6 +2398,17 @@
         "unDoPrepareRemovalConfirmationMsg":  "將序號 {pdId} 的實體設備，設定為取消準備刪除?",
         "startLocateConfirmationMsg":  "開始定位序號 {pdId} 的實體設備?",
         "stopLocateConfirmationMsg":  "停止定位序號 {pdId} 的實體設備?",
+        "startCopybackConfirmationMsg": "是否要開始 '回寫' 實體設備 ID 為 {pdId} 的數據？",
+        "stopCopybackConfirmationMsg": "是否要停止 '回寫' 實體設備 ID 為 {pdId} 的數據？",
+        "startCopybackSuccess": "成功啟動實體設備 '回寫' 數據。",
+        "startCopybackFail": "啟動實體設備 '回寫' 數據失敗。",
+        "stopCopybackSuccess": "成功停止實體設備 '回寫' 數據。",
+        "stopCopybackFail": "停止實體設備 '回寫' 數據失敗。",
+        "startCopyback": "開始啟動實體設備 '回寫' 數據。",
+        "stopCopyback": "停止實體設備 '回寫' 數據。",
+        "copybackConfigSuccess": "'回寫' 功能已成功啟用。",
+        "copybackConfigFail": "無法啟用 '回寫' 功能。",
+        "copybackConfig": "啟用 '回寫' 功能。",
         "addGlobalHotSpareConfirmationMsg": "是否要將 {pdId} 設置為全域熱備援？",
         "addGlobalHotSpareSuccess": "磁碟已成功設置為全域熱備援。",
         "addGlobalHotSpareFail": "設置磁碟為全域熱備援失敗。",

@@ -2344,7 +2344,20 @@
             "powerState": "Stromstatus",
             "productId": "Produkt-ID",
             "temperature": "Temperatur",
-            "readyToRemove": "Bereit zum Entfernen"
+            "readyToRemove": "Bereit zum Entfernen",
+            "state": {
+                "hotspare": "Hot-Spare",
+                "unconfiguredGood": "Unkonfiguriert Gut",
+                "unknownState": "Unbekannt",
+                "copyback": "Rückkopieren"
+            }
+        },
+            "modal": {
+            "sourcePDriveId": "ID",
+            "destinationPDriveId": "Ersatzlaufwerk auswählen",
+            "sourcePDIdHelperText": "Zeigt die ausgewählte Quellgeräte-ID an.",
+            "destinationPDIdHelperText": "Wählt ein Laufwerk aus einer Liste aus. Das ausgewählte Laufwerk wird das Ersatzlaufwerk sein.",
+            "enableCopybackConfig": "Die Funktion „Rückkopieren“ auf diesem Controller ist derzeit deaktiviert. Klicken Sie auf „OK“, um diese Funktion zu aktivieren und den Vorgang auf dem physischen Gerät auszuführen."
         },
         "noPhysicalDevice": "Derzeit sind keine Informationen zum physischen Gerät vorhanden.",
         "startLocatePhysicalDevice": "Ortung des physischen Geräts starten.",
@@ -2363,6 +2376,8 @@
         "labelUndoPrepareToRemoval": "Entfernung vorbereiten rückgängig machen",
         "labelStartLocate": "Lokalisierung starten",
         "labelStopLocate": "Lokalisierung beenden",
+        "labelStartCopyback": "Rückkopieren starten",
+        "labelStopCopyback": "Rückkopieren stoppen",
         "labelAddGlobalHotSpare": "Globalen Hot-Spare hinzufügen",
         "labelDeleteGlobalHotSpare": "Globalen Hot-Spare entfernen",
         "physicalDeviceActionTitle": "Aktualisieren der physischen Geräteeinstellungen",
@@ -2370,6 +2385,17 @@
         "unDoPrepareRemovalConfirmationMsg": "Möchten Sie den Status des physischen Geräts mit der ID {pdId} auf 'Entfernung vorbereiten rückgängig machen' setzen?",
         "startLocateConfirmationMsg": "Möchten Sie mit der Ortung des physischen Geräts mit der ID {pdId} beginnen?",
         "stopLocateConfirmationMsg": "Möchten Sie die Ortung des physischen Geräts mit der ID {pdId} beenden?",
+        "startCopybackConfirmationMsg": "Möchten Sie das Rückkopieren für das physische Gerät mit der ID {pdId} starten?",
+        "stopCopybackConfirmationMsg": "Möchten Sie das Rückkopieren für das physische Gerät mit der ID {pdId} stoppen?",
+        "startCopybackSuccess": "Das Laufwerk hat das Rückkopieren erfolgreich gestartet.",
+        "startCopybackFail": "Das Laufwerk konnte nicht im Rückkopierstatus gestartet werden.",
+        "stopCopybackSuccess": "Das Laufwerk hat das Rückkopieren erfolgreich gestoppt.",
+        "stopCopybackFail": "Das Laufwerk konnte nicht im Rückkopierstatus gestoppt werden.",
+        "startCopyback": "Starten Sie das physische Gerät in den 'Rückkopier'-Status.",
+        "stopCopyback": "Stoppen Sie das physische Gerät im 'Rückkopier'-Status.",
+        "copybackConfigSuccess": "Die 'Copyback'-Funktion wurde erfolgreich aktiviert.",
+        "copybackConfigFail": "Die 'Copyback'-Funktion konnte nicht aktiviert werden.",
+        "copybackConfig": "Aktivieren Sie die 'Copyback'-Funktion.",
         "addGlobalHotSpareConfirmationMsg": "Möchten Sie {pdId} als globalen Hot-Spare zuweisen?",
         "addGlobalHotSpareSuccess": "Das Laufwerk wurde erfolgreich als globaler Hot-Spare zugewiesen.",
         "addGlobalHotSpareFail": "Die Zuweisung des Laufwerks als globaler Hot-Spare ist fehlgeschlagen.",

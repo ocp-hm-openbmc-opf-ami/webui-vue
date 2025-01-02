@@ -2365,7 +2365,20 @@
             "powerState": "Power State",
             "productId": "Product Id",
             "temperature": "Temperature",
-            "readyToRemove": "Ready To Remove"
+            "readyToRemove": "Ready To Remove",
+            "state": {
+                "hotspare": "Hot Spare",
+                "unconfiguredGood": "Unconfigured Good",
+                "unknownState": "Unknown",
+                "copyback": "Copyback"
+            }
+        },
+        "modal": {
+            "sourcePDriveId": "Device ID",
+            "destinationPDriveId": "Select Replacement Drive",
+            "sourcePDIdHelperText": "Display the selected source device ID.",
+            "destinationPDIdHelperText": "Selects a drive from a list. The selected drive will be the replacement drive.",
+            "enableCopybackConfig": "The 'Copyback' feature on this controller is currently disabled. To perform this operation on the physical device, please click 'OK' to enable the feature."
         },
         "noPhysicalDevice": "There are no Physical Device information present at this time.",
         "startLocatePhysicalDevice": "Start locating the physical device.",
@@ -2384,6 +2397,8 @@
         "labelUndoPrepareToRemoval": "Undo Prepare Removal",
         "labelStartLocate": "Start Locate",
         "labelStopLocate": "Stop Locate",
+        "labelStartCopyback": "Start Copyback",
+        "labelStopCopyback": "Stop Copyback",
         "labelAddGlobalHotSpare": "Assign Global Hot Spare",
         "labelDeleteGlobalHotSpare": "Unassign Global Hot Spare",
         "physicalDeviceActionTitle": "Update physical device settings",
@@ -2391,6 +2406,17 @@
         "unDoPrepareRemovalConfirmationMsg":  "Want to set the state of the physical device with ID {pdId} to Undo Prepare Removal?",
         "startLocateConfirmationMsg":  "Want to start locating the physical device with ID {pdId} ?",
         "stopLocateConfirmationMsg":  "Want to stop locating the physical device with ID {pdId} ?",
+        "startCopybackConfirmationMsg": "Do you want to start copyback for the physical device with ID {pdId}?",
+        "stopCopybackConfirmationMsg": "Do you want to stop copyback for the physical device with ID {pdId}?",
+        "startCopyback": "Start physical device to 'Copyback' status.",
+        "stopCopyback": "Stop physical device to 'Copyback' status.",
+        "startCopybackSuccess": "The drive successfully started copyback.",
+        "startCopybackFail": "Failed to start the drive in copyback status.",
+        "stopCopybackSuccess": "The drive successfully stopped copyback.",
+        "stopCopybackFail": "Failed to stop the drive in copyback status.",
+        "copybackConfigSuccess": "The 'Copyback' feature has been successfully enabled.",
+        "copybackConfigFail": "Unable to enable the 'Copyback' feature.",
+        "copybackConfig": "Enable the 'Copyback' feature.",
         "addGlobalHotSpareConfirmationMsg": "Do you want to assign ID {pdId} as a global hot spare?",
         "addGlobalHotSpareSuccess": "The drive was successfully assigned as a global hot spare.",
         "addGlobalHotSpareFail": "Failed to assign the drive as a global hot spare.",
