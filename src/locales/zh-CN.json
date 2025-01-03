@@ -183,7 +183,8 @@
         "nodeManager": "@:appPageTitle.nodeManager",
         "autoVideo":"@:appPageTitle.autoVideo",
         "videoLog":"@:appPageTitle.videoLog",
-        "radius": "RADIUS"
+        "radius": "RADIUS",
+        "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -246,7 +247,8 @@
         "nodeManager": "节点管理器",
         "autoVideo":"自动视频设置",
         "videoLog":"视频日志",
-        "radius": "RADIUS"
+        "radius": "RADIUS",
+        "amdRemoteDebug": "远程调试"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM 配置",
@@ -338,6 +340,15 @@
             "successUpdatePolicy": "成功更新策略",
             "successUpdateCapability": "成功更新域功能",
             "successDeletePolicy": "已成功删除策略"
+        }
+    },
+    "pageAmdRemoteDebug": {
+        "yaapServer": "YAAP服务器",
+        "toast": {
+            "errorAmdRemoteDebugEnabled": "启用远程调试服务器时出错",
+            "errorAmdRemoteDebugDisabled": "禁用远程调试服务器时出错",
+            "successAmdRemoteDebugEnabled": "成功启用远程调试服务器",
+            "successAmdRemoteDebugDisabled": "成功禁用远程调试服务器"
         }
     },
     "pageDDNSNetwork": {

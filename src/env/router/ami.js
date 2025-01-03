@@ -53,6 +53,7 @@ import PAM from '../../views/Settings/PamOrder/PamOrder';
 import NodeManager from '@/views/Settings/NodeManager';
 import AutoVideoSettings from '@/views/Settings/AutoVideoSettings';
 import VideoLogs from '@/views/Logs/VideoLogs';
+import AmdRemoteDebug from '../../views/HostSystemDiagnostics/AmdRemoteDebug/AmdRemoteDebug.vue';
 
 const roles = {
   administrator: 'Administrator',
@@ -332,6 +333,14 @@ const routes = [
         component: Asd,
         meta: {
           title: i18n.t('appPageTitle.asd'),
+        },
+      },
+      {
+        path: '/host-system-diagnostics/amd-remote-debug',
+        name: 'amd-remote-debug',
+        component: AmdRemoteDebug,
+        meta: {
+          title: i18n.t('appPageTitle.amdRemoteDebug'),
         },
       },
       {

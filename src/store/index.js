@@ -57,6 +57,7 @@ import VideoLogStore from './modules/Logs/VideoLogStore';
 import AutoVideoStore from './modules/Settings/AutoVideoStore';
 import PreserveConfigStore from './modules/Operations/PreserveConfigurationStore';
 import RadiusStore from './modules/SecurityAndAccess/RadiusStore';
+import AmdRemoteDebugStore from './modules/HostSystemDiagnostics/AmdRemoteDebugStore';
 
 Vue.use(Vuex);
 
@@ -121,5 +122,6 @@ export default new Vuex.Store({
     autoVideo: AutoVideoStore,
     preserveConfig: PreserveConfigStore,
     radius: RadiusStore,
+    amdRemoteDebug: AmdRemoteDebugStore,
   },
 });

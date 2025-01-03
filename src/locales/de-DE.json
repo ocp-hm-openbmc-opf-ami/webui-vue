@@ -182,7 +182,8 @@
         "nodeManager": "@:appPageTitle.nodeManager",
         "autoVideo":"@:appPageTitle.autoVideo",
         "videoLog":"@:appPageTitle.videoLog",
-        "radius": "RADIUS"
+        "radius": "RADIUS",
+        "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -245,7 +246,8 @@
         "nodeManager": "Knotenmanager",
         "autoVideo":"Automatische Videoeinstellungen",
         "videoLog":"Videoprotokoll",
-        "radius":  "RADIUS"
+        "radius":  "RADIUS",
+        "amdRemoteDebug": "Remote Debug"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM-Konfiguration",
@@ -337,6 +339,15 @@
             "successUpdatePolicy": "Richtlinie erfolgreich aktualisiert",
             "successUpdateCapability": "Domänenfähigkeit erfolgreich aktualisiert",
             "successDeletePolicy": "Die Richtlinie wurde erfolgreich gelöscht"
+        }
+    },
+    "pageAmdRemoteDebug": {
+        "yaapServer": "YAAP Server",
+        "toast": {
+            "errorAmdRemoteDebugEnabled": "Fehler beim Aktivieren des Remote Debug Servers",
+            "errorAmdRemoteDebugDisabled": "Fehler beim Deaktivieren des Remote Debug Servers",
+            "successAmdRemoteDebugEnabled": "Remote Debug Server erfolgreich aktiviert",
+            "successAmdRemoteDebugDisabled": "Remote Debug Server erfolgreich deaktiviert"
         }
     },
     "pageDDNSNetwork": {

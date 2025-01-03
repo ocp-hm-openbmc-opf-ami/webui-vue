@@ -307,6 +307,11 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.asd'),
               route: '/host-system-diagnostics/asd',
             },
+            {
+              id: 'amd-remote-debug',
+              label: this.$t('appNavigation.amdRemoteDebug'),
+              route: '/host-system-diagnostics/amd-remote-debug',
+            },
           ],
         },
         {
