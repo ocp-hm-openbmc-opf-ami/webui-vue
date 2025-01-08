@@ -47,6 +47,7 @@ export default class AMI_RFB extends RFB {
     this._keyboard.onkeyevent = this._handleKeyEvent.bind(this);
 
     this._hostLEDstate = -1; //variable to hold Host keyboard LED state
+    this.maxSessioninfo = null;
 
     Log.Debug('<< AMI_RFB.constructor');
   }
@@ -229,6 +230,20 @@ export default class AMI_RFB extends RFB {
 
   _setDesktopName(name) {
     this._fbName = name;
+  }
+
+  _fail(details) {
+    this.maxSessioninfo = details.includes('Max sessions')
+      ? 'Max session'
+      : null;
+    super._fail(details);
+  }
+
+  _updateConnectionState(state) {
+    if (this.maxSessioninfo == 'Max session') {
+      this._rfbCleanDisconnect = 'Max session';
+    }
+    super._updateConnectionState(state);
   }
 }
 

@@ -1410,6 +1410,8 @@
         "disconnected": "Disconnected",
         "alreadyActiveSession": "Already master KVM session is Running! Please try after some time.",
         "alreadyInMasterSession": "Master session is Running",
+        "maximumSessionReached": "Maximum KVM Session Reached",
+        "maximumkvmSessionReached": "Maximum number of allowable sessions reached. Please close other sessions and try again",
         "errorInGettingActiveStatus": "Error in Getting KVM active status!!",
         "disabledKVMService": "KVM service is disabled. Go to Security and Access -> Policies page to enable KVM service.",
         "toast": {

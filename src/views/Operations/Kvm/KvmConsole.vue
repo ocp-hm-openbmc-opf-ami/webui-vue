@@ -125,6 +125,7 @@ export default {
         this.$t('pageKvm.powerOperation.forcedShutdown'),
         this.$t('pageKvm.powerOperation.forcedRestart'),
       ],
+      MaxkvmSession: false,
     };
   },
   computed: {
@@ -133,6 +134,9 @@ export default {
       return this.$route.query.popup === 'true';
     },
     serverStatusIcon() {
+      if (this.MaxkvmSession == true) {
+        return 'secondary';
+      }
       if (this.status === Connected) {
         return 'success';
       } else if (this.status === Disconnected) {
@@ -144,6 +148,10 @@ export default {
       return this.$store.getters['controls/serverStatus'];
     },
     serverStatus() {
+      if (this.MaxkvmSession == true) {
+        this.errorToast(this.$t('pageKvm.maximumkvmSessionReached'));
+        return this.$t('pageKvm.maximumSessionReached');
+      }
       if (this.status === Connected) {
         if (this.rfb._fbName.indexOf('(View Only)') == -1) {
           this.$root.$emit('enable-softkeyboard-btn');
@@ -228,9 +236,11 @@ export default {
           that.setWidthToolbar();
         });
 
-        this.rfb.addEventListener('disconnect', () => {
+        this.rfb.addEventListener('disconnect', (event) => {
           this.isConnected = false;
           that.status = Disconnected;
+          this.MaxkvmSession =
+            event.detail.clean === 'Max session' ? true : false;
         });
       }, 5000);
     },

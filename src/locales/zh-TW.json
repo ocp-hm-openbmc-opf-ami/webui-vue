@@ -1404,6 +1404,8 @@
         "connecting": "連結中",
         "disconnected": "已斷連",
         "alreadyActiveSession": "主KVM會話正在運轉 請稍後再試 ",
+	"maximumSessionReached": "已達到最大 KVM 會話數",
+	"maximumkvmSessionReached": "已達到允許的最大會話數。請關閉其他會話並重試",
         "alreadyInMasterSession": "主會話正在運轉",
         "errorInGettingActiveStatus": "取得KVM活躍狀態發生錯誤!",
         "disabledKVMService": "KVM服務已停用。進入安全性和存取 -> 策略頁面啟用 KVM 服務。",

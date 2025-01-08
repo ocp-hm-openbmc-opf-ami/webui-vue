@@ -1403,6 +1403,8 @@
         "connecting": "verbinden",
         "disconnected": "Getrennt",
         "alreadyActiveSession": "Die Master KVM Sitzung läuft bereits! Bitte versuchen Sie es nach einiger Zeit.",
+	"maximumSessionReached": "Maximale KVM-Sitzung erreicht",
+	"maximumkvmSessionReached": "Maximale Anzahl zulässiger Sitzungen erreicht. Bitte schließen Sie andere Sitzungen und versuchen Sie es erneut",
         "alreadyInMasterSession": "Die Master Sitzung läuft",
         "errorInGettingActiveStatus": "Fehler beim Abrufen des KVM Aktiv Status!!",
         "disabledKVMService": "Der KVM-Dienst ist deaktiviert. Gehen Sie zur Seite Sicherheit und Zugriff -> Richtlinien, um den KVM-Dienst zu aktivieren.",

@@ -1,9 +1,6 @@
-import api from '@/store/api';
-
 const KvmStore = {
   namespaced: true,
   state: {
-    activeStatus: 0,
     isconsolewindow: null,
     softKeyboardStates: {
       keyboardLayoutStatus: 'default',
@@ -18,7 +15,6 @@ const KvmStore = {
     hostKeyboardLEDState: -1,
   },
   getters: {
-    getKvmActiveStatus: (state) => state.activeStatus,
     getIsConsoleWindow: (state) => state.isconsolewindow,
     getSoftKeyboardStatus: (state) => state.softKeyboardStates,
     getKeyboardLayout: (state) => state.keyboardLayout,
@@ -26,8 +22,6 @@ const KvmStore = {
     gethostKeyboardLEDState: (state) => state.hostKeyboardLEDState,
   },
   mutations: {
-    setKvmActiveStatusData: (state, statusData) =>
-      (state.activeStatus = statusData.kvmActiveStatus),
     setIsConsoleWindow: (state, isconsolewindowOpen) => {
       state.isconsolewindow = isconsolewindowOpen;
     },
@@ -50,15 +44,6 @@ const KvmStore = {
         // TODO: remove this after menu implementation
         window.navigator.language.toLocaleLowerCase(),
       );
-      return await api
-        .get('/kvm/kvmActiveStatus')
-        .then((response) => {
-          console.log('kvm active status', response);
-          commit('setKvmActiveStatusData', response.data);
-        })
-        .catch((error) => {
-          console.log('Error in getting KVM active status', error);
-        });
     },
   },
 };
