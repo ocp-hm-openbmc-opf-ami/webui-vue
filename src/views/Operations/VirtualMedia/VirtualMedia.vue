@@ -350,11 +350,14 @@ export default {
           );
           connectionData.isActive = true;
         })
-        .catch(() => {
-          this.errorToast(this.$t('pageVirtualMedia.toast.errorMounting'));
+        .catch(({ message }) => {
+          this.errorToast(message);
           this.isActive = false;
         })
-        .finally(() => this.endLoader());
+        .finally(() => {
+          this.getVirtualMedia();
+          this.endLoader();
+        });
     },
     stopLegacy(connectionData) {
       this.$store
@@ -383,7 +386,10 @@ export default {
           connectionData.password = '';
           connectionData.username = '';
         })
-        .finally(() => this.endLoader());
+        .finally(() => {
+          this.getVirtualMedia();
+          this.endLoader();
+        });
     },
     saveConnection(connectionData) {
       this.modalConfigureConnection.serverUri = connectionData.serverUri;

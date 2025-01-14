@@ -2304,6 +2304,7 @@
             "errorReadingFile": "Fehler beim Lesen der Datei. Schließt Server.",
             "errorUnmounting": "Fehler beim Aufheben der Bereitstellung",
             "errorVirtualMedia": "Fehler beim Abrufen virtueller Medien.",
+            "errorResourceInUse": "%{Slot} ist bereits im Einsatz.",
             "serverRunning": "Server läuft",
             "serverConnectionEstablished": "Serververbindung hergestellt",
             "serverClosedSuccessfully": "Der Server wurde erfolgreich geschlossen",

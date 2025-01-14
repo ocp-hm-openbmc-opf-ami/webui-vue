@@ -2313,6 +2313,7 @@
             "errorReadingFile": "读取档案失败. 关闭伺服器.",
             "errorUnmounting": "卸载失败",
             "errorVirtualMedia": "获取虚拟媒体时出错。",
+            "errorResourceInUse": "%{Slot} 已在使用中。",
             "serverRunning": "伺服器运行中",
             "serverConnectionEstablished": "伺服器已连线",
             "serverClosedSuccessfully": "关闭伺服器成功",

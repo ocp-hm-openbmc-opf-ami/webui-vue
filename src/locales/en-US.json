@@ -2325,6 +2325,7 @@
             "errorReadingFile": "Error reading file. Closing server.",
             "errorUnmounting": "Error unmounting",
             "errorVirtualMedia": "Error in getting virtual media.",
+            "errorResourceInUse": "%{Slot} is already in use.",
             "serverRunning": "Server running",
             "serverConnectionEstablished": "Server connection established",
             "serverClosedSuccessfully": "Server closed successfully",

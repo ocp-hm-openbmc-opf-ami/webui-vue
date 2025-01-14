@@ -178,7 +178,18 @@ const VirtualMediaStore = {
         )
         .catch((error) => {
           console.log('Mount image:', error);
-          throw new Error();
+          if (
+            error.response.status == 503 &&
+            error.response.data.error.code.indexOf('ResourceInUse') != -1
+          ) {
+            throw new Error(
+              i18n.t('pageVirtualMedia.toast.errorResourceInUse', {
+                Slot: id,
+              }),
+            );
+          } else {
+            throw new Error(i18n.t('pageVirtualMedia.toast.errorMounting'));
+          }
         });
     },
     async unmountImage(_, id) {
