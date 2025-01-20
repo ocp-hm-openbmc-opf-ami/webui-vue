@@ -26,7 +26,7 @@
       <b-col sm="6">
         <dl sm="6">
           <dt>{{ $t('global.table.overAllSystemHealth') }}</dt>
-          <dd v-if="greenLed || amberLed || susackLed">
+          <dd v-if="greenLed || amberLed || blueLed">
             <b-icon
               icon="circle-fill"
               :animation="greenBlinkStatus"
@@ -44,9 +44,9 @@
             />
             <b-icon
               icon="circle-fill"
-              :animation="susackBlinkStatus"
-              :style="susackLedStatus"
-              :title="susackLed"
+              :animation="blueBlinkStatus"
+              :style="blueLedStatus"
+              :title="blueLed"
               font-scale="2"
             />
           </dd>
@@ -74,10 +74,10 @@ export default {
     return {
       greenBlinkStatus: null,
       amberBlinkStatus: null,
-      susackBlinkStatus: null,
+      blueBlinkStatus: null,
       greenLedStatus: null,
       amberLedStatus: null,
-      susackLedStatus: null,
+      blueLedStatus: null,
     };
   },
   computed: {
@@ -93,12 +93,34 @@ export default {
     amberLed() {
       return this.$store.getters['system/getAmberLedStatus'];
     },
-    susackLed() {
-      return this.$store.getters['system/getSusackLedStatus'];
+    blueLed() {
+      return this.$store.getters['system/getBlueLedStatus'];
     },
   },
   watch: {
     greenLed() {
+      this.setGreenLED();
+    },
+    amberLed() {
+      this.setAmberLed();
+    },
+    blueLed() {
+      this.setBlueLed();
+    },
+  },
+  created() {
+    this.$root.$emit('overview-inventory-complete');
+    this.setGreenLED();
+    this.setAmberLed();
+    this.setBlueLed();
+  },
+  methods: {
+    toggleIdentifyLedSwitch(state) {
+      this.$store
+        .dispatch('system/changeIdentifyLedState', state)
+        .catch(({ message }) => this.errorToast(message));
+    },
+    setGreenLED() {
       // Handle Green LED status
       if (this.greenLed == 'Blinking') {
         this.greenBlinkStatus = 'throb';
@@ -114,7 +136,7 @@ export default {
           'color: #8fbc8f; margin: 5px; filter: brightness(0.9)';
       }
     },
-    amberLed() {
+    setAmberLed() {
       // Handle Amber LED status
       if (this.amberLed == 'Blinking') {
         this.amberBlinkStatus = 'throb';
@@ -130,31 +152,17 @@ export default {
           'color: #cc9900; margin: 5px; filter: brightness(0.9)';
       }
     },
-    susackLed() {
-      // Handle Susack LED status
-      if (this.susackLed == 'Blinking') {
-        this.susackBlinkStatus = 'throb';
-        this.susackLedStatus = 'color: #00bfff; margin: 5px';
+    setBlueLed() {
+      // Handle Blue LED status
+      if (this.blueLed == 'Blinking') {
+        this.blueBlinkStatus = 'throb';
+        this.blueLedStatus = 'color: #00bfff; margin: 5px';
       }
-      if (this.susackLed == 'On') {
-        this.susackBlinkStatus = null;
-        this.susackLedStatus = 'color: #00bfff; margin: 5px';
-      }
-      if (this.susackLed == 'Off' || this.susackLed == 'Unknown') {
-        this.susackBlinkStatus = null;
-        this.susackLedStatus =
+      if (this.blueLed == 'Off' || this.blueLed == 'Unknown') {
+        this.blueBlinkStatus = null;
+        this.blueLedStatus =
           'color: #617f89; margin: 5px; filter: brightness(0.9)';
       }
-    },
-  },
-  created() {
-    this.$root.$emit('overview-inventory-complete');
-  },
-  methods: {
-    toggleIdentifyLedSwitch(state) {
-      this.$store
-        .dispatch('system/changeIdentifyLedState', state)
-        .catch(({ message }) => this.errorToast(message));
     },
   },
 };

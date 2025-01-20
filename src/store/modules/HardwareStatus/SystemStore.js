@@ -9,14 +9,14 @@ const SystemStore = {
     systems: [],
     greenLedStatus: null,
     amberLedStatus: null,
-    susackLedStatus: null,
+    blueLedStatus: null,
     serverStatus: 'unreachable',
   },
   getters: {
     systems: (state) => state.systems,
     getGreenLedStatus: (state) => state.greenLedStatus,
     getAmberLedStatus: (state) => state.amberLedStatus,
-    getSusackLedStatus: (state) => state.susackLedStatus,
+    getBlueLedStatus: (state) => state.blueLedStatus,
     serverStatus: (state) => state.serverStatus,
   },
   mutations: {
@@ -54,7 +54,7 @@ const SystemStore = {
     setPhysicalLedStatus: (state, data) => {
       state.greenLedStatus = data.GreenLED;
       state.amberLedStatus = data.AmberLED;
-      state.susackLedStatus = data.SusackLED;
+      state.blueLedStatus = data.BlueLED;
     },
     setServerStatus: (state, serverState) =>
       (state.serverStatus = serverStateMapper(serverState)),
