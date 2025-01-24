@@ -1450,7 +1450,7 @@
             "groupPrivilege": "Gruppen Privileg"
         },
         "tableRoleGroups": {
-            "alertContent": "LDAP authentication must be enabled to modify role groups.",
+            "alertContent": "Zum Ändern von Rollengruppen muss die LDAP Authentifizierung aktiviert sein.",
             "groupName": "Gruppenname",
             "groupPrivilege": "Gruppen Privileg"
         },
