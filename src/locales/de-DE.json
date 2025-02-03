@@ -2340,7 +2340,24 @@
         "logicalDevicesCount": "Anzahl der logischen Geräte",
         "maxLogicalDevicesCount": "Maximale Anzahl logischer Geräte",
         "maxPhysicalDevicesCountPerLogicalDevicesCount": "Maximale Anzahl physischer Geräte pro logischem Gerät",
-        "hotSparesCount": "Anzahl der heißen Ersatzteile"
+        "hotSparesCount": "Anzahl der heißen Ersatzteile",
+        "modal": {
+            "dropdownManagementBtn": "Verwaltung",
+            "titleControllerManagement": "Controller-Verwaltung",
+            "titleRaidController": "RAID-Controller: ",
+            "labelCopybackConfig": "Copyback-Konfiguration",
+            "labelEnableCopybackConfig": "Copyback",
+            "labelEnableHDDCopyback": "HDD-Smart-Copyback",
+            "labelEnableSSDCopyback": "SSD-Smart-Copyback",
+            "copybackConfigHelperText": "Copyback-Einstellungen festlegen.",
+            "requiredEnableCopybackHelperText1": "Dieses Element wird automatisch aktiviert, wenn die HDD- oder SSD-Smart-Copyback-Funktion aktiviert ist.",
+            "requiredEnableCopybackHelperText2": "Wenn dieses Element deaktiviert ist, werden sowohl die HDD- als auch die SSD-Smart-Copyback-Funktionen deaktiviert."
+        },
+        "toast": {
+        "copybackConfigSuccess": "Die „Copyback“-Funktion wurde erfolgreich eingerichtet.",
+        "copybackConfigFail": "Die „Copyback“-Funktion konnte nicht eingerichtet werden.",
+        "copybackConfig": "Die „Copyback“-Funktion konfigurieren."
+        }
     },
     "pagePhysicalDevice": {
         "table": {

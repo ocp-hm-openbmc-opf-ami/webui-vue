@@ -1024,7 +1024,24 @@
         "logicalDevicesCount": "Количество логических устройств",
         "maxLogicalDevicesCount": "Максимальное количество логических устройств",
         "maxPhysicalDevicesCountPerLogicalDevicesCount": "Максимальное количество физических устройств на логическое устройство",
-        "hotSparesCount": "Количество горячих резервов"
+        "hotSparesCount": "Количество горячих резервов",
+        "modal": {
+            "dropdownManagementBtn": "Управление",
+            "titleControllerManagement": "Управление контроллером",
+            "titleRaidController": "RAID-контроллер: ",
+            "labelCopybackConfig": "Настройки Copyback",
+            "labelEnableCopybackConfig": "Copyback",
+            "labelEnableHDDCopyback": "Smart Copyback для HDD",
+            "labelEnableSSDCopyback": "Smart Copyback для SSD",
+            "copybackConfigHelperText": "Установите настройки, связанные с Copyback.",
+            "requiredEnableCopybackHelperText1": "Этот параметр будет автоматически включен, если включена функция Smart Copyback для HDD или SSD.",
+            "requiredEnableCopybackHelperText2": "Если этот параметр выключен, то функции Smart Copyback для HDD и SSD тоже будут выключены."
+        },
+        "toast": {
+        "copybackConfigSuccess": "Функция «Copyback» успешно настроена.",
+        "copybackConfigFail": "Не удалось настроить функцию «Copyback».",
+        "copybackConfig": "Настроить функцию «Copyback»."
+        }
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "Создать логическое устройство",

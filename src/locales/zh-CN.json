@@ -2349,7 +2349,24 @@
         "logicalDevicesCount": "逻辑设备数量",
         "maxLogicalDevicesCount": "最大逻辑设备数量",
         "maxPhysicalDevicesCountPerLogicalDevicesCount": "每个逻辑设备的最大实体设备数量",
-        "hotSparesCount": "热备份数量"
+        "hotSparesCount": "热备份数量",
+        "modal": {
+            "dropdownManagementBtn": "管理",
+            "titleControllerManagement": "控制器管理",
+            "titleRaidController": "RAID控制器：",
+            "labelCopybackConfig": "回拷配置",
+            "labelEnableCopybackConfig": "回拷",
+            "labelEnableHDDCopyback": "HDD 智能回拷",
+            "labelEnableSSDCopyback": "SSD 智能回拷",
+            "copybackConfigHelperText": "设置回拷相关配置。",
+            "requiredEnableCopybackHelperText1": "当启用 HDD 或 SSD 智能回拷功能后，该项目会自动开启。",
+            "requiredEnableCopybackHelperText2": "如果该项目关闭，那么 HDD 和 SSD 智能回拷也会一并关闭。"
+        },
+        "toast": {
+        "copybackConfigSuccess": "回拷功能已成功设置。",
+        "copybackConfigFail": "无法设置回拷功能。",
+        "copybackConfig": "配置回拷功能。"
+        }
     },
     "pagePhysicalDevice": {
         "table": {

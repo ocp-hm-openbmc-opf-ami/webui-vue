@@ -2361,7 +2361,24 @@
         "logicalDevicesCount": "Logical Devices Count",
         "maxLogicalDevicesCount": "Max Logical Devices Count",
         "maxPhysicalDevicesCountPerLogicalDevicesCount": "Max Physical Devices Count Per Logical Devices Count",
-        "hotSparesCount": "Hot Spares Count"
+        "hotSparesCount": "Hot Spares Count",
+        "modal": {
+            "dropdownManagementBtn": "Management",
+            "titleControllerManagement": "Controller Management",
+            "titleRaidController": "RAID Controller: ",
+            "labelCopybackConfig": "Copyback Configuration",
+            "labelEnableCopybackConfig": "Copyback",
+            "labelEnableHDDCopyback": "HDD Smart Copyback",
+            "labelEnableSSDCopyback": "SSD Smart Copyback",
+            "copybackConfigHelperText": "Set copyback relative configuration.",
+            "requiredEnableCopybackHelperText1": "This item will automatically turn on when either HDD or SSD Smart Copyback is turned on.",
+            "requiredEnableCopybackHelperText2": "If this item is turned off, both HDD and SSD Smart Copyback are also turned off."
+        },
+        "toast": {
+            "copybackConfigSuccess": "The 'Copyback' feature has been successfully set up.",
+            "copybackConfigFail": "Unable to set up the 'Copyback' feature.",
+            "copybackConfig": "Configure the 'Copyback' feature."
+        }
     },
     "pagePhysicalDevice": {
         "table": {

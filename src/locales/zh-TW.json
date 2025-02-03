@@ -2353,7 +2353,24 @@
         "logicalDevicesCount": "邏輯設備數量",
         "maxLogicalDevicesCount": "最大邏輯設備數量",
         "maxPhysicalDevicesCountPerLogicalDevicesCount": "每個邏輯設備的最大實體設備數量",
-        "hotSparesCount": "熱備援數量"
+        "hotSparesCount": "熱備援數量",
+       "modal": {
+            "dropdownManagementBtn": "管理",
+            "titleControllerManagement": "控制器管理",
+            "titleRaidController": "RAID 控制器：",
+            "labelCopybackConfig": "回寫設定",
+            "labelEnableCopybackConfig": "回寫",
+            "labelEnableHDDCopyback": "HDD 智慧回寫",
+            "labelEnableSSDCopyback": "SSD 智慧回寫",
+            "copybackConfigHelperText": "設定回寫相關配置。",
+            "requiredEnableCopybackHelperText1": "當啟用了 HDD 或 SSD 智慧回寫功能後，該項目會自動開啟。",
+            "requiredEnableCopybackHelperText2": "如果該項目關閉，那麼 HDD 和 SSD 智慧回寫功能也會一併關閉。"
+        },
+        "toast": {
+        "copybackConfigSuccess": "回寫功能已成功設定。",
+        "copybackConfigFail": "無法設定回寫功能。",
+        "copybackConfig": "設定回寫功能。"
+        }
     },
     "pagePhysicalDevice": {
         "table": {
