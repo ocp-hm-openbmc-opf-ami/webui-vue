@@ -196,7 +196,10 @@ export default {
       form: {
         serverUri: {
           required,
-          pattern: helpers.regex('pattern', /^[a-zA-Z0-9/\\_.:]+$/),
+          pattern: helpers.regex(
+            'pattern',
+            /^(localhost|127\.0\.0\.1|((25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})(\.)){3}(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})|([0-9A-Fa-f]{1,4}:){7,7}[0-9A-Fa-f]{1,4}|(::1))$/,
+          ),
         },
         imagePath: {
           required,
@@ -224,6 +227,7 @@ export default {
       },
     };
   },
+
   methods: {
     mountChange() {
       this.form.username = '';
