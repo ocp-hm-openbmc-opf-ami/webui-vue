@@ -63,7 +63,9 @@ const BackupAndRestore = {
         )
         .then((response) => {
           // Create a temporary URL
-          const url = response.data['@Message.ExtendedInfo'][0].MessageArgs[0];
+          const url =
+            response.data['BackupFeatures@Message.ExtendedInfo'][0]
+              .MessageArgs[0];
 
           // Create a link element
           const link = document.createElement('a');
