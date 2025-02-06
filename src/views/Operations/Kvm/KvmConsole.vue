@@ -140,6 +140,7 @@ export default {
       if (this.status === Connected) {
         return 'success';
       } else if (this.status === Disconnected) {
+        this.$root.$emit('disable-softkeyboard-btn');
         return 'danger';
       }
       return 'secondary';
@@ -178,6 +179,7 @@ export default {
     this.$store.dispatch('controls/getLastPowerOperationTime');
     this.$store.dispatch('global/getSystemInfo');
     window.addEventListener('beforeunload', this.handleChildWindowBeforeUnload);
+    window.addEventListener('blur', this.handleSoftKeyboardSyncedClose);
   },
   mounted() {
     // Start periodic check when component is mounted
@@ -195,11 +197,13 @@ export default {
     if (this.checkConsoleWindowInterval) {
       clearInterval(this.checkConsoleWindowInterval);
     }
+    this.handleSoftKeyboardSyncedClose();
     window.removeEventListener('resize', this.resizeKvmWindow);
     window.removeEventListener(
       'beforeunload',
       this.handleChildWindowBeforeUnload,
     );
+    window.removeEventListener('blur', this.handleSoftKeyboardSyncedClose);
     this.closeTerminal();
   },
   methods: {
@@ -263,12 +267,8 @@ export default {
     },
     openNewWindow() {
       if (this.rfb != null) {
+        this.handleSoftKeyboardSyncedClose();
         this.closeTerminal();
-        // close the softkeyboard if kvm is opening in new window
-        const softkeyboardComponent = this.$refs.softkeyboard;
-        if (softkeyboardComponent) {
-          softkeyboardComponent.closeSoftKeyboard();
-        }
       }
       this.isConsoleWindow = window.open(
         '#/console/kvm?popup=true', // Added query parameter
@@ -281,6 +281,7 @@ export default {
       });
     },
     handleChildWindowBeforeUnload() {
+      this.handleSoftKeyboardSyncedClose();
       if (this.isConsoleWindow && !this.isConsoleWindow.closed) {
         this.isConsoleWindow.close();
         this.isConsoleWindowOpen = false; // Reset the flag when window closes
@@ -398,6 +399,13 @@ export default {
           return this.$t('pageKvm.forcedRestartTooltip');
         default:
           return '';
+      }
+    },
+    handleSoftKeyboardSyncedClose() {
+      const softkeyboardComponent = this.$refs.softkeyboard;
+      if (softkeyboardComponent) {
+        softkeyboardComponent.resetSoftKeyboardCapsState();
+        softkeyboardComponent.closeSoftKeyboard();
       }
     },
   },

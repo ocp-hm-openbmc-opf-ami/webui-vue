@@ -185,6 +185,11 @@ export default class AMI_RFB extends RFB {
       return false;
     }
     this._hostLEDstate = LEDState;
+
+    /* Update the host LED status in KVM store */
+    if (this._hostLEDstate != store.getters['kvm/gethostKeyboardLEDState']) {
+      store.commit('kvm/sethostKeyboardLEDState', this._hostLEDstate);
+    }
     Log.Debug(
       '<< AMI_RFB._handleKeyboardLedState-KeyboardLedState:',
       this._hostLEDstate,

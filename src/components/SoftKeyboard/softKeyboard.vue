@@ -90,6 +90,11 @@ export default {
       this.selectKeyboardLanguage = 'Open Soft Keyboard';
       this.$root.$emit('reset-keyboard-location');
     },
+    resetSoftKeyboardCapsState() {
+      if (this.$store.getters['kvm/getSoftKeyboardStatus'].capsKeyStatus) {
+        this.releaseCaps();
+      }
+    },
     changeKeyboardLanguage(name, val) {
       if (this.selectKeyboardLanguage == name) {
         this.selectKeyboardLanguage = 'Open Soft Keyboard';
