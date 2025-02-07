@@ -46,6 +46,7 @@ import i18n from './i18n';
 import { format } from 'date-fns-tz';
 import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
+const moment = require('moment-timezone');
 
 // Filters
 Vue.filter('shortTimeZone', function (value) {
@@ -55,6 +56,12 @@ Vue.filter('shortTimeZone', function (value) {
     .pop();
   const regexNotUpper = /[*a-z ]/g;
   return longTZ.replace(regexNotUpper, '');
+});
+
+// Short timezone using the timezone
+Vue.filter('shortTzOffset', function (value) {
+  const shortTz = moment().tz(value).format('z');
+  return shortTz;
 });
 
 Vue.filter('formatDate', function (value) {

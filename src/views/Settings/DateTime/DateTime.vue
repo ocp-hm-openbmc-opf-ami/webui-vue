@@ -346,10 +346,8 @@ export default {
       return this.$store.getters['global/isUtcDisplay'];
     },
     timezone() {
-      if (this.isUtcDisplay) {
-        return 'UTC';
-      }
-      return this.localOffset();
+      const timeZoneName = this.$store.getters['global/timeZone'];
+      return this.localOffsetTimezone(timeZoneName);
     },
   },
   watch: {
@@ -365,8 +363,8 @@ export default {
       this.form.manual.dateOffset = this.isDate();
       this.form.manual.timeOffset = this.isTime(true);
     },
-    timeZoneOffset() {
-      this.form.ntp.timezoneName = this.$store.getters['global/timeZone'];
+    timeZoneOffset(newVal) {
+      this.form.ntp.timeZoneName = newVal;
     },
   },
   created() {
@@ -404,6 +402,7 @@ export default {
     },
     isTime(timeOffset) {
       const bmcDateTime = this.$store.getters['global/bmcDateTime'];
+      const timeZoneName = this.$store.getters['global/timeZone'];
       var time = null;
       if (localStorage.getItem('storedUtcDisplay') == 'false') {
         var dateTime = new Date(bmcDateTime);
@@ -426,7 +425,10 @@ export default {
       } else {
         if (timeOffset) {
           time =
-            bmcDateTime?.slice(11, 19) + ' (UTC' + bmcDateTime?.slice(19) + ')';
+            bmcDateTime?.slice(11, 19) +
+            ' (' +
+            this.localOffsetTimezone(timeZoneName) +
+            ')';
         } else time = bmcDateTime?.slice(11, 16);
       }
       return time;

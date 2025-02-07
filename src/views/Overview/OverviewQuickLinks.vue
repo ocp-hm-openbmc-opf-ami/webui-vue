@@ -39,17 +39,11 @@ export default {
   computed: {
     bmcTime() {
       let dateTime = this.$store.getters['global/bmcDateTime'];
+      let timeZoneName = this.$store.getters['global/timeZone'];
       if (this.$store.getters['global/isUtcDisplay'] == false) {
         return dateTime ? this.offsetDateTime(dateTime) : null;
       } else {
-        return dateTime
-          ? dateTime?.slice(0, 10) +
-              ' ' +
-              dateTime?.slice(11, 19) +
-              ' (UTC' +
-              dateTime?.slice(19) +
-              ')'
-          : null;
+        return dateTime ? this.offsetDateTimeUTC(dateTime, timeZoneName) : null;
       }
     },
   },
@@ -59,6 +53,16 @@ export default {
     });
   },
   methods: {
+    offsetDateTimeUTC(dateTime, timeZoneName) {
+      return (
+        dateTime?.slice(0, 10) +
+        ' ' +
+        dateTime?.slice(11, 19) +
+        ' (' +
+        this.localOffsetTimezone(timeZoneName) +
+        ')'
+      );
+    },
     offsetDateTime(dateTime) {
       var date = new Date(dateTime),
         dateFormat =
@@ -74,7 +78,7 @@ export default {
             date.getSeconds().toString().padStart(2, '0'),
           ].join(':') +
           ' (' +
-          this.localOffset() +
+          this.localOffset().split(' ')[0] +
           ')';
       return dateFormat;
     },

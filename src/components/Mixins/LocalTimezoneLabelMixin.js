@@ -8,6 +8,10 @@ const LocalTimezoneLabelMixin = {
       const pattern = `'${shortTz}' O`;
       return format(new Date(), pattern, { timezone }).replace('GMT', 'UTC');
     },
+    localOffsetTimezone(timezone) {
+      const shortTimeZoneOffset = this.$options.filters.shortTzOffset(timezone);
+      return shortTimeZoneOffset;
+    },
   },
 };
 
