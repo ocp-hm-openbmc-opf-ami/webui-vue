@@ -1408,6 +1408,8 @@
         "connected": "Connected",
         "connecting": "Connecting",
         "disconnected": "Disconnected",
+	"alreadyKVMSession": "KVM session is already active for this web session. Only one KVM session is allowed for a web session",
+        "alreadyKVMSessionactive":"Already a session is running in this browser",
         "alreadyActiveSession": "Already master KVM session is Running! Please try after some time.",
         "alreadyInMasterSession": "Master session is Running",
         "maximumSessionReached": "Maximum KVM Session Reached",

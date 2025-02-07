@@ -48,6 +48,7 @@ export default class AMI_RFB extends RFB {
 
     this._hostLEDstate = -1; //variable to hold Host keyboard LED state
     this.maxSessioninfo = null;
+    this.AlreadyKVMLaunched = null;
 
     Log.Debug('<< AMI_RFB.constructor');
   }
@@ -241,12 +242,18 @@ export default class AMI_RFB extends RFB {
     this.maxSessioninfo = details.includes('Max sessions')
       ? 'Max session'
       : null;
+    this.AlreadyKVMLaunched = details.includes('Already a session is running')
+      ? 'AlreadyKVMLaunched'
+      : null;
     super._fail(details);
   }
 
   _updateConnectionState(state) {
     if (this.maxSessioninfo == 'Max session') {
       this._rfbCleanDisconnect = 'Max session';
+    }
+    if (this.AlreadyKVMLaunched == 'AlreadyKVMLaunched') {
+      this._rfbCleanDisconnect = 'AlreadyKVMLaunched';
     }
     super._updateConnectionState(state);
   }

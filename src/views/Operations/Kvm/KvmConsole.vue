@@ -126,6 +126,7 @@ export default {
         this.$t('pageKvm.powerOperation.forcedRestart'),
       ],
       MaxkvmSession: false,
+      AlreadykvmLaunched: false,
     };
   },
   computed: {
@@ -134,7 +135,7 @@ export default {
       return this.$route.query.popup === 'true';
     },
     serverStatusIcon() {
-      if (this.MaxkvmSession == true) {
+      if (this.AlreadykvmLaunched == true || this.MaxkvmSession == true) {
         return 'secondary';
       }
       if (this.status === Connected) {
@@ -149,6 +150,10 @@ export default {
       return this.$store.getters['controls/serverStatus'];
     },
     serverStatus() {
+      if (this.AlreadykvmLaunched == true) {
+        this.errorToast(this.$t('pageKvm.alreadyKVMSession'));
+        return this.$t('pageKvm.alreadyKVMSessionactive');
+      }
       if (this.MaxkvmSession == true) {
         this.errorToast(this.$t('pageKvm.maximumkvmSessionReached'));
         return this.$t('pageKvm.maximumSessionReached');
@@ -245,6 +250,8 @@ export default {
           that.status = Disconnected;
           this.MaxkvmSession =
             event.detail.clean === 'Max session' ? true : false;
+          this.AlreadykvmLaunched =
+            event.detail.clean === 'AlreadyKVMLaunched' ? true : false;
         });
       }, 5000);
     },
