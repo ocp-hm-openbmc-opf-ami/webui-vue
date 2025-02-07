@@ -1481,7 +1481,7 @@
             "serverAddress": "Server Address",
             "port": "Port",
             "secret": "Secret",
-            "groupName1": "Group Name1 - optional",
+            "groupName1": "Group Name1",
             "groupName2": "Group Name2 - optional",
             "groupName3": "Group Name3 - optional",
             "privilege1": "Privilege 1",

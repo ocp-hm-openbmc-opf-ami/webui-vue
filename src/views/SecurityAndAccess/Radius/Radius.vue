@@ -110,7 +110,13 @@
                   v-model="radius.groupName1"
                   :disabled="!radius.authentication"
                   type="text"
+                  :state="getValidationState($v.radius.groupName1)"
+                  aria-describedby="groupName1-help-block"
+                  @input="$v.radius.groupName1.$touch()"
                 />
+                <b-form-invalid-feedback role="alert">
+                  {{ $t('global.form.fieldRequired') }}
+                </b-form-invalid-feedback>
               </b-form-group>
             </b-col>
             <b-col sm="6" xl="4">
@@ -123,7 +129,13 @@
                   v-model="radius.groupName2"
                   :disabled="!radius.authentication"
                   type="text"
+                  :state="getValidationState($v.radius.groupName2)"
+                  aria-describedby="groupName2-help-block"
+                  @input="$v.radius.groupName2.$touch()"
                 />
+                <b-form-invalid-feedback role="alert">
+                  {{ $t('global.form.fieldRequired') }}
+                </b-form-invalid-feedback>
               </b-form-group>
             </b-col>
             <b-col sm="6" xl="4">
@@ -136,7 +148,13 @@
                   v-model="radius.groupName3"
                   :disabled="!radius.authentication"
                   type="text"
+                  :state="getValidationState($v.radius.groupName3)"
+                  aria-describedby="groupName3-help-block"
+                  @input="$v.radius.groupName3.$touch()"
                 />
+                <b-form-invalid-feedback role="alert">
+                  {{ $t('global.form.fieldRequired') }}
+                </b-form-invalid-feedback>
               </b-form-group>
             </b-col>
           </b-row>
@@ -228,7 +246,7 @@ import PageTitle from '@/components/Global/PageTitle';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
-import { required } from 'vuelidate/lib/validators';
+import { requiredIf } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
 
 export default {
@@ -277,28 +295,57 @@ export default {
     return {
       radius: {
         serverAddress: {
-          required,
+          required: requiredIf(function () {
+            return this.radius.authentication;
+          }),
           pattern: function (val) {
+            if (!this.radius.authentication) return true;
             return this.serverAddressValidation(val);
           },
         },
         port: {
-          required,
+          required: requiredIf(function () {
+            return this.radius.authentication;
+          }),
           pattern: function (pw) {
+            if (!this.radius.authentication) return true;
             return this.radiusPortValueValidation(pw);
           },
         },
         secret: {
-          required,
+          required: requiredIf(function () {
+            return this.radius.authentication;
+          }),
         },
         privilege1: {
-          required,
+          required: requiredIf(function () {
+            return this.radius.authentication;
+          }),
+        },
+        groupName1: {
+          required: requiredIf(function () {
+            return this.radius.authentication;
+          }),
         },
         privilege2: {
-          required,
+          required: requiredIf(function () {
+            return this.radius.authentication && !!this.radius.groupName2;
+          }),
+        },
+        groupName2: {
+          required: requiredIf(function () {
+            return this.radius.authentication && !!this.radius.privilege2;
+          }),
         },
         privilege3: {
-          required,
+          required: requiredIf(function () {
+            return this.radius.authentication && !!this.radius.groupName3;
+          }),
+        },
+        groupName3: {
+          required: requiredIf(function () {
+            return this.radius.authentication && !!this.radius.privilege3;
+          }),
         },
       },
     };

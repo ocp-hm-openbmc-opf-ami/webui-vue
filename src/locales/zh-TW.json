@@ -1476,7 +1476,7 @@
             "serviceAddress": "伺服器位址",
             "port": "埠號",
             "secret": "密碼",
-            "groupName1": "群組名稱 1 - 可選",
+            "groupName1": "群組名稱 1",
             "groupName2": "組名稱2 - 可選",
             "groupName3": "組名稱3 - 可選",
             "privilege1": "特權 1",

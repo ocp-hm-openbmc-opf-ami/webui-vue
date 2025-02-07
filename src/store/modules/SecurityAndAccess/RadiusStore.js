@@ -38,17 +38,23 @@ const RadiusStore = {
               ServiceAddress: saveConfigValues.serverAddress,
               ServicePort: saveConfigValues.port,
               Secret: saveConfigValues.secret,
-              GroupName1: saveConfigValues.GroupName1,
-              GroupName2: saveConfigValues.GroupName2,
-              GroupName3: saveConfigValues.GroupName3,
-              Privilege1: saveConfigValues.Privilege1,
-              Privilege2: saveConfigValues.Privilege2,
-              Privilege3: saveConfigValues.Privilege3,
             },
           },
         },
         ServiceEnabled: saveConfigValues.authentication,
       };
+      [
+        'GroupName1',
+        'GroupName2',
+        'GroupName3',
+        'Privilege1',
+        'Privilege2',
+        'Privilege3',
+      ].forEach((key) => {
+        if (saveConfigValues[key]) {
+          Oem.Oem.Ami.RADIUS[key] = saveConfigValues[key];
+        }
+      });
       return await api
         .patch(
           '/redfish/v1/AccountService/ExternalAccountProviders/RADIUS',

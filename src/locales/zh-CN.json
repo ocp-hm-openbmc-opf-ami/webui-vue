@@ -1473,7 +1473,7 @@
             "serviceAddress": "服务器地址",
             "port": "端口",
             "secret": "密码",
-            "groupName1": "组名 1 - 可选",
+            "groupName1": "组名 1",
             "groupName2": "组名 2 - 可选",
             "groupName3": "组名 3 - 可选",
             "privilege1": "特权 1",

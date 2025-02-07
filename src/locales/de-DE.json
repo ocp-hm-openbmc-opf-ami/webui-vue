@@ -1475,7 +1475,7 @@
             "serviceAddress": "Serveradresse",
             "port": "Hafen",
             "secret": "Geheimnis",
-            "groupName1": "Gruppenname1 – optional",
+            "groupName1": "Gruppenname1",
             "groupName2": "Gruppenname2 - optional",
             "groupName3": "Gruppenname3 - optional",
             "privilege1": "Privileg 1",
