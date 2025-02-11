@@ -1,7 +1,7 @@
 {
     "global": {
         "action": {
-            "add": "新增",
+            "add": "添加",
             "cancel": "取消",
             "clearAll": "全部清除",
             "confirm": "确认",
@@ -47,7 +47,7 @@
             "useCursorKeysToNavigateCalendarDates": "使用方向键导览日曆日期"
         },
         "fileUpload": {
-            "browseText": "新增档案",
+            "browseText": "添加档案",
             "clearSelectedFile": "清除已选择的档案"
         },
         "form": {
@@ -60,7 +60,7 @@
             "invalidValue": "无效的值",
             "lengthMustBeBetween": "字元长度必须在  %{min} – %{max} 之间",
             "mustBeAtLeast": "最少必须 %{value}",
-            "optional": "选项",
+            "optional": "选填",
             "passwordsDoNotMatch": "密码不相同",
             "required": "必要",
             "search": "搜索",
@@ -86,13 +86,13 @@
             "noRecordsMessage": "无纪录",
             "emptySearchMessage": "没有与搜索条件匹配的项目",
             "expandTableRow": "展开表格栏位",
-            "fromDate": "表格日期",
+            "fromDate": "开始日期",
             "items": "%{count} 项目",
             "itemsPerPage": "每一页的项目",
             "selectAll": "全选",
             "selectItem": "选择项目",
             "selectedItems": "从 项目 过滤  %{filterCount} of %{count} items",
-            "toDate": "到日期",
+            "toDate": "结束日期",
             "viewAll": "检视全部",
             "overAllSystemHealth": "整体系统状态"
         },
@@ -199,7 +199,7 @@
         "factoryReset": "恢復原厂设定",
         "firmware": "韧体",
         "PreserveConfiguration": "Preserve",
-        "inventory": "清单",
+        "inventory": "清单与 LEDs",
         "kvm": "KVM",
         "ldap": "LDAP",
         "userManagement": "用户管理",
@@ -208,12 +208,12 @@
         "vlan": "VLAN",
         "overview": "概要",
         "pageNotFound": "找不到页面",
-        "postCodeLogs": "POST code 纪录",
+        "postCodeLogs": "POST 代码纪录",
         "powerRestorePolicy": "电源恢復政策",
         "profileSettings": "人物简介设定",
         "rebootBmc": "重启BMC",
         "policies": "政策",
-        "sensors": "感应器",
+        "sensors": "传感器",
         "serialOverLan": "序列 LAN (SOL) 控制台",
         "serverPowerOperations": "伺服器电源运作",
         "certificates": "凭证",
@@ -228,7 +228,7 @@
         "addc": "ADDC",
         "autonomousCrashDump": "ACD",
         "asd": "ASD",
-        "raidManagement": "RAID管理",
+        "raidManagement": "磁盘阵列管理",
         "adapter": "适配器",
         "physicalDevice": "实体设备",
         "logicalDevice": "逻辑设备",
@@ -240,7 +240,7 @@
         "Bond": "绑定",
         "License": "管理许可证",
         "systemInventory":"系统库存",
-        "networkDDNS": "Network DDNS",
+        "networkDDNS": "网络 DDNS",
         "networkLink": "网络链接",
         "ncsi": "NCSI",
         "pam": "PAM 订单设置",
@@ -359,7 +359,7 @@
             "sendNsupdateEnabled": "发送 Nsupdate",
             "domainConfiguration": "域配置",
             "domainNameSetting": "域名",
-            "iPPriority": "IP优先级",
+            "iPPriority": "IP 优先级",
             "staticDomainName": "静态域名",
             "hostConfiguration": "主机配置",
             "hostNameSetting": "主机名称",
@@ -368,7 +368,7 @@
             "ddnsMethod": "DDNS 方法",
             "nsUpdateEnable": "NS 更新启用",
             "useTSIG": "使用 TSIG",
-            "doNsupdate": "NS更新",
+            "doNsupdate": "NS 更新",
             "manual": "手动",
             "auto": "自动",
             "register": "登记",
@@ -405,14 +405,14 @@
             "name": "名称",
             "description": "描述",
             "model": "型号",
-            "indicatorLED": "LED指示灯",
+            "indicatorLED": "LED 指示灯",
             "manufacture": "制造商",
             "powerState": "电源状态",
             "serialNumuber": "序列号",
             "partNumuber": "零件号",
             "systemType": "系统类型",
             "assetTag": "资产标签",
-            "biosVersion": "Bios版本",
+            "biosVersion": "BIOS 版本",
             "state": "状态"
         },
         "processor": {
@@ -429,7 +429,7 @@
             "effectiveFamily": "高效家庭",
             "totalCores": "总核心数",
             "state": "状态",
-            "operatingSpeedMHz": "工作速度MHz",
+            "operatingSpeedMHz": "工作速度 MHz",
             "totalEnabledCores": "启用的核心总数",
             "sparePartNumber": "备件编号",
             "instructionSet": "指令集",
@@ -441,12 +441,12 @@
             "health": "健康"
         },
         "processorFPGA": {
-            "info": "FPGA信息",
+            "info": "FPGA 信息",
             "id": "Id",
             "name": "名称",
             "firmwareId": "固件 ID",
             "firmwareManufacturer": "固件制造商",
-            "fpgaType": "FPGA类型",
+            "fpgaType": "FPGA 类型",
             "interfaceType": "接口类型",
             "model": "型号",
             "pcieVirtualFunctions": "PCIe 虚拟功能",
@@ -457,7 +457,7 @@
             "memoryControllerInfo": "内存控制器信息",
             "id": "Id",
             "name": "名称",
-            "capacityMiB": "容量MiB",
+            "capacityMiB": "容量 MiB",
             "manufacturer": "制造商",
             "serialNumuber": "序列号",
             "partNumuber": "零件号",
@@ -481,7 +481,7 @@
             "state": "状态",
             "powerState": "电源状态",
             "assetTag": "资产标签",
-            "indicatorLED": "LED指示灯",
+            "indicatorLED": "LED 指示灯",
             "locationIndicatorActive": "位置指示器激活",
             "manufacturer": "制造商",
             "partNumber": "零件号",
@@ -490,7 +490,7 @@
         "networkInterfaces": {
             "networkInterfacesInfo": "网络接口信息",
             "id": "Id",
-            "mACAddress": "MAC地址",
+            "mACAddress": "MAC 地址",
             "interfaceEnabled": "接口启用",
             "iPv4Addresses": "IPv4 地址",
             "hostName": "主机名",
@@ -538,7 +538,7 @@
             "lowerThresholdFatal": "LF"
         },
         "thermal": {
-            "thermal": "热的",
+            "thermal": "热装置",
             "fanINFO": "风扇信息",
             "name": "名称",
             "sensorNumber": "传感器编号",
@@ -564,7 +564,7 @@
             "lowerThresholdFatal": "LF"
         },
         "pcieDevice": {
-            "pcieDevice": "PCIE设备",
+            "pcieDevice": "PCIE 设备",
             "pcieDeviceInfo": "PCIE 设备信息",
             "name": "名称",
             "id": "Id",
@@ -573,19 +573,19 @@
             "state": "状态"
         },
         "pcieFunction": {
-            "pcieFunction": "PCIE功能",
-            "pcieFunctionInfo": "PCIE功能信息",
+            "pcieFunction": "PCIE 功能",
+            "pcieFunctionInfo": "PCIE 功能信息",
             "id": "Id",
             "name": "名称",
             "deviceLinked": "设备链接",
             "deviceClass": "设备类别",
-            "classCode": "班级代码",
-            "deviceId": "设备ID",
+            "classCode": "类别代码",
+            "deviceId": "设备 ID",
             "vendorId": "供应商 ID",
-            "functionId": "功能ID",
+            "functionId": "功能 ID",
             "functionType": "功能类型",
             "revisionId": "修订 ID",
-            "subSystemId": "子系统ID",
+            "subSystemId": "子系统 ID",
             "subSystemVendorId": "子系统供应商 ID",
             "state": "状态"
         },
@@ -605,12 +605,12 @@
         },
         "storageController": {
             "storageControllerInfo": "存储控制器信息",
-            "memberId": "成员ID",
+            "memberId": "成员 ID",
             "name": "名称",
             "serialNumuber": "序列号",
             "model": "型号",
             "firmwareVersion": "固件版本",
-            "speedGbs": "速度Gbs",
+            "speedGbs": "速度 Gbs",
             "state": "状态"
         },
         "memoryAssembly" : {
@@ -620,7 +620,7 @@
             "binaryDataURI": "二进制数据 URI",
             "description": "描述",
             "engineeringChangeLevel": "工程变更级别",
-            "memberId": "会员ID",
+            "memberId": "会员 ID",
             "model": "模型",
             "partNumber": "零件号",
             "physicalContext": "物理环境",
@@ -630,7 +630,7 @@
             "serialNumber": "序列号",
             "sparePartNumber": "备件编号",
             "state": "状态",
-            "vendor": "供应商",
+            "vendor": "厂商",
             "version": "版本",
             "health": "健康"
         },
@@ -651,7 +651,7 @@
             "performanceDegraded": "性能下降",
             "predictedMediaLifeLeftPercent": "预测媒体剩余寿命百分比",
             "remainingSpareBlockPercentage": "剩余备用块百分比",
-            "operatingSpeedMHz": "工作速度MHz"
+            "operatingSpeedMHz": "工作速度 MHz"
         }
     },
     "pageBackupAndRestore": {
@@ -679,10 +679,10 @@
         }
     },
     "pageCups": {
-        "pageDescription": "CUPS配置",
+        "pageDescription": "CUPS 配置",
         "dynamicLoadFactor": "动态负载系数配置",
         "staticLoadFactor": "静态负载系数配置",
-        "cupsService": "Cups服务配置",
+        "cupsService": "Cups 服务配置",
         "dynamicLoadFactorCoreLoadFactor": "核心负载系数",
         "dynamicLoadFactorMemoryLoadFactor": "内存负载系数",
         "dynamicLoadFactorIioLoadFactor": "Iio 负载系数",
@@ -705,7 +705,7 @@
         }
     },
     "pageBsod": {
-        "capturedBsod": "捕获的 Bsod",
+        "capturedBsod": "捕获的 BSOD",
         "downloadBsodImage": "下载",
         "deleteBsodImage": "删除",
         "triggerBsodImage": "触发",
@@ -767,8 +767,8 @@
     "pageNic": {
         "currentTemperature": "当前温度",
         "channelCount": "通道数",
-        "vendorId": "供应商ID",
-        "deviceId": "设备ID",
+        "vendorId": "供应商 ID",
+        "deviceId": "设备 ID",
         "linkStatus": "链接状态",
         "firmwareName": "固件名称",
         "firmwareVersion": "固件版本",
@@ -783,11 +783,11 @@
         "getPartitionStatisticsProperties": "分区统计属性",
         "getPortConfigurationProperties": "端口配置属性",
         "macAddressCount": "MAC 地址计数",
-        "macAddress": "MAC地址",
+        "macAddress": "MAC 地址",
         "MCTP_over_PCIE_EID": "MCTP_over_PCIE_EID",
         "MCTP_over_SMBUS_EID": "MCTP_over_SMBUS_EID",
         "manufacturerId": "制造商 Id",
-        "NCSIVersion": "NCSI版本",
+        "NCSIVersion": "NCSI 版本",
         "OEMMacAddress": "OEM MAC 地址",
         "noInformationAvailable":"NIC 信息不可用",
         "allMulticastAddressSupport": "所有组播地址支持",
@@ -820,7 +820,7 @@
         "VLANTagCount": "VLAN 标记计数",
         "VLANTagStatus": "VLAN 标签状态",
         "headers": {
-            "MacAddress": "MAC地址信息",
+            "MacAddress": "MAC 地址信息",
             "linkStatus": "链接信息",
             "vlanTagStatus": "VLAN信息"
         }
@@ -855,11 +855,11 @@
         "ipmiVersion": "智能平台管理接口版本",
         "manufacturer": "制造商",
         "partNumber": "零件号",
-        "mctpSupport": "Mctp支持",
+        "mctpSupport": "MCTP 支持",
         "pcieMaximumLinkWidth": "PCIe 最大链路宽度",
         "pciePortInformation": "PCIe 端口信息",
         "pciePortNumber": "PCIe 端口号",
-        "pcieRecordVersion": "PCIe记录版本",
+        "pcieRecordVersion": "PCIe 记录版本",
         "pcieSupportedlinkSpeeds": "PCIe 支持的链路速度",
         "refClockCapability": "参考时钟能力",
         "PCIePortMultiRecord": "NVMe PCIe 端口多记录",
@@ -868,23 +868,23 @@
         "compositeTemperature": "复合温度",
         "driveFunctional": "驱动器功能",
         "pdlu": "PDLU",
-        "port0PCIeLinkActive": "端口0PCIeLink活动",
+        "port0PCIeLinkActive": "端口 0PCIeLink 活动",
         "port1PCIeLinkActive": "端口 1PCIeLink 活动",
         "resetNotRequired": "不需要重置",
         "availableSpare": "可用备用",
         "compositeTemperatureChange": "复合温度变化",
-        "nvmeBasicManagementCommand": "NVMe基础管理命令",
+        "nvmeBasicManagementCommand": "NVMe 基础管理命令",
         "controllerEnableChangeOccured": "控制器启用发生更改",
         "controllerFatalStatus": "控制器致命状态",
         "controllerStatusChange": "控制器状态变化",
         "criticalWarnings": "严重警告",
-        "nvmeSubSystemResetOccured": "NVMe子系统发生重置",
+        "nvmeSubSystemResetOccured": "NVMe 子系统发生重置",
         "nameSpaceAttributeChange": "名称空间属性更改",
         "percentageUsed": "使用百分比",
         "ready": "准备好",
         "shutDownStatus": "关机状态",
         "firmwareActivated": "固件已激活",
-        "eptFactor": "EPTF因子",
+        "eptFactor": "EPTF 因子",
         "initialPowerSupplyReq1_8v": "初始电源要求1.8v",
         "initialPowerSupplyReq12v": "初始电源要求12v",
         "initialPowerSupplyReq3_3v": "初始电源请求3.3v",
@@ -1026,7 +1026,7 @@
             "modifiedDate": "修改的日期",
             "name": "名称",
             "searchLogs": "搜寻纪录",
-            "severity": "严重",
+            "severity": "严重性",
             "status": "状态",
             "type": "型态"
         },
@@ -1184,7 +1184,7 @@
         "sectionTitleBmcCardsCombined": "BMC 和伺服器",
         "sectionTitleHostCards": "主机",
         "sectionTitleUpdateFirmware": "更新韧体",
-        "cardTitleClearConfig": "清晰的配置",
+        "cardTitleClearConfig": "清除配置",
         "clearConfigDescription": "启用 BIOS 清除配置",
         "alert": {
             "operationInProgress": "正在执行伺服器电源运作",
@@ -1278,8 +1278,8 @@
         "assemblies": "组件",
         "systemIndicator": {
             "powerStatus": "电源状态",
-            "identifyLed": "系统识别LED",
-            "sectionTitle": "LED light 控制"
+            "identifyLed": "系统识别 LED",
+            "sectionTitle": "LED 灯控制"
         },
         "table": {
             "assetTag": "资产标籤",
@@ -1415,56 +1415,56 @@
         "viewonly" : "（仅供查看）"
     },
     "pageLdap": {
-        "pageDescription": "配置LDAP设定和管理角色群",
-        "roleGroups": "角色群",
-        "settings": "设定",
-        "addRoleGroup": "新增角色群",
+        "pageDescription": "配置 LDAP 设置和管理身份组",
+        "roleGroups": "身份组",
+        "settings": "设置",
+        "addRoleGroup": "添加身份组",
         "ariaLabel": {
-            "ldapSettings": "LDAP 设定"
+            "ldapSettings": "LDAP 设置"
         },
         "form": {
             "activeDirectory": "活动目录",
             "baseDn": "基础 DN",
-            "bindDn": "绑定DN",
+            "bindDn": "绑定 DN",
             "bindPassword": "绑定密码",
-            "caCertificateValidUntil": "有效CA凭证直到",
+            "caCertificateValidUntil": "有效 CA 凭证直到",
             "groupIdAttribute": "群组 ID 属性",
             "ldapAuthentication": "LDAP 验证",
-            "ldapCertificateValidUntil": "有效LDAP凭证直到",
+            "ldapCertificateValidUntil": "有效 LDAP 凭证直到",
             "manageSslCertificates": "管理 SSL 凭证",
-            "openLDAP": "开放LDAP",
-            "secureLdapHelper": "启用安全LDAP时，必须有一个CA凭证和一个LDAP凭证",
-            "secureLdapUsingSsl": "安全LDAP 正使用 SSL",
-            "serverUri": "URI伺服器",
-            "serverUriTooltip": "正在启用LDAP改变URI方案到ldaps",
+            "openLDAP": "开放 LDAP",
+            "secureLdapHelper": "启用安全 LDAP 时，必须有一个 CA 凭证和一个 LDAP 凭证",
+            "secureLdapUsingSsl": "使用 SSL 确保 LDAP 安全",
+            "serverUri": "URI 伺服器",
+            "serverUriTooltip": "正在启用 LDAP 改变 URI 方案到 ldaps",
             "serviceType": "服务型态",
-            "userIdAttribute": "用户ID属性"
+            "userIdAttribute": "用户 ID 属性"
         },
         "modal": {
-            "addNewRoleGroup": "新增角色群组",
-            "deleteRoleGroupBatchConfirmMessage": "确定要删除 %{count} 角色群组? 此动作是不可逆的 | 确定要删除 %{count} 角色群组们? 此动作是不可逆的",
+            "addNewRoleGroup": "添加身份组",
+            "deleteRoleGroupBatchConfirmMessage": "确定要删除 %{count} 身份组? 此动作是不可逆的 | 确定要删除 %{count} 身份组们? 此动作是不可逆的",
             "deleteRoleGroupConfirmMessage": "确定要删除 '%{groupName}'? 此动作是不可逆的",
-            "deleteRoleGroup": "删除角色群组",
-            "editRoleGroup": "编辑角色群组",
+            "deleteRoleGroup": "删除身份组",
+            "editRoleGroup": "编辑身份组",
             "groupName": "群组名称",
             "groupPrivilege": "群组权限"
         },
         "tableRoleGroups": {
-            "alertContent": "LDAP 授权必须被启用以修改角色群组",
+            "alertContent": "LDAP 授权必须被启用以修改身份组",
             "groupName": "群组名称",
             "groupPrivilege": "群组权限"
         },
         "toast": {
-            "errorAddRoleGroup": "新增角色群组发生错误",
-            "errorDeleteRoleGroup": "删除角色群组发生错误 | 删除角色群组们发生错误",
-            "errorSaveActiveDirectorySettings": "储存Active Directory 设定发生错误",
-            "errorSaveLdapSettings": "储存Open LDAP 设定发生错误",
-            "errorSaveRoleGroup": "储存角色群组发生错误",
-            "successAddRoleGroup": "成功新增角色群组'%{groupName}'",
-            "successDeleteRoleGroup": "成功删除角色群组",
-            "successSaveActiveDirectorySettings": "成功储存Active Directory 设定.",
+            "errorAddRoleGroup": "添加身份组发生错误",
+            "errorDeleteRoleGroup": "删除身份组发生错误 | 删除身份组们发生错误",
+            "errorSaveActiveDirectorySettings": "储存 Active Directory 设定发生错误",
+            "errorSaveLdapSettings": "储存 Open LDAP 设定发生错误",
+            "errorSaveRoleGroup": "储存身份组发生错误",
+            "successAddRoleGroup": "成功添加身份组'%{groupName}'",
+            "successDeleteRoleGroup": "成功删除身份组",
+            "successSaveActiveDirectorySettings": "成功储存 Active Directory 设定.",
             "successSaveLdapSettings": "成功储存 Open LDAP 设定.",
-            "successSaveRoleGroup": "成功储存角色群组'%{groupName}'."
+            "successSaveRoleGroup": "成功储存身份组'%{groupName}'."
         }
     },
     "pageRadius": {
@@ -1490,10 +1490,10 @@
     },
     "pageUserManagement": {
         "accountPolicySettings": "帐户政策设定",
-        "addUser": "新增用户",
+        "addUser": "添加用户",
         "deleteUser": "删除用户 | 删除用户们",
         "editUser": "编辑用户",
-        "viewPrivilegeRoleDescriptions": "检视群权限描述",
+        "viewPrivilegeRoleDescriptions": "检视角色权限描述",
         "passwordComplexityRules": "密码複杂度规则",
         "note": "检视或修改密码複杂度请至安全性与存取权->政策页面",        
         "modal": {
@@ -1516,7 +1516,8 @@
             "username": "用户名称",
             "userPassword": "用户密码",
             "userUnlockMethod": "用户解锁方法",
-            "vmediaAccess": "视频媒体访问"
+            "passwordChangeRequired": "要求更改密码",
+            "vmediaAccess": "虚拟媒体访问"
         },
         "table": {
             "privilege": "权限",
@@ -1525,13 +1526,13 @@
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "配置此服务所管理的元件",
-            "configureManagerResources": "配置管理者资源",
+            "configureManagerResources": "配置管理员资源",
             "configureUsersAndTheirAccounts": "配置用户及他们的帐户",
-            "logInToTheServiceAndReadResources": "登入至服务及阅读政策",
+            "logInToTheServiceAndReadResources": "登入至服务及读取资源",
             "updatePasswordForCurrentUserAccount": "更新目前用户密码",
             "privilege": "权限",
-            "administrator": "管理人",
-            "operator": "操作者",
+            "administrator": "管理员",
+            "operator": "操作员",
             "readOnly": "唯读",
             "noAccess": "没有权限"
         },
@@ -1742,9 +1743,9 @@
             "informationMessage": "成功变更网路设定 请关闭此网页对谈然后开启新网页对谈使用新IP连接设备 "
         },
         "table": {
-            "addDnsAddress": "新增 IP 位址",
-            "addIpv4Address": "新增 IPv4 位址",
-            "addIpv6Address": "新增 IPv6 位址",
+            "addDnsAddress": "添加 IP 位址",
+            "addIpv4Address": "添加 IPv4 位址",
+            "addIpv6Address": "添加 IPv6 位址",
             "addressOrigin": "原始网址",
             "deleteDns": "删除 DNS 位址",
             "deleteIpv4": "删除 IPv4 位址",
@@ -1789,19 +1790,19 @@
             "virtualInterface": "虚拟介面",
             "id": "VLAN ID",
             "vlanPriority": "VLAN 优先权",
-            "add": "新增",
+            "add": "添加",
             "deleteVlan": "删除 Vlan Id"
         },
         "toast": {
             "successAddedVlan": "成功更新网路设定",
-            "errorAddedVlan": "新增 VLAN发生错误",
+            "errorAddedVlan": "添加 VLAN 发生错误",
             "successDeleteVlan": "成功删除虚拟介面",
-            "errorDeleteVlan": "删除VLAN发生错误",
+            "errorDeleteVlan": "删除 VLAN 发生错误",
             "errorVlanId": " VLAN ID 应该介于 1~4094."
         },
         "modal": {
             "confirmTitle": "确定?",
-            "confirmMessage": "这个设定可能改变设备的IP位址，无法更进一步使用. 在确认设备 IP后, 你可以以新IP登入. 你想继续吗?"
+            "confirmMessage": "这个设定可能改变设备的IP位址，无法更进一步使用. 在确认设备 IP 后, 你可以以新 IP 登入. 你想继续吗?"
         }
     },
     "pageSnmp": {
@@ -1907,7 +1908,7 @@
         }
     },
     "pageEventFilter": {
-        "pageDescription": "选择事件将触发警告",
+        "pageDescription": "选择将触发警告的事件",
         "sectionTitle": "事件过滤器",
         "eventFilterLabel": "设定警告接收者内容",
         "enableAllEvents": "启用/停用所有事件过滤器",
@@ -1919,7 +1920,7 @@
         "systemRestart": "系统重启",
         "powerUnitRedundancyFailure": "电源单位过多错误",
         "fanRedundancyFailure": "风扇过多错误",
-        "processorPresence": "处理器概论 ",
+        "processorPresence": "处理器存在",
         "voltageSensorOutOfRange": "容量感测超过范围",
         "chassisIntrusion": "机箱入侵",
         "memoryError": "记忆体错误",
@@ -2134,8 +2135,8 @@
         }
     },
     "pageSensors": {
-        "exportFilePrefix": "感测器_",
-        "searchForSensors": "搜索感测器",
+        "exportFilePrefix": "传感器_",
+        "searchForSensors": "搜索传感器",
         "table": {
             "currentValue": "目前值",
             "lowerWarning": "低于值的警告",
@@ -2231,7 +2232,7 @@
         }
     },
     "pageCertificates": {
-        "addNewCertificate": "新增凭证",
+        "addNewCertificate": "添加凭证",
         "caCertificate": "CA 凭证",
         "deleteCertificate": "删除凭证",
         "generateCsr": "产生 CSR",
@@ -2277,11 +2278,11 @@
             "validUntil": "有效期至"
         },
         "toast": {
-            "errorAddCertificate": "新增凭证失败",
+            "errorAddCertificate": "添加凭证失败",
             "errorGenerateCSR": "生成证书签名请求时出错。",
             "errorDeleteCertificate": "删除凭证失败",
             "errorReplaceCertificate": "置换凭证失败",
-            "successAddCertificate": "新增 %{certificate} 成功",
+            "successAddCertificate": "添加 %{certificate} 成功",
             "successDeleteCertificate": "删除 %{certificate} 成功",
             "successReplaceCertificate": "置换 %{certificate} 成功"
         }
@@ -2327,6 +2328,7 @@
     },
     "pageAdapter": {
         "generic": "一般资讯",
+        "storageSummary": "存储概览",
         "mA": "毫安培",
         "mV": "毫伏特",
         "celsius": "摄氏",
@@ -2338,7 +2340,7 @@
         "temperature": "温度",
         "voltage": "电压",
         "firmwareVersion": "固件版本",
-        "memberId": "成员ID",
+        "memberId": "成员 ID",
         "name": "名称",
         "serialNumber": "序列号",
         "supportedRaidTypes": "支持的 RAID 类型",
@@ -2378,7 +2380,7 @@
         "modal": {
             "dropdownManagementBtn": "管理",
             "titleControllerManagement": "控制器管理",
-            "titleRaidController": "RAID控制器：",
+            "titleRaidController": "RAID 控制器：",
             "labelCopybackConfig": "回拷配置",
             "labelEnableCopybackConfig": "回拷",
             "labelEnableHDDCopyback": "HDD 智能回拷",
@@ -2388,9 +2390,9 @@
             "requiredEnableCopybackHelperText2": "如果该项目关闭，那么 HDD 和 SSD 智能回拷也会一并关闭。"
         },
         "toast": {
-        "copybackConfigSuccess": "回拷功能已成功设置。",
-        "copybackConfigFail": "无法设置回拷功能。",
-        "copybackConfig": "配置回拷功能。"
+            "copybackConfigSuccess": "回拷功能已成功设置。",
+            "copybackConfigFail": "无法设置回拷功能。",
+            "copybackConfig": "配置回拷功能。"
         }
     },
     "pagePhysicalDevice": {
@@ -2457,7 +2459,7 @@
         "labelStopLocate": "停止定位",
         "labelStartCopyback": "开始回拷数据",
         "labelStopCopyback": "停止回拷数据",
-        "labelAddGlobalHotSpare": "新增全局热备盘",
+        "labelAddGlobalHotSpare": "添加全局热备盘",
         "labelDeleteGlobalHotSpare": "取消全局热备盘",
         "physicalDeviceActionTitle": "变更物理设备设定",
         "prepareRemovalConfirmationMsg": "将序号 {pdId} 的物理设备，设定为准备删除?",
@@ -2486,8 +2488,8 @@
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "创建逻辑设备",
-        "raidController": "RAID控制器",
-        "raidLevel": "RAID级别",
+        "raidController": "RAID 控制器",
+        "raidLevel": "RAID 级别",
         "virtualDeviceName": "虚拟设备名称",
         "logicalDeviceName": "逻辑设备名称",
         "logicalDevices": "逻辑设备",
@@ -2502,7 +2504,7 @@
         "readPolicy": "阅读政策",
         "writePolicy": "写策略",
         "cachePolicy": "缓存策略",
-        "ioPolicy": "IO政策",
+        "ioPolicy": "IO 政策",
         "accessPolicy": "存取机制",
         "diskCacheCapacity": "磁盘缓存容量",
         "unConfiguredPhysicalDrive": "未配置的实体驱动器",
@@ -2525,11 +2527,11 @@
             "unprotectedWriteBack": "不保护回写",
             "writeThrough": "直写",
             "alwaysWriteBack": "总是回信",
-            "writeBackWithBBU": "用BBU回写"
+            "writeBackWithBBU": "用 BBU 回写"
         },
         "ioPolicyOptions": {
-            "directIO": "直接IO",
-            "cachedIO": "缓存IO"
+            "directIO": "直接 IO",
+            "cachedIO": "缓存 IO"
         },
         "accessPolicyOptions": {
             "readWrite": "读写",
@@ -2588,7 +2590,7 @@
             "errorRaidOperationNotPermitted": "不允许 RAID 操作。",
             "errorRaidUnsupportedPhysicalDev": "不支持的 RAID 实体设备。",
             "errorRaidUnsupportedLogicalDev": "不支持的 RAID 逻辑设备。",
-            "errorRaidControllerBusy": "Raid 控制器正忙，无法处理命令。",
+            "errorRaidControllerBusy": "RAID 控制器繁忙，无法处理命令。",
             "successDeleteLogicalDevice": "已成功删除逻辑设备。请等待几秒钟并刷新应用程序以查看更改。",
             "errorDeleteLogicalDevice": "删除逻辑设备时出错",
             "errorNumberOfDrivesValidation": "驱动器数量不应高于未配置的实体设备数量！",
@@ -2644,7 +2646,7 @@
                 "startTime": "开始时间（24 小时制 HH:MM）",
                 "endDate": "结束日期 (YYYY-MM-DD)",
                 "endTime": "时间结束（24 小时制 HH:MM）",
-                "sourceMacAddress": "MAC地址",
+                "sourceMacAddress": "MAC 地址",
                 "protocol": "协议",
                 "drop": "降低",
                 "tcp": "TCP",
@@ -2674,11 +2676,11 @@
             "featureNotAvailable": "系统防火墙功能未启用。"
         },
         "table": {
-            "startIP": "起始IP",
-            "endIP": "结束IP",
+            "startIP": "起始 IP",
+            "endIP": "结束 IP",
             "startPort": "起始端口",
             "endPort": "结束端口",
-            "macAddress": "MAC地址",
+            "macAddress": "MAC 地址",
             "protocol": "协议",
             "startDuration": "开始持续时间",
             "endDuration": "结束持续时间",
@@ -2728,7 +2730,6 @@
         "duplexMode": "双工模式",
         "fullDuplex": "全双工",
         "halfDuplex": "半双工",
-        "duplex": "复式",
         "Mbps": "Mbps",
         "sameNetworkLinkSettings": "网络链接配置相同，因此无需保存。",
         "modifyNetworkLinkSettings": "如果用户需要更改这些接口配置，请修改父接口的值。",

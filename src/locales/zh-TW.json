@@ -60,7 +60,7 @@
             "invalidValue": "無效的值",
             "lengthMustBeBetween": "字元長度必須在  %{min} – %{max} 之間",
             "mustBeAtLeast": "最少必須 %{value}",
-            "optional": "選項",
+            "optional": "選填",
             "passwordsDoNotMatch": "密碼不相同",
             "required": "必要",
             "search": "搜索",
@@ -86,13 +86,13 @@
             "noRecordsMessage": "無紀錄",
             "emptySearchMessage": "沒有與搜索條件匹配的項目",
             "expandTableRow": "展開表格欄位",
-            "fromDate": "表格日期",
+            "fromDate": "開始日期",
             "items": "%{count} 項目",
             "itemsPerPage": "每一頁的項目",
             "selectAll": "全選",
             "selectItem": "選擇項目",
             "selectedItems": "從 項目 過濾  %{filterCount} of %{count} items",
-            "toDate": "到日期",
+            "toDate": "結束日期",
             "viewAll": "檢視全部",
             "overAllSystemHealth": "整體系統狀態"
         },
@@ -115,7 +115,7 @@
         "titleShowNavigation": "顯示導覽",
         "titleProfile": "顯示人物簡介清單",
         "titleRefresh": "更新應用程式資料",
-        "qrCodeLabel":"將以下內容新增到您選擇的身份驗證應用程式中，並在下面驗證它以啟用。",
+        "qrCodeLabel":"將以下內容新增到您選擇的身分驗證應用程式中，並在下面驗證它以啟用。",
         "backupCodeLable":"請儲存您的備份代碼以備緊急情況使用。"
     },
     "appNavigation": {
@@ -189,7 +189,7 @@
     "appPageTitle": {
         "bsod": "BSOD",
         "changePassword": "變更密碼",
-        "tfa": "兩因素身份驗證",
+        "tfa": "兩因素身分驗證",
         "power": "電源",
         "sessions": "會話",
         "dateTime": "日期與時間",
@@ -199,7 +199,7 @@
         "factoryReset": "恢復原廠設定",
         "firmware": "韌體",
         "PreserveConfiguration": "Preserve",
-        "inventory": "清單",
+        "inventory": "清單與 LEDs",
         "kvm": "KVM",
         "ldap": "LDAP",
         "userManagement": "使用者管理",
@@ -208,12 +208,12 @@
         "vlan": "VLAN",
         "overview": "概要",
         "pageNotFound": "找不到頁面",
-        "postCodeLogs": "POST code 紀錄",
+        "postCodeLogs": "POST 代碼紀錄",
         "powerRestorePolicy": "電源恢復政策",
         "profileSettings": "人物簡介設定",
         "rebootBmc": "重啟BMC",
         "policies": "政策",
-        "sensors": "感應器",
+        "sensors": "感測器",
         "serialOverLan": "序列 LAN (SOL) 控制台",
         "serverPowerOperations": "伺服器電源運作",
         "certificates": "憑證",
@@ -228,7 +228,7 @@
         "addc": "ADDC",
         "autonomousCrashDump": "ACD",
         "asd": "ASD",
-        "raidManagement": "磁盤陣列管理",
+        "raidManagement": "磁碟陣列管理",
         "adapter": "適配器",
         "physicalDevice": "實體設備",
         "logicalDevice": "邏輯設備",
@@ -240,7 +240,7 @@
         "Bond": "綁定",
         "License": "管理許可證",
         "systemInventory":"系統庫存",
-        "networkDDNS": "Network DDNS",
+        "networkDDNS": "網路 DDNS",
         "networkLink": "網路連結",
         "ncsi": "NCSI",
         "pam": "PAM 訂單設定",
@@ -357,10 +357,10 @@
             "dhcpConfiguration": "DHCP 配置",
             "sendHostNameEnabled": "發送主機名",
             "sendNsupdateEnabled": "發送 Nsupdate",
-            "domainConfiguration": "域配置",
+            "domainConfiguration": "網域配置",
             "domainNameSetting": "網域",
-            "iPPriority": "IP優先權",
-            "domainName": "網域",
+            "iPPriority": "IP 優先權",
+            "domainName": "網域名稱",
             "hostConfiguration": "主機配置",
             "hostNameSetting": "主機名稱",
             "staticHostName": "靜態主機名",
@@ -368,7 +368,7 @@
             "ddnsMethod": "DDNS 方法",
             "nsUpdateEnable": "NS 更新啟用",
             "useTSIG": "使用 TSIG",
-            "doNsupdate": "NS更新",
+            "doNsupdate": "NS 更新",
             "manual": "手動",
             "auto": "自動",
             "register": "登記",
@@ -377,7 +377,7 @@
             "ipv6IPPriority": "Ipv6",
             "tsigFileUpload": "上傳 TSIG 金鑰文件",
             "tsigFileUploadDiscription": "僅上傳（.private）文件",
-            "addDomainNames": "新增域名"
+            "addDomainNames": "新增網域名稱"
         },
         "toast": {
             "errorNsUpdate": "更新作業 DoNsUpdate 時發生錯誤",
@@ -405,14 +405,14 @@
             "name": "名稱",
             "description": "描述",
             "model": "模型",
-            "indicatorLED": "LED指示燈",
+            "indicatorLED": "LED 指示燈",
             "manufacture": "製造商",
             "powerState": "電源狀態",
             "serialNumuber": "序號",
             "partNumuber": "零件號",
             "systemType": "系統類型",
             "assetTag": "資產標籤",
-            "biosVersion": "Bios版本",
+            "biosVersion": "BIOS 版本",
             "state": "狀態"
         },
         "processor": {
@@ -429,7 +429,7 @@
             "effectiveFamily": "高效家庭",
             "totalCores": "總核心數",
             "state": "狀態",
-            "operatingSpeedMHz": "工作速度MHz",
+            "operatingSpeedMHz": "工作速度 MHz",
             "totalEnabledCores": "啟用的核心總數",
             "sparePartNumber": "備用零件編號",
             "instructionSet": "指令集",
@@ -438,15 +438,15 @@
             "totalThreads": "總線程數",
             "serialNumuber": "序號",
             "partNumuber": "零件編號",
-            "health": "Health"
+            "health": "健康"
         },
         "processorFPGA": {
-            "info": "FPGA資訊",
+            "info": "FPGA 資訊",
             "id": "Id",
             "name": "名稱",
             "firmwareId": "韌體 ID",
             "firmwareManufacturer": "韌體製造商",
-            "fpgaType": "FPGA類型",
+            "fpgaType": "FPGA 類型",
             "interfaceType": "介面類型",
             "model": "型號",
             "pcieVirtualFunctions": "PCIe 虛擬功能",
@@ -457,7 +457,7 @@
             "memoryControllerInfo": "記憶體控制器資訊",
             "id": "Id",
             "name": "名稱",
-            "capacityMiB": "容量MiB",
+            "capacityMiB": "容量 MiB",
             "manufacturer": "製造商",
             "serialNumuber": "序號",
             "partNumuber": "零件號",
@@ -481,7 +481,7 @@
             "state": "狀態",
             "powerState": "電源狀態",
             "assetTag": "資產標籤",
-            "indicatorLED": "LED指示燈",
+            "indicatorLED": "LED 指示燈",
             "locationIndicatorActive": "位置指示器激活",
             "manufacturer": "製造商",
             "partNumber": "零件號",
@@ -490,7 +490,7 @@
         "networkInterfaces": {
             "networkInterfacesInfo": "網路介面資訊",
             "id": "Id",
-            "mACAddress": "MAC位址",
+            "mACAddress": "MAC 位址",
             "interfaceEnabled": "介面啟用",
             "iPv4Addresses": "IPv4 位址",
             "hostName": "主機名稱",
@@ -538,7 +538,7 @@
             "lowerThresholdFatal": "LF"
         },
         "thermal": {
-            "thermal": "熱的",
+            "thermal": "熱裝置",
             "fanINFO": "風扇訊息",
             "name": "名稱",
             "sensorNumber": "感測器數量",
@@ -564,7 +564,7 @@
             "lowerThresholdFatal": "LF"
         },
         "pcieDevice": {
-            "pcieDevice": "PCIE設備",
+            "pcieDevice": "PCIE 設備",
             "pcieDeviceInfo": "PCIE 裝置資訊",
             "name": "名稱",
             "id": "Id",
@@ -576,19 +576,19 @@
             "state": "狀態"
         },
         "pcieFunction": {
-            "pcieFunction": "PCIE功能",
-            "pcieFunctionInfo": "PCIE功能資訊",
+            "pcieFunction": "PCIE 功能",
+            "pcieFunctionInfo": "PCIE 功能資訊",
             "id": "Id",
             "name": "名稱",
             "deviceLinked": "裝置連結",
             "deviceClass": "設備類別",
-            "classCode": "班級代碼",
-            "deviceId": "設備ID",
-            "vendorId": "供應商ID",
-            "functionId": "功能ID",
+            "classCode": "類別代碼",
+            "deviceId": "設備 ID",
+            "vendorId": "供應商 ID",
+            "functionId": "功能 ID",
             "functionType": "功能類型",
             "revisionId": "修訂 ID",
-            "subSystemId": "子系統ID",
+            "subSystemId": "子系統 ID",
             "subSystemVendorId": "子系統供應商 ID",
             "state": "狀態"
         },
@@ -608,12 +608,12 @@
         },
         "storageController": {
             "storageControllerInfo": "儲存控制器資訊",
-            "memberId": "會員ID",
+            "memberId": "會員 ID",
             "name": "名稱",
             "serialNumuber": "序號",
             "model": "模型",
             "firmwareVersion": "韌體版本",
-            "speedGbs": "速度Gbs",
+            "speedGbs": "速度 Gbs",
             "state": "狀態"
         },
         "memoryAssembly" : {
@@ -623,7 +623,7 @@
             "binaryDataURI": "二進位資料 URI",
             "description": "描述",
             "engineeringChangeLevel": "工程變更級別",
-            "memberId": "會員ID",
+            "memberId": "會員 ID",
             "model": "模型",
             "partNumber": "零件號",
             "physicalContext": "物理環境",
@@ -654,7 +654,7 @@
             "performanceDegraded": "性能下降",
             "predictedMediaLifeLeftPercent": "預測媒體剩餘壽命百分比",
             "remainingSpareBlockPercentage": "剩餘備用區塊百分比",
-            "operatingSpeedMHz": "工作速度MHz"
+            "operatingSpeedMHz": "工作速度 MHz"
         }
     },
     "pageBackupAndRestore": {
@@ -682,10 +682,10 @@
         }
     },
     "pageCups": {
-        "pageDescription": "CUPS配置",
+        "pageDescription": "CUPS 配置",
         "dynamicLoadFactor": "動態負載係數配置",
         "staticLoadFactor": "靜態負載係數配置",
-        "cupsService": "Cups服務配置",
+        "cupsService": "Cups 服務配置",
         "dynamicLoadFactorCoreLoadFactor": "核心負載係數",
         "dynamicLoadFactorMemoryLoadFactor": "記憶體負載係數",
         "dynamicLoadFactorIioLoadFactor": "Iio 負載係數",
@@ -708,11 +708,11 @@
         }
     },
     "pageBsod": {
-        "capturedBsod": "捕獲的 Bsod",
+        "capturedBsod": "捕獲的 BSOD",
         "downloadBsodImage": "下載",
         "deleteBsodImage": "刪除",
         "triggerBsodImage": "觸發",
-        "lastBsodCaptured": "最後捕獲的 Bsod 屏幕.",
+        "lastBsodCaptured": "最後捕獲的 BSOD 屏幕.",
         "bsodImageNotAvailable": "BSOD 屏幕不可用.",
         "toast": {
             "errorGettingBsodApi": "獲取 BSOD 圖像時出錯.",
@@ -770,8 +770,8 @@
     "pageNic": {
         "currentTemperature": "目前溫度",
         "channelCount": "頻道數",
-        "vendorId": "供應商ID",
-        "deviceId": "設備ID",
+        "vendorId": "供應商 ID",
+        "deviceId": "設備 ID",
         "linkStatus": "連結狀態",
         "firmwareName": "韌體名稱",
         "firmwareVersion": "韌體版本",
@@ -786,11 +786,11 @@
         "getPartitionStatisticsProperties": "分區統計屬性",
         "getPortConfigurationProperties": "連接埠配置屬性",
         "macAddressCount": "MAC 位址計數",
-        "macAddress": "MAC位址",
+        "macAddress": "MAC 位址",
         "MCTP_over_PCIE_EID": "MCTP_over_PCIE_EID",
         "MCTP_over_SMBUS_EID": "MCTP_over_SMBUS_EID",
         "manufacturerId": "製造商 ID",
-        "NCSIVersion": "NCSI版本",
+        "NCSIVersion": "NCSI 版本",
         "OEMMacAddress": "OEM Mac 位址",
         "noInformationAvailable":"NIC 資訊不可用",
         "allMulticastAddressSupport": "所有組播地址支持",
@@ -823,7 +823,7 @@
         "VLANTagCount": "VLAN 標記計數",
         "VLANTagStatus": "VLAN 標籤狀態",
         "headers": {
-            "MacAddress": "MAC位址資訊",
+            "MacAddress": "MAC 位址資訊",
             "linkStatus": "連結訊息",
             "vlanTagStatus": "VLAN資訊"
         }
@@ -858,11 +858,11 @@
         "ipmiVersion": "智慧型平台管理介面版本",
         "manufacturer": "製造商",
         "partNumber": "零件號",
-        "mctpSupport": "Mctp支持",
+        "mctpSupport": "MCTP 支持",
         "pcieMaximumLinkWidth": "PCIe 最大連結寬度",
         "pciePortInformation": "PCIe 連接埠資訊",
         "pciePortNumber": "PCIe 連接埠號",
-        "pcieRecordVersion": "PCIe記錄版本",
+        "pcieRecordVersion": "PCIe 記錄版本",
         "pcieSupportedlinkSpeeds": "PCIe 支援的連結速度",
         "refClockCapability": "參考時鐘能力",
         "PCIePortMultiRecord": "NVMe PCIe 連接埠多記錄",
@@ -871,23 +871,23 @@
         "compositeTemperature": "複合溫度",
         "driveFunctional": "驅動器功能",
         "pdlu": "PDLU",
-        "port0PCIeLinkActive": "連接埠0PCIeLink活動",
-        "port1PCIeLinkActive": "連接埠1PCIeLink活動",
+        "port0PCIeLinkActive": "連接埠 0PCIeLink 活動",
+        "port1PCIeLinkActive": "連接埠 1PCIeLink 活動",
         "resetNotRequired": "不需要重置",
         "availableSpare": "可用備用",
         "compositeTemperatureChange": "複合溫度變化",
-        "nvmeBasicManagementCommand": "NVMe基礎管理指令",
+        "nvmeBasicManagementCommand": "NVMe 基礎管理指令",
         "controllerEnableChangeOccured": "控制器啟用發生更改",
         "controllerFatalStatus": "控制器致命狀態",
         "controllerStatusChange": "控制器狀態變化",
         "criticalWarnings": "嚴重警告",
-        "nvmeSubSystemResetOccured": "NVMe子系統發生重置",
+        "nvmeSubSystemResetOccured": "NVMe 子系統發生重置",
         "nameSpaceAttributeChange": "名稱空間屬性更改",
         "percentageUsed": "使用百分比",
         "ready": "準備好",
         "shutDownStatus": "關機狀態",
         "firmwareActivated": "韌體已啟動",
-        "eptFactor": "EPTF因子",
+        "eptFactor": "EPTF 因子",
         "initialPowerSupplyReq1_8v": "初始電源需求1.8v",
         "initialPowerSupplyReq12v": "初始電源需求12v",
         "initialPowerSupplyReq3_3v": "初始電源請求3.3v",
@@ -1029,7 +1029,7 @@
             "modifiedDate": "修改的日期",
             "name": "名稱",
             "searchLogs": "搜尋紀錄",
-            "severity": "嚴重",
+            "severity": "嚴重性",
             "status": "狀態",
             "type": "型態"
         },
@@ -1187,7 +1187,7 @@
         "sectionTitleBmcCardsCombined": "BMC 和伺服器",
         "sectionTitleHostCards": "主機",
         "sectionTitleUpdateFirmware": "更新韌體",
-        "cardTitleClearConfig": "清晰的配置",
+        "cardTitleClearConfig": "清除配置",
         "clearConfigDescription": "啟用 BIOS 清除配置",
         "alert": {
             "operationInProgress": "正在執行伺服器電源運作",
@@ -1281,8 +1281,8 @@
         "assemblies": "組件",
         "systemIndicator": {
             "powerStatus": "電源狀態",
-            "identifyLed": "系統識別LED",
-            "sectionTitle": "LED light 控制"
+            "identifyLed": "系統識別 LED",
+            "sectionTitle": "LED 燈控制"
         },
         "table": {
             "assetTag": "資產標籤",
@@ -1418,56 +1418,56 @@
         "viewonly" : "（僅供查看）"
     },
     "pageLdap": {
-        "pageDescription": "配置LDAP設定和管理角色群",
-        "roleGroups": "角色群",
+        "pageDescription": "配置 LDAP 設定和管理身分組",
+        "roleGroups": "身分組",
         "settings": "設定",
-        "addRoleGroup": "新增角色群",
+        "addRoleGroup": "新增身分組",
         "ariaLabel": {
             "ldapSettings": "LDAP 設定"
         },
         "form": {
             "activeDirectory": "活動目錄",
             "baseDn": "基礎 DN",
-            "bindDn": "綁定DN",
+            "bindDn": "綁定 DN",
             "bindPassword": "綁定密碼",
-            "caCertificateValidUntil": "有效CA憑證直到",
+            "caCertificateValidUntil": "有效 CA 憑證直到",
             "groupIdAttribute": "群組 ID 屬性",
             "ldapAuthentication": "LDAP 驗證",
-            "ldapCertificateValidUntil": "有效LDAP憑證直到",
+            "ldapCertificateValidUntil": "有效 LDAP 憑證直到",
             "manageSslCertificates": "管理 SSL 憑證",
-            "openLDAP": "開放LDAP",
-            "secureLdapHelper": "啟用安全LDAP時，必須有一個CA憑證和一個LDAP憑證",
-            "secureLdapUsingSsl": "安全LDAP 正使用 SSL",
-            "serverUri": "URI伺服器",
-            "serverUriTooltip": "正在啟用LDAP改變URI方案到ldaps",
+            "openLDAP": "開放 LDAP",
+            "secureLdapHelper": "啟用 LDAP 安全連線時，必須有一個 CA 憑證和一個 LDAP 憑證",
+            "secureLdapUsingSsl": "使用 SSL 進行 LDAP 安全連線",
+            "serverUri": "URI 伺服器",
+            "serverUriTooltip": "正在啟用 LDAP 改變 URI 方案到 ldaps",
             "serviceType": "服務型態",
-            "userIdAttribute": "使用者ID屬性"
+            "userIdAttribute": "使用者 ID 屬性"
         },
         "modal": {
-            "addNewRoleGroup": "新增角色群組",
-            "deleteRoleGroupBatchConfirmMessage": "確定要刪除 %{count} 角色群組? 此動作是不可逆的 | 確定要刪除 %{count} 角色群組們? 此動作是不可逆的",
+            "addNewRoleGroup": "新增身分組",
+            "deleteRoleGroupBatchConfirmMessage": "確定要刪除 %{count} 身分組? 此動作是不可逆的 | 確定要刪除 %{count} 身分組們? 此動作是不可逆的",
             "deleteRoleGroupConfirmMessage": "確定要刪除 '%{groupName}'? 此動作是不可逆的",
-            "deleteRoleGroup": "刪除角色群組",
-            "editRoleGroup": "編輯角色群組",
+            "deleteRoleGroup": "刪除身分組",
+            "editRoleGroup": "編輯身分組",
             "groupName": "群組名稱",
             "groupPrivilege": "群組特權"
         },
         "tableRoleGroups": {
-            "alertContent": "LDAP 授權必須被啟用以修改角色群組",
+            "alertContent": "LDAP 授權必須被啟用以修改身分組",
             "groupName": "群組名稱",
             "groupPrivilege": "群組特權"
         },
         "toast": {
-            "errorAddRoleGroup": "新增角色群組發生錯誤",
-            "errorDeleteRoleGroup": "刪除角色群組發生錯誤 | 刪除角色群組們發生錯誤",
-            "errorSaveActiveDirectorySettings": "儲存Active Directory 設定發生錯誤",
-            "errorSaveLdapSettings": "儲存Open LDAP 設定發生錯誤",
-            "errorSaveRoleGroup": "儲存角色群組發生錯誤",
-            "successAddRoleGroup": "成功新增角色群組'%{groupName}'",
-            "successDeleteRoleGroup": "成功刪除角色群組",
-            "successSaveActiveDirectorySettings": "成功儲存Active Directory 設定.",
+            "errorAddRoleGroup": "新增身分組發生錯誤",
+            "errorDeleteRoleGroup": "刪除身分組發生錯誤 | 刪除身分組們發生錯誤",
+            "errorSaveActiveDirectorySettings": "儲存 Active Directory 設定發生錯誤",
+            "errorSaveLdapSettings": "儲存 Open LDAP 設定發生錯誤",
+            "errorSaveRoleGroup": "儲存身分組發生錯誤",
+            "successAddRoleGroup": "成功新增身分組'%{groupName}'",
+            "successDeleteRoleGroup": "成功刪除身分組",
+            "successSaveActiveDirectorySettings": "成功儲存 Active Directory 設定.",
             "successSaveLdapSettings": "成功儲存 Open LDAP 設定.",
-            "successSaveRoleGroup": "成功儲存角色群組'%{groupName}'."
+            "successSaveRoleGroup": "成功儲存身分組'%{groupName}'."
         }
     },
     "pageRadius": {
@@ -1496,7 +1496,7 @@
         "addUser": "新增使用者",
         "deleteUser": "刪除使用者 | 刪除使用者們",
         "editUser": "編輯使用者",
-        "viewPrivilegeRoleDescriptions": "檢視群特權描述",
+        "viewPrivilegeRoleDescriptions": "檢視角色特權描述",
         "passwordComplexityRules": "密碼複雜度規則",
         "note": "檢視或修改密碼複雜度請至安全性與存取權->政策頁面",        
         "modal": {
@@ -1519,8 +1519,8 @@
             "username": "使用者名稱",
             "userPassword": "使用者密碼",
             "userUnlockMethod": "使用者解鎖方法",
-            "passwordChangeRequired": "Password Change Required",
-            "vmediaAccess": "視頻媒體訪問"
+            "passwordChangeRequired": "要求變更密碼",
+            "vmediaAccess": "虛擬媒體訪問"
         },
         "table": {
             "privilege": "特權",
@@ -1529,13 +1529,13 @@
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "配置此服務所管理的元件",
-            "configureManagerResources": "配置管理者資源",
+            "configureManagerResources": "配置管理員資源",
             "configureUsersAndTheirAccounts": "配置使用者及他們的帳戶",
-            "logInToTheServiceAndReadResources": "登入至服務及閱讀政策",
+            "logInToTheServiceAndReadResources": "登入至服務及讀取資源",
             "updatePasswordForCurrentUserAccount": "更新目前使用者密碼",
             "privilege": "特權",
-            "administrator": "管理人",
-            "operator": "操作者",
+            "administrator": "管理員",
+            "operator": "操作員",
             "readOnly": "唯讀",
             "noAccess": "沒有權限"
         },
@@ -1849,10 +1849,10 @@
             "errorInAddSubscription": "新增訂閱時出錯",
             "errorInDeleteSubscription": "刪除訂閱時出錯",
             "errorInEditSubscription": "編輯訂閱時出錯",
-            "errorUpdatingAuthenticationProtocal": "更新身份驗證協定時發生錯誤",
+            "errorUpdatingAuthenticationProtocal": "更新身分驗證協定時發生錯誤",
             "successInAddSubscription": "已成功新增 SNMPTrap",
             "successInDeleteSubscription": "成功刪除 SNMPTrap",
-            "successUpdateAuthenticationProtocal": "成功更新身份驗證協議",
+            "successUpdateAuthenticationProtocal": "成功更新身分驗證協議",
             "successMsgTestTrap": "測試陷阱發送成功",
             "errorMsgAlert": "發送測試陷阱時出錯",
             "errorInUpdatingSubscription": "更新訂閱時出錯",
@@ -1911,7 +1911,7 @@
         }
     },
     "pageEventFilter": {
-        "pageDescription": "選擇事件將觸發警告",
+        "pageDescription": "選擇將觸發警告的事件",
         "sectionTitle": "事件過濾器",
         "eventFilterLabel": "設定警告接收者內容",
         "enableAllEvents": "啟用/停用所有事件過濾器",
@@ -1923,7 +1923,7 @@
         "systemRestart": "系統重啟",
         "powerUnitRedundancyFailure": "電源單位過多錯誤",
         "fanRedundancyFailure": "風扇過多錯誤",
-        "processorPresence": "處理器概論 ",
+        "processorPresence": "處理器存在",
         "voltageSensorOutOfRange": "容量感測超過範圍",
         "chassisIntrusion": "機箱入侵",
         "memoryError": "記憶體錯誤",
@@ -2331,6 +2331,7 @@
     },
     "pageAdapter": {
         "generic": "一般資訊",
+        "storageSummary": "儲存概要",
         "mA": "毫安培",
         "mV": "毫伏特",
         "celsius": "攝氏",
@@ -2342,7 +2343,7 @@
         "temperature": "溫度",
         "voltage": "電壓",
         "firmwareVersion": "韌體版本",
-        "memberId": "成員ID",
+        "memberId": "成員 ID",
         "name": "名稱",
         "serialNumber": "序列號",
         "supportedRaidTypes": "支持的 RAID 類型",
@@ -2379,7 +2380,7 @@
         "readCacheRatio": "讀取快取比率",
         "writeCacheRatio": "寫入快取比率",
         "manufacturer": "製造商",
-       "modal": {
+        "modal": {
             "dropdownManagementBtn": "管理",
             "titleControllerManagement": "控制器管理",
             "titleRaidController": "RAID 控制器：",
@@ -2392,9 +2393,9 @@
             "requiredEnableCopybackHelperText2": "如果該項目關閉，那麼 HDD 和 SSD 智慧回寫功能也會一併關閉。"
         },
         "toast": {
-        "copybackConfigSuccess": "回寫功能已成功設定。",
-        "copybackConfigFail": "無法設定回寫功能。",
-        "copybackConfig": "設定回寫功能。"
+            "copybackConfigSuccess": "回寫功能已成功設定。",
+            "copybackConfigFail": "無法設定回寫功能。",
+            "copybackConfig": "設定回寫功能。"
         }
     },
     "pagePhysicalDevice": {
@@ -2477,8 +2478,8 @@
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "創建邏輯設備",
-        "raidController": "RAID控制器",
-        "raidLevel": "RAID級別",
+        "raidController": "RAID 控制器",
+        "raidLevel": "RAID 級別",
         "virtualDeviceName": "虛擬設備名稱",
         "logicalDeviceName": "邏輯設備名稱",
         "logicalDevices": "邏輯設備",
@@ -2493,9 +2494,9 @@
         "readPolicy": "閱讀政策",
         "writePolicy": "寫策略",
         "cachePolicy": "快取策略",
-        "ioPolicy": "IO政策",
+        "ioPolicy": "IO 政策",
         "accessPolicy": "存取政策",
-        "diskCacheCapacity": "磁盤緩存容量",
+        "diskCacheCapacity": "磁碟緩存容量",
         "unConfiguredPhysicalDrive": "未配置的實體驅動器",
         "noLogicalDevice": "此時不存在邏輯設備信息。",
         "initStateOptions": {
@@ -2516,11 +2517,11 @@
             "unprotectedWriteBack": "不保護回寫",
             "writeThrough": "直寫",
             "alwaysWriteBack": "總是回信",
-            "writeBackWithBBU": "用BBU回寫"
+            "writeBackWithBBU": "用 BBU 回寫"
         },
         "ioPolicyOptions": {
-            "directIO": "直接IO",
-            "cachedIO": "緩存IO"
+            "directIO": "直接 IO",
+            "cachedIO": "緩存 IO"
         },
         "accessPolicyOptions": {
             "readWrite": "讀寫",
@@ -2535,7 +2536,7 @@
         "table": {
             "id": "ID",
             "name": "名稱",
-            "raidType": "磁盤陣列類型",
+            "raidType": "磁碟陣列類型",
             "stripSizeBytes": "條帶大小",
             "readCachePolicyType": "讀取緩存策略類型",
             "writeCachePolicyType": "寫入緩存策略類型",
@@ -2570,7 +2571,7 @@
             "stopLocateLogicalDriveActionTitle": "停止定位邏輯驅動器"
         },
         "toast": {
-            "successCreateLogicalDevice": "邏輯設備創建成功。请等待几秒钟并刷新应用程序以查看更改。",
+            "successCreateLogicalDevice": "邏輯設備創建成功。請等待幾秒鐘並刷新應用程式以查看更改。",
             "errorCreateLogicalDevice": "建立邏輯設備錯誤",
             "errorRaidDeviceNotPresent": "RAID 設備不存在。",
             "errorRaidCtrlIdInvalid": "RAID 控制器 ID 無效。",
@@ -2579,8 +2580,8 @@
             "errorRaidOperationNotPermitted": "不允許 RAID 操作。",
             "errorRaidUnsupportedPhysicalDev": "不支援的 RAID 實體設備。",
             "errorRaidUnsupportedLogicalDev": "不支援的 RAID 邏輯設備。",
-            "errorRaidControllerBusy": "Raid 控制器正忙，無法處理指令。",
-            "successDeleteLogicalDevice": "成功刪除邏輯設備。请等待几秒钟并刷新应用程序以查看更改。",
+            "errorRaidControllerBusy": "RAID 控制器繁忙，無法處理指令。",
+            "successDeleteLogicalDevice": "成功刪除邏輯設備。請等待幾秒鐘並刷新應用程式以查看更改。",
             "errorDeleteLogicalDevice": "刪除邏輯設備時出錯",
             "errorNumberOfDrivesValidation": "驅動器數量不應高於未配置的實體裝置數量！",
             "errorMinMaxSpanDepth":"最小和最大跨度深度均為 2。",
@@ -2635,7 +2636,7 @@
                 "startTime": "開始時間（24 小時制 HH:MM）",
                 "endDate": "結束日期 (YYYY-MM-DD)",
                 "endTime": "時間結束（24 小時制 HH:MM）",
-                "sourceMacAddress": "MAC位址",
+                "sourceMacAddress": "MAC 位址",
                 "protocol": "協定",
                 "drop": "降低",
                 "tcp": "TCP",
@@ -2665,11 +2666,11 @@
             "featureNotAvailable": "系統防火牆功能未啟用。"
         },
         "table": {
-            "startIP": "起始IP",
-            "endIP": "結束IP",
+            "startIP": "起始 IP",
+            "endIP": "結束 IP",
             "startPort": "起始連接埠",
             "endPort": "結束連接埠",
-            "macAddress": "MAC位址",
+            "macAddress": "MAC 位址",
             "protocol": "協定",
             "startDuration": "開始持續時間",
             "endDuration": "結束持續時間",
@@ -2719,7 +2720,6 @@
         "duplexMode": "雙工模式",
         "fullDuplex": "全雙工",
         "halfDuplex": "半雙工",
-        "duplex": "複式",
         "Mbps": "Mbps",
         "sameNetworkLinkSettings": "網路連結配置相同，因此無需儲存。",
         "modifyNetworkLinkSettings": "如果使用者需要變更這些介面配置，請修改父介面的值。",

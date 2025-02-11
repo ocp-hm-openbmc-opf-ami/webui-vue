@@ -95,16 +95,20 @@
                   >
                     <div>
                       <b-form-radio value="Full" class="mr10 radio-inline">
-                        {{ $t('networkLink.fullDuplex') }}</b-form-radio
-                      >
-                      <b-form-radio value="Half" class="mr10 radio-inline">{{
-                        $t('networkLink.halfDuplex')
-                      }}</b-form-radio>
+                        {{ $t('networkLink.fullDuplex') }}
+                      </b-form-radio>
+                      <b-form-radio value="Half" class="mr10 radio-inline">
+                        {{ $t('networkLink.halfDuplex') }}
+                      </b-form-radio>
                     </div>
                   </b-form-radio-group>
-                  <span v-else
-                    >{{ form.FullDuplex }} {{ $t('networkLink.duplex') }}</span
-                  >
+                  <span v-else>
+                    {{
+                      form.FullDuplex === 'Full'
+                        ? $t('networkLink.fullDuplex')
+                        : $t('networkLink.halfDuplex')
+                    }}
+                  </span>
                 </b-form-group>
               </b-col>
             </b-row>

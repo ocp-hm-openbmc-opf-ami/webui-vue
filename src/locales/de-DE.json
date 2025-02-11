@@ -2318,6 +2318,7 @@
     },
     "pageAdapter": {
         "generic": "Generisch",
+        "storageSummary": "Speicherübersicht",
         "mA": "Milliampere",
         "mV": "Millivolt",
         "celsius": "Celsius",
@@ -2716,7 +2717,6 @@
         "duplexMode": "Duplexmodus",
         "fullDuplex": "Vollduplex",
         "halfDuplex": "Halbduplex",
-        "duplex": "Duplex",
         "Mbps": "Mbit/s",
         "sameNetworkLinkSettings": "Die Netzwerkverbindungskonfigurationen sind identisch und müssen daher nicht gespeichert werden.",
         "modifyNetworkLinkSettings": "Wenn Benutzer diese Schnittstellenkonfigurationen ändern müssen, ändern Sie bitte stattdessen die Werte der übergeordneten Schnittstelle.",

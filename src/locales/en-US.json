@@ -2339,6 +2339,7 @@
     },
     "pageAdapter": {
         "generic": "Generic",
+        "storageSummary": "Storage Summary",
         "mA": "mA",
         "mV": "mV",
         "celsius": "Celsius",
@@ -2742,7 +2743,6 @@
         "duplexMode": "Duplex Mode",
         "fullDuplex": "Full Duplex",
         "halfDuplex": "Half Duplex",
-        "duplex": "Duplex",
         "Mbps": "Mbps",
         "sameNetworkLinkSettings": "The Network Link Configurations are the same, so there is no need to save.",
         "modifyNetworkLinkSettings": "If users need to change these interface configurations, please modify the values of the parent interface instead.",
