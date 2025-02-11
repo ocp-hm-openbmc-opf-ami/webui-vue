@@ -2439,9 +2439,19 @@
             "isForeignDevice": "Foreign Device",
             "state": {
                 "hotspare": "Hot Spare",
-                "unconfiguredGood": "Unconfigured Good",
                 "unknownState": "Unknown",
-                "copyback": "Copyback"
+                "copyback": "Copyback",
+                "unconfiguredGood": "Uconfigured Good",
+                "unconfiguredBad": "Unconfigured Bad",
+                "sanitize": "Sanitize",
+                "offline": "Offline",
+                "failed": "Failed",
+                "rebuild": "Rebuild",
+                "online": "Online",
+                "system": "System",
+                "shieldUnconfigured": "Shielded Unconfigured Drive",
+                "shieldHotSpare": "Shielded Host Spare Drive",
+                "shieldConfigured": "Shielded Configured Drive"
             }
         },
         "modal": {
@@ -2495,7 +2505,17 @@
         "deleteGlobalHotSpareConfirmationMsg": "Do you want to unassign ID {pdId} as a global hot spare?",
         "deleteGlobalHotSpareSuccess": "The drive was successfully unassigned as a global hot spare.",
         "deleteGlobalHotSpareFail": "Failed to unassign the drive as a global hot spare.",
-        "deleteGlobalHotSpare": "Unassign the drive as a global hot spare."
+        "deleteGlobalHotSpare": "Unassign the drive as a global hot spare.",
+        "labelMakeUnconfiguredBad": "Make Unconfigured Bad",
+        "makeUnconfiguredBadConfirmationMsg": "Do you want to make the physical device ID {pdId} to 'Unconfigured Bad'?",
+        "makeUnconfiguredBadSuccess": "Make the physical device ID {pdId} to 'Unconfigured Bad' successfully.",
+        "makeUnconfiguredBadFail": "Failed to make the physical device ID {pdId} to 'Unconfigured Bad'.",
+        "makeUnconfiguredBadInfo": "Make the physical device ID {pdId} to 'Unconfigured Bad'.",
+        "labelMakeUnconfiguredGood": "Make Unconfigured Good",
+        "makeUnconfiguredGoodConfirmationMsg": "Do you want to make the physical device ID {pdId} to 'Unconfigured Good'?",
+        "makeUnconfiguredGoodSuccess": "Make the physical device ID {pdId} to 'Unconfigured Good' successfully.",
+        "makeUnconfiguredGoodFail": "Failed to make the physical device ID {pdId} to 'Unconfigured Good'.",
+        "makeUnconfiguredGoodInfo": "Make the physical device ID {pdId} to 'Unconfigured Good'."
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "Create Logical Device",

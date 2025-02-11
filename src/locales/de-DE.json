@@ -2417,10 +2417,20 @@
             "blockCount": "Anzahl Blöcke",
             "isForeignDevice": "Fremdgerät",
             "state": {
-                "hotspare": "Hot-Spare",
-                "unconfiguredGood": "Unkonfiguriert Gut",
+                "hotspare": "Hot Spare",
                 "unknownState": "Unbekannt",
-                "copyback": "Rückkopieren"
+                "copyback": "Copyback",
+                "unconfiguredGood": "Nicht konfiguriert, gut",
+                "unconfiguredBad": "Nicht konfiguriert, schlecht",
+                "sanitize": "Bereinigen",
+                "offline": "Offline",
+                "failed": "Fehlgeschlagen",
+                "rebuild": "Neu erstellen",
+                "online": "Online",
+                "system": "System",
+                "shieldUnconfigured": "Geschütztes nicht konfiguriertes Laufwerk",
+                "shieldHotSpare": "Geschütztes Host-Spare-Laufwerk",
+                "shieldConfigured": "Geschütztes konfiguriertes Laufwerk"
             }
         },
             "modal": {
@@ -2474,7 +2484,17 @@
         "deleteGlobalHotSpareConfirmationMsg": "Möchten Sie {pdId} als globalen Hot-Spare aufheben?",
         "deleteGlobalHotSpareSuccess": "Die Zuweisung des Laufwerks als globaler Hot-Spare wurde erfolgreich aufgehoben.",
         "deleteGlobalHotSpareFail": "Die Aufhebung der Zuweisung des Laufwerks als globaler Hot-Spare ist fehlgeschlagen.",
-        "deleteGlobalHotSpare": "Heben Sie die Zuweisung des Laufwerks als globaler Hot-Spare auf."
+        "deleteGlobalHotSpare": "Heben Sie die Zuweisung des Laufwerks als globaler Hot-Spare auf.",
+        "labelMakeUnconfiguredBad": "Unconfigured Bad machen",
+        "makeUnconfiguredBadConfirmationMsg": "Möchten Sie das physische Gerät ID {pdId} auf Unconfigured Bad' machen?",
+        "makeUnconfiguredBadSuccess": "Das physische Gerät ID {pdId} erfolgreich auf 'Unconfigured Bad' machen.",
+        "makeUnconfiguredBadFail": "Das physische Gerät ID {pdId} konnte nicht auf 'Unconfigured Bad' gemacht werden.",
+        "makeUnconfiguredBadInfo": "Das physische Gerät ID {pdId} auf 'Unconfigured Bad' machen.",
+        "labelMakeUnconfiguredGood": "Unconfigured Good machen",
+        "makeUnconfiguredGoodConfirmationMsg": "Möchten Sie das physische Gerät ID {pdId} auf 'Unconfigured Good' machen?",
+        "makeUnconfiguredGoodSuccess": "Das physische Gerät ID {pdId} erfolgreich auf 'Unconfigured Good' gesetzt.",
+        "makeUnconfiguredGoodFail": "Physisches Gerät ID {pdId} konnte nicht auf 'Unconfigured Good' gesetzt werden.",
+        "makeUnconfiguredGoodInfo": "Physisches Gerät ID {pdId} auf 'Unconfigured Good' gesetzt."
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "Logisches Gerät erstellen",

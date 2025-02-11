@@ -1199,10 +1199,20 @@
             "blockCount": "Количество блоков",
             "isForeignDevice": "Иностранное устройство",
             "state": {
-                "hotspare": "Горячий Резерв",
-                "unconfiguredGood": "Неконфигурированный Хороший",
-                "unknownState": "Неизвестный",
-                "copyback": "Копибэк"
+                "hotspare": "Горячий резерв",
+                "unknownState": "Неизвестно",
+                "copyback": "Copyback",
+                "unconfiguredGood": "Ненастроенный хороший",
+                "unconfiguredBad": "Ненастроенный плохой",
+                "sanitize": "Очистка",
+                "offline": "Оффлайн",
+                "failed": "Ошибка",
+                "rebuild": "Перестроить",
+                "online": "Онлайн",
+                "system": "Система",
+                "shieldUnconfigured": "Экранированный ненастроенный диск",
+                "shieldHotSpare": "Экранированный резервный диск хоста",
+                "shieldConfigured": "Экранированный настроенный диск"
             }
         },
         "modal": {
@@ -1256,7 +1266,17 @@
         "deleteGlobalHotSpareConfirmationMsg": "Вы хотите отменить назначение {pdId} как глобального горячего резерва?",
         "deleteGlobalHotSpareSuccess": "Назначение диска как глобального горячего резерва успешно отменено.",
         "deleteGlobalHotSpareFail": "Не удалось отменить назначение диска как глобального горячего резерва.",
-        "deleteGlobalHotSpare": "Отменить назначение диска как глобального горячего резерва."
+        "deleteGlobalHotSpare": "Отменить назначение диска как глобального горячего резерва.",
+        "labelMakeUnconfiguredBad": "Сделать ненастроенное плохим",
+        "makeUnconfiguredBadConfirmationMsg": "Хотите сделать физическое устройство ID {pdId} ненастроенным плохим?",
+        "makeUnconfiguredBadSuccess": "Успешно сделать физическое устройство ID {pdId} ненастроенным плохим.",
+        "makeUnconfiguredBadFail": "Не удалось сделать физическое устройство ID {pdId} ненастроенным плохим.",
+        "makeUnconfiguredBadInfo": "Сделать физическое устройство ID {pdId} ненастроенным плохим.",
+        "labelMakeUnconfiguredGood": "Сделать ненастроенное хорошим",
+        "makeUnconfiguredGoodConfirmationMsg": "Хотите сделать физическое устройство ID {pdId} ненастроенным Хорошо?",
+        "makeUnconfiguredGoodSuccess": "Успешно сделать физическое устройство ID {pdId} ненастроенным хорошим.",
+        "makeUnconfiguredGoodFail": "Не удалось сделать физическое устройство ID {pdId} ненастроенным хорошим.",
+        "makeUnconfiguredGoodInfo": "Сделать физическое устройство ID {pdId} ненастроенным хорошим."
     },
     "pageTopology": {
         "raidTopology": "Информация о топологии",

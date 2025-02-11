@@ -2431,9 +2431,19 @@
             "isForeignDevice": "外來實體設備",
             "state": {
                 "hotspare": "熱備援",
-                "unconfiguredGood": "未配置良好",
+                "unconfiguredGood": "未配置且良好",
+                "unconfiguredBad": "未配置且不良",
                 "unknownState": "未知",
-                "copyback": "回寫"
+                "copyback": "回寫",        
+                "sanitize": "清除",
+                "offline": "離線",
+                "failed": "故障",
+                "rebuild": "重建",
+                "online": "線上",
+                "system": "系統",
+                "shieldUnconfigured": "屏蔽未配置的實體設備",
+                "shieldHotSpare": "屏蔽主機備用實體設備",
+                "shieldConfigured": "屏蔽配置的實體設備"
             }
         },
         "modal": {
@@ -2474,7 +2484,17 @@
         "deleteGlobalHotSpareConfirmationMsg": "是否要取消 {pdId} 的全域熱備援設置？",
         "deleteGlobalHotSpareSuccess": "磁碟的全域熱備援設置已成功取消。",
         "deleteGlobalHotSpareFail": "取消磁碟的全域熱備援設置失敗。",
-        "deleteGlobalHotSpare": "取消磁碟的全域熱備援設置。"
+        "deleteGlobalHotSpare": "取消磁碟的全域熱備援設置。",
+        "labelMakeUnconfiguredBad": "設置成未配置且不良",
+        "makeUnconfiguredBadConfirmationMsg": "是否要設定實體設備 ID {pdId} 為'未配置且不良'的狀態？",
+        "makeUnconfiguredBadSuccess": "設定實體設備 ID {pdId} 為'未配置且不良'的狀態成功。",
+        "makeUnconfiguredBadFail": "設定實體設備 ID {pdId} 為'未配置且不良'的狀態失敗。",
+        "makeUnconfiguredBadInfo": "設定實體設備 ID {pdId} 為'未配置且不良'的狀態。",
+        "labelMakeUnconfiguredGood": "設置成未配置且良好",
+        "makeUnconfiguredGoodConfirmationMsg": "是否要設定實體設備 ID {pdId} 為'未配置且良好'的狀態？",
+        "makeUnconfiguredGoodSuccess": "設定實體設備 ID {pdId} 為'未配置且良好'的狀態成功。",
+        "makeUnconfiguredGoodFail": "設定實體設備 ID {pdId} 為'未配置且良好'的狀態失敗。",
+        "makeUnconfiguredGoodInfo": "設定實體設備 ID {pdId} 為'未配置且良好'的狀態。"
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "創建邏輯設備",
