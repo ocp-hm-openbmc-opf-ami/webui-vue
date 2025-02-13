@@ -1159,14 +1159,21 @@
         }
     },
     "PageFactoryDefault": {
-        "FactoryDefaultPartialDescription": "BMC wird neu gestartet und nach dem Booten auf der BMC-Konsole bleiben alle konfigurierten Daten erhalten.",
-        "FactoryDefaultFullDescription": "BMC wird neu gestartet und nach dem Booten auf der BMC-Konsole werden die konfigurierten Daten auf die Standardeinstellungen der Geräte-Firmware zurückgesetzt.",
-        "restore": "Wiederherstellen",
+        "authentication": "Authentifizierung",
+        "fru": "FRU",
+        "kvm": "KVM",
+        "smtp": "SMTP",
+        "network": "Netzwerk",
+        "redfish": "Redfish",
+        "sdr": "SDR",
+        "sel": "SEL",
+        "snmp": "SNMP",
+        "ubootEnv": "ubootEnv",
+        "helpContent": "Die folgenden markierten Konfigurationen bleiben beim Wiederherstellungsvorgang erhalten. Sie können auf der Seite „Beibehalten“ Änderungen an der Liste vornehmen.",
         "toast": {
-            "restoreToDefaultsSuccess": "Wiederherstellung der Werkseinstellungen erfolgreich.",
-            "restoreToDefaultsError": "Die Wiederherstellung der Werkseinstellungen ist fehlgeschlagen.",
-            "FactoryDefaultConfirmationFull": "Dieser Vorgang kann nicht rückgängig gemacht werden. Alle Remote Sitzungen werden beendet und alle Benutzer und Netzwerkschnittstellen werden deaktiviert. Klicken Sie auf „OK“, um fortzufahren, oder auf „Abbrechen“, um den Vorgang jetzt abzubrechen.",
-            "FactoryDefaultConfirmationPartial": "Dieser Vorgang kann nicht rückgängig gemacht werden. Alle Remote-Sitzungen werden beendet und Benutzer- und LAN-Konfigurationen werden basierend auf der Standardwiederherstellung reserviert. Klicken Sie auf „OK“, um fortzufahren, oder auf „Abbrechen“, um den Vorgang jetzt abzubrechen.",
+            "restoreToDefaultsSuccess": "Erfolg! Das Gerät wurde zurückgesetzt. Bitte schließen Sie diese Browsersitzung und öffnen Sie eine neue Browsersitzung, um die Verbindung zum Gerät wiederherzustellen.",
+            "restoreToDefaultsError": "Fehler beim Wiederherstellen der Werkseinstellungen.",
+            "FactoryDefaultConfirmation": "Klicken Sie auf „OK“, wenn Sie mit der Wiederherstellung der Konfigurationen fortfahren möchten. WARNUNG: Durch die Wiederherstellung der Konfigurationen wird das Gerät neu gestartet.",
             "title": "Werkseinstellung",
             "okTitle": "ok"
         }

@@ -1157,14 +1157,21 @@
         }
     },
     "PageFactoryDefault": {
-        "FactoryDefaultPartialDescription": "BMC 将重新启动，启动至 BMC 控制台后，所有配置的数据将被保留.",
-        "FactoryDefaultFullDescription": "BMC 将重新启动，启动到 BMC 控制台后，配置的数据将恢复为设备固件的默认值.",
-        "restore": "恢复",
+        "authentication": "验证",
+        "fru": "FRU",
+        "kvm": "KVM",
+        "smtp": "SMTP",
+        "network": "网络",
+        "redfish": "Redfish",
+        "sdr": "SDR",
+        "sel": "SEL",
+        "snmp": "SNMP",
+        "ubootEnv": "ubootEnv",
+        "helpContent": "以下已勾选的配置将通过恢复操作保留。您可以在“保留”页面中对列表进行更改。",
         "toast": {
-            "restoreToDefaultsSuccess": "原厂设定恢復成功",
-            "restoreToDefaultsError": "原厂设定恢復失败",
-            "FactoryDefaultConfirmationFull": "此动作无法未完成。所有远端对谈将结束，所有用户及网路介面将停用。点击OK以继续或点击Cancel停止",
-            "FactoryDefaultConfirmationPartial": "此动作无法未完成。所有远端对谈将结束，所有用户及LAN设定将回復到原厂设定。 点击OK以继续或点击Cancel停止",
+            "restoreToDefaultsSuccess": "成功！设备已重置。请关闭此浏览器会话并打开新的浏览器会话以重新连接到设备。",
+            "restoreToDefaultsError": "恢复出厂默认设置时出错。",
+            "FactoryDefaultConfirmation": "如果要继续恢复配置，请单击“确定”。警告：恢复配置将重新启动设备。",
             "title": "原厂设定",
             "okTitle": "ok"
         }

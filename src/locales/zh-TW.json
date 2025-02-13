@@ -1160,14 +1160,21 @@
         }
     },
     "PageFactoryDefault": {
-        "FactoryDefaultPartialDescription": "BMC 將重新啟動，啟動至 BMC 控制台後，所有設定的資料將會保留.",
-        "FactoryDefaultFullDescription": "BMC 將重新啟動，啟動至 BMC 控制台後，配置的資料將恢復為裝置韌體的預設值.",
-        "restore": "恢復",
+        "authentication": "驗證",
+        "fru": "FRU",
+        "kvm": "KVM",
+        "smtp": "SMTP",
+        "network": "網路",
+        "redfish": "Redfish",
+        "sdr": "SDR",
+        "sel": "SEL",
+        "snmp": "SNMP",
+        "ubootEnv": "ubootEnv",
+        "helpContent": "透過恢復操作將保留以下檢查的配置。您可以在「保留」頁面中變更清單。",
         "toast": {
-            "restoreToDefaultsSuccess": "原廠設定恢復成功",
-            "restoreToDefaultsError": "原廠設定恢復失敗",
-            "FactoryDefaultConfirmationFull": "此動作無法未完成。所有遠端對談將結束，所有使用者及網路介面將停用。點擊OK以繼續或點擊Cancel停止",
-            "FactoryDefaultConfirmationPartial": "此動作無法未完成。所有遠端對談將結束，所有使用者及LAN設定將回復到原廠設定。 點擊OK以繼續或點擊Cancel停止",
+            "restoreToDefaultsSuccess": "成功！設備已重置。請關閉此瀏覽器會話並開啟新的瀏覽器會話以重新連接到裝置。",
+            "restoreToDefaultsError": "恢復出廠預設值時出錯。",
+            "FactoryDefaultConfirmation": "如果您想繼續恢復配置，請按一下「確定」。 警告：恢復配置將重新啟動設備。",
             "title": "原廠設定",
             "okTitle": "ok"
         }

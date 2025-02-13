@@ -1165,14 +1165,21 @@
         }
     },
     "PageFactoryDefault": {
-        "FactoryDefaultPartialDescription": "BMC will reboot and after boot to BMC console, all configured data will be preserved.",
-        "FactoryDefaultFullDescription": "BMC will reboot and after boot to BMC console, configured data will be restore to the defaults of the device firmware.",
-        "restore": "Restore",
+        "authentication": "Authentication",
+        "fru": "FRU",
+        "kvm": "KVM",
+        "smtp": "SMTP",
+        "network": "Network",
+        "redfish": "Redfish",
+        "sdr": "SDR",
+        "sel": "SEL",
+        "snmp": "SNMP",
+        "ubootEnv": "ubootEnv",
+        "helpContent": "The following checked configurations will be preserved through the restore operation. You can make changes to the list in the Preserve page.",
         "toast": {
-            "restoreToDefaultsSuccess": "Factory Default Restore Default successful.",
-            "restoreToDefaultsError": "Factory Default Restore Default failed.",
-            "FactoryDefaultConfirmationFull": "This operation cannot be undone. All remote sessions will be ended, and all users and network interfaces will be disabled. Click OK to continue,or click Cancel to stop now.",
-            "FactoryDefaultConfirmationPartial": "This operation cannot be undone. All remote sessions will be ended, and will reserve user and LAN configurations based on Default Restore. Click OK to continue, or click Cancel to stop now.",
+            "restoreToDefaultsSuccess": "Success! Device has been reset. Please close this browser session and open a new browser session to reconnect to the device.",
+            "restoreToDefaultsError": "Error in Restore Factory Defaults.",
+            "FactoryDefaultConfirmation": "Click 'OK' if you want to continue restoring configurations.    WARNING:Restoring configurations will restart the device.",
             "title": "Factory Default",
             "okTitle": "ok"
         }
