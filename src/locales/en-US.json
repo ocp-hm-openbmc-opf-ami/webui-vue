@@ -2396,6 +2396,7 @@
         "writeCacheRatio": "Write Cache Ratio",
         "manufacturer": "Manufacturer",
         "modal": {
+            "dropdownPropertiesBtn":"Properties",
             "dropdownManagementBtn": "Management",
             "titleControllerManagement": "Controller Management",
             "titleRaidController": "RAID Controller: ",
@@ -2405,12 +2406,23 @@
             "labelEnableSSDCopyback": "SSD Smart Copyback",
             "copybackConfigHelperText": "Set copyback relative configuration.",
             "requiredEnableCopybackHelperText1": "This item will automatically turn on when either HDD or SSD Smart Copyback is turned on.",
-            "requiredEnableCopybackHelperText2": "If this item is turned off, both HDD and SSD Smart Copyback are also turned off."
+            "requiredEnableCopybackHelperText2": "If this item is turned off, both HDD and SSD Smart Copyback are also turned off.",
+            "labelControllerProperties": "Controller Properties",
+            "controllerPropertiesHelperText":"Set controller properties.",
+            "controllerPropertiesRateValueHelperText": "The value must be between 0 and 100, inclusive.",
+            "labelRebuildRate": "Rebuild Rate",
+            "labelPatrolReadRate": "Patrol Read Rate",
+            "labelBGIRate": "BGI Rate",
+            "labelConsistencyCheckRate": "Consistency Check Rate",
+            "labelReconstructionRate": "Reconstruction Rate"
         },
         "toast": {
             "copybackConfigSuccess": "The 'Copyback' feature has been successfully set up.",
             "copybackConfigFail": "Unable to set up the 'Copyback' feature.",
-            "copybackConfig": "Configure the 'Copyback' feature."
+            "copybackConfig": "Configure the 'Copyback' feature.",
+            "controllerPropertiesSuccess": "Set controller properties successfully.   The setting will take some time to complete. Please wait for few seconds and refresh the application to see the changes.",
+            "controllerPropertiesFail": "Failed to set controller properties.",
+            "controllerPropertiesConfig": "Controller Properties setting."
         }
     },
     "pagePhysicalDevice": {

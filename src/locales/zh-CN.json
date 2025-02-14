@@ -2385,6 +2385,7 @@
         "writeCacheRatio": "写入快取比率",
         "manufacturer": "制造商",
         "modal": {
+            "dropdownPropertiesBtn": "属性",
             "dropdownManagementBtn": "管理",
             "titleControllerManagement": "控制器管理",
             "titleRaidController": "RAID 控制器：",
@@ -2394,12 +2395,23 @@
             "labelEnableSSDCopyback": "SSD 智能回拷",
             "copybackConfigHelperText": "设置回拷相关配置。",
             "requiredEnableCopybackHelperText1": "当启用 HDD 或 SSD 智能回拷功能后，该项目会自动开启。",
-            "requiredEnableCopybackHelperText2": "如果该项目关闭，那么 HDD 和 SSD 智能回拷也会一并关闭。"
+            "requiredEnableCopybackHelperText2": "如果该项目关闭，那么 HDD 和 SSD 智能回拷也会一并关闭。",
+            "labelControllerProperties": "控制器属性",
+            "controllerPropertiesHelperText": "设置控制器属性。",
+            "controllerPropertiesRateValueHelperText": "该值必须在 0 到 100 之间，包括 0 和 100。",
+            "labelRebuildRate": "重建速率",
+            "labelPatrolReadRate": "巡逻读取速率",
+            "labelBGIRate": "BGI 速率",
+            "labelConsistencyCheckRate": "一致性检查速率",
+            "labelReconstructionRate": "重建速率"
         },
         "toast": {
             "copybackConfigSuccess": "回拷功能已成功设置。",
             "copybackConfigFail": "无法设置回拷功能。",
-            "copybackConfig": "配置回拷功能。"
+            "copybackConfig": "配置回拷功能。",
+            "controllerPropertiesSuccess": "成功设置控制器属性。需要一些时间来完成该设定。请等待几秒钟并刷新应用程序以查看更改內容。",
+            "controllerPropertiesFail": "设置控制器属性失败。",
+            "controllerPropertiesConfig": "控制器属性设置。"
         }
     },
     "pagePhysicalDevice": {

@@ -2388,6 +2388,7 @@
         "writeCacheRatio": "寫入快取比率",
         "manufacturer": "製造商",
         "modal": {
+            "dropdownPropertiesBtn": "屬性",
             "dropdownManagementBtn": "管理",
             "titleControllerManagement": "控制器管理",
             "titleRaidController": "RAID 控制器：",
@@ -2397,12 +2398,23 @@
             "labelEnableSSDCopyback": "SSD 智慧回寫",
             "copybackConfigHelperText": "設定回寫相關配置。",
             "requiredEnableCopybackHelperText1": "當啟用了 HDD 或 SSD 智慧回寫功能後，該項目會自動開啟。",
-            "requiredEnableCopybackHelperText2": "如果該項目關閉，那麼 HDD 和 SSD 智慧回寫功能也會一併關閉。"
+            "requiredEnableCopybackHelperText2": "如果該項目關閉，那麼 HDD 和 SSD 智慧回寫功能也會一併關閉。",
+            "labelControllerProperties": "控制器屬性",
+            "controllerPropertiesHelperText": "設置控制器屬性。",
+            "controllerPropertiesRateValueHelperText": "該值必須在 0 到 100 之間，包括 0 和 100。",
+            "labelRebuildRate": "重建速率",
+            "labelPatrolReadRate": "巡邏讀取速率",
+            "labelBGIRate": "BGI 速率",
+            "labelConsistencyCheckRate": "一致性檢查速率",
+            "labelReconstructionRate": "重建速率"
         },
         "toast": {
             "copybackConfigSuccess": "回寫功能已成功設定。",
             "copybackConfigFail": "無法設定回寫功能。",
-            "copybackConfig": "設定回寫功能。"
+            "copybackConfig": "設定回寫功能。",
+            "controllerPropertiesSuccess": "成功設置控制器屬性。將需要一些時間來完成該設置。請等待幾秒鐘並刷新應用程序以查看更改的內容。",
+            "controllerPropertiesFail": "設置控制器屬性失敗。",
+            "controllerPropertiesConfig": "控制器屬性設置。"
         }
     },
     "pagePhysicalDevice": {

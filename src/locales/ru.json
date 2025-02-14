@@ -1029,6 +1029,7 @@
         "maxPhysicalDevicesCountPerLogicalDevicesCount": "Максимальное количество физических устройств на логическое устройство",
         "hotSparesCount": "Количество горячих резервов",
         "modal": {
+            "dropdownPropertiesBtn": "Свойства",
             "dropdownManagementBtn": "Управление",
             "titleControllerManagement": "Управление контроллером",
             "titleRaidController": "RAID-контроллер: ",
@@ -1038,12 +1039,23 @@
             "labelEnableSSDCopyback": "Smart Copyback для SSD",
             "copybackConfigHelperText": "Установите настройки, связанные с Copyback.",
             "requiredEnableCopybackHelperText1": "Этот параметр будет автоматически включен, если включена функция Smart Copyback для HDD или SSD.",
-            "requiredEnableCopybackHelperText2": "Если этот параметр выключен, то функции Smart Copyback для HDD и SSD тоже будут выключены."
+            "requiredEnableCopybackHelperText2": "Если этот параметр выключен, то функции Smart Copyback для HDD и SSD тоже будут выключены.",
+            "labelControllerProperties": "Свойства контроллера",
+            "controllerPropertiesHelperText": "Установите свойства контроллера.",
+            "controllerPropertiesRateValueHelperText": "Значение должно быть от 0 до 100, включая 0 и 100.",
+            "labelRebuildRate": "Скорость восстановления",
+            "labelPatrolReadRate": "Скорость чтения патруля",
+            "labelBGIRate": "Скорость BGI",
+            "labelConsistencyCheckRate": "Скорость проверки согласованности",
+            "labelReconstructionRate": "Скорость реконструкции"
         },
         "toast": {
         "copybackConfigSuccess": "Функция «Copyback» успешно настроена.",
         "copybackConfigFail": "Не удалось настроить функцию «Copyback».",
-        "copybackConfig": "Настроить функцию «Copyback»."
+        "copybackConfig": "Настроить функцию «Copyback».",
+        "controllerPropertiesSuccess": "Свойства контроллера успешно установлены. Это может занять некоторое время. Пожалуйста, подождите несколько секунд и обновите приложение, чтобы увидеть изменения.",
+        "controllerPropertiesFail": "Не удалось установить свойства контроллера.",
+        "controllerPropertiesConfig": "Настройки свойств контроллера."
         }
     },
     "pageLogicalDevice": {

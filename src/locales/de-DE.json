@@ -2375,6 +2375,7 @@
         "writeCacheRatio": "Коэффициент кэширования записи",
         "manufacturer": "Производитель",
         "modal": {
+            "dropdownPropertiesBtn": "Eigenschaften",
             "dropdownManagementBtn": "Verwaltung",
             "titleControllerManagement": "Controller-Verwaltung",
             "titleRaidController": "RAID-Controller: ",
@@ -2384,12 +2385,23 @@
             "labelEnableSSDCopyback": "SSD-Smart-Copyback",
             "copybackConfigHelperText": "Copyback-Einstellungen festlegen.",
             "requiredEnableCopybackHelperText1": "Dieses Element wird automatisch aktiviert, wenn die HDD- oder SSD-Smart-Copyback-Funktion aktiviert ist.",
-            "requiredEnableCopybackHelperText2": "Wenn dieses Element deaktiviert ist, werden sowohl die HDD- als auch die SSD-Smart-Copyback-Funktionen deaktiviert."
+            "requiredEnableCopybackHelperText2": "Wenn dieses Element deaktiviert ist, werden sowohl die HDD- als auch die SSD-Smart-Copyback-Funktionen deaktiviert.",
+            "labelControllerProperties": "Steuereigenschaften",
+            "controllerPropertiesHelperText": "Steuereigenschaften festlegen.",
+            "controllerPropertiesRateValueHelperText": "Der Wert muss zwischen 0 und 100 liegen, einschließlich 0 und 100.",
+            "labelRebuildRate": "Wiederherstellungsrate",
+            "labelPatrolReadRate": "Patrouillenleserate",
+            "labelBGIRate": "BGI-Rate",
+            "labelConsistencyCheckRate": "Konsistenzprüfungsrate",
+            "labelReconstructionRate": "Wiederaufbaurate"
         },
         "toast": {
         "copybackConfigSuccess": "Die „Copyback“-Funktion wurde erfolgreich eingerichtet.",
         "copybackConfigFail": "Die „Copyback“-Funktion konnte nicht eingerichtet werden.",
-        "copybackConfig": "Die „Copyback“-Funktion konfigurieren."
+        "copybackConfig": "Die „Copyback“-Funktion konfigurieren.",
+        "controllerPropertiesSuccess": "Steuereigenschaften erfolgreich festgelegt. Die Einstellung benötigt einige Zeit, um abgeschlossen zu werden. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
+        "controllerPropertiesFail": "Fehler beim Setzen der Controller-Eigenschaften.",
+        "controllerPropertiesConfig": "Steuereigenschaften-Einstellung."
         }
     },
     "pagePhysicalDevice": {
