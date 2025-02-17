@@ -198,7 +198,17 @@ export default {
               if (tfaEnabled) {
                 this.$router.push('/two-factor-authentication');
               } else {
-                this.$router.push('/');
+                const url = new URL(window.location.href);
+                const nextPath = url.searchParams.get('next');
+                if (nextPath && nextPath.startsWith('/redfish/v1')) {
+                  const match = nextPath.match(/^\/redfish\/v1\/[^/]+/);
+                  if (match) {
+                    window.location.href = window.location.origin + match[0];
+                  }
+                } else {
+                  window.location.href = '/';
+                  // this.$router.push('/');
+                }
                 this.$store.dispatch('license/getUserAlertCount');
                 this.$store.commit('license/setisLicense', false);
               }
@@ -210,7 +220,16 @@ export default {
           .catch((error) => console.log(error))
           .finally(() => (this.disableSubmitButton = false));
       } else {
-        window.location.href = '/';
+        const url = new URL(window.location.href);
+        const nextPath = url.searchParams.get('next');
+        if (nextPath && nextPath.startsWith('/redfish/v1')) {
+          const match = nextPath.match(/^\/redfish\/v1\/[^/]+/);
+          if (match) {
+            window.location.href = window.location.origin + match[0];
+          }
+        } else {
+          window.location.href = '/';
+        }
       }
     },
   },

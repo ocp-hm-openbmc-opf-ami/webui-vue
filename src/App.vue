@@ -6,6 +6,7 @@
 
 <script>
 import store from './store';
+
 import Cookies from 'js-cookie';
 import i18n from '@/i18n';
 export default {
@@ -28,7 +29,8 @@ export default {
         Cookies.get('XSRF-TOKEN') &&
         Cookies.get('loginSessionSuccess') === 'false' &&
         window.name != 'kvmConsoleWindow' &&
-        window.location.href.indexOf('serial-over-lan-console') == -1
+        window.location.href.indexOf('serial-over-lan-console') == -1 &&
+        window.location.href.indexOf('/redfish/v1') != -1
       ) {
         this.$bvModal.msgBoxOk(
           this.$tc('global.action.same_session_running_infomation'),
@@ -45,9 +47,11 @@ export default {
     handleRefresh(event) {
       if (
         window.name != 'kvmConsoleWindow' &&
-        window.location.href.indexOf('serial-over-lan-console') == -1
+        window.location.href.indexOf('serial-over-lan-console') == -1 &&
+        window.location.href.indexOf('/redfish/v1') != -1
       ) {
         if (event.srcElement.URL.indexOf('login') == -1) {
+          console.log('event:', event);
           store.dispatch('authentication/logout');
           //Due to firefox browser behaviour keep busy the browser to logout
           if (
