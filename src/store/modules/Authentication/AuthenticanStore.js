@@ -71,6 +71,11 @@ const AuthenticationStore = {
           }
         })
         .catch((error) => {
+          console.log(error);
+          const errorMessage = error.response.data?.error?.code || '';
+          if (errorMessage.includes('SessionLimitExceeded')) {
+            throw new Error(i18n.t('pagePolicies.toast.errorMaxSessionLogin'));
+          }
           if (error.response.status == 423) {
             commit('authLocked');
           } else {

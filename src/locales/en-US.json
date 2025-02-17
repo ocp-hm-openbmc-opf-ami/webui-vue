@@ -2048,6 +2048,7 @@
             "errorKVMSessionTimeout": "Error configuring KVM session timeout.",
             "errorSolBitRate": "Error in configuring SOL Non-Volatile Bit Rate.",
             "errorVMReconnect": "Error in setting Virtual Media Reconnect value.",
+            "errorMaxSessionLogin": "Maximum number of sessions already in use.",
             "successIpmiDisabled": "Successfully disabled IPMI security setting.",
             "successIpmiEnabled": "Successfully enabled IPMI security setting.",
             "successRtadDisabled": "Successfully disabled RTAD security setting.",
@@ -2131,7 +2132,13 @@
         "solBitRate": "SOL Non-Volatile Bit Rate",
         "retryCount": "Retry Count",
         "retryInterval": "Retry Interval",
-        "vmVMValueLimits": "Kindly enter the Values between %{min} to %{max}"
+        "vmVMValueLimits": "Kindly enter the Values between %{min} to %{max}",
+        "maxSession": "Max Session Service Information",
+        "kvmMaxSession": "KVM",
+        "redfishMaxSession": "Redfish",
+        "sshMaxSession": "SSH",
+        "vmMaxSession": "Virtual Media",
+        "webMaxSession": "Web"
 
     },
     "pagePower": {

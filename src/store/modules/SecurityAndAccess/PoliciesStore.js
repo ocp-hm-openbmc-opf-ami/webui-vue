@@ -26,6 +26,7 @@ const PoliciesStore = {
     webPortValue: null,
     solBitRate: null,
     vmReconnectData: {},
+    maxSessions: [],
   },
   getters: {
     sshProtocolEnabled: (state) => state.sshProtocolEnabled,
@@ -50,6 +51,7 @@ const PoliciesStore = {
     webPortValue: (state) => state.webPortValue,
     solBitRate: (state) => state.solBitRate,
     vmReconnectData: (state) => state.vmReconnectData,
+    maxSessions: (state) => state.maxSessions,
   },
   mutations: {
     setSshProtocolEnabled: (state, sshProtocolEnabled) =>
@@ -90,6 +92,7 @@ const PoliciesStore = {
     setSolBitRate: (state, solBitRate) => (state.solBitRate = solBitRate),
     setVMReconnectValues: (state, vmReconnectData) =>
       (state.vmReconnectData = vmReconnectData),
+    setMaxSessions: (state, maxSessions) => (state.maxSessions = maxSessions),
   },
   actions: {
     setSolSshPortUpdatedValue({ commit }, solSshProtocolPort) {
@@ -149,18 +152,46 @@ const PoliciesStore = {
         .catch((error) => console.log(error));
     },
     async getSessionTimeout({ commit }) {
+      const maxSessionsServiceInfo = [];
       return await api
         .get('/redfish/v1/SessionService')
         .then((response) => {
-          const sessionTimeoutValue = response.data.SessionTimeout;
-          const kvmSessionTimeoutValue =
-            response.data?.Oem?.Ami?.KVMSessionTimeout;
-          const kvmPortValue = response.data?.Oem?.Ami?.KVMPort;
-          const webPortValue = response.data?.Oem?.Ami?.BMCwebPort;
+          const commonValidation = (value, defaultValue = 'NA') =>
+            value !== '' && value !== undefined ? value : defaultValue;
+          const sessionTimeoutValue = commonValidation(
+            response.data.SessionTimeout,
+          );
+          const kvmSessionTimeoutValue = commonValidation(
+            response.data?.Oem?.Ami?.KVMSessionTimeout,
+          );
+          const kvmPortValue = commonValidation(
+            response.data?.Oem?.Ami?.KVMPort,
+          );
+          const webPortValue = commonValidation(
+            response.data?.Oem?.Ami?.BMCwebPort,
+          );
+          const maxSessions = response;
+          maxSessions.kvmMaxSession = commonValidation(
+            response.data?.Oem?.Ami?.KvmMaxSession,
+          );
+          maxSessions.redfishMaxSession = commonValidation(
+            response.data?.Oem?.Ami?.RedfishMaxSession,
+          );
+          maxSessions.sshMaxSession = commonValidation(
+            response.data?.Oem?.Ami?.SshMaxSession,
+          );
+          maxSessions.vmMaxSession = commonValidation(
+            response.data?.Oem?.Ami?.VmMaxSession,
+          );
+          maxSessions.webMaxSession = commonValidation(
+            response.data?.Oem?.Ami?.WebMaxSession,
+          );
+          maxSessionsServiceInfo.push(maxSessions);
           commit('setSessionTimeoutValue', sessionTimeoutValue);
           commit('setKvmSessionTimeout', kvmSessionTimeoutValue);
           commit('setKvmPortValue', kvmPortValue);
           commit('setWebPortValue', webPortValue);
+          commit('setMaxSessions', maxSessionsServiceInfo);
         })
         .catch((error) => console.log(error));
     },

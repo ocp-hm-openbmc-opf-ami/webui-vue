@@ -111,11 +111,12 @@ import i18n from '@/i18n';
 import Alert from '@/components/Global/Alert';
 import InputPasswordToggle from '@/components/Global/InputPasswordToggle';
 import Cookies from 'js-cookie';
+import BVToastMixin from '@/components/Mixins/BVToastMixin';
 
 export default {
   name: 'Login',
   components: { Alert, InputPasswordToggle },
-  mixins: [VuelidateMixin],
+  mixins: [VuelidateMixin, BVToastMixin],
   data() {
     return {
       userInfo: {
@@ -217,7 +218,15 @@ export default {
               this.$store.commit('global/setPrivilege', RoleId);
             }
           })
-          .catch((error) => console.log(error))
+          .catch(({ message }) => {
+            if (
+              message.includes(
+                i18n.t('pagePolicies.toast.errorMaxSessionLogin'),
+              )
+            ) {
+              this.errorToast(message);
+            }
+          })
           .finally(() => (this.disableSubmitButton = false));
       } else {
         const url = new URL(window.location.href);

@@ -2039,6 +2039,7 @@
             "errorKVMSessionTimeout": "配置 KVM 会话超时时出错。",
             "errorSolBitRate": "配置 SOL 非易失性比特率时出错。",
             "errorVMReconnect": "设置虚拟媒体重新连接值时出错。",
+            "errorMaxSessionLogin": "已使用的最大会话数.",
             "successIpmiDisabled": "停用 IPMI 安全设定成功",
             "successIpmiEnabled": "启用 IPMI 安全设定成功",
             "successRtadDisabled": "停用 RTAD 安全设定成功",
@@ -2122,7 +2123,13 @@
         "solBitRate": "SOL 非易失性比特率",
         "retryCount": "重试次数",
         "retryInterval": "重试间隔",
-        "vmVMValueLimits": "请输入 %{min} 到 %{max} 之间的值"
+        "vmVMValueLimits": "请输入 %{min} 到 %{max} 之间的值",
+        "maxSession": "最大会话服务信息",
+        "kvmMaxSession": "KVM",
+        "redfishMaxSession": "红鱼",
+        "sshMaxSession": "SSH",
+        "vmMaxSession": "虚拟媒体",
+        "webMaxSession": "网络"
     },
     "pagePower": {
         "description": "设置电源上限以使功耗保持在或低于指定值",

@@ -785,6 +785,29 @@
               ></page-section>
             </b-col>
           </b-row>
+          <b-row>
+            <b-col>
+              <page-section
+                class="page-section"
+                :section-title="$t('pagePolicies.maxSession')"
+              >
+                <b-row>
+                  <b-col xl="10">
+                    <b-table
+                      ref="table"
+                      responsive="md"
+                      show-empty
+                      :fields="maxSessionServicesField"
+                      :items="maxSessionServicesInfo"
+                      :empty-text="$t('global.table.emptyMessage')"
+                      head-variant="light"
+                    >
+                    </b-table>
+                  </b-col>
+                </b-row>
+              </page-section>
+            </b-col>
+          </b-row>
         </b-col>
       </b-row>
     </b-container>
@@ -839,6 +862,33 @@ export default {
         { value: '38400', text: '38400' },
         { value: '57600', text: '57600' },
         { value: '115200', text: '115200' },
+      ],
+      maxSessionServicesField: [
+        {
+          key: 'kvmMaxSession',
+          label: this.$t('pagePolicies.kvmMaxSession'),
+          class: 'text-center',
+        },
+        {
+          key: 'redfishMaxSession',
+          label: this.$t('pagePolicies.redfishMaxSession'),
+          class: 'text-center',
+        },
+        {
+          key: 'sshMaxSession',
+          label: this.$t('pagePolicies.sshMaxSession'),
+          class: 'text-center',
+        },
+        {
+          key: 'vmMaxSession',
+          label: this.$t('pagePolicies.vmMaxSession'),
+          class: 'text-center',
+        },
+        {
+          key: 'webMaxSession',
+          label: this.$t('pagePolicies.webMaxSession'),
+          class: 'text-center',
+        },
       ],
       kvmSessionTimeOutValue: this.$store.getters['policies/kvmSessionTimeout'],
       webSessionTimeoutValue:
@@ -1004,6 +1054,9 @@ export default {
     },
     ssdpPortValue() {
       return this.$store.getters['policies/ssdpPortValue'];
+    },
+    maxSessionServicesInfo() {
+      return this.$store.getters['policies/maxSessions'];
     },
     ...mapState('policies', [
       'kvmSessionTimeout',

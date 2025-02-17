@@ -2029,6 +2029,7 @@
             "errorKVMSessionTimeout": "Fehler beim Konfigurieren des KVM-Sitzungs-Timeouts.",
             "errorSolBitRate": "Fehler beim Konfigurieren der nichtflüchtigen SOL-Bitrate.",
             "errorVMReconnect": "Fehler beim Festlegen des Virtual Media Reconnect-Werts.",
+            "errorMaxSessionLogin": "Maximale Anzahl bereits verwendeter Sitzungen.",
             "successIpmiDisabled": "IPMI Sicherheitseinstellung erfolgreich deaktiviert.",
             "successIpmiEnabled": "IPMI Sicherheitseinstellung erfolgreich aktiviert.",
             "successRtadDisabled": "Die RTAD Sicherheitseinstellung wurde erfolgreich deaktiviert.",
@@ -2112,7 +2113,13 @@
         "solBitRate": "SOL Nichtflüchtige Bitrate",
         "retryCount": "Anzahl der Wiederholungen",
         "retryInterval": "Wiederholungsintervall",
-        "vmVMValueLimits": "Bitte geben Sie die Werte zwischen %{min} und %{max} ein."
+        "vmVMValueLimits": "Bitte geben Sie die Werte zwischen %{min} und %{max} ein.",
+        "maxSession": "Informationen zum maximalen Sitzungsdienst",
+        "kvmMaxSession": "KVM",
+        "redfishMaxSession": "Rotbarsch",
+        "sshMaxSession": "SSH",
+        "vmMaxSession": "Virtuelle Medien",
+        "webMaxSession": "Web"
     },
     "pagePower": {
         "description": "Legen Sie eine Leistungsobergrenze fest, um den Stromverbrauch auf oder unter dem angegebenen Wert in Watt zu halten",
