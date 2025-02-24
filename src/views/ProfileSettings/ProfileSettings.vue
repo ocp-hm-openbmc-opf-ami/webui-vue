@@ -113,7 +113,7 @@
                 :value="true"
                 data-test-id="profileSettings-radio-defaultUTC"
               >
-                {{ $t('pageProfileSettings.defaultUTC') }}
+                {{ $t('pageProfileSettings.defaultUTC', { defaultTimezone }) }}
               </b-form-radio>
               <b-form-radio
                 v-model="form.isUtcDisplay"
@@ -179,6 +179,10 @@ export default {
     },
     timezone() {
       return this.localOffset();
+    },
+    defaultTimezone() {
+      const timeZoneName = this.$store.getters['global/timeZone'];
+      return this.$options.filters.shortTzOffset(timeZoneName);
     },
     userPrivilege() {
       return this.$store.getters['global/userPrivilege'];

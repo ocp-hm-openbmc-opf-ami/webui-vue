@@ -5,7 +5,7 @@
       <b-col md="8" xl="6">
         <alert variant="info" class="mb-4">
           <span>
-            {{ $t('pageDateTime.alert.message') }}
+            {{ $t('pageDateTime.alert.message', { timeZoneName }) }}
             <b-link to="/profile-settings">
               {{ $t('pageDateTime.alert.link') }}</b-link
             >
@@ -18,16 +18,14 @@
         <b-col lg="3">
           <dl>
             <dt>{{ $t('pageDateTime.form.date') }}</dt>
-            <dd v-if="bmcTime">{{ form.manual.dateOffset }}</dd>
+            <dd v-if="bmcTime">{{ bmcTime | formatDate }}</dd>
             <dd v-else>--</dd>
           </dl>
         </b-col>
         <b-col lg="3">
           <dl>
             <dt>{{ $t('pageDateTime.form.time.label') }}</dt>
-            <dd v-if="bmcTime">
-              {{ form.manual.timeOffset }}
-            </dd>
+            <dd v-if="bmcTime">{{ bmcTime | formatTime }}</dd>
             <dd v-else>--</dd>
           </dl>
         </b-col>
@@ -40,6 +38,21 @@
           :disabled="loading"
           label-sr-only
         >
+          <b-row class="mt-3 ml-3">
+            <b-col xl="6">
+              <b-form-group
+                :label="$t('pageDateTime.form.timezone')"
+                label-for="timeZone"
+              >
+                <v-select
+                  v-model="form.ntp.timeZoneName"
+                  :options="timeZoneOptions"
+                  placeholder="Select an option"
+                  class="select-timeZone"
+                />
+              </b-form-group>
+            </b-col>
+          </b-row>
           <b-form-radio
             v-model="form.configurationSelected"
             value="manual"
@@ -133,23 +146,6 @@
           >
             NTP
           </b-form-radio>
-          <b-row class="mt-3 ml-3">
-            <b-col xl="6">
-              <b-form-group
-                :label="$t('pageDateTime.form.timezone')"
-                label-for="timeZone"
-              >
-                <v-select
-                  v-model="form.ntp.timeZoneName"
-                  :options="timeZoneOptions"
-                  placeholder="Select an option"
-                  :disabled="!ntpOptionSelected"
-                  class="select-timeZone"
-                  :class="{ disabled: !ntpOptionSelected }"
-                />
-              </b-form-group>
-            </b-col>
-          </b-row>
           <b-row class="mt-3 ml-3">
             <b-col sm="6" lg="4" xl="3">
               <b-form-group
@@ -270,10 +266,8 @@ export default {
       form: {
         configurationSelected: 'manual',
         manual: {
-          date: this.isDate(),
-          time: this.isTime(false),
-          dateOffset: this.isDate(),
-          timeOffset: this.isTime(true),
+          date: '',
+          time: '',
         },
         ntp: {
           firstAddress: '',
@@ -331,7 +325,7 @@ export default {
   computed: {
     ...mapState('dateTime', ['ntpServers', 'isNtpProtocolEnabled']),
     bmcTime() {
-      return this.$store.getters['global/bmcDateTime'];
+      return this.$store.getters['global/bmcTime'];
     },
     timeZoneOffset() {
       return this.$store.getters['global/timeZone'];
@@ -346,8 +340,13 @@ export default {
       return this.$store.getters['global/isUtcDisplay'];
     },
     timezone() {
-      const timeZoneName = this.$store.getters['global/timeZone'];
-      return this.localOffsetTimezone(timeZoneName);
+      if (this.isUtcDisplay) {
+        return this.$options.filters.shortTzOffset(this.timeZoneName);
+      }
+      return this.localOffset();
+    },
+    timeZoneName() {
+      return this.$store.getters['global/timeZone'];
     },
   },
   watch: {
@@ -358,10 +357,12 @@ export default {
       this.emitChange();
     },
     bmcTime() {
-      this.form.manual.date = this.isDate();
-      this.form.manual.time = this.isTime(false);
-      this.form.manual.dateOffset = this.isDate();
-      this.form.manual.timeOffset = this.isTime(true);
+      this.form.manual.date = this.$options.filters.formatDate(
+        this.$store.getters['global/bmcTime'],
+      );
+      this.form.manual.time = this.$options.filters
+        .formatTime(this.$store.getters['global/bmcTime'])
+        .slice(0, 5);
     },
     timeZoneOffset(newVal) {
       this.form.ntp.timeZoneName = newVal;
@@ -384,54 +385,6 @@ export default {
         ]),
       ].sort();
       return combinedUniqueTimeZone;
-    },
-    isDate() {
-      const bmcDateTime = this.$store.getters['global/bmcDateTime'];
-      var date = null;
-      if (localStorage.getItem('storedUtcDisplay') == 'false') {
-        var dateTime = new Date(bmcDateTime);
-        date = [
-          dateTime.getFullYear().toString().padStart(2, '0'),
-          (dateTime.getMonth() + 1).toString().padStart(2, '0'),
-          dateTime.getDate().toString().padStart(2, '0'),
-        ].join('-');
-      } else {
-        date = bmcDateTime?.slice(0, 10);
-      }
-      return date;
-    },
-    isTime(timeOffset) {
-      const bmcDateTime = this.$store.getters['global/bmcDateTime'];
-      const timeZoneName = this.$store.getters['global/timeZone'];
-      var time = null;
-      if (localStorage.getItem('storedUtcDisplay') == 'false') {
-        var dateTime = new Date(bmcDateTime);
-        if (timeOffset) {
-          time =
-            [
-              dateTime.getHours().toString().padStart(2, '0'),
-              dateTime.getMinutes().toString().padStart(2, '0'),
-              dateTime.getSeconds().toString().padStart(2, '0'),
-            ].join(':') +
-            ' (' +
-            this.localOffset() +
-            ')';
-        } else {
-          time = [
-            dateTime.getHours().toString().padStart(2, '0'),
-            dateTime.getMinutes().toString().padStart(2, '0'),
-          ].join(':');
-        }
-      } else {
-        if (timeOffset) {
-          time =
-            bmcDateTime?.slice(11, 19) +
-            ' (' +
-            this.localOffsetTimezone(timeZoneName) +
-            ')';
-        } else time = bmcDateTime?.slice(11, 16);
-      }
-      return time;
     },
     emitChange() {
       if (this.$v.$invalid) return;
@@ -457,17 +410,39 @@ export default {
 
       let dateTimeForm = {};
       let isNTPEnabled = this.form.configurationSelected === 'ntp';
+      dateTimeForm.TimeZoneName = this.form.ntp.timeZoneName;
       if (!isNTPEnabled) {
+        const isUtcDisplay = this.$store.getters['global/isUtcDisplay'];
         let date;
 
         dateTimeForm.ntpProtocolEnabled = false;
 
-        date = this.getUtcDate(this.form.manual.date, this.form.manual.time);
-
-        dateTimeForm.updatedDateTime = date.toISOString().split('.')[0];
+        if (isUtcDisplay) {
+          // Create UTC Date
+          date = this.getUtcDate(this.form.manual.date, this.form.manual.time);
+          dateTimeForm.updatedDateTime = date.toISOString().split('.')[0];
+        } else {
+          // Create local Date
+          date = new Date(`${this.form.manual.date} ${this.form.manual.time}`);
+          let options = {
+            timeZone: this.form.ntp.timeZoneName,
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+          };
+          dateTimeForm.updatedDateTime = new Intl.DateTimeFormat(
+            'en-CA',
+            options,
+          )
+            .format(date)
+            .replace(', ', 'T');
+        }
       } else {
         dateTimeForm.ntpProtocolEnabled = true;
-        dateTimeForm.TimeZoneName = this.form.ntp.timeZoneName;
 
         const ntpArray = [
           this.form.ntp.firstAddress,
@@ -554,9 +529,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.select-timeZone.disabled {
-  background-color: #ccc;
-  color: #999;
-  opacity: 0.6;
+.b-form-datepicker {
+  z-index: 1;
 }
 </style>

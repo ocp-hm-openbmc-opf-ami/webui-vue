@@ -60,16 +60,23 @@ Vue.filter('shortTimeZone', function (value) {
 
 // Short timezone using the timezone
 Vue.filter('shortTzOffset', function (value) {
+  const offset = moment().tz(value).format('Z');
   const shortTz = moment().tz(value).format('z');
-  return shortTz;
+  return shortTz != 'UTC' ? 'GMT' + offset + ' ' + shortTz : 'UTC' + offset;
 });
 
 Vue.filter('formatDate', function (value) {
   const isUtcDisplay = store.getters['global/isUtcDisplay'];
-
+  const bmcTimeZone = store.getters['global/timeZone'];
   if (value instanceof Date) {
     if (isUtcDisplay) {
-      return value.toISOString().substring(0, 10);
+      let options = {
+        timeZone: bmcTimeZone,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      };
+      return value.toLocaleDateString('en-CA', options);
     }
     const pattern = `yyyy-MM-dd`;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -79,19 +86,26 @@ Vue.filter('formatDate', function (value) {
 
 Vue.filter('formatTime', function (value) {
   const isUtcDisplay = store.getters['global/isUtcDisplay'];
+  const bmcTimeZone = store.getters['global/timeZone'];
 
   if (value instanceof Date) {
     if (isUtcDisplay) {
       let timeOptions = {
-        timeZone: 'UTC',
+        timeZone: bmcTimeZone,
         hourCycle: 'h23',
       };
-      return `${value.toLocaleTimeString('default', timeOptions)} UTC`;
+      const shortTzOff = Vue.filter('shortTzOffset')(bmcTimeZone);
+      return (
+        value.toLocaleTimeString('default', timeOptions) +
+        ' (' +
+        shortTzOff +
+        ')'
+      );
     }
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const shortTz = Vue.filter('shortTimeZone')(value);
-    const pattern = `HH:mm:ss ('${shortTz}' O)`;
-    return format(value, pattern, { timezone }).replace('GMT', 'UTC');
+    const pattern = `HH:mm:ss (O '${shortTz}')`;
+    return format(value, pattern, { timezone });
   }
 });
 

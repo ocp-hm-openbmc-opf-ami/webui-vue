@@ -910,7 +910,7 @@
     },
     "pageDateTime": {
         "alert": {
-            "message": "如需改变时间或日期(UTC或网页偏移量) 请透过应用程式 ",
+            "message": "如需改变时间或日期(%{timeZoneName}或网页偏移量) 请透过应用程式 ",
             "link": "用户资讯"
         },
         "configureSettings": "配置设定",
@@ -1690,7 +1690,7 @@
         "browserOffset": "浏览器偏移 (%{timezone})",
         "changePassword": "改变密码",
         "confirmPassword": "确认新密码",
-        "defaultUTC": "预设 (UTC)",
+        "defaultUTC": "预设 (%{defaultTimezone})",
         "newPassword": "新密码",
         "currentPassword": "目前密码",
         "newPassLabelTextInfo": "密码字元必须在 %{min} - %{max} 之间",

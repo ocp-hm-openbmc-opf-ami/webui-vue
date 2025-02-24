@@ -5,7 +5,7 @@
         <dl>
           <dt>{{ $t('pageOverview.bmcTime') }}</dt>
           <dd v-if="bmcTime" data-test-id="overviewQuickLinks-text-bmcTime">
-            {{ bmcTime }}
+            {{ bmcTime | formatDate }} {{ bmcTime | formatTime }}
           </dd>
           <dd v-else>--</dd>
         </dl>
@@ -38,50 +38,13 @@ export default {
   mixins: [BVToastMixin, LocalTimezoneLabelMixin],
   computed: {
     bmcTime() {
-      let dateTime = this.$store.getters['global/bmcDateTime'];
-      let timeZoneName = this.$store.getters['global/timeZone'];
-      if (this.$store.getters['global/isUtcDisplay'] == false) {
-        return dateTime ? this.offsetDateTime(dateTime) : null;
-      } else {
-        return dateTime ? this.offsetDateTimeUTC(dateTime, timeZoneName) : null;
-      }
+      return this.$store.getters['global/bmcTime'];
     },
   },
   created() {
     Promise.all([this.$store.dispatch('global/getBmcTime')]).finally(() => {
       this.$root.$emit('overview-quicklinks-complete');
     });
-  },
-  methods: {
-    offsetDateTimeUTC(dateTime, timeZoneName) {
-      return (
-        dateTime?.slice(0, 10) +
-        ' ' +
-        dateTime?.slice(11, 19) +
-        ' (' +
-        this.localOffsetTimezone(timeZoneName) +
-        ')'
-      );
-    },
-    offsetDateTime(dateTime) {
-      var date = new Date(dateTime),
-        dateFormat =
-          [
-            date.getFullYear().toString().padStart(2, '0'),
-            (date.getMonth() + 1).toString().padStart(2, '0'),
-            date.getDate().toString().padStart(2, '0'),
-          ].join('-') +
-          ' ' +
-          [
-            date.getHours().toString().padStart(2, '0'),
-            date.getMinutes().toString().padStart(2, '0'),
-            date.getSeconds().toString().padStart(2, '0'),
-          ].join(':') +
-          ' (' +
-          this.localOffset().split(' ')[0] +
-          ')';
-      return dateFormat;
-    },
   },
 };
 </script>

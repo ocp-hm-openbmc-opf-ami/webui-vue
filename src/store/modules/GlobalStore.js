@@ -1,4 +1,5 @@
 import api from '@/store/api';
+import LocalTimezoneLabelMixin from '@/components/Mixins/LocalTimezoneLabelMixin';
 
 const HOST_STATE = {
   on: 'xyz.openbmc_project.State.Host.HostState.Running',
@@ -132,11 +133,14 @@ const GlobalStore = {
           const areBothActionsAvailable =
             isBackupConfigAvailable !== undefined &&
             isRestoreConfigAvailable !== undefined;
-          const bmcDateTime = response.data.DateTime;
-          const date = new Date(bmcDateTime);
           const timeZone = response.data.TimeZoneName;
+          var bmcDateTime = response.data.DateTime;
+          bmcDateTime =
+            bmcDateTime +
+            LocalTimezoneLabelMixin.methods.offsetUseTimezone(timeZone);
+          const date = new Date(bmcDateTime);
+
           commit('setBmcTime', date);
-          commit('setBmcDateTime', bmcDateTime);
           commit('setTimeZone', timeZone);
           commit('setbackupAndRestore', areBothActionsAvailable);
         })

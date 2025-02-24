@@ -918,7 +918,7 @@
     },
     "pageDateTime": {
         "alert": {
-            "message": "To change how date and time are displayed (either UTC or browser offset) throughout the application, visit ",
+            "message": "To change how date and time are displayed (either %{timeZoneName} or browser offset) throughout the application, visit ",
             "link": "Profile Settings"
         },
         "configureSettings": "Configure settings",
@@ -1699,7 +1699,7 @@
         "browserOffset": "Browser offset (%{timezone})",
         "changePassword": "Change password",
         "confirmPassword": "Confirm new password",
-        "defaultUTC": "Default (UTC)",
+        "defaultUTC": "Default (%{defaultTimezone})",
         "newPassword": "New password",
         "currentPassword": "Current password",
         "newPassLabelTextInfo": "Password must be between %{min} - %{max} characters",

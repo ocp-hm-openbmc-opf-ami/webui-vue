@@ -47,7 +47,7 @@ const DateTimeStore = {
             dateTimePayload.TimeZoneName = dateTimeForm.TimeZoneName;
           } else {
             dateTimePayload.DateTime = dateTimeForm.updatedDateTime;
-            dateTimePayload.TimeZoneName = 'UTC';
+            dateTimePayload.TimeZoneName = dateTimeForm.TimeZoneName;
           }
           /**
            * https://github.com/openbmc/phosphor-time-manager/blob/master/README.md#special-note-on-changing-ntp-setting

@@ -1,16 +1,17 @@
 import { format } from 'date-fns-tz';
+const moment = require('moment-timezone');
 
 const LocalTimezoneLabelMixin = {
   methods: {
     localOffset() {
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       const shortTz = this.$options.filters.shortTimeZone(new Date());
-      const pattern = `'${shortTz}' O`;
-      return format(new Date(), pattern, { timezone }).replace('GMT', 'UTC');
+      const pattern = `O '${shortTz}'`;
+      return format(new Date(), pattern, { timezone });
     },
-    localOffsetTimezone(timezone) {
-      const shortTimeZoneOffset = this.$options.filters.shortTzOffset(timezone);
-      return shortTimeZoneOffset;
+    offsetUseTimezone(value) {
+      const offset = moment().tz(value).format('Z');
+      return offset;
     },
   },
 };

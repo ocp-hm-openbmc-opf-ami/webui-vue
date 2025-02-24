@@ -912,7 +912,7 @@
     },
     "pageDateTime": {
         "alert": {
-            "message": "Zum Ändern der Anzeige von Datum und Uhrzeit (entweder UTC oder Browser Offset) während der gesamten Anwendung, besuchen ",
+            "message": "Zum Ändern der Anzeige von Datum und Uhrzeit (entweder %{timeZoneName} oder Browser Offset) während der gesamten Anwendung, besuchen ",
             "link": "Profileinstellungen"
         },
         "configureSettings": "Einstellungen konfigurieren",
@@ -1693,7 +1693,7 @@
         "browserOffset": "Browser offset (%{Zeitzone})",
         "changePassword": "Kennwort ändern",
         "confirmPassword": "Bestätige neues Passwort",
-        "defaultUTC": "Standard (UTC)",
+        "defaultUTC": "Standard (%{defaultTimezone})",
         "newPassword": "Neues Kennwort",
         "currentPassword": "Aktuelles Passwort",
         "newPassLabelTextInfo": "Das Passwort muss zwischen liegen %{min} - %{max} Figuren",
