@@ -221,6 +221,9 @@ export default {
             .then((addConfirmed) => {
               if (addConfirmed) {
                 this.networkOverlay = true;
+                setTimeout(() => {
+                  window.location.reload();
+                }, 2000); // wait to load the session
               }
             });
         })

@@ -288,6 +288,9 @@ export default {
                     .then((addConfirmed) => {
                       if (addConfirmed) {
                         this.$emit('networkOverlay', true);
+                        setTimeout(() => {
+                          window.location.reload();
+                        }, 2000); // wait to load the session
                       }
                     });
                 })
