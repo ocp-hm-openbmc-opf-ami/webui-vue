@@ -21,7 +21,7 @@
           />
         </h1>
         <div>
-          <b-form>
+          <b-form class="form" novalidate @submit.prevent="changePassword">
             <input-password-toggle>
               <b-form-input
                 id="password"
@@ -87,7 +87,6 @@
               variant="primary"
               data-test-id="login-button-submit"
               :disabled="disableSubmitButton"
-              @click="changePassword"
               >{{ $t('pageChangePassword.submit') }}</b-button
             >
           </b-form>
@@ -107,22 +106,29 @@ import {
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin';
 import InputPasswordToggle from '@/components/Global/InputPasswordToggle';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
+import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 
 export default {
   name: 'ChangePassword',
   components: { InputPasswordToggle },
-  mixins: [VuelidateMixin, BVToastMixin],
+  mixins: [VuelidateMixin, BVToastMixin, LoadingBarMixin],
   data() {
     return {
       form: {
-        password: null,
-        passwordConfirm: null,
+        password: '',
+        passwordConfirm: '',
       },
       altLogo: process.env.VUE_APP_COMPANY_NAME || 'AMI',
       customizableGuiName: process.env.VUE_APP_GUI_NAME || '',
       username: this.$store.getters['global/username'],
       disableSubmitButton: false,
       changePasswordError: false,
+    };
+  },
+  mounted() {
+    window.onpopstate = () => {
+      //click browser back button
+      this.$store.commit('authentication/logout');
     };
   },
   validations() {
