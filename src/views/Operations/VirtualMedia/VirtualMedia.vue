@@ -82,6 +82,14 @@
                     >
                       {{ $t('pageVirtualMedia.stop') }}
                     </b-button>
+                    <div class="custom-form-file-container">
+                      <div
+                        v-if="dev.isActive && dev.file"
+                        class="clear-selected-file text-break px-3 py-2 mt-2"
+                      >
+                        {{ dev.file.name }}
+                      </div>
+                    </div>
                   </b-col>
                 </b-row>
               </page-section>
@@ -159,14 +167,19 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import ModalConfigureConnection from './ModalConfigureConnection';
 import NbdServer from '@/utilities/NBDServer';
 import FormFile from '@/components/Global/FormFile';
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 //license checking
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
 
 export default {
   name: 'VirtualMedia',
-  components: { PageTitle, PageSection, ModalConfigureConnection, FormFile },
+  components: {
+    PageTitle,
+    PageSection,
+    ModalConfigureConnection,
+    FormFile,
+  },
   mixins: [BVToastMixin, LoadingBarMixin, LicensecheckMixin],
   data() {
     return {
@@ -181,6 +194,7 @@ export default {
   },
   computed: {
     ...mapState('global', ['virtualMediaServiceEnabledAccess']),
+    ...mapState('virtualMedia', ['slot0File', 'slot1File']),
     proxyDevices() {
       return this.$store.getters['virtualMedia/proxyDevices'];
     },
@@ -234,6 +248,7 @@ export default {
     });
   },
   methods: {
+    ...mapMutations('virtualMedia', ['setSlot0File', 'setSlot1File']),
     getVirtualMedia() {
       this.startLoader();
       this.$store
@@ -311,6 +326,13 @@ export default {
     stopVM(device) {
       if (device.nbd) {
         device.nbd.stop();
+      }
+
+      // Clear the stored file name when stopping redirection
+      if (device.id === 'Slot_0') {
+        this.setSlot0File(null);
+      } else if (device.id === 'Slot_1') {
+        this.setSlot1File(null);
       }
     },
     startLegacy(connectionData) {
@@ -435,6 +457,11 @@ export default {
           this.errorToast(this.$t('pageVirtualMedia.toast.invalidFileType'));
         }
       }
+      if (dev.id === 'Slot_0') {
+        this.setSlot0File(file);
+      } else if (dev.id === 'Slot_1') {
+        this.setSlot1File(file);
+      }
     },
     isPasswordRequired(device) {
       // Check if password is required for CIFS or HTTPS
@@ -446,3 +473,22 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.clear-selected-file {
+  display: flex;
+  align-items: center;
+  background-color: theme-color('light');
+  word-break: break-word; // break long file name into multiple lines
+  .btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+
+    &:focus {
+      box-shadow: inset 0 0 0 2px theme-color('primary');
+    }
+  }
+}
+</style>

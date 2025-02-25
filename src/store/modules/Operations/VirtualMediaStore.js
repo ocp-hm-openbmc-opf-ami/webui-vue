@@ -29,6 +29,8 @@ const VirtualMediaStore = {
     virtualMediaPolicies: false,
     mediaAlreadyRedirected: [],
     slotArray: [],
+    slot0File: null,
+    slot1File: null,
   },
   getters: {
     proxyDevices: (state) => state.proxyDevices,
@@ -45,6 +47,8 @@ const VirtualMediaStore = {
       );
       return filtered;
     },
+    slot0File: (state) => state.slot0File,
+    slot1File: (state) => state.slot1File,
   },
   mutations: {
     setProxyDevicesData: (state, deviceData) =>
@@ -69,6 +73,8 @@ const VirtualMediaStore = {
         }
       }
     },
+    setSlot0File: (state, file) => (state.slot0File = file),
+    setSlot1File: (state, file) => (state.slot1File = file),
   },
   actions: {
     async getData({ commit, state }) {
@@ -124,23 +130,23 @@ const VirtualMediaStore = {
           const proxyDevices = deviceData
             .filter((d) => d.transferProtocolType === transferProtocolType.OEM)
             .map((device) => {
-              if (state.slot0Nbd || state.slot1Nbd) {
-                return {
-                  ...device,
-                  file: null,
-                  nbd:
-                    device.id == 'Slot_0' && state.slot0Nbd
-                      ? state.slot0Nbd
-                      : device.id == 'Slot_1' && state.slot1Nbd
-                        ? state.slot1Nbd
-                        : null,
-                };
-              } else {
-                return {
-                  ...device,
-                  file: null,
-                };
+              let file = null;
+              if (device.id === 'Slot_0' && state.slot0File) {
+                file = state.slot0File;
+              } else if (device.id === 'Slot_1' && state.slot1File) {
+                file = state.slot1File;
               }
+
+              return {
+                ...device,
+                file: file, // Use the stored file if available
+                nbd:
+                  device.id == 'Slot_0' && state.slot0Nbd
+                    ? state.slot0Nbd
+                    : device.id == 'Slot_1' && state.slot1Nbd
+                      ? state.slot1Nbd
+                      : null,
+              };
             });
           const legacyDevices = deviceData
             .filter((d) => d.transferProtocolType !== transferProtocolType.OEM)
