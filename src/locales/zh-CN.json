@@ -2417,7 +2417,16 @@
             "labelPatrolReadRate": "巡逻读取速率",
             "labelBGIRate": "BGI 速率",
             "labelConsistencyCheckRate": "一致性检查速率",
-            "labelReconstructionRate": "重建速率"
+            "labelReconstructionRate": "重建速率",
+            "labelControllerPersonality": "控制器运行模式",
+            "labelCurrentControllerPersonality": "当前的控制器运行模式",
+            "labelSetControllerPersonality": "设置控制器运行模式",
+            "controllerPersonalityHelperText": "控制器运行模式决定 RAID 控制器如何管理存储设备。",
+            "currentControllerPersonalityHelperText": "显示 RAID 控制器当前的运行模式。",
+            "setControllerPersonalityHelperText": "切换 RAID 模式与 JBOD 模式，变更后需要重新启动主机才能生效。",
+            "raidMode": "RAID 模式",
+            "jbodMode": "JBOD 模式",
+            "alertNotSupport": "此功能当前不支持。"
         },
         "toast": {
             "copybackConfigSuccess": "回拷功能已成功设置。",
@@ -2431,7 +2440,10 @@
             "configImport": "导入配置文件。",
             "controllerPropertiesSuccess": "成功设置控制器属性。需要一些时间来完成该设定。请等待几秒钟并刷新应用程序以查看更改內容。",
             "controllerPropertiesFail": "设置控制器属性失败。",
-            "controllerPropertiesConfig": "控制器属性设置。"
+            "controllerPropertiesConfig": "控制器属性设置。",
+            "controllerPersonalitySuccess": "成功设置控制器运行模式，请重新启动主机以应用更改。",
+            "controllerPersonalityFail": "设置控制器运行模式失败，请确保所有逻辑设备已移除后再继续。",
+            "controllerPersonality": "切换控制器运行模式。"
         }
     },
     "pagePhysicalDevice": {

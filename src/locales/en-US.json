@@ -2428,7 +2428,16 @@
             "labelPatrolReadRate": "Patrol Read Rate",
             "labelBGIRate": "BGI Rate",
             "labelConsistencyCheckRate": "Consistency Check Rate",
-            "labelReconstructionRate": "Reconstruction Rate"
+            "labelReconstructionRate": "Reconstruction Rate",
+            "labelControllerPersonality": "Controller Personality",
+            "labelCurrentControllerPersonality": "Current Controller Personality",
+            "labelSetControllerPersonality": "Set Controller Personality",
+            "controllerPersonalityHelperText": "Controller Personality determines how the RAID controller manages storage devices.",
+            "currentControllerPersonalityHelperText": "Displays the current Controller Personality mode of the RAID controller.",
+            "setControllerPersonalityHelperText": "Toggle to switch between RAID Mode and JBOD Mode. A host reboot is required for the changes to take effect.",
+            "raidMode": "RAID Mode",
+            "jbodMode": "JBOD Mode",
+            "alertNotSupport": "This feature is currently not supported."
         },
         "toast": {
             "copybackConfigSuccess": "The 'Copyback' feature has been successfully set up.",
@@ -2442,7 +2451,10 @@
             "configImport": "Import the configuration file.",
             "controllerPropertiesSuccess": "Set controller properties successfully.   The setting will take some time to complete. Please wait for few seconds and refresh the application to see the changes.",
             "controllerPropertiesFail": "Failed to set controller properties.",
-            "controllerPropertiesConfig": "Controller Properties setting."
+            "controllerPropertiesConfig": "Controller Properties setting.",
+            "controllerPersonalitySuccess": "Successfully set Controller Personality. Please reboot the host to apply the changes.",
+            "controllerPersonalityFail": "Failed to set Controller Personality. Please ensure that all Logical Devices are removed before proceeding.",
+            "controllerPersonality": "Switch Controller Personality mode."
         }
     },
     "pagePhysicalDevice": {

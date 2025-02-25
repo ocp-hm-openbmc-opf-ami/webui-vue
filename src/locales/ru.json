@@ -1054,7 +1054,16 @@
             "labelPatrolReadRate": "Скорость чтения патруля",
             "labelBGIRate": "Скорость BGI",
             "labelConsistencyCheckRate": "Скорость проверки согласованности",
-            "labelReconstructionRate": "Скорость реконструкции"
+            "labelReconstructionRate": "Скорость реконструкции",
+            "labelControllerPersonality": "Режим работы контроллера",
+            "labelCurrentControllerPersonality": "Текущий режим работы контроллера",
+            "labelSetControllerPersonality": "Установить режим работы контроллера",
+            "controllerPersonalityHelperText": "Режим работы контроллера определяет, как RAID-контроллер управляет устройствами хранения.",
+            "currentControllerPersonalityHelperText": "Отображает текущий режим работы контроллера RAID.",
+            "setControllerPersonalityHelperText": "Переключение между режимами RAID и JBOD. Для вступления изменений в силу требуется перезагрузка хоста.",
+            "raidMode": "Режим RAID",
+            "jbodMode": "Режим JBOD",
+            "alertNotSupport": "Эта функция в настоящее время не поддерживается."
         },
         "toast": {
             "copybackConfigSuccess": "Функция «Copyback» успешно настроена.",
@@ -1068,7 +1077,10 @@
             "configImport": "Импортируйте конфигурационный файл.",
             "controllerPropertiesSuccess": "Свойства контроллера успешно установлены. Это может занять некоторое время. Пожалуйста, подождите несколько секунд и обновите приложение, чтобы увидеть изменения.",
             "controllerPropertiesFail": "Не удалось установить свойства контроллера.",
-            "controllerPropertiesConfig": "Настройки свойств контроллера."
+            "controllerPropertiesConfig": "Настройки свойств контроллера.",
+            "controllerPersonalitySuccess": "Режим работы контроллера успешно установлен. Перезагрузите хост, чтобы применить изменения.",
+            "controllerPersonalityFail": "Не удалось установить режим работы контроллера. Убедитесь, что все логические устройства удалены перед продолжением.",
+            "controllerPersonality": "Переключить режим работы контроллера."
         }
     },
     "pageLogicalDevice": {
