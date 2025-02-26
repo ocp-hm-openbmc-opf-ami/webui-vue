@@ -8,6 +8,32 @@
   >
     <b-form id="form-addSensorThreshold" @submit.prevent="handleSubmit">
       <b-row>
+        <b-col v-if="form.upperFatal != undefined" sm="6">
+          <b-form-group
+            :label="$t('pageSensors.sensorThreshold.modal.upperFatal')"
+            label-for="upperFatal"
+          >
+            <b-form-input
+              id="upperFatal"
+              v-model="form.upperFatal"
+              type="text"
+              :state="getValidationState($v.form.upperFatal)"
+              @input="$v.form.upperFatal.$touch()"
+            />
+            <b-form-invalid-feedback role="alert">
+              <template v-if="!$v.form.upperFatal.required">
+                {{ $t('global.form.fieldRequired') }}
+              </template>
+              <template
+                v-if="
+                  $v.form.upperFatal.required && !$v.form.upperFatal.pattern
+                "
+              >
+                {{ upperFatalErrorMsg }}
+              </template>
+            </b-form-invalid-feedback>
+          </b-form-group>
+        </b-col>
         <b-col v-if="form.upperCritical != undefined" sm="6">
           <b-form-group
             :label="$t('pageSensors.sensorThreshold.modal.upperCritical')"
@@ -35,6 +61,8 @@
             </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
+      </b-row>
+      <b-row>
         <b-col v-if="form.upperCaution != undefined" sm="6">
           <b-form-group
             :label="$t('pageSensors.sensorThreshold.modal.upperCaution')"
@@ -61,8 +89,6 @@
             </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
-      </b-row>
-      <b-row>
         <b-col v-if="form.lowerCaution != undefined" sm="6">
           <b-form-group
             :label="$t('pageSensors.sensorThreshold.modal.lowerCaution')"
@@ -90,6 +116,8 @@
             </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
+      </b-row>
+      <b-row>
         <b-col v-if="form.lowerCritical != undefined" sm="6">
           <b-form-group
             :label="$t('pageSensors.sensorThreshold.modal.lowerCritical')"
@@ -113,6 +141,32 @@
                 "
               >
                 {{ lowerCriticalErrorMsg }}
+              </template>
+            </b-form-invalid-feedback>
+          </b-form-group>
+        </b-col>
+        <b-col v-if="form.lowerFatal != undefined" sm="6">
+          <b-form-group
+            :label="$t('pageSensors.sensorThreshold.modal.lowerFatal')"
+            label-for="lowerFatal"
+          >
+            <b-form-input
+              id="lowerFatal"
+              v-model="form.lowerFatal"
+              type="text"
+              :state="getValidationState($v.form.lowerFatal)"
+              @input="$v.form.lowerFatal.$touch()"
+            />
+            <b-form-invalid-feedback role="alert">
+              <template v-if="!$v.form.lowerFatal.required">
+                {{ $t('global.form.fieldRequired') }}
+              </template>
+              <template
+                v-if="
+                  $v.form.lowerFatal.required && !$v.form.lowerFatal.pattern
+                "
+              >
+                {{ lowerFatalErrorMsg }}
               </template>
             </b-form-invalid-feedback>
           </b-form-group>
@@ -152,11 +206,15 @@ export default {
       upperCautionErrorMsg: '',
       lowerCautionErrorMsg: '',
       lowerCriticalErrorMsg: '',
+      upperFatalErrorMsg: '',
+      lowerFatalErrorMsg: '',
       form: {
         upperCritical: '',
         upperCaution: '',
         lowerCritical: '',
         lowerCaution: '',
+        upperFatal: '',
+        lowerFatal: '',
       },
     };
   },
@@ -214,39 +272,55 @@ export default {
             return this.lowerCautionValidation(val);
           },
         },
+        upperFatal: {
+          required: requiredIf(function (form) {
+            if (form.upperFatal != undefined) {
+              return true;
+            }
+          }),
+          pattern: function (val) {
+            return this.upperFatalValidation(val);
+          },
+        },
+        lowerFatal: {
+          required: requiredIf(function (form) {
+            if (form.lowerFatal != undefined) {
+              return true;
+            }
+          }),
+          pattern: function (val) {
+            return this.lowerFatalValidation(val);
+          },
+        },
       },
     };
   },
   methods: {
     initModal() {
-      this.form.upperCritical =
-        this.modalSensorThreshold.upperCritical == undefined
-          ? this.modalSensorThreshold.upperCritical
-          : this.modalSensorThreshold.upperCritical !=
-              Math.floor(this.modalSensorThreshold.upperCritical)
-            ? parseFloat(this.modalSensorThreshold.upperCritical).toFixed(2)
-            : Math.floor(this.modalSensorThreshold.upperCritical);
-      this.form.upperCaution =
-        this.modalSensorThreshold.upperCaution == undefined
-          ? this.modalSensorThreshold.upperCaution
-          : this.modalSensorThreshold.upperCaution !=
-              Math.floor(this.modalSensorThreshold.upperCaution)
-            ? parseFloat(this.modalSensorThreshold.upperCaution).toFixed(2)
-            : Math.floor(this.modalSensorThreshold.upperCaution);
-      this.form.lowerCritical =
-        this.modalSensorThreshold.lowerCritical == undefined
-          ? this.modalSensorThreshold.lowerCritical
-          : this.modalSensorThreshold.lowerCritical !=
-              Math.floor(this.modalSensorThreshold.lowerCritical)
-            ? parseFloat(this.modalSensorThreshold.lowerCritical).toFixed(2)
-            : Math.floor(this.modalSensorThreshold.lowerCritical);
-      this.form.lowerCaution =
-        this.modalSensorThreshold.lowerCaution == undefined
-          ? this.modalSensorThreshold.lowerCaution
-          : this.modalSensorThreshold.lowerCaution !=
-              Math.floor(this.modalSensorThreshold.lowerCaution)
-            ? parseFloat(this.modalSensorThreshold.lowerCaution).toFixed(2)
-            : Math.floor(this.modalSensorThreshold.lowerCaution);
+      const processThreshold = (value) => {
+        if (value === undefined) return value;
+        return value !== Math.floor(value)
+          ? parseFloat(value).toFixed(2)
+          : Math.floor(value);
+      };
+      this.form.upperFatal = processThreshold(
+        this.modalSensorThreshold.upperFatal,
+      );
+      this.form.upperCritical = processThreshold(
+        this.modalSensorThreshold.upperCritical,
+      );
+      this.form.upperCaution = processThreshold(
+        this.modalSensorThreshold.upperCaution,
+      );
+      this.form.lowerCaution = processThreshold(
+        this.modalSensorThreshold.lowerCaution,
+      );
+      this.form.lowerCritical = processThreshold(
+        this.modalSensorThreshold.lowerCritical,
+      );
+      this.form.lowerFatal = processThreshold(
+        this.modalSensorThreshold.lowerFatal,
+      );
     },
     resetForm() {
       this.$emit('closeAddModal', false);
@@ -268,6 +342,12 @@ export default {
       if (this.form.lowerCaution != undefined) {
         setThresholdValue.LowerCaution = parseFloat(this.form.lowerCaution);
       }
+      if (this.form.upperFatal != undefined) {
+        setThresholdValue.UpperFatal = parseFloat(this.form.upperFatal);
+      }
+      if (this.form.lowerFatal != undefined) {
+        setThresholdValue.LowerFatal = parseFloat(this.form.lowerFatal);
+      }
       this.$emit('setSensorThresholdOk', setThresholdValue);
     },
     closeModal() {
@@ -275,6 +355,16 @@ export default {
         this.$refs.modal.hide();
         this.resetForm();
       });
+    },
+    upperFatalValidation(value) {
+      if (value != undefined && !/^-?\d{1,}(\.\d{1,2})?$/.test(value)) {
+        this.upperFatalErrorMsg = this.$t(
+          'pageSensors.sensorThreshold.modal.upperFatalValidationInfo',
+        );
+        return false;
+      } else {
+        return true;
+      }
     },
     upperCriticalValidation(value) {
       if (value != undefined && !/^-?\d{1,}(\.\d{1,2})?$/.test(value)) {
@@ -284,29 +374,11 @@ export default {
         return false;
       } else if (
         value != undefined &&
-        this.form.upperCaution != undefined &&
-        parseFloat(value) <= parseFloat(this.form.upperCaution)
+        this.form.upperFatal != undefined &&
+        parseFloat(value) >= parseFloat(this.form.upperFatal)
       ) {
         this.uppercriticalErrorMsg = this.$t(
           'pageSensors.sensorThreshold.modal.upperCriticalValidationInfo1',
-        );
-        return false;
-      } else if (
-        value != undefined &&
-        this.form.lowerCaution != undefined &&
-        parseFloat(value) <= parseFloat(this.form.lowerCaution)
-      ) {
-        this.uppercriticalErrorMsg = this.$t(
-          'pageSensors.sensorThreshold.modal.upperCriticalValidationInfo2',
-        );
-        return false;
-      } else if (
-        value != undefined &&
-        this.form.lowerCritical != undefined &&
-        parseFloat(value) <= parseFloat(this.form.lowerCritical)
-      ) {
-        this.uppercriticalErrorMsg = this.$t(
-          'pageSensors.sensorThreshold.modal.upperCriticalValidationInfo3',
         );
         return false;
       } else {
@@ -321,8 +393,8 @@ export default {
         return false;
       } else if (
         value != undefined &&
-        this.form.upperCritical != undefined &&
-        parseFloat(value) >= parseFloat(this.form.upperCritical)
+        this.form.upperFatal != undefined &&
+        parseFloat(value) >= parseFloat(this.form.upperFatal)
       ) {
         this.upperCautionErrorMsg = this.$t(
           'pageSensors.sensorThreshold.modal.upperCautionValidationInfo1',
@@ -330,20 +402,11 @@ export default {
         return false;
       } else if (
         value != undefined &&
-        this.form.lowerCaution != undefined &&
-        parseFloat(value) <= parseFloat(this.form.lowerCaution)
+        this.form.upperCritical != undefined &&
+        parseFloat(value) >= parseFloat(this.form.upperCritical)
       ) {
         this.upperCautionErrorMsg = this.$t(
-          'pageSensors.sensorThreshold.modal.upperCautionValidationInfo2',
-        );
-        return false;
-      } else if (
-        value != undefined &&
-        this.form.lowerCritical != undefined &&
-        parseFloat(value) <= parseFloat(this.form.lowerCritical)
-      ) {
-        this.upperCautionErrorMsg = this.$t(
-          'pageSensors.sensorThreshold.modal.upperCautionValidationInfo3',
+          'pageSensors.sensorThreshold.modal.upperCautionValidationInfo1',
         );
         return false;
       } else {
@@ -358,6 +421,15 @@ export default {
         return false;
       } else if (
         value != undefined &&
+        this.form.upperCaution != undefined &&
+        parseFloat(value) >= parseFloat(this.form.upperCaution)
+      ) {
+        this.lowerCautionErrorMsg = this.$t(
+          'pageSensors.sensorThreshold.modal.lowerCautionValidationInfo1',
+        );
+        return false;
+      } else if (
+        value != undefined &&
         this.form.upperCritical != undefined &&
         parseFloat(value) >= parseFloat(this.form.upperCritical)
       ) {
@@ -367,20 +439,11 @@ export default {
         return false;
       } else if (
         value != undefined &&
-        this.form.upperCaution != undefined &&
-        parseFloat(value) >= parseFloat(this.form.upperCaution)
+        this.form.upperFatal != undefined &&
+        parseFloat(value) >= parseFloat(this.form.upperFatal)
       ) {
         this.lowerCautionErrorMsg = this.$t(
-          'pageSensors.sensorThreshold.modal.lowerCautionValidationInfo2',
-        );
-        return false;
-      } else if (
-        value != undefined &&
-        this.form.lowerCritical != undefined &&
-        parseFloat(value) <= parseFloat(this.form.lowerCritical)
-      ) {
-        this.lowerCautionErrorMsg = this.$t(
-          'pageSensors.sensorThreshold.modal.lowerCautionValidationInfo3',
+          'pageSensors.sensorThreshold.modal.lowerCautionValidationInfo1',
         );
         return false;
       } else {
@@ -391,6 +454,15 @@ export default {
       if (value != undefined && !/^-?\d{1,}(\.\d{1,2})?$/.test(value)) {
         this.lowerCriticalErrorMsg = this.$t(
           'pageSensors.sensorThreshold.modal.lowerCriticalValidationInfo',
+        );
+        return false;
+      } else if (
+        value != undefined &&
+        this.form.upperFatal != undefined &&
+        parseFloat(value) >= parseFloat(this.form.upperFatal)
+      ) {
+        this.lowerCriticalErrorMsg = this.$t(
+          'pageSensors.sensorThreshold.modal.lowerCriticalValidationInfo1',
         );
         return false;
       } else if (
@@ -408,7 +480,7 @@ export default {
         parseFloat(value) >= parseFloat(this.form.upperCaution)
       ) {
         this.lowerCriticalErrorMsg = this.$t(
-          'pageSensors.sensorThreshold.modal.lowerCriticalValidationInfo2',
+          'pageSensors.sensorThreshold.modal.lowerCriticalValidationInfo1',
         );
         return false;
       } else if (
@@ -417,7 +489,62 @@ export default {
         parseFloat(value) >= parseFloat(this.form.lowerCaution)
       ) {
         this.lowerCriticalErrorMsg = this.$t(
-          'pageSensors.sensorThreshold.modal.lowerCriticalValidationInfo3',
+          'pageSensors.sensorThreshold.modal.lowerCriticalValidationInfo1',
+        );
+        return false;
+      } else {
+        return true;
+      }
+    },
+    lowerFatalValidation(value) {
+      if (value != undefined && !/^-?\d{1,}(\.\d{1,2})?$/.test(value)) {
+        this.lowerFatalErrorMsg = this.$t(
+          'pageSensors.sensorThreshold.modal.lowerFatalValidationInfo',
+        );
+        return false;
+      } else if (
+        value != undefined &&
+        this.form.upperFatal != undefined &&
+        parseFloat(value) >= parseFloat(this.form.upperFatal)
+      ) {
+        this.lowerFatalErrorMsg = this.$t(
+          'pageSensors.sensorThreshold.modal.lowerFatalValidationInfo1',
+        );
+        return false;
+      } else if (
+        value != undefined &&
+        this.form.upperCritical != undefined &&
+        parseFloat(value) >= parseFloat(this.form.upperCritical)
+      ) {
+        this.lowerFatalErrorMsg = this.$t(
+          'pageSensors.sensorThreshold.modal.lowerFatalValidationInfo1',
+        );
+        return false;
+      } else if (
+        value != undefined &&
+        this.form.upperCaution != undefined &&
+        parseFloat(value) >= parseFloat(this.form.upperCaution)
+      ) {
+        this.lowerFatalErrorMsg = this.$t(
+          'pageSensors.sensorThreshold.modal.lowerFatalValidationInfo1',
+        );
+        return false;
+      } else if (
+        value != undefined &&
+        this.form.lowerCaution != undefined &&
+        parseFloat(value) >= parseFloat(this.form.lowerCaution)
+      ) {
+        this.lowerFatalErrorMsg = this.$t(
+          'pageSensors.sensorThreshold.modal.lowerFatalValidationInfo1',
+        );
+        return false;
+      } else if (
+        value != undefined &&
+        this.form.lowerCritical != undefined &&
+        parseFloat(value) >= parseFloat(this.form.lowerCritical)
+      ) {
+        this.lowerFatalErrorMsg = this.$t(
+          'pageSensors.sensorThreshold.modal.lowerFatalValidationInfo1',
         );
         return false;
       } else {

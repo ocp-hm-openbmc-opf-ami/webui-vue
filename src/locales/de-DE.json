@@ -2148,7 +2148,9 @@
             "name": "Name",
             "status": "Status",
             "upperWarning": "Obere Warnung",
-            "upperCritical": "Oberer kritischer"
+            "upperCritical": "Oberer kritischer",
+            "upperFatal": "Oberer nicht wiederherstellbarer",
+            "lowerFatal": "Niedrigere nicht wiederherstellbare"
         },
         "sensorgraph": {
             "frame": "Rahmen (Minuten)",
@@ -2168,22 +2170,19 @@
                 "lowerCritical": "Niedrigerer kritischer Wert",
                 "upperCaution": "Obere Vorsicht",
                 "upperCritical": "Oberer kritischer Wert",
+                "upperFatal": "Upper Non-recoverable",
+                "lowerFatal": "Lower Non-recoverable",
                 "lowerCautionValidationInfo": "Ungültiger unterer Warnwert.",
-                "lowerCautionValidationInfo1": "Die untere Warnung kann nicht größer oder gleich dem oberen kritischen Wert sein.",
-                "lowerCautionValidationInfo2": "Der untere Warnwert kann nicht größer oder gleich dem oberen Warnwert sein.",
-                "lowerCautionValidationInfo3": "Die untere Warnung kann nicht kleiner oder gleich dem unteren kritischen Wert sein.",
+                "lowerCautionValidationInfo1": "Der untere Warnwert kann nicht größer oder gleich den vorherigen Feldwerten sein.",
                 "lowerCriticalValidationInfo": "Ungültiger unterer kritischer Wert.",
-                "lowerCriticalValidationInfo1": "Der untere kritische Wert kann nicht größer oder gleich dem oberen kritischen Wert sein.",
-                "lowerCriticalValidationInfo2": "Der untere kritische Wert kann nicht größer oder gleich dem oberen Warnwert sein.",
-                "lowerCriticalValidationInfo3": "Der untere kritische Wert kann nicht größer oder gleich dem unteren Warnwert sein.",
+                "lowerCriticalValidationInfo1": "Der untere kritische Wert kann nicht größer oder gleich den vorherigen Feldwerten sein.",
                 "upperCautionValidationInfo": "Ungültiger oberer Warnwert.",
-                "upperCautionValidationInfo1": "Die obere Warnung kann nicht größer oder gleich dem oberen kritischen Wert sein.",
-                "upperCautionValidationInfo2": "Der obere Warnwert kann nicht kleiner oder gleich dem unteren Warnwert sein.",
-                "upperCautionValidationInfo3": "Der obere Warnwert kann nicht kleiner oder gleich dem unteren kritischen Wert sein.",
+                "upperCautionValidationInfo1": "Der obere Warnwert kann nicht größer oder gleich den vorherigen Feldwerten sein.",
                 "upperCriticalValidationInfo": "Ungültiger oberer kritischer Wert.",
-                "upperCriticalValidationInfo1": "Der obere kritische Wert kann nicht kleiner oder gleich dem oberen Warnwert sein.",
-                "upperCriticalValidationInfo2": "Der obere kritische Wert kann nicht kleiner oder gleich dem unteren Warnwert sein.",
-                "upperCriticalValidationInfo3": "Der obere kritische Wert kann nicht kleiner oder gleich dem unteren kritischen Wert sein."
+                "upperCriticalValidationInfo1": "Der obere kritische Wert kann nicht größer oder gleich den vorherigen Feldwerten sein.",
+                "upperFatalValidationInfo": "Ungültiger oberer, nicht wiederherstellbarer Wert.",
+                "lowerFatalValidationInfo": "Ungültiger niedrigerer, nicht wiederherstellbarer Wert.",
+                "lowerFatalValidationInfo1": "Der niedrigere, nicht wiederherstellbare Wert kann nicht größer oder gleich den vorherigen Feldwerten sein."
             },
             "toast": {
                 "successSaveThreshold": "Sensorschwellenwerte wurden erfolgreich gespeichert.",

@@ -2161,7 +2161,9 @@
             "name": "名稱",
             "status": "狀態",
             "upperWarning": "高於值的警告",
-            "upperCritical": "高於值的嚴重警告"
+            "upperCritical": "高於值的嚴重警告",
+            "upperFatal": "上限不可恢復",
+            "lowerFatal": "下限不可恢復"
         },
         "sensorgraph": {
             "frame": "幀（分鐘）",
@@ -2181,22 +2183,19 @@
                 "lowerCritical": "較低臨界值",
                 "upperCaution": "上層注意事項",
                 "upperCritical": "上臨界",
+                "upperFatal": "上限不可恢復",
+                "lowerFatal": "下限不可恢復",
                 "lowerCautionValidationInfo": "下限警告值無效。",
-                "lowerCautionValidationInfo1": "下限警告值不能大於或等於上限臨界值。",
-                "lowerCautionValidationInfo2": "下限警告值不能大於或等於上限警告值。",
-                "lowerCautionValidationInfo3": "下限警告不能小於或等於下限臨界值。",
+                "lowerCautionValidationInfo1": "下警告值不能大於或等於先前的欄位值。",
                 "lowerCriticalValidationInfo": "下限臨界值無效。",
-                "lowerCriticalValidationInfo1": "下限臨界值不能大於或等於上限臨界值。",
-                "lowerCriticalValidationInfo2": "下限臨界值不能大於或等於上限警告值。",
-                "lowerCriticalValidationInfo3": "下限臨界值不能大於或等於下限警告值。",
+                "lowerCriticalValidationInfo1": "下臨界值不能大於或等於先前的欄位值。",
                 "upperCautionValidationInfo": "上限警告值無效。",
-                "upperCautionValidationInfo1": "上限警告值不能大於或等於上限臨界值。",
-                "upperCautionValidationInfo2": "上限警告值不能小於或等於下限警告值。",
-                "upperCautionValidationInfo3": "上限警告值不能小於或等於下限臨界值。",
+                "upperCautionValidationInfo1": "上警告值不能大於或等於先前的欄位值。",
                 "upperCriticalValidationInfo": "上限臨界值無效。",
-                "upperCriticalValidationInfo1": "上限臨界值不能小於或等於上警告值。",
-                "upperCriticalValidationInfo2": "上限臨界不能小於或等於下限警告值。",
-                "upperCriticalValidationInfo3": "上限臨界值不能小於或等於下限臨界值。"
+                "upperCriticalValidationInfo1": "上臨界值不能大於或等於先前的欄位值。",
+                "upperFatalValidationInfo": "無效上限不可恢復值。",
+                "lowerFatalValidationInfo": "無效的下限不可恢復值。",
+                "lowerFatalValidationInfo1": "下不可恢復值不能大於或等於先前的欄位值。"
             },
             "toast": {
                 "successSaveThreshold": "感測器閾值已成功保存。",

@@ -75,6 +75,8 @@ const SensorsStore = {
               upperCaution: response.data.Thresholds?.UpperCaution?.Reading,
               lowerCritical: response.data.Thresholds?.LowerCritical?.Reading,
               upperCritical: response.data.Thresholds?.UpperCritical?.Reading,
+              upperFatal: response.data.Thresholds?.UpperFatal?.Reading,
+              lowerFatal: response.data.Thresholds?.LowerFatal?.Reading,
               units: response.data.ReadingUnits,
             });
           }

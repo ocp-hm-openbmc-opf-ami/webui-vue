@@ -102,6 +102,12 @@
             <template #cell(upperCritical)="data">
               {{ data.value }} {{ data.item.units }}
             </template>
+            <template #cell(upperFatal)="data">
+              {{ data.value }} {{ data.item.units }}
+            </template>
+            <template #cell(lowerFatal)="data">
+              {{ data.value }} {{ data.item.units }}
+            </template>
             <template #cell(actions)="{ item }">
               <svg
                 v-if="historyViewSensors.includes(item.name) && item.id"
@@ -267,6 +273,16 @@ export default {
           key: 'upperCritical',
           formatter: this.dataFormatter,
           label: this.$t('pageSensors.table.upperCritical'),
+        },
+        {
+          key: 'upperFatal',
+          formatter: this.dataFormatter,
+          label: this.$t('pageSensors.table.upperFatal'),
+        },
+        {
+          key: 'lowerFatal',
+          formatter: this.dataFormatter,
+          label: this.$t('pageSensors.table.lowerFatal'),
         },
         {
           key: 'actions',

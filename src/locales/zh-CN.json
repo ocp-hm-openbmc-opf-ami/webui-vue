@@ -2158,7 +2158,9 @@
             "name": "名称",
             "status": "状态",
             "upperWarning": "高于值的警告",
-            "upperCritical": "高于值的严重警告"
+            "upperCritical": "高于值的严重警告",
+            "upperFatal": "上限不可恢复",
+            "lowerFatal": "下限不可恢复"
         },
         "sensorgraph": {
             "frame": "帧 （分钟）",
@@ -2178,22 +2180,19 @@
                 "lowerCritical": "较低临界值",
                 "upperCaution": "上层注意事项",
                 "upperCritical": "上临界",
+                "upperFatal": "上限不可恢复",
+                "lowerFatal": "下限不可恢复",
                 "lowerCautionValidationInfo": "较低警告值无效。",
-                "lowerCautionValidationInfo1": "下限警告值不能大于或等于上限临界值。",
-                "lowerCautionValidationInfo2": "下限警告值不能大于或等于上限警告值。",
-                "lowerCautionValidationInfo3": "下限警告值不能小于或等于下限临界值。",
+                "lowerCautionValidationInfo1": "较低的警告值不能大于或等于之前的字段值。",
                 "lowerCriticalValidationInfo": "下临界值无效。",
-                "lowerCriticalValidationInfo1": "下限临界值不能大于或等于上限临界值。",
-                "lowerCriticalValidationInfo2": "下限临界值不能大于或等于上限警告值。",
-                "lowerCriticalValidationInfo3": "最低临界值不能大于或等于最低警告值。",
+                "lowerCriticalValidationInfo1": "下限临界值不能大于或等于之前的字段值。",
                 "upperCautionValidationInfo": "上限警告值无效。",
-                "upperCautionValidationInfo1": "上限警告值不能大于或等于上限临界值。",
-                "upperCautionValidationInfo2": "上限警告值不能小于或等于下限警告值。",
-                "upperCautionValidationInfo3": "上限警告值不能小于或等于下限临界值。",
+                "upperCautionValidationInfo1": "上限警告值不能大于或等于之前的字段值。",
                 "upperCriticalValidationInfo": "上限临界值无效。",
-                "upperCriticalValidationInfo1": "上限临界值不能小于或等于上限警告值。",
-                "upperCriticalValidationInfo2": "上限临界值不能小于或等于下限警告值。",
-                "upperCriticalValidationInfo3": "上限临界值不能小于或等于下限临界值。"
+                "upperCriticalValidationInfo1": "上临界值不能大于或等于之前的字段值。",
+                "upperFatalValidationInfo": "无效的上限不可恢复值。",
+                "lowerFatalValidationInfo": "无效的下限不可恢复值。",
+                "lowerFatalValidationInfo1": "较低的不可恢复值不能大于或等于先前的字段值。"
             },
             "toast": {
                 "successSaveThreshold": "传感器阈值已成功保存。",

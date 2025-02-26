@@ -2169,7 +2169,9 @@
             "status": "Status",
             "state": "State",
             "upperWarning": "Upper warning",
-            "upperCritical": "Upper critical"
+            "upperCritical": "Upper critical",
+            "upperFatal": "Upper Non-recoverable",
+            "lowerFatal": "Lower Non-recoverable"
         },
         "sensorgraph": {
             "frame": "Frame (minutes)",
@@ -2188,22 +2190,19 @@
                 "lowerCritical": "Lower Critical",
                 "upperCaution": "Upper Caution",
                 "upperCritical": "Upper Critical",
+                "upperFatal": "Upper Non-recoverable",
+                "lowerFatal": "Lower Non-recoverable",
                 "lowerCautionValidationInfo": "Invalid Lower Caution value.",
-                "lowerCautionValidationInfo1": "Lower Caution cannot be bigger than or equal to Upper Critical value.",
-                "lowerCautionValidationInfo2": "Lower Caution cannot be bigger than or equal to Upper Caution value.",
-                "lowerCautionValidationInfo3": "Lower Caution cannot be smaller than or equal to Lower Critical value.",
+                "lowerCautionValidationInfo1": "Lower Caution value cannot be bigger than or equal to previous field values.",
                 "lowerCriticalValidationInfo": "Invalid Lower Critical value.",
-                "lowerCriticalValidationInfo1": "Lower Critical cannot be bigger than or equal to Upper Critical value.",
-                "lowerCriticalValidationInfo2": "Lower Critical cannot be bigger than or equal to Upper Caution value.",
-                "lowerCriticalValidationInfo3": "Lower Critical cannot be bigger than or equal to Lower Caution value.",
+                "lowerCriticalValidationInfo1": "Lower Critical value cannot be bigger than or equal to previous field values.",
                 "upperCautionValidationInfo": "Invalid Upper Caution value.",
-                "upperCautionValidationInfo1": "Upper Caution cannot be bigger than or equal to Upper Critical value.",
-                "upperCautionValidationInfo2": "Upper Caution cannot be smaller than or equal to Lower Caution value.",
-                "upperCautionValidationInfo3": "Upper Caution cannot be smaller than or equal to Lower Critical value.",
+                "upperCautionValidationInfo1": "Upper Caution value cannot be bigger than or equal to previous field values.",
                 "upperCriticalValidationInfo": "Invalid Upper Critical value.",
-                "upperCriticalValidationInfo1": "Upper Critical cannot be smaller than or equal to Upper Caution value.",
-                "upperCriticalValidationInfo2": "Upper Critical cannot be smaller than or equal to Lower Caution value.",
-                "upperCriticalValidationInfo3": "Upper Critical cannot be smaller than or equal to Lower Critical value."
+                "upperCriticalValidationInfo1": "Upper Critical value cannot be bigger than or equal to previous field values.",
+                "upperFatalValidationInfo": "Invalid Upper Non-recoverable value.",
+                "lowerFatalValidationInfo": "Invalid Lower Non-recoverable value.",
+                "lowerFatalValidationInfo1": "Lower Non-recoverable value cannot be bigger than or equal to previous field values."
             },
             "toast": {
                 "successSaveThreshold": "Sensor Thresholds has been saved successfully.",
