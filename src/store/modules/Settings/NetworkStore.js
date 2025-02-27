@@ -330,7 +330,6 @@ const NetworkStore = {
       });
       IPv6StaticDefaultGateways.push({
         Address: modalFormData.Gateway,
-        PrefixLength: parseInt(modalFormData.PrefixLength),
       });
       var StaticIpv6 = {};
 
