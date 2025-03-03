@@ -63,11 +63,13 @@ const AuthenticationStore = {
         .post('/login', { data: [username, password] })
         .then((response) => {
           commit('authSuccess');
-          if (response.data.TwoFacEnableStatus == 'N/A') {
-            commit('setTfaFeatureEnabled', false);
-          } else {
-            commit('setTfaEnabled', response.data.TwoFacEnableStatus);
-            commit('setTfaFeatureEnabled', true);
+          if (response.data.TwoFacEnableStatus != undefined) {
+            if (response.data.TwoFacEnableStatus == 'N/A') {
+              commit('setTfaFeatureEnabled', false);
+            } else {
+              commit('setTfaEnabled', response.data.TwoFacEnableStatus);
+              commit('setTfaFeatureEnabled', true);
+            }
           }
         })
         .catch((error) => {

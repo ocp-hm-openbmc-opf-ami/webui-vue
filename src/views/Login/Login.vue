@@ -207,8 +207,7 @@ export default {
                     window.location.href = window.location.origin + match[0];
                   }
                 } else {
-                  window.location.href = '/';
-                  // this.$router.push('/');
+                  this.$router.push('/');
                 }
                 this.$store.dispatch('license/getUserAlertCount');
                 this.$store.commit('license/setisLicense', false);

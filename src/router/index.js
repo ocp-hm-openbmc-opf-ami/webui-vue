@@ -69,6 +69,17 @@ router.beforeEach((to, from, next) => {
     // invoke API call to get the role ID
     let username = localStorage.getItem('storedUsername');
     store.dispatch('authentication/getUserInfo', username).then((response) => {
+      if (response?.Oem?.Ami?.TwoFacEnableStatus != undefined) {
+        if (response?.Oem?.Ami?.TwoFacEnableStatus == 'N/A') {
+          store.commit('authentication/setTfaFeatureEnabled', false);
+        } else {
+          store.commit(
+            'authentication/setTfaEnabled',
+            response?.Oem?.Ami?.TwoFacEnableStatus,
+          );
+          store.commit('authentication/setTfaFeatureEnabled', true);
+        }
+      }
       if (response?.RoleId) {
         // set role ID
         store.commit('global/setPrivilege', response.RoleId);
