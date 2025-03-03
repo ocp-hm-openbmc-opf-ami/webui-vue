@@ -222,6 +222,7 @@ export default {
               if (addConfirmed) {
                 this.networkOverlay = true;
                 setTimeout(() => {
+                  this.$store.dispatch('authentication/customizedResetLogout');
                   window.location.reload();
                 }, 2000); // wait to load the session
               }
