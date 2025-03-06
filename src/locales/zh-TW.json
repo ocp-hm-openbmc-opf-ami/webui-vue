@@ -2412,6 +2412,15 @@
             "helperExportFileSave": "點擊匯出按鈕下載文件。",
             "labelConfigImport": "匯入",
             "labelConfigExport": "匯出",
+            "labelControllerPersonality": "控制器運行模式",
+            "labelCurrentControllerPersonality": "目前的控制器運行模式",
+            "labelSetControllerPersonality": "設定控制器運行模式",
+            "controllerPersonalityHelperText": "控制器運行模式決定 RAID 控制器如何管理儲存裝置。",
+            "currentControllerPersonalityHelperText": "顯示 RAID 控制器當前的運行模式。",
+            "setControllerPersonalityHelperText": "切換 RAID 模式與 JBOD 模式，變更後需要重新啟動主機才能生效。",
+            "labelRaidMode": "RAID 模式",
+            "labelJbodMode": "JBOD 模式",
+            "alertNotSupport": "此功能目前不支援。",
             "labelControllerProperties": "控制器屬性",
             "controllerPropertiesHelperText": "設置控制器屬性。",
             "controllerPropertiesRateValueHelperText": "該值必須在 0 到 100 之間，包括 0 和 100。",
@@ -2420,15 +2429,8 @@
             "labelBGIRate": "BGI 速率",
             "labelConsistencyCheckRate": "一致性檢查速率",
             "labelReconstructionRate": "重建速率",
-            "labelControllerPersonality": "控制器運行模式",
-            "labelCurrentControllerPersonality": "目前的控制器運行模式",
-            "labelSetControllerPersonality": "設定控制器運行模式",
-            "controllerPersonalityHelperText": "控制器運行模式決定 RAID 控制器如何管理儲存裝置。",
-            "currentControllerPersonalityHelperText": "顯示 RAID 控制器當前的運行模式。",
-            "setControllerPersonalityHelperText": "切換 RAID 模式與 JBOD 模式，變更後需要重新啟動主機才能生效。",
-            "raidMode": "RAID 模式",
-            "jbodMode": "JBOD 模式",
-            "alertNotSupport": "此功能目前不支援。"
+            "jbodModeHelperText": "啟用 JBOD 模式後，實體裝置的狀態將變為 JBOD，否則狀態將變為未配置且良好。",
+            "alertNotSupportSelectedController": "當前選擇的控制器不支援此功能。"
         },
         "toast": {
             "copybackConfigSuccess": "回寫功能已成功設定。",
@@ -2440,12 +2442,15 @@
             "configImportSuccess": "配置文件已成功匯入系統。",
             "configImportFail": "無法匯入配置文件。",
             "configImport": "匯入配置文件。",
+            "controllerPersonalitySuccess": "成功設定控制器運行模式，請重新啟動主機以套用變更。",
+            "controllerPersonalityFail": "設定控制器運行模式失敗，請確保所有邏輯裝置已移除後再繼續。",
+            "controllerPersonality": "切換控制器運行模式。",
             "controllerPropertiesSuccess": "成功設置控制器屬性。將需要一些時間來完成該設置。請等待幾秒鐘並刷新應用程序以查看更改的內容。",
             "controllerPropertiesFail": "設置控制器屬性失敗。",
             "controllerPropertiesConfig": "控制器屬性設置。",
-            "controllerPersonalitySuccess": "成功設定控制器運行模式，請重新啟動主機以套用變更。",
-            "controllerPersonalityFail": "設定控制器運行模式失敗，請確保所有邏輯裝置已移除後再繼續。",
-            "controllerPersonality": "切換控制器運行模式。"
+            "jbodModeSuccess": "成功設定 JBOD 模式。將需要一些時間來完成該設定，請等待幾秒鐘並刷新應用程式以查看變更。",
+            "jbodModeFail": "設定 JBOD 模式失敗。",
+            "jbodMode": "在控制器屬性中設定 JBOD 模式。"
         }
     },
     "pagePhysicalDevice": {
