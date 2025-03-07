@@ -2600,8 +2600,8 @@
         },
         "diskCacheCapacityOptions": {
             "unchanged": "不變",
-            "enabled": "啟用",
-            "disabled": "禁用"
+            "enable": "啟用",
+            "disable": "禁用"
         },
         "table": {
             "id": "ID",
@@ -2628,7 +2628,8 @@
             "cacheLineSize": "快取列大小",
             "ldType": "邏輯設備類型",
             "pdList": "實體設備列表",
-            "acceleratorType": "加速器類型"
+            "acceleratorType": "加速器類型",
+            "enableBGI": "EnableBGI"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "沒有可配置的實體設備！",
@@ -2638,7 +2639,9 @@
             "startLocateLogicalDriveActionConfirmationMsg": "您確定要啟動 ID 為 {ldId} 的邏輯驅動器定位嗎？",
             "startLocateLogicalDriveActionTitle": "啟動定位邏輯驅動器",
             "stopLocateLogicalDriveActionConfirmationMsg": "您確定要停止 ID 為 {ldId} 的邏輯驅動器定位嗎？",
-            "stopLocateLogicalDriveActionTitle": "停止定位邏輯驅動器"
+            "stopLocateLogicalDriveActionTitle": "停止定位邏輯驅動器",
+            "setPropertiesConfirmationMsg": "您確定要設置ID為{ldId}的邏輯驅動器的屬性嗎？",
+            "setPropertiesConfirmationTitle": "設置邏輯驅動器屬性"
         },
         "toast": {
             "successCreateLogicalDevice": "邏輯設備創建成功。請等待幾秒鐘並刷新應用程式以查看更改。",
@@ -2660,12 +2663,15 @@
             "successStartLocateLogicalDevice": "成功啟動定位邏輯驅動器。",
             "successStopLocateLogicalDevice": "成功停止定位邏輯設備。",
             "errorStartLocateLogicalDevice": "啟動定位邏輯設備時發生錯誤。",
-            "errorStopLocateLogicalDevice": "停止定位邏輯設備時發生錯誤。"
+            "errorStopLocateLogicalDevice": "停止定位邏輯設備時發生錯誤。",
+            "successSetProperties": "成功設置邏輯驅動器屬性。請等待約30秒並刷新應用程式以查看更改。",
+            "errorSetProperties": "設置邏輯驅動器屬性時出錯。"
         },
         "actions": {
             "startLocate": "啟動定位",
             "stopLocate": "停止定位",
-            "delete": "刪除"
+            "delete": "刪除",
+            "setProperties": "設置屬性"
         }
     },
     "pageTopology": {
