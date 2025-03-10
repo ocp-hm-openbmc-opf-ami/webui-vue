@@ -2615,8 +2615,8 @@
         },
         "diskCacheCapacityOptions": {
             "unchanged": "不变",
-            "enabled": "启用",
-            "disabled": "禁用"
+            "enable": "启用",
+            "disable": "禁用"
         },
         "table": {
             "id": "ID",
@@ -2643,7 +2643,8 @@
             "cacheLineSize": "快取列大小",
             "ldType": "逻辑设备类型",
             "pdList": "实体设备列表",
-            "acceleratorType": "加速器类型"
+            "acceleratorType": "加速器类型",
+            "enableBGI": "EnableBGI"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "没有可配置的物理设备！",
@@ -2653,7 +2654,9 @@
             "startLocateLogicalDriveActionConfirmationMsg": "您确定要启动 ID 为 {ldId} 的逻辑驱动器定位吗？",
             "startLocateLogicalDriveActionTitle": "启动定位逻辑驱动器",
             "stopLocateLogicalDriveActionConfirmationMsg": "您确定要停止 ID 为 {ldId} 的逻辑驱动器定位吗？",
-            "stopLocateLogicalDriveActionTitle": "停止定位逻辑驱动器"
+            "stopLocateLogicalDriveActionTitle": "停止定位逻辑驱动器",
+            "setPropertiesConfirmationMsg": "您确定要设置ID为{ldId}的逻辑驱动器的属性吗？",
+            "setPropertiesConfirmationTitle": "设置逻辑驱动器属性"
         },
         "toast": {
             "successCreateLogicalDevice": "逻辑设备创建成功. 请等待几秒钟并刷新应用程序以查看更改。",
@@ -2673,14 +2676,17 @@
             "errorSpanDepthDrives":"选定的 UnConfig 驱动器应等于跨度深度和每个跨度的驱动器数的倍数。",
             "errorMsccSize": "尺寸应能被条带尺寸整除。",
             "successStartLocateLogicalDevice": "成功启动逻辑驱动器定位。",
-    "successStopLocateLogicalDevice": "成功停止逻辑逻辑驱动器定位。",
-    "errorStartLocateLogicalDevice": "启动逻辑驱动器定位时发生错误。",
-    "errorStopLocateLogicalDevice": "停止逻辑驱动器定位时发生错误。"
-    },
-    "actions": {
-        "startLocate": "启动逻辑驱动器定位",
-        "stopLocate": "停止逻辑驱动器定位",
-        "delete": "删除"
+            "successStopLocateLogicalDevice": "成功停止逻辑逻辑驱动器定位。",
+            "errorStartLocateLogicalDevice": "启动逻辑驱动器定位时发生错误。",
+            "errorStopLocateLogicalDevice": "停止逻辑驱动器定位时发生错误。",
+            "successSetProperties": "成功设置逻辑驱动器属性。请等待约30秒并刷新应用程序以查看更改。",
+            "errorSetProperties": "设置逻辑驱动器属性时出错。"
+        },
+        "actions": {
+            "startLocate": "启动逻辑驱动器定位",
+            "stopLocate": "停止逻辑驱动器定位",
+            "delete": "删除",
+            "setProperties": "设置属性"
         }
     },
     "pageTopology": {

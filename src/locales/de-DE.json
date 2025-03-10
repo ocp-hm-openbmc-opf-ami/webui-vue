@@ -2606,8 +2606,8 @@
         },
         "diskCacheCapacityOptions": {
             "unchanged": "Unverändert",
-            "enabled": "Ermöglicht",
-            "disabled": "Deaktiviert"
+            "enable": "Ermöglicht",
+            "disable": "Deaktiviert"
         },
         "table": {
             "name": "Name",
@@ -2633,17 +2633,20 @@
             "cacheLineSize": "Cache-Zeilengröße",
             "ldType": "Logischer Gerätetyp",
             "pdList": "Liste physischer Geräte",
-            "acceleratorType": "Beschleunigertyp"
+            "acceleratorType": "Beschleunigertyp",
+            "enableBGI": "EnableBGI"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "Es ist kein physisches Gerät zum Konfigurieren verfügbar!",
             "deleteConfirmationMsg": "Sind Sie sicher, dass Sie das logische Gerät mit der ID {ldId} löschen möchten?",
-    "deleteConfirmationTitle": "Logisches Gerät löschen.",
-    "logicalCommonActionTitle": "Logische Geräteaktionen verwalten",
-    "startLocateLogicalDriveActionConfirmationMsg": "Sind Sie sicher, dass Sie mit der Lokalisierung des logischen Laufwerks mit der ID {ldId} beginnen möchten?",
-    "startLocateLogicalDriveActionTitle": "Lokalisierung des logischen Laufwerks starten",
-    "stopLocateLogicalDriveActionConfirmationMsg": "Sind Sie sicher, dass Sie die Lokalisierung des logischen Laufwerks mit der ID {ldId} stoppen möchten?",
-    "stopLocateLogicalDriveActionTitle": "Lokalisierung des logischen Laufwerks stoppen"
+            "deleteConfirmationTitle": "Logisches Gerät löschen.",
+            "logicalCommonActionTitle": "Logische Geräteaktionen verwalten",
+            "startLocateLogicalDriveActionConfirmationMsg": "Sind Sie sicher, dass Sie mit der Lokalisierung des logischen Laufwerks mit der ID {ldId} beginnen möchten?",
+            "startLocateLogicalDriveActionTitle": "Lokalisierung des logischen Laufwerks starten",
+            "stopLocateLogicalDriveActionConfirmationMsg": "Sind Sie sicher, dass Sie die Lokalisierung des logischen Laufwerks mit der ID {ldId} stoppen möchten?",
+            "stopLocateLogicalDriveActionTitle": "Lokalisierung des logischen Laufwerks stoppen",
+            "setPropertiesConfirmationMsg": "Sind Sie sicher, dass Sie die Eigenschaften für das logische Laufwerk mit der ID {ldId} festlegen möchten?",
+            "setPropertiesConfirmationTitle": "Eigenschaften des logischen Laufwerks festlegen"
         },
         "toast": {
             "successCreateLogicalDevice": "Logisches Gerät erfolgreich erstellt. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
@@ -2663,13 +2666,17 @@
             "errorSpanDepthDrives":"Ausgewählte UnConfig-Laufwerke sollten einem Vielfachen der Span-Tiefe und der Laufwerke pro Span entsprechen.",
             "errorMsccSize": "Die Größe sollte durch die Streifengröße teilbar sein.",
             "successStartLocateLogicalDevice": "Logisches Gerät erfolgreich gestartet.",
-    "successStopLocateLogicalDevice": "Logisches Gerät erfolgreich gestoppt.",
-    "errorStartLocateLogicalDevice": "Fehler beim Starten des logischen Geräts.",
-    "errorStopLocateLogicalDevice": "Fehler beim Stoppen des logischen Geräts."},
-    "actions": {
-        "startLocate": "Starten der Lokalisierung",
-        "stopLocate": "Stoppen der Lokalisierung",
-        "delete": "Löschen"
+            "successStopLocateLogicalDevice": "Logisches Gerät erfolgreich gestoppt.",
+            "errorStartLocateLogicalDevice": "Fehler beim Starten des logischen Geräts.",
+            "errorStopLocateLogicalDevice": "Fehler beim Stoppen des logischen Geräts.",
+            "successSetProperties": "Die logischen Laufwerkseigenschaften wurden erfolgreich festgelegt. Um die Änderungen anzuzeigen, warten Sie etwa 30 Sekunden und aktualisieren Sie dann die Seite.",
+            "errorSetProperties": "Fehler beim Festlegen der logischen Laufwerkseigenschaften."
+        },
+        "actions": {
+            "startLocate": "Starten der Lokalisierung",
+            "stopLocate": "Stoppen der Lokalisierung",
+            "delete": "Löschen",
+            "setProperties": "Eigenschaften festlegen"
         }
     },
     "pageTopology": {

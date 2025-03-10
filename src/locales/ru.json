@@ -1143,8 +1143,8 @@
         },
         "diskCacheCapacityOptions": {
             "unchanged": "Без изменений",
-            "enabled": "Включено",
-            "disabled": "Выключено"
+            "enable": "Включено",
+            "disable": "Выключено"
         },
         "table": {
             "name": "Имя",
@@ -1170,7 +1170,8 @@
             "cacheLineSize": "Размер строки кэша",
             "ldType": "Тип логического устройства",
             "pdList": "Список физических устройств",
-            "acceleratorType": "Тип ускорителя"
+            "acceleratorType": "Тип ускорителя",
+            "enableBGI": "EnableBGI"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "Нет доступных физических устройств для настройки!",
@@ -1180,7 +1181,9 @@
             "startLocateLogicalDriveActionConfirmationMsg": "Вы уверены, что хотите начать поиск логического диска с ID {ldId}?",
             "startLocateLogicalDriveActionTitle": "Начать поиск логического диска",
             "stopLocateLogicalDriveActionConfirmationMsg": "Вы уверены, что хотите остановить поиск логического диска с ID {ldId}?",
-            "stopLocateLogicalDriveActionTitle": "Остановить поиск логического диска"
+            "stopLocateLogicalDriveActionTitle": "Остановить поиск логического диска",
+            "setPropertiesConfirmationMsg": "Вы уверены, что хотите установить свойства для логического диска с идентификатором {ldId}?",
+            "setPropertiesConfirmationTitle": "Установка свойств логического диска"
         },
         "toast": {
             "successCreateLogicalDevice": "Логическое устройство успешно создано. Пожалуйста, подождите несколько секунд и обновите приложение, чтобы увидеть изменения.",
@@ -1202,12 +1205,15 @@
             "successStartLocateLogicalDevice": "Логическое устройство успешно запущено.",
             "successStopLocateLogicalDevice": "Логическое устройство успешно остановлено.",
             "errorStartLocateLogicalDevice": "Ошибка при запуске логического устройства.",
-            "errorStopLocateLogicalDevice": "Ошибка при остановке логического устройства."
+            "errorStopLocateLogicalDevice": "Ошибка при остановке логического устройства.",
+            "successSetProperties": "Свойства логического диска успешно установлены. Чтобы увидеть изменения, подождите около 30 секунд и затем обновите страницу.",
+            "errorSetProperties": "Ошибка при установке свойств логического диска."
         },
         "actions": {
             "startLocate": "Начать локализацию",
             "stopLocate": "Остановить локализацию",
-            "delete": "Удалить"
+            "delete": "Удалить",
+            "setProperties": "установить свойства"
         }
     },
     "pagePhysicalDevice": {

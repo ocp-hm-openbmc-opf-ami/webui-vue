@@ -2626,8 +2626,8 @@
         },
         "diskCacheCapacityOptions": {
             "unchanged": "Unchanged",
-            "enabled": "Enabled",
-            "disabled": "Disabled"
+            "enable": "Enabled",
+            "disable": "Disabled"
         },
         "table": {
             "id": "ID",
@@ -2654,7 +2654,8 @@
             "cacheLineSize": "Cache Line Size",
             "ldType": "Logical Device Type",
             "pdList": "Physical Device List",
-            "acceleratorType": "Accelerator Type"
+            "acceleratorType": "Accelerator Type",
+            "enableBGI": "EnableBGI"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "No Physical Device is available to configure!",
@@ -2664,7 +2665,9 @@
             "startLocateLogicalDriveActionConfirmationMsg": "Are you sure you want to start locating the Logical Drive with ID {ldId}?",
             "startLocateLogicalDriveActionTitle": "Start Locate Logical Drive",
             "stopLocateLogicalDriveActionConfirmationMsg": "Are you sure you want to stop locating the Logical Drive with ID {ldId}?",
-            "stopLocateLogicalDriveActionTitle": "Stop Locate Logical Drive"
+            "stopLocateLogicalDriveActionTitle": "Stop Locate Logical Drive",
+            "setPropertiesConfirmationMsg": "Are you sure you want to set the properties for the Logical Drive with ID {ldId}?",
+            "setPropertiesConfirmationTitle": "Setting Logical Drive Properties"
         },
         "toast": {
             "successCreateLogicalDevice": "Successfully Created Logical Device. Please wait for few seconds and refresh the application to see the changes.",
@@ -2686,13 +2689,15 @@
             "successStartLocateLogicalDevice": "Successfully starting the Logical Device.",
             "successStopLocateLogicalDevice": "Successfully stopping the Logical Device.",
             "errorStartLocateLogicalDevice": "Error in starting the Logical Device.",
-            "errorStopLocateLogicalDevice": "Error in stopping the Logical Device."
-            
+            "errorStopLocateLogicalDevice": "Error in stopping the Logical Device.",
+            "successSetProperties": "Successfully set the logical drive properties. To view the changes, wait for about 30 seconds and then refresh the page.",
+            "errorSetProperties": "Error in setting Logical Drive Properties."
         },
         "actions": {
             "startLocate":"start Locate",
             "stopLocate":"stop Locate",
-            "delete":"delete"
+            "delete":"delete",
+            "setProperties": "set Properties"
         }
     },
     "pageTopology": {
