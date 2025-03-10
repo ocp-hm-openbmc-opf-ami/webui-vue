@@ -41,18 +41,6 @@
                 <template v-if="!$v.form.password.required">
                   {{ $t('global.form.fieldRequired') }}
                 </template>
-                <template
-                  v-else-if="
-                    !$v.form.password.maxLength || !$v.form.password.minLength
-                  "
-                >
-                  {{
-                    $t('global.form.lengthMustBeBetween', { min: 8, max: 16 })
-                  }}
-                </template>
-                <template v-else-if="!$v.form.password.pattern">
-                  {{ $t('global.form.invalidFormat') }}
-                </template>
               </b-form-invalid-feedback>
             </input-password-toggle>
             <div class="mb-4"></div>
@@ -97,12 +85,7 @@
 </template>
 
 <script>
-import {
-  required,
-  sameAs,
-  maxLength,
-  minLength,
-} from 'vuelidate/lib/validators';
+import { required, sameAs } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin';
 import InputPasswordToggle from '@/components/Global/InputPasswordToggle';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
@@ -136,11 +119,6 @@ export default {
       form: {
         password: {
           required,
-          maxLength: maxLength(16),
-          minLength: minLength(8),
-          pattern: function (pw) {
-            return this.passwordValidation(pw);
-          },
         },
         passwordConfirm: {
           required,
@@ -163,30 +141,24 @@ export default {
 
       this.$store
         .dispatch('userManagement/updateUser', data)
-        .then((success) => this.successToast(success))
-        .catch(({ message }) => this.errorToast(message))
+        .then((success) => {
+          this.successToast(success);
+          this.logoutRequired = true;
+        })
+        .catch(({ message }) => {
+          this.errorToast(message);
+          this.$store.dispatch('authentication/logout');
+        })
         .finally(() => {
           this.disableSubmitButton = false;
           setTimeout(() => {
-            this.$store.dispatch('authentication/logout');
+            if (this.logoutRequired) {
+              this.$store.dispatch('authentication/logout');
+            }
           }, 2000);
         })
         .then(() => this.$router.push('/login'))
         .catch(() => (this.changePasswordError = true));
-    },
-    passwordValidation(val) {
-      if (
-        /([a-zA-Z0-9])\1\1+|(sshd|bin|daemon|sys|adm|asdfghjk|asdfghjkl|sync|shutdown|halt|mail|news|uucp operator|games|ftp|man|nobody|stunnel4|password|Password|qwertyui|qwertyuiop)+/gi.test(
-          val,
-        ) ||
-        /^[!@#$%^&*)(+=._-]+$/gi.test(val) ||
-        this.form.password.indexOf(this.username) !== -1 ||
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!\d)[a-zA-Z\d]$/gi.test(val) ||
-        /^(?:^|\D)(\d{8,20})$/gi.test(val)
-      ) {
-        return false;
-      }
-      return true;
     },
   },
 };
