@@ -655,7 +655,7 @@
                     <b-button
                       variant="primary"
                       type="submit"
-                      data-test-id="button-webSessionTimeoutValue"
+                      data-test-id="button-web-session-timeout"
                       @click="saveWebSessionTimeoutValue"
                     >
                       {{ $t('global.action.save') }}
@@ -704,7 +704,7 @@
                     <b-button
                       variant="primary"
                       type="submit"
-                      data-test-id="power-button-saveIpmiPortValue"
+                      data-test-id="button-kvm-session-timeout"
                       @click="saveKVMSessionTimeoutValue"
                     >
                       {{ $t('global.action.save') }}
@@ -1215,8 +1215,8 @@ export default {
         .catch(({ message }) => this.errorToast(message));
     },
     saveWebSessionTimeoutValue() {
-      this.$v.$touch();
-      if (this.$v.$invalid) return;
+      this.$v.webSessionTimeoutValue.$touch();
+      if (this.$v.webSessionTimeoutValue.$invalid) return;
       this.$store
         .dispatch(
           'policies/saveWebSessionTimeoutValue',
@@ -1312,8 +1312,8 @@ export default {
         });
     },
     saveKVMSessionTimeoutValue() {
-      this.$v.$touch();
-      if (this.$v.$invalid) return;
+      this.$v.kvmSessionTimeOutValue.$touch();
+      if (this.$v.kvmSessionTimeOutValue.$invalid) return;
       this.$store
         .dispatch(
           'policies/saveKVMSessionTimeout',
