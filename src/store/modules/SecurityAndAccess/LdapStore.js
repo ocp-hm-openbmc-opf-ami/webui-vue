@@ -221,7 +221,7 @@ const LdapStore = {
             LocalRole: groupPrivilege,
           };
         } else {
-          return {};
+          return group;
         }
       });
       if (isActiveDirectoryEnabled) {
@@ -248,7 +248,7 @@ const LdapStore = {
         if (find(roleGroups, { groupName: group.RemoteGroup })) {
           return null;
         } else {
-          return {};
+          return group;
         }
       });
       if (isActiveDirectoryEnabled) {
