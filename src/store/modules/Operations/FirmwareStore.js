@@ -208,7 +208,7 @@ const FirmwareStore = {
           headers: { 'Content-Type': 'application/octet-stream' },
         })
         .then((response) => {
-          commit('setImageName', response.data.Oem.ImageName);
+          commit('setImageName', response?.data?.Oem?.ImageName);
           return response;
         })
         .catch((error) => {
