@@ -2429,6 +2429,8 @@
             "labelBGIRate": "BGI 速率",
             "labelConsistencyCheckRate": "一致性檢查速率",
             "labelReconstructionRate": "重建速率",
+            "labelSsdPatrolRead": "SSD 巡邏讀取",
+            "ssdPatrolReadHelperText": "當啟用 SSD 巡邏讀取時，實體設備狀態會變更為 SSD 巡邏讀取。",
             "jbodModeHelperText": "啟用 JBOD 模式後，實體裝置的狀態將變為 JBOD，否則狀態將變為未配置且良好。",
             "alertNotSupportSelectedController": "當前選擇的控制器不支援此功能。"
         },
@@ -2448,6 +2450,9 @@
             "controllerPropertiesSuccess": "成功設置控制器屬性。將需要一些時間來完成該設置。請等待幾秒鐘並刷新應用程序以查看更改的內容。",
             "controllerPropertiesFail": "設置控制器屬性失敗。",
             "controllerPropertiesConfig": "控制器屬性設置。",
+            "ssdPatrolReadSuccess": "成功設置 SSD 巡邏讀取。設置將需要一些時間來完成。請稍等片刻並刷新應用程式以查看更改。",
+            "ssdPatrolReadFail": "設置 SSD 巡邏讀取失敗。",
+            "ssdPatrolReadConfig": "在控制器屬性中設置 SSD 巡邏讀取。",
             "jbodModeSuccess": "成功設定 JBOD 模式。將需要一些時間來完成該設定，請等待幾秒鐘並刷新應用程式以查看變更。",
             "jbodModeFail": "設定 JBOD 模式失敗。",
             "jbodMode": "在控制器屬性中設定 JBOD 模式。"

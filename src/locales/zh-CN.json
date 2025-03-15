@@ -2426,6 +2426,8 @@
             "labelBGIRate": "BGI 速率",
             "labelConsistencyCheckRate": "一致性检查速率",
             "labelReconstructionRate": "重建速率",
+            "labelSsdPatrolRead": "SSD 巡逻读取",
+            "ssdPatrolReadHelperText": "当启用 SSD 巡逻读取时，物理设备状态会变更为 SSD 巡逻读取。",
             "jbodModeHelperText": "启用 JBOD 模式后，物理设备的状态将变为 JBOD，否则状态将变为未配置且良好。",
             "alertNotSupportSelectedController": "当前选择的控制器不支持此功能。"
         },
@@ -2445,6 +2447,9 @@
             "controllerPropertiesSuccess": "成功设置控制器属性。需要一些时间来完成该设定。请等待几秒钟并刷新应用程序以查看更改內容。",
             "controllerPropertiesFail": "设置控制器属性失败。",
             "controllerPropertiesConfig": "控制器属性设置。",
+            "ssdPatrolReadSuccess": "成功设置 SSD 巡逻读取。设置将需要一些时间来完成。请稍等片刻并刷新应用程序以查看更改。",
+            "ssdPatrolReadFail": "设置 SSD 巡逻读取失败。",
+            "ssdPatrolReadConfig": "在控制器属性中设置 SSD 巡逻读取。",
             "jbodModeSuccess": "成功设置 JBOD 模式。需要一些时间来完成该设置，请等待几秒钟并刷新应用程序以查看更改。",
             "jbodModeFail": "设置 JBOD 模式失败。",
             "jbodMode": "在控制器属性中设置 JBOD 模式。"

@@ -2416,6 +2416,8 @@
             "labelBGIRate": "BGI-Rate",
             "labelConsistencyCheckRate": "Konsistenzprüfungsrate",
             "labelReconstructionRate": "Wiederaufbaurate",
+            "labelSsdPatrolRead": "SSD Patrol Read",
+            "ssdPatrolReadHelperText": "Wenn SSD Patrol Read aktiviert ist, ändert sich der Status des physischen Geräts auf SSD Patrol Read.",
             "jbodModeHelperText": "Wenn der JBOD-Modus aktiviert ist, ändert sich der Status des physischen Geräts zu JBOD. Andernfalls wird es als „Nicht konfiguriert, gut“ angezeigt.",
             "alertNotSupportSelectedController": "Diese Funktion wird vom aktuell ausgewählten Controller nicht unterstützt."
             
@@ -2430,12 +2432,15 @@
             "configImportSuccess": "Die Konfigurationsdatei wurde erfolgreich in das System importiert.",
             "configImportFail": "Die Konfigurationsdatei konnte nicht importiert werden.",
             "configImport": "Importieren Sie die Konfigurationsdatei.",
-            "controllerPersonalitySuccess": "Controller-Betriebsmodus erfolgreich festgelegt. Bitte starten Sie den Host neu, um die Änderungen zu übernehmen.",
-            "controllerPersonalityFail": "Fehler beim Festlegen des Controller-Betriebsmodus. Bitte stellen Sie sicher, dass alle logischen Geräte entfernt wurden, bevor Sie fortfahren.",
-            "controllerPersonality": "Controller-Betriebsmodus wechseln.",
             "controllerPropertiesSuccess": "Steuereigenschaften erfolgreich festgelegt. Die Einstellung benötigt einige Zeit, um abgeschlossen zu werden. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
             "controllerPropertiesFail": "Fehler beim Setzen der Controller-Eigenschaften.",
             "controllerPropertiesConfig": "Steuereigenschaften-Einstellung.",
+            "controllerPersonalitySuccess": "Controller-Betriebsmodus erfolgreich festgelegt. Bitte starten Sie den Host neu, um die Änderungen zu übernehmen.",
+            "controllerPersonalityFail": "Fehler beim Festlegen des Controller-Betriebsmodus. Bitte stellen Sie sicher, dass alle logischen Geräte entfernt wurden, bevor Sie fortfahren.",
+            "controllerPersonality": "Controller-Betriebsmodus wechseln.",
+            "ssdPatrolReadSuccess": "SSD Patrol Read wurde erfolgreich eingestellt. Die Einstellung wird einige Zeit in Anspruch nehmen. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
+            "ssdPatrolReadFail": "Fehler beim Einstellen des SSD Patrol Read.",
+            "ssdPatrolReadConfig": "Stellen Sie das SSD Patrol Read in den Controller-Eigenschaften ein.",
             "jbodModeSuccess": "JBOD-Modus erfolgreich festgelegt. Die Einstellung benötigt einige Zeit, um abgeschlossen zu werden. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
             "jbodModeFail": "Fehler beim Festlegen des JBOD-Modus.",
             "jbodMode": "JBOD-Modus in den Controller-Eigenschaften festlegen."
