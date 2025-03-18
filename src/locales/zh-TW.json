@@ -2426,9 +2426,10 @@
             "controllerPersonalityHelperText": "控制器運行模式決定 RAID 控制器如何管理儲存裝置。",
             "currentControllerPersonalityHelperText": "顯示 RAID 控制器當前的運行模式。",
             "setControllerPersonalityHelperText": "切換 RAID 模式與 JBOD 模式，變更後需要重新啟動主機才能生效。",
-            "raidMode": "RAID 模式",
-            "jbodMode": "JBOD 模式",
-            "alertNotSupport": "此功能目前不支援。"
+            "labelRaidMode": "RAID 模式",
+            "labelJbodMode": "JBOD 模式",
+            "alertNotSupport": "此功能目前不支援。",
+            "jbodModeHelperText": "啟用 JBOD 模式後，實體裝置的狀態將變為 JBOD，否則狀態將變為未配置且良好。"
         },
         "toast": {
             "copybackConfigSuccess": "回寫功能已成功設定。",
@@ -2445,7 +2446,10 @@
             "controllerPropertiesConfig": "控制器屬性設置。",
             "controllerPersonalitySuccess": "成功設定控制器運行模式，請重新啟動主機以套用變更。",
             "controllerPersonalityFail": "設定控制器運行模式失敗，請確保所有邏輯裝置已移除後再繼續。",
-            "controllerPersonality": "切換控制器運行模式。"
+            "controllerPersonality": "切換控制器運行模式。",
+            "jbodModeSuccess": "成功設定 JBOD 模式。將需要一些時間來完成該設定，請等待幾秒鐘並刷新應用程式以查看變更。",
+            "jbodModeFail": "設定 JBOD 模式失敗。",
+            "jbodMode": "在控制器屬性中設定 JBOD 模式。"
         }
     },
     "pagePhysicalDevice": {

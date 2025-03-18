@@ -2413,9 +2413,10 @@
             "controllerPersonalityHelperText": "Der Controller-Betriebsmodus bestimmt, wie der RAID-Controller Speichergeräte verwaltet.",
             "currentControllerPersonalityHelperText": "Zeigt den aktuellen Betriebsmodus des RAID-Controllers an.",
             "setControllerPersonalityHelperText": "Zwischen RAID-Modus und JBOD-Modus wechseln. Ein Neustart des Hosts ist erforderlich, damit die Änderungen wirksam werden.",
-            "raidMode": "RAID-Modus",
-            "jbodMode": "JBOD-Modus",
-            "alertNotSupport": "Diese Funktion wird derzeit nicht unterstützt."
+            "labelRaidMode": "RAID-Modus",
+            "labelJbodMode": "JBOD-Modus",
+            "alertNotSupport": "Diese Funktion wird derzeit nicht unterstützt.",
+            "jbodModeHelperText": "Wenn der JBOD-Modus aktiviert ist, ändert sich der Status des physischen Geräts zu JBOD. Andernfalls wird es als „Nicht konfiguriert, gut“ angezeigt."
         },
         "toast": {
             "copybackConfigSuccess": "Die „Copyback“-Funktion wurde erfolgreich eingerichtet.",
@@ -2432,7 +2433,10 @@
             "controllerPropertiesConfig": "Steuereigenschaften-Einstellung.",
             "controllerPersonalitySuccess": "Controller-Betriebsmodus erfolgreich festgelegt. Bitte starten Sie den Host neu, um die Änderungen zu übernehmen.",
             "controllerPersonalityFail": "Fehler beim Festlegen des Controller-Betriebsmodus. Bitte stellen Sie sicher, dass alle logischen Geräte entfernt wurden, bevor Sie fortfahren.",
-            "controllerPersonality": "Controller-Betriebsmodus wechseln."
+            "controllerPersonality": "Controller-Betriebsmodus wechseln.",
+            "jbodModeSuccess": "JBOD-Modus erfolgreich festgelegt. Die Einstellung benötigt einige Zeit, um abgeschlossen zu werden. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
+            "jbodModeFail": "Fehler beim Festlegen des JBOD-Modus.",
+            "jbodMode": "JBOD-Modus in den Controller-Eigenschaften festlegen."
         }
     },
     "pagePhysicalDevice": {

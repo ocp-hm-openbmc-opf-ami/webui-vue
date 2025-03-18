@@ -2434,9 +2434,10 @@
             "controllerPersonalityHelperText": "Controller Personality determines how the RAID controller manages storage devices.",
             "currentControllerPersonalityHelperText": "Displays the current Controller Personality mode of the RAID controller.",
             "setControllerPersonalityHelperText": "Toggle to switch between RAID Mode and JBOD Mode. A host reboot is required for the changes to take effect.",
-            "raidMode": "RAID Mode",
-            "jbodMode": "JBOD Mode",
-            "alertNotSupport": "This feature is currently not supported."
+            "labelRaidMode": "RAID Mode",
+            "labelJbodMode": "JBOD Mode",
+            "alertNotSupport": "This feature is currently not supported.",
+            "jbodModeHelperText": "When JBOD Mode is enabled, the physical device status changes to JBOD; otherwise, it changes to Unconfigured Good."
         },
         "toast": {
             "copybackConfigSuccess": "The 'Copyback' feature has been successfully set up.",
@@ -2453,7 +2454,10 @@
             "controllerPropertiesConfig": "Controller Properties setting.",
             "controllerPersonalitySuccess": "Successfully set Controller Personality. Please reboot the host to apply the changes.",
             "controllerPersonalityFail": "Failed to set Controller Personality. Please ensure that all Logical Devices are removed before proceeding.",
-            "controllerPersonality": "Switch Controller Personality mode."
+            "controllerPersonality": "Switch Controller Personality mode.",
+            "jbodModeSuccess": "Successfully set the JBOD Mode. The setting will take some time to complete. Please wait for few seconds and refresh the application to see the changes.",
+            "jbodModeFail": "Failed to set the JBOD Mode.",
+            "jbodMode": "Set the JBOD Mode in the controller properties."
         }
     },
     "pagePhysicalDevice": {
