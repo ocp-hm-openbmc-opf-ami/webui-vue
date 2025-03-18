@@ -2426,6 +2426,8 @@
             "controllerPersonalityHelperText": "Controller Personality determines how the RAID controller manages storage devices.",
             "currentControllerPersonalityHelperText": "Displays the current Controller Personality mode of the RAID controller.",
             "setControllerPersonalityHelperText": "Toggle to switch between RAID Mode and JBOD Mode. A host reboot is required for the changes to take effect.",
+            "labelRaidMode": "RAID Mode",
+            "labelJbodMode": "JBOD Mode",
             "alertNotSupport": "This feature is currently not supported.",
             "labelControllerProperties": "Controller Properties",
             "controllerPropertiesHelperText":"Set controller properties.",
@@ -2437,8 +2439,6 @@
             "labelReconstructionRate": "Reconstruction Rate",
             "labelSsdPatrolRead": "SSD Patrol Read",
             "ssdPatrolReadHelperText": "When SSD Patrol Read is enabled, the physical device status changes to SSD Patrol Read.",
-            "raidMode": "RAID Mode",
-            "jbodMode": "JBOD Mode",
             "jbodModeHelperText": "When JBOD Mode is enabled, the physical device status changes to JBOD; otherwise, it changes to Unconfigured Good.",
             "alertNotSupportSelectedController": "This feature is not supported for the currently selected controller."
         },
