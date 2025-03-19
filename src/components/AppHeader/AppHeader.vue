@@ -220,6 +220,7 @@ export default {
       isNavigationOpen: false,
       altLogo: process.env.VUE_APP_COMPANY_NAME || 'AMI',
       licenseStatus: this.$store.getters['license/isLicense'],
+      serverStatusIcon: 'secondary', // Set default value
     };
   },
   computed: {
@@ -247,19 +248,6 @@ export default {
     healthStatus() {
       return this.$store.getters['eventLog/healthStatus'];
     },
-    serverStatusIcon() {
-      switch (this.serverStatus) {
-        case 'on':
-          return 'success';
-        case 'error':
-          return 'danger';
-        case 'diagnosticMode':
-          return 'warning';
-        case 'off':
-        default:
-          return 'secondary';
-      }
-    },
     healthStatusIcon() {
       switch (this.healthStatus) {
         case 'OK':
@@ -285,17 +273,29 @@ export default {
         });
       }
     },
-    isLicense: function (value) {
+    isLicense(value) {
       this.licenseStatus = value;
+    },
+    serverStatus(newValue) {
+      this.serverStatusIcon = this.computeServerStatusIcon(newValue);
     },
   },
   created() {
-    // Reset auth state to check if user is authenticated based
-    // on available browser cookies
     this.$store.dispatch('authentication/resetStoreState');
     if (this.licenseStatus) {
       this.$store.dispatch('license/getUserAlertCount');
     }
+
+    // Ensure server status icon is set on page load
+    this.serverStatusIcon = this.computeServerStatusIcon(
+      this.$store.getters['system/serverStatus'],
+    );
+
+    // Dispatch Vuex action if needed to fetch latest status
+    this.$store
+      .dispatch('system/getSystem')
+      .catch((error) => console.error(error))
+      .finally(() => this.endLoader());
   },
   mounted() {
     this.$root.$on(
@@ -304,6 +304,19 @@ export default {
     );
   },
   methods: {
+    computeServerStatusIcon(status) {
+      switch (status) {
+        case 'on':
+          return 'success';
+        case 'error':
+          return 'danger';
+        case 'diagnosticMode':
+          return 'warning';
+        case 'off':
+        default:
+          return 'secondary';
+      }
+    },
     openBios() {
       window.open('/bios/Index.html', 'BIOS');
     },
