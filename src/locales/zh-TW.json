@@ -1527,7 +1527,8 @@
             "userPassword": "使用者密碼",
             "userUnlockMethod": "使用者解鎖方法",
             "passwordChangeRequired": "要求變更密碼",
-            "vmediaAccess": "虛擬媒體訪問"
+            "vmediaAccess": "虛擬媒體訪問",
+            "changePassword": "更改密碼"
         },
         "table": {
             "privilege": "特權",

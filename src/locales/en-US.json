@@ -1532,7 +1532,8 @@
             "userPassword": "User password",
             "userUnlockMethod": "User unlock method",
             "passwordChangeRequired": "Password Change Required",
-            "vmediaAccess": "VMedia Access"
+            "vmediaAccess": "VMedia Access",
+            "changePassword": "Change Password"
         },
         "table": {
             "privilege": "Privilege",

@@ -178,7 +178,11 @@ const UserManagementStore = {
       const globalPrivilege = store.getters.userPrivilege(store.state);
       if (globalPrivilege === 'Administrator') {
         if (originalUsername === 'root') {
-          if (password) data.Password = password;
+          if (password) {
+            data.Password = password;
+          } else {
+            if (username) data.UserName = username;
+          }
         } else {
           if (username) data.UserName = username;
           if (password) data.Password = password;

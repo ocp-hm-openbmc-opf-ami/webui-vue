@@ -583,7 +583,8 @@
             "unlock": "Разблокировать",
             "username": "Имя пользователя",
             "userPassword": "Пароль пользователя",
-            "userUnlockMethod": "Метод разблокировки пользователя"
+            "userUnlockMethod": "Метод разблокировки пользователя",
+            "changePassword": "Изменить пароль"
         },
         "table": {
             "privilege": "Привилегии",
