@@ -154,14 +154,141 @@ export default {
         fitAddon.fit();
       }, 1000);
       window.addEventListener('resize', this.resizeConsoleWindow);
-      this.term.onData((data) => {
-        if (data.charCodeAt(0) === 127) {
-          // ASCII 127 is the delete (DEL) character
-          this.ws.send('\b');
-        } else {
-          this.term.write(data);
-        }
-      });
+
+      // Define key maps
+      this.linuxKeyMap = [
+        [8, [0x08]],
+        [9, [0x09]],
+        [13, [0x0d]],
+        [27, [0x1b]],
+        [33, [0x1b, 0x5b, 0x35, 0x7e]],
+        [34, [0x1b, 0x5b, 0x36, 0x7e]],
+        [35, [0x1b, 0x5b, 0x46]],
+        [36, [0x1b, 0x5b, 0x48]],
+        [37, [0x1b, 0x5b, 0x44]],
+        [38, [0x1b, 0x5b, 0x41]],
+        [39, [0x1b, 0x5b, 0x43]],
+        [40, [0x1b, 0x5b, 0x42]],
+        [45, [0x1b, 0x5b, 0x32, 0x7e]],
+        [46, [0x1b, 0x5b, 0x33, 0x7e]],
+        [112, [0x1b, 0x4f, 0x50]],
+        [113, [0x1b, 0x4f, 0x51]],
+        [114, [0x1b, 0x4f, 0x52]],
+        [115, [0x1b, 0x4f, 0x53]],
+        [116, [0x1b, 0x4f, 0x54]],
+        [117, [0x1b, 0x4f, 0x55]],
+        [118, [0x1b, 0x4f, 0x56]],
+        [119, [0x1b, 0x4f, 0x57]],
+        [120, [0x1b, 0x4f, 0x58]],
+        [121, [0x1b, 0x4f, 0x59]],
+        [122, [0x1b, 0x4f, 0x5a]],
+        [123, [0x1b, 0x4f, 0x5b]],
+      ];
+
+      this.AsciiKeyMap = [
+        [50, 0x00],
+        [65, 0x01],
+        [66, 0x02],
+        [67, 0x03],
+        [68, 0x04],
+        [69, 0x05],
+        [70, 0x06],
+        [71, 0x07],
+        [72, 0x08],
+        [73, 0x09],
+        [74, 0x0a],
+        [75, 0x0b],
+        [76, 0x0c],
+        [77, 0x0d],
+        [78, 0x0e],
+        [79, 0x0f],
+        [80, 0x10],
+        [81, 0x11],
+        [82, 0x12],
+        [83, 0x13],
+        [84, 0x14],
+        [85, 0x15],
+        [86, 0x16],
+        [87, 0x17],
+        [88, 0x18],
+        [89, 0x19],
+        [90, 0x1a],
+        [219, 0x1b],
+        [220, 0x1c],
+        [221, 0x1d],
+        [54, 0x1e],
+        [189, 0x1f],
+        [191, 0x7f],
+      ];
+      this.term.element.addEventListener(
+        'keydown',
+        (e) => {
+          console.log(
+            'Key press event triggered',
+            e.keyCode,
+            e.key,
+            e.key.length,
+          );
+          e.stopPropagation();
+
+          let currentKey = e.keyCode;
+
+          // Prevent spamming control characters
+          if (
+            e.key.length > 1 &&
+            (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) &&
+            e.key !== 'Backspace'
+          ) {
+            return;
+          }
+
+          if (currentKey === 17 || currentKey === 16) {
+            return; // Ignore pure Ctrl and Shift key presses
+          }
+
+          if (e.ctrlKey && e.shiftKey) {
+            for (
+              let i = this.AsciiKeyMap.length - 2;
+              i < this.AsciiKeyMap.length;
+              i++
+            ) {
+              if (currentKey === this.AsciiKeyMap[i][0]) {
+                e.preventDefault();
+                let encoder = String.fromCharCode(this.AsciiKeyMap[i][1]);
+                this.ws.send(encoder);
+                return;
+              }
+            }
+          } else if (e.ctrlKey) {
+            for (let i = 0; i < this.AsciiKeyMap.length - 2; i++) {
+              if (currentKey === this.AsciiKeyMap[i][0]) {
+                e.preventDefault();
+                let encoder = String.fromCharCode(this.AsciiKeyMap[i][1]);
+                this.ws.send(encoder);
+                return;
+              }
+            }
+          } else {
+            for (let i = 0; i < this.linuxKeyMap.length; i++) {
+              if (currentKey === this.linuxKeyMap[i][0]) {
+                e.preventDefault();
+                let encoder = '';
+                for (let j = 0; j < this.linuxKeyMap[i][1].length; j++) {
+                  encoder += String.fromCharCode(this.linuxKeyMap[i][1][j]);
+                }
+                this.ws.send(encoder);
+                return;
+              }
+            }
+            // Avoid displaying the full name of one-character keys like 'Spacebar'
+            if (e.key.length !== 1) return;
+            if (this.term.buffer.active.cursorX == 0) {
+              this.term.write('\r\n'); //newline
+            }
+          }
+        },
+        true,
+      );
       try {
         this.ws.onopen = function () {
           console.log('websocket console0/ opened');
