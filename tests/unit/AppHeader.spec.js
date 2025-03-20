@@ -15,6 +15,7 @@ describe('AppHeader.vue', () => {
     'authentication/resetStoreState': jest.fn(),
     'license/getUserAlertCount': jest.fn(),
     'global/getSystemInfo': jest.fn(),
+    'system/getSystem': jest.fn(),
   };
   let state;
 

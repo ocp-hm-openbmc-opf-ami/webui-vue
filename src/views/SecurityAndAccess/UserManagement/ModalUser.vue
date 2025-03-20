@@ -38,222 +38,272 @@
         </b-row>
         <b-row>
           <b-col>
-            <b-form-group :label="$t('pageUserManagement.modal.accountStatus')">
-              <b-form-radio
-                v-model="form.status"
-                name="user-status"
-                :value="true"
-                data-test-id="userManagement-radioButton-statusEnabled"
-                @input="$v.form.status.$touch()"
-              >
-                {{ $t('global.status.enabled') }}
-              </b-form-radio>
-              <b-form-radio
-                v-model="form.status"
-                name="user-status"
-                data-test-id="userManagement-radioButton-statusDisabled"
-                :value="false"
-                :disabled="
-                  (!newUser && originalUsername === disabled) ||
-                  globalPrivilege !== 'Administrator' ||
-                  form.username === 'root'
-                "
-                @input="$v.form.status.$touch()"
-              >
-                {{ $t('global.status.disabled') }}
-              </b-form-radio>
-            </b-form-group>
-            <b-form-group
-              :label="$t('pageUserManagement.modal.username')"
-              label-for="username"
-            >
-              <b-form-text id="username-help-block">
-                {{ $t('pageUserManagement.modal.cannotStartWithANumber') }}
-                <br />
-                {{
-                  $t(
-                    'pageUserManagement.modal.noSpecialCharactersExceptUnderscore',
-                  )
-                }}
-              </b-form-text>
-              <b-form-input
-                id="username"
-                v-model="form.username"
-                type="text"
-                aria-describedby="username-help-block"
-                data-test-id="userManagement-input-username"
-                :state="getValidationState($v.form.username)"
-                :disabled="
-                  (!newUser && originalUsername === disabled) ||
-                  globalPrivilege !== 'Administrator' ||
-                  newUser === 'root'
-                "
-                autocomplete="new-username"
-                @input="$v.form.username.$touch()"
-              />
-              <b-form-invalid-feedback role="alert">
-                <template v-if="!$v.form.username.required">
-                  {{ $t('global.form.fieldRequired') }}
-                </template>
-                <template v-else-if="!$v.form.username.maxLength">
-                  {{
-                    $t('global.form.lengthMustBeBetween', { min: 1, max: 16 })
-                  }}
-                </template>
-                <template v-else-if="!$v.form.username.pattern">
-                  {{ $t('global.form.invalidFormat') }}
-                </template>
-              </b-form-invalid-feedback>
-            </b-form-group>
-            <b-form-group
-              :label="$t('pageUserManagement.modal.privilege')"
-              label-for="privilege"
-            >
-              <b-form-select
-                id="privilege"
-                v-model="form.privilege"
-                :options="privilegeTypes"
-                data-test-id="userManagement-select-privilege"
-                :state="getValidationState($v.form.privilege)"
-                :disabled="
-                  (!newUser && originalUsername === 'root') ||
-                  globalPrivilege !== 'Administrator'
-                "
-                @input="$v.form.privilege.$touch()"
-              >
-                <template #first>
-                  <b-form-select-option :value="null" disabled>
-                    {{ $t('global.form.selectAnOption') }}
-                  </b-form-select-option>
-                </template>
-              </b-form-select>
-              <b-form-invalid-feedback role="alert">
-                <template v-if="!$v.form.privilege.required">
-                  {{ $t('global.form.fieldRequired') }}
-                </template>
-              </b-form-invalid-feedback>
-            </b-form-group>
-            <b-form-group
-              :label="$t('pageUserManagement.modal.passwordChangeRequired')"
-            >
-              <b-form-radio
-                v-model="form.PasswordChangeRequired"
-                name="Password-change-status"
-                :value="true"
-                data-test-id="userManagement-radioButton-statusEnabled"
-                :disabled="
-                  form.username === 'root' ||
-                  globalPrivilege !== 'Administrator'
-                "
-                @input="$v.form.PasswordChangeRequired.$touch()"
-              >
-                {{ $t('global.status.enabled') }}
-              </b-form-radio>
-              <b-form-radio
-                v-model="form.PasswordChangeRequired"
-                name="Password-change-status"
-                data-test-id="userManagement-radioButton-statusDisabled"
-                :value="false"
-                :disabled="
-                  form.username === 'root' ||
-                  globalPrivilege !== 'Administrator'
-                "
-                @input="$v.form.PasswordChangeRequired.$touch()"
-              >
-                {{ $t('global.status.disabled') }}
-              </b-form-radio>
-            </b-form-group>
-            <b-form-group :label="$t('pageUserManagement.modal.vmediaAccess')">
-              <b-form-radio
-                v-model="form.vmediaAccess"
-                name="vmediaAccess-change-status"
-                :value="true"
-                data-test-id="userManagement-vmediaAccess-statusEnabled"
-                :disabled="
-                  form.username === 'root' ||
-                  globalPrivilege !== 'Administrator'
-                "
-                @input="$v.form.vmediaAccess.$touch()"
-              >
-                {{ $t('global.status.enabled') }}
-              </b-form-radio>
-              <b-form-radio
-                v-model="form.vmediaAccess"
-                name="vmediaAccess-change-status"
-                data-test-id="userManagement-vmediaAccess-statusDisabled"
-                :value="false"
-                :disabled="
-                  form.username === 'root' ||
-                  globalPrivilege !== 'Administrator'
-                "
-                @input="$v.form.vmediaAccess.$touch()"
-              >
-                {{ $t('global.status.disabled') }}
-              </b-form-radio>
-            </b-form-group>
+            <b-row>
+              <b-col>
+                <b-form-group
+                  :label="$t('pageUserManagement.modal.accountStatus')"
+                >
+                  <b-form-radio
+                    v-model="form.status"
+                    name="user-status"
+                    :value="true"
+                    data-test-id="userManagement-radioButton-statusEnabled"
+                    @input="$v.form.status.$touch()"
+                  >
+                    {{ $t('global.status.enabled') }}
+                  </b-form-radio>
+                  <b-form-radio
+                    v-model="form.status"
+                    name="user-status"
+                    data-test-id="userManagement-radioButton-statusDisabled"
+                    :value="false"
+                    :disabled="
+                      (!newUser && originalUsername === disabled) ||
+                      globalPrivilege !== 'Administrator' ||
+                      form.username === 'root'
+                    "
+                    @input="$v.form.status.$touch()"
+                  >
+                    {{ $t('global.status.disabled') }}
+                  </b-form-radio>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col>
+                <b-form-group
+                  :label="$t('pageUserManagement.modal.username')"
+                  label-for="username"
+                >
+                  <b-form-text id="username-help-block">
+                    {{ $t('pageUserManagement.modal.cannotStartWithANumber') }}
+                    <br />
+                    {{
+                      $t(
+                        'pageUserManagement.modal.noSpecialCharactersExceptUnderscore',
+                      )
+                    }}
+                  </b-form-text>
+                  <b-form-input
+                    id="username"
+                    v-model="form.username"
+                    type="text"
+                    aria-describedby="username-help-block"
+                    data-test-id="userManagement-input-username"
+                    :state="getValidationState($v.form.username)"
+                    :disabled="
+                      (!newUser && originalUsername === disabled) ||
+                      globalPrivilege !== 'Administrator' ||
+                      newUser === 'root'
+                    "
+                    autocomplete="new-username"
+                    @input="$v.form.username.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.form.username.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                    <template v-else-if="!$v.form.username.maxLength">
+                      {{
+                        $t('global.form.lengthMustBeBetween', {
+                          min: 1,
+                          max: 16,
+                        })
+                      }}
+                    </template>
+                    <template v-else-if="!$v.form.username.pattern">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col>
+                <b-form-group
+                  :label="$t('pageUserManagement.modal.privilege')"
+                  label-for="privilege"
+                >
+                  <b-form-select
+                    id="privilege"
+                    v-model="form.privilege"
+                    :options="privilegeTypes"
+                    data-test-id="userManagement-select-privilege"
+                    :state="getValidationState($v.form.privilege)"
+                    :disabled="
+                      (!newUser && originalUsername === 'root') ||
+                      globalPrivilege !== 'Administrator'
+                    "
+                    @input="$v.form.privilege.$touch()"
+                  >
+                    <template #first>
+                      <b-form-select-option :value="null" disabled>
+                        {{ $t('global.form.selectAnOption') }}
+                      </b-form-select-option>
+                    </template>
+                  </b-form-select>
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.form.privilege.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col>
+                <b-form-group
+                  :label="$t('pageUserManagement.modal.passwordChangeRequired')"
+                >
+                  <b-form-radio
+                    v-model="form.PasswordChangeRequired"
+                    name="Password-change-status"
+                    :value="true"
+                    data-test-id="userManagement-radioButton-statusEnabled"
+                    :disabled="
+                      form.username === 'root' ||
+                      globalPrivilege !== 'Administrator'
+                    "
+                    @input="$v.form.PasswordChangeRequired.$touch()"
+                  >
+                    {{ $t('global.status.enabled') }}
+                  </b-form-radio>
+                  <b-form-radio
+                    v-model="form.PasswordChangeRequired"
+                    name="Password-change-status"
+                    data-test-id="userManagement-radioButton-statusDisabled"
+                    :value="false"
+                    :disabled="
+                      form.username === 'root' ||
+                      globalPrivilege !== 'Administrator'
+                    "
+                    @input="$v.form.PasswordChangeRequired.$touch()"
+                  >
+                    {{ $t('global.status.disabled') }}
+                  </b-form-radio>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col>
+                <b-form-group
+                  :label="$t('pageUserManagement.modal.vmediaAccess')"
+                >
+                  <b-form-radio
+                    v-model="form.vmediaAccess"
+                    name="vmediaAccess-change-status"
+                    :value="true"
+                    data-test-id="userManagement-vmediaAccess-statusEnabled"
+                    :disabled="
+                      form.username === 'root' ||
+                      globalPrivilege !== 'Administrator'
+                    "
+                    @input="$v.form.vmediaAccess.$touch()"
+                  >
+                    {{ $t('global.status.enabled') }}
+                  </b-form-radio>
+                  <b-form-radio
+                    v-model="form.vmediaAccess"
+                    name="vmediaAccess-change-status"
+                    data-test-id="userManagement-vmediaAccess-statusDisabled"
+                    :value="false"
+                    :disabled="
+                      form.username === 'root' ||
+                      globalPrivilege !== 'Administrator'
+                    "
+                    @input="$v.form.vmediaAccess.$touch()"
+                  >
+                    {{ $t('global.status.disabled') }}
+                  </b-form-radio>
+                </b-form-group>
+              </b-col>
+            </b-row>
           </b-col>
           <b-col>
-            <b-form-group
-              :label="$t('pageUserManagement.modal.userPassword')"
-              label-for="password"
-            >
-              <b-form-text id="password-help-block">
-                {{
-                  $t('pageUserManagement.modal.passwordMustBeBetween', {
-                    min: passwordRequirements.minLength,
-                    max: passwordRequirements.maxLength,
-                  })
-                }}
-              </b-form-text>
-              <input-password-toggle>
-                <b-form-input
-                  id="password"
-                  v-model="form.password"
-                  type="password"
-                  data-test-id="userManagement-input-password"
-                  aria-describedby="password-help-block"
-                  :state="getValidationState($v.form.password)"
-                  class="form-control-with-button"
-                  autocomplete="new-password"
-                  @input="$v.form.password.$touch()"
-                />
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.form.password.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                  <template v-else-if="!$v.form.password.pattern">
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </input-password-toggle>
-            </b-form-group>
-            <b-form-group
-              :label="$t('pageUserManagement.modal.confirmUserPassword')"
-              label-for="password-confirmation"
-            >
-              <input-password-toggle>
-                <b-form-input
-                  id="password-confirmation"
-                  v-model="form.passwordConfirmation"
-                  data-test-id="userManagement-input-passwordConfirmation"
-                  type="password"
-                  :state="getValidationState($v.form.passwordConfirmation)"
-                  class="form-control-with-button"
-                  autocomplete="new-password"
-                  @input="$v.form.passwordConfirmation.$touch()"
-                />
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.form.passwordConfirmation.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                  <template
-                    v-else-if="!$v.form.passwordConfirmation.sameAsPassword"
+            <b-row>
+              <b-col class="form-change-password">
+                <b-form-group v-if="!newUser">
+                  <b-form-checkbox
+                    id="changePassword"
+                    v-model="form.changePassword"
                   >
-                    {{ $t('pageUserManagement.modal.passwordsDoNotMatch') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </input-password-toggle>
-            </b-form-group>
+                    {{ $t('pageUserManagement.modal.changePassword') }}
+                  </b-form-checkbox>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col :style="changePasswordFieldStyle">
+                <b-form-group
+                  :label="$t('pageUserManagement.modal.userPassword')"
+                  label-for="password"
+                >
+                  <b-form-text id="password-help-block">
+                    {{
+                      $t('pageUserManagement.modal.passwordMustBeBetween', {
+                        min: passwordRequirements.minLength,
+                        max: passwordRequirements.maxLength,
+                      })
+                    }}
+                  </b-form-text>
+                  <input-password-toggle>
+                    <b-form-input
+                      id="password"
+                      v-model="form.password"
+                      type="password"
+                      data-test-id="userManagement-input-password"
+                      aria-describedby="password-help-block"
+                      :state="getValidationState($v.form.password)"
+                      class="form-control-with-button"
+                      :style="passwordInputFieldStyle"
+                      :disabled="!form.changePassword && !newUser"
+                      autocomplete="new-password"
+                      @input="$v.form.password.$touch()"
+                    />
+                    <b-form-invalid-feedback role="alert">
+                      <template v-if="!$v.form.password.required">
+                        {{ $t('global.form.fieldRequired') }}
+                      </template>
+                      <template v-else-if="!$v.form.password.pattern">
+                        {{ $t('global.form.invalidFormat') }}
+                      </template>
+                    </b-form-invalid-feedback>
+                  </input-password-toggle>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col>
+                <b-form-group
+                  :label="$t('pageUserManagement.modal.confirmUserPassword')"
+                  label-for="password-confirmation"
+                >
+                  <input-password-toggle>
+                    <b-form-input
+                      id="password-confirmation"
+                      v-model="form.passwordConfirmation"
+                      data-test-id="userManagement-input-passwordConfirmation"
+                      type="password"
+                      :state="getValidationState($v.form.passwordConfirmation)"
+                      class="form-control-with-button"
+                      :disabled="!form.changePassword && !newUser"
+                      autocomplete="new-password"
+                      @input="$v.form.passwordConfirmation.$touch()"
+                    />
+                    <b-form-invalid-feedback role="alert">
+                      <template v-if="!$v.form.passwordConfirmation.required">
+                        {{ $t('global.form.fieldRequired') }}
+                      </template>
+                      <template
+                        v-else-if="!$v.form.passwordConfirmation.sameAsPassword"
+                      >
+                        {{ $t('pageUserManagement.modal.passwordsDoNotMatch') }}
+                      </template>
+                    </b-form-invalid-feedback>
+                  </input-password-toggle>
+                </b-form-group>
+              </b-col>
+            </b-row>
           </b-col>
         </b-row>
       </b-container>
@@ -322,6 +372,7 @@ export default {
         manualUnlock: false,
         PasswordChangeRequired: false,
         vmediaAccess: true,
+        changePassword: false,
       },
       disabled: this.$store.getters['global/username'],
       globalPrivilege: this.$store.getters['global/userPrivilege'],
@@ -339,6 +390,12 @@ export default {
     },
     privilegeTypes() {
       return this.$store.getters['userManagement/accountRoles'];
+    },
+    changePasswordFieldStyle() {
+      return !this.newUser ? { marginTop: '50px' } : {};
+    },
+    passwordInputFieldStyle() {
+      return !this.newUser ? { marginTop: '29px' } : {};
     },
   },
   watch: {
@@ -371,15 +428,17 @@ export default {
         },
         password: {
           required: requiredIf(function () {
-            return this.requirePassword();
+            return this.requirePassword() && this.form.changePassword;
           }),
           pattern: function (pw) {
-            return this.passwordValidation(pw);
+            return this.form.changePassword
+              ? this.passwordValidation(pw)
+              : true;
           },
         },
         passwordConfirmation: {
           required: requiredIf(function () {
-            return this.requirePassword();
+            return this.requirePassword() && this.form.changePassword;
           }),
           sameAsPassword: sameAs('password'),
         },
@@ -448,6 +507,7 @@ export default {
       this.form.vmediaAccess = true;
       this.form.password = '';
       this.form.passwordConfirmation = '';
+      this.form.changePassword = false;
       this.$v.$reset();
       this.$emit('hidden');
     },
@@ -481,3 +541,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.form-change-password {
+  transform: translateY(38px);
+}
+</style>

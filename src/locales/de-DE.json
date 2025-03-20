@@ -1526,7 +1526,8 @@
             "userPassword": "Benutzer Passwort",
             "userUnlockMethod": "Methode zum Entsperren des Benutzers",
             "passwordChangeRequired": "Passwortänderung erforderlich",
-            "vmediaAccess": "VMedia-Zugriff"
+            "vmediaAccess": "VMedia-Zugriff",
+            "changePassword": "Kennwort ändern"
         },
         "table": {
             "privilege": "Privileg",

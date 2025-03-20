@@ -183,7 +183,10 @@ export default {
               value: 'delete',
               title: this.$t('pageCertificates.deleteCertificate'),
               enabled:
-                certificate.type === 'TrustStore Certificate' ? true : false,
+                certificate.type !== 'HTTPS Certificate' &&
+                certificate.type !== 'ASD Certificate'
+                  ? true
+                  : false,
             },
           ],
         };

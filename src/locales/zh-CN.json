@@ -1524,7 +1524,8 @@
             "userPassword": "用户密码",
             "userUnlockMethod": "用户解锁方法",
             "passwordChangeRequired": "要求更改密码",
-            "vmediaAccess": "虚拟媒体访问"
+            "vmediaAccess": "虚拟媒体访问",
+            "changePassword": "更改密码"
         },
         "table": {
             "privilege": "权限",

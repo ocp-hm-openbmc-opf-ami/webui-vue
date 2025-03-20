@@ -120,9 +120,12 @@ const CertificatesStore = {
       { dispatch },
       { certificateString, location, type },
     ) {
+      const countBegin =
+        certificateString.match(/-----BEGIN CERTIFICATE/g)?.length ?? 0;
       const data = {};
       data.CertificateString = certificateString;
-      data.CertificateType = 'PEMchain';
+      data.CertificateType =
+        countBegin > 1 && type === 'HTTPS Certificate' ? 'PEMchain' : 'PEM';
       data.CertificateUri = { '@odata.id': location };
 
       return await api

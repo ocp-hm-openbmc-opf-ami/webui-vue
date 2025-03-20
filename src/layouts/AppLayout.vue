@@ -3,6 +3,7 @@
     <loading-bar class="loading" @load="loading" />
     <app-header
       ref="focusTarget"
+      :key="routerKey"
       class="app-header"
       :router-key="routerKey"
       @refresh="refresh"
