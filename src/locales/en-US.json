@@ -2139,7 +2139,9 @@
         "redfishMaxSession": "Redfish",
         "sshMaxSession": "SSH",
         "vmMaxSession": "Virtual Media",
-        "webMaxSession": "Web"
+        "webMaxSession": "Web",
+        "solSshPortValueLimits": "Kindly enter the Values between %{min} and %{max}",
+        "webPortValueLimits": "Kindly enter the Values between %{min} and %{max}"
 
     },
     "pagePower": {

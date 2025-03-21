@@ -2130,7 +2130,9 @@
         "redfishMaxSession": "红鱼",
         "sshMaxSession": "SSH",
         "vmMaxSession": "虚拟媒体",
-        "webMaxSession": "网络"
+        "webMaxSession": "网络",
+        "solSshPortValueLimits": "请输入 %{min} 和 %{max} 之间的值",
+        "webPortValueLimits": "请输入 %{min} 和 %{max} 之间的值"
     },
     "pagePower": {
         "description": "设置电源上限以使功耗保持在或低于指定值",
