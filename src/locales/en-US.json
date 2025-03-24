@@ -2831,7 +2831,8 @@
         "networkLinkFeatureNotAvailable": "The Network Link feature is not enabled.",
         "toast": {
             "successSaveNetworkLink": "Successfully saved Network Link.",
-            "errorSavedNetworkLink": "Error saved Network Link."
+            "errorSavedNetworkLink": "Error saved Network Link.",
+            "errorSavedNcsiEnabledNetworkLink": "Network Link Configuration cannot be saved when NCSI is active."
         }
     },
     "pagePamOrder": {

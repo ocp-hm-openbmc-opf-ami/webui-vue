@@ -2807,7 +2807,9 @@
         "networkLinkFeatureNotAvailable": "Die Netzwerkverbindungsfunktion ist nicht aktiviert.",
         "toast": {
             "successSaveNetworkLink": "Netzwerklink erfolgreich gespeichert.",
-            "errorSavedNetworkLink": "Fehler beim Speichern der Netzwerkverbindung."
+            "errorSavedNetworkLink": "Fehler beim Speichern der Netzwerkverbindung.",
+            "errorSavedNcsiEnabledNetworkLink": "Die Konfiguration der Netzwerkverbindung kann nicht gespeichert werden, wenn NCSI aktiv ist."
+
         }
     },
     "pagePamOrder": {

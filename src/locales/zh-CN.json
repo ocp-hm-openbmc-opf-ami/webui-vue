@@ -2819,7 +2819,8 @@
         "networkLinkFeatureNotAvailable": "网络链接功能未启用。",
         "toast": {
             "successSaveNetworkLink": "已成功保存网络链接。",
-            "errorSavedNetworkLink": "保存网络链接时出错。"
+            "errorSavedNetworkLink": "保存网络链接时出错。",
+            "errorSavedNcsiEnabledNetworkLink": "在 NCSI 激活时无法保存网络链接配置。"
         }
     },
     "pagePamOrder": {

@@ -2809,7 +2809,8 @@
         "networkLinkFeatureNotAvailable": "網路連結功能未啟用。",
         "toast": {
             "successSaveNetworkLink": "已成功儲存網頁連結。",
-            "errorSavedNetworkLink": "儲存網頁連結時發生錯誤。"
+            "errorSavedNetworkLink": "儲存網頁連結時發生錯誤。",
+            "errorSavedNcsiEnabledNetworkLink": "在 NCSI 啟用時無法保存網路連結配置。"
         }
     },
     "pagePamOrder": {
