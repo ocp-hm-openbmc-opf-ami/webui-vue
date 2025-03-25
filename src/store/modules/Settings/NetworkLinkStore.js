@@ -55,7 +55,17 @@ const NetworkLinkStore = {
         .then(() => i18n.t('networkLink.toast.successSaveNetworkLink'))
         .catch((error) => {
           console.log(error);
-          throw new Error(i18n.t('networkLink.toast.errorSavedNetworkLink'));
+          if (
+            error.response.data.error[
+              '@Message.ExtendedInfo'
+            ][0].MessageId.includes('NCSIAutoNegDuplexSpeedModificationDenied')
+          ) {
+            throw new Error(
+              i18n.t('networkLink.toast.errorSavedNcsiEnabledNetworkLink'),
+            );
+          } else {
+            throw new Error(i18n.t('networkLink.toast.errorSavedNetworkLink'));
+          }
         });
     },
   },

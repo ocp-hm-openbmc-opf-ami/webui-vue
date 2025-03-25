@@ -1193,6 +1193,8 @@
         "sectionTitleUpdateFirmware": "更新韧体",
         "cardTitleClearConfig": "清除配置",
         "clearConfigDescription": "启用 BIOS 清除配置",
+        "runningImageBootedFromBackup": "运行的映像从备份映像启动",
+        "runningImageBootedFromActive": "运行的映像从活动映像启动",
         "alert": {
             "operationInProgress": "正在执行伺服器电源运作",
             "serverMustBePoweredOffTo": "伺服器必须关闭电源至:",
@@ -2130,7 +2132,9 @@
         "redfishMaxSession": "红鱼",
         "sshMaxSession": "SSH",
         "vmMaxSession": "虚拟媒体",
-        "webMaxSession": "网络"
+        "webMaxSession": "网络",
+        "solSshPortValueLimits": "请输入 %{min} 和 %{max} 之间的值",
+        "webPortValueLimits": "请输入 %{min} 和 %{max} 之间的值"
     },
     "pagePower": {
         "description": "设置电源上限以使功耗保持在或低于指定值",
@@ -2823,7 +2827,8 @@
         "networkLinkFeatureNotAvailable": "网络链接功能未启用。",
         "toast": {
             "successSaveNetworkLink": "已成功保存网络链接。",
-            "errorSavedNetworkLink": "保存网络链接时出错。"
+            "errorSavedNetworkLink": "保存网络链接时出错。",
+            "errorSavedNcsiEnabledNetworkLink": "在 NCSI 激活时无法保存网络链接配置。"
         }
     },
     "pagePamOrder": {

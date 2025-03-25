@@ -180,7 +180,7 @@
                         <template v-else-if="!$v.kvmPort.pattern">
                           {{
                             $t('pagePolicies.kvmPortValueLimits', {
-                              min: 0,
+                              min: 1,
                               max: 65535,
                             })
                           }}
@@ -218,6 +218,14 @@
                       <b-form-invalid-feedback role="alert">
                         <template v-if="!$v.webPort.required">
                           {{ $t('global.form.fieldRequired') }}
+                        </template>
+                        <template v-else-if="!$v.webPort.pattern">
+                          {{
+                            $t('pagePolicies.webPortValueLimits', {
+                              min: 1,
+                              max: 65535,
+                            })
+                          }}
                         </template>
                       </b-form-invalid-feedback>
                     </b-form-group>
@@ -391,12 +399,27 @@
                       label-for="input-1"
                     >
                       <b-form-input
-                        id="input-1"
-                        v-model.number="solSshPortValueState"
-                        data-test-id="power-input-solSshPort"
+                        id="input-solSsh-port"
+                        v-model.number="solSshPort"
+                        data-test-id="input-solSshPort"
                         type="number"
                         aria-describedby="power-help-text"
+                        :state="getValidationState($v.solSshPort)"
+                        @input="$v.solSshPort.$touch()"
                       ></b-form-input>
+                      <b-form-invalid-feedback role="alert">
+                        <template v-if="!$v.solSshPort.required">
+                          {{ $t('global.form.fieldRequired') }}
+                        </template>
+                        <template v-else-if="!$v.solSshPort.pattern">
+                          {{
+                            $t('pagePolicies.solSshPortValueLimits', {
+                              min: 1,
+                              max: 65535,
+                            })
+                          }}
+                        </template>
+                      </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
                   <b-col class="d-flex align-items-center">
@@ -1020,7 +1043,7 @@ export default {
         this.$store.commit('policies/setSslFipsProtocolEnabled', newValue);
       },
     },
-    solSshPortValueState: {
+    solSshPort: {
       get() {
         return this.$store.getters['policies/solSshPortValue'];
       },
@@ -1120,6 +1143,15 @@ export default {
       },
       webPort: {
         required,
+        pattern: function (pw) {
+          return this.webPortValueValidation(pw);
+        },
+      },
+      solSshPort: {
+        required,
+        pattern: function (pw) {
+          return this.solSshValueValidation(pw);
+        },
       },
       vmReconnectValues: {
         vmInterval: {
@@ -1206,11 +1238,10 @@ export default {
         .catch(({ message }) => this.errorToast(message));
     },
     saveSolSshPortValue() {
+      this.$v.solSshPort.$touch();
+      if (this.$v.solSshPort.$invalid) return;
       this.$store
-        .dispatch(
-          'policies/saveSolSshPortState',
-          parseInt(this.solSshPortValueState),
-        )
+        .dispatch('policies/saveSolSshPortState', parseInt(this.solSshPort))
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
@@ -1390,7 +1421,7 @@ export default {
     },
     kvmPortValueValidation(val) {
       if (
-        !/^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/.test(
+        !/^([1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/.test(
           val,
         )
       ) {
@@ -1401,6 +1432,26 @@ export default {
     webSessionTimeoutValidation(val) {
       if (
         !/^(3[0-9]|[4-9][0-9]|[1-9][0-9]{2}|[1-8][0-9]{3}|[1-7][0-9]{4}|8[0-5][0-9]{3}|86[0-3][0-9]{2}|86400)$/.test(
+          val,
+        )
+      ) {
+        return false;
+      }
+      return true;
+    },
+    webPortValueValidation(val) {
+      if (
+        !/^([1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/.test(
+          val,
+        )
+      ) {
+        return false;
+      }
+      return true;
+    },
+    solSshValueValidation(val) {
+      if (
+        !/^([1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/.test(
           val,
         )
       ) {

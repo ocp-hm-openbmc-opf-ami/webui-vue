@@ -8,6 +8,9 @@
         <dl>
           <dt>{{ $t('pageOverview.runningVersion') }}</dt>
           <dd>{{ dataFormatter(runningVersion) }}</dd>
+          <dd v-if="runningVersion != '--'" class="mb-0">
+            ({{ bmcActiveFirmwareId }})
+          </dd>
           <dt>{{ $t('pageOverview.backupVersion') }}</dt>
           <dd>{{ dataFormatter(backupVersion) }}</dd>
         </dl>
@@ -49,7 +52,14 @@ export default {
         return this.server?.firmwareVersion;
       },
       runningVersion() {
-        return this.activeBmcFirmware?.version;
+        return this.activeBmcFirmware?.version || '--';
+      },
+      bmcActiveFirmwareId() {
+        return this.$t(
+          this.$store.getters['firmware/getBmcActiveFirmwareId'] === 'bmc_bkup'
+            ? 'pageFirmware.runningImageBootedFromBackup'
+            : 'pageFirmware.runningImageBootedFromActive',
+        );
       },
     }),
   },

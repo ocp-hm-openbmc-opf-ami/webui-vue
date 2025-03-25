@@ -1194,7 +1194,9 @@
         "sectionTitleHostCards": "Gastgeber",
         "sectionTitleUpdateFirmware": "Firmware aktualisieren",
         "cardTitleClearConfig": "Konfiguration löschen",
-        "clearConfigDescription": "Aktivieren der BIOS-Clear-Konfiguration",
+        "clearConfigDescription": "Aktivieren der BIOS-Clear-Konfiguration",        
+        "runningImageBootedFromBackup": "Das laufende Image wird vom Backup-Image gebootet",
+        "runningImageBootedFromActive": "Das laufende Image wird vom aktiven Image gebootet",
         "alert": {
             "operationInProgress": "Serverstrombetrieb läuft.",
             "serverMustBePoweredOffTo": "Der Server muss ausgeschaltet sein:",
@@ -2120,7 +2122,9 @@
         "redfishMaxSession": "Rotbarsch",
         "sshMaxSession": "SSH",
         "vmMaxSession": "Virtuelle Medien",
-        "webMaxSession": "Web"
+        "webMaxSession": "Web",
+        "solSshPortValueLimits": "Bitte geben Sie die Werte zwischen %{min} und %{max} ein",
+        "webPortValueLimits": "Bitte geben Sie die Werte zwischen %{min} und %{max} ein"
     },
     "pagePower": {
         "description": "Legen Sie eine Leistungsobergrenze fest, um den Stromverbrauch auf oder unter dem angegebenen Wert in Watt zu halten",
@@ -2812,7 +2816,9 @@
         "networkLinkFeatureNotAvailable": "Die Netzwerkverbindungsfunktion ist nicht aktiviert.",
         "toast": {
             "successSaveNetworkLink": "Netzwerklink erfolgreich gespeichert.",
-            "errorSavedNetworkLink": "Fehler beim Speichern der Netzwerkverbindung."
+            "errorSavedNetworkLink": "Fehler beim Speichern der Netzwerkverbindung.",
+            "errorSavedNcsiEnabledNetworkLink": "Die Konfiguration der Netzwerkverbindung kann nicht gespeichert werden, wenn NCSI aktiv ist."
+
         }
     },
     "pagePamOrder": {

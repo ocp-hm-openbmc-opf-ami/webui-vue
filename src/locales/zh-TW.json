@@ -1196,6 +1196,8 @@
         "sectionTitleUpdateFirmware": "更新韌體",
         "cardTitleClearConfig": "清除配置",
         "clearConfigDescription": "啟用 BIOS 清除配置",
+        "runningImageBootedFromBackup": "運行的映像從備份映像啟動",
+        "runningImageBootedFromActive": "運行的映像從活動映像啟動",
         "alert": {
             "operationInProgress": "正在執行伺服器電源運作",
             "serverMustBePoweredOffTo": "伺服器必須關閉電源至:",
@@ -2133,7 +2135,9 @@
         "redfishMaxSession": "紅魚",
         "sshMaxSession": "SSH",
         "vmMaxSession": "虛擬媒體",
-        "webMaxSession": "網路"
+        "webMaxSession": "網路",
+        "solSshPortValueLimits": "請輸入 %{min} 和 %{max} 之間的數值",
+        "webPortValueLimits": "請輸入 %{min} 和 %{max} 之間的數值"
     },
     "pagePower": {
         "description": "設置電源上限以使功耗保持在或低於指定值",
@@ -2813,7 +2817,8 @@
         "networkLinkFeatureNotAvailable": "網路連結功能未啟用。",
         "toast": {
             "successSaveNetworkLink": "已成功儲存網頁連結。",
-            "errorSavedNetworkLink": "儲存網頁連結時發生錯誤。"
+            "errorSavedNetworkLink": "儲存網頁連結時發生錯誤。",
+            "errorSavedNcsiEnabledNetworkLink": "在 NCSI 啟用時無法保存網路連結配置。"
         }
     },
     "pagePamOrder": {

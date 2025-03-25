@@ -1201,6 +1201,8 @@
         "sectionTitleUpdateFirmware": "Update firmware",
         "cardTitleClearConfig": "Clear Configuration",
         "clearConfigDescription": "Enabling BIOS Clear Configuration",
+        "runningImageBootedFromBackup": "Running image is booted from Backup Image",
+        "runningImageBootedFromActive": "Running image is booted from Active Image",
         "alert": {
             "operationInProgress": "Server power operation in progress.",
             "serverMustBePoweredOffTo": "Server must be powered off to:",
@@ -2139,7 +2141,9 @@
         "redfishMaxSession": "Redfish",
         "sshMaxSession": "SSH",
         "vmMaxSession": "Virtual Media",
-        "webMaxSession": "Web"
+        "webMaxSession": "Web",
+        "solSshPortValueLimits": "Kindly enter the Values between %{min} and %{max}",
+        "webPortValueLimits": "Kindly enter the Values between %{min} and %{max}"
 
     },
     "pagePower": {
@@ -2835,7 +2839,8 @@
         "networkLinkFeatureNotAvailable": "The Network Link feature is not enabled.",
         "toast": {
             "successSaveNetworkLink": "Successfully saved Network Link.",
-            "errorSavedNetworkLink": "Error saved Network Link."
+            "errorSavedNetworkLink": "Error saved Network Link.",
+            "errorSavedNcsiEnabledNetworkLink": "Network Link Configuration cannot be saved when NCSI is active."
         }
     },
     "pagePamOrder": {

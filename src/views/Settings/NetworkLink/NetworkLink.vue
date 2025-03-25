@@ -230,12 +230,6 @@ export default {
         .then(() => {
           this.networkLinkData =
             this.$store.getters['networkLink/getNetworkLinkData'];
-          if (
-            this.networkLinkData.Oem?.Ami?.NCSIConfiguration?.IsNCSI ==
-            undefined
-          ) {
-            this.networkLinkFeatureStatus = false;
-          }
           this.form = {
             AutoNeg: this.networkLinkData.AutoNeg,
             lanInterface: selectedVal,
