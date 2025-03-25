@@ -51,6 +51,7 @@ const FirmwareStore = {
     getApplyTimeSetValue: (state) => state.applyTimeSetValue,
     getActiveFeatureEnabledStatus: (state) => state.bmcActiveFeatureEnabled,
     getImageName: (state) => state.imageName,
+    getBmcActiveFirmwareId: (state) => state.bmcActiveFirmwareId,
   },
   mutations: {
     setActiveBmcFirmwareId: (state, id) => (state.bmcActiveFirmwareId = id),

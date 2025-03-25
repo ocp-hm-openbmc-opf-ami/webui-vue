@@ -1201,6 +1201,8 @@
         "sectionTitleUpdateFirmware": "Update firmware",
         "cardTitleClearConfig": "Clear Configuration",
         "clearConfigDescription": "Enabling BIOS Clear Configuration",
+        "runningImageBootedFromBackup": "Running image is booted from Backup Image",
+        "runningImageBootedFromActive": "Running image is booted from Active Image",
         "alert": {
             "operationInProgress": "Server power operation in progress.",
             "serverMustBePoweredOffTo": "Server must be powered off to:",

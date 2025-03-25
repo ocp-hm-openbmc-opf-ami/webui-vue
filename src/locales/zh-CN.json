@@ -1193,6 +1193,8 @@
         "sectionTitleUpdateFirmware": "更新韧体",
         "cardTitleClearConfig": "清除配置",
         "clearConfigDescription": "启用 BIOS 清除配置",
+        "runningImageBootedFromBackup": "运行的映像从备份映像启动",
+        "runningImageBootedFromActive": "运行的映像从活动映像启动",
         "alert": {
             "operationInProgress": "正在执行伺服器电源运作",
             "serverMustBePoweredOffTo": "伺服器必须关闭电源至:",

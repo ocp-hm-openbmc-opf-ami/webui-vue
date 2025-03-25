@@ -1194,7 +1194,9 @@
         "sectionTitleHostCards": "Gastgeber",
         "sectionTitleUpdateFirmware": "Firmware aktualisieren",
         "cardTitleClearConfig": "Konfiguration löschen",
-        "clearConfigDescription": "Aktivieren der BIOS-Clear-Konfiguration",
+        "clearConfigDescription": "Aktivieren der BIOS-Clear-Konfiguration",        
+        "runningImageBootedFromBackup": "Das laufende Image wird vom Backup-Image gebootet",
+        "runningImageBootedFromActive": "Das laufende Image wird vom aktiven Image gebootet",
         "alert": {
             "operationInProgress": "Serverstrombetrieb läuft.",
             "serverMustBePoweredOffTo": "Der Server muss ausgeschaltet sein:",

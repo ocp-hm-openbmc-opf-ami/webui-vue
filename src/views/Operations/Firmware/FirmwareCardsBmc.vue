@@ -11,7 +11,12 @@
           </template>
           <dl class="mb-0">
             <dt>{{ $t('pageFirmware.cardBodyVersion') }}</dt>
-            <dd class="mb-0">{{ runningVersion }}</dd>
+            <dd class="mb-0">
+              {{ runningVersion }}
+            </dd>
+            <dd v-if="runningVersion != '--'" class="mb-0">
+              ({{ bmcActiveFirmwareId }})
+            </dd>
           </dl>
         </b-card>
 
@@ -104,6 +109,13 @@ export default {
     showBackupImageStatus() {
       return (
         this.backupStatus === 'Critical' || this.backupStatus === 'Warning'
+      );
+    },
+    bmcActiveFirmwareId() {
+      return this.$t(
+        this.$store.getters['firmware/getBmcActiveFirmwareId'] === 'bmc_bkup'
+          ? 'pageFirmware.runningImageBootedFromBackup'
+          : 'pageFirmware.runningImageBootedFromActive',
       );
     },
   },

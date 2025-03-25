@@ -1196,6 +1196,8 @@
         "sectionTitleUpdateFirmware": "更新韌體",
         "cardTitleClearConfig": "清除配置",
         "clearConfigDescription": "啟用 BIOS 清除配置",
+        "runningImageBootedFromBackup": "運行的映像從備份映像啟動",
+        "runningImageBootedFromActive": "運行的映像從活動映像啟動",
         "alert": {
             "operationInProgress": "正在執行伺服器電源運作",
             "serverMustBePoweredOffTo": "伺服器必須關閉電源至:",
