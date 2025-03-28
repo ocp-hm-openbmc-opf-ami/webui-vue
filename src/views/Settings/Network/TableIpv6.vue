@@ -299,22 +299,45 @@ export default {
     },
     changeDhcpIpv6State(dhcpEnable) {
       if (dhcpEnable) {
-        this.startLoader();
-        this.$emit('addIpv6');
-        const data = { dhcpEnable: dhcpEnable, index: this.tabIndex };
-        this.$store.commit('network/setIpv6Dhcp', data);
-        this.$store
-          .dispatch('network/saveIpv6Dhcp', 'Enabled')
-          .then((message) => {
-            setTimeout(() => {
-              this.$store.dispatch('network/getEthernetData');
-              this.endLoader();
-              this.successToast(message);
-            }, 5000);
+        this.$bvModal
+          .msgBoxConfirm(this.$tc('pageNetwork.modal.confirmMessage'), {
+            title: this.$tc('pageNetwork.modal.confirmTitle'),
+            okTitle: this.$t('global.action.ok'),
+            cancelTitle: this.$t('global.action.cancel'),
+            autoFocusButton: 'ok',
           })
-          .catch(({ message }) => {
-            this.endLoader();
-            this.errorToast(message);
+          .then((addConfirmed) => {
+            if (addConfirmed) {
+              const data = { dhcpEnable: dhcpEnable, index: this.tabIndex };
+              this.$store.commit('network/setIpv6Dhcp', data);
+              this.$store
+                .dispatch('network/saveIpv6Dhcp', 'Enabled')
+                .then((message) => {
+                  this.successToast(message);
+                  this.$bvModal
+                    .msgBoxOk(
+                      this.$tc('pageNetwork.modal.informationMessage'),
+                      {
+                        title: this.$tc('pageNetwork.modal.informatiomTitle'),
+                      },
+                    )
+                    .then((addConfirmed) => {
+                      if (addConfirmed) {
+                        this.$emit('networkOverlay', true);
+                        setTimeout(() => {
+                          this.$store.dispatch(
+                            'authentication/customizedResetLogout',
+                          );
+                          window.location.reload();
+                        }, 2000); // wait to load the session
+                      }
+                    });
+                })
+                .catch(({ message }) => this.errorToast(message));
+            } else {
+              const data = { dhcpEnable: !dhcpEnable, index: this.tabIndex };
+              this.$store.commit('network/setIpv6Dhcp', data);
+            }
           });
       } else {
         const data = { dhcpEnable: !dhcpEnable, index: this.tabIndex };
