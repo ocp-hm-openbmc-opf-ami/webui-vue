@@ -1126,13 +1126,13 @@ export default {
       kvmSessionTimeOutValue: {
         required,
         pattern: function (pw) {
-          return this.kvmSessionTimeoutValidation(pw);
+          return this.webKvmSessionTimeoutValidation(pw);
         },
       },
       webSessionTimeoutValue: {
         required,
         pattern: function (pw) {
-          return this.webSessionTimeoutValidation(pw);
+          return this.webKvmSessionTimeoutValidation(pw);
         },
       },
       kvmPort: {
@@ -1409,9 +1409,9 @@ export default {
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
-    kvmSessionTimeoutValidation(val) {
+    webKvmSessionTimeoutValidation(val) {
       if (
-        !/^(3[0-9]|[4-9][0-9]|[1-9][0-9]{2}|[1-8][0-9]{3}|[1-7][0-9]{4}|8[0-5][0-9]{3}|86[0-3][0-9]{2}|86400)$/.test(
+        !/^(3[0-9]|[4-9][0-9]|[1-9][0-9]{2}|[1-9][0-9]{3}|[1-7][0-9]{4}|8[0-5][0-9]{3}|86[0-3][0-9]{2}|86400)$/.test(
           val,
         )
       ) {
@@ -1422,16 +1422,6 @@ export default {
     kvmPortValueValidation(val) {
       if (
         !/^([1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/.test(
-          val,
-        )
-      ) {
-        return false;
-      }
-      return true;
-    },
-    webSessionTimeoutValidation(val) {
-      if (
-        !/^(3[0-9]|[4-9][0-9]|[1-9][0-9]{2}|[1-8][0-9]{3}|[1-7][0-9]{4}|8[0-5][0-9]{3}|86[0-3][0-9]{2}|86400)$/.test(
           val,
         )
       ) {

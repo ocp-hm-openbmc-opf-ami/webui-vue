@@ -42,6 +42,7 @@
                   @ipv6EditData="getIpv6EditData"
                   @ipv6TableData="getIpv6TableData"
                   @addIpv6="isAddIpv6"
+                  @networkOverlay="isNetworkOverlay"
                 />
                 <!-- Static DNS table -->
                 <table-dns :tab-index="tabIndex" />
@@ -247,19 +248,23 @@ export default {
           modalFormData,
         })
         .then((message) => {
-          setTimeout(() => {
-            this.$store.dispatch('network/getEthernetData');
-            this.endLoader();
-            this.successToast(message);
-          }, 5000);
+          this.successToast(message);
+          this.$bvModal
+            .msgBoxOk(this.$tc('pageNetwork.modal.informationMessage'), {
+              title: this.$tc('pageNetwork.modal.informatiomTitle'),
+            })
+            .then((addConfirmed) => {
+              if (addConfirmed) {
+                this.networkOverlay = true;
+                setTimeout(() => {
+                  this.$store.dispatch('authentication/customizedResetLogout');
+                  window.location.reload();
+                }, 2000); // wait to load the session
+              }
+            });
         })
-        .catch(({ message }) => {
-          this.$store.dispatch('network/getEthernetData');
-          setTimeout(() => {
-            this.endLoader();
-            this.errorToast(message);
-          }, 7000); // Giving a maximum delay time of 7000 ms due to a network service restart.
-        });
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => this.endLoader());
     },
     saveDnsAddress(modalFormData) {
       this.startLoader();

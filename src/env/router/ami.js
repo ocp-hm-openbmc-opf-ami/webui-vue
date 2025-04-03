@@ -265,10 +265,10 @@ const routes = [
       },
       {
         path: '/operations/preserve-configuration',
-        name: 'PreserveConfiguration',
+        name: 'preserve',
         component: PreserveConfiguration,
         meta: {
-          title: i18n.t('appPageTitle.PreserveConfiguration'),
+          title: i18n.t('appPageTitle.preserve'),
         },
       },
       {
