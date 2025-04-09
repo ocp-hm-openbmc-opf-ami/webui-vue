@@ -1108,6 +1108,7 @@
         "accelerator": "Ускоритель",
         "spanDepth": "Глубина охвата",
         "numberOfDrives": "Количество дисков на охват",
+        "initState": "Состояние инициализации",
         "stripeSize": "Размер полосы",
         "readPolicy": "Политика чтения",
         "writePolicy": "Политика записи",

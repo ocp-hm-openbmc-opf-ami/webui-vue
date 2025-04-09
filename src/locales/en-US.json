@@ -2611,6 +2611,7 @@
         "accelerator": "Accelerator",
         "spanDepth": "Span Depth",
         "numberOfDrives": "Number of Drives per Span",
+        "initState": "Initialization State",
         "stripeSize": "Stripe Size",
         "readPolicy": "Read Policy",
         "writePolicy": "Write Policy",

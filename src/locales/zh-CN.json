@@ -2600,12 +2600,13 @@
         "accelerator": "加速器",
         "spanDepth": "跨度深度",
         "numberOfDrives": "每个跨度的驱动器数量",
-        "stripeSize": "条纹尺寸",
-        "readPolicy": "阅读政策",
-        "writePolicy": "写策略",
+        "initState": "初始化状态",
+        "stripeSize": "条带大小",
+        "readPolicy": "读取策略",
+        "writePolicy": "写入策略",
         "cachePolicy": "缓存策略",
-        "ioPolicy": "IO 政策",
-        "accessPolicy": "存取机制",
+        "ioPolicy": "IO 策略",
+        "accessPolicy": "存取策略",
         "diskCacheCapacity": "磁盘缓存容量",
         "unConfiguredPhysicalDrive": "未配置的物理驱动器",
         "noLogicalDevice": "此时不存在逻辑设备信息。",
@@ -2619,14 +2620,14 @@
             "off": "关闭",
             "adaptiveReadAhead": "调适预先读取",
             "noReadAhead": "不预读",
-            "alwaysReadAhead": "始终提前阅读"
+            "alwaysReadAhead": "始终预先读取"
         },
         "writePolicyOptions": {
             "off": "关闭",
             "protectedWriteBack": "保护回写",
             "unprotectedWriteBack": "不保护回写",
             "writeThrough": "直写",
-            "alwaysWriteBack": "总是回信",
+            "alwaysWriteBack": "总是回写",
             "writeBackWithBBU": "用 BBU 回写"
         },
         "ioPolicyOptions": {

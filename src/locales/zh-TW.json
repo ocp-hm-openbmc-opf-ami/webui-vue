@@ -2590,13 +2590,14 @@
         "accelerator": "加速器",
         "spanDepth": "跨度深度",
         "numberOfDrives": "每個跨度的驅動器數量",
-        "stripeSize": "條紋尺寸",
-        "readPolicy": "閱讀政策",
-        "writePolicy": "寫策略",
-        "cachePolicy": "快取策略",
+        "initState": "初始化狀態",
+        "stripeSize": "條帶大小",
+        "readPolicy": "讀取政策",
+        "writePolicy": "寫入政策",
+        "cachePolicy": "快取政策",
         "ioPolicy": "IO 政策",
         "accessPolicy": "存取政策",
-        "diskCacheCapacity": "磁碟緩存容量",
+        "diskCacheCapacity": "磁碟快取容量",
         "unConfiguredPhysicalDrive": "未配置的實體驅動器",
         "noLogicalDevice": "此時不存在邏輯設備信息。",
         "initStateOptions": {
@@ -2608,24 +2609,24 @@
             "readAhead": "預讀",
             "off": "關閉",
             "adaptiveReadAhead": "調適預先讀取",
-            "noReadAhead": "沒有預讀",
-            "alwaysReadAhead": "始終提前閱讀"
+            "noReadAhead": "不預讀",
+            "alwaysReadAhead": "始終預先讀取"
         },
         "writePolicyOptions": {
             "off":"關閉",
             "protectedWriteBack":"保護回寫",
             "unprotectedWriteBack": "不保護回寫",
             "writeThrough": "直寫",
-            "alwaysWriteBack": "總是回信",
+            "alwaysWriteBack": "總是回寫",
             "writeBackWithBBU": "用 BBU 回寫"
         },
         "ioPolicyOptions": {
             "directIO": "直接 IO",
-            "cachedIO": "緩存 IO"
+            "cachedIO": "快取 IO"
         },
         "accessPolicyOptions": {
             "readWrite": "讀寫",
-            "readOnly": "只讀",
+            "readOnly": "唯讀",
             "blocked": "被阻止"
         },
         "diskCacheCapacityOptions": {
@@ -2638,8 +2639,8 @@
             "name": "名稱",
             "raidType": "磁碟陣列類型",
             "stripSizeBytes": "條帶大小",
-            "readCachePolicyType": "讀取緩存策略類型",
-            "writeCachePolicyType": "寫入緩存策略類型",
+            "readCachePolicyType": "讀取快取政策類型",
+            "writeCachePolicyType": "寫入快取政策類型",
             "capacityBytes": "容量",
             "numberOfPhysicalDevices": "實體裝置數量",
             "health": "健康狀態",

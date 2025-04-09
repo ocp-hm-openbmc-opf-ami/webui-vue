@@ -2591,6 +2591,7 @@
         "accelerator": "Beschleuniger",
         "spanDepth": "Spannweite",
         "numberOfDrives": "Anzahl der Laufwerke pro Span",
+        "initState": "Initialisierungsstatus",
         "stripeSize": "Streifengröße",
         "readPolicy": "Lesen Sie die Richtlinie",
         "writePolicy": "Richtlinien schreiben",
