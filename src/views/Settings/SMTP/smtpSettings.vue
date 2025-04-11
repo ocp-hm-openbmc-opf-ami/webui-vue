@@ -791,7 +791,7 @@
               type="submit"
               data-test-id="smtp-button-saveSettings"
             >
-              {{ $t('global.action.saveSettings') }}
+              {{ $t('global.action.save') }}
             </b-button>
           </b-col>
           <b-col sm="3">

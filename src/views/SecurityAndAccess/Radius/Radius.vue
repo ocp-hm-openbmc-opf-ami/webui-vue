@@ -232,7 +232,7 @@
           <b-row class="mt-4 mb-5">
             <b-col>
               <b-btn variant="primary" type="submit" @click="SaveConfig">
-                {{ $t('global.action.saveSettings') }}
+                {{ $t('global.action.save') }}
               </b-btn>
             </b-col>
           </b-row>

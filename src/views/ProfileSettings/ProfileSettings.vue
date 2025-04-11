@@ -135,7 +135,7 @@
         type="submit"
         data-test-id="profileSettings-button-saveSettings"
       >
-        {{ $t('global.action.saveSettings') }}
+        {{ $t('global.action.save') }}
       </b-button>
     </b-form>
   </b-container>

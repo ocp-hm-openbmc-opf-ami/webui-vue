@@ -189,7 +189,7 @@
                 data-test-id="cupsService-button-saveSettings"
                 @click="createCupsServices"
               >
-                {{ $t('global.action.saveSettings') }}
+                {{ $t('global.action.save') }}
               </b-btn>
             </b-col>
           </b-row>

@@ -60,7 +60,7 @@
             data-test-id="eventFilter-button-saveSettings"
             :disabled="loading"
           >
-            {{ $t('global.action.saveSettings') }}
+            {{ $t('global.action.save') }}
           </b-btn>
         </b-col>
       </b-row>
