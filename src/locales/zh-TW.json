@@ -1958,9 +1958,12 @@
         "inletTemperatureOverheatShutdown": "Inlet 溫度過熱關機",
         "powerUnitStatus": "電源單元狀態",
         "processorDimmThermTrip": "處理器 DIMM Therm Trip",
+        "destinationType":"目的地類型",
         "toast": {
             "successEventFilterMsg": "事件過濾器設定成功",
-            "errorEventFilterMsg": "事件過濾器設定發生錯誤"
+            "errorEventFilterMsg": "事件過濾器設定發生錯誤",
+            "successDestinationType": "目標類型配置已成功更新",
+            "errorDestinationType": "更新目標類型配置時發生錯誤"
         }
     },
     "pagePageNotFound": {

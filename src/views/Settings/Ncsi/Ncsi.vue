@@ -144,12 +144,7 @@ export default {
       packageIdOptions: [
         { value: 0, text: this.$t('pageNcsi.options.packageOption') },
       ],
-      channelNumberOptions: [
-        { value: 0, text: '0 (package)' },
-        { value: 1, text: '1 (package)' },
-        { value: 2, text: '2 (package)' },
-        { value: 3, text: '3 (package)' },
-      ],
+      channelNumberOptions: [],
       checkNcsi: true,
     };
   },
@@ -204,6 +199,12 @@ export default {
             this.selectedMode = val?.Oem?.Ami?.NCSIConfiguration?.Mode;
             const channelList =
               val?.Oem?.Ami?.NCSIConfiguration?.ChannelList[0];
+            channelList.SupportedChannelsId.forEach((channel) => {
+              this.channelNumberOptions.push({
+                value: channel,
+                text: `${channel} (package)`,
+              });
+            });
             this.ncsiPackageId = channelList.PackageId;
             this.ncsiChannelNumber =
               val?.Oem?.Ami?.NCSIConfiguration?.ChannelId === 31
