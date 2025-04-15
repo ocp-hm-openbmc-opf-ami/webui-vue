@@ -1945,9 +1945,12 @@
         "inletTemperatureOverheatShutdown": "Abschaltung wegen Überhitzung der Einlasstemperatur",
         "powerUnitStatus": "Status der Leistungseinheit",
         "processorDimmThermTrip": "Prozessor DIMM Thermo Störung",
+        "destinationType":"Zieltyp",
         "toast": {
             "successEventFilterMsg": "Die Konfiguration des Ereignis Filters wurde erfolgreich aktualisiert",
-            "errorEventFilterMsg": "Fehler beim Aktualisieren der Ereignisfilter Konfiguration"
+            "errorEventFilterMsg": "Fehler beim Aktualisieren der Ereignisfilter Konfiguration",
+            "successDestinationType": "Zieltypkonfiguration erfolgreich aktualisiert",
+            "errorDestinationType": "Fehler beim Aktualisieren der Zieltypkonfiguration"
         }
     },
     "pagePageNotFound": {

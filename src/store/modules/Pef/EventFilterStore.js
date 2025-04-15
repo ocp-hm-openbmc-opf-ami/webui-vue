@@ -115,10 +115,12 @@ const EventFilterStore = {
       },
     ],
     checkAll: null,
+    destinationType: '',
   },
   getters: {
     getAlertData: (state) => state.alertData,
     getCheckAll: (state) => state.checkAll,
+    getDestinationType: (state) => state.destinationType,
   },
   mutations: {
     setAlertData: (state, eventFilterData) => {
@@ -133,6 +135,10 @@ const EventFilterStore = {
         }
       }
     },
+
+    setDestinationType: (state, destinationType) =>
+      (state.destinationType = destinationType),
+
     setCheckAll: (state, newValue) => {
       state.checkAll = newValue;
     },
@@ -143,6 +149,7 @@ const EventFilterStore = {
         .get('/redfish/v1/PefService')
         .then((response) => {
           commit('setAlertData', response.data);
+          commit('setDestinationType', response.data.DestinationType);
         })
         .catch((error) => console.log(error));
     },
@@ -166,6 +173,27 @@ const EventFilterStore = {
         .then(() => i18n.t('pageEventFilter.toast.successEventFilterMsg'))
         .catch(() => {
           throw new Error(i18n.t('pageEventFilter.toast.errorEventFilterMsg'));
+        });
+    },
+    async saveDestinationType({ commit }, DestinationTypeValue) {
+      commit('setDestinationType', DestinationTypeValue);
+      const destinationTypePayload = {
+        DestinationType: DestinationTypeValue,
+      };
+      return await api
+        .patch('/redfish/v1/PefService', destinationTypePayload)
+        .then(() => {
+          if (DestinationTypeValue) {
+            return i18n.t('pageEventFilter.toast.successDestinationType');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          if (DestinationTypeValue) {
+            throw new Error(
+              i18n.t('pageEventFilter.toast.errorDestinationType'),
+            );
+          }
         });
     },
   },

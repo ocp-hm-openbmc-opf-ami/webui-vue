@@ -51,19 +51,35 @@
             </b-col>
           </b-row>
         </b-form-group>
+        <b-row class="mb-3">
+          <b-col>
+            <b-btn
+              variant="primary"
+              type="submit"
+              data-test-id="eventFilter-button-saveSettings"
+              :disabled="loading"
+            >
+              {{ $t('global.action.saveSettings') }}
+            </b-btn>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col xl="3">
+            <b-form-group
+              :label="$t('pageEventFilter.destinationType')"
+              label-for="destinationType"
+            >
+              <b-form-select
+                id="destination-type"
+                v-model="destinationTypes"
+                :options="destinationTypeOptions"
+                @change="changeDestinationType($event)"
+              >
+              </b-form-select>
+            </b-form-group>
+          </b-col>
+        </b-row>
       </div>
-      <b-row class="mt-4 mb-5">
-        <b-col>
-          <b-btn
-            variant="primary"
-            type="submit"
-            data-test-id="eventFilter-button-saveSettings"
-            :disabled="loading"
-          >
-            {{ $t('global.action.saveSettings') }}
-          </b-btn>
-        </b-col>
-      </b-row>
     </b-form>
   </b-container>
 </template>
@@ -84,6 +100,11 @@ export default {
       alertData: this.$store.getters['eventFilter/getAlertData'],
       loading,
       localCheckAll: this.$store.getters['eventFilter/getCheckAll'],
+      destinationTypes: '',
+      destinationTypeOptions: [
+        { value: 'SMTP', text: 'SMTP' },
+        { value: 'SnmpTrap', text: 'SNMP Trap' },
+      ],
     };
   },
   computed: {
@@ -106,6 +127,8 @@ export default {
     this.startLoader();
     this.$store.dispatch('eventFilter/getEventFilterData').finally(() => {
       this.endLoader();
+      this.destinationTypes =
+        this.$store.getters['eventFilter/getDestinationType'];
     });
   },
   methods: {
@@ -123,6 +146,14 @@ export default {
         .finally(() => {
           this.endLoader();
         });
+    },
+    changeDestinationType() {
+      this.$store
+        .dispatch('eventFilter/saveDestinationType', this.destinationTypes)
+        .then((message) => {
+          this.successToast(message);
+        })
+        .catch(({ message }) => this.errorToast(message));
     },
     enableAllTheEvents(checkAll) {
       this.alertData.forEach((each) => {

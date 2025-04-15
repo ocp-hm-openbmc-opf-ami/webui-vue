@@ -1964,9 +1964,12 @@
         "inletTemperatureOverheatShutdown": "Inlet Temperature Overheat Shutdown",
         "powerUnitStatus": "Power Unit Status",
         "processorDimmThermTrip": "Processor DIMM Therm Trip",
+        "destinationType":"Destination Type",
         "toast": {
             "successEventFilterMsg": "Event Filter configuration updated successfully",
-            "errorEventFilterMsg": "Error in Updating event filter configuration"
+            "errorEventFilterMsg": "Error in Updating event filter configuration",
+            "successDestinationType": "Destination Type configuration updated successfully",
+            "errorDestinationType": "Error in Updating Destination Type configuration"
         }
     },
     "pagePageNotFound": {
