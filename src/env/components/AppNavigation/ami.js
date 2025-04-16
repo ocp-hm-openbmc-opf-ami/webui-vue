@@ -123,11 +123,6 @@ const AppNavigationMixin = {
               route: '/operations/reboot-bmc',
             },
             {
-              id: 'backup-and-restore',
-              label: this.$t('appNavigation.backupAndRestore'),
-              route: '/operations/backup-and-restore',
-            },
-            {
               id: 'serial-over-lan',
               label: this.$t('appNavigation.serialOverLan'),
               route: '/operations/serial-over-lan',
@@ -182,21 +177,6 @@ const AppNavigationMixin = {
               route: '/settings/network-ddns',
             },
             {
-              id: 'network_bond',
-              label: this.$t('appNavigation.bond'),
-              route: '/settings/bond',
-            },
-            {
-              id: 'network-link',
-              label: this.$t('appNavigation.networkLink'),
-              route: '/settings/network-link',
-            },
-            {
-              id: 'ncsi',
-              label: this.$t('appNavigation.ncsi'),
-              route: '/settings/ncsi',
-            },
-            {
               id: 'vlan',
               label: this.$t('appNavigation.vlan'),
               route: '/settings/vlan',
@@ -210,21 +190,6 @@ const AppNavigationMixin = {
               id: 'snmp',
               label: this.$t('appNavigation.snmpSettings'),
               route: '/settings/snmp',
-            },
-            {
-              id: 'system_firewall',
-              label: this.$t('appNavigation.fireWall'),
-              route: '/settings/firewall',
-            },
-            {
-              id: 'cups',
-              label: this.$t('appNavigation.cups'),
-              route: '/settings/cups',
-            },
-            {
-              id: 'node_manager',
-              label: this.$t('appNavigation.nodeManager'),
-              route: '/settings/node-manager',
             },
             {
               id: 'license',
@@ -288,39 +253,63 @@ const AppNavigationMixin = {
           ],
         },
         {
-          id: 'host-system-diagnostics',
-          label: this.$t('appNavigation.hostSystemDiagnostics'),
-          icon: 'iconLogs',
-          children: [
-            {
-              id: 'addc',
-              label: this.$t('appNavigation.addc'),
-              route: '/host-system-diagnostics/addc',
-            },
-            {
-              id: 'acd',
-              label: this.$t('appNavigation.autonomousCrashDump'),
-              route: '/host-system-diagnostics/acd',
-            },
-            {
-              id: 'asd',
-              label: this.$t('appNavigation.asd'),
-              route: '/host-system-diagnostics/asd',
-            },
-            {
-              id: 'amd-remote-debug',
-              label: this.$t('appNavigation.amdRemoteDebug'),
-              route: '/host-system-diagnostics/amd-remote-debug',
-            },
-          ],
-        },
-        {
           id: 'system-inventory',
           label: this.$t('appNavigation.systemInventory'),
           route: '/system-inventory',
           icon: 'iconLogs',
         },
-        {
+      ];
+      if (process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true') {
+        navigationItemsList.navigationItems[4].children.push({
+          id: 'ncsi',
+          label: this.$t('appNavigation.ncsi'),
+          route: '/settings/ncsi',
+        });
+      }
+      if (process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true') {
+        navigationItemsList.navigationItems[4].children.push({
+          id: 'system_firewall',
+          label: this.$t('appNavigation.fireWall'),
+          route: '/settings/firewall',
+        });
+      }
+      if (process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true') {
+        navigationItemsList.navigationItems[4].children.push({
+          id: 'network-link',
+          label: this.$t('appNavigation.networkLink'),
+          route: '/settings/network-link',
+        });
+      }
+      if (process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true') {
+        navigationItemsList.navigationItems[4].children.push({
+          id: 'network_bond',
+          label: this.$t('appNavigation.bond'),
+          route: '/settings/bond',
+        });
+      }
+      if (process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true') {
+        navigationItemsList.navigationItems[3].children.push({
+          id: 'backup-and-restore',
+          label: this.$t('appNavigation.backupAndRestore'),
+          route: '/operations/backup-and-restore',
+        });
+      }
+      if (process.env.VUE_APP_ONETREE_INTELSIPACK_ENABLED === 'true') {
+        navigationItemsList.navigationItems[4].children.push({
+          id: 'cups',
+          label: this.$t('appNavigation.cups'),
+          route: '/settings/cups',
+        });
+      }
+      if (process.env.VUE_APP_ONETREE_INTELSIPACK_ENABLED === 'true') {
+        navigationItemsList.navigationItems[4].children.push({
+          id: 'node_manager',
+          label: this.$t('appNavigation.nodeManager'),
+          route: '/settings/node-manager',
+        });
+      }
+      if (process.env.VUE_APP_ONETREE_AMD_POWERCAP_ENABLED === 'true') {
+        navigationItemsList.navigationItems.push({
           id: 'resource-management',
           label: this.$t('appNavigation.resourceManagement'),
           icon: 'iconResourceManagement',
@@ -331,9 +320,12 @@ const AppNavigationMixin = {
               route: '/resource-management/power',
             },
           ],
-        },
-      ];
-      if (process.env.VUE_APP_RAID_ENABLED === 'true') {
+        });
+      }
+      if (
+        process.env.VUE_APP_ONETREE_MSCCRAID_ENABLED === 'true' ||
+        process.env.VUE_APP_ONETREE_BRCMRAID_ENABLED === 'true'
+      ) {
         navigationItemsList.navigationItems.push({
           id: 'raid',
           label: this.$t('appNavigation.raidManagement'),
@@ -362,7 +354,10 @@ const AppNavigationMixin = {
           ],
         });
       }
-      if (process.env.VUE_APP_NVME_ENABLED === 'true') {
+      if (
+        process.env.VUE_APP_ONETREE_NVME_ENABLED === 'true' ||
+        process.env.VUE_APP_ONETREE_NVMEBASIC_ENABLED === 'true'
+      ) {
         navigationItemsList.navigationItems.push({
           id: 'nvmeInformation',
           label: this.$t('appNavigation.nvmeInformation'),
@@ -370,7 +365,7 @@ const AppNavigationMixin = {
           icon: 'iconObjectStorage',
         });
       }
-      if (process.env.VUE_APP_NIC_ENABLED === 'true') {
+      if (process.env.VUE_APP_ONETREE_NIC_ENABLED === 'true') {
         navigationItemsList.navigationItems.push({
           id: 'nic',
           label: this.$t('appNavigation.nicInformation'),
@@ -383,6 +378,53 @@ const AppNavigationMixin = {
           id: 'radius',
           label: this.$t('appNavigation.radius'),
           route: '/security-and-access/radius',
+        });
+      }
+      if (
+        process.env.VUE_APP_ONETREE_ACD_ENABLED === 'true' ||
+        process.env.VUE_APP_ONETREE_ASD_ENABLED === 'true' ||
+        process.env.VUE_APP_ONETREE_AMDREMOTEDBG_ENABLED === 'true' ||
+        process.env.VUE_APP_ONETREE_AMD_ADDC_ENABLED === 'true'
+      ) {
+        let hostSystemDiagnosticsChildren = [];
+
+        if (process.env.VUE_APP_ONETREE_AMD_ADDC_ENABLED === 'true') {
+          hostSystemDiagnosticsChildren.push({
+            id: 'addc',
+            label: this.$t('appNavigation.addc'),
+            route: '/host-system-diagnostics/addc',
+          });
+        }
+
+        if (process.env.VUE_APP_ONETREE_ACD_ENABLED === 'true') {
+          hostSystemDiagnosticsChildren.push({
+            id: 'acd',
+            label: this.$t('appNavigation.autonomousCrashDump'),
+            route: '/host-system-diagnostics/acd',
+          });
+        }
+
+        if (process.env.VUE_APP_ONETREE_ASD_ENABLED === 'true') {
+          hostSystemDiagnosticsChildren.push({
+            id: 'asd',
+            label: this.$t('appNavigation.asd'),
+            route: '/host-system-diagnostics/asd',
+          });
+        }
+
+        if (process.env.VUE_APP_ONETREE_AMDREMOTEDBG_ENABLED === 'true') {
+          hostSystemDiagnosticsChildren.push({
+            id: 'amd-remote-debug',
+            label: this.$t('appNavigation.amdRemoteDebug'),
+            route: '/host-system-diagnostics/amd-remote-debug',
+          });
+        }
+
+        navigationItemsList.navigationItems.push({
+          id: 'host-system-diagnostics',
+          label: this.$t('appNavigation.hostSystemDiagnostics'),
+          icon: 'iconLogs',
+          children: hostSystemDiagnosticsChildren,
         });
       }
       return navigationItemsList;

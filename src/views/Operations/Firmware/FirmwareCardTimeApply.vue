@@ -235,7 +235,8 @@ export default {
         timeSlot: '',
       },
       applyTimeSetValueStatus: {},
-      isPFREnable: process.env.VUE_APP_PFR_SUPPORT === 'true' ? true : false,
+      isPFREnable:
+        process.env.VUE_APP_ONETREE_PFR_ENABLED === 'true' ? true : false,
     };
   },
   computed: {
