@@ -212,9 +212,9 @@ export default {
       QrCodeSize: 300,
       tfaUserEnabled: this.$store.getters['authentication/tfaEnabled'],
       tfaFeatureEnabled:
-        process.env.VUE_APP_TFA &&
+        process.env.VUE_APP_ONETREE_2FA_ENABLED &&
         this.$store.getters['authentication/tfaFeatureEnabled'],
-      biosFeatureEnabled: process.env.VUE_APP_BIOS_ENABLED,
+      biosFeatureEnabled: process.env.VUE_APP_ONETREE_RTP_ENABLED,
       qrCodeUrl: '',
       recoveryCode: [],
       isNavigationOpen: false,

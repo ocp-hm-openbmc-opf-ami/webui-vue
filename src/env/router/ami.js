@@ -32,28 +32,16 @@ import SerialOverLanConsole from '@/views/Operations/SerialOverLan/SerialOverLan
 import ServerPowerOperations from '@/views/Operations/ServerPowerOperations';
 import Certificates from '@/views/SecurityAndAccess/Certificates';
 import VirtualMedia from '@/views/Operations/VirtualMedia';
-import Power from '@/views/ResourceManagement/Power';
 import i18n from '@/i18n';
 import Dumps from '@/views/Logs/Dumps';
-import ADDC from '@/views/HostSystemDiagnostics/Addc';
-import ACD from '@/views/HostSystemDiagnostics/ACD';
-import Asd from '@/views/HostSystemDiagnostics/Asd';
-import BackupAndRestore from '@/views/Operations/BackupAndRestore';
 import SnmpSettings from '@/views/Settings/SNMP';
-import FireWall from '@/views/Settings/FireWall';
 import Tasks from '@/views/Operations/Task/Tasks.vue';
-import CupsConfiguration from '@/views/Settings/CUPS';
-import Bond from '@/views/Settings/Bond';
 import License from '@/views/Settings/License';
 import systemInventory from '@/views/SystemInventory/SystemInventory';
 import DDNS from '../../views/Settings/NetworkDDNS';
-import NetworkLink from '@/views/Settings/NetworkLink/NetworkLink';
-import Ncsi from '@/views/Settings/Ncsi';
 import PAM from '../../views/Settings/PamOrder/PamOrder';
-import NodeManager from '@/views/Settings/NodeManager';
 import AutoVideoSettings from '@/views/Settings/AutoVideoSettings';
 import VideoLogs from '@/views/Logs/VideoLogs';
-import AmdRemoteDebug from '../../views/HostSystemDiagnostics/AmdRemoteDebug/AmdRemoteDebug.vue';
 
 const roles = {
   administrator: 'Administrator',
@@ -312,59 +300,11 @@ const routes = [
         },
       },
       {
-        path: '/host-system-diagnostics/addc',
-        name: 'addc',
-        component: ADDC,
-        meta: {
-          title: i18n.t('appPageTitle.addc'),
-        },
-      },
-      {
-        path: '/host-system-diagnostics/acd',
-        name: 'autonomous-crash-dump',
-        component: ACD,
-        meta: {
-          title: i18n.t('appPageTitle.autonomousCrashDump'),
-        },
-      },
-      {
-        path: '/host-system-diagnostics/asd',
-        name: 'asd',
-        component: Asd,
-        meta: {
-          title: i18n.t('appPageTitle.asd'),
-        },
-      },
-      {
-        path: '/host-system-diagnostics/amd-remote-debug',
-        name: 'amd-remote-debug',
-        component: AmdRemoteDebug,
-        meta: {
-          title: i18n.t('appPageTitle.amdRemoteDebug'),
-        },
-      },
-      {
-        path: '/resource-management/power',
-        name: 'power',
-        component: Power,
-        meta: {
-          title: i18n.t('appPageTitle.power'),
-        },
-      },
-      {
         path: '/operations/reboot-bmc',
         name: 'reboot-bmc',
         component: RebootBmc,
         meta: {
           title: i18n.t('appPageTitle.rebootBmc'),
-        },
-      },
-      {
-        path: '/operations/backup-and-restore',
-        name: 'backup-and-restore',
-        component: BackupAndRestore,
-        meta: {
-          title: i18n.t('appPageTitle.backupAndRestore'),
         },
       },
       {
@@ -376,28 +316,12 @@ const routes = [
         },
       },
       {
-        path: '/settings/cups',
-        name: 'cups',
-        component: CupsConfiguration,
-        meta: {
-          title: i18n.t('appPageTitle.cups'),
-        },
-      },
-      {
         path: '/operations/serial-over-lan',
         name: 'serial-over-lan',
         component: SerialOverLan,
         meta: {
           title: i18n.t('appPageTitle.serialOverLan'),
           exclusiveToRoles: [roles.administrator],
-        },
-      },
-      {
-        path: '/settings/bond',
-        name: 'Bond',
-        component: Bond,
-        meta: {
-          title: i18n.t('appPageTitle.bond'),
         },
       },
       {
@@ -422,27 +346,11 @@ const routes = [
         },
       },
       {
-        path: '/settings/firewall',
-        name: 'FireWall',
-        component: FireWall,
-        meta: {
-          title: i18n.t('appPageTitle.systemFirewall'),
-        },
-      },
-      {
         path: '/operations/tasks',
         name: 'tasks',
         component: Tasks,
         meta: {
           title: i18n.t('appPageTitle.tasks'),
-        },
-      },
-      {
-        path: '/settings/ncsi',
-        name: 'ncsi',
-        component: Ncsi,
-        meta: {
-          title: i18n.t('appPageTitle.ncsi'),
         },
       },
       {
@@ -462,27 +370,11 @@ const routes = [
         },
       },
       {
-        path: '/settings/network-link',
-        name: 'networkLink',
-        component: NetworkLink,
-        meta: {
-          title: i18n.t('appPageTitle.networkLink'),
-        },
-      },
-      {
         path: '/settings/pam',
         name: 'pam',
         component: PAM,
         meta: {
           title: i18n.t('appPageTitle.pam'),
-        },
-      },
-      {
-        path: '/settings/node-manager',
-        name: 'nodeManager',
-        component: NodeManager,
-        meta: {
-          title: i18n.t('appPageTitle.nodeManager'),
         },
       },
       {
@@ -504,7 +396,58 @@ const routes = [
     ],
   },
 ];
-if (process.env.VUE_APP_RAID_ENABLED == 'true') {
+if (process.env.VUE_APP_ONETREE_AMD_ADDC_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/host-system-diagnostics/addc',
+    name: 'addc',
+    component: () =>
+      import(
+        /* webpackChunkName: "ACD" */ '@/views/HostSystemDiagnostics/Addc'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.addc'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_ACD_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/host-system-diagnostics/acd',
+    name: 'autonomous-crash-dump',
+    component: () =>
+      import(/* webpackChunkName: "ACD" */ '@/views/HostSystemDiagnostics/ACD'),
+    meta: {
+      title: i18n.t('appPageTitle.autonomousCrashDump'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_ASD_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/host-system-diagnostics/asd',
+    name: 'asd',
+    component: () =>
+      import(/* webpackChunkName: "ASD" */ '@/views/HostSystemDiagnostics/Asd'),
+    meta: {
+      title: i18n.t('appPageTitle.asd'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_AMDREMOTEDBG_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/host-system-diagnostics/amd-remote-debug',
+    name: 'amd-remote-debug',
+    component: () =>
+      import(
+        /* webpackChunkName: "RemoteDebug" */ '@/views/HostSystemDiagnostics/AmdRemoteDebug/AmdRemoteDebug.vue'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.amdRemoteDebug'),
+    },
+  });
+}
+if (
+  process.env.VUE_APP_ONETREE_MSCCRAID_ENABLED == 'true' ||
+  process.env.VUE_APP_ONETREE_BRCMRAID_ENABLED == 'true'
+) {
   routes[2].children.push(
     {
       path: '/raid/adapter',
@@ -572,7 +515,10 @@ if (process.env.VUE_APP_RAID_ENABLED == 'true') {
     },
   );
 }
-if (process.env.VUE_APP_NVME_ENABLED == 'true') {
+if (
+  process.env.VUE_APP_ONETREE_NVME_ENABLED == 'true' ||
+  process.env.VUE_APP_ONETREE_NVMEBASIC_ENABLED == 'true'
+) {
   routes[2].children.push({
     path: '/nvme-information',
     name: 'nvme-information',
@@ -586,7 +532,7 @@ if (process.env.VUE_APP_NVME_ENABLED == 'true') {
   });
 }
 
-if (process.env.VUE_APP_NIC_ENABLED == 'true') {
+if (process.env.VUE_APP_ONETREE_NIC_ENABLED == 'true') {
   routes[2].children.push({
     path: '/nic',
     name: 'nic-information',
@@ -610,6 +556,105 @@ if (process.env.VUE_APP_RADIUS_SUPPORT == 'true') {
     },
   });
 }
+if (process.env.VUE_APP_ONETREE_AMD_POWERCAP_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/resource-management/power',
+    name: 'power',
+    component: () =>
+      import(
+        /* webpackChunkName: "powerInformation" */ '@/views/ResourceManagement/Power'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.power'),
+    },
+  });
+}
+
+if (process.env.VUE_APP_ONETREE_INTELSIPACK_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/cups',
+    name: 'cups',
+    component: () =>
+      import(/* webpackChunkName: "CupsInformation" */ '@/views/Settings/CUPS'),
+    meta: {
+      title: i18n.t('appPageTitle.cups'),
+    },
+  });
+}
+
+if (process.env.VUE_APP_ONETREE_INTELSIPACK_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/node-manager',
+    name: 'nodeManager',
+    component: () =>
+      import(
+        /* webpackChunkName: "NodeManager" */ '@/views/Settings/NodeManager'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.nodeManager'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/operations/backup-and-restore',
+    name: 'backup-and-restore',
+    component: () =>
+      import(
+        /* webpackChunkName: "BackupAndRestore" */ '@/views/Operations/BackupAndRestore'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.backupAndRestore'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/ncsi',
+    name: 'ncsi',
+    component: () =>
+      import(/* webpackChunkName: "Ncsi" */ '@/views/Settings/Ncsi'),
+    meta: {
+      title: i18n.t('appPageTitle.ncsi'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/firewall',
+    name: 'FireWall',
+    component: () =>
+      import(/* webpackChunkName: "FireWall" */ '@/views/Settings/FireWall'),
+    meta: {
+      title: i18n.t('appPageTitle.systemFirewall'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/network-link',
+    name: 'networkLink',
+    component: () =>
+      import(
+        /* webpackChunkName: "NetworkLink" */ '@/views/Settings/NetworkLink/NetworkLink'
+      ),
+    meta: {
+      title: i18n.t('appPageTitle.networkLink'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/bond',
+    name: 'Bond',
+    component: () =>
+      import(/* webpackChunkName: "NetworkBond" */ '@/views/Settings/Bond'),
+    meta: {
+      title: i18n.t('appPageTitle.bond'),
+    },
+  });
+}
+
 routes[2].children.push({
   path: '*',
   name: 'page-not-found',
