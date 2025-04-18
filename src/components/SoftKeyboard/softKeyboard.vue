@@ -7,18 +7,22 @@
             <icon-keyboard
               v-if="selectKeyboardLanguage == 'Open Soft Keyboard'"
             />
-            {{ selectKeyboardLanguage }}</span
+            {{ softKeyBoardLabel }}</span
           >
         </template>
         <b-dropdown-item
-          v-for="(languageName, index) in softKeyBoardLanguages"
+          v-for="(item, index) in softKeyBoardLanguages"
           :key="index"
-          :value="languageName"
+          :value="item.languageName"
           @click="
-            changeKeyboardLanguage(languageName, 'displayObj' + languageName)
+            changeKeyboardLanguage(
+              item.languageName,
+              item.label,
+              'displayObj' + item.languageName,
+            )
           "
         >
-          {{ languageName }}
+          {{ item.label }}
         </b-dropdown-item>
       </b-dropdown>
     </div>
@@ -47,27 +51,51 @@ import IconKeyboard from '@carbon/icons-vue/es/keyboard/20';
 export default {
   name: 'KvmSoftKeyboard',
   components: { IconClose, IconKeyboard },
-  data: () => ({
-    ctlBtnStatus: false,
-    altBtnStatus: false,
-    cmdBtnStatus: false,
-    capsBtnStatus: false,
-    dropdownStatus: true,
-    keyboard: null,
-    keyboardControlPad: null,
-    keyboardArrows: null,
-    showSoftKeyboard: false,
-    selectKeyboardLanguage: 'Open Soft Keyboard',
-    softKeyBoardLanguages: [
-      'English',
-      'Italian',
-      'Dutch',
-      'French',
-      'German',
-      'Russian',
-      'Spanish',
-    ],
-  }),
+  data() {
+    return {
+      ctlBtnStatus: false,
+      altBtnStatus: false,
+      cmdBtnStatus: false,
+      capsBtnStatus: false,
+      dropdownStatus: true,
+      keyboard: null,
+      keyboardControlPad: null,
+      keyboardArrows: null,
+      showSoftKeyboard: false,
+      selectKeyboardLanguage: 'Open Soft Keyboard',
+      softKeyBoardLabel: this.$t('pageKvm.openSoftKeyboard'),
+      softKeyBoardLanguages: [
+        {
+          languageName: 'English',
+          label: this.$t('pageKvm.languages.english'),
+        },
+        {
+          languageName: 'Italian',
+          label: this.$t('pageKvm.languages.italian'),
+        },
+        {
+          languageName: 'Dutch',
+          label: this.$t('pageKvm.languages.dutch'),
+        },
+        {
+          languageName: 'French',
+          label: this.$t('pageKvm.languages.french'),
+        },
+        {
+          languageName: 'German',
+          label: this.$t('pageKvm.languages.german'),
+        },
+        {
+          languageName: 'Russian',
+          label: this.$t('pageKvm.languages.russian'),
+        },
+        {
+          languageName: 'Spanish',
+          label: this.$t('pageKvm.languages.spanish'),
+        },
+      ],
+    };
+  },
   mounted() {
     this.renderSoftkeyboard('displayObjEnglish');
     this.$root.$on('enable-softkeyboard-btn', () =>
@@ -88,6 +116,7 @@ export default {
       }
       this.showSoftKeyboard = false;
       this.selectKeyboardLanguage = 'Open Soft Keyboard';
+      this.softKeyBoardLabel = this.$t('pageKvm.openSoftKeyboard');
       this.$root.$emit('reset-keyboard-location');
     },
     resetSoftKeyboardCapsState() {
@@ -95,13 +124,15 @@ export default {
         this.releaseCaps();
       }
     },
-    changeKeyboardLanguage(name, val) {
+    changeKeyboardLanguage(name, label, val) {
       if (this.selectKeyboardLanguage == name) {
         this.selectKeyboardLanguage = 'Open Soft Keyboard';
+        this.softKeyBoardLabel = this.$t('pageKvm.openSoftKeyboard');
         this.showSoftKeyboard = false;
       } else {
         this.showSoftKeyboard = true;
         this.selectKeyboardLanguage = name;
+        this.softKeyBoardLabel = label;
         this.renderSoftkeyboard(val);
       }
     },

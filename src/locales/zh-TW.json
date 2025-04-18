@@ -40,7 +40,8 @@
             "scrollToTop": "移動到頂端",
             "showPassword": "將密碼以明碼顯示。注意：這會在屏幕上直接顯示您的密碼。",
             "tooltip": "提示",
-            "progressBar": "網頁讀取進度"
+            "progressBar": "網頁讀取進度",
+            "waitLoadingBar": "請稍候..."
         },
         "calendar": {
             "selectDate": "選擇日期",
@@ -1423,6 +1424,16 @@
         "gracefulRestartTooltip": "作業系統關閉，然後伺服器重新啟動",
         "forcedShutdownTooltip": "伺服器關閉，作業系統不關閉；可能會導致資料損壞",
         "forcedRestartTooltip": "伺服器重新啟動而不關閉作業系統；可能會導致資料損壞",
+        "openSoftKeyboard": "開啟虛擬鍵盤",
+        "languages": {
+            "english": "英文",
+            "italian": "義大利文",
+            "dutch": "荷蘭文",
+            "french": "法文",
+            "german": "德文",
+            "russian": "俄文",
+            "spanish": "西班牙文"
+        },
         "status": "狀態",
         "connected": "已結接",
         "connecting": "連結中",
@@ -1885,7 +1896,7 @@
         }
     },
     "pageSmtp": {
-        "pageDescription": "Configure BMC SMTP 設定",
+        "pageDescription": "配置 BMC SMTP 設定",
         "sectionTitle": "SMTP",
         "smtpLabel": "SMTP 設定",
         "labelServerAddress": "伺服器位址",
