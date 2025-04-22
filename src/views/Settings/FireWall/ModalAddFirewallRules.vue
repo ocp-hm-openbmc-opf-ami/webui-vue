@@ -623,36 +623,67 @@ export default {
       }
     },
     ipEndValidation(value) {
-      if (
-        ((!/((^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))$)|(^((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?$))/.test(
-          value,
-        ) ||
-          /^localhost$|^127(?:\.[0-9]+){0,2}\.[0-9]+$|^(?:0*\\:)*?:?0*1$/.test(
-            value,
-          ) ||
-          (value != undefined &&
-            value != null &&
-            (String(value).charAt(0) == '0' ||
-              '#255.255.255.0#0.24.56.4#255.255.255.255#'.indexOf(
-                '#' + value + '#',
-              ) > -1)) ||
-          value.trim() == '::') &&
-          !/^(?=.{1,254}$)((?=[a-z0-9-]{1 ,63}\.)(xn--+)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}$/i.test(
-            value,
-          ) &&
-          value.length != 0) ||
-        (value.length != 0 &&
-          this.ipToInt(value) < this.ipToInt(this.form.ipStart))
-      ) {
+      if (!value || !this.form.ipStart) {
         return false;
-      } else {
-        return true;
+      }
+      // Validate format using regex
+      const ipv4Regex =
+        /^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))$/;
+      const ipv6Regex =
+        /^(([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:)|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?$/;
+
+      const isIPv4 = ipv4Regex.test(value);
+      const isIPv6 = ipv6Regex.test(value);
+
+      if (!isIPv4 && !isIPv6) {
+        return false;
+      }
+
+      try {
+        const startIPNum = this.ipToNumber(this.form.ipStart);
+        const endIPNum = this.ipToNumber(value);
+
+        return this.compareIPArrays(startIPNum, endIPNum);
+      } catch (error) {
+        return false;
       }
     },
-    ipToInt(ip) {
-      return ip
-        .split('.')
-        .reduce((acc, octet) => (acc << 8) + parseInt(octet, 10), 0);
+
+    ipToNumber(ip) {
+      if (ip.includes('.')) {
+        return ip.split('.').map(Number);
+      } else {
+        let parts = ip.split(':');
+        let missingSections = 8 - parts.filter(Boolean).length;
+        let expanded = [];
+        for (let part of parts) {
+          if (part === '') {
+            for (let i = 0; i <= missingSections; i++) expanded.push('0000');
+          } else {
+            expanded.push(part.padStart(4, '0'));
+          }
+        }
+
+        let bytes = expanded
+          .map((hex) => parseInt(hex, 16))
+          .reduce(
+            (acc, part) => acc.concat([(part >> 8) & 0xff, part & 0xff]),
+            [],
+          );
+
+        return bytes;
+      }
+    },
+
+    compareIPArrays(ip1, ip2) {
+      for (let i = 0; i < Math.max(ip1.length, ip2.length); i++) {
+        const byte1 = ip1[i] || 0;
+        const byte2 = ip2[i] || 0;
+        if (byte1 !== byte2) {
+          return byte1 < byte2;
+        }
+      }
+      return true;
     },
     portStartValidation(value) {
       if (

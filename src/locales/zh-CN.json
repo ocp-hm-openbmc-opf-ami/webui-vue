@@ -40,7 +40,8 @@
             "scrollToTop": "移动到顶端",
             "showPassword": "将密码以明码显示。注意：这会在屏幕上直接显示您的密码。",
             "tooltip": "提示",
-            "progressBar": "网页读取进度"
+            "progressBar": "网页读取进度",
+            "waitLoadingBar": "请稍候..."
         },
         "calendar": {
             "selectDate": "选择日期",
@@ -1420,6 +1421,16 @@
         "gracefulRestartTooltip": "操作系统关闭，然后服务器重新启动",
         "forcedShutdownTooltip": "服务器关闭，操作系统不关闭；可能会导致数据损坏",
         "forcedRestartTooltip": "服务器重新启动而不关闭操作系统；可能会导致数据损坏",
+        "openSoftKeyboard": "打开虚拟键盘",
+        "languages": {
+            "english": "英语",
+            "italian": "意大利语",
+            "dutch": "荷兰语",
+            "french": "法语",
+            "german": "德语",
+            "russian": "俄语",
+            "spanish": "西班牙语"
+        },
         "status": "状态",
         "connected": "已结接",
         "connecting": "连结中",
@@ -1882,7 +1893,7 @@
         }
     },
     "pageSmtp": {
-        "pageDescription": "Configure BMC SMTP 设定",
+        "pageDescription": "配置 BMC SMTP 设定",
         "sectionTitle": "SMTP",
         "smtpLabel": "SMTP 设定",
         "sendTestAlert": "发送测试警报",

@@ -31,7 +31,8 @@
             "scrollToTop": "Прокрутить наверх",
             "showPassword": "Отобразить пароль. Примечание: это может раскрыть пароль третьим лицам",
             "tooltip": "Подсказка",
-            "progressBar": "Индикатор загрузки страницы"
+            "progressBar": "Индикатор загрузки страницы",
+            "waitLoadingBar": "Пожалуйста, подождите..."
         },
         "calendar": {
             "selectDate": "Выбрать дату",
@@ -491,6 +492,16 @@
     "pageKvm": {
         "openNewTab": "Открыть окно в новой вкладке",
         "buttonCtrlAltDelete": "Послать Ctrl+Alt+Delete",
+        "openSoftKeyboard": "Открыть виртуальную клавиатуру",
+        "languages": {
+            "english": "Английский",
+            "italian": "Итальянский",
+            "dutch": "Голландский",
+            "french": "Французский",
+            "german": "Немецкий",
+            "russian": "Русский",
+            "spanish": "Испанский"
+        },
         "status": "Статус",
         "connected": "Подключено",
         "connecting": "Подключение",

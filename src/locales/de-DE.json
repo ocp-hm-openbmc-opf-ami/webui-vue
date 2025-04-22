@@ -40,7 +40,8 @@
             "scrollToTop": "Nach oben scrollen",
             "showPassword": "Passwort als Klartext anzeigen. Hinweis: Dadurch wird Ihr Passwort visuell auf dem Bildschirm angezeigt.",
             "tooltip": "Tooltip",
-            "progressBar": "Fortschrittsbalken beim Laden der Seite"
+            "progressBar": "Fortschrittsbalken beim Laden der Seite",
+            "waitLoadingBar": "Bitte warten..."
         },
         "calendar": {
             "selectDate": "Datum auswählen",
@@ -1422,6 +1423,16 @@
         "gracefulRestartTooltip": "Das Betriebssystem wird heruntergefahren und der Server neu gestartet",
         "forcedShutdownTooltip": "Der Server wird heruntergefahren, ohne dass das Betriebssystem heruntergefahren wird. kann zu Datenbeschädigungen führen",
         "forcedRestartTooltip": "Der Server wird neu gestartet, ohne dass das Betriebssystem heruntergefahren wird. kann zu Datenbeschädigungen führen",
+        "openSoftKeyboard": "Virtuelle Tastatur öffnen",
+        "languages": {
+            "english": "Englisch",
+            "italian": "Italienisch",
+            "dutch": "Niederländisch",
+            "french": "Französisch",
+            "german": "Deutsch",
+            "russian": "Russisch",
+            "spanish": "Spanisch"
+        },
         "status": "Status",
         "connected": "In Verbindung gebracht",
         "connecting": "verbinden",

@@ -41,7 +41,8 @@
             "showPassword": "Show password as plain text. Note: this will visually expose your password on the screen.",
             "tooltip": "Tooltip",
             "progressBar": "Page loading progress bar",
-            "megaracOneTree": "MegaRAC OneTree - "
+            "megaracOneTree": "MegaRAC OneTree - ",
+            "waitLoadingBar": "Please wait..."
         },
         "calendar": {
             "selectDate": "Select date",
@@ -1428,6 +1429,16 @@
         "gracefulRestartTooltip": "Operating system shuts down, then server reboots",
         "forcedShutdownTooltip": "Server shuts down without operating system shutting down; may cause data corruption",
         "forcedRestartTooltip": "Server reboots without operating system shutting down; may cause data corruption",
+        "openSoftKeyboard": "Open Soft Keyboard",
+        "languages": {
+            "english": "English",
+            "italian": "Italian",
+            "dutch": "Dutch",
+            "french": "French",
+            "german": "German",
+            "russian": "Russian",
+            "spanish": "Spanish"
+        },
         "status": "Status",
         "connected": "Connected",
         "connecting": "Connecting",
