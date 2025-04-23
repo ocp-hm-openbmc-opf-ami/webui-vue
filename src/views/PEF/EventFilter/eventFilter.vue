@@ -99,7 +99,7 @@ export default {
     return {
       alertData: this.$store.getters['eventFilter/getAlertData'],
       loading,
-      localCheckAll: this.$store.getters['eventFilter/getCheckAll'],
+      localCheckAll: '',
       destinationTypes: '',
       destinationTypeOptions: [
         { value: 'SMTP', text: 'SMTP' },
@@ -129,6 +129,7 @@ export default {
       this.endLoader();
       this.destinationTypes =
         this.$store.getters['eventFilter/getDestinationType'];
+      this.localCheckAll = this.$store.getters['eventFilter/getCheckAll'];
     });
   },
   methods: {
