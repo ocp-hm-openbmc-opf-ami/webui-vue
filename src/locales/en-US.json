@@ -2653,14 +2653,14 @@
             "unprotectedWriteBack": "Unprotected Write Back",
             "writeThrough": "Write Through",
             "alwaysWriteBack": "Always Write Back",
-            "writeBackWithBBU": "Write back with BBU"
+            "writeBackWithBBU": "Write Back With BBU"
         },
         "ioPolicyOptions": {
             "directIO": "DirectIO",
             "cachedIO": "CachedIO"
         },
         "accessPolicyOptions": {
-            "readWrite": "Read-Write",
+            "readWrite": "Read Write",
             "readOnly": "Read Only",
             "blocked": "Blocked"
         },
@@ -2734,10 +2734,10 @@
             "errorSetProperties": "Error in setting Logical Drive Properties."
         },
         "actions": {
-            "startLocate":"start Locate",
-            "stopLocate":"stop Locate",
-            "delete":"delete",
-            "setProperties": "set Properties"
+            "startLocate":"Start Locate",
+            "stopLocate":"Stop Locate",
+            "delete":"Delete",
+            "setProperties": "Set Properties"
         }
     },
     "pageTopology": {
