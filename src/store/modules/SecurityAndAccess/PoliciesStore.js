@@ -520,13 +520,13 @@ const PoliciesStore = {
       return await api
         .patch('/redfish/v1/AccountService', Oem)
         .then(() => {
-          if (passwordHistoryValue) {
+          if (passwordHistoryValue >= 0 && passwordHistoryValue <= 5) {
             return i18n.t('pagePolicies.toast.successPasswordHistory');
           }
         })
         .catch((error) => {
           console.log(error);
-          if (passwordHistoryValue) {
+          if (passwordHistoryValue >= 0 && passwordHistoryValue <= 5) {
             throw new Error(i18n.t('pagePolicies.toast.errorPasswordHistory'));
           }
         });
