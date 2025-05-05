@@ -1555,12 +1555,27 @@
             "userUnlockMethod": "Methode zum Entsperren des Benutzers",
             "passwordChangeRequired": "Passwortänderung erforderlich",
             "vmediaAccess": "VMedia-Zugriff",
-            "changePassword": "Kennwort ändern"
+            "changePassword": "Kennwort ändern",
+            "snmpUserEnable": "SNMP Benutzer aktivieren",
+            "encryption": "Verschlüsselung",
+            "algorithm": "Algorithmus",
+            "readWritePermission": "Lese-/Schreibberechtigung",
+            "readOnly": "Nur Lesen",
+            "readWrite": "Lesen/Schreiben",
+            "authProtocolNone": "Keine",
+            "authProtocolsh224": "SHA-224",
+            "authProtocolsha256": "SHA-256",
+            "authProtocolsha384": "SHA-384",
+            "authProtocolsha512": "SHA-512"
         },
         "table": {
             "privilege": "Privileg",
             "status": "Status",
-            "username": "Nutzername"
+            "username": "Nutzername",
+            "snmpUserEnable": "SNMP Benutzer aktivieren",
+            "algorithm": "Algorithmus",
+            "readWritePermission": "Lese-/Schreibberechtigung",
+            "encryption": "Verschlüsselung"
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "Konfigurieren Sie die von diesem Dienst verwalteten Komponenten",
@@ -1855,6 +1870,12 @@
         "addSubscrition": "Abonnement hinzufügen",
         "editSubscrition": "Abonnement bearbeiten",
         "sendTestTrap": "Testfalle senden",
+        "addCommunityString": "Community String hinzufügen",
+        "editCommunityString": "Community String bearbeiten",
+        "snmpSubscription": "SNMP Abonnement",
+        "snmpCommunity": "SNMP Community",
+        "duplicateString": "Community String duplizieren",
+        "defaultCommunity": "public’ und ‘private’ sind gängige Standardzeichenfolgen. Bitte geben Sie einen anderen Wert ein.",
         "modal": {
             "destination": "Ziel",
             "subscriptionType": "Abonnementtyp",
@@ -1863,8 +1884,16 @@
             "addTrap": "Falle hinzufügen",
             "bmcUser": "BMC-Benutzer",
             "password": "Passwort",
-            "encryption": "Verschlüsselung",
-            "algorithm": "Algorithmus"
+            "portNumber": "Portnummer",
+            "all": "Alle",
+            "smtp": "SMTP",
+            "system": "System",
+            "readOnlyCommunity": "Nur-Lese-Community",
+            "readWriteCommunity": "Lesen-Schreiben-Community",
+            "communityProfile": "Community-Profil",
+            "communityString": "Community-String",
+            "readWritePermission": "Lese-Schreibberechtigung",
+            "addCommunity": "Community hinzufügen"
         },
         "table": {
             "destination": "Ziel",
@@ -1879,20 +1908,29 @@
             "authProtocolsha512": "SHA-512",
             "authProtocolsha": "SHA",
             "bmcUser": "BMC-Benutzer",
-            "encryption": "Verschlüsselung"
+            "encryption": "Verschlüsselung",
+            "communityProfile": "Community-Profil",
+            "communityString": "Community-String",
+            "readWritePermission": "Lese-Schreibberechtigung"
         },
         "toast": {
             "errorInAddSubscription": "Fehler beim Hinzufügen des Abonnements",
             "errorInDeleteSubscription": "Fehler beim Löschen des Abonnements",
             "errorInEditSubscription": "Fehler beim Bearbeiten des Abonnements",
             "errorUpdatingAuthenticationProtocal": "Fehler beim Aktualisieren des AuthenticationProtocol",
+            "errorMsgAlert": "Fehler beim Senden des Test-Traps",
+            "errorInUpdatingSubscription": "Fehler beim Aktualisieren des Abonnements",
+            "errorInAddCommunityString": "Fehler beim Hinzufügen des Community-Strings",
+            "errorInUpdateCommunityString": "Fehler beim Bearbeiten des Community-Strings",
+            "errorInDeleteCommunityString": "Fehler beim Löschen des Community-Strings",
             "successInAddSubscription": "SNMPTrap erfolgreich hinzugefügt",
             "successInDeleteSubscription": "SNMPTrap wurde erfolgreich gelöscht",
             "successUpdateAuthenticationProtocal": "AuthenticationProtocol erfolgreich aktualisiert",
             "successMsgTestTrap": "Test Trap Versand erfolgreich",
-            "errorMsgAlert": "Fehler beim Senden des Test-Traps",
-            "errorInUpdatingSubscription": "Fehler beim Aktualisieren des Abonnements",
-            "successInUpdatingSubscription": "Abonnement erfolgreich aktualisiert"
+            "successInUpdatingSubscription": "Abonnement erfolgreich aktualisiert",
+            "successInAddCommunityString": "Community-String erfolgreich hinzugefügt",
+            "successInUpdateCommunityString": "Community-String erfolgreich aktualisiert",
+            "successInDeleteCommunityString": "Community-String erfolgreich gelöscht"
         }
     },
     "pageSmtp": {

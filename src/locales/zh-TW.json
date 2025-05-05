@@ -1556,12 +1556,27 @@
             "userUnlockMethod": "使用者解鎖方法",
             "passwordChangeRequired": "要求變更密碼",
             "vmediaAccess": "虛擬媒體訪問",
-            "changePassword": "更改密碼"
+            "changePassword": "更改密碼",
+            "snmpUserEnable": "啟用 SNMP 用戶",
+            "encryption": "加密",
+            "algorithm": "演算法",
+            "readWritePermission": "讀寫權限",
+            "readOnly": "只讀",
+            "readWrite": "讀寫",
+            "authProtocolNone": "沒有任何",
+            "authProtocolsh224": "SHA-224",
+            "authProtocolsha256": "SHA-256",
+            "authProtocolsha384": "SHA-384",
+            "authProtocolsha512": "SHA-512"
         },
         "table": {
             "privilege": "特權",
             "status": "狀態",
-            "username": "使用者名稱"
+            "username": "使用者名稱",
+            "snmpUserEnable": "SNMP 使用者啟用",
+            "algorithm": "演算法",
+            "readWritePermission": "讀寫權限",
+            "encryption": "加密"
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "配置此服務所管理的元件",
@@ -1855,6 +1870,12 @@
         "addSubscrition": "新增訂閱",
         "editSubscrition": "編輯訂閱",
         "sendTestTrap": "發送測試陷阱",
+        "addCommunityString": "新增社區字串",
+        "editCommunityString": "編輯社區字串",
+        "snmpSubscription": "SNMP訂閱",
+        "snmpCommunity": "SNMP 社群",
+        "duplicateString": "重複的社區字串",
+        "defaultCommunity": "public' 和 'private' 是常見的預設字串。請輸入不同的值.",
         "modal": {
             "destination": "目的地",
             "subscriptionType": "訂閱類型",
@@ -1863,8 +1884,16 @@
             "addTrap": "添加陷阱",
             "bmcUser": "BMC用戶",
             "password": "密碼",
-            "encryption": "加密",
-            "algorithm": "演算法"
+            "portNumber": "連接埠號",
+            "all": "全部",
+            "smtp": "SMTP",
+            "system": "系統",
+            "readOnlyCommunity": "只讀社區",
+            "readWriteCommunity": "讀寫社區",
+            "communityProfile": "社區簡介",
+            "communityString": "社區字串",
+            "readWritePermission": "讀寫權限",
+            "addCommunity": "新增社區"
         },
         "table": {
             "destination": "目的地",
@@ -1879,20 +1908,29 @@
             "authProtocolsha512": "SHA-512",
             "authProtocolsha": "SHA",
             "bmcUser": "BMC用戶",
-            "encryption": "加密"
+            "encryption": "加密",
+            "communityProfile": "社區簡介",
+            "communityString": "社區字串",
+            "readWritePermission": "讀寫權限"
         },
         "toast": {
             "errorInAddSubscription": "新增訂閱時出錯",
             "errorInDeleteSubscription": "刪除訂閱時出錯",
             "errorInEditSubscription": "編輯訂閱時出錯",
             "errorUpdatingAuthenticationProtocal": "更新身分驗證協定時發生錯誤",
+            "errorMsgAlert": "發送測試陷阱時出錯",
+            "errorInUpdatingSubscription": "更新訂閱時出錯",
+            "errorInAddCommunityString": "新增社區字串時出錯",
+            "errorInUpdateCommunityString": "編輯社區字串時出錯",
+            "errorInDeleteCommunityString": "刪除社群字串時發生錯誤",
             "successInAddSubscription": "已成功新增 SNMPTrap",
             "successInDeleteSubscription": "成功刪除 SNMPTrap",
             "successUpdateAuthenticationProtocal": "成功更新身分驗證協議",
             "successMsgTestTrap": "測試陷阱發送成功",
-            "errorMsgAlert": "發送測試陷阱時出錯",
-            "errorInUpdatingSubscription": "更新訂閱時出錯",
-            "successInUpdatingSubscription": "已成功更新訂閱"
+            "successInUpdatingSubscription": "已成功更新訂閱",
+            "successInAddCommunityString": "已成功新增社群字串",
+            "successInUpdateCommunityString": "已成功更新社區字串",
+            "successInDeleteCommunityString": "已成功刪除社群字串"
         }
     },
     "pageSmtp": {

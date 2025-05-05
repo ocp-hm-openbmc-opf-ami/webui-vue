@@ -1553,12 +1553,27 @@
             "userUnlockMethod": "用户解锁方法",
             "passwordChangeRequired": "要求更改密码",
             "vmediaAccess": "虚拟媒体访问",
-            "changePassword": "更改密码"
+            "changePassword": "更改密码",
+            "snmpUserEnable": "启用 SNMP 用户",
+            "encryption": "加密",
+            "algorithm": "算法",
+            "readWritePermission": "读写权限",
+            "readOnly": "只读",
+            "readWrite": "读写",
+            "authProtocolNone": "无",
+            "authProtocolsh224": "SHA-224",
+            "authProtocolsha256": "SHA-256",
+            "authProtocolsha384": "SHA-384",
+            "authProtocolsha512": "SHA-512"
         },
         "table": {
             "privilege": "权限",
             "status": "状态",
-            "username": "用户名称"
+            "username": "用户名称",
+            "snmpUserEnable": "SNMP 用户启用",
+            "algorithm": "算法",
+            "readWritePermission": "读写权限",
+            "encryption": "加密"
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "配置此服务所管理的元件",
@@ -1852,6 +1867,12 @@
         "addSubscrition": "添加订阅",
         "editSubscrition": "编辑订阅",
         "sendTestTrap": "发送测试陷阱",
+        "addCommunityString": "添加社区字符串",
+        "editCommunityString": "编辑社区字符串",
+        "snmpSubscription": "SNMP 订阅",
+        "snmpCommunity": "SNMP 社区",
+        "duplicateString": "重复社区字符串",
+        "defaultCommunity": "public’ 和 ‘private’ 是常见的默认字符串。请输入其他值.",
         "modal": {
             "destination": "目的地",
             "subscriptionType": "订阅类型",
@@ -1860,8 +1881,16 @@
             "addTrap": "添加陷阱",
             "bmcUser": "BMC用户",
             "password": "密码",
-            "encryption": "加密",
-            "algorithm": "算法"
+            "portNumber": "端口号",
+            "all": "全部",
+            "smtp": "SMTP",
+            "system": "系统",
+            "readOnlyCommunity": "只读社区",
+            "readWriteCommunity": "读写社区",
+            "communityProfile": "社区配置文件",
+            "communityString": "社区字符串",
+            "readWritePermission": "读写权限",
+            "addCommunity": "添加社区"
         },
         "table": {
             "destination": "目的地",
@@ -1876,20 +1905,29 @@
             "authProtocolsha512": "SHA-512",
             "authProtocolsha": "SHA",
             "bmcUser": "BMC用户",
-            "encryption": "加密"
+            "encryption": "加密",
+            "communityProfile": "社区配置文件",
+            "communityString": "社区字符串",
+            "readWritePermission": "读写权限"
         },
         "toast": {
             "errorInAddSubscription": "添加订阅时出错",
             "errorInDeleteSubscription": "删除订阅时出错",
             "errorInEditSubscription": "编辑订阅时出错",
             "errorUpdatingAuthenticationProtocal": "更新身份验证协议时出错",
+            "errorMsgAlert": "发送测试陷阱时出错",
+            "errorInUpdatingSubscription": "更新订阅时出错",
+            "errorInAddCommunityString": "添加社区字符串时出错",
+            "errorInUpdateCommunityString": "编辑社区字符串时出错",
+            "errorInDeleteCommunityString": "删除社区字符串时出错",
             "successInAddSubscription": "已成功添加 SNMPTrap",
             "successInDeleteSubscription": "成功删除 SNMPTrap",
             "successUpdateAuthenticationProtocal": "成功更新身份验证协议",
             "successMsgTestTrap": "测试陷阱发送成功",
-            "errorMsgAlert": "发送测试陷阱时出错",
-            "errorInUpdatingSubscription": "更新订阅时出错",
-            "successInUpdatingSubscription": "已成功更新订阅"
+            "successInUpdatingSubscription": "已成功更新订阅",
+            "successInAddCommunityString": "成功添加社区字符串",
+            "successInUpdateCommunityString": "成功更新社区字符串",
+            "successInDeleteCommunityString": "成功删除社区字符串"
         }
     },
     "pageSmtp": {

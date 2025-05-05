@@ -12,6 +12,8 @@ const SnmpStore = {
     snmpv1Enabled: false,
     snmpv2cEnabled: false,
     snmpv3Enabled: false,
+    snmpCommunityString: [],
+    communityStrings: [],
   },
   getters: {
     allSubscriptions: (state) => state.allSubscriptions,
@@ -22,6 +24,8 @@ const SnmpStore = {
     snmpv1Enabled: (state) => state.snmpv1Enabled,
     snmpv2cEnabled: (state) => state.snmpv2cEnabled,
     snmpv3Enabled: (state) => state.snmpv3Enabled,
+    snmpCommunityString: (state) => state.snmpCommunityString,
+    communityStrings: (state) => state.communityStrings,
   },
   mutations: {
     setAllSubscriptions: (state, allSubscriptions) =>
@@ -40,6 +44,10 @@ const SnmpStore = {
       (state.snmpv2cEnabled = snmpv2cEnabled),
     setsnmpv3Enabled: (state, snmpv3Enabled) =>
       (state.snmpv3Enabled = snmpv3Enabled),
+    setSnmpCommunityString: (state, snmpCommunityString) =>
+      (state.snmpCommunityString = snmpCommunityString),
+    setCommunityStrings: (state, communityStrings) =>
+      (state.communityStrings = communityStrings),
   },
   actions: {
     async getSNMPProtocolStatus({ commit }) {
@@ -51,13 +59,39 @@ const SnmpStore = {
           const snmpv1 = response.data?.SNMP?.EnableSNMPv1;
           const snmpv2c = response.data?.SNMP?.EnableSNMPv2c;
           const snmpv3 = response.data?.SNMP?.EnableSNMPv3;
+          const communityString =
+            response.data?.Oem?.OpenBmc?.SNMP?.CommunityStrings || [];
+          const accessMode = (response.data?.SNMP?.CommunityStrings || []).map(
+            (item) => {
+              return {
+                AccessMode: item?.AccessMode,
+                CommunityString: item.CommunityString,
+              };
+            },
+          );
+          const data = communityString.map((item, index) => {
+            return {
+              communityProfile: item?.AllowedMiBs,
+              communityString: item?.CommunityString,
+              Sino: index + 1,
+              readWritePermission: accessMode[index]?.AccessMode,
+            };
+          });
+          const snmpCommunityStrings = communityString.map(
+            (item) => item?.CommunityString,
+          );
+          commit('setSnmpCommunityString', data);
           commit('setSnmpProtocolEnabled', snmpProtocol);
           commit('setSnmpPort', snmpPortValue);
           commit('setsnmpv1Enabled', snmpv1);
           commit('setsnmpv2cEnabled', snmpv2c);
           commit('setsnmpv3Enabled', snmpv3);
+          commit('setCommunityStrings', snmpCommunityStrings);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          commit('setSnmpCommunityString', []);
+          console.log(error);
+        });
     },
     async saveSnmpProtocolState({ commit, dispatch }, protocolEnabled) {
       commit('setSnmpProtocolEnabled', protocolEnabled);
@@ -188,6 +222,10 @@ const SnmpStore = {
                   ? 'NA'
                   : data?.SNMP?.EncryptionProtocol,
               bmcUser: userName,
+              communityString:
+                (data?.Oem?.OpenBmc?.CommunityString ?? '') === ''
+                  ? 'NA'
+                  : data?.Oem?.OpenBmc?.CommunityString,
             };
           });
           commit('setAllSubscriptions', data);
@@ -207,16 +245,17 @@ const SnmpStore = {
             SubscriptionType: snmpTrap.selectSubscriptionType,
             Protocol: snmpTrap.selectProtocol,
             Password: snmpTrap.password,
-            SNMP: {
-              AuthenticationProtocol: snmpTrap.algorithm,
-              EncryptionProtocol: snmpTrap.encryption,
-            },
           };
         } else {
           data = {
             Destination: `snmp://${snmpTrap.destination}`,
             SubscriptionType: snmpTrap.selectSubscriptionType,
             Protocol: snmpTrap.selectProtocol,
+            Oem: {
+              OpenBmc: {
+                CommunityString: snmpTrap.communityString,
+              },
+            },
           };
         }
       } else {
@@ -228,16 +267,17 @@ const SnmpStore = {
             SubscriptionType: snmpTrap.selectSubscriptionType,
             Protocol: snmpTrap.selectProtocol,
             Password: snmpTrap.password,
-            SNMP: {
-              AuthenticationProtocol: snmpTrap.algorithm,
-              EncryptionProtocol: snmpTrap.encryption,
-            },
           };
         } else {
           data = {
             Destination: `snmp://[${snmpTrap.destination}]`,
             SubscriptionType: snmpTrap.selectSubscriptionType,
             Protocol: snmpTrap.selectProtocol,
+            oem: {
+              openBmc: {
+                CommunityString: snmpTrap.communityString,
+              },
+            },
           };
         }
       }
@@ -314,6 +354,110 @@ const SnmpStore = {
           console.log(error);
           const message = i18n.t('pageUserManagement.toast.errorLoadUsers');
           throw new Error(message);
+        });
+    },
+    async createCommunityString({ dispatch, state }, communityData) {
+      let communityStrings = state.snmpCommunityString.map(() => ({}));
+      let communityMode = state.snmpCommunityString.map(() => ({}));
+
+      // Add the new object data
+      communityStrings.push({
+        AllowedMiBs: communityData.communityProfile,
+        CommunityString: communityData.communityString,
+      });
+      communityMode.push({
+        AccessMode: communityData.readWritePermission,
+        CommunityString: communityData.communityString,
+      });
+
+      const data = {
+        Oem: {
+          OpenBmc: {
+            SNMP: {
+              CommunityStrings: communityStrings,
+            },
+          },
+        },
+        SNMP: {
+          CommunityStrings: communityMode,
+        },
+      };
+      return await api
+        .patch('/redfish/v1/Managers/bmc/NetworkProtocol', data)
+        .then(() => dispatch('getSNMPProtocolStatus'))
+        .then(() => i18n.t('pageSnmp.toast.successInAddCommunityString'))
+        .catch(() => {
+          throw new Error(i18n.t('pageSnmp.toast.errorInAddCommunityString'));
+        });
+    },
+    async deleteCommunityString({ dispatch, state }, communityData) {
+      const data = {
+        Oem: {
+          OpenBmc: {
+            SNMP: {
+              CommunityStrings: state.snmpCommunityString.map((item) =>
+                item.Sino === communityData.Sino ? null : {},
+              ),
+            },
+          },
+        },
+        SNMP: {
+          CommunityStrings: state.snmpCommunityString.map((item) =>
+            item.Sino === communityData.Sino ? null : {},
+          ),
+        },
+      };
+      return await api
+        .patch('/redfish/v1/Managers/bmc/NetworkProtocol', data)
+        .then(() => dispatch('getSNMPProtocolStatus'))
+        .then(() => i18n.t('pageSnmp.toast.successInDeleteCommunityString'))
+        .catch(() => {
+          throw new Error(
+            i18n.t('pageSnmp.toast.errorInDeleteCommunityString'),
+          );
+        });
+    },
+    async updateCommunityString({ dispatch, state }, communityData) {
+      const data = {
+        Oem: {
+          OpenBmc: {
+            SNMP: {
+              CommunityStrings: state.snmpCommunityString.map((item) =>
+                item.Sino === communityData.sino &&
+                (item.communityString != communityData.communityString ||
+                  item.communityProfile != communityData.communityProfile ||
+                  item.readWritePermission != communityData.readWritePermission)
+                  ? {
+                      AllowedMiBs: communityData.communityProfile,
+                      CommunityString: communityData.communityString,
+                    }
+                  : {},
+              ),
+            },
+          },
+        },
+        SNMP: {
+          CommunityStrings: state.snmpCommunityString.map((item) =>
+            item.Sino === communityData.sino &&
+            (item.communityString != communityData.communityString ||
+              item.communityProfile != communityData.communityProfile ||
+              item.readWritePermission != communityData.readWritePermission)
+              ? {
+                  AccessMode: communityData.readWritePermission,
+                  CommunityString: communityData.communityString,
+                }
+              : {},
+          ),
+        },
+      };
+      return await api
+        .patch('/redfish/v1/Managers/bmc/NetworkProtocol', data)
+        .then(() => dispatch('getSNMPProtocolStatus'))
+        .then(() => i18n.t('pageSnmp.toast.successInUpdateCommunityString'))
+        .catch(() => {
+          throw new Error(
+            i18n.t('pageSnmp.toast.errorInUpdateCommunityString'),
+          );
         });
     },
   },

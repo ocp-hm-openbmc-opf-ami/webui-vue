@@ -201,6 +201,26 @@ export default {
           label: this.$t('pageUserManagement.table.status'),
         },
         {
+          key: 'snmpUserEnabled',
+          label: this.$t('pageUserManagement.table.snmpUserEnable'),
+          tdClass: 'text-nowrap',
+        },
+        {
+          key: 'algorithm',
+          label: this.$t('pageUserManagement.table.algorithm'),
+          tdClass: 'text-nowrap',
+        },
+        {
+          key: 'encryption',
+          label: this.$t('pageUserManagement.table.encryption'),
+          tdClass: 'text-nowrap',
+        },
+        {
+          key: 'readWritePermission',
+          label: this.$t('pageUserManagement.table.readWritePermission'),
+          tdClass: 'text-nowrap',
+        },
+        {
           key: 'actions',
           label: '',
           tdClass: 'text-right text-nowrap',
@@ -242,6 +262,18 @@ export default {
             : user.Enabled
               ? 'Enabled'
               : 'Disabled',
+          snmpUserEnabled: user?.Oem?.Ami?.SNMP?.SNMPAccessEnableStatus
+            ? 'Enabled'
+            : 'Disabled',
+          algorithm: user?.Oem?.Ami?.SNMP?.Algorithm
+            ? user?.Oem?.Ami?.SNMP?.Algorithm
+            : 'NA',
+          encryption: user?.Oem?.Ami?.SNMP?.Encryption
+            ? user?.Oem?.Ami?.SNMP?.Encryption
+            : 'NA',
+          readWritePermission: user?.Oem?.Ami?.SNMP?.Access
+            ? user?.Oem?.Ami?.SNMP?.Access
+            : 'NA',
           actions: [
             {
               value: 'edit',

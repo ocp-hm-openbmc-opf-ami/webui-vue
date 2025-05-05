@@ -1561,12 +1561,27 @@
             "userUnlockMethod": "User unlock method",
             "passwordChangeRequired": "Password Change Required",
             "vmediaAccess": "VMedia Access",
-            "changePassword": "Change Password"
+            "changePassword": "Change Password",
+            "snmpUserEnable": "Enable SNMP User",
+            "encryption": "Encryption",
+            "algorithm": "Algorithm",
+            "readWritePermission": "Read Write Permission",
+            "readOnly": "Read Only",
+            "readWrite": "Read Write",
+            "authProtocolNone": "None",
+            "authProtocolsh224": "SHA-224",
+            "authProtocolsha256": "SHA-256",
+            "authProtocolsha384": "SHA-384",
+            "authProtocolsha512": "SHA-512"
         },
         "table": {
             "privilege": "Privilege",
             "status": "Status",
-            "username": "Username"
+            "username": "Username",
+            "snmpUserEnable": "SNMP User Enable",
+            "algorithm": "Algorithm",
+            "readWritePermission": "Read Write Permission",
+            "encryption": "Encryption"
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "Configure components managed by this service",
@@ -1861,6 +1876,12 @@
         "addSubscrition": "Add Subscription",
         "editSubscrition": "Edit Subscription",
         "sendTestTrap": "Send Test Trap",
+        "addCommunityString": "Add Community String",
+        "editCommunityString": "Edit Community String",
+        "snmpSubscription": "SNMP Subscription",
+        "snmpCommunity": "SNMP Community",
+        "duplicateString": "Duplicate Community String",
+        "defaultCommunity": "public’ and ‘private’ are common default strings. Please enter a different value.",
         "modal": {
             "destination": "Destination",
             "subscriptionType": "Subscription Type",
@@ -1869,8 +1890,16 @@
             "addTrap": "Add Trap",
             "bmcUser": "BMC Users",
             "password": "Password",
-            "encryption": "Encryption",
-            "algorithm": "Algorithm"
+            "portNumber": "Port Number",
+            "all": "All",
+            "smtp": "SMTP",
+            "system": "System",
+            "readOnlyCommunity": "Read Only Community",
+            "readWriteCommunity": "Read Write Community",
+            "communityProfile": "Community Profile",
+            "communityString": "Community String",
+            "readWritePermission": "Read Write Permission",
+            "addCommunity": "Add Community"
         },
         "table": {
             "destination": "Destination",
@@ -1885,20 +1914,29 @@
             "authProtocolsha512": "SHA-512",
             "authProtocolsha": "SHA",
             "encryption": "Encryption",
-            "bmcUser": "BMC Users"
+            "bmcUser": "BMC Users",
+            "communityProfile": "Community Profile",
+            "communityString": "Community String",
+            "readWritePermission": "Read Write Permission"
         },
         "toast": {
             "errorInAddSubscription": "Error in Adding Subscription",
             "errorInDeleteSubscription": "Error in Deleting Subscription",
             "errorInEditSubscription": "Error in Editing Subscription",
             "errorUpdatingAuthenticationProtocal": "Error in Updating Authentication Protocol",
+            "errorMsgAlert": "Error in sending test Trap",
+            "errorInUpdatingSubscription": "Error in updating Subscription",
+            "errorInAddCommunityString": "Error in adding Community String",
+            "errorInUpdateCommunityString": "Error in Editing Community String",
+            "errorInDeleteCommunityString": "Error in Deleting Community String",
             "successInAddSubscription": "Successfully added SNMPTrap",
             "successInDeleteSubscription": "Successfully deleted SNMPTrap",
             "successUpdateAuthenticationProtocal": "Successfully Updated Authentication Protocol",
             "successMsgTestTrap": "Test Trap send successfully",
-            "errorMsgAlert": "Error in sending test Trap",
-            "errorInUpdatingSubscription": "Error in updating Subscription",
-            "successInUpdatingSubscription": "Successfully updated Subscription"
+            "successInUpdatingSubscription": "Successfully updated Subscription",
+            "successInAddCommunityString": "Successfully added Community String",
+            "successInUpdateCommunityString": "Successfully updated Community String",
+            "successInDeleteCommunityString": "Successfully deleted Community String"
         }
     },
     "pageSmtp": {

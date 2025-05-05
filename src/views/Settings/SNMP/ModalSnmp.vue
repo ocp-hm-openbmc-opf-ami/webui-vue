@@ -68,6 +68,34 @@
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-row>
+            <b-row v-if="form.selectProtocol != 'SNMPv3'">
+              <b-form-group
+                :label="$t('pageSnmp.modal.communityString')"
+                label-for="protocol"
+                class="field-width"
+              >
+                <b-form-select
+                  id="protocol"
+                  v-model="form.communityString"
+                  :options="communityStringType"
+                  data-test-id="snmp-select-communityString"
+                  :disabled="!snmpData"
+                  :state="getValidationState($v.form.communityString)"
+                  @input="$v.form.communityString.$touch()"
+                >
+                  <template #first>
+                    <b-form-select-option :value="null" disabled>
+                      {{ $t('global.form.selectAnOption') }}
+                    </b-form-select-option>
+                  </template>
+                </b-form-select>
+                <b-form-invalid-feedback role="alert">
+                  <template v-if="!$v.form.communityString.required">
+                    {{ $t('global.form.fieldRequired') }}
+                  </template>
+                </b-form-invalid-feedback>
+              </b-form-group>
+            </b-row>
             <b-row>
               <b-form-group
                 :label="$t('pageSnmp.modal.destination')"
@@ -98,6 +126,34 @@
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-row>
+            <b-row>
+              <b-form-group
+                :label="$t('pageSnmp.modal.portNumber')"
+                label-for="portNumber"
+                class="field-width"
+              >
+                <b-form-input
+                  id="portNumber"
+                  v-model="form.portNumber"
+                  type="text"
+                  data-test-id="snmp-input-portNumber"
+                  :state="getValidationState($v.form.portNumber)"
+                  @input="$v.form.portNumber.$touch()"
+                />
+                <b-form-invalid-feedback role="alert">
+                  <template v-if="!$v.form.portNumber.required">
+                    {{ $t('global.form.fieldRequired') }}
+                  </template>
+                  <template
+                    v-if="
+                      $v.form.portNumber.required && !$v.form.portNumber.pattern
+                    "
+                  >
+                    {{ $t('global.form.invalidFormat') }}
+                  </template>
+                </b-form-invalid-feedback>
+              </b-form-group>
+            </b-row>
             <b-row v-if="form.selectProtocol === 'SNMPv3'">
               <b-form-group
                 :label="$t('pageSnmp.modal.bmcUser')"
@@ -119,89 +175,6 @@
                     </b-form-select-option>
                   </template>
                 </b-form-select>
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.form.encryption.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-row>
-          </b-col>
-          <b-col v-if="form.selectProtocol === 'SNMPv3'" class="ml-4">
-            <b-row v-if="form.selectProtocol === 'SNMPv3'">
-              <b-form-group
-                :label="$t('pageSnmp.modal.password')"
-                label-for="password"
-                class="field-width"
-              >
-                <b-form-input
-                  id="password"
-                  v-model="form.password"
-                  type="password"
-                  :disabled="!snmpData"
-                  data-test-id="snmp-input-password"
-                  :state="getValidationState($v.form.password)"
-                  @input="$v.form.password.$touch()"
-                />
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.form.password.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-row>
-            <b-row v-if="form.selectProtocol === 'SNMPv3'">
-              <b-form-group
-                :label="$t('pageSnmp.modal.encryption')"
-                label-for="encryption"
-                class="field-width"
-              >
-                <b-form-select
-                  id="encryption"
-                  v-model="form.encryption"
-                  :options="encryptionType"
-                  data-test-id="snmp-input-encryption"
-                  :state="getValidationState($v.form.encryption)"
-                  @input="$v.form.encryption.$touch()"
-                >
-                  <template #first>
-                    <b-form-select-option :value="null" disabled>
-                      {{ $t('global.form.selectAnOption') }}
-                    </b-form-select-option>
-                  </template>
-                </b-form-select>
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.form.encryption.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-row>
-            <b-row v-if="form.selectProtocol === 'SNMPv3'">
-              <b-form-group
-                :label="$t('pageSnmp.modal.algorithm')"
-                label-for="algorithm"
-                class="field-width"
-              >
-                <b-form-select
-                  id="algorithm"
-                  v-model="form.algorithm"
-                  :options="algorithmType"
-                  data-test-id="snmp-input-algorithm"
-                  :state="getValidationState($v.form.algorithm)"
-                  @input="$v.form.algorithm.$touch()"
-                >
-                  <template #first>
-                    <b-form-select-option :value="null" disabled>
-                      {{ $t('global.form.selectAnOption') }}
-                    </b-form-select-option>
-                  </template>
-                </b-form-select>
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.form.algorithm.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                </b-form-invalid-feedback>
               </b-form-group>
             </b-row>
           </b-col>
@@ -237,6 +210,7 @@
 <script>
 import { required, requiredIf } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
+import { mapState } from 'vuex';
 
 export default {
   components: {},
@@ -254,9 +228,8 @@ export default {
         selectSubscriptionType: null,
         selectProtocol: null,
         bmcUser: null,
-        password: '',
-        encryption: null,
-        algorithm: null,
+        portNumber: '',
+        communityString: null,
       },
       subscriptionType: [
         { value: 'SNMPTrap', text: this.$t('pageSnmp.snmpTrap') },
@@ -266,29 +239,8 @@ export default {
         { value: 'SNMPv2c', text: this.$t('pageSnmp.snmpProtocolV2') },
         { value: 'SNMPv3', text: this.$t('pageSnmp.snmpProtocolV3') },
       ],
-      encryptionType: [
-        { value: 'DES', text: 'DES' },
-        { value: 'AES', text: 'AES' },
-      ],
-      algorithmType: [
-        {
-          value: 'SHA',
-          text: this.$tc('pageSnmp.table.authProtocolsha'),
-        },
-        {
-          value: 'SHA-256',
-          text: this.$tc('pageSnmp.table.authProtocolsha256'),
-        },
-        {
-          value: 'SHA-384',
-          text: this.$tc('pageSnmp.table.authProtocolsha384'),
-        },
-        {
-          value: 'SHA-512',
-          text: this.$tc('pageSnmp.table.authProtocolsha512'),
-        },
-      ],
       snmpId: '',
+      communityStringType: this.$store.getters['snmp/communityStrings'],
     };
   },
   computed: {
@@ -298,6 +250,7 @@ export default {
     bmcUsersOptions() {
       return this.$store.getters['snmp/Bmcusers'];
     },
+    ...mapState('snmp', ['communityStrings']),
   },
   watch: {
     snmp: function (value) {
@@ -305,10 +258,11 @@ export default {
       this.form.destination = value.destination;
       this.form.selectSubscriptionType = value.subscriptionType;
       this.form.selectProtocol = value.protocol;
-      this.form.algorithm = value.authenticationProtocol;
       this.snmpId = value.Id;
-      this.form.encryption = value.encryption;
       this.form.bmcUser = value.bmcUser;
+    },
+    communityStrings: function (value) {
+      this.communityStringType = value;
     },
   },
   validations() {
@@ -319,20 +273,20 @@ export default {
       },
       selectSubscriptionType: { required },
       selectProtocol: { required },
+      portNumber: {
+        required,
+        pattern: (val) => this.portNumberValidation(val),
+      },
+      communityString: {
+        required: requiredIf(function () {
+          return this.form.selectProtocol === 'SNMPv3' ? false : true;
+        }),
+      },
     };
 
     if (this.form.selectProtocol === 'SNMPv3') {
       Object.assign(baseValidations, {
         bmcUser: { required },
-        password: {
-          required: requiredIf(function () {
-            if (this.snmpData) {
-              return true;
-            }
-          }),
-        },
-        encryption: { required },
-        algorithm: { required },
       });
     }
 
@@ -347,24 +301,31 @@ export default {
         if (this.$v.$invalid) return;
         if (this.form.selectProtocol === 'SNMPv3') {
           SnmpTrap.destination =
-            this.form.bmcUser + '@' + this.form.destination;
+            this.form.bmcUser +
+            '@' +
+            this.form.destination +
+            ':' +
+            this.form.portNumber;
           SnmpTrap.selectSubscriptionType = this.form.selectSubscriptionType;
           SnmpTrap.selectProtocol = this.form.selectProtocol;
           SnmpTrap.bmcUser = this.form.bmcUser;
-          SnmpTrap.password = this.form.password;
-          SnmpTrap.encryption = this.form.encryption;
-          SnmpTrap.algorithm = this.form.algorithm;
         } else {
-          SnmpTrap.destination = this.form.destination;
+          SnmpTrap.destination =
+            this.form.destination + ':' + this.form.portNumber;
           SnmpTrap.selectSubscriptionType = this.form.selectSubscriptionType;
           SnmpTrap.selectProtocol = this.form.selectProtocol;
+          SnmpTrap.communityString = this.form.communityString;
         }
       } else {
         this.$v.$touch();
         if (this.$v.$invalid) return;
         if (this.$v.form.destination.$dirty) {
           SnmpTrap.destination =
-            this.form.bmcUser + '@' + this.form.destination;
+            this.form.bmcUser +
+            '@' +
+            this.form.destination +
+            ':' +
+            this.form.portNumber;
         }
         if (this.$v.form.selectSubscriptionType.$dirty) {
           SnmpTrap.selectSubscriptionType = this.form.selectSubscriptionType;
@@ -372,15 +333,8 @@ export default {
         if (this.$v.form.selectProtocol.$dirty) {
           SnmpTrap.selectProtocol = this.form.selectProtocol;
         }
-        if (this.$v.form.password.$dirty) {
-          SnmpTrap.password = this.form.password;
-        }
-        if (this.$v.form.encryption.$dirty) {
-          SnmpTrap.encryption = this.form.encryption;
-          SnmpTrap.snmpId = this.snmpId;
-        }
-        if (this.$v.form.algorithm.$dirty) {
-          SnmpTrap.algorithm = this.form.algorithm;
+        if (this.$v.form.communityString.$dirty) {
+          SnmpTrap.communityString = this.form.communityString;
         }
         if (Object.entries(SnmpTrap).length === 1) {
           this.closeModal();
@@ -400,9 +354,8 @@ export default {
       this.form.selectSubscriptionType = null;
       this.form.selectProtocol = null;
       this.form.bmcUser = null;
-      this.form.password = '';
-      this.form.algorithm = null;
-      this.form.encryption = null;
+      this.form.portNumber = '';
+      this.form.communityString = null;
       this.$v.$reset();
       this.$emit('hidden');
     },
@@ -445,6 +398,13 @@ export default {
         return false;
       } else {
         return true;
+      }
+    },
+    portNumberValidation(value) {
+      if (/^\d+$/.test(value) && value >= 1 && value <= 65535) {
+        return true;
+      } else {
+        return false;
       }
     },
   },
