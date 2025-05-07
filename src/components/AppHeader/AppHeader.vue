@@ -243,7 +243,7 @@ export default {
       return this.$store.getters['global/userPrivilege'];
     },
     serverStatus() {
-      return this.$store.getters['system/serverStatus'];
+      return this.$store.getters['controls/serverStatus'];
     },
     healthStatus() {
       return this.$store.getters['eventLog/healthStatus'];
@@ -288,12 +288,17 @@ export default {
 
     // Ensure server status icon is set on page load
     this.serverStatusIcon = this.computeServerStatusIcon(
-      this.$store.getters['system/serverStatus'],
+      this.$store.getters['controls/serverStatus'],
     );
+    window.events.listen('powerActionServerStatus', () => {
+      this.serverStatusIcon = this.computeServerStatusIcon(
+        this.$store.getters['controls/serverStatus'],
+      );
+    });
 
     // Dispatch Vuex action if needed to fetch latest status
     this.$store
-      .dispatch('system/getSystem')
+      .dispatch('controls/getLastPowerOperationTime')
       .catch((error) => console.error(error))
       .finally(() => this.endLoader());
   },

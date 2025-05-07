@@ -46,6 +46,7 @@ import i18n from './i18n';
 import { format } from 'date-fns-tz';
 import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
+import Events from './components/Mixins/EventBus.js';
 const moment = require('moment-timezone');
 
 // Filters
@@ -108,7 +109,6 @@ Vue.filter('formatTime', function (value) {
     return format(value, pattern, { timezone });
   }
 });
-
 // Plugins
 Vue.use(AlertPlugin);
 Vue.use(BadgePlugin);
@@ -158,6 +158,7 @@ Vue.use(Vuelidate);
 Vue.use(OverlayPlugin);
 Vue.use(BootstrapVueIcons);
 Vue.component('VSelect', vSelect);
+Vue.use(Events);
 
 new Vue({
   router,

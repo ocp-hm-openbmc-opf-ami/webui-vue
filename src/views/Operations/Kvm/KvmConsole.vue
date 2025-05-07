@@ -369,6 +369,7 @@ export default {
         .then((message) => {
           this.updatePowerActionDropDown(dropdownValue);
           this.successToast(message);
+          window.events.fire('powerActionServerStatus');
         })
         .catch(({ message }) => this.errorToast(message));
     },

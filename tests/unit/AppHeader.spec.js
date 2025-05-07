@@ -7,6 +7,9 @@ import AppHeader from '@/components/AppHeader';
 Vue.config.silent = true;
 const localVue = createLocalVue();
 localVue.use(Vuex);
+window.events = {
+  listen: jest.fn(), // Mock the listen function
+};
 
 describe('AppHeader.vue', () => {
   const actions = {
@@ -15,7 +18,7 @@ describe('AppHeader.vue', () => {
     'authentication/resetStoreState': jest.fn(),
     'license/getUserAlertCount': jest.fn(),
     'global/getSystemInfo': jest.fn(),
-    'system/getSystem': jest.fn(),
+    'controls/getLastPowerOperationTime': jest.fn(),
   };
   let state;
 
