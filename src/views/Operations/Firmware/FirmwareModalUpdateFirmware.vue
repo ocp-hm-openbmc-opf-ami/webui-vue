@@ -22,13 +22,23 @@
       </p>
     </template>
     <template v-else>
-      {{ $t('pageFirmware.modal.updateFirmwareInfoDefault') }}
+      <template v-if="isPFREnable">
+        {{ $t('pageFirmware.modal.updateFirmwareInfoPfr') }}
+      </template>
+      <template v-else>
+        {{ $t('pageFirmware.modal.updateFirmwareInfoDefault') }}
+      </template>
     </template>
   </b-modal>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      isPFREnable: process.env.VUE_APP_PFR_SUPPORT === 'true' ? true : false,
+    };
+  },
   computed: {
     runningBmc() {
       return this.$store.getters['firmware/activeBmcFirmware'];

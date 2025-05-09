@@ -1247,6 +1247,7 @@
             "updateFirmwareInfo2": "Das laufende Bild (%{running}) wird ins Backup kopiert. Das Backup-Image wird gelöscht.",
             "updateFirmwareInfo3": "Sind Sie sicher, dass Sie mit dem Update fortfahren möchten?",
             "updateFirmwareInfoDefault": "Das neue Bild wird hochgeladen und aktiviert. Danach wird der BMC oder Host automatisch neu gestartet, um mit dem neuen Image zu starten.",
+            "updateFirmwareInfoPfr": "Nach erfolgreichem Flash wechselt das System in den gesicherten Update-Modus (T-1). Während dieser Zeit erscheint das System ausgeschaltet/reagiert nicht und startet erst, wenn die Aktualisierung abgeschlossen ist (ca. 10 Minuten). Klicken Sie bitte auf Update starten, um fortzufahren.",
             "firmwareResetCalled": "BMC Firmware-Reset wurde aufgerufen. Schließen Sie die aktuelle Sitzung und öffnen Sie nach ein paar Minuten eine neue Sitzung."
         },
         "toast": {
@@ -1263,6 +1264,8 @@
             "successEnabledClearConfig": "Konfiguration löschen erfolgreich aktiviert.",
             "successDisabledClearConfig": "Konfiguration löschen erfolgreich deaktiviert.",
             "successUpdateFirmware": "Die Firmware wurde erfolgreich aktualisiert.",
+            "successFirmwarePfrImmediate": "Das Image ist nun bereitgestellt und das Firmware-Update hat begonnen. Bitte schalten Sie das System während dieser Zeit nicht aus und wieder ein und unterbrechen Sie es nicht.",
+            "successFirmwarePfrOnreset": "Das Image ist nun bereitgestellt und das System ist beim nächsten Neustart für die Aktualisierung bereit.  Bitte starten Sie das System neu, um mit der Aktualisierung zu beginnen. Schalten Sie das System während dieser Zeit nicht aus und wieder ein und unterbrechen Sie es nicht.",
             "errorEnabledClearConfig": "Fehler beim Aktivieren der Konfiguration löschen.",
             "errorDisabledClearConfig": "Fehler beim Deaktivieren der Konfiguration löschen."
         }

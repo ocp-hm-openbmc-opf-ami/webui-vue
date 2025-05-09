@@ -1245,7 +1245,8 @@
             "updateFirmwareInfo2": "执行中的镜像(%{running})将被备份。备份镜像将被删除",
             "updateFirmwareInfo3": "确定要执行这次更新?",
             "updateFirmwareInfoDefault": "新的镜像将被上传且启用。此后，BMC跟主机将会自动开机去执行新的镜像。",
-            "firmwareResetCalled": "BMC 已调用固件重置。关闭当前会话，并在几分钟后打开新会话。"
+            "firmwareResetCalled": "BMC 已调用固件重置。关闭当前会话，并在几分钟后打开新会话。",
+            "updateFirmwareInfoPfr": "刷机成功后，系统将进入安全更新模式（T-1）。在此期间，系统将显示为关闭/无响应，并且在更新完成（大约 10 分钟）之前不会启动。请单击开始更新以继续。"
         },
         "toast": {
             "errorSwitchImages": "切换执行中备份镜像失败",
@@ -1261,6 +1262,8 @@
             "successEnabledClearConfig": "已成功启用清除配置。",
             "successDisabledClearConfig": "已成功禁用清除配置。",
             "successUpdateFirmware": "成功更新固件。",
+            "successFirmwarePfrImmediate": "映像现已上演，固件更新已开始。在此期间请不要重新启动或中断系统。",
+            "successFirmwarePfrOnreset": "映像现已暂存，系统已准备好在下次重新启动时进行更新。  请重新启动系统以开始更新，并且在此期间请勿重新启动或中断系统。",
             "errorEnabledClearConfig": "启用清除配置时出错。",
             "errorDisabledClearConfig": "禁用清除配置时出错。"
         }
