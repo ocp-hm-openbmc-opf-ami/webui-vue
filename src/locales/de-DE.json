@@ -2491,8 +2491,17 @@
             "labelSsdPatrolRead": "SSD Patrol Read",
             "ssdPatrolReadHelperText": "Wenn SSD Patrol Read aktiviert ist, ändert sich der Status des physischen Geräts auf SSD Patrol Read.",
             "jbodModeHelperText": "Wenn der JBOD-Modus aktiviert ist, ändert sich der Status des physischen Geräts zu JBOD. Andernfalls wird es als „Nicht konfiguriert, gut“ angezeigt.",
-            "alertNotSupportSelectedController": "Diese Funktion wird vom aktuell ausgewählten Controller nicht unterstützt."
-            
+            "alertNotSupportSelectedController": "Diese Funktion wird vom aktuell ausgewählten Controller nicht unterstützt.",
+            "labelPatrolReadAction": "Patrouille lezen",
+            "labelpatrolReadCurrentProperties": "Huidige eigenschappen van patrouille lezen:",
+            "labelPatrolReadCurrentRate": "Snelheid:",
+            "patrolReadCurrentPropertiesHelperText": "Geeft de eigenschappen van patrouille lezen weer. Als u het item wilt bewerken, klik dan op de knop 'Eigenschappen' > 'Controller eigenschappen'.",
+            "patrolReadActionSwitchHelperText": "Selecteer 'Start/Stop' om patrouille lezen te verwerken. Wacht een minuut na voltooiing.",
+            "alertNotSupportPatrolReadAction": "Aktion nicht unterstützt. Stellen Sie sicher, dass der Adapter mindestens ein virtuelles Laufwerk oder mindestens ein Hot Spare-Laufwerk hat."
+        },
+        "actions": {
+            "startPatrolRead":"Start patrouille lezen",
+            "stopPatrolRead":"Stop patrouille lezen"
         },
         "toast": {
             "copybackConfigSuccess": "Die „Copyback“-Funktion wurde erfolgreich eingerichtet.",
@@ -2515,7 +2524,13 @@
             "ssdPatrolReadConfig": "Stellen Sie das SSD Patrol Read in den Controller-Eigenschaften ein.",
             "jbodModeSuccess": "JBOD-Modus erfolgreich festgelegt. Die Einstellung benötigt einige Zeit, um abgeschlossen zu werden. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
             "jbodModeFail": "Fehler beim Festlegen des JBOD-Modus.",
-            "jbodMode": "JBOD-Modus in den Controller-Eigenschaften festlegen."
+            "jbodMode": "JBOD-Modus in den Controller-Eigenschaften festlegen.",
+            "startPatrolReadActionSuccess": "Patrouille lezen succesvol gestart.",
+            "startPatrolReadActionFail": "Patrouille lezen starten mislukt.",
+            "startPatrolReadAction": "Start patrouille lezen.",
+            "stopPatrolReadActionSuccess": "Patrouille lezen succesvol gestopt.",
+            "stopPatrolReadActionFail": "Patrouille lezen stoppen mislukt.",
+            "stopPatrolReadAction": "Stop patrouille lezen."
         }
     },
     "pagePhysicalDevice": {

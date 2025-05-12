@@ -2501,7 +2501,17 @@
             "labelSsdPatrolRead": "SSD 巡逻读取",
             "ssdPatrolReadHelperText": "当启用 SSD 巡逻读取时，物理设备状态会变更为 SSD 巡逻读取。",
             "jbodModeHelperText": "启用 JBOD 模式后，物理设备的状态将变为 JBOD，否则状态将变为未配置且良好。",
-            "alertNotSupportSelectedController": "当前选择的控制器不支持此功能。"
+            "alertNotSupportSelectedController": "当前选择的控制器不支持此功能。",
+            "labelPatrolReadAction": "巡逻读取",
+            "labelpatrolReadCurrentProperties": "当前巡逻读取属性：",
+            "labelPatrolReadCurrentRate": "速率：",
+            "patrolReadCurrentPropertiesHelperText": "显示巡逻读取属性。如果需要编辑项目，请点击“属性”>“控制器属性”按钮。",
+            "patrolReadActionSwitchHelperText": "选择开始/停止以处理巡逻读取。完成后等待一分钟。",
+            "alertNotSupportPatrolReadAction": "操作不支持。请确保 RAID 控制器至少有一个逻辑设备或一个热备盘物理设备。"
+        },
+        "actions": {
+            "startPatrolRead": "开始巡逻读取",
+            "stopPatrolRead": "停止巡逻读取"
         },
         "toast": {
             "copybackConfigSuccess": "回写功能已成功设置。",
@@ -2524,7 +2534,13 @@
             "ssdPatrolReadConfig": "在控制器属性中设置 SSD 巡逻读取。",
             "jbodModeSuccess": "成功设置 JBOD 模式。需要一些时间来完成该设置，请等待几秒钟并刷新应用程序以查看更改。",
             "jbodModeFail": "设置 JBOD 模式失败。",
-            "jbodMode": "在控制器属性中设置 JBOD 模式。"
+            "jbodMode": "在控制器属性中设置 JBOD 模式。",
+            "startPatrolReadActionSuccess": "成功启动巡逻读取操作。",
+            "startPatrolReadActionFail": "启动巡逻读取操作失败。",
+            "startPatrolReadAction": "启动巡逻读取操作。",
+            "stopPatrolReadActionSuccess": "成功停止巡逻读取操作。",
+            "stopPatrolReadActionFail": "停止巡逻读取操作失败。",
+            "stopPatrolReadAction": "停止巡逻读取操作。"
         }
     },
     "pagePhysicalDevice": {

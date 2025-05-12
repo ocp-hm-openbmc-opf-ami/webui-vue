@@ -2512,7 +2512,17 @@
             "labelSsdPatrolRead": "SSD Patrol Read",
             "ssdPatrolReadHelperText": "When SSD Patrol Read is enabled, the physical device status changes to SSD Patrol Read.",
             "jbodModeHelperText": "When JBOD Mode is enabled, the physical device status changes to JBOD; otherwise, it changes to Unconfigured Good.",
-            "alertNotSupportSelectedController": "This feature is not supported for the currently selected controller."
+            "alertNotSupportSelectedController": "This feature is not supported for the currently selected controller.",
+            "labelPatrolReadAction": "Patrol Read",
+            "labelpatrolReadCurrentProperties": "Current Patrol Read Properties:",
+            "labelPatrolReadCurrentRate": "Rate: ",
+            "patrolReadCurrentPropertiesHelperText":"Displays Patrol Read properties. If you need to edit the item, please click the 'Properties' > 'Controller Properties' button.",
+            "patrolReadActionSwitchHelperText": "Select Start/Stop to process Patrol Read. Wait a minute after completion.",
+            "alertNotSupportPatrolReadAction":"Action not supported. Make sure the adapter has at least one virtual drive or at least one Hot Spare drive available."
+        },
+        "actions": {
+            "startPatrolRead":"Start Patrol Read",
+            "stopPatrolRead":"Stop Patrol Read"
         },
         "toast": {
             "copybackConfigSuccess": "The 'Copyback' feature has been successfully set up.",
@@ -2535,7 +2545,13 @@
             "ssdPatrolReadConfig": "Set the SSD Patrol Read in the controller properties.",
             "jbodModeSuccess": "Successfully set the JBOD Mode. The setting will take some time to complete. Please wait for few seconds and refresh the application to see the changes.",
             "jbodModeFail": "Failed to set the JBOD Mode.",
-            "jbodMode": "Set the JBOD Mode in the controller properties."
+            "jbodMode": "Set the JBOD Mode in the controller properties.",
+            "startPatrolReadActionSuccess": "Successfully started the Patrol Read action.",
+            "startPatrolReadActionFail": "Failed to start the Patrol Read action.",
+            "startPatrolReadAction": "Start the Patrol Read action.",
+            "stopPatrolReadActionSuccess": "Successfully stopped the Patrol Read action.",
+            "stopPatrolReadActionFail": "Failed to stop the Patrol Read action.",
+            "stopPatrolReadAction": "Stop the Patrol Read action."
         }
     },
     "pagePhysicalDevice": {
