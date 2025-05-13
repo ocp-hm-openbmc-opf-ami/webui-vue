@@ -10,16 +10,7 @@ const DumpsStore = {
     allDumps: (state) => state.allDumps,
   },
   mutations: {
-    setAllDumps: (state, dumps) => {
-      state.allDumps = dumps.map((dump) => ({
-        data: dump.AdditionalDataURI,
-        dateTime: new Date(dump.Created),
-        dumpType: dump.Name,
-        id: dump.Id,
-        location: dump['@odata.id'],
-        size: dump.AdditionalDataSizeBytes,
-      }));
-    },
+    setAllDumps: (state, allDumps) => (state.allDumps = allDumps),
   },
   actions: {
     async getBmcDumpEntries() {
@@ -49,7 +40,20 @@ const DumpsStore = {
           const bmcDumpEntries = response[0].data?.Members || [];
           const systemDumpEntries = response[1].data?.Members || [];
           const allDumps = [...bmcDumpEntries, ...systemDumpEntries];
-          commit('setAllDumps', allDumps);
+          const allDumpsData = allDumps.map((dump) => {
+            let lastElement = dump['@odata.id'].split('/').pop();
+            let downloadURIParts = dump.AdditionalDataURI.split('/');
+            let extractedValue = downloadURIParts[downloadURIParts.length - 2];
+            return {
+              data: extractedValue,
+              dateTime: new Date(dump.Created),
+              dumpType: dump.Name,
+              id: dump.Id,
+              uri: lastElement,
+              size: dump.AdditionalDataSizeBytes,
+            };
+          });
+          commit('setAllDumps', allDumpsData);
         })
         .catch((error) => console.log(error));
     },
@@ -81,9 +85,9 @@ const DumpsStore = {
           throw new Error(i18n.t('pageDumps.toast.errorStartSystemDump'));
         });
     },
-    async deleteDumps({ dispatch }, dumps) {
-      const promises = dumps.map(({ location }) =>
-        api.delete(location).catch((error) => {
+    async deleteDumps({ dispatch }, uris = []) {
+      const promises = uris.map((uri) =>
+        api.delete(uri).catch((error) => {
           console.log(error);
           return error;
         }),
