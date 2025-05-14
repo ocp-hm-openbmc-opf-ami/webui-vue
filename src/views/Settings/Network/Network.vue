@@ -27,10 +27,14 @@
                 @click="getTabIndex(index)"
               >
                 <!-- Interface settings -->
-                <network-interface-settings :tab-index="tabIndex" />
+                <network-interface-settings
+                  :tab-index="tabIndex"
+                  :lan-interface-status="enableLANInterface"
+                />
                 <!-- IPV4 table -->
                 <table-ipv-4
                   :tab-index="tabIndex"
+                  :lan-interface-status="enableLANInterface"
                   @ipv4EditData="getIpv4EditData"
                   @ipv4TableData="getIpv4TableData"
                   @addIpv4="isAddIpv4"
@@ -39,13 +43,19 @@
                 <!-- IPV6 table -->
                 <table-ipv-6
                   :tab-index="tabIndex"
+                  :lan-interface-status="enableLANInterface"
                   @ipv6EditData="getIpv6EditData"
                   @ipv6TableData="getIpv6TableData"
                   @addIpv6="isAddIpv6"
                   @networkOverlay="isNetworkOverlay"
+                  @addIpv6TabIndex="isAddIpv6TabIndex"
+                  @ipv6DeleteTableData="isIpv6DeleteTableData"
                 />
                 <!-- Static DNS table -->
-                <table-dns :tab-index="tabIndex" />
+                <table-dns
+                  :tab-index="tabIndex"
+                  :lan-interface-status="enableLANInterface"
+                />
               </b-tab>
             </b-tabs>
           </b-card>
@@ -62,11 +72,21 @@
     <modal-ipv6
       :ipv6-data="ipv6Data"
       :add-ipv6="addIpv6"
+      :ipv6-index-value="ipv6IndexValue"
+      :modal-success="isIpv6ModalSuccess"
+      :tab-index="tabIndex"
       @ok="saveIpv6Address"
+      @closeIpv6Modal="isIpv6closeAddModal"
     />
     <modal-dns @ok="saveDnsAddress" />
     <modal-hostname :hostname="currentHostname" @ok="saveSettings" />
     <modal-mac-address :mac-address="currentMacAddress" @ok="saveSettings" />
+    <modal-enable-lan
+      :modal-success="isModalSuccess"
+      :ethernet-data="enableLanNetworkSettings"
+      @ok="enableLansave"
+      @closeAddModal="iscloseAddModal"
+    />
   </b-container>
 </template>
 
@@ -86,7 +106,9 @@ import PageTitle from '@/components/Global/PageTitle';
 import TableIpv4 from './TableIpv4.vue';
 import TableIpv6 from './TableIpv6.vue';
 import TableDns from './TableDns.vue';
+import ModalEnableLan from './ModalEnableLan.vue';
 import { mapState } from 'vuex';
+import _ from 'lodash';
 
 export default {
   name: 'Network',
@@ -103,6 +125,7 @@ export default {
     TableDns,
     TableIpv4,
     TableIpv6,
+    ModalEnableLan,
   },
   mixins: [BVToastMixin, DataFormatterMixin, LoadingBarMixin],
   beforeRouteLeave(to, from, next) {
@@ -125,10 +148,16 @@ export default {
       ipv4Index: null,
       loading,
       tabIndex: 0,
+      isModalSuccess: false,
+      interfaceOptions: [],
+      ineterfaceOptions: [],
+      enableLANInterface: true,
+      ipv6IndexValue: {},
+      isIpv6ModalSuccess: false,
     };
   },
   computed: {
-    ...mapState('network', ['ethernetData']),
+    ...mapState('network', ['ethernetData', 'enableLanNetworkSettings']),
   },
   watch: {
     ethernetData() {
@@ -148,15 +177,28 @@ export default {
     isAddIpv6() {
       this.addIpv6 = true;
       this.ipv6Data = null;
+      this.ipv6IndexValue = this.ethernetData[this.tabIndex];
+    },
+    isAddIpv6TabIndex() {
+      this.addIpv6 = true;
+      this.ipv6Data = null;
+      this.ipv6IndexValue = this.ethernetData[this.tabIndex];
     },
     getIpv6TableData(ipv6) {
+      this.getTabIndex(this.tabIndex);
       this.ipv6TableData = ipv6;
       this.ipv6Index = null;
+      this.ipv6IndexValue = this.ethernetData[this.tabIndex];
+    },
+    isIpv6DeleteTableData() {
+      this.getTabIndex(this.tabIndex);
+      this.ipv6IndexValue = this.ethernetData[this.tabIndex];
     },
     getIpv6EditData(index) {
       this.ipv6Data = this.ipv6TableData[index];
       this.ipv6Index = index;
       this.addIpv6 = false;
+      this.ipv6IndexValue = this.ethernetData[this.tabIndex];
     },
     isAddIpv4() {
       this.addIpv4 = true;
@@ -234,21 +276,29 @@ export default {
     },
     saveIpv6Address(modalFormData) {
       this.startLoader();
+      var ipv6AddressDataClone = [];
+      ipv6AddressDataClone = _.cloneDeep(this.ipv6TableData);
       if (this.ipv6Index == null) {
-        this.ipv6TableData.push(modalFormData);
+        ipv6AddressDataClone.push(modalFormData);
       } else {
-        this.ipv6TableData[this.ipv6Index] = modalFormData;
+        ipv6AddressDataClone[this.ipv6Index] = modalFormData;
       }
       const dhcpv6State = this.ethernetData[this.tabIndex].DHCPv6.OperatingMode;
-      const ipv6Data = this.ipv6TableData;
+      const ipv6Data = ipv6AddressDataClone;
+      const getOemAmiActions = this.ethernetData[this.tabIndex].Actions?.Oem
+        ?.Ami
+        ? true
+        : false;
       this.$store
         .dispatch('network/saveIpv6Address', {
           dhcpv6State,
           ipv6Data,
           modalFormData,
+          getOemAmiActions,
         })
         .then((message) => {
           this.successToast(message);
+          this.isIpv6ModalSuccess = true;
           this.$bvModal
             .msgBoxOk(this.$tc('pageNetwork.modal.informationMessage'), {
               title: this.$tc('pageNetwork.modal.informatiomTitle'),
@@ -281,6 +331,27 @@ export default {
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.endLoader());
+    },
+    enableLansave(val) {
+      this.startLoader();
+      this.$store
+        .dispatch('network/interfaceEnabledStatus', val)
+        .then(() => {
+          // this.successToast(message);
+          this.$store.dispatch('authentication/customizedResetLogout');
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000); // wait to load the session
+          this.isModalSuccess = true;
+        })
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => this.endLoader());
+    },
+    iscloseAddModal(val) {
+      this.isModalSuccess = val;
+    },
+    isIpv6closeAddModal(val) {
+      this.isIpv6ModalSuccess = val;
     },
   },
 };

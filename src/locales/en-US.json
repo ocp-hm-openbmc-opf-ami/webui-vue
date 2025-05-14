@@ -1769,6 +1769,9 @@
         "useNtp": "Use NTP Servers",
         "speed": "Speed (mbps)",
         "staticDns": "Static DNS",
+        "enableLAN": "Enable LAN",	
+        "ipv6Index": "IPv6 Index",
+        "ipv4ipv6statusinfo": "For the selected interface, either IPv4 or IPv6 support should be enabled; neither can be turned off simultaneously.", 
         "modal": {
             "confirmDisableDhcp": "Are you sure you want to disable DHCP?",
             "confirmEnableDhcp": "When DHCP is enabled, static IP addresses will not be accessible.",
@@ -1788,7 +1791,10 @@
             "confirmTitle": "Confirm?",
             "confirmMessage": "This configuration may change the IP address of the device, making further access impossible. After confirming the device IP, you can log in with the new IP. Do you want to proceed?",
             "informatiomTitle": "Information",
-            "informationMessage": "Network configuration has been reset successfully. Please close this browser session and open a new browser session to connect to the device with new IP"
+            "informationMessage": "Network configuration has been reset successfully. Please close this browser session and open a new browser session to connect to the device with new IP",
+            "lanInterface":"LAN Interface",
+            "enableLAN": "Enable LAN",
+            "confirmMsg": "This function may change the IP address of the device, and you may lose connectivity in this browser session. Please reconnect using new browser session after applying the changes. Do you want to proceed?"
         },
         "table": {
             "addDnsAddress": "Add IP address",
@@ -1806,11 +1812,18 @@
             "subnet": "Subnet mask",
             "prefixLength": "Prefix Length",
             "primaryDns": "Primary DNS Server",
-            "secondaryDns": "Secondary DNS Server"
+            "secondaryDns": "Secondary DNS Server",
+            "ipv6Index": "IPv6 Index"
         },
         "toast": {
             "errorSaveNetworkSettings": "Error updating %{setting} settings.",
-            "successSaveNetworkSettings": "Successfully updated %{setting} settings."
+            "successSaveNetworkSettings": "Successfully updated %{setting} settings.",
+            "successSaveLanconfigurationNetworkSettings": "Successfully updated LAN Configuration settings.",
+            "successSaveiIpNetworkSettings": "Successfully updated Interface settings.",
+            "errorSaveLanconfigurationNetworkSettings": "Error in updated LAN Configuration settings.",
+            "errorSaveIpNetworkSettings": "Error in updated Interface settings.",            
+            "errorAddressSaveNetworkSettings": "The IPv6 Address already exists.",
+            "AllInterfaceDisableInfo": "Ensure that more than one Interface is enabled before attempting to disable an interface."
         }
     },
     "pageNcsi": {

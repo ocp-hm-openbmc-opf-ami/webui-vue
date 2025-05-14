@@ -1,111 +1,135 @@
 <template>
-  <page-section :section-title="$t('pageNetwork.ipv4')">
-    <b-row>
-      <b-col md="3">
-        <dl>
-          <dt>{{ $t('pageNetwork.useDomainName') }}</dt>
-          <dd>
-            <b-form-checkbox
-              v-model="useDomainNameState"
-              data-test-id="DHCPv4-switch-useDomainName"
-              switch
-              :disabled="interfaceId === 'hostusb0'"
-              @change="changeDhcpv4DomainNameState"
-            >
-              <span v-if="useDomainNameState">
-                {{ $t('global.status.enabled') }}
-              </span>
-              <span v-else>{{ $t('global.status.disabled') }}</span>
-            </b-form-checkbox>
-          </dd>
-        </dl>
+  <page-section
+    :section-title="$t('pageNetwork.ipv4')"
+    class="network_header_block"
+  >
+    <span>
+      <b-form-checkbox
+        v-if="getOemAmiActions"
+        v-model="enableIpv4Network"
+        data-test-id="enableIpv4-network"
+        switch
+        class="network_header_enable"
+        :disabled="interfaceId === 'hostusb0'"
+        @change="ipv4StatusUpdate"
+      >
+      </b-form-checkbox>
+    </span>
+    <span v-if="enableIpv4InterfaceChecking">
+      <b-col xl="6" class="p0 inline_block_element">
+        <b-alert show variant="warning">{{
+          $t('pageNetwork.ipv4ipv6statusinfo')
+        }}</b-alert>
       </b-col>
-      <b-col md="3">
-        <dl>
-          <dt>{{ $t('pageNetwork.useDns') }}</dt>
-          <dd>
-            <b-form-checkbox
-              v-model="useDnsState"
-              data-test-id="DHCPv4-switch-useDns"
-              switch
-              :disabled="interfaceId === 'hostusb0'"
-              @change="changeDhcpv4DnsState"
-            >
-              <span v-if="useDnsState">
-                {{ $t('global.status.enabled') }}
-              </span>
-              <span v-else>{{ $t('global.status.disabled') }}</span>
-            </b-form-checkbox>
-          </dd>
-        </dl>
-      </b-col>
-      <b-col md="3">
-        <dl>
-          <dt>{{ $t('pageNetwork.useNtp') }}</dt>
-          <dd>
-            <b-form-checkbox
-              v-model="useNtpState"
-              data-test-id="DHCPv4-switch-useNtp"
-              switch
-              :disabled="interfaceId === 'hostusb0'"
-              @change="changeDhcpv4NtpState"
-            >
-              <span v-if="useNtpState">
-                {{ $t('global.status.enabled') }}
-              </span>
-              <span v-else>{{ $t('global.status.disabled') }}</span>
-            </b-form-checkbox>
-          </dd>
-        </dl>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
-        <h3 class="h5">
-          {{ $t('pageNetwork.ipv4Addresses') }}
-        </h3>
-      </b-col>
-      <b-col class="text-right" md="3">
-        <dl>
-          <dd>
-            <b-form-checkbox
-              v-model="globalNetworkSettings[tabIndex].ipv4DhcpEnabled"
-              switch
-              :disabled="interfaceId === 'hostusb0'"
-              @change="changeDhcpIpv4State"
-            >
-              <span>
-                {{ $t('pageNetwork.dhcp') }}
-              </span>
-            </b-form-checkbox>
-          </dd>
-        </dl>
-      </b-col>
-    </b-row>
-    <b-table
-      responsive="md"
-      hover
-      :fields="ipv4TableFields"
-      :items="form.ipv4TableItems"
-      :empty-text="$t('global.table.emptyMessage')"
-      class="mb-0"
-      show-empty
-    >
-      <template #cell(actions)="{ item, index }">
-        <table-row-action
-          v-for="(action, actionIndex) in item.actions"
-          :key="actionIndex"
-          :value="action.value"
-          :title="action.title"
-          :enabled="action.enabled"
-          @click-table-action="editIpv4TableRow(index)"
-        >
-          <template #icon>
-            <icon-edit v-if="action.value === 'edit'" />
-          </template>
-        </table-row-action>
-      </template>
-    </b-table>
+    </span>
+    <div>
+      <b-row>
+        <b-col md="3">
+          <dl>
+            <dt>{{ $t('pageNetwork.useDomainName') }}</dt>
+            <dd>
+              <b-form-checkbox
+                v-model="useDomainNameState"
+                data-test-id="DHCPv4-switch-useDomainName"
+                switch
+                :disabled="interfaceId === 'hostusb0' || !ipv4SettingsStatus"
+                @change="changeDhcpv4DomainNameState"
+              >
+                <span v-if="useDomainNameState">
+                  {{ $t('global.status.enabled') }}
+                </span>
+                <span v-else>{{ $t('global.status.disabled') }}</span>
+              </b-form-checkbox>
+            </dd>
+          </dl>
+        </b-col>
+        <b-col md="3">
+          <dl>
+            <dt>{{ $t('pageNetwork.useDns') }}</dt>
+            <dd>
+              <b-form-checkbox
+                v-model="useDnsState"
+                data-test-id="DHCPv4-switch-useDns"
+                switch
+                :disabled="interfaceId === 'hostusb0' || !ipv4SettingsStatus"
+                @change="changeDhcpv4DnsState"
+              >
+                <span v-if="useDnsState">
+                  {{ $t('global.status.enabled') }}
+                </span>
+                <span v-else>{{ $t('global.status.disabled') }}</span>
+              </b-form-checkbox>
+            </dd>
+          </dl>
+        </b-col>
+        <b-col md="3">
+          <dl>
+            <dt>{{ $t('pageNetwork.useNtp') }}</dt>
+            <dd>
+              <b-form-checkbox
+                v-model="useNtpState"
+                data-test-id="DHCPv4-switch-useNtp"
+                switch
+                :disabled="interfaceId === 'hostusb0' || !ipv4SettingsStatus"
+                @change="changeDhcpv4NtpState"
+              >
+                <span v-if="useNtpState">
+                  {{ $t('global.status.enabled') }}
+                </span>
+                <span v-else>{{ $t('global.status.disabled') }}</span>
+              </b-form-checkbox>
+            </dd>
+          </dl>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <h3 class="h5">
+            {{ $t('pageNetwork.ipv4Addresses') }}
+          </h3>
+        </b-col>
+        <b-col class="text-right" md="3">
+          <dl>
+            <dd>
+              <b-form-checkbox
+                v-model="globalNetworkSettings[tabIndex].ipv4DhcpEnabled"
+                switch
+                :disabled="interfaceId === 'hostusb0' || !ipv4SettingsStatus"
+                @change="changeDhcpIpv4State"
+              >
+                <span>
+                  {{ $t('pageNetwork.dhcp') }}
+                </span>
+              </b-form-checkbox>
+            </dd>
+          </dl>
+        </b-col>
+      </b-row>
+      <b-table
+        responsive="md"
+        hover
+        :fields="ipv4TableFields"
+        :items="form.ipv4TableItems"
+        :empty-text="$t('global.table.emptyMessage')"
+        class="mb-0"
+        show-empty
+      >
+        <template #cell(actions)="{ item, index }">
+          <table-row-action
+            v-for="(action, actionIndex) in item.actions"
+            :key="actionIndex"
+            :value="action.value"
+            :title="action.title"
+            :enabled="action.enabled && ipv4SettingsStatus"
+            @click-table-action="editIpv4TableRow(index)"
+          >
+            <template #icon>
+              <icon-edit v-if="action.value === 'edit'" />
+            </template>
+          </table-row-action>
+        </template>
+      </b-table>
+    </div>
   </page-section>
 </template>
 
@@ -164,6 +188,8 @@ export default {
         { key: 'actions', label: '', tdClass: 'text-right' },
       ],
       interfaceId: this.$store.getters['network/selectedInterfaceId'],
+      enableIpv4Network: true,
+      enableIpv4InterfaceChecking: false,
     };
   },
   computed: {
@@ -181,6 +207,14 @@ export default {
       set(newValue) {
         return newValue;
       },
+    },
+    ipv4SettingsStatus() {
+      return this.$store.getters['network/globalNetworkSettings'][this.tabIndex]
+        .ipv4Status;
+    },
+    ipv6SettingsStatus() {
+      return this.$store.getters['network/globalNetworkSettings'][this.tabIndex]
+        .ipv6Status;
     },
     useDnsState: {
       get() {
@@ -201,6 +235,9 @@ export default {
       set(newValue) {
         return newValue;
       },
+    },
+    getOemAmiActions() {
+      return this.ethernetData[this.tabIndex].Actions?.Oem?.Ami ? true : false;
     },
   },
   watch: {
@@ -250,6 +287,7 @@ export default {
           ],
         };
       });
+      this.enableIpv4Network = this.ipv4SettingsStatus;
     },
     editIpv4TableRow(index) {
       this.$emit('ipv4TableData', this.form.ipv4TableItems);
@@ -318,13 +356,15 @@ export default {
           const data = { dhcpEnable: dhcpEnable, index: this.tabIndex };
           this.$store.commit('network/setIpv4Dhcp', data);
           this.form.ipv4TableItems.forEach((element) => {
-            element.actions = [
-              {
-                value: 'edit',
-                title: this.$t('pageNetwork.table.editIpv4'),
-                enabled: true,
-              },
-            ];
+            if (this.ipv4SettingsStatus) {
+              element.actions = [
+                {
+                  value: 'edit',
+                  title: this.$t('pageNetwork.table.editIpv4'),
+                  enabled: true,
+                },
+              ];
+            }
           });
         }
       }
@@ -349,6 +389,60 @@ export default {
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
+    ipv4StatusUpdate(state) {
+      const IPv4IPv4Configuration = {
+        IPv4Enable: state,
+      };
+      if (this.ipv6SettingsStatus || state) {
+        this.$bvModal
+          .msgBoxConfirm(this.$t('pageNetwork.modal.confirmMsg'), {
+            title: this.$tc('pageNetwork.ipv4'),
+            okTitle: this.$tc('global.action.ok'),
+            cancelTitle: this.$t('global.action.cancel'),
+            autoFocusButton: 'ok',
+          })
+          .then((saveConfirmed) => {
+            if (saveConfirmed) {
+              this.startLoader();
+              this.$store
+                .dispatch(
+                  'network/networkIpv4Ipv6Status',
+                  IPv4IPv4Configuration,
+                )
+                .then(() => {
+                  // this.successToast(success);
+                  this.$store.dispatch('authentication/customizedResetLogout');
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 2000); // wait to load the session
+                })
+                .catch(({ message }) => this.errorToast(message));
+            } else {
+              this.enableIpv4Network = !this.enableIpv4Network;
+            }
+          });
+      } else {
+        this.enableIpv4Network = !this.enableIpv4Network;
+        this.enableIpv4InterfaceChecking = true;
+        setTimeout(() => {
+          this.enableIpv4InterfaceChecking = false;
+        }, 3000); // Show selected Network interface options Ipv6 Ipv4 enable/disable information for 3 seconds.
+      }
+    },
   },
 };
 </script>
+<style lang="scss">
+.network_header_block {
+  h2 {
+    display: inline-block;
+  }
+}
+.network_header_enable {
+  display: inline-block !important;
+  margin-left: 10px;
+}
+.inline_block_element {
+  display: inline-block;
+}
+</style>

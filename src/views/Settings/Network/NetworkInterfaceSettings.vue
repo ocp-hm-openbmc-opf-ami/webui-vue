@@ -39,7 +39,7 @@
               <b-button
                 variant="link"
                 class="p-1"
-                :disabled="interfaceId === 'hostusb0'"
+                :disabled="interfaceId === 'hostusb0' || !lanInterfaceStatus"
                 @click="initMacAddressModal()"
               >
                 <icon-edit
@@ -75,6 +75,10 @@ export default {
     tabIndex: {
       type: Number,
       default: 0,
+    },
+    lanInterfaceStatus: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {

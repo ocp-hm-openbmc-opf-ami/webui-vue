@@ -1,120 +1,148 @@
 <template>
-  <page-section :section-title="$t('pageNetwork.ipv6')">
-    <b-row>
-      <b-col md="3">
-        <dl>
-          <dt>{{ $t('pageNetwork.useDomainName') }}</dt>
-          <dd>
-            <b-form-checkbox
-              v-model="useDomainNameState"
-              data-test-id="DHCPv6-switch-useDomainName"
-              switch
-              :disabled="interfaceId === 'hostusb0'"
-              @change="changeDhcpv6DomainNameState"
-            >
-              <span v-if="useDomainNameState">
-                {{ $t('global.status.enabled') }}
-              </span>
-              <span v-else>{{ $t('global.status.disabled') }}</span>
-            </b-form-checkbox>
-          </dd>
-        </dl>
+  <page-section
+    :section-title="$t('pageNetwork.ipv6')"
+    class="network_header_block"
+  >
+    <span>
+      <b-form-checkbox
+        v-if="getOemAmiActions"
+        v-model="enableIpv6Network"
+        data-test-id="enableIpv6-network"
+        switch
+        class="network_header_enable"
+        :disabled="interfaceId === 'hostusb0'"
+        @change="ipv6StatusUpdate"
+      >
+      </b-form-checkbox>
+    </span>
+    <span v-if="enableIpv6InterfaceChecking">
+      <b-col xl="6" class="p0 inline_block_element">
+        <b-alert show variant="warning">{{
+          $t('pageNetwork.ipv4ipv6statusinfo')
+        }}</b-alert>
       </b-col>
-      <b-col md="3">
-        <dl>
-          <dt>{{ $t('pageNetwork.useDns') }}</dt>
-          <dd>
-            <b-form-checkbox
-              v-model="useDnsState"
-              switch
-              :disabled="interfaceId === 'hostusb0'"
-              @change="changeDhcpv6DnsState"
-            >
-              <span v-if="useDnsState">
-                {{ $t('global.status.enabled') }}
-              </span>
-              <span v-else>{{ $t('global.status.disabled') }}</span>
-            </b-form-checkbox>
-          </dd>
-        </dl>
-      </b-col>
-      <b-col md="3">
-        <dl>
-          <dt>{{ $t('pageNetwork.useNtp') }}</dt>
-          <dd>
-            <b-form-checkbox
-              v-model="useNtpState"
-              switch
-              :disabled="interfaceId === 'hostusb0'"
-              @change="changeDhcpv6NtpState"
-            >
-              <span v-if="useNtpState">
-                {{ $t('global.status.enabled') }}
-              </span>
-              <span v-else>{{ $t('global.status.disabled') }}</span>
-            </b-form-checkbox>
-          </dd>
-        </dl>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
-        <h3 class="h5">
-          {{ $t('pageNetwork.ipv6Addresses') }}
-        </h3>
-      </b-col>
-      <b-col class="text-right">
-        <b-button
-          :disabled="ipv6BtnDisable || interfaceId === 'hostusb0'"
-          variant="primary"
-          @click="initAddIpv6Address()"
-        >
-          <icon-add />
-          {{ $t('pageNetwork.table.addIpv6Address') }}
-        </b-button>
-      </b-col>
-      <b-col class="text-right" md="3">
-        <dl>
-          <dd>
-            <b-form-checkbox
-              v-model="globalNetworkSettings[tabIndex].ipv6DhcpEnabled"
-              switch
-              :disabled="interfaceId === 'hostusb0'"
-              @change="changeDhcpIpv6State"
-            >
-              <span>
-                {{ $t('pageNetwork.dhcp') }}
-              </span>
-            </b-form-checkbox>
-          </dd>
-        </dl>
-      </b-col>
-    </b-row>
-    <b-table
-      responsive="md"
-      hover
-      :fields="ipv6TableFields"
-      :items="form.ipv6TableItems"
-      :empty-text="$t('global.table.emptyMessage')"
-      class="mb-0"
-      show-empty
-    >
-      <template #cell(actions)="{ item, index }">
-        <table-row-action
-          v-for="(action, actionIndex) in item.actions"
-          :key="actionIndex"
-          :value="action.value"
-          :title="action.title"
-          :enabled="action.enabled"
-          @click-table-action="onIpv6TableAction(action, $event, index)"
-        >
-          <template #icon>
-            <icon-edit v-if="action.value === 'edit'" />
-            <icon-trashcan v-if="action.value === 'delete'" />
-          </template>
-        </table-row-action>
-      </template>
-    </b-table>
+    </span>
+    <div>
+      <b-row>
+        <b-col md="3">
+          <dl>
+            <dt>{{ $t('pageNetwork.useDomainName') }}</dt>
+            <dd>
+              <b-form-checkbox
+                v-model="useDomainNameState"
+                data-test-id="DHCPv6-switch-useDomainName"
+                switch
+                :disabled="interfaceId === 'hostusb0' || !ipv6SettingsStatus"
+                @change="changeDhcpv6DomainNameState"
+              >
+                <span v-if="useDomainNameState">
+                  {{ $t('global.status.enabled') }}
+                </span>
+                <span v-else>{{ $t('global.status.disabled') }}</span>
+              </b-form-checkbox>
+            </dd>
+          </dl>
+        </b-col>
+        <b-col md="3">
+          <dl>
+            <dt>{{ $t('pageNetwork.useDns') }}</dt>
+            <dd>
+              <b-form-checkbox
+                v-model="useDnsState"
+                switch
+                :disabled="interfaceId === 'hostusb0' || !ipv6SettingsStatus"
+                @change="changeDhcpv6DnsState"
+              >
+                <span v-if="useDnsState">
+                  {{ $t('global.status.enabled') }}
+                </span>
+                <span v-else>{{ $t('global.status.disabled') }}</span>
+              </b-form-checkbox>
+            </dd>
+          </dl>
+        </b-col>
+        <b-col md="3">
+          <dl>
+            <dt>{{ $t('pageNetwork.useNtp') }}</dt>
+            <dd>
+              <b-form-checkbox
+                v-model="useNtpState"
+                switch
+                :disabled="interfaceId === 'hostusb0' || !ipv6SettingsStatus"
+                @change="changeDhcpv6NtpState"
+              >
+                <span v-if="useNtpState">
+                  {{ $t('global.status.enabled') }}
+                </span>
+                <span v-else>{{ $t('global.status.disabled') }}</span>
+              </b-form-checkbox>
+            </dd>
+          </dl>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <h3 class="h5">
+            {{ $t('pageNetwork.ipv6Addresses') }}
+          </h3>
+        </b-col>
+        <b-col class="text-right">
+          <b-button
+            :disabled="
+              ipv6BtnDisable ||
+              interfaceId === 'hostusb0' ||
+              !ipv6SettingsStatus
+            "
+            variant="primary"
+            @click="initAddIpv6Address()"
+          >
+            <icon-add />
+            {{ $t('pageNetwork.table.addIpv6Address') }}
+          </b-button>
+        </b-col>
+        <b-col class="text-right" md="3">
+          <dl>
+            <dd>
+              <b-form-checkbox
+                v-model="globalNetworkSettings[tabIndex].ipv6DhcpEnabled"
+                switch
+                :disabled="interfaceId === 'hostusb0' || !ipv6SettingsStatus"
+                @change="changeDhcpIpv6State"
+              >
+                <span>
+                  {{ $t('pageNetwork.dhcp') }}
+                </span>
+              </b-form-checkbox>
+            </dd>
+          </dl>
+        </b-col>
+      </b-row>
+      <b-table
+        responsive="md"
+        hover
+        :fields="ipv6TableFields"
+        :items="form.ipv6TableItems"
+        :empty-text="$t('global.table.emptyMessage')"
+        class="mb-0"
+        show-empty
+      >
+        <template #cell(actions)="{ item, index }">
+          <table-row-action
+            v-for="(action, actionIndex) in item.actions"
+            :key="actionIndex"
+            :value="action.value"
+            :title="action.title"
+            :enabled="action.enabled && ipv6SettingsStatus"
+            @click-table-action="onIpv6TableAction(action, $event, index, item)"
+          >
+            <template #icon>
+              <icon-edit v-if="action.value === 'edit'" />
+              <icon-trashcan v-if="action.value === 'delete'" />
+            </template>
+          </table-row-action>
+        </template>
+      </b-table>
+    </div>
   </page-section>
 </template>
 
@@ -127,6 +155,7 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import PageSection from '@/components/Global/PageSection';
 import TableRowAction from '@/components/Global/TableRowAction';
 import { mapState } from 'vuex';
+import _ from 'lodash';
 
 export default {
   name: 'Ipv6Table',
@@ -142,6 +171,10 @@ export default {
     tabIndex: {
       type: Number,
       default: 0,
+    },
+    ipv6IndexValue: {
+      type: Object,
+      default: () => {},
     },
   },
   data() {
@@ -176,6 +209,8 @@ export default {
         { key: 'actions', label: '', tdClass: 'text-right' },
       ],
       interfaceId: this.$store.getters['network/selectedInterfaceId'],
+      enableIpv6Network: true,
+      enableIpv6InterfaceChecking: false,
     };
   },
   computed: {
@@ -214,6 +249,17 @@ export default {
         return newValue;
       },
     },
+    ipv6SettingsStatus() {
+      return this.$store.getters['network/globalNetworkSettings'][this.tabIndex]
+        .ipv6Status;
+    },
+    ipv4SettingsStatus() {
+      return this.$store.getters['network/globalNetworkSettings'][this.tabIndex]
+        .ipv4Status;
+    },
+    getOemAmiActions() {
+      return this.ethernetData[this.tabIndex].Actions?.Oem?.Ami ? true : false;
+    },
   },
   watch: {
     // Watch for change in tab index
@@ -233,22 +279,42 @@ export default {
   methods: {
     getIpv6TableItems() {
       this.ipv6BtnDisable =
-        this.ethernetData[this.tabIndex].IPv6StaticAddresses.length < 16 &&
+        this.ethernetData[this.tabIndex].IPv6StaticAddresses.length <= 16 &&
         this.ethernetData[this.tabIndex].DHCPv6.OperatingMode == 'Disabled'
           ? false
           : true;
       const index = this.tabIndex;
-      const addresses = this.ethernetData[index].IPv6Addresses || [];
+      const addresses = this.ipv6BtnDisable
+        ? this.ethernetData[index].IPv6Addresses || []
+        : this.ethernetData[index].IPv6StaticAddresses || []; //if IPV6 DHCP disabled take the take from the IPv6StaticAddresses due to index present.
       this.form.ipv6TableItems = addresses.filter((ipv6) => {
         if (ipv6.AddressOrigin !== 'LinkLocal') {
           return ipv6;
         }
       });
+      if (
+        this.ethernetData[index].IPv6StaticAddresses.length > 0 &&
+        this.ethernetData[index].Actions?.Oem?.Ami
+      ) {
+        this.ipv6TableFields.splice(this.ipv6TableFields.length - 1, 0, {
+          //adding the ipv6Index field to the table baseon the IPv6StaticAddresses length
+          key: 'ipv6Index',
+          label: this.$t('pageNetwork.table.ipv6Index'),
+        });
+      } else {
+        this.ipv6TableFields = this.ipv6TableFields.filter(function (e) {
+          //remove the ipv6Index field to the table if IPv6Addresses length
+          return e.key !== 'ipv6Index';
+        });
+      }
       this.form.ipv6TableItems = this.form.ipv6TableItems.map((ipv6) => {
         return {
           Address: ipv6.Address,
           PrefixLength: ipv6.PrefixLength,
           Gateway: this.ethernetData[index].IPv6DefaultGateway,
+          ...(ipv6.Oem?.Ami && {
+            ipv6Index: ipv6.Oem.Ami.StaticIPv6AddressIndex,
+          }), // Conditionally add ipv6Index
           actions: [
             {
               value: 'edit',
@@ -272,10 +338,11 @@ export default {
           ],
         };
       });
+      this.enableIpv6Network = this.ipv6SettingsStatus;
     },
-    onIpv6TableAction(action, $event, index) {
+    onIpv6TableAction(action, $event, index, item) {
       if ($event === 'delete') {
-        this.deleteIpv6TableRow(index);
+        this.deleteIpv6TableRow(index, item);
       } else {
         this.editIpv6TableRow(index);
       }
@@ -285,12 +352,27 @@ export default {
       this.$emit('ipv6EditData', index);
       this.$bvModal.show('modal-add-ipv6');
     },
-    deleteIpv6TableRow(index) {
-      this.form.ipv6TableItems.splice(index, 1);
+    deleteIpv6TableRow(index, ipv6DataItem) {
+      var ipv6TabelDataList = [];
+      ipv6TabelDataList = _.cloneDeep(this.form.ipv6TableItems);
+      ipv6TabelDataList.splice(index, 1); //REP disable remove the delete IPV6 address from the list
+      this.startLoader();
       this.$store
-        .dispatch('network/deleteIpv6Address', this.form.ipv6TableItems)
-        .then((message) => this.successToast(message))
-        .catch(({ message }) => this.errorToast(message));
+        .dispatch('network/deleteIpv6Address', {
+          ipv6TabelDataList,
+          ipv6DataItem,
+        })
+        .then((message) => {
+          this.$store.dispatch('network/getEthernetData').then(() => {
+            this.$emit('ipv6DeleteTableData');
+            this.endLoader();
+            this.successToast(message);
+          });
+        })
+        .catch(({ message }) => {
+          this.endLoader();
+          this.errorToast(message);
+        });
     },
     initAddIpv6Address() {
       this.$emit('addIpv6');
@@ -340,9 +422,10 @@ export default {
             }
           });
       } else {
+        this.$emit('addIpv6TabIndex');
         const data = { dhcpEnable: !dhcpEnable, index: this.tabIndex };
         this.$store.commit('network/setIpv6Dhcp', data);
-        if (this.ethernetData[this.tabIndex].IPv6StaticAddresses.length < 16) {
+        if (this.ethernetData[this.tabIndex].IPv6StaticAddresses.length <= 16) {
           this.$bvModal.show('modal-add-ipv6');
         } else {
           this.$bvModal.msgBoxOk(
@@ -390,6 +473,61 @@ export default {
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
+    ipv6StatusUpdate(state) {
+      const IPv6IPv6Configuration = {
+        IPv6Enable: state,
+      };
+      if (this.ipv4SettingsStatus || state) {
+        this.$bvModal
+          .msgBoxConfirm(this.$t('pageNetwork.modal.confirmMsg'), {
+            title: this.$tc('pageNetwork.ipv6'),
+            okTitle: this.$tc('global.action.ok'),
+            cancelTitle: this.$t('global.action.cancel'),
+            autoFocusButton: 'ok',
+          })
+          .then((saveConfirmed) => {
+            if (saveConfirmed) {
+              this.startLoader();
+              this.$store
+                .dispatch(
+                  'network/networkIpv4Ipv6Status',
+                  IPv6IPv6Configuration,
+                )
+                .then(() => {
+                  // this.successToast(success);
+                  this.endLoader();
+                  this.$store.dispatch('authentication/customizedResetLogout');
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 2000); // wait to load the session
+                })
+                .catch(({ message }) => this.errorToast(message));
+            } else {
+              this.enableIpv6Network = !this.enableIpv6Network;
+            }
+          });
+      } else {
+        this.enableIpv6Network = !this.enableIpv6Network;
+        this.enableIpv6InterfaceChecking = true;
+        setTimeout(() => {
+          this.enableIpv6InterfaceChecking = false;
+        }, 3000); // Show selected Network interface options Ipv6 Ipv4 enable/disable information for 3 seconds.
+      }
+    },
   },
 };
 </script>
+<style lang="scss">
+.network_header_block {
+  h2 {
+    display: inline-block;
+  }
+}
+.network_header_enable {
+  display: inline-block !important;
+  margin-left: 10px;
+}
+.inline_block_element {
+  display: inline-block;
+}
+</style>

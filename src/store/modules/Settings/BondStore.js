@@ -22,9 +22,28 @@ const BondStore = {
     async getBondEthernetData({ commit }) {
       return await api
         .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
-        .then((response) => {
+        .then((response) =>
+          response.data.Members.map(
+            (ethernetInterface) => ethernetInterface['@odata.id'],
+          ),
+        )
+        .then((ethernetInterfaceIds) =>
+          api.all(
+            ethernetInterfaceIds.map((ethernetInterface) =>
+              api.get(ethernetInterface),
+            ),
+          ),
+        )
+        .then((ethernetInterfaces) => {
+          const bondInterfaceiteam = ethernetInterfaces
+            .filter(function (ethernetInterface) {
+              return ethernetInterface.data.InterfaceEnabled; // Only include enabled interfaces
+            })
+            .map(function (ethernetInterface) {
+              return ethernetInterface.data;
+            });
           let interfaceiteam = [];
-          response.data.Members.map((ethernetInterface) => {
+          bondInterfaceiteam.map((ethernetInterface) => {
             let res = ethernetInterface['@odata.id'].split('/');
             let lastElement = res[res.length - 1];
             interfaceiteam.push(lastElement);

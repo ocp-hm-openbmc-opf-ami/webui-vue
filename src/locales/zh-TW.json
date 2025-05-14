@@ -1763,6 +1763,9 @@
         "useNtp": "使用 NTP 伺服器",
         "speed": "速度 (mbps)",
         "staticDns": "固定 DNS",
+        "enableLAN": "啟用區域網路",	
+        "ipv6Index": "IPv6索引", 
+        "ipv4ipv6statusinfo": "對於所選接口，應啟用 IPv4 或 IPv6 支援；兩者不能同時關閉。", 
         "modal": {
             "confirmDisableDhcp": "你確定要停用 DHCP?",
             "confirmEnableDhcp": "啟用 DHCP 後，無法訪問靜態 IP 地址。",
@@ -1782,7 +1785,10 @@
             "confirmTitle": "確定?",
             "confirmMessage":"這個設定可能改變設備的IP位址，無法更進一步使用. 在確認設備 IP後, 你可以以新IP登入. 你想繼續嗎?",
             "informatiomTitle": "資訊",
-            "informationMessage": "成功變更網路設定 請關閉此網頁對談然後開啟新網頁對談使用新IP連接設備 "
+            "informationMessage": "成功變更網路設定 請關閉此網頁對談然後開啟新網頁對談使用新IP連接設備 ",
+            "lanInterface":"區域網路介面",
+            "enableLAN": "啟用區域網路",
+            "confirmMsg": "此功能可能會變更裝置的 IP 位址，並且您可能會在此瀏覽器工作階段中失去連線。套用變更後，請使用新的瀏覽器會話重新連線。您想繼續嗎？"
         },
         "table": {
             "addDnsAddress": "新增 IP 位址",
@@ -1800,11 +1806,18 @@
             "subnet": "次網域遮罩",
             "prefixLength": "前綴長度",
             "primaryDns": "主 DNS 伺服器",
-            "secondaryDns": "次 DNS 伺服器"
+            "secondaryDns": "次 DNS 伺服器",
+            "ipv6Index": "IPv6索引"
         },
         "toast": {
             "errorSaveNetworkSettings": "更新 %{setting} 設定失敗",
-            "successSaveNetworkSettings": "更新 %{setting} 設定成功"
+            "successSaveNetworkSettings": "更新 %{setting} 設定成功",
+            "successSaveLanconfigurationNetworkSettings": "已成功更新 LAN 設定設定。",
+            "successSaveiIpNetworkSettings": "已成功更新介面設定。",
+            "errorSaveLanconfigurationNetworkSettings": "更新的 LAN 配置設定出錯。",
+            "errorSaveIpNetworkSettings": "更新的介面設定出錯。",            
+            "errorAddressSaveNetworkSettings": "IPv6 位址已存在。",
+            "AllInterfaceDisableInfo": "在嘗試停用某一介面之前，請確保啟用了多個介面。"
         }
     },
     "pageNcsi": {

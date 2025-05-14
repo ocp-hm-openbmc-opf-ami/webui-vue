@@ -48,8 +48,8 @@ const NetworkDDNSStore = {
     setStaticHostName: (state, staticHostName) =>
       (state.staticHostName = staticHostName),
     setDomainNameServer: (state, data) => {
-      state.domainNameServer = data.map(({ data }) => {
-        const { DHCPv4, DHCPv6 } = data;
+      state.domainNameServer = data.map(function (item) {
+        const { DHCPv4, DHCPv6 } = item;
         return {
           dhcpv4: {
             useDnsEnabled: DHCPv4.UseDNSServers,
@@ -100,16 +100,20 @@ const NetworkDDNSStore = {
           ),
         )
         .then(async (ethernetInterfaces) => {
-          const ethernetData = ethernetInterfaces.map(
-            (ethernetInterface) => ethernetInterface.data,
-          );
+          const ethernetData = ethernetInterfaces
+            .filter(function (ethernetInterface) {
+              return ethernetInterface.data.InterfaceEnabled; // Only include enabled interfaces
+            })
+            .map(function (ethernetInterface) {
+              return ethernetInterface.data;
+            });
           const firstEtherData = ethernetData[0];
           const firstInterfaceId = ethernetData[0].Id;
           commit('setDDNSSelectedInterfaceId', firstInterfaceId);
           commit('setDDNSEthernetData', ethernetData);
           commit('setDDNSFirstInterfaceId', firstInterfaceId);
           commit('setDDNSFirstEtherData', firstEtherData);
-          commit('setDomainNameServer', ethernetInterfaces);
+          commit('setDomainNameServer', ethernetData);
           await dispatch('getfirstEtherData', firstEtherData);
         })
         .catch((error) => {

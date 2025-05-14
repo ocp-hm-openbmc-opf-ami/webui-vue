@@ -42,9 +42,13 @@ const NcsiStore = {
           ),
         )
         .then(async (ethernetInterfaces) => {
-          const ethernetData = ethernetInterfaces.map(
-            (ethernetInterface) => ethernetInterface.data,
-          );
+          const ethernetData = ethernetInterfaces
+            .filter(function (ethernetInterface) {
+              return ethernetInterface.data.InterfaceEnabled; // Only include enabled interfaces
+            })
+            .map(function (ethernetInterface) {
+              return ethernetInterface.data;
+            });
           const ncsiData = await dispatch('getNcsiData', ethernetData);
           let ncsiInterfaceId = [];
           let ncsiConfiguration = [];
