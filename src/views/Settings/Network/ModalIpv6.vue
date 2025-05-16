@@ -7,6 +7,33 @@
   >
     <b-form id="form-ipv6" @submit.prevent="handleSubmit">
       <b-row>
+        <b-col v-if="getOemAmiActions" sm="6">
+          <b-form-group
+            :label="$t('pageNetwork.ipv6Index')"
+            label-for="ipv6Index"
+          >
+            <b-form-select
+              id="ipv6Index"
+              v-model="form.ipv6Index"
+              class="input"
+              :options="ipv6IndexOptions"
+              data-test-id="ipv6Index-option"
+              :state="getValidationState($v.form.ipv6Index)"
+              @input="$v.form.ipv6Index.$touch()"
+              @change="indexChange"
+              ><template #first>
+                <b-form-select-option :value="valuedefault" disabled>
+                  {{ $t('global.form.selectAnOption') }}
+                </b-form-select-option>
+              </template></b-form-select
+            >
+            <b-form-invalid-feedback role="alert">
+              <template v-if="!$v.form.ipv6Index.required">
+                {{ $t('global.form.fieldRequired') }}
+              </template>
+            </b-form-invalid-feedback>
+          </b-form-group>
+        </b-col>
         <b-col sm="6">
           <b-form-group
             :label="$t('pageNetwork.modal.ipAddress')"
@@ -59,8 +86,6 @@
             </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
-      </b-row>
-      <b-row>
         <b-col sm="6">
           <b-form-group
             :label="$t('pageNetwork.modal.gateway')"
@@ -100,7 +125,7 @@
 
 <script>
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
-import { required } from 'vuelidate/lib/validators';
+import { required, requiredIf } from 'vuelidate/lib/validators';
 
 export default {
   mixins: [VuelidateMixin],
@@ -117,16 +142,97 @@ export default {
       type: Boolean,
       default: false,
     },
+    ipv6IndexValue: {
+      type: Object,
+      default: () => {},
+    },
+    modalSuccess: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       form: {
+        ipv6Index: '',
         ipAddress: '',
         prefixLength: '',
         gateway: '',
       },
+      valuedefault: '',
       isAddIpv6: false,
+      ipv6IndexOptions: [
+        {
+          text: 0,
+          value: 0,
+        },
+        {
+          text: 1,
+          value: 1,
+        },
+        {
+          text: 2,
+          value: 2,
+        },
+        {
+          text: 3,
+          value: 3,
+        },
+        {
+          text: 4,
+          value: 4,
+        },
+        {
+          text: 5,
+          value: 5,
+        },
+        {
+          text: 6,
+          value: 6,
+        },
+        {
+          text: 7,
+          value: 7,
+        },
+        {
+          text: 8,
+          value: 8,
+        },
+        {
+          text: 9,
+          value: 9,
+        },
+        {
+          text: 10,
+          value: 10,
+        },
+        {
+          text: 11,
+          value: 11,
+        },
+        {
+          text: 12,
+          value: 12,
+        },
+        {
+          text: 13,
+          value: 13,
+        },
+        {
+          text: 14,
+          value: 14,
+        },
+        {
+          text: 15,
+          value: 15,
+        },
+      ],
     };
+  },
+  computed: {
+    getOemAmiActions() {
+      return this.ipv6IndexValue.Actions?.Oem?.Ami ? true : false;
+    },
   },
   watch: {
     defaultGateway() {
@@ -144,6 +250,12 @@ export default {
       this.form.ipAddress = this.ipv6Data?.Address;
       this.form.gateway = this.ipv6Data?.Gateway;
       this.form.prefixLength = this.ipv6Data?.PrefixLength;
+      this.form.ipv6Index = this.ipv6Data?.ipv6Index;
+    },
+    modalSuccess: function (value) {
+      if (value === true) {
+        this.closeModal();
+      }
     },
   },
   validations() {
@@ -167,6 +279,13 @@ export default {
             return this.ipv6gatewayValidation(val);
           },
         },
+        ipv6Index: {
+          required: requiredIf(function () {
+            if (this.getOemAmiActions) {
+              return true;
+            }
+          }),
+        },
       },
     };
   },
@@ -174,12 +293,16 @@ export default {
     handleSubmit() {
       this.$v.$touch();
       if (this.$v.$invalid) return;
-      this.$emit('ok', {
+      let params = {
         Address: this.form.ipAddress,
         PrefixLength: this.form.prefixLength,
         Gateway: this.form.gateway,
-      });
-      this.closeModal();
+      };
+      if (this.getOemAmiActions) {
+        params.ipv6Index = this.form.ipv6Index;
+      }
+      this.$emit('ok', params);
+      // this.closeModal();
     },
     onCancel() {
       this.closeModal();
@@ -194,18 +317,34 @@ export default {
         this.form.ipAddress = null;
         this.form.gateway = null;
         this.form.prefixLength = null;
+        this.form.ipv6Index = null;
       } else {
-        this.form.ipAddress = this.ipv6Data.Address;
-        this.form.gateway = this.ipv6Data.Gateway;
-        this.form.prefixLength = this.ipv6Data.PrefixLength;
+        this.form.ipAddress = this.ipv6Data?.Address;
+        this.form.gateway = this.ipv6Data?.Gateway;
+        this.form.prefixLength = this.ipv6Data?.PrefixLength;
+        this.form.ipv6Index = this.ipv6Data?.ipv6Index;
       }
       this.$v.$reset();
-      this.$emit('hidden');
+      this.$emit('closeAddModal', false);
     },
     onOk(bvModalEvt) {
       // prevent modal close
       bvModalEvt.preventDefault();
       this.handleSubmit();
+    },
+    indexChange(value) {
+      this.ipv6IndexValue?.IPv6StaticAddresses?.some((val) => {
+        if (val.Oem.Ami.StaticIPv6AddressIndex === value) {
+          this.form.ipAddress = val.Address;
+          this.form.prefixLength = val.PrefixLength;
+          this.form.gateway = this.ipv6IndexValue.IPv6DefaultGateway;
+          return true; // stops further iteration
+        } else {
+          this.form.ipAddress = null;
+          this.form.gateway = null;
+          this.form.prefixLength = null;
+        }
+      });
     },
     ipv6addressValidation(value) {
       if (

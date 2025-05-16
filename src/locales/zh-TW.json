@@ -1248,6 +1248,7 @@
             "updateFirmwareInfo2": "執行中的映像(%{running})將被備份。備份映像將被刪除",
             "updateFirmwareInfo3": "確定要執行這次更新?",
             "updateFirmwareInfoDefault": "新的映像將被上傳且啟用。此後，BMC跟主機將會自動開機去執行新的映像。",
+            "updateFirmwareInfoPfr": "刷機成功後，系統將進入安全性更新模式（T-1）。在此期間，系統將顯示為關閉/無回應，並且在更新完成（約 10 分鐘）之前不會啟動。請點擊開始更新以繼續。",
             "firmwareResetCalled": "BMC 已調用韌體重置。關閉目前會話，並在幾分鐘後開啟新會話。"
         },
         "toast": {
@@ -1264,6 +1265,8 @@
             "successEnabledClearConfig": "已成功啟用清除配置。",
             "successDisabledClearConfig": "已成功停用清除配置。",
             "successUpdateFirmware": "成功更新韌體。",
+            "successFirmwarePfrImmediate": "映像現已上演，韌體更新已開始。在此期間請不要重新啟動或中斷系統。",
+            "successFirmwarePfrOnreset": "映像現已暫存，系統已準備好在下次重新啟動時進行更新。  請重新啟動系統以開始更新，並且在此期間請勿重新啟動或中斷系統。",
             "errorEnabledClearConfig": "啟用清除配置時發生錯誤。",
             "errorDisabledClearConfig": "停用清除配置時發生錯誤。"
         }
@@ -1775,6 +1778,9 @@
         "useNtp": "使用 NTP 伺服器",
         "speed": "速度 (mbps)",
         "staticDns": "固定 DNS",
+        "enableLAN": "啟用區域網路",	
+        "ipv6Index": "IPv6索引", 
+        "ipv4ipv6statusinfo": "對於所選接口，應啟用 IPv4 或 IPv6 支援；兩者不能同時關閉。", 
         "modal": {
             "confirmDisableDhcp": "你確定要停用 DHCP?",
             "confirmEnableDhcp": "啟用 DHCP 後，無法訪問靜態 IP 地址。",
@@ -1794,7 +1800,10 @@
             "confirmTitle": "確定?",
             "confirmMessage":"這個設定可能改變設備的IP位址，無法更進一步使用. 在確認設備 IP後, 你可以以新IP登入. 你想繼續嗎?",
             "informatiomTitle": "資訊",
-            "informationMessage": "成功變更網路設定 請關閉此網頁對談然後開啟新網頁對談使用新IP連接設備 "
+            "informationMessage": "成功變更網路設定 請關閉此網頁對談然後開啟新網頁對談使用新IP連接設備 ",
+            "lanInterface":"區域網路介面",
+            "enableLAN": "啟用區域網路",
+            "confirmMsg": "此功能可能會變更裝置的 IP 位址，並且您可能會在此瀏覽器工作階段中失去連線。套用變更後，請使用新的瀏覽器會話重新連線。您想繼續嗎？"
         },
         "table": {
             "addDnsAddress": "新增 IP 位址",
@@ -1812,11 +1821,18 @@
             "subnet": "次網域遮罩",
             "prefixLength": "前綴長度",
             "primaryDns": "主 DNS 伺服器",
-            "secondaryDns": "次 DNS 伺服器"
+            "secondaryDns": "次 DNS 伺服器",
+            "ipv6Index": "IPv6索引"
         },
         "toast": {
             "errorSaveNetworkSettings": "更新 %{setting} 設定失敗",
-            "successSaveNetworkSettings": "更新 %{setting} 設定成功"
+            "successSaveNetworkSettings": "更新 %{setting} 設定成功",
+            "successSaveLanconfigurationNetworkSettings": "已成功更新 LAN 設定設定。",
+            "successSaveiIpNetworkSettings": "已成功更新介面設定。",
+            "errorSaveLanconfigurationNetworkSettings": "更新的 LAN 配置設定出錯。",
+            "errorSaveIpNetworkSettings": "更新的介面設定出錯。",            
+            "errorAddressSaveNetworkSettings": "IPv6 位址已存在。",
+            "AllInterfaceDisableInfo": "在嘗試停用某一介面之前，請確保啟用了多個介面。"
         }
     },
     "pageNcsi": {

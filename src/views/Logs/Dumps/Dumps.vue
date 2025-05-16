@@ -58,8 +58,11 @@
             :items="filteredDumps"
             :empty-text="$t('global.table.emptyMessage')"
             :empty-filtered-text="$t('global.table.emptySearchMessage')"
+            :per-page="perPage"
             :filter="searchFilter"
             :busy="isBusy"
+            :current-page="currentPage"
+            @filtered="onFiltered"
             @row-selected="onRowSelected($event, filteredDumps.length)"
           >
             <!-- Checkbox column -->
@@ -99,7 +102,7 @@
                 :key="index"
                 :value="action.value"
                 :title="action.title"
-                :download-location="row.item.data"
+                :download-location="downloadFile(row.item.data)"
                 :export-name="exportFileName(row)"
                 @click-table-action="onTableRowAction($event, row.item)"
               >
@@ -134,7 +137,7 @@
           first-number
           last-number
           :per-page="perPage"
-          :total-rows="getTotalRowCount()"
+          :total-rows="getTotalRowCount(filteredRows)"
           aria-controls="table-dump-entries"
         />
       </b-col>
@@ -251,7 +254,7 @@ export default {
       filterEndDate: null,
       filterStartDate: null,
       perPage: perPage,
-      searchFilter,
+      searchFilter: searchFilter,
       searchTotalFilteredRows: 0,
       selectedRows,
       tableHeaderCheckboxIndeterminate,
@@ -313,11 +316,44 @@ export default {
     onFiltered(filteredItems) {
       this.searchTotalFilteredRows = filteredItems.length;
     },
+    onChangeSearchInput(event) {
+      this.searchFilter = event;
+    },
     onChangeDateTimeFilter({ fromDate, toDate }) {
       this.filterStartDate = fromDate;
       this.filterEndDate = toDate;
     },
-    onTableRowAction(action, dump) {
+    deleteAllDumps(uris) {
+      uris.forEach((uri, index) => {
+        uris[index] =
+          '/redfish/v1/Managers/bmc/LogServices/Dump/Entries/' + uri;
+      });
+      this.$store.dispatch('dumps/deleteAllDumps').then((messages) => {
+        messages.forEach(({ type, message }) => {
+          if (type === 'success') {
+            this.successToast(message);
+          } else if (type === 'error') {
+            this.errorToast(message);
+          }
+        });
+      });
+    },
+    deleteDumps(uris) {
+      uris.forEach((uri, index) => {
+        uris[index] =
+          '/redfish/v1/Managers/bmc/LogServices/Dump/Entries/' + uri;
+      });
+      this.$store.dispatch('dumps/deleteDumps', uris).then((messages) => {
+        messages.forEach(({ type, message }) => {
+          if (type === 'success') {
+            this.successToast(message);
+          } else if (type === 'error') {
+            this.errorToast(message);
+          }
+        });
+      });
+    },
+    onTableRowAction(action, { uri }) {
       if (action === 'delete') {
         this.$bvModal
           .msgBoxConfirm(this.$tc('pageDumps.modal.deleteDumpConfirmation'), {
@@ -326,25 +362,14 @@ export default {
             cancelTitle: this.$t('global.action.cancel'),
             autoFocusButton: 'ok',
           })
-          .then((deleteConfrimed) => {
-            if (deleteConfrimed) {
-              this.$store
-                .dispatch('dumps/deleteDumps', [dump])
-                .then((messages) => {
-                  messages.forEach(({ type, message }) => {
-                    if (type === 'success') {
-                      this.successToast(message);
-                    } else if (type === 'error') {
-                      this.errorToast(message);
-                    }
-                  });
-                });
-            }
+          .then((deleteConfirmed) => {
+            if (deleteConfirmed) this.deleteDumps([uri]);
           });
       }
     },
     onTableBatchAction(action) {
       if (action === 'delete') {
+        const uris = this.selectedRows.map((row) => row.uri);
         this.$bvModal
           .msgBoxConfirm(
             this.$tc(
@@ -367,22 +392,9 @@ export default {
           .then((deleteConfrimed) => {
             if (deleteConfrimed) {
               if (this.selectedRows.length === this.allDumps.length) {
-                this.$store
-                  .dispatch('dumps/deleteAllDumps')
-                  .then((success) => this.successToast(success))
-                  .catch(({ message }) => this.errorToast(message));
+                this.deleteAllDumps(uris);
               } else {
-                this.$store
-                  .dispatch('dumps/deleteDumps', this.selectedRows)
-                  .then((messages) => {
-                    messages.forEach(({ type, message }) => {
-                      if (type === 'success') {
-                        this.successToast(message);
-                      } else if (type === 'error') {
-                        this.errorToast(message);
-                      }
-                    });
-                  });
+                this.deleteDumps(uris);
               }
             }
           });
@@ -392,6 +404,13 @@ export default {
       let filename = row.item.dumpType + '_' + row.item.id + '.tar.xz';
       filename = filename.replace(RegExp(' ', 'g'), '_');
       return filename;
+    },
+    downloadFile(data) {
+      return (
+        '/redfish/v1/Managers/bmc/LogServices/Dump/Entries/' +
+        data +
+        '/attachment'
+      );
     },
   },
 };

@@ -1245,7 +1245,8 @@
             "updateFirmwareInfo2": "执行中的镜像(%{running})将被备份。备份镜像将被删除",
             "updateFirmwareInfo3": "确定要执行这次更新?",
             "updateFirmwareInfoDefault": "新的镜像将被上传且启用。此后，BMC跟主机将会自动开机去执行新的镜像。",
-            "firmwareResetCalled": "BMC 已调用固件重置。关闭当前会话，并在几分钟后打开新会话。"
+            "firmwareResetCalled": "BMC 已调用固件重置。关闭当前会话，并在几分钟后打开新会话。",
+            "updateFirmwareInfoPfr": "刷机成功后，系统将进入安全更新模式（T-1）。在此期间，系统将显示为关闭/无响应，并且在更新完成（大约 10 分钟）之前不会启动。请单击开始更新以继续。"
         },
         "toast": {
             "errorSwitchImages": "切换执行中备份镜像失败",
@@ -1261,6 +1262,8 @@
             "successEnabledClearConfig": "已成功启用清除配置。",
             "successDisabledClearConfig": "已成功禁用清除配置。",
             "successUpdateFirmware": "成功更新固件。",
+            "successFirmwarePfrImmediate": "映像现已上演，固件更新已开始。在此期间请不要重新启动或中断系统。",
+            "successFirmwarePfrOnreset": "映像现已暂存，系统已准备好在下次重新启动时进行更新。  请重新启动系统以开始更新，并且在此期间请勿重新启动或中断系统。",
             "errorEnabledClearConfig": "启用清除配置时出错。",
             "errorDisabledClearConfig": "禁用清除配置时出错。"
         }
@@ -1772,6 +1775,9 @@
         "useNtp": "使用 DHCP 下发的 NTP 服务器",
         "speed": "速度 (mbps)",
         "staticDns": "静态 DNS",
+        "enableLAN": "启用局域网",	
+        "ipv6Index": "IPv6索引",        
+        "ipv4ipv6statusinfo": "对于所选接口，应启用 IPv4 或 IPv6 支持；两者不能同时关闭。", 
         "modal": {
             "confirmDisableDhcp": "你确定要禁用 DHCP?",
             "confirmEnableDhcp": "启用 DHCP 后，无法访问静态 IP 地址。",
@@ -1791,7 +1797,10 @@
             "confirmTitle": "确定?",
             "confirmMessage": "这个设置可能改变设备的IP地址，无法更进一步使用。在确认设备 IP后, 你可以使用新IP登录。 你想继续吗?",
             "informatiomTitle": "信息",
-            "informationMessage": "成功更改网络设置 请关闭此网页对话然后使用新 IP 开启新网页对话连接设备 "
+            "informationMessage": "成功更改网络设置 请关闭此网页对话然后使用新 IP 开启新网页对话连接设备 ",
+            "lanInterface":"局域网接口",
+            "enableLAN": "启用局域网",
+            "confirmMsg": "此功能可能会更改设备的 IP 地址，并且您可能会在此浏览器会话中失去连接。应用更改后，请使用新的浏览器会话重新连接。您想继续吗？"
         },
         "table": {
             "addDnsAddress": "添加 IP 地址",
@@ -1809,11 +1818,18 @@
             "subnet": "子网掩码",
             "prefixLength": "前缀长度",
             "primaryDns": "主 DNS 服务器",
-            "secondaryDns": "次 DNS 服务器"
+            "secondaryDns": "次 DNS 服务器",
+            "ipv6Index": "IPv6索引"
         },
         "toast": {
             "errorSaveNetworkSettings": "更新 %{setting} 设置失败",
-            "successSaveNetworkSettings": "更新 %{setting} 设置成功"
+            "successSaveNetworkSettings": "更新 %{setting} 设置成功",
+            "successSaveLanconfigurationNetworkSettings": "已成功更新 LAN 配置设置。",
+            "successSaveiIpNetworkSettings": "已成功更新界面设置。",
+            "errorSaveLanconfigurationNetworkSettings": "更新的 LAN 配置设置出错。",
+            "errorSaveIpNetworkSettings": "更新的界面设置出错。",            
+            "errorAddressSaveNetworkSettings": "IPv6 地址已存在。",
+            "AllInterfaceDisableInfo": "在尝试禁用某一接口之前，请确保启用多个接口。"
         }
     },
     "pageNcsi": {

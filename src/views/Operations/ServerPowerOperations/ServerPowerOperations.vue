@@ -213,7 +213,13 @@ export default {
   },
   methods: {
     powerOn() {
-      this.$store.dispatch('controls/serverPowerOn');
+      this.$store
+        .dispatch('controls/serverPowerOn')
+        .then((message) => {
+          this.successToast(message);
+          window.events.fire('powerActionServerStatus');
+        })
+        .catch(({ message }) => this.errorToast(message));
     },
     rebootServer() {
       const modalMessage = this.$t(
@@ -230,13 +236,29 @@ export default {
         this.$bvModal
           .msgBoxConfirm(modalMessage, modalOptions)
           .then((confirmed) => {
-            if (confirmed) this.$store.dispatch('controls/serverSoftReboot');
+            if (confirmed) {
+              this.$store
+                .dispatch('controls/serverSoftReboot')
+                .then((message) => {
+                  this.successToast(message);
+                  window.events.fire('powerActionServerStatus');
+                })
+                .catch(({ message }) => this.errorToast(message));
+            }
           });
       } else if (this.form.rebootOption === 'immediate') {
         this.$bvModal
           .msgBoxConfirm(modalMessage, modalOptions)
           .then((confirmed) => {
-            if (confirmed) this.$store.dispatch('controls/serverHardReboot');
+            if (confirmed) {
+              this.$store
+                .dispatch('controls/serverHardReboot')
+                .then((message) => {
+                  this.successToast(message);
+                  window.events.fire('powerActionServerStatus');
+                })
+                .catch(({ message }) => this.errorToast(message));
+            }
           });
       }
     },
@@ -255,14 +277,30 @@ export default {
         this.$bvModal
           .msgBoxConfirm(modalMessage, modalOptions)
           .then((confirmed) => {
-            if (confirmed) this.$store.dispatch('controls/serverSoftPowerOff');
+            if (confirmed) {
+              this.$store
+                .dispatch('controls/serverSoftPowerOff')
+                .then((message) => {
+                  this.successToast(message);
+                  window.events.fire('powerActionServerStatus');
+                })
+                .catch(({ message }) => this.errorToast(message));
+            }
           });
       }
       if (this.form.shutdownOption === 'immediate') {
         this.$bvModal
           .msgBoxConfirm(modalMessage, modalOptions)
           .then((confirmed) => {
-            if (confirmed) this.$store.dispatch('controls/serverHardPowerOff');
+            if (confirmed) {
+              this.$store
+                .dispatch('controls/serverHardPowerOff')
+                .then((message) => {
+                  this.successToast(message);
+                  window.events.fire('powerActionServerStatus');
+                })
+                .catch(({ message }) => this.errorToast(message));
+            }
           });
       }
     },

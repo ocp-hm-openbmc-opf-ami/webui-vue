@@ -1253,6 +1253,7 @@
             "updateFirmwareInfo2": "The running image (%{running}) will be copied to backup. The backup image will be deleted.",
             "updateFirmwareInfo3": "Are you sure you want to proceed with the update?",
             "updateFirmwareInfoDefault": "The new image will be uploaded and activated. After that, the BMC or host will reboot automatically to run from the new image.",
+            "updateFirmwareInfoPfr": "After Successful Flash, System will entered secured update mode(T-1). During this time, the system will appear off/unresponsive and will not boot until the update completes (approx. 10 minutes). Please click Start update to continue.",
             "firmwareResetCalled": "BMC firmware reset has been called. Close the current session, and open a new session after a couple of minutes."
         },
         "toast": {
@@ -1269,6 +1270,8 @@
             "successEnabledClearConfig": "Successfully enabled Clear configuration.",
             "successDisabledClearConfig": "Successfully disabled Clear configuration.",
             "successUpdateFirmware": "Successfully updated the firmware.",
+            "successFirmwarePfrImmediate": "The image is now staged and the firmware update has started. Please do not power cycle or interrupt the system during this time.",
+            "successFirmwarePfrOnreset": "The image is now staged and the system is ready for update upon next reboot.  Please reboot the system to begin the update and Please do not power cycle or interrupt the system during this time.",
             "errorEnabledClearConfig": "Error enabling Clear configuration.",
             "errorDisabledClearConfig": "Error disabling Clear configuration."
         }
@@ -1781,6 +1784,9 @@
         "useNtp": "Use NTP Servers",
         "speed": "Speed (mbps)",
         "staticDns": "Static DNS",
+        "enableLAN": "Enable LAN",	
+        "ipv6Index": "IPv6 Index",
+        "ipv4ipv6statusinfo": "For the selected interface, either IPv4 or IPv6 support should be enabled; neither can be turned off simultaneously.", 
         "modal": {
             "confirmDisableDhcp": "Are you sure you want to disable DHCP?",
             "confirmEnableDhcp": "When DHCP is enabled, static IP addresses will not be accessible.",
@@ -1800,7 +1806,10 @@
             "confirmTitle": "Confirm?",
             "confirmMessage": "This configuration may change the IP address of the device, making further access impossible. After confirming the device IP, you can log in with the new IP. Do you want to proceed?",
             "informatiomTitle": "Information",
-            "informationMessage": "Network configuration has been reset successfully. Please close this browser session and open a new browser session to connect to the device with new IP"
+            "informationMessage": "Network configuration has been reset successfully. Please close this browser session and open a new browser session to connect to the device with new IP",
+            "lanInterface":"LAN Interface",
+            "enableLAN": "Enable LAN",
+            "confirmMsg": "This function may change the IP address of the device, and you may lose connectivity in this browser session. Please reconnect using new browser session after applying the changes. Do you want to proceed?"
         },
         "table": {
             "addDnsAddress": "Add IP address",
@@ -1818,11 +1827,18 @@
             "subnet": "Subnet mask",
             "prefixLength": "Prefix Length",
             "primaryDns": "Primary DNS Server",
-            "secondaryDns": "Secondary DNS Server"
+            "secondaryDns": "Secondary DNS Server",
+            "ipv6Index": "IPv6 Index"
         },
         "toast": {
             "errorSaveNetworkSettings": "Error updating %{setting} settings.",
-            "successSaveNetworkSettings": "Successfully updated %{setting} settings."
+            "successSaveNetworkSettings": "Successfully updated %{setting} settings.",
+            "successSaveLanconfigurationNetworkSettings": "Successfully updated LAN Configuration settings.",
+            "successSaveiIpNetworkSettings": "Successfully updated Interface settings.",
+            "errorSaveLanconfigurationNetworkSettings": "Error in updated LAN Configuration settings.",
+            "errorSaveIpNetworkSettings": "Error in updated Interface settings.",            
+            "errorAddressSaveNetworkSettings": "The IPv6 Address already exists.",
+            "AllInterfaceDisableInfo": "Ensure that more than one Interface is enabled before attempting to disable an interface."
         }
     },
     "pageNcsi": {

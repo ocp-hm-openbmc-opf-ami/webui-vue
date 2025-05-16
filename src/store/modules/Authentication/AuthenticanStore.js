@@ -160,7 +160,7 @@ const AuthenticationStore = {
       commit('logout');
       localStorage.removeItem('storedLanguage');
       Cookies.remove('loginSessionSuccess');
-      router.push('/login');
+      router.push('/login').catch(() => {});
     },
   },
 };

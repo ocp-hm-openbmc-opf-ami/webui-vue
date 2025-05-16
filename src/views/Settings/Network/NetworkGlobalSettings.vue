@@ -14,6 +14,16 @@
           </dd>
         </dl>
       </b-col>
+      <b-col md="3">
+        <dl>
+          <dt>
+            {{ $t('pageNetwork.enableLAN') }}
+            <b-button variant="link" class="p-2" @click="initEnableLansModal()">
+              <icon-edit />
+            </b-button>
+          </dt>
+        </dl>
+      </b-col>
     </b-row>
   </page-section>
 </template>
@@ -44,6 +54,9 @@ export default {
   methods: {
     initSettingsModal() {
       this.$bvModal.show('modal-hostname');
+    },
+    initEnableLansModal() {
+      this.$bvModal.show('modal-enable-lan');
     },
   },
 };

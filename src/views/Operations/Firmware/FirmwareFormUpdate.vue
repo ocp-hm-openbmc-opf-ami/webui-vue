@@ -162,6 +162,7 @@ export default {
       modalReset: 0,
       updateServiceData: {},
       activeBackupValue: {},
+      isPFREnable: process.env.VUE_APP_PFR_SUPPORT === 'true' ? true : false,
     };
   },
   computed: {
@@ -314,9 +315,15 @@ export default {
           if (this.applyTimeFormValue.applyTimeMode !== 'Immediate') {
             let applyTimeFirmwareninfo = '';
             if (this.applyTimeFormValue.applyTimeMode == 'OnReset') {
-              applyTimeFirmwareninfo = this.$tc(
-                'pageFirmware.form.updateFirmware.onResetinfo',
-              );
+              if (this.isPFREnable) {
+                applyTimeFirmwareninfo = this.$tc(
+                  'pageFirmware.toast.successFirmwarePfrOnreset',
+                );
+              } else {
+                applyTimeFirmwareninfo = this.$tc(
+                  'pageFirmware.form.updateFirmware.onResetinfo',
+                );
+              }
             } else if (
               this.applyTimeFormValue.applyTimeMode ==
               'AtMaintenanceWindowStart'
@@ -382,9 +389,17 @@ export default {
                       }
                     });
               } else {
-                this.successToast(
-                  i18n.t('pageFirmware.toast.successUpdateFirmware'),
-                );
+                if (this.isPFREnable) {
+                  if (this.applyTimeFormValue.applyTimeMode == 'Immediate') {
+                    this.successToast(
+                      i18n.t('pageFirmware.toast.successFirmwarePfrImmediate'),
+                    );
+                  }
+                } else {
+                  this.successToast(
+                    i18n.t('pageFirmware.toast.successUpdateFirmware'),
+                  );
+                }
               }
             } else {
               this.isProgress = false;

@@ -38,7 +38,7 @@ const checkForServerStatus = function (serverStatus, isKvm) {
    * means timeout value reduced 10 seconds for
    * updating the server status
    */
-  const timeoutValue = isKvm === 'kvm' ? 10000 : 300000;
+  const timeoutValue = isKvm === 'kvm' ? 10000 : 8000;
   return new Promise((resolve) => {
     const timer = setTimeout(() => {
       resolve();

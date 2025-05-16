@@ -404,22 +404,24 @@ const SystemInventoryStore = {
         )
         .then((ethernetInterfaces) => {
           ethernetInterfaces.forEach(({ data }) => {
-            data.IPv4Addresses.forEach((ipv4) => {
-              const networkIntefaces = {
-                id: data.Id || 'NA',
-                mACAddress: data.MACAddress || 'NA',
-                interfaceEnabled: data?.InterfaceEnabled
-                  ? data?.InterfaceEnabled
-                  : data?.InterfaceEnabled === false
+            if (data.InterfaceEnabled) {
+              data.IPv4Addresses.forEach((ipv4) => {
+                const networkIntefaces = {
+                  id: data.Id || 'NA',
+                  mACAddress: data.MACAddress || 'NA',
+                  interfaceEnabled: data?.InterfaceEnabled
                     ? data?.InterfaceEnabled
-                    : 'NA',
-                iPv4Addresses: ipv4.Address || 'NA',
-                hostName: data.HostName || 'NA',
-                state: data.Status?.State || 'NA',
-                address: ipv4.Address || 'NA',
-              };
-              networkInterfacesInfo.push(networkIntefaces);
-            });
+                    : data?.InterfaceEnabled === false
+                      ? data?.InterfaceEnabled
+                      : 'NA',
+                  iPv4Addresses: ipv4.Address || 'NA',
+                  hostName: data.HostName || 'NA',
+                  state: data.Status?.State || 'NA',
+                  address: ipv4.Address || 'NA',
+                };
+                networkInterfacesInfo.push(networkIntefaces);
+              });
+            }
           });
           commit('setBasebordInfoNetworkinterfaces', networkInterfacesInfo);
         })
@@ -443,21 +445,23 @@ const SystemInventoryStore = {
         )
         .then((ethernetInterfaces) => {
           ethernetInterfaces.forEach(({ data }) => {
-            data.IPv6Addresses.forEach((ipv6) => {
-              const ipv6Address = {
-                id: data.Id || 'NA',
-                address: ipv6.Address || 'NA',
-                prefixLength: ipv6.PrefixLength || 'NA',
-                scope: ipv6.AddressOrigin
-                  ? ipv6.AddressOrigin === 'SLAAC'
-                    ? 'Global'
-                    : ipv6.AddressOrigin === 'LinkLocal'
-                      ? 'LinkLocal'
-                      : ''
-                  : 'NA',
-              };
-              ipv6AddressInfo.push(ipv6Address);
-            });
+            if (data.InterfaceEnabled) {
+              data.IPv6Addresses.forEach((ipv6) => {
+                const ipv6Address = {
+                  id: data.Id || 'NA',
+                  address: ipv6.Address || 'NA',
+                  prefixLength: ipv6.PrefixLength || 'NA',
+                  scope: ipv6.AddressOrigin
+                    ? ipv6.AddressOrigin === 'SLAAC'
+                      ? 'Global'
+                      : ipv6.AddressOrigin === 'LinkLocal'
+                        ? 'LinkLocal'
+                        : ''
+                    : 'NA',
+                };
+                ipv6AddressInfo.push(ipv6Address);
+              });
+            }
           });
           commit('setBasebordInfoNetworkInterfacesIpv6', ipv6AddressInfo);
         })

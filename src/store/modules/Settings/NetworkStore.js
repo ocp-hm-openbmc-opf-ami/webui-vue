@@ -11,6 +11,7 @@ const NetworkStore = {
     selectedInterfaceIndex: 0, // which tab is selected
     networkBond: null,
     systemFirewall: null,
+    enableLanNetworkSettings: [],
   },
   getters: {
     ethernetData: (state) => state.ethernetData,
@@ -20,6 +21,7 @@ const NetworkStore = {
     selectedInterfaceIndex: (state) => state.selectedInterfaceIndex,
     getNetworkBond: (state) => state.networkBond,
     getSystemFirewall: (state) => state.systemFirewall,
+    getEnableLanNetworkSettings: (state) => state.enableLanNetworkSettings,
   },
   mutations: {
     setDomainNameState: (state, domainState) =>
@@ -30,52 +32,63 @@ const NetworkStore = {
     setFirstInterfaceId: (state, firstInterfaceId) =>
       (state.firstInterfaceId = firstInterfaceId),
     setIpv4Dhcp: (state, { dhcpEnable, index }) => {
-      console.log(state.globalNetworkSettings, dhcpEnable, index);
       state.globalNetworkSettings[index].ipv4DhcpEnabled = dhcpEnable;
     },
     setIpv6Dhcp: (state, { dhcpEnable, index }) => {
-      console.log(state.globalNetworkSettings, dhcpEnable, index);
       state.globalNetworkSettings[index].ipv6DhcpEnabled = dhcpEnable;
     },
     setGlobalNetworkSettings: (state, data) => {
-      state.globalNetworkSettings = data.map(({ data }) => {
-        const {
-          DHCPv4,
-          DHCPv6,
-          HostName,
-          IPv4Addresses,
-          IPv4StaticAddresses,
-          LinkStatus,
-          MACAddress,
-          Id,
-        } = data;
-        return {
-          defaultGateway: IPv4StaticAddresses[0]?.Gateway, //First static gateway is the default gateway
-          dhcpAddress: IPv4Addresses.filter(
-            (ipv4) => ipv4.AddressOrigin === 'DHCP',
-          ),
-          hostname: HostName,
-          macAddress: MACAddress,
-          linkStatus: LinkStatus,
-          staticAddress: IPv4StaticAddresses[0]?.Address, // Display first static address on overview page
-          dhcpv4: {
+      state.globalNetworkSettings = data
+        .filter(function (item) {
+          return item.data.InterfaceEnabled; // Keep only enabled interfaces
+        })
+        .map(function (item) {
+          var ethernetData = item.data;
+          const {
+            DHCPv4,
+            DHCPv6,
+            HostName,
+            IPv4Addresses,
+            IPv4StaticAddresses,
+            LinkStatus,
+            MACAddress,
+            Id,
+            Oem,
+          } = ethernetData;
+
+          return {
+            defaultGateway: IPv4StaticAddresses[0]?.Gateway, //First static gateway is the default gateway
+            dhcpAddress: IPv4Addresses.filter(
+              (ipv4) => ipv4.AddressOrigin === 'DHCP',
+            ),
+            hostname: HostName,
+            macAddress: MACAddress,
+            linkStatus: LinkStatus,
+            staticAddress: IPv4StaticAddresses[0]?.Address, // Display first static address on overview page
+            ipv4Status: Oem?.Ami
+              ? Oem?.Ami?.IPv4IPv6Configuration?.IPv4Enable
+              : true,
+            ipv6Status: Oem?.Ami
+              ? Oem?.Ami?.IPv4IPv6Configuration?.IPv6Enable
+              : true,
+            dhcpv4: {
+              useDnsEnabled: DHCPv4.UseDNSServers,
+              useDomainNameEnabled: DHCPv4.UseDomainName,
+              useNtpEnabled: DHCPv4.UseNTPServers,
+            },
+            dhcpv6: {
+              useDnsEnabled: DHCPv6.UseDNSServers,
+              useDomainNameEnabled: DHCPv6.UseDomainName,
+              useNtpEnabled: DHCPv6.UseNTPServers,
+            },
             useDnsEnabled: DHCPv4.UseDNSServers,
             useDomainNameEnabled: DHCPv4.UseDomainName,
             useNtpEnabled: DHCPv4.UseNTPServers,
-          },
-          dhcpv6: {
-            useDnsEnabled: DHCPv6.UseDNSServers,
-            useDomainNameEnabled: DHCPv6.UseDomainName,
-            useNtpEnabled: DHCPv6.UseNTPServers,
-          },
-          useDnsEnabled: DHCPv4.UseDNSServers,
-          useDomainNameEnabled: DHCPv4.UseDomainName,
-          useNtpEnabled: DHCPv4.UseNTPServers,
-          ipv4DhcpEnabled: DHCPv4.DHCPEnabled,
-          ipv6DhcpEnabled: DHCPv6.OperatingMode == 'Enabled' ? true : false,
-          id: Id,
-        };
-      });
+            ipv4DhcpEnabled: DHCPv4.DHCPEnabled,
+            ipv6DhcpEnabled: DHCPv6.OperatingMode == 'Enabled' ? true : false,
+            id: Id,
+          };
+        });
     },
     setNtpState: (state, ntpState) => (state.ntpState = ntpState),
     setSelectedInterfaceId: (state, selectedInterfaceId) =>
@@ -87,6 +100,9 @@ const NetworkStore = {
     },
     setSystemFirewall: (state, systemFirewall) => {
       state.systemFirewall = systemFirewall;
+    },
+    setEnableLanNetworkSettings: (state, enableLanNetworkSettings) => {
+      state.enableLanNetworkSettings = enableLanNetworkSettings;
     },
   },
   actions: {
@@ -106,14 +122,19 @@ const NetworkStore = {
           ),
         )
         .then((ethernetInterfaces) => {
-          const ethernetData = ethernetInterfaces.map(
-            (ethernetInterface) => ethernetInterface.data,
-          );
+          const ethernetData = ethernetInterfaces
+            .filter(function (ethernetInterface) {
+              return ethernetInterface.data.InterfaceEnabled; // Only include enabled interfaces
+            })
+            .map(function (ethernetInterface) {
+              return ethernetInterface.data;
+            });
           const firstInterfaceId = ethernetData[0].Id;
           commit('setEthernetData', ethernetData);
           commit('setFirstInterfaceId', firstInterfaceId);
           commit('setSelectedInterfaceId', firstInterfaceId);
           commit('setGlobalNetworkSettings', ethernetInterfaces);
+          commit('setEnableLanNetworkSettings', ethernetInterfaces);
           commit(
             'setNetworkBond',
             ethernetData[0].Actions?.Oem?.Ami[
@@ -316,18 +337,34 @@ const NetworkStore = {
           );
         });
     },
-    async saveIpv6Address({ state }, { dhcpv6State, ipv6Data, modalFormData }) {
+    async saveIpv6Address(
+      { state },
+      { dhcpv6State, ipv6Data, modalFormData, getOemAmiActions },
+    ) {
       let DHCPv6 = {
         OperatingMode: 'Disabled',
       };
       let IPv6StaticAddresses = [];
       let IPv6StaticDefaultGateways = [];
-      ipv6Data.forEach((rowData) => {
+      if (getOemAmiActions && modalFormData.ipv6Index !== undefined) {
+        // REP(Actions/Oem/Ami) Enabled pass the ipv6Index else remove the ipv6Index
         IPv6StaticAddresses.push({
-          Address: rowData.Address,
-          PrefixLength: parseInt(rowData.PrefixLength),
+          Address: modalFormData.Address,
+          PrefixLength: parseInt(modalFormData.PrefixLength),
+          Oem: {
+            Ami: {
+              StaticIPv6AddressIndex: parseInt(modalFormData.ipv6Index),
+            },
+          },
         });
-      });
+      } else {
+        ipv6Data.forEach((rowData) => {
+          IPv6StaticAddresses.push({
+            Address: rowData.Address,
+            PrefixLength: parseInt(rowData.PrefixLength),
+          });
+        });
+      }
       IPv6StaticDefaultGateways.push({
         Address: modalFormData.Gateway,
       });
@@ -358,21 +395,49 @@ const NetworkStore = {
         })
         .catch((error) => {
           console.log(error);
-          throw new Error(
-            i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
-              setting: i18n.t('pageNetwork.ipv6'),
-            }),
-          );
+          if (
+            (error.response &&
+              error.response.data &&
+              error.response.data.error[
+                '@Message.ExtendedInfo'
+              ][0].MessageId.includes('SameIPv6Address')) ||
+            error.response.data.error[
+              '@Message.ExtendedInfo'
+            ][0].MessageId.includes('PropertyValueIncorrect')
+          ) {
+            throw new Error(
+              i18n.t('pageNetwork.toast.errorAddressSaveNetworkSettings'),
+            );
+          } else {
+            throw new Error(
+              i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
+                setting: i18n.t('pageNetwork.ipv6'),
+              }),
+            );
+          }
         });
     },
-    async deleteIpv6Address({ state }, ipv6Data) {
+    async deleteIpv6Address({ state }, { ipv6TabelDataList, ipv6DataItem }) {
       let IPv6StaticAddresses = [];
-      ipv6Data.forEach((rowData) => {
+      if (ipv6DataItem && ipv6DataItem.ipv6Index !== undefined) {
+        // REP(Actions/Oem/Ami) Enabled pass the ipv6Index else remove the ipv6Index
         IPv6StaticAddresses.push({
-          Address: rowData.Address,
-          PrefixLength: parseInt(rowData.PrefixLength),
+          Address: null,
+          Oem: {
+            Ami: {
+              StaticIPv6AddressIndex: parseInt(ipv6DataItem.ipv6Index),
+            },
+          },
+          PrefixLength: parseInt(ipv6DataItem.PrefixLength),
         });
-      });
+      } else {
+        ipv6TabelDataList.forEach((rowData) => {
+          IPv6StaticAddresses.push({
+            Address: rowData.Address,
+            PrefixLength: parseInt(rowData.PrefixLength),
+          });
+        });
+      }
 
       return api
         .patch(
@@ -572,6 +637,65 @@ const NetworkStore = {
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.ntp'),
             }),
+          );
+        });
+    },
+    async interfaceEnabledStatus(_, data) {
+      const params = {
+        InterfaceEnabled: data.form.InterfaceEnabled,
+      };
+      return api
+        .patch(
+          `/redfish/v1/Managers/bmc/EthernetInterfaces/${data.form.lanInterface}`,
+          params,
+        )
+        .then(() =>
+          i18n.t(
+            'pageNetwork.toast.successSaveLanconfigurationNetworkSettings',
+          ),
+        )
+        .catch((error) => {
+          console.log(error);
+          if (
+            (error.response &&
+              error.response.data &&
+              error.response.data.error[
+                '@Message.ExtendedInfo'
+              ][0].MessageId.includes('SingleEthernetEnabled')) ||
+            error.response.data.error[
+              '@Message.ExtendedInfo'
+            ][0].MessageId.includes('propertyValueExternalConflict')
+          ) {
+            throw new Error(
+              i18n.t('pageNetwork.toast.AllInterfaceDisableInfo'),
+            );
+          } else {
+            throw new Error(
+              i18n.t(
+                'pageNetwork.toast.errorSaveLanconfigurationNetworkSettings',
+              ),
+            );
+          }
+        });
+    },
+    async networkIpv4Ipv6Status({ state }, IPv4IPv6Configuration) {
+      const params = {
+        Oem: {
+          Ami: {
+            IPv4IPv6Configuration,
+          },
+        },
+      };
+      return api
+        .patch(
+          `/redfish/v1/Managers/bmc/EthernetInterfaces/${state.selectedInterfaceId}`,
+          params,
+        )
+        .then(() => i18n.t('pageNetwork.toast.successSaveiIpNetworkSettings'))
+        .catch((error) => {
+          console.log(error);
+          throw new Error(
+            i18n.t('pageNetwork.toast.errorSaveIpNetworkSettings'),
           );
         });
     },

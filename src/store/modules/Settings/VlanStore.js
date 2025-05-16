@@ -31,9 +31,13 @@ const NetworkStore = {
           ),
         )
         .then((ethernetInterfaces) => {
-          const vlanAllData = ethernetInterfaces.map(
-            (ethernetInterface) => ethernetInterface.data,
-          );
+          const vlanAllData = ethernetInterfaces
+            .filter(function (ethernetInterface) {
+              return ethernetInterface.data.InterfaceEnabled; // Only include enabled interfaces
+            })
+            .map(function (ethernetInterface) {
+              return ethernetInterface.data;
+            });
           commit('setVlanAllData', vlanAllData);
           const vlanTableData = [];
           ethernetInterfaces.map((ethernetInterface) => {

@@ -1247,6 +1247,7 @@
             "updateFirmwareInfo2": "Das laufende Bild (%{running}) wird ins Backup kopiert. Das Backup-Image wird gelöscht.",
             "updateFirmwareInfo3": "Sind Sie sicher, dass Sie mit dem Update fortfahren möchten?",
             "updateFirmwareInfoDefault": "Das neue Bild wird hochgeladen und aktiviert. Danach wird der BMC oder Host automatisch neu gestartet, um mit dem neuen Image zu starten.",
+            "updateFirmwareInfoPfr": "Nach erfolgreichem Flash wechselt das System in den gesicherten Update-Modus (T-1). Während dieser Zeit erscheint das System ausgeschaltet/reagiert nicht und startet erst, wenn die Aktualisierung abgeschlossen ist (ca. 10 Minuten). Klicken Sie bitte auf Update starten, um fortzufahren.",
             "firmwareResetCalled": "BMC Firmware-Reset wurde aufgerufen. Schließen Sie die aktuelle Sitzung und öffnen Sie nach ein paar Minuten eine neue Sitzung."
         },
         "toast": {
@@ -1263,6 +1264,8 @@
             "successEnabledClearConfig": "Konfiguration löschen erfolgreich aktiviert.",
             "successDisabledClearConfig": "Konfiguration löschen erfolgreich deaktiviert.",
             "successUpdateFirmware": "Die Firmware wurde erfolgreich aktualisiert.",
+            "successFirmwarePfrImmediate": "Das Image ist nun bereitgestellt und das Firmware-Update hat begonnen. Bitte schalten Sie das System während dieser Zeit nicht aus und wieder ein und unterbrechen Sie es nicht.",
+            "successFirmwarePfrOnreset": "Das Image ist nun bereitgestellt und das System ist beim nächsten Neustart für die Aktualisierung bereit.  Bitte starten Sie das System neu, um mit der Aktualisierung zu beginnen. Schalten Sie das System während dieser Zeit nicht aus und wieder ein und unterbrechen Sie es nicht.",
             "errorEnabledClearConfig": "Fehler beim Aktivieren der Konfiguration löschen.",
             "errorDisabledClearConfig": "Fehler beim Deaktivieren der Konfiguration löschen."
         }
@@ -1775,6 +1778,9 @@
         "useNtp": "Verwenden Sie NTP Server",
         "speed": "Geschwindigkeit (mbps)",
         "staticDns": "Statisches DNS",
+        "enableLAN": "LAN aktivieren",	
+        "ipv6Index": "IPv6 Index", 
+        "ipv4ipv6statusinfo": "Für die ausgewählte Schnittstelle sollte entweder IPv4- oder IPv6-Unterstützung aktiviert sein; Beides kann nicht gleichzeitig ausgeschaltet werden.",
         "modal": {
             "confirmDisableDhcp": "Sind Sie sicher, dass Sie DHCP deaktivieren möchten??",
             "confirmEnableDhcp": "Wenn DHCP aktiviert ist, ist der Zugriff auf statische IP Adressen nicht möglich.",
@@ -1794,7 +1800,10 @@
             "confirmTitle": "Bestätigen?",
             "confirmMessage":"Diese Konfiguration kann dazu führen, dass sich die IP Adresse des Geräts ändert und ein weiterer Zugriff unmöglich wird. Nach Bestätigung der Geräte IP können Sie sich mit der neuen IP anmelden. Möchten Sie fortfahren?",
             "informatiomTitle": "Information",
-            "informationMessage": "Die Netzwerkkonfiguration wurde erfolgreich zurückgesetzt. Bitte schließen Sie diese Browsersitzung und öffnen Sie eine neue Browsersitzung, um eine Verbindung zum Gerät mit neuer IP herzustellen"
+            "informationMessage": "Die Netzwerkkonfiguration wurde erfolgreich zurückgesetzt. Bitte schließen Sie diese Browsersitzung und öffnen Sie eine neue Browsersitzung, um eine Verbindung zum Gerät mit neuer IP herzustellen",
+            "lanInterface":"LAN-Schnittstelle",
+            "enableLAN": "LAN aktivieren",
+            "confirmMsg": "Diese Funktion kann die IP-Adresse des Geräts ändern und es kann sein, dass Sie in dieser Browsersitzung die Verbindung verlieren. Bitte stellen Sie die Verbindung mit einer neuen Browsersitzung wieder her, nachdem Sie die Änderungen übernommen haben. Möchten Sie fortfahren?"
         },
         "table": {
             "addDnsAddress": "IP Adresse hinzufügen",
@@ -1812,11 +1821,18 @@
             "subnet": "Subnetzmaske",
             "prefixLength": "Präfixlänge",
             "primaryDns": "Primärer DNS Server",
-            "secondaryDns": "Zweiter DNS Server"
+            "secondaryDns": "Zweiter DNS Server",
+            "ipv6Index": "IPv6 Index"
         },
         "toast": {
             "errorSaveNetworkSettings": "Fehler beim Aktualisieren der %{setting} Einstellungen.",
-            "successSaveNetworkSettings": "Erfolgreich aktualisiert %{setting} Einstellungen."
+            "successSaveNetworkSettings": "Erfolgreich aktualisiert %{setting} Einstellungen.",
+            "successSaveLanconfigurationNetworkSettings": "LAN-Konfigurationseinstellungen erfolgreich aktualisiert.",
+            "successSaveiIpNetworkSettings": "Schnittstelleneinstellungen erfolgreich aktualisiert.",
+            "errorSaveLanconfigurationNetworkSettings": "Fehler in den aktualisierten LAN-Konfigurationseinstellungen.",
+            "errorSaveIpNetworkSettings": "Fehler in den aktualisierten Schnittstelleneinstellungen.",            
+            "errorAddressSaveNetworkSettings": "Die IPv6-Adresse existiert bereits.",
+            "AllInterfaceDisableInfo": "Stellen Sie sicher, dass mehr als eine Schnittstelle aktiviert ist, bevor Sie versuchen, eine Schnittstelle zu deaktivieren. "
         }
     },
     "pageNcsi": {
