@@ -301,7 +301,7 @@ exports[`AppHeader.vue should render correctly 1`] = `
               <p
                 id="cancel-label"
               >
-                Please wait...
+                global.ariaLabel.waitLoadingBar
               </p>
             </div>
           </div>
