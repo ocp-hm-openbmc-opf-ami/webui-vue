@@ -132,62 +132,6 @@ const routes = [
         },
       },
       {
-        path: '/logs/dumps',
-        name: 'dumps',
-        component: Dumps,
-        meta: {
-          title: i18n.t('appPageTitle.dumps'),
-        },
-      },
-      {
-        path: '/logs/event-logs',
-        name: 'event-logs',
-        component: EventLogs,
-        meta: {
-          title: i18n.t('appPageTitle.eventLogs'),
-        },
-      },
-      {
-        path: '/logs/post-code-logs',
-        name: 'post-code-logs',
-        component: PostCodeLogs,
-        meta: {
-          title: i18n.t('appPageTitle.postCodeLogs'),
-        },
-      },
-      {
-        path: '/hardware-status/inventory',
-        name: 'inventory',
-        component: Inventory,
-        meta: {
-          title: i18n.t('appPageTitle.inventory'),
-        },
-      },
-      {
-        path: '/hardware-status/sensors',
-        name: 'sensors',
-        component: Sensors,
-        meta: {
-          title: i18n.t('appPageTitle.sensors'),
-        },
-      },
-      {
-        path: '/security-and-access/sessions',
-        name: 'sessions',
-        component: Sessions,
-        meta: {
-          title: i18n.t('appPageTitle.sessions'),
-        },
-      },
-      {
-        path: '/security-and-access/ldap',
-        name: 'ldap',
-        component: Ldap,
-        meta: {
-          title: i18n.t('appPageTitle.ldap'),
-        },
-      },
-      {
         path: '/security-and-access/user-management',
         name: 'user-management',
         component: UserManagement,
@@ -212,43 +156,11 @@ const routes = [
         },
       },
       {
-        path: '/settings/date-time',
-        name: 'date-time',
-        component: DateTime,
-        meta: {
-          title: i18n.t('appPageTitle.dateTime'),
-        },
-      },
-      {
-        path: '/settings/bsod',
-        name: 'bsod',
-        component: Bsod,
-        meta: {
-          title: i18n.t('appPageTitle.bsod'),
-        },
-      },
-      {
-        path: '/operations/kvm',
-        name: 'kvm',
-        component: Kvm,
-        meta: {
-          title: i18n.t('appPageTitle.kvm'),
-        },
-      },
-      {
         path: '/operations/factory-default',
         name: 'factory-default',
         component: FactoryDefault,
         meta: {
           title: i18n.t('appPageTitle.FactoryDefault'),
-        },
-      },
-      {
-        path: '/operations/firmware',
-        name: 'firmware',
-        component: Firmware,
-        meta: {
-          title: i18n.t('appPageTitle.firmware'),
         },
       },
       {
@@ -260,43 +172,11 @@ const routes = [
         },
       },
       {
-        path: '/settings/smtp',
-        name: 'smtpSettings',
-        component: SmtpSettings,
-        meta: {
-          title: i18n.t('appPageTitle.smtpSettings'),
-        },
-      },
-      {
         path: '/pef/eventFilter',
         name: 'eventFilter',
         component: EventFilter,
         meta: {
           title: i18n.t('appPageTitle.eventFilter'),
-        },
-      },
-      {
-        path: '/settings/network',
-        name: 'network',
-        component: Network,
-        meta: {
-          title: i18n.t('appPageTitle.network'),
-        },
-      },
-      {
-        path: '/settings/network-ddns',
-        name: 'network-DDNS',
-        component: DDNS,
-        meta: {
-          title: i18n.t('appPageTitle.networkDDNS'),
-        },
-      },
-      {
-        path: '/settings/vlan',
-        name: 'vlan',
-        component: Vlan,
-        meta: {
-          title: i18n.t('appPageTitle.vlan'),
         },
       },
       {
@@ -308,44 +188,6 @@ const routes = [
         },
       },
       {
-        path: '/settings/snmp',
-        name: 'snmp',
-        component: SnmpSettings,
-        meta: {
-          title: i18n.t('appPageTitle.snmpSettings'),
-        },
-      },
-      {
-        path: '/operations/serial-over-lan',
-        name: 'serial-over-lan',
-        component: SerialOverLan,
-        meta: {
-          title: i18n.t('appPageTitle.serialOverLan'),
-          exclusiveToRoles: [roles.administrator],
-        },
-      },
-      {
-        path: '/operations/server-power-operations',
-        name: 'server-power-operations',
-        component: ServerPowerOperations,
-        meta: {
-          title: i18n.t('appPageTitle.serverPowerOperations'),
-        },
-      },
-      {
-        path: '/operations/virtual-media',
-        name: 'virtual-media',
-        component: VirtualMedia,
-        meta: {
-          title: i18n.t('appPageTitle.virtualMedia'),
-          exclusiveToRoles: [
-            roles.administrator,
-            roles.operator,
-            roles.readonly,
-          ],
-        },
-      },
-      {
         path: '/operations/tasks',
         name: 'tasks',
         component: Tasks,
@@ -354,43 +196,11 @@ const routes = [
         },
       },
       {
-        path: '/settings/license',
-        name: 'License',
-        component: License,
-        meta: {
-          title: i18n.t('appPageTitle.License'),
-        },
-      },
-      {
-        path: '/system-inventory',
-        name: 'system-inventory',
-        component: systemInventory,
-        meta: {
-          title: i18n.t('appPageTitle.systemInventory'),
-        },
-      },
-      {
         path: '/settings/pam',
         name: 'pam',
         component: PAM,
         meta: {
           title: i18n.t('appPageTitle.pam'),
-        },
-      },
-      {
-        path: '/settings/auto-video',
-        name: 'auto-video',
-        component: AutoVideoSettings,
-        meta: {
-          title: i18n.t('appPageTitle.autoVideo'),
-        },
-      },
-      {
-        path: '/logs/video-log',
-        name: 'video-log',
-        component: VideoLogs,
-        meta: {
-          title: i18n.t('appPageTitle.videoLog'),
         },
       },
     ],
@@ -543,7 +353,17 @@ if (process.env.VUE_APP_ONETREE_NIC_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_RADIUS_SUPPORT == 'true') {
+if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/system-inventory',
+    name: 'system-inventory',
+    component: systemInventory,
+    meta: {
+      title: i18n.t('appPageTitle.systemInventory'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_RADIUS_CLIENT_ENABLED == 'true') {
   routes[2].children.push({
     path: '/security-and-access/radius',
     name: 'radius',
@@ -595,7 +415,7 @@ if (process.env.VUE_APP_ONETREE_INTELSIPACK_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
+if (process.env.VUE_APP_ONETREE_BACKUP_RESTORE_ENABLED == 'true') {
   routes[2].children.push({
     path: '/operations/backup-and-restore',
     name: 'backup-and-restore',
@@ -608,7 +428,7 @@ if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
+if (process.env.VUE_APP_ONETREE_NETWORK_NCSI_SUPPORT_ENABLED == 'true') {
   routes[2].children.push({
     path: '/settings/ncsi',
     name: 'ncsi',
@@ -619,7 +439,9 @@ if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
+if (
+  process.env.VUE_APP_ONETREE_NETWORK_SYSTEM_FIREWALL_SUPPORT_ENABLED == 'true'
+) {
   routes[2].children.push({
     path: '/settings/firewall',
     name: 'FireWall',
@@ -643,7 +465,7 @@ if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
+if (process.env.VUE_APP_ONETREE_NETWORK_BONDING_SUPPORT_ENABLED == 'true') {
   routes[2].children.push({
     path: '/settings/bond',
     name: 'Bond',
@@ -654,7 +476,228 @@ if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
     },
   });
 }
-
+if (process.env.VUE_APP_ONETREE_SMTP_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/smtp',
+    name: 'smtpSettings',
+    component: SmtpSettings,
+    meta: {
+      title: i18n.t('appPageTitle.smtpSettings'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_SNMP_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/snmp',
+    name: 'snmp',
+    component: SnmpSettings,
+    meta: {
+      title: i18n.t('appPageTitle.snmpSettings'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_KVM_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/logs/video-log',
+    name: 'video-log',
+    component: VideoLogs,
+    meta: {
+      title: i18n.t('appPageTitle.videoLog'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_KVM_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/bsod',
+    name: 'bsod',
+    component: Bsod,
+    meta: {
+      title: i18n.t('appPageTitle.bsod'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_KVM_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/operations/kvm',
+    name: 'kvm',
+    component: Kvm,
+    meta: {
+      title: i18n.t('appPageTitle.kvm'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_FWUPDATE_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/operations/firmware',
+    name: 'firmware',
+    component: Firmware,
+    meta: {
+      title: i18n.t('appPageTitle.firmware'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_KVM_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/auto-video',
+    name: 'auto-video',
+    component: AutoVideoSettings,
+    meta: {
+      title: i18n.t('appPageTitle.autoVideo'),
+    },
+  });
+}
+if (process.env.VUE_APP_OBMC_DEBUG_COLLECTOR_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/logs/dumps',
+    name: 'dumps',
+    component: Dumps,
+    meta: {
+      title: i18n.t('appPageTitle.dumps'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_SEL_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/logs/event-logs',
+    name: 'event-logs',
+    component: EventLogs,
+    meta: {
+      title: i18n.t('appPageTitle.eventLogs'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_POSTCODE_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/logs/post-code-logs',
+    name: 'post-code-logs',
+    component: PostCodeLogs,
+    meta: {
+      title: i18n.t('appPageTitle.postCodeLogs'),
+    },
+  });
+}
+if (process.env.VUE_APP_OBMC_LEDS_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/hardware-status/inventory',
+    name: 'inventory',
+    component: Inventory,
+    meta: {
+      title: i18n.t('appPageTitle.inventory'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_SENSORS_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/hardware-status/sensors',
+    name: 'sensors',
+    component: Sensors,
+    meta: {
+      title: i18n.t('appPageTitle.sensors'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_SOL_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/operations/serial-over-lan',
+    name: 'serial-over-lan',
+    component: SerialOverLan,
+    meta: {
+      title: i18n.t('appPageTitle.serialOverLan'),
+      exclusiveToRoles: [roles.administrator],
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_POWER_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/operations/server-power-operations',
+    name: 'server-power-operations',
+    component: ServerPowerOperations,
+    meta: {
+      title: i18n.t('appPageTitle.serverPowerOperations'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_MEDIA_REDIRECT_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/operations/virtual-media',
+    name: 'virtual-media',
+    component: VirtualMedia,
+    meta: {
+      title: i18n.t('appPageTitle.virtualMedia'),
+      exclusiveToRoles: [roles.administrator, roles.operator, roles.readonly],
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_NTP_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/date-time',
+    name: 'date-time',
+    component: DateTime,
+    meta: {
+      title: i18n.t('appPageTitle.dateTime'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_NETWORK_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/network',
+    name: 'network',
+    component: Network,
+    meta: {
+      title: i18n.t('appPageTitle.network'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_NETWORK_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/network-ddns',
+    name: 'network-DDNS',
+    component: DDNS,
+    meta: {
+      title: i18n.t('appPageTitle.networkDDNS'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_NETWORK_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/vlan',
+    name: 'vlan',
+    component: Vlan,
+    meta: {
+      title: i18n.t('appPageTitle.vlan'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_LICENSE_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/license',
+    name: 'License',
+    component: License,
+    meta: {
+      title: i18n.t('appPageTitle.License'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_SESSION_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/security-and-access/sessions',
+    name: 'sessions',
+    component: Sessions,
+    meta: {
+      title: i18n.t('appPageTitle.sessions'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_LDAP_CLIENT_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/security-and-access/ldap',
+    name: 'ldap',
+    component: Ldap,
+    meta: {
+      title: i18n.t('appPageTitle.ldap'),
+    },
+  });
+}
 routes[2].children.push({
   path: '*',
   name: 'page-not-found',
