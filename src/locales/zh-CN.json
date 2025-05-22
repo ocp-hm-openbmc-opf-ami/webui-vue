@@ -2054,12 +2054,12 @@
         "rebootBmc": "重新启动 BMC",
         "rebootInformation": "当您重新启动 BMC 时，您的 Web 浏览器将与 BMC 失去联系几分钟。 当 BMC 重新上线后，您可能需要重新登录。",
         "modal": {
-            "confirmMessage": "您确定要重新启动 BMC 吗？",
+            "confirmMessage": "您确定要重启 BMC 吗？重启 BMC 需要几分钟时间。重启 BMC 成功完成后，请关闭当前会话并打开一个新会话。",
             "confirmTitle": "确认 BMC 重启"
         },
         "toast": {
-            "errorRebootStart": "重启 BMC 失败",
-            "successRebootStart": "正在重启 BMC "
+            "errorRebootStart": "重新启动 BMC 时出错。",
+            "successRebootStart": "成功重启 BMC。"
         }
     },
     "pagePolicies": {

@@ -2063,12 +2063,12 @@
         "rebootBmc": "Reboot BMC",
         "rebootInformation": "When you reboot the BMC, your web browser loses contact with the BMC for several minutes. When the BMC is back online, you may need to log in again.",
         "modal": {
-            "confirmMessage": "Are you sure you want to reboot the BMC?",
+            "confirmMessage": "Are you sure you want to reboot the BMC? To start Reboot BMC it will take few minutes. Close the current session and open a new session after Reboot BMC sucessfully completed.",
             "confirmTitle": "Confirm BMC reboot"
         },
         "toast": {
-            "errorRebootStart": "Error rebooting BMC.",
-            "successRebootStart": "Rebooting BMC."
+            "errorRebootStart": "Error in rebooting BMC.",
+            "successRebootStart": "Successfully rebooting BMC."
         }
     },
     "pagePolicies": {

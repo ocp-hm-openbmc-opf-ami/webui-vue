@@ -2044,12 +2044,12 @@
         "rebootBmc": "Starten Sie BMC neu",
         "rebootInformation": "Wenn Sie den BMC neu starten, verliert Ihr Webbrowser für einige Minuten den Kontakt zum BMC. Wenn der BMC wieder online ist, müssen Sie sich möglicherweise erneut anmelden.",
         "modal": {
-            "confirmMessage": "Sind Sie sicher, dass Sie den BMC neu starten möchten?",
+            "confirmMessage": "Möchten Sie den BMC wirklich neu starten? Der Neustart des BMC dauert einige Minuten. Schließen Sie die aktuelle Sitzung und öffnen Sie eine neue, nachdem der Neustart des BMC erfolgreich abgeschlossen ist.",
             "confirmTitle": "Bestätigen Sie den BMC-Neustart"
         },
         "toast": {
-            "errorRebootStart": "Fehler beim Neustart von BMC.",
-            "successRebootStart": "BMC neu starten."
+            "errorRebootStart": "Fehler beim Neustart des BMC.",
+            "successRebootStart": "BMC wurde erfolgreich neugestartet."
         }
     },
     "pagePolicies": {
