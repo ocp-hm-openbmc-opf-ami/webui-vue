@@ -162,6 +162,13 @@ const AuthenticationStore = {
       Cookies.remove('loginSessionSuccess');
       router.push('/login').catch(() => {});
     },
+    clearCookie({ commit }) {
+      Cookies.remove('XSRF-TOKEN');
+      Cookies.remove('IsAuthenticated');
+      Cookies.remove('loginSessionSuccess');
+      commit('setConsoleWindow', false);
+      localStorage.clear();
+    },
   },
 };
 

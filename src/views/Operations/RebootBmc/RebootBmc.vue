@@ -72,10 +72,19 @@ export default {
         });
     },
     rebootBmc() {
+      this.startLoader();
       this.$store
         .dispatch('controls/rebootBmc')
-        .then((message) => this.successToast(message))
-        .catch(({ message }) => this.errorToast(message));
+        .then((message) => {
+          this.successToast(message);
+          setTimeout(() => {
+            this.$store.dispatch('authentication/clearCookie');
+          }, 10000); // wait to load the session
+        })
+        .catch(({ message }) => {
+          this.errorToast(message);
+          this.endLoader();
+        });
     },
   },
 };

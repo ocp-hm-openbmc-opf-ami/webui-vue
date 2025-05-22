@@ -2019,12 +2019,12 @@
         "rebootBmc": "重新啟動 BMC",
         "rebootInformation": "當您重新啟動 BMC 時，您的 Web 瀏覽器將與 BMC 失去聯繫幾分鐘。 當BMC重新上線後，您可能需要重新登錄。",
         "modal": {
-            "confirmMessage": "您確定要重新啟動 BMC 嗎？",
+            "confirmMessage": "您確定要重新啟動 BMC 嗎？開始重新啟動 BMC 需要幾分鐘。重新啟動 BMC 成功完成後，關閉目前會話並開啟一個新會話。",
             "confirmTitle": "確認 BMC 重啟"
         },
         "toast": {
-            "errorRebootStart": "重啟 BMC 失敗",
-            "successRebootStart": "正在重啟 BMC "
+            "errorRebootStart": "重新啟動 BMC 時發生錯誤。",
+            "successRebootStart": "成功重啟 BMC。"
         }
     },
     "pagePolicies": {
