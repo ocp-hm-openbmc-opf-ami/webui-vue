@@ -25,6 +25,7 @@
       </b-row>
     </page-section>
     <b-button type="submit" variant="primary" @click="doNSUpdate">
+      <icon-update />
       {{ $t('pageDDNSNetwork.ddnsConfiguration.doNsupdate') }}
     </b-button>
   </b-container>
@@ -38,6 +39,7 @@ import DdnsSettings from './ddnsSettings.vue';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import { mapState } from 'vuex';
+import IconUpdate from '@carbon/icons-vue/es/update-now/20';
 export default {
   name: 'DDNSConfiguration',
   components: {
@@ -45,6 +47,7 @@ export default {
     PageTitle,
     DdnsConfiguration,
     DdnsSettings,
+    IconUpdate,
   },
   mixins: [LoadingBarMixin, BVToastMixin],
   data() {

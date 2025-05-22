@@ -119,6 +119,7 @@
               :disabled="disabledNetworkLinkStatus"
               @click="onSave"
             >
+              <icon-save />
               {{ $t('global.action.save') }}
             </b-button>
           </b-form>
@@ -135,9 +136,11 @@ import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import _ from 'lodash';
 import { mapState } from 'vuex';
+import IconSave from '@carbon/icons-vue/es/save/20';
 export default {
   components: {
     PageTitle,
+    IconSave,
   },
   mixins: [LoadingBarMixin, VuelidateMixin, BVToastMixin],
   data() {

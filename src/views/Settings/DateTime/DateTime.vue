@@ -222,6 +222,7 @@
             type="submit"
             data-test-id="dateTime-button-saveSettings"
           >
+            <icon-save />
             {{ $t('global.action.save') }}
           </b-button>
         </b-form-group>
@@ -243,13 +244,14 @@ import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import timezone from '@/locales/time-zone.json';
 import { mapState } from 'vuex';
 import { requiredIf, helpers } from 'vuelidate/lib/validators';
+import IconSave from '@carbon/icons-vue/es/save/20';
 
 const isoDateRegex = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
 const isoTimeRegex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
 
 export default {
   name: 'DateTime',
-  components: { Alert, IconCalendar, PageTitle, PageSection },
+  components: { Alert, IconCalendar, PageTitle, PageSection, IconSave },
   mixins: [
     BVToastMixin,
     LoadingBarMixin,

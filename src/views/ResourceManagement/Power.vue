@@ -55,6 +55,7 @@
             type="submit"
             data-test-id="power-button-savePowerCapValue"
           >
+            <icon-save />
             {{ $t('global.action.save') }}
           </b-button>
         </b-form-group>
@@ -70,10 +71,11 @@ import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import { requiredIf, between } from 'vuelidate/lib/validators';
 import { mapGetters } from 'vuex';
+import IconSave from '@carbon/icons-vue/es/save/20';
 
 export default {
   name: 'Power',
-  components: { PageTitle },
+  components: { PageTitle, IconSave },
   mixins: [VuelidateMixin, BVToastMixin, LoadingBarMixin],
   beforeRouteLeave(to, from, next) {
     this.hideLoader();

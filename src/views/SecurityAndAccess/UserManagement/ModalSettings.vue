@@ -106,6 +106,7 @@
         data-test-id="userManagement-button-cancel"
         @click="cancel()"
       >
+        <icon-cancel />
         {{ $t('global.action.cancel') }}
       </b-button>
       <b-button
@@ -115,6 +116,7 @@
         data-test-id="userManagement-button-submit"
         @click="onOk"
       >
+        <icon-save />
         {{ $t('global.action.save') }}
       </b-button>
     </template>
@@ -129,8 +131,14 @@ import {
   minValue,
   maxValue,
 } from 'vuelidate/lib/validators';
+import IconSave from '@carbon/icons-vue/es/save/20';
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
 
 export default {
+  components: {
+    IconSave,
+    IconCancel,
+  },
   mixins: [VuelidateMixin],
   props: {
     settings: {

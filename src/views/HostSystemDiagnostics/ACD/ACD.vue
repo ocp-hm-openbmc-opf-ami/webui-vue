@@ -75,7 +75,9 @@
             variant="primary"
             :disabled="allConnections.length === 0"
             @click="downloadZipFile"
-            >{{ $t('pageAutonomousCrashDump.action.download') }}</b-button
+            ><icon-download />{{
+              $t('pageAutonomousCrashDump.action.download')
+            }}</b-button
           >
           <b-tooltip target="downloadlog" triggers> </b-tooltip>
         </b-form-group>
@@ -110,6 +112,7 @@ import Loader from '@/components/Global/Loader';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
 import { mapState } from 'vuex';
+import IconDownload from '@carbon/icons-vue/es/document--download/20';
 export default {
   components: {
     PageTitle,
@@ -118,6 +121,7 @@ export default {
     IconAdd,
     ModalView,
     Loader,
+    IconDownload,
   },
   mixins: [LoadingBarMixin, BVToastMixin],
   beforeRouteLeave(to, from, next) {

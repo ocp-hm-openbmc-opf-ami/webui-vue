@@ -15,7 +15,7 @@
         "test:update": "vue-cli-service test:unit -u"
     },
     "dependencies": {
-        "@carbon/icons-vue": "10.28.0",
+        "@carbon/icons-vue": "10.99.1",
         "@fontsource/source-sans-pro": "5.0.5",
         "@novnc/novnc": "1.2.0",
         "axios": "1.6.0",

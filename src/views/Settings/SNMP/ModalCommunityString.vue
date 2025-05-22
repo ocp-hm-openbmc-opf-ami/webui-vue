@@ -141,7 +141,7 @@
 import { required } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import IconSave from '@carbon/icons-vue/es/save/20';
-import IconCancel from '@carbon/icons-vue/es/close/20';
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 export default {
   components: {

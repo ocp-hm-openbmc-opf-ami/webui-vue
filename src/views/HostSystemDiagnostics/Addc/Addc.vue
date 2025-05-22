@@ -195,6 +195,7 @@
           </b-col>
           <b-col sm="6" md="3">
             <b-button type="submit" variant="primary" @click="onOk">
+              <icon-save />
               {{ $t('global.action.save') }}
             </b-button>
           </b-col>
@@ -297,12 +298,14 @@ import BVPaginationMixin, {
 } from '@/components/Mixins/BVPaginationMixin';
 import Search from '@/components/Global/Search';
 import TableCellCount from '@/components/Global/TableCellCount';
+import IconSave from '@carbon/icons-vue/es/save/20';
 export default {
   components: {
     PageTitle,
     IconDownload,
     Search,
     TableCellCount,
+    IconSave,
   },
   mixins: [
     LoadingBarMixin,

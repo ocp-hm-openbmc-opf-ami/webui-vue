@@ -23,6 +23,7 @@
             data-test-id="alertDestination-button-sendTestTrap"
             @click="initModalNewPolicy(null)"
           >
+            <icon-add />
             {{ $t('pageNodeManager.createNewPolicy') }}
           </b-button>
         </b-col>
@@ -121,6 +122,7 @@ import SearchFilterMixin, {
 import Search from '@/components/Global/Search';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 export default {
   name: 'NMConfiguration',
   components: {
@@ -130,6 +132,7 @@ export default {
     IconEdit,
     TableCellCount,
     Search,
+    IconAdd,
   },
   mixins: [
     BVPaginationMixin,

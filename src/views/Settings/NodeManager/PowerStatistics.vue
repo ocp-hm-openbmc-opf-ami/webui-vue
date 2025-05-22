@@ -23,6 +23,7 @@
             data-test-id="alertDestination-button-sendTestTrap"
             @click="initModalSetCapability()"
           >
+            <icon-add />
             {{ $t('pageNodeManager.setCapabilityModal.setCapabilityStr') }}
           </b-button>
         </b-col>
@@ -94,12 +95,14 @@ import SearchFilterMixin, {
 } from '@/components/Mixins/SearchFilterMixin';
 import Search from '@/components/Global/Search';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
+import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 export default {
   name: 'PowerStatistics',
   components: {
     ModalSetCapability,
     TableCellCount,
     Search,
+    IconAdd,
   },
   mixins: [
     LoadingBarMixin,

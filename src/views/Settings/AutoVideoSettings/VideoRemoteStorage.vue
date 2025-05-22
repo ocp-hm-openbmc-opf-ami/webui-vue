@@ -253,6 +253,7 @@
           <b-row class="mt-4 mb-5">
             <b-col>
               <b-button type="submit" variant="primary" @click="onOk">
+                <icon-save />
                 {{ $t('global.action.save') }}
               </b-button>
             </b-col>
@@ -272,11 +273,13 @@ import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { mapState } from 'vuex';
 
 import { requiredIf } from 'vuelidate/lib/validators';
+import IconSave from '@carbon/icons-vue/es/save/20';
 
 export default {
   name: 'Videoremotestorage',
   components: {
     PageSection,
+    IconSave,
   },
   mixins: [BVToastMixin, DataFormatterMixin, VuelidateMixin, LoadingBarMixin],
   props: {

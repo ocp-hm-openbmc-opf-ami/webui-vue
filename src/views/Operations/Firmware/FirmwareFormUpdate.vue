@@ -91,6 +91,7 @@
           variant="primary"
           :disabled="isPageDisabled"
         >
+          <icon-update />
           {{ $t('pageFirmware.form.updateFirmware.startUpdate') }}
         </b-btn>
       </b-form>
@@ -119,9 +120,10 @@ import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
 import i18n from '@/i18n';
 import FormFile from '@/components/Global/FormFile';
 import ModalUpdateFirmware from './FirmwareModalUpdateFirmware';
+import IconUpdate from '@carbon/icons-vue/es/update-now/20';
 
 export default {
-  components: { FormFile, ModalUpdateFirmware },
+  components: { FormFile, ModalUpdateFirmware, IconUpdate },
   mixins: [BVToastMixin, LoadingBarMixin, VuelidateMixin, UtcDateTimeMixin],
   props: {
     isPageDisabled: {

@@ -25,6 +25,7 @@
             data-test-id="rebootBmc-button-reboot"
             @click="onClick"
           >
+            <icon-reset />
             {{ $t('pageRebootBmc.rebootBmc') }}
           </b-button>
         </page-section>
@@ -38,10 +39,11 @@ import PageTitle from '@/components/Global/PageTitle';
 import PageSection from '@/components/Global/PageSection';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import IconReset from '@carbon/icons-vue/es/reset/20';
 
 export default {
   name: 'RebootBmc',
-  components: { PageTitle, PageSection },
+  components: { PageTitle, PageSection, IconReset },
   mixins: [BVToastMixin, LoadingBarMixin],
   beforeRouteLeave(to, from, next) {
     this.hideLoader();

@@ -409,6 +409,7 @@
         data-test-id="userManagement-button-cancel"
         @click="cancel()"
       >
+        <icon-cancel />
         {{ $t('global.action.cancel') }}
       </b-button>
       <b-button
@@ -419,9 +420,11 @@
         @click="onOk"
       >
         <template v-if="newUser">
+          <icon-add />
           {{ $t('pageUserManagement.addUser') }}
         </template>
         <template v-else>
+          <icon-save />
           {{ $t('global.action.save') }}
         </template>
       </b-button>
@@ -441,9 +444,12 @@ import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import InputPasswordToggle from '@/components/Global/InputPasswordToggle';
 import Alert from '@/components/Global/Alert';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
+import IconSave from '@carbon/icons-vue/es/save/20';
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
+import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 
 export default {
-  components: { Alert, InputPasswordToggle },
+  components: { Alert, InputPasswordToggle, IconSave, IconCancel, IconAdd },
   mixins: [VuelidateMixin, BVToastMixin],
   props: {
     user: {

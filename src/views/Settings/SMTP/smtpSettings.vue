@@ -791,6 +791,7 @@
               type="submit"
               data-test-id="smtp-button-saveSettings"
             >
+              <icon-save />
               {{ $t('global.action.save') }}
             </b-button>
           </b-col>
@@ -801,6 +802,7 @@
               :disabled="!sendTestAlertDisabled"
               @click="sendTestAlert"
             >
+              <icon-send />
               {{ $t('pageSmtp.sendTestAlert') }}
             </b-button>
           </b-col>
@@ -825,6 +827,8 @@ import FormFile from '@/components/Global/FormFile';
 import InputPasswordToggle from '@/components/Global/InputPasswordToggle';
 //license checking
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
+import IconSave from '@carbon/icons-vue/es/save/20';
+import IconSend from '@carbon/icons-vue/es/send--alt--filled/20';
 
 export default {
   name: 'SmtpSettings',
@@ -836,6 +840,8 @@ export default {
     ModalSendAlert,
     FormFile,
     InputPasswordToggle,
+    IconSave,
+    IconSend,
   },
   mixins: [BVToastMixin, VuelidateMixin, LoadingBarMixin, LicensecheckMixin],
   data() {

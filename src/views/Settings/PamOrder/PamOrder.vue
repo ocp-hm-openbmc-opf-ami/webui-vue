@@ -36,6 +36,7 @@
           variant="primary"
           @click="onSave"
         >
+          <icon-save />
           {{ $t('global.action.save') }}
         </b-button>
       </b-col>
@@ -50,6 +51,7 @@ import { mapState } from 'vuex';
 import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import Alert from '@/components/Global/Alert';
+import IconSave from '@carbon/icons-vue/es/save/20';
 
 export default {
   name: 'PamOrder',
@@ -57,6 +59,7 @@ export default {
     draggable,
     PageTitle,
     Alert,
+    IconSave,
   },
   mixins: [LoadingBarMixin, BVToastMixin],
   data() {

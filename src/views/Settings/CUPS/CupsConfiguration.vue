@@ -189,6 +189,7 @@
                 data-test-id="cupsService-button-saveSettings"
                 @click="createCupsServices"
               >
+                <icon-save />
                 {{ $t('global.action.save') }}
               </b-btn>
             </b-col>
@@ -205,9 +206,10 @@ import { mapState } from 'vuex';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import IconSave from '@carbon/icons-vue/es/save/20';
 export default {
   name: 'Cups',
-  components: { PageTitle },
+  components: { PageTitle, IconSave },
   mixins: [VuelidateMixin, BVToastMixin, LoadingBarMixin],
   data() {
     return {

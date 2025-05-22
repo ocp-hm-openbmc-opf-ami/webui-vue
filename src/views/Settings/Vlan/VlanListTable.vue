@@ -87,6 +87,7 @@
       </b-row>
     </div>
     <b-button variant="primary" @click="addVlan()">
+      <icon-add />
       {{ $t('pageVlan.table.add') }}
     </b-button>
   </div>
@@ -100,10 +101,11 @@ import TableRowAction from '@/components/Global/TableRowAction';
 import { mapState } from 'vuex';
 import { required } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
+import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 
 export default {
   name: 'VlanListTable',
-  components: { IconTrashcan, TableRowAction },
+  components: { IconTrashcan, TableRowAction, IconAdd },
   mixins: [BVToastMixin, LoadingBarMixin, VuelidateMixin],
   props: {
     tabId: {

@@ -28,6 +28,7 @@
     </b-form>
     <template #modal-footer="{ cancel }">
       <b-button variant="secondary" @click="cancel()">
+        <icon-cancel />
         {{ $t('global.action.cancel') }}
       </b-button>
       <b-button
@@ -36,6 +37,7 @@
         variant="primary"
         @click="onOk"
       >
+        <icon-save />
         {{ $t('global.action.save') }}
       </b-button>
     </template>
@@ -46,8 +48,10 @@
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { required } from 'vuelidate/lib/validators';
 import FormFile from '@/components/Global/FormFile';
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
+import IconSave from '@carbon/icons-vue/es/save/20';
 export default {
-  components: { FormFile },
+  components: { FormFile, IconCancel, IconSave },
   mixins: [VuelidateMixin],
   props: {
     modalAddliceseSuccess: {

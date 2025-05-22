@@ -114,6 +114,7 @@
         data-test-id="ncsi-button-savencsiMode"
         @click="saveNcsiConfiguration"
       >
+        <icon-save />
         {{ $t('global.action.save') }}
       </b-button>
     </div>
@@ -126,9 +127,10 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { required } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
+import IconSave from '@carbon/icons-vue/es/save/20';
 export default {
   name: 'Ncsi',
-  components: { PageTitle },
+  components: { PageTitle, IconSave },
   mixins: [LoadingBarMixin, BVToastMixin, VuelidateMixin],
   data() {
     return {

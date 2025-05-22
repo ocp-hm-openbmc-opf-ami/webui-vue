@@ -52,6 +52,7 @@
         </b-col>
       </b-row>
       <b-button type="submit" variant="primary" @click="saveConfigurations">
+        <icon-save />
         {{ $t('global.action.save') }}
       </b-button>
     </page-section>
@@ -142,6 +143,7 @@
               variant="primary"
               @click="onSubmitUpload"
             >
+              <icon-upload />
               {{ $t('global.action.upload') }}
             </b-button>
           </b-col>
@@ -149,6 +151,7 @@
       </div>
     </page-section>
     <b-button type="submit" variant="primary" @click="handleSubmit">
+      <icon-save />
       {{ $t('global.action.save') }}
     </b-button>
   </b-container>
@@ -164,6 +167,8 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import IconMisuse from '@carbon/icons-vue/es/misuse/20';
 import { mapState } from 'vuex';
+import IconUpload from '@carbon/icons-vue/es/upload/20';
+import IconSave from '@carbon/icons-vue/es/save/20';
 export default {
   name: 'DDNSConfiguration',
   components: {
@@ -171,6 +176,8 @@ export default {
     FormFile,
     IconAdd,
     IconMisuse,
+    IconUpload,
+    IconSave,
   },
   mixins: [VuelidateMixin, BVToastMixin, LoadingBarMixin],
   props: {

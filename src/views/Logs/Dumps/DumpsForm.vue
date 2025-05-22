@@ -25,6 +25,7 @@
         {{ $t('pageDumps.form.systemDumpInfo') }}
       </alert>
       <b-button variant="primary" type="submit" form="form-new-dump">
+        <icon-touch />
         {{ $t('pageDumps.form.initiateDump') }}
       </b-button>
     </b-form>
@@ -38,9 +39,10 @@ import ModalConfirmation from './DumpsModalConfirmation';
 import Alert from '@/components/Global/Alert';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
+import IconTouch from '@carbon/icons-vue/es/touch--interaction/20';
 
 export default {
-  components: { Alert, ModalConfirmation },
+  components: { Alert, ModalConfirmation, IconTouch },
   mixins: [BVToastMixin, VuelidateMixin],
   data() {
     return {

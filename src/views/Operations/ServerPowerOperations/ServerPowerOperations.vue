@@ -81,6 +81,7 @@
               :disabled="globalPrivilege !== 'Administrator'"
               @click="powerOn"
             >
+              <icon-power />
               {{ $t('pageServerPowerOperations.powerOn') }}
             </b-button>
           </template>
@@ -113,6 +114,7 @@
                 data-test-id="serverPowerOperations-button-reboot"
                 :disabled="globalPrivilege !== 'Administrator'"
               >
+                <icon-reset />
                 {{ $t('pageServerPowerOperations.reboot') }}
               </b-button>
             </b-form>
@@ -144,6 +146,7 @@
                 data-test-id="serverPowerOperations-button-shutDown"
                 :disabled="globalPrivilege !== 'Administrator'"
               >
+                <icon-power />
                 {{ $t('pageServerPowerOperations.shutDown') }}
               </b-button>
             </b-form>
@@ -161,10 +164,19 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import BootSettings from './BootSettings';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import Alert from '@/components/Global/Alert';
+import IconPower from '@carbon/icons-vue/es/power/20';
+import IconReset from '@carbon/icons-vue/es/reset/20';
 
 export default {
   name: 'ServerPowerOperations',
-  components: { PageTitle, PageSection, BootSettings, Alert },
+  components: {
+    PageTitle,
+    PageSection,
+    BootSettings,
+    Alert,
+    IconPower,
+    IconReset,
+  },
   mixins: [BVToastMixin, LoadingBarMixin],
   beforeRouteLeave(to, from, next) {
     this.hideLoader();

@@ -30,6 +30,7 @@
               class="mr10"
               @click="initFlushAllModal()"
             >
+              <icon-trashcan />
               {{ $t('pageFireWall.firewallSettings.flushAll') }}
             </b-button>
             <b-button

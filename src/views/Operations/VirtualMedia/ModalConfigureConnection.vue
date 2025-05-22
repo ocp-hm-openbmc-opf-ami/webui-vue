@@ -144,9 +144,11 @@
       </b-form-group>
     </b-form>
     <template #modal-ok>
+      <icon-save />
       {{ $t('global.action.save') }}
     </template>
     <template #modal-cancel>
+      <icon-cancel />
       {{ $t('global.action.cancel') }}
     </template>
   </b-modal>
@@ -156,7 +158,10 @@
 import { required, requiredIf, helpers } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
+import IconSave from '@carbon/icons-vue/es/save/20';
 export default {
+  components: { IconSave, IconCancel },
   mixins: [VuelidateMixin, BVToastMixin],
   props: {
     connection: {

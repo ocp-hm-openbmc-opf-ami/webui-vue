@@ -10,9 +10,11 @@
             :disabled="items.length <= 0"
             @click="initAddUserAlertCountLicenseModal()"
           >
+            <icon-event />
             {{ $t('license.userAlertCount') }}
           </b-button>
           <b-button variant="primary" @click="initAddLicenseModal()">
+            <icon-add />
             {{ $t('license.add_license_key') }}
           </b-button>
         </div>
@@ -64,12 +66,16 @@ import ModalAddLicense from './ModalAddLicense.vue';
 import ModalAddUserAlertCountLicense from './ModalAddUserAlertCountLicense.vue';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import { mapState } from 'vuex';
+import IconAdd from '@carbon/icons-vue/es/add--alt/20';
+import IconEvent from '@carbon/icons-vue/es/event--schedule/20';
 export default {
   components: {
     TableRowAction,
     PageTitle,
     ModalAddLicense,
     ModalAddUserAlertCountLicense,
+    IconAdd,
+    IconEvent,
   },
   mixins: [LoadingBarMixin, BVToastMixin],
   data() {

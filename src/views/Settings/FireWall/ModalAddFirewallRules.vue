@@ -341,9 +341,11 @@
     </b-form>
     <template #modal-footer="{ cancel }">
       <b-button variant="secondary" @click="cancel()">
+        <icon-cancel />
         {{ $t('global.action.cancel') }}
       </b-button>
       <b-button form="form-ipv6" type="submit" variant="primary" @click="onOk">
+        <icon-add />
         {{ $t('global.action.add') }}
       </b-button>
     </template>
@@ -354,11 +356,13 @@
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import IconCalendar from '@carbon/icons-vue/es/calendar/20';
 import { required, requiredIf, helpers } from 'vuelidate/lib/validators';
+import IconAdd from '@carbon/icons-vue/es/add--alt/20';
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
 
 const isoTimeRegex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
 
 export default {
-  components: { IconCalendar },
+  components: { IconCalendar, IconAdd, IconCancel },
   mixins: [VuelidateMixin],
   props: {
     modalSuccess: {

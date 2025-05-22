@@ -30,6 +30,7 @@
           </b-col>
           <b-col sm="3">
             <b-button class="upload-button" type="submit" variant="primary">
+              <icon-upload />
               {{ $t('global.action.upload') }}
             </b-button>
           </b-col>
@@ -44,9 +45,10 @@ import { required } from 'vuelidate/lib/validators';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
+import IconUpload from '@carbon/icons-vue/es/upload/20';
 export default {
   name: 'Restore',
-  components: { FormFile },
+  components: { FormFile, IconUpload },
   mixins: [BVToastMixin, LoadingBarMixin, VuelidateMixin],
   props: {
     tabIndex: {

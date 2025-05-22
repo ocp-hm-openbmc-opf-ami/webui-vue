@@ -195,6 +195,7 @@
                       data-test-id="button-saveKVMPortValue"
                       @click="saveKVMPortValue"
                     >
+                      <icon-save />
                       {{ $t('global.action.save') }}
                     </b-button>
                   </b-col>
@@ -237,6 +238,7 @@
                       data-test-id="button-saveWebPortValue"
                       @click="saveWebPortValue"
                     >
+                      <icon-save />
                       {{ $t('global.action.save') }}
                     </b-button>
                   </b-col>
@@ -356,6 +358,7 @@
                         data-test-id="button-saveVMReconnectValues"
                         @click="saveVMReconnectValues"
                       >
+                        <icon-save />
                         {{ $t('global.action.save') }}
                       </b-button>
                     </b-col>
@@ -429,6 +432,7 @@
                       data-test-id="power-button-saveIpmiPortValue"
                       @click="saveSolSshPortValue"
                     >
+                      <icon-save />
                       {{ $t('global.action.save') }}
                     </b-button>
                   </b-col>
@@ -681,6 +685,7 @@
                       data-test-id="button-web-session-timeout"
                       @click="saveWebSessionTimeoutValue"
                     >
+                      <icon-save />
                       {{ $t('global.action.save') }}
                     </b-button>
                   </b-col>
@@ -730,6 +735,7 @@
                       data-test-id="button-kvm-session-timeout"
                       @click="saveKVMSessionTimeoutValue"
                     >
+                      <icon-save />
                       {{ $t('global.action.save') }}
                     </b-button>
                   </b-col>
@@ -758,6 +764,7 @@
                       data-test-id="sol-button-saveBaudRateValue"
                       @click="saveBaudRateValue"
                     >
+                      <icon-save />
                       {{ $t('global.action.save') }}
                     </b-button>
                   </b-col>
@@ -845,9 +852,10 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import { required } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { mapState } from 'vuex';
+import IconSave from '@carbon/icons-vue/es/save/20';
 export default {
   name: 'Policies',
-  components: { PageTitle, PageSection },
+  components: { PageTitle, PageSection, IconSave },
   mixins: [LoadingBarMixin, BVToastMixin, VuelidateMixin],
   beforeRouteLeave(to, from, next) {
     this.hideLoader();

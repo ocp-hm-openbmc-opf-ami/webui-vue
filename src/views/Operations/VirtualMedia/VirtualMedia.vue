@@ -65,6 +65,7 @@
                       :disabled="!dev.file || isButtonDisabled"
                       @click="handleActionClick(startVM, dev)"
                     >
+                      <icon-start />
                       {{ $t('pageVirtualMedia.start') }}
                     </b-button>
                     <b-button
@@ -80,6 +81,7 @@
                       "
                       @click="handleActionClick(stopVM, dev)"
                     >
+                      <icon-stop />
                       {{ $t('pageVirtualMedia.stop') }}
                     </b-button>
                     <div class="custom-form-file-container">
@@ -118,6 +120,7 @@
                         :disabled="device.isActive"
                         @click="configureConnection(device)"
                       >
+                        <icon-connection />
                         {{ $t('pageVirtualMedia.configureConnection') }}
                       </b-button>
 
@@ -132,6 +135,7 @@
                         "
                         @click="handleActionClick(startLegacy, device)"
                       >
+                        <icon-start />
                         {{ $t('pageVirtualMedia.start') }}
                       </b-button>
                       <b-button
@@ -141,6 +145,7 @@
                         :disabled="isButtonDisabled"
                         @click="handleActionClick(stopLegacy, device)"
                       >
+                        <icon-stop />
                         {{ $t('pageVirtualMedia.stop') }}
                       </b-button>
                     </b-form-group>
@@ -168,6 +173,9 @@ import ModalConfigureConnection from './ModalConfigureConnection';
 import NbdServer from '@/utilities/NBDServer';
 import FormFile from '@/components/Global/FormFile';
 import { mapState, mapMutations } from 'vuex';
+import IconStop from '@carbon/icons-vue/es/stop/20';
+import IconStart from '@carbon/icons-vue/es/run/20';
+import IconConnection from '@carbon/icons-vue/es/connection--send/20';
 
 //license checking
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
@@ -179,6 +187,9 @@ export default {
     PageSection,
     ModalConfigureConnection,
     FormFile,
+    IconStop,
+    IconStart,
+    IconConnection,
   },
   mixins: [BVToastMixin, LoadingBarMixin, LicensecheckMixin],
   data() {

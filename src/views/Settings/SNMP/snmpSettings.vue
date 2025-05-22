@@ -18,6 +18,7 @@
             data-test-id="alertDestination-button-sendTestTrap"
             @click="sendTestTrap"
           >
+            <icon-send />
             {{ $t('pageSnmp.sendTestTrap') }}
           </b-button>
           <b-button
@@ -60,6 +61,7 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import ModalSnmp from './ModalSnmp.vue';
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
+import IconSend from '@carbon/icons-vue/es/send--alt--filled/20';
 
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import snmpSubscription from './snmpSubscription.vue';
@@ -72,6 +74,7 @@ export default {
     ModalSnmp,
     snmpSubscription,
     snmpCommunityString,
+    IconSend,
   },
   mixins: [LoadingBarMixin, LicensecheckMixin, BVToastMixin],
   data() {

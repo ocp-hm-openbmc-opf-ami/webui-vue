@@ -87,6 +87,7 @@
     </page-section>
     <page-section>
       <b-button type="submit" variant="primary" @click="saveConfigurations">
+        <icon-save />
         {{ $t('global.action.save') }}
       </b-button>
     </page-section>
@@ -98,10 +99,12 @@ import PageSection from '@/components/Global/PageSection';
 import { mapState } from 'vuex';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import IconSave from '@carbon/icons-vue/es/save/20';
 export default {
   name: 'DDNSSettings',
   components: {
     PageSection,
+    IconSave,
   },
   mixins: [BVToastMixin, LoadingBarMixin],
   data() {

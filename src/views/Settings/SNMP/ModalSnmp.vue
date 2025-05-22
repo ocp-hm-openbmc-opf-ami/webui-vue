@@ -187,6 +187,7 @@
         data-test-id="userManagement-button-cancel"
         @click="cancel()"
       >
+        <icon-cancel />
         {{ $t('pageSnmp.modal.cancel') }}
       </b-button>
       <b-button
@@ -197,9 +198,11 @@
         @click="onOk"
       >
         <template v-if="snmpData">
+          <icon-add />
           {{ $t('pageSnmp.modal.addTrap') }}
         </template>
         <template v-else>
+          <icon-save />
           {{ $t('global.action.save') }}
         </template>
       </b-button>
@@ -211,9 +214,12 @@
 import { required, requiredIf } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { mapState } from 'vuex';
+import IconSave from '@carbon/icons-vue/es/save/20';
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
+import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 
 export default {
-  components: {},
+  components: { IconSave, IconCancel, IconAdd },
   mixins: [VuelidateMixin],
   props: {
     snmp: {

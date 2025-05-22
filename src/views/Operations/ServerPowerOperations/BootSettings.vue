@@ -48,6 +48,7 @@
         class="mb-3"
         :disabled="globalPrivilege !== 'Administrator'"
       >
+        <icon-save />
         {{ $t('global.action.save') }}
       </b-button>
     </b-form>
@@ -58,9 +59,11 @@
 import { mapState } from 'vuex';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import IconSave from '@carbon/icons-vue/es/save/20';
 
 export default {
   name: 'BootSettings',
+  components: { IconSave },
   mixins: [BVToastMixin, LoadingBarMixin],
   data() {
     return {

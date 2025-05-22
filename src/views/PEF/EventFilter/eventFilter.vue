@@ -59,6 +59,7 @@
               data-test-id="eventFilter-button-saveSettings"
               :disabled="loading"
             >
+              <icon-save />
               {{ $t('global.action.save') }}
             </b-btn>
           </b-col>
@@ -88,11 +89,13 @@
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
 import PageTitle from '@/components/Global/PageTitle';
+import IconSave from '@carbon/icons-vue/es/save/20';
 
 export default {
   name: 'EventFilterSettings',
   components: {
     PageTitle,
+    IconSave,
   },
   mixins: [BVToastMixin, LoadingBarMixin],
   data() {
