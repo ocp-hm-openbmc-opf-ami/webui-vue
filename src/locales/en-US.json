@@ -684,7 +684,9 @@
             "fileUploadedError": "Error Uploading the Restore File",
             "errorGettingBackupDetails": "Error in getting the property BackupFeatures",
             "errorMessageNotConfigured": "The operation cannot be completed, since the Configuration file does not exit",
-            "featureNotAvailable": "The backup and restore feature is not enabled."
+            "featureNotAvailable": "The backup and restore feature is not enabled.",
+            "restoreConfirmation": "Restore functionality will restart the services of configured backup properties. Are you sure you want to proceed?",
+            "confirmTitle": "Confirm?"
         }
     },
     "pageCups": {

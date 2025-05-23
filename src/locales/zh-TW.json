@@ -679,7 +679,9 @@
             "fileUploadedError": "上傳恢復檔案時發生錯誤",
             "errorGettingBackupDetails": "取得屬性備份功能時發生錯誤",
             "errorMessageNotConfigured": "由於設定檔不存在，操作無法完成",
-            "featureNotAvailable": "未啟用備份和復原功能."
+            "featureNotAvailable": "未啟用備份和復原功能.",
+            "restoreConfirmation": "還原功能將重新啟動配置的備份屬性的服務。您確定要繼續嗎？",
+            "confirmTitle": "確認嗎？"
         }
     },
     "pageCups": {
