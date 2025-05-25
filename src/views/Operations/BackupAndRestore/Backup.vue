@@ -5,9 +5,10 @@
         <b-col md="9" lg="8" xl="9">
           <b-form-group :label="$t('pageBackupAndRestore.checkAll')">
             <b-form-checkbox
-              v-model="allSelected"
+              v-model="checkAll"
               data-test-id="checkAllBackup"
               switch
+              @change="toggleAllButtons"
             >
               <span v-if="checkAll">{{ $t('global.status.enabled') }}</span>
               <span v-else>{{ $t('global.status.disabled') }}</span>
@@ -15,7 +16,7 @@
           </b-form-group>
         </b-col>
       </b-row>
-      <b-row>
+      <b-row v-if="togglebuttons.SMTP != undefined">
         <b-col class="d-flex" cols="2">
           <dl class="mr-3 w-10">
             <dd class="font_style">
@@ -24,8 +25,10 @@
           </dl>
         </b-col>
         <b-col cols="10">
-          <b-form-checkbox id="smtp" v-model="SMTP" switch>
-            <span v-if="SMTP">{{ $t('global.status.enabled') }}</span>
+          <b-form-checkbox id="smtp" v-model="togglebuttons.SMTP" switch>
+            <span v-if="togglebuttons.SMTP">{{
+              $t('global.status.enabled')
+            }}</span>
             <span v-else>{{ $t('global.status.disabled') }}</span>
           </b-form-checkbox>
         </b-col>
@@ -39,13 +42,19 @@
           </dl>
         </b-col>
         <b-col cols="10">
-          <b-form-checkbox id="Authentication" v-model="Authentication" switch>
-            <span v-if="Authentication">{{ $t('global.status.enabled') }}</span>
+          <b-form-checkbox
+            id="Authentication"
+            v-model="togglebuttons.Authentication"
+            switch
+          >
+            <span v-if="togglebuttons.Authentication">{{
+              $t('global.status.enabled')
+            }}</span>
             <span v-else>{{ $t('global.status.disabled') }}</span>
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row>
+      <b-row v-if="togglebuttons.VirtualMedia != undefined">
         <b-col class="d-flex" cols="2">
           <dl class="mr-3 w-10">
             <dd class="font_style">
@@ -54,8 +63,14 @@
           </dl>
         </b-col>
         <b-col cols="10">
-          <b-form-checkbox id="virtualMedia" v-model="VirtualMedia" switch>
-            <span v-if="VirtualMedia">{{ $t('global.status.enabled') }}</span>
+          <b-form-checkbox
+            id="virtualMedia"
+            v-model="togglebuttons.VirtualMedia"
+            switch
+          >
+            <span v-if="togglebuttons.VirtualMedia">{{
+              $t('global.status.enabled')
+            }}</span>
             <span v-else>{{ $t('global.status.disabled') }}</span>
           </b-form-checkbox>
         </b-col>
@@ -69,13 +84,15 @@
           </dl>
         </b-col>
         <b-col cols="10">
-          <b-form-checkbox id="ipmi" v-model="IPMI" switch>
-            <span v-if="IPMI">{{ $t('global.status.enabled') }}</span>
+          <b-form-checkbox id="ipmi" v-model="togglebuttons.IPMI" switch>
+            <span v-if="togglebuttons.IPMI">{{
+              $t('global.status.enabled')
+            }}</span>
             <span v-else>{{ $t('global.status.disabled') }}</span>
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row>
+      <b-row v-if="togglebuttons.Network != undefined">
         <b-col class="d-flex" cols="2">
           <dl class="mr-3 w-10">
             <dd class="font_style">
@@ -84,13 +101,15 @@
           </dl>
         </b-col>
         <b-col cols="10">
-          <b-form-checkbox id="network" v-model="Network" switch>
-            <span v-if="Network">{{ $t('global.status.enabled') }}</span>
+          <b-form-checkbox id="network" v-model="togglebuttons.Network" switch>
+            <span v-if="togglebuttons.Network">{{
+              $t('global.status.enabled')
+            }}</span>
             <span v-else>{{ $t('global.status.disabled') }}</span>
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row v-if="hide">
+      <b-row v-if="togglebuttons.NTP != undefined">
         <b-col class="d-flex" cols="2">
           <dl class="mr-3 w-10">
             <dd class="font_style">
@@ -99,8 +118,10 @@
           </dl>
         </b-col>
         <b-col cols="10">
-          <b-form-checkbox id="ntp" v-model="NTP" switch>
-            <span v-if="NTP">{{ $t('global.status.enabled') }}</span>
+          <b-form-checkbox id="ntp" v-model="togglebuttons.NTP" switch>
+            <span v-if="togglebuttons.NTP">{{
+              $t('global.status.enabled')
+            }}</span>
             <span v-else>{{ $t('global.status.disabled') }}</span>
           </b-form-checkbox>
         </b-col>
@@ -114,8 +135,10 @@
           </dl>
         </b-col>
         <b-col cols="10">
-          <b-form-checkbox id="snmp" v-model="SNMP" switch>
-            <span v-if="SNMP">{{ $t('global.status.enabled') }}</span>
+          <b-form-checkbox id="snmp" v-model="togglebuttons.SNMP" switch>
+            <span v-if="togglebuttons.SNMP">{{
+              $t('global.status.enabled')
+            }}</span>
             <span v-else>{{ $t('global.status.disabled') }}</span>
           </b-form-checkbox>
         </b-col>
@@ -129,8 +152,10 @@
           </dl>
         </b-col>
         <b-col cols="10">
-          <b-form-checkbox id="sysLog" v-model="SysLog" switch>
-            <span v-if="SysLog">{{ $t('global.status.enabled') }}</span>
+          <b-form-checkbox id="sysLog" v-model="togglebuttons.SysLog" switch>
+            <span v-if="togglebuttons.SysLog">{{
+              $t('global.status.enabled')
+            }}</span>
             <span v-else>{{ $t('global.status.disabled') }}</span>
           </b-form-checkbox>
         </b-col>
@@ -141,7 +166,7 @@
             class="mt-2"
             type="submit"
             variant="primary"
-            @click="handleSubmit"
+            @click="handleDownload"
             ><icon-download />
             {{ $t('global.action.download') }}
           </b-button>
@@ -167,125 +192,64 @@ export default {
     },
   },
   data() {
-    const smtp = this.$store.getters['backupAndRestore/smtp'];
-    const virtualMedia = this.$store.getters['backupAndRestore/virtualMedia'];
-    const network = this.$store.getters['backupAndRestore/network'];
     return {
-      SMTP: this.$store.getters['backupAndRestore/smtp'],
-      VirtualMedia: this.$store.getters['backupAndRestore/virtualMedia'],
-      IPMI: this.$store.getters['backupAndRestore/ipmi'],
-      Network: this.$store.getters['backupAndRestore/network'],
-      NTP: this.$store.getters['backupAndRestore/ntp'],
-      SNMP: this.$store.getters['backupAndRestore/snmp'],
-      SysLog: this.$store.getters['backupAndRestore/sysLog'],
-      checkAll: smtp && virtualMedia && network,
       hide: false,
+      checkAll: '',
+      togglebuttons: {},
     };
   },
   computed: {
-    allSelected: {
-      get() {
-        return this.SMTP && this.VirtualMedia && this.Network;
-      },
-      set(value) {
-        this.checkAll = value;
-        if (value) {
-          this.SMTP = value;
-          this.VirtualMedia = value;
-          this.Network = value;
-        } else {
-          if (!(this.SMTP && this.VirtualMedia && this.Network)) {
-            this.checkAll = false;
-          } else {
-            this.SMTP = value;
-            this.VirtualMedia = value;
-            this.Network = value;
-          }
-        }
-      },
-    },
-    ...mapState('backupAndRestore', [
-      'smtp',
-      'ipmi',
-      'virtualMedia',
-      'network',
-      'ntp',
-      'snmp',
-      'sysLog',
-    ]),
+    ...mapState('backupAndRestore', ['backupConfigValues']),
   },
   watch: {
-    smtp: function (value) {
-      this.SMTP = value;
+    backupConfigValues() {
+      this.initbackupConfigValues();
     },
-    ipmi: function (value) {
-      this.IPMI = value;
-    },
-    virtualMedia: function (value) {
-      this.VirtualMedia = value;
-    },
-    network: function (value) {
-      this.Network = value;
-    },
-    ntp: function (value) {
-      this.NTP = value;
-    },
-    snmp: function (value) {
-      this.SNMP = value;
-    },
-    sysLog: function (value) {
-      this.SysLog = value;
-    },
-    SMTP(value) {
-      if (!value) {
-        this.checkAll = false;
-      }
-    },
-    VirtualMedia(value) {
-      if (!value) {
-        this.checkAll = false;
-      }
-    },
-    Network(value) {
-      if (!value) {
-        this.checkAll = false;
-      }
+    togglebuttons: {
+      handler(val) {
+        this.checkAll = Object.values(val).every((checked) => checked);
+      },
+      deep: true,
     },
   },
+  created() {
+    this.startLoader();
+    this.$store
+      .dispatch('backupAndRestore/getBackupConfig')
+      .catch(({ message }) => this.errorToast(message))
+      .finally(() => this.endLoader());
+  },
   methods: {
-    handleSubmit() {
-      this.startLoader();
+    initbackupConfigValues() {
+      const config =
+        this.$store.getters['backupAndRestore/getBackupConfigValues'];
+      this.togglebuttons = config;
+    },
+    handleDownload() {
       let data = [];
-      if (this.SMTP) {
-        data.push('SMTP');
-      }
-      if (this.VirtualMedia) {
-        data.push('Virtual-media');
-      }
-      if (this.IPMI) {
-        data.push('IPMI');
-      }
-      if (this.Network) {
+      if (this.togglebuttons.Network) {
         data.push('Network');
       }
-      if (this.NTP) {
+      if (this.togglebuttons.NTP) {
         data.push('NTP');
       }
-      if (this.SNMP) {
-        data.push('SNMP');
+      if (this.togglebuttons.SMTP) {
+        data.push('SMTP');
       }
-      if (this.SysLog) {
-        data.push('Syslog');
+      if (this.togglebuttons.VirtualMedia) {
+        data.push('Virtual-media');
       }
+      this.startLoader();
       this.$store
         .dispatch('backupAndRestore/updateBackup', data)
-        .then((success) => {
-          if (success) {
-            this.successToast(success);
-          }
-        })
+        .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.endLoader());
+    },
+    toggleAllButtons() {
+      Object.keys(this.togglebuttons).forEach((key) => {
+        this.togglebuttons[key] = this.checkAll;
+      });
     },
   },
 };

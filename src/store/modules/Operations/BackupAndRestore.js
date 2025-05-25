@@ -4,52 +4,14 @@ import i18n from '@/i18n';
 const BackupAndRestore = {
   namespaced: true,
   state: {
-    BackupDatas: [],
-    smtp: null,
-    ipmi: null,
-    virtualMedia: null,
-    network: null,
-    ntp: null,
-    snmp: null,
-    sysLog: null,
+    backupConfigValues: {},
   },
   getters: {
-    BackupDatas(state) {
-      return state.BackupDatas;
-    },
-    smtp: (state) => state.smtp,
-    ipmi: (state) => state.ipmi,
-    virtualMedia: (state) => state.virtualMedia,
-    network: (state) => state.network,
-    ntp: (state) => state.ntp,
-    snmp: (state) => state.snmp,
-    sysLog: (state) => state.sysLog,
+    getBackupConfigValues: (state) => state.backupConfigValues,
   },
   mutations: {
-    setBackupDatas(state, BackupDatas) {
-      state.BackupDatas = BackupDatas;
-    },
-    setSmtp(state, smtp) {
-      state.smtp = smtp;
-    },
-    setIPMI(state, ipmi) {
-      state.ipmi = ipmi;
-    },
-    setVirtualMedia(state, virtualMedia) {
-      state.virtualMedia = virtualMedia;
-    },
-    setNetwork(state, network) {
-      state.network = network;
-    },
-    setNtp(state, ntp) {
-      state.ntp = ntp;
-    },
-    setSnmp(state, snmp) {
-      state.snmp = snmp;
-    },
-    setSysLog(state, sysLog) {
-      state.sysLog = sysLog;
-    },
+    setBackupConfigValues: (state, backupConfigValues) =>
+      (state.backupConfigValues = backupConfigValues),
   },
   actions: {
     async updateBackup({ dispatch }, authentication) {
@@ -98,27 +60,23 @@ const BackupAndRestore = {
       return await api
         .get('/redfish/v1/Managers/bmc')
         .then((response) => {
-          commit(
-            'setSmtp',
-            response.data.Oem.Ami?.SelectedBackupFeatures?.SMTP,
-          );
-          commit(
-            'setIPMI',
-            response.data.Oem.Ami?.SelectedBackupFeatures?.IPMI,
-          );
-          commit(
-            'setVirtualMedia',
-            response.data.Oem.Ami?.SelectedBackupFeatures?.['Virtual-media'],
-          );
-          commit(
-            'setNetwork',
-            response.data.Oem.Ami?.SelectedBackupFeatures?.Network,
-          );
-          commit(
-            'setSnmp',
-            response.data.Oem.Ami?.SelectedBackupFeatures?.SNMP,
-          );
-          commit('setNtp', response.data.Oem.Ami?.SelectedBackupFeatures?.NTP);
+          const getBackupConfigValues =
+            response.data.Oem.Ami?.SelectedBackupFeatures;
+          const togglebuttons = {};
+          if (getBackupConfigValues?.SMTP !== undefined) {
+            togglebuttons.SMTP = getBackupConfigValues?.SMTP;
+          }
+          if (getBackupConfigValues?.['Virtual-media'] !== undefined) {
+            togglebuttons.VirtualMedia =
+              getBackupConfigValues?.['Virtual-media'];
+          }
+          if (getBackupConfigValues?.Network !== undefined) {
+            togglebuttons.Network = getBackupConfigValues?.Network;
+          }
+          if (getBackupConfigValues?.NTP !== undefined) {
+            togglebuttons.NTP = getBackupConfigValues?.NTP;
+          }
+          commit('setBackupConfigValues', togglebuttons);
         })
         .catch((error) => {
           console.log(error);
