@@ -36,7 +36,6 @@
             <b-form-input
               id="vlanId"
               v-model="form.vlanId"
-              type="number"
               :state="getValidationState($v.form.vlanId)"
             >
             </b-form-input>
@@ -65,7 +64,6 @@
             <b-form-input
               id="vlanPriority"
               v-model="form.vlanPriority"
-              type="number"
               :state="getValidationState($v.form.vlanPriority)"
             >
             </b-form-input>
@@ -293,16 +291,10 @@ export default {
         });
     },
     vlanIdValidation(val) {
-      if (!/^(?:[2-9]|[1-3][0-9]{1,3}|40[0-8][0-9]|409[0-4])$/.test(val)) {
-        return false;
-      }
-      return true;
+      return /^\d+$/.test(val) && Number(val) >= 2 && Number(val) <= 4094;
     },
     vlanPriorityValidation(val) {
-      if (!/^[0-7]$/.test(val)) {
-        return false;
-      }
-      return true;
+      return /^\d+$/.test(val) && Number(val) >= 0 && Number(val) <= 7;
     },
   },
 };
