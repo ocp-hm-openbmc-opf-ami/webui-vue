@@ -20,6 +20,7 @@ const FirmwareStore = {
     applyTimeSetValue: {},
     bmcActiveFeatureEnabled: true,
     imageName: '',
+    httpPushUriOptions: {},
   },
   getters: {
     isTftpUploadAvailable: (state) => state.tftpAvailable,
@@ -52,6 +53,7 @@ const FirmwareStore = {
     getActiveFeatureEnabledStatus: (state) => state.bmcActiveFeatureEnabled,
     getImageName: (state) => state.imageName,
     getBmcActiveFirmwareId: (state) => state.bmcActiveFirmwareId,
+    httpPushUriOptions: (state) => state.httpPushUriOptions,
   },
   mutations: {
     setActiveBmcFirmwareId: (state, id) => (state.bmcActiveFirmwareId = id),
@@ -79,6 +81,8 @@ const FirmwareStore = {
     setBmcActiveFeatureEnabled: (state, bmcActiveFeatureEnabled) =>
       (state.bmcActiveFeatureEnabled = bmcActiveFeatureEnabled),
     setImageName: (state, imageName) => (state.imageName = imageName),
+    setHttpPushUriOptions: (state, httpPushUriOptions) =>
+      (state.httpPushUriOptions = httpPushUriOptions),
   },
   actions: {
     async getFirmwareInformation({ dispatch }) {
@@ -162,12 +166,14 @@ const FirmwareStore = {
       return await api
         .get('/redfish/v1/UpdateService')
         .then(({ data }) => {
+          const httpPushUriOption = data?.HttpPushUriOptions;
           const applyTime =
-            data.HttpPushUriOptions.HttpPushUriApplyTime.ApplyTime;
+            data.HttpPushUriOptions?.HttpPushUriApplyTime?.ApplyTime;
           const allowableActions =
             data?.Actions?.['#UpdateService.SimpleUpdate']?.[
               'TransferProtocol@Redfish.AllowableValues'
             ];
+          commit('setHttpPushUriOptions', httpPushUriOption);
           commit('setApplyTime', applyTime);
           commit('setClearConfigState', data.Oem.ApplyOptions.ClearConfig);
           const httpPushUri = data.HttpPushUri;
@@ -191,13 +197,13 @@ const FirmwareStore = {
 
           const applyTimeFirmwareValue = {
             applyTimeMode:
-              data.HttpPushUriOptions.HttpPushUriApplyTime.ApplyTime,
+              data.HttpPushUriOptions?.HttpPushUriApplyTime?.ApplyTime,
             endDateTime:
-              data.HttpPushUriOptions.HttpPushUriApplyTime
-                .MaintenanceWindowStartTime,
+              data.HttpPushUriOptions?.HttpPushUriApplyTime
+                ?.MaintenanceWindowStartTime,
             timeSlot:
-              data.HttpPushUriOptions.HttpPushUriApplyTime
-                .MaintenanceWindowDurationInSeconds,
+              data.HttpPushUriOptions?.HttpPushUriApplyTime
+                ?.MaintenanceWindowDurationInSeconds,
           };
           commit('setApplyTimeSetValue', applyTimeFirmwareValue);
         })

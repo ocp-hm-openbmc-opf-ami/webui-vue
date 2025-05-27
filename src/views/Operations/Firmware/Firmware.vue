@@ -22,7 +22,7 @@
       :section-title="$t('pageFirmware.sectionTitleUpdateFirmware')"
     >
       <b-row>
-        <b-col sm="6" md="6" xl="6">
+        <b-col v-if="httpPushUriOptions !== undefined" sm="6" md="6" xl="6">
           <firmware-card-time-apply
             :current-bmc-time-value="currentBmcTime"
             :set-apply-time-status="setApplyTimeValue"
@@ -102,6 +102,9 @@ export default {
         return !this.isServerOff || this.loading || this.isOperationInProgress;
       }
       return this.loading || this.isOperationInProgress;
+    },
+    httpPushUriOptions() {
+      return this.$store.getters['firmware/httpPushUriOptions'];
     },
   },
   created() {
