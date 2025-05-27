@@ -196,6 +196,14 @@ const routes = [
         },
       },
       {
+        path: '/operations/firmware',
+        name: 'firmware',
+        component: Firmware,
+        meta: {
+          title: i18n.t('appPageTitle.firmware'),
+        },
+      },
+      {
         path: '/settings/pam',
         name: 'pam',
         component: PAM,
@@ -523,16 +531,6 @@ if (process.env.VUE_APP_ONETREE_KVM_ENABLED == 'true') {
     component: Kvm,
     meta: {
       title: i18n.t('appPageTitle.kvm'),
-    },
-  });
-}
-if (process.env.VUE_APP_ONETREE_FWUPDATE_ENABLED == 'true') {
-  routes[2].children.push({
-    path: '/operations/firmware',
-    name: 'firmware',
-    component: Firmware,
-    meta: {
-      title: i18n.t('appPageTitle.firmware'),
     },
   });
 }

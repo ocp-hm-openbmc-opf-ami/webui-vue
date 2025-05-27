@@ -86,6 +86,11 @@ const AppNavigationMixin = {
               icon: 'iconTask',
               route: '/operations/tasks',
             },
+            {
+              id: 'firmware',
+              label: this.$t('appNavigation.firmware'),
+              route: '/operations/firmware',
+            },
           ],
         },
         {
@@ -305,13 +310,6 @@ const AppNavigationMixin = {
             roles.operator,
             roles.readonly,
           ],
-        });
-      }
-      if (process.env.VUE_APP_ONETREE_FWUPDATE_ENABLED === 'true') {
-        navigationItemsList.navigationItems[3].children.push({
-          id: 'firmware',
-          label: this.$t('appNavigation.firmware'),
-          route: '/operations/firmware',
         });
       }
       if (process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true') {

@@ -181,6 +181,9 @@ export default {
     activeFeatureEnabledStatus() {
       return this.$store.getters['firmware/getActiveFeatureEnabledStatus'];
     },
+    httpPushUriOptions() {
+      return this.$store.getters['firmware/httpPushUriOptions'];
+    },
   },
   watch: {
     isWorkstationSelected: function () {
@@ -267,52 +270,69 @@ export default {
           this.bmcActiveBackupSelected;
         this.updateServiceData.HttpPushUriTargetsBusy = true;
       }
-      var enddateval =
-        this.applyTimeFormValue.endDate != '' &&
-        this.applyTimeFormValue.endTime != ''
-          ? this.getUtcDate(
-              this.applyTimeFormValue.endDate,
-              this.applyTimeFormValue.endTime,
-              true, // include secounds in the value
-            )
-          : '';
-      this.updateServiceData.HttpPushUriOptions = {
-        HttpPushUriApplyTime: {
-          ApplyTime: this.applyTimeFormValue.applyTimeMode,
-          MaintenanceWindowDurationInSeconds: parseInt(
-            this.applyTimeFormValue.timeSlot,
-          ),
-          MaintenanceWindowStartTime:
-            enddateval != ''
-              ? enddateval.toISOString().substring(0, 19) +
-                this.firmwareDateTime?.slice(19)
-              : '',
-        },
-      };
-      this.$store
-        .dispatch('firmware/setFirmwarUpdateActive', this.updateServiceData)
-        .then(() => {
-          this.infoToast(this.$t('pageFirmware.toast.updateStartedMessage'), {
-            title: this.$t('pageFirmware.toast.updateStarted'),
-            timestamp: true,
-          });
-          if (this.isWorkstationSelected) {
-            this.dispatchWorkstationUpload();
-          } else {
-            this.dispatchTftpUpload();
-          }
-        })
-        .catch(({ message }) => {
-          this.updateFirmwareInit();
-          this.endLoader();
-          this.errorToast(message);
+      if (this.httpPushUriOptions !== undefined) {
+        var enddateval =
+          this.applyTimeFormValue.endDate != '' &&
+          this.applyTimeFormValue.endTime != ''
+            ? this.getUtcDate(
+                this.applyTimeFormValue.endDate,
+                this.applyTimeFormValue.endTime,
+                true, // include secounds in the value
+              )
+            : '';
+        this.updateServiceData.HttpPushUriOptions = {
+          HttpPushUriApplyTime: {
+            ApplyTime: this.applyTimeFormValue.applyTimeMode,
+            MaintenanceWindowDurationInSeconds: parseInt(
+              this.applyTimeFormValue.timeSlot,
+            ),
+            MaintenanceWindowStartTime:
+              enddateval != ''
+                ? enddateval.toISOString().substring(0, 19) +
+                  this.firmwareDateTime?.slice(19)
+                : '',
+          },
+        };
+      }
+      if (Object.keys(this.updateServiceData).length === 0) {
+        this.infoToast(this.$t('pageFirmware.toast.updateStartedMessage'), {
+          title: this.$t('pageFirmware.toast.updateStarted'),
+          timestamp: true,
         });
+        if (this.isWorkstationSelected) {
+          this.dispatchWorkstationUpload();
+        } else {
+          this.dispatchTftpUpload();
+        }
+      } else {
+        this.$store
+          .dispatch('firmware/setFirmwarUpdateActive', this.updateServiceData)
+          .then(() => {
+            this.infoToast(this.$t('pageFirmware.toast.updateStartedMessage'), {
+              title: this.$t('pageFirmware.toast.updateStarted'),
+              timestamp: true,
+            });
+            if (this.isWorkstationSelected) {
+              this.dispatchWorkstationUpload();
+            } else {
+              this.dispatchTftpUpload();
+            }
+          })
+          .catch(({ message }) => {
+            this.updateFirmwareInit();
+            this.endLoader();
+            this.errorToast(message);
+          });
+      }
     },
     dispatchWorkstationUpload() {
       this.$store
         .dispatch('firmware/uploadFirmware', this.file)
         .then((response) => {
-          if (this.applyTimeFormValue.applyTimeMode !== 'Immediate') {
+          if (
+            this.httpPushUriOptions !== undefined &&
+            this.applyTimeFormValue.applyTimeMode !== 'Immediate'
+          ) {
             let applyTimeFirmwareninfo = '';
             if (this.applyTimeFormValue.applyTimeMode == 'OnReset') {
               if (this.isPFREnable) {
@@ -410,9 +430,15 @@ export default {
       }, 300);
     },
     onSubmitUpload() {
-      this.minValidationStatus();
-      this.$v.$touch();
-      if (this.$v.$invalid || this.isValidationStatus) return;
+      if (this.httpPushUriOptions == undefined) {
+        this.$v.$touch();
+        if (this.$v.$invalid) return;
+        this.$bvModal.show('modal-update-firmware');
+      } else {
+        this.minValidationStatus();
+        this.$v.$touch();
+        if (this.$v.$invalid || this.isValidationStatus) return;
+      }
     },
     onFileUpload(file) {
       this.file = file;
