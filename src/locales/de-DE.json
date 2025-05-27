@@ -676,7 +676,9 @@
             "fileUploadedError": "Fehler beim Hochladen der Wiederherstellungsdatei",
             "errorGettingBackupDetails": "Fehler beim Abrufen der Eigenschaft BackupFeatures",
             "errorMessageNotConfigured": "Der Vorgang kann nicht abgeschlossen werden, da die Konfigurationsdatei nicht beendet wird",
-            "featureNotAvailable": "Die Sicherungs- und Wiederherstellungsfunktion ist nicht aktiviert."
+            "featureNotAvailable": "Die Sicherungs- und Wiederherstellungsfunktion ist nicht aktiviert.",
+            "restoreConfirmation": "Die Wiederherstellungsfunktionalität startet die Dienste der konfigurierten Sicherungseigenschaften neu. Sind Sie sicher, dass Sie fortfahren möchten?",
+            "confirmTitle": "Bestätigen?"
         }
     },
     "pageCups": {

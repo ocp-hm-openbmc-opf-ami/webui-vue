@@ -76,20 +76,33 @@ export default {
     onSubmitUpload() {
       this.$v.$touch();
       if (this.$v.$invalid) return;
-      this.startLoader();
-      this.$store
-        .dispatch('backupAndRestore/uploadRestoreFiles', this.file)
-        .then((message) => {
-          this.successToast(message);
-          this.clearFile();
-        })
-        .catch(({ message }) => {
-          this.errorToast(message);
-          this.clearFile();
-        })
-        .finally(() => {
-          this.reset();
-          this.endLoader();
+      this.$bvModal
+        .msgBoxConfirm(
+          this.$tc('pageBackupAndRestore.toast.restoreConfirmation'),
+          {
+            title: this.$tc('pageBackupAndRestore.toast.confirmTitle'),
+            okTitle: this.$t('global.action.ok'),
+            cancelTitle: this.$t('global.action.cancel'),
+            autoFocusButton: 'ok',
+          },
+        )
+        .then((confirmed) => {
+          if (confirmed) {
+            this.$store
+              .dispatch('backupAndRestore/uploadRestoreFiles', this.file)
+              .then((message) => {
+                this.successToast(message);
+                this.clearFile();
+              })
+              .catch(({ message }) => {
+                this.errorToast(message);
+                this.clearFile();
+              })
+              .finally(() => {
+                this.reset();
+                this.endLoader();
+              });
+          }
         });
     },
     reset() {

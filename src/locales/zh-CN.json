@@ -676,7 +676,9 @@
             "fileUploadedError": "上传恢复文件时出错",
             "errorGettingBackupDetails": "获取属性备份功能时出错",
             "errorMessageNotConfigured": "由于配置文件不存在，操作无法完成",
-            "featureNotAvailable": "未启用备份和恢复功能."
+            "featureNotAvailable": "备份和还原功能未启用。",
+            "restoreConfirmation": "还原功能将重新启动已配置备份属性的服务。您确定要继续吗？",
+            "confirmTitle": "确认？"
         }
     },
     "pageCups": {
