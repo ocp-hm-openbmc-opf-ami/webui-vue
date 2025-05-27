@@ -93,7 +93,22 @@ const CertificatesStore = {
                     .map((certificate) => certificate.type)
                     .includes(type),
               );
-
+              // Ensure "CA Certificate" is always included but max 10
+              const caCertType = CERTIFICATE_TYPES.find(
+                (cert) => cert.type === 'TrustStore Certificate',
+              );
+              const caCertsOnSystem = certificates.filter(
+                (cert) => cert.type === caCertType.type,
+              ).length;
+              if (
+                caCertType &&
+                caCertsOnSystem < 10 &&
+                !availableUploadTypes.some(
+                  (cert) => cert.type === caCertType.type,
+                )
+              ) {
+                availableUploadTypes.push(caCertType);
+              }
               commit('setCertificates', certificates);
               commit('setAvailableUploadTypes', availableUploadTypes);
             }),
