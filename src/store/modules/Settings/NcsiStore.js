@@ -27,59 +27,36 @@ const NcsiStore = {
   },
   actions: {
     async getEthernetInterfaces({ commit, dispatch }) {
-      return await api
-        .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
-        .then((response) =>
-          response.data.Members.map(
-            (ethernetInterface) => ethernetInterface['@odata.id'],
-          ),
-        )
-        .then((ethernetInterfaceIds) =>
-          api.all(
-            ethernetInterfaceIds.map((ethernetInterface) =>
-              api.get(ethernetInterface),
-            ),
-          ),
-        )
-        .then(async (ethernetInterfaces) => {
-          const ethernetData = ethernetInterfaces
-            .filter(function (ethernetInterface) {
-              return ethernetInterface.data.InterfaceEnabled; // Only include enabled interfaces
-            })
-            .map(function (ethernetInterface) {
-              return ethernetInterface.data;
-            });
-          const ncsiData = await dispatch('getNcsiData', ethernetData);
-          let ncsiInterfaceId = [];
-          let ncsiConfiguration = [];
-          ncsiData.forEach((data) => {
-            ncsiConfiguration.push(data);
-            commit('setNcsiData', ncsiConfiguration);
-            ncsiInterfaceId.push(data.Id);
-          });
-          commit('setNcsiInterface', ncsiInterfaceId);
-          commit('setEthernetData', ethernetData);
-        })
-        .catch((error) => {
-          console.log('Network Data:', error);
-          throw new Error(i18n.t('pageNcsi.toast.errorGettingNcsi'));
-        });
+      try {
+        const response = await api.get('/redfish/v1/Managers/bmc');
+        const ethernetData =
+          response.data.Oem?.Ami?.NCSIEthernetInterfaces[0]['@odata.id'];
+        const ncsiData = await dispatch('getNcsiData', ethernetData);
+        commit('setNcsiData', [ncsiData[0]]);
+        commit('setNcsiInterface', [ncsiData[0].Id]);
+        commit('setEthernetData', ethernetData);
+      } catch (error) {
+        console.error('Network Data:', error);
+        throw new Error(i18n.t('pageNcsi.toast.errorGettingNcsi'));
+      }
     },
     async getNcsiData({ commit }, ethernetData) {
       let ncsiInterfaces = [];
-      ethernetData.forEach((ethernet) => {
-        if (ethernet.Id != 'hostusb0') {
-          if (
-            ethernet?.Oem?.Ami?.NCSIConfiguration &&
-            ethernet?.Oem?.Ami?.NCSIConfiguration?.ChannelId !== undefined
-          ) {
-            ncsiInterfaces.push(ethernet);
+      try {
+        const response = await api.get(ethernetData);
+        const ncsiConfiguration = response.data.Oem?.Ami?.NCSIConfiguration;
+        const ethernetId = ethernetData.split('/').pop();
+        if (ethernetId != 'hostusb0') {
+          if (ncsiConfiguration && ncsiConfiguration?.ChannelId !== undefined) {
             commit('setNcsiEnable', true);
+            ncsiInterfaces.push(response.data);
           } else {
             commit('setNcsiEnable', false);
           }
         }
-      });
+      } catch (error) {
+        commit('setNcsiEnable', false);
+      }
       return ncsiInterfaces;
     },
     async saveNcsiConfigurations(
