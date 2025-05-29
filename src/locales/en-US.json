@@ -1613,6 +1613,7 @@
             "errorSaveSettings": "Error saving account settings.",
             "errorUpdateUser": "Error updating user '%{username}'.",
             "errorInvalidPassword": "Invalid Password check the Password complexity rules",
+            "errorLastPasswordUsed": "Please enter a new password. It cannot be the same as your current password",
             "successBatchDelete": "Successfully deleted %{count} user. | Successfully deleted %{count} users.",
             "successBatchDisable": "Successfully disabled %{count} user. | Successfully disabled %{count} users.",
             "successBatchEnable": "Successfully enabled %{count} user. | Successfully enabled %{count} users.",

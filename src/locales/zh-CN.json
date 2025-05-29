@@ -1605,6 +1605,7 @@
             "errorSaveSettings": "保存用户设置发生错误",
             "errorUpdateUser": "更新用户 '%{username}' 发生错误",
             "errorInvalidPassword": "无效密码 请确认密码规则",
+            "errorLastPasswordUsed": "请输入新密码。新密码不能与当前密码相同",
             "successBatchDelete": "成功删除 %{count} 个用户 | 成功删除 %{count} 个用户",
             "successBatchDisable": "成功禁用 %{count} 个用户 | 成功禁用 %{count} 个用户",
             "successBatchEnable": "成功启用 %{count} 个用户 | 成功启用 %{count} 个用户",

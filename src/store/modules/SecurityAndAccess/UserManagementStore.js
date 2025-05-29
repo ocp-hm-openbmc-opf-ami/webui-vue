@@ -288,7 +288,11 @@ const UserManagementStore = {
         })
         .catch(async (error) => {
           console.log(error);
-          let temp = await dispatch('handleError', { error, originalUsername });
+          let temp = await dispatch('handleError', {
+            error,
+            originalUsername,
+            routerPath,
+          });
           throw new Error(temp);
         });
     },
@@ -458,7 +462,7 @@ const UserManagementStore = {
           throw new Error(message);
         });
     },
-    async handleError(_, { error, username, originalUsername }) {
+    async handleError(_, { error, username, originalUsername, routerPath }) {
       if (
         error.response &&
         error.response.data &&
@@ -515,14 +519,32 @@ const UserManagementStore = {
 
         return errorMessage;
       }
+
       if (originalUsername && originalUsername != undefined) {
-        const errorMessage = i18n.t(
-          'pageUserManagement.toast.errorUpdateUser',
-          {
-            username: originalUsername,
-          },
-        );
-        return errorMessage;
+        if (routerPath === '/change-password') {
+          const messageInfo =
+            error.response?.data?.error['@Message.ExtendedInfo'];
+          // Check if messageInfo is an array and has elements
+          if (Array.isArray(messageInfo) && messageInfo.length > 0) {
+            for (const info of messageInfo) {
+              const message = info.Message;
+              if (message && message.includes('Last password cannot be used')) {
+                const errorMessage = i18n.t(
+                  'pageUserManagement.toast.errorLastPasswordUsed',
+                );
+                return errorMessage;
+              }
+            }
+          }
+        } else {
+          const errorMessage = i18n.t(
+            'pageUserManagement.toast.errorUpdateUser',
+            {
+              username: originalUsername,
+            },
+          );
+          return errorMessage;
+        }
       }
     },
   },
