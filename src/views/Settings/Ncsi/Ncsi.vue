@@ -194,6 +194,7 @@ export default {
     },
     changeInterfaceId(selectedId) {
       if (this.ncsiInterfaceData && this.ncsiInterfaceData.length > 0) {
+        this.channelNumberOptions = [];
         this.ncsiInterfaceData.forEach((val) => {
           if (selectedId === val?.Id) {
             this.selectedMode = val?.Oem?.Ami?.NCSIConfiguration?.Mode;
