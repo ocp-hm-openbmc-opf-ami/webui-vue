@@ -428,7 +428,10 @@ export default {
         },
         password: {
           required: requiredIf(function () {
-            return this.requirePassword() && this.form.changePassword;
+            return (
+              (this.requirePassword() && this.form.changePassword) ||
+              this.newUser
+            );
           }),
           pattern: function (pw) {
             return this.form.changePassword
@@ -438,7 +441,10 @@ export default {
         },
         passwordConfirmation: {
           required: requiredIf(function () {
-            return this.requirePassword() && this.form.changePassword;
+            return (
+              (this.requirePassword() && this.form.changePassword) ||
+              this.newUser
+            );
           }),
           sameAsPassword: sameAs('password'),
         },

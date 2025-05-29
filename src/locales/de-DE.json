@@ -1592,6 +1592,7 @@
             "errorSaveSettings": "Fehler beim Speichern der Kontoeinstellungen.",
             "errorUpdateUser": "Fehler beim Aktualisieren des Benutzers '%{username}'.",
             "errorInvalidPassword": "Ungültiges Passwort. Überprüfen Sie die Regeln zur Passwortkomplexität",
+            "errorLastPasswordUsed": "Bitte geben Sie ein neues Passwort ein. Es darf nicht mit Ihrem aktuellen Passwort identisch sein",
             "successBatchDelete": "Erfolgreich gelöscht %{count} Benutzerin. | Erfolgreich gelöscht %{count} Benutzer.",
             "successBatchDisable": "Erfolgreich deaktiviert %{count} Benutzerin. | Erfolgreich deaktiviert %{count} Benutzer.",
             "successBatchEnable": "Erfolgreich aktiviert %{count} Benutzerin. | Erfolgreich aktiviert %{count} Benutzer.",
