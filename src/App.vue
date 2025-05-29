@@ -33,7 +33,7 @@ export default {
         window.location.href.indexOf('/redfish/v1') != -1
       ) {
         this.$bvModal.msgBoxOk(
-          this.$tc('global.action.same_session_running_infomation'),
+          this.$tc('global.action.same_session_running_information'),
         );
       }
     }, 2000); // wait to read the XSRF-TOKEN
