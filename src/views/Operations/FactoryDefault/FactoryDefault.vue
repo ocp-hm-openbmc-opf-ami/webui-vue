@@ -11,11 +11,11 @@
       <page-title />
       <div class="form-background p-3">
         <p>
-          {{ $t('PageFactoryDefault.navigationInfoFactoryDefaut') }}
+          {{ $t('PageFactoryDefault.navigationInfoFactoryDefault') }}
         </p>
         <a href="#/operations/preserve-configuration" class="link-style">
           {{ $t('appPageTitle.preserve') }} </a
-        >{{ $t('PageFactoryDefault.navigationInfoExtensionFactoryDefaut') }}
+        >{{ $t('PageFactoryDefault.navigationInfoExtensionFactoryDefault') }}
         <hr class="my-3" style="border-color: #e9ecef" />
         <b-row class="mt-3">
           <b-col sm="6" md="3">

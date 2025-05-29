@@ -19,7 +19,7 @@
             "replace": "置換",
             "reset": "重設",
             "save": "儲存",
-            "saveSettings": "儲存設定",
+            "saveSettings": "儲存",
             "selected": "已選定",
             "ok": "OK",
             "warning": "警告",
@@ -32,7 +32,7 @@
             "close": "關閉",
             "yes": "是的",
             "no": "不",
-            "same_session_running_infomation": "該瀏覽器中已經有一個會話正在運行，因此打開同一個會話"
+            "same_session_running_information": "該瀏覽器中已經有一個會話正在運行，因此打開同一個會話"
         },
         "ariaLabel": {
             "clearSearch": "清除搜索條件",
@@ -41,6 +41,7 @@
             "showPassword": "將密碼以明碼顯示。注意：這會在屏幕上直接顯示您的密碼。",
             "tooltip": "提示",
             "progressBar": "網頁讀取進度",
+            "megaracOneTree": "MegaRAC OneTree - ",
             "waitLoadingBar": "請稍候..."
         },
         "calendar": {
@@ -66,7 +67,7 @@
             "required": "必要",
             "search": "搜索",
             "selectAnOption": "選擇一個項目",
-            "valueMustBeBetween": "值必須在 %{min} – %{max} 之間"
+            "valueMustBeBetween": "值必須在 %{min} – %{max} 之間。"
         },
         "status": {
             "copied": "已複製",
@@ -111,11 +112,13 @@
         "power": "電源",
         "profileSettings": "@:appPageTitle.profileSettings",
         "refresh": "更新",
-        "skipToContent": "跳至主要内容",
+        "skipToContent": "跳過",
         "titleHideNavigation": "隱藏導覽",
         "titleShowNavigation": "顯示導覽",
         "titleProfile": "顯示人物簡介清單",
         "titleRefresh": "更新應用程式資料",
+        "2fa":"2FA",
+        "setupTwoFactorAuthentication":"設置雙重申份驗證",
         "qrCodeLabel":"將以下內容新增到您選擇的身分驗證應用程式中，並在下面驗證它以啟用。",
         "backupCodeLable":"請儲存您的備份代碼以備緊急情況使用。"
     },
@@ -166,10 +169,10 @@
         "asd": "@:appPageTitle.asd",
         "raidManagement": "@:appPageTitle.raidManagement",
         "adapter": "@:appPageTitle.adapter",
+        "raidTopology": "@:appPageTitle.raidTopology",
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
-        "raidTopology": "@:appPageTitle.raidTopology",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "tasks": "@:appPageTitle.tasks",
@@ -321,35 +324,35 @@
             "hardPowerOff": "硬關機",
             "logEventOnly": "只有日誌事件",
             "oem": "Oem",
-            "policyIdHelpTest": "可以使用整數和字串值建立PolicyId",
-            "policyIdHelpTest1": "整數值範圍必須在 0 到 255 之間",
-            "componentIdHelpTest": "只能使用整數值建立元件",
-            "componentIdHelpTest1": "整數值範圍必須在 0 到 255 之間",
-            "policyLimitHelpTest": "策略限制應在所選域的最小和最大能力值之間的範圍內",
-            "correctionTimeHelpTest": "策略修正時間範圍必須在 1000 到 60000 毫秒之間",
-            "statisticsReportingPeriodHelpTest": "統計報告週期應在1S到1H之間 秒(S)和分鐘(M)是60的倍數",
-            "triggerLimitHelpTest": "政策限額應在 0 到 65,535 之間的範圍內"
+            "policyIdHelpTest": "可以使用整數和字串值建立Policy ID。",
+            "policyIdHelpTest1": "整數值範圍必須在 0 到 255 之間。",
+            "componentIdHelpTest": "只能使用整數值建立元件。",
+            "componentIdHelpTest1": "整數值範圍必須在 0 到 255 之間。",
+            "policyLimitHelpTest": "策略限制應在所選域的最小和最大能力值之間的範圍內。",
+            "correctionTimeHelpTest": "策略修正時間範圍必須在 1000 到 60000 毫秒之間。",
+            "statisticsReportingPeriodHelpTest": "統計報告週期應在1S到1H之間 秒(S)和分鐘(M)是60的倍數。",
+            "triggerLimitHelpTest": "政策限額應在 0 到 65,535 之間的範圍內。"
         },
         "toast": {
-            "errorGettingNodeManager": "取得節點管理器資訊時發生錯誤",
-            "errorInAddNmConfiguration": "建立新原則時發生錯誤",
-            "errorUpdatePolicy": "更新原則時發生錯誤",
-            "errorInPowerStatistics": "取得功率統計資料時發生錯誤",
-            "errorUpdateCapability": "更新域能力時發生錯誤",
-            "errorDeletePolicy": "刪除策略時發生錯誤",
-            "successInAddNmConfiguration": "成功建立新策略",
-            "successUpdatePolicy": "成功更新政策",
-            "successUpdateCapability": "成功更新域能力",
-            "successDeletePolicy": "已成功刪除策略"
+            "errorGettingNodeManager": "取得節點管理器資訊時發生錯誤。",
+            "errorInAddNmConfiguration": "建立新原則時發生錯誤。",
+            "errorUpdatePolicy": "更新原則時發生錯誤。",
+            "errorInPowerStatistics": "取得功率統計資料時發生錯誤。",
+            "errorUpdateCapability": "更新域能力時發生錯誤。",
+            "errorDeletePolicy": "刪除策略時發生錯誤。",
+            "successInAddNmConfiguration": "成功建立新策略。",
+            "successUpdatePolicy": "成功更新政策。",
+            "successUpdateCapability": "成功更新域能力。",
+            "successDeletePolicy": "已成功刪除策略。"
         }
     },
     "pageAmdRemoteDebug": {
         "yaapServer": "YAAP伺服器",
         "toast": {
-            "errorAmdRemoteDebugEnabled": "啟用遠端調試伺服器時出錯",
-            "errorAmdRemoteDebugDisabled": "禁用遠端調試伺服器時出錯",
-            "successAmdRemoteDebugEnabled": "成功啟用遠端調試伺服器",
-            "successAmdRemoteDebugDisabled": "成功禁用遠端調試伺服器"
+            "errorAmdRemoteDebugEnabled": "啟用遠端調試伺服器時出錯。",
+            "errorAmdRemoteDebugDisabled": "禁用遠端調試伺服器時出錯。",
+            "successAmdRemoteDebugEnabled": "成功啟用遠端調試伺服器。",
+            "successAmdRemoteDebugDisabled": "成功禁用遠端調試伺服器。"
         }
     },
     "pageDDNSNetwork": {
@@ -381,22 +384,22 @@
             "addDomainNames": "新增網域名稱"
         },
         "toast": {
-            "errorNsUpdate": "更新作業 DoNsUpdate 時發生錯誤",
-            "errorInterfaceConfiguration": "更新 DDNS 介面配置時出錯",
-            "errorEnableHostName": "啟用主機名稱設定時發生錯誤",
-            "errorDisableHostName": "停用主機名稱設定時出錯",
-            "errorEnableNsUpdate": "啟用 NSUpdate 設定時發生錯誤",
-            "errorDisableNsUpdate": "停用 NSUpdate 設定時發生錯誤",
-            "errorUpdateTsig": "上傳 TSIG 檔案時發生錯誤",
-            "errorSaveConfiguratin": "更新 DDNS 配置時出錯",
-            "successNsUpdate": "已成功更新操作 DoNsUpdate",
-            "successInterfaceConfiguration": "成功更新 DDNS 介面配置",
-            "successEnableHostName": "成功啟用主機名稱設定",
-            "successDisableeHostName": "成功禁用主機名設定",
-            "successEnableNsUpdate": "成功啟用 NSUpdate 設定",
-            "successDisableNsUpdate": "成功停用 NSUpdate 設定",
-            "successUpdateTsig": "成功上傳 TSIG 文件",
-            "successSaveConfiguratin": "成功更新 DDNS 配置"
+            "errorNsUpdate": "更新作業 DoNsUpdate 時發生錯誤。",
+            "errorInterfaceConfiguration": "更新 DDNS 介面配置時出錯。",
+            "errorEnableHostName": "啟用主機名稱設定時發生錯誤。",
+            "errorDisableHostName": "停用主機名稱設定時出錯。",
+            "errorEnableNsUpdate": "啟用 NSUpdate 設定時發生錯誤。",
+            "errorDisableNsUpdate": "停用 NSUpdate 設定時發生錯誤。",
+            "errorUpdateTsig": "上傳 TSIG 檔案時發生錯誤。",
+            "errorSaveConfiguratin": "更新 DDNS 配置時出錯。",
+            "successNsUpdate": "已成功更新操作 DoNsUpdate。",
+            "successInterfaceConfiguration": "成功更新 DDNS 介面配置。",
+            "successEnableHostName": "成功啟用主機名稱設定。",
+            "successDisableeHostName": "成功禁用主機名設定。",
+            "successEnableNsUpdate": "成功啟用 NSUpdate 設定。",
+            "successDisableNsUpdate": "成功停用 NSUpdate 設定。",
+            "successUpdateTsig": "成功上傳 TSIG 文件。",
+            "successSaveConfiguratin": "成功更新 DDNS 配置。"
         }
     },
     "pageSystemInventory": {
@@ -414,12 +417,13 @@
             "systemType": "系統類型",
             "assetTag": "資產標籤",
             "biosVersion": "BIOS 版本",
-            "state": "狀態"
+            "state": "狀態",
+            "health": "健康"
         },
         "processor": {
             "processor": "處理器",
             "processorInfo": "處理器資訊",
-            "id": "Id",
+            "id": "ID",
             "name": "名稱",
             "manufacture": "製造商",
             "maxSpeedMHz": "最大速度 MHz",
@@ -443,7 +447,7 @@
         },
         "processorFPGA": {
             "info": "FPGA 資訊",
-            "id": "Id",
+            "id": "ID",
             "name": "名稱",
             "firmwareId": "韌體 ID",
             "firmwareManufacturer": "韌體製造商",
@@ -456,7 +460,7 @@
         "memoryController": {
             "memoryController": "記憶體控制器",
             "memoryControllerInfo": "記憶體控制器資訊",
-            "id": "Id",
+            "id": "ID",
             "name": "名稱",
             "capacityMiB": "容量 MiB",
             "manufacturer": "製造商",
@@ -480,6 +484,7 @@
             "name": "名稱",
             "model": "模型",
             "state": "狀態",
+            "health": "健康",
             "powerState": "電源狀態",
             "assetTag": "資產標籤",
             "indicatorLED": "LED 指示燈",
@@ -490,7 +495,7 @@
         },
         "networkInterfaces": {
             "networkInterfacesInfo": "網路介面資訊",
-            "id": "Id",
+            "id": "ID",
             "mACAddress": "MAC 位址",
             "interfaceEnabled": "介面啟用",
             "iPv4Addresses": "IPv4 位址",
@@ -502,7 +507,7 @@
             "address": "地址",
             "prefixLength": "前綴長度",
             "addressOrigin": "地址來源",
-            "id": "Id",
+            "id": "ID",
             "name": "名稱"
         },
         "power": {
@@ -568,7 +573,7 @@
             "pcieDevice": "PCIE 設備",
             "pcieDeviceInfo": "PCIE 裝置資訊",
             "name": "名稱",
-            "id": "Id",
+            "id": "ID",
             "description": "描述",
             "manufacturer": "製造商",
             "assetTag": "資產標籤",
@@ -579,7 +584,7 @@
         "pcieFunction": {
             "pcieFunction": "PCIE 功能",
             "pcieFunctionInfo": "PCIE 功能資訊",
-            "id": "Id",
+            "id": "ID",
             "name": "名稱",
             "deviceLinked": "裝置連結",
             "deviceClass": "設備類別",
@@ -596,7 +601,7 @@
         "storage": {
             "storage": "儲存",
             "storageDriveInfo": "儲存驅動器資訊",
-            "id": "Id",
+            "id": "ID",
             "name": "名稱",
             "serialNumuber": "序號",
             "manufacturer": "製造商",
@@ -619,7 +624,7 @@
         },
         "memoryAssembly" : {
             "assemblyInfo": "記憶體組件資訊",
-            "id": "Id",
+            "id": "ID",
             "name": "名稱",
             "binaryDataURI": "二進位資料 URI",
             "description": "描述",
@@ -640,7 +645,7 @@
         },
         "memoryMetrics": {
             "memortMetricsInfo": "記憶體指標資訊",
-            "id": "Id",
+            "id": "ID",
             "name": "名稱",
             "bandwidthPercent": "頻寬百分比",
             "blockSizeBytes": "區塊大小位元組",
@@ -673,13 +678,13 @@
         "checkAll": "啟用/停用所有備份屬性",
         "tarFileOnly": "僅上傳恢復 (.tar) 文件",
         "toast": {
-            "successMessage": "已成功下載屬性備份功能",
-            "errorMessage": "屬性「備份功能」不在可接受值清單中",
-            "fileUploadedSuccessfully": "恢復檔案上傳成功 ",
-            "fileUploadedError": "上傳恢復檔案時發生錯誤",
-            "errorGettingBackupDetails": "取得屬性備份功能時發生錯誤",
-            "errorMessageNotConfigured": "由於設定檔不存在，操作無法完成",
-            "featureNotAvailable": "未啟用備份和復原功能.",
+            "successMessage": "已成功下載屬性備份功能。",
+            "errorMessage": "屬性「備份功能」不在可接受值清單中。",
+            "fileUploadedSuccessfully": "恢復檔案上傳成功 。",
+            "fileUploadedError": "上傳恢復檔案時發生錯誤。",
+            "errorGettingBackupDetails": "取得屬性備份功能時發生錯誤。",
+            "errorMessageNotConfigured": "由於設定檔不存在，操作無法完成。",
+            "featureNotAvailable": "未啟用備份和復原功能。",
             "restoreConfirmation": "還原功能將重新啟動配置的備份屬性的服務。您確定要繼續嗎？",
             "confirmTitle": "確認嗎？"
         }
@@ -700,14 +705,14 @@
         "loadFactorConfiguration": "負載係數配置",
         "static": "靜止的",
         "dynamic": "動態的",
-        "staticLoaderFactorSum": "三個靜載係數總和必須等於 100",
-        "cupsIntervelHelpContent": "間隔時間應在 0.1 至 1 秒之間",
-        "cupsAveragingPeriodContent": "平均週期時間應在 1 到 10 秒之間",
+        "staticLoaderFactorSum": "三個靜載係數總和必須等於 100。",
+        "cupsIntervelHelpContent": "間隔時間應在 0.1 至 1 秒之間。",
+        "cupsAveragingPeriodContent": "平均週期時間應在 1 到 10 秒之間。",
         "toast": {
-            "errorGettingIntelCups": "英特爾 CupsService 不可用",
-            "errorUpdateCupsService": "未找到名為「CupsService」類型的請求資源",
-            "successUpdateCupsService": "已成功更新 CupsService",
-            "errorAddingStaticLoadFactor": "靜載係數總和必須等於 100"
+            "errorGettingIntelCups": "英特爾 CUPs Service 不可用。",
+            "errorUpdateCupsService": "未找到名為「CUPs Service」類型的請求資源。",
+            "successUpdateCupsService": "已成功更新 CUPs Service。",
+            "errorAddingStaticLoadFactor": "靜載係數總和必須等於 100。"
         }
     },
     "pageBsod": {
@@ -715,14 +720,14 @@
         "downloadBsodImage": "下載",
         "deleteBsodImage": "刪除",
         "triggerBsodImage": "觸發",
-        "lastBsodCaptured": "最後捕獲的 BSOD 屏幕.",
-        "bsodImageNotAvailable": "BSOD 屏幕不可用.",
+        "lastBsodCaptured": "最後捕獲的 BSOD 屏幕。",
+        "bsodImageNotAvailable": "BSOD 屏幕不可用。",
         "toast": {
-            "errorGettingBsodApi": "獲取 BSOD 圖像時出錯.",
-            "errorDeleteBsodImage": "刪除 BSOD 影像時出錯",
-            "errorTriggerBsodImage": "觸發 BSOD 影像時出錯",
-            "successTriggerBsodImage": "成功觸發 BSOD 影像。有時，請使用刷新按鈕來正確反映觸發的圖像",
-            "successDeleteBsodImage": "已成功刪除 BSOD 影像"
+            "errorGettingBsodApi": "獲取 BSOD 圖像時出錯。",
+            "errorDeleteBsodImage": "刪除 BSOD 影像時出錯。",
+            "errorTriggerBsodImage": "觸發 BSOD 影像時出錯。",
+            "successTriggerBsodImage": "成功觸發 BSOD 影像。有時，請使用刷新按鈕來正確反映觸發的圖像。",
+            "successDeleteBsodImage": "已成功刪除 BSOD 影像。"
         }
     },
     "pageChangePassword": {
@@ -911,7 +916,7 @@
         "model": "模型",
         "serialNumber": "序號",
         "toast": {
-            "errorShowingNVMeInfo": "顯示 NVMe 資訊時出錯"
+            "errorShowingNVMeInfo": "顯示 NVMe 資訊時出錯。"
         }
     },
     "pageDateTime": {
@@ -935,8 +940,8 @@
             }
         },
         "toast": {
-            "errorSaveDateTime": "儲存日期與時間設定發生錯誤",
-            "successSaveDateTime": "成功儲存日期與時間設定"
+            "errorSaveDateTime": "儲存日期與時間設定發生錯誤。",
+            "successSaveDateTime": "成功儲存日期與時間設定。"
         },
         "timeZone": {
             "MIDWAY": "UTC-11:00 | 中途島",
@@ -1037,15 +1042,15 @@
             "type": "型態"
         },
         "toast": {
-            "errorDelete": "刪除 %{count} 紀錄發生錯誤 | 刪除 %{count} 紀錄發生錯誤",
-            "errorLogStatusUpdate": "更新紀錄狀態發生錯誤",
-            "errorResolveLogs": "解決 %{count} 紀錄發生錯誤 | 解決 %{count} 紀錄發生錯誤",
-            "errorUnresolveLogs": "未解決 %{count} 紀錄發生錯誤 | 未解決 %{count} 紀錄發生錯誤",
+            "errorDelete": "刪除 %{count} 紀錄發生錯誤 | 刪除 %{count} 紀錄發生錯誤。",
+            "errorLogStatusUpdate": "更新紀錄狀態發生錯誤。",
+            "errorResolveLogs": "解決 %{count} 紀錄發生錯誤 | 解決 %{count} 紀錄發生錯誤。",
+            "errorUnresolveLogs": "未解決 %{count} 紀錄發生錯誤 | 未解決 %{count} 紀錄發生錯誤。",
             "errorDownloadEventEntry": "下載事件日誌條目時發生錯誤。",
             "successDownloadEventEntry": "已成功下載事件日誌條目。",
-            "successDelete": "成功刪除 %{count} 紀錄 | 成功刪除 %{count} 紀錄",
-            "successResolveLogs": "成功解決 %{count} 紀錄 | 成功解決 %{count} 紀錄",
-            "successUnresolveLogs": "成功未解決 %{count} 紀錄 | 成功未解決 %{count} 紀錄"
+            "successDelete": "成功刪除 %{count} 紀錄 | 成功刪除 %{count} 紀錄。",
+            "successResolveLogs": "成功解決 %{count} 紀錄 | 成功解決 %{count} 紀錄。",
+            "successUnresolveLogs": "成功未解決 %{count} 紀錄 | 成功未解決 %{count} 紀錄。"
         }
     },
     "pageFactoryReset": {
@@ -1079,10 +1084,10 @@
             "resetWarningCheckLabel": "繼續執行且不關閉系統"
         },
         "toast": {
-            "resetBiosSuccess": "成功恢復原廠伺服器設定",
-            "resetBiosError": "恢復原廠伺服器設定失敗",
-            "resetToDefaultsSuccess": "成功恢復BMC與原廠伺服器設定",
-            "resetToDefaultsError": "恢復BMC與原廠伺服器設定失敗"
+            "resetBiosSuccess": "成功恢復原廠伺服器設定。",
+            "resetBiosError": "恢復原廠伺服器設定失敗。",
+            "resetToDefaultsSuccess": "成功恢復BMC與原廠伺服器設定。",
+            "resetToDefaultsError": "恢復BMC與原廠伺服器設定失敗。"
         }
     },
     "pageAddc": {
@@ -1096,7 +1101,7 @@
         "table": {
             "fileName": "檔案名稱",
             "fileInformation": "檔案資訊",
-            "sino": "S.NO"
+            "id": "ID"
         },
         "harvestUcode": "收穫u碼",
         "harvestPpin": "收穫PPIN",
@@ -1111,10 +1116,10 @@
         "toast": {
             "successSaveAddc": "ADDC 配置已成功儲存。",
             "errorSavedAddc": "儲存 ADDC 配置時發生錯誤。",
-            "successAddcDownload": "ADDC 日志下载成功。",
-            "errorAddcDownload": "保存 ADDC 配置时出错。",
+            "successAddcDownload": "ADDC 日誌下載成功。",
+            "errorAddcDownload": "儲存 ADDC 配置時出錯。",
             "successAddcLogCleared": "CPER 文件删除成功。",
-            "errorAddcLogCleared": "清除日志文件时发生错误"
+            "errorAddcLogCleared": "清除日誌文件時發生錯誤。"
         }
     },
     "pageAutonomousCrashDump": {
@@ -1124,12 +1129,12 @@
             "generate": "產生",
             "close": "關閉",
             "view": "點擊後請等待一分鐘，JSON Viewer跳出視窗正在載入..",
-            "logInProgress": "日誌生成正在進行中"
+            "logInProgress": "日誌生成正在進行中。"
         },
         "modal": {
             "jsonViewer": "已選擇檔案: %{fileName}",
             "confirmTitle": "確認嗎？",
-            "confirmMessage":"您確定要生成故障轉儲日誌嗎？有時可能需要 10 到 15 分鐘才能生成日誌."
+            "confirmMessage":"您確定要生成故障轉儲日誌嗎？有時可能需要 10 到 15 分鐘才能生成日誌。"
         },
         "table": {
             "fileName": "檔案名稱",
@@ -1138,11 +1143,11 @@
         },
         "pageDescription": "自主速成的轉儲",
         "toast": {
-            "successGenerateCrashDumpLog": "成功產生速成的轉儲",
-            "errorACDDisabled": "停用ACD發生錯誤",
-            "errorACDEnabled": "啟用ACD發生錯誤",
-            "successACDDisabled": "成功停用ACD",
-            "successACDEnabled": "成功啟用ACD"
+            "successGenerateCrashDumpLog": "成功產生速成的轉儲。",
+            "errorACDDisabled": "停用ACD發生錯誤。",
+            "errorACDEnabled": "啟用ACD發生錯誤。",
+            "successACDDisabled": "成功停用ACD。",
+            "successACDEnabled": "成功啟用ACD。"
         }
     },
     "pageAsd": {
@@ -1153,13 +1158,13 @@
         "JTAGInfo": "JTAG 信息",
         "uploadCertificate": "上傳證書",
         "toast": {
-            "errorAsdDisabled": "停用 ASD 伺服器發生錯誤",
-            "errorAsdEnabled": "啟用 ASD 伺服器發生錯誤",
-            "successAsdDisabled": "成功停用 ASD 伺服器",
-            "successAsdEnabled": "成功啟用 ASD 伺服器",
-            "errorAsdDbusEnable": "無法獲取 TLS 和 JTAG 信息",
-            "errorAsdCertificate": "無法取得 TLS 憑證可用性.",
-            "errorAsdCertInfo": "無法取得 TLS 憑證信息."
+            "errorAsdDisabled": "停用 ASD 伺服器發生錯誤。",
+            "errorAsdEnabled": "啟用 ASD 伺服器發生錯誤。",
+            "successAsdDisabled": "成功停用 ASD 伺服器。",
+            "successAsdEnabled": "成功啟用 ASD 伺服器。",
+            "errorAsdDbusEnable": "無法獲取 TLS 和 JTAG 信息。",
+            "errorAsdCertificate": "無法取得 TLS 憑證可用性。",
+            "errorAsdCertInfo": "無法取得 TLS 憑證信息。"
         }
     },
     "PageFactoryDefault": {
@@ -1179,14 +1184,14 @@
         "ntp": "NTP",
         "sol": "SOL",
         "sysLog": "Syslog",
-        "navigationInfoFactoryDefaut": "以下檢查配置將通過還原操作保留。您可以在列表中更改",
-        "navigationInfoExtensionFactoryDefaut": "頁。",
+        "navigationInfoFactoryDefault": "以下檢查配置將通過還原操作保留。您可以在列表中更改",
+        "navigationInfoExtensionFactoryDefault": "頁。",
         "toast": {
             "restoreToDefaultsSuccess": "成功！設備已重置。請關閉此瀏覽器會話並開啟新的瀏覽器會話以重新連接到裝置。",
             "restoreToDefaultsError": "恢復出廠預設值時出錯。",
             "FactoryDefaultConfirmation": "如果您想繼續恢復配置，請按一下「確定」。 警告：恢復配置將重新啟動設備。",
-            "title": "原廠設定",
-            "okTitle": "ok"
+            "title": "恢復原廠設定",
+            "okTitle": "OK"
         }
     },
     "PageOperations": {
@@ -1204,15 +1209,14 @@
         "sectionTitleBmcCardsCombined": "BMC 和伺服器",
         "sectionTitleHostCards": "主機",
         "sectionTitleUpdateFirmware": "更新韌體",
-        "cardTitleClearConfig": "清除配置",
-        "clearConfigDescription": "啟用 BIOS 清除配置",
-        "runningImageBootedFromBackup": "運行的映像從備份映像啟動",
-        "runningImageBootedFromActive": "運行的映像從活動映像啟動",
+        "cardTitleClearConfig": "清除 BIOS 配置",
+        "runningImageBootedFromBackup": "運行的映像從備份映像啟動。",
+        "runningImageBootedFromActive": "運行的映像從活動映像啟動。",
         "alert": {
-            "operationInProgress": "正在執行伺服器電源運作",
+            "operationInProgress": "正在執行伺服器電源運作。",
             "serverMustBePoweredOffTo": "伺服器必須關閉電源至:",
-            "serverMustBePoweredOffToUpdateFirmware": "更新韌體時必須關機",
-            "switchRunningAndBackupImages": "切換至執行模式且備份映像",
+            "serverMustBePoweredOffToUpdateFirmware": "更新韌體時必須關機。",
+            "switchRunningAndBackupImages": "切換至執行模式且備份映像。",
             "updateFirmware": "更新韌體",
             "viewServerPowerOperations": "檢視伺服器電源運作"
         },
@@ -1234,8 +1238,8 @@
                 "maintenanceWindowDurationInSeconds": "持續時間（秒）",
                 "maintenanceWindowStartDate": "開始日期",
                 "maintenanceWindowStartTime": "開始時間((24 小時制 HH:MM:SS)",
-                "dateValidation": "開始日期應晚於 BMC 日期",
-                "timeValidation": "開始時間應大於 BMC 時間",
+                "dateValidation": "開始日期應晚於 BMC 日期。",
+                "timeValidation": "開始時間應大於 BMC 時間。",
                 "onResetinfo": "BMC 將重新啟動，並在啟動後進入 BMC 控制台以取得所選選項。",
                 "atMaintenanceWindowStartinfo": "韌體更新將根據所選選項配置的開始日期/時間開始。",
                 "inMaintenanceWindowOnResetinfo": "BMC 重新啟動應根據所選選項的配置開始日期/時間和持續時間進行。"
@@ -1254,11 +1258,11 @@
             "firmwareResetCalled": "BMC 已調用韌體重置。關閉目前會話，並在幾分鐘後開啟新會話。"
         },
         "toast": {
-            "errorSwitchImages": "切換執行中備份映像失敗",
-            "errorUpdateFirmware": "韌體更新失敗",
-            "rebootStarted": "已重新開機",
-            "rebootStartedMessage": "成功啟用備份映像開機",
-            "updateStarted": "已開始更新",
+            "errorSwitchImages": "切換執行中備份映像失敗。",
+            "errorUpdateFirmware": "韌體更新失敗。",
+            "rebootStarted": "已重新開機。",
+            "rebootStartedMessage": "成功啟用備份映像開機。",
+            "updateStarted": "已開始更新。",
             "updateStartedMessage": "在做任何變更以前請等待韌體更新通知。",
             "verifySwitch": "認證切換",
             "verifySwitchMessage": "刷新應用程式以證實執行中及備份映像已更換",
@@ -1306,7 +1310,7 @@
         "bmcManager": "BMC 管理員",
         "chassis": "機箱",
         "processors": "處理器",
-        "quicklinkTitle": "硬體元件捷徑",
+        "quicklinkTitle": "硬體元件捷徑。",
         "system": "系統",
         "assemblies": "組件",
         "systemIndicator": {
@@ -1377,8 +1381,8 @@
         "toast": {
             "successDisableIdentifyLed": "成功停用識別 LED。",
             "successEnableIdentifyLed": "成功啟用識別 LED。",
-            "errorDisableIdentifyLed": "停用識別LED發生錯誤",
-            "errorEnableIdentifyLed": "啟用識別LED發生錯誤"
+            "errorDisableIdentifyLed": "停用識別LED發生錯誤。",
+            "errorEnableIdentifyLed": "啟用識別LED發生錯誤。"
         }
     },
     "pageKeyClear": {
@@ -1393,11 +1397,11 @@
             "clearAllLabel": "全部清除",
             "clearAllHeperText": "清除所有平台韌體的敏感資料",
             "clearHypervisorSystemKeyLabel": "清除超級監督者系統鑰匙",
-            "clearHypervisorSystemKeyHelperText": "顯示超級監督者清除系統鑰匙",
+            "clearHypervisorSystemKeyHelperText": "顯示超級監督者清除系統鑰匙。",
             "clearOperatingSystemKeysLabel": "清除正在運作系統的鑰匙",
-            "clearOperatingSystemKeysHelperText": "顯示OPAL清除正在運作的安全啟動鑰匙",
+            "clearOperatingSystemKeysHelperText": "顯示OPAL清除正在運作的安全啟動鑰匙。",
             "clearSystemSecurityKeyLabel": "清除系統安全鑰匙",
-            "clearSystemSecurityKeyHelperText": "顯示OPAL/PEF清除系統安全者的鑰匙",
+            "clearSystemSecurityKeyHelperText": "顯示OPAL/PEF清除系統安全者的鑰匙。",
             "keyClearOptionsLabel": "鑰匙清除選項",
             "keyClearNotRequested": "鑰匙清除不是必須",
             "none": "無",
@@ -1405,8 +1409,8 @@
         },
         "modal": {
             "clear": "清除鑰匙",
-            "clearAllMessage": "任何包含已選資料的加密鑰匙將會移失。系統將無法解碼任何需要這些鑰匙的資料",
-            "clearAllTitle": "警告:此動作是不可逆的"
+            "clearAllMessage": "任何包含已選資料的加密鑰匙將會移失。系統將無法解碼任何需要這些鑰匙的資料。",
+            "clearAllTitle": "警告:此動作是不可逆的。"
         },
         "toast": {
             "selectedKeyClearedError": "清除鑰匙發生錯誤",
@@ -1425,10 +1429,10 @@
             "forcedRestart": "強制重啟"
         },
         "powerOnTooltip": "開啟伺服器",
-        "gracefulShutdownTooltip": "作業系統關閉，然後伺服器關閉",
-        "gracefulRestartTooltip": "作業系統關閉，然後伺服器重新啟動",
-        "forcedShutdownTooltip": "伺服器關閉，作業系統不關閉；可能會導致資料損壞",
-        "forcedRestartTooltip": "伺服器重新啟動而不關閉作業系統；可能會導致資料損壞",
+        "gracefulShutdownTooltip": "作業系統關閉，然後伺服器關閉。",
+        "gracefulRestartTooltip": "作業系統關閉，然後伺服器重新啟動。",
+        "forcedShutdownTooltip": "伺服器關閉，作業系統不關閉；可能會導致資料損壞。",
+        "forcedRestartTooltip": "伺服器重新啟動而不關閉作業系統；可能會導致資料損壞。",
         "openSoftKeyboard": "開啟虛擬鍵盤",
         "languages": {
             "english": "英文",
@@ -1443,17 +1447,17 @@
         "connected": "已結接",
         "connecting": "連結中",
         "disconnected": "已斷連",
-	"alreadyKVMSession": "此 Web 會話的 KVM 會話已處於作用中狀態。一個 Web 會話僅允許一個 KVM 會話",
-        "alreadyKVMSessionactive": "該瀏覽器中已經有一個會話正在執行",
-        "alreadyActiveSession": "主KVM會話正在運轉 請稍後再試 ",
-	"maximumSessionReached": "已達到最大 KVM 會話數",
-	"maximumkvmSessionReached": "已達到允許的最大會話數。請關閉其他會話並重試",
-        "alreadyInMasterSession": "主會話正在運轉",
+	    "alreadyKVMSession": "此 Web 會話的 KVM 會話已處於作用中狀態。一個 Web 會話僅允許一個 KVM 會話。",
+        "alreadyKVMSessionactive": "該瀏覽器中已經有一個會話正在執行。",
+        "alreadyActiveSession": "主KVM會話正在運轉 請稍後再試。",
+        "alreadyInMasterSession": "主會話正在運轉。",
+	    "maximumSessionReached": "已達到最大 KVM 會話數。",
+	    "maximumkvmSessionReached": "已達到允許的最大會話數。請關閉其他會話並重試。",
         "errorInGettingActiveStatus": "取得KVM活躍狀態發生錯誤!",
         "disabledKVMService": "KVM服務已停用。進入安全性和存取 -> 策略頁面啟用 KVM 服務。",
         "toast": {
-            "success" : "電源操作成功執行",
-            "error" : "執行電源操作時發生錯誤"
+            "success" : "電源操作成功執行。",
+            "error" : "執行電源操作時發生錯誤。"
         },
         "viewonly" : "（僅供查看）"
     },
@@ -1493,21 +1497,21 @@
             "groupPrivilege": "群組特權"
         },
         "tableRoleGroups": {
-            "alertContent": "LDAP 授權必須被啟用以修改身分組",
+            "alertContent": "LDAP 授權必須被啟用以修改身分組。",
             "groupName": "群組名稱",
             "groupPrivilege": "群組特權"
         },
         "toast": {
-            "errorAddRoleGroup": "新增身分組發生錯誤",
-            "errorDeleteRoleGroup": "刪除身分組發生錯誤 | 刪除身分組們發生錯誤",
-            "errorSaveActiveDirectorySettings": "儲存 Active Directory 設定發生錯誤",
-            "errorSaveLdapSettings": "儲存 Open LDAP 設定發生錯誤",
-            "errorSaveRoleGroup": "儲存身分組發生錯誤",
-            "successAddRoleGroup": "成功新增身分組'%{groupName}'",
-            "successDeleteRoleGroup": "成功刪除身分組",
-            "successSaveActiveDirectorySettings": "成功儲存 Active Directory 設定.",
-            "successSaveLdapSettings": "成功儲存 Open LDAP 設定.",
-            "successSaveRoleGroup": "成功儲存身分組'%{groupName}'."
+            "errorAddRoleGroup": "新增身分組發生錯誤。",
+            "errorDeleteRoleGroup": "刪除身分組發生錯誤。 | 刪除身分組們發生錯誤。",
+            "errorSaveActiveDirectorySettings": "儲存 Active Directory 設定發生錯誤。",
+            "errorSaveLdapSettings": "儲存 Open LDAP 設定發生錯誤。",
+            "errorSaveRoleGroup": "儲存身分組發生錯誤。",
+            "successAddRoleGroup": "成功新增身分組'%{groupName}'。",
+            "successDeleteRoleGroup": "成功刪除身分組。",
+            "successSaveActiveDirectorySettings": "成功儲存 Active Directory 設定。",
+            "successSaveLdapSettings": "成功儲存 Open LDAP 設定。",
+            "successSaveRoleGroup": "成功儲存身分組'%{groupName}'。"
         }
     },
     "pageRadius": {
@@ -1543,7 +1547,7 @@
             "accountLocked": "帳號被上鎖",
             "accountStatus": "帳號狀態",
             "automaticAfterTimeout": "超時以後將自動",
-            "batchDeleteConfirmMessage": "確定要刪除 %{count} 使用者? 此動作是不可逆的 | 確定要刪除 %{count} 使用者們? 此動作是不可逆的",
+            "batchDeleteConfirmMessage": "確定要刪除 %{count} 使用者? 此動作是不可逆的。 | 確定要刪除 %{count} 使用者們? 此動作是不可逆的。",
             "cannotStartWithANumber": "開頭不能使用數字",
             "clickSaveToUnlockAccount": "點擊 \"Save\" 解鎖帳戶",
             "confirmUserPassword": "確認使用者密碼",
@@ -1581,78 +1585,78 @@
             "noAccess": "沒有權限"
         },
         "toast": {
-            "errorBatchDelete": "刪除 %{count} 使用者發生錯誤 | 刪除  %{count} 使用者們發生錯誤",
-            "errorBatchDisable": "停用 %{count} 使用者發生錯誤 | 停用 %{count} 使用者們發生錯誤",
-            "errorBatchEnable": "啟用 %{count} 使用者發生錯誤 | 啟用 %{count} 使用者們發生錯誤",
-            "errorCreateUser": "建立使用者「%{username}」時發生錯誤",
-            "errorAlreadyExistUser": "使用者名稱 '%{username}'已經存在",
-            "errorDeleteUser": "刪除使用者'%{username}'發生錯誤",
-            "errorDeleteLoggedUser": "使用者 '%{username}' 目前已登入其他對話",
-            "errorLoadAccountSettings": "載入帳戶設定發生錯誤",
-            "errorLoadUsers": "載入使用者們發生錯誤",
-            "errorSaveSettings": "儲存帳戶設定發生錯誤",
-            "errorUpdateUser": "更新使用者'%{username}'發生錯誤",
-            "errorInvalidPassword": "無效密碼 請確認密碼規則",
-            "errorLastPasswordUsed": "請輸入新密碼。它不能與您目前的密碼相同",
-            "successBatchDelete": "成功刪除 %{count} 使用者 | 成功刪除 %{count} 使用者們",
-            "successBatchDisable": "成功停用 %{count} 使用者 | 成功停用 %{count} 使用者們",
-            "successBatchEnable": "成功啟用 %{count} 使用者 | 成功啟用 %{count} 使用者們",
-            "successCreateUser": "使用者 '%{username}'已建立",
-            "successDeleteUser": "使用者'%{username}'已刪除",
-            "successSaveSettings": "成功儲存帳戶設定",
-            "successUpdateUser": "使用者 '%{username}'已更新",
-            "successPasswordChanged": "密碼變更成功，請使用新密碼重新登入"
+            "errorBatchDelete": "刪除 %{count} 使用者發生錯誤 | 刪除  %{count} 使用者們發生錯誤。",
+            "errorBatchDisable": "停用 %{count} 使用者發生錯誤 | 停用 %{count} 使用者們發生錯誤。",
+            "errorBatchEnable": "啟用 %{count} 使用者發生錯誤 | 啟用 %{count} 使用者們發生錯誤。",
+            "errorCreateUser": "建立使用者「%{username}」時發生錯誤。",
+            "errorAlreadyExistUser": "使用者名稱 '%{username}'已經存在。",
+            "errorDeleteUser": "刪除使用者'%{username}'發生錯誤。",
+            "errorDeleteLoggedUser": "使用者 '%{username}' 目前已登入其他對話。",
+            "errorLoadAccountSettings": "載入帳戶設定發生錯誤。",
+            "errorLoadUsers": "載入使用者們發生錯誤。",
+            "errorSaveSettings": "儲存帳戶設定發生錯誤。",
+            "errorUpdateUser": "更新使用者'%{username}'發生錯誤。",
+            "errorInvalidPassword": "無效密碼 請確認密碼規則。",
+            "errorLastPasswordUsed": "請輸入新密碼。它不能與您目前的密碼相同。",
+            "successBatchDelete": "成功刪除 %{count} 使用者 | 成功刪除 %{count} 使用者們。",
+            "successBatchDisable": "成功停用 %{count} 使用者 | 成功停用 %{count} 使用者們。",
+            "successBatchEnable": "成功啟用 %{count} 使用者 | 成功啟用 %{count} 使用者們。",
+            "successCreateUser": "使用者 '%{username}'已建立。",
+            "successDeleteUser": "使用者'%{username}'已刪除。",
+            "successSaveSettings": "成功儲存帳戶設定。",
+            "successUpdateUser": "使用者 '%{username}'已更新。",
+            "successPasswordChanged": "密碼變更成功，請使用新密碼重新登入。"
         },
         "passwordRules": {
             "passwordForHigh": {
-                "passwordComplexityForHigh": "密碼複雜度高",
-                "rule1": "它應該只包含可列印字符.",
-                "rule2": "密碼長度不能短於八個字元",
-                "rule3": "必須包含至少 5 個唯一字元（不允許使用 abcabcabc）",
+                "passwordComplexityForHigh": "密碼複雜度高。",
+                "rule1": "它應該只包含可列印字符。",
+                "rule2": "密碼長度不能短於八個字元。",
+                "rule3": "必須包含至少 5 個唯一字元（不允許使用 abcabcabc）。",
                 "rule4": "須符合以下四個標準:" ,
-                "rule5": "包含一個大寫字母(e.g. A, G)",
-                "rule6": "包含一個小寫字母(e.g. a, g)",
-                "rule7": "包含數字(e.g. 1, 6)",
-                "rule8": "至少包含一個空格或符號（例如 $、&）.",
-                "rule9": "不能包含使用者名稱或反向的使用者名稱（不區分大小寫）.",
-                "rule10": "不能包含超過或等於 3 個字元的連續或反向連續順序的數字（例如不允許使用 BMC(123)ste、BMC(654)sfc、BMC(4567)ste、BMC(9876)sfc ).",
-                "rule11": "不能包含大於或等於 3 個字元的連續或反向連續順序的區分大小寫字母（例如 (ABC)347!,57$(fed)68k, (GHIJ)347!, 57$(kjih )68k 是不允許的).",
-                "rule12": "不能包含超過 3 個字元的符號（例如不允許使用 34Mgs57(?!$#)68k）.",
-                "rule13": "不能包含超過 3 個字元的數字（例如不允許使用 Fgke(1245)#@、(4390)FGL$).",
-                "rule14": "字母表不能包含超過 3 個字元（區分大小寫）（例如不允許使用 Fg1s3as(FDGB)、GleOp34!(asbd)）."
+                "rule5": "包含一個大寫字母(e.g. A, G)。",
+                "rule6": "包含一個小寫字母(e.g. a, g)。",
+                "rule7": "包含數字(e.g. 1, 6)。",
+                "rule8": "至少包含一個空格或符號（例如 $、&）。",
+                "rule9": "不能包含使用者名稱或反向的使用者名稱（不區分大小寫）。",
+                "rule10": "不能包含超過或等於 3 個字元的連續或反向連續順序的數字（例如不允許使用 BMC(123)ste、BMC(654)sfc、BMC(4567)ste、BMC(9876)sfc )。",
+                "rule11": "不能包含大於或等於 3 個字元的連續或反向連續順序的區分大小寫字母（例如 (ABC)347!,57$(fed)68k, (GHIJ)347!, 57$(kjih )68k 是不允許的)。",
+                "rule12": "不能包含超過 3 個字元的符號（例如不允許使用 34Mgs57(?!$#)68k）。",
+                "rule13": "不能包含超過 3 個字元的數字（例如不允許使用 Fgke(1245)#@、(4390)FGL$)。",
+                "rule14": "字母表不能包含超過 3 個字元（區分大小寫）（例如不允許使用 Fg1s3as(FDGB)、GleOp34!(asbd)）。"
               },
               "passwordFormedium": {
                 "passwordComplexityFormedium": "密碼複雜度中",
-                "rule1": "它應該只包含可列印字符.",
-                "rule2": "密碼長度不能短於八個字元",
-                "rule3": "必須包含至少 5 個唯一字元（不允許使用 abcabcabc）",
-                "rule4": "不能包含使用者名稱或是倒反的使用者名稱",
+                "rule1": "它應該只包含可列印字符。",
+                "rule2": "密碼長度不能短於八個字元。",
+                "rule3": "必須包含至少 5 個唯一字元（不允許使用 abcabcabc）。",
+                "rule4": "不能包含使用者名稱或是倒反的使用者名稱。",
                 "rule5": "須符合以下四個標準:",
-                "rule6": "包含一個大寫字母(e.g. A, G).",
-                "rule7": "包含一個小寫字母 (e.g. a, g).",
-                "rule8": "包含數字 (e.g. 1, 6).",
-                "rule9": "至少包含一個空格或符號（例如 $、&）.",
-                "rule10": "不能包含使用者名稱或是倒反的使用者名稱(字母沒有大小寫之分) (eg,username=Hello, Password=th12(oLleH)_78 是不被允許)."
+                "rule6": "包含一個大寫字母(e.g. A, G)。",
+                "rule7": "包含一個小寫字母 (e.g. a, g)。",
+                "rule8": "包含數字 (e.g. 1, 6)。",
+                "rule9": "至少包含一個空格或符號（例如 $、&）。",
+                "rule10": "不能包含使用者名稱或是倒反的使用者名稱(字母沒有大小寫之分) (eg,username=Hello, Password=th12(oLleH)_78 是不被允許)。"
               },
             "passwordForLow": {
               "passwordComplexityForLow": "密碼複雜度低",
-              "rule1": "它應該只包含可列印字符.",
-              "rule2": "密碼長度不能短於8個字符",
-              "rule3": "必須包含至少 5 個唯一字元（不允許使用 abcabcabc）",
+              "rule1": "它應該只包含可列印字符。",
+              "rule2": "密碼長度不能短於8個字符。",
+              "rule3": "必須包含至少 5 個唯一字元（不允許使用 abcabcabc）。",
               "rule4": "必須符合以下 4 項標準中的任意 3 條:",
-              "rule5": "包含一個大寫字母(e.g. A, G).",
-              "rule6": "包含一個小寫字母 (e.g. a, g).",
-              "rule7": "包含數字 (e.g. 1, 6).",
-              "rule8": "至少包含一個空格或符號（例如 $、&）.",
-              "rule9": "不能包含使用者名稱或是倒反的使用者名稱 (pam_cracklib將會檢查兩者) (字母沒有大小寫之分) (eg, username=Hello,  Password=th12(heLLo)_78 和 Password=th12(oLleH)_78是不被允許,跟密碼複雜度中高一樣)."
+              "rule5": "包含一個大寫字母(e.g. A, G)。",
+              "rule6": "包含一個小寫字母 (e.g. a, g)。",
+              "rule7": "包含數字 (e.g. 1, 6)。",
+              "rule8": "至少包含一個空格或符號（例如 $、&）。",
+              "rule9": "不能包含使用者名稱或是倒反的使用者名稱 (pam_cracklib將會檢查兩者) (字母沒有大小寫之分) (eg, username=Hello,  Password=th12(heLLo)_78 和 Password=th12(oLleH)_78是不被允許,跟密碼複雜度中高一樣)。"
             },
             "passwordForDisabled": {
                 "passwordComplexityForDisabled": "停用密碼複雜性",
-                "rule1": "它應該只包含可列印字符.",
-                "rule2": "密碼長度不能短於8個字符.",
-                "rule3": "不能與使用者名稱或使用者名稱倒序相同.",
-                "rule4": "必須包含至少 5 個唯一字元（不允許使用 abcabcabc）",
-                "rule5": "不能是「password」等簡單密碼"
+                "rule1": "它應該只包含可列印字符。",
+                "rule2": "密碼長度不能短於8個字符。",
+                "rule3": "不能與使用者名稱或使用者名稱倒序相同。",
+                "rule4": "必須包含至少 5 個唯一字元（不允許使用 abcabcabc）。",
+                "rule5": "不能是「password」等簡單密碼。"
               }
         }
     },
@@ -1662,7 +1666,8 @@
         "password": "密碼",
         "username": "使用者名稱",
         "alert": {
-            "message": "無效的使用者名稱跟密碼"
+            "message": "無效的使用者名稱跟密碼",
+            "authLockmessage": "已達到最大登入嘗試次數。使用者帳戶已被鎖定。"
         }
     },
     "pageOverview": {
@@ -1720,8 +1725,8 @@
             "timeStampOffset": "時間戳偏移量"
         },
         "toast": {
-            "errorDelete": "刪除 %{count} 筆日誌失敗. | 刪除 %{count} 筆日誌失敗.",
-            "successDelete": "已經成功刪除 %{count} 筆日誌. | 已經成功刪除 %{count} 筆日誌."
+            "errorDelete": "刪除 %{count} 筆日誌失敗. | 刪除 %{count} 筆日誌失敗。",
+            "successDelete": "已經成功刪除 %{count} 筆日誌. | 已經成功刪除 %{count} 筆日誌。"
         }
     },
     "pageProfileSettings": {
@@ -1731,7 +1736,7 @@
         "defaultUTC": "預設 (%{defaultTimezone})",
         "newPassword": "新密碼",
         "currentPassword": "目前密碼",
-        "newPassLabelTextInfo": "密碼字元必須在 %{min} - %{max} 之間",
+        "newPassLabelTextInfo": "密碼字元必須在 %{min} - %{max} 之間。",
         "passwordsDoNotMatch": "密碼不相符",
         "profileInfoTitle": "檔案資訊",
         "timezone": "時區",
@@ -1740,7 +1745,7 @@
         "username": "使用者名稱",
         "userPrivilege": "使用者權限",
         "toast": {
-            "successUpdatingTimeZone": "更新時區成功.",
+            "successUpdatingTimeZone": "更新時區成功。",
             "wrongCredentials": "憑證錯誤"
         }
     },
@@ -1783,12 +1788,12 @@
             "primaryDns": "主 DNS 伺服器",
             "secondaryDns": "次 DNS 伺服器",
             "confirm": "確認",
-            "ipv4Confirmation": "請刪除任一個 IPV4 address 以加入Static IPV4 位址.",
-            "ipv6Confirmation": "請刪除任一個 IPV6 address 以加入Static IPV6 位址.",
+            "ipv4Confirmation": "請刪除任一個 IPV4 address 以加入Static IPV4 位址。",
+            "ipv6Confirmation": "請刪除任一個 IPV6 address 以加入Static IPV6 位址。",
             "confirmTitle": "確定?",
             "confirmMessage":"這個設定可能改變設備的IP位址，無法更進一步使用. 在確認設備 IP後, 你可以以新IP登入. 你想繼續嗎?",
             "informatiomTitle": "資訊",
-            "informationMessage": "成功變更網路設定 請關閉此網頁對談然後開啟新網頁對談使用新IP連接設備 ",
+            "informationMessage": "成功變更網路設定 請關閉此網頁對談然後開啟新網頁對談使用新IP連接設備。",
             "lanInterface":"區域網路介面",
             "enableLAN": "啟用區域網路",
             "confirmMsg": "此功能可能會變更裝置的 IP 位址，並且您可能會在此瀏覽器工作階段中失去連線。套用變更後，請使用新的瀏覽器會話重新連線。您想繼續嗎？"
@@ -1813,8 +1818,8 @@
             "ipv6Index": "IPv6索引"
         },
         "toast": {
-            "errorSaveNetworkSettings": "更新 %{setting} 設定失敗",
-            "successSaveNetworkSettings": "更新 %{setting} 設定成功",
+            "errorSaveNetworkSettings": "更新 %{setting} 設定失敗。",
+            "successSaveNetworkSettings": "更新 %{setting} 設定成功。",
             "successSaveLanconfigurationNetworkSettings": "已成功更新 LAN 設定設定。",
             "successSaveiIpNetworkSettings": "已成功更新介面設定。",
             "errorSaveLanconfigurationNetworkSettings": "更新的 LAN 配置設定出錯。",
@@ -1835,28 +1840,28 @@
             "packageOption": "0 (active)"
         },
         "toast": {
-            "errorSavinNcsiInterface": "儲存 NCSI 介面設定時發生錯誤",
-            "errorGettingNcsi": "取得 NCSi 介面資訊時出錯",
-            "successSavingNcsiInterface": "成功保存 NCSi 介面設置",
+            "errorSavinNcsiInterface": "儲存 NCSI 介面設定時發生錯誤。",
+            "errorGettingNcsi": "取得 NCSi 介面資訊時出錯。",
+            "successSavingNcsiInterface": "成功保存 NCSi 介面設置。",
             "featureNotEnabled": "NCSI 功能未啟用。"
         }
     },
     "pageVlan": {
         "vlan": "VLAN 設定",
-        "vlanRangeLimits": "請輸入 %{min} 和 %{max} 之間的數值",
+        "vlanRangeLimits": "請輸入 %{min} 和 %{max} 之間的數值。",
         "table": {
             "virtualInterface": "虛擬介面",
             "id": "VLAN ID",
             "vlanPriority": "VLAN 優先權",
             "add": "新增",
-            "deleteVlan": "刪除 Vlan Id"
+            "deleteVlan": "刪除 Vlan ID"
         },
         "toast": {
-            "successAddedVlan": "成功更新網路設定",
-            "errorAddedVlan": "新增 VLAN發生錯誤",
-            "successDeleteVlan": "成功刪除虛擬介面",
-            "errorDeleteVlan": "刪除VLAN發生錯誤",
-            "errorVlanId": " VLAN ID 應該介於 1~4094."
+            "successAddedVlan": "成功更新網路設定。",
+            "errorAddedVlan": "新增 VLAN發生錯誤。",
+            "successDeleteVlan": "成功刪除虛擬介面。",
+            "errorDeleteVlan": "刪除VLAN發生錯誤。",
+            "errorVlanId": " VLAN ID 應該介於 1~4094。"
         },
         "modal": {
             "confirmTitle": "確定?",
@@ -1901,17 +1906,17 @@
             "encryption": "加密"
         },
         "toast": {
-            "errorInAddSubscription": "新增訂閱時出錯",
-            "errorInDeleteSubscription": "刪除訂閱時出錯",
-            "errorInEditSubscription": "編輯訂閱時出錯",
-            "errorUpdatingAuthenticationProtocal": "更新身分驗證協定時發生錯誤",
-            "successInAddSubscription": "已成功新增 SNMPTrap",
-            "successInDeleteSubscription": "成功刪除 SNMPTrap",
-            "successUpdateAuthenticationProtocal": "成功更新身分驗證協議",
-            "successMsgTestTrap": "測試陷阱發送成功",
-            "errorMsgAlert": "發送測試陷阱時出錯",
-            "errorInUpdatingSubscription": "更新訂閱時出錯",
-            "successInUpdatingSubscription": "已成功更新訂閱"
+            "errorInAddSubscription": "新增訂閱時出錯。",
+            "errorInDeleteSubscription": "刪除訂閱時出錯。",
+            "errorInEditSubscription": "編輯訂閱時出錯。",
+            "errorUpdatingAuthenticationProtocal": "更新身分驗證協定時發生錯誤。",
+            "successInAddSubscription": "已成功新增 SNMP Trap。",
+            "successInDeleteSubscription": "成功刪除 SNMP Trap。",
+            "successUpdateAuthenticationProtocal": "成功更新身分驗證協議。",
+            "successMsgTestTrap": "測試陷阱發送成功。",
+            "errorMsgAlert": "發送測試陷阱時出錯。",
+            "errorInUpdatingSubscription": "更新訂閱時出錯。",
+            "successInUpdatingSubscription": "已成功更新訂閱。"
         }
     },
     "pageSmtp": {
@@ -1941,34 +1946,34 @@
             "mailContent": "郵件內容"
         },
         "toast": {
-            "successSMTPConfiguration": "成功更新 SMTP 設定",
-            "errorSMTPConfiguration": "更新 SMTP 發生錯誤",
-            "successAddCertificate": "添加成功 %{certificate}.",
-            "errorAddCertificate": "新增證書時發生錯誤.",
-            "errorAddPemCertificate": "請上傳Cacert PEM證書",
-            "errorAddCrtCertificate": "請上傳伺服器CRT證書",
-            "errorAddKeyCertificate": "請上傳伺服器密鑰證書",
-            "successMsgTestAlert": "測試警報發送成功",
-            "errorMsgAlert": "發送測試警報時出錯"
+            "successSMTPConfiguration": "成功更新 SMTP 設定。",
+            "successAddCertificate": "添加成功 %{certificate}。",
+            "successMsgTestAlert": "測試警報發送成功。",
+            "errorMsgAlert": "發送測試警報時出錯。",
+            "errorSMTPConfiguration": "更新 SMTP 發生錯誤。",
+            "errorAddCertificate": "新增證書時發生錯誤。",
+            "errorAddPemCertificate": "請上傳Cacert PEM證書。",
+            "errorAddCrtCertificate": "請上傳伺服器CRT證書。",
+            "errorAddKeyCertificate": "請上傳伺服器密鑰證書。"
         }
     },
     "pageAlertDestination": {
-        "pageDescription": "設定警告接收者",
+        "pageDescription": "設定警告接收者。",
         "sectionTitle": "警告接收者",
-        "alertDestinationLabel": "設定警告接收者內容",
+        "alertDestinationLabel": "設定警告接收者內容。",
         "sendEmailTo": "寄送 Email 給:",
         "sendTestAlert": "寄送測試警告",
         "toast": {
-            "successMsg": "成功更新警告接收者",
-            "errorMsg": "更新警告接收者發生錯誤",
-            "successMsgTestAlert": "測試警告寄送成功",
-            "errorMsgAlert": "寄送測試警告發生錯誤"
+            "successMsg": "成功更新警告接收者。",
+            "errorMsg": "更新警告接收者發生錯誤。",
+            "successMsgTestAlert": "測試警告寄送成功。",
+            "errorMsgAlert": "寄送測試警告發生錯誤。"
         }
     },
     "pageEventFilter": {
-        "pageDescription": "選擇將觸發警告的事件",
+        "pageDescription": "選擇將觸發警告的事件。",
         "sectionTitle": "事件過濾器",
-        "eventFilterLabel": "設定警告接收者內容",
+        "eventFilterLabel": "設定警告接收者內容。",
         "enableAllEvents": "啟用/停用所有事件過濾器",
         "temperatureSensorOutOfRange": "溫度感測超過範圍",
         "fanFailure": "風扇錯誤",
@@ -1990,10 +1995,10 @@
         "processorDimmThermTrip": "處理器 DIMM Therm Trip",
         "destinationType":"目的地類型",
         "toast": {
-            "successEventFilterMsg": "事件過濾器設定成功",
-            "errorEventFilterMsg": "事件過濾器設定發生錯誤",
-            "successDestinationType": "目標類型配置已成功更新",
-            "errorDestinationType": "更新目標類型配置時發生錯誤"
+            "successEventFilterMsg": "事件過濾器設定成功。",
+            "errorEventFilterMsg": "事件過濾器設定發生錯誤。",
+            "successDestinationType": "目標類型配置已成功更新。",
+            "errorDestinationType": "更新目標類型配置時發生錯誤。"
         }
     },
     "pagePageNotFound": {
@@ -2013,7 +2018,7 @@
             "LastState": "最後狀態 - 通電後系統返回到上次打開或關閉電源狀態"
         },
         "toast": {
-            "errorSaveSettings": "儲存設定失敗",
+            "errorSaveSettings": "儲存設定失敗。",
             "successSaveSettings": "電源恢復策略更新成功。"
         }
     },
@@ -2036,9 +2041,9 @@
         "ipmi": "Network IPMI (頻外 IPMI)",
         "ipmiDescription": "允許通過 IPMI 遠程管理平台。 ipmitool 等工具需要啟用此設置。",
         "rtad": "RTAD",
-        "rtadDescription": "此選項啟用或禁用主機韌體的遠程可信證明守護程序",
+        "rtadDescription": "此選項啟用或禁用主機韌體的遠程可信證明守護程序。",
         "ssh": "BMC shell (透過 SSH)",
-        "sshDescription": "允許通過 BMC 上的端口 22 通過 SSH 訪問 shell 會話",
+        "sshDescription": "允許通過 BMC 上的端口 22 通過 SSH 訪問 shell 會話。",
         "modal": {
             "disableMessage": {
                 "ipmi": "您確定要停用 @:pagePolicies.ipmi?",
@@ -2058,70 +2063,70 @@
             "vmReconnectConfirmation": "變更配置時，已開啟的服務虛擬媒體會話將受到影響，服務也將重新啟動。如果您想繼續，請按一下「確定」。"
         },
         "toast": {
-            "errorIpmiPort": "設定 IPMI 端口數字發生錯誤",
-            "errorSolSshPort": "設定 SOL SSH 端口數字發生錯誤",
-            "errorIpmiDisabled": "停用 IPMI 安全設定失敗",
-            "errorIpmiEnabled": "啟用 IPMI 安全設定失敗",
-            "errorRtadDisabled": "停用 RTAD 安全設定失敗",
-            "errorRtadEnabled": "啟用 RTAD 安全設定失敗",
-            "errorSshDisabled": "停用 SSH 安全設定失敗",
-            "errorSshEnabled": "啟用 SSH 安全設定失敗",
-            "errorVtpmDisabled": "停用 VirtualTPM 安全設定失敗",
-            "errorVtpmEnabled": "啟用 VirtualTPM 安全設定失敗",
-            "errorKvmDisabled": "停用 KVM  安全設定失敗",
-            "errorKvmEnabled": "啟用 KVM  安全設定失敗",
-            "errorVmcDisabled": "停用 Virtual Media  安全設定失敗",
-            "errorVmcEnabled": "啟用 Virtual Media  安全設定失敗",
-            "errorSOLDisabled": "停用 SOL SSH  安全設定失敗",
-            "errorSOLEnabled": "啟用 SOL SSH  安全設定失敗",
-            "successIpmiPort": "成功更新IPMI 端口數字",
-            "successSolSshPort": "成功更新 SOL SSH 端口數字",
-            "errorSessionTimeout": "配置會話逾期失敗",
-            "errorComplexity": "改變複雜度發生錯誤",
-            "errorPasswordHistory": "改面密碼歷史發生錯誤",
-            "errorSSDPDisabled": "停用 SSDP 安全設定時出錯.",
-            "errorSSDPEnabled": "啟用 SSDP 安全設定時出錯.",
+            "errorIpmiPort": "設定 IPMI 端口數字發生錯誤。",
+            "errorSolSshPort": "設定 SOL SSH 端口數字發生錯誤。",
+            "errorIpmiDisabled": "停用 IPMI 安全設定失敗。",
+            "errorIpmiEnabled": "啟用 IPMI 安全設定失敗。",
+            "errorRtadDisabled": "停用 RTAD 安全設定失敗。",
+            "errorRtadEnabled": "啟用 RTAD 安全設定失敗。",
+            "errorSshDisabled": "停用 SSH 安全設定失敗。",
+            "errorSshEnabled": "啟用 SSH 安全設定失敗。",
+            "errorVtpmDisabled": "停用 VirtualTPM 安全設定失敗。",
+            "errorVtpmEnabled": "啟用 VirtualTPM 安全設定失敗。",
+            "errorKvmDisabled": "停用 KVM  安全設定失敗。",
+            "errorKvmEnabled": "啟用 KVM  安全設定失敗。",
+            "errorVmcDisabled": "停用 Virtual Media  安全設定失敗。",
+            "errorVmcEnabled": "啟用 Virtual Media  安全設定失敗。",
+            "errorSOLDisabled": "停用 SOL SSH  安全設定失敗。",
+            "errorSOLEnabled": "啟用 SOL SSH  安全設定失敗。",
+            "successIpmiPort": "成功更新IPMI 端口數字。",
+            "successSolSshPort": "成功更新 SOL SSH 端口數字。",
+            "errorSessionTimeout": "配置會話逾期失敗。",
+            "errorComplexity": "改變複雜度發生錯誤。",
+            "errorPasswordHistory": "改變密碼歷史發生錯誤。",
+            "errorSSDPDisabled": "停用 SSDP 安全設定時出錯.。",
+            "errorSSDPEnabled": "啟用 SSDP 安全設定時出錯.。",
             "errorOpenSSLFIPSDisabled": "停用 OpenSSL FIPS 安全設定時發生錯誤。",
             "errorOpenSSLFIPSEnabled": "啟用 OpenSSL FIPS 安全設定時發生錯誤。",
             "openSSLFIPSConfirmation": "啟用/停用 OpenSSL FIPS 模式時，BMC 將重新啟動。您確定要變更 OpenSSL FIPS 模式嗎？",
-            "errorSNMPDisabled": "停用 SNMP 安全設定時出錯.",
-            "errorSNMPEnabled": "啟用 SNMP 安全設定時發生錯誤.",
-            "errorSNMPVersionDisabled": "停用 SNMP 版本類型時發生錯誤",
-            "errorSNMPVersionEnabled": "啟用 SNMP 版本類型時發生錯誤",
-            "errorKVMPort": "設定 KVM 連接埠值錯誤.",
+            "errorSNMPDisabled": "停用 SNMP 安全設定時出錯.。",
+            "errorSNMPEnabled": "啟用 SNMP 安全設定時發生錯誤。",
+            "errorSNMPVersionDisabled": "停用 SNMP 版本類型時發生錯誤。",
+            "errorSNMPVersionEnabled": "啟用 SNMP 版本類型時發生錯誤。",
+            "errorKVMPort": "設定 KVM 連接埠值錯誤。",
             "errorWebPort": "設定 Web 連接埠值時發生錯誤。",
-            "errorKVMSessionTimeout": "配置 KVM 會話逾時時發生錯誤.",
+            "errorKVMSessionTimeout": "配置 KVM 會話逾時時發生錯誤。",
             "errorSolBitRate": "配置 SOL 非揮發性位元率時發生錯誤。",
             "errorVMReconnect": "設定虛擬媒體重新連線值時發生錯誤。",
-            "errorMaxSessionLogin": "已使用的最大會話數.",
-            "successIpmiDisabled": "停用 IPMI 安全設定成功",
-            "successIpmiEnabled": "啟用 IPMI 安全設定成功",
-            "successRtadDisabled": "停用 RTAD 安全設定成功",
-            "successRtadEnabled": "啟用 RTAD 安全設定成功",
-            "successSshDisabled": "停用 SSH 安全設定成功",
-            "successSshEnabled": "啟用 SSH 安全設定成功",
-            "successVtpmDisabled": "停用 VirtualTPM 安全設定成功",
-            "successVtpmEnabled": "啟用 VirtualTPM 安全設定成功",
+            "errorMaxSessionLogin": "已使用的最大會話數。",
+            "successIpmiDisabled": "停用 IPMI 安全設定成功。",
+            "successIpmiEnabled": "啟用 IPMI 安全設定成功。",
+            "successRtadDisabled": "停用 RTAD 安全設定成功。",
+            "successRtadEnabled": "啟用 RTAD 安全設定成功。",
+            "successSshDisabled": "停用 SSH 安全設定成功。",
+            "successSshEnabled": "啟用 SSH 安全設定成功。",
+            "successVtpmDisabled": "停用 VirtualTPM 安全設定成功。",
+            "successVtpmEnabled": "啟用 VirtualTPM 安全設定成功。",
             "successKvmDisabled": "已停用的KVM服務已成功儲存。請等待 10-20 秒以進行停用。",
             "successKvmEnabled": "啟用的KVM服務已成功儲存。請等待最多 10-20 秒以啟用..",
             "successVmcDisabled": "虛擬媒體服務配置已成功儲存。請等待 10-20 秒以停用並刷新操作 -> 虛擬媒體頁面以查看變更。",
             "successVmcEnabled": "虛擬媒體服務配置已成功儲存。請等待 10-20 秒以啟用並刷新操作 -> 虛擬媒體頁面以查看變更。",
-            "successSOLDisabled": "停用 SOL SSH  安全設定成功",
-            "successSOLEnabled": " 啟用 SOL SSH  安全設定成功",
-            "successSessionTimeout": "配置會話逾期成功",
-            "successComplexity": "成功改變複雜度數字",
-            "successPasswordHistory": "成功改變密碼歷史數字",
-            "successSSDPDisabled": "成功停用 SSDP 安全性設定.",
-            "successSSDPEnabled": "成功啟用 SSDP 安全性設定.",
+            "successSOLDisabled": "停用 SOL SSH  安全設定成功。",
+            "successSOLEnabled": " 啟用 SOL SSH  安全設定成功。",
+            "successSessionTimeout": "配置會話逾期成功。",
+            "successComplexity": "成功改變複雜度數字。",
+            "successPasswordHistory": "成功改變密碼歷史數字。",
+            "successSSDPDisabled": "成功停用 SSDP 安全性設定。",
+            "successSSDPEnabled": "成功啟用 SSDP 安全性設定。",
             "successOpenSSLFIPSDisabled": "已成功停用 OpenSSL FIPS 安全設定。",
             "successOpenSSLFIPSEnabled": "已成功啟用 OpenSSL FIPS 安全設定。",
-            "successSNMPDisabled": "已成功停用 SNMP 安全性設定.",
-            "successSNMPEnabled": "已成功啟用 SNMP 安全性設定.",
-            "successSNMPVersionDisabled": "成功停用 SNMP 版本類型",
-            "successSNMPVersionEnabled": "成功啟用 SNMP 版本類型",
+            "successSNMPDisabled": "已成功停用 SNMP 安全性設定。",
+            "successSNMPEnabled": "已成功啟用 SNMP 安全性設定。",
+            "successSNMPVersionDisabled": "成功停用 SNMP 版本類型。",
+            "successSNMPVersionEnabled": "成功啟用 SNMP 版本類型。",
             "successKVMPort": "已成功更新 KVM 連接埠值。",
             "successWebPort": "已成功更新 Web 連接埠值。",
-            "successKVMSessionTimeout": "成功配置 KVM 會話逾時。.",
+            "successKVMSessionTimeout": "成功配置 KVM 會話逾時。",
             "successSolBitRate": "已成功配置 SOL 非揮發性位元率。",
             "successVMReconnect": "已成功更新虛擬媒體重新連線值。"
         },
@@ -2136,21 +2141,21 @@
         "vtpm": "虛擬TPM",
         "vtpmDescription": "啟用 vTPM 使 TPM 可用於來賓操作系統。",
         "webSessionTimeOut": "網絡會話超時",
-        "webSessionTimeOutDescription": "將 Web 會話逾時變更為 30 秒到 86400 秒的時間延遲",
-        "webSessionTimeoutLimits": "請輸入 %{min} 和 %{max} 之間的秒數",
+        "webSessionTimeOutDescription": "將 Web 會話逾時變更為 30 秒到 86400 秒的時間延遲。",
+        "webSessionTimeoutLimits": "請輸入 %{min} 和 %{max} 之間的秒數。",
         "kvm": "KVM",
-        "kvmDescription": "啟用 KVM 在客戶運作系統",
+        "kvmDescription": "啟用 KVM 在客戶運作系統。",
         "vmc": "虛擬媒體",
-        "vmcDescription": "啟用虛擬媒體為了映像重導",
+        "vmcDescription": "啟用虛擬媒體為了映像重導。",
         "solssh": "SOL SSH",
-        "solDescription": "啟用 SOL SSH",
+        "solDescription": "啟用 SOL SSH。",
         "ssdpProtocol": "SSDP",
         "SsdpPortLabel": "SSDP連接埠值",
-        "ssdpDescription": "啟用SSDP協議",
+        "ssdpDescription": "啟用SSDP協議。",
         "complexity": "複雜度",
-        "complexityDescription": "點選密碼歷史選單以設定密碼複雜度 (停用, 低, 中, 高). 密碼不能超過20 bytes長度，由於 IPMI 2.0 限制.",
+        "complexityDescription": "點選密碼歷史選單以設定密碼複雜度 (停用, 低, 中, 高). 密碼不能超過20 bytes長度，由於 IPMI 2.0 限制。",
         "passwordHistory": "密碼歷史",
-        "passwordHistoryDescription": "點選密碼歷史選單以設定密碼歷史 (0 to 5). 使用者儲存至少 N(0~5) 密碼，為了限制密碼改變歷史和避免頻繁變更相同使用者密碼",
+        "passwordHistoryDescription": "點選密碼歷史選單以設定密碼歷史 (0 to 5). 使用者儲存至少 N(0~5) 密碼，為了限制密碼改變歷史和避免頻繁變更相同使用者密碼。",
         "disabled": "停用",
         "low": "低",
         "medium": "中",
@@ -2159,48 +2164,48 @@
         "servicesPolicies": "服務",
         "snmpProtocol": "SNMP",
         "snmpPortLabel": "SNMP 連接埠值",
-        "snmpDescription": "啟用 SNMP 協定",
+        "snmpDescription": "啟用 SNMP 協定。",
         "snmpv1": "SNMPv1",
-        "snmpv1Description": "啟用 SNMPv1",
+        "snmpv1Description": "啟用 SNMPv1。",
         "snmpv2c": "SNMPv2c",
-        "snmpv2cDescription": "啟用 SNMPv2c",
+        "snmpv2cDescription": "啟用 SNMPv2c。",
         "snmpv3": "SNMPv3",
-        "snmpv3Description": "啟用 SNMPv3",
+        "snmpv3Description": "啟用 SNMPv3。",
         "openSslFipsLable": "OpenSSL FIPS 模式",
-        "openSslFipsDescription": "啟用 OpenSSL FIPS 模式",
+        "openSslFipsDescription": "啟用 OpenSSL FIPS 模式。",
         "kvmSessionTimeOut": "KVM 會話逾時",
         "kvmSessionTimeOutDescription": "將 kvm 會話逾時變更為 30 秒到 86400 秒的時間延遲。",
-        "kvmPortValue": "KVM 連接埠值（以數字表示）",
-        "webPortValue": "Web 連接埠值（以數字表示）",
+        "kvmPortValue": "KVM 連接埠值（以數字表示）。",
+        "webPortValue": "Web 連接埠值（以數字表示）。",
         "kvmTimeoutValueLimits": "請輸入 %{min} 和 %{max} 之間的秒數。",
-        "kvmPortValueLimits": "請輸入 %{min} 和 %{max} 之間的數值",
+        "kvmPortValueLimits": "請輸入 %{min} 和 %{max} 之間的數值。",
         "solBitRate": "SOL 非揮發性位元速率",
         "retryCount": "重試次數",
         "retryInterval": "重試間隔",
-        "vmVMValueLimits": "請輸入 %{min} 到 %{max} 之間的值",
+        "vmVMValueLimits": "請輸入 %{min} 到 %{max} 之間的值。",
         "maxSession": "最大會話服務訊息",
         "kvmMaxSession": "KVM",
         "redfishMaxSession": "Redfish",
         "sshMaxSession": "SSH",
         "vmMaxSession": "虛擬媒體",
         "webMaxSession": "網路",
-        "solSshPortValueLimits": "請輸入 %{min} 和 %{max} 之間的數值",
-        "webPortValueLimits": "請輸入 %{min} 和 %{max} 之間的數值"
+        "solSshPortValueLimits": "請輸入 %{min} 和 %{max} 之間的數值。",
+        "webPortValueLimits": "請輸入 %{min} 和 %{max} 之間的數值。"
     },
     "pagePower": {
-        "description": "設置電源上限以使功耗保持在或低於指定值",
-        "powerCapLabel": "電源上限值 (以瓦為單位)",
-        "powerCapLabelTextInfo": " 值必須介於 %{min} 和 %{max} 之間",
+        "description": "設置電源上限以使功耗保持在或低於指定值。",
+        "powerCapLabel": "電源上限值 (以瓦為單位)。",
+        "powerCapLabelTextInfo": " 值必須介於 %{min} 和 %{max} 之間。",
         "powerCapDisablesState": "PowerCap 已停用（0 瓦狀態）。",
         "powerCapSettingData": "套用電源上限",
         "powerCapSettingLabel": "電源上限設定",
         "powerConsumption": "目前電源消耗",
         "serverPowCapSetting": "伺服器電源上限設置",
         "toast": {
-            "successApplyPowerCapEnable": "成功啟用powerCap ",
-            "successApplyPowerCapDisable": "成功停用powerCap",
-            "errorApplyPowerCapEnable": "啟用powerCap發生錯誤",
-            "errorApplyPowerCapDisable": "停用 powerCap發生錯誤",
+            "successApplyPowerCapEnable": "成功啟用powerCap。",
+            "successApplyPowerCapDisable": "成功停用powerCap。",
+            "errorApplyPowerCapEnable": "啟用powerCap發生錯誤。",
+            "errorApplyPowerCapDisable": "停用 powerCap發生錯誤。",
             "featureNotAvailable":"此平台不支援功率上限。"
         }
     },
@@ -2258,26 +2263,26 @@
     },
     "pageSerialOverLan": {
         "alert": {
-            "disconnectedAlertMessage": "系統必須開機才能連接"
+            "disconnectedAlertMessage": "系統必須開機才能連接。"
         },
         "connected": "已連線",
         "disconnected": "中斷連線",
         "openNewTab": "在新頁籤打開",
         "status": "狀態",
-        "subTitle": "SOL 控制台將伺服器的串行輸出重定向到此窗口"
+        "subTitle": "SOL 控制台將伺服器的串行輸出重定向到此窗口。"
     },
     "pageServerPowerOperations": {
         "currentStatus": "目前狀態",
         "serverBootSettings": "開機設定",
         "serverStatus": "伺服器狀態",
-        "immediateReboot": "立即 – 伺服器在不關閉操作系統的情況下重新啟動；可能會導致資料損壞",
-        "immediateShutdown": "立即 - 伺服器在不關閉操作系統的情況下關閉；可能會導致資料損壞",
+        "immediateReboot": "立即 – 伺服器在不關閉操作系統的情況下重新啟動；可能會導致資料損壞。",
+        "immediateShutdown": "立即 - 伺服器在不關閉操作系統的情況下關閉；可能會導致資料損壞。",
         "lastPowerOperation": "最後一次電源操作",
         "oneTimeBootWarning": "等待一次啟動。下次啟動將使用指定的一次性啟動設置執行。後續啟動將使用默認設置執行。",
         "operationInProgress": "電源操作正在進行時沒有可顯示的選項。完成後，電源操作將顯示在此處。",
         "operations": "操作",
-        "orderlyReboot": "有序 - 操作系統關閉，然後伺服器重新啟動",
-        "orderlyShutdown": "有序 - 操作系統關閉，然後伺服器關閉",
+        "orderlyReboot": "有序 - 操作系統關閉，然後伺服器重新啟動。",
+        "orderlyShutdown": "有序 - 操作系統關閉，然後伺服器關閉。",
         "powerOn": "開機",
         "reboot": "重開機",
         "rebootServer": "伺服器重開機",
@@ -2291,13 +2296,13 @@
         },
         "modal": {
             "confirmRebootMessage": "你確定要重開機嗎?",
-            "confirmRebootTitle": "伺務器重新開機將會導致斷電",
+            "confirmRebootTitle": "伺務器重新開機將會導致斷電。",
             "confirmShutdownMessage": "你確定要關機嗎?",
-            "confirmShutdownTitle": "伺務器關機將會導致斷電"
+            "confirmShutdownTitle": "伺務器關機將會導致斷電。"
         },
         "toast": {
-            "errorSaveSettings": "儲存設定失敗",
-            "successSaveSettings": "儲存設定成功"
+            "errorSaveSettings": "儲存設定失敗。",
+            "successSaveSettings": "儲存設定成功。"
         }
     },
     "pageCertificates": {
@@ -2318,7 +2323,7 @@
         },
         "modal": {
             "alternateName": "備用名稱",
-            "alternateNameHelperText": "添加多個備用名稱，以空格分隔",
+            "alternateNameHelperText": "添加多個備用名稱，以空格分隔。",
             "certificateFile": "憑證檔案",
             "certificateSigningRequest": "憑證簽章要求 (CSR)",
             "certificateType": "憑證類型",
@@ -2347,13 +2352,13 @@
             "validUntil": "有效期至"
         },
         "toast": {
-            "errorAddCertificate": "新增憑證失敗",
+            "errorAddCertificate": "新增憑證失敗。",
             "errorGenerateCSR": "產生憑證簽署請求時發生錯誤。",
-            "errorDeleteCertificate": "刪除憑證失敗",
-            "errorReplaceCertificate": "置換憑證失敗",
-            "successAddCertificate": "新增 %{certificate} 成功",
-            "successDeleteCertificate": "刪除 %{certificate} 成功",
-            "successReplaceCertificate": "置換 %{certificate} 成功"
+            "errorDeleteCertificate": "刪除憑證失敗。",
+            "errorReplaceCertificate": "置換憑證失敗。",
+            "successAddCertificate": "新增 %{certificate} 成功。",
+            "successDeleteCertificate": "刪除 %{certificate} 成功。",
+            "successReplaceCertificate": "置換 %{certificate} 成功。"
         }
     },
     "pageVirtualMedia": {
@@ -2363,8 +2368,9 @@
         "stop": "停止",
         "virtualMediaSubTitleFirst": "從網頁瀏覽器讀取映像檔",
         "virtualMediaSubTitleSecond": "從外部伺服器讀取映像檔",
-        "permissionRestricted": "您沒有權限查看此頁面",
+        "permissionRestricted": "您沒有權限查看此頁面。",
         "disabledVirtualMediaService": "虛擬媒體服務已停用。進入安全性和存取 -> 策略頁面以啟用虛擬媒體服務。",
+        "mediaAlreadyRedirected": "%{Slot} 的媒體重定向已在進行中。請導航至安全性和存取 -> 會話頁面並中斷 VMEDIA 掛載類型控制台會話以停止媒體重新導向。",
         "modal": {
             "password": "密碼",
             "serverUri": "外部伺服器 URI",
@@ -2381,18 +2387,18 @@
             "imagePathSupportCharacter":"注意：此欄位不允許超過 256 個字元。"
         },
         "toast": {
-            "errorMounting": "掛載失敗",
-            "errorReadingFile": "讀取檔案失敗. 關閉伺服器.",
-            "errorUnmounting": "卸載失敗",
+            "errorMounting": "掛載失敗。",
+            "errorReadingFile": "讀取檔案失敗. 關閉伺服器。",
+            "errorUnmounting": "卸載失敗。",
             "errorVirtualMedia": "取得虛擬媒體時出錯。",
             "errorResourceInUse": "%{Slot} 已在使用中。",
-            "serverRunning": "伺服器運行中",
-            "serverConnectionEstablished": "伺服器已連線",
-            "serverClosedSuccessfully": "關閉伺服器成功",
-            "serverClosedWithErrors": "伺服器已關閉但有錯誤發生",
+            "serverRunning": "伺服器運行中。",
+            "serverConnectionEstablished": "伺服器已連線。",
+            "serverClosedSuccessfully": "關閉伺服器成功。",
+            "serverClosedWithErrors": "伺服器已關閉但有錯誤發生。",
             "invalidFileType": "圖像檔案類型無效",
             "infoTitle": "外部伺服器啟動按鈕",
-            "infoMessage": "僅當設定了密碼並且安裝類型為 CIFS 或 HTTPS 時，才會啟用「開始」按鈕"
+            "infoMessage": "僅當設定了密碼並且安裝類型為 CIFS 或 HTTPS 時，才會啟用「開始」按鈕。"
         }
     },
     "pageAdapter": {
@@ -2538,10 +2544,10 @@
             "isForeignDevice": "外來實體設備",
             "state": {
                 "hotspare": "熱備援",
-                "unconfiguredGood": "未配置且良好",
-                "unconfiguredBad": "未配置且不良",
                 "unknownState": "未知",
-                "copyback": "回寫",        
+                "copyback": "回寫",  
+                "unconfiguredGood": "未配置且良好",
+                "unconfiguredBad": "未配置且不良",      
                 "sanitize": "清除",
                 "offline": "離線",
                 "failed": "故障",
@@ -2561,7 +2567,7 @@
             "enableCopybackConfig": "目前此控制器的「回寫數據」功能尚未啟用。如需對此實體裝置執行操作，請點擊「確定」以啟用此功能。"
         },
         "noPhysicalDevice": "目前不存在實體裝置信息。",
-        "startLocatePhysicalDevice": "開始定位實體裝置",
+        "startLocatePhysicalDevice": "開始定位實體裝置。",
         "startLocatePhysicalDeviceSuccess": "開始定位實體裝置成功。",
         "startLocatePhysicalDeviceFail": "開始定位實體裝置失敗。",
         "stopLocatePhysicalDevice": "停止定位實體裝置。",
@@ -2577,6 +2583,8 @@
         "labelUndoPrepareToRemoval": "取消準備移除",
         "labelStartLocate": "開始定位",
         "labelStopLocate": "停止定位",
+        "labelStartCopyback": "開始回寫資料",
+        "labelStopCopyback": "停止回寫資料",
         "labelAddGlobalHotSpare": "新增全域熱備援",
         "labelDeleteGlobalHotSpare": "取消全域熱備援",
         "physicalDeviceActionTitle": "變更實體設備設定",
@@ -2584,6 +2592,17 @@
         "unDoPrepareRemovalConfirmationMsg":  "將序號 {pdId} 的實體設備，設定為取消準備刪除?",
         "startLocateConfirmationMsg":  "開始定位序號 {pdId} 的實體設備?",
         "stopLocateConfirmationMsg":  "停止定位序號 {pdId} 的實體設備?",
+        "startCopybackConfirmationMsg": "是否要開始 '回寫' 實體裝置 ID 為 {pdId} 的資料？",
+        "stopCopybackConfirmationMsg": "是否要停止 '回寫' 實體裝置 ID 為 {pdId} 的資料？",
+        "startCopybackSuccess": "實體裝置成功開始 '回寫' 資料。",
+        "startCopybackFail": "無法開始實體裝置 '回寫' 資料。",
+        "stopCopybackSuccess": "實體裝置成功停止 '回寫' 資料。",
+        "stopCopybackFail": "無法停止實體裝置 '回寫' 資料。",
+        "startCopyback": "開始實體裝置 '回寫' 資料。",
+        "stopCopyback": "停止實體裝置 '回寫' 資料。",
+        "copybackConfigSuccess": "'回寫' 功能已經啟用。",
+        "copybackConfigFail": "無法啟用 '回寫' 功能。",
+        "copybackConfig": "啟用 '回寫' 功能。",
         "addGlobalHotSpareConfirmationMsg": "是否要將 {pdId} 設置為全域熱備援？",
         "addGlobalHotSpareSuccess": "磁碟已成功設置為全域熱備援。",
         "addGlobalHotSpareFail": "設置磁碟為全域熱備援失敗。",
@@ -2776,6 +2795,7 @@
                 "udp": "UDP",
                 "all": "全部",
                 "target": "目標",
+                "unspecified": "未指定",
                 "deleteConfirmMessage": "您確定要查看該記錄嗎？此操作無法撤銷。",
                 "deleteFireWall": "刪除|刪除 ",
                 "endDateCanNotBeLessThanStartDate": "結束日期不能早於開始日期",
@@ -2832,9 +2852,9 @@
         "license_key": "註冊碼",
         "userAlertCount": "用戶警報計數",
         "userAlertCountPercentage": "用戶警報計數天數",
-        "licenseExpired": "您的模組授權已過期。請更新有效的許可證密鑰",
+        "licenseExpired": "您的模組授權已過期。請更新有效的許可證密鑰。",
         "licensePageLink": "[ 許可證頁面連結。 ]",
-        "userAlertCountRangeRequired": "請輸入有效的計數天數",
+        "userAlertCountRangeRequired": "請輸入有效的計數天數。",
         "toast": {
             "successSavelicense": "已成功保存許可證。",
             "errorsavedlicense": "保存許可證時發生錯誤。"
@@ -2864,13 +2884,13 @@
         }
     },
     "pagePamOrder": {
-        "pam": "帕姆",
-        "samePamOrder": "Pam訂單配置相同，因此無需儲存.",
-        "informationMessage": "拖放 PAM 模組以變更其在序列中的位置.",
+        "pam": "PAM",
+        "samePamOrder": "PAM 訂單配置相同，因此無需儲存。",
+        "informationMessage": "拖放 PAM 模組以變更其在序列中的位置。",
         "toast": {
-            "errorSavingPamOrder": "更新 PAM 訂單時出錯",
-            "successSavingPamOrder": "已成功更新 PAM 訂單",
-            "errorGettingPamorder": "取得 PAM 訂單資料時發生錯誤"
+            "errorSavingPamOrder": "更新 PAM 訂單時出錯。",
+            "successSavingPamOrder": "已成功更新 PAM 訂單。",
+            "errorGettingPamorder": "取得 PAM 訂單資料時發生錯誤。"
         }
     },
     "pageTask": {
@@ -2890,8 +2910,8 @@
             "cancelConfirmationTitle": "取消任務"
         },
         "toast": {
-            "successfullyCancelledTask":"成功取消任務",
-            "errorCancellingTask":"取消任務時出錯"
+            "successfullyCancelledTask":"成功取消任務。",
+            "errorCancellingTask":"取消任務時出錯。"
         }
     },
     "pageVideo": {
@@ -2941,9 +2961,9 @@
             "videoDuration":"影像時長"
         },
         "form":{
-            "maxDumpRangeRequired": "最大轉儲值的範圍應為 1",
-            "maxDurationRangeRequired": "最大持續時間範圍應為 1 到 20 秒",
-            "maxSizeRangeRequired": "最大大小範圍應為 1 到 10 MB"
+            "maxDumpRangeRequired": "最大轉儲值的範圍應為 1。",
+            "maxDurationRangeRequired": "最大持續時間範圍應為 1 到 20 秒。",
+            "maxSizeRangeRequired": "最大大小範圍應為 1 到 10 MB。"
         },
         "toast": {
             "successSaveVideoTriggerSettings": "已成功儲存視訊觸發設定。",
