@@ -54,9 +54,6 @@
             </span>
             <span v-else>{{ $t('global.status.disabled') }}</span>
           </b-form-checkbox>
-          <dd>
-            {{ $t('pageFirmware.clearConfigDescription') }}
-          </dd>
         </dl>
       </b-card>
     </b-card-group>
