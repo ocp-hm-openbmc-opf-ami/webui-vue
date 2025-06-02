@@ -135,7 +135,9 @@
         "certificates": "@:appPageTitle.certificates",
         "virtualMedia": "@:appPageTitle.virtualMedia",
         "power": "@:appPageTitle.power",
-        "keyClear": "@:appPageTitle.keyClear"
+        "keyClear": "@:appPageTitle.keyClear",
+        "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
+        "raidEventLog": "@:appPageTitle.raidEventLog"
     },
     "appPageTitle": {
         "changePassword": "Изменить пароль",
@@ -166,7 +168,9 @@
         "certificates": "Сертификаты",
         "virtualMedia": "Виртуальные носители",
         "keyClear": "Удаление ключей",
-        "raidTopology": "Информация о топологии"
+        "raidTopology": "Информация о топологии",
+        "ipmiEventLog": "Журналы событий IPMI",
+        "raidEventLog": "журнал событий"
     },
     "pageChangePassword": {
         "changePassword": "Изменить пароль",
@@ -259,6 +263,39 @@
         }
     },
     "pageEventLogs": {
+        "additionalDataUri": "Загрузить дополнительные данные",
+        "resolve": "Разрешить",
+        "resolved": "Разрешено",
+        "unresolve": "Отменить разрешение",
+        "unresolved": "Нерешённое",
+        "modal": {
+            "deleteAllTitle": "Удалить все логи",
+            "deleteAllMessage": "Вы уверены, что хотите удалить все логи? Действие не может быть отменено.",
+            "deleteTitle": "Удалить запись из журнала | Удалить записи из журнала",
+            "deleteMessage": "Вы уверены, что хотите удалить %{count} запись? Действие не может быть отменено. | Вы уверены, что хотите удалить %{count} записей? Действие не может быть отменено."
+        },
+        "table": {
+            "date": "Дата",
+            "description": "Описание",
+            "id": "Идентификатор",
+            "modifiedDate": "Дата последнего изменения",
+            "name": "Имя",
+            "searchLogs": "Поиск записей в журнале событий",
+            "severity": "Уровень",
+            "status": "Статус",
+            "type": "Тип"
+        },
+        "toast": {
+            "errorDelete": "Ошибка удаления %{count} записи. | Ошибка уделения %{count} записей.",
+            "errorLogStatusUpdate": "Ошибка обновления статуса записи.",
+            "errorResolveLogs": "Ошибка разрешения %{count} записи. | Ошибка разрешения %{count} записей.",
+            "errorUnresolveLogs": "Ошибка снятия разрешения с %{count} записи. | Ошибка снятия разрешения с %{count} записей.",
+            "successDelete": "Успешное удаление %{count} записи. | Успешное удаление всех %{count} записей.",
+            "successResolveLogs": "Успешное разрешение %{count} записи. | Успешное разрешение %{count} записей.",
+            "successUnresolveLogs": "Успешная отмена разрешения с %{count} записи. | Успешная отмена разрешения с %{count} записей."
+        }
+    },
+    "pageIpmiEventLogs": {
         "additionalDataUri": "Загрузить дополнительные данные",
         "resolve": "Разрешить",
         "resolved": "Разрешено",
@@ -1380,6 +1417,42 @@
         "protocolRoleSataDevice": "Устройство SATA",
         "toast" : {
             "errorGetTopologyDevice": "Ошибка при получении топологического устройства."
+        }
+    },
+    "pageRaidEventLog": {
+        "allControllers": "Все контроллеры",
+        "selectEventType": "Выбрать тип события",
+        "events": "События",
+        "ctrlName": "Имя контроллера",
+        "ID": "ID",
+        "timeStamp": "Метка времени",
+        "code": "Код",
+        "class": "Класс",
+        "info": "Информация",
+        "fatal": "Фатал",
+        "type": "Тип",
+        "description": "Описание",
+        "eventType": {
+            "allEvents": "Все события",
+            "controllerEvents": "События контроллера",
+            "controller": "Контроллер",
+            "physicalDeviceEvents": "События физического устройства",
+            "physicalDevice": "Физическое устройство",
+            "logicalDeviceEvents": "События логического устройства",
+            "logicalDevice": "Логическое устройство",
+            "configurationEvents": "События конфигурации",
+            "configuration": "Конфигурация",
+            "bbuEvents": "События BBU",
+            "bbu": "BBU"
+        },
+        "modal": {
+            "deleteAllTitle": "Удалить все журналы",
+            "deleteAllMessage": "Вы уверены, что хотите удалить все журналы? Это действие невозможно отменить."
+        },
+        "toast": {
+            "errorGet": "FОшибка при получении журналов событий.",
+            "errorDelete": "Ошибка удаления %{count} журнала. | Ошибка удаления %{count} журналов.",
+            "successDelete": "Успешно удален %{count} журнал. | Успешно удалены %{count} журналов."
         }
     },
     "pageTask": {

@@ -173,6 +173,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "raidEventLog": "@:appPageTitle.raidEventLog",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "tasks": "@:appPageTitle.tasks",
@@ -188,7 +189,8 @@
         "autoVideo":"@:appPageTitle.autoVideo",
         "videoLog":"@:appPageTitle.videoLog",
         "radius": "RADIUS",
-        "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug"
+        "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
+        "ipmiEventLog": "@:appPageTitle.ipmiEventLog"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -237,6 +239,7 @@
         "logicalDevice": "逻辑设备",
         "createLogicalDevice": "创建逻辑设备",
         "raidTopology": "拓扑信息",
+        "raidEventLog": "事件日志",
         "backupAndRestore": "备份与还原",
         "FireWall": "系统防火墙",
         "tasks": "任务",
@@ -252,7 +255,8 @@
         "autoVideo":"自动视频设置",
         "videoLog":"视频日志",
         "radius": "RADIUS",
-        "amdRemoteDebug": "AMD 远程调试"
+        "amdRemoteDebug": "AMD 远程调试",
+        "ipmiEventLog": "IPMI事件日志"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM 配置",
@@ -1051,6 +1055,41 @@
             "successDelete": "成功删除 %{count} 条记录。  | 成功删除 %{count} 条记录。",
             "successResolveLogs": "成功解决 %{count} 条记录。  | 成功解决 %{count} 条记录。",
             "successUnresolveLogs": "成功未解决 %{count} 条记录。  | 成功未解决 %{count} 条记录。"
+        }
+    },
+    "pageIpmiEventLogs": {
+        "additionalDataUri": "附加数据",
+        "resolve": "解决",
+        "resolved": "已解决的",
+        "unresolve": "尚未解决",
+        "unresolved": "尚未解决的",
+        "modal": {
+            "deleteAllTitle": "删除所有记录",
+            "deleteAllMessage": "确定想要删除所有记录? 执行此操作以后不可恢复。",
+            "deleteTitle": "删除记录 | 删除多项记录",
+            "deleteMessage": "确定想要删除 %{count} 条记录? 执行此操作以后不可恢复。 |确定想要删除 %{count} 条记录? 执行此操作以后不可恢复。"
+        },
+        "table": {
+            "date": "日期",
+            "description": "描述",
+            "id": "ID",
+            "modifiedDate": "修改的日期",
+            "name": "名称",
+            "searchLogs": "搜寻记录",
+            "severity": "严重性",
+            "status": "状态",
+            "type": "类型"
+        },
+        "toast": {
+            "errorDelete": "删除 %{count} 条记录发生错误 | 删除 %{count} 条记录发生错误",
+            "errorLogStatusUpdate": "更新记录状态发生错误",
+            "errorResolveLogs": "解决 %{count} 条记录发生错误 | 解决 %{count} 条记录发生错误",
+            "errorUnresolveLogs": "未解决 %{count} 条记录发生错误 | 未解决 %{count} 条记录发生错误",
+            "errorDownloadEventEntry": "下载事件日志条目时出错。",
+            "successDownloadEventEntry": "已成功下载事件日志条目。",
+            "successDelete": "成功删除 %{count} 条记录 | 成功删除 %{count} 条记录",
+            "successResolveLogs": "成功解决 %{count} 条记录 | 成功解决 %{count} 条记录",
+            "successUnresolveLogs": "成功未解决 %{count} 条记录 | 成功未解决 %{count} 条记录"
         }
     },
     "pageFactoryReset": {
@@ -2831,6 +2870,42 @@
         "protocolRoleSataDevice": "SATA 设备",
         "toast" : {
             "errorGetTopologyDevice": "取得拓扑设备时发生错误。"
+        }
+    },
+    "pageRaidEventLog": {
+        "allControllers": "所有控制器",
+        "selectEventType": "选择事件类型",
+        "events": "事件",
+        "ctrlName": "控制器名称",
+        "recordId": "ID",
+        "timeStamp": "时间戳",
+        "code": "代码",
+        "class": "类别",
+        "info": "资讯",
+        "fatal": "致命",
+        "type": "类型",
+        "description": "描述",
+        "eventType": {
+            "allEvents": "所有事件",
+            "controllerEvents": "控制器事件",
+            "controller": "控制器",
+            "physicalDeviceEvents": "物理设备事件",
+            "physicalDevice": "物理设备",
+            "logicalDeviceEvents": "逻辑设备事件",
+            "logicalDevice": "逻辑设备",
+            "configurationEvents": "配置事件",
+            "configuration": "配置",
+            "bbuEvents": "BBU 事件",
+            "bbu": "BBU"
+        },
+        "modal": {
+            "deleteAllTitle": "删除所有日志",
+            "deleteAllMessage": "您确定要删除所有日志吗？ 此操作无法撤消。"
+        },
+        "toast": {
+            "errorGet": "获取事件日志时发生错误。",
+            "errorDelete": "删除 %{count} 笔日志失败。 | 删除 %{count} 笔日志失败。",
+            "successDelete": "已经成功删除 %{count} 笔日志。 | 已经成功删除 %{count} 笔日志。"
         }
     },
     "pageFireWall": {

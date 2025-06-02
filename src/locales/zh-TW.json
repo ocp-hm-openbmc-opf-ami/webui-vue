@@ -173,6 +173,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "raidEventLog": "@:appPageTitle.raidEventLog",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "tasks": "@:appPageTitle.tasks",
@@ -188,7 +189,8 @@
         "autoVideo":"@:appPageTitle.autoVideo",
         "videoLog":"@:appPageTitle.videoLog",
         "radius": "RADIUS",
-        "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug"
+        "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
+        "ipmiEventLog": "@:appPageTitle.ipmiEventLog"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -238,6 +240,7 @@
         "logicalDevice": "邏輯設備",
         "createLogicalDevice": "創建邏輯設備",
         "raidTopology": "拓樸資訊",
+        "raidEventLog": "事件日誌",
         "backupAndRestore": "備份還原",
         "FireWall": "系統防火牆",
         "cups": "CUPS",
@@ -252,7 +255,8 @@
         "autoVideo":"自動影像設定",
         "videoLog":"視訊日誌",
         "radius": "RADIUS",
-        "amdRemoteDebug": "AMD 遠端偵錯"
+        "amdRemoteDebug": "AMD 遠端偵錯",
+        "ipmiEventLog": "IPMI事件日誌"
     },
     "pageNodeManager": {
         "nmConfiguration": "網管設定",
@@ -1051,6 +1055,41 @@
             "successDelete": "成功刪除 %{count} 紀錄 | 成功刪除 %{count} 紀錄。",
             "successResolveLogs": "成功解決 %{count} 紀錄 | 成功解決 %{count} 紀錄。",
             "successUnresolveLogs": "成功未解決 %{count} 紀錄 | 成功未解決 %{count} 紀錄。"
+        }
+    },
+    "pageIpmiEventLogs": {
+        "additionalDataUri": "附加數據",
+        "resolve": "解決",
+        "resolved": "已解決的",
+        "unresolve": "尚未解決",
+        "unresolved": "尚未解決的",
+        "modal": {
+            "deleteAllTitle": "刪除所有紀錄",
+            "deleteAllMessage": "確定想要刪除所有紀錄? 執行此動作以後不可恢復。",
+            "deleteTitle": "刪除紀錄 | 刪除多項紀錄",
+            "deleteMessage": "確定想要刪除 %{count} 紀錄? 執行此動作以後不可恢復。 |確定想要刪除 %{count} 紀錄? 執行此動作以後不可恢復。"
+        },
+        "table": {
+            "date": "日期",
+            "description": "描述",
+            "id": "ID",
+            "modifiedDate": "修改的日期",
+            "name": "名稱",
+            "searchLogs": "搜尋紀錄",
+            "severity": "嚴重性",
+            "status": "狀態",
+            "type": "型態"
+        },
+        "toast": {
+            "errorDelete": "刪除 %{count} 紀錄發生錯誤 | 刪除 %{count} 紀錄發生錯誤",
+            "errorLogStatusUpdate": "更新紀錄狀態發生錯誤",
+            "errorResolveLogs": "解決 %{count} 紀錄發生錯誤 | 解決 %{count} 紀錄發生錯誤",
+            "errorUnresolveLogs": "未解決 %{count} 紀錄發生錯誤 | 未解決 %{count} 紀錄發生錯誤",
+            "errorDownloadEventEntry": "下載事件日誌條目時發生錯誤。",
+            "successDownloadEventEntry": "已成功下載事件日誌條目。",
+            "successDelete": "成功刪除 %{count} 紀錄 | 成功刪除 %{count} 紀錄",
+            "successResolveLogs": "成功解決 %{count} 紀錄 | 成功解決 %{count} 紀錄",
+            "successUnresolveLogs": "成功未解決 %{count} 紀錄 | 成功未解決 %{count} 紀錄"
         }
     },
     "pageFactoryReset": {
@@ -2831,6 +2870,42 @@
         "protocolRoleSataDevice": "SATA 裝置",
         "toast" : {
             "errorGetTopologyDevice": "取得拓樸設備時發生錯誤。"
+        }
+    },
+    "pageRaidEventLog": {
+        "allControllers": "所有控制器",
+        "selectEventType": "選擇事件類型",
+        "events": "事件",
+        "ctrlName": "控制器名稱",
+        "recordId": "ID",
+        "timeStamp": "時間戳記",
+        "code": "代碼",
+        "class": "類別",
+        "info": "資訊",
+        "fatal": "致命",
+        "type": "類型",
+        "description": "描述",
+        "eventType": {
+            "allEvents": "所有事件",
+            "controllerEvents": "控制器事件",
+            "controller": "控制器",
+            "physicalDeviceEvents": "實體設備事件",
+            "physicalDevice": "實體設備",
+            "logicalDeviceEvents": "邏輯設備事件",
+            "logicalDevice": "邏輯設備",
+            "configurationEvents": "配置事件",
+            "configuration": "配置",
+            "bbuEvents": "BBU 事件",
+            "bbu": "BBU"
+        },
+        "modal": {
+            "deleteAllTitle": "刪除所有日誌",
+            "deleteAllMessage": "您確定要刪除所有日誌嗎？ 此操作無法撤消。"
+        },
+        "toast": {
+            "errorGet": "獲取事件日誌時發生錯誤。",
+            "errorDelete": "刪除 %{count} 筆日誌失敗。 | 刪除 %{count} 筆日誌失敗。",
+            "successDelete": "已經成功刪除 %{count} 筆日誌。 | 已經成功刪除 %{count} 筆日誌。"
         }
     },
     "pageFireWall": {

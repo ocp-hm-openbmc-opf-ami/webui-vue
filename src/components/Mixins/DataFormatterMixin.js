@@ -11,6 +11,8 @@ const DataFormatterMixin = {
     },
     statusIcon(status) {
       switch (status) {
+        case 'Info':
+          return 'info';
         case 'OK':
           return 'success';
         case 'Warning':

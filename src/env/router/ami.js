@@ -42,6 +42,7 @@ import DDNS from '../../views/Settings/NetworkDDNS';
 import PAM from '../../views/Settings/PamOrder/PamOrder';
 import AutoVideoSettings from '@/views/Settings/AutoVideoSettings';
 import VideoLogs from '@/views/Logs/VideoLogs';
+import IPMIEventLog from '@/views/Logs/IPMIEventLogs';
 
 const roles = {
   administrator: 'Administrator',
@@ -331,6 +332,17 @@ if (
         title: i18n.t('appPageTitle.raidTopology'),
       },
     },
+    {
+      path: '/raid/raid-event-log',
+      name: 'raid-event-log',
+      component: () =>
+        import(
+          /* webpackChunkName: "RaidEventLog" */ '@/views/RAID/EventLog/RaidEventLog.vue'
+        ),
+      meta: {
+        title: i18n.t('appPageTitle.raidEventLog'),
+      },
+    },
   );
 }
 if (
@@ -561,6 +573,16 @@ if (process.env.VUE_APP_ONETREE_SEL_ENABLED == 'true') {
     component: EventLogs,
     meta: {
       title: i18n.t('appPageTitle.eventLogs'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_SEL_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/logs/ipmi-event-log',
+    name: 'ipmi-event-log',
+    component: IPMIEventLog,
+    meta: {
+      title: i18n.t('appPageTitle.ipmiEventLog'),
     },
   });
 }

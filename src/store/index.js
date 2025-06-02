@@ -39,6 +39,7 @@ import AsdStore from './modules/HostSystemDiagnostics/AsdStore';
 import RaidStore from './modules/Raid/RaidStore';
 import LogicalStore from './modules/Raid/LogicalStore';
 import PhysicalStore from './modules/Raid/PhysicalStore';
+import RaidEventLogStore from './modules/Raid/RaidEventLogStore';
 import BackupAndRestore from './modules/Operations/BackupAndRestore';
 import SNMPStore from './modules/Settings/SNMPStore';
 import FireWallStore from './modules/Settings/FireWallStore';
@@ -58,6 +59,7 @@ import AutoVideoStore from './modules/Settings/AutoVideoStore';
 import PreserveConfigStore from './modules/Operations/PreserveConfigurationStore';
 import RadiusStore from './modules/SecurityAndAccess/RadiusStore';
 import AmdRemoteDebugStore from './modules/HostSystemDiagnostics/AmdRemoteDebugStore';
+import IPMIEventLogStore from './modules/Logs/IPMIEventLogStore';
 
 Vue.use(Vuex);
 
@@ -104,6 +106,7 @@ export default new Vuex.Store({
     raid: RaidStore,
     logicalDrive: LogicalStore,
     physical: PhysicalStore,
+    raidEventLog: RaidEventLogStore,
     backupAndRestore: BackupAndRestore,
     snmp: SNMPStore,
     fireWall: FireWallStore,
@@ -123,5 +126,6 @@ export default new Vuex.Store({
     preserveConfig: PreserveConfigStore,
     radius: RadiusStore,
     amdRemoteDebug: AmdRemoteDebugStore,
+    ipmiEventLog: IPMIEventLogStore,
   },
 });
