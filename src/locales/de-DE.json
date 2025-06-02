@@ -170,6 +170,7 @@
         "raidManagement": "@:appPageTitle.raidManagement",
         "adapter": "@:appPageTitle.adapter",
         "raidTopology": "@:appPageTitle.raidTopology",
+        "raidEventLog": "@:appPageTitle.raidEventLog",
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
@@ -188,7 +189,8 @@
         "autoVideo":"@:appPageTitle.autoVideo",
         "videoLog":"@:appPageTitle.videoLog",
         "radius":"RADIUS",
-        "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug"
+        "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
+        "ipmiEventLog": "@:appPageTitle.ipmiEventLog"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -237,6 +239,7 @@
         "logicalDevice": "Logisches Gerät",
         "createLogicalDevice": "Logisches Gerät erstellen",
         "raidTopology": "Topologie-Informationen",
+        "raidEventLog": "Ereignisprotokoll",
         "backupAndRestore": "Backup und Wiederherstellung",
         "FireWall": "System-Firewall",
         "tasks": "Aufgaben",
@@ -252,7 +255,8 @@
         "autoVideo": "Automatische Videoeinstellungen",
         "videoLog": "Video-Log",
         "radius": "RADIUS",
-        "amdRemoteDebug": "Remote-Debugging"
+        "amdRemoteDebug": "Remote-Debugging",
+        "ipmiEventLog": "IPMI -Ereignisprotokolle"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM-Konfiguration",
@@ -1053,6 +1057,41 @@
             "successDelete": "Erfolgreich %{count} Log gelöscht. | Erfolgreich %{count} Logs gelöscht.",
             "successResolveLogs": "Erfolgreich %{count} Log gelöst. | Erfolgreich %{count} Logs gelöst.",
             "successUnresolveLogs": "Erfolgreich %{count} Log nicht gelöst. | Erfolgreich %{count} Logs nicht gelöst."
+        }
+    },
+    "pageIpmiEventLogs": {
+        "additionalDataUri": "Zusätzliche Daten",
+        "resolve": "Beschließen",
+        "resolved": "Beschlossen",
+        "unresolve": "Unlösbar",
+        "unresolved": "ungelöst",
+        "modal": {
+            "deleteAllTitle": "Alle Protokolle löschen",
+            "deleteAllMessage": "Sind Sie sicher, dass Sie alle Protokolle löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+            "deleteTitle": "Protokoll löschen | Protokolle löschen",
+            "deleteMessage": "Sind Sie sicher, dass Sie löschen möchten %{count} Protokoll? Diese Aktion kann nicht rückgängig gemacht werden. | Sind Sie sicher, dass Sie löschen möchten %{count} Protokolle? Diese Aktion kann nicht rückgängig gemacht werden."
+        },
+        "table": {
+            "date": "Datum",
+            "description": "Beschreibung",
+            "id": "ID",
+            "modifiedDate": "Änderungsdatum",
+            "name": "Name",
+            "searchLogs": "Protokolle durchsuchen",
+            "severity": "Schwere",
+            "status": "Status",
+            "type": "Typ"
+        },
+        "toast": {
+            "errorDelete": "Fehler beim Löschen %{count} Protokoll. | Fehler beim Löschen %{count} Protokolle.",
+            "errorLogStatusUpdate": "Fehler beim Aktualisieren des Protokollstatus.",
+            "errorResolveLogs": "Fehlerbehebung %{count} Protokoll. | Fehlerbehebung %{count} Protokoll.",
+            "errorUnresolveLogs": "Fehler nicht behoben %{count} Protokoll. | Fehler nicht behoben %{count} Protokoll.",
+            "errorDownloadEventEntry": "Fehler beim Herunterladen des Ereignisprotokolleintrags.",
+            "successDownloadEventEntry": "Ereignisprotokolleintrag erfolgreich heruntergeladen.",
+            "successDelete": "Erfolgreich gelöscht %{count} Protokoll. | Erfolgreich gelöscht %{count} Protokolle.",
+            "successResolveLogs": "Erfolgreich gelöst %{count} Protokoll. | Erfolgreich gelöst %{count} Protokolle.",
+            "successUnresolveLogs": "Erfolgreich ungelöst %{count} Protokoll. | Erfolgreich ungelöst %{count} Protokolle."
         }
     },
     "pageFactoryReset": {
@@ -2834,6 +2873,42 @@
         "protocolRoleSataDevice": "SATA-Gerät",
         "toast": {
             "errorGetTopologyDevice": "Fehler beim Abrufen des Topologiegeräts."
+        }
+    },
+    "pageRaidEventLog": {
+        "allControllers": "Alle Controller",
+        "selectEventType": "Ereignistyp auswählen",
+        "events": "Ereignisse",
+        "ctrlName": "Controller-Name",
+        "recordId": "ID",
+        "timeStamp": "Zeitstempel",
+        "code": "Code",
+        "class": "Klasse",
+        "info": "Info",
+        "fatal": "Fatal",
+        "type": "Typ",
+        "description": "Beschreibung",
+        "eventType": {
+            "allEvents": "Alle Ereignisse",
+            "controllerEvents": "Controller-Ereignisse",
+            "controller": "Controller",
+            "physicalDeviceEvents": "Physische-Geräte-Ereignisse",
+            "physicalDevice": "Physisches Gerät",
+            "logicalDeviceEvents": "Logische-Geräte-Ereignisse",
+            "logicalDevice": "Logisches Gerät",
+            "configurationEvents": "Konfigurations-Ereignisse",
+            "configuration": "Konfiguration",
+            "bbuEvents": "BBU-Ereignisse",
+            "bbu": "BBU"
+        },
+        "modal": {
+            "deleteAllTitle": "Alle Protokolle löschen",
+            "deleteAllMessage": "Möchten Sie wirklich alle Protokolle löschen? Diese Aktion kann nicht rückgängig gemacht werden."
+        },
+        "toast": {
+            "errorGet": "Fehler beim Abrufen der Ereignisprotokolle.",
+            "errorDelete": "Fehler beim Löschen von %{count} Protokoll. | Fehler beim Löschen von %{count} Protokollen.",
+            "successDelete": "Erfolgreich %{count} Protokoll gelöscht. | Erfolgreich %{count} Protokolle gelöscht."
         }
     },
     "pageFireWall": {

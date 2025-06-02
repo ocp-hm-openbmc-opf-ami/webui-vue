@@ -173,6 +173,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "raidEventLog": "@:appPageTitle.raidEventLog",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "tasks": "@:appPageTitle.tasks",
@@ -188,7 +189,8 @@
         "autoVideo":"@:appPageTitle.autoVideo",
         "videoLog":"@:appPageTitle.videoLog",
         "radius":"RADIUS",
-        "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug"
+        "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
+        "ipmiEventLog": "@:appPageTitle.ipmiEventLog"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -237,6 +239,7 @@
         "logicalDevice": "Logical Device",
         "createLogicalDevice": "Create Logical Device",
         "raidTopology": "Topology Information",
+        "raidEventLog": "Event Log",
         "backupAndRestore": "Backup and Restore",
         "FireWall": "System Firewall",
         "tasks": "Tasks",
@@ -252,7 +255,9 @@
         "autoVideo":"Auto Video Settings",
         "videoLog":"Video Log",
         "radius": "RADIUS",
-        "amdRemoteDebug": "Remote Debug"
+        "amdRemoteDebug": "Remote Debug",
+        "ipmiEventLog": "IPMI Event Logs"
+
     },
     "pageNodeManager": {
         "nmConfiguration": "NM Configuration",
@@ -1051,6 +1056,41 @@
             "successDelete": "Successfully deleted %{count} log. | Successfully deleted %{count} Logs.",
             "successResolveLogs": "Successfully resolved %{count} log. | Successfully resolved %{count} Logs.",
             "successUnresolveLogs": "Successfully unresolved %{count} log. | Successfully unresolved %{count} Logs."
+        }
+    },
+    "pageIpmiEventLogs": {
+        "additionalDataUri": "Additional data",
+        "resolve": "Resolve",
+        "resolved": "Resolved",
+        "unresolve": "Unresolve",
+        "unresolved": "Unresolved",
+        "modal": {
+            "deleteAllTitle": "Delete all logs",
+            "deleteAllMessage": "Are you sure you want to delete all logs? This action cannot be undone.",
+            "deleteTitle": "Delete log | Delete logs",
+            "deleteMessage": "Are you sure you want to delete %{count} log? This action cannot be undone. | Are you sure you want to delete %{count} logs? This action cannot be undone."
+        },
+        "table": {
+            "date": "Date",
+            "description": "Description",
+            "id": "ID",
+            "modifiedDate": "Modified Date",
+            "name": "Name",
+            "searchLogs": "Search logs",
+            "severity": "Severity",
+            "status": "Status",
+            "type": "Type"
+        },
+        "toast": {
+            "errorDelete": "Error deleting %{count} log. | Error deleting %{count} logs.",
+            "errorLogStatusUpdate": "Error updating log status.",
+            "errorResolveLogs": "Error resolving %{count} log. | Error resolving %{count} logs.",
+            "errorUnresolveLogs": "Error unresolving %{count} log. | Error unresolving %{count} logs.",
+            "errorDownloadEventEntry": "Error download event log entry.",
+            "successDownloadEventEntry": "Successfully downloaded event log entry.",
+            "successDelete": "Successfully deleted %{count} log. | Successfully deleted %{count} logs.",
+            "successResolveLogs": "Successfully resolved %{count} log. | Successfully resolved %{count} logs.",
+            "successUnresolveLogs": "Successfully unresolved %{count} log. | Successfully unresolved %{count} logs."
         }
     },
     "pageFactoryReset": {
@@ -2837,6 +2877,42 @@
         "protocolRoleSataDevice": "SATA Device",
         "toast" : {
             "errorGetTopologyDevice": "Error in getting the Topology Device."
+        }
+    },
+    "pageRaidEventLog": {
+        "allControllers": "All Controllers",
+        "selectEventType": "Select Event Type",
+        "events": "Events",
+        "ctrlName": "Controller Name",
+        "recordId": "ID",
+        "timeStamp": "Time Stamp",
+        "code": "Code",
+        "class": "Class",
+        "info": "Info",
+        "fatal": "Fatal",
+        "type": "Type",
+        "description": "Description",
+        "eventType": {
+            "allEvents": "All Events",
+            "controllerEvents": "Controller Events",
+            "controller": "Controller",
+            "physicalDeviceEvents": "Physical Device Events",
+            "physicalDevice": "Physical Device",
+            "logicalDeviceEvents": "Logical Device Events",
+            "logicalDevice": "Logical Device",
+            "configurationEvents": "Configuration Events",
+            "configuration": "Configuration",
+            "bbuEvents": "BBU Events",
+            "bbu": "BBU"
+        },
+        "modal": {
+            "deleteAllTitle": "Delete All Logs",
+            "deleteAllMessage": "Are you sure you want to delete all logs? This action cannot be undone."
+        },
+        "toast": {
+            "errorGet": "Error getting event logs.",
+            "errorDelete": "Error deleting %{count} log. | Error deleting %{count} logs.",
+            "successDelete": "Successfully deleted %{count} log. | Successfully deleted %{count} logs."
         }
     },
     "pageFireWall": {
