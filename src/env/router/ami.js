@@ -141,6 +141,14 @@ const routes = [
         },
       },
       {
+        path: '/security-and-access/ldap',
+        name: 'ldap',
+        component: Ldap,
+        meta: {
+          title: i18n.t('appPageTitle.ldap'),
+        },
+      },
+      {
         path: '/security-and-access/policies',
         name: 'policies',
         component: Policies,
@@ -705,16 +713,6 @@ if (process.env.VUE_APP_ONETREE_SESSION_ENABLED == 'true') {
     component: Sessions,
     meta: {
       title: i18n.t('appPageTitle.sessions'),
-    },
-  });
-}
-if (process.env.VUE_APP_ONETREE_LDAP_CLIENT_ENABLED == 'true') {
-  routes[2].children.push({
-    path: '/security-and-access/ldap',
-    name: 'ldap',
-    component: Ldap,
-    meta: {
-      title: i18n.t('appPageTitle.ldap'),
     },
   });
 }
