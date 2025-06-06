@@ -123,6 +123,16 @@ const AppNavigationMixin = {
           icon: 'iconSecurityAndAccess',
           children: [
             {
+              id: 'certificates',
+              label: this.$t('appNavigation.certificates'),
+              route: '/security-and-access/certificates',
+            },
+            {
+              id: 'ldap',
+              label: this.$t('appNavigation.ldap'),
+              route: '/security-and-access/ldap',
+            },
+            {
               id: 'user-management',
               label: this.$t('appNavigation.userManagement'),
               route: '/security-and-access/user-management',
@@ -131,11 +141,6 @@ const AppNavigationMixin = {
               id: 'policies',
               label: this.$t('appNavigation.policies'),
               route: '/security-and-access/policies',
-            },
-            {
-              id: 'certificates',
-              label: this.$t('appNavigation.certificates'),
-              route: '/security-and-access/certificates',
             },
           ],
         },
@@ -418,13 +423,6 @@ const AppNavigationMixin = {
           id: 'sessions',
           label: this.$t('appNavigation.sessions'),
           route: '/security-and-access/sessions',
-        });
-      }
-      if (process.env.VUE_APP_ONETREE_LDAP_CLIENT_ENABLED === 'true') {
-        navigationItemsList.navigationItems[6].children.push({
-          id: 'ldap',
-          label: this.$t('appNavigation.ldap'),
-          route: '/security-and-access/ldap',
         });
       }
       if (
