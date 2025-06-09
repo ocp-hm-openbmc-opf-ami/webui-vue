@@ -1565,7 +1565,9 @@
             "userUnlockMethod": "使用者解鎖方法",
             "passwordChangeRequired": "要求變更密碼",
             "vmediaAccess": "虛擬媒體訪問",
-            "changePassword": "更改密碼"
+            "changePassword": "更改密碼",
+            "logoutConfirmMessage": "您確定要變更登入使用者「%{user}」的密碼嗎？該用戶將註銷，並且僅反映在下次登入中.",
+            "logoutAlert": "註銷警報"
         },
         "table": {
             "privilege": "特權",

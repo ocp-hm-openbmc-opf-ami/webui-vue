@@ -1567,7 +1567,9 @@
             "userUnlockMethod": "Benutzerentsperrmethode",
             "passwordChangeRequired": "Passwortänderung erforderlich",
             "vmediaAccess": "VMedia-Zugriff",
-            "changePassword": "Passwort ändern"
+            "changePassword": "Passwort ändern",
+            "logoutConfirmMessage": "Sind Sie sicher, dass Sie das Passwort für den angemeldeten Benutzer „%{user}“ ändern möchten? Dieser Benutzer wird abgemeldet und dies wird erst bei der nächsten Anmeldung berücksichtigt.",
+            "logoutAlert": "Abmeldewarnung"
         },
         "table": {
             "privilege": "Privileg",

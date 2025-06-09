@@ -324,19 +324,44 @@ export default {
       this.$bvModal.show('modal-settings');
     },
     saveUser({ isNewUser, userData }) {
-      this.startLoader();
       if (isNewUser) {
+        this.startLoader();
         this.$store
           .dispatch('userManagement/createUser', userData)
           .then((success) => this.successToast(success))
           .catch(({ message }) => this.errorToast(message))
           .finally(() => this.endLoader());
       } else {
-        this.$store
-          .dispatch('userManagement/updateUser', userData)
-          .then((success) => this.successToast(success))
-          .catch(({ message }) => this.errorToast(message))
-          .finally(() => this.endLoader());
+        if (this.$store.getters['global/username'] === userData.username) {
+          this.$bvModal
+            .msgBoxConfirm(
+              this.$t('pageUserManagement.modal.logoutConfirmMessage', {
+                user: userData.username,
+              }),
+              {
+                title: this.$tc('pageUserManagement.modal.logoutAlert'),
+                okTitle: this.$tc('global.action.ok'),
+                cancelTitle: this.$t('global.action.cancel'),
+              },
+            )
+            .then((passwordChangeRequired) => {
+              if (passwordChangeRequired) {
+                this.startLoader();
+                this.$store
+                  .dispatch('userManagement/updateUser', userData)
+                  .then((success) => this.successToast(success))
+                  .catch(({ message }) => this.errorToast(message))
+                  .finally(() => this.endLoader());
+              }
+            });
+        } else {
+          this.startLoader();
+          this.$store
+            .dispatch('userManagement/updateUser', userData)
+            .then((success) => this.successToast(success))
+            .catch(({ message }) => this.errorToast(message))
+            .finally(() => this.endLoader());
+        }
       }
     },
     deleteUser({ username }) {

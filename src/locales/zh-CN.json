@@ -1565,7 +1565,9 @@
             "userUnlockMethod": "用户解锁方法",
             "passwordChangeRequired": "要求更改密码",
             "vmediaAccess": "虚拟媒体访问",
-            "changePassword": "更改密码"
+            "changePassword": "更改密码",
+            "logoutConfirmMessage": "您确定要更改登录用户“%{user}”的密码吗？该用户将注销，并且仅反映在下次登录中.",
+            "logoutAlert": "注销警报"
         },
         "table": {
             "privilege": "权限",
