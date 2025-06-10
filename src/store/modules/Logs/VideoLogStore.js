@@ -33,24 +33,20 @@ const VideoLogStore = {
     },
     async videoLogDownload(_, file) {
       try {
-        const response = await api.get(file, { responseType: 'blob' });
-        const blob = new Blob([response.data], {
-          type: 'application/octet-stream',
-        }); // adjust MIME type if needed
-        const url = window.URL.createObjectURL(blob);
+        const response = await api.get(file);
+        console.log(response.data.length); // wait until the file is fully downloaded from API
+        const url = file;
 
         // Create a link element for download
         const link = document.createElement('a');
         link.href = url;
         link.setAttribute('download', file.split('/').pop());
-
         // Append link to body, trigger download, then remove
         document.body.appendChild(link);
         link.click();
-        document.body.removeChild(link);
-
         // Revoke the object URL to release memory
         window.URL.revokeObjectURL(url);
+        document.body.removeChild(link);
       } catch (error) {
         console.error(error);
         throw new Error(i18n.t('videoLog.toast.errorVideoLogDownload'));
