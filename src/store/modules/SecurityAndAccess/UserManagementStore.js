@@ -1,6 +1,7 @@
 import api, { getResponseCount } from '@/store/api';
 import i18n from '@/i18n';
 import store from '../GlobalStore';
+import authentication from '../store';
 
 const UserManagementStore = {
   namespaced: true,
@@ -276,7 +277,13 @@ const UserManagementStore = {
       }
       return await api
         .patch(`/redfish/v1/AccountService/Accounts/${originalUsername}`, data)
-        .then(() => dispatch('getUsers'))
+        .then(() => {
+          if (originalUsername === store.getters.username(store.state)) {
+            authentication.dispatch('authentication/logout');
+          } else {
+            dispatch('getUsers');
+          }
+        })
         .then(() => {
           if (routerPath === '/change-password') {
             return i18n.t('pageUserManagement.toast.successPasswordChanged');

@@ -1617,7 +1617,9 @@
             "authProtocolsh224": "SHA-224",
             "authProtocolsha256": "SHA-256",
             "authProtocolsha384": "SHA-384",
-            "authProtocolsha512": "SHA-512"
+            "authProtocolsha512": "SHA-512",
+            "logoutConfirmMessage": "Sind Sie sicher, dass Sie das Passwort für den angemeldeten Benutzer „%{user}“ ändern möchten? Dieser Benutzer wird abgemeldet und dies wird erst bei der nächsten Anmeldung berücksichtigt.",
+            "logoutAlert": "Abmeldewarnung"
         },
         "table": {
             "privilege": "Privileg",

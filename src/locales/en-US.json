@@ -1616,7 +1616,9 @@
             "authProtocolsh224": "SHA-224",
             "authProtocolsha256": "SHA-256",
             "authProtocolsha384": "SHA-384",
-            "authProtocolsha512": "SHA-512"
+            "authProtocolsha512": "SHA-512",
+            "logoutConfirmMessage": "Are you sure you want to change Password for the logged in user '%{user}'? This user will get logout and it will be reflected in the next login only.",
+            "logoutAlert": "Logout Alert"
         },
         "table": {
             "privilege": "Privilege",

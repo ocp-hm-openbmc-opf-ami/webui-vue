@@ -106,7 +106,7 @@
               </b-form-checkbox>
             </b-form-group>
           </b-col>
-          <b-col v-if="form.useTSIG" sm="3">
+          <b-col v-if="form.useTSIGFileUpload" sm="3">
             <b-form-group
               :label="$t('pageDDNSNetwork.ddnsConfiguration.tsigFileUpload')"
             >
@@ -118,6 +118,7 @@
                 }}
               </b-form-text>
               <form-file
+                id="image-file"
                 ref="formFile"
                 v-model="file"
                 accept=".private"
@@ -141,6 +142,7 @@
               class="upload-button"
               type="submit"
               variant="primary"
+              :disabled="!form.useTSIG"
               @click="onSubmitUpload"
             >
               <icon-upload />
@@ -148,12 +150,12 @@
             </b-button>
           </b-col>
         </b-row>
+        <b-button type="submit" variant="primary" @click="handleSubmit">
+          <icon-save />
+          {{ $t('global.action.save') }}
+        </b-button>
       </div>
     </page-section>
-    <b-button type="submit" variant="primary" @click="handleSubmit">
-      <icon-save />
-      {{ $t('global.action.save') }}
-    </b-button>
   </b-container>
 </template>
 
@@ -194,6 +196,7 @@ export default {
         ddnsMethod: false,
         nsUpdateEnabled: false,
         useTSIG: false,
+        useTSIGFileUpload: false,
       },
       domainNames: [],
     };
@@ -225,6 +228,7 @@ export default {
       file: {
         required,
         pattern: function (file) {
+          if (!this.$v.file.required) return true;
           return this.getIsFileTypeCorrect(file);
         },
       },
@@ -246,6 +250,7 @@ export default {
       this.form.nsUpdateEnabled =
         ddnsData?.InterfacesConfiguration?.NSUpdateEnable;
       this.form.useTSIG = ddnsData?.InterfacesConfiguration?.UseTSIG;
+      this.form.useTSIGFileUpload = this.form.useTSIG;
       this.domainNames = ddnsData?.DomainConfiguration?.DomainNames || [];
     },
     handleSubmit() {
@@ -259,10 +264,14 @@ export default {
         .dispatch('ddnsNetwork/saveInterfaceConfiguration', data)
         .then((success) => {
           if (success) {
+            this.getdata();
             this.successToast(success);
           }
         })
-        .catch(({ message }) => this.errorToast(message))
+        .catch(({ message }) => {
+          this.getdata();
+          this.errorToast(message);
+        })
         .finally(() => this.endLoader());
     },
     doNSUpdate() {

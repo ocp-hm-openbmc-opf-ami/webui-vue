@@ -1615,7 +1615,9 @@
             "authProtocolsh224": "SHA-224",
             "authProtocolsha256": "SHA-256",
             "authProtocolsha384": "SHA-384",
-            "authProtocolsha512": "SHA-512"
+            "authProtocolsha512": "SHA-512",
+            "logoutConfirmMessage": "您確定要變更登入使用者「%{user}」的密碼嗎？該用戶將註銷，並且僅反映在下次登入中.",
+            "logoutAlert": "註銷警報"
         },
         "table": {
             "privilege": "特權",
