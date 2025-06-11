@@ -84,8 +84,6 @@
           </b-form-group>
         </b-col>
       </b-row>
-    </page-section>
-    <page-section>
       <b-button type="submit" variant="primary" @click="saveConfigurations">
         {{ $t('global.action.save') }}
       </b-button>
