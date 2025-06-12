@@ -1186,6 +1186,7 @@
         "ntp": "NTP",
         "sol": "SOL",
         "sysLog": "Syslog",
+        "serviceManager": "Service Manager",
         "navigationInfoFactoryDefault": "Die folgenden ausgewählten Konfigurationen werden während des Wiederherstellungsvorgangs beibehalten. Sie können Änderungen an der Liste auf der",
         "navigationInfoExtensionFactoryDefault": "Seite vornehmen.",
         "toast": {
@@ -1297,6 +1298,7 @@
         "ntp": "NTP",
         "sol": "SOL",
         "sysLog": "Syslog",
+        "serviceManager": "Service Manager",
         "navigationInfoPreserve": "Klicken Sie hier, um zu",
         "navigationInfoExtensionPreserve": "oder",
         "toast": {

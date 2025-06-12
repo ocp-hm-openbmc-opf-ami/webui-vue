@@ -1184,6 +1184,7 @@
         "ntp": "NTP",
         "sol": "SOL",
         "sysLog": "Syslog",
+        "serviceManager": "Service Manager",
         "navigationInfoFactoryDefault": "以下检查配置将通过还原操作保留。您可以在列表中更改",
         "navigationInfoExtensionFactoryDefault": "页。",
         "toast": {
@@ -1295,6 +1296,7 @@
         "ntp": "NTP",
         "sol": "SOL",
         "sysLog": "Syslog",
+        "serviceManager": "Service Manager",
         "navigationInfoPreserve": "单击此处去",
         "navigationInfoExtensionPreserve": "或者",
         "toast": {

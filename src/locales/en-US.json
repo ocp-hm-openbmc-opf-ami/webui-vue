@@ -1184,6 +1184,7 @@
         "ntp": "NTP",
         "sol": "SOL",
         "sysLog": "Syslog",
+        "serviceManager": "Service Manager",
         "navigationInfoFactoryDefault": "The following checked configurations will be preserved through the restore operation. You can make changes to the list in the",
         "navigationInfoExtensionFactoryDefault": "Page.",
         "toast": {
@@ -1295,6 +1296,7 @@
         "ntp": "NTP",
         "sol": "SOL",
         "sysLog": "Syslog",
+        "serviceManager": "Service Manager",
         "navigationInfoPreserve": "Click here to go to",
         "navigationInfoExtensionPreserve": "or",
         "toast": {
