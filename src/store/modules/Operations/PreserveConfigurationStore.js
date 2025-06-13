@@ -51,6 +51,7 @@ const PreserveConfigStore = {
               SOL: saveConfigValues.sol,
               SYSLOG: saveConfigValues.sysLog,
               U_BOOT_ENV: saveConfigValues.ubootEnv,
+              ServiceManager: saveConfigValues.serviceManager,
             },
           },
         },

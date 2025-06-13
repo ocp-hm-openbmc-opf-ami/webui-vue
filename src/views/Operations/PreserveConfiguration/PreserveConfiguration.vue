@@ -136,6 +136,13 @@
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
+          <b-form-checkbox v-model="checkboxes.serviceManager">
+            {{ $t('pagePreserveConfiguration.serviceManager') }}
+          </b-form-checkbox>
+        </b-col>
+      </b-row>
+      <b-row class="mt-3">
+        <b-col sm="6" md="3">
           <b-button type="submit" variant="primary" @click="SaveConfig">
             <icon-save />
             {{ $t('global.action.save') }}
@@ -177,6 +184,7 @@ export default {
         sol: '',
         sysLog: '',
         ubootEnv: '',
+        serviceManager: '',
       },
     };
   },
@@ -222,6 +230,7 @@ export default {
         sol: config.SOL,
         sysLog: config.SYSLOG,
         ubootEnv: config.U_BOOT_ENV,
+        serviceManager: config.ServiceManager,
       };
     },
     SaveConfig() {
@@ -242,6 +251,7 @@ export default {
       saveConfigValues.sol = this.checkboxes.sol;
       saveConfigValues.sysLog = this.checkboxes.sysLog;
       saveConfigValues.ubootEnv = this.checkboxes.ubootEnv;
+      saveConfigValues.serviceManager = this.checkboxes.serviceManager;
       this.startLoader();
       this.$store
         .dispatch('preserveConfig/savePreserveConfig', saveConfigValues)

@@ -195,6 +195,17 @@
         </b-row>
         <b-row class="mt-3">
           <b-col sm="6" md="3">
+            <div class="d-flex align-items-center">
+              <b-form-checkbox v-model="checkboxes.serviceManager" disabled>
+              </b-form-checkbox>
+              <span class="ml-2">
+                {{ $t('PageFactoryDefault.serviceManager') }}
+              </span>
+            </div>
+          </b-col>
+        </b-row>
+        <b-row class="mt-3">
+          <b-col sm="6" md="3">
             <b-button
               type="submit"
               variant="primary"
@@ -241,6 +252,7 @@ export default {
         sol: '',
         sysLog: '',
         ubootEnv: '',
+        serviceManager: '',
       },
     };
   },
@@ -280,6 +292,7 @@ export default {
         sol: config.SOL,
         sysLog: config.SYSLOG,
         ubootEnv: config.U_BOOT_ENV,
+        serviceManager: config.ServiceManager,
       };
     },
     onRestoreToDefaults() {
