@@ -11,6 +11,7 @@ import IconObjectStorage from '@carbon/icons-vue/es/object-storage/16';
 import IconHostSystemDiagnostics from '@carbon/icons-vue/es/laptop/16';
 import IconStorageRequest from '@carbon/icons-vue/es/storage-request/16';
 import IconTask from '@carbon/icons-vue/es/task/16';
+import Iconchip from '@carbon/icons-vue/es/chip/16';
 
 const roles = {
   administrator: 'Administrator',
@@ -34,6 +35,7 @@ const AppNavigationMixin = {
     iconHostSystemDiagnostics: IconHostSystemDiagnostics,
     iconStorageRequest: IconStorageRequest,
     iconTask: IconTask,
+    iconChip: Iconchip,
   },
   data() {
     return this.renderNavigationItems();
@@ -382,6 +384,14 @@ const AppNavigationMixin = {
               route: '/raid/topology',
             },
           ],
+        });
+      }
+      if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED === 'true') {
+        navigationItemsList.navigationItems.push({
+          id: 'gpgpu',
+          label: this.$t('appNavigation.gpgpu'),
+          route: '/gpgpu',
+          icon: 'iconChip',
         });
       }
       if (

@@ -21,6 +21,8 @@ const FirmwareStore = {
     bmcActiveFeatureEnabled: true,
     imageName: '',
     httpPushUriOptions: {},
+    gpuFirmwareinfo: [],
+    fpgaFirmwareinfo: [],
   },
   getters: {
     isTftpUploadAvailable: (state) => state.tftpAvailable,
@@ -54,6 +56,8 @@ const FirmwareStore = {
     getImageName: (state) => state.imageName,
     getBmcActiveFirmwareId: (state) => state.bmcActiveFirmwareId,
     httpPushUriOptions: (state) => state.httpPushUriOptions,
+    getGpuFirmwareinfo: (state) => state.gpuFirmwareinfo,
+    getFpgaFirmwareinfo: (state) => state.fpgaFirmwareinfo,
   },
   mutations: {
     setActiveBmcFirmwareId: (state, id) => (state.bmcActiveFirmwareId = id),
@@ -83,6 +87,10 @@ const FirmwareStore = {
     setImageName: (state, imageName) => (state.imageName = imageName),
     setHttpPushUriOptions: (state, httpPushUriOptions) =>
       (state.httpPushUriOptions = httpPushUriOptions),
+    setGpuFirmwareinfo: (state, gpuFirmwareinfo) =>
+      (state.gpuFirmwareinfo = gpuFirmwareinfo),
+    setFPGAFirmwareinfo: (state, fpgaFirmwareinfo) =>
+      (state.fpgaFirmwareinfo = fpgaFirmwareinfo),
   },
   actions: {
     async getFirmwareInformation({ dispatch }) {
@@ -123,6 +131,8 @@ const FirmwareStore = {
         .then((response) => {
           const bmcFirmware = [];
           const hostFirmware = [];
+          const fpgaFirmware = [];
+          const gpgpuFirmware = [];
           response.forEach(({ data }) => {
             const firmwareType = data?.RelatedItem?.[0]?.['@odata.id']
               .split('/')
@@ -154,7 +164,16 @@ const FirmwareStore = {
             } else if (firmwareType === 'Bios') {
               hostFirmware.push(item);
             }
+            var deviceName = data?.['@odata.id'].split('/').pop();
+            if (deviceName.includes('FW_GPU')) {
+              gpgpuFirmware.push(data);
+            }
+            if (deviceName.includes('FW_FPGA')) {
+              fpgaFirmware.push(data);
+            }
           });
+          commit('setGpuFirmwareinfo', gpgpuFirmware);
+          commit('setFPGAFirmwareinfo', fpgaFirmware);
           commit('setBmcFirmware', bmcFirmware);
           commit('setHostFirmware', hostFirmware);
         })

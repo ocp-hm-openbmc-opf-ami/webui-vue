@@ -7,6 +7,10 @@ const VuelidateMixin = {
     validateRange(val, min, max) {
       return /^\d+$/.test(val) && val >= min && val <= max;
     },
+    //checking a value if value not come return NA
+    getValidValue: function (val) {
+      return val === null || val === undefined || val === '' ? 'NA' : val;
+    },
   },
 };
 

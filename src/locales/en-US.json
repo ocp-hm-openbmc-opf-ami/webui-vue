@@ -188,7 +188,8 @@
         "autoVideo":"@:appPageTitle.autoVideo",
         "videoLog":"@:appPageTitle.videoLog",
         "radius":"RADIUS",
-        "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug"
+        "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
+        "gpgpu": "@:appPageTitle.gpgpu"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -252,7 +253,8 @@
         "autoVideo":"Auto Video Settings",
         "videoLog":"Video Log",
         "radius": "RADIUS",
-        "amdRemoteDebug": "Remote Debug"
+        "amdRemoteDebug": "Remote Debug",
+        "gpgpu": "GPGPU"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM Configuration",
@@ -2994,6 +2996,52 @@
             "successVideoLogCleared": "Video Log Deleted Successfully.",
             "errorVideoLogDownload": "Video Log Downloaded Failed.",
             "errorGettingVideoLog": "Error in getting Video Logs."
+        }
+    },
+    "gpgpu": {
+        "tab":{
+            "gpgpuInterfaceProcessorTab" : "Processor",
+            "gpgpuInterfaceChassisTab" : "Chassis",
+            "gpgpuInterfaceMemoryTab": "Memory"
+        },
+        "gpgpuInterfaceHeader" : "GPU",
+        "gpgpuInterfaceMemoryChassisContentTitle":"Chassis Info",
+        "gpgpuInterfaceMemoryEnvironmentMetricsContentTitle":"Environment Metrics",
+        "gpgpuInterfaceMemoryMetricsContentTitle":"Memory Metrics",
+        "gpgpuInterfaceMemoryContentTitle": "Memory Controller Info",
+        "gpgpuInterfaceProcessorPcieFunctionContentTitle":"PCIe Function",
+        "gpgpuInterfaceProcessorMetricsContentTitle":"Processor Metrics",
+        "gpgpuInterfaceProcessorEnvironmentmetricsContentTitle":"Environment Metrics",
+        "gpgpuInterfaceProcessorMemorySummaryContentTitle": "Memory Summary",
+        "gpgpuInterfaceInfoContentTitle": "GPU Info",
+        "gpgpuInterfaceMemorySensorsInfoContentTitle":"Sensors Info",
+        "gpgpuInterfaceMemoryPcieDevicesContentTitle":"PCIe Devices",
+        "gpgpuDevices":"GPU Devices",
+        "fpga": {
+            "fpgaInterfaceHeader" : "FPGA",
+            "fpgaInterfaceProcessorPortContentTitle": "Port Info",
+            "fpgaInterfaceFpgaContentTitle": "FPGA Info",
+            "fpgaInterfaceChassisContentTitle": "Chassis Info",
+            "fpgaInterfaceSensorsInfoContentTitle":"Sensors Info",
+            "fpgaDevices":"FPGA Devices"
+        },
+        "baseboard": {
+            "baseBoardInterfaceHeader" : "BaseBoard",     
+            "baseBoardInterfaceAssemblyTab" : "Assembly",
+            "baseBoardInterfaceSensorsTab" : "Sensors",
+            "baseBoardInterfaceChassisSensorsInfoContentTitle":"Sensors Info",
+            "baseBoardInterfaceBaseBoardAssemblyContentTitle": "Assembly Info"
+        },
+        "toast": {
+            "errorGettingSystems": "Error in getting Systems Information",
+            "errorGettingChassis": "Error in getting Chassis Information",
+            "errorGettingProcessor": "Error in getting Processor Information",
+            "errorGettingEnvironmentMetrics": "Error in getting Environment Metrics Information",
+            "errorGettingMemoryMetrics": "Error in getting Memory Metrics Information",
+            "errorGettingFpgaInfo": "Error in getting FPGA Information",
+            "errorGettingFpgaSensorInfo": "Error in getting FPGA Sensors Information",
+            "errorGettingBaseBoardInfo": "Error in getting BaseBoard Information",
+            "errorGettingBaseBoardSensorInfo": "Error in getting BaseBoard Sensors Information"
         }
     },
     "countries": {

@@ -188,7 +188,8 @@
         "autoVideo":"@:appPageTitle.autoVideo",
         "videoLog":"@:appPageTitle.videoLog",
         "radius": "RADIUS",
-        "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug"
+        "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
+        "gpgpu": "@:appPageTitle.gpgpu"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -252,7 +253,8 @@
         "autoVideo":"自動影像設定",
         "videoLog":"視訊日誌",
         "radius": "RADIUS",
-        "amdRemoteDebug": "AMD 遠端偵錯"
+        "amdRemoteDebug": "AMD 遠端偵錯",
+        "gpgpu": "GPGPU"
     },
     "pageNodeManager": {
         "nmConfiguration": "網管設定",
@@ -2994,6 +2996,52 @@
             "successVideoLogCleared": "視訊日誌刪除成功。",
             "errorVideoLogDownload": "視訊日誌下載失敗。",
             "errorGettingVideoLog": "取得視訊日誌時發生錯誤。"
+        }
+    },
+    "gpgpu": {
+        "tab":{
+            "gpgpuInterfaceProcessorTab" : "處理器",
+            "gpgpuInterfaceChassisTab" : "機殼",
+            "gpgpuInterfaceMemoryTab": "記憶"
+        },
+        "gpgpuInterfaceHeader" : "圖形處理器",
+        "gpgpuInterfaceMemoryChassisContentTitle":"底盤資訊",
+        "gpgpuInterfaceMemoryEnvironmentMetricsContentTitle":"環境指標",
+        "gpgpuInterfaceMemoryMetricsContentTitle":"記憶體指標",
+        "gpgpuInterfaceMemoryContentTitle": "記憶體控制器資訊",
+        "gpgpuInterfaceProcessorSystemInterfaceContentTitle":"PCIe功能",
+        "gpgpuInterfaceProcessorMetricsContentTitle":"處理器指標",
+        "gpgpuInterfaceProcessorEnvironmentmetricsContentTitle":"環境指標",
+        "gpgpuInterfaceProcessorMemorySummaryContentTitle": "記憶體總結",
+        "gpgpuInterfaceInfoContentTitle": "GPU資訊",
+        "gpgpuInterfaceMemorySensorsInfoContentTitle":"感測器資訊",
+        "gpgpuInterfaceMemoryPcieDevicesContentTitle":"PCIe 裝置",
+        "gpgpuDevices":"GPU裝置",
+        "fpga": {
+            "fpgaInterfaceHeader" : "FPGA",
+            "fpgaInterfaceProcessorPortContentTitle": "港口資訊",
+            "fpgaInterfaceFpgaContentTitle": "FPGA資訊",
+            "fpgaInterfaceChassisContentTitle": "底盤資訊",
+            "fpgaInterfaceSensorsInfoContentTitle":"感測器資訊",
+            "fpgaDevices":"FPGA設備"
+        },
+        "baseboard": {
+            "baseBoardInterfaceHeader" : "底板",     
+            "baseBoardInterfaceAssemblyTab" : "集會",
+            "baseBoardInterfaceSensorsTab" : "感應器",
+            "baseBoardInterfaceChassisSensorsInfoContentTitle":"感測器資訊",
+            "baseBoardInterfaceBaseBoardAssemblyContentTitle": "裝配資訊"
+        },
+        "toast": {
+            "errorGettingSystems": "取得系統資訊時出錯",
+            "errorGettingChassis": "取得機箱資訊出錯",
+            "errorGettingProcessor": "取得處理器資訊時出錯",
+            "errorGettingEnvironmentMetrics": "取得環境指標資訊時出錯",
+            "errorGettingMemoryMetrics": "取得記憶體指標資訊時出錯",
+            "errorGettingFpgaInfo": "取得FPGA資訊出錯",
+            "errorGettingFpgaSensorInfo": "取得 FPGA 感知器資訊時出錯",
+            "errorGettingBaseBoardInfo": "取得底板資訊時出錯",
+            "errorGettingBaseBoardSensorInfo": "取得底板感測器資訊時出錯"
         }
     },
     "countries": {

@@ -58,6 +58,7 @@ import AutoVideoStore from './modules/Settings/AutoVideoStore';
 import PreserveConfigStore from './modules/Operations/PreserveConfigurationStore';
 import RadiusStore from './modules/SecurityAndAccess/RadiusStore';
 import AmdRemoteDebugStore from './modules/HostSystemDiagnostics/AmdRemoteDebugStore';
+import Gpu from './modules/Settings/GpuStore';
 
 Vue.use(Vuex);
 
@@ -123,5 +124,6 @@ export default new Vuex.Store({
     preserveConfig: PreserveConfigStore,
     radius: RadiusStore,
     amdRemoteDebug: AmdRemoteDebugStore,
+    gpu: Gpu,
   },
 });
