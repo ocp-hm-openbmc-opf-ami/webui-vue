@@ -51,7 +51,12 @@
           </b-form-group>
         </b-col>
       </b-row>
-      <b-button type="submit" variant="primary" @click="saveConfigurations">
+      <b-button
+        type="submit"
+        variant="primary"
+        :disabled="isButtonDisable"
+        @click="saveConfigurations"
+      >
         <icon-save />
         {{ $t('global.action.save') }}
       </b-button>
@@ -71,6 +76,7 @@
               <b-form-checkbox
                 v-model="form.ddnsMethod"
                 data-test-id="ddns-method"
+                :disabled="isButtonDisable"
                 switch
               >
                 <span v-if="form.ddnsMethod">
@@ -86,7 +92,11 @@
             <b-form-group
               :label="$t('pageDDNSNetwork.ddnsConfiguration.nsUpdateEnable')"
             >
-              <b-form-checkbox v-model="form.nsUpdateEnabled" switch>
+              <b-form-checkbox
+                v-model="form.nsUpdateEnabled"
+                :disabled="isButtonDisable"
+                switch
+              >
                 <span v-if="form.nsUpdateEnabled">
                   {{ $t('global.status.enabled') }}
                 </span>
@@ -98,7 +108,11 @@
             <b-form-group
               :label="$t('pageDDNSNetwork.ddnsConfiguration.useTSIG')"
             >
-              <b-form-checkbox v-model="form.useTSIG" switch>
+              <b-form-checkbox
+                v-model="form.useTSIG"
+                :disabled="isButtonDisable"
+                switch
+              >
                 <span v-if="form.useTSIG">
                   {{ $t('global.status.enabled') }}
                 </span>
@@ -142,7 +156,7 @@
               class="upload-button"
               type="submit"
               variant="primary"
-              :disabled="!form.useTSIG"
+              :disabled="!form.useTSIG || isButtonDisable"
               @click="onSubmitUpload"
             >
               <icon-upload />
@@ -156,6 +170,15 @@
         </b-button>
       </div>
     </page-section>
+    <b-button
+      type="submit"
+      variant="primary"
+      :disabled="isButtonDisable"
+      @click="handleSubmit"
+    >
+      <icon-save />
+      {{ $t('global.action.save') }}
+    </b-button>
   </b-container>
 </template>
 
@@ -186,6 +209,11 @@ export default {
     tabIndex: {
       type: Number,
       default: 0,
+    },
+    isButtonDisable: {
+      required: true,
+      type: Boolean,
+      default: false,
     },
   },
   data() {

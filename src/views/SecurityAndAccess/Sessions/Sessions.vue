@@ -54,6 +54,7 @@
             <b-form-checkbox
               v-model="tableHeaderCheckboxModel"
               data-test-id="sessions-checkbox-selectAll"
+              :disabled="isButtonDisable"
               :indeterminate="tableHeaderCheckboxIndeterminate"
               @change="onChangeHeaderCheckbox($refs.table)"
             >
@@ -63,6 +64,7 @@
           <template #cell(checkbox)="row">
             <b-form-checkbox
               v-model="row.rowSelected"
+              :disabled="isButtonDisable"
               :data-test-id="`sessions-checkbox-selectRow-${row.index}`"
               @change="toggleSelectRow($refs.table, row.index)"
             >
@@ -77,6 +79,7 @@
               :key="index"
               :value="action.value"
               :title="action.title"
+              :enabled="action.enabled"
               :row-data="row.item"
               :btn-icon-only="false"
               :data-test-id="`sessions-button-disconnect-${row.index}`"
@@ -86,6 +89,7 @@
                 <icon-trashcan
                   v-if="action.value === 'delete'"
                   :data-test-id="`userManagement-tableRowAction-delete-${index}`"
+                  :disabled="isButtonDisable"
                 />
               </template>
             </table-row-action>
@@ -144,6 +148,8 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import SearchFilterMixin, {
   searchFilter,
 } from '@/components/Mixins/SearchFilterMixin';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -245,6 +251,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     filteredRows() {
       return this.searchFilter
         ? this.searchTotalFilteredRows
@@ -258,6 +268,7 @@ export default {
             {
               value: 'delete',
               title: this.$t('pageSessions.action.delete'),
+              enabled: !this.isButtonDisable,
             },
           ],
         };
@@ -337,11 +348,3 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-#table-session-logs {
-  td .btn-link {
-    width: auto !important;
-    color: rgb(1, 70, 159);
-  }
-}
-</style>

@@ -37,6 +37,7 @@
           v-b-modal.generate-csr
           data-test-id="certificates-button-generateCsr"
           variant="link"
+          :disabled="isButtonDisable"
         >
           <icon-add />
           {{ $t('pageCertificates.generateCsr') }}
@@ -113,6 +114,8 @@ import Alert from '@/components/Global/Alert';
 
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Certificates',
@@ -167,6 +170,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     certificates() {
       return this.$store.getters['certificates/allCertificates'];
     },

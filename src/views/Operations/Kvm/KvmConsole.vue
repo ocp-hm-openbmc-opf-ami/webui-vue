@@ -28,13 +28,14 @@
             v-if="isFullWindow && !isPopup && !isConsoleWindowOpen"
             variant="link"
             type="button"
+            :disabled="isButtonDisable"
             @click="openConsoleWindow()"
           >
             <icon-launch />
             {{ $t('pageKvm.openNewTab') }}
           </b-button>
           <div class="serverPowerBtn">
-            <b-dropdown variant="link">
+            <b-dropdown variant="link" :disabled="isButtonDisable">
               <template #button-content>
                 <span class="responsive-text">
                   <b-icon icon="power"></b-icon>
@@ -82,6 +83,8 @@ import DraggableDivVue from '@/components/SoftKeyboard/draggableDiv';
 import '@/components/SoftKeyboard/softKeyboard.css';
 import { throttle } from 'lodash';
 import { mapState } from 'vuex';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 const Connecting = 0;
 const Connected = 1;
@@ -131,6 +134,10 @@ export default {
   },
   computed: {
     ...mapState('authentication', ['consoleWindow']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     isPopup() {
       return this.$route.query.popup === 'true';
     },

@@ -53,6 +53,7 @@
           <b-button
             variant="primary"
             type="submit"
+            :disabled="isButtonDisable"
             data-test-id="power-button-savePowerCapValue"
           >
             <icon-save />
@@ -72,6 +73,7 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import { requiredIf, between } from 'vuelidate/lib/validators';
 import { mapGetters } from 'vuex';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
 
 export default {
   name: 'Power',
@@ -91,6 +93,10 @@ export default {
     ...mapGetters({
       powerConsumptionValue: 'powerControl/powerConsumptionValue',
     }),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
 
     /**
       Computed property isPowerCapFieldEnabled is used to enable or disable the input field.

@@ -4,7 +4,7 @@
       <b-col lg="6">
         <div class="text-right">
           <b-button
-            :disabled="interfaceId === 'hostusb0'"
+            :disabled="interfaceId === 'hostusb0' || isButtonDisable"
             variant="primary"
             @click="initDnsModal()"
           >
@@ -65,6 +65,11 @@ export default {
     tabIndex: {
       type: Number,
       default: 0,
+    },
+    isButtonDisable: {
+      required: true,
+      type: Boolean,
+      default: false,
     },
   },
   data() {

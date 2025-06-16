@@ -12,6 +12,7 @@
               v-model="sendHostNameEnabled"
               data-test-id="ddns-toggle-host-name"
               switch
+              :disabled="isButtonDisable"
               @change="changeHostNameEnabled"
             >
               <span v-if="sendHostNameEnabled">
@@ -29,6 +30,7 @@
               v-model="sendNsupdateEnabled"
               data-test-id="ddns-toggle-ns-update"
               switch
+              :disabled="isButtonDisable"
               @change="changeNsupdateEnabled"
             >
               <span v-if="sendNsupdateEnabled">
@@ -79,12 +81,17 @@
               id="Static-Host-Name"
               v-model="StaticHostName"
               type="text"
-              :disabled="hostNameSetting === 'Auto'"
+              :disabled="hostNameSetting === 'Auto' || isButtonDisable"
             />
           </b-form-group>
         </b-col>
       </b-row>
-      <b-button type="submit" variant="primary" @click="saveConfigurations">
+      <b-button
+        type="submit"
+        variant="primary"
+        :disabled="isButtonDisable"
+        @click="saveConfigurations"
+      >
         <icon-save />
         {{ $t('global.action.save') }}
       </b-button>
@@ -105,6 +112,13 @@ export default {
     IconSave,
   },
   mixins: [BVToastMixin, LoadingBarMixin],
+  props: {
+    isButtonDisable: {
+      required: true,
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       ipPriorityType: [

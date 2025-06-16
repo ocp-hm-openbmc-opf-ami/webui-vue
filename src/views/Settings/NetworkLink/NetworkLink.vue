@@ -47,6 +47,7 @@
                     id="autoNegotiation"
                     v-model="form.AutoNeg"
                     data-test-id="networklink-autoNegotiation"
+                    :disabled="isButtonDisable"
                     switch
                   >
                   </b-form-checkbox>
@@ -116,7 +117,7 @@
               form="form-networLink"
               type="submit"
               variant="primary"
-              :disabled="disabledNetworkLinkStatus"
+              :disabled="disabledNetworkLinkStatus || isButtonDisable"
               @click="onSave"
             >
               <icon-save />
@@ -137,6 +138,8 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import _ from 'lodash';
 import { mapState } from 'vuex';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   components: {
     PageTitle,
@@ -175,6 +178,10 @@ export default {
   },
   computed: {
     ...mapState('networkLink', ['interfaceData']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     enabledinputfield() {
       if (!this.form.enableBonding || this.checkBondStatus) {
         return true;

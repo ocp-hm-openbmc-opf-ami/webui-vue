@@ -166,6 +166,7 @@
             class="mt-2"
             type="submit"
             variant="primary"
+            :disabled="isButtonDisable"
             @click="handleDownload"
             ><icon-download />
             {{ $t('global.action.download') }}
@@ -181,6 +182,8 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import IconDownload from '@carbon/icons-vue/es/document--download/20';
 import { mapState } from 'vuex';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   name: 'Backup',
   components: { IconDownload },
@@ -200,6 +203,10 @@ export default {
   },
   computed: {
     ...mapState('backupAndRestore', ['backupConfigValues']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
   },
   watch: {
     backupConfigValues() {

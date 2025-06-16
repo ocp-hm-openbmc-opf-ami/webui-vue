@@ -35,7 +35,7 @@
             </b-button>
             <b-button
               variant="primary"
-              :disabled="items.length >= 64"
+              :disabled="items.length >= 64 || isButtonDisable"
               @click="initFireWallModal()"
             >
               <icon-add />
@@ -129,6 +129,8 @@ import BVPaginationMixin, {
   perPage,
 } from '@/components/Mixins/BVPaginationMixin';
 import { mapState } from 'vuex';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -226,6 +228,10 @@ export default {
   },
   computed: {
     ...mapState('fireWall', ['FireWallData']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
     filteredRows() {
       return this.searchFilter
         ? this.searchTotalFilteredRows

@@ -56,6 +56,7 @@
           <b-form-radio
             v-model="form.configurationSelected"
             value="manual"
+            :disabled="isButtonDisable"
             data-test-id="dateTime-radio-configureManual"
           >
             {{ $t('pageDateTime.form.manual') }}
@@ -72,7 +73,7 @@
                     id="input-manual-date"
                     v-model="form.manual.date"
                     :state="getValidationState($v.form.manual.date)"
-                    :disabled="ntpOptionSelected"
+                    :disabled="ntpOptionSelected || isButtonDisable"
                     data-test-id="dateTime-input-manualDate"
                     class="form-control-with-button"
                     @blur="$v.form.manual.date.$touch()"
@@ -98,7 +99,7 @@
                       $t('global.calendar.useCursorKeysToNavigateCalendarDates')
                     "
                     :title="$t('global.calendar.selectDate')"
-                    :disabled="ntpOptionSelected"
+                    :disabled="ntpOptionSelected || isButtonDisable"
                     button-variant="link"
                     aria-controls="input-manual-date"
                   >
@@ -123,7 +124,7 @@
                     id="input-manual-time"
                     v-model="form.manual.time"
                     :state="getValidationState($v.form.manual.time)"
-                    :disabled="ntpOptionSelected"
+                    :disabled="ntpOptionSelected || isButtonDisable"
                     data-test-id="dateTime-input-manualTime"
                     @blur="$v.form.manual.time.$touch()"
                   />
@@ -157,7 +158,7 @@
                     id="input-ntp-1"
                     v-model="form.ntp.firstAddress"
                     :state="getValidationState($v.form.ntp.firstAddress)"
-                    :disabled="manualOptionSelected"
+                    :disabled="manualOptionSelected || isButtonDisable"
                     data-test-id="dateTime-input-ntpServer1"
                     @input="$v.form.ntp.firstAddress.$touch()"
                   />
@@ -182,7 +183,7 @@
                     id="input-ntp-2"
                     v-model="form.ntp.secondAddress"
                     :state="getValidationState($v.form.ntp.secondAddress)"
-                    :disabled="manualOptionSelected"
+                    :disabled="manualOptionSelected || isButtonDisable"
                     data-test-id="dateTime-input-ntpServer2"
                     @input="$v.form.ntp.secondAddress.$touch()"
                   />
@@ -204,7 +205,7 @@
                     id="input-ntp-3"
                     v-model="form.ntp.thirdAddress"
                     :state="getValidationState($v.form.ntp.thirdAddress)"
-                    :disabled="manualOptionSelected"
+                    :disabled="manualOptionSelected || isButtonDisable"
                     data-test-id="dateTime-input-ntpServer3"
                     @input="$v.form.ntp.thirdAddress.$touch()"
                   />
@@ -220,6 +221,7 @@
           <b-button
             variant="primary"
             type="submit"
+            :disabled="isButtonDisable"
             data-test-id="dateTime-button-saveSettings"
           >
             <icon-save />
@@ -245,6 +247,8 @@ import timezone from '@/locales/time-zone.json';
 import { mapState } from 'vuex';
 import { requiredIf, helpers } from 'vuelidate/lib/validators';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 const isoDateRegex = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
 const isoTimeRegex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
@@ -326,6 +330,10 @@ export default {
   },
   computed: {
     ...mapState('dateTime', ['ntpServers', 'isNtpProtocolEnabled']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     bmcTime() {
       return this.$store.getters['global/bmcTime'];
     },

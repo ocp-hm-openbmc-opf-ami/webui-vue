@@ -21,6 +21,7 @@
             variant="primary"
             class="mb-2"
             data-test-id="alertDestination-button-sendTestTrap"
+            :disabled="isButtonDisable"
             @click="initModalSetCapability()"
           >
             <icon-add />
@@ -96,6 +97,8 @@ import SearchFilterMixin, {
 import Search from '@/components/Global/Search';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   name: 'PowerStatistics',
   components: {
@@ -166,6 +169,10 @@ export default {
       return this.searchFilter
         ? this.searchTotalFilteredRows
         : this.allStatistics.length;
+    },
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
     },
   },
   methods: {

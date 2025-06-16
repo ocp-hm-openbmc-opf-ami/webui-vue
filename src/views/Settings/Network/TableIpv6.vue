@@ -10,7 +10,7 @@
         data-test-id="enableIpv6-network"
         switch
         class="network_header_enable"
-        :disabled="interfaceId === 'hostusb0'"
+        :disabled="interfaceId === 'hostusb0' || isButtonDisable"
         @change="ipv6StatusUpdate"
       >
       </b-form-checkbox>
@@ -32,7 +32,11 @@
                 v-model="useDomainNameState"
                 data-test-id="DHCPv6-switch-useDomainName"
                 switch
-                :disabled="interfaceId === 'hostusb0' || !ipv6SettingsStatus"
+                :disabled="
+                  interfaceId === 'hostusb0' ||
+                  !ipv6SettingsStatus ||
+                  isButtonDisable
+                "
                 @change="changeDhcpv6DomainNameState"
               >
                 <span v-if="useDomainNameState">
@@ -50,7 +54,11 @@
               <b-form-checkbox
                 v-model="useDnsState"
                 switch
-                :disabled="interfaceId === 'hostusb0' || !ipv6SettingsStatus"
+                :disabled="
+                  interfaceId === 'hostusb0' ||
+                  !ipv6SettingsStatus ||
+                  isButtonDisable
+                "
                 @change="changeDhcpv6DnsState"
               >
                 <span v-if="useDnsState">
@@ -68,7 +76,11 @@
               <b-form-checkbox
                 v-model="useNtpState"
                 switch
-                :disabled="interfaceId === 'hostusb0' || !ipv6SettingsStatus"
+                :disabled="
+                  interfaceId === 'hostusb0' ||
+                  !ipv6SettingsStatus ||
+                  isButtonDisable
+                "
                 @change="changeDhcpv6NtpState"
               >
                 <span v-if="useNtpState">
@@ -91,7 +103,8 @@
             :disabled="
               ipv6BtnDisable ||
               interfaceId === 'hostusb0' ||
-              !ipv6SettingsStatus
+              !ipv6SettingsStatus ||
+              isButtonDisable
             "
             variant="primary"
             @click="initAddIpv6Address()"
@@ -106,7 +119,11 @@
               <b-form-checkbox
                 v-model="globalNetworkSettings[tabIndex].ipv6DhcpEnabled"
                 switch
-                :disabled="interfaceId === 'hostusb0' || !ipv6SettingsStatus"
+                :disabled="
+                  interfaceId === 'hostusb0' ||
+                  !ipv6SettingsStatus ||
+                  isButtonDisable
+                "
                 @change="changeDhcpIpv6State"
               >
                 <span>
@@ -175,6 +192,11 @@ export default {
     ipv6IndexValue: {
       type: Object,
       default: () => {},
+    },
+    isButtonDisable: {
+      required: true,
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -320,20 +342,21 @@ export default {
               value: 'edit',
               title: this.$t('pageNetwork.table.editIpv6'),
               enabled:
-                this.ethernetData[this.tabIndex].DHCPv6.OperatingMode ==
+                (this.ethernetData[this.tabIndex].DHCPv6.OperatingMode ==
                 'Disabled'
                   ? true
-                  : false,
+                  : false) && !this.isButtonDisable,
             },
             {
               value: 'delete',
               title: this.$t('pageNetwork.table.deleteIpv6'),
               enabled:
                 this.form.ipv6TableItems.length > 1 &&
-                this.ethernetData[this.tabIndex].DHCPv6.OperatingMode ==
-                  'Disabled'
+                (this.ethernetData[this.tabIndex].DHCPv6.OperatingMode ==
+                'Disabled'
                   ? true
-                  : false,
+                  : false) &&
+                !this.isButtonDisable,
             },
           ],
         };

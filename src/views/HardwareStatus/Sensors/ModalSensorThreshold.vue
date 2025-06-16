@@ -178,7 +178,13 @@
         <icon-cancel />
         {{ $t('global.action.cancel') }}
       </b-button>
-      <b-button form="form-ipv6" type="submit" variant="primary" @click="onOk">
+      <b-button
+        form="form-ipv6"
+        type="submit"
+        variant="primary"
+        :disabled="isButtonDisable"
+        @click="onOk"
+      >
         <icon-save />
         {{ $t('global.action.save') }}
       </b-button>
@@ -191,6 +197,8 @@ import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { requiredIf } from 'vuelidate/lib/validators';
 import IconSave from '@carbon/icons-vue/es/save/20';
 import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -225,6 +233,12 @@ export default {
         lowerFatal: '',
       },
     };
+  },
+  computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
   },
   watch: {
     modalSuccess: function (value) {

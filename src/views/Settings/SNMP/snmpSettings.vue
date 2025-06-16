@@ -16,6 +16,7 @@
             variant="primary"
             class="mr-2"
             data-test-id="alertDestination-button-sendTestTrap"
+            :disabled="isButtonDisable"
             @click="sendTestTrap"
           >
             <icon-send />
@@ -24,6 +25,7 @@
           <b-button
             variant="primary"
             data-test-id="snmp-button-addSubscrition"
+            :disabled="isButtonDisable"
             @click="initModalSNMP(null)"
           >
             <icon-add />
@@ -62,6 +64,8 @@ import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import ModalSnmp from './ModalSnmp.vue';
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
 import IconSend from '@carbon/icons-vue/es/send--alt--filled/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import snmpSubscription from './snmpSubscription.vue';
@@ -83,6 +87,12 @@ export default {
       licenseName: 'SNMP',
       snmpData: null,
     };
+  },
+  computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
   },
   created() {
     this.startLoader();

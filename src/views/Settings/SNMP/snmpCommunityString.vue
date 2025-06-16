@@ -7,6 +7,7 @@
             variant="primary"
             class="mr-2"
             data-test-id="snmp-button-addCommunityString"
+            :disabled="isButtonDisable"
             @click="initModalCommunityString(null)"
           >
             <icon-add />
@@ -70,6 +71,8 @@ import IconEdit from '@carbon/icons-vue/es/edit/20';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import ModalCommunityString from './ModalCommunityString.vue';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'SnmpSubscription',
@@ -134,6 +137,10 @@ export default {
           ],
         };
       });
+    },
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
     },
   },
   methods: {

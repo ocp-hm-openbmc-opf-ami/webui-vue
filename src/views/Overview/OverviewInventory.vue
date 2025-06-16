@@ -13,6 +13,7 @@
               v-model="systems.locationIndicatorActive"
               data-test-id="overviewInventory-checkbox-identifyLed"
               switch
+              :disabled="isButtonDisable"
               @change="toggleIdentifyLedSwitch"
             >
               <span v-if="systems.locationIndicatorActive">
@@ -63,6 +64,8 @@
 import OverviewCard from './OverviewCard';
 import { BIcon } from 'bootstrap-vue';
 import { mapState } from 'vuex';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Inventory',
@@ -87,6 +90,10 @@ export default {
         return systemData ? systemData : {};
       },
     }),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
     greenLed() {
       return this.$store.getters['system/getGreenLedStatus'];
     },

@@ -23,6 +23,7 @@
             variant="primary"
             class="d-block mt-5"
             data-test-id="rebootBmc-button-reboot"
+            :disabled="isButtonDisable"
             @click="onClick"
           >
             <icon-reset />
@@ -40,6 +41,8 @@ import PageSection from '@/components/Global/PageSection';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import IconReset from '@carbon/icons-vue/es/reset/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'RebootBmc',
@@ -50,6 +53,10 @@ export default {
     next();
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     lastBmcRebootTime() {
       return this.$store.getters['controls/lastBmcRebootTime'];
     },

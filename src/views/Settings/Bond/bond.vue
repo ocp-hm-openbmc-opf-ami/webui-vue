@@ -96,7 +96,7 @@
               form="form-bond"
               type="submit"
               variant="primary"
-              :disabled="bondInterfaceOptions.length <= 1"
+              :disabled="bondInterfaceOptions.length <= 1 || isButtonDisable"
               @click="onSave"
             >
               <icon-save />
@@ -116,6 +116,8 @@ import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
 import { requiredIf } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   components: {
     PageTitle,
@@ -153,6 +155,10 @@ export default {
     },
     enabledNetworkBond() {
       return this.$store.getters['network/getNetworkBond'];
+    },
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
     },
   },
   watch: {

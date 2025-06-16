@@ -349,6 +349,7 @@
             <b-btn
               variant="primary"
               type="submit"
+              :disabled="isButtonDisable"
               data-test-id="videoTrigger-button-saveSettings"
               @click="onOk"
             >
@@ -377,6 +378,13 @@ export default {
   name: 'Videotrigger',
   components: { IconCalendar, IconSave },
   mixins: [LoadingBarMixin, BVToastMixin, VuelidateMixin],
+  props: {
+    isButtonDisable: {
+      required: true,
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       locale: this.$store.getters['global/languagePreference'],

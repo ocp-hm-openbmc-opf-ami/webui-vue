@@ -21,6 +21,7 @@
             variant="primary"
             class="mb-2"
             data-test-id="alertDestination-button-sendTestTrap"
+            :disabled="isButtonDisable"
             @click="initModalNewPolicy(null)"
           >
             <icon-add />
@@ -58,6 +59,7 @@
                 <template #icon>
                   <icon-edit
                     v-if="action.value === 'edit'"
+                    :disabled="isButtonDisable"
                     :data-test-id="`snmp-tableRowAction-edit-${index}`"
                   />
                   <icon-trashcan
@@ -123,6 +125,8 @@ import Search from '@/components/Global/Search';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   name: 'NMConfiguration',
   components: {
@@ -196,6 +200,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     allNmPolicies() {
       return this.$store.getters['nmConfiguration/nodeManagerPolicies'].map(
         (log) => {
@@ -205,13 +213,19 @@ export default {
               {
                 value: 'edit',
                 enabled:
-                  log.domain === 'CPUPerformance' ? false : !log.defaultPolicy,
+                  (log.domain === 'CPUPerformance'
+                    ? false
+                    : !log.defaultPolicy) &&
+                  this.userPrivilege === privilegesId.admin,
                 title: this.$t('pageNodeManager.table.edit'),
               },
               {
                 value: 'delete',
                 enabled:
-                  log.domain === 'CPUPerformance' ? false : !log.defaultPolicy,
+                  (log.domain === 'CPUPerformance'
+                    ? false
+                    : !log.defaultPolicy) &&
+                  this.userPrivilege === privilegesId.admin,
                 title: this.$tc('pageNodeManager.table.delete'),
               },
             ],

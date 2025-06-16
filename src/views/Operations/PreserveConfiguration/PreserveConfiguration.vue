@@ -143,7 +143,12 @@
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
-          <b-button type="submit" variant="primary" @click="SaveConfig">
+          <b-button
+            type="submit"
+            variant="primary"
+            :disabled="isButtonDisable"
+            @click="SaveConfig"
+          >
             <icon-save />
             {{ $t('global.action.save') }}
           </b-button>
@@ -159,6 +164,8 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import { mapState } from 'vuex';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'PreserveConfig',
@@ -190,6 +197,10 @@ export default {
   },
   computed: {
     ...mapState('preserveConfig', ['preserveConfigValues']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
   },
   watch: {
     preserveConfigValues() {

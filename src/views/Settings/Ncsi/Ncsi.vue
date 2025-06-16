@@ -111,6 +111,7 @@
         class="mt-2"
         variant="primary"
         type="submit"
+        :disabled="isButtonDisable"
         data-test-id="ncsi-button-savencsiMode"
         @click="saveNcsiConfiguration"
       >
@@ -128,6 +129,8 @@ import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { required } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   name: 'Ncsi',
   components: { PageTitle, IconSave },
@@ -152,6 +155,10 @@ export default {
   },
   computed: {
     ...mapState('ncsi', ['ncsiData', 'ncsiInterface']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
   },
   watch: {
     ncsiInterface: function (value) {

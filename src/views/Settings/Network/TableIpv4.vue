@@ -10,7 +10,7 @@
         data-test-id="enableIpv4-network"
         switch
         class="network_header_enable"
-        :disabled="interfaceId === 'hostusb0'"
+        :disabled="interfaceId === 'hostusb0' || isButtonDisable"
         @change="ipv4StatusUpdate"
       >
       </b-form-checkbox>
@@ -32,7 +32,11 @@
                 v-model="useDomainNameState"
                 data-test-id="DHCPv4-switch-useDomainName"
                 switch
-                :disabled="interfaceId === 'hostusb0' || !ipv4SettingsStatus"
+                :disabled="
+                  interfaceId === 'hostusb0' ||
+                  !ipv4SettingsStatus ||
+                  isButtonDisable
+                "
                 @change="changeDhcpv4DomainNameState"
               >
                 <span v-if="useDomainNameState">
@@ -51,7 +55,11 @@
                 v-model="useDnsState"
                 data-test-id="DHCPv4-switch-useDns"
                 switch
-                :disabled="interfaceId === 'hostusb0' || !ipv4SettingsStatus"
+                :disabled="
+                  interfaceId === 'hostusb0' ||
+                  !ipv4SettingsStatus ||
+                  isButtonDisable
+                "
                 @change="changeDhcpv4DnsState"
               >
                 <span v-if="useDnsState">
@@ -70,7 +78,11 @@
                 v-model="useNtpState"
                 data-test-id="DHCPv4-switch-useNtp"
                 switch
-                :disabled="interfaceId === 'hostusb0' || !ipv4SettingsStatus"
+                :disabled="
+                  interfaceId === 'hostusb0' ||
+                  !ipv4SettingsStatus ||
+                  isButtonDisable
+                "
                 @change="changeDhcpv4NtpState"
               >
                 <span v-if="useNtpState">
@@ -94,7 +106,11 @@
               <b-form-checkbox
                 v-model="globalNetworkSettings[tabIndex].ipv4DhcpEnabled"
                 switch
-                :disabled="interfaceId === 'hostusb0' || !ipv4SettingsStatus"
+                :disabled="
+                  interfaceId === 'hostusb0' ||
+                  !ipv4SettingsStatus ||
+                  isButtonDisable
+                "
                 @change="changeDhcpIpv4State"
               >
                 <span>
@@ -153,6 +169,11 @@ export default {
     tabIndex: {
       type: Number,
       default: 0,
+    },
+    isButtonDisable: {
+      required: true,
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -280,9 +301,9 @@ export default {
               value: 'edit',
               title: this.$t('pageNetwork.table.editIpv4'),
               enabled:
-                this.ethernetData[this.tabIndex].DHCPv4.DHCPEnabled == false
+                (this.ethernetData[this.tabIndex].DHCPv4.DHCPEnabled == false
                   ? true
-                  : false,
+                  : false) && !this.isButtonDisable,
             },
           ],
         };

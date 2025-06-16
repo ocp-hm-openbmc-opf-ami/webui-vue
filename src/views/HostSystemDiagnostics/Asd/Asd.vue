@@ -15,6 +15,7 @@
             id="asdServer"
             v-model="asdServer"
             switch
+            :disabled="isButtonDisable"
             @change="changeAsdServer"
           >
             <span v-if="asdServer">
@@ -73,6 +74,8 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
 import UploadFile from '@carbon/icons-vue/es/upload/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -81,6 +84,10 @@ export default {
   },
   mixins: [LoadingBarMixin, BVToastMixin, DataFormatterMixin],
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
     asdServer: {
       get() {
         return this.$store.getters['asd/asdServerEnabled'];
