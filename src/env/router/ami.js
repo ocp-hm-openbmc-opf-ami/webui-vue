@@ -223,6 +223,17 @@ const routes = [
     ],
   },
 ];
+if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/gpgpu',
+    name: 'gpgpu',
+    component: () =>
+      import(/* webpackChunkName: "Gpgpu" */ '@/views/Settings/Gpgpu'),
+    meta: {
+      title: i18n.t('appPageTitle.gpgpu'),
+    },
+  });
+}
 if (process.env.VUE_APP_ONETREE_AMD_ADDC_ENABLED == 'true') {
   routes[2].children.push({
     path: '/host-system-diagnostics/addc',
