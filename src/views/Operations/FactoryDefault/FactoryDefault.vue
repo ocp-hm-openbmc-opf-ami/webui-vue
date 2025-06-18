@@ -185,10 +185,10 @@
         <b-row class="mt-3">
           <b-col sm="6" md="3">
             <div class="d-flex align-items-center">
-              <b-form-checkbox v-model="checkboxes.ubootEnv" disabled>
+              <b-form-checkbox v-model="checkboxes.serviceManager" disabled>
               </b-form-checkbox>
               <span class="ml-2">
-                {{ $t('PageFactoryDefault.ubootEnv') }}
+                {{ $t('PageFactoryDefault.serviceManager') }}
               </span>
             </div>
           </b-col>
@@ -196,10 +196,10 @@
         <b-row class="mt-3">
           <b-col sm="6" md="3">
             <div class="d-flex align-items-center">
-              <b-form-checkbox v-model="checkboxes.serviceManager" disabled>
+              <b-form-checkbox v-model="checkboxes.ubootEnv" disabled>
               </b-form-checkbox>
               <span class="ml-2">
-                {{ $t('PageFactoryDefault.serviceManager') }}
+                {{ $t('PageFactoryDefault.ubootEnv') }}
               </span>
             </div>
           </b-col>
@@ -254,8 +254,8 @@ export default {
         snmp: '',
         sol: '',
         sysLog: '',
-        ubootEnv: '',
         serviceManager: '',
+        ubootEnv: '',
       },
     };
   },
@@ -298,8 +298,8 @@ export default {
         snmp: config.SNMP,
         sol: config.SOL,
         sysLog: config.SYSLOG,
-        ubootEnv: config.U_BOOT_ENV,
         serviceManager: config.ServiceManager,
+        ubootEnv: config.U_BOOT_ENV,
       };
     },
     onRestoreToDefaults() {

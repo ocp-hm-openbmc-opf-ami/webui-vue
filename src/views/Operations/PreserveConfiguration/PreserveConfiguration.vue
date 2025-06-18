@@ -129,15 +129,15 @@
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
-          <b-form-checkbox v-model="checkboxes.ubootEnv">
-            {{ $t('pagePreserveConfiguration.ubootEnv') }}
+          <b-form-checkbox v-model="checkboxes.serviceManager">
+            {{ $t('pagePreserveConfiguration.serviceManager') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
-          <b-form-checkbox v-model="checkboxes.serviceManager">
-            {{ $t('pagePreserveConfiguration.serviceManager') }}
+          <b-form-checkbox v-model="checkboxes.ubootEnv">
+            {{ $t('pagePreserveConfiguration.ubootEnv') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
@@ -190,8 +190,8 @@ export default {
         snmp: '',
         sol: '',
         sysLog: '',
-        ubootEnv: '',
         serviceManager: '',
+        ubootEnv: '',
       },
     };
   },
@@ -240,8 +240,8 @@ export default {
         snmp: config.SNMP,
         sol: config.SOL,
         sysLog: config.SYSLOG,
-        ubootEnv: config.U_BOOT_ENV,
         serviceManager: config.ServiceManager,
+        ubootEnv: config.U_BOOT_ENV,
       };
     },
     SaveConfig() {
@@ -261,8 +261,8 @@ export default {
       saveConfigValues.snmp = this.checkboxes.snmp;
       saveConfigValues.sol = this.checkboxes.sol;
       saveConfigValues.sysLog = this.checkboxes.sysLog;
-      saveConfigValues.ubootEnv = this.checkboxes.ubootEnv;
       saveConfigValues.serviceManager = this.checkboxes.serviceManager;
+      saveConfigValues.ubootEnv = this.checkboxes.ubootEnv;
       this.startLoader();
       this.$store
         .dispatch('preserveConfig/savePreserveConfig', saveConfigValues)
