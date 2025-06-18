@@ -18,8 +18,11 @@
                 :section-title="$t('pagePolicies.servicesPolicies')"
               >
                 <b-row v-if="!modifySSHPolicyDisabled" class="setting-section">
-                  <b-col class="d-flex align-items-center">
-                    <dl class="mr-4 w-75">
+                  <b-col
+                    lg="8"
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <dl class="mt-3 mr-4 w-75">
                       <dt>{{ $t('pagePolicies.ssh') }}</dt>
                       <dd>
                         {{ $t('pagePolicies.sshDescription') }}

@@ -103,7 +103,7 @@ const PoliciesStore = {
         .get('/redfish/v1/Managers/bmc/NetworkProtocol')
         .then((response) => {
           const sshProtocol = response.data?.SSH?.ProtocolEnabled;
-          const ipmiProtocol = response.data?.IPMI?.ProtocolEnabled;
+          const ipmiProtocol = !response.data?.Oem?.OpenBmc?.IPMI?.Masked;
           const ssdpProtocol = response.data?.SSDP?.ProtocolEnabled;
           const ssdpPortValue = response.data?.SSDP?.Port;
           commit('setSshProtocolEnabled', sshProtocol);
@@ -211,8 +211,12 @@ const PoliciesStore = {
     async saveIpmiProtocolState({ commit }, protocolEnabled) {
       commit('setIpmiProtocolEnabled', protocolEnabled);
       const ipmi = {
-        IPMI: {
-          ProtocolEnabled: protocolEnabled,
+        Oem: {
+          OpenBmc: {
+            IPMI: {
+              Masked: !protocolEnabled,
+            },
+          },
         },
       };
       return await api
