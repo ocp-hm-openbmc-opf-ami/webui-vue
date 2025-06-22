@@ -2949,7 +2949,8 @@
                 "ipv6": "IPv6",
                 "both": "Both",
                 "networkType": "Network Type",
-                "preLoad":"PreLoad"
+                "preLoad":"PreLoad",
+                "ipVersion": "IP Version"
             }
         },
         "toast": {

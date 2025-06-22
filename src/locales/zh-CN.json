@@ -2938,7 +2938,7 @@
                 "all": "全部",
                 "target": "目标",
                 "unspecified": "未指定",
-		"deleteConfirmMessage": "您确定要删除该记录吗？此操作无法撤消。",
+		        "deleteConfirmMessage": "您确定要删除该记录吗？此操作无法撤消。",
                 "deleteFireWall": "删除 |删除 ",
                 "endDateCanNotBeLessThanStartDate": "结束日期不能早于开始日期",
                 "endTimeCanNotBeEqualToStartTime": "结束时间不能早于开始时间",
@@ -2948,7 +2948,8 @@
                 "ipv6": "IPv6",
                 "both": "全部",
                 "networkType": "网络类型",
-                "preLoad":"预加载"
+                "preLoad":"预加载",
+                "ipVersion": "IP版本"
             }
         },
         "toast": {

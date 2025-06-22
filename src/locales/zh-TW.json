@@ -2948,7 +2948,8 @@
                 "ipv6": "IPv6",
                 "both": "兩個都",
                 "networkType": "網路類型",
-                "preLoad":"預先載入"
+                "preLoad":"預先載入",
+                "ipVersion": "IP版本"
             }
         },
         "toast": {
