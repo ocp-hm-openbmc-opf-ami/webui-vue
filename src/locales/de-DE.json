@@ -191,7 +191,8 @@
         "radius":"RADIUS",
         "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
         "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
-        "gpgpu": "@:appPageTitle.gpgpu"
+        "gpgpu": "@:appPageTitle.gpgpu",
+        "advancedLogSettings":"@:appPageTitle.advancedLogSettings"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -258,7 +259,8 @@
         "radius": "RADIUS",
         "amdRemoteDebug": "Remote-Debugging",
         "ipmiEventLog": "IPMI -Ereignisprotokolle",
-        "gpgpu": "GPGPU"
+        "gpgpu": "GPGPU",
+        "advancedLogSettings":"Erweiterte Protokolleinstellunge"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM-Konfiguration",
@@ -3176,6 +3178,34 @@
             "errorGettingFpgaSensorInfo": "Fehler beim Abrufen der FPGA-Sensorinformationen",
             "errorGettingBaseBoardInfo": "Fehler beim Abrufen der BaseBoard-Informationen",
             "errorGettingBaseBoardSensorInfo": "Fehler beim Abrufen der BaseBoard-Sensorinformationen"
+        }
+    },
+    "advancedLogSettings":{
+        "systemLog": "Systemprotokoll",
+        "localLog": "Lokales Protokoll",
+        "remoteLog": "Remote-Protokoll",
+        "portType": "Porttyp",
+        "udp": "UDP",
+        "tcp": "TCP",
+        "fileSize": "Dateigröße",
+        "rotateCount": "Anzahl drehen",
+        "remotelogserver": "Remote-Protokollserver",
+        "remoteserverport": "Remote-Server-Port",
+        "enableauditlog": "Aktivieren Sie das Audit-Protokoll",
+        "caCertificateFile": "CA-Zertifikatdatei",
+        "certificatefile": "Zertifikatsdatei",
+        "privateKey": "privater Schlüssel",
+        "advancedLogValueLimits": "Bitte geben Sie Werte zwischen %{min} und %{max} ein.",
+        "invalidIPAddress": "Ungültige IP-Adresse",
+        "cacertPEM": "Cacert PEM-Zertifikat",
+        "serverCRT": "Server-CRT-Zertifikat",
+        "serverKey": "Serverschlüsselzertifikat",
+        "incorrectAdvancedCertificateFileType": "Die Datei weist keinen korrekten Zertifikatstyp auf.",
+        "toast": {
+            "successSaveAdvancedLogsSettings": "Erweiterte Protokolleinstellungen erfolgreich gespeichert.",
+            "errorAdvancedAddCertificate": "Fehler beim Hinzufügen des Zertifikats.",
+            "successCertificateUpload": "%{certificate} erfolgreich hinzugefügt.",
+            "errorGettingVideoLog": "Fehler beim Speichern der erweiterten Protokolleinstellungen."
         }
     },
     "countries": {

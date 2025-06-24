@@ -61,6 +61,7 @@ import RadiusStore from './modules/SecurityAndAccess/RadiusStore';
 import AmdRemoteDebugStore from './modules/HostSystemDiagnostics/AmdRemoteDebugStore';
 import IPMIEventLogStore from './modules/Logs/IPMIEventLogStore';
 import Gpu from './modules/Settings/GpuStore';
+import AdvancedLogSettingsStore from './modules/Settings/AdvancedLogSettingsStore';
 
 Vue.use(Vuex);
 
@@ -129,5 +130,6 @@ export default new Vuex.Store({
     amdRemoteDebug: AmdRemoteDebugStore,
     ipmiEventLog: IPMIEventLogStore,
     gpu: Gpu,
+    advancedLog: AdvancedLogSettingsStore,
   },
 });

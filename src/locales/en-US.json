@@ -191,7 +191,8 @@
         "radius":"RADIUS",
         "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
         "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
-        "gpgpu": "@:appPageTitle.gpgpu"
+        "gpgpu": "@:appPageTitle.gpgpu",
+        "advancedLogSettings":"@:appPageTitle.advancedLogSettings"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -258,7 +259,8 @@
         "radius": "RADIUS",
         "amdRemoteDebug": "Remote Debug",
         "ipmiEventLog": "IPMI Event Logs",
-        "gpgpu": "GPGPU"
+        "gpgpu": "GPGPU",
+        "advancedLogSettings":"Advanced Log Settings"
 
     },
     "pageNodeManager": {
@@ -3180,6 +3182,34 @@
             "errorGettingFpgaSensorInfo": "Error in getting FPGA Sensors Information",
             "errorGettingBaseBoardInfo": "Error in getting BaseBoard Information",
             "errorGettingBaseBoardSensorInfo": "Error in getting BaseBoard Sensors Information"
+        }
+    },
+    "advancedLogSettings":{
+        "systemLog": "System Log",
+        "localLog": "Local Log",
+        "remoteLog": "Remote Log",
+        "portType": "Port Type",
+        "udp": "UDP",
+        "tcp": "TCP",
+        "fileSize": "File Size",
+        "rotateCount": "Rotate Count",
+        "remotelogserver": "Remote Log Server",
+        "remoteserverport": "Remote Server Port",
+        "enableauditlog": "Enable Audit Log",
+        "caCertificateFile": "CA Certificate File",
+        "certificatefile": "Certificate File",
+        "privateKey": "Private key",
+        "advancedLogValueLimits": "Kindly enter the Values between %{min} to %{max}.",
+        "invalidIPAddress": "Invalid IP Address",        
+        "cacertPEM": "Cacert PEM Certificate",
+        "serverCRT": "Server CRT Certificate",
+        "serverKey": "Server Key Certificate",
+        "incorrectAdvancedCertificateFileType": "File is not a correct Certificate Type.",
+        "toast": {
+            "successSaveAdvancedLogsSettings": "Successfully Saved Advanced Log Settings.",
+            "errorAdvancedAddCertificate": "Error in adding certificate.",
+            "successCertificateUpload": "Successfully added %{certificate}.",
+            "errorGettingVideoLog": "Error in saving Advanced Log Settings."
         }
     },
     "countries": {

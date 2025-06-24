@@ -43,6 +43,7 @@ import PAM from '../../views/Settings/PamOrder/PamOrder';
 import AutoVideoSettings from '@/views/Settings/AutoVideoSettings';
 import VideoLogs from '@/views/Logs/VideoLogs';
 import IPMIEventLog from '@/views/Logs/IPMIEventLogs';
+import AdvancedLogSettings from '@/views/Settings/AdvancedLogSettings/AdvancedLogSettings.vue';
 
 const roles = {
   administrator: 'Administrator',
@@ -218,6 +219,14 @@ const routes = [
         component: PAM,
         meta: {
           title: i18n.t('appPageTitle.pam'),
+        },
+      },
+      {
+        path: '/settings/advanced-log',
+        name: 'advanced-log-settings',
+        component: AdvancedLogSettings,
+        meta: {
+          title: i18n.t('appPageTitle.advancedLogSettings'),
         },
       },
     ],

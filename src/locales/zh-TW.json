@@ -191,7 +191,8 @@
         "radius": "RADIUS",
         "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
         "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
-        "gpgpu": "@:appPageTitle.gpgpu"
+        "gpgpu": "@:appPageTitle.gpgpu",
+        "advancedLogSettings":"@:appPageTitle.advancedLogSettings"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -258,7 +259,8 @@
         "radius": "RADIUS",
         "amdRemoteDebug": "AMD 遠端偵錯",
         "ipmiEventLog": "IPMI事件日誌",
-        "gpgpu": "GPGPU"
+        "gpgpu": "GPGPU",
+        "advancedLogSettings":"進階日誌設定"
     },
     "pageNodeManager": {
         "nmConfiguration": "網管設定",
@@ -3179,6 +3181,34 @@
             "errorGettingFpgaSensorInfo": "取得 FPGA 感知器資訊時出錯",
             "errorGettingBaseBoardInfo": "取得底板資訊時出錯",
             "errorGettingBaseBoardSensorInfo": "取得底板感測器資訊時出錯"
+        }
+    },
+    "advancedLogSettings":{
+        "systemLog": "系統日誌",
+        "localLog": "本地日誌",
+        "remoteLog": "遠端日誌",
+        "portType": "連接埠類型",
+        "udp": "UDP協定",
+        "tcp": "傳輸控制協定",
+        "fileSize": "文件大小",
+        "rotateCount": "旋轉計數",
+        "remotelogserver": "遠端日誌伺服器",
+        "remoteserverport": "遠端伺服器連接埠",
+        "enableauditlog": "啟用審核日誌",
+        "caCertificateFile": "CA憑證文件",
+        "certificatefile": "證書文件",
+        "privateKey": "私鑰",
+        "advancedLogValueLimits": "請輸入 %{min} 至 %{max} 之間的數值。",
+        "invalidIPAddress": "IP 位址無效",
+        "cacertPEM": "Cacert PEM 證書",
+        "serverCRT": "伺服器CRT證書",
+        "serverKey": "伺服器密鑰證書",
+        "incorrectAdvancedCertificateFileType": "文件不是正確的證書類型。",
+        "toast": {
+            "successSaveAdvancedLogsSettings": "已成功儲存進階日誌設定。",
+            "errorAdvancedAddCertificate": "新增證書錯誤。",
+            "successCertificateUpload": "已成功新增%{證書}。",
+            "errorGettingVideoLog": "儲存進階日誌設定時發生錯誤。"
         }
     },
     "countries": {

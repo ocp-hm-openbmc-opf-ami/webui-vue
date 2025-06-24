@@ -105,6 +105,11 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.pam'),
               route: '/settings/pam',
             },
+            {
+              id: 'advanced-log-settings',
+              label: this.$t('appNavigation.advancedLogSettings'),
+              route: '/settings/advanced-log',
+            },
           ],
         },
         {
