@@ -91,7 +91,8 @@
             :disabled="
               ipv6BtnDisable ||
               interfaceId === 'hostusb0' ||
-              !ipv6SettingsStatus
+              !ipv6SettingsStatus ||
+              form.ipv6TableItems.length >= 16
             "
             variant="primary"
             @click="initAddIpv6Address()"
