@@ -104,6 +104,7 @@
               ipv6BtnDisable ||
               interfaceId === 'hostusb0' ||
               !ipv6SettingsStatus ||
+              form.ipv6TableItems.length >= 16 ||
               isButtonDisable
             "
             variant="primary"
