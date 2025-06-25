@@ -328,6 +328,7 @@
       </b-form>
       <template #modal-footer="{ cancel }">
         <b-button variant="secondary" @click="cancel()">
+          <icon-cancel />
           {{ $t('global.action.cancel') }}
         </b-button>
         <b-button
@@ -337,6 +338,7 @@
           data-test-id="modalGenerateCsr-button-ok"
           @click="onOkGenerateCsrModal"
         >
+          <icon-generate />
           {{ $t('pageCertificates.generateCsr') }}
         </b-button>
       </template>
@@ -356,6 +358,7 @@
             {{ $t('global.status.copied') }}
           </template>
           <template v-else>
+            <icon-copy />
             {{ $t('global.action.copy') }}
           </template>
         </b-btn>
@@ -367,6 +370,7 @@
           download="certificate.csr"
           class="btn btn-primary"
         >
+          <icon-download />
           {{ $t('global.action.download') }}
         </a>
       </template>
@@ -384,10 +388,20 @@ import { COUNTRY_LIST } from './CsrCountryCodes';
 import { CERTIFICATE_TYPES } from '@/store/modules/SecurityAndAccess/CertificatesStore';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
-
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
+import IconGenerate from '@carbon/icons-vue/es/generate-pdf/20';
+import IconDownload from '@carbon/icons-vue/es/download/20';
+import IconCopy from '@carbon/icons-vue/es/copy/20';
 export default {
   name: 'ModalGenerateCsr',
-  components: { IconAdd, IconCheckmark },
+  components: {
+    IconAdd,
+    IconCheckmark,
+    IconCancel,
+    IconGenerate,
+    IconDownload,
+    IconCopy,
+  },
   mixins: [BVToastMixin, VuelidateMixin],
   data() {
     return {

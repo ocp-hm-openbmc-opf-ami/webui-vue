@@ -173,6 +173,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "raidEventLog": "@:appPageTitle.raidEventLog",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "tasks": "@:appPageTitle.tasks",
@@ -189,7 +190,9 @@
         "videoLog":"@:appPageTitle.videoLog",
         "radius":"RADIUS",
         "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
-        "gpgpu": "@:appPageTitle.gpgpu"
+        "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
+        "gpgpu": "@:appPageTitle.gpgpu",
+        "advancedLogSettings":"@:appPageTitle.advancedLogSettings"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -238,6 +241,7 @@
         "logicalDevice": "Logical Device",
         "createLogicalDevice": "Create Logical Device",
         "raidTopology": "Topology Information",
+        "raidEventLog": "Event Log",
         "backupAndRestore": "Backup and Restore",
         "FireWall": "System Firewall",
         "tasks": "Tasks",
@@ -254,7 +258,10 @@
         "videoLog":"Video Log",
         "radius": "RADIUS",
         "amdRemoteDebug": "Remote Debug",
-        "gpgpu": "GPGPU"
+        "ipmiEventLog": "IPMI Event Logs",
+        "gpgpu": "GPGPU",
+        "advancedLogSettings":"Advanced Log Settings"
+
     },
     "pageNodeManager": {
         "nmConfiguration": "NM Configuration",
@@ -1055,6 +1062,41 @@
             "successUnresolveLogs": "Successfully unresolved %{count} log. | Successfully unresolved %{count} Logs."
         }
     },
+    "pageIpmiEventLogs": {
+        "additionalDataUri": "Additional data",
+        "resolve": "Resolve",
+        "resolved": "Resolved",
+        "unresolve": "Unresolve",
+        "unresolved": "Unresolved",
+        "modal": {
+            "deleteAllTitle": "Delete all logs",
+            "deleteAllMessage": "Are you sure you want to delete all logs? This action cannot be undone.",
+            "deleteTitle": "Delete log | Delete logs",
+            "deleteMessage": "Are you sure you want to delete %{count} log? This action cannot be undone. | Are you sure you want to delete %{count} logs? This action cannot be undone."
+        },
+        "table": {
+            "date": "Date",
+            "description": "Description",
+            "id": "ID",
+            "modifiedDate": "Modified Date",
+            "name": "Name",
+            "searchLogs": "Search logs",
+            "severity": "Severity",
+            "status": "Status",
+            "type": "Type"
+        },
+        "toast": {
+            "errorDelete": "Error deleting %{count} log. | Error deleting %{count} logs.",
+            "errorLogStatusUpdate": "Error updating log status.",
+            "errorResolveLogs": "Error resolving %{count} log. | Error resolving %{count} logs.",
+            "errorUnresolveLogs": "Error unresolving %{count} log. | Error unresolving %{count} logs.",
+            "errorDownloadEventEntry": "Error download event log entry.",
+            "successDownloadEventEntry": "Successfully downloaded event log entry.",
+            "successDelete": "Successfully deleted %{count} log. | Successfully deleted %{count} logs.",
+            "successResolveLogs": "Successfully resolved %{count} log. | Successfully resolved %{count} logs.",
+            "successUnresolveLogs": "Successfully unresolved %{count} log. | Successfully unresolved %{count} logs."
+        }
+    },
     "pageFactoryReset": {
         "description": "These functions do not perform a secure delete of any sensitive data.",
         "form": {
@@ -1570,13 +1612,28 @@
             "passwordChangeRequired": "Password Change Required",
             "vmediaAccess": "VMedia Access",
             "changePassword": "Change Password",
+            "snmpUserEnable": "Enable SNMP User",
+            "encryption": "Encryption",
+            "algorithm": "Algorithm",
+            "readWritePermission": "Read Write Permission",
+            "readOnly": "Read Only",
+            "readWrite": "Read Write",
+            "authProtocolNone": "None",
+            "authProtocolsh224": "SHA-224",
+            "authProtocolsha256": "SHA-256",
+            "authProtocolsha384": "SHA-384",
+            "authProtocolsha512": "SHA-512",
             "logoutConfirmMessage": "Are you sure you want to change Password for the logged in user '%{user}'? This user will get logout and it will be reflected in the next login only.",
             "logoutAlert": "Logout Alert"
         },
         "table": {
             "privilege": "Privilege",
             "status": "Status",
-            "username": "Username"
+            "username": "Username",
+            "snmpUserEnable": "SNMP User Enable",
+            "algorithm": "Algorithm",
+            "readWritePermission": "Read Write Permission",
+            "encryption": "Encryption"
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "Configure components managed by this service",
@@ -1885,6 +1942,12 @@
         "addSubscrition": "Add Subscription",
         "editSubscrition": "Edit Subscription",
         "sendTestTrap": "Send Test Trap",
+        "addCommunityString": "Add Community String",
+        "editCommunityString": "Edit Community String",
+        "snmpSubscription": "SNMP Subscription",
+        "snmpCommunity": "SNMP Community",
+        "duplicateString": "Duplicate Community String",
+        "defaultCommunity": "public’ and ‘private’ are common default strings. Please enter a different value.",
         "modal": {
             "destination": "Destination",
             "subscriptionType": "Subscription Type",
@@ -1893,8 +1956,16 @@
             "addTrap": "Add Trap",
             "bmcUser": "BMC Users",
             "password": "Password",
-            "encryption": "Encryption",
-            "algorithm": "Algorithm"
+            "portNumber": "Port Number",
+            "all": "All",
+            "smtp": "SMTP",
+            "system": "System",
+            "readOnlyCommunity": "Read Only Community",
+            "readWriteCommunity": "Read Write Community",
+            "communityProfile": "Community Profile",
+            "communityString": "Community String",
+            "readWritePermission": "Read Write Permission",
+            "addCommunity": "Add Community"
         },
         "table": {
             "destination": "Destination",
@@ -1909,20 +1980,29 @@
             "authProtocolsha512": "SHA-512",
             "authProtocolsha": "SHA",
             "encryption": "Encryption",
-            "bmcUser": "BMC Users"
+            "bmcUser": "BMC Users",
+            "communityProfile": "Community Profile",
+            "communityString": "Community String",
+            "readWritePermission": "Read Write Permission"
         },
         "toast": {
-            "errorInAddSubscription": "Error in adding Subscription.",
-            "errorInDeleteSubscription": "Error in deleting Subscription.",
-            "errorInEditSubscription": "Error in editing Subscription.",
-            "errorUpdatingAuthenticationProtocal": "Error in updating Authentication Protocol.",
-            "successInAddSubscription": "Successfully added SNMP Trap.",
-            "successInDeleteSubscription": "Successfully deleted SNMP Trap.",
-            "successUpdateAuthenticationProtocal": "Successfully updated Authentication Protocol.",
-            "successMsgTestTrap": "Test Trap send successfully.",
-            "errorMsgAlert": "Error in sending Test Trap.",
-            "errorInUpdatingSubscription": "Error in updating Subscription.",
-            "successInUpdatingSubscription": "Successfully updated Subscription"
+            "errorInAddSubscription": "Error in Adding Subscription",
+            "errorInDeleteSubscription": "Error in Deleting Subscription",
+            "errorInEditSubscription": "Error in Editing Subscription",
+            "errorUpdatingAuthenticationProtocal": "Error in Updating Authentication Protocol",
+            "errorMsgAlert": "Error in sending test Trap",
+            "errorInUpdatingSubscription": "Error in updating Subscription",
+            "errorInAddCommunityString": "Error in adding Community String",
+            "errorInUpdateCommunityString": "Error in Editing Community String",
+            "errorInDeleteCommunityString": "Error in Deleting Community String",
+            "successInAddSubscription": "Successfully added SNMPTrap",
+            "successInDeleteSubscription": "Successfully deleted SNMPTrap",
+            "successUpdateAuthenticationProtocal": "Successfully Updated Authentication Protocol",
+            "successMsgTestTrap": "Test Trap send successfully",
+            "successInUpdatingSubscription": "Successfully updated Subscription",
+            "successInAddCommunityString": "Successfully added Community String",
+            "successInUpdateCommunityString": "Successfully updated Community String",
+            "successInDeleteCommunityString": "Successfully deleted Community String"
         }
     },
     "pageSmtp": {
@@ -2477,14 +2557,6 @@
             "helperExportFileSave": "Click Export to download the file.",
             "labelConfigImport": "Import",
             "labelConfigExport": "Export",
-            "labelControllerProperties": "Controller Properties",
-            "controllerPropertiesHelperText":"Set Controller Properties.",
-            "controllerPropertiesRateValueHelperText": "The value must be between 0 and 100, inclusive.",
-            "labelRebuildRate": "Rebuild Rate",
-            "labelPatrolReadRate": "Patrol Read Rate",
-            "labelBGIRate": "BGI Rate",
-            "labelConsistencyCheckRate": "Consistency Check Rate",
-            "labelReconstructionRate": "Reconstruction Rate",
             "labelControllerPersonality": "Controller Personality",
             "labelCurrentControllerPersonality": "Current Controller Personality",
             "labelSetControllerPersonality": "Set Controller Personality",
@@ -2494,7 +2566,28 @@
             "labelRaidMode": "RAID Mode",
             "labelJbodMode": "JBOD Mode",
             "alertNotSupport": "This feature is currently not supported.",
-            "jbodModeHelperText": "When JBOD Mode is enabled, the Physical Device Status changes to JBOD; otherwise, it changes to Unconfigured Good."
+            "labelControllerProperties": "Controller Properties",
+            "controllerPropertiesHelperText":"Set controller properties.",
+            "controllerPropertiesRateValueHelperText": "The value must be between 0 and 100, inclusive.",
+            "labelRebuildRate": "Rebuild Rate",
+            "labelPatrolReadRate": "Patrol Read Rate",
+            "labelBGIRate": "BGI Rate",
+            "labelConsistencyCheckRate": "Consistency Check Rate",
+            "labelReconstructionRate": "Reconstruction Rate",
+            "labelSsdPatrolRead": "SSD Patrol Read",
+            "ssdPatrolReadHelperText": "When SSD Patrol Read is enabled, the physical device status changes to SSD Patrol Read.",
+            "jbodModeHelperText": "When JBOD Mode is enabled, the physical device status changes to JBOD; otherwise, it changes to Unconfigured Good.",
+            "alertNotSupportSelectedController": "This feature is not supported for the currently selected controller.",
+            "labelPatrolReadAction": "Patrol Read",
+            "labelpatrolReadCurrentProperties": "Current Patrol Read Properties:",
+            "labelPatrolReadCurrentRate": "Rate: ",
+            "patrolReadCurrentPropertiesHelperText":"Displays Patrol Read properties. If you need to edit the item, please click the 'Properties' > 'Controller Properties' button.",
+            "patrolReadActionSwitchHelperText": "Select Start/Stop to process Patrol Read. Wait a minute after completion.",
+            "alertNotSupportPatrolReadAction":"Action not supported. Make sure the adapter has at least one virtual drive or at least one Hot Spare drive available."
+        },
+        "actions": {
+            "startPatrolRead":"Start Patrol Read",
+            "stopPatrolRead":"Stop Patrol Read"
         },
         "toast": {
             "copybackConfigSuccess": "The 'Copyback' feature has been successfully set up.",
@@ -2506,15 +2599,24 @@
             "configImportSuccess": "Successfully imported the configuration file to the system.",
             "configImportFail": "Unable to import the configuration file.",
             "configImport": "Import the configuration file.",
-            "controllerPropertiesSuccess": "Set Controller properties successfully. The Setting will take some time to complete. Please wait for a few seconds and refresh the application to see the changes.",
-            "controllerPropertiesFail": "Failed to set Controller properties.",
-            "controllerPropertiesConfig": "Controller Properties Setting.",
             "controllerPersonalitySuccess": "Successfully set Controller Personality. Please reboot the host to apply the changes.",
             "controllerPersonalityFail": "Failed to set Controller Personality. Please ensure that all Logical Devices are removed before proceeding.",
             "controllerPersonality": "Switch Controller Personality mode.",
-            "jbodModeSuccess": "Successfully set the JBOD Mode. The Setting will take some time to complete. Please wait for a few seconds and refresh the application to see the changes.",
+            "controllerPropertiesSuccess": "Set controller properties successfully.   The setting will take some time to complete. Please wait for few seconds and refresh the application to see the changes.",
+            "controllerPropertiesFail": "Failed to set controller properties.",
+            "controllerPropertiesConfig": "Controller Properties setting.",
+            "ssdPatrolReadSuccess": "Successfully set the SSD Patrol Read. The setting will take some time to complete. Please wait for few seconds and refresh the application to see the changes.",
+            "ssdPatrolReadFail": "Failed to set the SSD Patrol Read.",
+            "ssdPatrolReadConfig": "Set the SSD Patrol Read in the controller properties.",
+            "jbodModeSuccess": "Successfully set the JBOD Mode. The setting will take some time to complete. Please wait for few seconds and refresh the application to see the changes.",
             "jbodModeFail": "Failed to set the JBOD Mode.",
-            "jbodMode": "Set the JBOD Mode in the Controller properties."
+            "jbodMode": "Set the JBOD Mode in the controller properties.",
+            "startPatrolReadActionSuccess": "Successfully started the Patrol Read action.",
+            "startPatrolReadActionFail": "Failed to start the Patrol Read action.",
+            "startPatrolReadAction": "Start the Patrol Read action.",
+            "stopPatrolReadActionSuccess": "Successfully stopped the Patrol Read action.",
+            "stopPatrolReadActionFail": "Failed to stop the Patrol Read action.",
+            "stopPatrolReadAction": "Stop the Patrol Read action."
         }
     },
     "pagePhysicalDevice": {
@@ -2642,6 +2744,7 @@
         "accelerator": "Accelerator",
         "spanDepth": "Span Depth",
         "numberOfDrives": "Number of Drives per Span",
+        "initState": "Initialization State",
         "stripeSize": "Stripe Size",
         "readPolicy": "Read Policy",
         "writePolicy": "Write Policy",
@@ -2669,14 +2772,14 @@
             "unprotectedWriteBack": "Unprotected Write Back",
             "writeThrough": "Write Through",
             "alwaysWriteBack": "Always Write Back",
-            "writeBackWithBBU": "Write Back with BBU"
+            "writeBackWithBBU": "Write Back With BBU"
         },
         "ioPolicyOptions": {
             "directIO": "DirectIO",
             "cachedIO": "CachedIO"
         },
         "accessPolicyOptions": {
-            "readWrite": "Read-Write",
+            "readWrite": "Read Write",
             "readOnly": "Read Only",
             "blocked": "Blocked"
         },
@@ -2778,6 +2881,42 @@
             "errorGetTopologyDevice": "Error in getting the Topology Device."
         }
     },
+    "pageRaidEventLog": {
+        "allControllers": "All Controllers",
+        "selectEventType": "Select Event Type",
+        "events": "Events",
+        "ctrlName": "Controller Name",
+        "recordId": "ID",
+        "timeStamp": "Time Stamp",
+        "code": "Code",
+        "class": "Class",
+        "info": "Info",
+        "fatal": "Fatal",
+        "type": "Type",
+        "description": "Description",
+        "eventType": {
+            "allEvents": "All Events",
+            "controllerEvents": "Controller Events",
+            "controller": "Controller",
+            "physicalDeviceEvents": "Physical Device Events",
+            "physicalDevice": "Physical Device",
+            "logicalDeviceEvents": "Logical Device Events",
+            "logicalDevice": "Logical Device",
+            "configurationEvents": "Configuration Events",
+            "configuration": "Configuration",
+            "bbuEvents": "BBU Events",
+            "bbu": "BBU"
+        },
+        "modal": {
+            "deleteAllTitle": "Delete All Logs",
+            "deleteAllMessage": "Are you sure you want to delete all logs? This action cannot be undone."
+        },
+        "toast": {
+            "errorGet": "Error getting event logs.",
+            "errorDelete": "Error deleting %{count} log. | Error deleting %{count} logs.",
+            "successDelete": "Successfully deleted %{count} log. | Successfully deleted %{count} logs."
+        }
+    },
     "pageFireWall": {
         "firewallSettings": {
             "addNewRule": "Add New Rule",
@@ -2812,7 +2951,8 @@
                 "ipv6": "IPv6",
                 "both": "Both",
                 "networkType": "Network Type",
-                "preLoad":"PreLoad"
+                "preLoad":"PreLoad",
+                "ipVersion": "IP Version"
             }
         },
         "toast": {
@@ -3042,6 +3182,34 @@
             "errorGettingFpgaSensorInfo": "Error in getting FPGA Sensors Information",
             "errorGettingBaseBoardInfo": "Error in getting BaseBoard Information",
             "errorGettingBaseBoardSensorInfo": "Error in getting BaseBoard Sensors Information"
+        }
+    },
+    "advancedLogSettings":{
+        "systemLog": "System Log",
+        "localLog": "Local Log",
+        "remoteLog": "Remote Log",
+        "portType": "Port Type",
+        "udp": "UDP",
+        "tcp": "TCP",
+        "fileSize": "File Size",
+        "rotateCount": "Rotate Count",
+        "remotelogserver": "Remote Log Server",
+        "remoteserverport": "Remote Server Port",
+        "enableauditlog": "Enable Audit Log",
+        "caCertificateFile": "CA Certificate File",
+        "certificatefile": "Certificate File",
+        "privateKey": "Private key",
+        "advancedLogValueLimits": "Kindly enter the Values between %{min} to %{max}.",
+        "invalidIPAddress": "Invalid IP Address",        
+        "cacertPEM": "Cacert PEM Certificate",
+        "serverCRT": "Server CRT Certificate",
+        "serverKey": "Server Key Certificate",
+        "incorrectAdvancedCertificateFileType": "File is not a correct Certificate Type.",
+        "toast": {
+            "successSaveAdvancedLogsSettings": "Successfully Saved Advanced Log Settings.",
+            "errorAdvancedAddCertificate": "Error in adding certificate.",
+            "successCertificateUpload": "Successfully added %{certificate}.",
+            "errorGettingVideoLog": "Error in saving Advanced Log Settings."
         }
     },
     "countries": {

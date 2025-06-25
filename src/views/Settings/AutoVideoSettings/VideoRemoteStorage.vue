@@ -6,7 +6,10 @@
           <b-row>
             <b-col sm="6">
               <b-form-group>
-                <b-form-checkbox v-model="videoRemote.RecordToRemote">
+                <b-form-checkbox
+                  v-model="videoRemote.RecordToRemote"
+                  :disabled="isButtonDisable"
+                >
                   {{
                     $t(
                       'pageVideo.videoRemoteSettings.recordVideotoRemoteServer',
@@ -252,7 +255,13 @@
           </div>
           <b-row class="mt-4 mb-5">
             <b-col>
-              <b-button type="submit" variant="primary" @click="onOk">
+              <b-button
+                type="submit"
+                variant="primary"
+                :disabled="isButtonDisable"
+                @click="onOk"
+              >
+                <icon-save />
                 {{ $t('global.action.save') }}
               </b-button>
             </b-col>
@@ -272,17 +281,24 @@ import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { mapState } from 'vuex';
 
 import { requiredIf } from 'vuelidate/lib/validators';
+import IconSave from '@carbon/icons-vue/es/save/20';
 
 export default {
   name: 'Videoremotestorage',
   components: {
     PageSection,
+    IconSave,
   },
   mixins: [BVToastMixin, DataFormatterMixin, VuelidateMixin, LoadingBarMixin],
   props: {
     tabIndex: {
       type: Number,
       default: 0,
+    },
+    isButtonDisable: {
+      required: true,
+      type: Boolean,
+      default: false,
     },
   },
   data() {

@@ -51,7 +51,13 @@
           </b-form-group>
         </b-col>
       </b-row>
-      <b-button type="submit" variant="primary" @click="saveConfigurations">
+      <b-button
+        type="submit"
+        variant="primary"
+        :disabled="isButtonDisable"
+        @click="saveConfigurations"
+      >
+        <icon-save />
         {{ $t('global.action.save') }}
       </b-button>
     </page-section>
@@ -70,6 +76,7 @@
               <b-form-checkbox
                 v-model="form.ddnsMethod"
                 data-test-id="ddns-method"
+                :disabled="isButtonDisable"
                 switch
               >
                 <span v-if="form.ddnsMethod">
@@ -85,7 +92,11 @@
             <b-form-group
               :label="$t('pageDDNSNetwork.ddnsConfiguration.nsUpdateEnable')"
             >
-              <b-form-checkbox v-model="form.nsUpdateEnabled" switch>
+              <b-form-checkbox
+                v-model="form.nsUpdateEnabled"
+                :disabled="isButtonDisable"
+                switch
+              >
                 <span v-if="form.nsUpdateEnabled">
                   {{ $t('global.status.enabled') }}
                 </span>
@@ -97,7 +108,11 @@
             <b-form-group
               :label="$t('pageDDNSNetwork.ddnsConfiguration.useTSIG')"
             >
-              <b-form-checkbox v-model="form.useTSIG" switch>
+              <b-form-checkbox
+                v-model="form.useTSIG"
+                :disabled="isButtonDisable"
+                switch
+              >
                 <span v-if="form.useTSIG">
                   {{ $t('global.status.enabled') }}
                 </span>
@@ -141,18 +156,29 @@
               class="upload-button"
               type="submit"
               variant="primary"
-              :disabled="!form.useTSIG"
+              :disabled="!form.useTSIG || isButtonDisable"
               @click="onSubmitUpload"
             >
+              <icon-upload />
               {{ $t('global.action.upload') }}
             </b-button>
           </b-col>
         </b-row>
         <b-button type="submit" variant="primary" @click="handleSubmit">
+          <icon-save />
           {{ $t('global.action.save') }}
         </b-button>
       </div>
     </page-section>
+    <b-button
+      type="submit"
+      variant="primary"
+      :disabled="isButtonDisable"
+      @click="handleSubmit"
+    >
+      <icon-save />
+      {{ $t('global.action.save') }}
+    </b-button>
   </b-container>
 </template>
 
@@ -166,6 +192,8 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import IconMisuse from '@carbon/icons-vue/es/misuse/20';
 import { mapState } from 'vuex';
+import IconUpload from '@carbon/icons-vue/es/upload/20';
+import IconSave from '@carbon/icons-vue/es/save/20';
 export default {
   name: 'DDNSConfiguration',
   components: {
@@ -173,12 +201,19 @@ export default {
     FormFile,
     IconAdd,
     IconMisuse,
+    IconUpload,
+    IconSave,
   },
   mixins: [VuelidateMixin, BVToastMixin, LoadingBarMixin],
   props: {
     tabIndex: {
       type: Number,
       default: 0,
+    },
+    isButtonDisable: {
+      required: true,
+      type: Boolean,
+      default: false,
     },
   },
   data() {

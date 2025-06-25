@@ -135,7 +135,9 @@
         "certificates": "@:appPageTitle.certificates",
         "virtualMedia": "@:appPageTitle.virtualMedia",
         "power": "@:appPageTitle.power",
-        "keyClear": "@:appPageTitle.keyClear"
+        "keyClear": "@:appPageTitle.keyClear",
+        "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
+        "raidEventLog": "@:appPageTitle.raidEventLog"
     },
     "appPageTitle": {
         "changePassword": "Изменить пароль",
@@ -166,7 +168,9 @@
         "certificates": "Сертификаты",
         "virtualMedia": "Виртуальные носители",
         "keyClear": "Удаление ключей",
-        "raidTopology": "Информация о топологии"
+        "raidTopology": "Информация о топологии",
+        "ipmiEventLog": "Журналы событий IPMI",
+        "raidEventLog": "журнал событий"
     },
     "pageChangePassword": {
         "changePassword": "Изменить пароль",
@@ -259,6 +263,39 @@
         }
     },
     "pageEventLogs": {
+        "additionalDataUri": "Загрузить дополнительные данные",
+        "resolve": "Разрешить",
+        "resolved": "Разрешено",
+        "unresolve": "Отменить разрешение",
+        "unresolved": "Нерешённое",
+        "modal": {
+            "deleteAllTitle": "Удалить все логи",
+            "deleteAllMessage": "Вы уверены, что хотите удалить все логи? Действие не может быть отменено.",
+            "deleteTitle": "Удалить запись из журнала | Удалить записи из журнала",
+            "deleteMessage": "Вы уверены, что хотите удалить %{count} запись? Действие не может быть отменено. | Вы уверены, что хотите удалить %{count} записей? Действие не может быть отменено."
+        },
+        "table": {
+            "date": "Дата",
+            "description": "Описание",
+            "id": "Идентификатор",
+            "modifiedDate": "Дата последнего изменения",
+            "name": "Имя",
+            "searchLogs": "Поиск записей в журнале событий",
+            "severity": "Уровень",
+            "status": "Статус",
+            "type": "Тип"
+        },
+        "toast": {
+            "errorDelete": "Ошибка удаления %{count} записи. | Ошибка уделения %{count} записей.",
+            "errorLogStatusUpdate": "Ошибка обновления статуса записи.",
+            "errorResolveLogs": "Ошибка разрешения %{count} записи. | Ошибка разрешения %{count} записей.",
+            "errorUnresolveLogs": "Ошибка снятия разрешения с %{count} записи. | Ошибка снятия разрешения с %{count} записей.",
+            "successDelete": "Успешное удаление %{count} записи. | Успешное удаление всех %{count} записей.",
+            "successResolveLogs": "Успешное разрешение %{count} записи. | Успешное разрешение %{count} записей.",
+            "successUnresolveLogs": "Успешная отмена разрешения с %{count} записи. | Успешная отмена разрешения с %{count} записей."
+        }
+    },
+    "pageIpmiEventLogs": {
         "additionalDataUri": "Загрузить дополнительные данные",
         "resolve": "Разрешить",
         "resolved": "Разрешено",
@@ -1059,14 +1096,6 @@
             "helperExportFileSave": "Нажмите кнопку Экспорт, чтобы скачать файл.",
             "labelConfigImport": "Импорт",
             "labelConfigExport": "Экспорт",
-            "labelControllerProperties": "Свойства контроллера",
-            "controllerPropertiesHelperText": "Установите свойства контроллера.",
-            "controllerPropertiesRateValueHelperText": "Значение должно быть от 0 до 100, включая 0 и 100.",
-            "labelRebuildRate": "Скорость восстановления",
-            "labelPatrolReadRate": "Скорость чтения патруля",
-            "labelBGIRate": "Скорость BGI",
-            "labelConsistencyCheckRate": "Скорость проверки согласованности",
-            "labelReconstructionRate": "Скорость реконструкции",
             "labelControllerPersonality": "Режим работы контроллера",
             "labelCurrentControllerPersonality": "Текущий режим работы контроллера",
             "labelSetControllerPersonality": "Установить режим работы контроллера",
@@ -1076,7 +1105,28 @@
             "labelRaidMode": "Режим RAID",
             "labelJbodMode": "Режим JBOD",
             "alertNotSupport": "Эта функция в настоящее время не поддерживается.",
-            "jbodModeHelperText": "При включении режима JBOD статус физического устройства изменяется на JBOD; в противном случае он становится «Ненастроенный хороший»."
+            "labelControllerProperties": "Свойства контроллера",
+            "controllerPropertiesHelperText": "Установите свойства контроллера.",
+            "controllerPropertiesRateValueHelperText": "Значение должно быть от 0 до 100, включая 0 и 100.",
+            "labelRebuildRate": "Скорость восстановления",
+            "labelPatrolReadRate": "Скорость чтения патруля",
+            "labelBGIRate": "Скорость BGI",
+            "labelConsistencyCheckRate": "Скорость проверки согласованности",
+            "labelReconstructionRate": "Скорость реконструкции",
+            "labelSsdPatrolRead": "SSD патрульное чтение",
+            "ssdPatrolReadHelperText": "Когда SSD патрульное чтение включено, статус физического устройства изменяется на SSD патрульное чтение.",
+            "jbodModeHelperText": "При включении режима JBOD статус физического устройства изменяется на JBOD; в противном случае он становится «Ненастроенный хороший».",
+            "alertNotSupportSelectedController": "Эта функция не поддерживается выбранным контроллером.",
+            "labelPatrolReadAction": "Патрульное чтение",
+            "labelpatrolReadCurrentProperties": "Текущие свойства патрульного чтения:",
+            "labelPatrolReadCurrentRate": "Скорость:",
+            "patrolReadCurrentPropertiesHelperText": "Отображает свойства патрульного чтения. Если нужно изменить элемент, нажмите кнопку 'Свойства' > 'Свойства контроллера'.",
+            "patrolReadActionSwitchHelperText": "Выберите 'Начать/Остановить' для обработки патрульного чтения. После завершения подождите минуту.",
+            "alertNotSupportPatrolReadAction": "Действие не поддерживается. Убедитесь, что адаптер имеет хотя бы один виртуальный диск или хотя бы один диск Hot Spare."
+        },
+        "actions": {
+            "startPatrolRead":"Начать патрульное чтение",
+            "stopPatrolRead":"Остановить патрульное чтение"
         },
         "toast": {
             "copybackConfigSuccess": "Функция «Copyback» успешно настроена.",
@@ -1088,15 +1138,24 @@
             "configImportSuccess": "Конфигурационный файл успешно импортирован в систему.",
             "configImportFail": "Не удалось импортировать конфигурационный файл.",
             "configImport": "Импортируйте конфигурационный файл.",
-            "controllerPropertiesSuccess": "Свойства контроллера успешно установлены. Это может занять некоторое время. Пожалуйста, подождите несколько секунд и обновите приложение, чтобы увидеть изменения.",
-            "controllerPropertiesFail": "Не удалось установить свойства контроллера.",
-            "controllerPropertiesConfig": "Настройки свойств контроллера.",
             "controllerPersonalitySuccess": "Режим работы контроллера успешно установлен. Перезагрузите хост, чтобы применить изменения.",
             "controllerPersonalityFail": "Не удалось установить режим работы контроллера. Убедитесь, что все логические устройства удалены перед продолжением.",
             "controllerPersonality": "Переключить режим работы контроллера.",
+            "controllerPropertiesSuccess": "Свойства контроллера успешно установлены. Это может занять некоторое время. Пожалуйста, подождите несколько секунд и обновите приложение, чтобы увидеть изменения.",
+            "controllerPropertiesFail": "Не удалось установить свойства контроллера.",
+            "controllerPropertiesConfig": "Настройки свойств контроллера.",
+            "ssdPatrolReadSuccess": "SSD патрульное чтение успешно настроено. Настройка займет некоторое время. Пожалуйста, подождите несколько секунд и обновите приложение, чтобы увидеть изменения.",
+            "ssdPatrolReadFail": "Не удалось настроить SSD патрульное чтение.",
+            "ssdPatrolReadConfig": "Настройте SSD патрульное чтение в свойствах контроллера.",
             "jbodModeSuccess": "Режим JBOD успешно установлен. Это может занять некоторое время. Пожалуйста, подождите несколько секунд и обновите приложение, чтобы увидеть изменения.",
             "jbodModeFail": "Не удалось установить режим JBOD.",
-            "jbodMode": "Настроить режим JBOD в свойствах контроллера."
+            "jbodMode": "Настроить режим JBOD в свойствах контроллера.",
+            "startPatrolReadActionSuccess": "Патрульное чтение успешно начато.",
+            "startPatrolReadActionFail": "Не удалось начать патрульное чтение.",
+            "startPatrolReadAction": "Начать патрульное чтение.",
+            "stopPatrolReadActionSuccess": "Патрульное чтение успешно остановлено.",
+            "stopPatrolReadActionFail": "Не удалось остановить патрульное чтение.",
+            "stopPatrolReadAction": "Остановить патрульное чтение."
         }
     },
     "pageLogicalDevice": {
@@ -1113,6 +1172,7 @@
         "accelerator": "Ускоритель",
         "spanDepth": "Глубина охвата",
         "numberOfDrives": "Количество дисков на охват",
+        "initState": "Состояние инициализации",
         "stripeSize": "Размер полосы",
         "readPolicy": "Политика чтения",
         "writePolicy": "Политика записи",
@@ -1357,6 +1417,42 @@
         "protocolRoleSataDevice": "Устройство SATA",
         "toast" : {
             "errorGetTopologyDevice": "Ошибка при получении топологического устройства."
+        }
+    },
+    "pageRaidEventLog": {
+        "allControllers": "Все контроллеры",
+        "selectEventType": "Выбрать тип события",
+        "events": "События",
+        "ctrlName": "Имя контроллера",
+        "ID": "ID",
+        "timeStamp": "Метка времени",
+        "code": "Код",
+        "class": "Класс",
+        "info": "Информация",
+        "fatal": "Фатал",
+        "type": "Тип",
+        "description": "Описание",
+        "eventType": {
+            "allEvents": "Все события",
+            "controllerEvents": "События контроллера",
+            "controller": "Контроллер",
+            "physicalDeviceEvents": "События физического устройства",
+            "physicalDevice": "Физическое устройство",
+            "logicalDeviceEvents": "События логического устройства",
+            "logicalDevice": "Логическое устройство",
+            "configurationEvents": "События конфигурации",
+            "configuration": "Конфигурация",
+            "bbuEvents": "События BBU",
+            "bbu": "BBU"
+        },
+        "modal": {
+            "deleteAllTitle": "Удалить все журналы",
+            "deleteAllMessage": "Вы уверены, что хотите удалить все журналы? Это действие невозможно отменить."
+        },
+        "toast": {
+            "errorGet": "FОшибка при получении журналов событий.",
+            "errorDelete": "Ошибка удаления %{count} журнала. | Ошибка удаления %{count} журналов.",
+            "successDelete": "Успешно удален %{count} журнал. | Успешно удалены %{count} журналов."
         }
     },
     "pageTask": {

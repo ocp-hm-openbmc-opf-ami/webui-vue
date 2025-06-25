@@ -138,12 +138,12 @@ const PoliciesStore = {
         .get('/redfish/v1/Systems/system')
         .then((response) => {
           const kvmServiceEnabled =
-            response.data.GraphicalConsole.ServiceEnabled;
+            response.data?.GraphicalConsole?.ServiceEnabled;
           const virtualMediaServiceEnabled =
-            response.data.VirtualMediaConfig.ServiceEnabled;
+            response.data?.VirtualMediaConfig?.ServiceEnabled;
           const solSshServiceEnabled =
-            response.data.SerialConsole.SSH.ServiceEnabled;
-          const solSshPortValue = response.data.SerialConsole.SSH.Port;
+            response.data?.SerialConsole?.SSH?.ServiceEnabled;
+          const solSshPortValue = response.data?.SerialConsole?.SSH?.Port;
           commit('setKvmServiceEnabled', kvmServiceEnabled);
           commit('setVirtualMediaServiceEnabled', virtualMediaServiceEnabled);
           commit('setSolSshServiceEnabled', solSshServiceEnabled);

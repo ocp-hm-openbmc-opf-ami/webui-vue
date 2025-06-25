@@ -170,6 +170,7 @@
         "raidManagement": "@:appPageTitle.raidManagement",
         "adapter": "@:appPageTitle.adapter",
         "raidTopology": "@:appPageTitle.raidTopology",
+        "raidEventLog": "@:appPageTitle.raidEventLog",
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
@@ -189,7 +190,9 @@
         "videoLog":"@:appPageTitle.videoLog",
         "radius":"RADIUS",
         "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
-        "gpgpu": "@:appPageTitle.gpgpu"
+        "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
+        "gpgpu": "@:appPageTitle.gpgpu",
+        "advancedLogSettings":"@:appPageTitle.advancedLogSettings"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -238,6 +241,7 @@
         "logicalDevice": "Logisches Gerät",
         "createLogicalDevice": "Logisches Gerät erstellen",
         "raidTopology": "Topologie-Informationen",
+        "raidEventLog": "Ereignisprotokoll",
         "backupAndRestore": "Backup und Wiederherstellung",
         "FireWall": "System-Firewall",
         "tasks": "Aufgaben",
@@ -254,7 +258,9 @@
         "videoLog": "Video-Log",
         "radius": "RADIUS",
         "amdRemoteDebug": "Remote-Debugging",
-        "gpgpu": "GPGPU"
+        "ipmiEventLog": "IPMI -Ereignisprotokolle",
+        "gpgpu": "GPGPU",
+        "advancedLogSettings":"Erweiterte Protokolleinstellunge"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM-Konfiguration",
@@ -1057,6 +1063,41 @@
             "successUnresolveLogs": "Erfolgreich %{count} Log nicht gelöst. | Erfolgreich %{count} Logs nicht gelöst."
         }
     },
+    "pageIpmiEventLogs": {
+        "additionalDataUri": "Zusätzliche Daten",
+        "resolve": "Beschließen",
+        "resolved": "Beschlossen",
+        "unresolve": "Unlösbar",
+        "unresolved": "ungelöst",
+        "modal": {
+            "deleteAllTitle": "Alle Protokolle löschen",
+            "deleteAllMessage": "Sind Sie sicher, dass Sie alle Protokolle löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+            "deleteTitle": "Protokoll löschen | Protokolle löschen",
+            "deleteMessage": "Sind Sie sicher, dass Sie löschen möchten %{count} Protokoll? Diese Aktion kann nicht rückgängig gemacht werden. | Sind Sie sicher, dass Sie löschen möchten %{count} Protokolle? Diese Aktion kann nicht rückgängig gemacht werden."
+        },
+        "table": {
+            "date": "Datum",
+            "description": "Beschreibung",
+            "id": "ID",
+            "modifiedDate": "Änderungsdatum",
+            "name": "Name",
+            "searchLogs": "Protokolle durchsuchen",
+            "severity": "Schwere",
+            "status": "Status",
+            "type": "Typ"
+        },
+        "toast": {
+            "errorDelete": "Fehler beim Löschen %{count} Protokoll. | Fehler beim Löschen %{count} Protokolle.",
+            "errorLogStatusUpdate": "Fehler beim Aktualisieren des Protokollstatus.",
+            "errorResolveLogs": "Fehlerbehebung %{count} Protokoll. | Fehlerbehebung %{count} Protokoll.",
+            "errorUnresolveLogs": "Fehler nicht behoben %{count} Protokoll. | Fehler nicht behoben %{count} Protokoll.",
+            "errorDownloadEventEntry": "Fehler beim Herunterladen des Ereignisprotokolleintrags.",
+            "successDownloadEventEntry": "Ereignisprotokolleintrag erfolgreich heruntergeladen.",
+            "successDelete": "Erfolgreich gelöscht %{count} Protokoll. | Erfolgreich gelöscht %{count} Protokolle.",
+            "successResolveLogs": "Erfolgreich gelöst %{count} Protokoll. | Erfolgreich gelöst %{count} Protokolle.",
+            "successUnresolveLogs": "Erfolgreich ungelöst %{count} Protokoll. | Erfolgreich ungelöst %{count} Protokolle."
+        }
+    },
     "pageFactoryReset": {
         "description": "Diese Funktionen führen kein sicheres Löschen sensibler Daten durch.",
         "form": {
@@ -1571,14 +1612,29 @@
             "userUnlockMethod": "Benutzerentsperrmethode",
             "passwordChangeRequired": "Passwortänderung erforderlich",
             "vmediaAccess": "VMedia-Zugriff",
-            "changePassword": "Passwort ändern",
+            "changePassword": "Kennwort ändern",
+            "snmpUserEnable": "SNMP Benutzer aktivieren",
+            "encryption": "Verschlüsselung",
+            "algorithm": "Algorithmus",
+            "readWritePermission": "Lese-/Schreibberechtigung",
+            "readOnly": "Nur Lesen",
+            "readWrite": "Lesen/Schreiben",
+            "authProtocolNone": "Keine",
+            "authProtocolsh224": "SHA-224",
+            "authProtocolsha256": "SHA-256",
+            "authProtocolsha384": "SHA-384",
+            "authProtocolsha512": "SHA-512",
             "logoutConfirmMessage": "Sind Sie sicher, dass Sie das Passwort für den angemeldeten Benutzer „%{user}“ ändern möchten? Dieser Benutzer wird abgemeldet und dies wird erst bei der nächsten Anmeldung berücksichtigt.",
             "logoutAlert": "Abmeldewarnung"
         },
         "table": {
             "privilege": "Privileg",
             "status": "Status",
-            "username": "Benutzername"
+            "username": "Nutzername",
+            "snmpUserEnable": "SNMP Benutzer aktivieren",
+            "algorithm": "Algorithmus",
+            "readWritePermission": "Lese-/Schreibberechtigung",
+            "encryption": "Verschlüsselung"
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "Konfigurieren Sie Komponenten, die von diesem Dienst verwaltet werden",
@@ -1881,6 +1937,12 @@
         "addSubscrition": "Abonnement hinzufügen",
         "editSubscrition": "Abonnement bearbeiten",
         "sendTestTrap": "Testfalle senden",
+        "addCommunityString": "Community String hinzufügen",
+        "editCommunityString": "Community String bearbeiten",
+        "snmpSubscription": "SNMP Abonnement",
+        "snmpCommunity": "SNMP Community",
+        "duplicateString": "Community String duplizieren",
+        "defaultCommunity": "public’ und ‘private’ sind gängige Standardzeichenfolgen. Bitte geben Sie einen anderen Wert ein.",
         "modal": {
             "destination": "Ziel",
             "subscriptionType": "Abonnementtyp",
@@ -1889,8 +1951,16 @@
             "addTrap": "Falle hinzufügen",
             "bmcUser": "BMC-Benutzer",
             "password": "Passwort",
-            "encryption": "Verschlüsselung",
-            "algorithm": "Algorithmus"
+            "portNumber": "Portnummer",
+            "all": "Alle",
+            "smtp": "SMTP",
+            "system": "System",
+            "readOnlyCommunity": "Nur-Lese-Community",
+            "readWriteCommunity": "Lesen-Schreiben-Community",
+            "communityProfile": "Community-Profil",
+            "communityString": "Community-String",
+            "readWritePermission": "Lese-Schreibberechtigung",
+            "addCommunity": "Community hinzufügen"
         },
         "table": {
             "destination": "Ziel",
@@ -1904,21 +1974,30 @@
             "authProtocolsha384": "SHA-384",
             "authProtocolsha512": "SHA-512",
             "authProtocolsha": "SHA",
+            "bmcUser": "BMC-Benutzer",
             "encryption": "Verschlüsselung",
-            "bmcUser": "BMC-Benutzer"
+            "communityProfile": "Community-Profil",
+            "communityString": "Community-String",
+            "readWritePermission": "Lese-Schreibberechtigung"
         },
         "toast": {
-            "errorInAddSubscription": "Fehler beim Hinzufügen des Abonnements.",
-            "errorInDeleteSubscription": "Fehler beim Löschen des Abonnements.",
-            "errorInEditSubscription": "Fehler beim Bearbeiten des Abonnements.",
-            "errorUpdatingAuthenticationProtocal": "Fehler beim Aktualisieren des Authentifizierungsprotokolls.",
-            "successInAddSubscription": "SNMP-Falle erfolgreich hinzugefügt.",
-            "successInDeleteSubscription": "SNMP-Falle erfolgreich gelöscht.",
-            "successUpdateAuthenticationProtocal": "Authentifizierungsprotokoll erfolgreich aktualisiert.",
-            "successMsgTestTrap": "Testfalle erfolgreich gesendet.",
-            "errorMsgAlert": "Fehler beim Senden der Testfalle.",
-            "errorInUpdatingSubscription": "Fehler beim Aktualisieren des Abonnements.",
-            "successInUpdatingSubscription": "Abonnement erfolgreich aktualisiert"
+            "errorInAddSubscription": "Fehler beim Hinzufügen des Abonnements",
+            "errorInDeleteSubscription": "Fehler beim Löschen des Abonnements",
+            "errorInEditSubscription": "Fehler beim Bearbeiten des Abonnements",
+            "errorUpdatingAuthenticationProtocal": "Fehler beim Aktualisieren des AuthenticationProtocol",
+            "errorMsgAlert": "Fehler beim Senden des Test-Traps",
+            "errorInUpdatingSubscription": "Fehler beim Aktualisieren des Abonnements",
+            "errorInAddCommunityString": "Fehler beim Hinzufügen des Community-Strings",
+            "errorInUpdateCommunityString": "Fehler beim Bearbeiten des Community-Strings",
+            "errorInDeleteCommunityString": "Fehler beim Löschen des Community-Strings",
+            "successInAddSubscription": "SNMPTrap erfolgreich hinzugefügt",
+            "successInDeleteSubscription": "SNMPTrap wurde erfolgreich gelöscht",
+            "successUpdateAuthenticationProtocal": "AuthenticationProtocol erfolgreich aktualisiert",
+            "successMsgTestTrap": "Test Trap Versand erfolgreich",
+            "successInUpdatingSubscription": "Abonnement erfolgreich aktualisiert",
+            "successInAddCommunityString": "Community-String erfolgreich hinzugefügt",
+            "successInUpdateCommunityString": "Community-String erfolgreich aktualisiert",
+            "successInDeleteCommunityString": "Community-String erfolgreich gelöscht"
         }
     },
     "pageSmtp": {
@@ -2474,24 +2553,37 @@
             "helperExportFileSave": "Klicken Sie auf Exportieren, um die Datei herunterzuladen.",
             "labelConfigImport": "Importieren",
             "labelConfigExport": "Exportieren",
-            "labelControllerProperties": "Controller-Eigenschaften",
-            "controllerPropertiesHelperText": "Setzen Sie die Controller-Eigenschaften.",
-            "controllerPropertiesRateValueHelperText": "Der Wert muss zwischen 0 und 100 liegen, einschließlich.",
-            "labelRebuildRate": "Rebuild-Rate",
-            "labelPatrolReadRate": "Patrol-Read-Rate",
-            "labelBGIRate": "BGI-Rate",
-            "labelConsistencyCheckRate": "Consistency-Check-Rate",
-            "labelReconstructionRate": "Reconstruction-Rate",
-            "labelControllerPersonality": "Controller-Persönlichkeit",
-            "labelCurrentControllerPersonality": "Aktuelle Controller-Persönlichkeit",
-            "labelSetControllerPersonality": "Controller-Persönlichkeit festlegen",
-            "controllerPersonalityHelperText": "Die Controller-Persönlichkeit bestimmt, wie der RAID-Controller Speichergeräte verwaltet.",
-            "currentControllerPersonalityHelperText": "Zeigt den aktuellen Controller-Persönlichkeitsmodus des RAID-Controllers an.",
-            "setControllerPersonalityHelperText": "Umschalten zwischen RAID-Modus und JBOD-Modus. Ein Neustart des Hosts ist erforderlich, damit die Änderungen wirksam werden.",
+            "labelControllerPersonality": "Controller-Betriebsmodus",
+            "labelCurrentControllerPersonality": "Aktueller Controller-Betriebsmodus",
+            "labelSetControllerPersonality": "Controller-Betriebsmodus festlegen",
+            "controllerPersonalityHelperText": "Der Controller-Betriebsmodus bestimmt, wie der RAID-Controller Speichergeräte verwaltet.",
+            "currentControllerPersonalityHelperText": "Zeigt den aktuellen Betriebsmodus des RAID-Controllers an.",
+            "setControllerPersonalityHelperText": "Zwischen RAID-Modus und JBOD-Modus wechseln. Ein Neustart des Hosts ist erforderlich, damit die Änderungen wirksam werden.",
             "labelRaidMode": "RAID-Modus",
             "labelJbodMode": "JBOD-Modus",
             "alertNotSupport": "Diese Funktion wird derzeit nicht unterstützt.",
-            "jbodModeHelperText": "Wenn der JBOD-Modus aktiviert ist, ändert sich der Status des physischen Geräts zu JBOD; andernfalls ändert er sich zu Unconfigured Good."
+            "labelControllerProperties": "Steuereigenschaften",
+            "controllerPropertiesHelperText": "Steuereigenschaften festlegen.",
+            "controllerPropertiesRateValueHelperText": "Der Wert muss zwischen 0 und 100 liegen, einschließlich 0 und 100.",
+            "labelRebuildRate": "Wiederherstellungsrate",
+            "labelPatrolReadRate": "Patrouillenleserate",
+            "labelBGIRate": "BGI-Rate",
+            "labelConsistencyCheckRate": "Konsistenzprüfungsrate",
+            "labelReconstructionRate": "Wiederaufbaurate",
+            "labelSsdPatrolRead": "SSD Patrol Read",
+            "ssdPatrolReadHelperText": "Wenn SSD Patrol Read aktiviert ist, ändert sich der Status des physischen Geräts auf SSD Patrol Read.",
+            "jbodModeHelperText": "Wenn der JBOD-Modus aktiviert ist, ändert sich der Status des physischen Geräts zu JBOD. Andernfalls wird es als „Nicht konfiguriert, gut“ angezeigt.",
+            "alertNotSupportSelectedController": "Diese Funktion wird vom aktuell ausgewählten Controller nicht unterstützt.",
+            "labelPatrolReadAction": "Patrouille lezen",
+            "labelpatrolReadCurrentProperties": "Huidige eigenschappen van patrouille lezen:",
+            "labelPatrolReadCurrentRate": "Snelheid:",
+            "patrolReadCurrentPropertiesHelperText": "Geeft de eigenschappen van patrouille lezen weer. Als u het item wilt bewerken, klik dan op de knop 'Eigenschappen' > 'Controller eigenschappen'.",
+            "patrolReadActionSwitchHelperText": "Selecteer 'Start/Stop' om patrouille lezen te verwerken. Wacht een minuut na voltooiing.",
+            "alertNotSupportPatrolReadAction": "Aktion nicht unterstützt. Stellen Sie sicher, dass der Adapter mindestens ein virtuelles Laufwerk oder mindestens ein Hot Spare-Laufwerk hat."
+        },
+        "actions": {
+            "startPatrolRead":"Start patrouille lezen",
+            "stopPatrolRead":"Stop patrouille lezen"
         },
         "toast": {
             "copybackConfigSuccess": "Die 'Copyback'-Funktion wurde erfolgreich eingerichtet.",
@@ -2503,15 +2595,24 @@
             "configImportSuccess": "Die Konfigurationsdatei wurde erfolgreich in das System importiert.",
             "configImportFail": "Die Konfigurationsdatei konnte nicht importiert werden.",
             "configImport": "Importieren Sie die Konfigurationsdatei.",
-            "controllerPropertiesSuccess": "Controller-Eigenschaften erfolgreich festgelegt. Die Einstellung wird einige Zeit in Anspruch nehmen. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
-            "controllerPropertiesFail": "Fehler beim Festlegen der Controller-Eigenschaften.",
-            "controllerPropertiesConfig": "Controller-Eigenschaften-Einstellung.",
-            "controllerPersonalitySuccess": "Controller-Persönlichkeit erfolgreich festgelegt. Bitte starten Sie den Host neu, um die Änderungen anzuwenden.",
-            "controllerPersonalityFail": "Fehler beim Festlegen der Controller-Persönlichkeit. Stellen Sie sicher, dass alle logischen Geräte entfernt sind, bevor Sie fortfahren.",
-            "controllerPersonality": "Controller-Persönlichkeitsmodus wechseln.",
-            "jbodModeSuccess": "JBOD-Modus erfolgreich festgelegt. Die Einstellung wird einige Zeit in Anspruch nehmen. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
+            "controllerPropertiesSuccess": "Steuereigenschaften erfolgreich festgelegt. Die Einstellung benötigt einige Zeit, um abgeschlossen zu werden. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
+            "controllerPropertiesFail": "Fehler beim Setzen der Controller-Eigenschaften.",
+            "controllerPropertiesConfig": "Steuereigenschaften-Einstellung.",
+            "controllerPersonalitySuccess": "Controller-Betriebsmodus erfolgreich festgelegt. Bitte starten Sie den Host neu, um die Änderungen zu übernehmen.",
+            "controllerPersonalityFail": "Fehler beim Festlegen des Controller-Betriebsmodus. Bitte stellen Sie sicher, dass alle logischen Geräte entfernt wurden, bevor Sie fortfahren.",
+            "controllerPersonality": "Controller-Betriebsmodus wechseln.",
+            "ssdPatrolReadSuccess": "SSD Patrol Read wurde erfolgreich eingestellt. Die Einstellung wird einige Zeit in Anspruch nehmen. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
+            "ssdPatrolReadFail": "Fehler beim Einstellen des SSD Patrol Read.",
+            "ssdPatrolReadConfig": "Stellen Sie das SSD Patrol Read in den Controller-Eigenschaften ein.",
+            "jbodModeSuccess": "JBOD-Modus erfolgreich festgelegt. Die Einstellung benötigt einige Zeit, um abgeschlossen zu werden. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
             "jbodModeFail": "Fehler beim Festlegen des JBOD-Modus.",
-            "jbodMode": "JBOD-Modus in den Controller-Eigenschaften festlegen."
+            "jbodMode": "JBOD-Modus in den Controller-Eigenschaften festlegen.",
+            "startPatrolReadActionSuccess": "Patrouille lezen succesvol gestart.",
+            "startPatrolReadActionFail": "Patrouille lezen starten mislukt.",
+            "startPatrolReadAction": "Start patrouille lezen.",
+            "stopPatrolReadActionSuccess": "Patrouille lezen succesvol gestopt.",
+            "stopPatrolReadActionFail": "Patrouille lezen stoppen mislukt.",
+            "stopPatrolReadAction": "Stop patrouille lezen."
         }
     },
     "pagePhysicalDevice": {
@@ -2639,10 +2740,11 @@
         "accelerator": "Beschleuniger",
         "spanDepth": "Spantiefe",
         "numberOfDrives": "Anzahl der Laufwerke pro Span",
-        "stripeSize": "Streifenbreite",
-        "readPolicy": "Lese-Richtlinie",
-        "writePolicy": "Schreib-Richtlinie",
-        "cachePolicy": "Cache-Richtlinie",
+        "initState": "Initialisierungsstatus",
+        "stripeSize": "Streifengröße",
+        "readPolicy": "Lesen Sie die Richtlinie",
+        "writePolicy": "Richtlinien schreiben",
+        "cachePolicy": "Cache-Strategie",
         "ioPolicy": "IO-Richtlinie",
         "accessPolicy": "Zugriffsrichtlinie",
         "diskCacheCapacity": "Festplatten-Cache-Kapazität",
@@ -2775,6 +2877,42 @@
             "errorGetTopologyDevice": "Fehler beim Abrufen des Topologiegeräts."
         }
     },
+    "pageRaidEventLog": {
+        "allControllers": "Alle Controller",
+        "selectEventType": "Ereignistyp auswählen",
+        "events": "Ereignisse",
+        "ctrlName": "Controller-Name",
+        "recordId": "ID",
+        "timeStamp": "Zeitstempel",
+        "code": "Code",
+        "class": "Klasse",
+        "info": "Info",
+        "fatal": "Fatal",
+        "type": "Typ",
+        "description": "Beschreibung",
+        "eventType": {
+            "allEvents": "Alle Ereignisse",
+            "controllerEvents": "Controller-Ereignisse",
+            "controller": "Controller",
+            "physicalDeviceEvents": "Physische-Geräte-Ereignisse",
+            "physicalDevice": "Physisches Gerät",
+            "logicalDeviceEvents": "Logische-Geräte-Ereignisse",
+            "logicalDevice": "Logisches Gerät",
+            "configurationEvents": "Konfigurations-Ereignisse",
+            "configuration": "Konfiguration",
+            "bbuEvents": "BBU-Ereignisse",
+            "bbu": "BBU"
+        },
+        "modal": {
+            "deleteAllTitle": "Alle Protokolle löschen",
+            "deleteAllMessage": "Möchten Sie wirklich alle Protokolle löschen? Diese Aktion kann nicht rückgängig gemacht werden."
+        },
+        "toast": {
+            "errorGet": "Fehler beim Abrufen der Ereignisprotokolle.",
+            "errorDelete": "Fehler beim Löschen von %{count} Protokoll. | Fehler beim Löschen von %{count} Protokollen.",
+            "successDelete": "Erfolgreich %{count} Protokoll gelöscht. | Erfolgreich %{count} Protokolle gelöscht."
+        }
+    },
     "pageFireWall": {
         "firewallSettings": {
             "addNewRule": "Neue Regel hinzufügen",
@@ -2809,7 +2947,8 @@
                 "ipv6": "IPv6",
                 "both": "Beide",
                 "networkType": "Netzwerktyp",
-                "preLoad": "Vorladen"
+                "preLoad": "Vorladen",
+                "ipVersion": "IP-Version"
             }
         },
         "toast": {
@@ -3039,6 +3178,34 @@
             "errorGettingFpgaSensorInfo": "Fehler beim Abrufen der FPGA-Sensorinformationen",
             "errorGettingBaseBoardInfo": "Fehler beim Abrufen der BaseBoard-Informationen",
             "errorGettingBaseBoardSensorInfo": "Fehler beim Abrufen der BaseBoard-Sensorinformationen"
+        }
+    },
+    "advancedLogSettings":{
+        "systemLog": "Systemprotokoll",
+        "localLog": "Lokales Protokoll",
+        "remoteLog": "Remote-Protokoll",
+        "portType": "Porttyp",
+        "udp": "UDP",
+        "tcp": "TCP",
+        "fileSize": "Dateigröße",
+        "rotateCount": "Anzahl drehen",
+        "remotelogserver": "Remote-Protokollserver",
+        "remoteserverport": "Remote-Server-Port",
+        "enableauditlog": "Aktivieren Sie das Audit-Protokoll",
+        "caCertificateFile": "CA-Zertifikatdatei",
+        "certificatefile": "Zertifikatsdatei",
+        "privateKey": "privater Schlüssel",
+        "advancedLogValueLimits": "Bitte geben Sie Werte zwischen %{min} und %{max} ein.",
+        "invalidIPAddress": "Ungültige IP-Adresse",
+        "cacertPEM": "Cacert PEM-Zertifikat",
+        "serverCRT": "Server-CRT-Zertifikat",
+        "serverKey": "Serverschlüsselzertifikat",
+        "incorrectAdvancedCertificateFileType": "Die Datei weist keinen korrekten Zertifikatstyp auf.",
+        "toast": {
+            "successSaveAdvancedLogsSettings": "Erweiterte Protokolleinstellungen erfolgreich gespeichert.",
+            "errorAdvancedAddCertificate": "Fehler beim Hinzufügen des Zertifikats.",
+            "successCertificateUpload": "%{certificate} erfolgreich hinzugefügt.",
+            "errorGettingVideoLog": "Fehler beim Speichern der erweiterten Protokolleinstellungen."
         }
     },
     "countries": {

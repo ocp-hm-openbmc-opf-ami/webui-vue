@@ -344,6 +344,7 @@
                     id="primary-certificate-cacertPEM"
                     v-model="primary.cacertPEM"
                     accept=".pem"
+                    :disabled="isButtonDisable"
                     :state="getValidationState($v.primary.cacertPEM)"
                     @input="onFileUpload($event, 'CacertPEM', 'primary')"
                   >
@@ -364,6 +365,7 @@
                     id="primary-certificate-serverCRT"
                     v-model="primary.serverCRT"
                     accept=".crt"
+                    :disabled="isButtonDisable"
                     :state="getValidationState($v.primary.serverCRT)"
                     @input="onFileUpload($event, 'ServerCRT', 'primary')"
                   >
@@ -384,6 +386,7 @@
                     id="primary-certificate-serverKey"
                     v-model="primary.serverKey"
                     accept=".key"
+                    :disabled="isButtonDisable"
                     :state="getValidationState($v.primary.serverKey)"
                     @input="onFileUpload($event, 'ServerKey', 'primary')"
                   >
@@ -730,6 +733,7 @@
                     id="secondary-certificate-cacertPEM"
                     v-model="secondary.cacertPEM"
                     accept=".pem"
+                    :disabled="isButtonDisable"
                     :state="getValidationState($v.secondary.cacertPEM)"
                     @input="onFileUpload($event, 'CacertPEM', 'secondary')"
                   >
@@ -750,6 +754,7 @@
                     id="secondary-certificate-serverCRT"
                     v-model="secondary.serverCRT"
                     accept=".crt"
+                    :disabled="isButtonDisable"
                     :state="getValidationState($v.secondary.serverCRT)"
                     @input="onFileUpload($event, 'ServerCRT', 'secondary')"
                   >
@@ -770,6 +775,7 @@
                     id="secondary-certificate-serverKey"
                     v-model="secondary.serverKey"
                     accept=".key"
+                    :disabled="isButtonDisable"
                     :state="getValidationState($v.secondary.serverKey)"
                     @input="onFileUpload($event, 'ServerKey', 'secondary')"
                   >
@@ -789,9 +795,11 @@
             <b-button
               variant="primary"
               type="submit"
+              :disabled="isButtonDisable"
               data-test-id="smtp-button-saveSettings"
             >
-              {{ $t('global.action.saveSettings') }}
+              <icon-save />
+              {{ $t('global.action.save') }}
             </b-button>
           </b-col>
           <b-col sm="3">
@@ -801,6 +809,7 @@
               :disabled="!sendTestAlertDisabled"
               @click="sendTestAlert"
             >
+              <icon-send />
               {{ $t('pageSmtp.sendTestAlert') }}
             </b-button>
           </b-col>
@@ -825,6 +834,10 @@ import FormFile from '@/components/Global/FormFile';
 import InputPasswordToggle from '@/components/Global/InputPasswordToggle';
 //license checking
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
+import IconSave from '@carbon/icons-vue/es/save/20';
+import IconSend from '@carbon/icons-vue/es/send--alt--filled/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'SmtpSettings',
@@ -836,6 +849,8 @@ export default {
     ModalSendAlert,
     FormFile,
     InputPasswordToggle,
+    IconSave,
+    IconSend,
   },
   mixins: [BVToastMixin, VuelidateMixin, LoadingBarMixin, LicensecheckMixin],
   data() {
@@ -895,6 +910,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     primaryCacertModifiedDate() {
       return this.$store.getters['smtp/isPrimaryConfig'].cacertModifiedDate;
     },

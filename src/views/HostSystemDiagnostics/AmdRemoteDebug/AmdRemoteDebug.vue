@@ -15,6 +15,7 @@
             id="amdRemoteDebugServer"
             v-model="amdRemoteDebugServer"
             switch
+            :disabled="isButtonDisable"
             @change="changeAmdRemoteDebugServer"
           >
             <span v-if="amdRemoteDebugServer">
@@ -32,6 +33,8 @@
 import PageTitle from '@/components/Global/PageTitle';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -39,6 +42,10 @@ export default {
   },
   mixins: [LoadingBarMixin, BVToastMixin],
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
     amdRemoteDebugServer: {
       get() {
         return this.$store.getters[

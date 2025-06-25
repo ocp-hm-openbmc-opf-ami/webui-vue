@@ -30,11 +30,12 @@
               class="mr10"
               @click="initFlushAllModal()"
             >
+              <icon-trashcan />
               {{ $t('pageFireWall.firewallSettings.flushAll') }}
             </b-button>
             <b-button
               variant="primary"
-              :disabled="items.length >= 64"
+              :disabled="items.length >= 64 || isButtonDisable"
               @click="initFireWallModal()"
             >
               <icon-add />
@@ -128,6 +129,8 @@ import BVPaginationMixin, {
   perPage,
 } from '@/components/Mixins/BVPaginationMixin';
 import { mapState } from 'vuex';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -202,8 +205,8 @@ export default {
           class: 'text-center',
         },
         {
-          key: 'NetworkType',
-          label: this.$t('pageFireWall.table.networkType'),
+          key: 'IPVersion',
+          label: this.$t('pageFireWall.firewallSettings.modal.ipVersion'),
           sortable: true,
           class: 'text-center',
         },
@@ -225,6 +228,10 @@ export default {
   },
   computed: {
     ...mapState('fireWall', ['FireWallData']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
     filteredRows() {
       return this.searchFilter
         ? this.searchTotalFilteredRows
@@ -312,6 +319,10 @@ export default {
               deleteRowVal.EndTime =
                 rowItem.EndTime != '-' ? rowItem.EndTime.replace(' ', 'T') : '';
             }
+            if (rowItem.IPVersion != '-') {
+              deleteRowVal.IPVersion =
+                rowItem.IPVersion != '-' ? rowItem.IPVersion : '';
+            }
             let deleteval = {};
             Object.assign(deleteval, deleteRowVal);
             this.$store
@@ -356,7 +367,7 @@ export default {
         }
         val.EndTime = val.EndTime.replace(/T/g, ' ');
         val.StartTime = val.StartTime.replace(/T/g, ' ');
-        val.NetworkType = 'IPv4';
+        val.IPVersion = 'IPv4';
         val.actions = [
           {
             value: this.$t('global.action.delete'),
@@ -378,7 +389,7 @@ export default {
         }
         val.EndTime = val.EndTime.replace(/T/g, ' ');
         val.StartTime = val.StartTime.replace(/T/g, ' ');
-        val.NetworkType = 'IPv6';
+        val.IPVersion = 'IPv6';
         val.actions = [
           {
             value: this.$t('global.action.delete'),

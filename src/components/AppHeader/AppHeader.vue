@@ -50,7 +50,17 @@
           </div>
         </b-navbar-nav>
         <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto helper-menu">
+        <b-navbar-nav class="ml-auto helper-menu language_dropdown">
+          <b-nav-item>
+            <b-form-select
+              id="language"
+              v-model="$i18n.locale"
+              class="input language_overview"
+              :options="languages"
+              data-test-id="login-select-language"
+              @change="languageChange"
+            ></b-form-select>
+          </b-nav-item>
           <b-nav-item
             v-if="biosFeatureEnabled"
             data-test-id="appHeader-container-bios"
@@ -185,6 +195,7 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import QrcodeVue from 'qrcode.vue';
 import { mapState } from 'vuex';
 import IconInfo from '@carbon/icons-vue/es/information--filled/20';
+import i18n from '@/i18n';
 
 export default {
   name: 'AppHeader',
@@ -221,6 +232,16 @@ export default {
       altLogo: process.env.VUE_APP_COMPANY_NAME || 'AMI',
       licenseStatus: this.$store.getters['license/isLicense'],
       serverStatusIcon: 'secondary', // Set default value
+      languages: [
+        {
+          value: 'en-US',
+          text: 'US - English',
+        },
+        {
+          value: 'ru',
+          text: 'Russian - Русский',
+        },
+      ],
     };
   },
   computed: {
@@ -301,6 +322,21 @@ export default {
       .dispatch('controls/getLastPowerOperationTime')
       .catch((error) => console.error(error))
       .finally(() => this.endLoader());
+    if (process.env.VUE_APP_CHINESE_ZH_CN_LANGUAGE_SUPPORT == 'true')
+      this.languages.push({
+        value: 'zh-CN',
+        text: 'China - 中文 (简体)',
+      });
+    if (process.env.VUE_APP_TAIWAN_ZH_TW_LANGUAGE_SUPPORT == 'true')
+      this.languages.push({
+        value: 'zh-TW',
+        text: 'Taiwan - 中文 (正體)',
+      });
+    if (process.env.VUE_APP_GERMAN_DE_LANGUAGE_SUPPORT == 'true')
+      this.languages.push({
+        value: 'de-DE',
+        text: 'Germany - Deutsch',
+      });
   },
   mounted() {
     this.$root.$on(
@@ -376,6 +412,11 @@ export default {
     },
     resetForm() {
       this.tfaUserEnabled = true;
+    },
+    languageChange() {
+      this.$store.commit('global/setLanguagePreference', i18n.locale);
+      localStorage.setItem('storedLanguage', i18n.locale);
+      this.$emit('languageChange');
     },
   },
 };
@@ -543,5 +584,39 @@ export default {
 }
 .align-center {
   text-align: center;
+}
+.app-header {
+  .language_overview {
+    color: #ffffff !important;
+    background-color: #161616 !important;
+    option {
+      background-color: #ffffff !important;
+      color: #161616 !important;
+    }
+  }
+  .language_dropdown {
+    .nav-link:focus {
+      box-shadow:
+        inset 0 0 0 3px #161616,
+        inset 0 0 0 5px #161616;
+    }
+    .nav-link:hover {
+      background-color: #161616 !important;
+    }
+    .custom-select:focus {
+      box-shadow:
+        inset 0 0 0 3px #161616,
+        inset 0 0 0 5px #161616 !important;
+    }
+    .custom-select:active {
+      border: 2px solid #ffffff !important;
+    }
+    .custom-select {
+      border: 2px solid #ffffff;
+      background: #ffffff
+        url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='white' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e")
+        right 0.75rem center/8px 10px no-repeat;
+    }
+  }
 }
 </style>

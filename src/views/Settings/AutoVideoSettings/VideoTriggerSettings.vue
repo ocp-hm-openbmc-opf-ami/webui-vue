@@ -347,9 +347,11 @@
             <b-btn
               variant="primary"
               type="submit"
+              :disabled="isButtonDisable"
               data-test-id="videoTrigger-button-saveSettings"
               @click="onOk"
             >
+              <icon-save />
               {{ $t('global.action.save') }}
             </b-btn>
           </b-col>
@@ -366,13 +368,21 @@ import IconCalendar from '@carbon/icons-vue/es/calendar/20';
 import { requiredIf, helpers } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { mapState } from 'vuex';
+import IconSave from '@carbon/icons-vue/es/save/20';
 const isoDateRegex = /^([12]\d{3})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
 const isoTimeRegex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/;
 
 export default {
   name: 'Videotrigger',
-  components: { IconCalendar },
+  components: { IconCalendar, IconSave },
   mixins: [LoadingBarMixin, BVToastMixin, VuelidateMixin],
+  props: {
+    isButtonDisable: {
+      required: true,
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       locale: this.$store.getters['global/languagePreference'],

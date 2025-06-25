@@ -187,9 +187,11 @@
                 type="submit"
                 class="btn-style"
                 data-test-id="cupsService-button-saveSettings"
+                :disabled="isButtonDisable"
                 @click="createCupsServices"
               >
-                {{ $t('global.action.saveSettings') }}
+                <icon-save />
+                {{ $t('global.action.save') }}
               </b-btn>
             </b-col>
           </b-row>
@@ -205,9 +207,12 @@ import { mapState } from 'vuex';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   name: 'Cups',
-  components: { PageTitle },
+  components: { PageTitle, IconSave },
   mixins: [VuelidateMixin, BVToastMixin, LoadingBarMixin],
   data() {
     return {
@@ -239,6 +244,10 @@ export default {
       'cupsServiceAveragingPeriod',
       'loadFactorConfiguration',
     ]),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
   },
   watch: {
     staticCoreLoadFactor: function (value) {

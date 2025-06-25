@@ -137,6 +137,10 @@ const UserManagementStore = {
         status,
         PasswordChangeRequired,
         vmediaAccess,
+        snmpUserEnable,
+        encryption,
+        algorithm,
+        readWritePermission,
       },
     ) {
       const data = {
@@ -146,6 +150,16 @@ const UserManagementStore = {
         Enabled: status,
         PasswordChangeRequired: PasswordChangeRequired,
         OEMAccountTypes: vmediaAccess ? ['media'] : [],
+        Oem: {
+          Ami: {
+            SNMP: {
+              Algorithm: algorithm,
+              Encryption: encryption,
+              Access: readWritePermission,
+              SNMPAccessEnableStatus: snmpUserEnable,
+            },
+          },
+        },
       };
       return await api
         .post('/redfish/v1/AccountService/Accounts', data)
@@ -173,6 +187,10 @@ const UserManagementStore = {
         PasswordChangeRequired,
         routerPath,
         vmediaAccess,
+        snmpUserEnable,
+        encryption,
+        algorithm,
+        readWritePermission,
       },
     ) {
       const data = {};
@@ -180,9 +198,48 @@ const UserManagementStore = {
       if (globalPrivilege === 'Administrator') {
         if (originalUsername === 'root') {
           if (password) {
-            data.Password = password;
+            if (snmpUserEnable === true) {
+              data.Password = password;
+              if (username) data.UserName = username;
+              if (
+                snmpUserEnable !== undefined ||
+                encryption !== undefined ||
+                algorithm !== undefined ||
+                readWritePermission !== undefined
+              ) {
+                data.Oem = {
+                  Ami: {
+                    SNMP: {
+                      Algorithm: algorithm,
+                      Encryption: encryption,
+                      Access: readWritePermission,
+                      SNMPAccessEnableStatus: snmpUserEnable,
+                    },
+                  },
+                };
+              }
+            } else {
+              data.Password = password;
+            }
           } else {
             if (username) data.UserName = username;
+            if (
+              snmpUserEnable !== undefined ||
+              encryption !== undefined ||
+              algorithm !== undefined ||
+              readWritePermission !== undefined
+            ) {
+              data.Oem = {
+                Ami: {
+                  SNMP: {
+                    Algorithm: algorithm,
+                    Encryption: encryption,
+                    Access: readWritePermission,
+                    SNMPAccessEnableStatus: snmpUserEnable,
+                  },
+                },
+              };
+            }
           }
         } else {
           if (username) data.UserName = username;
@@ -194,6 +251,23 @@ const UserManagementStore = {
           if (locked !== undefined) data.Locked = locked;
           if (PasswordChangeRequired !== undefined)
             data.PasswordChangeRequired = PasswordChangeRequired;
+          if (
+            snmpUserEnable !== undefined ||
+            encryption !== undefined ||
+            algorithm !== undefined ||
+            readWritePermission !== undefined
+          ) {
+            data.Oem = {
+              Ami: {
+                SNMP: {
+                  Algorithm: algorithm,
+                  Encryption: encryption,
+                  Access: readWritePermission,
+                  SNMPAccessEnableStatus: snmpUserEnable,
+                },
+              },
+            };
+          }
         }
       } else if (
         globalPrivilege === 'Operator' ||

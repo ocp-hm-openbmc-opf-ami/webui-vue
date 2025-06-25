@@ -53,8 +53,10 @@
           <b-button
             variant="primary"
             type="submit"
+            :disabled="isButtonDisable"
             data-test-id="power-button-savePowerCapValue"
           >
+            <icon-save />
             {{ $t('global.action.save') }}
           </b-button>
         </b-form-group>
@@ -70,10 +72,12 @@ import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import { requiredIf, between } from 'vuelidate/lib/validators';
 import { mapGetters } from 'vuex';
+import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
 
 export default {
   name: 'Power',
-  components: { PageTitle },
+  components: { PageTitle, IconSave },
   mixins: [VuelidateMixin, BVToastMixin, LoadingBarMixin],
   beforeRouteLeave(to, from, next) {
     this.hideLoader();
@@ -89,6 +93,10 @@ export default {
     ...mapGetters({
       powerConsumptionValue: 'powerControl/powerConsumptionValue',
     }),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
 
     /**
       Computed property isPowerCapFieldEnabled is used to enable or disable the input field.

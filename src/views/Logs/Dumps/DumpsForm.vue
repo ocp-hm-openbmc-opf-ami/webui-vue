@@ -24,7 +24,13 @@
       <alert variant="info" class="mb-3" :show="selectedDumpType === 'system'">
         {{ $t('pageDumps.form.systemDumpInfo') }}
       </alert>
-      <b-button variant="primary" type="submit" form="form-new-dump">
+      <b-button
+        variant="primary"
+        type="submit"
+        form="form-new-dump"
+        :disabled="isButtonDisable"
+      >
+        <icon-touch />
         {{ $t('pageDumps.form.initiateDump') }}
       </b-button>
     </b-form>
@@ -38,9 +44,12 @@ import ModalConfirmation from './DumpsModalConfirmation';
 import Alert from '@/components/Global/Alert';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
+import IconTouch from '@carbon/icons-vue/es/touch--interaction/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
-  components: { Alert, ModalConfirmation },
+  components: { Alert, ModalConfirmation, IconTouch },
   mixins: [BVToastMixin, VuelidateMixin],
   data() {
     return {
@@ -49,6 +58,12 @@ export default {
         { value: 'bmc', text: this.$t('pageDumps.form.bmcDump') },
       ],
     };
+  },
+  computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
   },
   validations() {
     return {

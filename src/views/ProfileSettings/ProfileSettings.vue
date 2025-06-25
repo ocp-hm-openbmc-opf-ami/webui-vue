@@ -135,7 +135,8 @@
         type="submit"
         data-test-id="profileSettings-button-saveSettings"
       >
-        {{ $t('global.action.saveSettings') }}
+        <icon-save />
+        {{ $t('global.action.save') }}
       </b-button>
     </b-form>
   </b-container>
@@ -150,10 +151,11 @@ import LocalTimezoneLabelMixin from '@/components/Mixins/LocalTimezoneLabelMixin
 import PageTitle from '@/components/Global/PageTitle';
 import PageSection from '@/components/Global/PageSection';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
+import IconSave from '@carbon/icons-vue/es/save/20';
 
 export default {
   name: 'ProfileSettings',
-  components: { InputPasswordToggle, PageSection, PageTitle },
+  components: { InputPasswordToggle, PageSection, PageTitle, IconSave },
   mixins: [
     BVToastMixin,
     LocalTimezoneLabelMixin,

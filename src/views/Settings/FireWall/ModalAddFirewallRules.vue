@@ -106,6 +106,60 @@
       <b-row>
         <b-col sm="6">
           <b-form-group
+            :label="$t('pageFireWall.firewallSettings.modal.ipVersion')"
+            label-for="ipVersion"
+          >
+            <b-form-select
+              id="ipVersion"
+              v-model="form.ipVersion"
+              class="input"
+              :options="ipVersionOptions"
+              data-test-id="ipVersion-option"
+              :state="getValidationState($v.form.ipVersion)"
+              ><template #first>
+                <b-form-select-option :value="valuedefault" disabled>
+                  {{ $t('global.form.selectAnOption') }}
+                </b-form-select-option>
+              </template></b-form-select
+            >
+            <b-form-invalid-feedback role="alert">
+              <template v-if="!$v.form.ipVersion.required">
+                {{ $t('global.form.fieldRequired') }}
+              </template>
+            </b-form-invalid-feedback>
+          </b-form-group>
+        </b-col>
+        <b-col sm="6">
+          <b-form-group
+            :label="$t('pageFireWall.firewallSettings.modal.sourceMacAddress')"
+            label-for="sourceMacAddress"
+          >
+            <b-form-input
+              id="sourceMacAddress"
+              v-model="form.sourceMacAddress"
+              type="text"
+              :state="getValidationState($v.form.sourceMacAddress)"
+              @input="$v.form.sourceMacAddress.$touch()"
+            />
+            <b-form-invalid-feedback role="alert">
+              <template v-if="!$v.form.sourceMacAddress.required">
+                {{ $t('global.form.fieldRequired') }}
+              </template>
+              <template
+                v-if="
+                  $v.form.sourceMacAddress.required &&
+                  !$v.form.sourceMacAddress.pattern
+                "
+              >
+                {{ $t('global.form.invalidFormat') }}
+              </template>
+            </b-form-invalid-feedback>
+          </b-form-group>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col sm="6">
+          <b-form-group
             :label="$t('pageFireWall.firewallSettings.modal.ipStart')"
             label-for="ipStart"
           >
@@ -114,13 +168,16 @@
               v-model="form.ipStart"
               type="text"
               :state="getValidationState($v.form.ipStart)"
+              :disabled="form.ipVersion != '' && form.ipVersion == 'BOTH'"
               @input="$v.form.ipStart.$touch()"
             />
             <b-form-invalid-feedback role="alert">
               <template v-if="!$v.form.ipStart.required">
                 {{ $t('global.form.fieldRequired') }}
               </template>
-              <template v-if="!$v.form.ipStart.pattern">
+              <template
+                v-if="$v.form.ipStart.required && !$v.form.ipStart.pattern"
+              >
                 {{ $t('pageFireWall.firewallSettings.modal.invalidIPAddress') }}
               </template>
             </b-form-invalid-feedback>
@@ -136,32 +193,12 @@
               v-model="form.ipEnd"
               type="text"
               :state="getValidationState($v.form.ipEnd)"
+              :disabled="form.ipVersion != '' && form.ipVersion == 'BOTH'"
               @input="$v.form.ipEnd.$touch()"
             />
             <b-form-invalid-feedback role="alert">
               <template v-if="!$v.form.ipEnd.pattern">
                 {{ $t('pageFireWall.firewallSettings.modal.invalidIPAddress') }}
-              </template>
-            </b-form-invalid-feedback>
-          </b-form-group>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col sm="6">
-          <b-form-group
-            :label="$t('pageFireWall.firewallSettings.modal.sourceMacAddress')"
-            label-for="sourceMacAddress"
-          >
-            <b-form-input
-              id="sourceMacAddress"
-              v-model="form.sourceMacAddress"
-              type="text"
-              :state="getValidationState($v.form.sourceMacAddress)"
-              @input="$v.form.sourceMacAddress.$touch()"
-            />
-            <b-form-invalid-feedback role="alert">
-              <template v-if="!$v.form.sourceMacAddress.pattern">
-                {{ $t('global.form.invalidFormat') }}
               </template>
             </b-form-invalid-feedback>
           </b-form-group>
@@ -341,9 +378,11 @@
     </b-form>
     <template #modal-footer="{ cancel }">
       <b-button variant="secondary" @click="cancel()">
+        <icon-cancel />
         {{ $t('global.action.cancel') }}
       </b-button>
       <b-button form="form-ipv6" type="submit" variant="primary" @click="onOk">
+        <icon-add />
         {{ $t('global.action.add') }}
       </b-button>
     </template>
@@ -354,11 +393,13 @@
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import IconCalendar from '@carbon/icons-vue/es/calendar/20';
 import { required, requiredIf, helpers } from 'vuelidate/lib/validators';
+import IconAdd from '@carbon/icons-vue/es/add--alt/20';
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
 
 const isoTimeRegex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
 
 export default {
-  components: { IconCalendar },
+  components: { IconCalendar, IconAdd, IconCancel },
   mixins: [VuelidateMixin],
   props: {
     modalSuccess: {
@@ -382,6 +423,7 @@ export default {
         endTime: '',
         endDate: '',
         target: '',
+        ipVersion: '',
       },
       protocolOptions: [
         {
@@ -405,6 +447,20 @@ export default {
         {
           text: this.$t('pageFireWall.firewallSettings.modal.drop'),
           value: 'DROP',
+        },
+      ],
+      ipVersionOptions: [
+        {
+          text: this.$t('pageFireWall.firewallSettings.modal.ipv4'),
+          value: 'IPv4',
+        },
+        {
+          text: this.$t('pageFireWall.firewallSettings.modal.ipv6'),
+          value: 'IPv6',
+        },
+        {
+          text: this.$t('pageFireWall.firewallSettings.modal.both'),
+          value: 'BOTH',
         },
       ],
       value: '',
@@ -433,7 +489,7 @@ export default {
         },
         ipStart: {
           required: requiredIf(function (form) {
-            if (form.ipEnd != '') {
+            if (form.ipVersion != '' && form.ipVersion != 'BOTH') {
               return true;
             }
           }),
@@ -466,6 +522,11 @@ export default {
           },
         },
         sourceMacAddress: {
+          required: requiredIf(function (form) {
+            if (form.ipVersion != '' && form.ipVersion === 'BOTH') {
+              return true;
+            }
+          }),
           pattern: function (val) {
             return this.sourceMacAddressValidation(val);
           },
@@ -521,6 +582,9 @@ export default {
             }
           },
         },
+        ipVersion: {
+          required,
+        },
       },
     };
   },
@@ -538,6 +602,7 @@ export default {
       this.form.endTime = '';
       this.form.endDate = '';
       this.form.target = '';
+      this.form.ipVersion = '';
       this.$v.$reset();
     },
     onOk() {
@@ -572,10 +637,18 @@ export default {
       if (this.form.target != '') {
         addrules.Target = this.form.target;
       }
-      if (this.form.ipStart != '') {
+      if (
+        this.form.ipVersion != '' &&
+        this.form.ipVersion != 'BOTH' &&
+        this.form.ipStart != ''
+      ) {
         addrules.StartSourceIPAddress = this.form.ipStart;
       }
-      if (this.form.ipEnd != '') {
+      if (
+        this.form.ipVersion != '' &&
+        this.form.ipVersion != 'BOTH' &&
+        this.form.ipEnd != ''
+      ) {
         addrules.EndSourceIPAddress = this.form.ipEnd;
       }
       if (this.form.sourceMacAddress != '') {
@@ -589,6 +662,9 @@ export default {
         addrules.EndTime =
           enddateval != '' ? enddateval.toISOString().substring(0, 19) : '';
       }
+      if (this.form.ipVersion != '') {
+        addrules.IPVersion = this.form.ipVersion;
+      }
 
       Object.assign(addallrules, addrules);
       this.$emit('addNewRulesOk', addallrules);
@@ -600,6 +676,31 @@ export default {
       });
     },
     ipStartValidation(value) {
+      if (
+        (this.form.ipVersion != '' && this.form.ipVersion === 'BOTH') ||
+        !value ||
+        value.length === 0
+      ) {
+        return true; // Return true for empty input (not invalid)
+      }
+      const isIPv4 = this.ipv4Regex(value);
+      const isIPv6 = this.ipv6Regex(value);
+
+      if (!isIPv4 && !isIPv6) {
+        return false;
+      } else if (
+        this.form.ipVersion != '' &&
+        this.form.ipVersion == 'IPv6' &&
+        !isIPv6
+      ) {
+        return false;
+      } else if (
+        this.form.ipVersion != '' &&
+        this.form.ipVersion == 'IPv4' &&
+        !isIPv4
+      ) {
+        return false;
+      }
       if (
         (!/((^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))$)|(^((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?$))/.test(
           value,
@@ -615,7 +716,8 @@ export default {
         !/^(?=.{1,254}$)((?=[a-z0-9-]{1 ,63}\.)(xn--+)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}$/i.test(
           value,
         ) &&
-        value.length != 0
+        this.form.ipVersion != '' &&
+        this.form.ipVersion != 'BOTH'
       ) {
         return false;
       } else {
@@ -623,30 +725,55 @@ export default {
       }
     },
     ipEndValidation(value) {
-      if (!value || !this.form.ipStart) {
-        return false;
+      // Only validate if there's input (length > 0)
+      if (
+        (this.form.ipVersion != '' && this.form.ipVersion === 'BOTH') ||
+        !value ||
+        value.length === 0
+      ) {
+        return true; // Return true for empty input (not invalid)
       }
-      // Validate format using regex
-      const ipv4Regex =
-        /^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))$/;
-      const ipv6Regex =
-        /^(([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:)|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?$/;
 
-      const isIPv4 = ipv4Regex.test(value);
-      const isIPv6 = ipv6Regex.test(value);
+      const isIPv4 = this.ipv4Regex(value);
+      const isIPv6 = this.ipv6Regex(value);
 
       if (!isIPv4 && !isIPv6) {
         return false;
-      }
-
-      try {
-        const startIPNum = this.ipToNumber(this.form.ipStart);
-        const endIPNum = this.ipToNumber(value);
-
-        return this.compareIPArrays(startIPNum, endIPNum);
-      } catch (error) {
+      } else if (
+        this.form.ipVersion != '' &&
+        this.form.ipVersion == 'IPv6' &&
+        !isIPv6
+      ) {
+        return false;
+      } else if (
+        this.form.ipVersion != '' &&
+        this.form.ipVersion == 'IPv4' &&
+        !isIPv4
+      ) {
         return false;
       }
+
+      // Only compare if start IP exists and is valid
+      if (this.form.ipStart && this.form.ipStart.length > 0) {
+        try {
+          const startIPNum = this.ipToNumber(this.form.ipStart);
+          const endIPNum = this.ipToNumber(value);
+
+          // Additional check for same IP version
+          if (
+            (isIPv4 && this.form.ipStart.includes(':')) ||
+            (isIPv6 && this.form.ipStart.includes('.'))
+          ) {
+            return false;
+          }
+
+          return this.compareIPArrays(startIPNum, endIPNum);
+        } catch (error) {
+          return false;
+        }
+      }
+
+      return true; // If no start IP to compare against, just validate format
     },
 
     ipToNumber(ip) {

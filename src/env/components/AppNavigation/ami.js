@@ -105,6 +105,11 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.pam'),
               route: '/settings/pam',
             },
+            {
+              id: 'advanced-log-settings',
+              label: this.$t('appNavigation.advancedLogSettings'),
+              route: '/settings/advanced-log',
+            },
           ],
         },
         {
@@ -241,6 +246,13 @@ const AppNavigationMixin = {
           id: 'video-log',
           label: this.$t('appNavigation.videoLog'),
           route: '/logs/video-log',
+        });
+      }
+      if (process.env.VUE_APP_ONETREE_SEL_ENABLED === 'true') {
+        navigationItemsList.navigationItems[1].children.push({
+          id: 'ipmi-event-log',
+          label: this.$t('appNavigation.ipmiEventLog'),
+          route: '/logs/ipmi-event-log',
         });
       }
       if (process.env.VUE_APP_OBMC_DEBUG_COLLECTOR_ENABLED === 'true') {
@@ -382,6 +394,11 @@ const AppNavigationMixin = {
               id: 'raid-topology',
               label: this.$t('appNavigation.raidTopology'),
               route: '/raid/topology',
+            },
+            {
+              id: 'raid-event-log',
+              label: this.$t('appNavigation.raidEventLog'),
+              route: '/raid/raid-event-log',
             },
           ],
         });

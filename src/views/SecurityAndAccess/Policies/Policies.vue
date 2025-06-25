@@ -33,6 +33,7 @@
                       v-model="sshProtocolState"
                       data-test-id="policies-toggle-bmcShell"
                       switch
+                      :disabled="userPrivilege !== privilegesId.admin"
                       @change="changeSshProtocolState"
                     >
                       <span class="sr-only">
@@ -63,6 +64,7 @@
                       v-model="ipmiProtocolState"
                       data-test-id="polices-toggle-networkIpmi"
                       switch
+                      :disabled="userPrivilege !== privilegesId.admin"
                       @change="changeIpmiProtocolState"
                     >
                       <span class="sr-only">
@@ -148,6 +150,7 @@
                       v-model="kvmState"
                       data-test-id="policies-toggle-kvm"
                       switch
+                      :disabled="userPrivilege !== privilegesId.admin"
                       @change="changeKmvState"
                     >
                       <span class="sr-only">
@@ -172,6 +175,7 @@
                         v-model.number="kvmPort"
                         data-test-id="input-kvmPort"
                         type="number"
+                        :disabled="userPrivilege !== privilegesId.admin"
                         aria-describedby="power-help-text"
                         :state="getValidationState($v.kvmPort)"
                         @input="$v.kvmPort.$touch()"
@@ -195,9 +199,11 @@
                     <b-button
                       variant="primary"
                       type="submit"
+                      :disabled="userPrivilege !== privilegesId.admin"
                       data-test-id="button-saveKVMPortValue"
                       @click="saveKVMPortValue"
                     >
+                      <icon-save />
                       {{ $t('global.action.save') }}
                     </b-button>
                   </b-col>
@@ -214,6 +220,7 @@
                         v-model.number="webPort"
                         data-test-id="input-webPort"
                         type="number"
+                        :disabled="userPrivilege !== privilegesId.admin"
                         aria-describedby="power-help-text"
                         :state="getValidationState($v.webPort)"
                         @input="$v.webPort.$touch()"
@@ -237,9 +244,11 @@
                     <b-button
                       variant="primary"
                       type="submit"
+                      :disabled="userPrivilege !== privilegesId.admin"
                       data-test-id="button-saveWebPortValue"
                       @click="saveWebPortValue"
                     >
+                      <icon-save />
                       {{ $t('global.action.save') }}
                     </b-button>
                   </b-col>
@@ -262,6 +271,7 @@
                       v-model="vmcState"
                       data-test-id="policies-toggle-vmc"
                       switch
+                      :disabled="userPrivilege === privilegesId.readOnly"
                       @change="changeVmcState"
                     >
                       <span class="sr-only">
@@ -285,6 +295,7 @@
                         <b-form-input
                           id="input-vm-interval"
                           v-model="vmReconnectValues.vmInterval"
+                          :disabled="userPrivilege === privilegesId.readOnly"
                           data-test-id="input-vminterval"
                           aria-describedby="power-help-text"
                           :state="
@@ -325,6 +336,7 @@
                           v-model="vmReconnectValues.vmCount"
                           data-test-id="input-vmcount"
                           aria-describedby="power-help-text"
+                          :disabled="userPrivilege === privilegesId.readOnly"
                           :state="
                             getValidationState($v.vmReconnectValues.vmCount)
                           "
@@ -356,9 +368,11 @@
                       <b-button
                         variant="primary"
                         type="submit"
+                        :disabled="userPrivilege === privilegesId.readOnly"
                         data-test-id="button-saveVMReconnectValues"
                         @click="saveVMReconnectValues"
                       >
+                        <icon-save />
                         {{ $t('global.action.save') }}
                       </b-button>
                     </b-col>
@@ -382,6 +396,7 @@
                       v-model="solState"
                       data-test-id="policies-toggle-sol"
                       switch
+                      :disabled="userPrivilege === privilegesId.readOnly"
                       @change="changeSOLState"
                     >
                       <span class="sr-only">
@@ -406,6 +421,7 @@
                         v-model.number="solSshPort"
                         data-test-id="input-solSshPort"
                         type="number"
+                        :disabled="userPrivilege === privilegesId.readOnly"
                         aria-describedby="power-help-text"
                         :state="getValidationState($v.solSshPort)"
                         @input="$v.solSshPort.$touch()"
@@ -429,9 +445,11 @@
                     <b-button
                       variant="primary"
                       type="submit"
+                      :disabled="userPrivilege === privilegesId.readOnly"
                       data-test-id="power-button-saveIpmiPortValue"
                       @click="saveSolSshPortValue"
                     >
+                      <icon-save />
                       {{ $t('global.action.save') }}
                     </b-button>
                   </b-col>
@@ -452,6 +470,7 @@
                       v-model="ssdpState"
                       data-test-id="policies-toggle-sol"
                       switch
+                      :disabled="userPrivilege !== privilegesId.admin"
                       @change="changeSSDPLState"
                     >
                       <span class="sr-only">
@@ -492,6 +511,7 @@
                       v-model="snmpState"
                       data-test-id="policies-toggle-sol"
                       switch
+                      :disabled="userPrivilege !== privilegesId.admin"
                       @change="changeSNMPState"
                     >
                       <span class="sr-only">
@@ -519,6 +539,7 @@
                       v-model="snmpv1State"
                       data-test-id="policies-toggle-sol"
                       switch
+                      :disabled="userPrivilege !== privilegesId.admin"
                       @change="changeSNMPv1State"
                     >
                       <span class="sr-only">
@@ -546,6 +567,7 @@
                       v-model="snmpv2cState"
                       data-test-id="policies-toggle-sol"
                       switch
+                      :disabled="userPrivilege !== privilegesId.admin"
                       @change="changeSNMPv2cState"
                     >
                       <span class="sr-only">
@@ -573,6 +595,7 @@
                       v-model="snmpv3State"
                       data-test-id="policies-toggle-sol"
                       switch
+                      :disabled="userPrivilege !== privilegesId.admin"
                       @change="changeSNMPv3State"
                     >
                       <span class="sr-only">
@@ -613,6 +636,7 @@
                       v-model="openSslFipsState"
                       data-test-id="policies-toggle-sol"
                       switch
+                      :disabled="userPrivilege !== privilegesId.admin"
                       @change="changeOpenSslFipsState"
                     >
                       <span class="sr-only">
@@ -653,6 +677,7 @@
                         data-test-id="web-session-timeout"
                         aria-describedby="power-help-text"
                         type="text"
+                        :disabled="userPrivilege !== privilegesId.admin"
                         :state="getValidationState($v.webSessionTimeoutValue)"
                         @input="$v.webSessionTimeoutValue.$touch()"
                       >
@@ -682,8 +707,10 @@
                       variant="primary"
                       type="submit"
                       data-test-id="button-web-session-timeout"
+                      :disabled="userPrivilege !== privilegesId.admin"
                       @click="saveWebSessionTimeoutValue"
                     >
+                      <icon-save />
                       {{ $t('global.action.save') }}
                     </b-button>
                   </b-col>
@@ -707,6 +734,7 @@
                         v-model="kvmSessionTimeOutValue"
                         data-test-id="kvm-session-timeout"
                         type="text"
+                        :disabled="userPrivilege !== privilegesId.admin"
                         aria-describedby="power-help-text"
                         :state="getValidationState($v.kvmSessionTimeOutValue)"
                         @input="$v.kvmSessionTimeOutValue.$touch()"
@@ -731,8 +759,10 @@
                       variant="primary"
                       type="submit"
                       data-test-id="button-kvm-session-timeout"
+                      :disabled="userPrivilege !== privilegesId.admin"
                       @click="saveKVMSessionTimeoutValue"
                     >
+                      <icon-save />
                       {{ $t('global.action.save') }}
                     </b-button>
                   </b-col>
@@ -751,6 +781,7 @@
                       <b-form-select
                         id="sol-baudRate"
                         v-model="baudRateState"
+                        :disabled="userPrivilege !== privilegesId.admin"
                         data-test-id="sol-select-baudRate"
                         :options="baudRateOptions"
                       ></b-form-select>
@@ -758,9 +789,11 @@
                     <b-button
                       variant="primary"
                       type="submit"
+                      :disabled="userPrivilege !== privilegesId.admin"
                       data-test-id="sol-button-saveBaudRateValue"
                       @click="saveBaudRateValue"
                     >
+                      <icon-save />
                       {{ $t('global.action.save') }}
                     </b-button>
                   </b-col>
@@ -781,6 +814,7 @@
                     <b-form-select
                       id="complexity"
                       v-model="complexityState"
+                      :disabled="userPrivilege !== privilegesId.admin"
                       :options="complexityOptions"
                       @change="changeComplexity"
                     >
@@ -803,6 +837,7 @@
                     <b-form-select
                       id="password-history"
                       v-model="passwordHistoryState"
+                      :disabled="userPrivilege !== privilegesId.admin"
                       :options="passwordHistoryOptions"
                       @change="changePasswordHistory"
                     >
@@ -848,9 +883,12 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import { required } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { mapState } from 'vuex';
+import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   name: 'Policies',
-  components: { PageTitle, PageSection },
+  components: { PageTitle, PageSection, IconSave },
   mixins: [LoadingBarMixin, BVToastMixin, VuelidateMixin],
   beforeRouteLeave(to, from, next) {
     this.hideLoader();
@@ -859,6 +897,7 @@ export default {
   data() {
     return {
       policiesOverlay: false,
+      privilegesId,
       baudRate: '',
       sessionTimeOutOptions: [
         { value: 1800, text: this.$t('pagePolicies.options.30minutes') },
@@ -931,6 +970,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
     sshProtocolState: {
       get() {
         return this.$store.getters['policies/sshProtocolEnabled'];

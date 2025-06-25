@@ -111,9 +111,11 @@
         class="mt-2"
         variant="primary"
         type="submit"
+        :disabled="isButtonDisable"
         data-test-id="ncsi-button-savencsiMode"
         @click="saveNcsiConfiguration"
       >
+        <icon-save />
         {{ $t('global.action.save') }}
       </b-button>
     </div>
@@ -126,9 +128,12 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { required } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
+import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   name: 'Ncsi',
-  components: { PageTitle },
+  components: { PageTitle, IconSave },
   mixins: [LoadingBarMixin, BVToastMixin, VuelidateMixin],
   data() {
     return {
@@ -140,23 +145,24 @@ export default {
       form: {
         enableConfiguration: '',
       },
-      ncsiInterfaceOptions: this.$store.getters['ncsi/ncsiInterface'],
+      ncsiInterfaceOptions: [],
       packageIdOptions: [
         { value: 0, text: this.$t('pageNcsi.options.packageOption') },
       ],
       channelNumberOptions: [],
       checkNcsi: true,
+      ncsiData: [],
     };
   },
   computed: {
-    ...mapState('ncsi', ['ncsiData', 'ncsiInterface']),
+    ...mapState('ncsi', ['ncsiInterface']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
   },
   watch: {
-    ncsiInterface: function (value) {
-      this.ncsiInterfaceOptions = value;
-      this.ncsiInterfaceId = this.ncsiInterfaceOptions[0];
-    },
-    ncsiData() {
+    ncsiInterface() {
       this.bindNcsiData();
     },
   },
@@ -188,18 +194,32 @@ export default {
       this.checkNcsi = this.$store.getters['ncsi/ncsiEnable'];
     },
     bindNcsiData() {
-      this.ncsiInterfaceData = [];
-      this.ncsiInterfaceData = this.$store.getters['ncsi/ncsiData'];
-      this.changeInterfaceId(this.ncsiInterfaceId);
+      this.ncsiInterfaceData = this.$store.getters['ncsi/ncsiInterface'];
+      if (this.ncsiInterfaceData && this.ncsiInterfaceData.length > 0) {
+        this.ncsiInterfaceData.forEach((val) => {
+          this.ncsiInterfaceOptions.push({
+            value: val,
+            text: val,
+          });
+        });
+        this.changeInterfaceId(this.ncsiInterfaceOptions[0].value);
+      } else {
+        this.ncsiInterfaceOptions = [];
+      }
     },
     changeInterfaceId(selectedId) {
-      if (this.ncsiInterfaceData && this.ncsiInterfaceData.length > 0) {
-        this.channelNumberOptions = [];
-        this.ncsiInterfaceData.forEach((val) => {
-          if (selectedId === val?.Id) {
-            this.selectedMode = val?.Oem?.Ami?.NCSIConfiguration?.Mode;
+      this.startLoader();
+      this.$store
+        .dispatch('ncsi/getNcsiData', selectedId)
+        .then(() => {
+          this.ncsiData = this.$store.getters['ncsi/ncsiData'];
+          if (this.ncsiData) {
+            this.ncsiInterfaceId = selectedId;
+            this.channelNumberOptions = [];
+            this.selectedMode =
+              this.ncsiData?.Oem?.Ami?.NCSIConfiguration?.Mode;
             const channelList =
-              val?.Oem?.Ami?.NCSIConfiguration?.ChannelList[0];
+              this.ncsiData?.Oem?.Ami?.NCSIConfiguration?.ChannelList[0];
             channelList.SupportedChannelsId.forEach((channel) => {
               this.channelNumberOptions.push({
                 value: channel,
@@ -208,12 +228,13 @@ export default {
             });
             this.ncsiPackageId = channelList.PackageId;
             this.ncsiChannelNumber =
-              val?.Oem?.Ami?.NCSIConfiguration?.ChannelId === 31
-                ? 0
-                : val?.Oem?.Ami?.NCSIConfiguration?.ChannelId;
+              this.ncsiData?.Oem?.Ami?.NCSIConfiguration?.ChannelId;
           }
+        })
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => {
+          this.endLoader();
         });
-      }
     },
     saveNcsiConfiguration() {
       let data = {};
@@ -235,6 +256,7 @@ export default {
         .then((success) => {
           if (success) {
             this.successToast(success);
+            this.changeInterfaceId(data.interFace);
           }
         })
         .catch(({ message }) => this.errorToast(message))

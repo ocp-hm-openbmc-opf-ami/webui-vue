@@ -57,7 +57,7 @@
             class="display"
             date-test-id="AutonomousCrashDump-toggle-ACDstate"
             switch
-            :disabled="polling === 'Running'"
+            :disabled="polling === 'Running' || isButtonDisable"
             @change="changeAcdServer"
           >
             <span class="sr-only display">
@@ -75,7 +75,9 @@
             variant="primary"
             :disabled="allConnections.length === 0"
             @click="downloadZipFile"
-            >{{ $t('pageAutonomousCrashDump.action.download') }}</b-button
+            ><icon-download />{{
+              $t('pageAutonomousCrashDump.action.download')
+            }}</b-button
           >
           <b-tooltip target="downloadlog" triggers> </b-tooltip>
         </b-form-group>
@@ -84,6 +86,7 @@
           id="toolbtn"
           title="Click to Generate the logs"
           variant="primary"
+          :disabled="isButtonDisable"
           @click="createCrashDump"
           ><icon-add />{{
             $t('pageAutonomousCrashDump.action.generate')
@@ -110,6 +113,9 @@ import Loader from '@/components/Global/Loader';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
 import { mapState } from 'vuex';
+import IconDownload from '@carbon/icons-vue/es/document--download/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   components: {
     PageTitle,
@@ -118,6 +124,7 @@ export default {
     IconAdd,
     ModalView,
     Loader,
+    IconDownload,
   },
   mixins: [LoadingBarMixin, BVToastMixin],
   beforeRouteLeave(to, from, next) {
@@ -159,6 +166,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
     allConnections() {
       return this.$store.getters['acd/allCrashDump'].map((log) => {
         return {

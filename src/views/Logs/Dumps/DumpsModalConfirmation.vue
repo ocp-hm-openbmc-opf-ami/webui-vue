@@ -28,6 +28,7 @@
     </b-form-invalid-feedback>
     <template #modal-footer="{ cancel }">
       <b-button variant="secondary" @click="cancel()">
+        <icon-cancel />
         {{ $t('global.action.cancel') }}
       </b-button>
       <b-button variant="danger" @click="handleSubmit">
@@ -40,9 +41,9 @@
 <script>
 import StatusIcon from '@/components/Global/StatusIcon';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
-
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
 export default {
-  components: { StatusIcon },
+  components: { StatusIcon, IconCancel },
   mixins: [VuelidateMixin],
   data() {
     return {

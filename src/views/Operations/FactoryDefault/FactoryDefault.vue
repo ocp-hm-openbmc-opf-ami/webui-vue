@@ -209,8 +209,10 @@
             <b-button
               type="submit"
               variant="primary"
+              :disabled="isButtonDisable"
               @click="onRestoreToDefaults"
             >
+              <icon-save />
               {{ $t('global.action.save') }}
             </b-button>
           </b-col>
@@ -225,10 +227,13 @@ import PageTitle from '@/components/Global/PageTitle';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import { mapState } from 'vuex';
+import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'FactoryDefault',
-  components: { PageTitle },
+  components: { PageTitle, IconSave },
   mixins: [BVToastMixin, LoadingBarMixin],
   data() {
     return {
@@ -256,6 +261,10 @@ export default {
   },
   computed: {
     ...mapState('FactoryDefault', ['resetDefaultValues']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
   },
   watch: {
     resetDefaultValues() {

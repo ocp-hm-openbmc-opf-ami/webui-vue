@@ -336,6 +336,7 @@
         data-test-id="newpolicy-button-cancel"
         @click="cancel()"
       >
+        <icon-cancel />
         {{ $t('global.action.cancel') }}
       </b-button>
       <b-button
@@ -346,9 +347,11 @@
         @click="onOk"
       >
         <template v-if="policiesData">
+          <icon-add />
           {{ $t('pageNodeManager.createNewPolicy') }}
         </template>
         <template v-else>
+          <icon-save />
           {{ $t('global.action.save') }}
         </template>
       </b-button>
@@ -358,7 +361,15 @@
 <script>
 import { required } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
+import IconSave from '@carbon/icons-vue/es/save/20';
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
+import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 export default {
+  components: {
+    IconSave,
+    IconCancel,
+    IconAdd,
+  },
   mixins: [VuelidateMixin],
   props: {
     policies: {

@@ -232,7 +232,8 @@
           <b-row class="mt-4 mb-5">
             <b-col>
               <b-btn variant="primary" type="submit" @click="SaveConfig">
-                {{ $t('global.action.saveSettings') }}
+                <icon-save />
+                {{ $t('global.action.save') }}
               </b-btn>
             </b-col>
           </b-row>
@@ -248,11 +249,13 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { requiredIf } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
+import IconSave from '@carbon/icons-vue/es/save/20';
 
 export default {
   name: 'Radius',
   components: {
     PageTitle,
+    IconSave,
   },
   mixins: [BVToastMixin, VuelidateMixin, LoadingBarMixin],
   data() {

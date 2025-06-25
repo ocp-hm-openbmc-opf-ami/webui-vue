@@ -70,6 +70,7 @@
               <b-form-checkbox
                 v-model="tableHeaderCheckboxModel"
                 :indeterminate="tableHeaderCheckboxIndeterminate"
+                :disabled="isButtonDisable"
                 @change="onChangeHeaderCheckbox($refs.table)"
               >
                 <span class="sr-only">{{ $t('global.table.selectAll') }}</span>
@@ -78,6 +79,7 @@
             <template #cell(checkbox)="row">
               <b-form-checkbox
                 v-model="row.rowSelected"
+                :disabled="isButtonDisable"
                 @change="toggleSelectRow($refs.table, row.index)"
               >
                 <span class="sr-only">{{ $t('global.table.selectItem') }}</span>
@@ -103,6 +105,7 @@
                 :value="action.value"
                 :title="action.title"
                 :download-location="downloadFile(row.item.data)"
+                :enabled="action.enabled"
                 :export-name="exportFileName(row)"
                 @click-table-action="onTableRowAction($event, row.item)"
               >
@@ -172,6 +175,8 @@ import SearchFilterMixin, {
 } from '@/components/Mixins/SearchFilterMixin';
 import TableFilter from '@/components/Global/TableFilter';
 import TableFilterMixin from '@/components/Mixins/TableFilterMixin';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -262,6 +267,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     filteredRows() {
       return this.searchFilter
         ? this.searchTotalFilteredRows
@@ -274,10 +283,12 @@ export default {
           actions: [
             {
               value: 'download',
+              enabled: !this.isButtonDisable,
               title: this.$t('global.action.download'),
             },
             {
               value: 'delete',
+              enabled: !this.isButtonDisable,
               title: this.$t('global.action.delete'),
             },
           ],

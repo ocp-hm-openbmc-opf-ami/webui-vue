@@ -10,6 +10,7 @@
             <b-form-select
               id="hInterval"
               v-model="form.historyIntervalValue"
+              :disabled="isButtonDisable"
               class="input"
               :options="historyIntervalOptions"
               data-test-id="hInterval-option"
@@ -24,6 +25,7 @@
             <b-form-select
               id="timeFrame"
               v-model="form.timeFrame"
+              :disabled="isButtonDisable"
               class="input"
               :options="timeFrameOptions"
               data-test-id="timeFrame-option"
@@ -32,7 +34,11 @@
         </b-col>
         <b-col xl="2" class="display_inline">
           <div class="text-right mb10">
-            <b-button variant="primary" @click="historyIntervalInit()">
+            <b-button
+              variant="primary"
+              :disabled="isButtonDisable"
+              @click="historyIntervalInit()"
+            >
               {{ $t('pageSensors.sensorgraph.displayGraph') }}
             </b-button>
           </div>
@@ -74,6 +80,8 @@
 <script>
 import Chart from '@/components/Global/Graph.vue';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -221,6 +229,12 @@ export default {
         'Cpu Power Average CPU1',
       ],
     };
+  },
+  computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
   },
   watch: {
     lineData() {},

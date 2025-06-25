@@ -65,13 +65,16 @@
     </b-container>
     <template #modal-footer="{ cancel }">
       <b-button variant="secondary" @click="cancel()">
+        <icon-cancel />
         {{ $t('global.action.cancel') }}
       </b-button>
       <b-button form="role-group" type="submit" variant="primary" @click="onOk">
         <template v-if="roleGroup">
+          <icon-save />
           {{ $t('global.action.save') }}
         </template>
         <template v-else>
+          <icon-add />
           {{ $t('global.action.add') }}
         </template>
       </b-button>
@@ -82,8 +85,12 @@
 <script>
 import { required, requiredIf } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
+import IconSave from '@carbon/icons-vue/es/save/20';
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
+import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 
 export default {
+  components: { IconSave, IconCancel, IconAdd },
   mixins: [VuelidateMixin],
   props: {
     roleGroup: {

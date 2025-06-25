@@ -59,6 +59,7 @@
             <b-form-checkbox
               v-model="tableHeaderCheckboxModel"
               data-test-id="videoLog-checkbox-selectAll"
+              :disabled="isButtonDisable"
               :indeterminate="tableHeaderCheckboxIndeterminate"
               @change="onChangeHeaderCheckbox($refs.table)"
             >
@@ -68,6 +69,7 @@
           <template #cell(checkbox)="row">
             <b-form-checkbox
               v-model="row.rowSelected"
+              :disabled="isButtonDisable"
               :data-test-id="`videoLog-checkbox-selectRow-${row.index}`"
               @change="toggleSelectRow($refs.table, row.index)"
             >
@@ -79,16 +81,28 @@
             <p class="mb-0">{{ value.replace(/[TZ]/g, ' ').slice(0, 19) }}</p>
           </template>
           <template #cell(actions)="{ item }">
-            <icon-download
-              class="mr10 cursor"
-              :title="$t('videoLog.table.downloadTitle')"
-              @click="onDownloadlick(item)"
-            ></icon-download>
-            <icon-trashcan
-              class="cursor"
-              :title="$t('videoLog.modal.deleteTitle')"
-              @click="onDeleteclick(item)"
-            ></icon-trashcan>
+            <table-row-action
+              v-for="(action, index) in item.actions"
+              :key="index"
+              :value="action.value"
+              :title="action.title"
+              :enabled="action.enabled"
+              :row-data="item"
+              @click-table-action="onTableRowAction($event, item)"
+            >
+              <template #icon>
+                <icon-download
+                  v-if="action.value === 'download'"
+                  class="mr10 cursor"
+                  @click="onDownloadlick(item)"
+                ></icon-download>
+                <icon-trashcan
+                  v-if="action.value === 'delete'"
+                  class="cursor"
+                  @click="onDeleteclick(item)"
+                ></icon-trashcan>
+              </template>
+            </table-row-action>
           </template>
         </b-table>
       </b-col>
@@ -149,6 +163,9 @@ import SearchFilterMixin, {
   searchFilter,
 } from '@/components/Mixins/SearchFilterMixin';
 import { mapState } from 'vuex';
+import TableRowAction from '@/components/Global/TableRowAction';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -159,6 +176,7 @@ export default {
     TableToolbar,
     // TableDateFilter,
     IconDownload,
+    TableRowAction,
   },
   mixins: [
     BVPaginationMixin,
@@ -203,6 +221,10 @@ export default {
   },
   computed: {
     ...mapState('videoLog', ['allVideoLogs']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     filteredRows() {
       return this.searchFilter
         ? this.searchTotalFilteredRows
@@ -212,6 +234,17 @@ export default {
       return this.$store.getters['videoLog/getAllVideoLogs'].map((event) => {
         return {
           ...event,
+          actions: [
+            {
+              value: 'download',
+              title: this.$t('videoLog.table.downloadTitle'),
+            },
+            {
+              value: 'delete',
+              enabled: !this.isButtonDisable,
+              title: this.$tc('pageNodeManager.table.delete'),
+            },
+          ],
         };
       });
     },
@@ -247,6 +280,16 @@ export default {
       });
   },
   methods: {
+    onTableRowAction(action) {
+      switch (action) {
+        case 'download':
+          break;
+        case 'delete':
+          break;
+        default:
+          break;
+      }
+    },
     onDeleteclick(val) {
       this.$bvModal
         .msgBoxConfirm(this.$tc('videoLog.modal.deleteMessage', val.length), {

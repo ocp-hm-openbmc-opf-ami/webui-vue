@@ -216,7 +216,8 @@
               data-test-id="ldap-button-saveSettings"
               :disabled="loading"
             >
-              {{ $t('global.action.saveSettings') }}
+              <icon-save />
+              {{ $t('global.action.save') }}
             </b-btn>
           </b-col>
         </b-row>
@@ -243,6 +244,7 @@ import PageTitle from '@/components/Global/PageTitle';
 import PageSection from '@/components/Global/PageSection';
 import InfoTooltip from '@/components/Global/InfoTooltip';
 import TableRoleGroups from './TableRoleGroups';
+import IconSave from '@carbon/icons-vue/es/save/20';
 
 export default {
   name: 'Ldap',
@@ -252,6 +254,7 @@ export default {
     PageTitle,
     PageSection,
     TableRoleGroups,
+    IconSave,
   },
   mixins: [BVToastMixin, VuelidateMixin, LoadingBarMixin],
   beforeRouteLeave(to, from, next) {

@@ -133,6 +133,7 @@
             variant="primary"
             @click="onSave"
           >
+            <icon-save />
             {{ $t('global.action.save') }}
           </b-button>
         </b-col>
@@ -150,11 +151,13 @@ import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { required } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
+import IconSave from '@carbon/icons-vue/es/save/20';
 
 export default {
   name: 'PreEventVideoRecord',
   components: {
     PageSection,
+    IconSave,
   },
   mixins: [BVToastMixin, DataFormatterMixin, VuelidateMixin, LoadingBarMixin],
   data() {

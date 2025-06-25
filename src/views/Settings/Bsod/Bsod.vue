@@ -16,6 +16,7 @@
       </b-col>
       <b-col sm="8" class="text-right">
         <b-button variant="primary" type="button" @click="triggerBsodImage">
+          <icon-camera />
           {{ $t('pageBsod.triggerBsodImage') }}
         </b-button>
         <b-button
@@ -25,6 +26,7 @@
           type="button"
           @click="downloadImage"
         >
+          <icon-download />
           {{ $t('pageBsod.downloadBsodImage') }}
         </b-button>
         <b-button
@@ -34,6 +36,7 @@
           type="button"
           @click="deleteBsodImage"
         >
+          <icon-trashcan />
           {{ $t('pageBsod.deleteBsodImage') }}
         </b-button>
       </b-col>
@@ -52,10 +55,13 @@
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import PageTitle from '@/components/Global/PageTitle';
+import IconTrashcan from '@carbon/icons-vue/es/trash-can/20';
+import IconDownload from '@carbon/icons-vue/es/download/20';
+import IconCamera from '@carbon/icons-vue/es/camera--action/20';
 
 export default {
   name: 'Bsod',
-  components: { PageTitle },
+  components: { PageTitle, IconTrashcan, IconDownload, IconCamera },
   mixins: [BVToastMixin, LoadingBarMixin],
   computed: {
     base64ImageData() {

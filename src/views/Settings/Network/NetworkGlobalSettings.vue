@@ -5,7 +5,12 @@
         <dl>
           <dt>
             {{ $t('pageNetwork.hostname') }}
-            <b-button variant="link" class="p-1" @click="initSettingsModal()">
+            <b-button
+              variant="link"
+              class="p-1"
+              :disabled="isButtonDisable"
+              @click="initSettingsModal()"
+            >
               <icon-edit :title="$t('pageNetwork.modal.editHostnameTitle')" />
             </b-button>
           </dt>
@@ -18,7 +23,12 @@
         <dl>
           <dt>
             {{ $t('pageNetwork.enableLAN') }}
-            <b-button variant="link" class="p-2" @click="initEnableLansModal()">
+            <b-button
+              variant="link"
+              class="p-2"
+              :disabled="isButtonDisable"
+              @click="initEnableLansModal()"
+            >
               <icon-edit />
             </b-button>
           </dt>
@@ -39,7 +49,13 @@ export default {
   name: 'GlobalNetworkSettings',
   components: { IconEdit, PageSection },
   mixins: [BVToastMixin, DataFormatterMixin],
-
+  props: {
+    isButtonDisable: {
+      required: true,
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       hostname: '',

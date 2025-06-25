@@ -173,6 +173,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "raidEventLog": "@:appPageTitle.raidEventLog",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "tasks": "@:appPageTitle.tasks",
@@ -189,7 +190,9 @@
         "videoLog":"@:appPageTitle.videoLog",
         "radius": "RADIUS",
         "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
-        "gpgpu": "@:appPageTitle.gpgpu"
+        "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
+        "gpgpu": "@:appPageTitle.gpgpu",
+        "advancedLogSettings":"@:appPageTitle.advancedLogSettings"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -238,6 +241,7 @@
         "logicalDevice": "逻辑设备",
         "createLogicalDevice": "创建逻辑设备",
         "raidTopology": "拓扑信息",
+        "raidEventLog": "事件日志",
         "backupAndRestore": "备份与还原",
         "FireWall": "系统防火墙",
         "tasks": "任务",
@@ -254,7 +258,9 @@
         "videoLog":"视频日志",
         "radius": "RADIUS",
         "amdRemoteDebug": "AMD 远程调试",
-        "gpgpu": "GPGPU"
+        "ipmiEventLog": "IPMI事件日志",
+        "gpgpu": "GPGPU",
+        "advancedLogSettings":"高级日志设置"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM 配置",
@@ -1055,6 +1061,41 @@
             "successUnresolveLogs": "成功未解决 %{count} 条记录。  | 成功未解决 %{count} 条记录。"
         }
     },
+    "pageIpmiEventLogs": {
+        "additionalDataUri": "附加数据",
+        "resolve": "解决",
+        "resolved": "已解决的",
+        "unresolve": "尚未解决",
+        "unresolved": "尚未解决的",
+        "modal": {
+            "deleteAllTitle": "删除所有记录",
+            "deleteAllMessage": "确定想要删除所有记录? 执行此操作以后不可恢复。",
+            "deleteTitle": "删除记录 | 删除多项记录",
+            "deleteMessage": "确定想要删除 %{count} 条记录? 执行此操作以后不可恢复。 |确定想要删除 %{count} 条记录? 执行此操作以后不可恢复。"
+        },
+        "table": {
+            "date": "日期",
+            "description": "描述",
+            "id": "ID",
+            "modifiedDate": "修改的日期",
+            "name": "名称",
+            "searchLogs": "搜寻记录",
+            "severity": "严重性",
+            "status": "状态",
+            "type": "类型"
+        },
+        "toast": {
+            "errorDelete": "删除 %{count} 条记录发生错误 | 删除 %{count} 条记录发生错误",
+            "errorLogStatusUpdate": "更新记录状态发生错误",
+            "errorResolveLogs": "解决 %{count} 条记录发生错误 | 解决 %{count} 条记录发生错误",
+            "errorUnresolveLogs": "未解决 %{count} 条记录发生错误 | 未解决 %{count} 条记录发生错误",
+            "errorDownloadEventEntry": "下载事件日志条目时出错。",
+            "successDownloadEventEntry": "已成功下载事件日志条目。",
+            "successDelete": "成功删除 %{count} 条记录 | 成功删除 %{count} 条记录",
+            "successResolveLogs": "成功解决 %{count} 条记录 | 成功解决 %{count} 条记录",
+            "successUnresolveLogs": "成功未解决 %{count} 条记录 | 成功未解决 %{count} 条记录"
+        }
+    },
     "pageFactoryReset": {
         "description": "这些功能无法安全删除任何敏感资料。",
         "form": {
@@ -1570,13 +1611,28 @@
             "passwordChangeRequired": "要求更改密码",
             "vmediaAccess": "虚拟媒体访问",
             "changePassword": "更改密码",
+            "snmpUserEnable": "启用 SNMP 用户",
+            "encryption": "加密",
+            "algorithm": "算法",
+            "readWritePermission": "读写权限",
+            "readOnly": "只读",
+            "readWrite": "读写",
+            "authProtocolNone": "无",
+            "authProtocolsh224": "SHA-224",
+            "authProtocolsha256": "SHA-256",
+            "authProtocolsha384": "SHA-384",
+            "authProtocolsha512": "SHA-512",
             "logoutConfirmMessage": "您确定要更改登录用户“%{user}”的密码吗？该用户将注销，并且仅反映在下次登录中.",
             "logoutAlert": "注销警报"
         },
         "table": {
             "privilege": "权限",
             "status": "状态",
-            "username": "用户名"
+            "username": "用户名称",
+            "snmpUserEnable": "SNMP 用户启用",
+            "algorithm": "算法",
+            "readWritePermission": "读写权限",
+            "encryption": "加密"
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "配置此服务所管理的组件",
@@ -1884,7 +1940,13 @@
         "snmpProtocolV3": "SNMPv3",
         "addSubscrition": "添加订阅",
         "editSubscrition": "编辑订阅",
-        "sendTestTrap": "发送 SNMPTrap",
+        "sendTestTrap": "发送测试陷阱",
+        "addCommunityString": "添加社区字符串",
+        "editCommunityString": "编辑社区字符串",
+        "snmpSubscription": "SNMP 订阅",
+        "snmpCommunity": "SNMP 社区",
+        "duplicateString": "重复社区字符串",
+        "defaultCommunity": "public’ 和 ‘private’ 是常见的默认字符串。请输入其他值.",
         "modal": {
             "destination": "目标",
             "subscriptionType": "订阅类型",
@@ -1893,8 +1955,16 @@
             "addTrap": "添加 SNMPTrap",
             "bmcUser": "BMC 用户",
             "password": "密码",
-            "encryption": "加密",
-            "algorithm": "算法"
+            "portNumber": "端口号",
+            "all": "全部",
+            "smtp": "SMTP",
+            "system": "系统",
+            "readOnlyCommunity": "只读社区",
+            "readWriteCommunity": "读写社区",
+            "communityProfile": "社区配置文件",
+            "communityString": "社区字符串",
+            "readWritePermission": "读写权限",
+            "addCommunity": "添加社区"
         },
         "table": {
             "destination": "目标",
@@ -1908,21 +1978,30 @@
             "authProtocolsha384": "SHA-384",
             "authProtocolsha512": "SHA-512",
             "authProtocolsha": "SHA",
-	    "bmcUser": "BMC 用户",
-            "encryption": "加密"
+            "bmcUser": "BMC用户",
+            "encryption": "加密",
+            "communityProfile": "社区配置文件",
+            "communityString": "社区字符串",
+            "readWritePermission": "读写权限"
         },
         "toast": {
-            "errorInAddSubscription": "添加订阅时出错。",
-            "errorInDeleteSubscription": "删除订阅时出错。",
-            "errorInEditSubscription": "编辑订阅时出错。",
-            "errorUpdatingAuthenticationProtocal": "更新身份验证协议时出错。",
-            "successInAddSubscription": "已成功添加 SNMPTrap。",
-            "successInDeleteSubscription": "成功删除 SNMPTrap。",
-            "successUpdateAuthenticationProtocal": "成功更新身份验证协议。",
-            "successMsgTestTrap": "SNMPTrap 发送成功。",
-            "errorMsgAlert": "SNMPTrap 时出错。",
-            "errorInUpdatingSubscription": "更新订阅时出错。",
-            "successInUpdatingSubscription": "已成功更新订阅。"
+            "errorInAddSubscription": "添加订阅时出错",
+            "errorInDeleteSubscription": "删除订阅时出错",
+            "errorInEditSubscription": "编辑订阅时出错",
+            "errorUpdatingAuthenticationProtocal": "更新身份验证协议时出错",
+            "errorMsgAlert": "发送测试陷阱时出错",
+            "errorInUpdatingSubscription": "更新订阅时出错",
+            "errorInAddCommunityString": "添加社区字符串时出错",
+            "errorInUpdateCommunityString": "编辑社区字符串时出错",
+            "errorInDeleteCommunityString": "删除社区字符串时出错",
+            "successInAddSubscription": "已成功添加 SNMPTrap",
+            "successInDeleteSubscription": "成功删除 SNMPTrap",
+            "successUpdateAuthenticationProtocal": "成功更新身份验证协议",
+            "successMsgTestTrap": "测试陷阱发送成功",
+            "successInUpdatingSubscription": "已成功更新订阅",
+            "successInAddCommunityString": "成功添加社区字符串",
+            "successInUpdateCommunityString": "成功更新社区字符串",
+            "successInDeleteCommunityString": "成功删除社区字符串"
         }
     },
     "pageSmtp": {
@@ -2477,14 +2556,6 @@
             "helperExportFileSave": "点击导出按钮下载文件。",
             "labelConfigImport": "导入",
             "labelConfigExport": "导出",
-            "labelControllerProperties": "控制器属性",
-            "controllerPropertiesHelperText": "设置控制器属性。",
-            "controllerPropertiesRateValueHelperText": "该值必须在 0 到 100 之间，包括 0 和 100。",
-            "labelRebuildRate": "重建速率",
-            "labelPatrolReadRate": "巡检读取速率",
-            "labelBGIRate": "BGI 速率",
-            "labelConsistencyCheckRate": "一致性检查速率",
-            "labelReconstructionRate": "重建速率",
             "labelControllerPersonality": "控制器运行模式",
             "labelCurrentControllerPersonality": "当前的控制器运行模式",
             "labelSetControllerPersonality": "设置控制器运行模式",
@@ -2494,7 +2565,28 @@
             "labelRaidMode": "RAID 模式",
             "labelJbodMode": "JBOD 模式",
             "alertNotSupport": "此功能当前不支持。",
-            "jbodModeHelperText": "启用 JBOD 模式后，物理设备的状态将变为 JBOD，否则状态将变为未配置且良好。"
+            "labelControllerProperties": "控制器属性",
+            "controllerPropertiesHelperText": "设置控制器属性。",
+            "controllerPropertiesRateValueHelperText": "该值必须在 0 到 100 之间，包括 0 和 100。",
+            "labelRebuildRate": "重建速率",
+            "labelPatrolReadRate": "巡逻读取速率",
+            "labelBGIRate": "BGI 速率",
+            "labelConsistencyCheckRate": "一致性检查速率",
+            "labelReconstructionRate": "重建速率",
+            "labelSsdPatrolRead": "SSD 巡逻读取",
+            "ssdPatrolReadHelperText": "当启用 SSD 巡逻读取时，物理设备状态会变更为 SSD 巡逻读取。",
+            "jbodModeHelperText": "启用 JBOD 模式后，物理设备的状态将变为 JBOD，否则状态将变为未配置且良好。",
+            "alertNotSupportSelectedController": "当前选择的控制器不支持此功能。",
+            "labelPatrolReadAction": "巡逻读取",
+            "labelpatrolReadCurrentProperties": "当前巡逻读取属性：",
+            "labelPatrolReadCurrentRate": "速率：",
+            "patrolReadCurrentPropertiesHelperText": "显示巡逻读取属性。如果需要编辑项目，请点击“属性”>“控制器属性”按钮。",
+            "patrolReadActionSwitchHelperText": "选择开始/停止以处理巡逻读取。完成后等待一分钟。",
+            "alertNotSupportPatrolReadAction": "操作不支持。请确保 RAID 控制器至少有一个逻辑设备或一个热备盘物理设备。"
+        },
+        "actions": {
+            "startPatrolRead": "开始巡逻读取",
+            "stopPatrolRead": "停止巡逻读取"
         },
         "toast": {
             "copybackConfigSuccess": "回写功能已成功设置。",
@@ -2506,15 +2598,24 @@
             "configImportSuccess": "配置文件已成功导入系统。",
             "configImportFail": "无法导入配置文件。",
             "configImport": "导入配置文件。",
-            "controllerPropertiesSuccess": "成功设置控制器属性。需要一些时间来完成该设置。请等待几秒钟并刷新应用程序以查看更改内容。",
-            "controllerPropertiesFail": "设置控制器属性失败。",
-            "controllerPropertiesConfig": "控制器属性设置。",
             "controllerPersonalitySuccess": "成功设置控制器运行模式，请重新启动主机以应用更改。",
             "controllerPersonalityFail": "设置控制器运行模式失败，请确保所有逻辑设备已移除后再继续。",
             "controllerPersonality": "切换控制器运行模式。",
+            "controllerPropertiesSuccess": "成功设置控制器属性。需要一些时间来完成该设定。请等待几秒钟并刷新应用程序以查看更改內容。",
+            "controllerPropertiesFail": "设置控制器属性失败。",
+            "controllerPropertiesConfig": "控制器属性设置。",
+            "ssdPatrolReadSuccess": "成功设置 SSD 巡逻读取。设置将需要一些时间来完成。请稍等片刻并刷新应用程序以查看更改。",
+            "ssdPatrolReadFail": "设置 SSD 巡逻读取失败。",
+            "ssdPatrolReadConfig": "在控制器属性中设置 SSD 巡逻读取。",
             "jbodModeSuccess": "成功设置 JBOD 模式。需要一些时间来完成该设置，请等待几秒钟并刷新应用程序以查看更改。",
             "jbodModeFail": "设置 JBOD 模式失败。",
-            "jbodMode": "在控制器属性中设置 JBOD 模式。"
+            "jbodMode": "在控制器属性中设置 JBOD 模式。",
+            "startPatrolReadActionSuccess": "成功启动巡逻读取操作。",
+            "startPatrolReadActionFail": "启动巡逻读取操作失败。",
+            "startPatrolReadAction": "启动巡逻读取操作。",
+            "stopPatrolReadActionSuccess": "成功停止巡逻读取操作。",
+            "stopPatrolReadActionFail": "停止巡逻读取操作失败。",
+            "stopPatrolReadAction": "停止巡逻读取操作。"
         }
     },
     "pagePhysicalDevice": {
@@ -2642,12 +2743,13 @@
         "accelerator": "加速器",
         "spanDepth": "跨度深度",
         "numberOfDrives": "每个跨度的驱动器数量",
+        "initState": "初始化状态",
         "stripeSize": "条带大小",
-        "readPolicy": "读策略",
-        "writePolicy": "写策略",
+        "readPolicy": "读取策略",
+        "writePolicy": "写入策略",
         "cachePolicy": "缓存策略",
         "ioPolicy": "IO 策略",
-        "accessPolicy": "存取机制",
+        "accessPolicy": "存取策略",
         "diskCacheCapacity": "磁盘缓存容量",
         "unConfiguredPhysicalDrive": "未配置的物理驱动器",
         "noLogicalDevice": "此时不存在逻辑设备信息。",
@@ -2661,14 +2763,14 @@
             "off": "关闭",
             "adaptiveReadAhead": "自适应预读",
             "noReadAhead": "不预读",
-            "alwaysReadAhead": "始终预读"
+            "alwaysReadAhead": "始终预先读取"
         },
         "writePolicyOptions": {
             "off": "关闭",
             "protectedWriteBack": "保护回写",
             "unprotectedWriteBack": "不保护回写",
             "writeThrough": "直写",
-            "alwaysWriteBack": "始终写回",
+            "alwaysWriteBack": "总是回写",
             "writeBackWithBBU": "用 BBU 回写"
         },
         "ioPolicyOptions": {
@@ -2778,6 +2880,42 @@
             "errorGetTopologyDevice": "取得拓扑设备时发生错误。"
         }
     },
+    "pageRaidEventLog": {
+        "allControllers": "所有控制器",
+        "selectEventType": "选择事件类型",
+        "events": "事件",
+        "ctrlName": "控制器名称",
+        "recordId": "ID",
+        "timeStamp": "时间戳",
+        "code": "代码",
+        "class": "类别",
+        "info": "资讯",
+        "fatal": "致命",
+        "type": "类型",
+        "description": "描述",
+        "eventType": {
+            "allEvents": "所有事件",
+            "controllerEvents": "控制器事件",
+            "controller": "控制器",
+            "physicalDeviceEvents": "物理设备事件",
+            "physicalDevice": "物理设备",
+            "logicalDeviceEvents": "逻辑设备事件",
+            "logicalDevice": "逻辑设备",
+            "configurationEvents": "配置事件",
+            "configuration": "配置",
+            "bbuEvents": "BBU 事件",
+            "bbu": "BBU"
+        },
+        "modal": {
+            "deleteAllTitle": "删除所有日志",
+            "deleteAllMessage": "您确定要删除所有日志吗？ 此操作无法撤消。"
+        },
+        "toast": {
+            "errorGet": "获取事件日志时发生错误。",
+            "errorDelete": "删除 %{count} 笔日志失败。 | 删除 %{count} 笔日志失败。",
+            "successDelete": "已经成功删除 %{count} 笔日志。 | 已经成功删除 %{count} 笔日志。"
+        }
+    },
     "pageFireWall": {
         "firewallSettings": {
             "addNewRule":"添加新规则",
@@ -2802,7 +2940,7 @@
                 "all": "全部",
                 "target": "目标",
                 "unspecified": "未指定",
-		"deleteConfirmMessage": "您确定要删除该记录吗？此操作无法撤消。",
+		        "deleteConfirmMessage": "您确定要删除该记录吗？此操作无法撤消。",
                 "deleteFireWall": "删除 |删除 ",
                 "endDateCanNotBeLessThanStartDate": "结束日期不能早于开始日期",
                 "endTimeCanNotBeEqualToStartTime": "结束时间不能早于开始时间",
@@ -2812,7 +2950,8 @@
                 "ipv6": "IPv6",
                 "both": "全部",
                 "networkType": "网络类型",
-                "preLoad":"预加载"
+                "preLoad":"预加载",
+                "ipVersion": "IP版本"
             }
         },
         "toast": {
@@ -3042,6 +3181,34 @@
             "errorGettingFpgaSensorInfo": "获取 FPGA 传感器信息时出错",
             "errorGettingBaseBoardInfo": "获取底板信息时出错",
             "errorGettingBaseBoardSensorInfo": "获取底板传感器信息时出错"
+        }
+    },
+    "advancedLogSettings":{
+        "systemLog": "系统日志",
+        "localLog": "本地日志",
+        "remoteLog": "远程日志",
+        "portType": "端口类型",
+        "udp": "UDP协议",
+        "tcp": "传输控制协议",
+        "fileSize": "文件大小",
+        "rotateCount": "旋转计数",
+        "remotelogserver": "远程日志服务器",
+        "remoteserverport": "远程服务器端口",
+        "enableauditlog": "启用审核日志",
+        "caCertificateFile": "CA证书文件",
+        "certificatefile": "证书文件",
+        "privateKey": "私钥",
+        "advancedLogValueLimits": "请输入 %{min} 至 %{max} 之间的值。",
+        "invalidIPAddress": "IP 地址无效",        
+        "cacertPEM": "Cacert PEM 证书",
+        "serverCRT": "服务器CRT证书",
+        "serverKey": "服务器密钥证书",
+        "incorrectAdvancedCertificateFileType": "文件不是正确的证书类型。",
+        "toast": {
+            "successSaveAdvancedLogsSettings": "已成功保存高级日志设置。",
+            "errorAdvancedAddCertificate": "添加证书错误。",
+            "successCertificateUpload": "已成功添加 %{certificate}。",
+            "errorGettingVideoLog": "保存高级日志设置时出错。"
         }
     },
     "countries": {

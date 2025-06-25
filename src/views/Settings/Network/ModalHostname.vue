@@ -33,6 +33,7 @@
     </b-form>
     <template #modal-footer="{ cancel }">
       <b-button variant="secondary" @click="cancel()">
+        <icon-cancel />
         {{ $t('global.action.cancel') }}
       </b-button>
       <b-button
@@ -41,6 +42,7 @@
         variant="primary"
         @click="onOk"
       >
+        <icon-add />
         {{ $t('global.action.add') }}
       </b-button>
     </template>
@@ -50,10 +52,16 @@
 <script>
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { required, helpers } from 'vuelidate/lib/validators';
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
+import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 
 const validateHostname = helpers.regex('validateHostname', /^\S{0,64}$/);
 
 export default {
+  components: {
+    IconCancel,
+    IconAdd,
+  },
   mixins: [VuelidateMixin],
   props: {
     hostname: {

@@ -56,13 +56,16 @@
     </b-form>
     <template #modal-ok>
       <template v-if="certificate">
+        <icon-replace />
         {{ $t('global.action.replace') }}
       </template>
       <template v-else>
+        <icon-add />
         {{ $t('global.action.add') }}
       </template>
     </template>
     <template #modal-cancel>
+      <icon-cancel />
       {{ $t('global.action.cancel') }}
     </template>
   </b-modal>
@@ -73,9 +76,12 @@ import { required, requiredIf } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 
 import FormFile from '@/components/Global/FormFile';
+import IconAdd from '@carbon/icons-vue/es/add--alt/20';
+import IconReplace from '@carbon/icons-vue/es/renew/20';
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
 
 export default {
-  components: { FormFile },
+  components: { FormFile, IconAdd, IconReplace, IconCancel },
   mixins: [VuelidateMixin],
   props: {
     certificate: {

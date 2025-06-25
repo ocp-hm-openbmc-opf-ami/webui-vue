@@ -16,6 +16,7 @@
                 ref="formFile"
                 v-model="file"
                 accept=".tar"
+                :disabled="isButtonDisable"
                 :state="getValidationState($v.file)"
                 aria-describedby="image-file-help-block"
                 @input="onFileUpload($event)"
@@ -29,7 +30,13 @@
             </b-form-group>
           </b-col>
           <b-col sm="3">
-            <b-button class="upload-button" type="submit" variant="primary">
+            <b-button
+              class="upload-button"
+              type="submit"
+              variant="primary"
+              :disabled="isButtonDisable"
+            >
+              <icon-upload />
               {{ $t('global.action.upload') }}
             </b-button>
           </b-col>
@@ -44,9 +51,12 @@ import { required } from 'vuelidate/lib/validators';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
+import IconUpload from '@carbon/icons-vue/es/upload/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   name: 'Restore',
-  components: { FormFile },
+  components: { FormFile, IconUpload },
   mixins: [BVToastMixin, LoadingBarMixin, VuelidateMixin],
   props: {
     tabIndex: {
@@ -58,6 +68,12 @@ export default {
     return {
       file: null,
     };
+  },
+  computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
   },
   validations() {
     return {

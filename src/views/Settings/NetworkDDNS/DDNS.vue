@@ -1,7 +1,7 @@
 <template>
   <b-container fluid="xl">
     <page-title></page-title>
-    <ddns-settings></ddns-settings>
+    <ddns-settings :is-button-disable="isButtonDisable"></ddns-settings>
     <page-section v-show="ddnsEthernetData">
       <b-row>
         <b-col>
@@ -17,14 +17,23 @@
                 :title="data.Id"
                 @click="getTabIndex(data.Id, index)"
               >
-                <ddns-configuration :tab-index="tabIndex"></ddns-configuration>
+                <ddns-configuration
+                  :is-button-disable="isButtonDisable"
+                  :tab-index="tabIndex"
+                ></ddns-configuration>
               </b-tab>
             </b-tabs>
           </b-card>
         </b-col>
       </b-row>
     </page-section>
-    <b-button type="submit" variant="primary" @click="doNSUpdate">
+    <b-button
+      type="submit"
+      variant="primary"
+      :disabled="isButtonDisable"
+      @click="doNSUpdate"
+    >
+      <icon-update />
       {{ $t('pageDDNSNetwork.ddnsConfiguration.doNsupdate') }}
     </b-button>
   </b-container>
@@ -38,6 +47,9 @@ import DdnsSettings from './ddnsSettings.vue';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import { mapState } from 'vuex';
+import IconUpdate from '@carbon/icons-vue/es/update-now/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   name: 'DDNSConfiguration',
   components: {
@@ -45,6 +57,7 @@ export default {
     PageTitle,
     DdnsConfiguration,
     DdnsSettings,
+    IconUpdate,
   },
   mixins: [LoadingBarMixin, BVToastMixin],
   data() {
@@ -55,6 +68,10 @@ export default {
   },
   computed: {
     ...mapState('ddnsNetwork', ['ddnsEthernetData']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
   },
   created() {
     this.startLoader();
