@@ -1,7 +1,7 @@
 import api, { getResponseCount } from '@/store/api';
 import i18n from '@/i18n';
 import store from '../GlobalStore';
-import authentication from '../store';
+import authentication from '../Authentication/AuthenticanStore';
 
 const UserManagementStore = {
   namespaced: true,

@@ -1,6 +1,7 @@
 import { mount, createLocalVue, createWrapper } from '@vue/test-utils';
 import Vue from 'vue';
 import Vuex from 'vuex';
+import i18n from '@/i18n';
 import AppHeader from '@/components/AppHeader';
 
 // Silencing warnings about undefined Bootsrap-vue components
@@ -40,6 +41,7 @@ describe('AppHeader.vue', () => {
   const wrapper = mount(AppHeader, {
     store,
     localVue,
+    i18n,
     mocks: {
       $t: (key) => key,
     },

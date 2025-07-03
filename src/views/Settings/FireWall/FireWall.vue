@@ -10,7 +10,7 @@
       <b-row class="align-items-end">
         <b-col xl="4">
           <search
-            :placeholder="$t('pageSessions.table.searchSessions')"
+            :placeholder="$t('pageFireWall.table.searchFirewallRule')"
             data-test-id="sessions-input-searchSessions"
             @change-search="onChangeSearchInput"
             @clear-search="onClearSearchInput"

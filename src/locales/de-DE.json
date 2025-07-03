@@ -1563,7 +1563,7 @@
     },
     "pageRadius": {
         "enableRadiusAuthentication": "RADIUS-Authentifizierung aktivieren",
-        "radiusConfiguration": "RADIUS-Konfiguration ist nicht aktiviert.",
+        "radiusConfiguration": "Die Radius -Authentifizierung ist nicht aktiviert.",
         "radiusPortValueLimits": "Bitte geben Sie Werte zwischen %{min} und %{max} ein.",
         "form": {
             "serverAddress": "Serveradresse",
@@ -2971,7 +2971,8 @@
             "endDuration": "Enddauer",
             "preLoad": "Vorladen",
             "target": "Ziel",
-            "networkType": "Netzwerktyp"
+            "networkType": "Netzwerktyp",
+            "searchFirewallRule": "Firewall-Regel durchsuchen"
         }
     },
     "bond": {

@@ -1561,7 +1561,7 @@
     },
     "pageRadius": {
         "enableRadiusAuthentication": " 啟用 RADIUS 認證",
-        "radiusConfiguration": "未啟用半徑配置。",
+        "radiusConfiguration": "不啟用 RADIUS 身份驗證。",
         "radiusPortValueLimits": "請輸入 %{min} 和 %{max} 之間的數值",
         "form": {
             "serviceAddress": "伺服器位址",
@@ -2974,7 +2974,8 @@
             "endDuration": "結束持續時間",
             "preLoad": "預先載入",
             "target": "目標",
-            "networkType": "網路類型"
+            "networkType": "網路類型",
+            "searchFirewallRule": "搜尋防火牆規則"
         }
     },
     "bond": {

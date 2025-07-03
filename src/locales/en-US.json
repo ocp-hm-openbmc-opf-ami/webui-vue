@@ -1562,7 +1562,7 @@
     },
     "pageRadius": {
         "enableRadiusAuthentication": " Enable RADIUS Authentication",
-        "radiusConfiguration": " RADIUS Configuration is not enabled.",
+        "radiusConfiguration": " RADIUS Authentication is not enabled.",
         "radiusPortValueLimits": "Kindly enter the values between %{min} and %{max}.",
         "form": {
             "serverAddress": "Server Address",
@@ -2975,7 +2975,8 @@
             "endDuration": "End Duration",
             "preLoad": "PreLoad",
             "target": "Target",
-            "networkType": "Network Type"
+            "networkType": "Network Type",
+            "searchFirewallRule": "Search Firewall Rule"
         }
     },
     "bond": {

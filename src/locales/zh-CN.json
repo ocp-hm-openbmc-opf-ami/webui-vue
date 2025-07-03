@@ -1561,7 +1561,7 @@
     },
     "pageRadius": {
         "enableRadiusAuthentication": " 启用 RADIUS 认证",
-        "radiusConfiguration": "RADIUS 配置未启用。",
+        "radiusConfiguration": "不启用 RADIUS 身份验证。",
         "radiusPortValueLimits": "请输入 %{min} 和 %{max} 之间的值。",
         "form": {
             "serviceAddress": "服务器地址",
@@ -2974,7 +2974,8 @@
             "endDuration": "结束持续时间",
             "preLoad": "预加载",
             "target": "目标",
-            "networkType": "网络类型"
+            "networkType": "网络类型",
+            "searchFirewallRule": "搜索防火墙规则"
         }
     },
     "bond": {
