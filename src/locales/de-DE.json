@@ -3204,7 +3204,7 @@
         "incorrectAdvancedCertificateFileType": "Die Datei weist keinen korrekten Zertifikatstyp auf.",
         "toast": {
             "successSaveAdvancedLogsSettings": "Erweiterte Protokolleinstellungen erfolgreich gespeichert.",
-            "errorAdvancedAddCertificate": "Fehler beim Hinzufügen des Zertifikats.",
+            "errorAdvancedAddCertificate": "Fehler beim Hinzufügen von %{certificate}.",
             "successCertificateUpload": "%{certificate} erfolgreich hinzugefügt.",
             "errorGettingVideoLog": "Fehler beim Speichern der erweiterten Protokolleinstellungen."
         }

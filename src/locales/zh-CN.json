@@ -3207,7 +3207,7 @@
         "incorrectAdvancedCertificateFileType": "文件不是正确的证书类型。",
         "toast": {
             "successSaveAdvancedLogsSettings": "已成功保存高级日志设置。",
-            "errorAdvancedAddCertificate": "添加证书错误。",
+            "errorAdvancedAddCertificate": "添加 %{certificate} 时出错。",
             "successCertificateUpload": "已成功添加 %{certificate}。",
             "errorGettingVideoLog": "保存高级日志设置时出错。"
         }

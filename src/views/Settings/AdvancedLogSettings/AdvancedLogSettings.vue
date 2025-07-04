@@ -166,11 +166,11 @@
                     {{ advancedLogCacertModifiedDate | formatTime }}
                   </span>
                   <form-file
-                    id="certificate-file"
+                    id="certificatecacertPEM-file"
                     v-model="form.cacertPEM"
                     accept=".pem"
                     :state="getValidationState($v.form.cacertPEM)"
-                    @input="onFileUpload($event, 'CacertPEM', 'pem')"
+                    @input="onFileUpload($event, 'cacertPEM', 'pem')"
                   >
                     <template #invalid>
                       <b-form-invalid-feedback role="alert">
@@ -190,11 +190,11 @@
                     {{ advancedLogServerCRTModifiedDate | formatTime }}
                   </span>
                   <form-file
-                    id="certificate-file"
+                    id="certificateserverCRT-file"
                     v-model="form.serverCRT"
                     accept=".crt"
                     :state="getValidationState($v.form.serverCRT)"
-                    @input="onFileUpload($event, 'ServerCRT', 'crt')"
+                    @input="onFileUpload($event, 'serverCRT', 'crt')"
                   >
                     <template #invalid>
                       <b-form-invalid-feedback role="alert">
@@ -212,11 +212,11 @@
                     {{ advancedLogServerKeyModifiedDate | formatTime }}
                   </span>
                   <form-file
-                    id="certificate-file"
+                    id="certificateserverKey-file"
                     v-model="form.serverKey"
                     accept=".key"
                     :state="getValidationState($v.form.serverKey)"
-                    @input="onFileUpload($event, 'ServerKey', 'key')"
+                    @input="onFileUpload($event, 'serverKey', 'key')"
                   >
                     <template #invalid>
                       <b-form-invalid-feedback role="alert">
@@ -278,6 +278,8 @@ export default {
       advancedLogCacertModifiedDate: '',
       advancedLogServerCRTModifiedDate: '',
       advancedLogServerKeyModifiedDate: '',
+      fileUploadTCP: [],
+      fileUploaddetails: {},
     };
   },
   computed: {
@@ -402,7 +404,11 @@ export default {
         .dispatch('advancedLog/setAdvancedLogsSettings', params)
         .then((success) => {
           this.successToast(success);
-          this.initAdvancedLogSettings();
+          if (this.form.portType == 'TCP') {
+            this.addCertificate();
+          } else {
+            this.initAdvancedLogSettings();
+          }
         })
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.endLoader());
@@ -411,29 +417,58 @@ export default {
       if (file) {
         let fileTypeCorrect = this.getIsFileTypeCorrect(file, extension);
         if (fileTypeCorrect) {
-          this.addCertificate(file, type);
+          if (type === 'cacertPEM') {
+            this.fileUploadTCP.splice('cacertPEM', 1);
+            this.fileUploaddetails.cacertPEM = {
+              file: type === 'cacertPEM' ? file : this.form.cacertPEM,
+              type: type,
+            };
+          }
+          if (type === 'serverCRT') {
+            this.fileUploadTCP.splice('serverCRT', 1);
+            this.fileUploaddetails.serverCRT = {
+              file: type === 'serverCRT' ? file : this.form.serverCRT,
+              type: type,
+            };
+          }
+          if (type === 'serverKey') {
+            this.fileUploadTCP.splice('serverKey', 1);
+            this.fileUploaddetails.serverKey = {
+              file: type === 'serverKey' ? file : this.form.serverKey,
+              type: type,
+            };
+          }
+          this.fileUploadTCP.push(this.fileUploaddetails);
         } else {
+          this.form[type] = ''; // when wrong file choosen to clear the file from the form
           this.errorToast(
             this.$t('advancedLogSettings.incorrectAdvancedCertificateFileType'),
-            {
-              title: this.$t(
-                'advancedLogSettings.toast.errorAdvancedAddCertificate',
-              ),
-            },
           );
         }
       }
     },
-    addCertificate(file, type) {
+    addCertificate() {
       this.startLoader();
-      this.$store
-        .dispatch('advancedLog/addAdvancedLogsCertificate', { file, type })
-        .then((success) => {
-          this.successToast(success);
-          this.initAdvancedLogSettings();
-        })
-        .catch(({ message }) => this.errorToast(message))
-        .finally(() => this.endLoader());
+      if (this.fileUploadTCP.length <= 0) {
+        this.initAdvancedLogSettings();
+        return;
+      }
+      this.fileUploadTCP.forEach((obj) => {
+        Object.entries(obj).forEach((item, index, array) => {
+          var file = item[1];
+          var type = file.type;
+          this.$store
+            .dispatch('advancedLog/addAdvancedLogsCertificate', { file, type })
+            .then((success) => {
+              if (index === array.length - 1) {
+                this.initAdvancedLogSettings();
+              }
+              this.successToast(success);
+            })
+            .catch(({ message }) => this.errorToast(message))
+            .finally(() => this.endLoader());
+        });
+      });
     },
     getIsFileTypeCorrect(file, extension) {
       const fileTypeExtension = file.name.split('.').pop();

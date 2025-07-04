@@ -3208,7 +3208,7 @@
         "incorrectAdvancedCertificateFileType": "File is not a correct Certificate Type.",
         "toast": {
             "successSaveAdvancedLogsSettings": "Successfully Saved Advanced Log Settings.",
-            "errorAdvancedAddCertificate": "Error in adding certificate.",
+            "errorAdvancedAddCertificate": "Error in adding %{certificate}.",
             "successCertificateUpload": "Successfully added %{certificate}.",
             "errorGettingVideoLog": "Error in saving Advanced Log Settings."
         }
