@@ -156,6 +156,19 @@
                       <template v-if="!$v.form.password.required">
                         {{ $t('global.form.fieldRequired') }}
                       </template>
+                      <template
+                        v-else-if="
+                          !$v.form.password.minLength ||
+                          !$v.form.password.maxLength
+                        "
+                      >
+                        {{
+                          $t('pageUserManagement.modal.passwordMustBeBetween', {
+                            min: passwordRequirements.minLength,
+                            max: passwordRequirements.maxLength,
+                          })
+                        }}
+                      </template>
                       <template v-else-if="!$v.form.password.pattern">
                         {{ $t('global.form.invalidFormat') }}
                       </template>
@@ -250,6 +263,19 @@
                     <b-form-invalid-feedback role="alert">
                       <template v-if="!$v.form.passwordConfirmation.required">
                         {{ $t('global.form.fieldRequired') }}
+                      </template>
+                      <template
+                        v-else-if="
+                          !$v.form.passwordConfirmation.minLength ||
+                          !$v.form.passwordConfirmation.maxLength
+                        "
+                      >
+                        {{
+                          $t('pageUserManagement.modal.passwordMustBeBetween', {
+                            min: passwordRequirements.minLength,
+                            max: passwordRequirements.maxLength,
+                          })
+                        }}
                       </template>
                       <template
                         v-else-if="!$v.form.passwordConfirmation.sameAsPassword"
@@ -436,6 +462,7 @@
 import {
   required,
   maxLength,
+  minLength,
   sameAs,
   helpers,
   requiredIf,
@@ -574,6 +601,8 @@ export default {
               this.newUser
             );
           }),
+          minLength: minLength(8),
+          maxLength: maxLength(20),
           pattern: function (pw) {
             return this.form.changePassword
               ? this.passwordValidation(pw)
@@ -587,6 +616,8 @@ export default {
               this.newUser
             );
           }),
+          minLength: minLength(8),
+          maxLength: maxLength(20),
           sameAsPassword: sameAs('password'),
         },
         manualUnlock: {},

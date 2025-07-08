@@ -473,10 +473,9 @@ const UserManagementStore = {
       if (
         error.response &&
         error.response.data &&
-        error.response.data['Password@Message.ExtendedInfo']
+        error.response.data.error['@Message.ExtendedInfo']
       ) {
-        const extendedInfo =
-          error.response.data['Password@Message.ExtendedInfo'];
+        const extendedInfo = error.response.data.error['@Message.ExtendedInfo'];
         if (Array.isArray(extendedInfo) && extendedInfo.length > 0) {
           const message = extendedInfo[0].Message;
           if (message && message.indexOf('Password') !== -1) {
@@ -497,10 +496,10 @@ const UserManagementStore = {
         if (
           error.response &&
           error.response.data &&
-          error.response.data['UserName@Message.ExtendedInfo']
+          error.response.data.error['@Message.ExtendedInfo']
         ) {
           const extendedInfo =
-            error.response.data['UserName@Message.ExtendedInfo'];
+            error.response.data.error['@Message.ExtendedInfo'];
           for (let key in extendedInfo) {
             if (
               extendedInfo[key].Message &&
