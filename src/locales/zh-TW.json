@@ -2430,11 +2430,29 @@
             "state": "狀態"
         },
         "table": {
-            "certificate": "憑證",
+            "certificate": "證書",
             "issuedBy": "發出從",
             "issuedTo": "發出給",
+            "issuerCommonName": "發出的通用名稱 (CN)",
+            "issuedToCommonName": "發出給通用名稱 (CN)",
             "validFrom": "有效期自",
-            "validUntil": "有效期至"
+            "validUntil": "有效期至",
+            "issuerCity": "發出的城市或地點 (L)",
+            "issuerCountry": "發出的國家 (C)",
+            "issuerOrganization": "發出的組織 (O)",
+            "issuerOrganizationalUnit": "發出的組織單位 (OU)",
+            "issuerState": "發出的州或省 (ST)",
+            "issuedToCity": "發出的城市或地點 (L)",
+            "issuedToCountry": "發出的國家 (C)",
+            "issuedToOrganization": "發出的組織 (O)",
+            "issuedToOrganizationalUnit": "發出的組織單位 (OU)",
+            "issuedToState": "發出的州或省 (ST)",
+            "certificateVersion":"憑證版本",
+            "serialNumber":"序號",
+            "signatureAlgorithm":"簽名機制",
+            "publicKey":"公鑰",
+            "issuerEmailAddress": "發出的電子郵件地址",
+            "issuedToEmailAddress": "發出的電子郵件地址"
         },
         "toast": {
             "errorAddCertificate": "新增憑證失敗。",
