@@ -33,8 +33,8 @@
                       >
                         {{
                           $t('advancedLogSettings.advancedLogValueLimits', {
-                            min: 3,
-                            max: 50000,
+                            min: fileSizeValues.min,
+                            max: fileSizeValues.max,
                           })
                         }}
                       </template>
@@ -116,8 +116,8 @@
                       >
                         {{
                           $t('advancedLogSettings.advancedLogValueLimits', {
-                            min: 3,
-                            max: 65535,
+                            min: fileSizeValues.min,
+                            max: fileSizeValues.max,
                           })
                         }}
                       </template>
@@ -280,6 +280,10 @@ export default {
       advancedLogServerKeyModifiedDate: '',
       fileUploadTCP: [],
       fileUploaddetails: {},
+      fileSizeValues: {
+        min: 0,
+        max: 65535,
+      },
     };
   },
   computed: {
@@ -301,7 +305,11 @@ export default {
             return true;
           }),
           pattern: function (val) {
-            return this.validateRange(val, 3, 50000);
+            return this.validateRange(
+              val,
+              this.fileSizeValues.min,
+              this.fileSizeValues.max,
+            );
           },
         },
         remotelogserver: {
@@ -317,7 +325,11 @@ export default {
             return true;
           }),
           pattern: function (val) {
-            return this.validateRange(val, 0, 65535);
+            return this.validateRange(
+              val,
+              this.fileSizeValues.min,
+              this.fileSizeValues.max,
+            );
           },
         },
         cacertPEM: {
