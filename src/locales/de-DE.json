@@ -2976,7 +2976,8 @@
             "errorDelete": "Fehler beim Löschen der Firewall-Regeln.",
             "errorDateOrTimeSaveFireWall": "Ungültiges Datum oder Uhrzeit.",
             "errorStartorEndIpSaveFireWall": "Ungültiger Bereich Start oder Bereich Ende IP.",
-            "featureNotAvailable": "Die System-Firewall-Funktion ist nicht aktiviert."
+            "featureNotAvailable": "Die System-Firewall-Funktion ist nicht aktiviert.",
+            "errorCreateLimitReachedForResource": "Es können maximal 64 IPv4-Firewall-Regeln und 64 IPv6-Firewall-Regeln erstellt werden."
         },
         "table": {
             "startIP": "Start-IP",

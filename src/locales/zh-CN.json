@@ -2979,7 +2979,8 @@
             "errorDelete": "删除防火墙规则时出错。",
             "errorDateOrTimeSaveFireWall": "日期或时间无效。",
             "errorStartorEndIpSaveFireWall": "范围起始或范围结束 IP 无效。",
-            "featureNotAvailable": "系统防火墙功能未启用。"
+            "featureNotAvailable": "系统防火墙功能未启用。",
+            "errorCreateLimitReachedForResource": "可以创建的防火墙规则的最大数量为 64 个 IPv4 防火墙规则和 64 个 IPv6 防火墙规则。"
         },
         "table": {
             "startIP": "起始 IP",

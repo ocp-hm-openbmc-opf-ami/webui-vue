@@ -2980,7 +2980,8 @@
             "errorDelete": "Error in deleting Firewall Rules.",
             "errorDateOrTimeSaveFireWall": "Invalid Date or Time.",
             "errorStartorEndIpSaveFireWall": "Invalid Range Start or Range End IP.",
-            "featureNotAvailable": "The System Firewall feature is not enabled."
+            "featureNotAvailable": "The System Firewall feature is not enabled.",
+            "errorCreateLimitReachedForResource": "The maximum number of Firewall Rules that can be created is up to 64 IPv4 Firewall Rules and 64 IPv6 Firewall Rules."
         },
         "table": {
             "startIP": "Start IP",

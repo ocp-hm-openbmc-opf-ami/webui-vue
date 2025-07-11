@@ -35,7 +35,7 @@
             </b-button>
             <b-button
               variant="primary"
-              :disabled="items.length >= 64 || isButtonDisable"
+              :disabled="items.length >= 128 || isButtonDisable"
               @click="initFireWallModal()"
             >
               <icon-add />
