@@ -1,6 +1,7 @@
 import i18n from '@/i18n';
 export const currentPage = 1;
 export const perPage = 20;
+export const limit = 10;
 const BVPaginationMixin = {
   data() {
     return {

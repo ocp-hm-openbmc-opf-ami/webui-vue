@@ -121,6 +121,7 @@
           :per-page="perPage"
           :total-rows="getTotalRowCount(filteredRows)"
           aria-controls="table-session-logs"
+          :limit="limit"
         />
       </b-col>
     </b-row>
@@ -138,6 +139,7 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import BVPaginationMixin, {
   currentPage,
   perPage,
+  limit,
 } from '@/components/Mixins/BVPaginationMixin';
 import BVTableSelectableMixin, {
   selectedRows,
@@ -243,6 +245,7 @@ export default {
       ],
       currentPage: currentPage,
       perPage: perPage,
+      limit: limit,
       selectedRows: selectedRows,
       searchTotalFilteredRows: 0,
       tableHeaderCheckboxModel: tableHeaderCheckboxModel,

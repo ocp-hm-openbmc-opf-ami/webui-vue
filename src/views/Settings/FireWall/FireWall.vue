@@ -98,6 +98,7 @@
             :per-page="perPage"
             :total-rows="getTotalRowCount(filteredRows)"
             aria-controls="table-session-logs"
+            :limit="limit"
           />
         </b-col>
       </b-row>
@@ -127,6 +128,7 @@ import SearchFilterMixin, {
 import BVPaginationMixin, {
   currentPage,
   perPage,
+  limit,
 } from '@/components/Mixins/BVPaginationMixin';
 import { mapState } from 'vuex';
 import { privilegesId } from '@/store/modules/GlobalStore';
@@ -221,6 +223,7 @@ export default {
       loading,
       currentPage: currentPage,
       perPage: perPage,
+      limit: limit,
       searchTotalFilteredRows: 0,
       searchFilter: searchFilter,
       isModalSuccess: false,
