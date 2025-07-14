@@ -1016,6 +1016,7 @@
             "bmcDumpEntry":"BMC轉儲"
         },
         "toast": {
+            "createDumpConfirmation": "您確定要建立新的 BMC 轉儲嗎？此操作無法撤銷。",
             "errorDeleteDump": "刪除轉儲 %{count} | 刪除轉儲們 %{count}",
             "errorStartBmcDump": "啟動新BMC轉儲發生錯誤",
             "errorStartSystemDump": "啟動新系統轉儲發生錯誤",
@@ -1023,7 +1024,9 @@
             "successStartBmcDump": "需要一段時間進行轉儲。刷新頁面以查看表單中已完成的轉儲",
             "successStartBmcDumpTitle": "BMC 轉儲已開始",
             "successStartSystemDump": "需要一段時間進行轉儲。轉儲將會被卸載到運作系統",
-            "successStartSystemDumpTitle": "系統轉儲開始"
+            "successStartSystemDumpTitle": "系統轉儲開始",
+            "activeDumpInProgressTitle": "轉儲進度狀態",
+            "activeDumpInProgress": "轉儲可能需要一些時間。刷新頁面以查看結果。\n您可以從任務頁面取消正在運行的任務，或在完成後啟動新的轉儲。"
         }
     },
     "pageEventLogs": {

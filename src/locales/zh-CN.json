@@ -1016,6 +1016,7 @@
             "bmcDumpEntry":"BMC转储"
         },
         "toast": {
+            "createDumpConfirmation": "您确定要创建新的 BMC 转储吗？此操作无法撤消。",
             "errorDeleteDump": "删除转储 %{count} | 删除转储 %{count}。",
             "errorStartBmcDump": "启动新BMC转储发生错误。",
             "errorStartSystemDump": "启动新系统转储发生错误。",
@@ -1023,7 +1024,9 @@
             "successStartBmcDump": "需要一段时间进行转储。刷新页面以查看表单中已完成的转储。",
             "successStartBmcDumpTitle": "BMC 转储已开始",
             "successStartSystemDump": "需要一段时间进行转储。转储将会被卸载到运行系统。",
-            "successStartSystemDumpTitle": "系统转储开始"
+            "successStartSystemDumpTitle": "系统转储开始",
+            "activeDumpInProgressTitle": "转储进度状态",
+            "activeDumpInProgress": "转储可能需要一些时间。请刷新页面以查看结果。\n您可以在任务页面取消正在运行的任务，或在完成后开始新的转储。"
         }
     },
     "pageEventLogs": {

@@ -61,14 +61,26 @@ export default {
   },
   computed: {
     ...mapGetters('global', ['userPrivilege']),
+    ...mapGetters('dumps', ['hasActiveDumpTask']),
     isButtonDisable() {
-      return this.userPrivilege !== privilegesId.admin;
+      if (this.hasActiveDumpTask === true) {
+        this.infoToast(this.$t('pageDumps.toast.activeDumpInProgress'), {
+          title: this.$t('pageDumps.toast.activeDumpInProgressTitle'),
+          timestamp: true,
+        });
+      }
+      return (
+        this.userPrivilege !== privilegesId.admin || this.hasActiveDumpTask
+      );
     },
   },
   validations() {
     return {
       selectedDumpType: { required },
     };
+  },
+  mounted() {
+    this.$store.dispatch('dumps/checkActiveDumpTasks');
   },
   methods: {
     handleSubmit() {
@@ -81,15 +93,31 @@ export default {
       }
       // BMC dump initiation
       else if (this.selectedDumpType === 'bmc') {
-        this.$store
-          .dispatch('dumps/createBmcDump')
-          .then(() =>
-            this.infoToast(this.$t('pageDumps.toast.successStartBmcDump'), {
-              title: this.$t('pageDumps.toast.successStartBmcDumpTitle'),
-              timestamp: true,
-            }),
-          )
-          .catch(({ message }) => this.errorToast(message));
+        this.$bvModal
+          .msgBoxConfirm(this.$t('pageDumps.toast.createDumpConfirmation'), {
+            title: this.$t('pageDumps.form.initiateDump'),
+            okTitle: this.$t('global.action.ok'),
+            cancelTitle: this.$t('global.action.cancel'),
+            autoFocusButton: 'ok',
+          })
+          .then((confirmed) => {
+            if (confirmed) {
+              this.$store
+                .dispatch('dumps/createBmcDump')
+                .then(() =>
+                  this.infoToast(
+                    this.$t('pageDumps.toast.successStartBmcDump'),
+                    {
+                      title: this.$t(
+                        'pageDumps.toast.successStartBmcDumpTitle',
+                      ),
+                      timestamp: true,
+                    },
+                  ),
+                )
+                .catch(({ message }) => this.errorToast(message));
+            }
+          });
       }
     },
     showConfirmationModal() {

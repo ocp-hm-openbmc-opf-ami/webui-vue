@@ -1017,6 +1017,7 @@
             "bmcDumpEntry":"BMC Dump Entry"
         },
         "toast": {
+            "createDumpConfirmation": "Are you sure you want to create a new BMC Dump? This action cannot be undone.",
             "errorDeleteDump": "Error deleting %{count} Dump. | Error deleting %{count} Dumps.",
             "errorStartBmcDump": "Error in starting new BMC Dump.",
             "errorStartSystemDump": "Error in starting new System Dump.",
@@ -1024,7 +1025,9 @@
             "successStartBmcDump": "The Dump will take some time to complete. Refresh the application to see the completed Dump in the table.",
             "successStartBmcDumpTitle": "BMC Dump started",
             "successStartSystemDump": "The Dump will take some time to complete. The Dump will be offloaded to the operating system.",
-            "successStartSystemDumpTitle": "System Dump started"
+            "successStartSystemDumpTitle": "System Dump started",
+            "activeDumpInProgressTitle": "Dump Progress Status",
+            "activeDumpInProgress": "The dump may take some time. Refresh the page to view results.\nYou can cancel the running task from the Tasks page or start a new dump after completion."
         }
     },
     "pageEventLogs": {

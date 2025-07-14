@@ -1018,6 +1018,7 @@
             "bmcDumpEntry": "BMC-Dump-Eintrag"
         },
         "toast": {
+            "createDumpConfirmation": "Möchten Sie wirklich einen neuen BMC-Dump erstellen? Diese Aktion kann nicht rückgängig gemacht werden.",
             "errorDeleteDump": "Fehler beim Löschen von %{count} Dump. | Fehler beim Löschen von %{count} Dumps.",
             "errorStartBmcDump": "Fehler beim Starten eines neuen BMC-Dumps.",
             "errorStartSystemDump": "Fehler beim Starten eines neuen System-Dumps.",
@@ -1025,7 +1026,9 @@
             "successStartBmcDump": "Der Dump wird einige Zeit in Anspruch nehmen. Aktualisieren Sie die Anwendung, um den abgeschlossenen Dump in der Tabelle zu sehen.",
             "successStartBmcDumpTitle": "BMC-Dump gestartet",
             "successStartSystemDump": "Der Dump wird einige Zeit in Anspruch nehmen. Der Dump wird auf das Betriebssystem ausgelagert.",
-            "successStartSystemDumpTitle": "System-Dump gestartet"
+            "successStartSystemDumpTitle": "System-Dump gestartet",
+            "activeDumpInProgressTitle": "Dump-Fortschrittsstatus",
+            "activeDumpInProgress": "Der Dump kann einige Zeit in Anspruch nehmen. Aktualisieren Sie die Seite, um die Ergebnisse anzuzeigen.\nSie können die laufende Aufgabe auf der Aufgaben-Seite abbrechen oder nach Abschluss einen neuen Dump starten."
         }
     },
     "pageEventLogs": {
