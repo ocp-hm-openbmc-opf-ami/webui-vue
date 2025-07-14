@@ -58,7 +58,6 @@
                   id="port"
                   v-model="radius.port"
                   :disabled="!radius.authentication"
-                  type="number"
                   :state="getValidationState($v.radius.port)"
                   @input="$v.radius.port.$touch()"
                 />
@@ -66,9 +65,10 @@
                   <template v-if="!$v.radius.port.required">
                     {{ $t('global.form.fieldRequired') }}
                   </template>
-                  <template
-                    v-if="$v.radius.port.required && !$v.radius.port.pattern"
-                  >
+                  <template v-else-if="!$v.radius.port.pattern">
+                    {{ $t('global.form.invalidFormat') }}
+                  </template>
+                  <template v-else-if="!$v.radius.port.rangeValue">
                     {{
                       $t('pageRadius.radiusPortValueLimits', {
                         min: 0,
@@ -310,9 +310,18 @@ export default {
           required: requiredIf(function () {
             return this.radius.authentication;
           }),
-          pattern: function (pw) {
+          pattern: function (val) {
             if (!this.radius.authentication) return true;
-            return this.radiusPortValueValidation(pw);
+            if (/^[0-9]+$/.test(val)) {
+              //handling value with leading zeors
+              this.radius.port = String(Number(val));
+            }
+            return /^-?\d+$/.test(val);
+          },
+          rangeValue: function (val) {
+            if (!this.radius.authentication) return true;
+            if (!/^-?\d+$/.test(val)) return true;
+            return val >= 0 && val <= 65535;
           },
         },
         secret: {
@@ -411,16 +420,6 @@ export default {
       } else {
         return true;
       }
-    },
-    radiusPortValueValidation(val) {
-      if (
-        !/^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/.test(
-          val,
-        )
-      ) {
-        return false;
-      }
-      return true;
     },
   },
 };
