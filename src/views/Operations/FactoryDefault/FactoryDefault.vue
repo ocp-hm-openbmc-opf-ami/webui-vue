@@ -308,7 +308,7 @@ export default {
           this.$tc('PageFactoryDefault.toast.FactoryDefaultConfirmation'),
           {
             title: this.$tc('PageFactoryDefault.toast.title'),
-            okTitle: this.$tc('PageFactoryDefault.toast.okTitle'),
+            okTitle: this.$t('global.action.ok'),
             cancelTitle: this.$t('global.action.cancel'),
             autoFocusButton: 'ok',
           },

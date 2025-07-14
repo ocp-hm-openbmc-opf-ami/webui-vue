@@ -1235,8 +1235,7 @@
             "restoreToDefaultsSuccess": "Success! Device has been reset. Please close this browser session and open a new browser session to reconnect to the device.",
             "restoreToDefaultsError": "Error in Restore Factory Defaults.",
             "FactoryDefaultConfirmation": "Click 'OK' if you want to continue Restoring Configurations. WARNING: Restoring Configurations will restart the device.",
-            "title": "Factory Default",
-            "okTitle": "ok"
+            "title": "Factory Default"
         }
     },
     "PageOperations": {
@@ -1322,7 +1321,7 @@
             "errorDisabledClearConfig": "Error in disabling Clear Configuration."
         }
     },
-    "pagePreserveConfiguration": {
+    "pagePreserve": {
         "pageDescription": "BMC Preserve Configuration",
         "authentication": "Authentication",
         "fru": "FRU",
@@ -1346,7 +1345,9 @@
         "toast": {
             "successPreserveConfiguration": "Preserve Configuration Settings have been saved successfully.",
             "errorPreserveConfiguration": "Error in setting Preserve Configuration.",
-            "errorGettingPreserveConfig": "Error in getting Preserve Configuration."
+            "errorGettingPreserveConfig": "Error in getting Preserve Configuration.",
+            "preserveConfirmation": "Saving selected Configurations will take effect only during a BMC full flash update. All existing Configurations will be preserved by default during a BMC partial update.",
+            "title": "Preserve"
         }
     },
     "pageInventory": {

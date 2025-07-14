@@ -1234,8 +1234,7 @@
             "restoreToDefaultsSuccess": "成功！設備已重置。請關閉此瀏覽器會話並開啟新的瀏覽器會話以重新連接到裝置。",
             "restoreToDefaultsError": "恢復出廠預設值時出錯。",
             "FactoryDefaultConfirmation": "如果您想繼續恢復配置，請按一下「確定」。 警告：恢復配置將重新啟動設備。",
-            "title": "恢復原廠設定",
-            "okTitle": "OK"
+            "title": "恢復原廠設定"
         }
     },
     "PageOperations": {
@@ -1321,7 +1320,7 @@
             "errorDisabledClearConfig": "停用清除配置時發生錯誤。"
         }
     },
-    "pagePreserveConfiguration": {
+    "pagePreserve": {
         "pageDescription": "BMC 保留配置",
         "authentication": "驗證",
         "fru": "FRU",
@@ -1345,7 +1344,9 @@
         "toast": {
             "successPreserveConfiguration": "保留配置設定已成功儲存。",
             "errorPreserveConfiguration": "設定保留配置時發生錯誤。",
-            "errorGettingPreserveConfig": "取得保留配置時發生錯誤。"
+            "errorGettingPreserveConfig": "取得保留配置時發生錯誤。",
+            "preserveConfirmation": "保存所選配置僅在BMC完整更新期間生效。 BMC部分更新期間，默認情況下將保留所有現有配置。",
+            "title": "保存"
         }
     },
     "pageInventory": {

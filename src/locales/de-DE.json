@@ -1236,8 +1236,7 @@
             "restoreToDefaultsSuccess": "Erfolg! Gerät wurde zurückgesetzt. Bitte schließen Sie diese Browsersitzung und öffnen Sie eine neue Browsersitzung, um eine Verbindung zum Gerät herzustellen.",
             "restoreToDefaultsError": "Fehler beim Wiederherstellen der Werkseinstellungen.",
             "FactoryDefaultConfirmation": "Klicken Sie auf 'OK', wenn Sie die Wiederherstellung der Konfigurationen fortsetzen möchten. WARNUNG: Das Wiederherstellen der Konfigurationen startet das Gerät neu.",
-            "title": "Werkseinstellungen wiederherstellen",
-            "okTitle": "ok"
+            "title": "Werkseinstellungen wiederherstellen"
         }
     },
     "PageOperations": {
@@ -1323,7 +1322,7 @@
             "errorDisabledClearConfig": "Fehler beim Deaktivieren der Konfiguration löschen."
         }
     },
-    "pagePreserveConfiguration": {
+    "pagePreserve": {
         "pageDescription": "BMC-Konfiguration beibehalten",
         "authentication": "Authentifizierung",
         "fru": "FRU",
@@ -1347,7 +1346,9 @@
         "toast": {
             "successPreserveConfiguration": "Konfigurationseinstellungen erfolgreich gespeichert.",
             "errorPreserveConfiguration": "Fehler beim Festlegen der Konfiguration beibehalten.",
-            "errorGettingPreserveConfig": "Fehler beim Abrufen der Konfiguration beibehalten."
+            "errorGettingPreserveConfig": "Fehler beim Abrufen der Konfiguration beibehalten.",
+            "preserveConfirmation": "Das Speichern ausgewählter Konfigurationen wirkt sich nur während eines BMC -vollständigen Flash -Update aus. Alle vorhandenen Konfigurationen werden standardmäßig während eines BMC -Teil Update erhalten.",
+            "title": "Bewahren"
         }
     },
     "pageInventory": {
