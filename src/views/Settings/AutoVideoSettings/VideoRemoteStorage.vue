@@ -379,22 +379,18 @@ export default {
         },
         UserName: {
           required: requiredIf(function () {
-            if (
+            return (
               this.videoRemote.RecordToRemote &&
               this.videoRemote.ShareType == 'cifs'
-            ) {
-              return true;
-            }
+            );
           }),
         },
         PassWord: {
           required: requiredIf(function () {
-            if (
+            return (
               this.videoRemote.RecordToRemote &&
               this.videoRemote.ShareType == 'cifs'
-            ) {
-              return true;
-            }
+            );
           }),
         },
       },
@@ -408,6 +404,7 @@ export default {
         .then(() => {
           const config =
             this.$store.getters['autoVideo/getVideoRemoteStorageValues'] || {};
+          this.$v.$reset();
           this.videoRemote = {
             RecordToRemote: config.RecordToRemote,
             MaxDumps: config.MaxDumps,
@@ -416,8 +413,6 @@ export default {
             ServerIP: config.ServerIP,
             ShareType: config.ShareType,
             PathInServer: config.PathInServer,
-            PassWord: config.PassWord,
-            UserName: config.UserName,
           };
         })
         .finally(() => {
