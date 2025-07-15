@@ -62,7 +62,7 @@ const AutoVideoStore = {
     },
     async setVideoTriggerSettings(_, data) {
       return await api
-        .post(
+        .patch(
           `/redfish/v1/Managers/bmc/Oem/Ami/AutoVideoSettings/VideoTriggerSetting`,
           data,
         )
