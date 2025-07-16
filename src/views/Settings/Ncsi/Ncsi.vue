@@ -8,31 +8,6 @@
     </div>
     <div v-if="checkNcsi" class="form-background p-3">
       <b-row>
-        <b-col>
-          <b-form-group :label="$t('pageNcsi.ncsiMode')" label-for="ncsiMode">
-            <b-form-radio-group v-model="selectedMode">
-              <b-form-row>
-                <b-form-radio
-                  v-model="form.enableConfiguration"
-                  value="Auto"
-                  data-test-id="ncsi-autoFailOverMode"
-                  class="mr-2"
-                >
-                  {{ $t('pageNcsi.autoFailOverMode') }}
-                </b-form-radio>
-                <b-form-radio
-                  v-model="form.enableConfiguration"
-                  value="Manual"
-                  data-test-id="ncsi-manualSwitchMode"
-                >
-                  {{ $t('pageNcsi.manualSwitchMode') }}
-                </b-form-radio>
-              </b-form-row>
-            </b-form-radio-group>
-          </b-form-group>
-        </b-col>
-      </b-row>
-      <b-row>
         <b-col class="col-sm-2 p-2">
           <dl>
             <dt>{{ $t('pageNcsi.ncsiInterfaceOptions') }}</dt>
@@ -42,7 +17,6 @@
           <b-form-select
             id="ncsi-interface"
             v-model="ncsiInterfaceId"
-            :disabled="selectedMode === 'Auto'"
             :options="ncsiInterfaceOptions"
             data-test-id="ncsi-interface-select"
             :state="getValidationState($v.ncsiInterfaceId)"
@@ -59,6 +33,32 @@
               {{ $t('global.form.fieldRequired') }}
             </template>
           </b-form-invalid-feedback>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col class="col-sm-2 p-2">
+          <dl>
+            <dt>{{ $t('pageNcsi.ncsiMode') }}</dt>
+          </dl>
+        </b-col>
+        <b-col lg="6">
+          <b-form-radio-group v-model="selectedMode">
+            <b-form-radio
+              v-model="form.enableConfiguration"
+              value="Auto"
+              data-test-id="ncsi-autoFailOverMode"
+              class="mr-2"
+            >
+              {{ $t('pageNcsi.autoFailOverMode') }}
+            </b-form-radio>
+            <b-form-radio
+              v-model="form.enableConfiguration"
+              value="Manual"
+              data-test-id="ncsi-manualSwitchMode"
+            >
+              {{ $t('pageNcsi.manualSwitchMode') }}
+            </b-form-radio>
+          </b-form-radio-group>
         </b-col>
       </b-row>
       <b-row>
