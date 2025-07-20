@@ -235,17 +235,17 @@
                 >
                   <b-form-input
                     id="password"
-                    v-model="videoRemote.PassWord"
+                    v-model="videoRemote.Password"
                     :disabled="
                       !videoRemote.RecordToRemote ||
                       videoRemote.ShareType != 'cifs'
                     "
                     type="password"
-                    :state="getValidationState($v.videoRemote.PassWord)"
-                    @input="$v.videoRemote.PassWord.$touch()"
+                    :state="getValidationState($v.videoRemote.Password)"
+                    @input="$v.videoRemote.Password.$touch()"
                   />
                   <b-form-invalid-feedback role="alert">
-                    <template v-if="!$v.videoRemote.PassWord.required">
+                    <template v-if="!$v.videoRemote.Password.required">
                       {{ $t('global.form.fieldRequired') }}
                     </template>
                   </b-form-invalid-feedback>
@@ -312,7 +312,7 @@ export default {
         ShareType: '',
         PathInServer: '',
         UserName: '',
-        PassWord: '',
+        Password: '',
       },
     };
   },
@@ -385,7 +385,7 @@ export default {
             );
           }),
         },
-        PassWord: {
+        Password: {
           required: requiredIf(function () {
             return (
               this.videoRemote.RecordToRemote &&
@@ -413,6 +413,8 @@ export default {
             ServerIP: config.ServerIP,
             ShareType: config.ShareType,
             PathInServer: config.PathInServer,
+            Password: config.Password,
+            UserName: config.UserName,
           };
         })
         .finally(() => {
@@ -443,7 +445,7 @@ export default {
       };
       if (this.videoRemote.ShareType == 'cifs') {
         params.UserName = this.videoRemote.UserName;
-        params.PassWord = this.videoRemote.PassWord;
+        params.Password = this.videoRemote.Password;
       }
       this.startLoader();
       this.$store
