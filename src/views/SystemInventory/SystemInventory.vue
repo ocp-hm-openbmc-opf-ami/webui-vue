@@ -9,6 +9,7 @@
           active-nav-item-class="font-weight-bold"
           card
           content-class="mt-3"
+          @input="onTabChange"
         >
           <b-tab :title="$t('pageSystemInventory.system.system')"
             ><b>{{ $t('pageSystemInventory.system.systemInfo') }}</b>
@@ -134,25 +135,81 @@ export default {
     };
   },
   created() {
-    this.startLoader();
-    this.$store.dispatch('SystemStore/ChassisCollection').then(() => {
-      Promise.all([
-        this.$store.dispatch('SystemStore/getSystemsInfo'),
-        this.$store.dispatch('SystemStore/getBaseBoardInfo'),
-        this.$store.dispatch('SystemStore/getMemoryControllersInfo'),
-        this.$store.dispatch('SystemStore/getProcessorsInfo'),
-        this.$store.dispatch(
-          'SystemStore/getBasebordInfoNetworkInterfacesIpv6',
-        ),
-        this.$store.dispatch('SystemStore/getBasebordInfoNetworkinterfaces'),
-        this.$store.dispatch('SystemStore/getPcieDeviceInfo'),
-        this.$store.dispatch('SystemStore/getPcieFunctionInfo'),
-        this.$store.dispatch('SystemStore/getPowerInfo'),
-        this.$store.dispatch('SystemStore/getTemperatureInfo'),
-        this.$store.dispatch('SystemStore/getFansInfo'),
-        this.$store.dispatch('SystemStore/getVoltageInfo'),
-      ]).finally(() => this.endLoader());
-    });
+    this.onTabChange(0); // Load first tab initially
+  },
+  methods: {
+    async onTabChange(index) {
+      this.startLoader();
+      let apiCalls = [];
+
+      // Only call ChassisCollection for tabs that need baseBoardId
+      const tabsNeedingChassisCollection = [3, 4, 5]; // Baseboard, Power, Thermal
+      if (tabsNeedingChassisCollection.includes(index)) {
+        await this.$store.dispatch('SystemStore/ChassisCollection');
+      }
+
+      switch (index) {
+        case 0: // System
+          apiCalls.push(this.$store.dispatch('SystemStore/getSystemsInfo'));
+          break;
+        case 1: // Processor
+          apiCalls.push(
+            this.$store.dispatch('SystemStore/getProcessorsInfo'),
+            // Add FPGA info if needed
+          );
+          break;
+        case 2: // Memory Controller
+          apiCalls.push(
+            this.$store.dispatch('SystemStore/getMemoryControllersInfo'),
+            // Add MemoryAssembly and MemoryMetrics if needed
+          );
+          break;
+        case 3: // Baseboard
+          apiCalls.push(
+            this.$store.dispatch('SystemStore/getBaseBoardInfo'),
+            this.$store.dispatch(
+              'SystemStore/getBasebordInfoNetworkinterfaces',
+            ),
+            this.$store.dispatch(
+              'SystemStore/getBasebordInfoNetworkInterfacesIpv6',
+            ),
+          );
+          break;
+        case 4: // Power
+          apiCalls.push(
+            this.$store.dispatch('SystemStore/getPowerInfo'),
+            this.$store.dispatch('SystemStore/getVoltageInfo'),
+          );
+          break;
+        case 5: // Thermal
+          apiCalls.push(
+            this.$store.dispatch('SystemStore/getFansInfo'),
+            this.$store.dispatch('SystemStore/getTemperatureInfo'),
+          );
+          break;
+        case 6: // PCIe Device
+          apiCalls.push(this.$store.dispatch('SystemStore/getPcieDeviceInfo'));
+          break;
+        case 7: // PCIe Function
+          apiCalls.push(
+            this.$store.dispatch('SystemStore/getPcieFunctionInfo'),
+          );
+          break;
+        case 8: // Storage (if shown)
+          apiCalls.push(
+            this.$store.dispatch('SystemStore/getStorageDriveInfo'),
+            this.$store.dispatch('SystemStore/getStorageControllerInfo'),
+          );
+          break;
+        default:
+          break;
+      }
+      try {
+        await Promise.all(apiCalls);
+      } finally {
+        this.endLoader();
+      }
+    },
   },
 };
 </script>
