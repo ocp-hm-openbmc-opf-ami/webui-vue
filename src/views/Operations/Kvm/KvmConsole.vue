@@ -82,9 +82,8 @@ import softKeyBoard from '@/components/SoftKeyboard/softKeyboard';
 import DraggableDivVue from '@/components/SoftKeyboard/draggableDiv';
 import '@/components/SoftKeyboard/softKeyboard.css';
 import { throttle } from 'lodash';
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import { privilegesId } from '@/store/modules/GlobalStore';
-import { mapGetters } from 'vuex';
 
 const Connecting = 0;
 const Connected = 1;
@@ -134,7 +133,7 @@ export default {
   },
   computed: {
     ...mapState('authentication', ['consoleWindow']),
-    ...mapGetters('global', ['userPrivilege']),
+    ...mapGetters('global', ['userPrivilege', 'sessionId']),
     isButtonDisable() {
       return this.userPrivilege !== privilegesId.admin;
     },
@@ -231,6 +230,10 @@ export default {
     openTerminal() {
       setTimeout(() => {
         const token = this.$store.getters['authentication/token'];
+        let sessionId = this.sessionId;
+        if (this.$route && this.$route.query && this.$route.query.sessionId) {
+          sessionId = this.$route.query.sessionId;
+        }
         this.rfb = new AMI_RFB(
           this.$refs.panel,
           `wss://${window.location.host}/kvm/0`,
@@ -250,6 +253,10 @@ export default {
           that.isConnected = true;
           that.status = Connected;
           that.setWidthToolbar();
+          setTimeout(() => {
+            console.log('Waited 1 millisecond');
+          }, 1);
+          that.rfb.ivtpSendSessionInfo(String(sessionId));
         });
 
         this.rfb.addEventListener('disconnect', (event) => {
@@ -284,8 +291,9 @@ export default {
         this.handleSoftKeyboardSyncedClose();
         this.closeTerminal();
       }
+      const sessionId = this.sessionId;
       this.isConsoleWindow = window.open(
-        '#/console/kvm?popup=true', // Added query parameter
+        `#/console/kvm?popup=true&sessionId=${encodeURIComponent(sessionId)}`,
         'kvmConsoleWindow',
         'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=700,height=550',
       );
