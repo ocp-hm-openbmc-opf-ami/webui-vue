@@ -57,7 +57,7 @@ export default {
       return systemData ? systemData : {};
     },
     serverStatus() {
-      return this.$store.getters['global/serverStatus'];
+      return this.$store.getters['system/serverStatus'];
     },
     powerStatus() {
       if (this.serverStatus === 'unreachable') {
