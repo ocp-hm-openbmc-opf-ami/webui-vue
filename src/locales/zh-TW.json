@@ -776,7 +776,10 @@
             "ipAddress": "IP 位址",
             "privilege": "特權",
             "searchSessions": "搜尋會話們",
-            "mountType": "安裝類型"
+            "mountType": "安裝類型",
+            "administrator": "管理員",
+            "operator": "操作員",
+            "readOnly": "唯讀"
         },
         "toast": {
             "errorDelete": "錯誤取消連結 %{count} 會話 | 錯誤取消連結 %{count} 會話們",

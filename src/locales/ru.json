@@ -194,7 +194,10 @@
             "context": "контекст",
             "username": "Имя пользователя",
             "ipAddress": "IP адрес",
-            "searchSessions": "Поиск сессий"
+            "searchSessions": "Поиск сессий",
+            "administrator": "Администратор",
+            "operator": "Оператор",
+            "readOnly": "Только для чтения"
         },
         "toast": {
             "errorDelete": "Ошибка отключения %{count} сессии. | Ошибка отключения %{count} сессий.",

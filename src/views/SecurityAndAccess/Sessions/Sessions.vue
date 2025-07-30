@@ -222,6 +222,7 @@ export default {
         {
           key: 'privilege',
           label: this.$t('pageSessions.table.privilege'),
+          formatter: this.convertPrivilege,
           class: 'text-center',
           sortable: true,
         },
@@ -347,6 +348,18 @@ export default {
             }
           });
       }
+    },
+    convertPrivilege(value) {
+      if (!value) return '';
+      const role = value.toLowerCase();
+      if (role.includes('administrator')) {
+        return this.$t('pageSessions.table.administrator');
+      } else if (role.includes('operator')) {
+        return this.$t('pageSessions.table.operator');
+      } else if (role.includes('readonly')) {
+        return this.$t('pageSessions.table.readOnly');
+      }
+      return value;
     },
   },
 };

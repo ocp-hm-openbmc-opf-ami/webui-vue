@@ -776,7 +776,10 @@
             "ipAddress": "IP 地址",
             "privilege": "权限",
             "searchSessions": "查找会话",
-            "mountType": "挂载类型"
+            "mountType": "挂载类型",
+            "administrator": "管理员",
+            "operator": "操作员",
+            "readOnly": "只读"
         },
         "toast": {
             "errorDelete": "断开 %{count} 个会话时失败 | 断开 %{count} 个会话时失败",

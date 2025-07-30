@@ -777,7 +777,10 @@
             "ipAddress": "IP Address",
             "privilege": "Privilege",
             "searchSessions": "Search Sessions",
-            "mountType": "Mount Type"
+            "mountType": "Mount Type",
+            "administrator": "Administrator",
+            "operator": "Operator",
+            "readOnly": "Readonly"
         },
         "toast": {
             "errorDelete": "Error disconnecting %{count} session. | Error in disconnecting %{count} sessions.",

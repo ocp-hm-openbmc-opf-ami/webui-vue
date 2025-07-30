@@ -777,7 +777,10 @@
             "ipAddress": "IP-Adresse",
             "privilege": "Berechtigung",
             "searchSessions": "Sitzungen durchsuchen",
-            "mountType": "Mount-Typ"
+            "mountType": "Mount-Typ",
+            "administrator": "Administrator",
+            "operator": "Operator",
+            "readOnly": "Nur lesen"
         },
         "toast": {
             "errorDelete": "Fehler beim Trennen von %{count} Sitzung. | Fehler beim Trennen von %{count} Sitzungen.",
