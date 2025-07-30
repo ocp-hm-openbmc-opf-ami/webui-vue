@@ -227,8 +227,14 @@ export default {
               });
             });
             this.ncsiPackageId = channelList.PackageId;
-            this.ncsiChannelNumber =
+
+            const currentChannelId =
               this.ncsiData?.Oem?.Ami?.NCSIConfiguration?.ChannelId;
+            this.ncsiChannelNumber = channelList.SupportedChannelsId.includes(
+              currentChannelId,
+            )
+              ? currentChannelId
+              : 0;
           }
         })
         .catch(({ message }) => this.errorToast(message))
