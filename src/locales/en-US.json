@@ -1585,6 +1585,10 @@
         "enableRadiusAuthentication": " Enable RADIUS Authentication",
         "radiusConfiguration": " RADIUS Authentication is not enabled.",
         "radiusPortValueLimits": "Kindly enter the values between %{min} and %{max}.",
+        "enableEAPTLSAuthentication": "Enable EAP-TLS Authentication",
+        "radiusBlastCa": "RADIUS CA",
+        "radiusBlastClient": "RADIUS Client",
+        "radiusBlastKey": "RADIUS Key",
         "form": {
             "serverAddress": "Server Address",
             "port": "Port",
@@ -1594,12 +1598,21 @@
             "groupName3": "Group Name3 - Optional",
             "privilege1": "Privilege 1",
             "privilege2": "Privilege 2",
-            "privilege3": "Privilege 3"
+            "privilege3": "Privilege 3",
+            "radiusCA": "RADIUS CA",
+            "radiusClient": "RADIUS Client",
+            "radiusKey": "RADIUS Key"
         },
         "toast": {
             "successRadiusConfiguration": "RADIUS Settings has been saved successfully.",
+            "successAddCertificate": "Successfully added %{certificate}.",
+            "successEnableEapTLS": "Successfully enabled EAP-TLS Authentication.",
+            "successDisableEapTLS": "Successfully disabled EAP-TLS Authentication.",
+            "errorAddCertificate": "Error in adding Certificate.",
             "errorRadiusConfiguration": "Error in setting RADIUS Configuration.",
-            "errorGettingRadiusConfig": "Error in getting RADIUS Configuration."
+            "errorGettingRadiusConfig": "Error in getting RADIUS Configuration.",
+            "errorEnableEapTLS": "Error in enabling EAP-TLS Authentication.",
+            "errorDisableEapTLS": "Error in disabling EAP-TLS Authentication."
         }
     },
     "pageUserManagement": {

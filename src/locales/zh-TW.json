@@ -1584,6 +1584,10 @@
         "enableRadiusAuthentication": " 啟用 RADIUS 認證",
         "radiusConfiguration": "不啟用 RADIUS 身份驗證。",
         "radiusPortValueLimits": "請輸入 %{min} 和 %{max} 之間的數值",
+        "enableEAPTLSAuthentication": "啟用 EAP-TLS 身份驗證",
+        "radiusBlastCa": "RADIUS CA",
+        "radiusBlastClient": "RADIUS 用戶端",
+        "radiusBlastKey": "RADIUS 金鑰",
         "form": {
             "serviceAddress": "伺服器位址",
             "port": "埠號",
@@ -1593,12 +1597,21 @@
             "groupName3": "組名稱3 - 可選",
             "privilege1": "特權 1",
             "privilege2": "特權 2",
-            "privilege3": "特權 3"
+            "privilege3": "特權 3",
+            "radiusCA": "RADIUS CA",
+            "radiusClient": "RADIUS 用戶端",
+            "radiusKey": "RADIUS 金鑰"
         },
         "toast": {
             "successRadiusConfiguration": "RADIUS 設定已成功儲存。",
+            "successAddCertificate": "已成功添加 %{certificate}。",
+            "successEnableEapTLS": "已成功啟用 EAP-TLS 身份驗證。",
+            "successDisableEapTLS": "已成功停用 EAP-TLS 驗證。",
+            "errorAddCertificate": "新增證書時發生錯誤。",
             "errorRadiusConfiguration": "設定半徑配置時發生錯誤。",
-            "errorGettingRadiusConfig": "取得 RADIUS 配置時發生錯誤。"
+            "errorGettingRadiusConfig": "取得 RADIUS 配置時發生錯誤。",
+            "errorEnableEapTLS": "啟用 EAP-TLS 身份驗證時發生錯誤。",
+            "errorDisableEapTLS": "停用 EAP-TLS 身份驗證時發生錯誤。"
         }
     },
     "pageUserManagement": {

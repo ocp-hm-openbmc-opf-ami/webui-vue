@@ -1584,6 +1584,10 @@
         "enableRadiusAuthentication": " 启用 RADIUS 认证",
         "radiusConfiguration": "不启用 RADIUS 身份验证。",
         "radiusPortValueLimits": "请输入 %{min} 和 %{max} 之间的值。",
+        "enableEAPTLSAuthentication": "启用 EAP-TLS 身份验证",
+        "radiusBlastCa": "RADIUS CA",
+        "radiusBlastClient": "RADIUS 客户端",
+        "radiusBlastKey": "RADIUS 密钥",
         "form": {
             "serviceAddress": "服务器地址",
             "port": "端口",
@@ -1593,12 +1597,21 @@
             "groupName3": "群组名 3 - 可选",
             "privilege1": "权限 1",
             "privilege2": "权限 2",
-            "privilege3": "权限 3"
+            "privilege3": "权限 3",
+            "radiusCA": "RADIUS CA",
+            "radiusClient": "RADIUS 客户端",
+            "radiusKey": "RADIUS 密钥"
         },
         "toast": {
             "successRadiusConfiguration": "RADIUS 设置已成功保存。",
+            "successAddCertificate": "已成功添加 %{certificate}.",
+            "successEnableEapTLS": "已成功启用 EAP-TLS 身份验证.",
+            "successDisableEapTLS": "已成功禁用 EAP-TLS 身份验证.",
+            "errorAddCertificate": "添加证书时出错.",
             "errorRadiusConfiguration": "设置 RADIUS 配置错误。",
-            "errorGettingRadiusConfig": "获取 RADIUS 配置时出错。"
+            "errorGettingRadiusConfig": "获取 RADIUS 配置时出错。",
+            "errorEnableEapTLS": "启用 EAP-TLS 身份验证时出错.",
+            "errorDisableEapTLS": "禁用 EAP-TLS 身份验证时出错."
         }
     },
     "pageUserManagement": {
