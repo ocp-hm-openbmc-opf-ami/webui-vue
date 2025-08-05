@@ -1,7 +1,7 @@
 import api, { getResponseCount } from '@/store/api';
 import i18n from '@/i18n';
 import store from '../GlobalStore';
-import authentication from '../Authentication/AuthenticanStore';
+import authentication from '@/store';
 
 const UserManagementStore = {
   namespaced: true,
@@ -150,7 +150,9 @@ const UserManagementStore = {
         Enabled: status,
         PasswordChangeRequired: PasswordChangeRequired,
         OEMAccountTypes: vmediaAccess ? ['media'] : [],
-        Oem: {
+      };
+      if (snmpUserEnable === true) {
+        data.Oem = {
           Ami: {
             SNMP: {
               Algorithm: algorithm,
@@ -159,8 +161,16 @@ const UserManagementStore = {
               SNMPAccessEnableStatus: snmpUserEnable,
             },
           },
-        },
-      };
+        };
+      } else if (snmpUserEnable === false) {
+        data.Oem = {
+          Ami: {
+            SNMP: {
+              SNMPAccessEnableStatus: snmpUserEnable,
+            },
+          },
+        };
+      }
       return await api
         .post('/redfish/v1/AccountService/Accounts', data)
         .then(() => dispatch('getUsers'))
@@ -251,18 +261,28 @@ const UserManagementStore = {
           if (locked !== undefined) data.Locked = locked;
           if (PasswordChangeRequired !== undefined)
             data.PasswordChangeRequired = PasswordChangeRequired;
-          if (
-            snmpUserEnable !== undefined ||
-            encryption !== undefined ||
-            algorithm !== undefined ||
-            readWritePermission !== undefined
-          ) {
+          if (snmpUserEnable === true) {
+            if (
+              snmpUserEnable !== undefined ||
+              encryption !== undefined ||
+              algorithm !== undefined ||
+              readWritePermission !== undefined
+            ) {
+              data.Oem = {
+                Ami: {
+                  SNMP: {
+                    Algorithm: algorithm,
+                    Encryption: encryption,
+                    Access: readWritePermission,
+                    SNMPAccessEnableStatus: snmpUserEnable,
+                  },
+                },
+              };
+            }
+          } else if (snmpUserEnable === false) {
             data.Oem = {
               Ami: {
                 SNMP: {
-                  Algorithm: algorithm,
-                  Encryption: encryption,
-                  Access: readWritePermission,
                   SNMPAccessEnableStatus: snmpUserEnable,
                 },
               },
@@ -278,7 +298,12 @@ const UserManagementStore = {
       return await api
         .patch(`/redfish/v1/AccountService/Accounts/${originalUsername}`, data)
         .then(() => {
-          if (originalUsername === store.getters.username(store.state)) {
+          const passwordChangeRequired = data.PasswordChangeRequired;
+          const password = data.Password;
+          if (
+            originalUsername === store.getters.username(store.state) &&
+            (passwordChangeRequired || password)
+          ) {
             authentication.dispatch('authentication/logout');
           } else {
             dispatch('getUsers');

@@ -120,6 +120,7 @@
                   v-if="!newUser"
                   id="changePassword"
                   v-model="form.changePassword"
+                  :disabled="isCheckboxDisabled(form)"
                 >
                   {{ $t('pageUserManagement.modal.changePassword') }}
                 </b-form-checkbox>
@@ -145,10 +146,7 @@
                       :state="getValidationState($v.form.password)"
                       class="form-control-with-button"
                       :style="passwordInputFieldStyle"
-                      :disabled="
-                        !newUser &&
-                        !(form.snmpUserEnable || form.changePassword)
-                      "
+                      :disabled="!newUser && !form.changePassword"
                       autocomplete="new-password"
                       @input="$v.form.password.$touch()"
                     />
@@ -253,10 +251,7 @@
                       type="password"
                       :state="getValidationState($v.form.passwordConfirmation)"
                       class="form-control-with-button"
-                      :disabled="
-                        !newUser &&
-                        !(form.snmpUserEnable || form.changePassword)
-                      "
+                      :disabled="!newUser && !form.changePassword"
                       autocomplete="new-password"
                       @input="$v.form.passwordConfirmation.$touch()"
                     />
@@ -514,7 +509,7 @@ export default {
       ],
       algorithmType: [
         {
-          value: 'SHA',
+          value: 'SHA-224',
           text: this.$tc('pageUserManagement.modal.authProtocolsh224'),
         },
         {
@@ -572,9 +567,21 @@ export default {
       this.form.PasswordChangeRequired = value.PasswordChangeRequired;
       this.form.vmediaAccess = value.OEMAccountTypes.includes('media');
       this.form.snmpUserEnable = value.Oem.Ami.SNMP.SNMPAccessEnableStatus;
-      this.form.algorithm = value.Oem.Ami.SNMP.Algorithm;
-      this.form.encryption = value.Oem.Ami.SNMP.Encryption;
-      this.form.readWritePermission = value.Oem.Ami.SNMP.Access;
+      this.form.algorithm = value.Oem.Ami.SNMP.Algorithm
+        ? value.Oem.Ami.SNMP.Algorithm
+        : null;
+      this.form.encryption = value.Oem.Ami.SNMP.Encryption
+        ? value.Oem.Ami.SNMP.Encryption
+        : null;
+      this.form.readWritePermission = value.Oem.Ami.SNMP.Access
+        ? value.Oem.Ami.SNMP.Access
+        : null;
+    },
+    'form.snmpUserEnable': function (newValue) {
+      this.form.changePassword =
+        !this.newUser &&
+        this.user.snmpUserEnabled == 'Disabled' &&
+        newValue === true;
     },
   },
   validations() {
@@ -765,6 +772,15 @@ export default {
         .then((success) => this.successToast(success))
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.closeModal());
+    },
+    isCheckboxDisabled(form) {
+      const snmpFields = ['encryption', 'algorithm', 'readWritePermission'];
+      return (
+        !this.newUser &&
+        this.user.snmpUserEnabled === 'Disabled' &&
+        form.snmpUserEnable === true &&
+        snmpFields.some((field) => this.user[field] === 'NA')
+      );
     },
   },
 };
