@@ -235,17 +235,17 @@
                 >
                   <b-form-input
                     id="password"
-                    v-model="videoRemote.PassWord"
+                    v-model="videoRemote.Password"
                     :disabled="
                       !videoRemote.RecordToRemote ||
                       videoRemote.ShareType != 'cifs'
                     "
                     type="password"
-                    :state="getValidationState($v.videoRemote.PassWord)"
-                    @input="$v.videoRemote.PassWord.$touch()"
+                    :state="getValidationState($v.videoRemote.Password)"
+                    @input="$v.videoRemote.Password.$touch()"
                   />
                   <b-form-invalid-feedback role="alert">
-                    <template v-if="!$v.videoRemote.PassWord.required">
+                    <template v-if="!$v.videoRemote.Password.required">
                       {{ $t('global.form.fieldRequired') }}
                     </template>
                   </b-form-invalid-feedback>
@@ -312,7 +312,7 @@ export default {
         ShareType: '',
         PathInServer: '',
         UserName: '',
-        PassWord: '',
+        Password: '',
       },
     };
   },
@@ -379,22 +379,18 @@ export default {
         },
         UserName: {
           required: requiredIf(function () {
-            if (
+            return (
               this.videoRemote.RecordToRemote &&
               this.videoRemote.ShareType == 'cifs'
-            ) {
-              return true;
-            }
+            );
           }),
         },
-        PassWord: {
+        Password: {
           required: requiredIf(function () {
-            if (
+            return (
               this.videoRemote.RecordToRemote &&
               this.videoRemote.ShareType == 'cifs'
-            ) {
-              return true;
-            }
+            );
           }),
         },
       },
@@ -408,6 +404,7 @@ export default {
         .then(() => {
           const config =
             this.$store.getters['autoVideo/getVideoRemoteStorageValues'] || {};
+          this.$v.$reset();
           this.videoRemote = {
             RecordToRemote: config.RecordToRemote,
             MaxDumps: config.MaxDumps,
@@ -416,7 +413,7 @@ export default {
             ServerIP: config.ServerIP,
             ShareType: config.ShareType,
             PathInServer: config.PathInServer,
-            PassWord: config.PassWord,
+            Password: config.Password,
             UserName: config.UserName,
           };
         })
@@ -448,7 +445,7 @@ export default {
       };
       if (this.videoRemote.ShareType == 'cifs') {
         params.UserName = this.videoRemote.UserName;
-        params.PassWord = this.videoRemote.PassWord;
+        params.Password = this.videoRemote.Password;
       }
       this.startLoader();
       this.$store

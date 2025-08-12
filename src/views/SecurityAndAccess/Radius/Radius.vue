@@ -19,6 +19,25 @@
                 </b-form-checkbox>
               </b-form-group>
             </b-col>
+            <b-col>
+              <b-form-group
+                :label="$t('pageRadius.enableEAPTLSAuthentication')"
+              >
+                <b-form-checkbox
+                  id="enableEapTLS"
+                  v-model="tlsAuthenticationEnable"
+                  data-test-id="radius-toggle-TLS"
+                  switch
+                  :disabled="!radius.authentication"
+                  @change="ChangeEnableEapTLS"
+                >
+                  <span v-if="tlsAuthenticationEnable">
+                    {{ $t('global.status.enabled') }}
+                  </span>
+                  <span v-else>{{ $t('global.status.disabled') }}</span>
+                </b-form-checkbox>
+              </b-form-group>
+            </b-col>
           </b-row>
           <b-row>
             <b-col sm="6" xl="4">
@@ -58,7 +77,6 @@
                   id="port"
                   v-model="radius.port"
                   :disabled="!radius.authentication"
-                  type="number"
                   :state="getValidationState($v.radius.port)"
                   @input="$v.radius.port.$touch()"
                 />
@@ -66,9 +84,10 @@
                   <template v-if="!$v.radius.port.required">
                     {{ $t('global.form.fieldRequired') }}
                   </template>
-                  <template
-                    v-if="$v.radius.port.required && !$v.radius.port.pattern"
-                  >
+                  <template v-else-if="!$v.radius.port.pattern">
+                    {{ $t('global.form.invalidFormat') }}
+                  </template>
+                  <template v-else-if="!$v.radius.port.rangeValue">
                     {{
                       $t('pageRadius.radiusPortValueLimits', {
                         min: 0,
@@ -229,6 +248,71 @@
               </b-form-group>
             </b-col>
           </b-row>
+          <b-row
+            v-if="tlsAuthenticationEnable && radius.authentication"
+            class="mt-4"
+          >
+            <b-col sm="4">
+              <b-form-group :label="$t('pageRadius.form.radiusCA')">
+                <span v-if="radius.radiusCAModifiedDate">
+                  Last Modified Date: {{ radius.radiusCAModifiedDate }}
+                </span>
+                <form-file
+                  id="radius-certificate-radiusCA"
+                  v-model="radius.radiusCA"
+                  accept=".pem"
+                  :state="getValidationState($v.radius.radiusCA)"
+                  @input="onFileUpload($event, 'radius_ca')"
+                >
+                  <template #invalid>
+                    <b-form-invalid-feedback role="alert">
+                      {{ $t('global.form.required') }}
+                    </b-form-invalid-feedback>
+                  </template>
+                </form-file>
+              </b-form-group>
+            </b-col>
+            <b-col sm="4">
+              <b-form-group :label="$t('pageRadius.form.radiusClient')">
+                <span v-if="radius.radiusClientModifiedDate">
+                  Last Modified Date: {{ radius.radiusClientModifiedDate }}
+                </span>
+                <form-file
+                  id="radius-certificate-radiusClient"
+                  v-model="radius.radiusClient"
+                  accept=".pem"
+                  :state="getValidationState($v.radius.radiusClient)"
+                  @input="onFileUpload($event, 'radius_client')"
+                >
+                  <template #invalid>
+                    <b-form-invalid-feedback role="alert">
+                      {{ $t('global.form.required') }}
+                    </b-form-invalid-feedback>
+                  </template>
+                </form-file>
+              </b-form-group>
+            </b-col>
+            <b-col sm="4">
+              <b-form-group :label="$t('pageRadius.form.radiusKey')">
+                <span v-if="radius.radiusKeyModifiedDate">
+                  Last Modified Date: {{ radius.radiusKeyModifiedDate }}
+                </span>
+                <form-file
+                  id="radius-certificate-radiusKey"
+                  v-model="radius.radiusKey"
+                  accept=".pem"
+                  :state="getValidationState($v.radius.radiusKey)"
+                  @input="onFileUpload($event, 'radius_key')"
+                >
+                  <template #invalid>
+                    <b-form-invalid-feedback role="alert">
+                      {{ $t('global.form.required') }}
+                    </b-form-invalid-feedback>
+                  </template>
+                </form-file>
+              </b-form-group>
+            </b-col>
+          </b-row>
           <b-row class="mt-4 mb-5">
             <b-col>
               <b-btn variant="primary" type="submit" @click="SaveConfig">
@@ -250,12 +334,14 @@ import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { requiredIf } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import FormFile from '@/components/Global/FormFile';
 
 export default {
   name: 'Radius',
   components: {
     PageTitle,
     IconSave,
+    FormFile,
   },
   mixins: [BVToastMixin, VuelidateMixin, LoadingBarMixin],
   data() {
@@ -271,6 +357,12 @@ export default {
         privilege1: null,
         privilege2: null,
         privilege3: null,
+        radiusCA: '',
+        radiusClient: '',
+        radiusKey: '',
+        radiusCAModifiedDate: '',
+        radiusClientModifiedDate: '',
+        radiusKeyModifiedDate: '',
       },
       privilegeTypes: [
         { value: 'Administrator', text: 'Administrator' },
@@ -281,6 +373,14 @@ export default {
   },
   computed: {
     ...mapState('radius', ['radiusValues']),
+    tlsAuthenticationEnable: {
+      get() {
+        return this.$store.getters['radius/getEnableEapTLS'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
   },
   watch: {
     radiusValues() {
@@ -310,9 +410,18 @@ export default {
           required: requiredIf(function () {
             return this.radius.authentication;
           }),
-          pattern: function (pw) {
+          pattern: function (val) {
             if (!this.radius.authentication) return true;
-            return this.radiusPortValueValidation(pw);
+            if (/^[0-9]+$/.test(val)) {
+              //handling value with leading zeors
+              this.radius.port = String(Number(val));
+            }
+            return /^-?\d+$/.test(val);
+          },
+          rangeValue: function (val) {
+            if (!this.radius.authentication) return true;
+            if (!/^-?\d+$/.test(val)) return true;
+            return val >= 0 && val <= 65535;
           },
         },
         secret: {
@@ -350,6 +459,33 @@ export default {
             return this.radius.authentication && !!this.radius.privilege3;
           }),
         },
+        radiusCA: {
+          required: requiredIf(function () {
+            return (
+              this.radius.authentication &&
+              this.tlsAuthenticationEnable &&
+              !this.radius.radiusCAModifiedDate
+            );
+          }),
+        },
+        radiusClient: {
+          required: requiredIf(function () {
+            return (
+              this.radius.authentication &&
+              this.tlsAuthenticationEnable &&
+              !this.radius.radiusClientModifiedDate
+            );
+          }),
+        },
+        radiusKey: {
+          required: requiredIf(function () {
+            return (
+              this.radius.authentication &&
+              this.tlsAuthenticationEnable &&
+              !this.radius.radiusKeyModifiedDate
+            );
+          }),
+        },
       },
     };
   },
@@ -369,6 +505,9 @@ export default {
         privilege1: config.Privilege1 === '' ? null : config.Privilege1,
         privilege2: config.Privilege2 === '' ? null : config.Privilege2,
         privilege3: config.Privilege3 === '' ? null : config.Privilege3,
+        radiusCAModifiedDate: config?.CAFileModifiedDate,
+        radiusClientModifiedDate: config?.ClientFileModifiedDate,
+        radiusKeyModifiedDate: config?.PrivateKeyFileModifiedDate,
       };
     },
     SaveConfig() {
@@ -421,6 +560,26 @@ export default {
         return false;
       }
       return true;
+    },
+    onFileUpload(file, type) {
+      if (file) {
+        this.startLoader();
+        this.$store
+          .dispatch('radius/addNewCertificate', { file, type })
+          .then((success) => {
+            this.successToast(success);
+          })
+          .catch(({ message }) => this.errorToast(message))
+          .finally(() => this.endLoader());
+      }
+    },
+    ChangeEnableEapTLS(state) {
+      this.startLoader();
+      this.$store
+        .dispatch('radius/ChangeEnableEapTLS', state ? true : false)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => this.endLoader());
     },
   },
 };

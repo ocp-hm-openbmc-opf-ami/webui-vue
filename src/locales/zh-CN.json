@@ -372,9 +372,9 @@
             "domainConfiguration": "域配置",
             "domainNameSetting": "域名",
             "iPPriority": "IP 优先级",
-            "staticDomainName": "静态域名",
+            "hostName": "主机名",
             "hostConfiguration": "主机配置",
-            "hostNameSetting": "主机名称",
+            "hostNameSetting": "主机名设置",
             "domainName": "域名",
             "interfacesConfiguration": "接口",
             "ddnsMethod": "DDNS 方法",
@@ -776,7 +776,10 @@
             "ipAddress": "IP 地址",
             "privilege": "权限",
             "searchSessions": "查找会话",
-            "mountType": "挂载类型"
+            "mountType": "挂载类型",
+            "administrator": "管理员",
+            "operator": "操作员",
+            "readOnly": "只读"
         },
         "toast": {
             "errorDelete": "断开 %{count} 个会话时失败 | 断开 %{count} 个会话时失败",
@@ -883,6 +886,15 @@
         "refClockCapability": "参考时钟的能力",
         "PCIePortMultiRecord": "NVMe PCIe 端口多记录",
         "nvmeMultiRecord": "NVMe 多重记录",
+        "topologyMultiRecord": "拓扑多条记录",
+        "elementCount": "元素数量",
+        "recordElementFormFactor": "记录元素形状因素",
+        "recordElementMaxAuxPower": "记录元素最大辅助电源",
+        "recordElementMaxPower": "记录元素最大电源",
+        "recordElementType": "记录元素类型",
+        "recordFormat": "记录格式",
+        "recordTypeId": "记录类型 ID",
+        "recordVersion": "记录版本",
         "SubSystemHealthStatusPoll": "子系统健康状态轮询",
         "compositeTemperature": "复合温度",
         "driveFunctional": "驱动器功能",
@@ -915,6 +927,7 @@
         "maxPowerSupplyReq5v": "最大电源要求 5v",
         "maxThermalLoad": "最大热负载",
         "recordAreaVersion": "记录区版本",
+        "totalNVMCapacity": "总 NVM 容量",
         "mediaInReadOnly": "只读媒体",
         "overallSubsystemDegraded": "所有子系统均降级",
         "powerBackupFailed": "备用电源失败",
@@ -923,6 +936,10 @@
         "nvmeSolidStateDrive": "NVMe 固态硬盘",
         "model": "模型",
         "serialNumber": "序列号",
+        "portTypePCIe": "PCIe 端口类型",
+        "portTypeSMBus": "SMBus 端口类型",
+        "nvmePCIePortMultiRecord": "NVMe PCIe 端口多条记录",
+        "vitalProductData": "重要产品数据",
         "toast": {
             "errorShowingNVMeInfo": "显示 NVMe 信息时出错。"
         }
@@ -1016,6 +1033,7 @@
             "bmcDumpEntry":"BMC转储"
         },
         "toast": {
+            "createDumpConfirmation": "您确定要创建新的 BMC 转储吗？此操作无法撤消。",
             "errorDeleteDump": "删除转储 %{count} | 删除转储 %{count}。",
             "errorStartBmcDump": "启动新BMC转储发生错误。",
             "errorStartSystemDump": "启动新系统转储发生错误。",
@@ -1023,7 +1041,9 @@
             "successStartBmcDump": "需要一段时间进行转储。刷新页面以查看表单中已完成的转储。",
             "successStartBmcDumpTitle": "BMC 转储已开始",
             "successStartSystemDump": "需要一段时间进行转储。转储将会被卸载到运行系统。",
-            "successStartSystemDumpTitle": "系统转储开始"
+            "successStartSystemDumpTitle": "系统转储开始",
+            "activeDumpInProgressTitle": "转储进度状态",
+            "activeDumpInProgress": "转储可能需要一些时间。请刷新页面以查看结果。\n您可以在任务页面取消正在运行的任务，或在完成后开始新的转储。"
         }
     },
     "pageEventLogs": {
@@ -1234,8 +1254,7 @@
             "restoreToDefaultsSuccess": "成功！设备已重置。请关闭此浏览器会话并打开新的浏览器会话以重新连接到设备。",
             "restoreToDefaultsError": "恢复出厂默认设置时出错。",
             "FactoryDefaultConfirmation": "如果要继续恢复配置，请单击“确定”。警告：恢复配置将重新启动设备。",
-            "title": "出厂设置",
-            "okTitle": "OK"
+            "title": "出厂设置"
         }
     },
     "PageOperations": {
@@ -1321,7 +1340,7 @@
             "errorDisabledClearConfig": "禁用清除配置时出错。"
         }
     },
-    "pagePreserveConfiguration": {
+    "pagePreserve": {
         "pageDescription": "BMC 保留配置",
         "authentication": "验证",
         "fru": "FRU",
@@ -1345,7 +1364,9 @@
         "toast": {
             "successPreserveConfiguration": "保留配置设置已成功保存。",
             "errorPreserveConfiguration": "设置保留配置时出错。",
-            "errorGettingPreserveConfig": "获取保留配置时出错。"
+            "errorGettingPreserveConfig": "获取保留配置时出错。",
+            "preserveConfirmation": "保存所选配置仅在BMC完整更新期间生效。 BMC部分更新期间，默认情况下将保留所有现有配置。",
+            "title": "保留"
         }
     },
     "pageInventory": {
@@ -1561,8 +1582,12 @@
     },
     "pageRadius": {
         "enableRadiusAuthentication": " 启用 RADIUS 认证",
-        "radiusConfiguration": "RADIUS 配置未启用。",
+        "radiusConfiguration": "不启用 RADIUS 身份验证。",
         "radiusPortValueLimits": "请输入 %{min} 和 %{max} 之间的值。",
+        "enableEAPTLSAuthentication": "启用 EAP-TLS 身份验证",
+        "radiusBlastCa": "RADIUS CA",
+        "radiusBlastClient": "RADIUS 客户端",
+        "radiusBlastKey": "RADIUS 密钥",
         "form": {
             "serviceAddress": "服务器地址",
             "port": "端口",
@@ -1572,12 +1597,21 @@
             "groupName3": "群组名 3 - 可选",
             "privilege1": "权限 1",
             "privilege2": "权限 2",
-            "privilege3": "权限 3"
+            "privilege3": "权限 3",
+            "radiusCA": "RADIUS CA",
+            "radiusClient": "RADIUS 客户端",
+            "radiusKey": "RADIUS 密钥"
         },
         "toast": {
             "successRadiusConfiguration": "RADIUS 设置已成功保存。",
+            "successAddCertificate": "已成功添加 %{certificate}.",
+            "successEnableEapTLS": "已成功启用 EAP-TLS 身份验证.",
+            "successDisableEapTLS": "已成功禁用 EAP-TLS 身份验证.",
+            "errorAddCertificate": "添加证书时出错.",
             "errorRadiusConfiguration": "设置 RADIUS 配置错误。",
-            "errorGettingRadiusConfig": "获取 RADIUS 配置时出错。"
+            "errorGettingRadiusConfig": "获取 RADIUS 配置时出错。",
+            "errorEnableEapTLS": "启用 EAP-TLS 身份验证时出错.",
+            "errorDisableEapTLS": "禁用 EAP-TLS 身份验证时出错."
         }
     },
     "pageUserManagement": {
@@ -2433,8 +2467,26 @@
             "certificate": "证书",
             "issuedBy": "发出从",
             "issuedTo": "发出给",
+            "issuerCommonName": "发出的通用名称 (CN)",
+            "issuedToCommonName": "发出给通用名称 (CN)",
             "validFrom": "有效期自",
-            "validUntil": "有效期至"
+            "validUntil": "有效期至",
+            "issuerCity": "发出的城市或地点 (L)",
+            "issuerCountry": "发出的国家 (C)",
+            "issuerOrganization": "发出的组织 (O)",
+            "issuerOrganizationalUnit": "发出的组织单位 (OU)",
+            "issuerState": "发出的州或省 (ST)",
+            "issuedToCity": "发出的城市或地点 (L)",
+            "issuedToCountry": "发出的国家 (C)",
+            "issuedToOrganization": "发出的组织 (O)",
+            "issuedToOrganizationalUnit": "发出的组织单位 (OU)",
+            "issuedToState": "发出的州或省 (ST)",
+            "certificateVersion":"凭证版本",
+            "serialNumber":"序号",
+            "signatureAlgorithm":"签名机制",
+            "publicKey":"公钥",
+            "issuerEmailAddress": "发出的电子邮件地址",
+            "issuedToEmailAddress": "发出的电子邮件地址"
         },
         "toast": {
             "errorAddCertificate": "添加证书失败。",
@@ -2961,7 +3013,8 @@
             "errorDelete": "删除防火墙规则时出错。",
             "errorDateOrTimeSaveFireWall": "日期或时间无效。",
             "errorStartorEndIpSaveFireWall": "范围起始或范围结束 IP 无效。",
-            "featureNotAvailable": "系统防火墙功能未启用。"
+            "featureNotAvailable": "系统防火墙功能未启用。",
+            "errorCreateLimitReachedForResource": "可以创建的防火墙规则的最大数量为 64 个 IPv4 防火墙规则和 64 个 IPv6 防火墙规则。"
         },
         "table": {
             "startIP": "起始 IP",
@@ -2974,7 +3027,8 @@
             "endDuration": "结束持续时间",
             "preLoad": "预加载",
             "target": "目标",
-            "networkType": "网络类型"
+            "networkType": "网络类型",
+            "searchFirewallRule": "搜索防火墙规则"
         }
     },
     "bond": {
@@ -3206,7 +3260,7 @@
         "incorrectAdvancedCertificateFileType": "文件不是正确的证书类型。",
         "toast": {
             "successSaveAdvancedLogsSettings": "已成功保存高级日志设置。",
-            "errorAdvancedAddCertificate": "添加证书错误。",
+            "errorAdvancedAddCertificate": "添加 %{certificate} 时出错。",
             "successCertificateUpload": "已成功添加 %{certificate}。",
             "errorGettingVideoLog": "保存高级日志设置时出错。"
         }

@@ -364,7 +364,12 @@ export default {
           .catch(({ message }) => this.errorToast(message))
           .finally(() => this.endLoader());
       } else {
-        if (this.$store.getters['global/username'] === userData.username) {
+        const passwordChangeRequired = userData.PasswordChangeRequired;
+        const password = userData.password;
+        if (
+          this.$store.getters['global/username'] === userData.username &&
+          (passwordChangeRequired || password)
+        ) {
           this.$bvModal
             .msgBoxConfirm(
               this.$t('pageUserManagement.modal.logoutConfirmMessage', {

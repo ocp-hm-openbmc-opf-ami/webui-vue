@@ -374,8 +374,8 @@
             "iPPriority": "IP 優先權",
             "domainName": "網域名稱",
             "hostConfiguration": "主機配置",
-            "hostNameSetting": "主機名稱",
-            "staticHostName": "靜態主機名",
+            "hostNameSetting": "主機名稱設定",
+            "hostName": "主機名稱",
             "interfacesConfiguration": "介面",
             "ddnsMethod": "DDNS 方法",
             "nsUpdateEnable": "NS 更新啟用",
@@ -776,7 +776,10 @@
             "ipAddress": "IP 位址",
             "privilege": "特權",
             "searchSessions": "搜尋會話們",
-            "mountType": "安裝類型"
+            "mountType": "安裝類型",
+            "administrator": "管理員",
+            "operator": "操作員",
+            "readOnly": "唯讀"
         },
         "toast": {
             "errorDelete": "錯誤取消連結 %{count} 會話 | 錯誤取消連結 %{count} 會話們",
@@ -883,6 +886,15 @@
         "refClockCapability": "參考時鐘能力",
         "PCIePortMultiRecord": "NVMe PCIe 連接埠多記錄",
         "nvmeMultiRecord": "NVMe 多記錄",
+        "topologyMultiRecord": "拓樸多筆記錄",
+        "elementCount": "元素數量",
+        "recordElementFormFactor": "記錄元素形狀因素",
+        "recordElementMaxAuxPower": "記錄元素最大輔助電源",
+        "recordElementMaxPower": "記錄元素最大電源",
+        "recordElementType": "記錄元素類型",
+        "recordFormat": "記錄格式",
+        "recordTypeId": "記錄類型 ID",
+        "recordVersion": "記錄版本",
         "SubSystemHealthStatusPoll": "子系統健康狀態輪詢",
         "compositeTemperature": "複合溫度",
         "driveFunctional": "驅動器功能",
@@ -915,6 +927,7 @@
         "maxPowerSupplyReq5v": "最大電源需求 5v",
         "maxThermalLoad": "最大熱負載",
         "recordAreaVersion": "記錄區版本",
+        "totalNVMCapacity": "總 NVM 容量",
         "mediaInReadOnly": "只讀媒體",
         "overallSubsystemDegraded": "所有子系統均降級",
         "powerBackupFailed": "備用電源失敗",
@@ -923,6 +936,10 @@
         "nvmeSolidStateDrive": "NVMe 固態硬碟",
         "model": "模型",
         "serialNumber": "序號",
+        "portTypePCIe": "PCIe 連接埠類型",
+        "portTypeSMBus": "SMBus 連接埠類型",
+        "nvmePCIePortMultiRecord": "NVMe PCIe 端口多筆記錄",
+        "vitalProductData": "重要產品數據",
         "toast": {
             "errorShowingNVMeInfo": "顯示 NVMe 資訊時出錯。"
         }
@@ -1016,6 +1033,7 @@
             "bmcDumpEntry":"BMC轉儲"
         },
         "toast": {
+            "createDumpConfirmation": "您確定要建立新的 BMC 轉儲嗎？此操作無法撤銷。",
             "errorDeleteDump": "刪除轉儲 %{count} | 刪除轉儲們 %{count}",
             "errorStartBmcDump": "啟動新BMC轉儲發生錯誤",
             "errorStartSystemDump": "啟動新系統轉儲發生錯誤",
@@ -1023,7 +1041,9 @@
             "successStartBmcDump": "需要一段時間進行轉儲。刷新頁面以查看表單中已完成的轉儲",
             "successStartBmcDumpTitle": "BMC 轉儲已開始",
             "successStartSystemDump": "需要一段時間進行轉儲。轉儲將會被卸載到運作系統",
-            "successStartSystemDumpTitle": "系統轉儲開始"
+            "successStartSystemDumpTitle": "系統轉儲開始",
+            "activeDumpInProgressTitle": "轉儲進度狀態",
+            "activeDumpInProgress": "轉儲可能需要一些時間。刷新頁面以查看結果。\n您可以從任務頁面取消正在運行的任務，或在完成後啟動新的轉儲。"
         }
     },
     "pageEventLogs": {
@@ -1234,8 +1254,7 @@
             "restoreToDefaultsSuccess": "成功！設備已重置。請關閉此瀏覽器會話並開啟新的瀏覽器會話以重新連接到裝置。",
             "restoreToDefaultsError": "恢復出廠預設值時出錯。",
             "FactoryDefaultConfirmation": "如果您想繼續恢復配置，請按一下「確定」。 警告：恢復配置將重新啟動設備。",
-            "title": "恢復原廠設定",
-            "okTitle": "OK"
+            "title": "恢復原廠設定"
         }
     },
     "PageOperations": {
@@ -1321,7 +1340,7 @@
             "errorDisabledClearConfig": "停用清除配置時發生錯誤。"
         }
     },
-    "pagePreserveConfiguration": {
+    "pagePreserve": {
         "pageDescription": "BMC 保留配置",
         "authentication": "驗證",
         "fru": "FRU",
@@ -1345,7 +1364,9 @@
         "toast": {
             "successPreserveConfiguration": "保留配置設定已成功儲存。",
             "errorPreserveConfiguration": "設定保留配置時發生錯誤。",
-            "errorGettingPreserveConfig": "取得保留配置時發生錯誤。"
+            "errorGettingPreserveConfig": "取得保留配置時發生錯誤。",
+            "preserveConfirmation": "保存所選配置僅在BMC完整更新期間生效。 BMC部分更新期間，默認情況下將保留所有現有配置。",
+            "title": "保存"
         }
     },
     "pageInventory": {
@@ -1561,8 +1582,12 @@
     },
     "pageRadius": {
         "enableRadiusAuthentication": " 啟用 RADIUS 認證",
-        "radiusConfiguration": "未啟用半徑配置。",
+        "radiusConfiguration": "不啟用 RADIUS 身份驗證。",
         "radiusPortValueLimits": "請輸入 %{min} 和 %{max} 之間的數值",
+        "enableEAPTLSAuthentication": "啟用 EAP-TLS 身份驗證",
+        "radiusBlastCa": "RADIUS CA",
+        "radiusBlastClient": "RADIUS 用戶端",
+        "radiusBlastKey": "RADIUS 金鑰",
         "form": {
             "serviceAddress": "伺服器位址",
             "port": "埠號",
@@ -1572,12 +1597,21 @@
             "groupName3": "組名稱3 - 可選",
             "privilege1": "特權 1",
             "privilege2": "特權 2",
-            "privilege3": "特權 3"
+            "privilege3": "特權 3",
+            "radiusCA": "RADIUS CA",
+            "radiusClient": "RADIUS 用戶端",
+            "radiusKey": "RADIUS 金鑰"
         },
         "toast": {
             "successRadiusConfiguration": "RADIUS 設定已成功儲存。",
+            "successAddCertificate": "已成功添加 %{certificate}。",
+            "successEnableEapTLS": "已成功啟用 EAP-TLS 身份驗證。",
+            "successDisableEapTLS": "已成功停用 EAP-TLS 驗證。",
+            "errorAddCertificate": "新增證書時發生錯誤。",
             "errorRadiusConfiguration": "設定半徑配置時發生錯誤。",
-            "errorGettingRadiusConfig": "取得 RADIUS 配置時發生錯誤。"
+            "errorGettingRadiusConfig": "取得 RADIUS 配置時發生錯誤。",
+            "errorEnableEapTLS": "啟用 EAP-TLS 身份驗證時發生錯誤。",
+            "errorDisableEapTLS": "停用 EAP-TLS 身份驗證時發生錯誤。"
         }
     },
     "pageUserManagement": {
@@ -2430,11 +2464,29 @@
             "state": "狀態"
         },
         "table": {
-            "certificate": "憑證",
+            "certificate": "證書",
             "issuedBy": "發出從",
             "issuedTo": "發出給",
+            "issuerCommonName": "發出的通用名稱 (CN)",
+            "issuedToCommonName": "發出給通用名稱 (CN)",
             "validFrom": "有效期自",
-            "validUntil": "有效期至"
+            "validUntil": "有效期至",
+            "issuerCity": "發出的城市或地點 (L)",
+            "issuerCountry": "發出的國家 (C)",
+            "issuerOrganization": "發出的組織 (O)",
+            "issuerOrganizationalUnit": "發出的組織單位 (OU)",
+            "issuerState": "發出的州或省 (ST)",
+            "issuedToCity": "發出的城市或地點 (L)",
+            "issuedToCountry": "發出的國家 (C)",
+            "issuedToOrganization": "發出的組織 (O)",
+            "issuedToOrganizationalUnit": "發出的組織單位 (OU)",
+            "issuedToState": "發出的州或省 (ST)",
+            "certificateVersion":"憑證版本",
+            "serialNumber":"序號",
+            "signatureAlgorithm":"簽名機制",
+            "publicKey":"公鑰",
+            "issuerEmailAddress": "發出的電子郵件地址",
+            "issuedToEmailAddress": "發出的電子郵件地址"
         },
         "toast": {
             "errorAddCertificate": "新增憑證失敗。",
@@ -2961,7 +3013,8 @@
             "errorDelete": "刪除防火牆規則時發生錯誤。",
             "errorDateOrTimeSaveFireWall": "日期或時間無效。",
             "errorStartorEndIpSaveFireWall": "範圍起始或範圍結束 IP 無效。",
-            "featureNotAvailable": "系統防火牆功能未啟用。"
+            "featureNotAvailable": "系統防火牆功能未啟用。",
+            "errorCreateLimitReachedForResource": "可以建立的防火牆規則的最大數量為 64 個 IPv4 防火牆規則和 64 個 IPv6 防火牆規則。"
         },
         "table": {
             "startIP": "起始 IP",
@@ -2974,7 +3027,8 @@
             "endDuration": "結束持續時間",
             "preLoad": "預先載入",
             "target": "目標",
-            "networkType": "網路類型"
+            "networkType": "網路類型",
+            "searchFirewallRule": "搜尋防火牆規則"
         }
     },
     "bond": {
@@ -3206,7 +3260,7 @@
         "incorrectAdvancedCertificateFileType": "文件不是正確的證書類型。",
         "toast": {
             "successSaveAdvancedLogsSettings": "已成功儲存進階日誌設定。",
-            "errorAdvancedAddCertificate": "新增證書錯誤。",
+            "errorAdvancedAddCertificate": "加 %{certificate} 時發生錯誤。",
             "successCertificateUpload": "已成功新增%{證書}。",
             "errorGettingVideoLog": "儲存進階日誌設定時發生錯誤。"
         }

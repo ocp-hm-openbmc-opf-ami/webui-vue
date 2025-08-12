@@ -273,8 +273,8 @@ const SnmpStore = {
             Destination: `snmp://[${snmpTrap.destination}]`,
             SubscriptionType: snmpTrap.selectSubscriptionType,
             Protocol: snmpTrap.selectProtocol,
-            oem: {
-              openBmc: {
+            Oem: {
+              OpenBmc: {
                 CommunityString: snmpTrap.communityString,
               },
             },

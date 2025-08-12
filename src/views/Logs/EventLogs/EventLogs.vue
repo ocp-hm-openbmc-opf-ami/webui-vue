@@ -252,6 +252,7 @@
           :per-page="perPage"
           :total-rows="getTotalRowCount(filteredRows)"
           aria-controls="table-event-logs"
+          :limit="limit"
         />
       </b-col>
     </b-row>
@@ -281,6 +282,7 @@ import TableFilterMixin from '@/components/Mixins/TableFilterMixin';
 import BVPaginationMixin, {
   currentPage,
   perPage,
+  limit,
 } from '@/components/Mixins/BVPaginationMixin';
 import BVTableSelectableMixin, {
   selectedRows,
@@ -426,6 +428,7 @@ export default {
       filterStartDate: null,
       filterEndDate: null,
       perPage: perPage,
+      limit: limit,
       searchFilter: searchFilter,
       searchTotalFilteredRows: 0,
       selectedRows: selectedRows,

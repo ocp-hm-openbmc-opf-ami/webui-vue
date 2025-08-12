@@ -160,7 +160,6 @@ const SystemInventoryStore = {
               serialNumber: data.SerialNumber,
             };
           });
-          console.log(proccessorInfo);
           commit('setProcessors', proccessorInfo);
         })
         .catch((error) => console.log(error));

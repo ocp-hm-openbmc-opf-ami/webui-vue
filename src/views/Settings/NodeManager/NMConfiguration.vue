@@ -96,6 +96,7 @@
             :per-page="perPage"
             :total-rows="getTotalRowCount(filteredRows)"
             aria-controls="table-event-logs"
+            limit="limit"
           />
         </b-col>
       </b-row>
@@ -116,6 +117,7 @@ import TableFilterMixin from '@/components/Mixins/TableFilterMixin';
 import BVPaginationMixin, {
   currentPage,
   perPage,
+  limit,
 } from '@/components/Mixins/BVPaginationMixin';
 import TableCellCount from '@/components/Global/TableCellCount';
 import SearchFilterMixin, {
@@ -195,6 +197,7 @@ export default {
       nmPolicies: null,
       currentPage: currentPage,
       perPage: perPage,
+      limit: limit,
       searchTotalFilteredRows: 0,
       searchFilter: searchFilter,
     };

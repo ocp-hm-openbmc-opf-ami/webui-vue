@@ -5,16 +5,8 @@
         <dl>
           <dt>
             {{ $t('pageNetwork.hostname') }}
-            <b-button
-              variant="link"
-              class="p-1"
-              :disabled="isButtonDisable"
-              @click="initSettingsModal()"
-            >
-              <icon-edit :title="$t('pageNetwork.modal.editHostnameTitle')" />
-            </b-button>
           </dt>
-          <dd style="word-break: break-all">
+          <dd style="word-break: break-all" data-test-id="host-name">
             {{ dataFormatter(firstInterface.hostname) }}
           </dd>
         </dl>
@@ -26,6 +18,7 @@
             <b-button
               variant="link"
               class="p-2"
+              data-test-id="disable-lan-button"
               :disabled="isButtonDisable"
               @click="initEnableLansModal()"
             >

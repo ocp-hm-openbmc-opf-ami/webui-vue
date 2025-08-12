@@ -3,15 +3,15 @@ import i18n from '@/i18n';
 
 export const CERTIFICATE_TYPES = [
   {
-    type: 'CacertPEM',
+    type: 'cacertPEM',
     label: i18n.t('advancedLogSettings.cacertPEM'),
   },
   {
-    type: 'ServerCRT',
+    type: 'serverCRT',
     label: i18n.t('advancedLogSettings.serverCRT'),
   },
   {
-    type: 'ServerKey',
+    type: 'serverKey',
     label: i18n.t('advancedLogSettings.serverKey'),
   },
 ];
@@ -57,7 +57,7 @@ const AdvancedLogSettingsStore = {
         commit('setAdvancedLogsData', getAdvancedLogsValues[0]);
       }
     },
-    async setAdvancedLogsSettings({ dispatch, state }, Configuration) {
+    async setAdvancedLogsSettings({ state }, Configuration) {
       const advancedLogsConfig = {
         Oem: {
           Ami: {
@@ -69,9 +69,6 @@ const AdvancedLogSettingsStore = {
       };
       return await api
         .patch(state.advancedLogsData['@odata.id'], advancedLogsConfig)
-        .then(() => {
-          dispatch('getAdvancedLogsSettings');
-        })
         .then(() =>
           i18n.t('advancedLogSettings.toast.successSaveAdvancedLogsSettings'),
         )
@@ -82,12 +79,12 @@ const AdvancedLogSettingsStore = {
           );
         });
     },
-    async addAdvancedLogsCertificate({ dispatch }, { file, type }) {
+    async addAdvancedLogsCertificate(_, { file, type }) {
       let uploadData = new FormData();
-      uploadData.append('', file);
+      uploadData.append('', file.file);
       return await api
         .post(
-          '/redfish/v1/Systems/system/LogServices/Syslog/Actions/Oem/Ami/Rsyslog.RemoteServerCertificateUpload ',
+          '/redfish/v1/Systems/system/LogServices/Syslog/Actions/Oem/Ami/Rsyslog.RemoteServerCertificateUpload',
           uploadData,
           {
             headers: {
@@ -96,15 +93,16 @@ const AdvancedLogSettingsStore = {
           },
         )
         .then(() => {
-          dispatch('getSMTPdata');
           return i18n.t('advancedLogSettings.toast.successCertificateUpload', {
             certificate: getCertificateProp(type, 'label'),
           });
         })
         .catch((error) => {
-          console.log(error);
+          console.log(type, error);
           throw new Error(
-            i18n.t('advancedLogSettings.toast.errorAdvancedAddCertificate'),
+            i18n.t('advancedLogSettings.toast.errorAdvancedAddCertificate', {
+              certificate: getCertificateProp(type, 'label'),
+            }),
           );
         });
     },

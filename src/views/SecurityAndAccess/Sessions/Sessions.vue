@@ -121,6 +121,7 @@
           :per-page="perPage"
           :total-rows="getTotalRowCount(filteredRows)"
           aria-controls="table-session-logs"
+          :limit="limit"
         />
       </b-col>
     </b-row>
@@ -138,6 +139,7 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import BVPaginationMixin, {
   currentPage,
   perPage,
+  limit,
 } from '@/components/Mixins/BVPaginationMixin';
 import BVTableSelectableMixin, {
   selectedRows,
@@ -220,6 +222,7 @@ export default {
         {
           key: 'privilege',
           label: this.$t('pageSessions.table.privilege'),
+          formatter: this.convertPrivilege,
           class: 'text-center',
           sortable: true,
         },
@@ -243,6 +246,7 @@ export default {
       ],
       currentPage: currentPage,
       perPage: perPage,
+      limit: limit,
       selectedRows: selectedRows,
       searchTotalFilteredRows: 0,
       tableHeaderCheckboxModel: tableHeaderCheckboxModel,
@@ -344,6 +348,18 @@ export default {
             }
           });
       }
+    },
+    convertPrivilege(value) {
+      if (!value) return '';
+      const role = value.toLowerCase();
+      if (role.includes('administrator')) {
+        return this.$t('pageSessions.table.administrator');
+      } else if (role.includes('operator')) {
+        return this.$t('pageSessions.table.operator');
+      } else if (role.includes('readonly')) {
+        return this.$t('pageSessions.table.readOnly');
+      }
+      return value;
     },
   },
 };

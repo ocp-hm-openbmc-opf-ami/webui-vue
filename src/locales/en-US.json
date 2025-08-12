@@ -375,8 +375,8 @@
             "iPPriority": "IP Priority",
             "domainName": "Domain Name",
             "hostConfiguration": "Host Configuration",
-            "hostNameSetting": "Host Name",
-            "staticHostName": "Static Host Name",
+            "hostNameSetting": "Host Name Settings",
+            "hostName": "Host Name",
             "interfacesConfiguration": "Interfaces",
             "ddnsMethod": "DDNS Method",
             "nsUpdateEnable": "NSUpdate Enable",
@@ -777,7 +777,10 @@
             "ipAddress": "IP Address",
             "privilege": "Privilege",
             "searchSessions": "Search Sessions",
-            "mountType": "Mount Type"
+            "mountType": "Mount Type",
+            "administrator": "Administrator",
+            "operator": "Operator",
+            "readOnly": "Readonly"
         },
         "toast": {
             "errorDelete": "Error disconnecting %{count} session. | Error in disconnecting %{count} sessions.",
@@ -884,6 +887,15 @@
         "refClockCapability": "RefClock Capability",
         "PCIePortMultiRecord": "NVMe PCIe Port MultiRecord",
         "nvmeMultiRecord": "NVMe MultiRecord",
+        "topologyMultiRecord": "Topology MultiRecord",
+        "elementCount": "Element Count",
+        "recordElementFormFactor": "Record Element Form Factor",
+        "recordElementMaxAuxPower": "Record Element Max Aux Power",
+        "recordElementMaxPower": "Record Element Max Power",
+        "recordElementType": "Record Element Type",
+        "recordFormat": "Record Format",
+        "recordTypeId": "Record Type ID",
+        "recordVersion": "Record Version",
         "SubSystemHealthStatusPoll": "SubSystem Health Status Poll",
         "compositeTemperature": "Composite Temperature",
         "driveFunctional": "Drive Functional",
@@ -916,6 +928,7 @@
         "maxPowerSupplyReq5v": "Max Power Supply Requirements5v",
         "maxThermalLoad": "Max Thermal Load",
         "recordAreaVersion": "Record Area Version",
+        "totalNVMCapacity": "Total NVM Capacity",
         "mediaInReadOnly": "Media In ReadOnly",
         "overallSubsystemDegraded": "Over all Subsystem Degraded",
         "powerBackupFailed": "Power Backup Failed",
@@ -924,6 +937,10 @@
         "nvmeSolidStateDrive": "NVMe Solid State Drive",
         "model": "Model",
         "serialNumber": "Serial Number",
+        "portTypePCIe": "Port Type PCIe",
+        "portTypeSMBus": "Port Type SMBus",
+        "nvmePCIePortMultiRecord": "NVMe PCIe Port MultiRecord",
+        "vitalProductData": "Vital Product Data",
         "toast": {
             "errorShowingNVMeInfo": "Error in displaying NVMe Information."
         }
@@ -1017,6 +1034,7 @@
             "bmcDumpEntry":"BMC Dump Entry"
         },
         "toast": {
+            "createDumpConfirmation": "Are you sure you want to create a new BMC Dump? This action cannot be undone.",
             "errorDeleteDump": "Error deleting %{count} Dump. | Error deleting %{count} Dumps.",
             "errorStartBmcDump": "Error in starting new BMC Dump.",
             "errorStartSystemDump": "Error in starting new System Dump.",
@@ -1024,7 +1042,9 @@
             "successStartBmcDump": "The Dump will take some time to complete. Refresh the application to see the completed Dump in the table.",
             "successStartBmcDumpTitle": "BMC Dump started",
             "successStartSystemDump": "The Dump will take some time to complete. The Dump will be offloaded to the operating system.",
-            "successStartSystemDumpTitle": "System Dump started"
+            "successStartSystemDumpTitle": "System Dump started",
+            "activeDumpInProgressTitle": "Dump Progress Status",
+            "activeDumpInProgress": "The dump may take some time. Refresh the page to view results.\nYou can cancel the running task from the Tasks page or start a new dump after completion."
         }
     },
     "pageEventLogs": {
@@ -1235,8 +1255,7 @@
             "restoreToDefaultsSuccess": "Success! Device has been reset. Please close this browser session and open a new browser session to reconnect to the device.",
             "restoreToDefaultsError": "Error in Restore Factory Defaults.",
             "FactoryDefaultConfirmation": "Click 'OK' if you want to continue Restoring Configurations. WARNING: Restoring Configurations will restart the device.",
-            "title": "Factory Default",
-            "okTitle": "ok"
+            "title": "Factory Default"
         }
     },
     "PageOperations": {
@@ -1322,7 +1341,7 @@
             "errorDisabledClearConfig": "Error in disabling Clear Configuration."
         }
     },
-    "pagePreserveConfiguration": {
+    "pagePreserve": {
         "pageDescription": "BMC Preserve Configuration",
         "authentication": "Authentication",
         "fru": "FRU",
@@ -1346,7 +1365,9 @@
         "toast": {
             "successPreserveConfiguration": "Preserve Configuration Settings have been saved successfully.",
             "errorPreserveConfiguration": "Error in setting Preserve Configuration.",
-            "errorGettingPreserveConfig": "Error in getting Preserve Configuration."
+            "errorGettingPreserveConfig": "Error in getting Preserve Configuration.",
+            "preserveConfirmation": "Saving selected Configurations will take effect only during a BMC full flash update. All existing Configurations will be preserved by default during a BMC partial update.",
+            "title": "Preserve"
         }
     },
     "pageInventory": {
@@ -1562,8 +1583,12 @@
     },
     "pageRadius": {
         "enableRadiusAuthentication": " Enable RADIUS Authentication",
-        "radiusConfiguration": " RADIUS Configuration is not enabled.",
+        "radiusConfiguration": " RADIUS Authentication is not enabled.",
         "radiusPortValueLimits": "Kindly enter the values between %{min} and %{max}.",
+        "enableEAPTLSAuthentication": "Enable EAP-TLS Authentication",
+        "radiusBlastCa": "RADIUS CA",
+        "radiusBlastClient": "RADIUS Client",
+        "radiusBlastKey": "RADIUS Key",
         "form": {
             "serverAddress": "Server Address",
             "port": "Port",
@@ -1573,12 +1598,21 @@
             "groupName3": "Group Name3 - Optional",
             "privilege1": "Privilege 1",
             "privilege2": "Privilege 2",
-            "privilege3": "Privilege 3"
+            "privilege3": "Privilege 3",
+            "radiusCA": "RADIUS CA",
+            "radiusClient": "RADIUS Client",
+            "radiusKey": "RADIUS Key"
         },
         "toast": {
             "successRadiusConfiguration": "RADIUS Settings has been saved successfully.",
+            "successAddCertificate": "Successfully added %{certificate}.",
+            "successEnableEapTLS": "Successfully enabled EAP-TLS Authentication.",
+            "successDisableEapTLS": "Successfully disabled EAP-TLS Authentication.",
+            "errorAddCertificate": "Error in adding Certificate.",
             "errorRadiusConfiguration": "Error in setting RADIUS Configuration.",
-            "errorGettingRadiusConfig": "Error in getting RADIUS Configuration."
+            "errorGettingRadiusConfig": "Error in getting RADIUS Configuration.",
+            "errorEnableEapTLS": "Error in enabling EAP-TLS Authentication.",
+            "errorDisableEapTLS": "Error in disabling EAP-TLS Authentication."
         }
     },
     "pageUserManagement": {
@@ -2434,8 +2468,26 @@
             "certificate": "Certificate",
             "issuedBy": "Issued By",
             "issuedTo": "Issued To",
+            "issuerCommonName": "Issuer Common Name (CN)",
+            "issuedToCommonName": "Issued to Common Name (CN)",
             "validFrom": "Valid From",
-            "validUntil": "Valid Until"
+            "validUntil": "Valid Until",
+            "issuerCity": "Issuer City or Locality (L)",
+            "issuerCountry": "Issuer Country(C)",
+            "issuerOrganization": "Issuer Organization (O)",
+            "issuerOrganizationalUnit": "Issuer Organization Unit (OU)",
+            "issuerState": "Issuer State or Province (ST)",
+            "issuedToCity": "Issued to City or Locality (L)",
+            "issuedToCountry": "Issued to Country(C)",
+            "issuedToOrganization": "Issued to Organization (O)",
+            "issuedToOrganizationalUnit": "Issued to Organization Unit (OU)",
+            "issuedToState": "Issued to State or Province (ST)",
+            "certificateVersion":"Certificate Version",
+            "serialNumber":"Serial Number",
+            "signatureAlgorithm":"Signature Algorithm",
+            "publicKey":"Public Key",
+            "issuerEmailAddress": "Issuer Email Address",
+            "issuedToEmailAddress": "Issued to Email Address"
         },
         "toast": {
             "errorAddCertificate": "Error in adding Certificate.",
@@ -2962,7 +3014,8 @@
             "errorDelete": "Error in deleting Firewall Rules.",
             "errorDateOrTimeSaveFireWall": "Invalid Date or Time.",
             "errorStartorEndIpSaveFireWall": "Invalid Range Start or Range End IP.",
-            "featureNotAvailable": "The System Firewall feature is not enabled."
+            "featureNotAvailable": "The System Firewall feature is not enabled.",
+            "errorCreateLimitReachedForResource": "The maximum number of Firewall Rules that can be created is up to 64 IPv4 Firewall Rules and 64 IPv6 Firewall Rules."
         },
         "table": {
             "startIP": "Start IP",
@@ -2975,7 +3028,8 @@
             "endDuration": "End Duration",
             "preLoad": "PreLoad",
             "target": "Target",
-            "networkType": "Network Type"
+            "networkType": "Network Type",
+            "searchFirewallRule": "Search Firewall Rule"
         }
     },
     "bond": {
@@ -3207,7 +3261,7 @@
         "incorrectAdvancedCertificateFileType": "File is not a correct Certificate Type.",
         "toast": {
             "successSaveAdvancedLogsSettings": "Successfully Saved Advanced Log Settings.",
-            "errorAdvancedAddCertificate": "Error in adding certificate.",
+            "errorAdvancedAddCertificate": "Error in adding %{certificate}.",
             "successCertificateUpload": "Successfully added %{certificate}.",
             "errorGettingVideoLog": "Error in saving Advanced Log Settings."
         }

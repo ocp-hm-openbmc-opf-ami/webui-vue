@@ -83,6 +83,14 @@ export default {
   name: 'ChangeTfa',
   components: { InputPasswordToggle },
   mixins: [VuelidateMixin, BVToastMixin],
+  beforeRouteLeave(to, from, next) {
+    // Check if user is navigating back to login page
+    if (to.name === 'login' || to.path === '/login') {
+      // Call logout to destroy the session
+      this.$store.dispatch('authentication/logout');
+    }
+    next();
+  },
   data() {
     return {
       verificationCode: null,

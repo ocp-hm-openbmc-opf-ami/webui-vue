@@ -5,14 +5,41 @@ const DumpsStore = {
   namespaced: true,
   state: {
     allDumps: [],
+    hasActiveDumpTask: false,
   },
   getters: {
     allDumps: (state) => state.allDumps,
+    hasActiveDumpTask: (state) => state.hasActiveDumpTask,
   },
   mutations: {
     setAllDumps: (state, allDumps) => (state.allDumps = allDumps),
+    setHasActiveDumpTask: (state, value) => (state.hasActiveDumpTask = value),
   },
   actions: {
+    async checkActiveDumpTasks({ commit }) {
+      try {
+        const tasksResp = await api.get('/redfish/v1/TaskService/Tasks');
+        const members = tasksResp.data.Members || [];
+        for (const member of members) {
+          const taskUrl = member['@odata.id'];
+          if (!taskUrl) continue;
+          const taskResp = await api.get(taskUrl);
+          const task = taskResp.data;
+          if (
+            task.Payload &&
+            task.Payload.TargetUri ===
+              '/redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData' &&
+            task.TaskState === 'New'
+          ) {
+            commit('setHasActiveDumpTask', true);
+            return;
+          }
+        }
+        commit('setHasActiveDumpTask', false);
+      } catch (e) {
+        commit('setHasActiveDumpTask', false);
+      }
+    },
     async getBmcDumpEntries() {
       return api
         .get('/redfish/v1/')

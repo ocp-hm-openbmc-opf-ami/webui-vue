@@ -30,6 +30,7 @@
     <b-button
       type="submit"
       variant="primary"
+      data-test-id="do-nsupdate-button"
       :disabled="isButtonDisable"
       @click="doNSUpdate"
     >

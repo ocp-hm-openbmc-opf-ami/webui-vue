@@ -4,17 +4,17 @@ import i18n from '@/i18n';
 export const CERTIFICATE_TYPES = [
   {
     type: 'HTTPS Certificate',
-    location: '/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/',
+    location: '/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates',
     label: i18n.t('pageCertificates.httpsCertificate'),
   },
   {
     type: 'LDAP Certificate',
-    location: '/redfish/v1/AccountService/LDAP/Certificates/',
+    location: '/redfish/v1/AccountService/LDAP/Certificates',
     label: i18n.t('pageCertificates.ldapCertificate'),
   },
   {
     type: 'TrustStore Certificate',
-    location: '/redfish/v1/Managers/bmc/Truststore/Certificates/',
+    location: '/redfish/v1/Managers/bmc/Truststore/Certificates',
     // Web UI will show 'CA Certificate' instead of
     // 'TrustStore Certificate' after user testing revealed
     // the term 'TrustStore Certificate' wasn't recognized/was unfamilar
@@ -22,7 +22,7 @@ export const CERTIFICATE_TYPES = [
   },
   {
     type: 'ASD Certificate',
-    location: '/redfish/v1/Managers/bmc/Certificates/',
+    location: '/redfish/v1/Managers/bmc/Certificates',
     label: i18n.t('pageCertificates.asdCertificate'),
   },
 ];
@@ -76,15 +76,34 @@ const CertificatesStore = {
                   ValidNotBefore,
                   Issuer = {},
                   Subject = {},
+                  Oem = {},
+                  SerialNumber,
+                  SignatureAlgorithm,
                 } = data;
                 return {
                   type: Name,
                   location: data['@odata.id'],
                   certificate: getCertificateProp(Name, 'label'),
+                  certificateVersion: Oem.Ami?.CertificateVersion,
+                  serialNumber: SerialNumber,
+                  signatureAlgorithm: SignatureAlgorithm,
+                  publicKey: Oem.Ami?.PublicKey,
                   issuedBy: Issuer.CommonName,
                   issuedTo: Subject.CommonName,
                   validFrom: new Date(ValidNotBefore),
                   validUntil: new Date(ValidNotAfter),
+                  issuedByCity: Issuer.City,
+                  issuedByCountry: Issuer.Country,
+                  issuedByOrganization: Issuer.Organization,
+                  issuedByOrganizationalUnit: Issuer.OrganizationalUnit,
+                  issuedByState: Issuer.State,
+                  issuedToCity: Subject.City,
+                  issuedToCountry: Subject.Country,
+                  issuedToOrganization: Subject.Organization,
+                  issuedToOrganizationalUnit: Subject.OrganizationalUnit,
+                  issuedToState: Subject.State,
+                  issuerEmail: Issuer.Email,
+                  issuedToEmail: Subject.Email,
                 };
               });
               const availableUploadTypes = CERTIFICATE_TYPES.filter(

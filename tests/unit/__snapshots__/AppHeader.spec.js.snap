@@ -67,8 +67,17 @@ exports[`AppHeader.vue should render correctly 1`] = `
       </b-navbar-nav>
        
       <b-navbar-nav
-        class="ml-auto helper-menu"
+        class="ml-auto helper-menu language_dropdown"
       >
+        <b-nav-item>
+          <b-form-select
+            class="input language_overview"
+            data-test-id="login-select-language"
+            id="language"
+            options="[object Object],[object Object]"
+          />
+        </b-nav-item>
+         
         <!---->
          
         <b-nav-item

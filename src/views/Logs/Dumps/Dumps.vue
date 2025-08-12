@@ -140,6 +140,7 @@
           first-number
           last-number
           :per-page="perPage"
+          :limit="limit"
           :total-rows="getTotalRowCount(filteredRows)"
           aria-controls="table-dump-entries"
         />
@@ -168,6 +169,7 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import BVPaginationMixin, {
   currentPage,
   perPage,
+  limit,
 } from '@/components/Mixins/BVPaginationMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import SearchFilterMixin, {
@@ -259,6 +261,7 @@ export default {
       filterEndDate: null,
       filterStartDate: null,
       perPage: perPage,
+      limit: limit,
       searchFilter: searchFilter,
       searchTotalFilteredRows: 0,
       selectedRows,

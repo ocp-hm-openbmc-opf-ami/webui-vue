@@ -9,6 +9,7 @@
         <b-col sm="3">
           <b-button
             variant="link"
+            data-test-id="add-domain-name-button"
             :disabled="
               domainNames.length >= 12 ||
               dhcpv4useDomainName ||
@@ -32,6 +33,7 @@
               :id="'Static-Domain-Name-' + index"
               v-model="domainNames[index]"
               type="text"
+              data-test-id="static-domain-name-input"
               :state="getValidationState($v.domainNames.$each[index])"
               @input="$v.domainNames.$each[index].$touch()"
             />
@@ -39,6 +41,7 @@
               v-if="index > 0"
               variant="cancel"
               class="input-action-btn cancel-btn"
+              data-test-id="remove-domain-name-button"
               @click="removeDomainName(index)"
             >
               <icon-misuse />
@@ -54,6 +57,7 @@
       <b-button
         type="submit"
         variant="primary"
+        data-test-id="domain-names-save-button"
         :disabled="isButtonDisable"
         @click="saveConfigurations"
       >
@@ -94,6 +98,7 @@
             >
               <b-form-checkbox
                 v-model="form.nsUpdateEnabled"
+                data-test-id="ddns-ns-update-enabled"
                 :disabled="isButtonDisable"
                 switch
               >
@@ -110,6 +115,7 @@
             >
               <b-form-checkbox
                 v-model="form.useTSIG"
+                data-test-id="ddns-use-tsig"
                 :disabled="isButtonDisable"
                 switch
               >
@@ -138,6 +144,7 @@
                 accept=".private"
                 :state="getValidationState($v.file)"
                 aria-describedby="image-file-help-block"
+                data-test-id="ddns-tsig-file-upload"
                 @input="onFileUpload($event)"
               >
                 <template #invalid>
@@ -156,6 +163,7 @@
               class="upload-button"
               type="submit"
               variant="primary"
+              data-test-id="ddns-tsig-file-upload-button"
               :disabled="!form.useTSIG || isButtonDisable"
               @click="onSubmitUpload"
             >
@@ -164,21 +172,19 @@
             </b-button>
           </b-col>
         </b-row>
-        <b-button type="submit" variant="primary" @click="handleSubmit">
+        <b-button
+          type="submit"
+          variant="primary"
+          class="mt-5"
+          data-test-id="ddns-save-button"
+          :disabled="isButtonDisable"
+          @click="handleSubmit"
+        >
           <icon-save />
           {{ $t('global.action.save') }}
         </b-button>
       </div>
     </page-section>
-    <b-button
-      type="submit"
-      variant="primary"
-      :disabled="isButtonDisable"
-      @click="handleSubmit"
-    >
-      <icon-save />
-      {{ $t('global.action.save') }}
-    </b-button>
   </b-container>
 </template>
 
