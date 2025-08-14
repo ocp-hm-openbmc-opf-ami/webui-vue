@@ -2531,6 +2531,7 @@
             "serverClosedSuccessfully": "Server erfolgreich geschlossen.",
             "serverClosedWithErrors": "Server mit Fehlern geschlossen.",
             "invalidFileType": "Ungültiger Bilddateityp",
+            "virtualMediaErrorFileTooSmall": "Die ausgewählte Datei muss mindestens 600 KB groß sein.",
             "infoTitle": "Startknopf für externen Server",
             "infoMessage": "Der Startknopf ist nur aktiviert, wenn ein Passwort gesetzt ist und der Mount-Typ CIFS oder HTTPS ist."
         }
