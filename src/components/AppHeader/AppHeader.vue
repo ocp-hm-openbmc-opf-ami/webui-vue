@@ -264,22 +264,13 @@ export default {
       return this.$store.getters['global/userPrivilege'];
     },
     serverStatus() {
-      return this.$store.getters['controls/serverStatus'];
+      return this.$store.getters['dashboard/powerStatus'];
     },
     healthStatus() {
-      return this.$store.getters['eventLog/healthStatus'];
+      return this.$store.getters['dashboard/healthStatus'];
     },
     healthStatusIcon() {
-      switch (this.healthStatus) {
-        case 'OK':
-          return 'success';
-        case 'Warning':
-          return 'warning';
-        case 'Critical':
-          return 'danger';
-        default:
-          return 'secondary';
-      }
+      return this.$store.getters['dashboard/healthStatusIcon'];
     },
     username() {
       return this.$store.getters['global/username'];
@@ -309,17 +300,17 @@ export default {
 
     // Ensure server status icon is set on page load
     this.serverStatusIcon = this.computeServerStatusIcon(
-      this.$store.getters['controls/serverStatus'],
+      this.$store.getters['dashboard/powerStatus'],
     );
     window.events.listen('powerActionServerStatus', () => {
       this.serverStatusIcon = this.computeServerStatusIcon(
-        this.$store.getters['controls/serverStatus'],
+        this.$store.getters['dashboard/powerStatus'],
       );
     });
 
-    // Dispatch Vuex action if needed to fetch latest status
+    // Dispatch Vuex action to fetch dashboard data instead of individual API calls
     this.$store
-      .dispatch('controls/getLastPowerOperationTime')
+      .dispatch('dashboard/fetchDashboardData')
       .catch((error) => console.error(error))
       .finally(() => this.endLoader());
     if (process.env.VUE_APP_CHINESE_ZH_CN_LANGUAGE_SUPPORT == 'true')
