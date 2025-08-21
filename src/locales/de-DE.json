@@ -2127,10 +2127,10 @@
             "AlwaysOff": "Immer aus",
             "LastState": "Letzter Zustand"
         },
-        "policiesDesc": {
-            "AlwaysOn": "Immer an - Das System wird immer eingeschaltet, wenn Strom angelegt wird.",
-            "AlwaysOff": "Immer aus - Das System bleibt immer ausgeschaltet, wenn Strom angelegt wird.",
-            "LastState": "Letzter Zustand - Das System kehrt zu seinem letzten Ein- oder Aus-Zustand zurück, wenn Strom angelegt wird."
+         "policiesDesc": {
+            "AlwaysOn": "Immer eingeschaltet – Das System wird immer eingeschaltet, wenn Strom angelegt wird.",
+            "AlwaysOff": "Immer aus – Das System bleibt immer ausgeschaltet, wenn Strom angelegt wird.",
+            "LastState": "Letzter Zustand – Das System kehrt in seinen letzten Ein- oder Ausschaltzustand zurück, wenn die Stromversorgung eingeschaltet wird."
         },
         "toast": {
             "errorSaveSettings": "Fehler beim Speichern der Einstellungen.",

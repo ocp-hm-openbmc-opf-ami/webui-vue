@@ -2132,9 +2132,9 @@
             "LastState": "最後狀態"
         },
         "policiesDesc": {
-            "AlwaysOn": "始終開啟 - 通電時系統始終開啟。",
-            "AlwaysOff": "始終關閉 - 通電時系統始終保持關閉狀態。",
-            "LastState": "最後狀態 - 通電後系統返回到上次打開或關閉電源狀態"
+            "AlwaysOn": "始終開啟 — 通電後系統始終開啟。",
+            "AlwaysOff": "始終關閉 — 通電後系統始終保持關閉狀態。",
+            "LastState": "最後狀態- 通電後系統返回上次開啟或關閉電源的狀態。"
         },
         "toast": {
             "errorSaveSettings": "儲存設定失敗。",

@@ -2132,10 +2132,10 @@
             "AlwaysOff": "Always Off",
             "LastState": "Last State"
         },
-        "policiesDesc": {
-            "AlwaysOn": "Always on - The system always powers on when power is applied.",
-            "AlwaysOff": "Always off - The system always remains powered off when power is applied.",
-            "LastState": "Last state - The system returns to its last on or off power state when power is applied."
+         "policiesDesc": {
+            "AlwaysOn": "Always On - The system always powers on when power is applied.",
+            "AlwaysOff": "Always Off - The system always remains powered off when power is applied.",
+            "LastState": "Last State - The system returns to its last on or off power state when power is applied."
         },
         "toast": {
             "errorSaveSettings": "Error in saving Settings.",

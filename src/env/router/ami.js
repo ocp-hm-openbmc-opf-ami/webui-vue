@@ -23,6 +23,7 @@ import Vlan from '@/views/Settings/Vlan';
 import Overview from '@/views/Overview';
 import PageNotFound from '@/views/PageNotFound';
 import PostCodeLogs from '@/views/Logs/PostCodeLogs';
+import PowerRestorePolicy from '@/views/Settings/PowerRestorePolicy';
 import ProfileSettings from '@/views/ProfileSettings';
 import RebootBmc from '@/views/Operations/RebootBmc';
 import Policies from '@/views/SecurityAndAccess/Policies';
@@ -531,6 +532,19 @@ if (process.env.VUE_APP_ONETREE_SMTP_ENABLED == 'true') {
     component: SmtpSettings,
     meta: {
       title: i18n.t('appPageTitle.smtpSettings'),
+    },
+  });
+}
+if (
+  process.env.VUE_APP_ONETREE_AMD_POWERCAP_ENABLED === 'true' ||
+  process.env.VUE_APP_ONETREE_GPGPU_ENABLED === 'true'
+) {
+  routes[2].children.push({
+    path: '/settings/power-restore-policy',
+    name: 'power-restore-policy',
+    component: PowerRestorePolicy,
+    meta: {
+      title: i18n.t('appPageTitle.powerRestorePolicy'),
     },
   });
 }

@@ -352,6 +352,16 @@ const AppNavigationMixin = {
           route: '/settings/auto-video',
         });
       }
+      if (
+        process.env.VUE_APP_ONETREE_AMD_POWERCAP_ENABLED === 'true' ||
+        process.env.VUE_APP_ONETREE_GPGPU_ENABLED === 'true'
+      ) {
+        navigationItemsList.navigationItems[4].children.push({
+          id: 'power-restore-policy',
+          label: this.$t('appNavigation.powerRestorePolicy'),
+          route: '/settings/power-restore-policy',
+        });
+      }
       if (process.env.VUE_APP_ONETREE_AMD_POWERCAP_ENABLED === 'true') {
         navigationItemsList.navigationItems.push({
           id: 'resource-management',

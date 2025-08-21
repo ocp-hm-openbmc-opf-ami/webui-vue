@@ -2132,9 +2132,9 @@
             "LastState": "最后状态"
         },
         "policiesDesc": {
-            "AlwaysOn": "始终开启 - 上电时系统始终开启。",
-            "AlwaysOff": "始终关闭 - 上电时系统始终保持关闭状态。",
-            "LastState": "最后状态 - 上电后系统返回到上次打开或关闭电源状态。"
+            "AlwaysOn": "始终开启 — 通电后系统始终开启。",
+            "AlwaysOff": "始终关闭 — 通电后系统始终保持关闭状态。",
+            "LastState": "最后状态- 通电后系统返回上次开启或关闭电源的状态。"
         },
         "toast": {
             "errorSaveSettings": "保存设置失败。",
