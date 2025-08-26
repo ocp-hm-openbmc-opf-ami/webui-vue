@@ -20,6 +20,7 @@ describe('AppHeader.vue', () => {
     'license/getUserAlertCount': jest.fn(),
     'global/getSystemInfo': jest.fn(),
     'controls/getLastPowerOperationTime': jest.fn(),
+    'dashboard/fetchDashboardData': jest.fn().mockResolvedValue({}),
   };
   let state;
 
@@ -35,6 +36,19 @@ describe('AppHeader.vue', () => {
       license: {
         namespaced: true,
         state,
+      },
+      dashboard: {
+        namespaced: true,
+        state: {
+          dashboardData: null,
+          isLoaded: false,
+        },
+        getters: {
+          powerStatus: () => 'on',
+        },
+        actions: {
+          fetchDashboardData: jest.fn().mockResolvedValue({}),
+        },
       },
     },
   });

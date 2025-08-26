@@ -25,7 +25,7 @@
 <script>
 import OverviewCard from './OverviewCard';
 import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Server',
@@ -34,21 +34,19 @@ export default {
   },
   mixins: [DataFormatterMixin],
   computed: {
-    ...mapState({
-      server: (state) => state.system.systems[0],
-      serverModel() {
-        return this.server?.model;
-      },
-      serverSerialNumber() {
-        return this.server?.serialNumber;
-      },
-      serverManufacturer() {
-        return this.server?.manufacturer;
-      },
-    }),
+    ...mapGetters('dashboard', ['serverInfo']),
+    serverModel() {
+      return this.serverInfo?.model;
+    },
+    serverSerialNumber() {
+      return this.serverInfo?.serialNumber;
+    },
+    serverManufacturer() {
+      return this.serverInfo?.manufacturer;
+    },
   },
   created() {
-    this.$store.dispatch('system/getSystem').finally(() => {
+    this.$store.dispatch('dashboard/fetchDashboardData').finally(() => {
       this.$root.$emit('overview-server-complete');
     });
   },

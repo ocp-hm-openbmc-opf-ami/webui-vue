@@ -466,6 +466,19 @@ export default {
         if (!validExtensions.includes(fileExtension)) {
           dev.file = null;
           this.errorToast(this.$t('pageVirtualMedia.toast.invalidFileType'));
+          return;
+        }
+        // Check file size - must be at least 600 KB for .iso and .nrg files only
+        const extensionsRequiringMinSize = ['iso', 'nrg'];
+        if (extensionsRequiringMinSize.includes(fileExtension)) {
+          const minFileSize = 600 * 1024; // 600 KB in bytes
+          if (file.size < minFileSize) {
+            dev.file = null;
+            this.errorToast(
+              this.$t('pageVirtualMedia.toast.virtualMediaErrorFileTooSmall'),
+            );
+            return;
+          }
         }
       }
       if (dev.id === 'Slot_0') {

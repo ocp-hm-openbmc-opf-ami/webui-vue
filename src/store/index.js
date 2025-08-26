@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import GlobalStore from './modules/GlobalStore';
+import DashboardStore from './modules/Dashboard/DashboardStore';
 import AuthenticationStore from './modules/Authentication/AuthenticanStore';
 import BsodStore from './modules/Settings/BsodStore';
 import SessionsStore from './modules/SecurityAndAccess/SessionsStore';
@@ -71,6 +72,7 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     global: GlobalStore,
+    dashboard: DashboardStore,
     authentication: AuthenticationStore,
     bsod: BsodStore,
     sessions: SessionsStore,

@@ -15,7 +15,13 @@
       </b-col>
     </b-row>
 
-    <b-button variant="primary" type="submit" @click="submitForm">
+    <b-button
+      variant="primary"
+      type="submit"
+      :disabled="isButtonDisable"
+      @click="submitForm"
+    >
+      <icon-save />
       {{ $t('global.action.save') }}
     </b-button>
   </b-container>
@@ -26,10 +32,13 @@ import PageTitle from '@/components/Global/PageTitle';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
+import IconSave from '@carbon/icons-vue/es/save/20';
 
 export default {
   name: 'PowerRestorePolicy',
-  components: { PageTitle },
+  components: { PageTitle, IconSave },
   mixins: [VuelidateMixin, BVToastMixin, LoadingBarMixin],
   beforeRouteLeave(to, from, next) {
     this.hideLoader();
@@ -42,6 +51,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     powerRestorePolicies() {
       return this.$store.getters['powerPolicy/powerRestorePolicies'];
     },

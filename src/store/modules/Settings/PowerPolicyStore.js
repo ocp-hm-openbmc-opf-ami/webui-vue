@@ -19,28 +19,27 @@ const PowerPolicyStore = {
   },
   actions: {
     async getPowerRestorePolicies({ commit }) {
-      return await api
-        .get('/redfish/v1/JsonSchemas/ComputerSystem/ComputerSystem.json')
-        .then(
-          ({
-            data: {
-              definitions: { PowerRestorePolicyTypes = {} },
-            },
-          }) => {
-            let powerPoliciesData = PowerRestorePolicyTypes.enum.map(
-              (powerState) => {
-                let desc = `${i18n.t(
-                  `pagePowerRestorePolicy.policies.${powerState}`,
-                )} - ${PowerRestorePolicyTypes.enumDescriptions[powerState]}`;
-                return {
-                  state: powerState,
-                  desc,
-                };
-              },
-            );
-            commit('setPowerRestorePolicies', powerPoliciesData);
-          },
+      try {
+        const { data } = await api.get(
+          '/redfish/v1/JsonSchemas/ComputerSystem',
         );
+        const schemaUri = data?.Location?.[0]?.Uri;
+        if (!schemaUri) throw new Error('Schema URI not found');
+
+        const { data: schema } = await api.get(schemaUri);
+        const types = schema?.definitions?.PowerRestorePolicyTypes;
+        const enums = types?.enum || [];
+        const descriptions = types?.enumDescriptions || [];
+
+        const powerPoliciesData = enums.map((state, idx) => ({
+          state,
+          desc: `${i18n.t(`pagePowerRestorePolicy.policies.${state}`)}${descriptions[idx] ? ' - ' + descriptions[idx] : ''}`,
+        }));
+
+        commit('setPowerRestorePolicies', powerPoliciesData);
+      } catch (error) {
+        console.error(error);
+      }
     },
     async getPowerRestoreCurrentPolicy({ commit }) {
       return await api

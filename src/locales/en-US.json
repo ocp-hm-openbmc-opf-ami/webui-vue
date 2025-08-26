@@ -2132,10 +2132,10 @@
             "AlwaysOff": "Always Off",
             "LastState": "Last State"
         },
-        "policiesDesc": {
-            "AlwaysOn": "Always on - The system always powers on when power is applied.",
-            "AlwaysOff": "Always off - The system always remains powered off when power is applied.",
-            "LastState": "Last state - The system returns to its last on or off power state when power is applied."
+         "policiesDesc": {
+            "AlwaysOn": "Always On - The system always powers on when power is applied.",
+            "AlwaysOff": "Always Off - The system always remains powered off when power is applied.",
+            "LastState": "Last State - The system returns to its last on or off power state when power is applied."
         },
         "toast": {
             "errorSaveSettings": "Error in saving Settings.",
@@ -2535,6 +2535,7 @@
             "serverClosedSuccessfully": "Server closed successfully.",
             "serverClosedWithErrors": "Server closed with errors.",
             "invalidFileType": "Invalid Image File Type",
+            "virtualMediaErrorFileTooSmall": "The selected file must be at least 600 KB.",
             "infoTitle": "External Server Start button",
             "infoMessage": "The Start button is enabled only if a Password is set and the Mount Type is CIFS or HTTPS."
         }

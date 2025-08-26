@@ -1050,7 +1050,9 @@
             "serverRunning": "Соединение установлено",
             "serverConnectionEstablished": "Соединение установлено",
             "serverClosedSuccessfully": "Соединение закрыто",
-            "serverClosedWithErrors": "Соединение разорвано"
+            "serverClosedWithErrors": "Соединение разорвано",
+            "invalidFileType": "Недопустимый тип файла изображения",
+            "virtualMediaErrorFileTooSmall": "Выбранный файл должен быть не менее 600 КБ."
         }
     },
     "pageAdapter": {
