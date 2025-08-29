@@ -1083,6 +1083,7 @@
         "maxLogicalDevicesCount": "Максимальное количество логических устройств",
         "maxPhysicalDevicesCountPerLogicalDevicesCount": "Максимальное количество физических устройств на логическое устройство",
         "hotSparesCount": "Количество горячих резервов",
+        "pci": "PCI",
         "modal": {
             "dropdownPropertiesBtn": "Свойства",
             "dropdownManagementBtn": "Управление",
@@ -1304,7 +1305,7 @@
             "serialNumber": "Сэрыйны нумар",
             "health": "Здароўе",
             "mediaType": "Тип носителя",
-            "pDrivestate": "Состояние",
+            "pDrivestate": "Состояние PDrive",
             "powerState": "Состояние питания",
             "productId": "Идентификатор продукта",
             "temperature": "Температура",
@@ -1322,6 +1323,9 @@
             "uid": "UID",
             "usage": "Использование",
             "blockCount": "Количество блоков",
+            "capableSpeedGbs": "Максимальная скорость",
+            "capacityBytes": "Ёмкость",
+            "present": "Присутствует",
             "isForeignDevice": "Иностранное устройство",
             "state": {
                 "hotspare": "Горячий резерв",
