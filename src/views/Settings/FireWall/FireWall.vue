@@ -1,114 +1,107 @@
 <template>
   <b-container fluid="xl">
     <page-title />
-    <div v-if="!enabledSystemFirewall">
-      <b-alert show variant="danger">{{
-        $t('pageFireWall.toast.featureNotAvailable')
-      }}</b-alert>
-    </div>
-    <div v-else>
-      <b-row class="align-items-end">
-        <b-col xl="4">
-          <search
-            :placeholder="$t('pageFireWall.table.searchFirewallRule')"
-            data-test-id="sessions-input-searchSessions"
-            @change-search="onChangeSearchInput"
-            @clear-search="onClearSearchInput"
-          />
-        </b-col>
-        <b-col xl="2">
-          <table-cell-count
-            :filtered-items-count="filteredRows"
-            :total-number-of-cells="items.length"
-          ></table-cell-count>
-        </b-col>
-        <b-col xl="6">
-          <div class="text-right mb10">
-            <b-button
-              variant="primary"
-              :disabled="items.length <= 0"
-              class="mr10"
-              @click="initFlushAllModal()"
-            >
-              <icon-trashcan />
-              {{ $t('pageFireWall.firewallSettings.flushAll') }}
-            </b-button>
-            <b-button
-              variant="primary"
-              :disabled="items.length >= 128 || isButtonDisable"
-              @click="initFireWallModal()"
-            >
-              <icon-add />
-              {{ $t('pageFireWall.firewallSettings.addNewRule') }}
-            </b-button>
-          </div>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col xl="12">
-          <b-table
-            responsive="md"
-            hover
-            :fields="fields"
-            :items="items"
-            :empty-text="$t('global.table.emptyMessage')"
-            :filter="searchFilter"
-            :per-page="perPage"
-            :current-page="currentPage"
-            show-empty
-            @filtered="onFiltered"
+    <b-row class="align-items-end">
+      <b-col xl="4">
+        <search
+          :placeholder="$t('pageFireWall.table.searchFirewallRule')"
+          data-test-id="sessions-input-searchSessions"
+          @change-search="onChangeSearchInput"
+          @clear-search="onClearSearchInput"
+        />
+      </b-col>
+      <b-col xl="2">
+        <table-cell-count
+          :filtered-items-count="filteredRows"
+          :total-number-of-cells="items.length"
+        ></table-cell-count>
+      </b-col>
+      <b-col xl="6">
+        <div class="text-right mb10">
+          <b-button
+            variant="primary"
+            :disabled="items.length <= 0"
+            class="mr10"
+            @click="initFlushAllModal()"
           >
-            <template #cell(actions)="{ item }">
-              <table-row-action
-                v-for="(action, actionIndex) in item.actions"
-                :key="actionIndex"
-                :value="action.value"
-                :title="action.title"
-                :enabled="action.enabled"
-                @click-table-action="onTableRowAction(item)"
-              >
-                <template #icon>
-                  <icon-trashcan />
-                </template>
-              </table-row-action>
-            </template>
-          </b-table>
-        </b-col>
-      </b-row>
-      <!-- Table pagination -->
-      <b-row>
-        <b-col sm="6">
-          <b-form-group
-            class="table-pagination-select"
-            :label="$t('global.table.itemsPerPage')"
-            label-for="pagination-items-per-page"
+            <icon-trashcan />
+            {{ $t('pageFireWall.firewallSettings.flushAll') }}
+          </b-button>
+          <b-button
+            variant="primary"
+            :disabled="items.length >= 128 || isButtonDisable"
+            @click="initFireWallModal()"
           >
-            <b-form-select
-              id="pagination-items-per-page"
-              v-model="perPage"
-              :options="itemsPerPageOptions"
-            />
-          </b-form-group>
-        </b-col>
-        <b-col sm="6">
-          <b-pagination
-            v-model="currentPage"
-            first-number
-            last-number
-            :per-page="perPage"
-            :total-rows="getTotalRowCount(filteredRows)"
-            aria-controls="table-session-logs"
-            :limit="limit"
+            <icon-add />
+            {{ $t('pageFireWall.firewallSettings.addNewRule') }}
+          </b-button>
+        </div>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col xl="12">
+        <b-table
+          responsive="md"
+          hover
+          :fields="fields"
+          :items="items"
+          :empty-text="$t('global.table.emptyMessage')"
+          :filter="searchFilter"
+          :per-page="perPage"
+          :current-page="currentPage"
+          show-empty
+          @filtered="onFiltered"
+        >
+          <template #cell(actions)="{ item }">
+            <table-row-action
+              v-for="(action, actionIndex) in item.actions"
+              :key="actionIndex"
+              :value="action.value"
+              :title="action.title"
+              :enabled="action.enabled"
+              @click-table-action="onTableRowAction(item)"
+            >
+              <template #icon>
+                <icon-trashcan />
+              </template>
+            </table-row-action>
+          </template>
+        </b-table>
+      </b-col>
+    </b-row>
+    <!-- Table pagination -->
+    <b-row>
+      <b-col sm="6">
+        <b-form-group
+          class="table-pagination-select"
+          :label="$t('global.table.itemsPerPage')"
+          label-for="pagination-items-per-page"
+        >
+          <b-form-select
+            id="pagination-items-per-page"
+            v-model="perPage"
+            :options="itemsPerPageOptions"
           />
-        </b-col>
-      </b-row>
-      <modal-add-firewall-rules
-        :modal-success="isModalSuccess"
-        @addNewRulesOk="onModalAddNewRulesOk"
-        @closeAddModal="iscloseAddModal"
-      />
-      <modal-flash-all-firewall @flushaAllOk="onModalFlushAllOk" />
-    </div>
+        </b-form-group>
+      </b-col>
+      <b-col sm="6">
+        <b-pagination
+          v-model="currentPage"
+          first-number
+          last-number
+          :per-page="perPage"
+          :total-rows="getTotalRowCount(filteredRows)"
+          aria-controls="table-session-logs"
+          :limit="limit"
+        />
+      </b-col>
+    </b-row>
+    <modal-add-firewall-rules
+      :modal-success="isModalSuccess"
+      @addNewRulesOk="onModalAddNewRulesOk"
+      @closeAddModal="iscloseAddModal"
+    />
+    <modal-flash-all-firewall @flushaAllOk="onModalFlushAllOk" />
   </b-container>
 </template>
 <script>
@@ -239,9 +232,6 @@ export default {
       return this.searchFilter
         ? this.searchTotalFilteredRows
         : this.items.length;
-    },
-    enabledSystemFirewall() {
-      return this.$store.getters['network/getSystemFirewall'];
     },
   },
   watch: {

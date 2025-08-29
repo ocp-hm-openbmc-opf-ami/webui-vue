@@ -692,7 +692,6 @@
             "fileUploadedError": "Fehler beim Hochladen der Wiederherstellungsdatei.",
             "errorGettingBackupDetails": "Fehler beim Abrufen der Sicherungseigenschaften.",
             "errorMessageNotConfigured": "Der Vorgang kann nicht abgeschlossen werden, da die Konfigurationsdatei nicht vorhanden ist.",
-            "featureNotAvailable": "Die Sicherungs- und Wiederherstellungsfunktionen sind nicht aktiviert.",
             "restoreConfirmation": "Die Wiederherstellungsfunktionalität startet die Dienste der konfigurierten Sicherungseigenschaften neu. Sind Sie sicher, dass Sie fortfahren möchten?",
             "confirmTitle": "Bestätigen?"
 
@@ -1934,8 +1933,7 @@
         "toast": {
             "errorSavinNcsiInterface": "Fehler beim Speichern der NCSI-Schnittstelleneinstellungen.",
             "errorGettingNcsi": "Fehler beim Abrufen der NCSI-Schnittstelleninformationen.",
-            "successSavingNcsiInterface": "Die NCSI-Schnittstelleneinstellungen wurden erfolgreich gespeichert.",
-            "featureNotEnabled": "Die NCSI-Funktion ist nicht aktiviert."
+            "successSavingNcsiInterface": "Die NCSI-Schnittstelleneinstellungen wurden erfolgreich gespeichert."
         }
     },
     "pageVlan": {
@@ -2321,8 +2319,7 @@
       "successApplyPowerCapEnable": "Leistungsgrenze erfolgreich aktiviert.",
       "successApplyPowerCapDisable": "Leistungsgrenze erfolgreich deaktiviert.",
       "errorApplyPowerCapEnable": "Fehler beim Aktivieren der Leistungsgrenze.",
-      "errorApplyPowerCapDisable": "Fehler beim Deaktivieren der Leistungsgrenze.",
-      "featureNotAvailable": "Leistungsgrenze wird auf dieser Plattform nicht unterstützt."
+      "errorApplyPowerCapDisable": "Fehler beim Deaktivieren der Leistungsgrenze."
     }
   },
   "pageSensors": {
@@ -3011,7 +3008,6 @@
             "errorDelete": "Fehler beim Löschen der Firewall-Regeln.",
             "errorDateOrTimeSaveFireWall": "Ungültiges Datum oder Uhrzeit.",
             "errorStartorEndIpSaveFireWall": "Ungültiger Bereich Start oder Bereich Ende IP.",
-            "featureNotAvailable": "Die System-Firewall-Funktion ist nicht aktiviert.",
             "errorCreateLimitReachedForResource": "Es können maximal 64 IPv4-Firewall-Regeln und 64 IPv6-Firewall-Regeln erstellt werden."
         },
         "table": {
@@ -3041,8 +3037,7 @@
         "errorSavebond": "Fehler beim Speichern des Netzwerk-Bonds.",
         "errorDelete": "Fehler beim Löschen des Netzwerk-Bonds.",
         "errorGetBond": "Fehler beim Abrufen des Netzwerk-Bonds.",
-        "miiRangeRequired": "Geben Sie den gültigen Millisekundenbereich zwischen 1-100 ein.",
-        "featureNotAvailable": "Die Netzwerk-Bond-Funktion ist nicht aktiviert."
+        "miiRangeRequired": "Geben Sie den gültigen Millisekundenbereich zwischen 1-100 ein."
     },
     "license": {
         "add_license_key": "Lizenzschlüssel hinzufügen",
@@ -3073,7 +3068,6 @@
         "Mbps": "Mbps",
         "sameNetworkLinkSettings": "Die Netzwerk-Link-Konfigurationen sind gleich, daher ist es nicht erforderlich, sie zu speichern.",
         "modifyNetworkLinkSettings": "Wenn Benutzer diese Schnittstellenkonfigurationen ändern müssen, ändern Sie bitte die Werte der übergeordneten Schnittstelle.",
-        "networkLinkFeatureNotAvailable": "Die Netzwerk-Link-Funktion ist nicht aktiviert.",
         "toast": {
             "successSaveNetworkLink": "Netzwerk-Link erfolgreich gespeichert.",
             "errorSavedNetworkLink": "Fehler beim Speichern des Netzwerk-Links.",

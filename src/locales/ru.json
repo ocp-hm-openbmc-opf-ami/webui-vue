@@ -913,8 +913,7 @@
             "successApplyPowerCapEnable": "успешно включено применить powerCap",
             "successApplyPowerCapDisable": "успешно отключено применение powerCap",
             "errorApplyPowerCapEnable": "ошибка включения применения powerCap",
-            "errorApplyPowerCapDisable": "ошибка отключения применения powerCap",
-            "featureNotAvailable": "Power Cap не поддерживается на этой платформе."
+            "errorApplyPowerCapDisable": "ошибка отключения применения powerCap"
         }
     },
     "pageSensors": {
