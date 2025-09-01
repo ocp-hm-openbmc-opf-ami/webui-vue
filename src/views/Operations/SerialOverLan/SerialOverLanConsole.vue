@@ -74,6 +74,11 @@ export default {
     return {
       resizeConsoleWindow: null,
       disable: false,
+      term: null,
+      ws: null,
+      fitAddon: null,
+      cols: 80,
+      rows: 25,
     };
   },
   computed: {
@@ -129,6 +134,8 @@ export default {
       // Refer https://github.com/xtermjs/xterm.js/ for xterm implementation and addons.
 
       this.term = new Terminal({
+        cols: this.cols,
+        rows: this.rows,
         fontSize: 15,
         fontFamily:
           'SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
@@ -137,8 +144,8 @@ export default {
       const attachAddon = new AttachAddon(this.ws);
       this.term.loadAddon(attachAddon);
 
-      const fitAddon = new FitAddon();
-      this.term.loadAddon(fitAddon);
+      this.fitAddon = new FitAddon();
+      this.term.loadAddon(this.fitAddon);
 
       const SOL_THEME = {
         background: '#19273c',
@@ -148,11 +155,14 @@ export default {
       this.term.setOption('theme', SOL_THEME);
 
       this.term.open(this.$refs.panel);
-      fitAddon.fit();
+      // Force exact 80x25 dimensions
+      this.term.resize(this.cols, this.rows);
+      this.term.focus();
 
+      // ONLY call resize/fit on actual window resize events
       this.resizeConsoleWindow = throttle(() => {
-        fitAddon.fit();
-      }, 1000);
+        this.handleWindowResize();
+      }, 100);
       window.addEventListener('resize', this.resizeConsoleWindow);
 
       // Define key maps
@@ -313,6 +323,13 @@ export default {
       if (this.ws) {
         this.ws.close();
         this.ws = null;
+      }
+      this.fitAddon = null;
+    },
+    handleWindowResize() {
+      // Only handle actual window resize for content fitting
+      if (this.term && this.fitAddon) {
+        this.fitAddon.fit();
       }
     },
     openConsoleWindow() {
