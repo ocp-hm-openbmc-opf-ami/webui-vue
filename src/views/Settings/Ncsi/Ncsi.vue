@@ -1,12 +1,7 @@
 <template>
   <b-container fluid="xl">
     <page-title :description="$t('pageNcsi.pageDescription')" />
-    <div v-if="!checkNcsi">
-      <b-alert show variant="danger">{{
-        $t('pageNcsi.toast.featureNotEnabled')
-      }}</b-alert>
-    </div>
-    <div v-if="checkNcsi" class="form-background p-3">
+    <div class="form-background p-3">
       <b-row>
         <b-col class="col-sm-2 p-2">
           <dl>
@@ -150,7 +145,6 @@ export default {
         { value: 0, text: this.$t('pageNcsi.options.packageOption') },
       ],
       channelNumberOptions: [],
-      checkNcsi: true,
       ncsiData: [],
     };
   },
@@ -185,14 +179,10 @@ export default {
   created() {
     this.startLoader();
     this.$store.dispatch('ncsi/getEthernetInterfaces').finally(() => {
-      this.checkNcsiEnabled();
       this.endLoader();
     });
   },
   methods: {
-    checkNcsiEnabled() {
-      this.checkNcsi = this.$store.getters['ncsi/ncsiEnable'];
-    },
     bindNcsiData() {
       this.ncsiInterfaceData = this.$store.getters['ncsi/ncsiInterface'];
       if (this.ncsiInterfaceData && this.ncsiInterfaceData.length > 0) {

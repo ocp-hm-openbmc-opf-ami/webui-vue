@@ -693,7 +693,6 @@
             "fileUploadedError": "Error in uploading the Restore File.",
             "errorGettingBackupDetails": "Error in getting the Property Backup Features.",
             "errorMessageNotConfigured": "The operation cannot be completed, since the Configuration file does not exit.",
-            "featureNotAvailable": "The Backup and Restore Features are not enabled.",
             "restoreConfirmation": "Restore functionality will restart the services of Configured Backup properties. Are you sure you want to proceed?",
             "confirmTitle": "Confirm?"
         }
@@ -1939,8 +1938,7 @@
         "toast": {
             "errorSavinNcsiInterface": "Error in saving NCSI Interface Settings.",
             "errorGettingNcsi": "Error in getting NCSI Interface information.",
-            "successSavingNcsiInterface": "Successfully saved NCSi Interface Settings.",
-            "featureNotEnabled": "The NCSI feature is not enabled."
+            "successSavingNcsiInterface": "Successfully saved NCSi Interface Settings."
         }
     },
     "pageVlan": {
@@ -2325,8 +2323,7 @@
             "successApplyPowerCapEnable": "Successfully enabled Apply Power Cap.",
             "successApplyPowerCapDisable": "Successfully disabled Apply Power Cap.",
             "errorApplyPowerCapEnable": "Error in enabling Apply Power Cap.",
-            "errorApplyPowerCapDisable": "Error in disabling Apply Power Cap.",
-            "featureNotAvailable":"Power Cap is not supported on this platform."
+            "errorApplyPowerCapDisable": "Error in disabling Apply Power Cap."
         }
     },
     "pageSensors": {
@@ -3019,7 +3016,6 @@
             "errorDelete": "Error in deleting Firewall Rules.",
             "errorDateOrTimeSaveFireWall": "Invalid Date or Time.",
             "errorStartorEndIpSaveFireWall": "Invalid Range Start or Range End IP.",
-            "featureNotAvailable": "The System Firewall feature is not enabled.",
             "errorCreateLimitReachedForResource": "The maximum number of Firewall Rules that can be created is up to 64 IPv4 Firewall Rules and 64 IPv6 Firewall Rules."
         },
         "table": {
@@ -3049,8 +3045,7 @@
         "errorSavebond": "Error in saving Network Bond.",
         "errorDelete": "Error in deleting Network Bond.",
         "errorGetBond": "Error in getting Network Bond.",
-        "miiRangeRequired": "Enter the valid milliseconds range between 1-100.",
-        "featureNotAvailable": "The Network Bond feature is not enabled."
+        "miiRangeRequired": "Enter the valid milliseconds range between 1-100."
     },
     "license": {
         "add_license_key": "Add License Key",
@@ -3081,7 +3076,6 @@
         "Mbps": "Mbps",
         "sameNetworkLinkSettings": "The Network Link Configurations are the same, so it is not required to save.",
         "modifyNetworkLinkSettings": "If users need to change these interface configurations, please modify the values of the parent interface instead.",
-        "networkLinkFeatureNotAvailable": "The Network Link feature is not enabled.",
         "toast": {
             "successSaveNetworkLink": "Successfully saved Network Link.",
             "errorSavedNetworkLink": "Error in saving Network Link.",

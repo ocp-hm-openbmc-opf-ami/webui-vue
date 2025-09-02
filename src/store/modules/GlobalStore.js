@@ -48,9 +48,7 @@ const GlobalStore = {
       : true,
     username: localStorage.getItem('storedUsername'),
     isAuthorized: true,
-    isAmdPlatform: false,
     userPrivilege: null,
-    backupAndRestore: null,
     virtualMediaServiceEnabledAccess: true,
     kvmServiceEnabledAccess: true,
     sessionId: null, // Store Session_ID from login
@@ -68,8 +66,6 @@ const GlobalStore = {
     username: (state) => state.username,
     isAuthorized: (state) => state.isAuthorized,
     userPrivilege: (state) => state.userPrivilege,
-    backupAndRestore: (state) => state.backupAndRestore,
-    isAmdPlatform: (state) => state.isAmdPlatform,
     virtualMediaServiceEnabledAccess: (state) =>
       state.virtualMediaServiceEnabledAccess,
     kvmServiceEnabledAccess: (state) => state.kvmServiceEnabledAccess,
@@ -98,9 +94,6 @@ const GlobalStore = {
     setPrivilege: (state, privilege) => {
       state.userPrivilege = privilege;
     },
-    setbackupAndRestore: (state, backupAndRestore) => {
-      state.backupAndRestore = backupAndRestore;
-    },
     setVirtualMediaServiceEnabledAccess: (
       state,
       virtualMediaServiceEnabledAccess,
@@ -110,9 +103,6 @@ const GlobalStore = {
     setkvmServiceEnabledAccess: (state, kvmServiceEnabledAccess) => {
       state.kvmServiceEnabledAccess = kvmServiceEnabledAccess;
     },
-    setIsAmdPlatform: (state, isAmdPlatform) => {
-      state.isAmdPlatform = isAmdPlatform;
-    },
     setSessionId: (state, sessionId) => (state.sessionId = sessionId),
   },
   actions: {
@@ -120,34 +110,12 @@ const GlobalStore = {
       return await api
         .get('/redfish/v1/Managers/bmc')
         .then((response) => {
-          const availableActions = response.data.Actions;
-
-          const isBackupConfigAvailable =
-            availableActions &&
-            availableActions.Oem &&
-            availableActions.Oem['#AMIManager.BackupConfig'] &&
-            availableActions.Oem['#AMIManager.BackupConfig'][
-              '@Redfish.ActionInfo'
-            ];
-
-          const isRestoreConfigAvailable =
-            availableActions &&
-            availableActions.Oem &&
-            availableActions.Oem['#AMIManager.RestoreConfig'] &&
-            availableActions.Oem['#AMIManager.RestoreConfig'][
-              '@Redfish.ActionInfo'
-            ];
-
-          const areBothActionsAvailable =
-            isBackupConfigAvailable !== undefined &&
-            isRestoreConfigAvailable !== undefined;
           const timeZone = response.data.TimeZoneName;
           var bmcDateTime = response.data.DateTime;
           const date = new Date(bmcDateTime);
 
           commit('setBmcTime', date);
           commit('setTimeZone', timeZone);
-          commit('setbackupAndRestore', areBothActionsAvailable);
         })
         .catch((error) => console.log(error));
     },

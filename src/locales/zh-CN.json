@@ -692,7 +692,6 @@
             "fileUploadedError": "上传恢复文件时出错。",
             "errorGettingBackupDetails": "获取属性备份功能时出错。",
             "errorMessageNotConfigured": "由于配置文件不存在，操作无法完成。",
-            "featureNotAvailable": "备份和还原功能未启用。",
             "restoreConfirmation": "还原功能将重新启动已配置备份属性的服务。您确定要继续吗？",
             "confirmTitle": "确认？"
         }
@@ -1938,8 +1937,7 @@
         "toast": {
             "errorSavinNcsiInterface": "保存 NCSI 接口设置时出错。",
             "errorGettingNcsi": "获取 NCSI 接口信息时出错。",
-            "successSavingNcsiInterface": "成功保存 NCSI 接口设置。",
-            "featureNotEnabled": "NCSI 功能未启用。"
+            "successSavingNcsiInterface": "成功保存 NCSI 接口设置。"
         }
     },
     "pageVlan": {
@@ -2324,8 +2322,7 @@
             "successApplyPowerCapEnable": "成功启用功耗上限。",
             "successApplyPowerCapDisable": "成功禁用功耗上限。",
             "errorApplyPowerCapEnable": "启用功耗上限发生错误。",
-            "errorApplyPowerCapDisable": "禁用功耗上限发生错误。",
-            "featureNotAvailable":"此平台不支持功耗上限。"
+            "errorApplyPowerCapDisable": "禁用功耗上限发生错误。"
         }
     },
     "pageSensors": {
@@ -3018,7 +3015,6 @@
             "errorDelete": "删除防火墙规则时出错。",
             "errorDateOrTimeSaveFireWall": "日期或时间无效。",
             "errorStartorEndIpSaveFireWall": "范围起始或范围结束 IP 无效。",
-            "featureNotAvailable": "系统防火墙功能未启用。",
             "errorCreateLimitReachedForResource": "可以创建的防火墙规则的最大数量为 64 个 IPv4 防火墙规则和 64 个 IPv6 防火墙规则。"
         },
         "table": {
@@ -3048,8 +3044,7 @@
         "errorSavebond": "保存网络 bond 时出错。",
         "errorDelete": "删除网络 bond 时出错。",
         "errorGetBond": "获取网络 bond 时出错。",
-        "miiRangeRequired": "输入 1-100 之间的有效毫秒。",
-        "featureNotAvailable": "网络 bond 功能未启用。"
+        "miiRangeRequired": "输入 1-100 之间的有效毫秒。"
     },
     "license": {
         "add_license_key": "添加许可证密钥",
@@ -3080,7 +3075,6 @@
         "Mbps": "Mbps",
         "sameNetworkLinkSettings": "网络连接配置相同，因此无需保存。",
         "modifyNetworkLinkSettings": "如果用户需要更改这些接口配置，请修改主接口的值。",
-        "networkLinkFeatureNotAvailable": "网络连接功能未启用。",
         "toast": {
             "successSaveNetworkLink": "已成功保存网络连接。",
             "errorSavedNetworkLink": "保存网络连接时出错。",

@@ -7,13 +7,11 @@ const NcsiStore = {
     ethernetData: [],
     ncsiInterface: [],
     ncsiData: [],
-    ncsiEnable: true,
   },
   getters: {
     ethernetData: (state) => state.ethernetData,
     ncsiInterface: (state) => state.ncsiInterface,
     ncsiData: (state) => state.ncsiData,
-    ncsiEnable: (state) => state.ncsiEnable,
   },
   mutations: {
     setEthernetData: (state, ethernetData) =>
@@ -21,9 +19,6 @@ const NcsiStore = {
     setNcsiInterface: (state, ncsiInterface) =>
       (state.ncsiInterface = ncsiInterface),
     setNcsiData: (state, ncsiData) => (state.ncsiData = ncsiData),
-    setNcsiEnable: (state, ncsiEnable) => {
-      state.ncsiEnable = ncsiEnable;
-    },
   },
   actions: {
     async getEthernetInterfaces({ commit }) {
@@ -72,7 +67,6 @@ const NcsiStore = {
         })
         .catch((error) => {
           console.error('NCSI Data:', error);
-          commit('setNcsiEnable', false);
           throw new Error(i18n.t('pageNcsi.toast.errorGettingNcsiData'));
         });
     },
