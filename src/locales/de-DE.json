@@ -32,7 +32,8 @@
             "close": "Schließen",
             "yes": "Ja",
             "no": "Nein",
-            "same_session_running_information": "Es läuft bereits eine Sitzung in diesem Browser, daher wird dieselbe Sitzung geöffnet."
+            "same_session_running_information": "Es läuft bereits eine Sitzung in diesem Browser, daher wird dieselbe Sitzung geöffnet.",
+            "na": "NA"
         },
         "ariaLabel": {
             "clearSearch": "Sucheingabe löschen",

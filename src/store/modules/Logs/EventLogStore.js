@@ -58,7 +58,7 @@ const EventLogStore = {
             } = log;
             return {
               id: Id,
-              severity: Severity,
+              severity: Severity || 'NA', // Handle missing Severity property for discrete sensors
               date: new Date(Created),
               type: EntryType,
               description: Message,

@@ -32,7 +32,8 @@
             "close": "Close",
             "yes": "Yes",
             "no": "No",
-            "same_session_running_information": "Already a session is running in this browser, so opening the same session."
+            "same_session_running_information": "Already a session is running in this browser, so opening the same session.",
+            "na": "NA"
         },
         "ariaLabel": {
             "clearSearch": "Clear Search Input",
