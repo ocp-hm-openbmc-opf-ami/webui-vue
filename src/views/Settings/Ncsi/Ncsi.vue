@@ -1,37 +1,7 @@
 <template>
   <b-container fluid="xl">
     <page-title :description="$t('pageNcsi.pageDescription')" />
-    <div v-if="!checkNcsi">
-      <b-alert show variant="danger">{{
-        $t('pageNcsi.toast.featureNotEnabled')
-      }}</b-alert>
-    </div>
-    <div v-if="checkNcsi" class="form-background p-3">
-      <b-row>
-        <b-col>
-          <b-form-group :label="$t('pageNcsi.ncsiMode')" label-for="ncsiMode">
-            <b-form-radio-group v-model="selectedMode">
-              <b-form-row>
-                <b-form-radio
-                  v-model="form.enableConfiguration"
-                  value="Auto"
-                  data-test-id="ncsi-autoFailOverMode"
-                  class="mr-2"
-                >
-                  {{ $t('pageNcsi.autoFailOverMode') }}
-                </b-form-radio>
-                <b-form-radio
-                  v-model="form.enableConfiguration"
-                  value="Manual"
-                  data-test-id="ncsi-manualSwitchMode"
-                >
-                  {{ $t('pageNcsi.manualSwitchMode') }}
-                </b-form-radio>
-              </b-form-row>
-            </b-form-radio-group>
-          </b-form-group>
-        </b-col>
-      </b-row>
+    <div class="form-background p-3">
       <b-row>
         <b-col class="col-sm-2 p-2">
           <dl>
@@ -42,7 +12,6 @@
           <b-form-select
             id="ncsi-interface"
             v-model="ncsiInterfaceId"
-            :disabled="selectedMode === 'Auto'"
             :options="ncsiInterfaceOptions"
             data-test-id="ncsi-interface-select"
             :state="getValidationState($v.ncsiInterfaceId)"
@@ -59,6 +28,32 @@
               {{ $t('global.form.fieldRequired') }}
             </template>
           </b-form-invalid-feedback>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col class="col-sm-2 p-2">
+          <dl>
+            <dt>{{ $t('pageNcsi.ncsiMode') }}</dt>
+          </dl>
+        </b-col>
+        <b-col lg="6">
+          <b-form-radio-group v-model="selectedMode">
+            <b-form-radio
+              v-model="form.enableConfiguration"
+              value="Auto"
+              data-test-id="ncsi-autoFailOverMode"
+              class="mr-2"
+            >
+              {{ $t('pageNcsi.autoFailOverMode') }}
+            </b-form-radio>
+            <b-form-radio
+              v-model="form.enableConfiguration"
+              value="Manual"
+              data-test-id="ncsi-manualSwitchMode"
+            >
+              {{ $t('pageNcsi.manualSwitchMode') }}
+            </b-form-radio>
+          </b-form-radio-group>
         </b-col>
       </b-row>
       <b-row>
@@ -111,6 +106,7 @@
         class="mt-2"
         variant="primary"
         type="submit"
+        :disabled="isButtonDisable"
         data-test-id="ncsi-button-savencsiMode"
         @click="saveNcsiConfiguration"
       >
@@ -128,6 +124,8 @@ import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { required } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   name: 'Ncsi',
   components: { PageTitle, IconSave },
@@ -142,23 +140,23 @@ export default {
       form: {
         enableConfiguration: '',
       },
-      ncsiInterfaceOptions: this.$store.getters['ncsi/ncsiInterface'],
+      ncsiInterfaceOptions: [],
       packageIdOptions: [
         { value: 0, text: this.$t('pageNcsi.options.packageOption') },
       ],
       channelNumberOptions: [],
-      checkNcsi: true,
+      ncsiData: [],
     };
   },
   computed: {
-    ...mapState('ncsi', ['ncsiData', 'ncsiInterface']),
+    ...mapState('ncsi', ['ncsiInterface']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
   },
   watch: {
-    ncsiInterface: function (value) {
-      this.ncsiInterfaceOptions = value;
-      this.ncsiInterfaceId = this.ncsiInterfaceOptions[0];
-    },
-    ncsiData() {
+    ncsiInterface() {
       this.bindNcsiData();
     },
   },
@@ -181,27 +179,37 @@ export default {
   created() {
     this.startLoader();
     this.$store.dispatch('ncsi/getEthernetInterfaces').finally(() => {
-      this.checkNcsiEnabled();
       this.endLoader();
     });
   },
   methods: {
-    checkNcsiEnabled() {
-      this.checkNcsi = this.$store.getters['ncsi/ncsiEnable'];
-    },
     bindNcsiData() {
-      this.ncsiInterfaceData = [];
-      this.ncsiInterfaceData = this.$store.getters['ncsi/ncsiData'];
-      this.changeInterfaceId(this.ncsiInterfaceId);
+      this.ncsiInterfaceData = this.$store.getters['ncsi/ncsiInterface'];
+      if (this.ncsiInterfaceData && this.ncsiInterfaceData.length > 0) {
+        this.ncsiInterfaceData.forEach((val) => {
+          this.ncsiInterfaceOptions.push({
+            value: val,
+            text: val,
+          });
+        });
+        this.changeInterfaceId(this.ncsiInterfaceOptions[0].value);
+      } else {
+        this.ncsiInterfaceOptions = [];
+      }
     },
     changeInterfaceId(selectedId) {
-      if (this.ncsiInterfaceData && this.ncsiInterfaceData.length > 0) {
-        this.channelNumberOptions = [];
-        this.ncsiInterfaceData.forEach((val) => {
-          if (selectedId === val?.Id) {
-            this.selectedMode = val?.Oem?.Ami?.NCSIConfiguration?.Mode;
+      this.startLoader();
+      this.$store
+        .dispatch('ncsi/getNcsiData', selectedId)
+        .then(() => {
+          this.ncsiData = this.$store.getters['ncsi/ncsiData'];
+          if (this.ncsiData) {
+            this.ncsiInterfaceId = selectedId;
+            this.channelNumberOptions = [];
+            this.selectedMode =
+              this.ncsiData?.Oem?.Ami?.NCSIConfiguration?.Mode;
             const channelList =
-              val?.Oem?.Ami?.NCSIConfiguration?.ChannelList[0];
+              this.ncsiData?.Oem?.Ami?.NCSIConfiguration?.ChannelList[0];
             channelList.SupportedChannelsId.forEach((channel) => {
               this.channelNumberOptions.push({
                 value: channel,
@@ -209,13 +217,20 @@ export default {
               });
             });
             this.ncsiPackageId = channelList.PackageId;
-            this.ncsiChannelNumber =
-              val?.Oem?.Ami?.NCSIConfiguration?.ChannelId === 31
-                ? 0
-                : val?.Oem?.Ami?.NCSIConfiguration?.ChannelId;
+
+            const currentChannelId =
+              this.ncsiData?.Oem?.Ami?.NCSIConfiguration?.ChannelId;
+            this.ncsiChannelNumber = channelList.SupportedChannelsId.includes(
+              currentChannelId,
+            )
+              ? currentChannelId
+              : 0;
           }
+        })
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => {
+          this.endLoader();
         });
-      }
     },
     saveNcsiConfiguration() {
       let data = {};
@@ -237,6 +252,7 @@ export default {
         .then((success) => {
           if (success) {
             this.successToast(success);
+            this.changeInterfaceId(data.interFace);
           }
         })
         .catch(({ message }) => this.errorToast(message))

@@ -59,6 +59,14 @@ const FireWallStore = {
             throw new Error(
               i18n.t('pageFireWall.toast.errorStartorEndIpSaveFireWall'),
             );
+          } else if (
+            error.response.data.error[
+              '@Message.ExtendedInfo'
+            ][0].MessageId.includes('CreateLimitReachedForResource')
+          ) {
+            throw new Error(
+              i18n.t('pageFireWall.toast.errorCreateLimitReachedForResource'),
+            );
           } else {
             throw new Error(i18n.t('pageFireWall.toast.errorSaveFireWall'));
           }

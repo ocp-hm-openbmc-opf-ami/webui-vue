@@ -185,6 +185,17 @@
         <b-row class="mt-3">
           <b-col sm="6" md="3">
             <div class="d-flex align-items-center">
+              <b-form-checkbox v-model="checkboxes.serviceManager" disabled>
+              </b-form-checkbox>
+              <span class="ml-2">
+                {{ $t('PageFactoryDefault.serviceManager') }}
+              </span>
+            </div>
+          </b-col>
+        </b-row>
+        <b-row class="mt-3">
+          <b-col sm="6" md="3">
+            <div class="d-flex align-items-center">
               <b-form-checkbox v-model="checkboxes.ubootEnv" disabled>
               </b-form-checkbox>
               <span class="ml-2">
@@ -198,6 +209,7 @@
             <b-button
               type="submit"
               variant="primary"
+              :disabled="isButtonDisable"
               @click="onRestoreToDefaults"
             >
               <icon-save />
@@ -216,6 +228,8 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import { mapState } from 'vuex';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'FactoryDefault',
@@ -240,12 +254,17 @@ export default {
         snmp: '',
         sol: '',
         sysLog: '',
+        serviceManager: '',
         ubootEnv: '',
       },
     };
   },
   computed: {
     ...mapState('FactoryDefault', ['resetDefaultValues']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
   },
   watch: {
     resetDefaultValues() {
@@ -279,6 +298,7 @@ export default {
         snmp: config.SNMP,
         sol: config.SOL,
         sysLog: config.SYSLOG,
+        serviceManager: config.ServiceManager,
         ubootEnv: config.U_BOOT_ENV,
       };
     },
@@ -288,7 +308,7 @@ export default {
           this.$tc('PageFactoryDefault.toast.FactoryDefaultConfirmation'),
           {
             title: this.$tc('PageFactoryDefault.toast.title'),
-            okTitle: this.$tc('PageFactoryDefault.toast.okTitle'),
+            okTitle: this.$t('global.action.ok'),
             cancelTitle: this.$t('global.action.cancel'),
             autoFocusButton: 'ok',
           },

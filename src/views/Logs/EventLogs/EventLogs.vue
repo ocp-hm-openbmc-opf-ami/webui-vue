@@ -25,13 +25,14 @@
         <table-filter :filters="tableFilters" @filter-change="onFilterChange" />
         <b-button
           variant="link"
-          :disabled="allLogs.length === 0"
+          :disabled="allLogs.length === 0 || isButtonDisable"
           @click="deleteAllLogs"
         >
           <icon-delete /> {{ $t('global.action.deleteAll') }}
         </b-button>
         <b-button
           variant="primary"
+          :disabled="isButtonDisable"
           :class="{ disabled: allLogs.length === 0 }"
           :download="exportFileNameByDate()"
           :href="href"
@@ -94,6 +95,7 @@
           <template #head(checkbox)>
             <b-form-checkbox
               v-model="tableHeaderCheckboxModel"
+              :disabled="isButtonDisable"
               data-test-id="eventLogs-checkbox-selectAll"
               :indeterminate="tableHeaderCheckboxIndeterminate"
               @change="onChangeHeaderCheckbox($refs.table)"
@@ -104,6 +106,7 @@
           <template #cell(checkbox)="row">
             <b-form-checkbox
               v-model="row.rowSelected"
+              :disabled="isButtonDisable"
               :data-test-id="`eventLogs-checkbox-selectRow-${row.index}`"
               @change="toggleSelectRow($refs.table, row.index)"
             >
@@ -190,6 +193,7 @@
               v-model="row.item.status"
               name="switch"
               switch
+              :disabled="isButtonDisable"
               @change="changelogStatus(row.item)"
             >
               <span v-if="row.item.status">
@@ -210,6 +214,7 @@
               :value="action.value"
               :title="action.title"
               :row-data="row.item"
+              :enabled="action.enabled"
               :export-name="exportFileNameByDate('export')"
               :data-test-id="`eventLogs-button-deleteRow-${row.index}`"
               @click-table-action="onTableRowAction($event, row.item)"
@@ -247,6 +252,7 @@
           :per-page="perPage"
           :total-rows="getTotalRowCount(filteredRows)"
           aria-controls="table-event-logs"
+          :limit="limit"
         />
       </b-col>
     </b-row>
@@ -276,6 +282,7 @@ import TableFilterMixin from '@/components/Mixins/TableFilterMixin';
 import BVPaginationMixin, {
   currentPage,
   perPage,
+  limit,
 } from '@/components/Mixins/BVPaginationMixin';
 import BVTableSelectableMixin, {
   selectedRows,
@@ -290,6 +297,8 @@ import SearchFilterMixin, {
   searchFilter,
 } from '@/components/Mixins/SearchFilterMixin';
 import i18n from '@/i18n';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -419,6 +428,7 @@ export default {
       filterStartDate: null,
       filterEndDate: null,
       perPage: perPage,
+      limit: limit,
       searchFilter: searchFilter,
       searchTotalFilteredRows: 0,
       selectedRows: selectedRows,
@@ -436,6 +446,10 @@ export default {
       const blob = new Blob([data], { type: 'application/json' });
       return URL.createObjectURL(blob); // Create a Blob URL for download
     },
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     filteredRows() {
       return this.searchFilter
         ? this.searchTotalFilteredRows
@@ -450,16 +464,19 @@ export default {
                 {
                   value: 'export',
                   title: this.$t('global.action.export'),
+                  enabled: !this.isButtonDisable,
                 },
               ]
             : [
                 {
                   value: 'export',
                   title: this.$t('global.action.export'),
+                  enabled: !this.isButtonDisable,
                 },
                 {
                   value: 'delete',
                   title: this.$t('global.action.delete'),
+                  enabled: !this.isButtonDisable,
                 },
               ],
         };

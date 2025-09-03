@@ -190,7 +190,9 @@
         "videoLog":"@:appPageTitle.videoLog",
         "radius": "RADIUS",
         "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
-        "ipmiEventLog": "@:appPageTitle.ipmiEventLog"
+        "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
+        "gpgpu": "@:appPageTitle.gpgpu",
+        "advancedLogSettings":"@:appPageTitle.advancedLogSettings"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -256,7 +258,9 @@
         "videoLog":"視訊日誌",
         "radius": "RADIUS",
         "amdRemoteDebug": "AMD 遠端偵錯",
-        "ipmiEventLog": "IPMI事件日誌"
+        "ipmiEventLog": "IPMI事件日誌",
+        "gpgpu": "GPGPU",
+        "advancedLogSettings":"進階日誌設定"
     },
     "pageNodeManager": {
         "nmConfiguration": "網管設定",
@@ -370,8 +374,8 @@
             "iPPriority": "IP 優先權",
             "domainName": "網域名稱",
             "hostConfiguration": "主機配置",
-            "hostNameSetting": "主機名稱",
-            "staticHostName": "靜態主機名",
+            "hostNameSetting": "主機名稱設定",
+            "hostName": "主機名稱",
             "interfacesConfiguration": "介面",
             "ddnsMethod": "DDNS 方法",
             "nsUpdateEnable": "NS 更新啟用",
@@ -688,7 +692,6 @@
             "fileUploadedError": "上傳恢復檔案時發生錯誤。",
             "errorGettingBackupDetails": "取得屬性備份功能時發生錯誤。",
             "errorMessageNotConfigured": "由於設定檔不存在，操作無法完成。",
-            "featureNotAvailable": "未啟用備份和復原功能。",
             "restoreConfirmation": "還原功能將重新啟動配置的備份屬性的服務。您確定要繼續嗎？",
             "confirmTitle": "確認嗎？"
         }
@@ -772,7 +775,10 @@
             "ipAddress": "IP 位址",
             "privilege": "特權",
             "searchSessions": "搜尋會話們",
-            "mountType": "安裝類型"
+            "mountType": "安裝類型",
+            "administrator": "管理員",
+            "operator": "操作員",
+            "readOnly": "唯讀"
         },
         "toast": {
             "errorDelete": "錯誤取消連結 %{count} 會話 | 錯誤取消連結 %{count} 會話們",
@@ -879,6 +885,15 @@
         "refClockCapability": "參考時鐘能力",
         "PCIePortMultiRecord": "NVMe PCIe 連接埠多記錄",
         "nvmeMultiRecord": "NVMe 多記錄",
+        "topologyMultiRecord": "拓樸多筆記錄",
+        "elementCount": "元素數量",
+        "recordElementFormFactor": "記錄元素形狀因素",
+        "recordElementMaxAuxPower": "記錄元素最大輔助電源",
+        "recordElementMaxPower": "記錄元素最大電源",
+        "recordElementType": "記錄元素類型",
+        "recordFormat": "記錄格式",
+        "recordTypeId": "記錄類型 ID",
+        "recordVersion": "記錄版本",
         "SubSystemHealthStatusPoll": "子系統健康狀態輪詢",
         "compositeTemperature": "複合溫度",
         "driveFunctional": "驅動器功能",
@@ -911,6 +926,7 @@
         "maxPowerSupplyReq5v": "最大電源需求 5v",
         "maxThermalLoad": "最大熱負載",
         "recordAreaVersion": "記錄區版本",
+        "totalNVMCapacity": "總 NVM 容量",
         "mediaInReadOnly": "只讀媒體",
         "overallSubsystemDegraded": "所有子系統均降級",
         "powerBackupFailed": "備用電源失敗",
@@ -919,6 +935,10 @@
         "nvmeSolidStateDrive": "NVMe 固態硬碟",
         "model": "模型",
         "serialNumber": "序號",
+        "portTypePCIe": "PCIe 連接埠類型",
+        "portTypeSMBus": "SMBus 連接埠類型",
+        "nvmePCIePortMultiRecord": "NVMe PCIe 端口多筆記錄",
+        "vitalProductData": "重要產品數據",
         "toast": {
             "errorShowingNVMeInfo": "顯示 NVMe 資訊時出錯。"
         }
@@ -1012,6 +1032,7 @@
             "bmcDumpEntry":"BMC轉儲"
         },
         "toast": {
+            "createDumpConfirmation": "您確定要建立新的 BMC 轉儲嗎？此操作無法撤銷。",
             "errorDeleteDump": "刪除轉儲 %{count} | 刪除轉儲們 %{count}",
             "errorStartBmcDump": "啟動新BMC轉儲發生錯誤",
             "errorStartSystemDump": "啟動新系統轉儲發生錯誤",
@@ -1019,7 +1040,9 @@
             "successStartBmcDump": "需要一段時間進行轉儲。刷新頁面以查看表單中已完成的轉儲",
             "successStartBmcDumpTitle": "BMC 轉儲已開始",
             "successStartSystemDump": "需要一段時間進行轉儲。轉儲將會被卸載到運作系統",
-            "successStartSystemDumpTitle": "系統轉儲開始"
+            "successStartSystemDumpTitle": "系統轉儲開始",
+            "activeDumpInProgressTitle": "轉儲進度狀態",
+            "activeDumpInProgress": "轉儲可能需要一些時間。刷新頁面以查看結果。\n您可以從任務頁面取消正在運行的任務，或在完成後啟動新的轉儲。"
         }
     },
     "pageEventLogs": {
@@ -1223,14 +1246,14 @@
         "ntp": "NTP",
         "sol": "SOL",
         "sysLog": "Syslog",
+        "serviceManager": "Service Manager",
         "navigationInfoFactoryDefault": "以下檢查配置將通過還原操作保留。您可以在列表中更改",
         "navigationInfoExtensionFactoryDefault": "頁。",
         "toast": {
             "restoreToDefaultsSuccess": "成功！設備已重置。請關閉此瀏覽器會話並開啟新的瀏覽器會話以重新連接到裝置。",
             "restoreToDefaultsError": "恢復出廠預設值時出錯。",
             "FactoryDefaultConfirmation": "如果您想繼續恢復配置，請按一下「確定」。 警告：恢復配置將重新啟動設備。",
-            "title": "恢復原廠設定",
-            "okTitle": "OK"
+            "title": "恢復原廠設定"
         }
     },
     "PageOperations": {
@@ -1316,7 +1339,7 @@
             "errorDisabledClearConfig": "停用清除配置時發生錯誤。"
         }
     },
-    "pagePreserveConfiguration": {
+    "pagePreserve": {
         "pageDescription": "BMC 保留配置",
         "authentication": "驗證",
         "fru": "FRU",
@@ -1334,12 +1357,15 @@
         "ntp": "NTP",
         "sol": "SOL",
         "sysLog": "Syslog",
+        "serviceManager": "Service Manager",
         "navigationInfoPreserve": "單擊此處去",
         "navigationInfoExtensionPreserve": "或者",
         "toast": {
             "successPreserveConfiguration": "保留配置設定已成功儲存。",
             "errorPreserveConfiguration": "設定保留配置時發生錯誤。",
-            "errorGettingPreserveConfig": "取得保留配置時發生錯誤。"
+            "errorGettingPreserveConfig": "取得保留配置時發生錯誤。",
+            "preserveConfirmation": "保存所選配置僅在BMC完整更新期間生效。 BMC部分更新期間，默認情況下將保留所有現有配置。",
+            "title": "保存"
         }
     },
     "pageInventory": {
@@ -1555,8 +1581,12 @@
     },
     "pageRadius": {
         "enableRadiusAuthentication": " 啟用 RADIUS 認證",
-        "radiusConfiguration": "未啟用半徑配置。",
+        "radiusConfiguration": "不啟用 RADIUS 身份驗證。",
         "radiusPortValueLimits": "請輸入 %{min} 和 %{max} 之間的數值",
+        "enableEAPTLSAuthentication": "啟用 EAP-TLS 身份驗證",
+        "radiusBlastCa": "RADIUS CA",
+        "radiusBlastClient": "RADIUS 用戶端",
+        "radiusBlastKey": "RADIUS 金鑰",
         "form": {
             "serviceAddress": "伺服器位址",
             "port": "埠號",
@@ -1566,12 +1596,21 @@
             "groupName3": "組名稱3 - 可選",
             "privilege1": "特權 1",
             "privilege2": "特權 2",
-            "privilege3": "特權 3"
+            "privilege3": "特權 3",
+            "radiusCA": "RADIUS CA",
+            "radiusClient": "RADIUS 用戶端",
+            "radiusKey": "RADIUS 金鑰"
         },
         "toast": {
             "successRadiusConfiguration": "RADIUS 設定已成功儲存。",
+            "successAddCertificate": "已成功添加 %{certificate}。",
+            "successEnableEapTLS": "已成功啟用 EAP-TLS 身份驗證。",
+            "successDisableEapTLS": "已成功停用 EAP-TLS 驗證。",
+            "errorAddCertificate": "新增證書時發生錯誤。",
             "errorRadiusConfiguration": "設定半徑配置時發生錯誤。",
-            "errorGettingRadiusConfig": "取得 RADIUS 配置時發生錯誤。"
+            "errorGettingRadiusConfig": "取得 RADIUS 配置時發生錯誤。",
+            "errorEnableEapTLS": "啟用 EAP-TLS 身份驗證時發生錯誤。",
+            "errorDisableEapTLS": "停用 EAP-TLS 身份驗證時發生錯誤。"
         }
     },
     "pageUserManagement": {
@@ -1615,7 +1654,9 @@
             "authProtocolsh224": "SHA-224",
             "authProtocolsha256": "SHA-256",
             "authProtocolsha384": "SHA-384",
-            "authProtocolsha512": "SHA-512"
+            "authProtocolsha512": "SHA-512",
+            "logoutConfirmMessage": "您確定要變更登入使用者「%{user}」的密碼嗎？該用戶將註銷，並且僅反映在下次登入中.",
+            "logoutAlert": "註銷警報"
         },
         "table": {
             "privilege": "特權",
@@ -1896,8 +1937,7 @@
         "toast": {
             "errorSavinNcsiInterface": "儲存 NCSI 介面設定時發生錯誤。",
             "errorGettingNcsi": "取得 NCSi 介面資訊時出錯。",
-            "successSavingNcsiInterface": "成功保存 NCSi 介面設置。",
-            "featureNotEnabled": "NCSI 功能未啟用。"
+            "successSavingNcsiInterface": "成功保存 NCSi 介面設置。"
         }
     },
     "pageVlan": {
@@ -2090,9 +2130,9 @@
             "LastState": "最後狀態"
         },
         "policiesDesc": {
-            "AlwaysOn": "始終開啟 - 通電時系統始終開啟。",
-            "AlwaysOff": "始終關閉 - 通電時系統始終保持關閉狀態。",
-            "LastState": "最後狀態 - 通電後系統返回到上次打開或關閉電源狀態"
+            "AlwaysOn": "始終開啟 — 通電後系統始終開啟。",
+            "AlwaysOff": "始終關閉 — 通電後系統始終保持關閉狀態。",
+            "LastState": "最後狀態- 通電後系統返回上次開啟或關閉電源的狀態。"
         },
         "toast": {
             "errorSaveSettings": "儲存設定失敗。",
@@ -2282,8 +2322,7 @@
             "successApplyPowerCapEnable": "成功啟用powerCap。",
             "successApplyPowerCapDisable": "成功停用powerCap。",
             "errorApplyPowerCapEnable": "啟用powerCap發生錯誤。",
-            "errorApplyPowerCapDisable": "停用 powerCap發生錯誤。",
-            "featureNotAvailable":"此平台不支援功率上限。"
+            "errorApplyPowerCapDisable": "停用 powerCap發生錯誤。"
         }
     },
     "pageSensors": {
@@ -2422,11 +2461,29 @@
             "state": "狀態"
         },
         "table": {
-            "certificate": "憑證",
+            "certificate": "證書",
             "issuedBy": "發出從",
             "issuedTo": "發出給",
+            "issuerCommonName": "發出的通用名稱 (CN)",
+            "issuedToCommonName": "發出給通用名稱 (CN)",
             "validFrom": "有效期自",
-            "validUntil": "有效期至"
+            "validUntil": "有效期至",
+            "issuerCity": "發出的城市或地點 (L)",
+            "issuerCountry": "發出的國家 (C)",
+            "issuerOrganization": "發出的組織 (O)",
+            "issuerOrganizationalUnit": "發出的組織單位 (OU)",
+            "issuerState": "發出的州或省 (ST)",
+            "issuedToCity": "發出的城市或地點 (L)",
+            "issuedToCountry": "發出的國家 (C)",
+            "issuedToOrganization": "發出的組織 (O)",
+            "issuedToOrganizationalUnit": "發出的組織單位 (OU)",
+            "issuedToState": "發出的州或省 (ST)",
+            "certificateVersion":"憑證版本",
+            "serialNumber":"序號",
+            "signatureAlgorithm":"簽名機制",
+            "publicKey":"公鑰",
+            "issuerEmailAddress": "發出的電子郵件地址",
+            "issuedToEmailAddress": "發出的電子郵件地址"
         },
         "toast": {
             "errorAddCertificate": "新增憑證失敗。",
@@ -2474,6 +2531,7 @@
             "serverClosedSuccessfully": "關閉伺服器成功。",
             "serverClosedWithErrors": "伺服器已關閉但有錯誤發生。",
             "invalidFileType": "圖像檔案類型無效",
+            "virtualMediaErrorFileTooSmall": "所選檔案必須至少為 600 KB。",
             "infoTitle": "外部伺服器啟動按鈕",
             "infoMessage": "僅當設定了密碼並且安裝類型為 CIFS 或 HTTPS 時，才會啟用「開始」按鈕。"
         }
@@ -2520,6 +2578,7 @@
         "nVDataVersion": "NVDATA 版本",
         "memorySizeMiB": "記憶體容量",
         "totalCacheSizeMiB": "所有快取容量",
+        "pci": "PCI",
         "pciVendorId": "PCI 供應商 ID",
         "pciDeviceId": "PCI 設備 ID",
         "pciSubVendorId": "PCI 次要供應商 ID",
@@ -2535,6 +2594,23 @@
         "readCacheRatio": "讀取快取比率",
         "writeCacheRatio": "寫入快取比率",
         "manufacturer": "製造商",
+        "boardTemperature": "底板溫度",
+        "pciLinkSpeed": "PCI 連接速度",
+        "batterySerialNumber": "電池序號",
+        "criticalTemperature": "臨界溫度 (°C)",
+        "designCapacity": "設計容量 (mAh)",
+        "designVoltage": "設計電壓 (mV)",
+        "deviceChemistry": "電池化學成分",
+        "energyPackSerialNunber": "能源模組序號",
+        "fwStatus": "韌體狀態",
+        "maxTemperature": "最高溫度 (°C)",
+        "mfgName": "製造商名稱",
+        "packAssemblyNumber": "組裝編號",
+        "packVersionNumber": "模組版本號",
+        "pcbAssemblyNumber": "電路板組裝編號",
+        "pcbVersionNumber": "電路板版本號",
+        "energyPackSubType": "能源模組子類型",
+        "energyPackType": "能源模組類型",
         "modal": {
             "dropdownPropertiesBtn": "屬性",
             "dropdownManagementBtn": "管理",
@@ -2563,6 +2639,8 @@
             "labelRaidMode": "RAID 模式",
             "labelJbodMode": "JBOD 模式",
             "alertNotSupport": "此功能目前不支援。",
+            "alertNotSupportControllerPersonalityMsg1": "僅支援此運行模式：",
+            "alertNotSupportControllerPersonalityMsg2": "系統目前無法切換至 JBOD 模式。",
             "labelControllerProperties": "控制器屬性",
             "controllerPropertiesHelperText": "設置控制器屬性。",
             "controllerPropertiesRateValueHelperText": "該值必須在 0 到 100 之間，包括 0 和 100。",
@@ -2580,7 +2658,12 @@
             "labelPatrolReadCurrentRate": "速率：",
             "patrolReadCurrentPropertiesHelperText": "顯示巡邏讀取屬性。如果需要編輯項目，請點擊“屬性”>“控制器屬性”按鈕。",
             "patrolReadActionSwitchHelperText": "選擇開始/停止以處理巡邏讀取。完成後等待一分鐘。",
-            "alertNotSupportPatrolReadAction": "操作不支援。請確保 RAID 控制器至少有一個邏輯設備或一個熱備援實體裝置。"
+            "alertNotSupportPatrolReadAction": "操作不支援。請確保 RAID 控制器至少有一個邏輯設備或一個熱備援實體裝置。",
+            "firmwareUpdateConfirmationMsg":"是否要更新 RAID 控制器韌體？",
+            "firmwareUpdateConfirmationTitle": "韌體更新",
+            "alertRaidFirmwareUpdateNotReady": "由於服務繁忙，韌體更新暫時無法使用。請稍後重試。",
+            "labelFirmwareUpdate": "韌體更新",
+            "firmwareUpdateHelperText": "此功能允許將 RAID 控制器的韌體更新至最新版本。更新完成後，請重新啟動主機套用新的韌體。若系統提示「服務繁忙」，請稍後再嘗試執行更新。"
         },
         "actions": {
             "startPatrolRead": "開始巡邏讀取",
@@ -2613,7 +2696,15 @@
             "startPatrolReadAction": "啟動巡邏讀取操作。",
             "stopPatrolReadActionSuccess": "成功停止巡邏讀取操作。",
             "stopPatrolReadActionFail": "停止巡邏讀取操作失敗。",
-            "stopPatrolReadAction": "停止巡邏讀取操作。"
+            "stopPatrolReadAction": "停止巡邏讀取操作。",
+            "successFirmwareUpdate": "更新 RAID 控制器韌體成功。請重新啟動主機套用新的韌體。",
+            "errorFirmwareUpdate": "更新 RAID 控制器韌體失敗。",
+            "successPrepareFirmwareUpdate": "準備 RAID 韌體更新成功。",
+            "errorPrepareFirmwareUpdate": "準備 RAID 韌體更新失敗。",
+            "labelUpdateStarted": "已開始更新。",
+            "successStartupFirmwareUpdate": "RAID 韌體更新中，請勿在固件更新完成前，執行任何變更。" ,
+            "selectFirmwareUpdateFile": "請選擇要更新 RAID 控制器的韌體文件。",
+            "errorGetFirmwareInventory": "取得韌體列表失敗。"
         }
     },
     "pagePhysicalDevice": {
@@ -2628,7 +2719,7 @@
             "serialNumber": "序列號",
             "health": "狀態",
             "mediaType": "媒體類型",
-            "pDrivestate": "狀態",
+            "pDrivestate": "實體裝置狀態",
             "powerState": "電源狀態",
             "productId": "產品編號",
             "temperature": "溫度",
@@ -2646,7 +2737,24 @@
             "uid": "使用者識別號碼",
             "usage": "使用資訊",
             "blockCount": "區塊數量",
+            "capableSpeedGbs": "可支援速度",
+            "capacityBytes": "容量",
+            "present": "存在",
             "isForeignDevice": "外來實體設備",
+            "auOperation": "AU操作",
+            "auStatus": "AU狀態",
+            "capabilities": "功能",
+            "ddf": "DDF",
+            "elapsedSecs": "已用秒數",
+            "lastPredFailEventSeqNum": "上次預測失敗事件序號",
+            "maxLinkSpeed": "最大連接速度",
+            "mediaErrCount": "媒體錯誤計數",
+            "otherErrCount": "其他錯誤計數",
+            "progressPercent": "進度百分比",
+            "rotationalSpeedRPM": "旋轉速度（RPM）",
+            "shieldCounter": "防護計數器",
+            "ssdPercentUsed": "SSD使用百分比",
+            "ssdPowerOnHours": "SSD開機時數",
             "state": {
                 "hotspare": "熱備援",
                 "unknownState": "未知",
@@ -2811,7 +2919,13 @@
             "ldType": "邏輯設備類型",
             "pdList": "實體設備列表",
             "acceleratorType": "加速器類型",
-            "enableBGI": "EnableBGI"
+            "accessPolicyStatus": "存取政策狀態",
+            "enableBGI": "啟用 BGI",
+            "encryptionType": "加密類型",
+            "powerSavingPolicy": "省電政策",
+            "PRL": "PRL",
+            "RLQ": "RLQ",
+            "spanDepth": "跨度深度"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "沒有可配置的實體設備！",
@@ -2902,7 +3016,21 @@
             "configurationEvents": "配置事件",
             "configuration": "配置",
             "bbuEvents": "BBU 事件",
-            "bbu": "BBU"
+            "bbu": "BBU",
+            "enclosureEvents": "機箱事件",
+            "enclosure": "機箱",
+            "sasEvents": "SAS 事件",
+            "sas": "SAS",
+            "pcieEvents": "PCIe 事件",
+            "pcie": "PCIe",
+            "blockingBootEvents": "阻斷開機事件",
+            "blockingBoot": "阻斷開機",
+            "nonBlockingBootEvents": "非阻斷開機事件",
+            "nonBlockingBoot": "非阻斷開機",
+            "storeLibEvents": "StoreLib 事件",
+            "storeLib": "StoreLib",
+            "clusterEvents": "叢集事件",
+            "cluster": "叢集"
         },
         "modal": {
             "deleteAllTitle": "刪除所有日誌",
@@ -2948,7 +3076,8 @@
                 "ipv6": "IPv6",
                 "both": "兩個都",
                 "networkType": "網路類型",
-                "preLoad":"預先載入"
+                "preLoad":"預先載入",
+                "ipVersion": "IP版本"
             }
         },
         "toast": {
@@ -2958,7 +3087,7 @@
             "errorDelete": "刪除防火牆規則時發生錯誤。",
             "errorDateOrTimeSaveFireWall": "日期或時間無效。",
             "errorStartorEndIpSaveFireWall": "範圍起始或範圍結束 IP 無效。",
-            "featureNotAvailable": "系統防火牆功能未啟用。"
+            "errorCreateLimitReachedForResource": "可以建立的防火牆規則的最大數量為 64 個 IPv4 防火牆規則和 64 個 IPv6 防火牆規則。"
         },
         "table": {
             "startIP": "起始 IP",
@@ -2971,7 +3100,8 @@
             "endDuration": "結束持續時間",
             "preLoad": "預先載入",
             "target": "目標",
-            "networkType": "網路類型"
+            "networkType": "網路類型",
+            "searchFirewallRule": "搜尋防火牆規則"
         }
     },
     "bond": {
@@ -2986,8 +3116,7 @@
         "errorSavebond": "保存網路绑定時發生錯誤。",
         "errorDelete": "刪除網路綁定時發生錯誤。",
         "errorGetBond": "取得網路綁定時發生錯誤。",
-        "miiRangeRequired": "輸入 1-100 之間的有效毫秒",
-        "featureNotAvailable": "網路綁定功能未啟用。"
+        "miiRangeRequired": "輸入 1-100 之間的有效毫秒"
     },
     "license": {
         "add_license_key": "新增許可證密鑰",
@@ -3018,7 +3147,6 @@
         "Mbps": "Mbps",
         "sameNetworkLinkSettings": "網路連結配置相同，因此無需儲存。",
         "modifyNetworkLinkSettings": "如果使用者需要變更這些介面配置，請修改父介面的值。",
-        "networkLinkFeatureNotAvailable": "網路連結功能未啟用。",
         "toast": {
             "successSaveNetworkLink": "已成功儲存網頁連結。",
             "errorSavedNetworkLink": "儲存網頁連結時發生錯誤。",
@@ -3132,6 +3260,80 @@
             "successVideoLogCleared": "視訊日誌刪除成功。",
             "errorVideoLogDownload": "視訊日誌下載失敗。",
             "errorGettingVideoLog": "取得視訊日誌時發生錯誤。"
+        }
+    },
+    "gpgpu": {
+        "tab":{
+            "gpgpuInterfaceProcessorTab" : "處理器",
+            "gpgpuInterfaceChassisTab" : "機殼",
+            "gpgpuInterfaceMemoryTab": "記憶"
+        },
+        "gpgpuInterfaceHeader" : "圖形處理器",
+        "gpgpuInterfaceMemoryChassisContentTitle":"底盤資訊",
+        "gpgpuInterfaceMemoryEnvironmentMetricsContentTitle":"環境指標",
+        "gpgpuInterfaceMemoryMetricsContentTitle":"記憶體指標",
+        "gpgpuInterfaceMemoryContentTitle": "記憶體控制器資訊",
+        "gpgpuInterfaceProcessorSystemInterfaceContentTitle":"PCIe功能",
+        "gpgpuInterfaceProcessorMetricsContentTitle":"處理器指標",
+        "gpgpuInterfaceProcessorEnvironmentmetricsContentTitle":"環境指標",
+        "gpgpuInterfaceProcessorMemorySummaryContentTitle": "記憶體總結",
+        "gpgpuInterfaceInfoContentTitle": "GPU資訊",
+        "gpgpuInterfaceMemorySensorsInfoContentTitle":"感測器資訊",
+        "gpgpuInterfaceMemoryPcieDevicesContentTitle":"PCIe 裝置",
+        "gpgpuDevices":"GPU裝置",
+        "fpga": {
+            "fpgaInterfaceHeader" : "FPGA",
+            "fpgaInterfaceProcessorPortContentTitle": "港口資訊",
+            "fpgaInterfaceFpgaContentTitle": "FPGA資訊",
+            "fpgaInterfaceChassisContentTitle": "底盤資訊",
+            "fpgaInterfaceSensorsInfoContentTitle":"感測器資訊",
+            "fpgaDevices":"FPGA設備"
+        },
+        "baseboard": {
+            "baseBoardInterfaceHeader" : "底板",     
+            "baseBoardInterfaceAssemblyTab" : "集會",
+            "baseBoardInterfaceSensorsTab" : "感應器",
+            "baseBoardInterfaceChassisSensorsInfoContentTitle":"感測器資訊",
+            "baseBoardInterfaceBaseBoardAssemblyContentTitle": "裝配資訊"
+        },
+        "toast": {
+            "errorGettingSystems": "取得系統資訊時出錯",
+            "errorGettingChassis": "取得機箱資訊出錯",
+            "errorGettingProcessor": "取得處理器資訊時出錯",
+            "errorGettingEnvironmentMetrics": "取得環境指標資訊時出錯",
+            "errorGettingMemoryMetrics": "取得記憶體指標資訊時出錯",
+            "errorGettingFpgaInfo": "取得FPGA資訊出錯",
+            "errorGettingFpgaSensorInfo": "取得 FPGA 感知器資訊時出錯",
+            "errorGettingBaseBoardInfo": "取得底板資訊時出錯",
+            "errorGettingBaseBoardSensorInfo": "取得底板感測器資訊時出錯"
+        }
+    },
+    "advancedLogSettings":{
+        "systemLog": "系統日誌",
+        "localLog": "本地日誌",
+        "remoteLog": "遠端日誌",
+        "portType": "連接埠類型",
+        "udp": "UDP協定",
+        "tcp": "傳輸控制協定",
+        "fileSize": "文件大小",
+        "rotateCount": "旋轉計數",
+        "remotelogserver": "遠端日誌伺服器",
+        "remoteserverport": "遠端伺服器連接埠",
+        "enableauditlog": "啟用審核日誌",
+        "caCertificateFile": "CA憑證文件",
+        "certificatefile": "證書文件",
+        "privateKey": "私鑰",
+        "advancedLogValueLimits": "請輸入 %{min} 至 %{max} 之間的數值。",
+        "invalidIPAddress": "IP 位址無效",
+        "cacertPEM": "Cacert PEM 證書",
+        "serverCRT": "伺服器CRT證書",
+        "serverKey": "伺服器密鑰證書",
+        "incorrectAdvancedCertificateFileType": "文件不是正確的證書類型。",
+        "toast": {
+            "successSaveAdvancedLogsSettings": "已成功儲存進階日誌設定。",
+            "errorAdvancedAddCertificate": "加 %{certificate} 時發生錯誤。",
+            "successCertificateUpload": "已成功新增%{證書}。",
+            "errorGettingVideoLog": "儲存進階日誌設定時發生錯誤。"
         }
     },
     "countries": {

@@ -1,12 +1,7 @@
 <template>
   <b-container fluid="xl">
     <page-title />
-    <div v-if="!enabledNetworkBond">
-      <b-alert show variant="danger">{{
-        $t('bond.featureNotAvailable')
-      }}</b-alert>
-    </div>
-    <div v-else-if="interfacechecking">
+    <div v-if="interfacechecking">
       <b-col xl="6" class="p0">
         <b-alert show variant="warning">{{
           $t('bond.BondWithSingleInterface')
@@ -96,7 +91,7 @@
               form="form-bond"
               type="submit"
               variant="primary"
-              :disabled="bondInterfaceOptions.length <= 1"
+              :disabled="bondInterfaceOptions.length <= 1 || isButtonDisable"
               @click="onSave"
             >
               <icon-save />
@@ -116,6 +111,8 @@ import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
 import { requiredIf } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   components: {
     PageTitle,
@@ -151,8 +148,9 @@ export default {
         return false;
       }
     },
-    enabledNetworkBond() {
-      return this.$store.getters['network/getNetworkBond'];
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
     },
   },
   watch: {

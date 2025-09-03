@@ -66,6 +66,7 @@
             <template #head(checkbox)>
               <b-form-checkbox
                 v-model="tableHeaderCheckboxModel"
+                :disabled="isButtonDisable"
                 :indeterminate="tableHeaderCheckboxIndeterminate"
                 @change="onChangeHeaderCheckbox($refs.table)"
               >
@@ -75,6 +76,7 @@
             <template #cell(checkbox)="row">
               <b-form-checkbox
                 v-model="row.rowSelected"
+                :disabled="isButtonDisable"
                 @change="toggleSelectRow($refs.table, row.index)"
               >
                 <span class="sr-only">{{ $t('global.table.selectItem') }}</span>
@@ -138,6 +140,7 @@
                 :title="
                   $t('pageSensors.sensorThreshold.modal.sensorThresholds')
                 "
+                :enabled="!isButtonDisable"
                 @click="initModalSensorThresholdModal(item)"
               />
               <span
@@ -194,6 +197,8 @@ import SearchFilterMixin, {
 import ModalSensorThreshold from './ModalSensorThreshold.vue';
 import IconEdit from '@carbon/icons-vue/es/edit/20';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Sensors',
@@ -395,6 +400,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
     allSensors() {
       return this.$store.getters['sensors/sensors'];
     },

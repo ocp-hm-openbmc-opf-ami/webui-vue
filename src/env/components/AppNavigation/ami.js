@@ -11,6 +11,7 @@ import IconObjectStorage from '@carbon/icons-vue/es/object-storage/16';
 import IconHostSystemDiagnostics from '@carbon/icons-vue/es/laptop/16';
 import IconStorageRequest from '@carbon/icons-vue/es/storage-request/16';
 import IconTask from '@carbon/icons-vue/es/task/16';
+import Iconchip from '@carbon/icons-vue/es/chip/16';
 
 const roles = {
   administrator: 'Administrator',
@@ -34,6 +35,7 @@ const AppNavigationMixin = {
     iconHostSystemDiagnostics: IconHostSystemDiagnostics,
     iconStorageRequest: IconStorageRequest,
     iconTask: IconTask,
+    iconChip: Iconchip,
   },
   data() {
     return this.renderNavigationItems();
@@ -103,6 +105,11 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.pam'),
               route: '/settings/pam',
             },
+            {
+              id: 'advanced-log-settings',
+              label: this.$t('appNavigation.advancedLogSettings'),
+              route: '/settings/advanced-log',
+            },
           ],
         },
         {
@@ -123,6 +130,16 @@ const AppNavigationMixin = {
           icon: 'iconSecurityAndAccess',
           children: [
             {
+              id: 'certificates',
+              label: this.$t('appNavigation.certificates'),
+              route: '/security-and-access/certificates',
+            },
+            {
+              id: 'ldap',
+              label: this.$t('appNavigation.ldap'),
+              route: '/security-and-access/ldap',
+            },
+            {
               id: 'user-management',
               label: this.$t('appNavigation.userManagement'),
               route: '/security-and-access/user-management',
@@ -131,11 +148,6 @@ const AppNavigationMixin = {
               id: 'policies',
               label: this.$t('appNavigation.policies'),
               route: '/security-and-access/policies',
-            },
-            {
-              id: 'certificates',
-              label: this.$t('appNavigation.certificates'),
-              route: '/security-and-access/certificates',
             },
           ],
         },
@@ -340,6 +352,16 @@ const AppNavigationMixin = {
           route: '/settings/auto-video',
         });
       }
+      if (
+        process.env.VUE_APP_ONETREE_AMD_POWERCAP_ENABLED === 'true' ||
+        process.env.VUE_APP_ONETREE_GPGPU_ENABLED === 'true'
+      ) {
+        navigationItemsList.navigationItems[4].children.push({
+          id: 'power-restore-policy',
+          label: this.$t('appNavigation.powerRestorePolicy'),
+          route: '/settings/power-restore-policy',
+        });
+      }
       if (process.env.VUE_APP_ONETREE_AMD_POWERCAP_ENABLED === 'true') {
         navigationItemsList.navigationItems.push({
           id: 'resource-management',
@@ -391,6 +413,14 @@ const AppNavigationMixin = {
           ],
         });
       }
+      if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED === 'true') {
+        navigationItemsList.navigationItems.push({
+          id: 'gpgpu',
+          label: this.$t('appNavigation.gpgpu'),
+          route: '/gpgpu',
+          icon: 'iconChip',
+        });
+      }
       if (
         process.env.VUE_APP_ONETREE_NVME_ENABLED === 'true' ||
         process.env.VUE_APP_ONETREE_NVMEBASIC_ENABLED === 'true'
@@ -430,13 +460,6 @@ const AppNavigationMixin = {
           id: 'sessions',
           label: this.$t('appNavigation.sessions'),
           route: '/security-and-access/sessions',
-        });
-      }
-      if (process.env.VUE_APP_ONETREE_LDAP_CLIENT_ENABLED === 'true') {
-        navigationItemsList.navigationItems[6].children.push({
-          id: 'ldap',
-          label: this.$t('appNavigation.ldap'),
-          route: '/security-and-access/ldap',
         });
       }
       if (

@@ -9,6 +9,7 @@
         <b-col sm="3">
           <b-button
             variant="link"
+            data-test-id="add-domain-name-button"
             :disabled="
               domainNames.length >= 12 ||
               dhcpv4useDomainName ||
@@ -32,6 +33,7 @@
               :id="'Static-Domain-Name-' + index"
               v-model="domainNames[index]"
               type="text"
+              data-test-id="static-domain-name-input"
               :state="getValidationState($v.domainNames.$each[index])"
               @input="$v.domainNames.$each[index].$touch()"
             />
@@ -39,6 +41,7 @@
               v-if="index > 0"
               variant="cancel"
               class="input-action-btn cancel-btn"
+              data-test-id="remove-domain-name-button"
               @click="removeDomainName(index)"
             >
               <icon-misuse />
@@ -51,7 +54,13 @@
           </b-form-group>
         </b-col>
       </b-row>
-      <b-button type="submit" variant="primary" @click="saveConfigurations">
+      <b-button
+        type="submit"
+        variant="primary"
+        data-test-id="domain-names-save-button"
+        :disabled="isButtonDisable"
+        @click="saveConfigurations"
+      >
         <icon-save />
         {{ $t('global.action.save') }}
       </b-button>
@@ -71,6 +80,7 @@
               <b-form-checkbox
                 v-model="form.ddnsMethod"
                 data-test-id="ddns-method"
+                :disabled="isButtonDisable"
                 switch
               >
                 <span v-if="form.ddnsMethod">
@@ -86,7 +96,12 @@
             <b-form-group
               :label="$t('pageDDNSNetwork.ddnsConfiguration.nsUpdateEnable')"
             >
-              <b-form-checkbox v-model="form.nsUpdateEnabled" switch>
+              <b-form-checkbox
+                v-model="form.nsUpdateEnabled"
+                data-test-id="ddns-ns-update-enabled"
+                :disabled="isButtonDisable"
+                switch
+              >
                 <span v-if="form.nsUpdateEnabled">
                   {{ $t('global.status.enabled') }}
                 </span>
@@ -98,7 +113,12 @@
             <b-form-group
               :label="$t('pageDDNSNetwork.ddnsConfiguration.useTSIG')"
             >
-              <b-form-checkbox v-model="form.useTSIG" switch>
+              <b-form-checkbox
+                v-model="form.useTSIG"
+                data-test-id="ddns-use-tsig"
+                :disabled="isButtonDisable"
+                switch
+              >
                 <span v-if="form.useTSIG">
                   {{ $t('global.status.enabled') }}
                 </span>
@@ -106,7 +126,7 @@
               </b-form-checkbox>
             </b-form-group>
           </b-col>
-          <b-col v-if="form.useTSIG" sm="3">
+          <b-col v-if="form.useTSIGFileUpload" sm="3">
             <b-form-group
               :label="$t('pageDDNSNetwork.ddnsConfiguration.tsigFileUpload')"
             >
@@ -118,11 +138,13 @@
                 }}
               </b-form-text>
               <form-file
+                id="image-file"
                 ref="formFile"
                 v-model="file"
                 accept=".private"
                 :state="getValidationState($v.file)"
                 aria-describedby="image-file-help-block"
+                data-test-id="ddns-tsig-file-upload"
                 @input="onFileUpload($event)"
               >
                 <template #invalid>
@@ -141,6 +163,8 @@
               class="upload-button"
               type="submit"
               variant="primary"
+              data-test-id="ddns-tsig-file-upload-button"
+              :disabled="!form.useTSIG || isButtonDisable"
               @click="onSubmitUpload"
             >
               <icon-upload />
@@ -148,12 +172,19 @@
             </b-button>
           </b-col>
         </b-row>
+        <b-button
+          type="submit"
+          variant="primary"
+          class="mt-5"
+          data-test-id="ddns-save-button"
+          :disabled="isButtonDisable"
+          @click="handleSubmit"
+        >
+          <icon-save />
+          {{ $t('global.action.save') }}
+        </b-button>
       </div>
     </page-section>
-    <b-button type="submit" variant="primary" @click="handleSubmit">
-      <icon-save />
-      {{ $t('global.action.save') }}
-    </b-button>
   </b-container>
 </template>
 
@@ -185,6 +216,11 @@ export default {
       type: Number,
       default: 0,
     },
+    isButtonDisable: {
+      required: true,
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -194,6 +230,7 @@ export default {
         ddnsMethod: false,
         nsUpdateEnabled: false,
         useTSIG: false,
+        useTSIGFileUpload: false,
       },
       domainNames: [],
     };
@@ -225,6 +262,7 @@ export default {
       file: {
         required,
         pattern: function (file) {
+          if (!this.$v.file.required) return true;
           return this.getIsFileTypeCorrect(file);
         },
       },
@@ -246,6 +284,7 @@ export default {
       this.form.nsUpdateEnabled =
         ddnsData?.InterfacesConfiguration?.NSUpdateEnable;
       this.form.useTSIG = ddnsData?.InterfacesConfiguration?.UseTSIG;
+      this.form.useTSIGFileUpload = this.form.useTSIG;
       this.domainNames = ddnsData?.DomainConfiguration?.DomainNames || [];
     },
     handleSubmit() {
@@ -259,10 +298,14 @@ export default {
         .dispatch('ddnsNetwork/saveInterfaceConfiguration', data)
         .then((success) => {
           if (success) {
+            this.getdata();
             this.successToast(success);
           }
         })
-        .catch(({ message }) => this.errorToast(message))
+        .catch(({ message }) => {
+          this.getdata();
+          this.errorToast(message);
+        })
         .finally(() => this.endLoader());
     },
     doNSUpdate() {

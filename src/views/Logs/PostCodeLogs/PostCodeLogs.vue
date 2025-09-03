@@ -23,14 +23,14 @@
       <b-col xl="12" class="text-right">
         <b-button
           variant="link"
-          :disabled="allLogs.length === 0"
+          :disabled="allLogs.length === 0 || isButtonDisable"
           @click="deleteAllLogs"
         >
           <icon-delete /> {{ $t('global.action.deleteAll') }}
         </b-button>
         <b-button
           variant="primary"
-          :disabled="allLogs.length === 0"
+          :disabled="allLogs.length === 0 || isButtonDisable"
           :download="exportFileNameByDate()"
           :href="href"
         >
@@ -79,6 +79,7 @@
           <template #head(checkbox)>
             <b-form-checkbox
               v-model="tableHeaderCheckboxModel"
+              :disabled="isButtonDisable"
               data-test-id="postCode-checkbox-selectAll"
               :indeterminate="tableHeaderCheckboxIndeterminate"
               @change="onChangeHeaderCheckbox($refs.table)"
@@ -89,6 +90,7 @@
           <template #cell(checkbox)="row">
             <b-form-checkbox
               v-model="row.rowSelected"
+              :disabled="isButtonDisable"
               :data-test-id="`postCode-checkbox-selectRow-${row.index}`"
               @change="toggleSelectRow($refs.table, row.index)"
             >
@@ -108,6 +110,7 @@
               :key="index"
               :value="action.value"
               :title="action.title"
+              :enabled="action.enabled"
               :row-data="row.item"
               :btn-icon-only="true"
               :export-name="exportFileNameByDate(action.value)"
@@ -148,6 +151,7 @@
           :per-page="perPage"
           :total-rows="getTotalRowCount(filteredRows)"
           aria-controls="table-post-code-logs"
+          :limit="limit"
         />
       </b-col>
     </b-row>
@@ -171,6 +175,7 @@ import TableFilterMixin from '@/components/Mixins/TableFilterMixin';
 import BVPaginationMixin, {
   currentPage,
   perPage,
+  limit,
 } from '@/components/Mixins/BVPaginationMixin';
 import BVTableSelectableMixin, {
   selectedRows,
@@ -183,6 +188,8 @@ import TableRowExpandMixin from '@/components/Mixins/TableRowExpandMixin';
 import SearchFilterMixin, {
   searchFilter,
 } from '@/components/Mixins/SearchFilterMixin';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -249,6 +256,7 @@ export default {
       filterStartDate: null,
       filterEndDate: null,
       perPage: perPage,
+      limit: limit,
       searchFilter: searchFilter,
       searchTotalFilteredRows: 0,
       selectedRows: selectedRows,
@@ -261,6 +269,10 @@ export default {
       const data = this.exportAllLogsString();
       const blob = new Blob([data], { type: 'application/json' });
       return URL.createObjectURL(blob); // Create a Blob URL for download
+    },
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
     },
     filteredRows() {
       return this.searchFilter
@@ -276,10 +288,12 @@ export default {
               {
                 value: 'export',
                 title: this.$t('pagePostCodeLogs.action.exportLogs'),
+                enabled: !this.isButtonDisable,
               },
               {
                 value: 'download',
                 title: this.$t('pagePostCodeLogs.action.downloadDetails'),
+                enabled: !this.isButtonDisable,
               },
             ],
           };

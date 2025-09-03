@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import GlobalStore from './modules/GlobalStore';
+import DashboardStore from './modules/Dashboard/DashboardStore';
 import AuthenticationStore from './modules/Authentication/AuthenticanStore';
 import BsodStore from './modules/Settings/BsodStore';
 import SessionsStore from './modules/SecurityAndAccess/SessionsStore';
@@ -40,6 +41,8 @@ import RaidStore from './modules/Raid/RaidStore';
 import LogicalStore from './modules/Raid/LogicalStore';
 import PhysicalStore from './modules/Raid/PhysicalStore';
 import RaidEventLogStore from './modules/Raid/RaidEventLogStore';
+import RaidSl8Store from './modules/Raid/Sl8/RaidSl8Store';
+import RaidFirmwareUpdate from './modules/Raid/FirmwareUpdateStore';
 import BackupAndRestore from './modules/Operations/BackupAndRestore';
 import SNMPStore from './modules/Settings/SNMPStore';
 import FireWallStore from './modules/Settings/FireWallStore';
@@ -60,6 +63,8 @@ import PreserveConfigStore from './modules/Operations/PreserveConfigurationStore
 import RadiusStore from './modules/SecurityAndAccess/RadiusStore';
 import AmdRemoteDebugStore from './modules/HostSystemDiagnostics/AmdRemoteDebugStore';
 import IPMIEventLogStore from './modules/Logs/IPMIEventLogStore';
+import Gpu from './modules/Settings/GpuStore';
+import AdvancedLogSettingsStore from './modules/Settings/AdvancedLogSettingsStore';
 
 Vue.use(Vuex);
 
@@ -69,6 +74,7 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     global: GlobalStore,
+    dashboard: DashboardStore,
     authentication: AuthenticationStore,
     bsod: BsodStore,
     sessions: SessionsStore,
@@ -107,6 +113,8 @@ export default new Vuex.Store({
     logicalDrive: LogicalStore,
     physical: PhysicalStore,
     raidEventLog: RaidEventLogStore,
+    raidSl8Store: RaidSl8Store,
+    raidFirmwareUpdate: RaidFirmwareUpdate,
     backupAndRestore: BackupAndRestore,
     snmp: SNMPStore,
     fireWall: FireWallStore,
@@ -127,5 +135,7 @@ export default new Vuex.Store({
     radius: RadiusStore,
     amdRemoteDebug: AmdRemoteDebugStore,
     ipmiEventLog: IPMIEventLogStore,
+    gpu: Gpu,
+    advancedLog: AdvancedLogSettingsStore,
   },
 });

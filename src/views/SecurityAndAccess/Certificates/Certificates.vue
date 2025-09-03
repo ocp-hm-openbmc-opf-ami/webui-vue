@@ -37,6 +37,7 @@
           v-b-modal.generate-csr
           data-test-id="certificates-button-generateCsr"
           variant="link"
+          :disabled="isButtonDisable"
         >
           <icon-add />
           {{ $t('pageCertificates.generateCsr') }}
@@ -62,6 +63,156 @@
           :items="tableItems"
           :empty-text="$t('global.table.emptyMessage')"
         >
+          <!-- Expand chevron icon -->
+          <template #cell(expandRow)="row">
+            <b-button
+              variant="link"
+              :aria-label="expandRowLabel"
+              :title="expandRowLabel"
+              class="btn-icon-only"
+              @click="toggleRowDetails(row)"
+            >
+              <icon-chevron />
+            </b-button>
+          </template>
+
+          <template #row-details="{ item }">
+            <b-container fluid>
+              <b-row>
+                <b-col>
+                  <dl>
+                    <dt>
+                      {{ $t('pageCertificates.table.certificateVersion') }}:
+                    </dt>
+                    <dd>
+                      {{ dataFormatter(item.certificateVersion) }}
+                    </dd>
+                  </dl>
+                  <dl>
+                    <dt>{{ $t('pageCertificates.table.serialNumber') }}:</dt>
+                    <dd>{{ dataFormatter(item.serialNumber) }}</dd>
+                  </dl>
+                  <dl>
+                    <dt>
+                      {{ $t('pageCertificates.table.signatureAlgorithm') }}:
+                    </dt>
+                    <dd>
+                      {{ dataFormatter(item.signatureAlgorithm) }}
+                    </dd>
+                  </dl>
+                  <dl>
+                    <dt>{{ $t('pageCertificates.table.publicKey') }}:</dt>
+                    <dd>{{ dataFormatter(item.publicKey) }}</dd>
+                  </dl>
+                  <dl>
+                    <dt>
+                      {{ $t('pageCertificates.table.issuerOrganization') }}:
+                    </dt>
+                    <dd>{{ dataFormatter(item.issuedByOrganization) }}</dd>
+                  </dl>
+                  <dl>
+                    <dt>
+                      {{ $t('pageCertificates.table.issuerCommonName') }}:
+                    </dt>
+                    <dd>{{ dataFormatter(item.issuedBy) }}</dd>
+                  </dl>
+                  <dl>
+                    <dt>
+                      {{
+                        $t('pageCertificates.table.issuerOrganizationalUnit')
+                      }}:
+                    </dt>
+                    <dd>
+                      {{ dataFormatter(item.issuedByOrganizationalUnit) }}
+                    </dd>
+                  </dl>
+                  <dl>
+                    <dt>{{ $t('pageCertificates.table.issuerCity') }}:</dt>
+                    <dd>{{ dataFormatter(item.issuedByCity) }}</dd>
+                  </dl>
+                  <dl>
+                    <dt>{{ $t('pageCertificates.table.issuerState') }}:</dt>
+                    <dd>
+                      {{ dataFormatter(item.issuedByState) }}
+                    </dd>
+                  </dl>
+                  <dl>
+                    <dt>{{ $t('pageCertificates.table.issuerCountry') }}:</dt>
+                    <dd>{{ dataFormatter(item.issuedByCountry) }}</dd>
+                  </dl>
+                  <dl>
+                    <dt>
+                      {{ $t('pageCertificates.table.issuerEmailAddress') }}:
+                    </dt>
+                    <dd>{{ dataFormatter(item.issuerEmail) }}</dd>
+                  </dl>
+                </b-col>
+                <b-col>
+                  <dl>
+                    <!-- Modified date -->
+                    <dt>{{ $t('pageCertificates.table.validFrom') }}:</dt>
+                    <dd v-if="item.validFrom">
+                      {{ item.validFrom | formatDate }}
+                      {{ item.validFrom | formatTime }}
+                    </dd>
+                    <dd v-else>--</dd>
+                  </dl>
+                  <dl>
+                    <!-- Modified date -->
+                    <dt>{{ $t('pageCertificates.table.validUntil') }}:</dt>
+                    <dd v-if="item.validUntil">
+                      {{ item.validUntil | formatDate }}
+                      {{ item.validUntil | formatTime }}
+                    </dd>
+                    <dd v-else>--</dd>
+                  </dl>
+                  <dl>
+                    <dt>
+                      {{ $t('pageCertificates.table.issuedToOrganization') }}:
+                    </dt>
+                    <dd>{{ dataFormatter(item.issuedToOrganization) }}</dd>
+                  </dl>
+                  <dl>
+                    <!-- Name -->
+                    <dt>
+                      {{ $t('pageCertificates.table.issuedToCommonName') }}:
+                    </dt>
+                    <dd>{{ dataFormatter(item.issuedTo) }}</dd>
+                  </dl>
+                  <dl>
+                    <dt>
+                      {{
+                        $t('pageCertificates.table.issuedToOrganizationalUnit')
+                      }}:
+                    </dt>
+                    <dd>
+                      {{ dataFormatter(item.issuedToOrganizationalUnit) }}
+                    </dd>
+                  </dl>
+                  <dl>
+                    <dt>{{ $t('pageCertificates.table.issuedToCity') }}:</dt>
+                    <dd>{{ dataFormatter(item.issuedToCity) }}</dd>
+                  </dl>
+                  <dl>
+                    <dt>{{ $t('pageCertificates.table.issuedToState') }}:</dt>
+                    <dd>
+                      {{ dataFormatter(item.issuedToState) }}
+                    </dd>
+                  </dl>
+                  <dl>
+                    <dt>{{ $t('pageCertificates.table.issuedToCountry') }}:</dt>
+                    <dd>{{ dataFormatter(item.issuedToCountry) }}</dd>
+                  </dl>
+                  <dl>
+                    <dt>
+                      {{ $t('pageCertificates.table.issuedToEmailAddress') }}:
+                    </dt>
+                    <dd>{{ dataFormatter(item.issuedToEmail) }}</dd>
+                  </dl>
+                </b-col>
+              </b-row>
+            </b-container>
+          </template>
           <template #cell(validFrom)="{ value }">
             {{ value | formatDate }}
           </template>
@@ -113,6 +264,11 @@ import Alert from '@/components/Global/Alert';
 
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
+import IconChevron from '@carbon/icons-vue/es/chevron--down/20';
+import TableRowExpandMixin from '@/components/Mixins/TableRowExpandMixin';
+import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
 
 export default {
   name: 'Certificates',
@@ -126,8 +282,14 @@ export default {
     PageTitle,
     StatusIcon,
     TableRowAction,
+    IconChevron,
   },
-  mixins: [BVToastMixin, LoadingBarMixin],
+  mixins: [
+    BVToastMixin,
+    LoadingBarMixin,
+    TableRowExpandMixin,
+    DataFormatterMixin,
+  ],
   beforeRouteLeave(to, from, next) {
     this.hideLoader();
     next();
@@ -138,6 +300,11 @@ export default {
       modalCertificate: null,
       fileTypeCorrect: undefined,
       fields: [
+        {
+          key: 'expandRow',
+          label: '',
+          tdClass: 'table-row-expand',
+        },
         {
           key: 'certificate',
           label: this.$t('pageCertificates.table.certificate'),
@@ -167,6 +334,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     certificates() {
       return this.$store.getters['certificates/allCertificates'];
     },

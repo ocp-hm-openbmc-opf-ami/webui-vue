@@ -1,6 +1,7 @@
 import { mount, createLocalVue, createWrapper } from '@vue/test-utils';
 import Vue from 'vue';
 import Vuex from 'vuex';
+import i18n from '@/i18n';
 import AppHeader from '@/components/AppHeader';
 
 // Silencing warnings about undefined Bootsrap-vue components
@@ -19,6 +20,7 @@ describe('AppHeader.vue', () => {
     'license/getUserAlertCount': jest.fn(),
     'global/getSystemInfo': jest.fn(),
     'controls/getLastPowerOperationTime': jest.fn(),
+    'dashboard/fetchDashboardData': jest.fn().mockResolvedValue({}),
   };
   let state;
 
@@ -35,11 +37,25 @@ describe('AppHeader.vue', () => {
         namespaced: true,
         state,
       },
+      dashboard: {
+        namespaced: true,
+        state: {
+          dashboardData: null,
+          isLoaded: false,
+        },
+        getters: {
+          powerStatus: () => 'on',
+        },
+        actions: {
+          fetchDashboardData: jest.fn().mockResolvedValue({}),
+        },
+      },
     },
   });
   const wrapper = mount(AppHeader, {
     store,
     localVue,
+    i18n,
     mocks: {
       $t: (key) => key,
     },

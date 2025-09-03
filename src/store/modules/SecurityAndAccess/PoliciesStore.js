@@ -103,7 +103,7 @@ const PoliciesStore = {
         .get('/redfish/v1/Managers/bmc/NetworkProtocol')
         .then((response) => {
           const sshProtocol = response.data?.SSH?.ProtocolEnabled;
-          const ipmiProtocol = response.data?.IPMI?.ProtocolEnabled;
+          const ipmiProtocol = !response.data?.Oem?.OpenBmc?.IPMI?.Masked;
           const ssdpProtocol = response.data?.SSDP?.ProtocolEnabled;
           const ssdpPortValue = response.data?.SSDP?.Port;
           commit('setSshProtocolEnabled', sshProtocol);
@@ -138,12 +138,12 @@ const PoliciesStore = {
         .get('/redfish/v1/Systems/system')
         .then((response) => {
           const kvmServiceEnabled =
-            response.data.GraphicalConsole.ServiceEnabled;
+            response.data?.GraphicalConsole?.ServiceEnabled;
           const virtualMediaServiceEnabled =
-            response.data.VirtualMediaConfig.ServiceEnabled;
+            response.data?.VirtualMediaConfig?.ServiceEnabled;
           const solSshServiceEnabled =
-            response.data.SerialConsole.SSH.ServiceEnabled;
-          const solSshPortValue = response.data.SerialConsole.SSH.Port;
+            response.data?.SerialConsole?.SSH?.ServiceEnabled;
+          const solSshPortValue = response.data?.SerialConsole?.SSH?.Port;
           commit('setKvmServiceEnabled', kvmServiceEnabled);
           commit('setVirtualMediaServiceEnabled', virtualMediaServiceEnabled);
           commit('setSolSshServiceEnabled', solSshServiceEnabled);
@@ -211,8 +211,12 @@ const PoliciesStore = {
     async saveIpmiProtocolState({ commit }, protocolEnabled) {
       commit('setIpmiProtocolEnabled', protocolEnabled);
       const ipmi = {
-        IPMI: {
-          ProtocolEnabled: protocolEnabled,
+        Oem: {
+          OpenBmc: {
+            IPMI: {
+              Masked: !protocolEnabled,
+            },
+          },
         },
       };
       return await api

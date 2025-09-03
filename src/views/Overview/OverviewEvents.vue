@@ -34,38 +34,28 @@
 import OverviewCard from './OverviewCard';
 import StatusIcon from '@/components/Global/StatusIcon';
 import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Events',
   components: { OverviewCard, StatusIcon },
   mixins: [DataFormatterMixin],
   computed: {
+    ...mapGetters('dashboard', ['eventLogCounts', 'allEvents']),
     eventLogData() {
-      return this.$store.getters['eventLog/allEvents'];
+      return this.allEvents;
     },
     criticalEvents() {
-      return this.eventLogData
-        .filter(
-          (log) =>
-            log.severity === 'Critical' && log.filterByStatus === 'Unresolved',
-        )
-        .map((log) => {
-          return log;
-        });
+      // Return mock array with length for display
+      return new Array(this.eventLogCounts.critical);
     },
     warningEvents() {
-      return this.eventLogData
-        .filter(
-          (log) =>
-            log.severity === 'Warning' && log.filterByStatus === 'Unresolved',
-        )
-        .map((log) => {
-          return log;
-        });
+      // Return mock array with length for display
+      return new Array(this.eventLogCounts.warning);
     },
   },
   created() {
-    this.$store.dispatch('eventLog/getEventLogData').finally(() => {
+    this.$store.dispatch('dashboard/fetchDashboardData').finally(() => {
       this.$root.$emit('overview-events-complete');
     });
   },

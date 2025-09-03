@@ -6,7 +6,10 @@
           <b-row>
             <b-col sm="6">
               <b-form-group>
-                <b-form-checkbox v-model="videoRemote.RecordToRemote">
+                <b-form-checkbox
+                  v-model="videoRemote.RecordToRemote"
+                  :disabled="isButtonDisable"
+                >
                   {{
                     $t(
                       'pageVideo.videoRemoteSettings.recordVideotoRemoteServer',
@@ -232,17 +235,17 @@
                 >
                   <b-form-input
                     id="password"
-                    v-model="videoRemote.PassWord"
+                    v-model="videoRemote.Password"
                     :disabled="
                       !videoRemote.RecordToRemote ||
                       videoRemote.ShareType != 'cifs'
                     "
                     type="password"
-                    :state="getValidationState($v.videoRemote.PassWord)"
-                    @input="$v.videoRemote.PassWord.$touch()"
+                    :state="getValidationState($v.videoRemote.Password)"
+                    @input="$v.videoRemote.Password.$touch()"
                   />
                   <b-form-invalid-feedback role="alert">
-                    <template v-if="!$v.videoRemote.PassWord.required">
+                    <template v-if="!$v.videoRemote.Password.required">
                       {{ $t('global.form.fieldRequired') }}
                     </template>
                   </b-form-invalid-feedback>
@@ -252,7 +255,12 @@
           </div>
           <b-row class="mt-4 mb-5">
             <b-col>
-              <b-button type="submit" variant="primary" @click="onOk">
+              <b-button
+                type="submit"
+                variant="primary"
+                :disabled="isButtonDisable"
+                @click="onOk"
+              >
                 <icon-save />
                 {{ $t('global.action.save') }}
               </b-button>
@@ -287,6 +295,11 @@ export default {
       type: Number,
       default: 0,
     },
+    isButtonDisable: {
+      required: true,
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -299,7 +312,7 @@ export default {
         ShareType: '',
         PathInServer: '',
         UserName: '',
-        PassWord: '',
+        Password: '',
       },
     };
   },
@@ -366,22 +379,18 @@ export default {
         },
         UserName: {
           required: requiredIf(function () {
-            if (
+            return (
               this.videoRemote.RecordToRemote &&
               this.videoRemote.ShareType == 'cifs'
-            ) {
-              return true;
-            }
+            );
           }),
         },
-        PassWord: {
+        Password: {
           required: requiredIf(function () {
-            if (
+            return (
               this.videoRemote.RecordToRemote &&
               this.videoRemote.ShareType == 'cifs'
-            ) {
-              return true;
-            }
+            );
           }),
         },
       },
@@ -395,6 +404,7 @@ export default {
         .then(() => {
           const config =
             this.$store.getters['autoVideo/getVideoRemoteStorageValues'] || {};
+          this.$v.$reset();
           this.videoRemote = {
             RecordToRemote: config.RecordToRemote,
             MaxDumps: config.MaxDumps,
@@ -403,7 +413,7 @@ export default {
             ServerIP: config.ServerIP,
             ShareType: config.ShareType,
             PathInServer: config.PathInServer,
-            PassWord: config.PassWord,
+            Password: config.Password,
             UserName: config.UserName,
           };
         })
@@ -435,7 +445,7 @@ export default {
       };
       if (this.videoRemote.ShareType == 'cifs') {
         params.UserName = this.videoRemote.UserName;
-        params.PassWord = this.videoRemote.PassWord;
+        params.Password = this.videoRemote.Password;
       }
       this.startLoader();
       this.$store

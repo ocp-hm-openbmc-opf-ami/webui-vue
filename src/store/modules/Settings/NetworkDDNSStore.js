@@ -14,6 +14,7 @@ const NetworkDDNSStore = {
     ipPriority: null,
     hostName: '',
     staticHostName: null,
+    defaultHostName: null,
     domainNameServer: [],
   },
   getters: {
@@ -28,6 +29,7 @@ const NetworkDDNSStore = {
     hostName: (state) => state.hostName,
     staticHostName: (state) => state.staticHostName,
     domainNameServer: (state) => state.domainNameServer,
+    defaultHostName: (state) => state.defaultHostName,
   },
   mutations: {
     setDDNSEthernetData: (state, ddnsEthernetData) =>
@@ -62,6 +64,8 @@ const NetworkDDNSStore = {
         };
       });
     },
+    setDefaultHostName: (state, defaultHostName) =>
+      (state.defaultHostName = defaultHostName),
   },
   actions: {
     async getfirstEtherData({ commit }, firstEtherData) {
@@ -82,6 +86,7 @@ const NetworkDDNSStore = {
       commit('setDomainName', domainName);
       commit('setIpPriority', ipPriority);
       commit('setHostName', hostName);
+      commit('setDefaultHostName', firstEtherData.HostName);
       commit('setStaticHostName', staticHostName);
     },
     async getDDNSEthernetData({ commit, dispatch }) {

@@ -1,14 +1,12 @@
 <template>
   <b-container fluid="xl">
-    <page-title
-      :description="$t('pagePreserveConfiguration.pageDescription')"
-    />
+    <page-title :description="$t('pagePreserve.pageDescription')" />
     <div class="form-background p-3">
-      {{ $t('pagePreserveConfiguration.navigationInfoPreserve') }}
+      {{ $t('pagePreserve.navigationInfoPreserve') }}
       <router-link :to="`/operations/firmware`">
         {{ $t('appPageTitle.firmware') }}
       </router-link>
-      {{ $t('pagePreserveConfiguration.navigationInfoExtensionPreserve') }}
+      {{ $t('pagePreserve.navigationInfoExtensionPreserve') }}
       <router-link :to="`/operations/factory-default`">
         {{ $t('appPageTitle.factoryDefault') }}
       </router-link>
@@ -25,118 +23,130 @@
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.authentication">
-            {{ $t('pagePreserveConfiguration.authentication') }}
+            {{ $t('pagePreserve.authentication') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.bootOverride">
-            {{ $t('pagePreserveConfiguration.bootOverride') }}
+            {{ $t('pagePreserve.bootOverride') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.extLog">
-            {{ $t('pagePreserveConfiguration.extLog') }}
+            {{ $t('pagePreserve.extLog') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.fru">
-            {{ $t('pagePreserveConfiguration.fru') }}
+            {{ $t('pagePreserve.fru') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.ipmi">
-            {{ $t('pagePreserveConfiguration.ipmi') }}
+            {{ $t('pagePreserve.ipmi') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.kvm">
-            {{ $t('pagePreserveConfiguration.kvm') }}
+            {{ $t('pagePreserve.kvm') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.network">
-            {{ $t('pagePreserveConfiguration.network') }}
+            {{ $t('pagePreserve.network') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.ntp">
-            {{ $t('pagePreserveConfiguration.ntp') }}
+            {{ $t('pagePreserve.ntp') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.redfish">
-            {{ $t('pagePreserveConfiguration.redfish') }}
+            {{ $t('pagePreserve.redfish') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.sdr">
-            {{ $t('pagePreserveConfiguration.sdr') }}
+            {{ $t('pagePreserve.sdr') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.sel">
-            {{ $t('pagePreserveConfiguration.sel') }}
+            {{ $t('pagePreserve.sel') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.smtp">
-            {{ $t('pagePreserveConfiguration.smtp') }}
+            {{ $t('pagePreserve.smtp') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.snmp">
-            {{ $t('pagePreserveConfiguration.snmp') }}
+            {{ $t('pagePreserve.snmp') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.sol">
-            {{ $t('pagePreserveConfiguration.sol') }}
+            {{ $t('pagePreserve.sol') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.sysLog">
-            {{ $t('pagePreserveConfiguration.sysLog') }}
+            {{ $t('pagePreserve.sysLog') }}
+          </b-form-checkbox>
+        </b-col>
+      </b-row>
+      <b-row class="mt-3">
+        <b-col sm="6" md="3">
+          <b-form-checkbox v-model="checkboxes.serviceManager">
+            {{ $t('pagePreserve.serviceManager') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.ubootEnv">
-            {{ $t('pagePreserveConfiguration.ubootEnv') }}
+            {{ $t('pagePreserve.ubootEnv') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
-          <b-button type="submit" variant="primary" @click="SaveConfig">
+          <b-button
+            type="submit"
+            variant="primary"
+            :disabled="isButtonDisable"
+            @click="SaveConfig"
+          >
             <icon-save />
             {{ $t('global.action.save') }}
           </b-button>
@@ -152,6 +162,8 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import { mapState } from 'vuex';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'PreserveConfig',
@@ -176,12 +188,17 @@ export default {
         snmp: '',
         sol: '',
         sysLog: '',
+        serviceManager: '',
         ubootEnv: '',
       },
     };
   },
   computed: {
     ...mapState('preserveConfig', ['preserveConfigValues']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
   },
   watch: {
     preserveConfigValues() {
@@ -221,33 +238,29 @@ export default {
         snmp: config.SNMP,
         sol: config.SOL,
         sysLog: config.SYSLOG,
+        serviceManager: config.ServiceManager,
         ubootEnv: config.U_BOOT_ENV,
       };
     },
     SaveConfig() {
-      let saveConfigValues = {};
-      saveConfigValues.authentication = this.checkboxes.authentication;
-      saveConfigValues.bootOverride = this.checkboxes.bootOverride;
-      saveConfigValues.extLog = this.checkboxes.extLog;
-      saveConfigValues.fru = this.checkboxes.fru;
-      saveConfigValues.ipmi = this.checkboxes.ipmi;
-      saveConfigValues.kvm = this.checkboxes.kvm;
-      saveConfigValues.network = this.checkboxes.network;
-      saveConfigValues.ntp = this.checkboxes.ntp;
-      saveConfigValues.redfish = this.checkboxes.redfish;
-      saveConfigValues.sdr = this.checkboxes.sdr;
-      saveConfigValues.sel = this.checkboxes.sel;
-      saveConfigValues.smtp = this.checkboxes.smtp;
-      saveConfigValues.snmp = this.checkboxes.snmp;
-      saveConfigValues.sol = this.checkboxes.sol;
-      saveConfigValues.sysLog = this.checkboxes.sysLog;
-      saveConfigValues.ubootEnv = this.checkboxes.ubootEnv;
-      this.startLoader();
-      this.$store
-        .dispatch('preserveConfig/savePreserveConfig', saveConfigValues)
-        .then((message) => this.successToast(message))
-        .catch(({ message }) => this.errorToast(message))
-        .finally(() => this.endLoader());
+      this.$bvModal
+        .msgBoxConfirm(this.$tc('pagePreserve.toast.preserveConfirmation'), {
+          title: this.$tc('pagePreserve.toast.title'),
+          okTitle: this.$t('global.action.ok'),
+          cancelTitle: this.$t('global.action.cancel'),
+          autoFocusButton: 'ok',
+        })
+        .then((confirmed) => {
+          if (confirmed) {
+            const saveConfigValues = { ...this.checkboxes };
+            this.startLoader();
+            this.$store
+              .dispatch('preserveConfig/savePreserveConfig', saveConfigValues)
+              .then((message) => this.successToast(message))
+              .catch(({ message }) => this.errorToast(message))
+              .finally(() => this.endLoader());
+          }
+        });
     },
     toggleAllCheckboxes() {
       Object.keys(this.checkboxes).forEach((key) => {

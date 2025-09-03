@@ -34,6 +34,7 @@
           form="form-networLink"
           type="submit"
           variant="primary"
+          :disabled="isButtonDisable"
           @click="onSave"
         >
           <icon-save />
@@ -52,6 +53,8 @@ import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import Alert from '@/components/Global/Alert';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'PamOrder',
@@ -72,6 +75,10 @@ export default {
   },
   computed: {
     ...mapState('pamOrder', ['pamOrderListData']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     dragOptions() {
       return {
         animation: 0,

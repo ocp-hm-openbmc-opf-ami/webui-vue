@@ -9,8 +9,6 @@ const NetworkStore = {
     globalNetworkSettings: [],
     selectedInterfaceId: '', // which tab is selected
     selectedInterfaceIndex: 0, // which tab is selected
-    networkBond: null,
-    systemFirewall: null,
     enableLanNetworkSettings: [],
   },
   getters: {
@@ -19,8 +17,6 @@ const NetworkStore = {
     globalNetworkSettings: (state) => state.globalNetworkSettings,
     selectedInterfaceId: (state) => state.selectedInterfaceId,
     selectedInterfaceIndex: (state) => state.selectedInterfaceIndex,
-    getNetworkBond: (state) => state.networkBond,
-    getSystemFirewall: (state) => state.systemFirewall,
     getEnableLanNetworkSettings: (state) => state.enableLanNetworkSettings,
   },
   mutations: {
@@ -95,12 +91,6 @@ const NetworkStore = {
       (state.selectedInterfaceId = selectedInterfaceId),
     setSelectedInterfaceIndex: (state, selectedInterfaceIndex) =>
       (state.selectedInterfaceIndex = selectedInterfaceIndex),
-    setNetworkBond: (state, networkBond) => {
-      state.networkBond = networkBond;
-    },
-    setSystemFirewall: (state, systemFirewall) => {
-      state.systemFirewall = systemFirewall;
-    },
     setEnableLanNetworkSettings: (state, enableLanNetworkSettings) => {
       state.enableLanNetworkSettings = enableLanNetworkSettings;
     },
@@ -135,25 +125,6 @@ const NetworkStore = {
           commit('setSelectedInterfaceId', firstInterfaceId);
           commit('setGlobalNetworkSettings', ethernetInterfaces);
           commit('setEnableLanNetworkSettings', ethernetInterfaces);
-          commit(
-            'setNetworkBond',
-            ethernetData[0].Actions?.Oem?.Ami[
-              '#EthernetInterface.CreateBond'
-            ] ||
-              ethernetData[0].Actions?.Oem?.Ami[
-                '#EthernetInterface.ChangeActiveSlave'
-              ]
-              ? true
-              : false,
-          );
-          commit(
-            'setSystemFirewall',
-            ethernetData[0].Actions?.Oem?.Ami[
-              '#EthernetInterface.AddFirewallRules'
-            ]
-              ? true
-              : false,
-          );
         })
         .catch((error) => {
           console.log('Network Data:', error);

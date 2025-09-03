@@ -33,6 +33,7 @@
         <b-form-checkbox
           id="identifyLedSwitchSystem"
           v-model="item.locationIndicatorActive"
+          :disabled="isButtonDisable"
           data-test-id="inventorySystem-toggle-identifyLed"
           switch
           @change="toggleIdentifyLedSwitch"
@@ -158,6 +159,8 @@ import StatusIcon from '@/components/Global/StatusIcon';
 
 import TableRowExpandMixin from '@/components/Mixins/TableRowExpandMixin';
 import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: { IconChevron, PageSection, StatusIcon },
@@ -197,6 +200,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
     systems() {
       return this.$store.getters['system/systems'];
     },

@@ -9,7 +9,7 @@
     </div>
     <page-title />
     <!-- Global settings for all interfaces -->
-    <network-global-settings />
+    <network-global-settings :is-button-disable="isButtonDisable" />
     <!-- Interface tabs -->
     <page-section v-show="ethernetData">
       <b-row>
@@ -30,11 +30,13 @@
                 <network-interface-settings
                   :tab-index="tabIndex"
                   :lan-interface-status="enableLANInterface"
+                  :is-button-disable="isButtonDisable"
                 />
                 <!-- IPV4 table -->
                 <table-ipv-4
                   :tab-index="tabIndex"
                   :lan-interface-status="enableLANInterface"
+                  :is-button-disable="isButtonDisable"
                   @ipv4EditData="getIpv4EditData"
                   @ipv4TableData="getIpv4TableData"
                   @addIpv4="isAddIpv4"
@@ -44,6 +46,7 @@
                 <table-ipv-6
                   :tab-index="tabIndex"
                   :lan-interface-status="enableLANInterface"
+                  :is-button-disable="isButtonDisable"
                   @ipv6EditData="getIpv6EditData"
                   @ipv6TableData="getIpv6TableData"
                   @addIpv6="isAddIpv6"
@@ -55,6 +58,7 @@
                 <table-dns
                   :tab-index="tabIndex"
                   :lan-interface-status="enableLANInterface"
+                  :is-button-disable="isButtonDisable"
                 />
               </b-tab>
             </b-tabs>
@@ -109,6 +113,8 @@ import TableDns from './TableDns.vue';
 import ModalEnableLan from './ModalEnableLan.vue';
 import { mapState } from 'vuex';
 import _ from 'lodash';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Network',
@@ -158,6 +164,10 @@ export default {
   },
   computed: {
     ...mapState('network', ['ethernetData', 'enableLanNetworkSettings']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
   },
   watch: {
     ethernetData() {

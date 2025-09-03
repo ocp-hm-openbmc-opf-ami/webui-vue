@@ -29,6 +29,7 @@
 import ArrowRight16 from '@carbon/icons-vue/es/arrow--right/16';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LocalTimezoneLabelMixin from '@/components/Mixins/LocalTimezoneLabelMixin';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'QuickLinks',
@@ -37,12 +38,13 @@ export default {
   },
   mixins: [BVToastMixin, LocalTimezoneLabelMixin],
   computed: {
+    ...mapGetters('dashboard', ['bmcDateTime']),
     bmcTime() {
-      return this.$store.getters['global/bmcTime'];
+      return this.bmcDateTime;
     },
   },
   created() {
-    Promise.all([this.$store.dispatch('global/getBmcTime')]).finally(() => {
+    this.$store.dispatch('dashboard/fetchDashboardData').finally(() => {
       this.$root.$emit('overview-quicklinks-complete');
     });
   },

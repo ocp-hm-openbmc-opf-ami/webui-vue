@@ -1,6 +1,7 @@
 import api, { getResponseCount } from '@/store/api';
 import i18n from '@/i18n';
 import store from '../GlobalStore';
+import authentication from '@/store';
 
 const UserManagementStore = {
   namespaced: true,
@@ -149,7 +150,9 @@ const UserManagementStore = {
         Enabled: status,
         PasswordChangeRequired: PasswordChangeRequired,
         OEMAccountTypes: vmediaAccess ? ['media'] : [],
-        Oem: {
+      };
+      if (snmpUserEnable === true) {
+        data.Oem = {
           Ami: {
             SNMP: {
               Algorithm: algorithm,
@@ -158,8 +161,16 @@ const UserManagementStore = {
               SNMPAccessEnableStatus: snmpUserEnable,
             },
           },
-        },
-      };
+        };
+      } else if (snmpUserEnable === false) {
+        data.Oem = {
+          Ami: {
+            SNMP: {
+              SNMPAccessEnableStatus: snmpUserEnable,
+            },
+          },
+        };
+      }
       return await api
         .post('/redfish/v1/AccountService/Accounts', data)
         .then(() => dispatch('getUsers'))
@@ -250,18 +261,28 @@ const UserManagementStore = {
           if (locked !== undefined) data.Locked = locked;
           if (PasswordChangeRequired !== undefined)
             data.PasswordChangeRequired = PasswordChangeRequired;
-          if (
-            snmpUserEnable !== undefined ||
-            encryption !== undefined ||
-            algorithm !== undefined ||
-            readWritePermission !== undefined
-          ) {
+          if (snmpUserEnable === true) {
+            if (
+              snmpUserEnable !== undefined ||
+              encryption !== undefined ||
+              algorithm !== undefined ||
+              readWritePermission !== undefined
+            ) {
+              data.Oem = {
+                Ami: {
+                  SNMP: {
+                    Algorithm: algorithm,
+                    Encryption: encryption,
+                    Access: readWritePermission,
+                    SNMPAccessEnableStatus: snmpUserEnable,
+                  },
+                },
+              };
+            }
+          } else if (snmpUserEnable === false) {
             data.Oem = {
               Ami: {
                 SNMP: {
-                  Algorithm: algorithm,
-                  Encryption: encryption,
-                  Access: readWritePermission,
                   SNMPAccessEnableStatus: snmpUserEnable,
                 },
               },
@@ -276,7 +297,18 @@ const UserManagementStore = {
       }
       return await api
         .patch(`/redfish/v1/AccountService/Accounts/${originalUsername}`, data)
-        .then(() => dispatch('getUsers'))
+        .then(() => {
+          const passwordChangeRequired = data.PasswordChangeRequired;
+          const password = data.Password;
+          if (
+            originalUsername === store.getters.username(store.state) &&
+            (passwordChangeRequired || password)
+          ) {
+            authentication.dispatch('authentication/logout');
+          } else {
+            dispatch('getUsers');
+          }
+        })
         .then(() => {
           if (routerPath === '/change-password') {
             return i18n.t('pageUserManagement.toast.successPasswordChanged');
@@ -466,10 +498,9 @@ const UserManagementStore = {
       if (
         error.response &&
         error.response.data &&
-        error.response.data['Password@Message.ExtendedInfo']
+        error.response.data.error['@Message.ExtendedInfo']
       ) {
-        const extendedInfo =
-          error.response.data['Password@Message.ExtendedInfo'];
+        const extendedInfo = error.response.data.error['@Message.ExtendedInfo'];
         if (Array.isArray(extendedInfo) && extendedInfo.length > 0) {
           const message = extendedInfo[0].Message;
           if (message && message.indexOf('Password') !== -1) {
@@ -490,10 +521,10 @@ const UserManagementStore = {
         if (
           error.response &&
           error.response.data &&
-          error.response.data['UserName@Message.ExtendedInfo']
+          error.response.data.error['@Message.ExtendedInfo']
         ) {
           const extendedInfo =
-            error.response.data['UserName@Message.ExtendedInfo'];
+            error.response.data.error['@Message.ExtendedInfo'];
           for (let key in extendedInfo) {
             if (
               extendedInfo[key].Message &&

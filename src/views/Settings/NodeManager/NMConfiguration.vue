@@ -21,6 +21,7 @@
             variant="primary"
             class="mb-2"
             data-test-id="alertDestination-button-sendTestTrap"
+            :disabled="isButtonDisable"
             @click="initModalNewPolicy(null)"
           >
             <icon-add />
@@ -58,6 +59,7 @@
                 <template #icon>
                   <icon-edit
                     v-if="action.value === 'edit'"
+                    :disabled="isButtonDisable"
                     :data-test-id="`snmp-tableRowAction-edit-${index}`"
                   />
                   <icon-trashcan
@@ -94,6 +96,7 @@
             :per-page="perPage"
             :total-rows="getTotalRowCount(filteredRows)"
             aria-controls="table-event-logs"
+            limit="limit"
           />
         </b-col>
       </b-row>
@@ -114,6 +117,7 @@ import TableFilterMixin from '@/components/Mixins/TableFilterMixin';
 import BVPaginationMixin, {
   currentPage,
   perPage,
+  limit,
 } from '@/components/Mixins/BVPaginationMixin';
 import TableCellCount from '@/components/Global/TableCellCount';
 import SearchFilterMixin, {
@@ -123,6 +127,8 @@ import Search from '@/components/Global/Search';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   name: 'NMConfiguration',
   components: {
@@ -191,11 +197,16 @@ export default {
       nmPolicies: null,
       currentPage: currentPage,
       perPage: perPage,
+      limit: limit,
       searchTotalFilteredRows: 0,
       searchFilter: searchFilter,
     };
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     allNmPolicies() {
       return this.$store.getters['nmConfiguration/nodeManagerPolicies'].map(
         (log) => {
@@ -205,13 +216,19 @@ export default {
               {
                 value: 'edit',
                 enabled:
-                  log.domain === 'CPUPerformance' ? false : !log.defaultPolicy,
+                  (log.domain === 'CPUPerformance'
+                    ? false
+                    : !log.defaultPolicy) &&
+                  this.userPrivilege === privilegesId.admin,
                 title: this.$t('pageNodeManager.table.edit'),
               },
               {
                 value: 'delete',
                 enabled:
-                  log.domain === 'CPUPerformance' ? false : !log.defaultPolicy,
+                  (log.domain === 'CPUPerformance'
+                    ? false
+                    : !log.defaultPolicy) &&
+                  this.userPrivilege === privilegesId.admin,
                 title: this.$tc('pageNodeManager.table.delete'),
               },
             ],

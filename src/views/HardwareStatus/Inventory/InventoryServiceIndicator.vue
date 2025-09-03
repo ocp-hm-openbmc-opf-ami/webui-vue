@@ -21,6 +21,7 @@
               <b-form-checkbox
                 id="identifyLedSwitchService"
                 v-model="systems.locationIndicatorActive"
+                :disabled="isButtonDisable"
                 data-test-id="inventoryService-toggle-identifyLed"
                 switch
                 @change="toggleIdentifyLedSwitch"
@@ -40,17 +41,23 @@
 <script>
 import PageSection from '@/components/Global/PageSection';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: { PageSection },
   mixins: [BVToastMixin],
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
     systems() {
       let systemData = this.$store.getters['system/systems'][0];
       return systemData ? systemData : {};
     },
     serverStatus() {
-      return this.$store.getters['global/serverStatus'];
+      return this.$store.getters['system/serverStatus'];
     },
     powerStatus() {
       if (this.serverStatus === 'unreachable') {

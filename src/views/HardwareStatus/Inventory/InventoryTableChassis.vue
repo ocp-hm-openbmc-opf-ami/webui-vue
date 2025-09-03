@@ -33,6 +33,7 @@
         <b-form-checkbox
           v-if="hasIdentifyLed(row.item.identifyLed)"
           v-model="row.item.identifyLed"
+          :disabled="isButtonDisable"
           name="switch"
           switch
           @change="toggleIdentifyLedValue(row.item)"
@@ -127,6 +128,8 @@ import StatusIcon from '@/components/Global/StatusIcon';
 
 import TableRowExpandMixin from '@/components/Mixins/TableRowExpandMixin';
 import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: { IconChevron, PageSection, StatusIcon },
@@ -160,6 +163,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
     chassis() {
       return this.$store.getters['chassis/chassis'];
     },

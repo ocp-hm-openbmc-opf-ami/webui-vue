@@ -190,7 +190,9 @@
         "videoLog":"@:appPageTitle.videoLog",
         "radius": "RADIUS",
         "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
-        "ipmiEventLog": "@:appPageTitle.ipmiEventLog"
+        "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
+        "gpgpu": "@:appPageTitle.gpgpu",
+        "advancedLogSettings":"@:appPageTitle.advancedLogSettings"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -256,7 +258,9 @@
         "videoLog":"视频日志",
         "radius": "RADIUS",
         "amdRemoteDebug": "AMD 远程调试",
-        "ipmiEventLog": "IPMI事件日志"
+        "ipmiEventLog": "IPMI事件日志",
+        "gpgpu": "GPGPU",
+        "advancedLogSettings":"高级日志设置"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM 配置",
@@ -368,9 +372,9 @@
             "domainConfiguration": "域配置",
             "domainNameSetting": "域名",
             "iPPriority": "IP 优先级",
-            "staticDomainName": "静态域名",
+            "hostName": "主机名",
             "hostConfiguration": "主机配置",
-            "hostNameSetting": "主机名称",
+            "hostNameSetting": "主机名设置",
             "domainName": "域名",
             "interfacesConfiguration": "接口",
             "ddnsMethod": "DDNS 方法",
@@ -688,7 +692,6 @@
             "fileUploadedError": "上传恢复文件时出错。",
             "errorGettingBackupDetails": "获取属性备份功能时出错。",
             "errorMessageNotConfigured": "由于配置文件不存在，操作无法完成。",
-            "featureNotAvailable": "备份和还原功能未启用。",
             "restoreConfirmation": "还原功能将重新启动已配置备份属性的服务。您确定要继续吗？",
             "confirmTitle": "确认？"
         }
@@ -772,7 +775,10 @@
             "ipAddress": "IP 地址",
             "privilege": "权限",
             "searchSessions": "查找会话",
-            "mountType": "挂载类型"
+            "mountType": "挂载类型",
+            "administrator": "管理员",
+            "operator": "操作员",
+            "readOnly": "只读"
         },
         "toast": {
             "errorDelete": "断开 %{count} 个会话时失败 | 断开 %{count} 个会话时失败",
@@ -879,6 +885,15 @@
         "refClockCapability": "参考时钟的能力",
         "PCIePortMultiRecord": "NVMe PCIe 端口多记录",
         "nvmeMultiRecord": "NVMe 多重记录",
+        "topologyMultiRecord": "拓扑多条记录",
+        "elementCount": "元素数量",
+        "recordElementFormFactor": "记录元素形状因素",
+        "recordElementMaxAuxPower": "记录元素最大辅助电源",
+        "recordElementMaxPower": "记录元素最大电源",
+        "recordElementType": "记录元素类型",
+        "recordFormat": "记录格式",
+        "recordTypeId": "记录类型 ID",
+        "recordVersion": "记录版本",
         "SubSystemHealthStatusPoll": "子系统健康状态轮询",
         "compositeTemperature": "复合温度",
         "driveFunctional": "驱动器功能",
@@ -911,6 +926,7 @@
         "maxPowerSupplyReq5v": "最大电源要求 5v",
         "maxThermalLoad": "最大热负载",
         "recordAreaVersion": "记录区版本",
+        "totalNVMCapacity": "总 NVM 容量",
         "mediaInReadOnly": "只读媒体",
         "overallSubsystemDegraded": "所有子系统均降级",
         "powerBackupFailed": "备用电源失败",
@@ -919,6 +935,10 @@
         "nvmeSolidStateDrive": "NVMe 固态硬盘",
         "model": "模型",
         "serialNumber": "序列号",
+        "portTypePCIe": "PCIe 端口类型",
+        "portTypeSMBus": "SMBus 端口类型",
+        "nvmePCIePortMultiRecord": "NVMe PCIe 端口多条记录",
+        "vitalProductData": "重要产品数据",
         "toast": {
             "errorShowingNVMeInfo": "显示 NVMe 信息时出错。"
         }
@@ -1012,6 +1032,7 @@
             "bmcDumpEntry":"BMC转储"
         },
         "toast": {
+            "createDumpConfirmation": "您确定要创建新的 BMC 转储吗？此操作无法撤消。",
             "errorDeleteDump": "删除转储 %{count} | 删除转储 %{count}。",
             "errorStartBmcDump": "启动新BMC转储发生错误。",
             "errorStartSystemDump": "启动新系统转储发生错误。",
@@ -1019,7 +1040,9 @@
             "successStartBmcDump": "需要一段时间进行转储。刷新页面以查看表单中已完成的转储。",
             "successStartBmcDumpTitle": "BMC 转储已开始",
             "successStartSystemDump": "需要一段时间进行转储。转储将会被卸载到运行系统。",
-            "successStartSystemDumpTitle": "系统转储开始"
+            "successStartSystemDumpTitle": "系统转储开始",
+            "activeDumpInProgressTitle": "转储进度状态",
+            "activeDumpInProgress": "转储可能需要一些时间。请刷新页面以查看结果。\n您可以在任务页面取消正在运行的任务，或在完成后开始新的转储。"
         }
     },
     "pageEventLogs": {
@@ -1223,14 +1246,14 @@
         "ntp": "NTP",
         "sol": "SOL",
         "sysLog": "Syslog",
+        "serviceManager": "Service Manager",
         "navigationInfoFactoryDefault": "以下检查配置将通过还原操作保留。您可以在列表中更改",
         "navigationInfoExtensionFactoryDefault": "页。",
         "toast": {
             "restoreToDefaultsSuccess": "成功！设备已重置。请关闭此浏览器会话并打开新的浏览器会话以重新连接到设备。",
             "restoreToDefaultsError": "恢复出厂默认设置时出错。",
             "FactoryDefaultConfirmation": "如果要继续恢复配置，请单击“确定”。警告：恢复配置将重新启动设备。",
-            "title": "出厂设置",
-            "okTitle": "OK"
+            "title": "出厂设置"
         }
     },
     "PageOperations": {
@@ -1316,7 +1339,7 @@
             "errorDisabledClearConfig": "禁用清除配置时出错。"
         }
     },
-    "pagePreserveConfiguration": {
+    "pagePreserve": {
         "pageDescription": "BMC 保留配置",
         "authentication": "验证",
         "fru": "FRU",
@@ -1334,12 +1357,15 @@
         "ntp": "NTP",
         "sol": "SOL",
         "sysLog": "Syslog",
+        "serviceManager": "Service Manager",
         "navigationInfoPreserve": "单击此处去",
         "navigationInfoExtensionPreserve": "或者",
         "toast": {
             "successPreserveConfiguration": "保留配置设置已成功保存。",
             "errorPreserveConfiguration": "设置保留配置时出错。",
-            "errorGettingPreserveConfig": "获取保留配置时出错。"
+            "errorGettingPreserveConfig": "获取保留配置时出错。",
+            "preserveConfirmation": "保存所选配置仅在BMC完整更新期间生效。 BMC部分更新期间，默认情况下将保留所有现有配置。",
+            "title": "保留"
         }
     },
     "pageInventory": {
@@ -1555,8 +1581,12 @@
     },
     "pageRadius": {
         "enableRadiusAuthentication": " 启用 RADIUS 认证",
-        "radiusConfiguration": "RADIUS 配置未启用。",
+        "radiusConfiguration": "不启用 RADIUS 身份验证。",
         "radiusPortValueLimits": "请输入 %{min} 和 %{max} 之间的值。",
+        "enableEAPTLSAuthentication": "启用 EAP-TLS 身份验证",
+        "radiusBlastCa": "RADIUS CA",
+        "radiusBlastClient": "RADIUS 客户端",
+        "radiusBlastKey": "RADIUS 密钥",
         "form": {
             "serviceAddress": "服务器地址",
             "port": "端口",
@@ -1566,12 +1596,21 @@
             "groupName3": "群组名 3 - 可选",
             "privilege1": "权限 1",
             "privilege2": "权限 2",
-            "privilege3": "权限 3"
+            "privilege3": "权限 3",
+            "radiusCA": "RADIUS CA",
+            "radiusClient": "RADIUS 客户端",
+            "radiusKey": "RADIUS 密钥"
         },
         "toast": {
             "successRadiusConfiguration": "RADIUS 设置已成功保存。",
+            "successAddCertificate": "已成功添加 %{certificate}.",
+            "successEnableEapTLS": "已成功启用 EAP-TLS 身份验证.",
+            "successDisableEapTLS": "已成功禁用 EAP-TLS 身份验证.",
+            "errorAddCertificate": "添加证书时出错.",
             "errorRadiusConfiguration": "设置 RADIUS 配置错误。",
-            "errorGettingRadiusConfig": "获取 RADIUS 配置时出错。"
+            "errorGettingRadiusConfig": "获取 RADIUS 配置时出错。",
+            "errorEnableEapTLS": "启用 EAP-TLS 身份验证时出错.",
+            "errorDisableEapTLS": "禁用 EAP-TLS 身份验证时出错."
         }
     },
     "pageUserManagement": {
@@ -1615,7 +1654,9 @@
             "authProtocolsh224": "SHA-224",
             "authProtocolsha256": "SHA-256",
             "authProtocolsha384": "SHA-384",
-            "authProtocolsha512": "SHA-512"
+            "authProtocolsha512": "SHA-512",
+            "logoutConfirmMessage": "您确定要更改登录用户“%{user}”的密码吗？该用户将注销，并且仅反映在下次登录中.",
+            "logoutAlert": "注销警报"
         },
         "table": {
             "privilege": "权限",
@@ -1896,8 +1937,7 @@
         "toast": {
             "errorSavinNcsiInterface": "保存 NCSI 接口设置时出错。",
             "errorGettingNcsi": "获取 NCSI 接口信息时出错。",
-            "successSavingNcsiInterface": "成功保存 NCSI 接口设置。",
-            "featureNotEnabled": "NCSI 功能未启用。"
+            "successSavingNcsiInterface": "成功保存 NCSI 接口设置。"
         }
     },
     "pageVlan": {
@@ -2090,9 +2130,9 @@
             "LastState": "最后状态"
         },
         "policiesDesc": {
-            "AlwaysOn": "始终开启 - 上电时系统始终开启。",
-            "AlwaysOff": "始终关闭 - 上电时系统始终保持关闭状态。",
-            "LastState": "最后状态 - 上电后系统返回到上次打开或关闭电源状态。"
+            "AlwaysOn": "始终开启 — 通电后系统始终开启。",
+            "AlwaysOff": "始终关闭 — 通电后系统始终保持关闭状态。",
+            "LastState": "最后状态- 通电后系统返回上次开启或关闭电源的状态。"
         },
         "toast": {
             "errorSaveSettings": "保存设置失败。",
@@ -2282,8 +2322,7 @@
             "successApplyPowerCapEnable": "成功启用功耗上限。",
             "successApplyPowerCapDisable": "成功禁用功耗上限。",
             "errorApplyPowerCapEnable": "启用功耗上限发生错误。",
-            "errorApplyPowerCapDisable": "禁用功耗上限发生错误。",
-            "featureNotAvailable":"此平台不支持功耗上限。"
+            "errorApplyPowerCapDisable": "禁用功耗上限发生错误。"
         }
     },
     "pageSensors": {
@@ -2425,8 +2464,26 @@
             "certificate": "证书",
             "issuedBy": "发出从",
             "issuedTo": "发出给",
+            "issuerCommonName": "发出的通用名称 (CN)",
+            "issuedToCommonName": "发出给通用名称 (CN)",
             "validFrom": "有效期自",
-            "validUntil": "有效期至"
+            "validUntil": "有效期至",
+            "issuerCity": "发出的城市或地点 (L)",
+            "issuerCountry": "发出的国家 (C)",
+            "issuerOrganization": "发出的组织 (O)",
+            "issuerOrganizationalUnit": "发出的组织单位 (OU)",
+            "issuerState": "发出的州或省 (ST)",
+            "issuedToCity": "发出的城市或地点 (L)",
+            "issuedToCountry": "发出的国家 (C)",
+            "issuedToOrganization": "发出的组织 (O)",
+            "issuedToOrganizationalUnit": "发出的组织单位 (OU)",
+            "issuedToState": "发出的州或省 (ST)",
+            "certificateVersion":"凭证版本",
+            "serialNumber":"序号",
+            "signatureAlgorithm":"签名机制",
+            "publicKey":"公钥",
+            "issuerEmailAddress": "发出的电子邮件地址",
+            "issuedToEmailAddress": "发出的电子邮件地址"
         },
         "toast": {
             "errorAddCertificate": "添加证书失败。",
@@ -2474,6 +2531,7 @@
             "serverClosedSuccessfully": "关闭服务器成功。",
             "serverClosedWithErrors": "服务器已关闭但有错误发生。",
             "invalidFileType": "图片文件类型无效",
+            "virtualMediaErrorFileTooSmall": "所选文件必须至少为 600 KB。",
             "infoTitle": "外部服务器启动按钮",
             "infoMessage": "仅当设置了密码并且安装类型为 CIFS 或 HTTPS 时，才会启用 '开始' 按钮。"
         }
@@ -2520,6 +2578,7 @@
         "nVDataVersion": "NVDATA 版本",
         "memorySizeMiB": "内存容量",
         "totalCacheSizeMiB": "总缓存容量",
+        "pci": "PCI",
         "pciVendorId": "PCI 供应商 ID",
         "pciDeviceId": "PCI 设备 ID",
         "pciSubVendorId": "PCI 次要供应商 ID",
@@ -2535,6 +2594,23 @@
         "readCacheRatio": "读取缓存比率",
         "writeCacheRatio": "写入缓存比率",
         "manufacturer": "制造商",
+        "boardTemperature": "底板温度",
+        "pciLinkSpeed": "PCI 链接速度",
+        "batterySerialNumber": "电池序列号",
+        "criticalTemperature": "临界温度 (°C)",
+        "designCapacity": "设计容量 (mAh)",
+        "designVoltage": "设计电压 (mV)",
+        "deviceChemistry": "电池化学成分",
+        "energyPackSerialNunber": "能源包序列号",
+        "fwStatus": "固件状态",
+        "maxTemperature": "最高温度 (°C)",
+        "mfgName": "制造商名称",
+        "packAssemblyNumber": "组装编号",
+        "packVersionNumber": "模组版本号",
+        "pcbAssemblyNumber": "电路板组装编号",
+        "pcbVersionNumber": "电路板版本号",
+        "energyPackSubType": "能源包次类型",
+        "energyPackType": "能源包类型",
         "modal": {
             "dropdownPropertiesBtn": "属性",
             "dropdownManagementBtn": "管理",
@@ -2563,6 +2639,8 @@
             "labelRaidMode": "RAID 模式",
             "labelJbodMode": "JBOD 模式",
             "alertNotSupport": "此功能当前不支持。",
+            "alertNotSupportControllerPersonalityMsg1": "仅支持此运行模式：",
+            "alertNotSupportControllerPersonalityMsg2": "系统目前无法切换到 JBOD 模式。",
             "labelControllerProperties": "控制器属性",
             "controllerPropertiesHelperText": "设置控制器属性。",
             "controllerPropertiesRateValueHelperText": "该值必须在 0 到 100 之间，包括 0 和 100。",
@@ -2580,7 +2658,12 @@
             "labelPatrolReadCurrentRate": "速率：",
             "patrolReadCurrentPropertiesHelperText": "显示巡逻读取属性。如果需要编辑项目，请点击“属性”>“控制器属性”按钮。",
             "patrolReadActionSwitchHelperText": "选择开始/停止以处理巡逻读取。完成后等待一分钟。",
-            "alertNotSupportPatrolReadAction": "操作不支持。请确保 RAID 控制器至少有一个逻辑设备或一个热备盘物理设备。"
+            "alertNotSupportPatrolReadAction": "操作不支持。请确保 RAID 控制器至少有一个逻辑设备或一个热备盘物理设备。",
+            "firmwareUpdateConfirmationMsg":"确定要更新 RAID 控制器的固件？",
+            "firmwareUpdateConfirmationTitle": "固件更新",
+            "alertRaidFirmwareUpdateNotReady": "由于服务繁忙，暂时无法进行固件更新。请稍后重试。",
+            "labelFirmwareUpdate": "固件更新",
+            "firmwareUpdateHelperText": "此功能允许将 RAID 控制器的固件更新至最新版本。更新完成后，请重启主机以应用新的固件。若系统提示'服务繁忙'，请稍后再尝试执行更新。"
         },
         "actions": {
             "startPatrolRead": "开始巡逻读取",
@@ -2613,7 +2696,15 @@
             "startPatrolReadAction": "启动巡逻读取操作。",
             "stopPatrolReadActionSuccess": "成功停止巡逻读取操作。",
             "stopPatrolReadActionFail": "停止巡逻读取操作失败。",
-            "stopPatrolReadAction": "停止巡逻读取操作。"
+            "stopPatrolReadAction": "停止巡逻读取操作。",
+            "successFirmwareUpdate": "RAID 控制器固件已成功更新。请重启主机以应用新的固件。",
+            "errorFirmwareUpdate": "RAID 控制器固件更新失败。",
+            "successPrepareFirmwareUpdate": "准备 RAID 固件更新成功。更改后需要重新启动主机才能生效",
+            "errorPrepareFirmwareUpdate": "准备 RAID 固件更新失败。",
+            "labelUpdateStarted": "已开始更新",
+            "successStartupFirmwareUpdate": "RAID 固件更新中，请勿在固件更新完成前进行任何变更。",
+            "selectFirmwareUpdateFile": "请选择要更新 RAID 控制器的固件文件。",
+            "errorGetFirmwareInventory": "取得韧体列表失败。"
         }
     },
     "pagePhysicalDevice": {
@@ -2628,7 +2719,7 @@
             "serialNumber": "序列号",
             "health": "状态",
             "mediaType": "媒体类型",
-            "pDrivestate": "状态",
+            "pDrivestate": "物理装置状态",
             "powerState": "电源状态",
             "productId": "产品编号",
             "temperature": "温度",
@@ -2646,7 +2737,24 @@
             "uid": "UID",
             "usage": "使用信息",
             "blockCount": "区块数量",
+            "capableSpeedGbs": "可支持速度",
+            "capacityBytes": "容量",
+            "present": "存在",
             "isForeignDevice": "外来实体设备",
+            "auOperation": "AU操作",
+            "auStatus": "AU状态",
+            "capabilities": "功能",
+            "ddf": "DDF",
+            "elapsedSecs": "已用秒数",
+            "lastPredFailEventSeqNum": "上次预测失败事件序号",
+            "maxLinkSpeed": "最大连接速度",
+            "mediaErrCount": "媒体错误数量",
+            "otherErrCount": "其他错误数量",
+            "progressPercent": "进度百分比",
+            "rotationalSpeedRPM": "旋转速度（RPM）",
+            "shieldCounter": "保护计数器",
+            "ssdPercentUsed": "SSD使用百分比",
+            "ssdPowerOnHours": "SSD开机时数",
             "state": {
                 "hotspare": "热备盘",
                 "unknownState": "未知",
@@ -2811,7 +2919,13 @@
             "ldType": "逻辑设备类型",
             "pdList": "实体设备列表",
             "acceleratorType": "加速器类型",
-            "enableBGI": "启用 BGI"
+            "accessPolicyStatus": "存取策略状态",
+            "enableBGI": "启用 BGI",
+            "encryptionType": "加密类型",
+            "powerSavingPolicy": "节能策略",
+            "PRL": "PRL",
+            "RLQ": "RLQ",
+            "spanDepth": "跨度深度"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "没有可配置的物理设备！",
@@ -2902,7 +3016,21 @@
             "configurationEvents": "配置事件",
             "configuration": "配置",
             "bbuEvents": "BBU 事件",
-            "bbu": "BBU"
+            "bbu": "BBU",
+            "enclosureEvents": "机箱事件",
+            "enclosure": "机箱",
+            "sasEvents": "SAS 事件",
+            "sas": "SAS",
+            "pcieEvents": "PCIe 事件",
+            "pcie": "PCIe",
+            "blockingBootEvents": "阻断启动事件",
+            "blockingBoot": "阻断启动",
+            "nonBlockingBootEvents": "非阻断启动事件",
+            "nonBlockingBoot": "非阻断启动",
+            "storeLibEvents": "StoreLib 事件",
+            "storeLib": "StoreLib",
+            "clusterEvents": "集群事件",
+            "cluster": "集群"
         },
         "modal": {
             "deleteAllTitle": "删除所有日志",
@@ -2938,7 +3066,7 @@
                 "all": "全部",
                 "target": "目标",
                 "unspecified": "未指定",
-		"deleteConfirmMessage": "您确定要删除该记录吗？此操作无法撤消。",
+		        "deleteConfirmMessage": "您确定要删除该记录吗？此操作无法撤消。",
                 "deleteFireWall": "删除 |删除 ",
                 "endDateCanNotBeLessThanStartDate": "结束日期不能早于开始日期",
                 "endTimeCanNotBeEqualToStartTime": "结束时间不能早于开始时间",
@@ -2948,7 +3076,8 @@
                 "ipv6": "IPv6",
                 "both": "全部",
                 "networkType": "网络类型",
-                "preLoad":"预加载"
+                "preLoad":"预加载",
+                "ipVersion": "IP版本"
             }
         },
         "toast": {
@@ -2958,7 +3087,7 @@
             "errorDelete": "删除防火墙规则时出错。",
             "errorDateOrTimeSaveFireWall": "日期或时间无效。",
             "errorStartorEndIpSaveFireWall": "范围起始或范围结束 IP 无效。",
-            "featureNotAvailable": "系统防火墙功能未启用。"
+            "errorCreateLimitReachedForResource": "可以创建的防火墙规则的最大数量为 64 个 IPv4 防火墙规则和 64 个 IPv6 防火墙规则。"
         },
         "table": {
             "startIP": "起始 IP",
@@ -2971,7 +3100,8 @@
             "endDuration": "结束持续时间",
             "preLoad": "预加载",
             "target": "目标",
-            "networkType": "网络类型"
+            "networkType": "网络类型",
+            "searchFirewallRule": "搜索防火墙规则"
         }
     },
     "bond": {
@@ -2986,8 +3116,7 @@
         "errorSavebond": "保存网络 bond 时出错。",
         "errorDelete": "删除网络 bond 时出错。",
         "errorGetBond": "获取网络 bond 时出错。",
-        "miiRangeRequired": "输入 1-100 之间的有效毫秒。",
-        "featureNotAvailable": "网络 bond 功能未启用。"
+        "miiRangeRequired": "输入 1-100 之间的有效毫秒。"
     },
     "license": {
         "add_license_key": "添加许可证密钥",
@@ -3018,7 +3147,6 @@
         "Mbps": "Mbps",
         "sameNetworkLinkSettings": "网络连接配置相同，因此无需保存。",
         "modifyNetworkLinkSettings": "如果用户需要更改这些接口配置，请修改主接口的值。",
-        "networkLinkFeatureNotAvailable": "网络连接功能未启用。",
         "toast": {
             "successSaveNetworkLink": "已成功保存网络连接。",
             "errorSavedNetworkLink": "保存网络连接时出错。",
@@ -3132,6 +3260,80 @@
             "successVideoLogCleared": "视频日志删除成功。",
             "errorVideoLogDownload": "视频日志下载失败。",
             "errorGettingVideoLog": "获取视频日志时出错。"
+        }
+    },
+     "gpgpu": {
+        "tab":{
+            "gpgpuInterfaceProcessorTab" : "处理器",
+            "gpgpuInterfaceChassisTab" : "机壳",
+            "gpgpuInterfaceMemoryTab": "记忆"
+        },
+        "gpgpuInterfaceHeader" : "图形处理器",
+        "gpgpuInterfaceMemoryChassisContentTitle":"底盘信息",
+        "gpgpuInterfaceMemoryEnvironmentMetricsContentTitle":"环境指标",
+        "gpgpuInterfaceMemoryMetricsContentTitle":"内存指标",
+        "gpgpuInterfaceMemoryContentTitle": "内存控制器信息",
+        "gpgpuInterfaceProcessorSystemInterfaceContentTitle":"PCIe功能",
+        "gpgpuInterfaceProcessorMetricsContentTitle":"处理器指标",
+        "gpgpuInterfaceProcessorEnvironmentmetricsContentTitle":"环境指标",
+        "gpgpuInterfaceProcessorMemorySummaryContentTitle": "内存总结",
+        "gpgpuInterfaceInfoContentTitle": "GPU信息",
+        "gpgpuInterfaceMemorySensorsInfoContentTitle":"传感器信息",
+        "gpgpuInterfaceMemoryPcieDevicesContentTitle":"PCIe 设备",
+        "gpgpuDevices":"GPU 设备=",
+        "fpga": {
+            "fpgaInterfaceHeader" : "FPGA",
+            "fpgaInterfaceProcessorPortContentTitle": "港口信息",
+            "fpgaInterfaceFpgaContentTitle": "FPGA信息",
+            "fpgaInterfaceChassisContentTitle": "底盘信息",
+            "fpgaInterfaceSensorsInfoContentTitle":"传感器信息",
+            "fpgaDevices":"FPGA设备"
+        },
+        "baseboard": {
+            "baseBoardInterfaceHeader" : "底板",     
+            "baseBoardInterfaceAssemblyTab" : "集会",
+            "baseBoardInterfaceSensorsTab" : "传感器",
+            "baseBoardInterfaceChassisSensorsInfoContentTitle":"传感器信息",
+            "baseBoardInterfaceBaseBoardAssemblyContentTitle": "装配信息"
+        },
+        "toast": {
+            "errorGettingSystems": "获取系统信息时出错",
+            "errorGettingChassis": "获取机箱信息出错",
+            "errorGettingProcessor": "获取处理器信息时出错",
+            "errorGettingEnvironmentMetrics": "获取环境指标信息时出错",
+            "errorGettingMemoryMetrics": "获取内存指标信息时出错",
+            "errorGettingFpgaInfo": "获取FPGA信息出错",
+            "errorGettingFpgaSensorInfo": "获取 FPGA 传感器信息时出错",
+            "errorGettingBaseBoardInfo": "获取底板信息时出错",
+            "errorGettingBaseBoardSensorInfo": "获取底板传感器信息时出错"
+        }
+    },
+    "advancedLogSettings":{
+        "systemLog": "系统日志",
+        "localLog": "本地日志",
+        "remoteLog": "远程日志",
+        "portType": "端口类型",
+        "udp": "UDP协议",
+        "tcp": "传输控制协议",
+        "fileSize": "文件大小",
+        "rotateCount": "旋转计数",
+        "remotelogserver": "远程日志服务器",
+        "remoteserverport": "远程服务器端口",
+        "enableauditlog": "启用审核日志",
+        "caCertificateFile": "CA证书文件",
+        "certificatefile": "证书文件",
+        "privateKey": "私钥",
+        "advancedLogValueLimits": "请输入 %{min} 至 %{max} 之间的值。",
+        "invalidIPAddress": "IP 地址无效",        
+        "cacertPEM": "Cacert PEM 证书",
+        "serverCRT": "服务器CRT证书",
+        "serverKey": "服务器密钥证书",
+        "incorrectAdvancedCertificateFileType": "文件不是正确的证书类型。",
+        "toast": {
+            "successSaveAdvancedLogsSettings": "已成功保存高级日志设置。",
+            "errorAdvancedAddCertificate": "添加 %{certificate} 时出错。",
+            "successCertificateUpload": "已成功添加 %{certificate}。",
+            "errorGettingVideoLog": "保存高级日志设置时出错。"
         }
     },
     "countries": {

@@ -190,7 +190,9 @@
         "videoLog":"@:appPageTitle.videoLog",
         "radius":"RADIUS",
         "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
-        "ipmiEventLog": "@:appPageTitle.ipmiEventLog"
+        "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
+        "gpgpu": "@:appPageTitle.gpgpu",
+        "advancedLogSettings":"@:appPageTitle.advancedLogSettings"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -256,7 +258,9 @@
         "videoLog":"Video Log",
         "radius": "RADIUS",
         "amdRemoteDebug": "Remote Debug",
-        "ipmiEventLog": "IPMI Event Logs"
+        "ipmiEventLog": "IPMI Event Logs",
+        "gpgpu": "GPGPU",
+        "advancedLogSettings":"Advanced Log Settings"
 
     },
     "pageNodeManager": {
@@ -371,8 +375,8 @@
             "iPPriority": "IP Priority",
             "domainName": "Domain Name",
             "hostConfiguration": "Host Configuration",
-            "hostNameSetting": "Host Name",
-            "staticHostName": "Static Host Name",
+            "hostNameSetting": "Host Name Settings",
+            "hostName": "Host Name",
             "interfacesConfiguration": "Interfaces",
             "ddnsMethod": "DDNS Method",
             "nsUpdateEnable": "NSUpdate Enable",
@@ -689,7 +693,6 @@
             "fileUploadedError": "Error in uploading the Restore File.",
             "errorGettingBackupDetails": "Error in getting the Property Backup Features.",
             "errorMessageNotConfigured": "The operation cannot be completed, since the Configuration file does not exit.",
-            "featureNotAvailable": "The Backup and Restore Features are not enabled.",
             "restoreConfirmation": "Restore functionality will restart the services of Configured Backup properties. Are you sure you want to proceed?",
             "confirmTitle": "Confirm?"
         }
@@ -773,7 +776,10 @@
             "ipAddress": "IP Address",
             "privilege": "Privilege",
             "searchSessions": "Search Sessions",
-            "mountType": "Mount Type"
+            "mountType": "Mount Type",
+            "administrator": "Administrator",
+            "operator": "Operator",
+            "readOnly": "Readonly"
         },
         "toast": {
             "errorDelete": "Error disconnecting %{count} session. | Error in disconnecting %{count} sessions.",
@@ -880,6 +886,15 @@
         "refClockCapability": "RefClock Capability",
         "PCIePortMultiRecord": "NVMe PCIe Port MultiRecord",
         "nvmeMultiRecord": "NVMe MultiRecord",
+        "topologyMultiRecord": "Topology MultiRecord",
+        "elementCount": "Element Count",
+        "recordElementFormFactor": "Record Element Form Factor",
+        "recordElementMaxAuxPower": "Record Element Max Aux Power",
+        "recordElementMaxPower": "Record Element Max Power",
+        "recordElementType": "Record Element Type",
+        "recordFormat": "Record Format",
+        "recordTypeId": "Record Type ID",
+        "recordVersion": "Record Version",
         "SubSystemHealthStatusPoll": "SubSystem Health Status Poll",
         "compositeTemperature": "Composite Temperature",
         "driveFunctional": "Drive Functional",
@@ -912,6 +927,7 @@
         "maxPowerSupplyReq5v": "Max Power Supply Requirements5v",
         "maxThermalLoad": "Max Thermal Load",
         "recordAreaVersion": "Record Area Version",
+        "totalNVMCapacity": "Total NVM Capacity",
         "mediaInReadOnly": "Media In ReadOnly",
         "overallSubsystemDegraded": "Over all Subsystem Degraded",
         "powerBackupFailed": "Power Backup Failed",
@@ -920,6 +936,10 @@
         "nvmeSolidStateDrive": "NVMe Solid State Drive",
         "model": "Model",
         "serialNumber": "Serial Number",
+        "portTypePCIe": "Port Type PCIe",
+        "portTypeSMBus": "Port Type SMBus",
+        "nvmePCIePortMultiRecord": "NVMe PCIe Port MultiRecord",
+        "vitalProductData": "Vital Product Data",
         "toast": {
             "errorShowingNVMeInfo": "Error in displaying NVMe Information."
         }
@@ -1013,6 +1033,7 @@
             "bmcDumpEntry":"BMC Dump Entry"
         },
         "toast": {
+            "createDumpConfirmation": "Are you sure you want to create a new BMC Dump? This action cannot be undone.",
             "errorDeleteDump": "Error deleting %{count} Dump. | Error deleting %{count} Dumps.",
             "errorStartBmcDump": "Error in starting new BMC Dump.",
             "errorStartSystemDump": "Error in starting new System Dump.",
@@ -1020,7 +1041,9 @@
             "successStartBmcDump": "The Dump will take some time to complete. Refresh the application to see the completed Dump in the table.",
             "successStartBmcDumpTitle": "BMC Dump started",
             "successStartSystemDump": "The Dump will take some time to complete. The Dump will be offloaded to the operating system.",
-            "successStartSystemDumpTitle": "System Dump started"
+            "successStartSystemDumpTitle": "System Dump started",
+            "activeDumpInProgressTitle": "Dump Progress Status",
+            "activeDumpInProgress": "The dump may take some time. Refresh the page to view results.\nYou can cancel the running task from the Tasks page or start a new dump after completion."
         }
     },
     "pageEventLogs": {
@@ -1224,14 +1247,14 @@
         "ntp": "NTP",
         "sol": "SOL",
         "sysLog": "Syslog",
+        "serviceManager": "Service Manager",
         "navigationInfoFactoryDefault": "The following checked configurations will be preserved through the restore operation. You can make changes to the list in the",
         "navigationInfoExtensionFactoryDefault": "Page.",
         "toast": {
             "restoreToDefaultsSuccess": "Success! Device has been reset. Please close this browser session and open a new browser session to reconnect to the device.",
             "restoreToDefaultsError": "Error in Restore Factory Defaults.",
             "FactoryDefaultConfirmation": "Click 'OK' if you want to continue Restoring Configurations. WARNING: Restoring Configurations will restart the device.",
-            "title": "Factory Default",
-            "okTitle": "ok"
+            "title": "Factory Default"
         }
     },
     "PageOperations": {
@@ -1317,7 +1340,7 @@
             "errorDisabledClearConfig": "Error in disabling Clear Configuration."
         }
     },
-    "pagePreserveConfiguration": {
+    "pagePreserve": {
         "pageDescription": "BMC Preserve Configuration",
         "authentication": "Authentication",
         "fru": "FRU",
@@ -1335,12 +1358,15 @@
         "ntp": "NTP",
         "sol": "SOL",
         "sysLog": "Syslog",
+        "serviceManager": "Service Manager",
         "navigationInfoPreserve": "Click here to go to",
         "navigationInfoExtensionPreserve": "or",
         "toast": {
             "successPreserveConfiguration": "Preserve Configuration Settings have been saved successfully.",
             "errorPreserveConfiguration": "Error in setting Preserve Configuration.",
-            "errorGettingPreserveConfig": "Error in getting Preserve Configuration."
+            "errorGettingPreserveConfig": "Error in getting Preserve Configuration.",
+            "preserveConfirmation": "Saving selected Configurations will take effect only during a BMC full flash update. All existing Configurations will be preserved by default during a BMC partial update.",
+            "title": "Preserve"
         }
     },
     "pageInventory": {
@@ -1556,8 +1582,12 @@
     },
     "pageRadius": {
         "enableRadiusAuthentication": " Enable RADIUS Authentication",
-        "radiusConfiguration": " RADIUS Configuration is not enabled.",
+        "radiusConfiguration": " RADIUS Authentication is not enabled.",
         "radiusPortValueLimits": "Kindly enter the values between %{min} and %{max}.",
+        "enableEAPTLSAuthentication": "Enable EAP-TLS Authentication",
+        "radiusBlastCa": "RADIUS CA",
+        "radiusBlastClient": "RADIUS Client",
+        "radiusBlastKey": "RADIUS Key",
         "form": {
             "serverAddress": "Server Address",
             "port": "Port",
@@ -1567,12 +1597,21 @@
             "groupName3": "Group Name3 - Optional",
             "privilege1": "Privilege 1",
             "privilege2": "Privilege 2",
-            "privilege3": "Privilege 3"
+            "privilege3": "Privilege 3",
+            "radiusCA": "RADIUS CA",
+            "radiusClient": "RADIUS Client",
+            "radiusKey": "RADIUS Key"
         },
         "toast": {
             "successRadiusConfiguration": "RADIUS Settings has been saved successfully.",
+            "successAddCertificate": "Successfully added %{certificate}.",
+            "successEnableEapTLS": "Successfully enabled EAP-TLS Authentication.",
+            "successDisableEapTLS": "Successfully disabled EAP-TLS Authentication.",
+            "errorAddCertificate": "Error in adding Certificate.",
             "errorRadiusConfiguration": "Error in setting RADIUS Configuration.",
-            "errorGettingRadiusConfig": "Error in getting RADIUS Configuration."
+            "errorGettingRadiusConfig": "Error in getting RADIUS Configuration.",
+            "errorEnableEapTLS": "Error in enabling EAP-TLS Authentication.",
+            "errorDisableEapTLS": "Error in disabling EAP-TLS Authentication."
         }
     },
     "pageUserManagement": {
@@ -1616,7 +1655,9 @@
             "authProtocolsh224": "SHA-224",
             "authProtocolsha256": "SHA-256",
             "authProtocolsha384": "SHA-384",
-            "authProtocolsha512": "SHA-512"
+            "authProtocolsha512": "SHA-512",
+            "logoutConfirmMessage": "Are you sure you want to change Password for the logged in user '%{user}'? This user will get logout and it will be reflected in the next login only.",
+            "logoutAlert": "Logout Alert"
         },
         "table": {
             "privilege": "Privilege",
@@ -1897,8 +1938,7 @@
         "toast": {
             "errorSavinNcsiInterface": "Error in saving NCSI Interface Settings.",
             "errorGettingNcsi": "Error in getting NCSI Interface information.",
-            "successSavingNcsiInterface": "Successfully saved NCSi Interface Settings.",
-            "featureNotEnabled": "The NCSI feature is not enabled."
+            "successSavingNcsiInterface": "Successfully saved NCSi Interface Settings."
         }
     },
     "pageVlan": {
@@ -2090,10 +2130,10 @@
             "AlwaysOff": "Always Off",
             "LastState": "Last State"
         },
-        "policiesDesc": {
-            "AlwaysOn": "Always on - The system always powers on when power is applied.",
-            "AlwaysOff": "Always off - The system always remains powered off when power is applied.",
-            "LastState": "Last state - The system returns to its last on or off power state when power is applied."
+         "policiesDesc": {
+            "AlwaysOn": "Always On - The system always powers on when power is applied.",
+            "AlwaysOff": "Always Off - The system always remains powered off when power is applied.",
+            "LastState": "Last State - The system returns to its last on or off power state when power is applied."
         },
         "toast": {
             "errorSaveSettings": "Error in saving Settings.",
@@ -2283,8 +2323,7 @@
             "successApplyPowerCapEnable": "Successfully enabled Apply Power Cap.",
             "successApplyPowerCapDisable": "Successfully disabled Apply Power Cap.",
             "errorApplyPowerCapEnable": "Error in enabling Apply Power Cap.",
-            "errorApplyPowerCapDisable": "Error in disabling Apply Power Cap.",
-            "featureNotAvailable":"Power Cap is not supported on this platform."
+            "errorApplyPowerCapDisable": "Error in disabling Apply Power Cap."
         }
     },
     "pageSensors": {
@@ -2426,8 +2465,26 @@
             "certificate": "Certificate",
             "issuedBy": "Issued By",
             "issuedTo": "Issued To",
+            "issuerCommonName": "Issuer Common Name (CN)",
+            "issuedToCommonName": "Issued to Common Name (CN)",
             "validFrom": "Valid From",
-            "validUntil": "Valid Until"
+            "validUntil": "Valid Until",
+            "issuerCity": "Issuer City or Locality (L)",
+            "issuerCountry": "Issuer Country(C)",
+            "issuerOrganization": "Issuer Organization (O)",
+            "issuerOrganizationalUnit": "Issuer Organization Unit (OU)",
+            "issuerState": "Issuer State or Province (ST)",
+            "issuedToCity": "Issued to City or Locality (L)",
+            "issuedToCountry": "Issued to Country(C)",
+            "issuedToOrganization": "Issued to Organization (O)",
+            "issuedToOrganizationalUnit": "Issued to Organization Unit (OU)",
+            "issuedToState": "Issued to State or Province (ST)",
+            "certificateVersion":"Certificate Version",
+            "serialNumber":"Serial Number",
+            "signatureAlgorithm":"Signature Algorithm",
+            "publicKey":"Public Key",
+            "issuerEmailAddress": "Issuer Email Address",
+            "issuedToEmailAddress": "Issued to Email Address"
         },
         "toast": {
             "errorAddCertificate": "Error in adding Certificate.",
@@ -2475,6 +2532,7 @@
             "serverClosedSuccessfully": "Server closed successfully.",
             "serverClosedWithErrors": "Server closed with errors.",
             "invalidFileType": "Invalid Image File Type",
+            "virtualMediaErrorFileTooSmall": "The selected file must be at least 600 KB.",
             "infoTitle": "External Server Start button",
             "infoMessage": "The Start button is enabled only if a Password is set and the Mount Type is CIFS or HTTPS."
         }
@@ -2521,6 +2579,7 @@
         "nVDataVersion": "NVDATA Version",
         "memorySizeMiB": "Memory Size",
         "totalCacheSizeMiB": "Total Cache Size",
+        "pci": "PCI",
         "pciVendorId": "PCI Vendor ID",
         "pciDeviceId": "PCI Device ID",
         "pciSubVendorId": "PCI Sub Vendor ID",
@@ -2536,6 +2595,23 @@
         "readCacheRatio": "Read Cache Ratio",
         "writeCacheRatio": "Write Cache Ratio",
         "manufacturer": "Manufacturer",
+        "boardTemperature": "Board Temperature",
+        "pciLinkSpeed": "PCI Link Speed",
+        "batterySerialNumber": "Battery Serial Number",
+        "criticalTemperature": "Critical Temperature (°C)",
+        "designCapacity": "Design Capacity (mAh)",
+        "designVoltage": "Design Voltage (mV)",
+        "deviceChemistry": "Device Chemistry",
+        "energyPackSerialNunber": "Energy Pack Serial Number",
+        "fwStatus": "Fw Status",
+        "maxTemperature": "Max Temperature (°C)",
+        "mfgName": "Mfg Name",
+        "packAssemblyNumber": "Pack Assembly Number",
+        "packVersionNumber": "Pack Version Number",
+        "pcbAssemblyNumber": "Pcb Assembly Number",
+        "pcbVersionNumber": "Pcb Version Number",
+        "energyPackSubType": "Energy Pack Sub Type",
+        "energyPackType": "Energy Pack Type",
         "modal": {
             "dropdownPropertiesBtn":"Properties",
             "dropdownManagementBtn": "Management",
@@ -2564,6 +2640,8 @@
             "labelRaidMode": "RAID Mode",
             "labelJbodMode": "JBOD Mode",
             "alertNotSupport": "This feature is currently not supported.",
+            "alertNotSupportControllerPersonalityMsg1":"Only supports this personality: ",
+            "alertNotSupportControllerPersonalityMsg2":"At this time, the system cannot switch to JBOD Mode.",
             "labelControllerProperties": "Controller Properties",
             "controllerPropertiesHelperText":"Set controller properties.",
             "controllerPropertiesRateValueHelperText": "The value must be between 0 and 100, inclusive.",
@@ -2581,7 +2659,12 @@
             "labelPatrolReadCurrentRate": "Rate: ",
             "patrolReadCurrentPropertiesHelperText":"Displays Patrol Read properties. If you need to edit the item, please click the 'Properties' > 'Controller Properties' button.",
             "patrolReadActionSwitchHelperText": "Select Start/Stop to process Patrol Read. Wait a minute after completion.",
-            "alertNotSupportPatrolReadAction":"Action not supported. Make sure the adapter has at least one virtual drive or at least one Hot Spare drive available."
+            "alertNotSupportPatrolReadAction":"Action not supported. Make sure the adapter has at least one virtual drive or at least one Hot Spare drive available.",
+            "firmwareUpdateConfirmationMsg":"Do you want to update the RAID controller firmware?",
+            "firmwareUpdateConfirmationTitle": "Firmware Update",
+            "alertRaidFirmwareUpdateNotReady": "Firmware update is temporarily unavailable because the service is busy. Please retry later.",
+            "labelFirmwareUpdate": "Firmware Update",
+            "firmwareUpdateHelperText": "This feature allows you to update the RAID controller's firmware. After the update is complete, please reboot the host to apply the new firmware. If the system prompts 'Busy', please try to perform the update again later."
         },
         "actions": {
             "startPatrolRead":"Start Patrol Read",
@@ -2614,7 +2697,15 @@
             "startPatrolReadAction": "Start the Patrol Read action.",
             "stopPatrolReadActionSuccess": "Successfully stopped the Patrol Read action.",
             "stopPatrolReadActionFail": "Failed to stop the Patrol Read action.",
-            "stopPatrolReadAction": "Stop the Patrol Read action."
+            "stopPatrolReadAction": "Stop the Patrol Read action.",
+            "successFirmwareUpdate": "Successfully updated the RAID controller firmware. Please reboot the host to apply the new firmware.",
+            "errorFirmwareUpdate": "Failed to update the RAID controller firmware.",
+            "successPrepareFirmwareUpdate": "Successfully prepared for RAID firmware update.",
+            "errorPrepareFirmwareUpdate": "Failed to prepare for RAID firmware update.",
+            "labelUpdateStarted": "Update Started",
+            "successStartupFirmwareUpdate": "Wait for the RAID firmware update notification before making any changes.",
+            "selectFirmwareUpdateFile": "Please select the firmware file to update the RAID controller.",
+            "errorGetFirmwareInventory": "Failed to get firmware inventory."
         }
     },
     "pagePhysicalDevice": {
@@ -2629,7 +2720,7 @@
             "serialNumber": "Serial Number",
             "health": "Health",
             "mediaType": "Media Type",
-            "pDrivestate": "State",
+            "pDrivestate": "PDrive State",
             "powerState": "Power State",
             "productId": "Product ID",
             "temperature": "Temperature",
@@ -2647,7 +2738,24 @@
             "uid": "UID",
             "usage": "Usage",
             "blockCount": "Block Count",
+            "capableSpeedGbs": "Capable Speed",
+            "capacityBytes": "Capacity",
+            "present": "Present",
             "isForeignDevice": "Foreign Device",
+            "auOperation": "AuOperation",
+            "auStatus": "AuStatus",
+            "capabilities": "Capabilities",
+            "ddf": "Ddf",
+            "elapsedSecs": "Elapsed Seconds ",
+            "lastPredFailEventSeqNum": "Last Pred Fail Event Seq Num",
+            "maxLinkSpeed": "Max Link Speed",
+            "mediaErrCount": "Media Error Count",
+            "otherErrCount": "Other Error Count",
+            "progressPercent": "Progress Percent",
+            "rotationalSpeedRPM": "Rotational Speed RPM",
+            "shieldCounter": "Shield Counter",
+            "ssdPercentUsed": "Ssd Percent Used",
+            "ssdPowerOnHours": "Ssd Power On Hours",
             "state": {
                 "hotspare": "Hot Spare",
                 "unknownState": "Unknown",
@@ -2812,7 +2920,13 @@
             "ldType": "Logical Device Type",
             "pdList": "Physical Device List",
             "acceleratorType": "Accelerator Type",
-            "enableBGI": "EnableBGI"
+            "accessPolicyStatus": "Access Policy Status",
+            "enableBGI": "Enable BGI",
+            "encryptionType": "Encryption Type",
+            "powerSavingPolicy": "Power Saving Policy",
+            "PRL": "PRL",
+            "RLQ": "RLQ",
+            "spanDepth": "Span Depth"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "No Physical Device is available to configure!",
@@ -2903,7 +3017,21 @@
             "configurationEvents": "Configuration Events",
             "configuration": "Configuration",
             "bbuEvents": "BBU Events",
-            "bbu": "BBU"
+            "bbu": "BBU",
+            "enclosureEvents": "Enclosure Events",
+            "enclosure": "Enclosure",
+            "sasEvents": "SAS Events",
+            "sas": "SAS",
+            "pcieEvents": "PCIe Events",
+            "pcie": "PCIe",
+            "blockingBootEvents": "Blocking Boot Events",
+            "blockingBoot": "Blocking Boot",
+            "nonBlockingBootEvents": "Non Blocking Boot Events",
+            "nonBlockingBoot": "Non Blocking Boot",
+            "storeLibEvents": "StoreLib Events",
+            "storeLib": "StoreLib",
+            "clusterEvents": "Cluster Events",
+            "cluster": "Cluster"
         },
         "modal": {
             "deleteAllTitle": "Delete All Logs",
@@ -2949,7 +3077,8 @@
                 "ipv6": "IPv6",
                 "both": "Both",
                 "networkType": "Network Type",
-                "preLoad":"PreLoad"
+                "preLoad":"PreLoad",
+                "ipVersion": "IP Version"
             }
         },
         "toast": {
@@ -2959,7 +3088,7 @@
             "errorDelete": "Error in deleting Firewall Rules.",
             "errorDateOrTimeSaveFireWall": "Invalid Date or Time.",
             "errorStartorEndIpSaveFireWall": "Invalid Range Start or Range End IP.",
-            "featureNotAvailable": "The System Firewall feature is not enabled."
+            "errorCreateLimitReachedForResource": "The maximum number of Firewall Rules that can be created is up to 64 IPv4 Firewall Rules and 64 IPv6 Firewall Rules."
         },
         "table": {
             "startIP": "Start IP",
@@ -2972,7 +3101,8 @@
             "endDuration": "End Duration",
             "preLoad": "PreLoad",
             "target": "Target",
-            "networkType": "Network Type"
+            "networkType": "Network Type",
+            "searchFirewallRule": "Search Firewall Rule"
         }
     },
     "bond": {
@@ -2987,8 +3117,7 @@
         "errorSavebond": "Error in saving Network Bond.",
         "errorDelete": "Error in deleting Network Bond.",
         "errorGetBond": "Error in getting Network Bond.",
-        "miiRangeRequired": "Enter the valid milliseconds range between 1-100.",
-        "featureNotAvailable": "The Network Bond feature is not enabled."
+        "miiRangeRequired": "Enter the valid milliseconds range between 1-100."
     },
     "license": {
         "add_license_key": "Add License Key",
@@ -3019,7 +3148,6 @@
         "Mbps": "Mbps",
         "sameNetworkLinkSettings": "The Network Link Configurations are the same, so it is not required to save.",
         "modifyNetworkLinkSettings": "If users need to change these interface configurations, please modify the values of the parent interface instead.",
-        "networkLinkFeatureNotAvailable": "The Network Link feature is not enabled.",
         "toast": {
             "successSaveNetworkLink": "Successfully saved Network Link.",
             "errorSavedNetworkLink": "Error in saving Network Link.",
@@ -3133,6 +3261,80 @@
             "successVideoLogCleared": "Video Log Deleted Successfully.",
             "errorVideoLogDownload": "Video Log Downloaded Failed.",
             "errorGettingVideoLog": "Error in getting Video Logs."
+        }
+    },
+    "gpgpu": {
+        "tab":{
+            "gpgpuInterfaceProcessorTab" : "Processor",
+            "gpgpuInterfaceChassisTab" : "Chassis",
+            "gpgpuInterfaceMemoryTab": "Memory"
+        },
+        "gpgpuInterfaceHeader" : "GPU",
+        "gpgpuInterfaceMemoryChassisContentTitle":"Chassis Info",
+        "gpgpuInterfaceMemoryEnvironmentMetricsContentTitle":"Environment Metrics",
+        "gpgpuInterfaceMemoryMetricsContentTitle":"Memory Metrics",
+        "gpgpuInterfaceMemoryContentTitle": "Memory Controller Info",
+        "gpgpuInterfaceProcessorPcieFunctionContentTitle":"PCIe Function",
+        "gpgpuInterfaceProcessorMetricsContentTitle":"Processor Metrics",
+        "gpgpuInterfaceProcessorEnvironmentmetricsContentTitle":"Environment Metrics",
+        "gpgpuInterfaceProcessorMemorySummaryContentTitle": "Memory Summary",
+        "gpgpuInterfaceInfoContentTitle": "GPU Info",
+        "gpgpuInterfaceMemorySensorsInfoContentTitle":"Sensors Info",
+        "gpgpuInterfaceMemoryPcieDevicesContentTitle":"PCIe Devices",
+        "gpgpuDevices":"GPU Devices",
+        "fpga": {
+            "fpgaInterfaceHeader" : "FPGA",
+            "fpgaInterfaceProcessorPortContentTitle": "Port Info",
+            "fpgaInterfaceFpgaContentTitle": "FPGA Info",
+            "fpgaInterfaceChassisContentTitle": "Chassis Info",
+            "fpgaInterfaceSensorsInfoContentTitle":"Sensors Info",
+            "fpgaDevices":"FPGA Devices"
+        },
+        "baseboard": {
+            "baseBoardInterfaceHeader" : "BaseBoard",     
+            "baseBoardInterfaceAssemblyTab" : "Assembly",
+            "baseBoardInterfaceSensorsTab" : "Sensors",
+            "baseBoardInterfaceChassisSensorsInfoContentTitle":"Sensors Info",
+            "baseBoardInterfaceBaseBoardAssemblyContentTitle": "Assembly Info"
+        },
+        "toast": {
+            "errorGettingSystems": "Error in getting Systems Information",
+            "errorGettingChassis": "Error in getting Chassis Information",
+            "errorGettingProcessor": "Error in getting Processor Information",
+            "errorGettingEnvironmentMetrics": "Error in getting Environment Metrics Information",
+            "errorGettingMemoryMetrics": "Error in getting Memory Metrics Information",
+            "errorGettingFpgaInfo": "Error in getting FPGA Information",
+            "errorGettingFpgaSensorInfo": "Error in getting FPGA Sensors Information",
+            "errorGettingBaseBoardInfo": "Error in getting BaseBoard Information",
+            "errorGettingBaseBoardSensorInfo": "Error in getting BaseBoard Sensors Information"
+        }
+    },
+    "advancedLogSettings":{
+        "systemLog": "System Log",
+        "localLog": "Local Log",
+        "remoteLog": "Remote Log",
+        "portType": "Port Type",
+        "udp": "UDP",
+        "tcp": "TCP",
+        "fileSize": "File Size",
+        "rotateCount": "Rotate Count",
+        "remotelogserver": "Remote Log Server",
+        "remoteserverport": "Remote Server Port",
+        "enableauditlog": "Enable Audit Log",
+        "caCertificateFile": "CA Certificate File",
+        "certificatefile": "Certificate File",
+        "privateKey": "Private key",
+        "advancedLogValueLimits": "Kindly enter the Values between %{min} to %{max}.",
+        "invalidIPAddress": "Invalid IP Address",        
+        "cacertPEM": "Cacert PEM Certificate",
+        "serverCRT": "Server CRT Certificate",
+        "serverKey": "Server Key Certificate",
+        "incorrectAdvancedCertificateFileType": "File is not a correct Certificate Type.",
+        "toast": {
+            "successSaveAdvancedLogsSettings": "Successfully Saved Advanced Log Settings.",
+            "errorAdvancedAddCertificate": "Error in adding %{certificate}.",
+            "successCertificateUpload": "Successfully added %{certificate}.",
+            "errorGettingVideoLog": "Error in saving Advanced Log Settings."
         }
     },
     "countries": {

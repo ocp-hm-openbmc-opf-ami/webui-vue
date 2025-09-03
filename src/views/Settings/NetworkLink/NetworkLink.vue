@@ -1,131 +1,125 @@
 <template>
   <b-container fluid="xl">
     <page-title />
-    <div v-if="!networkLinkFeatureStatus">
-      <b-alert show variant="danger">{{
-        $t('networkLink.networkLinkFeatureNotAvailable')
-      }}</b-alert>
-    </div>
-    <div v-else>
-      <b-row class="align-items-end form-background p-3">
-        <b-col xl="6" class="align-items-end">
-          <b-alert v-if="sameNetworkLink" show variant="warning">{{
-            $t('networkLink.sameNetworkLinkSettings')
-          }}</b-alert>
-          <b-alert v-if="disabledNetworkLinkStatus" show variant="warning">{{
-            $t('networkLink.modifyNetworkLinkSettings')
-          }}</b-alert>
-          <b-form id="form-networkLink">
-            <b-row>
-              <b-col sm="6">
-                <b-form-group
-                  :label="$t('networkLink.lanInterface')"
-                  label-for="lanInterface"
+    <b-row class="align-items-end form-background p-3">
+      <b-col xl="6" class="align-items-end">
+        <b-alert v-if="sameNetworkLink" show variant="warning">{{
+          $t('networkLink.sameNetworkLinkSettings')
+        }}</b-alert>
+        <b-alert v-if="disabledNetworkLinkStatus" show variant="warning">{{
+          $t('networkLink.modifyNetworkLinkSettings')
+        }}</b-alert>
+        <b-form id="form-networkLink">
+          <b-row>
+            <b-col sm="6">
+              <b-form-group
+                :label="$t('networkLink.lanInterface')"
+                label-for="lanInterface"
+              >
+                <b-form-select
+                  id="protocol"
+                  v-model="form.lanInterface"
+                  class="input"
+                  :options="linkInterfaceOptions"
+                  data-test-id="lanInterface-option"
+                  :state="getValidationState($v.form.lanInterface)"
+                  @change="onChangeSelect"
+                ></b-form-select>
+                <b-form-invalid-feedback role="alert">
+                  <template v-if="!$v.form.lanInterface.required">
+                    {{ $t('global.form.fieldRequired') }}
+                  </template>
+                </b-form-invalid-feedback>
+              </b-form-group>
+            </b-col>
+            <b-col sm="6">
+              <b-form-group
+                class="mb-3"
+                :label="$t('networkLink.autonegotiation')"
+              >
+                <b-form-checkbox
+                  id="autoNegotiation"
+                  v-model="form.AutoNeg"
+                  data-test-id="networklink-autoNegotiation"
+                  :disabled="isButtonDisable"
+                  switch
                 >
+                </b-form-checkbox>
+              </b-form-group>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col sm="6">
+              <b-form-group
+                :label="$t('networkLink.linkSpeed')"
+                label-for="linkSpeed"
+              >
+                <div v-if="!form.AutoNeg">
                   <b-form-select
                     id="protocol"
-                    v-model="form.lanInterface"
+                    v-model="form.SpeedMbps"
                     class="input"
-                    :options="linkInterfaceOptions"
-                    data-test-id="lanInterface-option"
-                    :state="getValidationState($v.form.lanInterface)"
-                    @change="onChangeSelect"
-                  ></b-form-select>
+                    :options="linkLinkSpeedOptions"
+                    data-test-id="bondInterface-option"
+                    :state="getValidationState($v.form.SpeedMbps)"
+                    ><template #first>
+                      <b-form-select-option :value="valueDefault" disabled>
+                        {{ $t('global.form.selectAnOption') }}
+                      </b-form-select-option>
+                    </template></b-form-select
+                  >
                   <b-form-invalid-feedback role="alert">
-                    <template v-if="!$v.form.lanInterface.required">
+                    <template v-if="!$v.form.SpeedMbps.required">
                       {{ $t('global.form.fieldRequired') }}
                     </template>
                   </b-form-invalid-feedback>
-                </b-form-group>
-              </b-col>
-              <b-col sm="6">
-                <b-form-group
-                  class="mb-3"
-                  :label="$t('networkLink.autonegotiation')"
-                >
-                  <b-form-checkbox
-                    id="autoNegotiation"
-                    v-model="form.AutoNeg"
-                    data-test-id="networklink-autoNegotiation"
-                    switch
-                  >
-                  </b-form-checkbox>
-                </b-form-group>
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col sm="6">
-                <b-form-group
-                  :label="$t('networkLink.linkSpeed')"
-                  label-for="linkSpeed"
-                >
-                  <div v-if="!form.AutoNeg">
-                    <b-form-select
-                      id="protocol"
-                      v-model="form.SpeedMbps"
-                      class="input"
-                      :options="linkLinkSpeedOptions"
-                      data-test-id="bondInterface-option"
-                      :state="getValidationState($v.form.SpeedMbps)"
-                      ><template #first>
-                        <b-form-select-option :value="valueDefault" disabled>
-                          {{ $t('global.form.selectAnOption') }}
-                        </b-form-select-option>
-                      </template></b-form-select
-                    >
-                    <b-form-invalid-feedback role="alert">
-                      <template v-if="!$v.form.SpeedMbps.required">
-                        {{ $t('global.form.fieldRequired') }}
-                      </template>
-                    </b-form-invalid-feedback>
-                  </div>
-                  <div v-else>
-                    <span>
-                      {{ speedMbpsLabel }} {{ $t('networkLink.Mbps') }}
-                    </span>
-                  </div>
-                </b-form-group>
-              </b-col>
-              <b-col sm="6">
-                <b-form-group :label="$t('networkLink.duplexMode')">
-                  <b-form-radio-group
-                    v-if="!form.AutoNeg"
-                    v-model="form.FullDuplex"
-                    stacked
-                  >
-                    <div>
-                      <b-form-radio value="Full" class="mr10 radio-inline">
-                        {{ $t('networkLink.fullDuplex') }}
-                      </b-form-radio>
-                      <b-form-radio value="Half" class="mr10 radio-inline">
-                        {{ $t('networkLink.halfDuplex') }}
-                      </b-form-radio>
-                    </div>
-                  </b-form-radio-group>
-                  <span v-else>
-                    {{
-                      form.FullDuplex === 'Full'
-                        ? $t('networkLink.fullDuplex')
-                        : $t('networkLink.halfDuplex')
-                    }}
+                </div>
+                <div v-else>
+                  <span>
+                    {{ speedMbpsLabel }} {{ $t('networkLink.Mbps') }}
                   </span>
-                </b-form-group>
-              </b-col>
-            </b-row>
-            <b-button
-              form="form-networLink"
-              type="submit"
-              variant="primary"
-              :disabled="disabledNetworkLinkStatus"
-              @click="onSave"
-            >
-              <icon-save />
-              {{ $t('global.action.save') }}
-            </b-button>
-          </b-form>
-        </b-col>
-      </b-row>
-    </div>
+                </div>
+              </b-form-group>
+            </b-col>
+            <b-col sm="6">
+              <b-form-group :label="$t('networkLink.duplexMode')">
+                <b-form-radio-group
+                  v-if="!form.AutoNeg"
+                  v-model="form.FullDuplex"
+                  stacked
+                >
+                  <div>
+                    <b-form-radio value="Full" class="mr10 radio-inline">
+                      {{ $t('networkLink.fullDuplex') }}
+                    </b-form-radio>
+                    <b-form-radio value="Half" class="mr10 radio-inline">
+                      {{ $t('networkLink.halfDuplex') }}
+                    </b-form-radio>
+                  </div>
+                </b-form-radio-group>
+                <span v-else>
+                  {{
+                    form.FullDuplex === 'Full'
+                      ? $t('networkLink.fullDuplex')
+                      : $t('networkLink.halfDuplex')
+                  }}
+                </span>
+              </b-form-group>
+            </b-col>
+          </b-row>
+          <b-button
+            form="form-networLink"
+            type="submit"
+            variant="primary"
+            :disabled="disabledNetworkLinkStatus || isButtonDisable"
+            @click="onSave"
+          >
+            <icon-save />
+            {{ $t('global.action.save') }}
+          </b-button>
+        </b-form>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 <script>
@@ -137,6 +131,8 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import _ from 'lodash';
 import { mapState } from 'vuex';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   components: {
     PageTitle,
@@ -170,11 +166,14 @@ export default {
       sameNetworkLink: false,
       speedMbpsLabel: '',
       disabledNetworkLinkStatus: false,
-      networkLinkFeatureStatus: true,
     };
   },
   computed: {
     ...mapState('networkLink', ['interfaceData']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     enabledinputfield() {
       if (!this.form.enableBonding || this.checkBondStatus) {
         return true;

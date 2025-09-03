@@ -19,7 +19,10 @@
           @click-table-action="deleteTableRow(index)"
         >
           <template #icon>
-            <icon-trashcan v-if="action.value === 'delete'" />
+            <icon-trashcan
+              v-if="action.value === 'delete'"
+              :disabled="isButtonDisable"
+            />
           </template>
         </table-row-action>
       </template>
@@ -84,7 +87,7 @@
         </b-col>
       </b-row>
     </div>
-    <b-button variant="primary" @click="addVlan()">
+    <b-button variant="primary" :disabled="isButtonDisable" @click="addVlan()">
       <icon-add />
       {{ $t('pageVlan.table.add') }}
     </b-button>
@@ -100,6 +103,8 @@ import { mapState } from 'vuex';
 import { required } from 'vuelidate/lib/validators';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'VlanListTable',
@@ -144,6 +149,10 @@ export default {
   },
   computed: {
     ...mapState('vlan', ['vlanTableData']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
   },
   watch: {
     vlanTableData() {
@@ -198,7 +207,7 @@ export default {
               {
                 value: 'delete',
                 title: this.$t('pageVlan.table.deleteVlan'),
-                enabled: true,
+                enabled: this.userPrivilege !== privilegesId.readOnly,
               },
             ],
           };

@@ -12,6 +12,7 @@
               v-model="sendHostNameEnabled"
               data-test-id="ddns-toggle-host-name"
               switch
+              :disabled="isButtonDisable"
               @change="changeHostNameEnabled"
             >
               <span v-if="sendHostNameEnabled">
@@ -29,6 +30,7 @@
               v-model="sendNsupdateEnabled"
               data-test-id="ddns-toggle-ns-update"
               switch
+              :disabled="isButtonDisable"
               @change="changeNsupdateEnabled"
             >
               <span v-if="sendNsupdateEnabled">
@@ -53,6 +55,7 @@
                 <b-form-radio
                   v-model="hostNameSetting"
                   name="Host-Name-Setting"
+                  data-test-id="host-name-setting-manual"
                   value="Manual"
                 >
                   {{ $t('pageDDNSNetwork.ddnsConfiguration.manual') }}
@@ -62,6 +65,7 @@
                 <b-form-radio
                   v-model="hostNameSetting"
                   name="Host-Name-Setting"
+                  data-test-id="host-name-setting-auto"
                   value="Auto"
                 >
                   {{ $t('pageDDNSNetwork.ddnsConfiguration.auto') }}
@@ -71,22 +75,36 @@
           </b-form-group>
         </b-col>
         <b-col sm="3">
+          <dl v-if="hostNameSetting === 'Auto' || hostNameSetting === ''">
+            <dt>
+              {{ $t('pageNetwork.hostname') }}
+            </dt>
+            <dd style="word-break: break-all" data-test-id="host-name-default">
+              {{ dataFormatter(defaultHostName) }}
+            </dd>
+          </dl>
           <b-form-group
-            :label="$t('pageDDNSNetwork.ddnsConfiguration.staticHostName')"
+            v-if="hostNameSetting === 'Manual'"
+            :label="$t('pageDDNSNetwork.ddnsConfiguration.hostName')"
             label-for="Static-Host-Name"
           >
             <b-form-input
-              id="Static-Host-Name"
+              id="host-Name"
               v-model="StaticHostName"
+              data-test-id="host-name-input"
               type="text"
-              :disabled="hostNameSetting === 'Auto'"
+              :disabled="hostNameSetting === 'Auto' || isButtonDisable"
             />
           </b-form-group>
         </b-col>
       </b-row>
-    </page-section>
-    <page-section>
-      <b-button type="submit" variant="primary" @click="saveConfigurations">
+      <b-button
+        type="submit"
+        variant="primary"
+        data-test-id="host-name-settings-save-button"
+        :disabled="isButtonDisable"
+        @click="saveConfigurations"
+      >
         <icon-save />
         {{ $t('global.action.save') }}
       </b-button>
@@ -100,13 +118,21 @@ import { mapState } from 'vuex';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
 export default {
   name: 'DDNSSettings',
   components: {
     PageSection,
     IconSave,
   },
-  mixins: [BVToastMixin, LoadingBarMixin],
+  mixins: [BVToastMixin, LoadingBarMixin, DataFormatterMixin],
+  props: {
+    isButtonDisable: {
+      required: true,
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       ipPriorityType: [
@@ -125,7 +151,12 @@ export default {
     };
   },
   computed: {
-    ...mapState('ddnsNetwork', ['ipPriority', 'hostName', 'staticHostName']),
+    ...mapState('ddnsNetwork', [
+      'ipPriority',
+      'hostName',
+      'staticHostName',
+      'defaultHostName',
+    ]),
     sendHostNameEnabled: {
       get() {
         return this.$store.getters['ddnsNetwork/hostNameEnabled'];

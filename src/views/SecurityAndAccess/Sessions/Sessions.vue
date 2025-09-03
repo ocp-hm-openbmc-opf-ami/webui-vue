@@ -54,6 +54,7 @@
             <b-form-checkbox
               v-model="tableHeaderCheckboxModel"
               data-test-id="sessions-checkbox-selectAll"
+              :disabled="isButtonDisable"
               :indeterminate="tableHeaderCheckboxIndeterminate"
               @change="onChangeHeaderCheckbox($refs.table)"
             >
@@ -63,6 +64,7 @@
           <template #cell(checkbox)="row">
             <b-form-checkbox
               v-model="row.rowSelected"
+              :disabled="isButtonDisable"
               :data-test-id="`sessions-checkbox-selectRow-${row.index}`"
               @change="toggleSelectRow($refs.table, row.index)"
             >
@@ -77,6 +79,7 @@
               :key="index"
               :value="action.value"
               :title="action.title"
+              :enabled="action.enabled"
               :row-data="row.item"
               :btn-icon-only="false"
               :data-test-id="`sessions-button-disconnect-${row.index}`"
@@ -86,6 +89,7 @@
                 <icon-trashcan
                   v-if="action.value === 'delete'"
                   :data-test-id="`userManagement-tableRowAction-delete-${index}`"
+                  :disabled="isButtonDisable"
                 />
               </template>
             </table-row-action>
@@ -117,6 +121,7 @@
           :per-page="perPage"
           :total-rows="getTotalRowCount(filteredRows)"
           aria-controls="table-session-logs"
+          :limit="limit"
         />
       </b-col>
     </b-row>
@@ -134,6 +139,7 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import BVPaginationMixin, {
   currentPage,
   perPage,
+  limit,
 } from '@/components/Mixins/BVPaginationMixin';
 import BVTableSelectableMixin, {
   selectedRows,
@@ -144,6 +150,8 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import SearchFilterMixin, {
   searchFilter,
 } from '@/components/Mixins/SearchFilterMixin';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -214,6 +222,7 @@ export default {
         {
           key: 'privilege',
           label: this.$t('pageSessions.table.privilege'),
+          formatter: this.convertPrivilege,
           class: 'text-center',
           sortable: true,
         },
@@ -237,6 +246,7 @@ export default {
       ],
       currentPage: currentPage,
       perPage: perPage,
+      limit: limit,
       selectedRows: selectedRows,
       searchTotalFilteredRows: 0,
       tableHeaderCheckboxModel: tableHeaderCheckboxModel,
@@ -245,6 +255,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     filteredRows() {
       return this.searchFilter
         ? this.searchTotalFilteredRows
@@ -258,6 +272,7 @@ export default {
             {
               value: 'delete',
               title: this.$t('pageSessions.action.delete'),
+              enabled: !this.isButtonDisable,
             },
           ],
         };
@@ -334,14 +349,18 @@ export default {
           });
       }
     },
+    convertPrivilege(value) {
+      if (!value) return '';
+      const role = value.toLowerCase();
+      if (role.includes('administrator')) {
+        return this.$t('pageSessions.table.administrator');
+      } else if (role.includes('operator')) {
+        return this.$t('pageSessions.table.operator');
+      } else if (role.includes('readonly')) {
+        return this.$t('pageSessions.table.readOnly');
+      }
+      return value;
+    },
   },
 };
 </script>
-<style lang="scss">
-#table-session-logs {
-  td .btn-link {
-    width: auto !important;
-    color: rgb(1, 70, 159);
-  }
-}
-</style>

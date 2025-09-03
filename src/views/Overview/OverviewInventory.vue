@@ -13,6 +13,7 @@
               v-model="systems.locationIndicatorActive"
               data-test-id="overviewInventory-checkbox-identifyLed"
               switch
+              :disabled="isButtonDisable"
               @change="toggleIdentifyLedSwitch"
             >
               <span v-if="systems.locationIndicatorActive">
@@ -62,7 +63,9 @@
 <script>
 import OverviewCard from './OverviewCard';
 import { BIcon } from 'bootstrap-vue';
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import BVToastMixin from '@/components/Mixins/BVToastMixin';
 
 export default {
   name: 'Inventory',
@@ -70,6 +73,7 @@ export default {
     OverviewCard,
     BIcon,
   },
+  mixins: [BVToastMixin],
   data() {
     return {
       greenBlinkStatus: null,
@@ -81,20 +85,32 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      systems: (state) => {
-        let systemData = state.system.systems[0];
-        return systemData ? systemData : {};
-      },
-    }),
+    ...mapGetters('dashboard', [
+      'systems',
+      'systemHealthLEDs',
+      'locationIndicatorStatus',
+    ]),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
+    },
+    systems() {
+      const systemData = this.$store.getters['dashboard/systems'][0];
+      return systemData
+        ? {
+            ...systemData,
+            locationIndicatorActive: this.locationIndicatorStatus,
+          }
+        : {};
+    },
     greenLed() {
-      return this.$store.getters['system/getGreenLedStatus'];
+      return this.systemHealthLEDs.greenLED;
     },
     amberLed() {
-      return this.$store.getters['system/getAmberLedStatus'];
+      return this.systemHealthLEDs.amberLED;
     },
     blueLed() {
-      return this.$store.getters['system/getBlueLedStatus'];
+      return this.systemHealthLEDs.blueLED;
     },
   },
   watch: {
@@ -109,15 +125,17 @@ export default {
     },
   },
   created() {
-    this.$root.$emit('overview-inventory-complete');
-    this.setGreenLED();
-    this.setAmberLed();
-    this.setBlueLed();
+    this.$store.dispatch('dashboard/fetchDashboardData').finally(() => {
+      this.$root.$emit('overview-inventory-complete');
+      this.setGreenLED();
+      this.setAmberLed();
+      this.setBlueLed();
+    });
   },
   methods: {
     toggleIdentifyLedSwitch(state) {
       this.$store
-        .dispatch('system/changeIdentifyLedState', state)
+        .dispatch('dashboard/updateLocationIndicator', state)
         .catch(({ message }) => this.errorToast(message));
     },
     setGreenLED() {

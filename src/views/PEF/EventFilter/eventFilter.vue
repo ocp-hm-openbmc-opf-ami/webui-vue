@@ -107,6 +107,7 @@ export default {
       destinationTypeOptions: [
         { value: 'SMTP', text: 'SMTP' },
         { value: 'SnmpTrap', text: 'SNMP Trap' },
+        { value: 'Both', text: 'Both' },
       ],
     };
   },

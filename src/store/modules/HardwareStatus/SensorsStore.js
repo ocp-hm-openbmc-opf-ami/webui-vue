@@ -31,8 +31,6 @@ const SensorsStore = {
       if (!collection) return;
       const promises = collection.reduce((acc, id) => {
         acc.push(dispatch('getSensors', id));
-        acc.push(dispatch('getThermalSensors', id));
-        acc.push(dispatch('getPowerSensors', id));
         return acc;
       }, []);
       return await api.all(promises);
@@ -83,62 +81,6 @@ const SensorsStore = {
         });
         commit('setSensors', sensorData);
       });
-    },
-    async getThermalSensors({ commit }, id) {
-      return await api
-        .get(`${id}/Thermal`)
-        .then(({ data: { Fans = [], Temperatures = [] } }) => {
-          const sensorData = [];
-          Fans.forEach((sensor) => {
-            sensorData.push({
-              name: sensor.Name,
-              status: sensor.Status.Health,
-              state: sensor.Status.State,
-              currentValue: sensor.Reading,
-              lowerCaution: sensor.LowerThresholdNonCritical,
-              upperCaution: sensor.UpperThresholdNonCritical,
-              lowerCritical: sensor.LowerThresholdCritical,
-              upperCritical: sensor.UpperThresholdCritical,
-              units: sensor.ReadingUnits,
-            });
-          });
-          Temperatures.forEach((sensor) => {
-            sensorData.push({
-              name: sensor.Name,
-              status: sensor.Status.Health,
-              state: sensor.Status.State,
-              currentValue: sensor.ReadingCelsius,
-              lowerCaution: sensor.LowerThresholdNonCritical,
-              upperCaution: sensor.UpperThresholdNonCritical,
-              lowerCritical: sensor.LowerThresholdCritical,
-              upperCritical: sensor.UpperThresholdCritical,
-              units: '℃',
-            });
-          });
-          commit('setSensors', sensorData);
-        })
-        .catch((error) => console.log(error));
-    },
-    async getPowerSensors({ commit }, id) {
-      return await api
-        .get(`${id}/Power`)
-        .then(({ data: { Voltages = [] } }) => {
-          const sensorData = Voltages.map((sensor) => {
-            return {
-              name: sensor.Name,
-              status: sensor.Status.Health,
-              state: sensor.Status.State,
-              currentValue: sensor.ReadingVolts,
-              lowerCaution: sensor.LowerThresholdNonCritical,
-              upperCaution: sensor.UpperThresholdNonCritical,
-              lowerCritical: sensor.LowerThresholdCritical,
-              upperCritical: sensor.UpperThresholdCritical,
-              units: 'V',
-            };
-          });
-          commit('setSensors', sensorData);
-        })
-        .catch((error) => console.log(error));
     },
     async getTimeInterval({ commit, state }, val) {
       let id = val.id == undefined ? state.graphSensors.id : val.id;

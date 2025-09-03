@@ -23,6 +23,7 @@ import Vlan from '@/views/Settings/Vlan';
 import Overview from '@/views/Overview';
 import PageNotFound from '@/views/PageNotFound';
 import PostCodeLogs from '@/views/Logs/PostCodeLogs';
+import PowerRestorePolicy from '@/views/Settings/PowerRestorePolicy';
 import ProfileSettings from '@/views/ProfileSettings';
 import RebootBmc from '@/views/Operations/RebootBmc';
 import Policies from '@/views/SecurityAndAccess/Policies';
@@ -43,6 +44,7 @@ import PAM from '../../views/Settings/PamOrder/PamOrder';
 import AutoVideoSettings from '@/views/Settings/AutoVideoSettings';
 import VideoLogs from '@/views/Logs/VideoLogs';
 import IPMIEventLog from '@/views/Logs/IPMIEventLogs';
+import AdvancedLogSettings from '@/views/Settings/AdvancedLogSettings/AdvancedLogSettings.vue';
 
 const roles = {
   administrator: 'Administrator',
@@ -141,6 +143,14 @@ const routes = [
         },
       },
       {
+        path: '/security-and-access/ldap',
+        name: 'ldap',
+        component: Ldap,
+        meta: {
+          title: i18n.t('appPageTitle.ldap'),
+        },
+      },
+      {
         path: '/security-and-access/policies',
         name: 'policies',
         component: Policies,
@@ -212,9 +222,28 @@ const routes = [
           title: i18n.t('appPageTitle.pam'),
         },
       },
+      {
+        path: '/settings/advanced-log',
+        name: 'advanced-log-settings',
+        component: AdvancedLogSettings,
+        meta: {
+          title: i18n.t('appPageTitle.advancedLogSettings'),
+        },
+      },
     ],
   },
 ];
+if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/gpgpu',
+    name: 'gpgpu',
+    component: () =>
+      import(/* webpackChunkName: "Gpgpu" */ '@/views/Settings/Gpgpu'),
+    meta: {
+      title: i18n.t('appPageTitle.gpgpu'),
+    },
+  });
+}
 if (process.env.VUE_APP_ONETREE_AMD_ADDC_ENABLED == 'true') {
   routes[2].children.push({
     path: '/host-system-diagnostics/addc',
@@ -506,6 +535,19 @@ if (process.env.VUE_APP_ONETREE_SMTP_ENABLED == 'true') {
     },
   });
 }
+if (
+  process.env.VUE_APP_ONETREE_AMD_POWERCAP_ENABLED === 'true' ||
+  process.env.VUE_APP_ONETREE_GPGPU_ENABLED === 'true'
+) {
+  routes[2].children.push({
+    path: '/settings/power-restore-policy',
+    name: 'power-restore-policy',
+    component: PowerRestorePolicy,
+    meta: {
+      title: i18n.t('appPageTitle.powerRestorePolicy'),
+    },
+  });
+}
 if (process.env.VUE_APP_ONETREE_SNMP_ENABLED == 'true') {
   routes[2].children.push({
     path: '/settings/snmp',
@@ -705,16 +747,6 @@ if (process.env.VUE_APP_ONETREE_SESSION_ENABLED == 'true') {
     component: Sessions,
     meta: {
       title: i18n.t('appPageTitle.sessions'),
-    },
-  });
-}
-if (process.env.VUE_APP_ONETREE_LDAP_CLIENT_ENABLED == 'true') {
-  routes[2].children.push({
-    path: '/security-and-access/ldap',
-    name: 'ldap',
-    component: Ldap,
-    meta: {
-      title: i18n.t('appPageTitle.ldap'),
     },
   });
 }

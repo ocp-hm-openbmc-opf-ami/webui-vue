@@ -8,6 +8,7 @@ const AuthenticationStore = {
   namespaced: true,
   state: {
     consoleWindow: null,
+    loginRoleId: null,
     authError: false,
     authLocked: false,
     xsrfCookie: Cookies.get('XSRF-TOKEN'),
@@ -63,6 +64,13 @@ const AuthenticationStore = {
         .post('/login', { data: [username, password] })
         .then((response) => {
           commit('authSuccess');
+          // Store Session_ID in global store if present
+          if (response.data.Session_ID !== undefined) {
+            store.commit('global/setSessionId', response.data.Session_ID);
+          }
+          if (response.data.RoleId) {
+            store.loginRoleId = response.data.RoleId;
+          }
           if (response.data.TwoFacEnableStatus != undefined) {
             if (response.data.TwoFacEnableStatus == 'N/A') {
               commit('setTfaFeatureEnabled', false);
@@ -103,7 +111,7 @@ const AuthenticationStore = {
           if (error.response.status == 404) {
             return Promise.resolve({
               PasswordChangeRequired: false,
-              RoleId: 'Administrator',
+              RoleId: store.loginRoleId,
             });
           }
         });

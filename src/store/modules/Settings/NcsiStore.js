@@ -7,13 +7,11 @@ const NcsiStore = {
     ethernetData: [],
     ncsiInterface: [],
     ncsiData: [],
-    ncsiEnable: true,
   },
   getters: {
     ethernetData: (state) => state.ethernetData,
     ncsiInterface: (state) => state.ncsiInterface,
     ncsiData: (state) => state.ncsiData,
-    ncsiEnable: (state) => state.ncsiEnable,
   },
   mutations: {
     setEthernetData: (state, ethernetData) =>
@@ -21,48 +19,58 @@ const NcsiStore = {
     setNcsiInterface: (state, ncsiInterface) =>
       (state.ncsiInterface = ncsiInterface),
     setNcsiData: (state, ncsiData) => (state.ncsiData = ncsiData),
-    setNcsiEnable: (state, ncsiEnable) => {
-      state.ncsiEnable = ncsiEnable;
-    },
   },
   actions: {
-    async getEthernetInterfaces({ commit, dispatch }) {
-      try {
-        const response = await api.get('/redfish/v1/Managers/bmc');
-        const ethernetData =
-          response.data.Oem?.Ami?.NCSIEthernetInterfaces[0]['@odata.id'];
-        const ncsiData = await dispatch('getNcsiData', ethernetData);
-        commit('setNcsiData', [ncsiData[0]]);
-        commit('setNcsiInterface', [ncsiData[0].Id]);
-        commit('setEthernetData', ethernetData);
-      } catch (error) {
-        console.error('Network Data:', error);
-        throw new Error(i18n.t('pageNcsi.toast.errorGettingNcsi'));
-      }
+    async getEthernetInterfaces({ commit }) {
+      return await api
+        .get('/redfish/v1/Managers/bmc')
+        .then((response) => {
+          const ncsiEthernetInterfaces =
+            response.data.Oem?.Ami?.NCSIEthernetInterfaces || [];
+          return ncsiEthernetInterfaces.map(
+            (ncsiEthernetInterface) => ncsiEthernetInterface['@odata.id'],
+          );
+        })
+        .then((ncsiEthernetfaceIds) =>
+          api.all(
+            ncsiEthernetfaceIds.map((ncsiEthernetInterface) =>
+              api.get(ncsiEthernetInterface),
+            ),
+          ),
+        )
+        .then((ncsiEthernetInterfaces) => {
+          const ncsiEthernetInterfacesIteam = ncsiEthernetInterfaces.map(
+            (ethernetInterface) => {
+              return ethernetInterface.data;
+            },
+          );
+          let ncsiInterfaceIteam = [];
+          ncsiEthernetInterfacesIteam.map((ncsiEthernetInterface) => {
+            let lastElement = ncsiEthernetInterface['@odata.id']
+              .split('/')
+              .pop();
+            ncsiInterfaceIteam.push(lastElement);
+            commit('setNcsiInterface', ncsiInterfaceIteam);
+          });
+        })
+        .catch((error) => {
+          console.error('Network Data:', error);
+          throw new Error(i18n.t('pageNcsi.toast.errorGettingNcsi'));
+        });
     },
     async getNcsiData({ commit }, ethernetData) {
-      let ncsiInterfaces = [];
-      try {
-        const response = await api.get(ethernetData);
-        const ncsiConfiguration = response.data.Oem?.Ami?.NCSIConfiguration;
-        const ethernetId = ethernetData.split('/').pop();
-        if (ethernetId != 'hostusb0') {
-          if (ncsiConfiguration && ncsiConfiguration?.ChannelId !== undefined) {
-            commit('setNcsiEnable', true);
-            ncsiInterfaces.push(response.data);
-          } else {
-            commit('setNcsiEnable', false);
-          }
-        }
-      } catch (error) {
-        commit('setNcsiEnable', false);
-      }
-      return ncsiInterfaces;
+      return await api
+        .get(`/redfish/v1/Managers/bmc/EthernetInterfaces/${ethernetData}`)
+        .then((response) => {
+          commit('setNcsiData', response.data);
+          return response.data;
+        })
+        .catch((error) => {
+          console.error('NCSI Data:', error);
+          throw new Error(i18n.t('pageNcsi.toast.errorGettingNcsiData'));
+        });
     },
-    async saveNcsiConfigurations(
-      { dispatch },
-      { Mode, PackageId, ChannelId, interFace },
-    ) {
+    async saveNcsiConfigurations(_, { Mode, PackageId, ChannelId, interFace }) {
       let setNcsi;
       if (Mode === 'Auto') {
         setNcsi = {
@@ -92,7 +100,6 @@ const NcsiStore = {
           `/redfish/v1/Managers/bmc/EthernetInterfaces/${interFace}`,
           setNcsi,
         )
-        .then(() => dispatch('getEthernetInterfaces'))
         .then(() => {
           return i18n.t('pageNcsi.toast.successSavingNcsiInterface');
         })

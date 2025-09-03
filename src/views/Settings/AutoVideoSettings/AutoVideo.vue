@@ -11,10 +11,14 @@
           content-class="mt-3"
         >
           <b-tab :title="$t('pageVideo.video')">
-            <video-trigger-settings></video-trigger-settings>
+            <video-trigger-settings
+              :is-button-disable="isButtonDisable"
+            ></video-trigger-settings>
           </b-tab>
           <b-tab :title="$t('pageVideo.videoRemote')">
-            <video-remote-storage></video-remote-storage>
+            <video-remote-storage
+              :is-button-disable="isButtonDisable"
+            ></video-remote-storage>
           </b-tab>
           <!-- <b-tab :title="$t('pageVideo.preEventVideoRecord')">
             <pre-event-video-record></pre-event-video-record>
@@ -30,6 +34,8 @@ import PageTitle from '@/components/Global/PageTitle';
 import VideoRemoteStorage from './VideoRemoteStorage.vue';
 import VideoTriggerSettings from './VideoTriggerSettings.vue';
 // import PreEventVideoRecord from './PreEventVideoRecord';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   name: 'AutoVideo',
   components: {
@@ -42,6 +48,16 @@ export default {
     return {
       tabIndex: 0,
     };
+  },
+  computed: {
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      if (this.userPrivilege !== privilegesId.admin) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   created() {
     this.startLoader();

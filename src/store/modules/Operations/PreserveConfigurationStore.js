@@ -24,9 +24,7 @@ const PreserveConfigStore = {
         .catch((error) => {
           console.log('Error in getting preserve configuration', error);
           throw new Error(
-            i18n.t(
-              'pagePreserveConfiguration.toast.errorGettingPreserveConfig',
-            ),
+            i18n.t('pagePreserve.toast.errorGettingPreserveConfig'),
           );
         });
     },
@@ -50,6 +48,7 @@ const PreserveConfigStore = {
               SNMP: saveConfigValues.snmp,
               SOL: saveConfigValues.sol,
               SYSLOG: saveConfigValues.sysLog,
+              ServiceManager: saveConfigValues.serviceManager,
               U_BOOT_ENV: saveConfigValues.ubootEnv,
             },
           },
@@ -59,16 +58,12 @@ const PreserveConfigStore = {
         .patch('/redfish/v1/UpdateService', Oem)
         .then(() => dispatch('getPreserveConfig'))
         .then(() => {
-          return i18n.t(
-            'pagePreserveConfiguration.toast.successPreserveConfiguration',
-          );
+          return i18n.t('pagePreserve.toast.successPreserveConfiguration');
         })
         .catch((error) => {
           console.log(error);
           throw new Error(
-            i18n.t(
-              'pagePreserveConfiguration.toast.errorPreserveConfiguration',
-            ),
+            i18n.t('pagePreserve.toast.errorPreserveConfiguration'),
           );
         });
     },

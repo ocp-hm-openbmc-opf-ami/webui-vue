@@ -7,13 +7,17 @@
           <b-button
             variant="primary"
             class="mr10"
-            :disabled="items.length <= 0"
+            :disabled="items.length <= 0 || isButtonDisable"
             @click="initAddUserAlertCountLicenseModal()"
           >
             <icon-event />
             {{ $t('license.userAlertCount') }}
           </b-button>
-          <b-button variant="primary" @click="initAddLicenseModal()">
+          <b-button
+            variant="primary"
+            :disabled="isButtonDisable"
+            @click="initAddLicenseModal()"
+          >
             <icon-add />
             {{ $t('license.add_license_key') }}
           </b-button>
@@ -68,6 +72,8 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import { mapState } from 'vuex';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import IconEvent from '@carbon/icons-vue/es/event--schedule/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 export default {
   components: {
     TableRowAction,
@@ -112,6 +118,10 @@ export default {
   },
   computed: {
     ...mapState('license', ['licenseData']),
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
   },
   watch: {
     licenseData() {

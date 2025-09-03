@@ -164,7 +164,7 @@
               </b-form-checkbox>
             </b-form-group>
           </b-col>
-          <b-col sm="6">
+          <!-- <b-col sm="6">
             <b-form-group
               :label="$t('pageVideo.preEventVideoRecord')"
               label-for="password"
@@ -180,9 +180,7 @@
                 <span v-else>{{ $t('global.status.disabled') }}</span>
               </b-form-checkbox>
             </b-form-group>
-          </b-col>
-        </b-row>
-        <b-row>
+          </b-col> -->
           <b-col sm="6">
             <b-form-group
               :label="$t('pageVideo.videoTriggerSettings.dateAndTime')"
@@ -349,6 +347,7 @@
             <b-btn
               variant="primary"
               type="submit"
+              :disabled="isButtonDisable"
               data-test-id="videoTrigger-button-saveSettings"
               @click="onOk"
             >
@@ -377,6 +376,13 @@ export default {
   name: 'Videotrigger',
   components: { IconCalendar, IconSave },
   mixins: [LoadingBarMixin, BVToastMixin, VuelidateMixin],
+  props: {
+    isButtonDisable: {
+      required: true,
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       locale: this.$store.getters['global/languagePreference'],
@@ -390,7 +396,7 @@ export default {
         chassisPowerOff: true,
         chassisReset: true,
         lPCReset: true,
-        preEventVideoRec: true,
+        // preEventVideoRec: true,
         precrash: true,
         preReset: true,
         dateandTime: true,
@@ -481,8 +487,8 @@ export default {
             chassisReset: config.TriggerEvents.chassisReset == 0 ? false : true,
             lPCReset: config.TriggerEvents.lPCReset == 0 ? false : true,
             dateandTime: config.TriggerEvents.dateandTime == 0 ? false : true,
-            preEventVideoRec:
-              config.TriggerEvents.preEventVideoRec == 0 ? false : true,
+            // preEventVideoRec:
+            //   config.TriggerEvents.preEventVideoRec == 0 ? false : true,
             Date: config.Date,
             Time: config.Time,
           };
@@ -510,7 +516,7 @@ export default {
             chassisReset: this.videoTriggerEvent.chassisReset ? 1 : 0,
             lPCReset: this.videoTriggerEvent.lPCReset ? 1 : 0,
             dateandTime: this.videoTriggerEvent.dateandTime ? 1 : 0,
-            preEventVideoRec: this.videoTriggerEvent.preEventVideoRec ? 1 : 0,
+            // preEventVideoRec: this.videoTriggerEvent.preEventVideoRec ? 1 : 0,
           },
         };
 
