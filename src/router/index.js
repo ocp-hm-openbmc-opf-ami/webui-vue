@@ -80,11 +80,11 @@ router.beforeEach((to, from, next) => {
           store.commit('authentication/setTfaFeatureEnabled', true);
         }
       }
-      if (response?.RoleId) {
+      if (response.Oem?.Ami?.WebRoleId) {
         // set role ID
-        store.commit('global/setPrivilege', response.RoleId);
+        store.commit('global/setPrivilege', response.Oem?.Ami?.WebRoleId);
         // allow the route to continue
-        allowRouterToNavigate(to, next, response.RoleId);
+        allowRouterToNavigate(to, next, response.Oem?.Ami?.WebRoleId);
       }
     });
   } else {

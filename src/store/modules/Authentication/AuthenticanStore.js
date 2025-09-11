@@ -86,6 +86,9 @@ const AuthenticationStore = {
           if (errorMessage.includes('SessionLimitExceeded')) {
             throw new Error(i18n.t('pagePolicies.toast.errorMaxSessionLogin'));
           }
+          if (errorMessage.includes('InsufficientPrivilege')) {
+            throw new Error(i18n.t('pagePolicies.toast.noPrivilegeUser'));
+          }
           if (error.response.status == 423) {
             commit('authLocked');
           } else {
@@ -94,14 +97,19 @@ const AuthenticationStore = {
           throw new Error(error);
         });
     },
-    async logout({ commit }) {
+    async logout({ commit, dispatch }) {
       return await api
         .post('/logout', { data: [] })
         .then(() => {
           commit('setConsoleWindow', false);
           commit('logout');
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          if (error.response.status == 403) {
+            dispatch('customizedResetLogout');
+          }
+        });
     },
     getUserInfo(_, username) {
       return api

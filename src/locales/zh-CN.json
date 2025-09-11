@@ -1656,7 +1656,8 @@
             "authProtocolsha384": "SHA-384",
             "authProtocolsha512": "SHA-512",
             "logoutConfirmMessage": "您确定要更改登录用户“%{user}”的密码吗？该用户将注销，并且仅反映在下次登录中.",
-            "logoutAlert": "注销警报"
+            "logoutAlert": "注销警报",
+            "channel": "渠道"
         },
         "table": {
             "privilege": "权限",
@@ -2245,7 +2246,8 @@
             "successWebPort": "已成功更新 Web 端口值。",
             "successKVMSessionTimeout": "成功配置 KVM 会话超时。",
             "successSolBitRate": "已成功配置 SOL 非易失性比特率。",
-            "successVMReconnect": "已成功更新虚拟媒体重新连接参数。"
+            "successVMReconnect": "已成功更新虚拟媒体重新连接参数。",
+            "noPrivilegeUser": "用户的相关访问权限不足。"
         },
         "options": {
             "30minutes": "30 分钟",

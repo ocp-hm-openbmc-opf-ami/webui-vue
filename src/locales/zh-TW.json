@@ -1656,7 +1656,8 @@
             "authProtocolsha384": "SHA-384",
             "authProtocolsha512": "SHA-512",
             "logoutConfirmMessage": "您確定要變更登入使用者「%{user}」的密碼嗎？該用戶將註銷，並且僅反映在下次登入中.",
-            "logoutAlert": "註銷警報"
+            "logoutAlert": "註銷警報",
+            "channel": "頻道"
         },
         "table": {
             "privilege": "特權",
@@ -2245,7 +2246,8 @@
             "successWebPort": "已成功更新 Web 連接埠值。",
             "successKVMSessionTimeout": "成功配置 KVM 會話逾時。",
             "successSolBitRate": "已成功配置 SOL 非揮發性位元率。",
-            "successVMReconnect": "已成功更新虛擬媒體重新連線值。"
+            "successVMReconnect": "已成功更新虛擬媒體重新連線值。",
+            "noPrivilegeUser": "使用者的相關存取權限不足。"
         },
         "options": {
             "30minutes": "30 分鐘",

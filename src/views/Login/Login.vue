@@ -190,7 +190,7 @@ export default {
             this.$store.commit('global/setLanguagePreference', i18n.locale);
             return this.$store.dispatch('authentication/getUserInfo', username);
           })
-          .then(({ PasswordChangeRequired, RoleId }) => {
+          .then(({ PasswordChangeRequired, Oem }) => {
             if (PasswordChangeRequired) {
               this.$router.push('/change-password');
             } else {
@@ -213,15 +213,16 @@ export default {
                 this.$store.commit('license/setisLicense', false);
               }
             }
-            if (RoleId) {
-              this.$store.commit('global/setPrivilege', RoleId);
+            if (Oem.Ami?.WebRoleId) {
+              this.$store.commit('global/setPrivilege', Oem.Ami?.WebRoleId);
             }
           })
           .catch(({ message }) => {
             if (
               message.includes(
                 i18n.t('pagePolicies.toast.errorMaxSessionLogin'),
-              )
+              ) ||
+              message.includes(i18n.t('pagePolicies.toast.noPrivilegeUser'))
             ) {
               this.errorToast(message);
             }

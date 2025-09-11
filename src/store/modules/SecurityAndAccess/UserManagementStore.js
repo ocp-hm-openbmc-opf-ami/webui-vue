@@ -133,7 +133,7 @@ const UserManagementStore = {
       {
         username,
         password,
-        privilege,
+        RoleId,
         status,
         PasswordChangeRequired,
         vmediaAccess,
@@ -141,12 +141,13 @@ const UserManagementStore = {
         encryption,
         algorithm,
         readWritePermission,
+        channelPrivileges = [],
       },
     ) {
       const data = {
         UserName: username,
         Password: password,
-        RoleId: privilege,
+        RoleId: RoleId,
         Enabled: status,
         PasswordChangeRequired: PasswordChangeRequired,
         OEMAccountTypes: vmediaAccess ? ['media'] : [],
@@ -171,9 +172,17 @@ const UserManagementStore = {
           },
         };
       }
+      data.Oem.Ami.ChannelPrivileges = channelPrivileges.map(
+        (channelPrivilege) => {
+          return {
+            ChannelId: channelPrivilege.ChannelId.ChannelId,
+            ChannelPrivilege: channelPrivilege.ChannelPrivilege,
+            ChannelAccess: channelPrivilege.ChannelAccess,
+          };
+        },
+      );
       return await api
         .post('/redfish/v1/AccountService/Accounts', data)
-        .then(() => dispatch('getUsers'))
         .then(() =>
           i18n.t('pageUserManagement.toast.successCreateUser', {
             username,
@@ -191,7 +200,7 @@ const UserManagementStore = {
         originalUsername,
         username,
         password,
-        privilege,
+        RoleId,
         status,
         locked,
         PasswordChangeRequired,
@@ -201,6 +210,7 @@ const UserManagementStore = {
         encryption,
         algorithm,
         readWritePermission,
+        channelPrivileges = [],
       },
     ) {
       const data = {};
@@ -254,7 +264,7 @@ const UserManagementStore = {
         } else {
           if (username) data.UserName = username;
           if (password) data.Password = password;
-          if (privilege) data.RoleId = privilege;
+          if (RoleId) data.RoleId = RoleId;
           if (vmediaAccess !== undefined)
             data.OEMAccountTypes = vmediaAccess ? ['media'] : [];
           if (status !== undefined) data.Enabled = status;
@@ -289,6 +299,15 @@ const UserManagementStore = {
             };
           }
         }
+        data.Oem.Ami.ChannelPrivileges = channelPrivileges.map(
+          (channelPrivilege) => {
+            return {
+              ChannelId: channelPrivilege.ChannelId.ChannelId,
+              ChannelPrivilege: channelPrivilege.ChannelPrivilege,
+              ChannelAccess: channelPrivilege.ChannelAccess,
+            };
+          },
+        );
       } else if (
         globalPrivilege === 'Operator' ||
         globalPrivilege === 'ReadOnly'
@@ -298,15 +317,8 @@ const UserManagementStore = {
       return await api
         .patch(`/redfish/v1/AccountService/Accounts/${originalUsername}`, data)
         .then(() => {
-          const passwordChangeRequired = data.PasswordChangeRequired;
-          const password = data.Password;
-          if (
-            originalUsername === store.getters.username(store.state) &&
-            (passwordChangeRequired || password)
-          ) {
+          if (originalUsername === store.getters.username(store.state)) {
             authentication.dispatch('authentication/logout');
-          } else {
-            dispatch('getUsers');
           }
         })
         .then(() => {

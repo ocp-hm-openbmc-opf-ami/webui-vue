@@ -1658,7 +1658,8 @@
             "authProtocolsha384": "SHA-384",
             "authProtocolsha512": "SHA-512",
             "logoutConfirmMessage": "Möchten Sie wirklich das Passwort für den angemeldeten Benutzer '%{user}' ändern? Dieser Benutzer wird abgemeldet und die Änderung wird erst bei der nächsten Anmeldung wirksam.",
-            "logoutAlert": "Abmeldewarnung"
+            "logoutAlert": "Abmeldewarnung",
+            "channel": "Kanal"
         },
         "table": {
             "privilege": "Berechtigung",
@@ -2248,7 +2249,8 @@
             "successWebPort": "Web-Portwert erfolgreich aktualisiert.",
             "successKVMSessionTimeout": "KVM-Sitzungs-Timeout erfolgreich konfiguriert.",
             "successSolBitRate": "SOL Non-Volatile Bitrate erfolgreich konfiguriert.",
-            "successVMReconnect": "Virtual Media-Neuverbindungswert erfolgreich aktualisiert."
+            "successVMReconnect": "Virtual Media-Neuverbindungswert erfolgreich aktualisiert.",
+            "noPrivilegeUser": "Dem Benutzer fehlen die entsprechenden Zugriffsrechte."
         },
         "options": {
             "30minutes": "30 Minuten",

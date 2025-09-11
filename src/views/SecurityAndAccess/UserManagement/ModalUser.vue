@@ -37,38 +37,123 @@
           </b-col>
         </b-row>
         <b-row>
-          <b-col lg="12">
+          <!-- first column start-->
+          <b-col lg="4">
+            <b-form-group :label="$t('pageUserManagement.modal.accountStatus')">
+              <b-form-radio
+                v-model="form.status"
+                name="user-status"
+                :value="true"
+                data-test-id="userManagement-radioButton-statusEnabled"
+                @input="$v.form.status.$touch()"
+              >
+                {{ $t('global.status.enabled') }}
+              </b-form-radio>
+              <b-form-radio
+                v-model="form.status"
+                name="user-status"
+                data-test-id="userManagement-radioButton-statusDisabled"
+                :value="false"
+                :disabled="
+                  (!newUser && originalUsername === disabled) ||
+                  globalPrivilege !== 'Administrator' ||
+                  form.username === 'root'
+                "
+                @input="$v.form.status.$touch()"
+              >
+                {{ $t('global.status.disabled') }}
+              </b-form-radio>
+            </b-form-group>
+            <b-form-group
+              :label="$t('pageUserManagement.modal.passwordChangeRequired')"
+            >
+              <b-form-radio
+                v-model="form.PasswordChangeRequired"
+                name="Password-change-status"
+                :value="true"
+                data-test-id="userManagement-radioButton-statusEnabled"
+                :disabled="
+                  form.username === 'root' ||
+                  globalPrivilege !== 'Administrator'
+                "
+                @input="$v.form.PasswordChangeRequired.$touch()"
+              >
+                {{ $t('global.status.enabled') }}
+              </b-form-radio>
+              <b-form-radio
+                v-model="form.PasswordChangeRequired"
+                name="Password-change-status"
+                data-test-id="userManagement-radioButton-statusDisabled"
+                :value="false"
+                :disabled="
+                  form.username === 'root' ||
+                  globalPrivilege !== 'Administrator'
+                "
+                @input="$v.form.PasswordChangeRequired.$touch()"
+              >
+                {{ $t('global.status.disabled') }}
+              </b-form-radio>
+            </b-form-group>
+            <b-form-group
+              :label="$t('pageUserManagement.modal.snmpUserEnable')"
+            >
+              <b-form-radio
+                v-model="form.snmpUserEnable"
+                name="snmp-user-enable"
+                :value="true"
+                :disabled="
+                  form.username === 'root' ||
+                  globalPrivilege !== 'Administrator'
+                "
+                data-test-id="userManagement-radioButton-snmpUserEnable"
+                @input="$v.form.snmpUserEnable.$touch()"
+              >
+                {{ $t('global.status.enabled') }}
+              </b-form-radio>
+              <b-form-radio
+                v-model="form.snmpUserEnable"
+                name="snmp-user-enable"
+                data-test-id="userManagement-radioButton-snmpUserEnable"
+                :value="false"
+                @input="$v.form.snmpUserEnable.$touch()"
+              >
+                {{ $t('global.status.disabled') }}
+              </b-form-radio>
+            </b-form-group>
+            <b-form-group :label="$t('pageUserManagement.modal.vmediaAccess')">
+              <b-form-radio
+                v-model="form.vmediaAccess"
+                name="vmediaAccess-change-status"
+                :value="true"
+                data-test-id="userManagement-vmediaAccess-statusEnabled"
+                :disabled="
+                  form.username === 'root' ||
+                  globalPrivilege !== 'Administrator'
+                "
+                @input="$v.form.vmediaAccess.$touch()"
+              >
+                {{ $t('global.status.enabled') }}
+              </b-form-radio>
+              <b-form-radio
+                v-model="form.vmediaAccess"
+                name="vmediaAccess-change-status"
+                data-test-id="userManagement-vmediaAccess-statusDisabled"
+                :value="false"
+                :disabled="
+                  form.username === 'root' ||
+                  globalPrivilege !== 'Administrator'
+                "
+                @input="$v.form.vmediaAccess.$touch()"
+              >
+                {{ $t('global.status.disabled') }}
+              </b-form-radio>
+            </b-form-group>
+          </b-col>
+          <!-- first column End-->
+          <!-- second column start -->
+          <b-col lg="8">
             <b-row>
-              <b-col lg="4">
-                <b-form-group
-                  :label="$t('pageUserManagement.modal.accountStatus')"
-                >
-                  <b-form-radio
-                    v-model="form.status"
-                    name="user-status"
-                    :value="true"
-                    data-test-id="userManagement-radioButton-statusEnabled"
-                    @input="$v.form.status.$touch()"
-                  >
-                    {{ $t('global.status.enabled') }}
-                  </b-form-radio>
-                  <b-form-radio
-                    v-model="form.status"
-                    name="user-status"
-                    data-test-id="userManagement-radioButton-statusDisabled"
-                    :value="false"
-                    :disabled="
-                      (!newUser && originalUsername === disabled) ||
-                      globalPrivilege !== 'Administrator' ||
-                      form.username === 'root'
-                    "
-                    @input="$v.form.status.$touch()"
-                  >
-                    {{ $t('global.status.disabled') }}
-                  </b-form-radio>
-                </b-form-group>
-              </b-col>
-              <b-col lg="4">
+              <b-col lg="6">
                 <b-form-group
                   :label="$t('pageUserManagement.modal.username')"
                   label-for="username"
@@ -115,7 +200,8 @@
                   </b-form-invalid-feedback>
                 </b-form-group>
               </b-col>
-              <b-col :style="changePasswordFieldStyle" lg="4">
+
+              <b-col :style="changePasswordFieldStyle" lg="6">
                 <b-form-checkbox
                   v-if="!newUser"
                   id="changePassword"
@@ -176,39 +262,7 @@
               </b-col>
             </b-row>
             <b-row>
-              <b-col lg="4">
-                <b-form-group
-                  :label="$t('pageUserManagement.modal.passwordChangeRequired')"
-                >
-                  <b-form-radio
-                    v-model="form.PasswordChangeRequired"
-                    name="Password-change-status"
-                    :value="true"
-                    data-test-id="userManagement-radioButton-statusEnabled"
-                    :disabled="
-                      form.username === 'root' ||
-                      globalPrivilege !== 'Administrator'
-                    "
-                    @input="$v.form.PasswordChangeRequired.$touch()"
-                  >
-                    {{ $t('global.status.enabled') }}
-                  </b-form-radio>
-                  <b-form-radio
-                    v-model="form.PasswordChangeRequired"
-                    name="Password-change-status"
-                    data-test-id="userManagement-radioButton-statusDisabled"
-                    :value="false"
-                    :disabled="
-                      form.username === 'root' ||
-                      globalPrivilege !== 'Administrator'
-                    "
-                    @input="$v.form.PasswordChangeRequired.$touch()"
-                  >
-                    {{ $t('global.status.disabled') }}
-                  </b-form-radio>
-                </b-form-group>
-              </b-col>
-              <b-col lg="4">
+              <!-- <b-col lg="6">
                 <b-form-group
                   :label="$t('pageUserManagement.modal.privilege')"
                   label-for="privilege"
@@ -237,8 +291,9 @@
                     </template>
                   </b-form-invalid-feedback>
                 </b-form-group>
-              </b-col>
-              <b-col lg="4">
+              </b-col> -->
+
+              <b-col lg="6">
                 <b-form-group
                   :label="$t('pageUserManagement.modal.confirmUserPassword')"
                   label-for="password-confirmation"
@@ -282,32 +337,8 @@
                 </b-form-group>
               </b-col>
             </b-row>
-            <b-row>
-              <b-col lg="4">
-                <b-form-group
-                  :label="$t('pageUserManagement.modal.snmpUserEnable')"
-                >
-                  <b-form-radio
-                    v-model="form.snmpUserEnable"
-                    name="snmp-user-enable"
-                    :value="true"
-                    data-test-id="userManagement-radioButton-snmpUserEnable"
-                    @input="$v.form.snmpUserEnable.$touch()"
-                  >
-                    {{ $t('global.status.enabled') }}
-                  </b-form-radio>
-                  <b-form-radio
-                    v-model="form.snmpUserEnable"
-                    name="snmp-user-enable"
-                    data-test-id="userManagement-radioButton-snmpUserEnable"
-                    :value="false"
-                    @input="$v.form.snmpUserEnable.$touch()"
-                  >
-                    {{ $t('global.status.disabled') }}
-                  </b-form-radio>
-                </b-form-group>
-              </b-col>
-              <b-col v-if="form.snmpUserEnable" lg="4">
+            <b-row v-if="form.snmpUserEnable">
+              <b-col lg="6">
                 <b-form-group
                   :label="$t('pageUserManagement.modal.encryption')"
                   label-for="encryption"
@@ -333,7 +364,7 @@
                   </b-form-invalid-feedback>
                 </b-form-group>
               </b-col>
-              <b-col v-if="form.snmpUserEnable" lg="4">
+              <b-col lg="6">
                 <b-form-group
                   :label="$t('pageUserManagement.modal.readWritePermission')"
                   label-for="readWritePermission"
@@ -360,40 +391,8 @@
                 </b-form-group>
               </b-col>
             </b-row>
-            <b-row>
-              <b-col lg="4">
-                <b-form-group
-                  :label="$t('pageUserManagement.modal.vmediaAccess')"
-                >
-                  <b-form-radio
-                    v-model="form.vmediaAccess"
-                    name="vmediaAccess-change-status"
-                    :value="true"
-                    data-test-id="userManagement-vmediaAccess-statusEnabled"
-                    :disabled="
-                      form.username === 'root' ||
-                      globalPrivilege !== 'Administrator'
-                    "
-                    @input="$v.form.vmediaAccess.$touch()"
-                  >
-                    {{ $t('global.status.enabled') }}
-                  </b-form-radio>
-                  <b-form-radio
-                    v-model="form.vmediaAccess"
-                    name="vmediaAccess-change-status"
-                    data-test-id="userManagement-vmediaAccess-statusDisabled"
-                    :value="false"
-                    :disabled="
-                      form.username === 'root' ||
-                      globalPrivilege !== 'Administrator'
-                    "
-                    @input="$v.form.vmediaAccess.$touch()"
-                  >
-                    {{ $t('global.status.disabled') }}
-                  </b-form-radio>
-                </b-form-group>
-              </b-col>
-              <b-col v-if="form.snmpUserEnable" lg="4">
+            <b-row v-if="form.snmpUserEnable">
+              <b-col lg="6">
                 <b-form-group
                   :label="$t('pageUserManagement.modal.algorithm')"
                   label-for="algorithm"
@@ -420,7 +419,83 @@
                 </b-form-group>
               </b-col>
             </b-row>
+            <b-row>
+              <!-- <b-col lg="6">
+                <b-form-checkbox
+                  :id="'channelAccess' + index"
+                  v-model="form.channelAccess[index]"
+                >
+                  {{ $t('pageUserManagement.modal.channel') }}
+                  {{ channelListAccess }}
+                </b-form-checkbox>
+              </b-col> -->
+              <b-col
+                v-for="(channelListAccess, index) in networkChannelList"
+                :key="index"
+                lg="6"
+              >
+                <b-form-checkbox
+                  :id="'channelAccess' + index"
+                  v-model="form.channelAccess[index]"
+                  :disabled="
+                    (!newUser && originalUsername === 'root') ||
+                    globalPrivilege !== 'Administrator'
+                  "
+                >
+                  {{
+                    $t('pageUserManagement.modal.privilege') +
+                    '(' +
+                    $t('pageUserManagement.modal.channel') +
+                    ' ' +
+                    channelListAccess.ChannelId +
+                    ')'
+                  }}
+                </b-form-checkbox>
+                <b-form-group label="" label-for="privilege">
+                  <b-form-select
+                    :id="'channelList_' + index"
+                    v-model="form.channelList[index]"
+                    :options="privilegeTypes"
+                    :state="
+                      $v.form.channelList.$each &&
+                      $v.form.channelList.$each[index]
+                        ? getValidationState($v.form.channelList.$each[index])
+                        : null
+                    "
+                    data-test-id="userManagement-select-channelList"
+                    :disabled="
+                      (!newUser && originalUsername === 'root') ||
+                      globalPrivilege !== 'Administrator'
+                    "
+                    @input="
+                      $v.form.channelList.$each &&
+                      $v.form.channelList.$each[index]
+                        ? $v.form.channelList.$each[index].$touch()
+                        : ''
+                    "
+                  >
+                    <template #first>
+                      <b-form-select-option :value="null" disabled>
+                        {{ $t('global.form.selectAnOption') }}
+                      </b-form-select-option>
+                    </template>
+                  </b-form-select>
+                  <b-form-invalid-feedback role="alert">
+                    <template
+                      v-if="
+                        $v.form.channelList.$each &&
+                        $v.form.channelList.$each[index] &&
+                        !$v.form.channelList.$each[index].required
+                      "
+                    >
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+            </b-row>
           </b-col>
+          <!-- second column End -->
         </b-row>
       </b-container>
     </b-form>
@@ -500,6 +575,8 @@ export default {
         encryption: null,
         algorithm: null,
         readWritePermission: null,
+        channelList: [],
+        channelAccess: [],
       },
       disabled: this.$store.getters['global/username'],
       globalPrivilege: this.$store.getters['global/userPrivilege'],
@@ -535,6 +612,7 @@ export default {
           text: this.$t('pageUserManagement.modal.readWrite'),
         },
       ],
+      channelPrivilegesList: [],
     };
   },
   computed: {
@@ -556,6 +634,12 @@ export default {
     passwordInputFieldStyle() {
       return this.newUser ? { marginTop: '29px' } : {};
     },
+    networkChannelList() {
+      return this.$store.getters['policies/getChannelList'];
+    },
+    defaultChannelList() {
+      return this.$store.getters['policies/getDefaultChannelList'];
+    },
   },
   watch: {
     user: function (value) {
@@ -563,7 +647,6 @@ export default {
       this.originalUsername = value.username;
       this.form.username = value.username;
       this.form.status = value.Enabled;
-      this.form.privilege = value.privilege;
       this.form.PasswordChangeRequired = value.PasswordChangeRequired;
       this.form.vmediaAccess = value.OEMAccountTypes.includes('media');
       this.form.snmpUserEnable = value.Oem.Ami.SNMP.SNMPAccessEnableStatus;
@@ -576,12 +659,27 @@ export default {
       this.form.readWritePermission = value.Oem.Ami.SNMP.Access
         ? value.Oem.Ami.SNMP.Access
         : null;
+      this.form.channelAccess = [];
+      this.form.channelList = [];
+      value?.Oem?.Ami?.ChannelPrivileges?.forEach((channelPrivilege) => {
+        this.form.channelList.push(channelPrivilege.ChannelPrivilege);
+        this.form.channelAccess.push(channelPrivilege.ChannelAccess);
+      });
     },
     'form.snmpUserEnable': function (newValue) {
       this.form.changePassword =
         !this.newUser &&
         this.user.snmpUserEnabled == 'Disabled' &&
         newValue === true;
+    },
+    networkChannelList() {
+      // Initialize arrays with the correct length when channel list changes
+      this.form.channelAccess = new Array(this.networkChannelList.length).fill(
+        false,
+      );
+      this.form.channelList = new Array(this.networkChannelList.length).fill(
+        '',
+      );
     },
   },
   validations() {
@@ -597,9 +695,6 @@ export default {
           required,
           maxLength: maxLength(16),
           pattern: helpers.regex('pattern', /^[a-zA-Z_][a-zA-Z0-9_]*$/),
-        },
-        privilege: {
-          required,
         },
         password: {
           required: requiredIf(function () {
@@ -649,6 +744,11 @@ export default {
             return this.form.snmpUserEnable;
           }),
         },
+        channelList: {
+          $each: {
+            required,
+          },
+        },
       },
     };
   },
@@ -656,12 +756,31 @@ export default {
     handleSubmit() {
       let userData = {};
 
+      // Validate channel list only if channels are enabled
+      this.channelPrivilegesList = [];
+      for (let i = 0; i < this.form.channelList.length; i++) {
+        const channelAccessValue = this.form.channelAccess[i] || false; // Default to false if value not avaiable
+        const privilegeValue = this.form.channelList[i];
+        const networkChannelNumber = this.networkChannelList[i];
+        let channelPrivilegesAccess = {
+          ChannelId: networkChannelNumber,
+          ChannelPrivilege: privilegeValue,
+          ChannelAccess: channelAccessValue,
+        };
+        if (
+          this.defaultChannelList.ChannelId === networkChannelNumber.ChannelId
+        ) {
+          userData.RoleId = privilegeValue;
+        }
+        this.channelPrivilegesList.push(channelPrivilegesAccess);
+        userData.channelPrivileges = this.channelPrivilegesList;
+      }
+
       if (this.newUser) {
         this.$v.$touch();
-        if (this.$v.$invalid) return;
+        if (this.$v.$invalid || this.privilegeValidation()) return;
         userData.username = this.form.username;
         userData.status = this.form.status;
-        userData.privilege = this.form.privilege;
         userData.PasswordChangeRequired = this.form.PasswordChangeRequired;
         userData.vmediaAccess = this.form.vmediaAccess;
         userData.password = this.form.password;
@@ -673,16 +792,13 @@ export default {
           : '';
       } else {
         this.$v.$touch();
-        if (this.$v.$invalid) return;
+        if (this.$v.$invalid || this.privilegeValidation()) return;
         userData.originalUsername = this.originalUsername;
         if (this.$v.form.status.$dirty) {
           userData.status = this.form.status;
         }
         if (this.$v.form.username.$dirty) {
           userData.username = this.form.username;
-        }
-        if (this.$v.form.privilege.$dirty) {
-          userData.privilege = this.form.privilege;
         }
         if (this.$v.form.PasswordChangeRequired.$dirty) {
           userData.PasswordChangeRequired = this.form.PasswordChangeRequired;
@@ -720,7 +836,6 @@ export default {
           return;
         }
       }
-
       this.$emit('ok', { isNewUser: this.newUser, userData });
       this.closeModal();
     },
@@ -733,7 +848,6 @@ export default {
       this.form.originalUsername = '';
       this.form.status = true;
       this.form.username = '';
-      this.form.privilege = null;
       this.form.PasswordChangeRequired = false;
       this.form.vmediaAccess = true;
       this.form.password = '';
@@ -743,6 +857,10 @@ export default {
       this.form.encryption = null;
       this.form.algorithm = null;
       this.form.readWritePermission = null;
+      this.form.channelList = new Array(this.form.channelAccess.length).fill(
+        '',
+      );
+      this.form.channelAccess = [];
       this.$v.$reset();
       this.$emit('hidden');
     },
@@ -781,6 +899,27 @@ export default {
         form.snmpUserEnable === true &&
         snmpFields.some((field) => this.user[field] === 'NA')
       );
+    },
+    privilegeValidation() {
+      var flag = false;
+      this.networkChannelList.forEach((access, index) => {
+        if (
+          access &&
+          this.$v.form.channelList.$each &&
+          this.$v.form.channelList.$each[index]
+        ) {
+          this.$v.form.channelList.$each[index].$touch();
+          if (this.$v.form.channelList.$each[index].$invalid) {
+            flag = true;
+            return flag;
+          }
+        }
+      });
+
+      if (flag) {
+        return flag;
+      }
+      return flag;
     },
   },
 };

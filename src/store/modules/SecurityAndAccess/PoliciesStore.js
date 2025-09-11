@@ -27,6 +27,8 @@ const PoliciesStore = {
     solBitRate: null,
     vmReconnectData: {},
     maxSessions: [],
+    channelList: [],
+    defaultChannelList: {},
   },
   getters: {
     sshProtocolEnabled: (state) => state.sshProtocolEnabled,
@@ -52,6 +54,8 @@ const PoliciesStore = {
     solBitRate: (state) => state.solBitRate,
     vmReconnectData: (state) => state.vmReconnectData,
     maxSessions: (state) => state.maxSessions,
+    getChannelList: (state) => state.channelList,
+    getDefaultChannelList: (state) => state.defaultChannelList,
   },
   mutations: {
     setSshProtocolEnabled: (state, sshProtocolEnabled) =>
@@ -93,6 +97,9 @@ const PoliciesStore = {
     setVMReconnectValues: (state, vmReconnectData) =>
       (state.vmReconnectData = vmReconnectData),
     setMaxSessions: (state, maxSessions) => (state.maxSessions = maxSessions),
+    setChannelList: (state, channelList) => (state.channelList = channelList),
+    setDefaultChannelList: (state, defaultChannelList) =>
+      (state.defaultChannelList = defaultChannelList),
   },
   actions: {
     setSolSshPortUpdatedValue({ commit }, solSshProtocolPort) {
@@ -103,13 +110,17 @@ const PoliciesStore = {
         .get('/redfish/v1/Managers/bmc/NetworkProtocol')
         .then((response) => {
           const sshProtocol = response.data?.SSH?.ProtocolEnabled;
+          const ChannelList = response.data?.Oem?.Ami?.AvailableChannelList;
           const ipmiProtocol = !response.data?.Oem?.OpenBmc?.IPMI?.Masked;
           const ssdpProtocol = response.data?.SSDP?.ProtocolEnabled;
           const ssdpPortValue = response.data?.SSDP?.Port;
+          const defaultChannelInfo = response.data?.Oem?.Ami?.DefaultChannel;
           commit('setSshProtocolEnabled', sshProtocol);
           commit('setIpmiProtocolEnabled', ipmiProtocol);
           commit('setSsdpProtocolEnabled', ssdpProtocol);
           commit('setSsdpPort', ssdpPortValue);
+          commit('setChannelList', ChannelList);
+          commit('setDefaultChannelList', defaultChannelInfo);
         })
         .catch((error) => console.log(error));
     },

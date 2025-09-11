@@ -1657,7 +1657,8 @@
             "authProtocolsha384": "SHA-384",
             "authProtocolsha512": "SHA-512",
             "logoutConfirmMessage": "Are you sure you want to change Password for the logged in user '%{user}'? This user will get logout and it will be reflected in the next login only.",
-            "logoutAlert": "Logout Alert"
+            "logoutAlert": "Logout Alert",
+            "channel": "Channel"
         },
         "table": {
             "privilege": "Privilege",
@@ -2246,7 +2247,8 @@
             "successWebPort": "Successfully updated the Web Port value.",
             "successKVMSessionTimeout": "Successfully configured the KVM Session Timeout.",
             "successSolBitRate": "Successfully configured the SOL Non-Volatile Bit Rate.",
-            "successVMReconnect": "Successfully updated the Virtual Media Reconnect value."
+            "successVMReconnect": "Successfully updated the Virtual Media Reconnect value.",
+            "noPrivilegeUser": "There are insufficient associated access rights for the User."
         },
         "options": {
             "30minutes": "30 Minutes",
