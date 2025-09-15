@@ -1495,9 +1495,9 @@
             "forcedRestart": "强制重启"
         },
         "powerOnTooltip": "开启服务器",
-        "gracefulShutdownTooltip": "操作系统关闭，然后服务器关闭。",
-        "gracefulRestartTooltip": "操作系统关闭，然后服务器重新启动。",
-        "forcedShutdownTooltip": "服务器关闭，操作系统不关闭；可能会导致数据损坏。",
+        "gracefulShutdownTooltip": "操作系统关闭后，服务器关机。<br><br><strong>注意：</strong>如果在主机操作系统中发起电源操作后又取消，建议用户等待一段时间以反映更改，或刷新以查看更新后的电源状态。",
+        "gracefulRestartTooltip": "操作系统关闭后，服务器重启。<br><br><strong>注意：</strong>如果在主机操作系统中发起电源操作后又取消，建议用户等待一段时间以反映更改，或刷新以查看更新后的电源状态。",
+        "forcedShutdownTooltip": "服务器在未关闭操作系统的情况下关机，可能导致数据损坏。<br><br><strong>注意：</strong>如果在主机操作系统中发起电源操作后又取消，建议用户等待一段时间以反映更改，或刷新以查看更新后的电源状态。",
         "forcedRestartTooltip": "服务器重新启动而不关闭操作系统；可能会导致数据损坏。",
         "openSoftKeyboard": "打开虚拟键盘",
         "languages": {

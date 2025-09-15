@@ -1496,9 +1496,9 @@
             "forcedRestart": "Forced Restart"
         },
         "powerOnTooltip": "Turn on the Server",
-        "gracefulShutdownTooltip": "Operating System shuts down, then Server shuts down.",
-        "gracefulRestartTooltip": "Operating System shuts down, then Server reboots.",
-        "forcedShutdownTooltip": "Server shuts down without Operating System shutting down; may cause data corruption.",
+        "gracefulShutdownTooltip": "Operating System shuts down, then Server shuts down.<br><br><strong>Note:</strong> Initiating a power operation and then cancel it from the Host OS. User is recommended to wait for some time to reflect the changes or refresh to view the updated Power status.",
+        "gracefulRestartTooltip": "Operating System shuts down, then Server reboots.<br><br><strong>Note:</strong> Initiating a power operation and then cancel it from the Host OS. User is recommended to wait for some time to reflect the changes or refresh to view the updated Power status.",
+        "forcedShutdownTooltip": "Server shuts down without Operating System shutting down; may cause data corruption.<br><br><strong>Note:</strong> Initiating a power operation and then cancel it from the Host OS. User is recommended to wait for some time to reflect the changes or refresh to view the updated Power status.",
         "forcedRestartTooltip": "Server reboots without Operating System shutting down; may cause data corruption.",
         "openSoftKeyboard": "Open Soft Keyboard",
         "languages": {

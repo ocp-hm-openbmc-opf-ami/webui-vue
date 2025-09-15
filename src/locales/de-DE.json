@@ -1497,11 +1497,11 @@
             "forcedRestart": "Erzwungener Neustart"
         },
         "powerOnTooltip": "Server einschalten",
-        "gracefulShutdownTooltip": "Das Betriebssystem wird heruntergefahren, dann wird der Server ausgeschaltet.",
-        "gracefulRestartTooltip": "Das Betriebssystem wird heruntergefahren, dann wird der Server neu gestartet.",
-        "forcedShutdownTooltip": "Server wird ausgeschaltet, ohne das Betriebssystem herunterzufahren; kann zu Datenverlust führen.",
-        "forcedRestartTooltip": "Server wird neu gestartet, ohne das Betriebssystem herunterzufahren; kann zu Datenverlust führen.",
-        "openSoftKeyboard": "Bildschirmtastatur öffnen",
+        "gracefulShutdownTooltip": "Betriebssystem fährt herunter, dann schaltet der Server ab.<br><br><strong>Hinweis:</strong> Wenn eine Stromoperation initiiert und dann vom Hostbetriebssystem abgebrochen wird, muss eine gewisse Zeit gewartet werden, um den aktualisierten Stromstatus anzuzeigen, oder die Seite muss aktualisiert werden, um den aktualisierten Stromstatus anzuzeigen.",
+        "gracefulRestartTooltip": "Betriebssystem fährt herunter, dann startet der Server neu.<br><br><strong>Hinweis:</strong> Wenn eine Stromoperation initiiert und dann vom Hostbetriebssystem abgebrochen wird, muss eine gewisse Zeit gewartet werden, um den aktualisierten Stromstatus anzuzeigen, oder die Seite muss aktualisiert werden, um den aktualisierten Stromstatus anzuzeigen.",
+        "forcedShutdownTooltip": "Server schaltet ab, ohne dass das Betriebssystem herunterfährt; kann zu Datenkorruption führen.<br><br><strong>Hinweis:</strong> Wenn eine Stromoperation initiiert und dann vom Hostbetriebssystem abgebrochen wird, muss eine gewisse Zeit gewartet werden, um den aktualisierten Stromstatus anzuzeigen, oder die Seite muss aktualisiert werden, um den aktualisierten Stromstatus anzuzeigen.",
+        "forcedRestartTooltip": "Server startet neu, ohne dass das Betriebssystem herunterfährt; kann zu Datenkorruption führen.",
+        "openSoftKeyboard": "Soft-Tastatur öffnen",
         "languages": {
             "english": "Englisch",
             "italian": "Italienisch",
