@@ -1,6 +1,9 @@
 <template>
   <b-tabs active-nav-item-class="font-weight-bold" card content-class="xl-12">
-    <b-tab :title="$t('gpgpu.baseboard.baseBoardInterfaceAssemblyTab')">
+    <b-tab
+      v-if="fpgaDeviceBasedChecking"
+      :title="$t('gpgpu.baseboard.baseBoardInterfaceAssemblyTab')"
+    >
       <h3>
         {{
           $t('gpgpu.baseboard.baseBoardInterfaceBaseBoardAssemblyContentTitle')
@@ -76,13 +79,21 @@ export default {
       baseBoardAssemblyInfo: [],
     };
   },
+  computed: {
+    fpgaDeviceBasedChecking() {
+      return this.$store.getters['gpu/getFpgaModelStatusInfo'];
+    },
+  },
   created() {
     this.chassisInfo = this.$store.getters['gpu/getGpgpuChassisData'];
     this.chassisInfo.length > 0 &&
       this.chassisInfo.forEach((val) => {
         var deviceName = val['@odata.id'].split('/').pop();
+        let baseboardDeviceName = this.fpgaDeviceBasedChecking
+          ? 'Baseboard'
+          : 'Chassis'; // adding the condition for checking the HGX or MGX
         if (
-          deviceName.includes('HGX_Chassis') &&
+          deviceName.includes(baseboardDeviceName) &&
           !deviceName.includes('ERoT') &&
           !deviceName.includes('IRoT')
         ) {

@@ -25,15 +25,17 @@
       :empty-text="$t('global.table.emptyMessage')"
       show-empty
     ></b-table>
-    <h3>{{ $t('gpgpu.fpga.fpgaInterfaceSensorsInfoContentTitle') }}</h3>
-    <b-table
-      responsive="md"
-      hover
-      :fields="fpgaChassisSensorInfofields"
-      :items="fpgaChassisSensorInfo"
-      :empty-text="$t('global.table.emptyMessage')"
-      show-empty
-    ></b-table>
+    <div v-if="fpgaDeviceBasedChecking">
+      <h3>{{ $t('gpgpu.fpga.fpgaInterfaceSensorsInfoContentTitle') }}</h3>
+      <b-table
+        responsive="md"
+        hover
+        :fields="fpgaChassisSensorInfofields"
+        :items="fpgaChassisSensorInfo"
+        :empty-text="$t('global.table.emptyMessage')"
+        show-empty
+      ></b-table>
+    </div>
   </div>
 </template>
 <script>
@@ -85,6 +87,11 @@ export default {
       fpgaOptions: [],
       fpgaProcessoeDevicseInfo: [],
     };
+  },
+  computed: {
+    fpgaDeviceBasedChecking() {
+      return this.$store.getters['gpu/getFpgaModelStatusInfo'];
+    },
   },
   created() {
     this.chassisInfo = this.$store.getters['gpu/getGpgpuChassisData'];
