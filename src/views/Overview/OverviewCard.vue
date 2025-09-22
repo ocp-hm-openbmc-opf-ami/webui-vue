@@ -12,10 +12,10 @@
         <b-button
           v-if="exportButton || downloadButton"
           :disabled="disabled"
-          :download="download"
-          :href="href"
+          v-bind="downloadButton ? { download, href } : {}"
           class="p-0"
           variant="link"
+          @click="exportEvent"
         >
           <span v-if="downloadButton">{{ $t('global.action.download') }}</span>
           <span v-if="exportButton">{{ $t('global.action.exportAll') }}</span>
@@ -73,6 +73,11 @@ export default {
     },
     href() {
       return `data:text/json;charset=utf-8,${this.dataForExport}`;
+    },
+  },
+  methods: {
+    exportEvent() {
+      this.$emit('export-all');
     },
   },
 };
