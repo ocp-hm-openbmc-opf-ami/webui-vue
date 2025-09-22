@@ -45,7 +45,10 @@
               <b-dropdown-item
                 v-for="(option, index) in powerDropdownOptions"
                 :key="index"
-                v-b-tooltip.hover.rightbottom="getTooltipText(option)"
+                v-b-tooltip.hover.rightbottom="{
+                  title: getTooltipText(option),
+                  html: true,
+                }"
                 :value="option"
                 :disabled="isDropdownItemDisabled(option)"
                 @click="handleNewDropdownClick(option)"

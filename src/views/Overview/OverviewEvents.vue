@@ -1,11 +1,11 @@
 <template>
   <overview-card
-    :data="eventLogData"
-    :disabled="eventLogData.length === 0"
+    :disabled="criticalEvents === 0 || warningEvents === 0"
     :export-button="true"
     :file-name="exportFileNameByDate()"
     :title="$t('pageOverview.eventLogs')"
     :to="`/logs/event-logs`"
+    @export-all="exportAll"
   >
     <b-row class="mt-3">
       <b-col sm="6">
@@ -35,16 +35,19 @@ import OverviewCard from './OverviewCard';
 import StatusIcon from '@/components/Global/StatusIcon';
 import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
 import { mapGetters } from 'vuex';
+import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 
 export default {
   name: 'Events',
   components: { OverviewCard, StatusIcon },
-  mixins: [DataFormatterMixin],
+  mixins: [DataFormatterMixin, LoadingBarMixin],
+  data() {
+    return {
+      eventLogData: [],
+    };
+  },
   computed: {
-    ...mapGetters('dashboard', ['eventLogCounts', 'allEvents']),
-    eventLogData() {
-      return this.allEvents;
-    },
+    ...mapGetters('dashboard', ['eventLogCounts']),
     criticalEvents() {
       // Return mock array with length for display
       return new Array(this.eventLogCounts.critical);
@@ -69,6 +72,27 @@ export default {
         date.toString().split(':').join('-').split(' ')[4];
       let fileName = 'all_event_logs_';
       return fileName + date;
+    },
+    async exportAll() {
+      this.startLoader();
+      // Fetch event log data from store
+      await this.$store.dispatch('eventLog/getEventLogData');
+      // Get the latest event log data from store
+      const eventLogData = this.$store.getters['eventLog/allEvents'];
+      // Download as JSON file
+      const dataStr = JSON.stringify(eventLogData);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = this.exportFileNameByDate() + '.json';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      // Optionally update local state if needed
+      this.eventLogData = eventLogData;
+      this.endLoader();
     },
   },
 };

@@ -2,6 +2,7 @@
   <div>
     <b-tabs active-nav-item-class="font-weight-bold" card content-class="xl-12">
       <b-tab
+        v-if="fpgaDeviceBasedChecking"
         :title="$t('gpgpu.tab.gpgpuInterfaceProcessorTab')"
         @click="activeTab = 'fpgaProcessorTab'"
       >
@@ -49,6 +50,16 @@ export default {
     return {
       activeTab: 'fpgaProcessorTab',
     };
+  },
+  computed: {
+    fpgaDeviceBasedChecking() {
+      return this.$store.getters['gpu/getFpgaModelStatusInfo'];
+    },
+  },
+  created() {
+    this.activeTab = this.fpgaDeviceBasedChecking
+      ? 'fpgaProcessorTab'
+      : 'fpgaChassisTab'; // activate the tab based on the model
   },
 };
 </script>

@@ -392,6 +392,7 @@ export default {
                   this.$t('global.action.ok'),
                   this.$t('global.action.warning'),
                   this.$t('global.action.critical'),
+                  this.$t('global.action.na'),
                 ],
               },
             ]
@@ -403,6 +404,7 @@ export default {
                   this.$t('global.action.ok'),
                   this.$t('global.action.warning'),
                   this.$t('global.action.critical'),
+                  this.$t('global.action.na'),
                 ],
               },
               {

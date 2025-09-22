@@ -22,6 +22,7 @@ const GpuStore = {
     gpgpuChassisSelectedInfo: '',
     gpuChassisSensorInfo: '',
     gpuProcessorPortData: '',
+    fpgaModelStatusInfo: true, // Default to true, will be set based on system model
   },
   getters: {
     getGpuSystemsInfo: (state) => state.gpuSystemsInfo,
@@ -43,6 +44,7 @@ const GpuStore = {
     getgpuChassisSelectedInfo: (state) => state.gpgpuChassisSelectedInfo,
     getGpuChassisSensorData: (state) => state.gpuChassisSensorInfo,
     setgpuProcessorPortData: (state) => state.gpuProcessorPortData,
+    getFpgaModelStatusInfo: (state) => state.fpgaModelStatusInfo,
   },
   mutations: {
     setGpuSystemsInfo: (state, gpuSystemsInfo) =>
@@ -84,6 +86,8 @@ const GpuStore = {
       (state.gpuChassisSensorInfo = gpuChassisSensorInfo),
     setgpuProcessorPortData: (state, gpuProcessorPortData) =>
       (state.gpuProcessorPortData = gpuProcessorPortData),
+    setFpgaModelStatusInfo: (state, fpgaModelStatusInfo) =>
+      (state.fpgaModelStatusInfo = fpgaModelStatusInfo),
   },
   actions: {
     // GPGPU Start
@@ -91,6 +95,13 @@ const GpuStore = {
       return await api
         .get('/redfish/v1/Systems/system')
         .then((systemInfo) => {
+          commit(
+            'setFpgaModelStatusInfo',
+            systemInfo.data.Model.includes('GB200') ||
+              systemInfo.data.Model.includes('GB300')
+              ? false
+              : true,
+          );
           commit('setGpuSystemsInfo', systemInfo.data);
         })
         .catch((error) => {
