@@ -45,6 +45,29 @@ import AutoVideoSettings from '@/views/Settings/AutoVideoSettings';
 import VideoLogs from '@/views/Logs/VideoLogs';
 import IPMIEventLog from '@/views/Logs/IPMIEventLogs';
 import AdvancedLogSettings from '@/views/Settings/AdvancedLogSettings/AdvancedLogSettings.vue';
+import Gpgpu from '@/views/Settings/Gpgpu';
+import Addc from '@/views/HostSystemDiagnostics/Addc';
+import ACD from '@/views/HostSystemDiagnostics/ACD';
+import Asd from '@/views/HostSystemDiagnostics/Asd';
+import AmdRemoteDebug from '@/views/HostSystemDiagnostics/AmdRemoteDebug/AmdRemoteDebug.vue';
+import Adapter from '@/views/RAID/Adapter';
+import PhysicalStorage from '@/views/RAID/PhysicalStorage';
+import LogicalStorage from '@/views/RAID/LogicalStorage/LogicalStorage.vue';
+import BrcmCreateLogicalStorage from '@/views/RAID/LogicalStorage/BrcmCreateLogicalStorage.vue';
+import MsccCreateLogicalStorage from '@/views/RAID/LogicalStorage/MsccCreateLogicalStorage.vue';
+import Topology from '@/views/RAID/Topology/Topology.vue';
+import RaidEventLog from '@/views/RAID/EventLog/RaidEventLog.vue';
+import NvmeInformation from '@/views/NvmeInformation';
+import Nic from '@/views/Nic';
+import Radius from '@/views/SecurityAndAccess/Radius';
+import Power from '@/views/ResourceManagement/Power';
+import CUPS from '@/views/Settings/CUPS';
+import NodeManager from '@/views/Settings/NodeManager';
+import BackupAndRestore from '@/views/Operations/BackupAndRestore';
+import Ncsi from '@/views/Settings/Ncsi';
+import FireWall from '@/views/Settings/FireWall';
+import NetworkLink from '@/views/Settings/NetworkLink/NetworkLink';
+import Bond from '@/views/Settings/Bond';
 
 const roles = {
   administrator: 'Administrator',
@@ -237,8 +260,7 @@ if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true') {
   routes[2].children.push({
     path: '/gpgpu',
     name: 'gpgpu',
-    component: () =>
-      import(/* webpackChunkName: "Gpgpu" */ '@/views/Settings/Gpgpu'),
+    component: Gpgpu,
     meta: {
       title: i18n.t('appPageTitle.gpgpu'),
     },
@@ -248,10 +270,7 @@ if (process.env.VUE_APP_ONETREE_AMD_ADDC_ENABLED == 'true') {
   routes[2].children.push({
     path: '/host-system-diagnostics/addc',
     name: 'addc',
-    component: () =>
-      import(
-        /* webpackChunkName: "ACD" */ '@/views/HostSystemDiagnostics/Addc'
-      ),
+    component: Addc,
     meta: {
       title: i18n.t('appPageTitle.addc'),
     },
@@ -261,8 +280,7 @@ if (process.env.VUE_APP_ONETREE_ACD_ENABLED == 'true') {
   routes[2].children.push({
     path: '/host-system-diagnostics/acd',
     name: 'autonomous-crash-dump',
-    component: () =>
-      import(/* webpackChunkName: "ACD" */ '@/views/HostSystemDiagnostics/ACD'),
+    component: ACD,
     meta: {
       title: i18n.t('appPageTitle.autonomousCrashDump'),
     },
@@ -272,8 +290,7 @@ if (process.env.VUE_APP_ONETREE_ASD_ENABLED == 'true') {
   routes[2].children.push({
     path: '/host-system-diagnostics/asd',
     name: 'asd',
-    component: () =>
-      import(/* webpackChunkName: "ASD" */ '@/views/HostSystemDiagnostics/Asd'),
+    component: Asd,
     meta: {
       title: i18n.t('appPageTitle.asd'),
     },
@@ -283,10 +300,7 @@ if (process.env.VUE_APP_ONETREE_AMDREMOTEDBG_ENABLED == 'true') {
   routes[2].children.push({
     path: '/host-system-diagnostics/amd-remote-debug',
     name: 'amd-remote-debug',
-    component: () =>
-      import(
-        /* webpackChunkName: "RemoteDebug" */ '@/views/HostSystemDiagnostics/AmdRemoteDebug/AmdRemoteDebug.vue'
-      ),
+    component: AmdRemoteDebug,
     meta: {
       title: i18n.t('appPageTitle.amdRemoteDebug'),
     },
@@ -300,8 +314,7 @@ if (
     {
       path: '/raid/adapter',
       name: 'adapter',
-      component: () =>
-        import(/* webpackChunkName: "Adapter" */ '@/views/RAID/Adapter'),
+      component: Adapter,
       meta: {
         title: i18n.t('appPageTitle.adapter'),
       },
@@ -309,10 +322,7 @@ if (
     {
       path: '/raid/physical-device',
       name: 'physical-device',
-      component: () =>
-        import(
-          /* webpackChunkName: "PhysicalStorage" */ '@/views/RAID/PhysicalStorage'
-        ),
+      component: PhysicalStorage,
       meta: {
         title: i18n.t('appPageTitle.physicalDevice'),
       },
@@ -320,10 +330,7 @@ if (
     {
       path: '/raid/logical-device',
       name: 'logical-device',
-      component: () =>
-        import(
-          /* webpackChunkName: "LogicalStorage" */ '@/views/RAID/LogicalStorage/LogicalStorage.vue'
-        ),
+      component: LogicalStorage,
       meta: {
         title: i18n.t('appPageTitle.logicalDevice'),
       },
@@ -331,10 +338,7 @@ if (
     {
       path: '/raid/brcm-create-logical-device',
       name: 'create-logical-device',
-      component: () =>
-        import(
-          /* webpackChunkName: "CreateLogicalStorage" */ '@/views/RAID/LogicalStorage/BrcmCreateLogicalStorage.vue'
-        ),
+      component: BrcmCreateLogicalStorage,
       meta: {
         title: i18n.t('appPageTitle.createLogicalDevice'),
       },
@@ -342,10 +346,7 @@ if (
     {
       path: '/raid/mscc-create-logical-device',
       name: 'create-logical-device',
-      component: () =>
-        import(
-          /* webpackChunkName: "CreateLogicalStorage" */ '@/views/RAID/LogicalStorage/MsccCreateLogicalStorage.vue'
-        ),
+      component: MsccCreateLogicalStorage,
       meta: {
         title: i18n.t('appPageTitle.createLogicalDevice'),
       },
@@ -353,10 +354,7 @@ if (
     {
       path: '/raid/topology',
       name: 'raid-topology',
-      component: () =>
-        import(
-          /* webpackChunkName: "RaidTopology" */ '@/views/RAID/Topology/Topology.vue'
-        ),
+      component: Topology,
       meta: {
         title: i18n.t('appPageTitle.raidTopology'),
       },
@@ -364,10 +362,7 @@ if (
     {
       path: '/raid/raid-event-log',
       name: 'raid-event-log',
-      component: () =>
-        import(
-          /* webpackChunkName: "RaidEventLog" */ '@/views/RAID/EventLog/RaidEventLog.vue'
-        ),
+      component: RaidEventLog,
       meta: {
         title: i18n.t('appPageTitle.raidEventLog'),
       },
@@ -381,10 +376,7 @@ if (
   routes[2].children.push({
     path: '/nvme-information',
     name: 'nvme-information',
-    component: () =>
-      import(
-        /* webpackChunkName: "NvmeInformation" */ '@/views/NvmeInformation'
-      ),
+    component: NvmeInformation,
     meta: {
       title: i18n.t('appPageTitle.nvmeInformation'),
     },
@@ -395,8 +387,7 @@ if (process.env.VUE_APP_ONETREE_NIC_ENABLED == 'true') {
   routes[2].children.push({
     path: '/nic',
     name: 'nic-information',
-    component: () =>
-      import(/* webpackChunkName: "nicInformation" */ '@/views/Nic'),
+    component: Nic,
     meta: {
       title: i18n.t('appPageTitle.nicInformation'),
     },
@@ -416,10 +407,7 @@ if (process.env.VUE_APP_ONETREE_RADIUS_CLIENT_ENABLED == 'true') {
   routes[2].children.push({
     path: '/security-and-access/radius',
     name: 'radius',
-    component: () =>
-      import(
-        /* webpackChunkName: "radius" */ '@/views/SecurityAndAccess/Radius'
-      ),
+    component: Radius,
     meta: {
       title: i18n.t('appPageTitle.radius'),
     },
@@ -429,10 +417,7 @@ if (process.env.VUE_APP_ONETREE_AMD_POWERCAP_ENABLED == 'true') {
   routes[2].children.push({
     path: '/resource-management/power',
     name: 'power',
-    component: () =>
-      import(
-        /* webpackChunkName: "powerInformation" */ '@/views/ResourceManagement/Power'
-      ),
+    component: Power,
     meta: {
       title: i18n.t('appPageTitle.power'),
     },
@@ -443,8 +428,7 @@ if (process.env.VUE_APP_ONETREE_INTELSIPACK_ENABLED == 'true') {
   routes[2].children.push({
     path: '/settings/cups',
     name: 'cups',
-    component: () =>
-      import(/* webpackChunkName: "CupsInformation" */ '@/views/Settings/CUPS'),
+    component: CUPS,
     meta: {
       title: i18n.t('appPageTitle.cups'),
     },
@@ -455,10 +439,7 @@ if (process.env.VUE_APP_ONETREE_INTELSIPACK_ENABLED == 'true') {
   routes[2].children.push({
     path: '/settings/node-manager',
     name: 'nodeManager',
-    component: () =>
-      import(
-        /* webpackChunkName: "NodeManager" */ '@/views/Settings/NodeManager'
-      ),
+    component: NodeManager,
     meta: {
       title: i18n.t('appPageTitle.nodeManager'),
     },
@@ -468,10 +449,7 @@ if (process.env.VUE_APP_ONETREE_BACKUP_RESTORE_ENABLED == 'true') {
   routes[2].children.push({
     path: '/operations/backup-and-restore',
     name: 'backup-and-restore',
-    component: () =>
-      import(
-        /* webpackChunkName: "BackupAndRestore" */ '@/views/Operations/BackupAndRestore'
-      ),
+    component: BackupAndRestore,
     meta: {
       title: i18n.t('appPageTitle.backupAndRestore'),
     },
@@ -481,8 +459,7 @@ if (process.env.VUE_APP_ONETREE_NETWORK_NCSI_SUPPORT_ENABLED == 'true') {
   routes[2].children.push({
     path: '/settings/ncsi',
     name: 'ncsi',
-    component: () =>
-      import(/* webpackChunkName: "Ncsi" */ '@/views/Settings/Ncsi'),
+    component: Ncsi,
     meta: {
       title: i18n.t('appPageTitle.ncsi'),
     },
@@ -494,8 +471,7 @@ if (
   routes[2].children.push({
     path: '/settings/firewall',
     name: 'FireWall',
-    component: () =>
-      import(/* webpackChunkName: "FireWall" */ '@/views/Settings/FireWall'),
+    component: FireWall,
     meta: {
       title: i18n.t('appPageTitle.systemFirewall'),
     },
@@ -505,10 +481,7 @@ if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
   routes[2].children.push({
     path: '/settings/network-link',
     name: 'networkLink',
-    component: () =>
-      import(
-        /* webpackChunkName: "NetworkLink" */ '@/views/Settings/NetworkLink/NetworkLink'
-      ),
+    component: NetworkLink,
     meta: {
       title: i18n.t('appPageTitle.networkLink'),
     },
@@ -518,8 +491,7 @@ if (process.env.VUE_APP_ONETREE_NETWORK_BONDING_SUPPORT_ENABLED == 'true') {
   routes[2].children.push({
     path: '/settings/bond',
     name: 'Bond',
-    component: () =>
-      import(/* webpackChunkName: "NetworkBond" */ '@/views/Settings/Bond'),
+    component: Bond,
     meta: {
       title: i18n.t('appPageTitle.bond'),
     },
