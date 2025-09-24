@@ -440,6 +440,15 @@ export default {
       );
       if (matchedElement) {
         Object.assign(connectionData, matchedElement.data);
+      } else {
+        Object.assign(connectionData, {
+          serverUri: null,
+          imagePath: null,
+          username: null,
+          password: null,
+          isRW: false,
+          transferProtocolType: '',
+        });
       }
       connectionData.password = '';
       this.modalConfigureConnection = connectionData;
