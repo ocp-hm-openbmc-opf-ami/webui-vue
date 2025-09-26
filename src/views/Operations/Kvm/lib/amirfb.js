@@ -11,6 +11,7 @@ import store from '../../../../store';
 /* additional import for Keyboard LED sync */
 import Keyboard from './amikeyboard';
 import { encodings } from '@novnc/novnc/core/encodings';
+import AMI_DISPLAY from './amidisplay.js';
 
 /*
  * backslash and Intlbackslash have same X11 keysym mapped in en-uk
@@ -41,6 +42,10 @@ export default class AMI_RFB extends RFB {
   /* RFB Extention for including AMI_KEYBOARD (wrapper keyboard module) */
   constructor(target, url, options) {
     super(target, url, options);
+
+    this._display = null;
+    this._display = new AMI_DISPLAY(this._canvas);
+    this._display.onflush = this._onFlush.bind(this);
 
     this._keyboard = null; // Keyboard input handler object
     this._keyboard = new Keyboard(this._canvas);
