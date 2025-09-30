@@ -1,3 +1,4 @@
+import { privilegesId } from '../../store/modules/GlobalStore';
 const VuelidateMixin = {
   methods: {
     getValidationState(model) {
@@ -44,6 +45,13 @@ const VuelidateMixin = {
         return false;
       } else {
         return true;
+      }
+    },
+    isNotAdmin(userPrivilege) {
+      if (userPrivilege !== null && userPrivilege !== undefined) {
+        return userPrivilege !== privilegesId.admin;
+      } else {
+        return false; // Default to false if userPrivilege is not defined
       }
     },
   },

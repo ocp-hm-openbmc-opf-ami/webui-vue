@@ -5,7 +5,7 @@
       <b-row>
         <b-col xl="6" class="p0">
           <div v-if="!radius.authentication">
-            <b-alert show variant="danger">{{
+            <b-alert :show="!isNotAdmin(userPrivilege)" variant="danger">{{
               $t('pageRadius.radiusConfiguration')
             }}</b-alert>
           </div>
@@ -14,7 +14,10 @@
           <b-row>
             <b-col>
               <b-form-group>
-                <b-form-checkbox v-model="radius.authentication">
+                <b-form-checkbox
+                  v-model="radius.authentication"
+                  :disabled="isNotAdmin(userPrivilege)"
+                >
                   {{ $t('pageRadius.enableRadiusAuthentication') }}
                 </b-form-checkbox>
               </b-form-group>
@@ -28,7 +31,9 @@
                   v-model="tlsAuthenticationEnable"
                   data-test-id="radius-toggle-TLS"
                   switch
-                  :disabled="!radius.authentication"
+                  :disabled="
+                    !radius.authentication || isNotAdmin(userPrivilege)
+                  "
                   @change="ChangeEnableEapTLS"
                 >
                   <span v-if="tlsAuthenticationEnable">
@@ -48,7 +53,9 @@
                 <b-form-input
                   id="serverAddress"
                   v-model="radius.serverAddress"
-                  :disabled="!radius.authentication"
+                  :disabled="
+                    !radius.authentication || isNotAdmin(userPrivilege)
+                  "
                   type="text"
                   :state="getValidationState($v.radius.serverAddress)"
                   @input="$v.radius.serverAddress.$touch()"
@@ -76,7 +83,9 @@
                 <b-form-input
                   id="port"
                   v-model="radius.port"
-                  :disabled="!radius.authentication"
+                  :disabled="
+                    !radius.authentication || isNotAdmin(userPrivilege)
+                  "
                   :state="getValidationState($v.radius.port)"
                   @input="$v.radius.port.$touch()"
                 />
@@ -106,7 +115,9 @@
                 <b-form-input
                   id="secret"
                   v-model="radius.secret"
-                  :disabled="!radius.authentication"
+                  :disabled="
+                    !radius.authentication || isNotAdmin(userPrivilege)
+                  "
                   type="password"
                   :state="getValidationState($v.radius.secret)"
                   aria-describedby="secret-help-block"
@@ -127,7 +138,9 @@
                 <b-form-input
                   id="groupName1"
                   v-model="radius.groupName1"
-                  :disabled="!radius.authentication"
+                  :disabled="
+                    !radius.authentication || isNotAdmin(userPrivilege)
+                  "
                   type="text"
                   :state="getValidationState($v.radius.groupName1)"
                   aria-describedby="groupName1-help-block"
@@ -146,7 +159,9 @@
                 <b-form-input
                   id="groupName2"
                   v-model="radius.groupName2"
-                  :disabled="!radius.authentication"
+                  :disabled="
+                    !radius.authentication || isNotAdmin(userPrivilege)
+                  "
                   type="text"
                   :state="getValidationState($v.radius.groupName2)"
                   aria-describedby="groupName2-help-block"
@@ -165,7 +180,9 @@
                 <b-form-input
                   id="groupName3"
                   v-model="radius.groupName3"
-                  :disabled="!radius.authentication"
+                  :disabled="
+                    !radius.authentication || isNotAdmin(userPrivilege)
+                  "
                   type="text"
                   :state="getValidationState($v.radius.groupName3)"
                   aria-describedby="groupName3-help-block"
@@ -186,7 +203,9 @@
                 <b-form-select
                   id="privilege1"
                   v-model="radius.privilege1"
-                  :disabled="!radius.authentication"
+                  :disabled="
+                    !radius.authentication || isNotAdmin(userPrivilege)
+                  "
                   class="input"
                   :options="privilegeTypes"
                   :state="getValidationState($v.radius.privilege1)"
@@ -212,7 +231,9 @@
                   class="input"
                   :options="privilegeTypes"
                   :state="getValidationState($v.radius.privilege2)"
-                  :disabled="!radius.authentication"
+                  :disabled="
+                    !radius.authentication || isNotAdmin(userPrivilege)
+                  "
                   data-test-id="radius2-option"
                   ><template #first>
                     <b-form-select-option :value="null" disabled>
@@ -235,7 +256,9 @@
                   class="input"
                   :options="privilegeTypes"
                   :state="getValidationState($v.radius.privilege3)"
-                  :disabled="!radius.authentication"
+                  :disabled="
+                    !radius.authentication || isNotAdmin(userPrivilege)
+                  "
                   data-test-id="radius3-option"
                   ><template #first>
                     <b-form-select-option :value="null" disabled>
@@ -315,7 +338,12 @@
           </b-row>
           <b-row class="mt-4 mb-5">
             <b-col>
-              <b-btn variant="primary" type="submit" @click="SaveConfig">
+              <b-btn
+                variant="primary"
+                type="submit"
+                :disabled="isNotAdmin(userPrivilege)"
+                @click="SaveConfig"
+              >
                 <icon-save />
                 {{ $t('global.action.save') }}
               </b-btn>
@@ -332,7 +360,7 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { requiredIf } from 'vuelidate/lib/validators';
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import IconSave from '@carbon/icons-vue/es/save/20';
 import FormFile from '@/components/Global/FormFile';
 
@@ -373,6 +401,7 @@ export default {
   },
   computed: {
     ...mapState('radius', ['radiusValues']),
+    ...mapGetters('global', ['userPrivilege']),
     tlsAuthenticationEnable: {
       get() {
         return this.$store.getters['radius/getEnableEapTLS'];
