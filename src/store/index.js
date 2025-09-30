@@ -63,7 +63,6 @@ import AmdRemoteDebugStore from './modules/HostSystemDiagnostics/AmdRemoteDebugS
 import IPMIEventLogStore from './modules/Logs/IPMIEventLogStore';
 import Gpu from './modules/Settings/GpuStore';
 import AdvancedLogSettingsStore from './modules/Settings/AdvancedLogSettingsStore';
-import DeviceOwnerTransfershipStore from './modules/Settings/DeviceOwnerTransfershipStore';
 
 Vue.use(Vuex);
 
@@ -134,6 +133,5 @@ export default new Vuex.Store({
     ipmiEventLog: IPMIEventLogStore,
     gpu: Gpu,
     advancedLog: AdvancedLogSettingsStore,
-    deviceOwnerTransfership: DeviceOwnerTransfershipStore,
   },
 });

@@ -68,7 +68,6 @@ import Ncsi from '@/views/Settings/Ncsi';
 import FireWall from '@/views/Settings/FireWall';
 import NetworkLink from '@/views/Settings/NetworkLink/NetworkLink';
 import Bond from '@/views/Settings/Bond';
-import DeviceOwnerTransfership from '@/views/Settings/DeviceOwnerTransfership/DeviceOwnerTransfership.vue';
 
 const roles = {
   administrator: 'Administrator',
@@ -495,16 +494,6 @@ if (process.env.VUE_APP_ONETREE_NETWORK_BONDING_SUPPORT_ENABLED == 'true') {
     component: Bond,
     meta: {
       title: i18n.t('appPageTitle.bond'),
-    },
-  });
-}
-if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true') {
-  routes[2].children.push({
-    path: '/settings/device-owner-transfership',
-    name: 'device-owner-transfership',
-    component: DeviceOwnerTransfership,
-    meta: {
-      title: i18n.t('appPageTitle.deviceOwnerTransfership'),
     },
   });
 }

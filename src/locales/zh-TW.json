@@ -193,8 +193,7 @@
         "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
         "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
         "gpgpu": "@:appPageTitle.gpgpu",
-        "advancedLogSettings":"@:appPageTitle.advancedLogSettings",
-        "deviceOwnerTransfership": "設備所有者轉讓"
+        "advancedLogSettings":"@:appPageTitle.advancedLogSettings"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -262,8 +261,7 @@
         "amdRemoteDebug": "AMD 遠端偵錯",
         "ipmiEventLog": "IPMI事件日誌",
         "gpgpu": "GPGPU",
-        "advancedLogSettings":"進階日誌設定",
-        "deviceOwnerTransfership": "設備所有者轉讓"
+        "advancedLogSettings":"進階日誌設定"
     },
     "pageNodeManager": {
         "nmConfiguration": "網管設定",
@@ -3262,81 +3260,6 @@
             "successCertificateUpload": "已成功新增%{證書}。",
             "errorGettingVideoLog": "儲存進階日誌設定時發生錯誤。"
         }
-    },
-    "pageDeviceOwnerTransfership": {
-      "title": "設備所有者轉移",
-      "description": "管理設備所有權轉移。",
-      "step1": {
-        "title": "CAK 解鎖",
-        "description": "開始 CAK 解鎖流程（狀態 2 到狀態 1）。",
-        "generateToken": "產生 CAK 解鎖令牌",
-        "uploadSignedToken": "下載產生的令牌，簽名後上傳簽名令牌（DOTTokenInstall）。"
-      },
-      "step2": {
-        "title": "停用 DOT",
-        "description": "在繼續停用 DOT（從 ERoT RAM 移除 CAK，狀態 1 到狀態 0）前請先執行電源循環。",
-        "disableDot": "停用 DOT（狀態 0 到狀態 3）",
-        "uploadLakPub": "上傳公開金鑰檔案以停用 DOT。"
-      },
-      "step3": {
-        "title": "啟用 DOT",
-        "description": "產生令牌以啟用 DOT（狀態 3 到狀態 0）。",
-        "generateToken": "產生啟用令牌",
-        "uploadSignedToken": "下載產生的令牌，簽名後上傳簽名令牌（DOTTokenInstall）。"
-      },
-      "step4": {
-        "title": "安裝 CAK",
-        "description": "上傳公開金鑰檔案以安裝新的 CAK（狀態 0 到狀態 1）。",
-        "uploadLakPub": "上傳公開金鑰檔案以安裝 CAK。"
-      },
-      "step5": {
-        "title": "鎖定 CAK",
-        "description": "鎖定 CAK 以完成流程（狀態 1 到狀態 2）。",
-        "uploadLakPub": "上傳公開金鑰檔案以安裝 CAK。",
-        "lockCak": "鎖定 CAK"
-      },
-      "step6": {
-        "title": "CAK 測試",
-        "description": "驗證金鑰是否正確安裝。",
-        "testCak": "測試 CAK"
-      },
-      "step7": {
-        "title": "CAK 簽章測試",
-        "description": "執行簽章測試以驗證新的 CAK。",
-        "generateToken": "產生簽章測試令牌",
-        "uploadSignedToken": "下載產生的令牌，簽名後上傳簽名令牌（DOTTokenInstall）。"
-      },
-      "success": {
-        "title": "成功",
-        "message": "設備所有者轉移流程已成功完成。"
-      },
-      "reset": "重設",
-      "status": "狀態",
-      "completed": "已完成",
-      "notStarted": "未開始",
-      "inProgress": "進行中",
-      "failed": "失敗",
-      "upload": "上傳",
-      "toast": {
-          "success": {
-              "step1": "CAK 解鎖令牌產生成功。",
-              "step2": "DOT 停用執行成功。",
-              "step3": "DOT 啟用令牌產生成功。",
-              "step4": "CAK 安裝執行成功。",
-              "step5": "CAK 鎖定執行成功。",
-              "step6": "CAK 測試執行成功。",
-              "step7": "簽章測試令牌產生成功。"
-          },
-          "error": {
-              "step1": "CAK 解鎖令牌產生失敗。",
-              "step2": "DOT 停用執行失敗。",
-              "step3": "DOT 啟用令牌產生失敗。",
-              "step4": "CAK 安裝執行失敗。",
-              "step5": "CAK 鎖定執行失敗。",
-              "step6": "CAK 測試執行失敗。",
-              "step7": "簽章測試令牌產生失敗。"
-          }
-      }
     },
     "countries": {
         "AF": "阿富汗",
