@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
 
 export const CERTIFICATE_TYPES = [
   {
@@ -80,6 +81,14 @@ const CertificatesStore = {
                   SerialNumber,
                   SignatureAlgorithm,
                 } = data;
+                const validFromObj =
+                  UtcDateTimeMixin.methods.createDateWithISOString(
+                    ValidNotBefore,
+                  );
+                const validUntilObj =
+                  UtcDateTimeMixin.methods.createDateWithISOString(
+                    ValidNotAfter,
+                  );
                 return {
                   type: Name,
                   location: data['@odata.id'],
@@ -90,8 +99,8 @@ const CertificatesStore = {
                   publicKey: Oem.Ami?.PublicKey,
                   issuedBy: Issuer.CommonName,
                   issuedTo: Subject.CommonName,
-                  validFrom: new Date(ValidNotBefore),
-                  validUntil: new Date(ValidNotAfter),
+                  validFrom: validFromObj,
+                  validUntil: validUntilObj,
                   issuedByCity: Issuer.City,
                   issuedByCountry: Issuer.Country,
                   issuedByOrganization: Issuer.Organization,

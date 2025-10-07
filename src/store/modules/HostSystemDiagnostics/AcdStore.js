@@ -1,5 +1,6 @@
 import i18n from '@/i18n';
 import api from '@/store/api';
+import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
 
 const AutonomousCrashDumpStore = {
   namespaced: true,
@@ -61,7 +62,9 @@ const AutonomousCrashDumpStore = {
         .then((response) => {
           const dumpFileUrls = response.data?.DumpFiles;
           const allCrashDumpData = dumpFileUrls.map((log, index) => {
-            var createdate = new Date(log.Created);
+            var createdate = UtcDateTimeMixin.methods.createDateWithISOString(
+              log.Created,
+            );
             return {
               date: createdate,
               filename: log.FilePath.split('/').pop(),

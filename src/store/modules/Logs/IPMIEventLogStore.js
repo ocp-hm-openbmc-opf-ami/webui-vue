@@ -1,5 +1,6 @@
 import api, { getResponseCount } from '@/store/api';
 import i18n from '@/i18n';
+import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
 
 const getHealthStatus = (events, loadedEvents) => {
   let status = loadedEvents ? 'OK' : '';
@@ -56,14 +57,18 @@ const IPMIEventLogStore = {
               Resolved,
               AdditionalDataURI,
             } = log;
+            const dateObj =
+              UtcDateTimeMixin.methods.createDateWithISOString(Created);
+            const modifiedDateObj =
+              UtcDateTimeMixin.methods.createDateWithISOString(Modified);
             return {
               id: Id,
               severity: Severity || 'NA', // Handle missing Severity property for discrete sensors
-              date: new Date(Created),
+              date: dateObj,
               type: EntryType,
               description: Message,
               name: Name,
-              modifiedDate: new Date(Modified),
+              modifiedDate: modifiedDateObj,
               uri: log['@odata.id'],
               filterByStatus: Resolved ? 'Resolved' : 'Unresolved',
               status: Resolved, //true or false
