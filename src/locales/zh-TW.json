@@ -2933,6 +2933,7 @@
             "deviceGroup": "裝置群組",
             "percentage": "百分比",
             "progress": "進度",
+            "operation" : "運作",
             "present": "顯示",
             "capableSpeedGbs": "實際速度",
             "blockCount": "區塊數量",

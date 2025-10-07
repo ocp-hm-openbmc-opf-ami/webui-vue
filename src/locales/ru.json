@@ -2807,6 +2807,7 @@
             "deviceGroup": "Группа устройств",
             "percentage": "Процент",
             "progress": "Прогресс",
+            "operation" : "Работа",
             "present": "Присутствует",
             "capableSpeedGbs": "Способная скорость",
             "blockCount": "Количество блоков",

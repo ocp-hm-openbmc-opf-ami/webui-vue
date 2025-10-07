@@ -2933,6 +2933,7 @@
             "deviceGroup": "设备组",
             "percentage": "百分比",
             "progress": "进度",
+            "operation" : "运行",
             "present": "显示",
             "capableSpeedGbs": "实际速度",
             "blockCount": "区块数量",

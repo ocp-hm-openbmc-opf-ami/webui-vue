@@ -2934,6 +2934,7 @@
             "deviceGroup": "Device Group",
             "percentage": "Percentage",
             "progress" : "Progress",
+            "operation" : "Operation",
             "present": "Present",
             "capableSpeedGbs": "Capable Speed",
             "blockCount": "Block Count",
