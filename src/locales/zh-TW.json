@@ -1572,12 +1572,12 @@
             "errorDeleteRoleGroup": "刪除身分組發生錯誤。 | 刪除身分組們發生錯誤。",
             "errorSaveActiveDirectorySettings": "儲存 Active Directory 設定發生錯誤。",
             "errorSaveLdapSettings": "儲存 Open LDAP 設定發生錯誤。",
-            "errorSaveRoleGroup": "儲存身分組發生錯誤。",
+            "errorSaveRoleGroup": "更新身分組時發生錯誤。",
             "successAddRoleGroup": "成功新增身分組'%{groupName}'。",
             "successDeleteRoleGroup": "成功刪除身分組。",
             "successSaveActiveDirectorySettings": "成功儲存 Active Directory 設定。",
             "successSaveLdapSettings": "成功儲存 Open LDAP 設定。",
-            "successSaveRoleGroup": "成功儲存身分組'%{groupName}'。"
+            "successSaveRoleGroup": "成功更新身分組'%{groupName}'。"
         }
     },
     "pageRadius": {

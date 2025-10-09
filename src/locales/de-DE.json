@@ -1574,12 +1574,12 @@
             "errorDeleteRoleGroup": "Fehler beim Löschen der Rollengruppe. | Fehler beim Löschen der Rollengruppen.",
             "errorSaveActiveDirectorySettings": "Fehler beim Speichern der Active Directory-Einstellungen.",
             "errorSaveLdapSettings": "Fehler beim Speichern der OpenLDAP-Einstellungen.",
-            "errorSaveRoleGroup": "Fehler beim Speichern der Rollengruppe.",
+            "errorSaveRoleGroup": "Fehler beim Aktualisieren der Rollengruppe.",
             "successAddRoleGroup": "Rollengruppe '%{groupName}' erfolgreich hinzugefügt.",
             "successDeleteRoleGroup": "Rollengruppe erfolgreich gelöscht. | Rollengruppen erfolgreich gelöscht.",
             "successSaveActiveDirectorySettings": "Active Directory-Einstellungen erfolgreich gespeichert.",
             "successSaveLdapSettings": "OpenLDAP-Einstellungen erfolgreich gespeichert.",
-            "successSaveRoleGroup": "Rollengruppe '%{groupName}' erfolgreich gespeichert."
+            "successSaveRoleGroup": "Rollengruppe '%{groupName}' erfolgreich aktualisiert."
         }
     },
     "pageRadius": {

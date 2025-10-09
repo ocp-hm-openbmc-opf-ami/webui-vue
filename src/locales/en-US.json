@@ -1573,12 +1573,12 @@
             "errorDeleteRoleGroup": "Error in deleting role group. | Error in deleting role groups.",
             "errorSaveActiveDirectorySettings": "Error in saving Active Directory settings.",
             "errorSaveLdapSettings": "Error in saving Open LDAP settings.",
-            "errorSaveRoleGroup": "Error in saving role group.",
+            "errorSaveRoleGroup": "Error in updating role group.",
             "successAddRoleGroup": "Successfully added role group '%{groupName}'.",
             "successDeleteRoleGroup": "Successfully deleted role group. | Successfully deleted role groups.",
             "successSaveActiveDirectorySettings": "Successfully saved Active Directory Settings.",
             "successSaveLdapSettings": "Successfully saved Open LDAP settings.",
-            "successSaveRoleGroup": "Successfully saved role group '%{groupName}'."
+            "successSaveRoleGroup": "Successfully updated role group '%{groupName}'."
         }
     },
     "pageRadius": {

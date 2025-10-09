@@ -64,11 +64,6 @@
                 <dd class="mb-2">
                   {{ dataFormatter(item.model) }}
                 </dd>
-                <!-- Asset tag -->
-                <dt>{{ $t('pageInventory.table.assetTag') }}:</dt>
-                <dd class="mb-2">
-                  {{ dataFormatter(item.assetTag) }}
-                </dd>
               </dl>
             </b-col>
             <b-col class="mt-2" sm="6" xl="6">
@@ -79,9 +74,11 @@
                 <!-- Power state -->
                 <dt>{{ $t('pageInventory.table.power') }}:</dt>
                 <dd>{{ dataFormatter(item.power) }}</dd>
-                <!-- Health rollup -->
-                <dt>{{ $t('pageInventory.table.healthRollup') }}:</dt>
-                <dd>{{ dataFormatter(item.healthRollup) }}</dd>
+                <!-- Asset tag -->
+                <dt>{{ $t('pageInventory.table.assetTag') }}:</dt>
+                <dd class="mb-2">
+                  {{ dataFormatter(item.assetTag) }}
+                </dd>
               </dl>
             </b-col>
           </b-row>
@@ -147,12 +144,6 @@ export default {
           key: 'id',
           label: this.$t('pageInventory.table.id'),
           formatter: this.dataFormatter,
-        },
-        {
-          key: 'health',
-          label: this.$t('pageInventory.table.health'),
-          formatter: this.dataFormatter,
-          tdClass: 'text-nowrap',
         },
         {
           key: 'identifyLed',

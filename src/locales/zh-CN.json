@@ -1572,12 +1572,12 @@
             "errorDeleteRoleGroup": "删除角色组发生错误。 | 删除角色组发生错误。",
             "errorSaveActiveDirectorySettings": "保存 Active Directory 设置发生错误。",
             "errorSaveLdapSettings": "保存 OpenLDAP 设置发生错误。",
-            "errorSaveRoleGroup": "保存角色组发生错误。",
+            "errorSaveRoleGroup": "更新角色组时出错。",
             "successAddRoleGroup": "成功添加角色组'%{groupName}'。",
             "successDeleteRoleGroup": "成功删除角色组",
             "successSaveActiveDirectorySettings": "成功保存 Active Directory 设置。",
             "successSaveLdapSettings": "成功保存 OpenLDAP 设置。",
-            "successSaveRoleGroup": "成功保存角色组'%{groupName}。"
+            "successSaveRoleGroup": "成功更新角色组'%{groupName}'。"
         }
     },
     "pageRadius": {
