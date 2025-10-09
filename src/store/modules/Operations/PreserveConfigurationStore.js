@@ -18,7 +18,8 @@ const PreserveConfigStore = {
       return await api
         .get('/redfish/v1/UpdateService')
         .then((response) => {
-          const getConfigValues = response.data.Oem.Ami?.PreserveConfiguration;
+          const getConfigValues =
+            response.data?.Oem?.Ami?.PreserveConfiguration;
           commit('setPreserveConfigValues', getConfigValues);
         })
         .catch((error) => {

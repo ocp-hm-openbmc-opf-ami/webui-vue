@@ -16,9 +16,10 @@ const FactoryDefaultStore = {
   actions: {
     async getResetDefault({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/Oem/Ami/ResetToDefaults')
+        .get('/redfish/v1/UpdateService')
         .then((response) => {
-          const getConfigValues = response.data.PreserveConfiguration;
+          const getConfigValues =
+            response.data?.Oem?.Ami?.PreserveConfiguration;
           commit('setResetDefaultValues', getConfigValues);
         })
         .catch((error) => {
@@ -29,8 +30,9 @@ const FactoryDefaultStore = {
         });
     },
     async saveResetDefault() {
+      const data = { ResetType: 'ResetAll' };
       return await api
-        .post('/redfish/v1/Managers/bmc/Oem/Ami/ResetToDefaults')
+        .post('/redfish/v1/Managers/bmc/ResetToDefaults', data)
         .then(() => i18n.t('PageFactoryDefault.toast.restoreToDefaultsSuccess'))
         .catch((error) => {
           console.log(error);
