@@ -193,7 +193,8 @@
         "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
         "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
         "gpgpu": "@:appPageTitle.gpgpu",
-        "advancedLogSettings":"@:appPageTitle.advancedLogSettings"
+        "advancedLogSettings":"@:appPageTitle.advancedLogSettings",
+        "deviceOwnerTransfership": "Device Owner Transfership"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -261,7 +262,8 @@
         "amdRemoteDebug": "Remote Debug",
         "ipmiEventLog": "IPMI Event Logs",
         "gpgpu": "GPGPU",
-        "advancedLogSettings":"Advanced Log Settings"
+        "advancedLogSettings":"Advanced Log Settings",
+        "deviceOwnerTransfership": "Device Owner Transfership"
 
     },
     "pageNodeManager": {
@@ -3261,6 +3263,81 @@
             "successCertificateUpload": "Successfully added %{certificate}.",
             "errorGettingVideoLog": "Error in saving Advanced Log Settings."
         }
+    },
+    "pageDeviceOwnerTransfership": {
+      "title": "Device Owner Transfership",
+      "description": "Manage device ownership transfership.",
+      "step1": {
+        "title": "CAK Unlock",
+        "description": "Start the CAK unlock process (State 2 to State 1).",
+        "generateToken": "Generate CAK Unlock Token",
+        "uploadSignedToken": "Download the generated token, sign it, and upload the signed token (DOTTokenInstall)."
+      },
+      "step2": {
+        "title": "Disable DOT",
+        "description": "Perform a power cycle before proceeding to the Disable DOT (Remove CAK from ERoT RAM (State 1 to State 0)).",
+        "disableDot": "Disable DOT (State 0 to State 3)",
+        "uploadLakPub": "Upload the public key file to disable DOT."
+      },
+      "step3": {
+        "title": "Enable DOT",
+        "description": "Generate a token to enable DOT (State 3 to State 0).",
+        "generateToken": "Generate Enable Token",
+        "uploadSignedToken": "Download the generated token, sign it, and upload the signed token (DOTTokenInstall)."
+      },
+      "step4": {
+        "title": "Install CAK",
+        "description": "Install the new CAK by uploading the public key file (State 0 to State 1).",
+        "uploadLakPub": "Upload the public key file to install the CAK."
+      },
+      "step5": {
+        "title": "Lock CAK",
+        "description": "Lock the CAK to complete the process (State 1 to State 2).",
+        "uploadLakPub": "Upload the public key file to install the CAK.",
+        "lockCak": "Lock CAK"
+      },
+      "step6": {
+        "title": "CAK Test",
+        "description": "Verify the keys are installed properly.",
+        "testCak": "Test CAK"
+      },
+      "step7": {
+        "title": "CAK Sign Test",
+        "description": "Perform a sign test to verify the new CAK.",
+        "generateToken": "Generate Sign Test Token",
+        "uploadSignedToken": "Download the generated token, sign it, and upload the signed token (DOTTokenInstall)."
+      },
+      "success": {
+        "title": "Success",
+        "message": "Device owner transfership process completed successfully."
+      },
+      "reset": "Reset",
+      "status": "Status",
+      "completed": "Completed",
+      "notStarted": "Not Started",
+      "inProgress": "In Progress",
+      "failed": "Failed",
+      "upload": "Upload",
+      "toast": {
+          "success": {
+              "step1": "CAK Unlock Token generated successfully.",
+              "step2": "DOT Disable executed successfully.",
+              "step3": "DOT Enable Token generated successfully.",
+              "step4": "CAK Install executed successfully.",
+              "step5": "CAK Lock executed successfully.",
+              "step6": "CAK Test executed successfully.",
+              "step7": "Sign Test Token generated successfully."
+          },
+          "error": {
+              "step1": "Failed to generate CAK Unlock Token.",
+              "step2": "Failed to execute DOT Disable.",
+              "step3": "Failed to generate DOT Enable Token.",
+              "step4": "Failed to execute CAK Install.",
+              "step5": "Failed to execute CAK Lock.",
+              "step6": "Failed to execute CAK Test.",
+              "step7": "Failed to generate Sign Test Token."
+          }
+      }
     },
     "countries": {
         "AF": "Afghanistan",
