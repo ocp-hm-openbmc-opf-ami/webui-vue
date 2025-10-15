@@ -68,6 +68,7 @@ import Ncsi from '@/views/Settings/Ncsi';
 import FireWall from '@/views/Settings/FireWall';
 import NetworkLink from '@/views/Settings/NetworkLink/NetworkLink';
 import Bond from '@/views/Settings/Bond';
+import FruInformation from '@/views/Fru';
 
 const roles = {
   administrator: 'Administrator',
@@ -256,6 +257,16 @@ const routes = [
     ],
   },
 ];
+if (process.env.VUE_APP_ONETREE_FRU_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/fru',
+    name: 'fru',
+    component: FruInformation,
+    meta: {
+      title: i18n.t('appPageTitle.fru'),
+    },
+  });
+}
 if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true') {
   routes[2].children.push({
     path: '/gpgpu',
