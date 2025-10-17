@@ -201,6 +201,7 @@ const UserManagementStore = {
         encryption,
         algorithm,
         readWritePermission,
+        delayLogout = false,
       },
     ) {
       const data = {};
@@ -302,9 +303,12 @@ const UserManagementStore = {
           const password = data.Password;
           if (
             originalUsername === store.getters.username(store.state) &&
-            (passwordChangeRequired || password)
+            (passwordChangeRequired || password) &&
+            !delayLogout
           ) {
-            authentication.dispatch('authentication/logout');
+            setTimeout(() => {
+              authentication.dispatch('authentication/logout');
+            }, 2000);
           } else {
             dispatch('getUsers');
           }
