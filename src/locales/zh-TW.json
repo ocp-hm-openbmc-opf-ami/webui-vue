@@ -3257,10 +3257,12 @@
         "serverKey": "伺服器密鑰證書",
         "incorrectAdvancedCertificateFileType": "文件不是正確的證書類型。",
         "toast": {
-            "successSaveAdvancedLogsSettings": "已成功儲存進階日誌設定。",
+            "successSaveLocalLogSettings": "成功儲存本地日誌設定。",
+            "successSaveRemoteLogSettings": "成功儲存遠端日誌設定。",
             "errorAdvancedAddCertificate": "加 %{certificate} 時發生錯誤。",
             "successCertificateUpload": "已成功新增%{證書}。",
-            "errorGettingVideoLog": "儲存進階日誌設定時發生錯誤。"
+            "errorGettingLocalLog": "儲存本地日誌設定時發生錯誤。",
+            "errorGettingRemoteLog": "儲存遠端日誌設定時發生錯誤。"
         }
     },
     "pageDeviceOwnerTransfership": {

@@ -3257,10 +3257,12 @@
         "serverKey": "服务器密钥证书",
         "incorrectAdvancedCertificateFileType": "文件不是正确的证书类型。",
         "toast": {
-            "successSaveAdvancedLogsSettings": "已成功保存高级日志设置。",
+            "successSaveLocalLogSettings": "成功保存本地日志设置。",
+            "successSaveRemoteLogSettings": "成功保存远程日志设置。",
             "errorAdvancedAddCertificate": "添加 %{certificate} 时出错。",
             "successCertificateUpload": "已成功添加 %{certificate}。",
-            "errorGettingVideoLog": "保存高级日志设置时出错。"
+            "errorGettingLocalLog": "保存本地日志设置时发生错误。",
+            "errorGettingRemoteLog": "保存远程日志设置时发生错误。"
         }
     },
     "pageDeviceOwnerTransfership": {

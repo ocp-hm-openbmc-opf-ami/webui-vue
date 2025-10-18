@@ -3258,10 +3258,12 @@
         "serverKey": "Server Key Certificate",
         "incorrectAdvancedCertificateFileType": "File is not a correct Certificate Type.",
         "toast": {
-            "successSaveAdvancedLogsSettings": "Successfully Saved Advanced Log Settings.",
+            "successSaveLocalLogSettings": "Successfully Saved Local Log Settings.",
+            "successSaveRemoteLogSettings": "Successfully Saved Remote Log Settings.",
             "errorAdvancedAddCertificate": "Error in adding %{certificate}.",
             "successCertificateUpload": "Successfully added %{certificate}.",
-            "errorGettingVideoLog": "Error in saving Advanced Log Settings."
+            "errorGettingLocalLog": "Error in saving Local Log Settings.",
+            "errorGettingRemoteLog": "Error in saving Remote Log Settings."
         }
     },
     "pageDeviceOwnerTransfership": {

@@ -3264,10 +3264,12 @@
         "serverKey": "Server-Key-Zertifikat",
         "incorrectAdvancedCertificateFileType": "Datei ist kein korrektes Zertifikat.",
         "toast": {
-            "successSaveAdvancedLogsSettings": "Erweiterte Protokoll-Einstellungen erfolgreich gespeichert.",
+            "successSaveLocalLogSettings": "Lokale Protokolleinstellungen erfolgreich gespeichert.",
+            "successSaveRemoteLogSettings": "Remote-Protokolleinstellungen erfolgreich gespeichert.",
             "errorAdvancedAddCertificate": "Fehler beim Hinzufügen von %{certificate}.",
             "successCertificateUpload": "%{certificate} erfolgreich hinzugefügt.",
-            "errorGettingVideoLog": "Fehler beim Speichern der erweiterten Protokoll-Einstellungen."
+            "errorGettingLocalLog": "Fehler beim Speichern der lokalen Protokolleinstellungen.",
+            "errorGettingRemoteLog": "Fehler beim Speichern der Remote-Protokolleinstellungen."
         }
     },
     "pageDeviceOwnerTransfership": {
