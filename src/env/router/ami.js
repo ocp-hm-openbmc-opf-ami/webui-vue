@@ -69,6 +69,7 @@ import FireWall from '@/views/Settings/FireWall';
 import NetworkLink from '@/views/Settings/NetworkLink/NetworkLink';
 import Bond from '@/views/Settings/Bond';
 import FruInformation from '@/views/Fru';
+import DeviceOwnerTransfership from '@/views/Settings/DeviceOwnerTransfership/DeviceOwnerTransfership.vue';
 
 const roles = {
   administrator: 'Administrator',
@@ -508,6 +509,16 @@ if (process.env.VUE_APP_ONETREE_NETWORK_BONDING_SUPPORT_ENABLED == 'true') {
     },
   });
 }
+if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/device-owner-transfership',
+    name: 'device-owner-transfership',
+    component: DeviceOwnerTransfership,
+    meta: {
+      title: i18n.t('appPageTitle.deviceOwnerTransfership'),
+    },
+  });
+}
 if (process.env.VUE_APP_ONETREE_SMTP_ENABLED == 'true') {
   routes[2].children.push({
     path: '/settings/smtp',
@@ -518,10 +529,7 @@ if (process.env.VUE_APP_ONETREE_SMTP_ENABLED == 'true') {
     },
   });
 }
-if (
-  process.env.VUE_APP_ONETREE_AMD_POWERCAP_ENABLED === 'true' ||
-  process.env.VUE_APP_ONETREE_GPGPU_ENABLED === 'true'
-) {
+if (process.env.VUE_APP_ONETREE_POWER_RESTORE_POLICY_ENABLED == 'true') {
   routes[2].children.push({
     path: '/settings/power-restore-policy',
     name: 'power-restore-policy',

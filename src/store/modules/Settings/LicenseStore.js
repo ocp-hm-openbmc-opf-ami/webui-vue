@@ -25,6 +25,15 @@ const LicenseStore = {
   },
   actions: {
     async getUserAlertCount({ commit }) {
+      const licenseEnabled =
+        process.env.VUE_APP_ONETREE_LICENSE_ENABLED === 'true';
+      if (!licenseEnabled) {
+        commit('setLicenseData', {});
+        commit('setLicenseExpireData', []);
+        commit('setLicenseMinData', 0);
+        return Promise.resolve();
+      }
+
       return await api
         .get('/redfish/v1/Oem/Ami/LicenseControl')
         .then((licenseControl) => {
@@ -62,6 +71,12 @@ const LicenseStore = {
         });
     },
     async setUserAlertCount({ dispatch }, percentageVal) {
+      const licenseEnabled =
+        process.env.VUE_APP_ONETREE_LICENSE_ENABLED === 'true';
+      if (!licenseEnabled) {
+        return Promise.resolve(i18n.t('license.toast.successSavelicense'));
+      }
+
       return await api
         .patch('/redfish/v1/Oem/Ami/LicenseControl', percentageVal)
         .then(() => dispatch('getUserAlertCount'))
@@ -71,6 +86,12 @@ const LicenseStore = {
         });
     },
     async uploadLicenseKey({ dispatch }, file) {
+      const licenseEnabled =
+        process.env.VUE_APP_ONETREE_LICENSE_ENABLED === 'true';
+      if (!licenseEnabled) {
+        return Promise.resolve(i18n.t('license.toast.successSavelicense'));
+      }
+
       let uploadData = new FormData();
       uploadData.append('LicenseKeyFile', file);
       const config = {

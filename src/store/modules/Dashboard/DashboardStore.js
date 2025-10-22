@@ -1,4 +1,5 @@
 import api from '@/store/api';
+import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
 
 const DashboardStore = {
   namespaced: true,
@@ -121,7 +122,10 @@ const DashboardStore = {
     // BMC Date and Time
     bmcDateTime: (state) => {
       if (!state.dashboardData?.DateTime) return null;
-      return new Date(state.dashboardData.DateTime);
+      const dateObj = UtcDateTimeMixin.methods.createDateWithISOString(
+        state.dashboardData.DateTime,
+      );
+      return dateObj;
     },
 
     // BMC Time Zone
@@ -187,7 +191,9 @@ const DashboardStore = {
         // Also update global store for backward compatibility
         // Some components still depend on global bmcTime and timeZone
         if (response.data.DateTime) {
-          const bmcTime = new Date(response.data.DateTime);
+          const bmcTime = UtcDateTimeMixin.methods.createDateWithISOString(
+            response.data.DateTime,
+          );
           commit('global/setBmcTime', bmcTime, { root: true });
         }
 

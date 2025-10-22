@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
 
 const TaskStore = {
   namespaced: true,
@@ -33,8 +34,13 @@ const TaskStore = {
                 const EndTime =
                   list.data.TaskState === 'New'
                     ? 'NA'
-                    : new Date(list.data.EndTime);
-                const StartTime = new Date(list.data.StartTime);
+                    : UtcDateTimeMixin.methods.createDateWithISOString(
+                        list.data.EndTime,
+                      );
+                const StartTime =
+                  UtcDateTimeMixin.methods.createDateWithISOString(
+                    list.data.StartTime,
+                  );
                 const Name = list.data.Name;
                 const PercentComplete = list.data.PercentComplete;
                 const HttpOperation = list.data.Payload.HttpOperation;

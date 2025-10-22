@@ -1,4 +1,5 @@
 import api from '@/store/api';
+import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
 
 const HOST_STATE = {
   on: 'xyz.openbmc_project.State.Host.HostState.Running',
@@ -112,7 +113,8 @@ const GlobalStore = {
         .then((response) => {
           const timeZone = response.data.TimeZoneName;
           var bmcDateTime = response.data.DateTime;
-          const date = new Date(bmcDateTime);
+          const date =
+            UtcDateTimeMixin.methods.createDateWithISOString(bmcDateTime);
 
           commit('setBmcTime', date);
           commit('setTimeZone', timeZone);

@@ -410,6 +410,7 @@ const SnmpStore = {
       return await api
         .patch('/redfish/v1/Managers/bmc/NetworkProtocol', data)
         .then(() => dispatch('getSNMPProtocolStatus'))
+        .then(() => dispatch('getSubscriptions'))
         .then(() => i18n.t('pageSnmp.toast.successInDeleteCommunityString'))
         .catch(() => {
           throw new Error(

@@ -1,5 +1,6 @@
 import api, { getResponseCount } from '@/store/api';
 import i18n from '@/i18n';
+import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
 
 const DumpsStore = {
   namespaced: true,
@@ -71,9 +72,11 @@ const DumpsStore = {
             let lastElement = dump['@odata.id'].split('/').pop();
             let downloadURIParts = dump.AdditionalDataURI.split('/');
             let extractedValue = downloadURIParts[downloadURIParts.length - 2];
+            const dateTimeObj =
+              UtcDateTimeMixin.methods.createDateWithISOString(dump.Created);
             return {
               data: extractedValue,
-              dateTime: new Date(dump.Created),
+              dateTime: dateTimeObj,
               dumpType: dump.Name,
               id: dump.Id,
               uri: lastElement,

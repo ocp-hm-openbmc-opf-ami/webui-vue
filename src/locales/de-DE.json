@@ -194,7 +194,8 @@
         "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
         "gpgpu": "@:appPageTitle.gpgpu",
         "advancedLogSettings":"@:appPageTitle.advancedLogSettings",
-        "fru":"@:appPageTitle.fru"
+        "fru":"@:appPageTitle.fru",
+        "deviceOwnerTransfership": "Übertragung des Geräteeigentümers"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -263,7 +264,8 @@
         "ipmiEventLog": "IPMI-Ereignisprotokolle",
         "gpgpu": "GPGPU",
         "advancedLogSettings":"Erweiterte Protokolleinstellungen",
-        "fru":"FRU"
+        "fru":"FRU",
+        "deviceOwnerTransfership": "Übertragung des Geräteeigentümers"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM-Konfiguration",
@@ -1576,12 +1578,12 @@
             "errorDeleteRoleGroup": "Fehler beim Löschen der Rollengruppe. | Fehler beim Löschen der Rollengruppen.",
             "errorSaveActiveDirectorySettings": "Fehler beim Speichern der Active Directory-Einstellungen.",
             "errorSaveLdapSettings": "Fehler beim Speichern der OpenLDAP-Einstellungen.",
-            "errorSaveRoleGroup": "Fehler beim Speichern der Rollengruppe.",
+            "errorSaveRoleGroup": "Fehler beim Aktualisieren der Rollengruppe.",
             "successAddRoleGroup": "Rollengruppe '%{groupName}' erfolgreich hinzugefügt.",
             "successDeleteRoleGroup": "Rollengruppe erfolgreich gelöscht. | Rollengruppen erfolgreich gelöscht.",
             "successSaveActiveDirectorySettings": "Active Directory-Einstellungen erfolgreich gespeichert.",
             "successSaveLdapSettings": "OpenLDAP-Einstellungen erfolgreich gespeichert.",
-            "successSaveRoleGroup": "Rollengruppe '%{groupName}' erfolgreich gespeichert."
+            "successSaveRoleGroup": "Rollengruppe '%{groupName}' erfolgreich aktualisiert."
         }
     },
     "pageRadius": {
@@ -3366,10 +3368,12 @@
         "serverKey": "Server-Key-Zertifikat",
         "incorrectAdvancedCertificateFileType": "Datei ist kein korrektes Zertifikat.",
         "toast": {
-            "successSaveAdvancedLogsSettings": "Erweiterte Protokoll-Einstellungen erfolgreich gespeichert.",
+            "successSaveLocalLogSettings": "Lokale Protokolleinstellungen erfolgreich gespeichert.",
+            "successSaveRemoteLogSettings": "Remote-Protokolleinstellungen erfolgreich gespeichert.",
             "errorAdvancedAddCertificate": "Fehler beim Hinzufügen von %{certificate}.",
             "successCertificateUpload": "%{certificate} erfolgreich hinzugefügt.",
-            "errorGettingVideoLog": "Fehler beim Speichern der erweiterten Protokoll-Einstellungen."
+            "errorGettingLocalLog": "Fehler beim Speichern der lokalen Protokolleinstellungen.",
+            "errorGettingRemoteLog": "Fehler beim Speichern der Remote-Protokolleinstellungen."
         }
     },
     "fru": {
@@ -3532,6 +3536,81 @@
         "toast": {
             "errorGetFru": "Fehler beim Abrufen der FRU."
         }
+    },
+    "pageDeviceOwnerTransfership": {
+      "title": "Gerätebesitzübertragung",
+      "description": "Verwalten Sie die Übertragung des Gerätebesitzes.",
+      "step1": {
+        "title": "CAK-Entsperrung",
+        "description": "Starten Sie den CAK-Entsperrprozess (Status 2 zu Status 1).",
+        "generateToken": "CAK-Entsperr-Token generieren",
+        "uploadSignedToken": "Laden Sie das generierte Token herunter, signieren Sie es und laden Sie das signierte Token hoch (DOTTokenInstall)."
+      },
+      "step2": {
+        "title": "DOT deaktivieren",
+        "description": "Führen Sie vor dem Fortfahren mit dem Deaktivieren von DOT einen Stromzyklus durch (Entfernen Sie CAK aus dem ERoT-RAM (Status 1 zu Status 0)).",
+        "disableDot": "DOT deaktivieren (Status 0 zu Status 3)",
+        "uploadLakPub": "Laden Sie die öffentliche Schlüsseldatei hoch, um DOT zu deaktivieren."
+      },
+      "step3": {
+        "title": "DOT aktivieren",
+        "description": "Generieren Sie ein Token, um DOT zu aktivieren (Status 3 zu Status 0).",
+        "generateToken": "Aktivierungs-Token generieren",
+        "uploadSignedToken": "Laden Sie das generierte Token herunter, signieren Sie es und laden Sie das signierte Token hoch (DOTTokenInstall)."
+      },
+      "step4": {
+        "title": "CAK installieren",
+        "description": "Installieren Sie den neuen CAK, indem Sie die öffentliche Schlüsseldatei hochladen (Status 0 zu Status 1).",
+        "uploadLakPub": "Laden Sie die öffentliche Schlüsseldatei hoch, um den CAK zu installieren."
+      },
+      "step5": {
+        "title": "CAK sperren",
+        "description": "Sperren Sie den CAK, um den Vorgang abzuschließen (Status 1 zu Status 2).",
+        "uploadLakPub": "Laden Sie die öffentliche Schlüsseldatei hoch, um den CAK zu installieren.",
+        "lockCak": "CAK sperren"
+      },
+      "step6": {
+        "title": "CAK-Test",
+        "description": "Überprüfen Sie, ob die Schlüssel korrekt installiert sind.",
+        "testCak": "Test CAK"
+      },
+      "step7": {
+        "title": "CAK-Signaturtest",
+        "description": "Führen Sie einen Signaturtest durch, um den neuen CAK zu überprüfen.",
+        "generateToken": "Signaturtest-Token generieren",
+        "uploadSignedToken": "Laden Sie das generierte Token herunter, signieren Sie es und laden Sie das signierte Token hoch (DOTTokenInstall)."
+      },
+      "success": {
+        "title": "Erfolg",
+        "message": "Der Gerätebesitzübertragungsprozess wurde erfolgreich abgeschlossen."
+      },
+      "reset": "Zurücksetzen",
+      "status": "Status",
+      "completed": "Abgeschlossen",
+      "notStarted": "Nicht gestartet",
+      "inProgress": "In Bearbeitung",
+      "failed": "Fehlgeschlagen",
+      "upload": "Hochladen",
+      "toast": {
+          "success": {
+              "step1": "CAK-Entsperr-Token erfolgreich generiert.",
+              "step2": "DOT-Deaktivierung erfolgreich ausgeführt.",
+              "step3": "DOT-Aktivierungs-Token erfolgreich generiert.",
+              "step4": "CAK-Installation erfolgreich ausgeführt.",
+              "step5": "CAK-Sperrung erfolgreich ausgeführt.",
+              "step6": "CAK-Test erfolgreich ausgeführt.",
+              "step7": "Signaturtest-Token erfolgreich generiert."
+          },
+          "error": {
+              "step1": "Fehler beim Generieren des CAK-Entsperr-Tokens.",
+              "step2": "Fehler beim Ausführen der DOT-Deaktivierung.",
+              "step3": "Fehler beim Generieren des DOT-Aktivierungs-Tokens.",
+              "step4": "Fehler bei der CAK-Installation.",
+              "step5": "Fehler bei der CAK-Sperrung.",
+              "step6": "Fehler beim Ausführen des CAK-Tests.",
+              "step7": "Fehler beim Generieren des Signaturtest-Tokens."
+          }
+      }
     },
     "countries": {
         "AF": "Afghanistan",

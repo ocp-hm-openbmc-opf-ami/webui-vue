@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
 
 const PostCodeLogsStore = {
   namespaced: true,
@@ -20,8 +21,10 @@ const PostCodeLogsStore = {
         .then(({ data: { Members = [] } = {} }) => {
           const postCodeLogs = Members.map((log) => {
             const { Created, MessageArgs, AdditionalDataURI } = log;
+            const dateObj =
+              UtcDateTimeMixin.methods.createDateWithISOString(Created);
             return {
-              date: new Date(Created),
+              date: dateObj,
               bootCount: MessageArgs[0],
               timeStampOffset: MessageArgs[1],
               postCode: MessageArgs[2],

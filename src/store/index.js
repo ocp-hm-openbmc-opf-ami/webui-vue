@@ -66,6 +66,7 @@ import IPMIEventLogStore from './modules/Logs/IPMIEventLogStore';
 import Gpu from './modules/Settings/GpuStore';
 import AdvancedLogSettingsStore from './modules/Settings/AdvancedLogSettingsStore';
 import FruStore from './modules/Fru/FruStore';
+import DeviceOwnerTransfershipStore from './modules/Settings/DeviceOwnerTransfershipStore';
 
 Vue.use(Vuex);
 
@@ -139,5 +140,6 @@ export default new Vuex.Store({
     gpu: Gpu,
     advancedLog: AdvancedLogSettingsStore,
     fru: FruStore,
+    deviceOwnerTransfership: DeviceOwnerTransfershipStore,
   },
 });

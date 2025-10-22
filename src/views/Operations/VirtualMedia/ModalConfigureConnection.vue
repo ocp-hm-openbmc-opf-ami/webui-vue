@@ -89,10 +89,7 @@
         </b-form-radio-group>
       </b-form-group>
       <div
-        v-if="
-          form.transferProtocolType !== undefined &&
-          form.transferProtocolType !== 'NFS'
-        "
+        v-if="form.transferProtocolType && form.transferProtocolType !== 'NFS'"
       >
         <b-form-group
           :label="$t('pageVirtualMedia.modal.username')"

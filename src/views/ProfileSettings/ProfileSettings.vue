@@ -219,6 +219,7 @@ export default {
         originalUsername: this.username,
         password: this.form.newPassword,
         privilege: this.userPrivilege,
+        delayLogout: true,
       };
 
       this.$store
@@ -229,7 +230,9 @@ export default {
             (this.form.currentPassword = '');
           this.$v.$reset();
           this.successToast(message);
-          this.$store.dispatch('authentication/logout');
+          setTimeout(() => {
+            this.$store.dispatch('authentication/logout');
+          }, 2000);
         })
         .catch(({ message }) => this.errorToast(message));
     },
@@ -246,7 +249,22 @@ export default {
         this.form.newPassword &&
         this.form.currentPassword
       ) {
-        this.confirmAuthenticate();
+        this.$bvModal
+          .msgBoxConfirm(
+            this.$t('pageUserManagement.modal.logoutConfirmMessage', {
+              user: this.username,
+            }),
+            {
+              title: this.$tc('pageUserManagement.modal.logoutAlert'),
+              okTitle: this.$tc('global.action.ok'),
+              cancelTitle: this.$t('global.action.cancel'),
+            },
+          )
+          .then((confirmed) => {
+            if (confirmed) {
+              this.confirmAuthenticate();
+            }
+          });
       }
       if (
         this.$store.getters['global/isUtcDisplay'] != this.form.isUtcDisplay

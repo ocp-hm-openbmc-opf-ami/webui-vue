@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
 
 /**
  * Watch for serverStatus changes in GlobalStore module
@@ -89,7 +90,8 @@ const ControlStore = {
           commit('setOperationInProgress', false);
           const lastReset = response.data.LastResetTime;
           if (lastReset) {
-            const lastPowerOperationTime = new Date(lastReset);
+            const lastPowerOperationTime =
+              UtcDateTimeMixin.methods.createDateWithISOString(lastReset);
             commit('setLastPowerOperationTime', lastPowerOperationTime);
           }
           if (
@@ -108,7 +110,8 @@ const ControlStore = {
         .get('/redfish/v1/Managers/bmc')
         .then((response) => {
           const lastBmcReset = response.data.LastResetTime;
-          const lastBmcRebootTime = new Date(lastBmcReset);
+          const lastBmcRebootTime =
+            UtcDateTimeMixin.methods.createDateWithISOString(lastBmcReset);
           commit('setLastBmcRebootTime', lastBmcRebootTime);
         })
         .catch((error) => console.log(error));

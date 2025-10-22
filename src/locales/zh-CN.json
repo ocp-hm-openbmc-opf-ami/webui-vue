@@ -194,7 +194,8 @@
         "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
         "gpgpu": "@:appPageTitle.gpgpu",
         "advancedLogSettings":"@:appPageTitle.advancedLogSettings",
-        "fru":"@:appPageTitle.fru"
+        "fru":"@:appPageTitle.fru",
+        "deviceOwnerTransfership": "设备所有者转让"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -263,7 +264,8 @@
         "ipmiEventLog": "IPMI事件日志",
         "gpgpu": "GPGPU",
         "advancedLogSettings":"高级日志设置",
-        "fru":"现场可更换单元"
+        "fru":"现场可更换单元",
+        "deviceOwnerTransfership": "设备所有者转让"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM 配置",
@@ -1574,12 +1576,12 @@
             "errorDeleteRoleGroup": "删除角色组发生错误。 | 删除角色组发生错误。",
             "errorSaveActiveDirectorySettings": "保存 Active Directory 设置发生错误。",
             "errorSaveLdapSettings": "保存 OpenLDAP 设置发生错误。",
-            "errorSaveRoleGroup": "保存角色组发生错误。",
+            "errorSaveRoleGroup": "更新角色组时出错。",
             "successAddRoleGroup": "成功添加角色组'%{groupName}'。",
             "successDeleteRoleGroup": "成功删除角色组",
             "successSaveActiveDirectorySettings": "成功保存 Active Directory 设置。",
             "successSaveLdapSettings": "成功保存 OpenLDAP 设置。",
-            "successSaveRoleGroup": "成功保存角色组'%{groupName}。"
+            "successSaveRoleGroup": "成功更新角色组'%{groupName}'。"
         }
     },
     "pageRadius": {
@@ -3359,10 +3361,12 @@
         "serverKey": "服务器密钥证书",
         "incorrectAdvancedCertificateFileType": "文件不是正确的证书类型。",
         "toast": {
-            "successSaveAdvancedLogsSettings": "已成功保存高级日志设置。",
+            "successSaveLocalLogSettings": "成功保存本地日志设置。",
+            "successSaveRemoteLogSettings": "成功保存远程日志设置。",
             "errorAdvancedAddCertificate": "添加 %{certificate} 时出错。",
             "successCertificateUpload": "已成功添加 %{certificate}。",
-            "errorGettingVideoLog": "保存高级日志设置时出错。"
+            "errorGettingLocalLog": "保存本地日志设置时发生错误。",
+            "errorGettingRemoteLog": "保存远程日志设置时发生错误。"
         }
     },
     "fru": {
@@ -3525,6 +3529,81 @@
         "toast": {
             "errorGetFru": "获取 FRU 时出错。"
         }
+    },
+    "pageDeviceOwnerTransfership": {
+      "title": "设备所有者转移",
+      "description": "管理设备所有权转移。",
+      "step1": {
+        "title": "CAK 解锁",
+        "description": "启动 CAK 解锁流程（状态 2 到 状态 1）。",
+        "generateToken": "生成 CAK 解锁令牌",
+        "uploadSignedToken": "下载生成的令牌，签名后上传签名令牌（DOTTokenInstall）。"
+      },
+      "step2": {
+        "title": "禁用 DOT",
+        "description": "在继续禁用 DOT（从 ERoT RAM 移除 CAK，状态 1 到 状态 0）前请先断电重启。",
+        "disableDot": "禁用 DOT（状态 0 到 状态 3）",
+        "uploadLakPub": "上传公钥文件以禁用 DOT。"
+      },
+      "step3": {
+        "title": "启用 DOT",
+        "description": "生成令牌以启用 DOT（状态 3 到 状态 0）。",
+        "generateToken": "生成启用令牌",
+        "uploadSignedToken": "下载生成的令牌，签名后上传签名令牌（DOTTokenInstall）。"
+      },
+      "step4": {
+        "title": "安装 CAK",
+        "description": "通过上传公钥文件安装新的 CAK（状态 0 到 状态 1）。",
+        "uploadLakPub": "上传公钥文件以安装 CAK。"
+      },
+      "step5": {
+        "title": "锁定 CAK",
+        "description": "锁定 CAK 以完成流程（状态 1 到 状态 2）。",
+        "uploadLakPub": "上传公钥文件以安装 CAK。",
+        "lockCak": "锁定 CAK"
+      },
+      "step6": {
+        "title": "CAK 测试",
+        "description": "验证密钥是否正确安装。",
+        "testCak": "测试 CAK"
+      },
+      "step7": {
+        "title": "CAK 签名测试",
+        "description": "执行签名测试以验证新的 CAK。",
+        "generateToken": "生成签名测试令牌",
+        "uploadSignedToken": "下载生成的令牌，签名后上传签名令牌（DOTTokenInstall）。"
+      },
+      "success": {
+        "title": "成功",
+        "message": "设备所有者转移流程已成功完成。"
+      },
+      "reset": "重置",
+      "status": "状态",
+      "completed": "已完成",
+      "notStarted": "未开始",
+      "inProgress": "进行中",
+      "failed": "失败",
+      "upload": "上传",
+      "toast": {
+          "success": {
+              "step1": "CAK 解锁令牌生成成功。",
+              "step2": "DOT 禁用执行成功。",
+              "step3": "DOT 启用令牌生成成功。",
+              "step4": "CAK 安装执行成功。",
+              "step5": "CAK 锁定执行成功。",
+              "step6": "CAK 测试执行成功。",
+              "step7": "签名测试令牌生成成功。"
+          },
+          "error": {
+              "step1": "CAK 解锁令牌生成失败。",
+              "step2": "DOT 禁用执行失败。",
+              "step3": "DOT 启用令牌生成失败。",
+              "step4": "CAK 安装执行失败。",
+              "step5": "CAK 锁定执行失败。",
+              "step6": "CAK 测试执行失败。",
+              "step7": "签名测试令牌生成失败。"
+          }
+      }
     },
     "countries": {
         "AF": "阿富汗",

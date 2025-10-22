@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
 
 const BmcStore = {
   namespaced: true,
@@ -12,7 +13,13 @@ const BmcStore = {
   mutations: {
     setBmcInfo: (state, data) => {
       const bmc = {};
-      bmc.dateTime = new Date(data.DateTime);
+      const dateTimeObj = UtcDateTimeMixin.methods.createDateWithISOString(
+        data.DateTime,
+      );
+      const lastResetTimeObj = UtcDateTimeMixin.methods.createDateWithISOString(
+        data.LastResetTime,
+      );
+      bmc.dateTime = dateTimeObj;
       bmc.description = data.Description;
       bmc.firmwareVersion = data.FirmwareVersion;
       bmc.commandShellConnectTypes = data.CommandShell?.ConnectTypesSupported;
@@ -21,7 +28,7 @@ const BmcStore = {
       bmc.health = data.Status.Health;
       bmc.healthRollup = data.Status.HealthRollup;
       bmc.id = data.Id;
-      bmc.lastResetTime = new Date(data.LastResetTime);
+      bmc.lastResetTime = lastResetTimeObj;
       bmc.identifyLed = data.LocationIndicatorActive;
       bmc.locationNumber = data.Location?.PartLocation?.ServiceLabel;
       bmc.manufacturer = data.manufacturer;

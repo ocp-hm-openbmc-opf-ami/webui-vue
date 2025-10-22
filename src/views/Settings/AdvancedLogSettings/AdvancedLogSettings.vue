@@ -1,494 +1,61 @@
 <template>
   <b-container fluid="xl">
     <page-title />
-    <b-row class="align-items-end form-background p-3">
-      <b-col xl="6" class="align-items-end">
-        <b-form id="form-advancedLogSettings">
-          <page-section
-            :section-title="$t('advancedLogSettings.localLog')"
-            class="pagesection_margin"
-          >
-            <div class="form-background p-3">
-              <b-row>
-                <b-col sm="6">
-                  <b-form-group
-                    :label="$t('advancedLogSettings.fileSize')"
-                    label-for="portStart"
-                  >
-                    <b-form-input
-                      id="fileSize"
-                      v-model="form.fileSize"
-                      :state="getValidationState($v.form.fileSize)"
-                      type="text"
-                      @input="$v.form.fileSize.$touch()"
-                    />
-                    <b-form-invalid-feedback role="alert">
-                      <template v-if="!$v.form.fileSize.required">
-                        {{ $t('global.form.fieldRequired') }}
-                      </template>
-                      <template
-                        v-if="
-                          $v.form.fileSize.required && !$v.form.fileSize.pattern
-                        "
-                      >
-                        {{
-                          $t('advancedLogSettings.advancedLogValueLimits', {
-                            min: fileSizeValues.min,
-                            max: fileSizeValues.max,
-                          })
-                        }}
-                      </template>
-                    </b-form-invalid-feedback>
-                  </b-form-group>
-                </b-col>
-                <b-col sm="6">
-                  <b-form-group
-                    :label="$t('advancedLogSettings.rotateCount')"
-                    label-for="rotateCount"
-                  >
-                    <b-form-checkbox
-                      id="rotateCount"
-                      v-model="form.rotateCount"
-                      switch
-                    >
-                      <span v-if="form.rotateCount">
-                        {{ $t('global.status.enabled') }}
-                      </span>
-                      <span v-else>{{ $t('global.status.disabled') }}</span>
-                    </b-form-checkbox>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-            </div>
-          </page-section>
-          <page-section
-            :section-title="$t('advancedLogSettings.remoteLog')"
-            class="pagesection_margin"
-          >
-            <div class="form-background p-3">
-              <b-row>
-                <b-col sm="6">
-                  <b-form-group
-                    :label="$t('advancedLogSettings.remotelogserver')"
-                    label-for="remotelogserver"
-                  >
-                    <b-form-input
-                      id="remotelogserver"
-                      v-model="form.remotelogserver"
-                      :state="getValidationState($v.form.remotelogserver)"
-                      type="text"
-                    />
-                    <b-form-invalid-feedback role="alert">
-                      <template v-if="!$v.form.remotelogserver.required">
-                        {{ $t('global.form.fieldRequired') }}
-                      </template>
-                      <template
-                        v-if="
-                          $v.form.remotelogserver.required &&
-                          !$v.form.remotelogserver.pattern
-                        "
-                      >
-                        {{ $t('advancedLogSettings.invalidIPAddress') }}
-                      </template>
-                    </b-form-invalid-feedback>
-                  </b-form-group>
-                </b-col>
-                <b-col sm="6">
-                  <b-form-group
-                    :label="$t('advancedLogSettings.remoteserverport')"
-                    label-for="remoteserverport"
-                  >
-                    <b-form-input
-                      id="remoteserverport"
-                      v-model="form.remoteserverport"
-                      :state="getValidationState($v.form.remoteserverport)"
-                      type="text"
-                    />
-                    <b-form-invalid-feedback role="alert">
-                      <template v-if="!$v.form.remoteserverport.required">
-                        {{ $t('global.form.fieldRequired') }}
-                      </template>
-                      <template
-                        v-if="
-                          $v.form.remoteserverport.required &&
-                          !$v.form.remoteserverport.pattern
-                        "
-                      >
-                        {{
-                          $t('advancedLogSettings.advancedLogValueLimits', {
-                            min: fileSizeValues.min,
-                            max: fileSizeValues.max,
-                          })
-                        }}
-                      </template>
-                    </b-form-invalid-feedback>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col sm="6">
-                  <b-form-group
-                    :label="$t('advancedLogSettings.portType')"
-                    label-for="portType"
-                  >
-                    <b-form-radio-group v-model="form.portType" stacked>
-                      <b-form-row>
-                        <b-form-radio
-                          value="UDP"
-                          data-test-id="advancedLogSettings-udp"
-                          class="mr-2"
-                        >
-                          {{ $t('advancedLogSettings.udp') }}
-                        </b-form-radio>
-                        <b-form-radio
-                          value="TCP"
-                          data-test-id="advancedLogSettings-tcp"
-                          class="mr-2"
-                        >
-                          {{ $t('advancedLogSettings.tcp') }}
-                        </b-form-radio>
-                      </b-form-row>
-                    </b-form-radio-group>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-            </div>
-          </page-section>
-          <div v-if="form.portType == 'TCP'" class="form-background p-3">
-            <b-row>
-              <b-col sm="4">
-                <b-form-group
-                  :label="$t('advancedLogSettings.caCertificateFile')"
-                >
-                  <span v-if="advancedLogCacertModifiedDate">
-                    Last Modified Date:
-                    {{ advancedLogCacertModifiedDate | formatDate }}
-                    {{ advancedLogCacertModifiedDate | formatTime }}
-                  </span>
-                  <form-file
-                    id="certificatecacertPEM-file"
-                    v-model="form.cacertPEM"
-                    accept=".pem"
-                    :state="getValidationState($v.form.cacertPEM)"
-                    @input="onFileUpload($event, 'cacertPEM', 'pem')"
-                  >
-                    <template #invalid>
-                      <b-form-invalid-feedback role="alert">
-                        {{ $t('global.form.required') }}
-                      </b-form-invalid-feedback>
-                    </template>
-                  </form-file>
-                </b-form-group>
-              </b-col>
-              <b-col sm="4">
-                <b-form-group
-                  :label="$t('advancedLogSettings.certificatefile')"
-                >
-                  <span v-if="advancedLogServerCRTModifiedDate">
-                    Last Modified Date:
-                    {{ advancedLogServerCRTModifiedDate | formatDate }}
-                    {{ advancedLogServerCRTModifiedDate | formatTime }}
-                  </span>
-                  <form-file
-                    id="certificateserverCRT-file"
-                    v-model="form.serverCRT"
-                    accept=".crt"
-                    :state="getValidationState($v.form.serverCRT)"
-                    @input="onFileUpload($event, 'serverCRT', 'crt')"
-                  >
-                    <template #invalid>
-                      <b-form-invalid-feedback role="alert">
-                        {{ $t('global.form.required') }}
-                      </b-form-invalid-feedback>
-                    </template>
-                  </form-file>
-                </b-form-group>
-              </b-col>
-              <b-col sm="4">
-                <b-form-group :label="$t('advancedLogSettings.privateKey')">
-                  <span v-if="advancedLogServerKeyModifiedDate">
-                    Last Modified Date:
-                    {{ advancedLogServerKeyModifiedDate | formatDate }}
-                    {{ advancedLogServerKeyModifiedDate | formatTime }}
-                  </span>
-                  <form-file
-                    id="certificateserverKey-file"
-                    v-model="form.serverKey"
-                    accept=".key"
-                    :state="getValidationState($v.form.serverKey)"
-                    @input="onFileUpload($event, 'serverKey', 'key')"
-                  >
-                    <template #invalid>
-                      <b-form-invalid-feedback role="alert">
-                        {{ $t('global.form.required') }}
-                      </b-form-invalid-feedback>
-                    </template>
-                  </form-file>
-                </b-form-group>
-              </b-col>
-            </b-row>
-          </div>
-          <b-button
-            form="form-networLink"
-            type="submit"
-            variant="primary"
-            @click="onOk"
-          >
-            <icon-save />
-            {{ $t('global.action.save') }}
-          </b-button>
-        </b-form>
-      </b-col>
-    </b-row>
+    <div>
+      <!-- Tabs with card integration -->
+      <b-card no-body>
+        <b-tabs
+          v-model="tabIndex"
+          active-nav-item-class="font-weight-bold"
+          card
+          content-class="mt-3"
+        >
+          <b-tab :title="$t('advancedLogSettings.localLog')">
+            <local-log :is-button-disable="isButtonDisable"></local-log>
+          </b-tab>
+          <b-tab :title="$t('advancedLogSettings.remoteLog')">
+            <remote-log :is-button-disable="isButtonDisable"></remote-log>
+          </b-tab>
+        </b-tabs>
+      </b-card>
+    </div>
   </b-container>
 </template>
+
 <script>
-import BVToastMixin from '@/components/Mixins/BVToastMixin';
+import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import PageTitle from '@/components/Global/PageTitle';
-import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
-import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
-import FormFile from '@/components/Global/FormFile';
-import PageSection from '@/components/Global/PageSection';
-import { mapState } from 'vuex';
-import { requiredIf } from 'vuelidate/lib/validators';
-import IconSave from '@carbon/icons-vue/es/save/20';
+import LocalLog from './LocalLog.vue';
+import RemoteLog from './RemoteLog.vue';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
-  components: {
-    PageTitle,
-    FormFile,
-    PageSection,
-    IconSave,
-  },
-  mixins: [LoadingBarMixin, VuelidateMixin, BVToastMixin],
+  name: 'AdvancedLogSettings',
+  components: { PageTitle, LocalLog, RemoteLog },
+  mixins: [LoadingBarMixin],
   data() {
-    return {
-      loading,
-      form: {
-        portType: '',
-        fileSize: '',
-        rotateCount: '',
-        remotelogserver: '',
-        remoteserverport: '',
-        ServerCRT: '',
-        serverCRT: '',
-        serverKey: '',
-      },
-      advancedLogsDataInfo: '',
-      advancedLogCacertModifiedDate: '',
-      advancedLogServerCRTModifiedDate: '',
-      advancedLogServerKeyModifiedDate: '',
-      fileUploadTCP: [],
-      fileUploaddetails: {},
-      fileSizeValues: {
-        min: 0,
-        max: 65535,
-      },
-    };
+    return { tabIndex: 0 };
   },
   computed: {
-    ...mapState('advancedLog', ['advancedLogsData']),
-  },
-  watch: {
-    advancedLogsData() {
-      this.getadvancedLogsDataInfo();
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      if (this.userPrivilege !== privilegesId.admin) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   created() {
-    this.initAdvancedLogSettings();
-  },
-  validations() {
-    return {
-      form: {
-        fileSize: {
-          required: requiredIf(function () {
-            return true;
-          }),
-          pattern: function (val) {
-            return this.validateRange(
-              val,
-              this.fileSizeValues.min,
-              this.fileSizeValues.max,
-            );
-          },
-        },
-        remotelogserver: {
-          required: requiredIf(function () {
-            return true;
-          }),
-          pattern: function (val) {
-            return this.ipValidation(val);
-          },
-        },
-        remoteserverport: {
-          required: requiredIf(function () {
-            return true;
-          }),
-          pattern: function (val) {
-            return this.validateRange(
-              val,
-              this.fileSizeValues.min,
-              this.fileSizeValues.max,
-            );
-          },
-        },
-        cacertPEM: {
-          required: requiredIf(function () {
-            if (
-              this.form.portType == 'TCP' &&
-              !this.advancedLogCacertModifiedDate
-            ) {
-              return true;
-            }
-          }),
-        },
-        serverCRT: {
-          required: requiredIf(function () {
-            if (
-              this.form.portType == 'TCP' &&
-              !this.advancedLogServerCRTModifiedDate
-            ) {
-              return true;
-            }
-          }),
-        },
-        serverKey: {
-          required: requiredIf(function () {
-            if (
-              this.form.portType == 'TCP' &&
-              !this.advancedLogServerKeyModifiedDate
-            ) {
-              return true;
-            }
-          }),
-        },
-      },
-    };
-  },
-  methods: {
-    initAdvancedLogSettings() {
-      this.startLoader();
-      this.$store
-        .dispatch('advancedLog/getAdvancedLogsSettings')
-        .finally(() => {
-          this.endLoader();
-        });
-    },
-    getadvancedLogsDataInfo() {
-      this.advancedLogsDataInfo =
-        this.$store.getters['advancedLog/getAdvancedLogsData']?.Oem?.Ami?.SysLog
-          ?.Configuration || {};
-      this.form = {
-        portType: this.advancedLogsDataInfo.PortType,
-        fileSize: this.advancedLogsDataInfo.FileSize,
-        rotateCount: this.advancedLogsDataInfo.RotateCount,
-        remotelogserver: this.advancedLogsDataInfo.RemoteLogServer,
-        remoteserverport: this.advancedLogsDataInfo.RemoteServerPort,
-      };
-      if (this.advancedLogsDataInfo.IsCACERTExist) {
-        this.advancedLogCacertModifiedDate = new Date(
-          this.advancedLogsDataInfo.SyslogCACERTModifiedDate,
-        );
-      }
-      if (this.advancedLogsDataInfo.IsServerCRTExist) {
-        this.advancedLogServerCRTModifiedDate = new Date(
-          this.advancedLogsDataInfo.SyslogserverCRTModifiedDate,
-        );
-      }
-      if (this.advancedLogsDataInfo.IsServerKeyExist) {
-        this.advancedLogServerKeyModifiedDate = new Date(
-          this.advancedLogsDataInfo.SyslogServerKeyModifiedDate,
-        );
-      }
-    },
-    onOk() {
-      this.$v.$touch();
-      if (this.$v.$invalid) return;
-      let params = {
-        PortType: this.form.portType,
-        FileSize: parseInt(this.form.fileSize),
-        RotateCount: this.form.rotateCount,
-        RemoteLogServer: this.form.remotelogserver,
-        RemoteServerPort: parseInt(this.form.remoteserverport),
-      };
-      this.startLoader();
-      this.$store
-        .dispatch('advancedLog/setAdvancedLogsSettings', params)
-        .then((success) => {
-          this.successToast(success);
-          if (this.form.portType == 'TCP') {
-            this.addCertificate();
-          } else {
-            this.initAdvancedLogSettings();
-          }
-        })
-        .catch(({ message }) => this.errorToast(message))
-        .finally(() => this.endLoader());
-    },
-    onFileUpload(file, type, extension) {
-      if (file) {
-        let fileTypeCorrect = this.getIsFileTypeCorrect(file, extension);
-        if (fileTypeCorrect) {
-          if (type === 'cacertPEM') {
-            this.fileUploadTCP.splice('cacertPEM', 1);
-            this.fileUploaddetails.cacertPEM = {
-              file: type === 'cacertPEM' ? file : this.form.cacertPEM,
-              type: type,
-            };
-          }
-          if (type === 'serverCRT') {
-            this.fileUploadTCP.splice('serverCRT', 1);
-            this.fileUploaddetails.serverCRT = {
-              file: type === 'serverCRT' ? file : this.form.serverCRT,
-              type: type,
-            };
-          }
-          if (type === 'serverKey') {
-            this.fileUploadTCP.splice('serverKey', 1);
-            this.fileUploaddetails.serverKey = {
-              file: type === 'serverKey' ? file : this.form.serverKey,
-              type: type,
-            };
-          }
-          this.fileUploadTCP.push(this.fileUploaddetails);
-        } else {
-          this.form[type] = ''; // when wrong file choosen to clear the file from the form
-          this.errorToast(
-            this.$t('advancedLogSettings.incorrectAdvancedCertificateFileType'),
-          );
-        }
-      }
-    },
-    addCertificate() {
-      this.startLoader();
-      if (this.fileUploadTCP.length <= 0) {
-        this.initAdvancedLogSettings();
-        return;
-      }
-      this.fileUploadTCP.forEach((obj) => {
-        Object.entries(obj).forEach((item, index, array) => {
-          var file = item[1];
-          var type = file.type;
-          this.$store
-            .dispatch('advancedLog/addAdvancedLogsCertificate', { file, type })
-            .then((success) => {
-              if (index === array.length - 1) {
-                this.initAdvancedLogSettings();
-              }
-              this.successToast(success);
-            })
-            .catch(({ message }) => this.errorToast(message))
-            .finally(() => this.endLoader());
-        });
-      });
-    },
-    getIsFileTypeCorrect(file, extension) {
-      const fileTypeExtension = file.name.split('.').pop();
-      return fileTypeExtension === extension;
-    },
+    this.startLoader();
+    this.$store.dispatch('advancedLog/getAdvancedLogsSettings').finally(() => {
+      this.endLoader();
+    });
   },
 };
 </script>
+
 <style scoped>
 .pagesection_margin {
   margin-bottom: 0;

@@ -57,7 +57,7 @@ const AdvancedLogSettingsStore = {
         commit('setAdvancedLogsData', getAdvancedLogsValues[0]);
       }
     },
-    async setAdvancedLogsSettings({ state }, Configuration) {
+    async setLocalLogSettings({ state }, Configuration) {
       const advancedLogsConfig = {
         Oem: {
           Ami: {
@@ -70,12 +70,34 @@ const AdvancedLogSettingsStore = {
       return await api
         .patch(state.advancedLogsData['@odata.id'], advancedLogsConfig)
         .then(() =>
-          i18n.t('advancedLogSettings.toast.successSaveAdvancedLogsSettings'),
+          i18n.t('advancedLogSettings.toast.successSaveLocalLogSettings'),
         )
         .catch((error) => {
           console.log(error);
           throw new Error(
-            i18n.t('advancedLogSettings.toast.errorGettingVideoLog'),
+            i18n.t('advancedLogSettings.toast.errorGettingLocalLog'),
+          );
+        });
+    },
+    async setRemoteLogSettings({ state }, Configuration) {
+      const advancedLogsConfig = {
+        Oem: {
+          Ami: {
+            SysLog: {
+              Configuration,
+            },
+          },
+        },
+      };
+      return await api
+        .patch(state.advancedLogsData['@odata.id'], advancedLogsConfig)
+        .then(() =>
+          i18n.t('advancedLogSettings.toast.successSaveRemoteLogSettings'),
+        )
+        .catch((error) => {
+          console.log(error);
+          throw new Error(
+            i18n.t('advancedLogSettings.toast.errorGettingRemoteLog'),
           );
         });
     },

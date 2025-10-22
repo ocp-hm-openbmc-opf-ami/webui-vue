@@ -211,6 +211,7 @@ const UserManagementStore = {
         algorithm,
         readWritePermission,
         channelPrivileges = [],
+        delayLogout = false,
       },
     ) {
       const data = {};
@@ -317,8 +318,18 @@ const UserManagementStore = {
       return await api
         .patch(`/redfish/v1/AccountService/Accounts/${originalUsername}`, data)
         .then(() => {
-          if (originalUsername === store.getters.username(store.state)) {
-            authentication.dispatch('authentication/logout');
+          const passwordChangeRequired = data.PasswordChangeRequired;
+          const password = data.Password;
+          if (
+            originalUsername === store.getters.username(store.state) &&
+            (passwordChangeRequired || password) &&
+            !delayLogout
+          ) {
+            setTimeout(() => {
+              authentication.dispatch('authentication/logout');
+            }, 2000);
+          } else {
+            dispatch('getUsers');
           }
         })
         .then(() => {

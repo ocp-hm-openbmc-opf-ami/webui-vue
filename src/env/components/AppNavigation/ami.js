@@ -340,6 +340,13 @@ const AppNavigationMixin = {
           route: '/settings/bsod',
         });
       }
+      if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED === 'true') {
+        navigationItemsList.navigationItems[4].children.push({
+          id: 'device-owner-transfership',
+          label: this.$t('appNavigation.deviceOwnerTransfership'),
+          route: '/settings/device-owner-transfership',
+        });
+      }
       if (process.env.VUE_APP_ONETREE_LICENSE_ENABLED === 'true') {
         navigationItemsList.navigationItems[4].children.push({
           id: 'license',
@@ -354,10 +361,7 @@ const AppNavigationMixin = {
           route: '/settings/auto-video',
         });
       }
-      if (
-        process.env.VUE_APP_ONETREE_AMD_POWERCAP_ENABLED === 'true' ||
-        process.env.VUE_APP_ONETREE_GPGPU_ENABLED === 'true'
-      ) {
+      if (process.env.VUE_APP_ONETREE_POWER_RESTORE_POLICY_ENABLED == 'true') {
         navigationItemsList.navigationItems[4].children.push({
           id: 'power-restore-policy',
           label: this.$t('appNavigation.powerRestorePolicy'),
@@ -511,7 +515,6 @@ const AppNavigationMixin = {
             route: '/host-system-diagnostics/amd-remote-debug',
           });
         }
-
         navigationItemsList.navigationItems.push({
           id: 'host-system-diagnostics',
           label: this.$t('appNavigation.hostSystemDiagnostics'),

@@ -111,46 +111,40 @@
               {{ data.value }} {{ data.item.units }}
             </template>
             <template #cell(actions)="{ item }">
-              <svg
-                v-if="historyViewSensors.includes(item.name) && item.id"
-                data-v-99969f6c=""
-                focusable="false"
-                preserveAspectRatio="xMidYMid meet"
-                xmlns="http://www.w3.org/2000/svg"
-                class="svg_graph m10"
-                viewBox="0 0 32 32"
-                aria-hidden="true"
-                @click="onRowclick(item)"
-              >
-                <title>
-                  {{ $t('pageSensors.sensorThreshold.modal.sesnorHistory') }}
-                </title>
-                <path
-                  data-v-99969f6c=""
-                  d="M8 10H16V12H8zM8 6H20V8H8zM8 2H20V4H8z"
-                ></path>
-                <path
-                  data-v-99969f6c=""
-                  d="M4.7111,28l5.6312-9.9961,7.4341,6.49A2,2,0,0,0,20.86,23.96l6.9707-10.4034-1.6622-1.1132-7,10.4472-.07.1035-7.4345-6.4907a2.0032,2.0032,0,0,0-3.0806.5308L4,25.1826V2H2V28a2.0023,2.0023,0,0,0,2,2H30V28Z"
-                ></path>
-              </svg>
-              <icon-edit
-                v-if="item.thresholdsId != null"
-                class="svg_graph"
-                :title="
-                  $t('pageSensors.sensorThreshold.modal.sensorThresholds')
-                "
-                :enabled="!isButtonDisable"
-                @click="initModalSensorThresholdModal(item)"
-              />
-              <span
-                v-if="
-                  !historyViewSensors.includes(item.name) &&
-                  !item.id &&
-                  item.thresholdsId == null
-                "
-                >-</span
-              >
+              <div class="allign-icons">
+                <svg
+                  v-if="historyViewSensors.includes(item.name) && item.id"
+                  focusable="false"
+                  preserveAspectRatio="xMidYMid meet"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="svg_graph"
+                  viewBox="0 0 32 32"
+                  aria-hidden="true"
+                  @click="onRowclick(item)"
+                >
+                  <title>
+                    {{ $t('pageSensors.sensorThreshold.modal.sesnorHistory') }}
+                  </title>
+                  <path d="M8 10H16V12H8zM8 6H20V8H8zM8 2H20V4H8z"></path>
+                  <path
+                    d="M4.7111,28l5.6312-9.9961,7.4341,6.49A2,2,0,0,0,20.86,23.96l6.9707-10.4034-1.6622-1.1132-7,10.4472-.07.1035-7.4345-6.4907a2.0032,2.0032,0,0,0-3.0806.5308L4,25.1826V2H2V28a2.0023,2.0023,0,0,0,2,2H30V28Z"
+                  ></path>
+                </svg>
+                <icon-edit
+                  v-if="item.thresholdsId != null"
+                  class="svg_graph"
+                  :title="
+                    $t('pageSensors.sensorThreshold.modal.sensorThresholds')
+                  "
+                  :enabled="!isButtonDisable"
+                  @click="initModalSensorThresholdModal(item)"
+                />
+                <span
+                  v-if="!item.id && item.thresholdsId == null"
+                  style="margin-left: 8px"
+                  >-</span
+                >
+              </div>
             </template>
           </b-table>
         </b-col>
@@ -520,5 +514,8 @@ export default {
 }
 .m10 {
   margin-right: 10px;
+}
+.allign-icons {
+  display: flex;
 }
 </style>
