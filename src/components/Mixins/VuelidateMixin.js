@@ -54,6 +54,27 @@ const VuelidateMixin = {
         return false; // Default to false if userPrivilege is not defined
       }
     },
+    base64ToHex(str) {
+      for (
+        var i = 0, bin = atob(str.replace(/[ \r\n]+$/, '')), hex = [];
+        i < bin.length;
+        ++i
+      ) {
+        var tmp = bin.charCodeAt(i).toString(16);
+        if (tmp.length === 1) tmp = '0' + tmp;
+        hex[hex.length] = tmp;
+      }
+      return hex.join('');
+    },
+    arrayBufferToBase64(buffer) {
+      var binary = '';
+      var bytes = new Uint8Array(buffer);
+      var len = bytes.byteLength;
+      for (var i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      return window.btoa(binary);
+    },
   },
 };
 

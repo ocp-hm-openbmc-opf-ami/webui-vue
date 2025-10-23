@@ -1311,7 +1311,8 @@
                 "timeValidation": "Startzeit muss nach der BMC-Zeit sein.",
                 "onResetinfo": "Der BMC wird neu gestartet und anschließend zur BMC-Konsole für die gewählte Option booten.",
                 "atMaintenanceWindowStartinfo": "Firmware-Update startet basierend auf dem konfigurierten Startdatum/-zeit für die ausgewählte Option.",
-                "inMaintenanceWindowOnResetinfo": "BMC-Neustart sollte basierend auf dem konfigurierten Startdatum/-zeit und der Dauer für die ausgewählte Option erfolgen."
+                "inMaintenanceWindowOnResetinfo": "BMC-Neustart sollte basierend auf dem konfigurierten Startdatum/-zeit und der Dauer für die ausgewählte Option erfolgen.",
+                "recoveryImage": "Wiederherstellungsbild"
             }
         },
         "modal": {

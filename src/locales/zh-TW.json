@@ -1309,7 +1309,8 @@
                 "timeValidation": "開始時間應大於 BMC 時間。",
                 "onResetinfo": "BMC 將重新啟動，並在啟動後進入 BMC 控制台以取得所選選項。",
                 "atMaintenanceWindowStartinfo": "韌體更新將根據所選選項配置的開始日期/時間開始。",
-                "inMaintenanceWindowOnResetinfo": "BMC 重新啟動應根據所選選項的配置開始日期/時間和持續時間進行。"
+                "inMaintenanceWindowOnResetinfo": "BMC 重新啟動應根據所選選項的配置開始日期/時間和持續時間進行。",
+                "recoveryImage": "恢復影像"
             }
         },
         "modal": {

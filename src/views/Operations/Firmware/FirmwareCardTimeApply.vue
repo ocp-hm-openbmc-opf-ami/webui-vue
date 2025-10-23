@@ -49,6 +49,7 @@
                   id="timeSlot"
                   v-model="form.timeSlot"
                   type="text"
+                  data-test-id="applyTime-input-timeSlot"
                   :state="getValidationState($v.form.timeSlot)"
                 />
                 <b-form-invalid-feedback role="alert">
@@ -126,6 +127,7 @@
                     :title="$t('global.calendar.selectDate')"
                     button-variant="link"
                     aria-controls="input-start-date"
+                    data-test-id="applyTime-input-endDate"
                   >
                     <template #button-content>
                       <icon-calendar />
@@ -236,7 +238,7 @@ export default {
       },
       applyTimeSetValueStatus: {},
       isPFREnable:
-        process.env.VUE_APP_ONETREE_PFR_ENABLED === 'true' ? true : false,
+        process.env.VUE_APP_ONETREE_INTEL_PFR_ENABLED === 'true' ? true : false,
     };
   },
   computed: {
@@ -387,7 +389,7 @@ export default {
       let timeElement =
         dateElement != '' ? dateElement[1].split('+').shift() : '';
       this.form.endDate = dateElement != '' ? dateElement[0] : '';
-      this.form.endTime = timeElement;
+      this.form.endTime = timeElement.slice(0, 8);
       this.form.applyTimeMode = this.applyTimeSetValueStatus.applyTimeMode;
       this.form.timeSlot = this.applyTimeSetValueStatus.timeSlot;
       this.applyTimeModeChange();

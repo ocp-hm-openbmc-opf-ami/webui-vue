@@ -4,6 +4,7 @@
     :title="$t('pageFirmware.sectionTitleUpdateFirmware')"
     :ok-title="$t('pageFirmware.form.updateFirmware.startUpdate')"
     :cancel-title="$t('global.action.cancel')"
+    data-test-id="modal-firmware-startUpdate"
     @ok="$emit('ok')"
   >
     <template v-if="isSingleFileUploadEnabled">
@@ -36,7 +37,8 @@
 export default {
   data() {
     return {
-      isPFREnable: process.env.VUE_APP_PFR_SUPPORT === 'true' ? true : false,
+      isPFREnable:
+        process.env.VUE_APP_ONETREE_INTEL_PFR_ENABLED === 'true' ? true : false,
     };
   },
   computed: {

@@ -1310,7 +1310,8 @@
                 "timeValidation": "Start Time should be greater than the BMC Time.",
                 "onResetinfo": "BMC will reboot and after boot to BMC Console for the selected option.",
                 "atMaintenanceWindowStartinfo": "Firmware Update will start based on the configured Start Date/Time for the selected option.",
-                "inMaintenanceWindowOnResetinfo": "BMC reboot should happen based on configured Start Date/Time and duration for the selected option."
+                "inMaintenanceWindowOnResetinfo": "BMC reboot should happen based on configured Start Date/Time and duration for the selected option.",
+                "recoveryImage": "Recovery Image"
             }
         },
         "modal": {
