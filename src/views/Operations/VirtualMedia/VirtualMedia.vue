@@ -50,6 +50,7 @@
                         :id="concatId(dev.id)"
                         v-model="dev.file"
                         accept=".iso, .img, .ima, .nrg"
+                        :data-test-id="`virtualmedia-input-${concatId(dev.id)}`"
                         @input="validateFile(dev)"
                       >
                         <template #invalid>
@@ -63,6 +64,7 @@
                       v-if="!dev.isActive"
                       variant="primary"
                       :disabled="!dev.file || isButtonDisabled"
+                      :data-test-id="`virtualmedia-button-start-${concatId(dev.id)}`"
                       @click="handleActionClick(startVM, dev)"
                     >
                       <icon-start />
@@ -79,6 +81,7 @@
                             ? !slot1Started
                             : !dev.file)
                       "
+                      :data-test-id="`virtualmedia-button-stop-${concatId(dev.id)}`"
                       @click="handleActionClick(stopVM, dev)"
                     >
                       <icon-stop />
@@ -97,6 +100,7 @@
               </page-section>
             </b-col>
           </b-row>
+
           <b-row v-if="loadImageFromExternalServer" class="mb-4">
             <b-col md="12">
               <page-section
@@ -110,7 +114,28 @@
                     :key="$index"
                     md="6"
                   >
+                    <div
+                      v-if="
+                        (device.id === 'Slot_2' || device.id === 'Slot_3') &&
+                        device.image &&
+                        device.image.startsWith('/tmp/lmedia/')
+                      "
+                    >
+                      <div
+                        role="alert"
+                        aria-live="polite"
+                        aria-atomic="true"
+                        class="alert alert-warning"
+                      >
+                        {{
+                          device.id === 'Slot_2'
+                            ? 'Slot2 redirected with eMMC image.'
+                            : 'Slot3 redirected with eMMC image.'
+                        }}
+                      </div>
+                    </div>
                     <b-form-group
+                      v-else
                       :label="device.id"
                       :label-for="device.id"
                       label-class="bold"
@@ -118,6 +143,7 @@
                       <b-button
                         variant="secondary"
                         :disabled="device.isActive"
+                        :data-test-id="`virtualmedia-button-configure-${device.id.toLowerCase()}`"
                         @click="configureConnection(device)"
                       >
                         <icon-connection />
@@ -133,6 +159,7 @@
                           isButtonDisabled ||
                           isPasswordRequired(device)
                         "
+                        :data-test-id="`virtualmedia-button-start-legacy-${device.id.toLowerCase()}`"
                         @click="handleActionClick(startLegacy, device)"
                       >
                         <icon-start />
@@ -143,6 +170,7 @@
                         variant="primary"
                         class="float-right"
                         :disabled="isButtonDisabled"
+                        :data-test-id="`virtualmedia-button-stop-legacy-${device.id.toLowerCase()}`"
                         @click="handleActionClick(stopLegacy, device)"
                       >
                         <icon-stop />
@@ -158,6 +186,7 @@
             :connection="modalConfigureConnection"
             @ok="saveConnection"
           />
+          <emmc-redirection />
         </div>
       </div>
     </div>
@@ -176,6 +205,7 @@ import { mapState, mapMutations } from 'vuex';
 import IconStop from '@carbon/icons-vue/es/stop/20';
 import IconStart from '@carbon/icons-vue/es/run/20';
 import IconConnection from '@carbon/icons-vue/es/connection--send/20';
+import EmmcRedirection from './EmmcRedirection.vue';
 
 //license checking
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
@@ -190,6 +220,7 @@ export default {
     IconStop,
     IconStart,
     IconConnection,
+    EmmcRedirection,
   },
   mixins: [BVToastMixin, LoadingBarMixin, LicensecheckMixin],
   data() {
