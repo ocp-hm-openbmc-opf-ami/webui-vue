@@ -2521,7 +2521,8 @@
                 "item2": "FQDN（完全限定網域名稱）格式。"
             },
             "imagePathSupport":"路徑必須是字母數字，並且僅允許使用以下特殊字元：「/」（反斜線）、「\\」（正斜線）、「_」（底線）、「.」（點）。",
-            "imagePathSupportCharacter":"注意：此欄位不允許超過 256 個字元。"
+            "imagePathSupportCharacter":"注意：此欄位不允許超過 256 個字元。",
+            "rwDisabledForCD": "CD 映像（.iso、.nrg）沒有讀/寫選項"
         },
         "toast": {
             "errorMounting": "掛載失敗。",
