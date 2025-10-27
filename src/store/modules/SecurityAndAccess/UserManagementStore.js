@@ -300,15 +300,17 @@ const UserManagementStore = {
             };
           }
         }
-        data.Oem.Ami.ChannelPrivileges = channelPrivileges.map(
-          (channelPrivilege) => {
-            return {
-              ChannelId: channelPrivilege.ChannelId.ChannelId,
-              ChannelPrivilege: channelPrivilege.ChannelPrivilege,
-              ChannelAccess: channelPrivilege.ChannelAccess,
-            };
-          },
-        );
+        if (channelPrivileges.length > 0) {
+          data.Oem.Ami.ChannelPrivileges = channelPrivileges.map(
+            (channelPrivilege) => {
+              return {
+                ChannelId: channelPrivilege.ChannelId.ChannelId,
+                ChannelPrivilege: channelPrivilege.ChannelPrivilege,
+                ChannelAccess: channelPrivilege.ChannelAccess,
+              };
+            },
+          );
+        }
       } else if (
         globalPrivilege === 'Operator' ||
         globalPrivilege === 'ReadOnly'
