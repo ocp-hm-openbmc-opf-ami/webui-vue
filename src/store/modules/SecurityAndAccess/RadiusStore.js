@@ -67,6 +67,7 @@ const RadiusStore = {
               ServiceAddress: saveConfigValues.serverAddress,
               ServicePort: saveConfigValues.port,
               Secret: saveConfigValues.secret,
+              EnableEapTLS: saveConfigValues.tlsAuthenticationEnable,
             },
           },
         },
@@ -118,40 +119,6 @@ const RadiusStore = {
         .catch((error) => {
           console.log(error);
           throw new Error(i18n.t('pageRadius.toast.errorAddCertificate'));
-        });
-    },
-    async ChangeEnableEapTLS({ commit, dispatch }, enableEapTLS) {
-      commit('setEnableEapTLS', enableEapTLS);
-      const data = {
-        Oem: {
-          Ami: {
-            RADIUS: {
-              EnableEapTLS: enableEapTLS,
-            },
-          },
-        },
-      };
-      return await api
-        .patch(
-          '/redfish/v1/AccountService/ExternalAccountProviders/RADIUS',
-          data,
-        )
-        .then(() => dispatch('radiusConfigValues'))
-        .then(() => {
-          if (enableEapTLS) {
-            return i18n.t('pageRadius.toast.successEnableEapTLS');
-          } else {
-            return i18n.t('pageRadius.toast.successDisableEapTLS');
-          }
-        })
-        .catch((error) => {
-          commit('setEnableEapTLS', !enableEapTLS);
-          console.log(error);
-          if (!enableEapTLS) {
-            throw new Error(i18n.t('pageRadius.toast.errorEnableEapTLS'));
-          } else {
-            throw new Error(i18n.t('pageRadius.toast.errorDisableEapTLS'));
-          }
         });
     },
   },
