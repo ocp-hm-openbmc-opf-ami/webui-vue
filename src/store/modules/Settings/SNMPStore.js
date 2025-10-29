@@ -60,7 +60,7 @@ const SnmpStore = {
           const snmpv2c = response.data?.SNMP?.EnableSNMPv2c;
           const snmpv3 = response.data?.SNMP?.EnableSNMPv3;
           const communityString =
-            response.data?.Oem?.OpenBmc?.SNMP?.CommunityStrings || [];
+            response.data?.Oem?.Ami?.SNMP?.CommunityStrings || [];
           const accessMode = (response.data?.SNMP?.CommunityStrings || []).map(
             (item) => {
               return {
@@ -372,7 +372,7 @@ const SnmpStore = {
 
       const data = {
         Oem: {
-          OpenBmc: {
+          Ami: {
             SNMP: {
               CommunityStrings: communityStrings,
             },
@@ -393,7 +393,7 @@ const SnmpStore = {
     async deleteCommunityString({ dispatch, state }, communityData) {
       const data = {
         Oem: {
-          OpenBmc: {
+          Ami: {
             SNMP: {
               CommunityStrings: state.snmpCommunityString.map((item) =>
                 item.Sino === communityData.Sino ? null : {},
@@ -421,7 +421,7 @@ const SnmpStore = {
     async updateCommunityString({ dispatch, state }, communityData) {
       const data = {
         Oem: {
-          OpenBmc: {
+          Ami: {
             SNMP: {
               CommunityStrings: state.snmpCommunityString.map((item) =>
                 item.Sino === communityData.sino &&
