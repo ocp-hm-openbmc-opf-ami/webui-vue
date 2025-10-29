@@ -152,6 +152,7 @@ import PageTitle from '@/components/Global/PageTitle';
 import PageSection from '@/components/Global/PageSection';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import { mapState } from 'vuex';
 
 export default {
   name: 'ProfileSettings',
@@ -170,9 +171,11 @@ export default {
         currentPassword: '',
         isUtcDisplay: this.$store.getters['global/isUtcDisplay'],
       },
+      defaultTimezone: '',
     };
   },
   computed: {
+    ...mapState('global', ['timeZone']),
     username() {
       return this.$store.getters['global/username'];
     },
@@ -182,16 +185,18 @@ export default {
     timezone() {
       return this.localOffset();
     },
-    defaultTimezone() {
-      const timeZoneName = this.$store.getters['global/timeZone'];
-      return this.$options.filters.shortTzOffset(timeZoneName);
-    },
     userPrivilege() {
       return this.$store.getters['global/userPrivilege'];
     },
   },
+  watch: {
+    timeZone() {
+      this.defaultTimezoneval();
+    },
+  },
   created() {
     this.startLoader();
+    this.defaultTimezoneval();
     this.$store
       .dispatch('userManagement/getAccountSettings')
       .finally(() => this.endLoader());
@@ -296,6 +301,13 @@ export default {
             this.$t('pageProfileSettings.toast.wrongCredentials'),
           );
         });
+    },
+    defaultTimezoneval() {
+      const timeZoneName = this.$store.getters['global/timeZone'];
+      if (timeZoneName !== null) {
+        this.defaultTimezone =
+          this.$options.filters.shortTzOffset(timeZoneName);
+      }
     },
   },
 };
