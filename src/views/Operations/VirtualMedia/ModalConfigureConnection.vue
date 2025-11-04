@@ -133,11 +133,15 @@
       <b-form-group>
         <b-form-checkbox
           v-model="form.isRW"
+          :disabled="isCDImage()"
           data-test-id="configureConnection-input-isRW"
           name="check-button"
         >
           RW
         </b-form-checkbox>
+        <b-form-text v-if="isCDImage()" class="text-muted small">
+          {{ $t('pageVirtualMedia.modal.rwDisabledForCD') }}
+        </b-form-text>
       </b-form-group>
     </b-form>
     <template #modal-ok>
@@ -192,6 +196,12 @@ export default {
       if (value === null) return;
       Object.assign(this.form, value);
     },
+    'form.imagePath': function () {
+      // Reset RW checkbox to false when switching to CD image
+      if (this.isCDImage()) {
+        this.form.isRW = false;
+      }
+    },
   },
   validations() {
     return {
@@ -231,6 +241,11 @@ export default {
   },
 
   methods: {
+    isCDImage() {
+      if (!this.form.imagePath) return false;
+      const path = this.form.imagePath.toLowerCase();
+      return path.endsWith('.iso') || path.endsWith('.nrg');
+    },
     mountChange() {
       this.form.username = '';
       this.form.password = '';

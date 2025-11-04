@@ -111,7 +111,7 @@ const PoliciesStore = {
         .then((response) => {
           const sshProtocol = response.data?.SSH?.ProtocolEnabled;
           const ChannelList = response.data?.Oem?.Ami?.AvailableChannelList;
-          const ipmiProtocol = !response.data?.Oem?.OpenBmc?.IPMI?.Masked;
+          const ipmiProtocol = !response.data?.Oem?.Ami?.IPMI?.Masked;
           const ssdpProtocol = response.data?.SSDP?.ProtocolEnabled;
           const ssdpPortValue = response.data?.SSDP?.Port;
           const defaultChannelInfo = response.data?.Oem?.Ami?.DefaultChannel;
@@ -223,7 +223,7 @@ const PoliciesStore = {
       commit('setIpmiProtocolEnabled', protocolEnabled);
       const ipmi = {
         Oem: {
-          OpenBmc: {
+          Ami: {
             IPMI: {
               Masked: !protocolEnabled,
             },

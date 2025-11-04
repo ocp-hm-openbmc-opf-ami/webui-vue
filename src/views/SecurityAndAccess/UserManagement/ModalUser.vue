@@ -613,6 +613,15 @@ export default {
         },
       ],
       channelPrivilegesList: [],
+      accountTypes: [
+        'HostConsole',
+        'IPMI',
+        'VirtualMedia',
+        'Redfish',
+        'WebUI',
+        'ManagerConsole',
+        'SNMP',
+      ],
     };
   },
   computed: {
@@ -640,6 +649,21 @@ export default {
     defaultChannelList() {
       return this.$store.getters['policies/getDefaultChannelList'];
     },
+    dynamicAccountTypes() {
+      const baseTypes = [
+        'HostConsole',
+        'IPMI',
+        'Redfish',
+        'WebUI',
+        'ManagerConsole',
+        'SNMP',
+      ];
+      if (this.form.vmediaAccess) {
+        return [...baseTypes, 'VirtualMedia'];
+      } else {
+        return baseTypes;
+      }
+    },
   },
   watch: {
     user: function (value) {
@@ -648,7 +672,9 @@ export default {
       this.form.username = value.username;
       this.form.status = value.Enabled;
       this.form.PasswordChangeRequired = value.PasswordChangeRequired;
-      this.form.vmediaAccess = value.OEMAccountTypes.includes('media');
+      this.form.vmediaAccess = value.AccountTypes
+        ? value.AccountTypes.includes('VirtualMedia')
+        : true;
       this.form.snmpUserEnable = value.Oem.Ami.SNMP.SNMPAccessEnableStatus;
       this.form.algorithm = value.Oem.Ami.SNMP.Algorithm
         ? value.Oem.Ami.SNMP.Algorithm
@@ -782,7 +808,7 @@ export default {
         userData.username = this.form.username;
         userData.status = this.form.status;
         userData.PasswordChangeRequired = this.form.PasswordChangeRequired;
-        userData.vmediaAccess = this.form.vmediaAccess;
+        userData.accountTypes = this.dynamicAccountTypes;
         userData.password = this.form.password;
         userData.snmpUserEnable = this.form.snmpUserEnable;
         userData.encryption = this.form.encryption ? this.form.encryption : '';
@@ -804,7 +830,7 @@ export default {
           userData.PasswordChangeRequired = this.form.PasswordChangeRequired;
         }
         if (this.$v.form.vmediaAccess.$dirty) {
-          userData.vmediaAccess = this.form.vmediaAccess;
+          userData.accountTypes = this.dynamicAccountTypes;
         }
         if (this.$v.form.password.$dirty) {
           userData.password = this.form.password;

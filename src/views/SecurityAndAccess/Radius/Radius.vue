@@ -28,15 +28,15 @@
               >
                 <b-form-checkbox
                   id="enableEapTLS"
-                  v-model="tlsAuthenticationEnable"
+                  v-model="radius.tlsAuthenticationEnable"
                   data-test-id="radius-toggle-TLS"
                   switch
                   :disabled="
                     !radius.authentication || isNotAdmin(userPrivilege)
                   "
-                  @change="ChangeEnableEapTLS"
+                  @input="$v.radius.tlsAuthenticationEnable.$touch()"
                 >
-                  <span v-if="tlsAuthenticationEnable">
+                  <span v-if="radius.tlsAuthenticationEnable">
                     {{ $t('global.status.enabled') }}
                   </span>
                   <span v-else>{{ $t('global.status.disabled') }}</span>
@@ -272,7 +272,7 @@
             </b-col>
           </b-row>
           <b-row
-            v-if="tlsAuthenticationEnable && radius.authentication"
+            v-if="radius.tlsAuthenticationEnable && radius.authentication"
             class="mt-4"
           >
             <b-col sm="4">
@@ -282,10 +282,14 @@
                 </span>
                 <form-file
                   id="radius-certificate-radiusCA"
+                  ref="radiusCAFile"
                   v-model="radius.radiusCA"
                   accept=".pem"
                   :state="getValidationState($v.radius.radiusCA)"
-                  @input="onFileUpload($event, 'radius_ca')"
+                  :disabled="
+                    !radius.authentication || isNotAdmin(userPrivilege)
+                  "
+                  @input="onFileSelect($event, 'radiusCA', 'pem')"
                 >
                   <template #invalid>
                     <b-form-invalid-feedback role="alert">
@@ -302,10 +306,14 @@
                 </span>
                 <form-file
                   id="radius-certificate-radiusClient"
+                  ref="radiusClientFile"
                   v-model="radius.radiusClient"
                   accept=".pem"
                   :state="getValidationState($v.radius.radiusClient)"
-                  @input="onFileUpload($event, 'radius_client')"
+                  :disabled="
+                    !radius.authentication || isNotAdmin(userPrivilege)
+                  "
+                  @input="onFileSelect($event, 'radiusClient', 'pem')"
                 >
                   <template #invalid>
                     <b-form-invalid-feedback role="alert">
@@ -322,10 +330,14 @@
                 </span>
                 <form-file
                   id="radius-certificate-radiusKey"
+                  ref="radiusKeyFile"
                   v-model="radius.radiusKey"
                   accept=".pem"
                   :state="getValidationState($v.radius.radiusKey)"
-                  @input="onFileUpload($event, 'radius_key')"
+                  :disabled="
+                    !radius.authentication || isNotAdmin(userPrivilege)
+                  "
+                  @input="onFileSelect($event, 'radiusKey', 'pem')"
                 >
                   <template #invalid>
                     <b-form-invalid-feedback role="alert">
@@ -391,29 +403,27 @@ export default {
         radiusCAModifiedDate: '',
         radiusClientModifiedDate: '',
         radiusKeyModifiedDate: '',
+        tlsAuthenticationEnable: false,
       },
       privilegeTypes: [
         { value: 'Administrator', text: 'Administrator' },
         { value: 'Operator', text: 'Operator' },
         { value: 'ReadOnly', text: 'ReadOnly' },
       ],
+      fileUploadTLS: [],
+      fileUploadDetails: {},
+      isSaving: false,
     };
   },
   computed: {
     ...mapState('radius', ['radiusValues']),
     ...mapGetters('global', ['userPrivilege']),
-    tlsAuthenticationEnable: {
-      get() {
-        return this.$store.getters['radius/getEnableEapTLS'];
-      },
-      set(newValue) {
-        return newValue;
-      },
-    },
   },
   watch: {
     radiusValues() {
-      this.initRadiusValues();
+      if (!this.isSaving) {
+        this.initRadiusValues();
+      }
     },
   },
   created() {
@@ -492,7 +502,7 @@ export default {
           required: requiredIf(function () {
             return (
               this.radius.authentication &&
-              this.tlsAuthenticationEnable &&
+              this.radius.tlsAuthenticationEnable &&
               !this.radius.radiusCAModifiedDate
             );
           }),
@@ -501,7 +511,7 @@ export default {
           required: requiredIf(function () {
             return (
               this.radius.authentication &&
-              this.tlsAuthenticationEnable &&
+              this.radius.tlsAuthenticationEnable &&
               !this.radius.radiusClientModifiedDate
             );
           }),
@@ -510,9 +520,14 @@ export default {
           required: requiredIf(function () {
             return (
               this.radius.authentication &&
-              this.tlsAuthenticationEnable &&
+              this.radius.tlsAuthenticationEnable &&
               !this.radius.radiusKeyModifiedDate
             );
+          }),
+        },
+        tlsAuthenticationEnable: {
+          required: requiredIf(function () {
+            return this.radius.authentication;
           }),
         },
       },
@@ -523,6 +538,12 @@ export default {
       const config = this.$store.getters['radius/getRadiusValues'] || {};
       const radiusEnable = this.$store.getters['radius/getServiceEnabled'];
       this.$v.$reset();
+      const preservedFiles = {
+        radiusCA: this.radius?.radiusCA || '',
+        radiusClient: this.radius?.radiusClient || '',
+        radiusKey: this.radius?.radiusKey || '',
+      };
+
       this.radius = {
         authentication: radiusEnable,
         serverAddress: config.ServiceAddress,
@@ -534,14 +555,23 @@ export default {
         privilege1: config.Privilege1 === '' ? null : config.Privilege1,
         privilege2: config.Privilege2 === '' ? null : config.Privilege2,
         privilege3: config.Privilege3 === '' ? null : config.Privilege3,
+        radiusCA: preservedFiles.radiusCA,
+        radiusClient: preservedFiles.radiusClient,
+        radiusKey: preservedFiles.radiusKey,
         radiusCAModifiedDate: config?.CAFileModifiedDate,
         radiusClientModifiedDate: config?.ClientFileModifiedDate,
         radiusKeyModifiedDate: config?.PrivateKeyFileModifiedDate,
+        tlsAuthenticationEnable: config.EnableEapTLS,
       };
+      this.fileUploadTLS = [];
+      this.fileUploadDetails = {};
     },
     SaveConfig() {
       this.$v.$touch();
       if (this.$v.$invalid) return;
+
+      this.isSaving = true;
+
       let saveConfigValues = {};
       saveConfigValues.authentication = this.radius.authentication;
       saveConfigValues.port = Number(this.radius.port);
@@ -553,12 +583,29 @@ export default {
       saveConfigValues.GroupName1 = this.radius.groupName1;
       saveConfigValues.GroupName2 = this.radius.groupName2;
       saveConfigValues.GroupName3 = this.radius.groupName3;
+      saveConfigValues.tlsAuthenticationEnable =
+        this.radius.tlsAuthenticationEnable;
+
       this.startLoader();
       this.$store
         .dispatch('radius/saveRadiusConfig', saveConfigValues)
-        .then((message) => this.successToast(message))
-        .catch(({ message }) => this.errorToast(message))
-        .finally(() => this.endLoader());
+        .then((message) => {
+          this.successToast(message);
+          // After config save, upload files if TLS is enabled
+          if (this.radius.tlsAuthenticationEnable) {
+            this.prepareCertificatesForUpload();
+            this.addCertificate();
+          } else {
+            this.isSaving = false; // Reset flag
+            this.initRadiusValues();
+            this.endLoader();
+          }
+        })
+        .catch(({ message }) => {
+          this.errorToast(message);
+          this.isSaving = false; // Reset flag on error
+          this.endLoader();
+        });
     },
     serverAddressValidation(value) {
       if (
@@ -590,25 +637,120 @@ export default {
       }
       return true;
     },
-    onFileUpload(file, type) {
+    onFileSelect(file, type, extension) {
       if (file) {
-        this.startLoader();
-        this.$store
-          .dispatch('radius/addNewCertificate', { file, type })
-          .then((success) => {
-            this.successToast(success);
-          })
-          .catch(({ message }) => this.errorToast(message))
-          .finally(() => this.endLoader());
+        const fileTypeCorrect = this.getIsFileTypeCorrect(file, extension);
+        if (!fileTypeCorrect) {
+          this.errorToast(this.$t('global.form.invalidFormat'));
+          setTimeout(() => {
+            this.radius[type] = '';
+            this.clearSpecificFile(type);
+          }, 200);
+        } else {
+          // File is valid, store it
+          this.radius[type] = file;
+        }
+      } else {
+        this.radius[type] = '';
       }
     },
-    ChangeEnableEapTLS(state) {
-      this.startLoader();
-      this.$store
-        .dispatch('radius/ChangeEnableEapTLS', state ? true : false)
-        .then((message) => this.successToast(message))
-        .catch(({ message }) => this.errorToast(message))
-        .finally(() => this.endLoader());
+    clearSpecificFile(type) {
+      // Map file types to their corresponding refs
+      const fileRefMap = {
+        radiusCA: 'radiusCAFile',
+        radiusClient: 'radiusClientFile',
+        radiusKey: 'radiusKeyFile',
+      };
+
+      const refName = fileRefMap[type];
+      if (refName && this.$refs[refName]) {
+        this.$refs[refName].clearSelectedFile();
+      }
+    },
+    prepareCertificatesForUpload() {
+      this.fileUploadTLS = [];
+      this.fileUploadDetails = {};
+
+      // Only add files that are actually selected and valid
+      if (this.radius.radiusCA) {
+        this.fileUploadDetails.radiusCA = {
+          file: this.radius.radiusCA,
+          type: 'radius_ca',
+        };
+      }
+      if (this.radius.radiusClient) {
+        this.fileUploadDetails.radiusClient = {
+          file: this.radius.radiusClient,
+          type: 'radius_client',
+        };
+      }
+      if (this.radius.radiusKey) {
+        this.fileUploadDetails.radiusKey = {
+          file: this.radius.radiusKey,
+          type: 'radius_key',
+        };
+      }
+
+      // Only push if there are files to upload
+      if (Object.keys(this.fileUploadDetails).length > 0) {
+        this.fileUploadTLS.push(this.fileUploadDetails);
+      }
+    },
+    addCertificate() {
+      if (this.fileUploadTLS.length <= 0) {
+        this.isSaving = false; // Reset flag
+        this.initRadiusValues();
+        this.endLoader();
+        return;
+      }
+
+      this.fileUploadTLS.forEach((obj) => {
+        Object.entries(obj).forEach((item) => {
+          const file = item[1];
+          const type = file.type;
+          this.$store
+            .dispatch('radius/addNewCertificate', { file: file.file, type })
+            .then((success) => {
+              this.successToast(success);
+              this.isSaving = false; // Reset flag after successful upload
+              this.initRadiusValues();
+              this.clearFile();
+            })
+            .catch(({ message }) => {
+              this.errorToast(message);
+              this.isSaving = false; // Reset flag after error
+              this.clearFile();
+            })
+            .finally(() => {
+              this.endLoader();
+            });
+        });
+      });
+    },
+    clearFile() {
+      this.fileUploadTLS = [];
+      this.fileUploadDetails = {};
+      this.radius.radiusCA = '';
+      this.radius.radiusClient = '';
+      this.radius.radiusKey = '';
+
+      if (this.$refs.radiusCAFile) {
+        this.$refs.radiusCAFile.clearSelectedFile();
+      }
+      if (this.$refs.radiusClientFile) {
+        this.$refs.radiusClientFile.clearSelectedFile();
+      }
+      if (this.$refs.radiusKeyFile) {
+        this.$refs.radiusKeyFile.clearSelectedFile();
+      }
+    },
+    getIsFileTypeCorrect(file, extension) {
+      if (!file || !file.name) return false;
+
+      const fileTypeExtension = file.name.split('.').pop().toLowerCase();
+      const expectedExtension = extension.toLowerCase();
+
+      return fileTypeExtension === expectedExtension;
     },
   },
 };

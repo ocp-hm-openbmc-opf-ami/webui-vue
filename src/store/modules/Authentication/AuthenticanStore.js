@@ -47,6 +47,7 @@ const AuthenticationStore = {
       Cookies.remove('IsAuthenticated');
       Cookies.remove('loginSessionSuccess');
       localStorage.removeItem('storedUsername');
+      localStorage.removeItem('loginRoleId');
       store.commit('global/setUtcTime', true);
       state.xsrfCookie = undefined;
       state.isAuthenticatedCookie = undefined;
@@ -69,6 +70,7 @@ const AuthenticationStore = {
             store.commit('global/setSessionId', response.data.Session_ID);
           }
           if (response.data.RoleId) {
+            localStorage.setItem('loginRoleId', response.data.RoleId); //stored in the localStorage because store getting null when browser refresh
             store.loginRoleId = response.data.RoleId;
           }
           if (response.data.TwoFacEnableStatus != undefined) {
@@ -116,7 +118,9 @@ const AuthenticationStore = {
         .get(`/redfish/v1/AccountService/Accounts/${username}`)
         .then(({ data }) => data)
         .catch((error) => {
-          if (error.response.status == 404) {
+          if (error?.response?.status === 404) {
+            store.loginRoleId =
+              store.loginRoleId || localStorage.getItem('loginRoleId');
             return Promise.resolve({
               PasswordChangeRequired: false,
               RoleId: store.loginRoleId,

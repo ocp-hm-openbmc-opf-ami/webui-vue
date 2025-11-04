@@ -2572,7 +2572,8 @@
                 "item2": "FQDN (vollständig qualifizierter Domainname)."
             },
             "imagePathSupport":"Der Pfad muss alphanumerisch sein und nur folgende Sonderzeichen sind erlaubt: '/' (Schrägstrich), '\\' (Backslash), '_' (Unterstrich), '.' (Punkt).",
-            "imagePathSupportCharacter":"HINWEIS: Dieses Feld erlaubt nicht mehr als 256 Zeichen."
+            "imagePathSupportCharacter":"HINWEIS: Dieses Feld erlaubt nicht mehr als 256 Zeichen.",
+            "rwDisabledForCD": "Read/Write-Option ist für CD-Images (.iso, .nrg) nicht verfügbar."
         },
         "toast": {
             "errorMounting": "Fehler beim Einhängen.",

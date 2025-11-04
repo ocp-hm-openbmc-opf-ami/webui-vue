@@ -136,7 +136,7 @@ const UserManagementStore = {
         RoleId,
         status,
         PasswordChangeRequired,
-        vmediaAccess,
+        accountTypes,
         snmpUserEnable,
         encryption,
         algorithm,
@@ -150,7 +150,7 @@ const UserManagementStore = {
         RoleId: RoleId,
         Enabled: status,
         PasswordChangeRequired: PasswordChangeRequired,
-        OEMAccountTypes: vmediaAccess ? ['media'] : [],
+        AccountTypes: accountTypes || [],
       };
       if (snmpUserEnable === true) {
         data.Oem = {
@@ -205,7 +205,7 @@ const UserManagementStore = {
         locked,
         PasswordChangeRequired,
         routerPath,
-        vmediaAccess,
+        accountTypes,
         snmpUserEnable,
         encryption,
         algorithm,
@@ -266,8 +266,7 @@ const UserManagementStore = {
           if (username) data.UserName = username;
           if (password) data.Password = password;
           if (RoleId) data.RoleId = RoleId;
-          if (vmediaAccess !== undefined)
-            data.OEMAccountTypes = vmediaAccess ? ['media'] : [];
+          if (accountTypes !== undefined) data.AccountTypes = accountTypes;
           if (status !== undefined) data.Enabled = status;
           if (locked !== undefined) data.Locked = locked;
           if (PasswordChangeRequired !== undefined)

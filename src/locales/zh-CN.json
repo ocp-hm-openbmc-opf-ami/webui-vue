@@ -2568,7 +2568,8 @@
                 "item2": "FQDN 格式。"
             },
             "imagePathSupport":"路径必须是字母数字，并且仅允许使用以下特殊字符：“/”（反斜杠）、“\\”（正斜杠）、“_”（下划线）、“.”（点）。",
-            "imagePathSupportCharacter":"注意：此字段不允许超过 256 个字符。"
+            "imagePathSupportCharacter":"注意：此字段不允许超过 256 个字符。",
+            "rwDisabledForCD": "CD 映像（.iso、.nrg）没有读/写选项"
         },
         "toast": {
             "errorMounting": "挂载失败。",
