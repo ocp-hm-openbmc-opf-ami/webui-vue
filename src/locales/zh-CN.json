@@ -178,6 +178,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "foreignLogicalDevice": "@:appPageTitle.foreignLogicalDevice",
         "raidEventLog": "@:appPageTitle.raidEventLog",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
@@ -247,6 +248,7 @@
         "physicalDevice": "物理设备",
         "logicalDevice": "逻辑设备",
         "createLogicalDevice": "创建逻辑设备",
+        "foreignLogicalDevice": "检视外部逻辑设备",
         "raidTopology": "拓扑信息",
         "raidEventLog": "事件日志",
         "backupAndRestore": "备份与还原",
@@ -2918,6 +2920,7 @@
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "创建逻辑设备",
+        "foreignLogicalDevice": "查看外部逻辑设备",
         "raidController": "RAID 控制器",
         "raidLevel": "RAID 级别",
         "virtualDeviceName": "虚拟设备名称",
@@ -2932,6 +2935,9 @@
         "numberOfDrives": "每个跨度的驱动器数量",
         "initState": "初始化状态",
         "stripeSize": "条带大小",
+        "stripeSizeHdd": "HDD 条带大小",
+        "stripeSizeSsd": "SSD 条带大小",
+        "usagePercent": "使用百分比",
         "readPolicy": "读取策略",
         "writePolicy": "写入策略",
         "cachePolicy": "缓存策略",
@@ -2940,6 +2946,8 @@
         "diskCacheCapacity": "磁盘缓存容量",
         "unConfiguredPhysicalDrive": "未配置的物理驱动器",
         "noLogicalDevice": "此时不存在逻辑设备信息。",
+        "importAll": "全部导入", 
+        "back": "返回",
         "initStateOptions": {
             "noInitialization": "无初始化",
             "quickInitialization": "快速初始化",
@@ -2958,7 +2966,8 @@
             "unprotectedWriteBack": "不保护回写",
             "writeThrough": "直写",
             "alwaysWriteBack": "总是回写",
-            "writeBackWithBBU": "用 BBU 回写"
+            "writeBackWithBBU": "用 BBU 回写",
+            "writeCacheAlways": "总是启用写入缓存"
         },
         "ioPolicyOptions": {
             "directIO": "直接 I/O",
@@ -3007,22 +3016,31 @@
             "powerSavingPolicy": "节能策略",
             "PRL": "PRL",
             "RLQ": "RLQ",
-            "spanDepth": "跨度深度"
+            "SRL": "SRL",
+            "spanDepth": "跨度深度",
+            "state": "状态"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "没有可配置的物理设备！",
             "deleteConfirmationMsg": "您确定要删除 ID 为 {ldId} 的逻辑设备吗？",
             "deleteConfirmationTitle": "删除逻辑设备。",
             "logicalCommonActionTitle": "管理逻辑设备操作",
-            "startLocateLogicalDriveActionConfirmationMsg": "您确定要启动 ID 为 {ldId} 的逻辑驱动器定位吗？",
-            "startLocateLogicalDriveActionTitle": "启动定位逻辑驱动器",
-            "stopLocateLogicalDriveActionConfirmationMsg": "您确定要停止 ID 为 {ldId} 的逻辑驱动器定位吗？",
-            "stopLocateLogicalDriveActionTitle": "停止定位逻辑驱动器",
-            "setPropertiesConfirmationMsg": "您确定要设置 ID 为 {ldId} 的逻辑驱动器的属性吗？",
-            "setPropertiesConfirmationTitle": "设置逻辑驱动器属性"
+            "startLocateLogicalDriveActionConfirmationMsg": "您确定要启动 ID 为 {ldId} 的逻辑设备定位吗？",
+            "startLocateLogicalDriveActionTitle": "启动定位逻辑设备",
+            "stopLocateLogicalDriveActionConfirmationMsg": "您确定要停止 ID 为 {ldId} 的逻辑设备定位吗？",
+            "stopLocateLogicalDriveActionTitle": "停止定位逻辑设备",
+            "setPropertiesConfirmationMsg": "您确定要设置 ID 为 {ldId} 的逻辑设备的属性吗？",
+            "setPropertiesConfirmationTitle": "设置逻辑设备属性",
+            "importForeignConfigConfirmationMsg": "您确定要导入所有外部逻辑设备吗？",
+            "importForeignConfigConfirmationTitle": "导入外部逻辑设备",
+            "clearForeignConfigConfirmationMsg": "您确定要清除所有外部逻辑设备吗？",
+            "clearForeignConfigConfirmationTitle": "清除外部逻辑设备",
+            "deleteAllLogicalDriveActionConfirmationMsg": "确定要删除所有的逻辑设备?",
+            "deleteAllLogicalDriveActionTitle": "删除所有的逻辑设备"
         },
         "toast": {
             "successCreateLogicalDevice": "逻辑设备创建成功. 请等待几秒钟并刷新应用程序以查看更改。",
+            "errorSelectedPdCount": "所选的 PD 数量不符合 {raidType} 的要求。 PD的数量必须介于 {min} 到 {max} 之间。",
             "errorCreateLogicalDevice": "创建逻辑设备出错",
             "errorRaidDeviceNotPresent": "RAID 设备不存在。",
             "errorRaidCtrlIdInvalid": "RAID 控制器 ID 无效。",
@@ -3038,18 +3056,25 @@
             "errorMinMaxSpanDepth":"最小和最大跨度深度均为 2。",
             "errorSpanDepthDrives":"所选的未配置驱动器数量应为跨度深度和每个跨度驱动器数的倍数。",
             "errorMsccSize": "大小应能被条带大小整除。",
-            "successStartLocateLogicalDevice": "成功启动逻辑驱动器定位。",
-            "successStopLocateLogicalDevice": "成功停止逻辑逻辑驱动器定位。",
-            "errorStartLocateLogicalDevice": "启动逻辑驱动器定位时发生错误。",
-            "errorStopLocateLogicalDevice": "停止逻辑驱动器定位时发生错误。",
-            "successSetProperties": "成功设置逻辑驱动器属性。请等待约30秒并刷新应用程序以查看更改。",
-            "errorSetProperties": "设置逻辑驱动器属性时出错。"
+            "successStartLocateLogicalDevice": "成功启动逻辑设备定位。",
+            "successStopLocateLogicalDevice": "成功停止逻辑设备定位。",
+            "errorStartLocateLogicalDevice": "启动逻辑设备定位时发生错误。",
+            "errorStopLocateLogicalDevice": "停止逻辑设备定位时发生错误。",
+            "successSetProperties": "成功设置逻辑设备属性。请等待约30秒并刷新应用程序以查看更改。",
+            "errorSetProperties": "设置逻辑设备属性时出错。",
+            "successImportForeignConfig": "已成功导入所有外部逻辑设备。请等待几秒钟并刷新应用程序以查看更改。",
+            "errorImportForeignConfig": "导入所有外部逻辑设备时发生错误。",
+            "successClearForeignConfig": "已成功清除所有外部逻辑设备。请等待几秒钟并刷新应用程序以查看更改。",
+            "errorClearForeignConfig": "清除所有外部逻辑设备时发生错误。",
+            "successDeleteAllLogicalDevice": "成功移除所有的逻辑设备。请等待几秒钟并刷新应用程序以查看更改。",
+            "errorDeleteAllLogicalDevice": "移除所有的逻辑设备时发生错误。"
         },
         "actions": {
-            "startLocate": "启动逻辑驱动器定位",
-            "stopLocate": "停止逻辑驱动器定位",
+            "startLocate": "启动逻辑设备定位",
+            "stopLocate": "停止逻辑设备定位",
             "delete": "删除",
-            "setProperties": "设置属性"
+            "setProperties": "设置属性",
+            "deleteAllLogicalDevice": "删除所有的逻辑设备"
         }
     },
     "pageTopology": {

@@ -178,6 +178,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "foreignLogicalDevice": "@:appPageTitle.foreignLogicalDevice",
         "raidEventLog": "@:appPageTitle.raidEventLog",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
@@ -247,6 +248,7 @@
         "physicalDevice": "Physical Device",
         "logicalDevice": "Logical Device",
         "createLogicalDevice": "Create Logical Device",
+        "foreignLogicalDevice": "View Foreign Logical Device",
         "raidTopology": "Topology Information",
         "raidEventLog": "Event Log",
         "backupAndRestore": "Backup and Restore",
@@ -2922,6 +2924,7 @@
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "Create Logical Device",
+        "foreignLogicalDevice": "View Foreign Logical Device",
         "raidController": "RAID Controller",
         "raidLevel": "RAID Level",
         "virtualDeviceName": "Virtual Device Name",
@@ -2936,6 +2939,9 @@
         "numberOfDrives": "Number of Drives per Span",
         "initState": "Initialization State",
         "stripeSize": "Stripe Size",
+        "stripeSizeHdd": "HDD Stripe Size",
+        "stripeSizeSsd": "SSD Stripe Size",
+        "usagePercent": "Usage Percent",
         "readPolicy": "Read Policy",
         "writePolicy": "Write Policy",
         "cachePolicy": "Cache Policy",
@@ -2944,6 +2950,8 @@
         "diskCacheCapacity": "Disk Cache Capacity",
         "unConfiguredPhysicalDrive": "Unconfigured Physical Drives",
         "noLogicalDevice": "There are no Logical Device information present at this time.",
+        "importAll": "Import All", 
+        "back": "Back",
         "initStateOptions": {
             "noInitialization": "No Initialization",
             "quickInitialization": "Quick Initialization",
@@ -2962,7 +2970,8 @@
             "unprotectedWriteBack": "Unprotected Write Back",
             "writeThrough": "Write Through",
             "alwaysWriteBack": "Always Write Back",
-            "writeBackWithBBU": "Write Back With BBU"
+            "writeBackWithBBU": "Write Back With BBU",
+            "writeCacheAlways": "Write Cache Always"
         },
         "ioPolicyOptions": {
             "directIO": "DirectIO",
@@ -3011,11 +3020,13 @@
             "powerSavingPolicy": "Power Saving Policy",
             "PRL": "PRL",
             "RLQ": "RLQ",
-            "spanDepth": "Span Depth"
+            "SRL": "SRL",
+            "spanDepth": "Span Depth",
+            "state": "State"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "No Physical Device is available to configure!",
-            "deleteConfirmationMsg": "Are you sure you want to delete the logical device with ID {ldId} ?",
+            "deleteConfirmationMsg": "Are you sure you want to delete the Logical Device with ID {ldId} ?",
             "deleteConfirmationTitle": "Delete Logical Device",
             "logicalCommonActionTitle": "Manage Logical Device Actions",
             "startLocateLogicalDriveActionConfirmationMsg": "Are you sure you want to start locating the Logical Drive with ID {ldId}?",
@@ -3023,10 +3034,17 @@
             "stopLocateLogicalDriveActionConfirmationMsg": "Are you sure you want to stop locating the Logical Drive with ID {ldId}?",
             "stopLocateLogicalDriveActionTitle": "Stop locate Logical Drive",
             "setPropertiesConfirmationMsg": "Are you sure you want to set the properties for the Logical Drive with ID {ldId}?",
-            "setPropertiesConfirmationTitle": "Setting Logical Drive Properties"
+            "setPropertiesConfirmationTitle": "Setting Logical Drive Properties",
+            "importForeignConfigConfirmationMsg": "Are you sure you want to import all foreign Logical Device?",
+            "importForeignConfigConfirmationTitle": "Import Foreign Logical Device",
+            "clearForeignConfigConfirmationMsg": "Are you sure you want to clear all foreign Logical Device?",
+            "clearForeignConfigConfirmationTitle": "Clear Foreign Logical Device",
+            "deleteAllLogicalDriveActionConfirmationMsg": "Are you sure you want to delete all Logical Devices?",
+            "deleteAllLogicalDriveActionTitle": "Delete All Logical Devices"
         },
         "toast": {
             "successCreateLogicalDevice": "Successfully created Logical Device. Please wait for few seconds and refresh the application to see the changes.",
+            "errorSelectedPdCount":"Selected PD count does not meet the requirements for {raidType}.  It must be between {min} and {max}.",
             "errorCreateLogicalDevice": "Error in creating Logical Device.",
             "errorRaidDeviceNotPresent": "RAID Device is not available.",
             "errorRaidCtrlIdInvalid": "Invalid RAID Controller ID.",
@@ -3047,13 +3065,20 @@
             "errorStartLocateLogicalDevice": "Error in starting the Logical Device.",
             "errorStopLocateLogicalDevice": "Error in stopping the Logical Device.",
             "successSetProperties": "Successfully set the logical Drive properties. To view the changes, wait for about 30 seconds and then refresh the page.",
-            "errorSetProperties": "Error in setting Logical Drive Properties."
+            "errorSetProperties": "Error in setting Logical Drive Properties.",
+            "successImportForeignConfig": "Successfully import all foreign Logical Device. Please wait for few seconds and refresh the application to see the changes.",
+            "errorImportForeignConfig": "Error in importing all foreign Logical Device.",
+            "successClearForeignConfig": "Successfully clear all foreign Logical Device. Please wait for few seconds and refresh the application to see the changes.",
+            "errorClearForeignConfig": "Error in clearing all foreign Logical Device.",
+            "successDeleteAllLogicalDevice": "All Logical Devices cleared successfully. To view the changes, wait for about 30 seconds and then refresh the page.",
+            "errorDeleteAllLogicalDevice": "An error occurred while clearing all Logical Devices."
         },
         "actions": {
             "startLocate":"Start Locate",
             "stopLocate":"Stop Locate",
             "delete":"Delete",
-            "setProperties": "Set Properties"
+            "setProperties": "Set Properties",
+            "deleteAllLogicalDevice": "Delete All Logical Devices"
         }
     },
     "pageTopology": {

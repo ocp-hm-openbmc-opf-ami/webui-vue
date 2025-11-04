@@ -54,6 +54,7 @@ import Adapter from '@/views/RAID/Adapter';
 import PhysicalStorage from '@/views/RAID/PhysicalStorage';
 import LogicalStorage from '@/views/RAID/LogicalStorage/LogicalStorage.vue';
 import BrcmCreateLogicalStorage from '@/views/RAID/LogicalStorage/BrcmCreateLogicalStorage.vue';
+import BrcmSl8CreateLogicalStorage from '@/views/RAID/LogicalStorage/BrcmSl8CreateLogicalStorage.vue';
 import MsccCreateLogicalStorage from '@/views/RAID/LogicalStorage/MsccCreateLogicalStorage.vue';
 import Topology from '@/views/RAID/Topology/Topology.vue';
 import RaidEventLog from '@/views/RAID/EventLog/RaidEventLog.vue';
@@ -356,11 +357,30 @@ if (
       },
     },
     {
+      path: '/raid/brcm-sl8-create-logical-device',
+      name: 'create-logical-device',
+      component: BrcmSl8CreateLogicalStorage,
+      meta: {
+        title: i18n.t('appPageTitle.createLogicalDevice'),
+      },
+    },
+    {
       path: '/raid/mscc-create-logical-device',
       name: 'create-logical-device',
       component: MsccCreateLogicalStorage,
       meta: {
         title: i18n.t('appPageTitle.createLogicalDevice'),
+      },
+    },
+    {
+      path: '/raid/foreign-logical-device',
+      name: 'foreign-logical-device',
+      component: () =>
+        import(
+          /* webpackChunkName: "ForeignLogicalStorage" */ '@/views/RAID/LogicalStorage/ForeignLogicalStorage.vue'
+        ),
+      meta: {
+        title: i18n.t('appPageTitle.foreignLogicalDevice'),
       },
     },
     {

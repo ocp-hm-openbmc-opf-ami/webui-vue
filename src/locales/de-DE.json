@@ -179,6 +179,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "foreignLogicalDevice": "@:appPageTitle.foreignLogicalDevice",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "tasks": "@:appPageTitle.tasks",
@@ -247,6 +248,7 @@
         "physicalDevice": "Physisches Gerät",
         "logicalDevice": "Logisches Gerät",
         "createLogicalDevice": "Logisches Gerät erstellen",
+        "foreignLogicalDevice": "Fremdes logisches Laufwerk anzeigen",
         "raidTopology": "Topologie-Informationen",
         "raidEventLog": "RAID-Ereignisprotokoll",
         "backupAndRestore": "Sichern und Wiederherstellen",
@@ -2922,6 +2924,7 @@
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "Logisches Gerät erstellen",
+        "foreignLogicalDevice": "Fremdes logisches Laufwerk anzeigen",
         "raidController": "RAID-Controller",
         "raidLevel": "RAID-Level",
         "virtualDeviceName": "Virtueller Gerätename",
@@ -2936,6 +2939,9 @@
         "numberOfDrives": "Anzahl Laufwerke pro Span",
         "initState": "Initialisierungsstatus",
         "stripeSize": "Stripe-Größe",
+        "stripeSizeHdd": "HDD-Streifengröße",
+        "stripeSizeSsd": "SSD-Streifengröße",
+        "usagePercent": "Nutzungsprozentsatz",
         "readPolicy": "Lese-Richtlinie",
         "writePolicy": "Schreib-Richtlinie",
         "cachePolicy": "Cache-Richtlinie",
@@ -2944,6 +2950,8 @@
         "diskCacheCapacity": "Festplatten-Cache-Kapazität",
         "unConfiguredPhysicalDrive": "Nicht konfigurierte physische Laufwerke",
         "noLogicalDevice": "Derzeit sind keine Informationen zu logischen Geräten vorhanden.",
+        "importAll": "Alles importieren", 
+        "back": "Zurück",
         "initStateOptions": {
             "noInitialization": "Keine Initialisierung",
             "quickInitialization": "Schnellinitialisierung",
@@ -2962,7 +2970,8 @@
             "unprotectedWriteBack": "Ungeschütztes Write Back",
             "writeThrough": "Write Through",
             "alwaysWriteBack": "Immer Write Back",
-            "writeBackWithBBU": "Write Back mit BBU"
+            "writeBackWithBBU": "Write Back mit BBU",
+            "writeCacheAlways": "Schreibcache immer aktivieren"
         },
         "ioPolicyOptions": {
             "directIO": "DirectIO",
@@ -3011,7 +3020,9 @@
             "powerSavingPolicy": "Energiesparrichtlinie",
             "PRL": "PRL",
             "RLQ": "RLQ",
-            "spanDepth": "Spanntiefe"
+            "SRL": "SRL",
+            "spanDepth": "Spanntiefe",
+            "state": "Zustand"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "Kein physisches Gerät zur Konfiguration verfügbar!",
@@ -3023,10 +3034,17 @@
             "stopLocateLogicalDriveActionConfirmationMsg": "Möchten Sie die Lokalisierung des logischen Laufwerks mit der ID {ldId} wirklich stoppen?",
             "stopLocateLogicalDriveActionTitle": "Lokalisierung des logischen Laufwerks stoppen",
             "setPropertiesConfirmationMsg": "Möchten Sie die Eigenschaften für das logische Laufwerk mit der ID {ldId} wirklich festlegen?",
-            "setPropertiesConfirmationTitle": "Eigenschaften des logischen Laufwerks festlegen"
+            "setPropertiesConfirmationTitle": "Eigenschaften des logischen Laufwerks festlegen",
+            "importForeignConfigConfirmationMsg": "Sind Sie sicher, dass Sie alle fremden logischen Geräte importieren möchten?",
+            "importForeignConfigConfirmationTitle": "Fremdes logisches Gerät importieren",
+            "clearForeignConfigConfirmationMsg": "Sind Sie sicher, dass Sie alle fremden logischen Geräte löschen möchten?",
+            "clearForeignConfigConfirmationTitle": "Fremdes logisches Gerät löschen",
+            "deleteAllLogicalDriveActionConfirmationMsg": "Möchten Sie wirklich alle logischen Geräte löschen?",
+            "deleteAllLogicalDriveActionTitle": "Alle logischen Geräte löschen"
         },
         "toast": {
             "successCreateLogicalDevice": "Logisches Gerät erfolgreich erstellt. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
+            "errorSelectedPdCount": "Die ausgewählte PD-Anzahl entspricht nicht den Anforderungen für {raidType}. Sie muss zwischen {min} und {max} liegen.",
             "errorCreateLogicalDevice": "Fehler beim Erstellen des logischen Geräts.",
             "errorRaidDeviceNotPresent": "RAID-Gerät ist nicht verfügbar.",
             "errorRaidCtrlIdInvalid": "Ungültige RAID-Controller-ID.",
@@ -3047,13 +3065,20 @@
             "errorStartLocateLogicalDevice": "Fehler beim Starten der Lokalisierung des logischen Geräts.",
             "errorStopLocateLogicalDevice": "Fehler beim Stoppen der Lokalisierung des logischen Geräts.",
             "successSetProperties": "Eigenschaften des logischen Laufwerks erfolgreich festgelegt. Um die Änderungen anzuzeigen, warten Sie etwa 30 Sekunden und aktualisieren Sie dann die Seite.",
-            "errorSetProperties": "Fehler beim Festlegen der Eigenschaften des logischen Laufwerks."
+            "errorSetProperties": "Fehler beim Festlegen der Eigenschaften des logischen Laufwerks.",
+            "successImportForeignConfig": "Alle fremden logischen Geräte wurden erfolgreich importiert. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
+            "errorImportForeignConfig": "Fehler beim Importieren aller fremden logischen Geräte.",
+            "successClearForeignConfig": "Alle fremden logischen Geräte wurden erfolgreich gelöscht. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
+            "errorClearForeignConfig": "Fehler beim Löschen aller fremden logischen Geräte.",
+            "successDeleteAllLogicalDevice": "Alle logischen Geräte erfolgreich gelöscht. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
+            "errorDeleteAllLogicalDevice": "Beim Löschen aller logischen Geräte ist ein Fehler aufgetreten."
         },
         "actions": {
             "startLocate":"Lokalisierung starten",
             "stopLocate":"Lokalisierung stoppen",
             "delete":"Löschen",
-            "setProperties": "Eigenschaften festlegen"
+            "setProperties": "Eigenschaften festlegen",
+            "deleteAllLogicalDevice": "Alle logischen Geräte löschen"
         }
     },
     "pageTopology": {

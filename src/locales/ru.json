@@ -178,6 +178,7 @@
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
+        "foreignLogicalDevice": "@:appPageTitle.foreignLogicalDevice",
         "raidEventLog": "@:appPageTitle.raidEventLog",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
@@ -246,6 +247,7 @@
         "physicalDevice": "Физическое устройство",
         "logicalDevice": "Логическое устройство",
         "createLogicalDevice": "Создать логическое устройство",
+        "foreignLogicalDevice": "Просмотр внешнего логического устройства",
         "raidTopology": "Информация о топологии",
         "raidEventLog": "Журнал событий",
         "backupAndRestore": "Резервное копирование и восстановление",
@@ -2789,6 +2791,7 @@
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "Создать логическое устройство",
+        "foreignLogicalDevice": "Просмотр внешнего логического устройства",
         "raidController": "RAID контроллер",
         "raidLevel": "Уровень RAID",
         "virtualDeviceName": "Имя виртуального устройства",
@@ -2803,6 +2806,9 @@
         "numberOfDrives": "Количество дисков на промежуток",
         "initState": "Состояние инициализации",
         "stripeSize": "Размер полосы",
+        "stripeSizeHdd": "Размер полосы HDD",
+        "stripeSizeSsd": "Размер полосы SSD",
+        "usagePercent": "Процент использования",
         "readPolicy": "Политика чтения",
         "writePolicy": "Политика записи",
         "cachePolicy": "Политика кэша",
@@ -2811,6 +2817,8 @@
         "diskCacheCapacity": "Емкость кэша диска",
         "unConfiguredPhysicalDrive": "Ненастроенные физические диски",
         "noLogicalDevice": "В данный момент информация о логических устройствах отсутствует.",
+        "importAll": "Импортировать всё", 
+        "back": "Назад",
         "initStateOptions": {
             "noInitialization": "Без инициализации",
             "quickInitialization": "Быстрая инициализация",
@@ -2829,7 +2837,8 @@
             "unprotectedWriteBack": "Незащищенная обратная запись",
             "writeThrough": "Сквозная запись",
             "alwaysWriteBack": "Всегда обратная запись",
-            "writeBackWithBBU": "Обратная запись с BBU"
+            "writeBackWithBBU": "Обратная запись с BBU",
+            "writeCacheAlways": "Всегда использовать кэш записи"
         },
         "ioPolicyOptions": {
             "directIO": "Прямой ввод-вывод",
@@ -2878,7 +2887,9 @@
             "powerSavingPolicy": "Политика энергосбережения",
             "PRL": "PRL",
             "RLQ": "RLQ",
-            "spanDepth": "Глубина охвата"
+            "SRL": "SRL",
+            "spanDepth": "Глубина охвата",
+            "state": "Состояние"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "Нет доступных физических устройств для настройки!",
@@ -2890,10 +2901,17 @@
             "stopLocateLogicalDriveActionConfirmationMsg": "Вы уверены, что хотите остановить поиск логического диска с ID {ldId}?",
             "stopLocateLogicalDriveActionTitle": "Остановить поиск логического диска",
             "setPropertiesConfirmationMsg": "Вы уверены, что хотите установить свойства для логического диска с ID {ldId}?",
-            "setPropertiesConfirmationTitle": "Установка свойств логического диска"
+            "setPropertiesConfirmationTitle": "Установка свойств логического диска",
+            "importForeignConfigConfirmationMsg": "Вы уверены, что хотите импортировать все внешние логические устройства?",
+            "importForeignConfigConfirmationTitle": "Импорт внешнего логического устройства",
+            "clearForeignConfigConfirmationMsg": "Вы уверены, что хотите очистить все внешние логические устройства?",
+            "clearForeignConfigConfirmationTitle": "Очистка внешнего логического устройства",
+            "deleteAllLogicalDriveActionConfirmationMsg": "Вы уверены, что хотите удалить все логические устройства?",
+            "deleteAllLogicalDriveActionTitle": "Удалить все логические устройства"
         },
         "toast": {
             "successCreateLogicalDevice": "Логическое устройство успешно создано. Подождите несколько секунд и обновите приложение для просмотра изменений.",
+            "errorSelectedPdCount": "Выбранное количество PD не соответствует требованиям для {raidType}. Оно должно быть между {min} и {max}.",
             "errorCreateLogicalDevice": "Ошибка создания логического устройства.",
             "errorRaidDeviceNotPresent": "RAID устройство недоступно.",
             "errorRaidCtrlIdInvalid": "Неверный ID RAID контроллера.",
@@ -2914,13 +2932,20 @@
             "errorStartLocateLogicalDevice": "Ошибка запуска логического устройства.",
             "errorStopLocateLogicalDevice": "Ошибка остановки логического устройства.",
             "successSetProperties": "Свойства логического диска успешно установлены. Для просмотра изменений подождите около 30 секунд, затем обновите страницу.",
-            "errorSetProperties": "Ошибка установки свойств логического диска."
+            "errorSetProperties": "Ошибка установки свойств логического диска.",
+            "successImportForeignConfig": "Все внешние логические устройства успешно импортированы. Пожалуйста, подождите несколько секунд и обновите приложение, чтобы увидеть изменения.",
+            "errorImportForeignConfig": "Ошибка при импорте всех внешних логических устройств.",
+            "successClearForeignConfig": "Все внешние логические устройства успешно очищены. Пожалуйста, подождите несколько секунд и обновите приложение, чтобы увидеть изменения.",
+            "errorClearForeignConfig": "Ошибка при очистке всех внешних логических устройств.",
+            "successDeleteAllLogicalDevice": "Все логические устройства успешно удалены. Пожалуйста, подождите несколько секунд и обновите приложение, чтобы увидеть изменения.",
+            "errorDeleteAllLogicalDevice": "Произошла ошибка при очистке всех логических устройств"
         },
         "actions": {
             "startLocate": "Начать поиск",
             "stopLocate": "Остановить поиск",
             "delete": "Удалить",
-            "setProperties": "Установить свойства"
+            "setProperties": "Установить свойства",
+            "deleteAllLogicalDevice": "Удалить все логические устройства"
         }
     },
     "pagePhysicalDevice": {
