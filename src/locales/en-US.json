@@ -1496,6 +1496,13 @@
     "pageKvm": {
         "openNewTab": "Open in New Tab",
         "buttonCtrlAltDelete": "Send Ctrl+Alt+Delete",
+        "bootSettings":{
+            "buttonBootSettings" : "Boot Settings",
+            "bootSettingsHdr": "Boot Settings",
+            "bootSettingsOverride": "Boot settings override",
+            "enableOneTimeBoot": "Enable one time boot",
+            "bootOptionsToolTips" : "Select Boot Source option from the list"
+        },
         "power": "Power",
         "powerOperation": {
             "powerOn": "Power ON",
