@@ -194,7 +194,8 @@
         "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
         "gpgpu": "@:appPageTitle.gpgpu",
         "advancedLogSettings":"@:appPageTitle.advancedLogSettings",
-        "deviceOwnerTransfership": "Übertragung des Geräteeigentümers"
+        "deviceOwnerTransfership": "Übertragung des Geräteeigentümers",
+        "spdm": "@:appPageTitle.spdm"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -263,7 +264,8 @@
         "ipmiEventLog": "IPMI-Ereignisprotokolle",
         "gpgpu": "GPGPU",
         "advancedLogSettings":"Erweiterte Protokolleinstellungen",
-        "deviceOwnerTransfership": "Übertragung des Geräteeigentümers"
+        "deviceOwnerTransfership": "Übertragung des Geräteeigentümers",
+        "spdm": "SPDM"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM-Konfiguration",
@@ -3348,6 +3350,34 @@
           }
       }
     },
+"pageSPDM": {
+    "spdmGetCertificate": "Zertifikat abrufen",
+    "getCertificateError": "Fehler beim Abrufen des Zertifikats.",
+    "id": "ID",
+    "name": "Name",
+    "description": "SPDM-Attestierungsbericht",
+    "componentIntegrityEnabled": "Komponentenintegrität aktiviert",
+    "componentIntegrityType": "Komponentenintegritätstyp",
+    "componentIntegrityTypeVersion": "Komponentenintegritätstyp-Version",
+    "spdmGetSignedMeasurements": "Signierte Messwerte abrufen",
+    "getSignedMeasurementsError": "Fehler beim Abrufen der SPDM-signierten Messwerte.",
+    "getSignedMeasurementsSuccess": "Signierte Messwerte erfolgreich abgerufen.",
+    "getSignedMeasurementsDataError": "Fehler beim Abrufen der signierten Messwertdaten.",
+    "getSignedMeasurementsDataSuccess": "Signierte Messwertdaten erfolgreich abgerufen.",
+    "componentIntegrityEmpty": "Keine SPDM-fähigen Geräte gefunden.",
+    "noSignedMeasurementsData": "Derzeit sind keine signierten Messwertdaten vorhanden.",
+    "noLocationFound": "Kein Speicherort in abgeschlossener Aufgabe gefunden.",
+    "taskTimeout": "Task-Polling-Timeout.",
+    "failedToFetchData": "Fehler beim Abrufen der SPDM-signierten Messwertdaten.",
+    "signedMeasurementsDataSuccess": "SPDM-signierte Messwertdaten erfolgreich abgerufen.",
+    "taskFailed": "Aufgabe fehlgeschlagen mit Status %{status}.",
+    "toast": {
+        "errorInGettingCertificate": "Fehler beim Abrufen des Zertifikats.",
+        "successInGettingCertificate": "Zertifikat erfolgreich abgerufen.",
+        "errorGettingComponentIntegrityData": "Fehler beim Abrufen der Komponentenintegritätsdaten.",
+        "errorInGettingSpdmDevicesInfo": "Fehler beim Abrufen der SPDM-Geräteinformationen."
+    }
+},
     "countries": {
         "AF": "Afghanistan",
         "AL": "Albania",

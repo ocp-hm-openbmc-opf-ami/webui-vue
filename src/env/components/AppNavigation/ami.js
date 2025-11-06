@@ -366,6 +366,13 @@ const AppNavigationMixin = {
           route: '/settings/power-restore-policy',
         });
       }
+      if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED === 'true') {
+        navigationItemsList.navigationItems[4].children.push({
+          id: 'spdm',
+          label: this.$t('appNavigation.spdm'),
+          route: '/settings/spdm',
+        });
+      }
       if (process.env.VUE_APP_ONETREE_AMD_POWERCAP_ENABLED === 'true') {
         navigationItemsList.navigationItems.push({
           id: 'resource-management',
@@ -505,6 +512,7 @@ const AppNavigationMixin = {
             route: '/host-system-diagnostics/amd-remote-debug',
           });
         }
+
         navigationItemsList.navigationItems.push({
           id: 'host-system-diagnostics',
           label: this.$t('appNavigation.hostSystemDiagnostics'),

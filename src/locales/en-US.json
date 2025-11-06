@@ -194,7 +194,8 @@
         "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
         "gpgpu": "@:appPageTitle.gpgpu",
         "advancedLogSettings":"@:appPageTitle.advancedLogSettings",
-        "deviceOwnerTransfership": "Device Owner Transfership"
+        "deviceOwnerTransfership": "Device Owner Transfership",
+        "spdm": "@:appPageTitle.spdm"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -263,7 +264,8 @@
         "ipmiEventLog": "IPMI Event Logs",
         "gpgpu": "GPGPU",
         "advancedLogSettings":"Advanced Log Settings",
-        "deviceOwnerTransfership": "Device Owner Transfership"
+        "deviceOwnerTransfership": "Device Owner Transfership",
+        "spdm": "SPDM"
 
     },
     "pageNodeManager": {
@@ -3341,6 +3343,34 @@
               "step7": "Failed to generate Sign Test Token."
           }
       }
+    },
+    "pageSPDM": {
+        "spdmGetCertificate": "Get Certificate",
+        "getCertificateError": "Error in getting Certificate.",
+        "id": "ID",
+        "name": "Name",
+        "description": "SPDM Attestation Report",
+        "componentIntegrityEnabled": "Component Integrity Enabled",
+        "componentIntegrityType": "Component Integrity Type",
+        "componentIntegrityTypeVersion": "Component Integrity Type Version",
+        "spdmGetSignedMeasurements": "Get Signed Measurements",
+        "getSignedMeasurementsError": "Error in SPDM Get Signed Measurements.",
+        "getSignedMeasurementsSuccess": "Successfully got Signed Measurements.",
+        "getSignedMeasurementsDataError": "Error fetching signed measurements data.",
+        "getSignedMeasurementsDataSuccess": "Successfully fetched signed measurements data.",
+        "componentIntegrityEmpty": "No SPDM-enabled devices are found.",
+        "noSignedMeasurementsData": "No Signed Measurements data is present at this time.",
+        "noLocationFound": "No location found in completed task.",
+        "taskTimeout": "Task polling timeout.",
+        "failedToFetchData": "Failed to fetch SPDM Signed Measurements Data.",
+        "signedMeasurementsDataSuccess": "Get SPDM Signed Measurements Data successfully.",
+        "taskFailed": "Task failed with state %{status}.",
+        "toast": {
+            "errorInGettingCertificate": "Error in getting Certificate.",
+            "successInGettingCertificate": "Successfully getting Certificate.",
+            "errorGettingComponentIntegrityData": "Error in getting Component Integrity Data.",
+            "errorInGettingSpdmDevicesInfo": "Error in getting SPDM Devices Information."
+        }
     },
     "countries": {
         "AF": "Afghanistan",

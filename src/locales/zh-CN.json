@@ -194,7 +194,8 @@
         "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
         "gpgpu": "@:appPageTitle.gpgpu",
         "advancedLogSettings":"@:appPageTitle.advancedLogSettings",
-        "deviceOwnerTransfership": "设备所有者转让"
+        "deviceOwnerTransfership": "设备所有者转让",
+        "spdm": "@:appPageTitle.spdm"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -263,7 +264,8 @@
         "ipmiEventLog": "IPMI事件日志",
         "gpgpu": "GPGPU",
         "advancedLogSettings":"高级日志设置",
-        "deviceOwnerTransfership": "设备所有者转让"
+        "deviceOwnerTransfership": "设备所有者转让",
+        "spdm": "SPDM"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM 配置",
@@ -3340,6 +3342,34 @@
               "step7": "签名测试令牌生成失败。"
           }
       }
+    },
+    "pageSPDM": {
+        "spdmGetCertificate": "获取证书",
+        "getCertificateError": "获取证书时出错。",
+        "id": "ID",
+        "name": "名称",
+        "description": "SPDM 验证报告",
+        "componentIntegrityEnabled": "组件完整性已启用",
+        "componentIntegrityType": "组件完整性类型",
+        "componentIntegrityTypeVersion": "组件完整性类型版本",
+        "spdmGetSignedMeasurements": "获取签名测量值",
+        "getSignedMeasurementsError": "获取 SPDM 签名测量值时出错。",
+        "getSignedMeasurementsSuccess": "成功获取签名测量值。",
+        "getSignedMeasurementsDataError": "获取签名测量数据时出错。",
+        "getSignedMeasurementsDataSuccess": "成功获取签名测量数据。",
+        "componentIntegrityEmpty": "未找到支持 SPDM 的设备。",
+        "noSignedMeasurementsData": "当前没有签名测量数据。",
+        "noLocationFound": "已完成任务中未找到位置。",
+        "taskTimeout": "任务轮询超时。",
+        "failedToFetchData": "获取 SPDM 签名测量数据时出错。",
+        "signedMeasurementsDataSuccess": "成功获取 SPDM 签名测量数据。",
+        "taskFailed": "任务失败，状态为 %{status}。",
+        "toast": {
+            "errorInGettingCertificate": "获取证书时出错。",
+            "successInGettingCertificate": "成功获取证书。",
+            "errorGettingComponentIntegrityData": "获取组件完整性数据时出错。",
+            "errorInGettingSpdmDevicesInfo": "获取 SPDM 设备信息时出错。"
+        }
     },
     "countries": {
         "AF": "阿富汗",

@@ -193,7 +193,8 @@
         "amdRemoteDebug": "@:appPageTitle.amdRemoteDebug",
         "ipmiEventLog": "@:appPageTitle.ipmiEventLog",
         "gpgpu": "@:appPageTitle.gpgpu",
-        "advancedLogSettings":"@:appPageTitle.advancedLogSettings"
+        "advancedLogSettings":"@:appPageTitle.advancedLogSettings",
+        "spdm": "@:appPageTitle.spdm"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -261,7 +262,8 @@
         "amdRemoteDebug": "Удаленная отладка",
         "ipmiEventLog": "Журналы событий IPMI",
         "gpgpu": "GPGPU",
-        "advancedLogSettings":"Расширенные настройки журналирования"
+        "advancedLogSettings":"Расширенные настройки журналирования",
+        "spdm": "SPDM"
 
     },
     "pageNodeManager": {
@@ -3269,6 +3271,34 @@
             "errorAdvancedAddCertificate": "Ошибка добавления %{certificate}.",
             "successCertificateUpload": "Успешно добавлен %{certificate}.",
             "errorGettingVideoLog": "Ошибка сохранения расширенных настроек журналирования."
+        }
+    },
+    "pageSPDM": {
+        "spdmGetCertificate": "Получить сертификат",
+        "getCertificateError": "Ошибка получения сертификата.",
+        "id": "ID",
+        "name": "Имя",
+        "description": "Отчет об аттестации SPDM",
+        "componentIntegrityEnabled": "Проверка целостности компонента включена",
+        "componentIntegrityType": "Тип проверки целостности компонента",
+        "componentIntegrityTypeVersion": "Версия типа проверки целостности компонента",
+        "spdmGetSignedMeasurements": "Получить подписанные измерения",
+        "getSignedMeasurementsError": "Ошибка получения подписанных измерений SPDM.",
+        "getSignedMeasurementsSuccess": "Подписанные измерения успешно получены.",
+        "getSignedMeasurementsDataError": "Ошибка получения данных подписанных измерений.",
+        "getSignedMeasurementsDataSuccess": "Данные подписанных измерений успешно получены.",
+        "componentIntegrityEmpty": "SPDM-устройства не найдены.",
+        "noSignedMeasurementsData": "В настоящее время нет данных подписанных измерений.",
+        "noLocationFound": "Местоположение не найдено в завершенной задаче.",
+        "taskTimeout": "Тайм-аут опроса задачи.",
+        "failedToFetchData": "Ошибка получения данных подписанных измерений SPDM.",
+        "SignedMeasurementsDataSuccess": "Данные подписанных измерений SPDM успешно получены.",
+        "taskFailed": "Задача завершилась неудачей со статусом %{status}.",
+        "toast": {
+            "errorInGettingCertificate": "Ошибка получения сертификата.",
+            "successInGettingCertificate": "Сертификат успешно получен.",
+            "errorGettingComponentIntegrityData": "Ошибка получения данных о целостности компонента.",
+            "errorInGettingSpdmDevicesInfo": "Ошибка получения информации об устройствах SPDM."
         }
     },
     "countries": {
