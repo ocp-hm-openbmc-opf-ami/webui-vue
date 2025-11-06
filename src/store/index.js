@@ -42,8 +42,10 @@ import LogicalStore from './modules/Raid/LogicalStore';
 import PhysicalStore from './modules/Raid/PhysicalStore';
 import RaidEventLogStore from './modules/Raid/RaidEventLogStore';
 import RaidSl8Store from './modules/Raid/Sl8/RaidSl8Store';
+import PhysicalSl8Store from './modules/Raid/Sl8/PhysicalSl8Store';
 import RaidFirmwareUpdate from './modules/Raid/FirmwareUpdateStore';
 import LogicalSl8Store from './modules/Raid/Sl8/LogicalSl8Store';
+import ArrayDrivesSl8Store from './modules/Raid/Sl8/ArrayDrivesSl8Store';
 import BackupAndRestore from './modules/Operations/BackupAndRestore';
 import SNMPStore from './modules/Settings/SNMPStore';
 import FireWallStore from './modules/Settings/FireWallStore';
@@ -117,8 +119,10 @@ export default new Vuex.Store({
     physical: PhysicalStore,
     raidEventLog: RaidEventLogStore,
     raidSl8Store: RaidSl8Store,
+    physicalSl8: PhysicalSl8Store,
     raidFirmwareUpdate: RaidFirmwareUpdate,
     logicalSl8: LogicalSl8Store,
+    arrayDrivesSl8Store: ArrayDrivesSl8Store,
     backupAndRestore: BackupAndRestore,
     snmp: SNMPStore,
     fireWall: FireWallStore,

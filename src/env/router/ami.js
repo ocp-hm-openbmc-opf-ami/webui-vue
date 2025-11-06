@@ -58,6 +58,7 @@ import BrcmSl8CreateLogicalStorage from '@/views/RAID/LogicalStorage/BrcmSl8Crea
 import MsccCreateLogicalStorage from '@/views/RAID/LogicalStorage/MsccCreateLogicalStorage.vue';
 import Topology from '@/views/RAID/Topology/Topology.vue';
 import RaidEventLog from '@/views/RAID/EventLog/RaidEventLog.vue';
+import ArrayDrives from '@/views/RAID/ArrayDrives/ArrayDrives.vue';
 import NvmeInformation from '@/views/NvmeInformation';
 import Nic from '@/views/Nic';
 import Radius from '@/views/SecurityAndAccess/Radius';
@@ -346,6 +347,14 @@ if (
       component: LogicalStorage,
       meta: {
         title: i18n.t('appPageTitle.logicalDevice'),
+      },
+    },
+    {
+      path: '/raid/array-drives',
+      name: 'array-drives',
+      component: ArrayDrives,
+      meta: {
+        title: i18n.t('appPageTitle.arrayDrives'),
       },
     },
     {

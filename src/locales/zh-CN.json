@@ -180,6 +180,7 @@
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "foreignLogicalDevice": "@:appPageTitle.foreignLogicalDevice",
         "raidEventLog": "@:appPageTitle.raidEventLog",
+        "arrayDrives": "@:appPageTitle.arrayDrives",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "tasks": "@:appPageTitle.tasks",
@@ -251,6 +252,7 @@
         "foreignLogicalDevice": "检视外部逻辑设备",
         "raidTopology": "拓扑信息",
         "raidEventLog": "事件日志",
+        "arrayDrives": "阵列磁盘",
         "backupAndRestore": "备份与还原",
         "FireWall": "系统防火墙",
         "tasks": "任务",
@@ -2723,6 +2725,8 @@
             "patrolReadPropertiesHelperText": "显示和/或更改控制器的巡检读取属性。巡检读取操作用于扫描并解决已配置逻辑设备上的潜在问题。可能的值包括：自动、手动和禁用。",
             "labelPatrolReadIteration": "迭代次数: ",
             "patrolReadIterationHelperText": "显示巡检读取迭代次数。",
+            "labelPatrolReadMaxConcurrentPD": "最大并发物理设备数：",
+            "patrolReadMaxConcurrentPDHelperText": "显示巡检同时处理的最大物理设备数量。",
             "labelPatrolReadPdDone": "巡检读取完成: ",
             "patrolReadPdDoneHelperText": "显示目前周期内已完成巡检读取的巡检读取数。",
             "labelPatrolReadStatus": "状态: ",
@@ -2856,11 +2860,33 @@
             }
         },
         "modal": {
-        "sourcePDriveId": "设备 ID",
-        "destinationPDriveId": "选择替换物理设备",
-        "sourcePDIdHelperText": "显示所选的源设备 ID。",
-        "destinationPDIdHelperText": "从列表中选择一个物理设备。所选设备将替换源设备。",
-            "enableCopybackConfig": "当前此控制器的 '回写数据' 功能尚未启用。如需对该物理设备执行操作，请点击 '确定' 以启用此功能。"
+            "sourcePDriveId": "设备 ID",
+            "destinationPDriveId": "选择替换物理设备",
+            "sourcePDIdHelperText": "显示所选的源设备 ID。",
+            "destinationPDIdHelperText": "从列表中选择一个物理设备。所选设备将替换源设备。",
+            "enableCopybackConfig": "当前此控制器的 '回写数据' 功能尚未启用。如需对该物理设备执行操作，请点击 '确定' 以启用此功能。",
+            "labelPhysicalDriveAuOperation": "驱动器操作模式",
+            "physicalDriveAuOperationHelperText": "显示物理设备当前正在执行的后台或维护任务。",
+            "labelPhysicalDriveAuStatus": "设备健康状态",
+            "physicalDriveAuStatusHelperText": "指示访问单元（AU）的健康状况和可用性，决定是否可以进行擦除或重建等操作。",
+            "secureEraseTypeHelperText": "驱动器将被覆盖擦除以安全地删除所有数据。请选择一个可用选项并点击保存以开始擦除操作。",
+            "labelSecureEraseType": "安全擦除类型",
+            "alertNotSupport": "仅当设备状态为良好时才可进行擦除操作。请确保设备健康且未参与任何RAID重建或故障。",
+            "secureEraseOptions": {
+                "simple": "简单",
+                "normal": "普通",
+                "thorough": "彻底",
+                "cryptographicErase": "加密擦除",
+                "sanitizeOverwrtie": "清除覆盖",
+                "sanitizeBlockErase": "清除块擦除",
+                "sanitizeFreezeLock": "清除冻结锁定",
+                "sanitizeAntifreezeLock": "清除防冻结锁定"
+            },
+            "mediaTypeHelperText": "显示当前物理设备的媒体类型。",
+            "capacityBytesHelperText": "显示当前物理设备的容量大小。",
+            "selectLd": "选择逻辑设备",
+            "selectLdHelperText": "请选择要指定的逻辑设备。只能选择 RAID1、RAID5、RAID6、RAID10、RAID50 或 RAID60，且与当前物理设备媒体类型相同，容量小于当前物理设备的逻辑设备。",
+            "alertNoLds": "没有可指定的逻辑设备。"
         },
         "noPhysicalDevice": "目前不存在物理设备信息。",
         "startLocatePhysicalDevice": "开始定位物理设备。",
@@ -2882,7 +2908,10 @@
         "labelStartCopyback": "开始回写数据",
         "labelStopCopyback": "停止回写数据",
         "labelAddGlobalHotSpare": "添加全局热备盘",
-        "labelDeleteGlobalHotSpare": "取消全局热备盘",
+        "labelAddDedicatedHotSpare": "添加专用热备盘",
+        "labelDeleteHotSpare": "取消热备盘",
+        "labelStartSecureEraseType": "开始安全擦除",
+        "labelStopSecureEraseType": "停止安全擦除",
         "physicalDeviceActionTitle": "更改物理设备设置",
         "prepareRemovalConfirmationMsg": "将序号 {pdId} 的物理设备，设置为准备删除?",
         "unDoPrepareRemovalConfirmationMsg": "将序号 {pdId} 的物理设备，设置为取消准备删除?",
@@ -2903,10 +2932,14 @@
         "addGlobalHotSpareSuccess": "磁盘已成功设置为全局热备盘。",
         "addGlobalHotSpareFail": "设置磁盘为全局热备盘失败。",
         "addGlobalHotSpare": "设置磁盘为全局热备盘。",
-        "deleteGlobalHotSpareConfirmationMsg": "是否要取消 {pdId} 的全局热备盘设置？",
-        "deleteGlobalHotSpareSuccess": "磁盘的全局热备盘设置已成功取消。",
-        "deleteGlobalHotSpareFail": "取消磁盘的全局热备盘设置失败。",
-        "deleteGlobalHotSpare": "取消磁盘的全局热备盘设置。",
+        "addDedicatedHotSpareConfirmationMsg": "是否要将 {pdId} 设置为专用热备盘？",
+        "addDedicatedHotSpareSuccess": "磁盘已成功设置为专用热备盘。",
+        "addDedicatedHotSpareFail": "设置磁盘为专用热备盘失败。",
+        "addDedicatedHotSpare": "设置磁盘为专用热备盘。",
+        "deleteHotSpareConfirmationMsg": "是否要取消 {pdId} 的热备盘设置？",
+        "deleteHotSpareSuccess": "磁盘的热备盘设置已成功取消。",
+        "deleteHotSpareFail": "取消磁盘的热备盘设置失败。",
+        "deleteHotSpare": "取消磁盘的热备盘设置。",
         "labelMakeUnconfiguredBad": "设置成未配置且不良",
         "makeUnconfiguredBadConfirmationMsg": "是否要设置物理设备 ID {pdId} 为 '未配置且不良' 的状态？",
         "makeUnconfiguredBadSuccess": "设置物理设备 ID {pdId} 为 '未配置且不良' 的状态成功。",
@@ -2916,7 +2949,15 @@
         "makeUnconfiguredGoodConfirmationMsg": "是否要设置物理设备 ID {pdId} 为 '未配置且良好' 的状态？",
         "makeUnconfiguredGoodSuccess": "设置物理设备 ID {pdId} 为 '未配置且良好' 的状态成功。",
         "makeUnconfiguredGoodFail": "设置物理设备 ID {pdId} 为 '未配置且良好' 的状态失败。",
-        "makeUnconfiguredGoodInfo": "设置物理设备 ID {pdId} 为 '未配置且良好' 的状态。"
+        "makeUnconfiguredGoodInfo": "设置物理设备 ID {pdId} 为 '未配置且良好' 的状态。",
+        "startSecureEraseConfirmationMsg": "您确定要在此设备上开始安全擦除吗？",
+        "startSecureEraseSuccess": "安全擦除已成功启动。",
+        "startSecureEraseFail": "启动安全擦除失败。",
+        "startSecureErase": "开始安全擦除",
+        "stopSecureEraseConfirmationMsg": "您确定要停止此设备上的安全擦除吗？",
+        "stopSecureEraseSuccess": "安全擦除已成功停止。",
+        "stopSecureEraseFail": "停止安全擦除失败。",
+        "stopSecureErase": "停止安全擦除"
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "创建逻辑设备",
@@ -2948,6 +2989,7 @@
         "noLogicalDevice": "此时不存在逻辑设备信息。",
         "importAll": "全部导入", 
         "back": "返回",
+        "arrayDrives": "阵列磁盘",
         "initStateOptions": {
             "noInitialization": "无初始化",
             "quickInitialization": "快速初始化",
@@ -2982,6 +3024,10 @@
             "unchanged": "不变",
             "enable": "启用",
             "disable": "禁用"
+        },
+        "initializationOptions": {
+            "initializationFullMode": "完整初始化",
+            "initializationFastMode": "快速初始化"
         },
         "table": {
             "id": "ID",
@@ -3018,7 +3064,9 @@
             "RLQ": "RLQ",
             "SRL": "SRL",
             "spanDepth": "跨度深度",
-            "state": "状态"
+            "state": "状态",
+            "operationProgressPercent": "操作进度百分比",
+            "operationElapsedSeconds": "操作已执行秒数"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "没有可配置的物理设备！",
@@ -3036,7 +3084,16 @@
             "clearForeignConfigConfirmationMsg": "您确定要清除所有外部逻辑设备吗？",
             "clearForeignConfigConfirmationTitle": "清除外部逻辑设备",
             "deleteAllLogicalDriveActionConfirmationMsg": "确定要删除所有的逻辑设备?",
-            "deleteAllLogicalDriveActionTitle": "删除所有的逻辑设备"
+            "deleteAllLogicalDriveActionTitle": "删除所有的逻辑设备",
+            "startConsistencyCheckMsg":"确定要开始一致性检查吗？",
+            "startConsistencyCheckTitle":"开始一致性检查",
+            "stopConsistencyCheckMsg":"确定要停止一致性检查吗？",
+            "stopConsistencyCheckTitle":"停止一致性检查",
+            "startLogicalDriveInitializationMsg":"确定要开始逻辑设备的初始化吗？",
+            "startLogicalDriveInitializationTitle":"开始逻辑设备初始化",
+            "stopLogicalDriveInitializationMsg":"确定要停止逻辑设备的初始化吗？",
+            "stopLogicalDriveInitializationTitle":"停止逻辑设备初始化",
+            "initializeOptionHelperText": "初始化的目的是使冗余逻辑设备处于一致状态。可以选择完全初始化或快速初始化。"
         },
         "toast": {
             "successCreateLogicalDevice": "逻辑设备创建成功. 请等待几秒钟并刷新应用程序以查看更改。",
@@ -3067,14 +3124,30 @@
             "successClearForeignConfig": "已成功清除所有外部逻辑设备。请等待几秒钟并刷新应用程序以查看更改。",
             "errorClearForeignConfig": "清除所有外部逻辑设备时发生错误。",
             "successDeleteAllLogicalDevice": "成功移除所有的逻辑设备。请等待几秒钟并刷新应用程序以查看更改。",
-            "errorDeleteAllLogicalDevice": "移除所有的逻辑设备时发生错误。"
+            "errorDeleteAllLogicalDevice": "移除所有的逻辑设备时发生错误。",
+            "successStartConsistencyCheck":"已成功开始逻辑设备的一致性检查。请稍等几秒钟，然后刷新此页面以查看更新的信息。",
+            "errorStartConsistencyCheck":"开始一致性检查失败。",
+            "successStopConsistencyCheck":"已成功停止逻辑设备的一致性检查。请稍等几秒钟，然后刷新此页面以查看更新的信息。",
+            "errorStopConsistencyCheck":"停止一致性检查失败。",
+            "successStartLogicalDriveInitialization":"已成功开始逻辑设备初始化。请稍等几秒钟，然后刷新此页面以查看更新的信息。",
+            "errorStartLogicalDriveInitialization":"开始逻辑设备初始化失败。",
+            "successStopLogicalDriveInitialization":"已成功停止逻辑设备初始化。请稍等几秒钟，然后刷新此页面以查看更新的信息。",
+            "errorStopLogicalDriveInitialization":"停止逻辑设备初始化失败。",
+            "pleaseSelectConsistencyCheckLogicalDrive":"目前选择的逻辑设备并没有在执行一致性检查．请选择其他正在执行一致性检查的逻辑设备．",
+            "pleaseSelectInInitializeLogicalDrive":"所选逻辑设备目前未执行初始化。请选择其他正在执行初始化的逻辑设备。",
+            "logicalDriveIsBusy":"目前选择的逻辑设备正在执行其他操作，请先停止目前的操作在再进行新的操作．",
+            "raidTypeNotSupportThisOperation":"所选逻辑设备不支持此操作。"
         },
         "actions": {
             "startLocate": "启动逻辑设备定位",
             "stopLocate": "停止逻辑设备定位",
             "delete": "删除",
             "setProperties": "设置属性",
-            "deleteAllLogicalDevice": "删除所有的逻辑设备"
+            "deleteAllLogicalDevice": "删除所有的逻辑设备",
+            "stopConsistencyCheck":"停止一致性检查",
+            "startConsistencyCheck":"开始一致性检查",
+            "startLogicalDriveInitialization":"开始初始化",
+            "stopLogicalDriveInitialization":"停止初始化"
         }
     },
     "pageTopology": {

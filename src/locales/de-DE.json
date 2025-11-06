@@ -176,6 +176,7 @@
         "adapter": "@:appPageTitle.adapter",
         "raidTopology": "@:appPageTitle.raidTopology",
         "raidEventLog": "@:appPageTitle.raidEventLog",
+        "arrayDrives": "@:appPageTitle.arrayDrives",
         "physicalDevice": "@:appPageTitle.physicalDevice",
         "logicalDevice": "@:appPageTitle.logicalDevice",
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
@@ -251,6 +252,7 @@
         "foreignLogicalDevice": "Fremdes logisches Laufwerk anzeigen",
         "raidTopology": "Topologie-Informationen",
         "raidEventLog": "RAID-Ereignisprotokoll",
+        "arrayDrives": "Array-Laufwerke",
         "backupAndRestore": "Sichern und Wiederherstellen",
         "FireWall": "System-Firewall",
         "tasks": "Aufgaben",
@@ -2727,6 +2729,8 @@
             "patrolReadPropertiesHelperText": "Zeigt die Patrol-Leseeigenschaften des Controllers an und/oder ändert sie. Patrol Read ist ein Vorgang, der konfigurierte Laufwerke scannt und potenzielle Probleme behebt. Mögliche Werte sind: Automatisch, Manuell und Deaktiviert.",
             "labelPatrolReadIteration": "Iterationen: ",
             "patrolReadIterationHelperText": "Zeigt die Anzahl der Patrol-Lese-Iterationen an.",
+            "labelPatrolReadMaxConcurrentPD": "Maximale gleichzeitige Laufwerke: ",
+            "patrolReadMaxConcurrentPDHelperText": "Maximale Anzahl von Laufwerken, die gleichzeitig von Patrol Read verarbeitet werden.",
             "labelPatrolReadPdDone": "PD abgeschlossen: ",
             "patrolReadPdDoneHelperText": "Zeigt die Anzahl der PDs an, die den Patrol-Lesevorgang im aktuellen Zyklus abgeschlossen haben.",
             "labelPatrolReadStatus": "Status: ",
@@ -2864,7 +2868,29 @@
             "destinationPDriveId": "Ersatzlaufwerk auswählen",
             "sourcePDIdHelperText": "Zeigt die ausgewählte Quellgeräte-ID an.",
             "destinationPDIdHelperText": "Wählt ein Laufwerk aus einer Liste. Das ausgewählte Laufwerk wird das Ersatzlaufwerk.",
-            "enableCopybackConfig": "Die 'Copyback'-Funktion auf diesem Controller ist derzeit deaktiviert. Um diesen Vorgang am physischen Gerät durchzuführen, klicken Sie bitte auf 'OK', um die Funktion zu aktivieren."
+            "enableCopybackConfig": "Die 'Copyback'-Funktion auf diesem Controller ist derzeit deaktiviert. Um diesen Vorgang am physischen Gerät durchzuführen, klicken Sie bitte auf 'OK', um die Funktion zu aktivieren.",
+            "labelPhysicalDriveAuOperation": "Laufwerksbetriebsmodus",
+            "physicalDriveAuOperationHelperText": "Zeigt die aktuelle Hintergrund- oder Wartungsaufgabe an, die auf dem physischen Gerät ausgeführt wird.",
+            "labelPhysicalDriveAuStatus": "Gerätegesundheitsstatus",
+            "physicalDriveAuStatusHelperText": "Gibt die Gesundheit und Verfügbarkeit der Access Unit (AU) an, die bestimmt, ob Vorgänge wie Löschen oder Wiederherstellen durchgeführt werden können.",
+            "secureEraseTypeHelperText": "Das Laufwerk wird mit Löschmustern überschrieben, um alle Daten sicher zu entfernen. Wählen Sie eine der verfügbaren Optionen und klicken Sie auf Speichern, um den Löschvorgang zu starten.",
+            "labelSecureEraseType": "Sicheres Löschverfahren",
+            "alertNotSupport": "Die Löschoperation ist nur verfügbar, wenn der Gerätestatus 'Gut' ist. Stellen Sie sicher, dass das Gerät gesund ist und nicht an einem RAID-Rebuild oder Fehler beteiligt ist, bevor Sie fortfahren.",
+            "secureEraseOptions": {
+                "simple": "Einfach",
+                "normal": "Normal",
+                "thorough": "Gründlich",
+                "cryptographicErase": "Kryptografisches Löschen",
+                "sanitizeOverwrtie": "Sanitize Überschreiben",
+                "sanitizeBlockErase": "Sanitize Block-Löschen",
+                "sanitizeFreezeLock": "Sanitize FreezeLock",
+                "sanitizeAntifreezeLock": "Sanitize AntifreezeLock"
+            },
+            "mediaTypeHelperText": "Zeigt den Medientyp des aktuellen physischen Geräts an.",
+            "capacityBytesHelperText": "Zeigt die Kapazität des aktuellen physischen Geräts an.",
+            "selectLd": "Logisches Gerät auswählen",
+            "selectLdHelperText": "Bitte wählen Sie das/die zuzuweisende(n) logische(n) Gerät(e) aus. Es können nur RAID1-, RAID5-, RAID6-, RAID10-, RAID50- oder RAID60-Geräte ausgewählt werden, die denselben Medientyp wie das aktuelle physische Gerät haben und eine kleinere Kapazität besitzen.",
+            "alertNoLds": "Es kann kein logisches Gerät zugewiesen werden."
         },
         "noPhysicalDevice": "Derzeit sind keine Informationen zu physischen Geräten vorhanden.",
         "startLocatePhysicalDevice": "Physisches Gerät lokalisieren starten.",
@@ -2886,7 +2912,10 @@
         "labelStartCopyback": "Copyback starten",
         "labelStopCopyback": "Copyback stoppen",
         "labelAddGlobalHotSpare": "Global Hot Spare zuweisen",
-        "labelDeleteGlobalHotSpare": "Global Hot Spare entfernen",
+        "labelAddDedicatedHotSpare": "Dedizierten Hot Spare zuweisen",
+        "labelDeleteHotSpare": "Hot Spare entfernen",
+        "labelStartSecureEraseType": "Sicheres Löschen starten",
+        "labelStopSecureEraseType": "Sicheres Löschen stoppen",
         "physicalDeviceActionTitle": "Physische Geräteeinstellungen aktualisieren",
         "prepareRemovalConfirmationMsg": "Möchten Sie den Status des physischen Geräts mit der ID {pdId} auf 'Entfernung vorbereiten' setzen?",
         "unDoPrepareRemovalConfirmationMsg":  "Möchten Sie den Status des physischen Geräts mit der ID {pdId} auf 'Entfernungsvorbereitung rückgängig machen' setzen?",
@@ -2907,10 +2936,14 @@
         "addGlobalHotSpareSuccess": "Das Laufwerk wurde erfolgreich als globaler Hot Spare zugewiesen.",
         "addGlobalHotSpareFail": "Das Laufwerk konnte nicht als globaler Hot Spare zugewiesen werden.",
         "addGlobalHotSpare": "Das Laufwerk als globalen Hot Spare zuweisen.",
-        "deleteGlobalHotSpareConfirmationMsg": "Möchten Sie die ID {pdId} als globalen Hot Spare entfernen?",
-        "deleteGlobalHotSpareSuccess": "Das Laufwerk wurde erfolgreich als globaler Hot Spare entfernt.",
-        "deleteGlobalHotSpareFail": "Das Laufwerk konnte nicht als globaler Hot Spare entfernt werden.",
-        "deleteGlobalHotSpare": "Das Laufwerk als globalen Hot Spare entfernen.",
+        "addDedicatedHotSpareConfirmationMsg": "Möchten Sie die ID {pdId} als dedizierten Hot Spare zuweisen?",
+        "addDedicatedHotSpareSuccess": "Das Laufwerk wurde erfolgreich als dedizierter Hot Spare zugewiesen.",
+        "addDedicatedHotSpareFail": "Das Laufwerk konnte nicht als dedizierter Hot Spare zugewiesen werden.",
+        "addDedicatedHotSpare": "Das Laufwerk als dedizierten Hot Spare zuweisen.",
+        "deleteHotSpareConfirmationMsg": "Möchten Sie die ID {pdId} als Hot Spare entfernen?",
+        "deleteHotSpareSuccess": "Das Laufwerk wurde erfolgreich als Hot Spare entfernt.",
+        "deleteHotSpareFail": "Das Laufwerk konnte nicht als Hot Spare entfernt werden.",
+        "deleteHotSpare": "Das Laufwerk als Hot Spare entfernen.",
         "labelMakeUnconfiguredBad": "Als Unconfigured Bad markieren",
         "makeUnconfiguredBadConfirmationMsg": "Möchten Sie das physische Gerät mit der ID {pdId} als 'Unconfigured Bad' markieren?",
         "makeUnconfiguredBadSuccess": "Physisches Gerät mit der ID {pdId} erfolgreich als 'Unconfigured Bad' markiert.",
@@ -2920,7 +2953,15 @@
         "makeUnconfiguredGoodConfirmationMsg": "Möchten Sie das physische Gerät mit der ID {pdId} als 'Unconfigured Good' markieren?",
         "makeUnconfiguredGoodSuccess": "Physisches Gerät mit der ID {pdId} erfolgreich als 'Unconfigured Good' markiert.",
         "makeUnconfiguredGoodFail": "Physisches Gerät mit der ID {pdId} konnte nicht als 'Unconfigured Good' markiert werden.",
-        "makeUnconfiguredGoodInfo": "Physisches Gerät mit der ID {pdId} als 'Unconfigured Good' markieren."
+        "makeUnconfiguredGoodInfo": "Physisches Gerät mit der ID {pdId} als 'Unconfigured Good' markieren.",
+        "startSecureEraseConfirmationMsg": "Sind Sie sicher, dass Sie Secure Erase auf diesem Gerät starten möchten?",
+        "startSecureEraseSuccess": "Secure Erase wurde erfolgreich gestartet.",
+        "startSecureEraseFail": "Secure Erase konnte nicht gestartet werden.",
+        "startSecureErase": "Secure Erase starten",
+        "stopSecureEraseConfirmationMsg": "Sind Sie sicher, dass Sie Secure Erase auf diesem Gerät stoppen möchten?",
+        "stopSecureEraseSuccess": "Secure Erase wurde erfolgreich gestoppt.",
+        "stopSecureEraseFail": "Secure Erase konnte nicht gestoppt werden.",
+        "stopSecureErase": "Secure Erase stoppen"
     },
     "pageLogicalDevice": {
         "createLogicalDevice": "Logisches Gerät erstellen",
@@ -2952,6 +2993,7 @@
         "noLogicalDevice": "Derzeit sind keine Informationen zu logischen Geräten vorhanden.",
         "importAll": "Alles importieren", 
         "back": "Zurück",
+        "arrayDrives": "Array-Laufwerke",
         "initStateOptions": {
             "noInitialization": "Keine Initialisierung",
             "quickInitialization": "Schnellinitialisierung",
@@ -2986,6 +3028,10 @@
             "unchanged": "Unverändert",
             "enable": "Aktiviert",
             "disable": "Deaktiviert"
+        },
+        "initializationOptions": {
+            "initializationFullMode":"Vollständige Initialisierung",
+            "initializationFastMode":"Schnelle Initialisierung"
         },
         "table": {
             "id": "ID",
@@ -3022,7 +3068,9 @@
             "RLQ": "RLQ",
             "SRL": "SRL",
             "spanDepth": "Spanntiefe",
-            "state": "Zustand"
+            "state": "Zustand",
+            "operationProgressPercent": "Vorgangsfortschritt in Prozent",
+            "operationElapsedSeconds": "Vorgang in Sekunden"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "Kein physisches Gerät zur Konfiguration verfügbar!",
@@ -3040,7 +3088,16 @@
             "clearForeignConfigConfirmationMsg": "Sind Sie sicher, dass Sie alle fremden logischen Geräte löschen möchten?",
             "clearForeignConfigConfirmationTitle": "Fremdes logisches Gerät löschen",
             "deleteAllLogicalDriveActionConfirmationMsg": "Möchten Sie wirklich alle logischen Geräte löschen?",
-            "deleteAllLogicalDriveActionTitle": "Alle logischen Geräte löschen"
+            "deleteAllLogicalDriveActionTitle": "Alle logischen Geräte löschen",
+            "startConsistencyCheckMsg":"Sind Sie sicher, dass Sie die Konsistenzprüfung starten?",
+            "startConsistencyCheckTitle":"Konsistenzprüfung starten",
+            "stopConsistencyCheckMsg":"Sind Sie sicher, dass Sie die Konsistenzprüfung beenden?",
+            "stopConsistencyCheckTitle":"Konsistenzprüfung beenden",
+            "startLogicalDriveInitializationMsg":"Sind Sie sicher, dass Sie die Initialisierung des logischen Geräts starten?",
+            "startLogicalDriveInitializationTitle":"Initialisierung des logischen Laufwerks starten",
+            "stopLogicalDriveInitializationMsg":"Sind Sie sicher, dass Sie die Initialisierung des logischen Geräts beenden?",
+            "stopLogicalDriveInitializationTitle":"Logisches Gerät beenden Laufwerkinitialisierung",
+            "initializeOptionHelperText": "Der Zweck der Initialisierung besteht darin, das redundante virtuelle Laufwerk in einen konsistenten Zustand zu bringen. Sie können zwischen der vollständigen Initialisierung und der schnellen Initialisierung wählen."
         },
         "toast": {
             "successCreateLogicalDevice": "Logisches Gerät erfolgreich erstellt. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
@@ -3071,14 +3128,30 @@
             "successClearForeignConfig": "Alle fremden logischen Geräte wurden erfolgreich gelöscht. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
             "errorClearForeignConfig": "Fehler beim Löschen aller fremden logischen Geräte.",
             "successDeleteAllLogicalDevice": "Alle logischen Geräte erfolgreich gelöscht. Bitte warten Sie einige Sekunden und aktualisieren Sie die Anwendung, um die Änderungen zu sehen.",
-            "errorDeleteAllLogicalDevice": "Beim Löschen aller logischen Geräte ist ein Fehler aufgetreten."
+            "errorDeleteAllLogicalDevice": "Beim Löschen aller logischen Geräte ist ein Fehler aufgetreten.",
+            "successStartConsistencyCheck":"Konsistenzprüfung für das logische Gerät erfolgreich gestartet. Bitte warten Sie ein paar Sekunden und aktualisieren Sie dann diese Seite, um die aktualisierten Informationen anzuzeigen.",
+            "errorStartConsistencyCheck":"Konsistenzprüfung konnte nicht gestartet werden.",
+            "successStopConsistencyCheck":"Konsistenzprüfung für das logische Gerät erfolgreich beendet. Bitte warten Sie ein paar Sekunden und aktualisieren Sie dann diese Seite, um die aktualisierten Informationen anzuzeigen.",
+            "errorStopConsistencyCheck":"Konsistenzprüfung konnte nicht beendet werden.",
+            "successStartLogicalDriveInitialization":"Initialisierung des logischen Laufwerks erfolgreich gestartet. Bitte warten Sie ein paar Sekunden und aktualisieren Sie dann diese Seite, um die aktualisierten Informationen anzuzeigen.",
+            "errorStartLogicalDriveInitialization":"Initialisierung des logischen Laufwerks konnte nicht gestartet werden.",
+            "successStopLogicalDriveInitialization":"Initialisierung des logischen Laufwerks konnte nicht beendet werden. Bitte warten Sie ein paar Sekunden und aktualisieren Sie dann diese Seite, um die aktualisierten Informationen anzuzeigen.",
+            "errorStopLogicalDriveInitialization":"Initialisierung des logischen Laufwerks konnte nicht beendet werden.",
+            "pleaseSelectConsistencyCheckLogicalDrive": "Das ausgewählte logische Gerät führt derzeit keine Konsistenzprüfung durch. Bitte wählen Sie ein anderes logisches Gerät aus, das aktiv eine Konsistenzprüfung durchführt.",
+            "pleaseSelectInInitializeLogicalDrive":"Das ausgewählte logische Gerät führt derzeit keine Initialisierung durch. Bitte wählen Sie ein anderes logisches Gerät aus, das aktiv eine Initialisierung durchführt.",
+            "logicalDriveIsBusy": "Das ausgewählte logische Gerät ist derzeit mit einem anderen Vorgang beschäftigt. Bitte beenden Sie den laufenden Vorgang, bevor Sie einen neuen starten.",
+            "raidTypeNotSupportThisOperation": "Das ausgewählte logische Gerät unterstützt diesen Vorgang nicht."
         },
         "actions": {
             "startLocate":"Lokalisierung starten",
             "stopLocate":"Lokalisierung stoppen",
             "delete":"Löschen",
             "setProperties": "Eigenschaften festlegen",
-            "deleteAllLogicalDevice": "Alle logischen Geräte löschen"
+            "deleteAllLogicalDevice": "Alle logischen Geräte löschen",
+            "stopConsistencyCheck":"Konsistenzprüfung beenden",
+            "startConsistencyCheck":"Konsistenzprüfung starten",
+            "startLogicalDriveInitialization":"Initialisierung starten",
+            "stopLogicalDriveInitialization":"Initialisierung beenden"
         }
     },
     "pageTopology": {

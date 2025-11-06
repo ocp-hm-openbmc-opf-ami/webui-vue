@@ -180,6 +180,7 @@
         "createLogicalDevice": "@:appPageTitle.createLogicalDevice",
         "foreignLogicalDevice": "@:appPageTitle.foreignLogicalDevice",
         "raidEventLog": "@:appPageTitle.raidEventLog",
+        "arrayDrives": "@:appPageTitle.arrayDrives",
         "backupAndRestore": "@:appPageTitle.backupAndRestore",
         "fireWall": "@:appPageTitle.FireWall",
         "tasks": "@:appPageTitle.tasks",
@@ -250,6 +251,7 @@
         "foreignLogicalDevice": "Просмотр внешнего логического устройства",
         "raidTopology": "Информация о топологии",
         "raidEventLog": "Журнал событий",
+        "arrayDrives": "Массив дисков",
         "backupAndRestore": "Резервное копирование и восстановление",
         "FireWall": "Системный брандмауэр",
         "tasks": "Задачи",
@@ -2722,6 +2724,8 @@
             "patrolReadPropertiesHelperText": "Адлюстроўвае і/або змяняе ўласцівасці чытання патруля для кантролера. Чытанне патруля - гэта аперацыя, якая скануе і вырашае патэнцыйныя праблемы на настроеных дысках. Магчымыя значэнні: Аўтаматычна, Ручно і Адключана.",
             "labelPatrolReadIteration": "Ітэрацыі: ",
             "patrolReadIterationHelperText": "Паказвае колькасць ітэрацый чытання патруля.",
+            "labelPatrolReadMaxConcurrentPD": "Макс. одновременные диски: ",
+            "patrolReadMaxConcurrentPDHelperText": "Максимальное количество дисков, обрабатываемых одновременно Patrol Read.",
             "labelPatrolReadPdDone": "PD завершаны: ",
             "patrolReadPdDoneHelperText": "Паказвае колькасць PD, якія завяршылі чытанне патруля ў бягучым цыкле",
             "labelPatrolReadStatus": "Стан: ",
@@ -2819,6 +2823,7 @@
         "noLogicalDevice": "В данный момент информация о логических устройствах отсутствует.",
         "importAll": "Импортировать всё", 
         "back": "Назад",
+        "arrayDrives": "Массив дисков",
         "initStateOptions": {
             "noInitialization": "Без инициализации",
             "quickInitialization": "Быстрая инициализация",
@@ -2853,6 +2858,10 @@
             "unchanged": "Без изменений",
             "enable": "Включено",
             "disable": "Отключено"
+        },
+        "initializationOptions": {
+            "initializationFullMode":"Полная инициализация",
+            "initializationFastMode":"Быстрая инициализация"
         },
         "table": {
             "id": "ID",
@@ -2889,7 +2898,9 @@
             "RLQ": "RLQ",
             "SRL": "SRL",
             "spanDepth": "Глубина охвата",
-            "state": "Состояние"
+            "state": "Состояние",
+            "operationProgressPercent": "Процент выполнения операции",
+            "operationElapsedSeconds": "Прошедшее время операции в секундах"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "Нет доступных физических устройств для настройки!",
@@ -2907,7 +2918,16 @@
             "clearForeignConfigConfirmationMsg": "Вы уверены, что хотите очистить все внешние логические устройства?",
             "clearForeignConfigConfirmationTitle": "Очистка внешнего логического устройства",
             "deleteAllLogicalDriveActionConfirmationMsg": "Вы уверены, что хотите удалить все логические устройства?",
-            "deleteAllLogicalDriveActionTitle": "Удалить все логические устройства"
+            "deleteAllLogicalDriveActionTitle": "Удалить все логические устройства",
+            "startConsistencyCheckMsg":"Вы уверены, что хотите начать проверку целостности?",
+            "startConsistencyCheckTitle":"Начать проверку целостности",
+            "stopConsistencyCheckMsg":"Вы уверены, что хотите остановить проверку целостности?",
+            "stopConsistencyCheckTitle":"Остановить проверку целостности",
+            "startLogicalDriveInitializationMsg":"Вы уверены, что хотите начать инициализацию логического устройства?",
+            "startLogicalDriveInitializationTitle":"Начать инициализацию логического диска",
+            "stopLogicalDriveInitializationMsg":"Вы уверены, что хотите остановить инициализацию логического устройства?",
+            "stopLogicalDriveInitializationTitle":"Остановить инициализацию логического диска",
+            "initializeOptionHelperText": "Цель инициализации — привести резервный виртуальный диск в согласованное состояние. Вы можете выбрать полную инициализацию или быструю инициализацию."
         },
         "toast": {
             "successCreateLogicalDevice": "Логическое устройство успешно создано. Подождите несколько секунд и обновите приложение для просмотра изменений.",
@@ -2938,14 +2958,30 @@
             "successClearForeignConfig": "Все внешние логические устройства успешно очищены. Пожалуйста, подождите несколько секунд и обновите приложение, чтобы увидеть изменения.",
             "errorClearForeignConfig": "Ошибка при очистке всех внешних логических устройств.",
             "successDeleteAllLogicalDevice": "Все логические устройства успешно удалены. Пожалуйста, подождите несколько секунд и обновите приложение, чтобы увидеть изменения.",
-            "errorDeleteAllLogicalDevice": "Произошла ошибка при очистке всех логических устройств"
+            "errorDeleteAllLogicalDevice": "Произошла ошибка при очистке всех логических устройств",
+            "successStartConsistencyCheck":"Проверка целостности логического устройства успешно запущена устройство.Пожалуйста, подождите несколько секунд, затем обновите эту страницу, чтобы увидеть обновлённую информацию.",
+            "errorStartConsistencyCheck":"Не удалось запустить проверку целостности.",
+            "successStopConsistencyCheck":"Проверка целостности логического устройства успешно остановлена.Пожалуйста, подождите несколько секунд, затем обновите эту страницу, чтобы увидеть обновлённую информацию.",
+            "errorStopConsistencyCheck":"Не удалось остановить проверку целостности.",
+            "successStartLogicalDriveInitialization":"Инициализация логического диска успешно запущена.Пожалуйста, подождите несколько секунд, затем обновите эту страницу, чтобы увидеть обновлённую информацию.",
+            "errorStartLogicalDriveInitialization":"Не удалось запустить инициализацию логического диска.",
+            "successStopLogicalDriveInitialization":"Инициализация логического диска успешно остановлена.Пожалуйста, подождите несколько секунд, затем обновите эту страницу, чтобы увидеть обновлённую информацию.",
+            "errorStopLogicalDriveInitialization":"Не удалось остановить инициализацию логического диска.",
+            "pleaseSelectConsistencyCheckLogicalDrive":"Выбранное логическое устройство в данный момент не выполняет проверку согласованности. Выберите другое логическое устройство, которое активно выполняет проверку согласованности.",
+            "pleaseSelectInInitializeLogicalDrive":"Выбранное логическое устройство в данный момент не выполняет инициализацию. Выберите другое логическое устройство, которое активно выполняет инициализацию.",
+            "logicalDriveIsBusy":"Выбранное логическое устройство в настоящее время выполняет другую операцию. Перед началом новой операции завершите текущую операцию.",
+            "raidTypeNotSupportThisOperation":"Выбранное логическое устройство не поддерживает эту операцию."
         },
         "actions": {
             "startLocate": "Начать поиск",
             "stopLocate": "Остановить поиск",
             "delete": "Удалить",
             "setProperties": "Установить свойства",
-            "deleteAllLogicalDevice": "Удалить все логические устройства"
+            "deleteAllLogicalDevice": "Удалить все логические устройства",
+            "stopConsistencyCheck":"Остановить проверку согласованности",
+            "startConsistencyCheck":"Начать проверку согласованности",
+            "startLogicalDriveInitialization":"Начать инициализацию",
+            "stopLogicalDriveInitialization":"Остановить инициализацию"
         }
     },
     "pagePhysicalDevice": {
@@ -3014,11 +3050,33 @@
             }
         },
         "modal": {
-        "sourcePDriveId": "ID",
-        "destinationPDriveId": "Выберите заменяющий диск",
-        "sourcePDIdHelperText": "Отображает выбранный идентификатор исходного устройства.",
-        "destinationPDIdHelperText": "Выберите диск из списка. Выбранный диск станет заменяющим.",
-        "enableCopybackConfig": "Функция «Восстановление» на этом контроллере в настоящее время отключена. Чтобы выполнить эту операцию на физическом устройстве, нажмите «ОК» для активации функции."
+            "sourcePDriveId": "ID",
+            "destinationPDriveId": "Выберите заменяющий диск",
+            "sourcePDIdHelperText": "Отображает выбранный идентификатор исходного устройства.",
+            "destinationPDIdHelperText": "Выберите диск из списка. Выбранный диск станет заменяющим.",
+            "enableCopybackConfig": "Функция «Восстановление» на этом контроллере в настоящее время отключена. Чтобы выполнить эту операцию на физическом устройстве, нажмите «ОК» для активации функции.",
+            "labelPhysicalDriveAuOperation": "Режим работы диска",
+            "physicalDriveAuOperationHelperText": "Показывает текущую фоновую или сервисную задачу, выполняемую на физическом устройстве.",
+            "labelPhysicalDriveAuStatus": "Состояние устройства",
+            "physicalDriveAuStatusHelperText": "Указывает на состояние и доступность модуля доступа (AU), что определяет возможность выполнения операций, таких как стирание или восстановление.",
+            "secureEraseTypeHelperText": "Диск будет перезаписан шаблонами стирания для безопасного удаления всех данных. Выберите один из доступных вариантов и нажмите «Сохранить» для начала операции стирания.",
+            "labelSecureEraseType": "Тип безопасного стирания",
+            "alertNotSupport": "Операция стирания доступна только при хорошем состоянии устройства. Убедитесь, что устройство исправно и не участвует в восстановлении RAID или неисправно.",
+            "secureEraseOptions": {
+                "simple": "Простой",
+                "normal": "Обычный",
+                "thorough": "Тщательный",
+                "cryptographicErase": "Криптографическое стирание",
+                "sanitizeOverwrtie": "Очистка перезаписью",
+                "sanitizeBlockErase": "Очистка блоков",
+                "sanitizeFreezeLock": "Очистка с блокировкой",
+                "sanitizeAntifreezeLock": "Очистка с разблокировкой"
+            },
+            "mediaTypeHelperText": "Отображает тип носителя текущего физического устройства.",
+            "capacityBytesHelperText": "Отображает ёмкость текущего физического устройства.",
+            "selectLd": "Выберите логическое устройство",
+            "selectLdHelperText": "Пожалуйста, выберите логическое устройство для назначения. Можно выбрать только устройства RAID1, RAID5, RAID6, RAID10, RAID50 или RAID60 с тем же типом носителя, что и у текущего физического устройства, и с меньшей ёмкостью.",
+            "alertNoLds": "Нет логических устройств для назначения."
         },
         "noPhysicalDevice": "У гэты час няма інфармацыі аб фізічнай прыладзе.",
         "startLocatePhysicalDevice": "Пачаць пошук фізічнай прылады.",
@@ -3040,7 +3098,10 @@
         "labelStartCopyback": "Начать восстановление",
         "labelStopCopyback": "Остановить восстановление",
         "labelAddGlobalHotSpare": "Добавить глобальный горячий резерв",
-        "labelDeleteGlobalHotSpare": "Удалить глобальный горячий резерв",
+        "labelAddDedicatedHotSpare": "Назначить выделенный горячий резерв",
+        "labelDeleteHotSpare": "Удалить горячий резерв",
+        "labelStartSecureEraseType": "Начать безопасное стирание",
+        "labelStopSecureEraseType": "Остановить безопасное стирание",
         "physicalDeviceActionTitle": "Абнавіце налады фізічнай прылады",
         "prepareRemovalConfirmationMsg": "Жадаеце ўсталяваць стан фізічнай прылады з ідэнтыфікатарам {pdId} на падрыхтоўку да выдалення?",
         "unDoPrepareRemovalConfirmationMsg": "Жадаеце ўсталяваць стан фізічнай прылады з ідэнтыфікатарам {pdId} на адмену падрыхтоўкі да выдалення?",
@@ -3061,10 +3122,14 @@
         "addGlobalHotSpareSuccess": "Диск успешно назначен как глобальный горячий резерв.",
         "addGlobalHotSpareFail": "Не удалось назначить диск как глобальный горячий резерв.",
         "addGlobalHotSpare": "Назначить диск как глобальный горячий резерв.",
-        "deleteGlobalHotSpareConfirmationMsg": "Вы хотите отменить назначение {pdId} как глобального горячего резерва?",
-        "deleteGlobalHotSpareSuccess": "Назначение диска как глобального горячего резерва успешно отменено.",
-        "deleteGlobalHotSpareFail": "Не удалось отменить назначение диска как глобального горячего резерва.",
-        "deleteGlobalHotSpare": "Отменить назначение диска как глобального горячего резерва.",
+        "addDedicatedHotSpareConfirmationMsg": "Вы хотите назначить ID {pdId} как выделенный горячий резерв?",
+        "addDedicatedHotSpareSuccess": "Диск был успешно назначен как выделенный горячий резерв.",
+        "addDedicatedHotSpareFail": "Не удалось назначить диск как выделенный горячий резерв.",
+        "addDedicatedHotSpare": "Назначить диск как выделенный горячий резерв.",
+        "deleteHotSpareConfirmationMsg": "Вы хотите отменить назначение {pdId} как горячего резерва?",
+        "deleteHotSpareSuccess": "Назначение диска как горячего резерва успешно отменено.",
+        "deleteHotSpareFail": "Не удалось отменить назначение диска как горячего резерва.",
+        "deleteHotSpare": "Отменить назначение диска как горячего резерва.",
         "labelMakeUnconfiguredBad": "Сделать ненастроенное плохим",
         "makeUnconfiguredBadConfirmationMsg": "Хотите сделать физическое устройство ID {pdId} ненастроенным плохим?",
         "makeUnconfiguredBadSuccess": "Успешно сделать физическое устройство ID {pdId} ненастроенным плохим.",
@@ -3074,7 +3139,15 @@
         "makeUnconfiguredGoodConfirmationMsg": "Хотите сделать физическое устройство ID {pdId} ненастроенным Хорошо?",
         "makeUnconfiguredGoodSuccess": "Успешно сделать физическое устройство ID {pdId} ненастроенным хорошим.",
         "makeUnconfiguredGoodFail": "Не удалось сделать физическое устройство ID {pdId} ненастроенным хорошим.",
-        "makeUnconfiguredGoodInfo": "Сделать физическое устройство ID {pdId} ненастроенным хорошим."
+        "makeUnconfiguredGoodInfo": "Сделать физическое устройство ID {pdId} ненастроенным хорошим.",
+        "startSecureEraseConfirmationMsg": "Вы уверены, что хотите начать безопасное стирание на этом устройстве?",
+        "startSecureEraseSuccess": "Безопасное стирание успешно начато.",
+        "startSecureEraseFail": "Не удалось начать безопасное стирание.",
+        "startSecureErase": "Начать безопасное стирание",
+        "stopSecureEraseConfirmationMsg": "Вы уверены, что хотите остановить безопасное стирание на этом устройстве?",
+        "stopSecureEraseSuccess": "Безопасное стирание успешно остановлено.",
+        "stopSecureEraseFail": "Не удалось остановить безопасное стирание.",
+        "stopSecureErase": "Остановить безопасное стирание"
     },
     "pageTopology": {
         "raidTopology": "Информация о топологии",
