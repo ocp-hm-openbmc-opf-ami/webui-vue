@@ -73,7 +73,11 @@
                     id="input-manual-date"
                     v-model="form.manual.date"
                     :state="getValidationState($v.form.manual.date)"
-                    :disabled="ntpOptionSelected || isButtonDisable"
+                    :disabled="
+                      ntpOptionSelected ||
+                      secureNtpOptionSelected ||
+                      isButtonDisable
+                    "
                     data-test-id="dateTime-input-manualDate"
                     class="form-control-with-button"
                     @blur="$v.form.manual.date.$touch()"
@@ -99,7 +103,11 @@
                       $t('global.calendar.useCursorKeysToNavigateCalendarDates')
                     "
                     :title="$t('global.calendar.selectDate')"
-                    :disabled="ntpOptionSelected || isButtonDisable"
+                    :disabled="
+                      ntpOptionSelected ||
+                      secureNtpOptionSelected ||
+                      isButtonDisable
+                    "
                     button-variant="link"
                     aria-controls="input-manual-date"
                   >
@@ -124,7 +132,11 @@
                     id="input-manual-time"
                     v-model="form.manual.time"
                     :state="getValidationState($v.form.manual.time)"
-                    :disabled="ntpOptionSelected || isButtonDisable"
+                    :disabled="
+                      ntpOptionSelected ||
+                      secureNtpOptionSelected ||
+                      isButtonDisable
+                    "
                     data-test-id="dateTime-input-manualTime"
                     @blur="$v.form.manual.time.$touch()"
                   />
@@ -145,7 +157,7 @@
             value="ntp"
             data-test-id="dateTime-radio-configureNTP"
           >
-            NTP
+            {{ $t('pageDateTime.form.ntp') }}
           </b-form-radio>
           <b-row class="mt-3 ml-3">
             <b-col sm="6" lg="4" xl="3">
@@ -218,6 +230,85 @@
               </b-form-group>
             </b-col>
           </b-row>
+          <b-form-radio
+            v-model="form.configurationSelected"
+            value="ntpsec"
+            data-test-id="dateTime-radio-configureNTPsec"
+          >
+            {{ $t('pageDateTime.form.ntpSec') }}
+          </b-form-radio>
+          <b-row class="mt-3 ml-3">
+            <b-col sm="6" lg="4" xl="3">
+              <b-form-group
+                :label="$t('pageDateTime.form.ntpServers.server1')"
+                label-for="input-ntpsec-1"
+              >
+                <b-input-group>
+                  <b-form-input
+                    id="input-ntpsec-1"
+                    v-model="form.secureNtp.firstAddress"
+                    :state="getValidationState($v.form.secureNtp.firstAddress)"
+                    :disabled="manualOptionSelected"
+                    data-test-id="dateTime-input-ntpsecServer1"
+                    @input="$v.form.secureNtp.firstAddress.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.form.secureNtp.firstAddress.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                    <template v-if="!$v.form.secureNtp.firstAddress.pattern">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-input-group>
+              </b-form-group>
+            </b-col>
+            <b-col sm="6" lg="4" xl="3">
+              <b-form-group
+                :label="$t('pageDateTime.form.ntpServers.server2')"
+                label-for="input-ntp-2"
+              >
+                <b-input-group>
+                  <b-form-input
+                    id="input-ntpsec-2"
+                    v-model="form.secureNtp.secondAddress"
+                    :state="getValidationState($v.form.secureNtp.secondAddress)"
+                    :disabled="manualOptionSelected"
+                    data-test-id="dateTime-input-ntpsecServer2"
+                    @input="$v.form.secureNtp.secondAddress.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.form.secureNtp.secondAddress.pattern">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-input-group>
+              </b-form-group>
+            </b-col>
+            <b-col sm="6" lg="4" xl="3">
+              <b-form-group
+                :label="$t('pageDateTime.form.ntpServers.server3')"
+                label-for="input-ntpsec-3"
+              >
+                <b-input-group>
+                  <b-form-input
+                    id="input-ntpsec-3"
+                    v-model="form.secureNtp.thirdAddress"
+                    :state="getValidationState($v.form.secureNtp.thirdAddress)"
+                    :disabled="manualOptionSelected"
+                    data-test-id="dateTime-input-ntpsecServer3"
+                    @input="$v.form.secureNtp.thirdAddress.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.form.secureNtp.thirdAddress.pattern">
+                      {{ $t('global.form.invalidFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-input-group>
+              </b-form-group>
+            </b-col>
+          </b-row>
+
           <b-button
             variant="primary"
             type="submit"
@@ -281,6 +372,11 @@ export default {
           thirdAddress: '',
           timeZoneName: this.$store.getters['global/timeZone'],
         },
+        secureNtp: {
+          firstAddress: '',
+          secondAddress: '',
+          thirdAddress: '',
+        },
       },
       loading,
       timeZoneOptions: this.combinedUniqueTimeZoneOptions(),
@@ -325,11 +421,39 @@ export default {
             },
           },
         },
+        secureNtp: {
+          firstAddress: {
+            required: requiredIf(function () {
+              return (
+                this.form.configurationSelected === 'ntp' ||
+                this.form.configurationSelected === 'ntpsec'
+              );
+            }),
+            pattern: function (val) {
+              return this.ntpServerValidation(val);
+            },
+          },
+          secondAddress: {
+            pattern: function (val) {
+              return this.ntpServerValidation(val);
+            },
+          },
+          thirdAddress: {
+            pattern: function (val) {
+              return this.ntpServerValidation(val);
+            },
+          },
+        },
       },
     };
   },
   computed: {
-    ...mapState('dateTime', ['ntpServers', 'isNtpProtocolEnabled']),
+    ...mapState('dateTime', [
+      'ntpServers',
+      'isNtpProtocolEnabled',
+      'secureNtpServers',
+      'isSecureNtpEnabled',
+    ]),
     ...mapGetters('global', ['userPrivilege']),
     isButtonDisable() {
       return this.userPrivilege !== privilegesId.admin;
@@ -342,6 +466,9 @@ export default {
     },
     ntpOptionSelected() {
       return this.form.configurationSelected === 'ntp';
+    },
+    secureNtpOptionSelected() {
+      return this.form.configurationSelected === 'ntpsec';
     },
     manualOptionSelected() {
       return this.form.configurationSelected === 'manual';
@@ -363,6 +490,9 @@ export default {
     ntpServers() {
       this.setNtpValues();
     },
+    secureNtpServers() {
+      this.setSecureNtpValues();
+    },
     manualDate() {
       this.emitChange();
     },
@@ -381,6 +511,7 @@ export default {
   created() {
     this.startLoader();
     this.setNtpValues();
+    this.setSecureNtpValues();
     Promise.all([
       this.$store.dispatch('global/getBmcTime'),
       this.$store.dispatch('dateTime/getNtpData'),
@@ -406,12 +537,26 @@ export default {
     setNtpValues() {
       this.form.configurationSelected = this.isNtpProtocolEnabled
         ? 'ntp'
-        : 'manual';
+        : this.form.configurationSelected;
       [
         this.form.ntp.firstAddress = '',
         this.form.ntp.secondAddress = '',
         this.form.ntp.thirdAddress = '',
       ] = [this.ntpServers[0], this.ntpServers[1], this.ntpServers[2]];
+    },
+    setSecureNtpValues() {
+      this.form.configurationSelected = this.isSecureNtpEnabled
+        ? 'ntpsec'
+        : this.form.configurationSelected;
+      [
+        this.form.secureNtp.firstAddress = '',
+        this.form.secureNtp.secondAddress = '',
+        this.form.secureNtp.thirdAddress = '',
+      ] = [
+        this.secureNtpServers[0],
+        this.secureNtpServers[1],
+        this.secureNtpServers[2],
+      ];
     },
     submitForm() {
       this.$v.$touch();
@@ -420,13 +565,29 @@ export default {
 
       let dateTimeForm = {};
       let isNTPEnabled = this.form.configurationSelected === 'ntp';
+      let isSecureNTPEnabled = this.form.configurationSelected === 'ntpsec';
+      let isManual = this.form.configurationSelected === 'manual';
       dateTimeForm.TimeZoneName = this.form.ntp.timeZoneName;
-      if (!isNTPEnabled) {
+      dateTimeForm.ntpProtocolEnabled = isNTPEnabled;
+      dateTimeForm.secureNtpProtocolEnabled = isSecureNTPEnabled;
+
+      const ntpArray = [
+        this.form.ntp.firstAddress,
+        this.form.ntp.secondAddress,
+        this.form.ntp.thirdAddress,
+      ];
+      const secureNtpArray = [
+        this.form.secureNtp.firstAddress,
+        this.form.secureNtp.secondAddress,
+        this.form.secureNtp.thirdAddress,
+      ];
+      // Filter arrays to remove empty strings
+      dateTimeForm.ntpServersArray = ntpArray.filter((x) => x);
+      dateTimeForm.secureNtpServersArray = secureNtpArray.filter((x) => x);
+
+      if (isManual) {
         const isUtcDisplay = this.$store.getters['global/isUtcDisplay'];
         let date;
-
-        dateTimeForm.ntpProtocolEnabled = false;
-
         if (isUtcDisplay) {
           // Create UTC Date
           date = this.getUtcDate(this.form.manual.date, this.form.manual.time);
@@ -451,28 +612,22 @@ export default {
             .format(date)
             .replace(', ', 'T');
         }
-      } else {
-        dateTimeForm.ntpProtocolEnabled = true;
-
-        const ntpArray = [
-          this.form.ntp.firstAddress,
-          this.form.ntp.secondAddress,
-          this.form.ntp.thirdAddress,
-        ];
-
-        // Filter the ntpArray to remove empty strings,
-        // per Redfish spec there should be no empty strings or null on the ntp array.
-        const ntpArrayFiltered = ntpArray.filter((x) => x);
-
-        dateTimeForm.ntpServersArray = [...ntpArrayFiltered];
-
+      }
+      // Update local state for both NTP and Secure NTP
+      if (isNTPEnabled) {
         [this.ntpServers[0], this.ntpServers[1], this.ntpServers[2]] = [
           ...dateTimeForm.ntpServersArray,
         ];
-
         this.setNtpValues();
       }
-
+      if (isSecureNTPEnabled) {
+        [
+          this.secureNtpServers[0],
+          this.secureNtpServers[1],
+          this.secureNtpServers[2],
+        ] = [...dateTimeForm.secureNtpServersArray];
+        this.setSecureNtpValues();
+      }
       this.$store
         .dispatch('dateTime/updateDateTime', dateTimeForm)
         .then((success) => {

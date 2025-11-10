@@ -966,6 +966,8 @@
             "date": "Дата",
             "manual": "Вручную",
             "timezone": "Часовой пояс",
+            "ntp": "NTP сервер",
+            "ntpSec": "Защищённый NTP",
             "time": {
                 "label": "24-часовое время",
                 "timezone": "@:pageDateTime.form.time.label (%{timezone})"

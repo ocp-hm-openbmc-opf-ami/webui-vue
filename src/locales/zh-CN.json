@@ -966,6 +966,8 @@
             "date": "日期",
             "manual": "手动",
             "timezone": "时区",
+            "ntp": "NTP",
+            "ntpSec": "安全 NTP",
             "time": {
                 "label": "24小时制时间",
                 "timezone": "@:pageDateTime.form.time.label (%{timezone})"

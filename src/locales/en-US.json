@@ -967,6 +967,8 @@
             "date": "Date",
             "manual": "Manual",
             "timezone": "Timezone",
+            "ntp": "NTP",
+            "ntpSec": "Secure NTP",
             "time": {
                 "label": "24-hour time",
                 "timezone": "@:pageDateTime.form.time.label (%{timezone})"
