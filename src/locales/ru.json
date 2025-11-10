@@ -3032,6 +3032,7 @@
             "shieldCounter": "Счётчик защиты",
             "ssdPercentUsed": "Использовано SSD (%)",
             "ssdPowerOnHours": "Время работы SSD (часы)",
+            "spareType": "Тип резервного устройства",
             "state": {
                 "hotspare": "Горячий резерв",
                 "unknownState": "Неизвестно",

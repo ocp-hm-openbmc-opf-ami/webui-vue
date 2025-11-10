@@ -2846,6 +2846,7 @@
             "shieldCounter": "Schutz-Zähler",
             "ssdPercentUsed": "SSD-Nutzungsgrad (%)",
             "ssdPowerOnHours": "SSD-Betriebsstunden",
+            "spareType": "Hot-Spare-Typ",
             "state": {
                 "hotspare": "Hot Spare",
                 "unknownState": "Unbekannt",

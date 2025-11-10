@@ -2842,6 +2842,7 @@
             "shieldCounter": "保护计数器",
             "ssdPercentUsed": "SSD使用百分比",
             "ssdPowerOnHours": "SSD开机时数",
+            "spareType": "备盘类型",
             "state": {
                 "hotspare": "热备盘",
                 "unknownState": "未知",

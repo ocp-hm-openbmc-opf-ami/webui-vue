@@ -2846,6 +2846,7 @@
             "shieldCounter": "Shield Counter",
             "ssdPercentUsed": "Ssd Percent Used",
             "ssdPowerOnHours": "Ssd Power On Hours",
+            "spareType": "Spare Type",
             "state": {
                 "hotspare": "Hot Spare",
                 "unknownState": "Unknown",
