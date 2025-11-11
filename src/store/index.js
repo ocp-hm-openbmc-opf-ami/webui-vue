@@ -38,13 +38,13 @@ import NvmeInformationStore from './modules/NvmeInformation/NvmeInformationStore
 import AutonomousCrashDumpStore from './modules/HostSystemDiagnostics/AcdStore';
 import AsdStore from './modules/HostSystemDiagnostics/AsdStore';
 import RaidStore from './modules/Raid/RaidStore';
+import LogicalSl8Store from './modules/Raid/Sl8/LogicalSl8Store';
 import LogicalStore from './modules/Raid/LogicalStore';
 import PhysicalStore from './modules/Raid/PhysicalStore';
 import RaidEventLogStore from './modules/Raid/RaidEventLogStore';
 import RaidSl8Store from './modules/Raid/Sl8/RaidSl8Store';
 import PhysicalSl8Store from './modules/Raid/Sl8/PhysicalSl8Store';
 import RaidFirmwareUpdate from './modules/Raid/FirmwareUpdateStore';
-import LogicalSl8Store from './modules/Raid/Sl8/LogicalSl8Store';
 import ArrayDrivesSl8Store from './modules/Raid/Sl8/ArrayDrivesSl8Store';
 import BackupAndRestore from './modules/Operations/BackupAndRestore';
 import SNMPStore from './modules/Settings/SNMPStore';
