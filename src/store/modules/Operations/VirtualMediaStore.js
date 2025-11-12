@@ -13,6 +13,56 @@ const transferProtocolType = {
   OEM: 'OEM',
 };
 
+const parseVirtualMediaUrl = (image, backupImageURL) => {
+  let url = image;
+  if (!url || url.trim() === '') {
+    url = backupImageURL;
+  }
+  if (!url || url.trim() === '') {
+    return {
+      serverUri: '',
+      imagePath: '',
+      transferProtocolType: '',
+    };
+  }
+
+  let protocol = '';
+  let serverUri = '';
+  let imagePath = '';
+
+  if (url.startsWith('smb://')) {
+    protocol = 'CIFS';
+    const withoutProto = url.substring(6);
+    const parts = withoutProto.split('/');
+    serverUri = parts[0];
+    imagePath = '/' + parts.slice(1).join('/');
+  } else if (url.startsWith('https://')) {
+    protocol = 'HTTPS';
+    const withoutProto = url.substring(8);
+    const parts = withoutProto.split('/');
+    serverUri = parts[0];
+    imagePath = '/' + parts.slice(1).join('/');
+  } else if (url.startsWith('nfs://')) {
+    protocol = 'NFS';
+    const withoutProto = url.substring(6);
+    const colonIndex = withoutProto.indexOf(':');
+    if (colonIndex !== -1) {
+      serverUri = withoutProto.substring(0, colonIndex);
+      imagePath = withoutProto.substring(colonIndex + 1);
+    } else {
+      const parts = withoutProto.split('/');
+      serverUri = parts[0];
+      imagePath = '/' + parts.slice(1).join('/');
+    }
+  }
+
+  return {
+    serverUri: serverUri,
+    imagePath: imagePath,
+    transferProtocolType: protocol,
+  };
+};
+
 const VirtualMediaStore = {
   namespaced: true,
   state: {
@@ -165,13 +215,20 @@ const VirtualMediaStore = {
                 d.id !== 'Slot_1',
             )
             .map((device) => {
+              const parsed = parseVirtualMediaUrl(
+                device.data?.Image,
+                device.data?.Oem?.Ami?.BackupImageURL,
+              );
               return {
                 ...device,
-                serverUri: '',
+                serverUri: parsed.serverUri,
+                imagePath: parsed.imagePath,
                 username: '',
                 password: '',
                 isRW: false,
+                transferProtocolType: parsed.transferProtocolType,
                 image: device.data?.Image,
+                backupImageURL: device.data?.Oem?.Ami?.BackupImageURL,
               };
             });
           commit('setProxyDevicesData', [...proxyDevices].reverse());

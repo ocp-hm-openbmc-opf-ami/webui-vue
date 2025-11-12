@@ -470,16 +470,12 @@ export default {
         (element) => element.data.id === connectionData.id,
       );
       if (matchedElement) {
-        Object.assign(connectionData, matchedElement.data);
-      } else {
-        Object.assign(connectionData, {
-          serverUri: null,
-          imagePath: null,
-          username: null,
-          password: null,
-          isRW: false,
-          transferProtocolType: '',
-        });
+        connectionData.username = matchedElement.data.username || '';
+        connectionData.password = matchedElement.data.password || '';
+        connectionData.isRW =
+          matchedElement.data.isRW !== undefined
+            ? matchedElement.data.isRW
+            : false;
       }
       connectionData.password = '';
       this.modalConfigureConnection = connectionData;
