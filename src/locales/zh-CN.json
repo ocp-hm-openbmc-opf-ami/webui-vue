@@ -2285,7 +2285,6 @@
         "configurationPolicies": "配置",
         "servicesPolicies": "服务",
         "snmpProtocol": "SNMP",
-        "snmpPortLabel": "SNMP 端口值",
         "snmpDescription": "启用 SNMP 协议",
         "snmpv1": "SNMPv1",
         "snmpv1Description": "启用 SNMPv1。",

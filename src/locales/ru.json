@@ -2286,7 +2286,6 @@
         "configurationPolicies": "Конфигурации",
         "servicesPolicies": "Службы",
         "snmpProtocol": "SNMP",
-        "snmpPortLabel": "Значение порта SNMP",
         "snmpDescription": "Включение протокола SNMP",
         "snmpv1": "SNMPv1",
         "snmpv1Description": "Включение SNMPv1.",

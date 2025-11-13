@@ -8,7 +8,6 @@ const SnmpStore = {
     authenticationProtocolValue: null,
     Bmcusers: [],
     snmpProtocolEnabled: false,
-    snmpPortValue: null,
     snmpv1Enabled: false,
     snmpv2cEnabled: false,
     snmpv3Enabled: false,
@@ -20,7 +19,6 @@ const SnmpStore = {
     authenticationProtocolValue: (state) => state.authenticationProtocolValue,
     Bmcusers: (state) => state.Bmcusers,
     snmpProtocolEnabled: (state) => state.snmpProtocolEnabled,
-    snmpPortValue: (state) => state.snmpPortValue,
     snmpv1Enabled: (state) => state.snmpv1Enabled,
     snmpv2cEnabled: (state) => state.snmpv2cEnabled,
     snmpv3Enabled: (state) => state.snmpv3Enabled,
@@ -36,8 +34,6 @@ const SnmpStore = {
     setBmcUsers: (state, Bmcusers) => (state.Bmcusers = Bmcusers),
     setSnmpProtocolEnabled: (state, snmpProtocolEnabled) =>
       (state.snmpProtocolEnabled = snmpProtocolEnabled),
-    setSnmpPort: (state, snmpPortValue) =>
-      (state.snmpPortValue = snmpPortValue),
     setsnmpv1Enabled: (state, snmpv1Enabled) =>
       (state.snmpv1Enabled = snmpv1Enabled),
     setsnmpv2cEnabled: (state, snmpv2cEnabled) =>
@@ -55,7 +51,6 @@ const SnmpStore = {
         .get('/redfish/v1/Managers/bmc/NetworkProtocol')
         .then((response) => {
           const snmpProtocol = response.data?.SNMP?.ProtocolEnabled;
-          const snmpPortValue = response.data?.SNMP?.Port;
           const snmpv1 = response.data?.SNMP?.EnableSNMPv1;
           const snmpv2c = response.data?.SNMP?.EnableSNMPv2c;
           const snmpv3 = response.data?.SNMP?.EnableSNMPv3;
@@ -82,7 +77,6 @@ const SnmpStore = {
           );
           commit('setSnmpCommunityString', data);
           commit('setSnmpProtocolEnabled', snmpProtocol);
-          commit('setSnmpPort', snmpPortValue);
           commit('setsnmpv1Enabled', snmpv1);
           commit('setsnmpv2cEnabled', snmpv2c);
           commit('setsnmpv3Enabled', snmpv3);

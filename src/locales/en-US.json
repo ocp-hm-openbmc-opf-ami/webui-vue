@@ -2286,7 +2286,6 @@
         "configurationPolicies": "Configurations",
         "servicesPolicies": "Services",
         "snmpProtocol": "SNMP",
-        "snmpPortLabel": "SNMP Port value",
         "snmpDescription": "Enabling SNMP Protocol.",
         "snmpv1": "SNMPv1",
         "snmpv1Description": "Enabling SNMPv1.",
