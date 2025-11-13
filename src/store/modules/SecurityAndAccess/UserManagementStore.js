@@ -133,7 +133,7 @@ const UserManagementStore = {
       {
         username,
         password,
-        privilege,
+        RoleId,
         status,
         PasswordChangeRequired,
         accountTypes,
@@ -141,12 +141,13 @@ const UserManagementStore = {
         encryption,
         algorithm,
         readWritePermission,
+        channelPrivileges = [],
       },
     ) {
       const data = {
         UserName: username,
         Password: password,
-        RoleId: privilege,
+        RoleId: RoleId,
         Enabled: status,
         PasswordChangeRequired: PasswordChangeRequired,
         AccountTypes: accountTypes || [],
@@ -171,9 +172,17 @@ const UserManagementStore = {
           },
         };
       }
+      data.Oem.Ami.ChannelPrivileges = channelPrivileges.map(
+        (channelPrivilege) => {
+          return {
+            ChannelId: channelPrivilege.ChannelId.ChannelId,
+            ChannelPrivilege: channelPrivilege.ChannelPrivilege,
+            ChannelAccess: channelPrivilege.ChannelAccess,
+          };
+        },
+      );
       return await api
         .post('/redfish/v1/AccountService/Accounts', data)
-        .then(() => dispatch('getUsers'))
         .then(() =>
           i18n.t('pageUserManagement.toast.successCreateUser', {
             username,
@@ -191,7 +200,7 @@ const UserManagementStore = {
         originalUsername,
         username,
         password,
-        privilege,
+        RoleId,
         status,
         locked,
         PasswordChangeRequired,
@@ -201,6 +210,7 @@ const UserManagementStore = {
         encryption,
         algorithm,
         readWritePermission,
+        channelPrivileges = [],
         delayLogout = false,
       },
     ) {
@@ -255,7 +265,7 @@ const UserManagementStore = {
         } else {
           if (username) data.UserName = username;
           if (password) data.Password = password;
-          if (privilege) data.RoleId = privilege;
+          if (RoleId) data.RoleId = RoleId;
           if (accountTypes !== undefined) data.AccountTypes = accountTypes;
           if (status !== undefined) data.Enabled = status;
           if (locked !== undefined) data.Locked = locked;
@@ -288,6 +298,17 @@ const UserManagementStore = {
               },
             };
           }
+        }
+        if (channelPrivileges.length > 0) {
+          data.Oem.Ami.ChannelPrivileges = channelPrivileges.map(
+            (channelPrivilege) => {
+              return {
+                ChannelId: channelPrivilege.ChannelId.ChannelId,
+                ChannelPrivilege: channelPrivilege.ChannelPrivilege,
+                ChannelAccess: channelPrivilege.ChannelAccess,
+              };
+            },
+          );
         }
       } else if (
         globalPrivilege === 'Operator' ||

@@ -23,6 +23,7 @@ const FirmwareStore = {
     httpPushUriOptions: {},
     gpuFirmwareinfo: [],
     fpgaFirmwareinfo: [],
+    bmcRecoveryEnabled: false,
   },
   getters: {
     isTftpUploadAvailable: (state) => state.tftpAvailable,
@@ -58,6 +59,7 @@ const FirmwareStore = {
     httpPushUriOptions: (state) => state.httpPushUriOptions,
     getGpuFirmwareinfo: (state) => state.gpuFirmwareinfo,
     getFpgaFirmwareinfo: (state) => state.fpgaFirmwareinfo,
+    getBmcRecoveryEnabledStatus: (state) => state.bmcRecoveryEnabled,
   },
   mutations: {
     setActiveBmcFirmwareId: (state, id) => (state.bmcActiveFirmwareId = id),
@@ -91,6 +93,8 @@ const FirmwareStore = {
       (state.gpuFirmwareinfo = gpuFirmwareinfo),
     setFPGAFirmwareinfo: (state, fpgaFirmwareinfo) =>
       (state.fpgaFirmwareinfo = fpgaFirmwareinfo),
+    setBmcRecoveryFeatureEnabled: (state, bmcRecoveryEnabled) =>
+      (state.bmcRecoveryEnabled = bmcRecoveryEnabled),
   },
   actions: {
     async getFirmwareInformation({ dispatch }) {
@@ -126,6 +130,7 @@ const FirmwareStore = {
         .catch((error) => console.log(error));
       let bmcBackupEnabled = false;
       let bmcActiveFeatureEnabled = false;
+      let bmcRecoveryFeatureEnabled = false;
       await api
         .all(inventoryList)
         .then((response) => {
@@ -144,9 +149,10 @@ const FirmwareStore = {
               status: data?.Status?.Health,
             };
             // Check if bmc_active is available
+            var fwDeviceName = data?.['@odata.id'].split('/').pop();
             if (
-              data?.['@odata.id'] ===
-              '/redfish/v1/UpdateService/FirmwareInventory/bmc_active'
+              fwDeviceName === 'bmc_active' ||
+              fwDeviceName === 'bios_active'
             ) {
               bmcActiveFeatureEnabled = true;
             }
@@ -159,6 +165,14 @@ const FirmwareStore = {
               bmcBackupEnabled = true;
             }
             commit('setBmcBackupEnabled', bmcBackupEnabled);
+
+            if (
+              fwDeviceName === 'bmc_recovery' ||
+              fwDeviceName === 'bios_recovery'
+            ) {
+              bmcRecoveryFeatureEnabled = true;
+            }
+            commit('setBmcRecoveryFeatureEnabled', bmcRecoveryFeatureEnabled);
             if (firmwareType === 'bmc') {
               bmcFirmware.push(item);
             } else if (firmwareType === 'Bios') {
@@ -203,7 +217,7 @@ const FirmwareStore = {
           let activeEnabledValue = true;
           if (
             data?.HttpPushUriTargets?.includes('bmc_active') ||
-            data?.HttpPushUriTargets.length <= 0
+            data?.HttpPushUriTargets?.length <= 0
           ) {
             activeEnabledValue = false;
           }

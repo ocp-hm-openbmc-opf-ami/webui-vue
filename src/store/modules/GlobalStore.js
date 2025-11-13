@@ -52,6 +52,7 @@ const GlobalStore = {
     userPrivilege: null,
     virtualMediaServiceEnabledAccess: true,
     kvmServiceEnabledAccess: true,
+    sessionId: null, // Store Session_ID from login
   },
   getters: {
     assetTag: (state) => state.assetTag,
@@ -69,6 +70,7 @@ const GlobalStore = {
     virtualMediaServiceEnabledAccess: (state) =>
       state.virtualMediaServiceEnabledAccess,
     kvmServiceEnabledAccess: (state) => state.kvmServiceEnabledAccess,
+    sessionId: (state) => state.sessionId,
   },
   mutations: {
     setAssetTag: (state, assetTag) => (state.assetTag = assetTag),
@@ -102,6 +104,7 @@ const GlobalStore = {
     setkvmServiceEnabledAccess: (state, kvmServiceEnabledAccess) => {
       state.kvmServiceEnabledAccess = kvmServiceEnabledAccess;
     },
+    setSessionId: (state, sessionId) => (state.sessionId = sessionId),
   },
   actions: {
     async getBmcTime({ commit }) {

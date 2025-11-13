@@ -65,6 +65,10 @@ const AuthenticationStore = {
         .post('/login', { data: [username, password] })
         .then((response) => {
           commit('authSuccess');
+          // Store Session_ID in global store if present
+          if (response.data.Session_ID !== undefined) {
+            store.commit('global/setSessionId', response.data.Session_ID);
+          }
           if (response.data.RoleId) {
             localStorage.setItem('loginRoleId', response.data.RoleId); //stored in the localStorage because store getting null when browser refresh
             store.loginRoleId = response.data.RoleId;
@@ -84,6 +88,9 @@ const AuthenticationStore = {
           if (errorMessage.includes('SessionLimitExceeded')) {
             throw new Error(i18n.t('pagePolicies.toast.errorMaxSessionLogin'));
           }
+          if (errorMessage.includes('InsufficientPrivilege')) {
+            throw new Error(i18n.t('pagePolicies.toast.noPrivilegeUser'));
+          }
           if (error.response.status == 423) {
             commit('authLocked');
           } else {
@@ -92,14 +99,19 @@ const AuthenticationStore = {
           throw new Error(error);
         });
     },
-    async logout({ commit }) {
+    async logout({ commit, dispatch }) {
       return await api
         .post('/logout', { data: [] })
         .then(() => {
           commit('setConsoleWindow', false);
           commit('logout');
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          if (error.response.status == 403) {
+            dispatch('customizedResetLogout');
+          }
+        });
     },
     getUserInfo(_, username) {
       return api

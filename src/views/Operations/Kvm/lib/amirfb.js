@@ -28,6 +28,10 @@ var pseudoEncodingKeyboardLedState = -131072; // 0xFFFE0000 (Reference:(libvncse
 var NUM_LOCK_LED_ON = 1 << 0; // 0th bit of output report set [0000 0001]
 var SCROLL_LOCK_LED_ON = 1 << 2; // 2nd bit of output report set [0000 0100]
 
+/* IVTP Specific MACROs */
+const IVTP_VALIDATE_VIDEO_SESSION = 0x0012;
+const IVTP_GET_WEB_TOKEN = 0x0015;
+
 /* Uncomment to enable logging in browser debug console
  * Note:
  * 1. Enable 'verbose' log level in browser debug console to view log messages
@@ -261,6 +265,70 @@ export default class AMI_RFB extends RFB {
       this._rfbCleanDisconnect = 'AlreadyKVMLaunched';
     }
     super._updateConnectionState(state);
+  }
+  isValidSessionFormat(input) {
+    const regex = /^session_\d+$/;
+    return regex.test(input);
+  }
+
+  ivtpSendSessionInfo(text) {
+    Log.Debug(`>> AMI_RFB.ivtpSendSessionInfo -> Clientcut : ` + `:${text}`);
+
+    if (this.isValidSessionFormat(text)) {
+      Log.Debug(
+        `>> AMI_RFB.ivtpSendSessionInfo 02 -> Clientcut : ` + `:${text}`,
+      );
+      const ivtpEncodedMsg = this.createIvtpCutText(
+        text,
+        IVTP_VALIDATE_VIDEO_SESSION,
+        IVTP_GET_WEB_TOKEN,
+      );
+
+      Log.Debug(
+        `>> AMI_RFB.ivtpSendSessionInfo -> Clientcut : ` +
+          `:${ivtpEncodedMsg.length}`,
+      );
+
+      RFB.messages.clientCutText(this._sock, ivtpEncodedMsg, false);
+    }
+  }
+
+  createIvtpCutText(text, num, stat) {
+    const ivtp = 'IVTP';
+    const encoder = new TextEncoder();
+    const ivtpPayload = encoder.encode(text);
+    const ivtpHeader = encoder.encode(ivtp);
+    const ivtpHeaderSize = 12; // 4 (ivtp) + 2 (num) + 4 (length) + 2(status)
+    const buffer = new Uint8Array(ivtpHeaderSize + ivtpPayload.length);
+    const view = new DataView(buffer.buffer);
+    let offset = 0;
+
+    // ivtp-header (4 bytes)
+    buffer.set(ivtpHeader, offset);
+    offset += ivtpHeader.length;
+
+    // ivtp-num (2 bytes)
+    view.setUint16(offset, num);
+    offset += 2;
+
+    // ivtp-length (4 bytes)
+    view.setUint32(offset, ivtpPayload.length);
+    offset += 4;
+
+    // ivtp-status (2 bytes)
+    view.setUint16(offset, stat);
+    offset += 2;
+
+    // ivtp-payload
+    buffer.set(ivtpPayload, offset);
+    offset += ivtpPayload.length;
+
+    console.debug(
+      `>> AMI_RFB.createivtpCutText -> buffer.length: ${buffer.length}`,
+    );
+    console.debug(`>> AMI_RFB.createivtpCutText -> offset: ${offset}`);
+
+    return buffer;
   }
 }
 

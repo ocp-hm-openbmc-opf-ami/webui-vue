@@ -6,25 +6,40 @@ const DateTimeStore = {
   state: {
     ntpServers: [],
     isNtpProtocolEnabled: null,
+    secureNtpServers: [],
+    isSecureNtpEnabled: null,
   },
   getters: {
     ntpServers: (state) => state.ntpServers,
     isNtpProtocolEnabled: (state) => state.isNtpProtocolEnabled,
+    secureNtpServers: (state) => state.secureNtpServers,
+    isSecureNtpEnabled: (state) => state.isSecureNtpEnabled,
   },
   mutations: {
     setNtpServers: (state, ntpServers) => (state.ntpServers = ntpServers),
     setIsNtpProtocolEnabled: (state, isNtpProtocolEnabled) =>
       (state.isNtpProtocolEnabled = isNtpProtocolEnabled),
+    setSecureNtpServers: (state, secureNtpServers) =>
+      (state.secureNtpServers = secureNtpServers),
+    setIsSecureNtpEnabled: (state, isSecureNtpEnabled) =>
+      (state.isSecureNtpEnabled = isSecureNtpEnabled),
   },
   actions: {
     async getNtpData({ commit }) {
       return await api
         .get('/redfish/v1/Managers/bmc/NetworkProtocol')
         .then((response) => {
-          const ntpServers = response.data.NTP.NTPServers;
-          const isNtpProtocolEnabled = response.data.NTP.ProtocolEnabled;
+          const ntpServers = response.data.NTP?.NTPServers || [];
+          const isNtpProtocolEnabled =
+            response.data.NTP?.ProtocolEnabled || false;
           commit('setNtpServers', ntpServers);
           commit('setIsNtpProtocolEnabled', isNtpProtocolEnabled);
+          const secureNtpServers =
+            response.data.Oem?.Ami?.EncrytedNTP?.NTPServers || [];
+          const isSecureNtpEnabled =
+            response.data.Oem?.Ami?.EncrytedNTP?.NTPStatus || false;
+          commit('setSecureNtpServers', secureNtpServers);
+          commit('setIsSecureNtpEnabled', isSecureNtpEnabled);
         })
         .catch((error) => {
           console.log(error);
@@ -32,13 +47,19 @@ const DateTimeStore = {
     },
     async updateDateTime({ state }, dateTimeForm) {
       const ntpData = {
+        Oem: {
+          Ami: {
+            EncrytedNTP: {
+              NTPServers: dateTimeForm.secureNtpServersArray || [],
+              NTPStatus: dateTimeForm.secureNtpProtocolEnabled || false,
+            },
+          },
+        },
         NTP: {
-          ProtocolEnabled: dateTimeForm.ntpProtocolEnabled,
+          NTPServers: dateTimeForm.ntpServersArray || [],
+          ProtocolEnabled: dateTimeForm.ntpProtocolEnabled || false,
         },
       };
-      if (dateTimeForm.ntpProtocolEnabled) {
-        ntpData.NTP.NTPServers = dateTimeForm.ntpServersArray;
-      }
       return await api
         .patch(`/redfish/v1/Managers/bmc/NetworkProtocol`, ntpData)
         .then(async () => {
@@ -59,7 +80,8 @@ const DateTimeStore = {
            * TODO: remove timeout if backend solves
            * https://github.com/openbmc/openbmc/issues/3459
            */
-          const timeoutVal = state.isNtpProtocolEnabled ? 20000 : 0;
+          const timeoutVal =
+            state.isNtpProtocolEnabled || state.isSecureNtpEnabled ? 20000 : 0;
           return await new Promise((resolve, reject) => {
             setTimeout(() => {
               return api

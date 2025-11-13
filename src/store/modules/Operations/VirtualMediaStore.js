@@ -13,6 +13,56 @@ const transferProtocolType = {
   OEM: 'OEM',
 };
 
+const parseVirtualMediaUrl = (image, backupImageURL) => {
+  let url = image;
+  if (!url || url.trim() === '') {
+    url = backupImageURL;
+  }
+  if (!url || url.trim() === '') {
+    return {
+      serverUri: '',
+      imagePath: '',
+      transferProtocolType: '',
+    };
+  }
+
+  let protocol = '';
+  let serverUri = '';
+  let imagePath = '';
+
+  if (url.startsWith('smb://')) {
+    protocol = 'CIFS';
+    const withoutProto = url.substring(6);
+    const parts = withoutProto.split('/');
+    serverUri = parts[0];
+    imagePath = '/' + parts.slice(1).join('/');
+  } else if (url.startsWith('https://')) {
+    protocol = 'HTTPS';
+    const withoutProto = url.substring(8);
+    const parts = withoutProto.split('/');
+    serverUri = parts[0];
+    imagePath = '/' + parts.slice(1).join('/');
+  } else if (url.startsWith('nfs://')) {
+    protocol = 'NFS';
+    const withoutProto = url.substring(6);
+    const colonIndex = withoutProto.indexOf(':');
+    if (colonIndex !== -1) {
+      serverUri = withoutProto.substring(0, colonIndex);
+      imagePath = withoutProto.substring(colonIndex + 1);
+    } else {
+      const parts = withoutProto.split('/');
+      serverUri = parts[0];
+      imagePath = '/' + parts.slice(1).join('/');
+    }
+  }
+
+  return {
+    serverUri: serverUri,
+    imagePath: imagePath,
+    transferProtocolType: protocol,
+  };
+};
+
 const VirtualMediaStore = {
   namespaced: true,
   state: {
@@ -31,6 +81,8 @@ const VirtualMediaStore = {
     slotArray: [],
     slot0File: null,
     slot1File: null,
+    emmcMemoryData: null,
+    localMediaList: [],
   },
   getters: {
     proxyDevices: (state) => state.proxyDevices,
@@ -62,7 +114,7 @@ const VirtualMediaStore = {
     setMediaAlreadyRedirected: (state, slot) =>
       (state.mediaAlreadyRedirected = slot),
     setSlot0Started: (state, start) => (state.slot0Started = start),
-    setSlot1Started: (state, start) => (state.Slot1Started = start),
+    setSlot1Started: (state, start) => (state.slot1Started = start),
     setSlotData(state, { slotId, slotData }) {
       const slotIndex = state.slotArray.findIndex((slot) => slot.id === slotId);
       if (slotIndex !== -1) {
@@ -75,6 +127,8 @@ const VirtualMediaStore = {
     },
     setSlot0File: (state, file) => (state.slot0File = file),
     setSlot1File: (state, file) => (state.slot1File = file),
+    setEmmcMemoryData: (state, data) => (state.emmcMemoryData = data),
+    setLocalMediaList: (state, data) => (state.localMediaList = data),
   },
   actions: {
     async getData({ commit, state }) {
@@ -124,11 +178,16 @@ const VirtualMediaStore = {
               transferProtocolType: device.data?.TransferProtocolType,
               websocket: device.data?.Oem?.OpenBMC?.WebSocketEndpoint,
               isActive: isActive,
+              data: device.data,
             };
           });
           commit('setMediaAlreadyRedirected', slot);
           const proxyDevices = deviceData
-            .filter((d) => d.transferProtocolType === transferProtocolType.OEM)
+            .filter(
+              (d) =>
+                d.transferProtocolType === transferProtocolType.OEM &&
+                (d.id === 'Slot_0' || d.id === 'Slot_1'),
+            )
             .map((device) => {
               let file = null;
               if (device.id === 'Slot_0' && state.slot0File) {
@@ -139,7 +198,7 @@ const VirtualMediaStore = {
 
               return {
                 ...device,
-                file: file, // Use the stored file if available
+                file: file,
                 nbd:
                   device.id == 'Slot_0' && state.slot0Nbd
                     ? state.slot0Nbd
@@ -149,14 +208,27 @@ const VirtualMediaStore = {
               };
             });
           const legacyDevices = deviceData
-            .filter((d) => d.transferProtocolType !== transferProtocolType.OEM)
+            .filter(
+              (d) =>
+                d.transferProtocolType !== transferProtocolType.OEM &&
+                d.id !== 'Slot_0' &&
+                d.id !== 'Slot_1',
+            )
             .map((device) => {
+              const parsed = parseVirtualMediaUrl(
+                device.data?.Image,
+                device.data?.Oem?.Ami?.BackupImageURL,
+              );
               return {
                 ...device,
-                serverUri: '',
+                serverUri: parsed.serverUri,
+                imagePath: parsed.imagePath,
                 username: '',
                 password: '',
                 isRW: false,
+                transferProtocolType: parsed.transferProtocolType,
+                image: device.data?.Image,
+                backupImageURL: device.data?.Oem?.Ami?.BackupImageURL,
               };
             });
           commit('setProxyDevicesData', [...proxyDevices].reverse());
@@ -206,6 +278,120 @@ const VirtualMediaStore = {
         .catch((error) => {
           console.log('Unmount image:', error);
           throw new Error();
+        });
+    },
+
+    async getEmmcMemoryData({ commit }) {
+      try {
+        const response = await api.get('/redfish/v1/Managers/bmc');
+        if (!response.data) {
+          throw new Error(i18n.t('pageVirtualMedia.toast.apiCallFailed'));
+        }
+        let localMediaPath = response.data?.Oem?.Ami?.LocalMedia;
+        let memoryData = localMediaPath?.Memory;
+        let redirectionImage = localMediaPath?.RedirectionImage;
+
+        if (!memoryData) {
+          memoryData = response.data?.LocalMedia?.Memory;
+        }
+        if (!memoryData) {
+          throw new Error(i18n.t('pageVirtualMedia.toast.memoryDataNotFound'));
+        }
+        commit('setEmmcMemoryData', memoryData);
+        return {
+          Memory: memoryData,
+          RedirectionImage: redirectionImage || '',
+        };
+      } catch (error) {
+        console.error('Error fetching memory data:', error);
+        throw error;
+      }
+    },
+
+    async getLocalMediaList({ commit }) {
+      return await api
+        .get('/redfish/v1/Managers/bmc/Oem/Ami/LocalMedia')
+        .then((response) => {
+          commit('setLocalMediaList', response.data);
+          return response.data;
+        });
+    },
+
+    async uploadLocalMedia(_, { formData }) {
+      return await api
+        .post(
+          '/redfish/v1/Managers/bmc/Actions/Oem/AMIManager.LocalMediaUpload',
+          formData,
+          {
+            headers: {
+              Accept: 'application/json',
+            },
+            transformRequest: [(data) => data],
+          },
+        )
+        .catch((error) => {
+          console.log('Upload local media:', error);
+          throw error;
+        });
+    },
+
+    async startLocalMediaRedirect(
+      { dispatch },
+      { localMedia, writeProtected },
+    ) {
+      return await api
+        .post(
+          '/redfish/v1/Managers/bmc/Actions/Oem/AMIManager.LocalMediaRedirect',
+          {
+            LocalMedia: localMedia,
+            WriteProtected: writeProtected,
+          },
+        )
+        .then(async () => {
+          await dispatch('getData');
+          await dispatch('getLocalMediaList');
+        })
+        .catch((error) => {
+          console.log('Start local media redirect:', error);
+          throw new Error(
+            i18n.t('pageVirtualMedia.eMMC.errorStartingRedirection'),
+          );
+        });
+    },
+
+    async stopLocalMediaRedirect({ dispatch }) {
+      return await api
+        .post(
+          '/redfish/v1/Managers/bmc/Actions/Oem/AMIManager.LocalMediaStopRedirect',
+        )
+        .then(async () => {
+          await dispatch('getData');
+          await dispatch('getLocalMediaList');
+        })
+        .catch((error) => {
+          console.log('Stop local media redirect:', error);
+          throw new Error(
+            i18n.t('pageVirtualMedia.eMMC.errorStoppingRedirection'),
+          );
+        });
+    },
+
+    async deleteLocalMedia(_, odataId) {
+      return await api.delete(odataId).catch((error) => {
+        console.log('Delete local media:', error);
+        throw new Error(i18n.t('pageVirtualMedia.eMMC.errorDeletingImage'));
+      });
+    },
+
+    async getImageDetails(_, imageName) {
+      return await api
+        .get(`/redfish/v1/Managers/bmc/Oem/Ami/LocalMedia/${imageName}`)
+        .then((response) => response.data)
+        .catch((error) => {
+          console.log('Get image details:', error);
+          throw new Error(
+            i18n.t('pageVirtualMedia.eMMC.errorLoadingImageDetails'),
+          );
         });
     },
   },

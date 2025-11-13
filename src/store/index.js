@@ -38,9 +38,14 @@ import NvmeInformationStore from './modules/NvmeInformation/NvmeInformationStore
 import AutonomousCrashDumpStore from './modules/HostSystemDiagnostics/AcdStore';
 import AsdStore from './modules/HostSystemDiagnostics/AsdStore';
 import RaidStore from './modules/Raid/RaidStore';
+import LogicalSl8Store from './modules/Raid/Sl8/LogicalSl8Store';
 import LogicalStore from './modules/Raid/LogicalStore';
 import PhysicalStore from './modules/Raid/PhysicalStore';
 import RaidEventLogStore from './modules/Raid/RaidEventLogStore';
+import RaidSl8Store from './modules/Raid/Sl8/RaidSl8Store';
+import PhysicalSl8Store from './modules/Raid/Sl8/PhysicalSl8Store';
+import RaidFirmwareUpdate from './modules/Raid/FirmwareUpdateStore';
+import ArrayDrivesSl8Store from './modules/Raid/Sl8/ArrayDrivesSl8Store';
 import BackupAndRestore from './modules/Operations/BackupAndRestore';
 import SNMPStore from './modules/Settings/SNMPStore';
 import FireWallStore from './modules/Settings/FireWallStore';
@@ -63,6 +68,7 @@ import AmdRemoteDebugStore from './modules/HostSystemDiagnostics/AmdRemoteDebugS
 import IPMIEventLogStore from './modules/Logs/IPMIEventLogStore';
 import Gpu from './modules/Settings/GpuStore';
 import AdvancedLogSettingsStore from './modules/Settings/AdvancedLogSettingsStore';
+import FruStore from './modules/Fru/FruStore';
 import DeviceOwnerTransfershipStore from './modules/Settings/DeviceOwnerTransfershipStore';
 import SpdmStore from './modules/Settings/SPDMStore';
 
@@ -113,6 +119,11 @@ export default new Vuex.Store({
     logicalDrive: LogicalStore,
     physical: PhysicalStore,
     raidEventLog: RaidEventLogStore,
+    raidSl8Store: RaidSl8Store,
+    physicalSl8: PhysicalSl8Store,
+    raidFirmwareUpdate: RaidFirmwareUpdate,
+    logicalSl8: LogicalSl8Store,
+    arrayDrivesSl8Store: ArrayDrivesSl8Store,
     backupAndRestore: BackupAndRestore,
     snmp: SNMPStore,
     fireWall: FireWallStore,
@@ -135,6 +146,7 @@ export default new Vuex.Store({
     ipmiEventLog: IPMIEventLogStore,
     gpu: Gpu,
     advancedLog: AdvancedLogSettingsStore,
+    fru: FruStore,
     deviceOwnerTransfership: DeviceOwnerTransfershipStore,
     spdm: SpdmStore,
   },

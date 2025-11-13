@@ -13,8 +13,9 @@
           <b-col v-if="activeFeatureEnabledStatus" sm="3">
             <b-form-checkbox
               v-model="activeImage"
-              value="bmc_active"
+              value="fw_active"
               :disabled="activeImageDisabled"
+              data-test-id="firmware-input-activeImage"
               @change="changeActiveImage"
             >
               {{ $t('pageFirmware.form.updateFirmware.activeImage') }}
@@ -25,9 +26,21 @@
               v-model="backupImage"
               value="bmc_bkup"
               :disabled="activeImageDisabled"
+              data-test-id="firmware-input-backupImage"
               @change="changeBackupImage"
             >
               {{ $t('pageFirmware.form.updateFirmware.backupImage') }}
+            </b-form-checkbox>
+          </b-col>
+          <b-col v-if="isPFREnable && recoveryEnabledStatus" sm="4">
+            <b-form-checkbox
+              v-model="recoveryImage"
+              value="fw_recovery"
+              :disabled="activeImageDisabled"
+              data-test-id="firmware-input-recoveryImage"
+              @change="changeRecoveryImage"
+            >
+              {{ $t('pageFirmware.form.updateFirmware.recoveryImage') }}
             </b-form-checkbox>
           </b-col>
         </b-row>
@@ -36,10 +49,18 @@
           :label="$t('pageFirmware.form.updateFirmware.fileSource')"
           :disabled="isPageDisabled"
         >
-          <b-form-radio v-model="isWorkstationSelected" :value="true">
+          <b-form-radio
+            v-model="isWorkstationSelected"
+            :value="true"
+            data-test-id="firmware-input-workstation"
+          >
             {{ $t('pageFirmware.form.updateFirmware.workstation') }}
           </b-form-radio>
-          <b-form-radio v-model="isWorkstationSelected" :value="false">
+          <b-form-radio
+            v-model="isWorkstationSelected"
+            :value="false"
+            data-test-id="firmware-input-tftpServer"
+          >
             {{ $t('pageFirmware.form.updateFirmware.tftpServer') }}
           </b-form-radio>
         </b-form-group>
@@ -55,6 +76,7 @@
               :disabled="isPageDisabled"
               :state="getValidationState($v.file)"
               aria-describedby="image-file-help-block"
+              data-test-id="firmware-input-imageFile"
               @input="onFileUpload($event)"
             >
               <template #invalid>
@@ -78,6 +100,7 @@
               type="text"
               :state="getValidationState($v.tftpFileAddress)"
               :disabled="isPageDisabled"
+              data-test-id="firmware-input-tftpFileAddress"
               @input="$v.tftpFileAddress.$touch()"
             />
             <b-form-invalid-feedback role="alert">
@@ -164,7 +187,14 @@ export default {
       modalReset: 0,
       updateServiceData: {},
       activeBackupValue: {},
-      isPFREnable: process.env.VUE_APP_PFR_SUPPORT === 'true' ? true : false,
+      recoveryImage: false,
+      PFR_IMG_SIZE: 33 * 1024 * 1024, // PFR BMC/BIOS Image Size 33MB
+      NON_PFR_BIOS_IMG_SIZE: 21 * 1024 * 1024, // Non-PFR BIOS Image Size 21MB
+      PFR_BMC_MAGIC_CODE: '19FDEAB6', //BMC Magic number
+      capsuleCodeStart: 17,
+      bmcBiosFileUpload: 'bmc',
+      isPFREnable:
+        process.env.VUE_APP_ONETREE_INTEL_PFR_ENABLED === 'true' ? true : false,
     };
   },
   computed: {
@@ -185,6 +215,9 @@ export default {
     },
     httpPushUriOptions() {
       return this.$store.getters['firmware/httpPushUriOptions'];
+    },
+    recoveryEnabledStatus() {
+      return this.$store.getters['firmware/getBmcRecoveryEnabledStatus'];
     },
   },
   watch: {
@@ -218,36 +251,54 @@ export default {
           this.$store.getters['firmware/bmcActiveEnabledStatus'];
         // For Active and Backup Feature Enable
         if (
+          //bind the bmc_active as default when the HttpPushUriTargets is empty
           !this.bmcActiveEnabledStatusValue &&
           this.activeFeatureEnabledStatus
         ) {
-          this.activeImage = 'bmc_active';
+          this.activeImage = 'fw_active';
         }
-        // For Backup Feature Enable
-        if (!this.activeFeatureEnabledStatus && this.bmcBackupEnabledStatus) {
+        // For Backup Feature Enable for single case
+        if (
+          !this.activeFeatureEnabledStatus &&
+          this.bmcBackupEnabledStatus &&
+          !this.recoveryEnabledStatus
+        ) {
           this.backupImage = 'bmc_bkup';
           this.activeImageDisabled = true;
         }
-        // For Active Feature Enable
-        if (this.activeFeatureEnabledStatus && !this.bmcBackupEnabledStatus) {
-          this.activeImage = 'bmc_active';
+        // For Active Feature Enable for single case
+        if (
+          this.activeFeatureEnabledStatus &&
+          !this.bmcBackupEnabledStatus &&
+          !this.recoveryEnabledStatus
+        ) {
+          this.activeImage = 'fw_active';
+          this.activeImageDisabled = true;
+        }
+        // For Recovery Feature Enable for single case
+        if (
+          !this.activeFeatureEnabledStatus &&
+          !this.bmcBackupEnabledStatus &&
+          this.recoveryEnabledStatus
+        ) {
+          this.recoveryImage = 'fw_recovery';
           this.activeImageDisabled = true;
         }
         if (this.httpPushUriTargetsBusyStatus) {
           let PushUriTargetsValue =
             this.$store.getters['firmware/httpPushUriTargetsValue'];
           PushUriTargetsValue?.forEach((val) => {
-            if (val == 'bmc_active') {
-              this.activeImage = 'bmc_active';
+            if (val == 'bmc_active' || val == 'bios_active') {
+              this.activeImage = 'fw_active';
             }
             if (val == 'bmc_bkup') {
               this.backupImage = 'bmc_bkup';
             }
+            if (val == 'bmc_recovery' || val == 'bios_recovery') {
+              this.recoveryImage = 'fw_recovery';
+            }
           });
-          if (
-            this.bmcBackupEnabledStatus &&
-            this.httpPushUriTargetsBusyStatus
-          ) {
+          if (this.httpPushUriTargetsBusyStatus) {
             this.activeImageDisabled = true;
           }
         }
@@ -259,10 +310,33 @@ export default {
     },
     updateFirmware() {
       this.startLoader();
+      const fileTypeExtension = this.file.name.split('.').pop();
+      if (
+        this.isPFREnable &&
+        fileTypeExtension == 'bin' &&
+        this.file.size <= this.PFR_IMG_SIZE //checking the  PFR feature file type with the bmc/bios file size
+      ) {
+        //checking the file type to call the capsule code
+        this.checkCapsuleCode().then(() => {
+          this.updateFirmwareImage();
+        });
+      } else {
+        this.bmcBiosFileUpload =
+          fileTypeExtension == 'bin' &&
+          this.file.size <= this.NON_PFR_BIOS_IMG_SIZE
+            ? 'bios'
+            : 'bmc'; //checking the non PFR file type with the bmc/bios file size
+        this.updateFirmwareImage();
+      }
+    },
+    updateFirmwareImage() {
       this.bmcActiveBackupSelected = [];
       this.updateServiceData = {};
       if (this.activeImage) {
-        this.bmcActiveBackupSelected.push('bmc_active');
+        this.bmcActiveBackupSelected.push(this.bmcBiosFileUpload + '_active');
+      }
+      if (this.recoveryImage) {
+        this.bmcActiveBackupSelected.push(this.bmcBiosFileUpload + '_recovery');
       }
       if (this.backupImage) {
         this.bmcActiveBackupSelected.push('bmc_bkup');
@@ -321,7 +395,6 @@ export default {
             }
           })
           .catch(({ message }) => {
-            this.updateFirmwareInit();
             this.endLoader();
             this.errorToast(message);
           });
@@ -447,13 +520,33 @@ export default {
       this.$v.file.$touch();
     },
     changeActiveImage(val) {
-      if (val == false) {
+      if (val == false && this.bmcBackupEnabledStatus) {
         this.backupImage = 'bmc_bkup';
+      } else if (
+        val == false &&
+        this.isPFREnable &&
+        this.recoveryEnabledStatus
+      ) {
+        this.recoveryImage = 'fw_recovery';
+      }
+      if (
+        val == 'fw_active' &&
+        this.isPFREnable &&
+        this.recoveryEnabledStatus
+      ) {
+        this.recoveryImage = false;
       }
     },
     changeBackupImage(val) {
       if (val == false) {
-        this.activeImage = 'bmc_active';
+        this.activeImage = 'fw_active';
+      }
+    },
+    changeRecoveryImage(val) {
+      if (val == false) {
+        this.activeImage = 'fw_active';
+      } else {
+        this.activeImage = false;
       }
     },
     minValidationStatus() {
@@ -475,6 +568,42 @@ export default {
           if (this.$v.$invalid || this.isValidationStatus) return;
           this.$bvModal.show('modal-update-firmware');
         }
+      });
+    },
+    async checkCapsuleCode() {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        var that = this;
+        var capsuleCode = '';
+        var blob = this.file.slice();
+        reader.readAsArrayBuffer(blob);
+        reader.onloadend = (evt) => {
+          if (evt.target.readyState == FileReader.DONE) {
+            // DONE == 2
+
+            var result = that.base64ToHex(
+              that.arrayBufferToBase64(evt.target.result),
+            );
+            // Check if the file is a valid PFR BMC firmware image
+            if (result.indexOf(that.PFR_BMC_MAGIC_CODE.toLowerCase()) == -1) {
+              return;
+            }
+            capsuleCode = parseInt(
+              result.substring(
+                that.capsuleCodeStart,
+                that.capsuleCodeStart + 1,
+              ),
+            );
+            if (capsuleCode == 4) {
+              /* BMC Cap or BMC PFM */
+              this.bmcBiosFileUpload = 'bmc';
+            } else if (capsuleCode == 2) {
+              /* BIOS capsule or BIOS PFM */
+              this.bmcBiosFileUpload = 'bios';
+            }
+            resolve();
+          }
+        };
       });
     },
   },

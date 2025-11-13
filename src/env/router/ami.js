@@ -54,9 +54,11 @@ import Adapter from '@/views/RAID/Adapter';
 import PhysicalStorage from '@/views/RAID/PhysicalStorage';
 import LogicalStorage from '@/views/RAID/LogicalStorage/LogicalStorage.vue';
 import BrcmCreateLogicalStorage from '@/views/RAID/LogicalStorage/BrcmCreateLogicalStorage.vue';
+import BrcmSl8CreateLogicalStorage from '@/views/RAID/LogicalStorage/BrcmSl8CreateLogicalStorage.vue';
 import MsccCreateLogicalStorage from '@/views/RAID/LogicalStorage/MsccCreateLogicalStorage.vue';
 import Topology from '@/views/RAID/Topology/Topology.vue';
 import RaidEventLog from '@/views/RAID/EventLog/RaidEventLog.vue';
+import ArrayDrives from '@/views/RAID/ArrayDrives/ArrayDrives.vue';
 import NvmeInformation from '@/views/NvmeInformation';
 import Nic from '@/views/Nic';
 import Radius from '@/views/SecurityAndAccess/Radius';
@@ -68,6 +70,7 @@ import Ncsi from '@/views/Settings/Ncsi';
 import FireWall from '@/views/Settings/FireWall';
 import NetworkLink from '@/views/Settings/NetworkLink/NetworkLink';
 import Bond from '@/views/Settings/Bond';
+import FruInformation from '@/views/Fru';
 import DeviceOwnerTransfership from '@/views/Settings/DeviceOwnerTransfership/DeviceOwnerTransfership.vue';
 import SPDM from '@/views/Settings/SPDM/SPDM.vue';
 
@@ -258,6 +261,16 @@ const routes = [
     ],
   },
 ];
+if (process.env.VUE_APP_ONETREE_FRU_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/fru',
+    name: 'fru',
+    component: FruInformation,
+    meta: {
+      title: i18n.t('appPageTitle.fru'),
+    },
+  });
+}
 if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true') {
   routes[2].children.push({
     path: '/gpgpu',
@@ -338,9 +351,25 @@ if (
       },
     },
     {
+      path: '/raid/array-drives',
+      name: 'array-drives',
+      component: ArrayDrives,
+      meta: {
+        title: i18n.t('appPageTitle.arrayDrives'),
+      },
+    },
+    {
       path: '/raid/brcm-create-logical-device',
       name: 'create-logical-device',
       component: BrcmCreateLogicalStorage,
+      meta: {
+        title: i18n.t('appPageTitle.createLogicalDevice'),
+      },
+    },
+    {
+      path: '/raid/brcm-sl8-create-logical-device',
+      name: 'create-logical-device',
+      component: BrcmSl8CreateLogicalStorage,
       meta: {
         title: i18n.t('appPageTitle.createLogicalDevice'),
       },
@@ -351,6 +380,17 @@ if (
       component: MsccCreateLogicalStorage,
       meta: {
         title: i18n.t('appPageTitle.createLogicalDevice'),
+      },
+    },
+    {
+      path: '/raid/foreign-logical-device',
+      name: 'foreign-logical-device',
+      component: () =>
+        import(
+          /* webpackChunkName: "ForeignLogicalStorage" */ '@/views/RAID/LogicalStorage/ForeignLogicalStorage.vue'
+        ),
+      meta: {
+        title: i18n.t('appPageTitle.foreignLogicalDevice'),
       },
     },
     {

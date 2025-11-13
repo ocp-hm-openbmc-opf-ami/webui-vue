@@ -2,7 +2,25 @@
   <b-container fluid="xl">
     <page-title />
     <b-row>
-      <b-col xl="9" class="text-right">
+      <b-col lg="2" class="channel-select-dropdown">
+        <label for="privilege">{{
+          $t('pageUserManagement.modal.channel')
+        }}</label>
+        <b-form-select
+          id="privilege"
+          v-model="filterChannelList"
+          data-test-id="userManagement-select-privilege"
+          :options="filterChannelListOptions"
+          @change="userItemsInit"
+        >
+          <template #first>
+            <b-form-select-option :value="null" disabled>
+              {{ $t('global.form.selectAnOption') }}
+            </b-form-select-option>
+          </template>
+        </b-form-select>
+      </b-col>
+      <b-col xl="7" class="text-right">
         <b-button
           variant="link"
           :disabled="globalPrivilege !== 'Administrator'"
@@ -221,6 +239,11 @@ export default {
           tdClass: 'text-nowrap',
         },
         {
+          key: 'UserAccess',
+          label: 'UserAccess',
+          tdClass: 'text-nowrap',
+        },
+        {
           key: 'actions',
           label: '',
           tdClass: 'text-right text-nowrap',
@@ -244,56 +267,14 @@ export default {
       tableHeaderCheckboxModel: tableHeaderCheckboxModel,
       tableHeaderCheckboxIndeterminate: tableHeaderCheckboxIndeterminate,
       globalPrivilege: this.$store.getters['global/userPrivilege'],
+      filterChannelList: null,
+      filterChannelListOptions: [],
+      tableItems: [],
     };
   },
   computed: {
     allUsers() {
       return this.$store.getters['userManagement/allUsers'];
-    },
-    tableItems() {
-      // transform user data to table data
-      return this.allUsers.map((user) => {
-        return {
-          rowSelected: false, // Ensure rowSelected is initialized
-          username: user.UserName,
-          privilege: user.RoleId,
-          status: user.Locked
-            ? 'Locked'
-            : user.Enabled
-              ? 'Enabled'
-              : 'Disabled',
-          snmpUserEnabled: user?.Oem?.Ami?.SNMP?.SNMPAccessEnableStatus
-            ? 'Enabled'
-            : 'Disabled',
-          algorithm: user?.Oem?.Ami?.SNMP?.Algorithm
-            ? user?.Oem?.Ami?.SNMP?.Algorithm
-            : 'NA',
-          encryption: user?.Oem?.Ami?.SNMP?.Encryption
-            ? user?.Oem?.Ami?.SNMP?.Encryption
-            : 'NA',
-          readWritePermission: user?.Oem?.Ami?.SNMP?.Access
-            ? user?.Oem?.Ami?.SNMP?.Access
-            : 'NA',
-          actions: [
-            {
-              value: 'edit',
-              enabled: this.editEnable(user),
-              title: this.$t('pageUserManagement.editUser'),
-            },
-            {
-              value: 'delete',
-              enabled:
-                user.UserName === this.$store.getters['global/username']
-                  ? false
-                  : true && user.UserName === 'root'
-                    ? false
-                    : true,
-              title: this.$tc('pageUserManagement.deleteUser'),
-            },
-          ],
-          ...user,
-        };
-      });
     },
     settings() {
       return this.$store.getters['userManagement/accountSettings'];
@@ -303,20 +284,30 @@ export default {
     },
   },
   created() {
-    this.startLoader();
-    this.$store.dispatch('userManagement/getUsers').finally(() => {
-      this.endLoader();
-      this.isBusy = false;
-    });
-    this.$store.dispatch('userManagement/getAccountSettings');
-    this.$store.dispatch('userManagement/getAccountRoles');
+    this.getUsersInit();
   },
   methods: {
+    getUsersInit() {
+      this.startLoader();
+      this.$store
+        .dispatch('userManagement/getUsers')
+        .then(() => {
+          this.$store.dispatch('policies/getNetworkProtocolStatus').then(() => {
+            this.channelInit();
+          });
+        })
+        .finally(() => {
+          this.endLoader();
+          this.isBusy = false;
+        });
+      this.$store.dispatch('userManagement/getAccountSettings');
+      this.$store.dispatch('userManagement/getAccountRoles');
+    },
     editEnable(user) {
       if (
         'root' === this.$store.getters['global/username'] &&
         user.UserName !== 'root' &&
-        user.RoleId === 'Administrator'
+        user.Oem.Ami?.WebRoleId === 'Administrator'
       ) {
         return true;
       } else if (
@@ -360,7 +351,10 @@ export default {
         this.startLoader();
         this.$store
           .dispatch('userManagement/createUser', userData)
-          .then((success) => this.successToast(success))
+          .then((success) => {
+            this.successToast(success);
+            this.getUsersInit();
+          })
           .catch(({ message }) => this.errorToast(message))
           .finally(() => this.endLoader());
       } else {
@@ -386,7 +380,10 @@ export default {
                 this.startLoader();
                 this.$store
                   .dispatch('userManagement/updateUser', userData)
-                  .then((success) => this.successToast(success))
+                  .then((success) => {
+                    this.successToast(success);
+                    this.getUsersInit();
+                  })
                   .catch(({ message }) => this.errorToast(message))
                   .finally(() => this.endLoader());
               }
@@ -395,7 +392,10 @@ export default {
           this.startLoader();
           this.$store
             .dispatch('userManagement/updateUser', userData)
-            .then((success) => this.successToast(success))
+            .then((success) => {
+              this.successToast(success);
+              this.getUsersInit();
+            })
             .catch(({ message }) => this.errorToast(message))
             .finally(() => this.endLoader());
         }
@@ -421,7 +421,10 @@ export default {
           if (userDelete) {
             this.$store
               .dispatch('userManagement/deleteUser', username)
-              .then((success) => this.successToast(success))
+              .then((success) => {
+                this.successToast(success);
+                this.getUsersInit();
+              })
               .catch(({ message }) => this.errorToast(message))
               .finally(() => this.endLoader());
           } else {
@@ -463,7 +466,10 @@ export default {
                   .dispatch('userManagement/deleteUsers', this.selectedRows)
                   .then((messages) => {
                     messages.forEach(({ type, message }) => {
-                      if (type === 'success') this.successToast(message);
+                      if (type === 'success') {
+                        this.successToast(message);
+                        this.getUsersInit();
+                      }
                       if (type === 'error') this.errorToast(message);
                     });
                   })
@@ -477,7 +483,10 @@ export default {
             .dispatch('userManagement/enableUsers', this.selectedRows)
             .then((messages) => {
               messages.forEach(({ type, message }) => {
-                if (type === 'success') this.successToast(message);
+                if (type === 'success') {
+                  this.successToast(message);
+                  this.getUsersInit();
+                }
                 if (type === 'error') this.errorToast(message);
               });
             })
@@ -489,7 +498,10 @@ export default {
             .dispatch('userManagement/disableUsers', this.selectedRows)
             .then((messages) => {
               messages.forEach(({ type, message }) => {
-                if (type === 'success') this.successToast(message);
+                if (type === 'success') {
+                  this.successToast(message);
+                  this.getUsersInit();
+                }
                 if (type === 'error') this.errorToast(message);
               });
             })
@@ -513,7 +525,10 @@ export default {
       this.startLoader();
       this.$store
         .dispatch('userManagement/saveAccountSettings', settings)
-        .then((message) => this.successToast(message))
+        .then((message) => {
+          this.successToast(message);
+          this.getUsersInit();
+        })
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.endLoader());
     },
@@ -538,6 +553,76 @@ export default {
         }
       }
     },
+    userItemsInit() {
+      // transform user data to table data
+      this.tableItems = [];
+      this.allUsers.map((user) => {
+        this.tableItems.push({
+          rowSelected: false, // Ensure rowSelected is initialized
+          username: user.UserName,
+          privilege:
+            user?.Oem?.Ami?.ChannelPrivileges?.filter(
+              (channel) => channel.ChannelId === this.filterChannelList,
+            )?.map((channel) => channel.ChannelPrivilege)[0] ?? 'NA',
+          status: user.Locked
+            ? 'Locked'
+            : user.Enabled
+              ? 'Enabled'
+              : 'Disabled',
+          snmpUserEnabled: user?.Oem?.Ami?.SNMP?.SNMPAccessEnableStatus
+            ? 'Enabled'
+            : 'Disabled',
+          algorithm: user?.Oem?.Ami?.SNMP?.Algorithm
+            ? user?.Oem?.Ami?.SNMP?.Algorithm
+            : 'NA',
+          encryption: user?.Oem?.Ami?.SNMP?.Encryption
+            ? user?.Oem?.Ami?.SNMP?.Encryption
+            : 'NA',
+          readWritePermission: user?.Oem?.Ami?.SNMP?.Access
+            ? user?.Oem?.Ami?.SNMP?.Access
+            : 'NA',
+          UserAccess:
+            user?.Oem?.Ami?.ChannelPrivileges?.filter(
+              (channel) => channel.ChannelId === this.filterChannelList,
+            )?.map((channel) => channel.ChannelAccess)[0] ?? 'NA',
+          actions: [
+            {
+              value: 'edit',
+              enabled: this.editEnable(user),
+              title: this.$t('pageUserManagement.editUser'),
+            },
+            {
+              value: 'delete',
+              enabled:
+                user.UserName === this.$store.getters['global/username']
+                  ? false
+                  : true && user.UserName === 'root'
+                    ? false
+                    : true,
+              title: this.$tc('pageUserManagement.deleteUser'),
+            },
+          ],
+          ...user,
+        });
+      });
+    },
+    channelInit() {
+      let channelOptionsVal = {};
+      let getChannelListValue = [];
+      this.filterChannelListOptions = [];
+      getChannelListValue = this.$store.getters['policies/getChannelList'];
+      if (getChannelListValue.length > 0) {
+        getChannelListValue.forEach((val) => {
+          channelOptionsVal = {
+            value: val.ChannelId,
+            text: val.ChannelId,
+          };
+          this.filterChannelListOptions.push(channelOptionsVal);
+          this.filterChannelList = this.filterChannelListOptions[0].value;
+        });
+        this.userItemsInit();
+      }
+    },
   },
 };
 </script>
@@ -546,6 +631,13 @@ export default {
 .btn.collapsed {
   svg {
     transform: rotate(180deg);
+  }
+}
+.channel-select-dropdown {
+  display: flex;
+  label {
+    margin-right: 20px;
+    font-size: 16px;
   }
 }
 </style>
