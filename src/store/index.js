@@ -70,6 +70,7 @@ import Gpu from './modules/Settings/GpuStore';
 import AdvancedLogSettingsStore from './modules/Settings/AdvancedLogSettingsStore';
 import FruStore from './modules/Fru/FruStore';
 import DeviceOwnerTransfershipStore from './modules/Settings/DeviceOwnerTransfershipStore';
+import SpdmStore from './modules/Settings/SPDMStore';
 
 Vue.use(Vuex);
 
@@ -147,5 +148,6 @@ export default new Vuex.Store({
     advancedLog: AdvancedLogSettingsStore,
     fru: FruStore,
     deviceOwnerTransfership: DeviceOwnerTransfershipStore,
+    spdm: SpdmStore,
   },
 });

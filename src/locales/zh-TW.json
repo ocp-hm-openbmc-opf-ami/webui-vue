@@ -201,7 +201,8 @@
         "gpgpu": "@:appPageTitle.gpgpu",
         "advancedLogSettings":"@:appPageTitle.advancedLogSettings",
         "fru":"@:appPageTitle.fru",
-        "deviceOwnerTransfership": "設備所有者轉讓"
+        "deviceOwnerTransfership": "設備所有者轉讓",
+        "spdm": "@:appPageTitle.spdm"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -273,7 +274,8 @@
         "gpgpu": "GPGPU",
         "advancedLogSettings":"進階日誌設定",
         "fru":"現場可更換單元",
-        "deviceOwnerTransfership": "設備所有者轉讓"
+        "deviceOwnerTransfership": "設備所有者轉讓",
+        "spdm": "SPDM"
     },
     "pageNodeManager": {
         "nmConfiguration": "網管設定",
@@ -3915,6 +3917,34 @@
               "step7": "簽章測試令牌產生失敗。"
           }
       }
+    },
+    "pageSPDM": {
+        "spdmGetCertificate": "取得憑證",
+        "getCertificateError": "取得憑證時發生錯誤。",
+        "id": "ID",
+        "name": "名稱",
+        "description": "SPDM 驗證報告",
+        "componentIntegrityEnabled": "元件完整性已啟用",
+        "componentIntegrityType": "元件完整性類型",
+        "componentIntegrityTypeVersion": "元件完整性類型版本",
+        "spdmGetSignedMeasurements": "取得簽名的測量值",
+        "getSignedMeasurementsError": "取得 SPDM 簽名測量值時發生錯誤。",
+        "getSignedMeasurementsSuccess": "成功取得簽名的測量值。",
+        "getSignedMeasurementsDataError": "取得簽名測量資料時發生錯誤。",
+        "getSignedMeasurementsDataSuccess": "成功取得簽名測量資料。",
+        "componentIntegrityEmpty": "未找到支援 SPDM 的設備。",
+        "noSignedMeasurementsData": "目前沒有簽名的測量資料。",
+        "noLocationFound": "已完成任務中未找到位置。",
+        "taskTimeout": "任務輪詢超時。",
+        "failedToFetchData": "獲取 SPDM 簽名測量數據時出錯。",
+        "signedMeasurementsDataSuccess": "成功獲取 SPDM 簽名測量數據。",
+        "taskFailed": "任務失敗，狀態為 %{status}。",
+        "toast": {
+            "errorInGettingCertificate": "取得憑證時發生錯誤。",
+            "successInGettingCertificate": "成功取得憑證。",
+            "errorGettingComponentIntegrityData": "取得元件完整性資料時發生錯誤。",
+            "errorInGettingSpdmDevicesInfo": "取得 SPDM 設備資訊時發生錯誤。"
+        }
     },
     "countries": {
         "AF": "阿富汗",

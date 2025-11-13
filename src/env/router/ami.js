@@ -72,6 +72,7 @@ import NetworkLink from '@/views/Settings/NetworkLink/NetworkLink';
 import Bond from '@/views/Settings/Bond';
 import FruInformation from '@/views/Fru';
 import DeviceOwnerTransfership from '@/views/Settings/DeviceOwnerTransfership/DeviceOwnerTransfership.vue';
+import SPDM from '@/views/Settings/SPDM/SPDM.vue';
 
 const roles = {
   administrator: 'Administrator',
@@ -767,6 +768,16 @@ if (process.env.VUE_APP_ONETREE_SESSION_ENABLED == 'true') {
     component: Sessions,
     meta: {
       title: i18n.t('appPageTitle.sessions'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/settings/spdm',
+    name: 'spdm',
+    component: SPDM,
+    meta: {
+      title: i18n.t('appPageTitle.spdm'),
     },
   });
 }

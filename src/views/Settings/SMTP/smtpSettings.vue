@@ -903,7 +903,8 @@ export default {
         serverKeyModifiedDate: '',
         serverCRTModifiedDate: '',
       },
-
+      primaryConfiguration: true,
+      secondaryConfiguration: true,
       loading,
       sendTestAlertDisabled: false,
       licenseName: 'SMTP',
@@ -1144,7 +1145,9 @@ export default {
       this.secondary.enableConfiguration =
         this.$store.getters['smtp/isSecondaryConfig'].smtpServiceEnabled;
       this.sendTestAlertDisabled = this.$store.getters['smtp/sendTestAlert'];
+      this.primaryConfiguration = true;
       this.updateSMTPPrimaryData();
+      this.secondaryConfiguration = true;
       this.updateSMTPSecondaryData();
     });
   },
@@ -1228,7 +1231,9 @@ export default {
             this.$store.getters['smtp/isSecondaryConfig'].smtpServiceEnabled;
           this.sendTestAlertDisabled =
             this.$store.getters['smtp/sendTestAlert'];
+          this.primaryConfiguration = true;
           this.updateSMTPPrimaryData();
+          this.secondaryConfiguration = true;
           this.updateSMTPSecondaryData();
           this.successToast(success);
         })
@@ -1247,105 +1252,126 @@ export default {
       this.resetSecondary();
     },
     resetPrimary() {
+      this.primaryConfiguration = true;
       this.updateSMTPPrimaryData();
     },
     resetSecondary() {
+      this.secondaryConfiguration = true;
       this.updateSMTPSecondaryData();
     },
     updateSMTPPrimaryData() {
-      this.primary.serverAddress =
-        this.$store.getters['smtp/isPrimaryConfig'].serverAddress;
-      this.primary.port = this.$store.getters['smtp/isPrimaryConfig'].port;
-      this.primary.senderEmailAddress =
-        this.$store.getters['smtp/isPrimaryConfig'].senderEmailAddress;
-      this.primary.recipientEmailAddress1 =
-        this.$store.getters['smtp/isPrimaryConfig'].recipientEmailAddress1;
-      this.primary.recipientEmailAddress2 =
-        this.$store.getters['smtp/isPrimaryConfig'].recipientEmailAddress2;
-      this.primary.recipientEmailAddress3 =
-        this.$store.getters['smtp/isPrimaryConfig'].recipientEmailAddress3;
-      this.primary.recipientEmailAddress4 =
-        this.$store.getters['smtp/isPrimaryConfig'].recipientEmailAddress4;
-      this.primary.tlsEnable =
-        this.$store.getters['smtp/isPrimaryConfig'].tlsEnable;
-      this.primary.authentication =
-        this.$store.getters['smtp/isPrimaryConfig'].authentication;
-      this.primary.username =
-        this.$store.getters['smtp/isPrimaryConfig'].username;
-      this.primary.password =
-        this.$store.getters['smtp/isPrimaryConfig'].password;
-      this.primary.cacertModifiedDate =
-        this.$store.getters['smtp/isPrimaryConfig'].cacertModifiedDate;
-      this.primary.serverKeyModifiedDate =
-        this.$store.getters['smtp/isPrimaryConfig'].serverKeyModifiedDate;
-      this.primary.serverCRTModifiedDate =
-        this.$store.getters['smtp/isPrimaryConfig'].serverCrtModifiedDate;
-      this.primary.recipientEmail2 = this.primary.recipientEmailAddress2
-        ? true
-        : false;
-      this.primary.recipientEmail3 = this.primary.recipientEmailAddress3
-        ? true
-        : false;
-      this.primary.recipientEmail4 = this.primary.recipientEmailAddress4
-        ? true
-        : false;
-      this.primary.recipientCount = 1;
-      if (this.primary.recipientEmailAddress2) {
-        this.primary.recipientCount = 2;
-      }
-      if (this.primary.recipientEmailAddress3) {
-        this.primary.recipientCount = 3;
-      }
-      if (this.primary.recipientEmailAddress4) {
-        this.primary.recipientCount = 4;
+      if (this.primaryConfiguration) {
+        this.primary.serverAddress =
+          this.$store.getters['smtp/isPrimaryConfig'].serverAddress;
+        this.primary.port = this.$store.getters['smtp/isPrimaryConfig'].port;
+        this.primary.senderEmailAddress =
+          this.$store.getters['smtp/isPrimaryConfig'].senderEmailAddress;
+        this.primary.recipientEmailAddress1 =
+          this.$store.getters['smtp/isPrimaryConfig'].recipientEmailAddress1;
+        this.primary.recipientEmailAddress2 =
+          this.$store.getters['smtp/isPrimaryConfig'].recipientEmailAddress2;
+        this.primary.recipientEmailAddress3 =
+          this.$store.getters['smtp/isPrimaryConfig'].recipientEmailAddress3;
+        this.primary.recipientEmailAddress4 =
+          this.$store.getters['smtp/isPrimaryConfig'].recipientEmailAddress4;
+        this.primary.tlsEnable =
+          this.$store.getters['smtp/isPrimaryConfig'].tlsEnable;
+        this.primary.authentication =
+          this.$store.getters['smtp/isPrimaryConfig'].authentication;
+        this.primary.username =
+          this.$store.getters['smtp/isPrimaryConfig'].username;
+        this.primary.password =
+          this.$store.getters['smtp/isPrimaryConfig'].password;
+        this.primary.cacertModifiedDate =
+          this.$store.getters['smtp/isPrimaryConfig'].cacertModifiedDate;
+        this.primary.serverKeyModifiedDate =
+          this.$store.getters['smtp/isPrimaryConfig'].serverKeyModifiedDate;
+        this.primary.serverCRTModifiedDate =
+          this.$store.getters['smtp/isPrimaryConfig'].serverCrtModifiedDate;
+        this.primary.recipientEmail2 = this.primary.recipientEmailAddress2
+          ? true
+          : false;
+        this.primary.recipientEmail3 = this.primary.recipientEmailAddress3
+          ? true
+          : false;
+        this.primary.recipientEmail4 = this.primary.recipientEmailAddress4
+          ? true
+          : false;
+        this.primary.recipientCount = 1;
+        if (this.primary.recipientEmailAddress2) {
+          this.primary.recipientCount = 2;
+        }
+        if (this.primary.recipientEmailAddress3) {
+          this.primary.recipientCount = 3;
+        }
+        if (this.primary.recipientEmailAddress4) {
+          this.primary.recipientCount = 4;
+        }
+      } else {
+        this.primary.cacertModifiedDate =
+          this.$store.getters['smtp/isPrimaryConfig'].cacertModifiedDate;
+        this.primary.serverKeyModifiedDate =
+          this.$store.getters['smtp/isPrimaryConfig'].serverKeyModifiedDate;
+        this.primary.serverCRTModifiedDate =
+          this.$store.getters['smtp/isPrimaryConfig'].serverCrtModifiedDate;
       }
     },
     updateSMTPSecondaryData() {
-      this.secondary.serverAddress =
-        this.$store.getters['smtp/isSecondaryConfig'].serverAddress;
-      this.secondary.port = this.$store.getters['smtp/isSecondaryConfig'].port;
-      this.secondary.senderEmailAddress =
-        this.$store.getters['smtp/isSecondaryConfig'].senderEmailAddress;
-      this.secondary.recipientEmailAddress1 =
-        this.$store.getters['smtp/isSecondaryConfig'].recipientEmailAddress1;
-      this.secondary.recipientEmailAddress2 =
-        this.$store.getters['smtp/isSecondaryConfig'].recipientEmailAddress2;
-      this.secondary.recipientEmailAddress3 =
-        this.$store.getters['smtp/isSecondaryConfig'].recipientEmailAddress3;
-      this.secondary.recipientEmailAddress4 =
-        this.$store.getters['smtp/isSecondaryConfig'].recipientEmailAddress4;
-      this.secondary.tlsEnable =
-        this.$store.getters['smtp/isSecondaryConfig'].tlsEnable;
-      this.secondary.authentication =
-        this.$store.getters['smtp/isSecondaryConfig'].authentication;
-      this.secondary.username =
-        this.$store.getters['smtp/isSecondaryConfig'].username;
-      this.secondary.password =
-        this.$store.getters['smtp/isSecondaryConfig'].password;
-      this.secondary.cacertModifiedDate =
-        this.$store.getters['smtp/isSecondaryConfig'].cacertModifiedDate;
-      this.secondary.serverKeyModifiedDate =
-        this.$store.getters['smtp/isSecondaryConfig'].serverKeyModifiedDate;
-      this.secondary.serverCRTModifiedDate =
-        this.$store.getters['smtp/isSecondaryConfig'].serverCrtModifiedDate;
-      this.secondary.recipientEmail2 = this.secondary.recipientEmailAddress2
-        ? true
-        : false;
-      this.secondary.recipientEmail3 = this.secondary.recipientEmailAddress3
-        ? true
-        : false;
-      this.secondary.recipientEmail4 = this.secondary.recipientEmailAddress4
-        ? true
-        : false;
-      this.secondary.recipientCount = 1;
-      if (this.secondary.recipientEmailAddress2) {
-        this.secondary.recipientCount = 2;
-      }
-      if (this.secondary.recipientEmailAddress3) {
-        this.secondary.recipientCount = 3;
-      }
-      if (this.secondary.recipientEmailAddress4) {
-        this.secondary.recipientCount = 4;
+      if (this.secondaryConfiguration) {
+        this.secondary.serverAddress =
+          this.$store.getters['smtp/isSecondaryConfig'].serverAddress;
+        this.secondary.port =
+          this.$store.getters['smtp/isSecondaryConfig'].port;
+        this.secondary.senderEmailAddress =
+          this.$store.getters['smtp/isSecondaryConfig'].senderEmailAddress;
+        this.secondary.recipientEmailAddress1 =
+          this.$store.getters['smtp/isSecondaryConfig'].recipientEmailAddress1;
+        this.secondary.recipientEmailAddress2 =
+          this.$store.getters['smtp/isSecondaryConfig'].recipientEmailAddress2;
+        this.secondary.recipientEmailAddress3 =
+          this.$store.getters['smtp/isSecondaryConfig'].recipientEmailAddress3;
+        this.secondary.recipientEmailAddress4 =
+          this.$store.getters['smtp/isSecondaryConfig'].recipientEmailAddress4;
+        this.secondary.tlsEnable =
+          this.$store.getters['smtp/isSecondaryConfig'].tlsEnable;
+        this.secondary.authentication =
+          this.$store.getters['smtp/isSecondaryConfig'].authentication;
+        this.secondary.username =
+          this.$store.getters['smtp/isSecondaryConfig'].username;
+        this.secondary.password =
+          this.$store.getters['smtp/isSecondaryConfig'].password;
+        this.secondary.cacertModifiedDate =
+          this.$store.getters['smtp/isSecondaryConfig'].cacertModifiedDate;
+        this.secondary.serverKeyModifiedDate =
+          this.$store.getters['smtp/isSecondaryConfig'].serverKeyModifiedDate;
+        this.secondary.serverCRTModifiedDate =
+          this.$store.getters['smtp/isSecondaryConfig'].serverCrtModifiedDate;
+        this.secondary.recipientEmail2 = this.secondary.recipientEmailAddress2
+          ? true
+          : false;
+        this.secondary.recipientEmail3 = this.secondary.recipientEmailAddress3
+          ? true
+          : false;
+        this.secondary.recipientEmail4 = this.secondary.recipientEmailAddress4
+          ? true
+          : false;
+        this.secondary.recipientCount = 1;
+        if (this.secondary.recipientEmailAddress2) {
+          this.secondary.recipientCount = 2;
+        }
+        if (this.secondary.recipientEmailAddress3) {
+          this.secondary.recipientCount = 3;
+        }
+        if (this.secondary.recipientEmailAddress4) {
+          this.secondary.recipientCount = 4;
+        }
+      } else {
+        this.secondary.cacertModifiedDate =
+          this.$store.getters['smtp/isSecondaryConfig'].cacertModifiedDate;
+        this.secondary.serverKeyModifiedDate =
+          this.$store.getters['smtp/isSecondaryConfig'].serverKeyModifiedDate;
+        this.secondary.serverCRTModifiedDate =
+          this.$store.getters['smtp/isSecondaryConfig'].serverCrtModifiedDate;
       }
     },
     serverAddressValidation(value) {
@@ -1450,7 +1476,9 @@ export default {
         this.$store
           .dispatch('smtp/addNewCertificate', { file, type, config })
           .then((success) => {
+            this.primaryConfiguration = false;
             this.updateSMTPPrimaryData();
+            this.secondaryConfiguration = false;
             this.updateSMTPSecondaryData();
             if (config == 'primary') this.primary.tlsEnable = true;
             else this.secondary.tlsEnable = true;
