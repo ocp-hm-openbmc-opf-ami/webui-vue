@@ -26,6 +26,7 @@ import SystemStore from './modules/HardwareStatus/SystemStore';
 import ChassisStore from './modules/HardwareStatus/ChassisStore';
 import BmcStore from './modules/HardwareStatus/BmcStore';
 import PostCodeLogsStore from './modules/Logs/PostCodeLogsStore';
+import SbmrLogsStore from './modules/Logs/SbmrLogStore';
 import PoliciesStore from './modules/SecurityAndAccess/PoliciesStore';
 import FactoryResetStore from './modules/Operations/FactoryResetStore';
 import KeyClearStore from './modules/Operations/KeyClearStore';
@@ -105,6 +106,7 @@ export default new Vuex.Store({
     chassis: ChassisStore,
     bmc: BmcStore,
     postCodeLogs: PostCodeLogsStore,
+    sbmrCodeLogs: SbmrLogsStore,
     virtualMedia: VirtualMediaStore,
     kvm: KvmStore,
     policies: PoliciesStore,

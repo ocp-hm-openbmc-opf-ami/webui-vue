@@ -151,6 +151,7 @@
         "overview": "@:appPageTitle.overview",
         "primaryNavigation": "主要导航",
         "postCodeLogs": "@:appPageTitle.postCodeLogs",
+        "sbmr": "@:appPageTitle.sbmr",
         "powerRestorePolicy": "@:appPageTitle.powerRestorePolicy",
         "rebootBmc": "@:appPageTitle.rebootBmc",
         "policies": "@:appPageTitle.policies",
@@ -226,6 +227,7 @@
         "overview": "概要",
         "pageNotFound": "找不到页面",
         "postCodeLogs": "POST Code 日志",
+        "sbmr": "SBMR",
         "powerRestorePolicy": "电源恢复策略",
         "profileSettings": "用户信息设置",
         "rebootBmc": "重启BMC",
@@ -1842,6 +1844,35 @@
             "created": "已创建",
             "bootCount": "启动次数",
             "postCode": "POST 代码",
+            "searchLogs": "搜索日志",
+            "timeStampOffset": "时间戳偏移量"
+        },
+        "toast": {
+            "errorDelete": "删除 %{count} 笔日志失败. | 删除 %{count} 笔日志失败。",
+            "successDelete": "已经成功删除 %{count} 笔日志. | 已经成功删除 %{count} 笔日志。"
+        }
+    },
+    "pageSbmrLogs": {
+        "allExportFilePrefix": "All_POST_codes_log_",
+        "downloadFilePrefix": "POST_codes_additional_details_",
+        "bootProgressCodeLogs": "启动进度代码日志",
+        "exportFilePrefix": "POST_codes_log_",
+        "action": {
+            "downloadDetails": "下载更多详细信息",
+            "exportLogs": "导出日志"
+        },
+        "button": {
+            "exportAll": "全部导出"
+        },
+        "modal": {
+            "deleteAllTitle": "删除所有日志",
+            "deleteAllMessage": "您确定要删除所有日志吗？ 此操作无法恢复。"
+        },
+        "table": {
+            "created": "已创建",
+            "bootCount": "启动次数",
+            "postCode": "启动进度代码 (十六进制) ",
+            "postCodeString": "启动进度代码 (字符串) ",
             "searchLogs": "搜索日志",
             "timeStampOffset": "时间戳偏移量"
         },

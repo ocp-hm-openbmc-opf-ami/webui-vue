@@ -271,11 +271,25 @@ const AppNavigationMixin = {
           route: '/logs/event-logs',
         });
       }
-      if (process.env.VUE_APP_ONETREE_POSTCODE_ENABLED === 'true') {
+      if (
+        process.env.VUE_APP_ONETREE_POSTCODE_ENABLED === 'true' &&
+        process.env.VUE_APP_ONETREE_ARM_SBMR_ENABLED != 'true' &&
+        process.env.VUE_APP_ONETREE_NVIDIASIPACK_ENABLED != 'true'
+      ) {
         navigationItemsList.navigationItems[1].children.push({
           id: 'post-code-logs',
           label: this.$t('appNavigation.postCodeLogs'),
           route: '/logs/post-code-logs',
+        });
+      }
+      if (
+        process.env.VUE_APP_ONETREE_ARM_SBMR_ENABLED === 'true' ||
+        process.env.VUE_APP_ONETREE_NVIDIASIPACK_ENABLED === 'true'
+      ) {
+        navigationItemsList.navigationItems[1].children.push({
+          id: 'sbmr',
+          label: this.$t('appNavigation.sbmr'),
+          route: '/logs/sbmr',
         });
       }
       if (process.env.VUE_APP_OBMC_LEDS_ENABLED === 'true') {

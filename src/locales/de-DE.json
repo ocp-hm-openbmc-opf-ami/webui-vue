@@ -151,6 +151,7 @@
         "overview": "@:appPageTitle.overview",
         "primaryNavigation": "Hauptnavigation",
         "postCodeLogs": "@:appPageTitle.postCodeLogs",
+        "sbmr": "@:appPageTitle.sbmr",
         "powerRestorePolicy": "@:appPageTitle.powerRestorePolicy",
         "rebootBmc": "@:appPageTitle.rebootBmc",
         "policies": "@:appPageTitle.policies",
@@ -226,6 +227,7 @@
         "overview": "Übersicht",
         "pageNotFound": "Seite nicht gefunden",
         "postCodeLogs": "POST-Code-Protokolle",
+        "sbmr": "SBMR",
         "powerRestorePolicy": "Wiederherstellungsrichtlinie für Stromversorgung",
         "profileSettings": "Profileinstellungen",
         "rebootBmc": "BMC neu starten",
@@ -1844,6 +1846,35 @@
             "created": "Erstellt",
             "bootCount": "Anzahl Starts",
             "postCode": "POST-Code",
+            "searchLogs": "Protokolle suchen",
+            "timeStampOffset": "Zeitstempel-Versatz"
+        },
+        "toast": {
+            "errorDelete": "Fehler beim Löschen von %{count} Protokoll. | Fehler beim Löschen von %{count} Protokollen.",
+            "successDelete": "%{count} Protokoll erfolgreich gelöscht. | %{count} Protokolle erfolgreich gelöscht."
+        }
+    },
+    "pageSbmrLogs": {
+        "allExportFilePrefix": "All_POST_codes_log_",
+        "downloadFilePrefix": "POST_codes_additional_details_",
+        "bootProgressCodeLogs": "Boot-Fortschritts-Code-Protokolle",
+        "exportFilePrefix": "POST_codes_log_",
+        "action": {
+            "downloadDetails": "Zusätzliche Details herunterladen",
+            "exportLogs": "Protokoll exportieren"
+        },
+        "button": {
+            "exportAll": "Alle exportieren"
+        },
+        "modal": {
+            "deleteAllTitle": "Alle Protokolle löschen",
+            "deleteAllMessage": "Möchten Sie wirklich alle Protokolle löschen? Diese Aktion kann nicht rückgängig gemacht werden."
+        },
+        "table": {
+            "created": "Erstellt",
+            "bootCount": "Anzahl Starts",
+            "postCode": "Boot-Fortschritts-Code (Hex)",
+            "postCodeString": "Boot-Fortschritts-Code (String) ",
             "searchLogs": "Protokolle suchen",
             "timeStampOffset": "Zeitstempel-Versatz"
         },

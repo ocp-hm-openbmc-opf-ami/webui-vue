@@ -151,6 +151,7 @@
         "overview": "@:appPageTitle.overview",
         "primaryNavigation": "Primary Navigation",
         "postCodeLogs": "@:appPageTitle.postCodeLogs",
+        "sbmr": "@:appPageTitle.sbmr",
         "powerRestorePolicy": "@:appPageTitle.powerRestorePolicy",
         "rebootBmc": "@:appPageTitle.rebootBmc",
         "policies": "@:appPageTitle.policies",
@@ -226,6 +227,7 @@
         "overview": "Overview",
         "pageNotFound": "Page not found",
         "postCodeLogs": "POST Code Logs",
+        "sbmr": "SBMR",
         "powerRestorePolicy": "Power Restore Policy",
         "profileSettings": "Profile Settings",
         "rebootBmc": "Reboot BMC",
@@ -1843,6 +1845,35 @@
             "created": "Created",
             "bootCount": "Boot Count",
             "postCode": "POST Code",
+            "searchLogs": "Search Logs",
+            "timeStampOffset": "Time Stamp Offset"
+        },
+        "toast": {
+            "errorDelete": "Error deleting %{count} log. | Error in deleting %{count} Logs.",
+            "successDelete": "Successfully deleted %{count} log. | Successfully deleted %{count} Logs."
+        }
+    },
+        "pageSbmrLogs": {
+        "allExportFilePrefix": "All_POST_codes_log_",
+        "downloadFilePrefix": "POST_codes_additional_details_",
+        "bootProgressCodeLogs": "Boot Progress Code Logs",
+        "exportFilePrefix": "POST_codes_log_",
+        "action": {
+            "downloadDetails": "Download Additional Details",
+            "exportLogs": "Export Log"
+        },
+        "button": {
+            "exportAll": "Export All"
+        },
+        "modal": {
+            "deleteAllTitle": "Delete All Logs",
+            "deleteAllMessage": "Are you sure you want to delete all logs? This action cannot be undone."
+        },
+        "table": {
+            "created": "Created",
+            "bootCount": "Boot Count",
+            "postCode": "Boot Progress Code (Hex) ",
+            "postCodeString": "Boot Progress Code (String) ",
             "searchLogs": "Search Logs",
             "timeStampOffset": "Time Stamp Offset"
         },

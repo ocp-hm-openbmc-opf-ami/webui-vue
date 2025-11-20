@@ -23,6 +23,7 @@ import Vlan from '@/views/Settings/Vlan';
 import Overview from '@/views/Overview';
 import PageNotFound from '@/views/PageNotFound';
 import PostCodeLogs from '@/views/Logs/PostCodeLogs';
+import Sbmr from '@/views/Logs/SbmrLogs';
 import PowerRestorePolicy from '@/views/Settings/PowerRestorePolicy';
 import ProfileSettings from '@/views/ProfileSettings';
 import RebootBmc from '@/views/Operations/RebootBmc';
@@ -649,13 +650,30 @@ if (process.env.VUE_APP_ONETREE_SEL_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_POSTCODE_ENABLED == 'true') {
+if (
+  process.env.VUE_APP_ONETREE_POSTCODE_ENABLED == 'true' &&
+  process.env.VUE_APP_ONETREE_ARM_SBMR_ENABLED != 'true' &&
+  process.env.VUE_APP_ONETREE_NVIDIASIPACK_ENABLED != 'true'
+) {
   routes[2].children.push({
     path: '/logs/post-code-logs',
     name: 'post-code-logs',
     component: PostCodeLogs,
     meta: {
       title: i18n.t('appPageTitle.postCodeLogs'),
+    },
+  });
+}
+if (
+  process.env.VUE_APP_ONETREE_ARM_SBMR_ENABLED == 'true' ||
+  process.env.VUE_APP_ONETREE_NVIDIASIPACK_ENABLED == 'true'
+) {
+  routes[2].children.push({
+    path: '/logs/sbmr',
+    name: 'sbmr',
+    component: Sbmr,
+    meta: {
+      title: i18n.t('appPageTitle.sbmr'),
     },
   });
 }

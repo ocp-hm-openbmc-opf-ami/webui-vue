@@ -151,6 +151,7 @@
         "overview": "@:appPageTitle.overview",
         "primaryNavigation": "Основная навигация",
         "postCodeLogs": "@:appPageTitle.postCodeLogs",
+        "sbmr": "@:appPageTitle.sbmr",
         "powerRestorePolicy": "@:appPageTitle.powerRestorePolicy",
         "rebootBmc": "@:appPageTitle.rebootBmc",
         "policies": "@:appPageTitle.policies",
@@ -225,6 +226,7 @@
         "overview": "Обзор",
         "pageNotFound": "Страница не найдена",
         "postCodeLogs": "Журналы POST кодов",
+        "sbmr": "SBMR",
         "powerRestorePolicy": "Политика восстановления питания",
         "profileSettings": "Настройки профиля",
         "rebootBmc": "Перезагрузка BMC",
@@ -1840,6 +1842,35 @@
             "created": "Создано",
             "bootCount": "Количество загрузок",
             "postCode": "POST-код",
+            "searchLogs": "Поиск журналов",
+            "timeStampOffset": "Смещение временной метки"
+        },
+        "toast": {
+            "errorDelete": "Ошибка удаления %{count} журнала. | Ошибка удаления %{count} журналов.",
+            "successDelete": "Успешно удален %{count} журнал. | Успешно удалено %{count} журналов."
+        }
+    },
+    "pageSbmrLogs": {
+        "allExportFilePrefix": "Все_журналы_POST_кодов_",
+        "downloadFilePrefix": "POST_коды_дополнительные_детали_",
+        "bootProgressCodeLogs": "Журналы кода загрузки",
+        "exportFilePrefix": "Журнал_POST_кодов_",
+        "action": {
+            "downloadDetails": "Скачать дополнительные детали",
+            "exportLogs": "Экспорт журнала"
+        },
+        "button": {
+            "exportAll": "Экспортировать всё"
+        },
+        "modal": {
+            "deleteAllTitle": "Удалить все журналы",
+            "deleteAllMessage": "Вы уверены, что хотите удалить все журналы? Это действие нельзя отменить."
+        },
+        "table": {
+            "created": "Создано",
+            "bootCount": "Количество загрузок",
+            "postCode": "Код прогресса загрузки (Hex) ",
+            "postCodeString": "Код прогресса загрузки (Строка) ",
             "searchLogs": "Поиск журналов",
             "timeStampOffset": "Смещение временной метки"
         },
