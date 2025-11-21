@@ -378,7 +378,7 @@
                     </b-col>
                   </b-row>
                 </div>
-                <b-row class="setting-section">
+                <b-row v-if="!isMultiSolMode" class="setting-section">
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
@@ -409,7 +409,10 @@
                     </b-form-checkbox>
                   </b-col>
                 </b-row>
-                <b-row v-if="solState" class="setting-section">
+                <b-row
+                  v-if="solState && !isMultiSolMode"
+                  class="setting-section"
+                >
                   <b-col cols="3" class="d-flex align-items-center">
                     <b-form-group
                       id="input-group-1"
@@ -452,6 +455,63 @@
                       <icon-save />
                       {{ $t('global.action.save') }}
                     </b-button>
+                  </b-col>
+                </b-row>
+                <b-row
+                  v-if="isMultiSolMode && multiSolSshList.length > 0"
+                  class="setting-section"
+                >
+                  <b-col lg="12">
+                    <dl class="mt-3 mb-4">
+                      <dt>{{ $t('pagePolicies.multiSolSsh') }}</dt>
+                      <dd>{{ $t('pagePolicies.multiSolSshDescription') }}</dd>
+                    </dl>
+                    <div>
+                      <b-row
+                        v-for="solService in multiSolSshList"
+                        :key="solService.Id"
+                        class="setting-section"
+                      >
+                        <b-col
+                          lg="7"
+                          class="d-flex align-items-center justify-content-between"
+                        >
+                          <dl class="mt-3 mr-4 w-75">
+                            <dt>
+                              {{
+                                $t('pagePolicies.solSshService', {
+                                  solId: solService.Id,
+                                })
+                              }}
+                            </dt>
+                          </dl>
+                        </b-col>
+                        <b-col lg="3" class="session-timeout">
+                          <b-form-checkbox
+                            :id="`solSwitch-${solService.Id}`"
+                            :checked="!solService.Masked"
+                            :data-test-id="`policies-toggle-sol-${solService.Id}`"
+                            switch
+                            :disabled="userPrivilege === privilegesId.readOnly"
+                            @change="changeMultiSOLState(solService.Id, $event)"
+                          >
+                            <span class="sr-only">
+                              {{
+                                $t('pagePolicies.solSshService', {
+                                  solId: solService.Id,
+                                })
+                              }}
+                            </span>
+                            <span v-if="solService.Masked == false">
+                              {{ $t('global.status.enabled') }}
+                            </span>
+                            <span v-else>{{
+                              $t('global.status.disabled')
+                            }}</span>
+                          </b-form-checkbox>
+                        </b-col>
+                      </b-row>
+                    </div>
                   </b-col>
                 </b-row>
                 <b-row class="setting-section">
@@ -1109,6 +1169,12 @@ export default {
     maxSessionServicesInfo() {
       return this.$store.getters['policies/maxSessions'];
     },
+    isMultiSolMode() {
+      return this.$store.getters['policies/isMultiSolMode'];
+    },
+    multiSolSshList() {
+      return this.$store.getters['policies/multiSolSshList'] || [];
+    },
     ...mapState('policies', [
       'kvmSessionTimeout',
       'kvmPortValue',
@@ -1256,6 +1322,12 @@ export default {
     changeSOLState(state) {
       this.$store
         .dispatch('policies/saveSOLSshState', state ? true : false)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
+    changeMultiSOLState(solId, enabled) {
+      this.$store
+        .dispatch('policies/saveMultiSOLSshState', { solId, enabled })
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },

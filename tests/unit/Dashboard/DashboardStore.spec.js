@@ -58,7 +58,7 @@ describe('DashboardStore', () => {
       DateTime: '2025-08-12T06:24:50Z',
       TimeZoneName: 'UTC',
       Oem: {
-        OpenBmc: {
+        Ami: {
           PhysicalLED: {
             AmberLED: 'Blinking',
             BlueLED: 'Off',

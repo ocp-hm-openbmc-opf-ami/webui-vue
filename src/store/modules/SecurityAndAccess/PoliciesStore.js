@@ -10,6 +10,8 @@ const PoliciesStore = {
     virtualMediaServiceEnabled: false,
     solSshServiceEnabled: false,
     solSshPortValue: null,
+    multiSolSshList: [],
+    isMultiSolMode: false,
     rtadEnabled: 'Disabled',
     vtpmEnabled: 'Disabled',
     sessionTimeoutValue: null,
@@ -34,6 +36,8 @@ const PoliciesStore = {
     sshProtocolEnabled: (state) => state.sshProtocolEnabled,
     ipmiProtocolEnabled: (state) => state.ipmiProtocolEnabled,
     solSshPortValue: (state) => state.solSshPortValue,
+    multiSolSshList: (state) => state.multiSolSshList,
+    isMultiSolMode: (state) => state.isMultiSolMode,
     rtadEnabled: (state) => state.rtadEnabled,
     vtpmEnabled: (state) => state.vtpmEnabled,
     sessionTimeoutValue: (state) => state.sessionTimeoutValue,
@@ -71,6 +75,17 @@ const PoliciesStore = {
     setSOLEnabled: (state, solEnabled) => (state.solEnabled = solEnabled),
     setSolSshServiceEnabled: (state, solSshServiceEnabled) =>
       (state.solSshServiceEnabled = solSshServiceEnabled),
+    setMultiSolSshList: (state, multiSolSshList) =>
+      (state.multiSolSshList = multiSolSshList),
+    updateMultiSolSshService: (state, { solId, enabled }) => {
+      const service = state.multiSolSshList.find((sol) => sol.Id === solId);
+      if (service) {
+        service.ServiceEnabled = enabled;
+        service.Masked = !enabled;
+      }
+    },
+    setIsMultiSolMode: (state, isMultiSolMode) =>
+      (state.isMultiSolMode = isMultiSolMode),
     setKvmServiceEnabled: (state, kvmServiceEnabled) =>
       (state.kvmServiceEnabled = kvmServiceEnabled),
     setVirtualMediaServiceEnabled: (state, virtualMediaServiceEnabled) =>
@@ -152,13 +167,24 @@ const PoliciesStore = {
             response.data?.GraphicalConsole?.ServiceEnabled;
           const virtualMediaServiceEnabled =
             response.data?.VirtualMediaConfig?.ServiceEnabled;
-          const solSshServiceEnabled =
-            response.data?.SerialConsole?.SSH?.ServiceEnabled;
-          const solSshPortValue = response.data?.SerialConsole?.SSH?.Port;
+          const multiSolSshData =
+            response.data?.Oem?.Ami?.SerialConsole?.SSH?.SOLSSH;
+          if (multiSolSshData?.length > 0) {
+            commit('setMultiSolSshList', multiSolSshData);
+            commit('setIsMultiSolMode', true);
+            commit('setSolSshServiceEnabled', false);
+            commit('setSolSshPort', null);
+          } else {
+            const solSshServiceEnabled =
+              response.data?.SerialConsole?.SSH?.ServiceEnabled;
+            const solSshPortValue = response.data?.SerialConsole?.SSH?.Port;
+            commit('setSolSshServiceEnabled', solSshServiceEnabled);
+            commit('setSolSshPort', solSshPortValue);
+            commit('setIsMultiSolMode', false);
+            commit('setMultiSolSshList', []);
+          }
           commit('setKvmServiceEnabled', kvmServiceEnabled);
           commit('setVirtualMediaServiceEnabled', virtualMediaServiceEnabled);
-          commit('setSolSshServiceEnabled', solSshServiceEnabled);
-          commit('setSolSshPort', solSshPortValue);
         })
         .catch((error) => console.log(error));
     },
@@ -398,8 +424,52 @@ const PoliciesStore = {
           commit('setSolSshServiceEnabled', !solEnabled);
           if (solEnabled) {
             throw new Error(i18n.t('pagePolicies.toast.errorSOLEnabled'));
+          }
+        });
+    },
+    async saveMultiSOLSshState({ commit }, { solId, enabled }) {
+      commit('updateMultiSolSshService', { solId, enabled });
+      const solSshUpdate = {
+        Oem: {
+          Ami: {
+            SerialConsole: {
+              SSH: {
+                SOLSSH: [
+                  {
+                    Id: solId,
+                    ServiceEnabled: enabled,
+                    Masked: !enabled,
+                  },
+                ],
+              },
+            },
+          },
+        },
+      };
+      return await api
+        .patch('/redfish/v1/Systems/system', solSshUpdate)
+        .then(() => {
+          if (enabled) {
+            return i18n.t('pagePolicies.toast.successMultiSOLEnabled', {
+              solId,
+            });
           } else {
-            throw new Error(i18n.t('pagePolicies.toast.errorSOLDisabled'));
+            return i18n.t('pagePolicies.toast.successMultiSOLDisabled', {
+              solId,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          commit('updateMultiSolSshService', { solId, enabled: !enabled });
+          if (enabled) {
+            throw new Error(
+              i18n.t('pagePolicies.toast.errorMultiSOLEnabled', { solId }),
+            );
+          } else {
+            throw new Error(
+              i18n.t('pagePolicies.toast.errorMultiSOLDisabled', { solId }),
+            );
           }
         });
     },

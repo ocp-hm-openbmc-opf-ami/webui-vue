@@ -81,10 +81,10 @@ const SystemStore = {
           }
           if (
             Object.keys(data).includes('Oem') &&
-            Object.keys(data.Oem).includes('OpenBmc')
+            Object.keys(data.Oem).includes('Ami')
           ) {
-            if (data.Oem.OpenBmc.PhysicalLED) {
-              commit('setPhysicalLedStatus', data.Oem.OpenBmc.PhysicalLED);
+            if (data.Oem.Ami.PhysicalLED) {
+              commit('setPhysicalLedStatus', data.Oem.Ami.PhysicalLED);
             }
           }
         })

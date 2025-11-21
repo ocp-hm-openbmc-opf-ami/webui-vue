@@ -98,7 +98,7 @@ const DashboardStore = {
 
     // System Health LEDs
     systemHealthLEDs: (state) => {
-      if (!state.dashboardData?.Oem?.OpenBmc?.PhysicalLED) {
+      if (!state.dashboardData?.Oem?.Ami?.PhysicalLED) {
         return {
           amberLED: null,
           blueLED: null,
@@ -106,11 +106,11 @@ const DashboardStore = {
         };
       }
 
-      const physicalLED = state.dashboardData.Oem.OpenBmc.PhysicalLED;
+      const physicalLED = state.dashboardData?.Oem?.Ami?.PhysicalLED;
       return {
-        amberLED: physicalLED.AmberLED,
-        blueLED: physicalLED.BlueLED,
-        greenLED: physicalLED.GreenLED,
+        amberLED: physicalLED?.AmberLED,
+        blueLED: physicalLED?.BlueLED,
+        greenLED: physicalLED?.GreenLED,
       };
     },
 
