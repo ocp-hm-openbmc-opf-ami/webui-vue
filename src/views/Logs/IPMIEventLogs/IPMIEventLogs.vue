@@ -32,6 +32,7 @@
         </b-button>
         <b-button
           variant="primary"
+          :disabled="allLogs.length === 0 || isButtonDisable"
           :class="{ disabled: allLogs.length === 0 }"
           :download="exportFileNameByDate()"
           :href="href"
@@ -155,6 +156,7 @@
                 <b-col class="text-nowrap">
                   <b-button
                     v-if="item.additionalDataUri"
+                    :disabled="isButtonDisable"
                     @click="downloadEntry(item.additionalDataUri)"
                   >
                     <icon-download />{{

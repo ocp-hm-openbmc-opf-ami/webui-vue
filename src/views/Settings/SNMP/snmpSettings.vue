@@ -91,7 +91,7 @@ export default {
   computed: {
     ...mapGetters('global', ['userPrivilege']),
     isButtonDisable() {
-      return this.userPrivilege === privilegesId.readOnly;
+      return this.userPrivilege !== privilegesId.admin;
     },
   },
   created() {

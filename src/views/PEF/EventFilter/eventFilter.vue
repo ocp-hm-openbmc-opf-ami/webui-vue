@@ -16,6 +16,7 @@
                   v-model="checkAll"
                   data-test-id="checkAllEventFilter"
                   switch
+                  :disabled="isButtonDisable"
                   @change="enableAllTheEvents"
                 >
                   <span v-if="checkAll">{{ $t('global.status.enabled') }}</span>
@@ -39,6 +40,7 @@
                       v-model="events.enableStatus"
                       data-test-id="alert-input-enable"
                       switch
+                      :disabled="isButtonDisable"
                     >
                       <span v-if="events.enableStatus">
                         {{ $t('global.status.enabled') }}
@@ -57,7 +59,7 @@
               variant="primary"
               type="submit"
               data-test-id="eventFilter-button-saveSettings"
-              :disabled="loading"
+              :disabled="loading || isButtonDisable"
             >
               <icon-save />
               {{ $t('global.action.save') }}
@@ -74,6 +76,7 @@
                 id="destination-type"
                 v-model="destinationTypes"
                 :options="destinationTypeOptions"
+                :disabled="isButtonDisable"
                 @change="changeDestinationType($event)"
               >
               </b-form-select>
@@ -90,6 +93,8 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
 import PageTitle from '@/components/Global/PageTitle';
 import IconSave from '@carbon/icons-vue/es/save/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'EventFilterSettings',
@@ -119,6 +124,10 @@ export default {
       set(newValue) {
         this.localCheckAll = newValue;
       },
+    },
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
     },
   },
   watch: {

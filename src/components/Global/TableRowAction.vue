@@ -6,6 +6,7 @@
       :download="download"
       :href="href"
       :title="title"
+      :disabled="isButtonDisable"
     >
       <slot name="icon">
         {{ $t('global.action.export') }}
@@ -20,6 +21,7 @@
       target="_blank"
       :href="downloadLocation"
       :title="title"
+      :disabled="isButtonDisable"
     >
       <slot name="icon" />
       <span class="sr-only">
@@ -32,6 +34,7 @@
       :download="exportName"
       :href="downloadLocation"
       :title="title"
+      :disabled="isButtonDisable"
     >
       <slot name="icon" />
       <span class="sr-only">
@@ -56,6 +59,8 @@
 
 <script>
 import { omit } from 'lodash';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'TableRowAction',
@@ -106,6 +111,10 @@ export default {
     },
     href() {
       return `data:text/json;charset=utf-8,${this.dataForExport}`;
+    },
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege !== privilegesId.admin;
     },
   },
 };

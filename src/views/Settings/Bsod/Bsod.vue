@@ -15,7 +15,12 @@
         </span>
       </b-col>
       <b-col sm="8" class="text-right">
-        <b-button variant="primary" type="button" @click="triggerBsodImage">
+        <b-button
+          variant="primary"
+          type="button"
+          :disabled="isButtonDisable"
+          @click="triggerBsodImage"
+        >
           <icon-camera />
           {{ $t('pageBsod.triggerBsodImage') }}
         </b-button>
@@ -24,6 +29,7 @@
           class="ml-3"
           variant="primary"
           type="button"
+          :disabled="isButtonDisable"
           @click="downloadImage"
         >
           <icon-download />
@@ -34,6 +40,7 @@
           class="ml-3"
           variant="primary"
           type="button"
+          :disabled="isButtonDisable"
           @click="deleteBsodImage"
         >
           <icon-trashcan />
@@ -58,6 +65,8 @@ import PageTitle from '@/components/Global/PageTitle';
 import IconTrashcan from '@carbon/icons-vue/es/trash-can/20';
 import IconDownload from '@carbon/icons-vue/es/download/20';
 import IconCamera from '@carbon/icons-vue/es/camera--action/20';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Bsod',
@@ -66,6 +75,10 @@ export default {
   computed: {
     base64ImageData() {
       return this.$store.getters['bsod/bsodImageData'];
+    },
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisable() {
+      return this.userPrivilege === privilegesId.readOnly;
     },
   },
   created() {

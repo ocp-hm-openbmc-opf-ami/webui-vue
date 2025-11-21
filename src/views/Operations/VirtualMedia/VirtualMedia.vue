@@ -49,6 +49,7 @@
                         v-if="!dev.isActive"
                         :id="concatId(dev.id)"
                         v-model="dev.file"
+                        :disabled="isNotAdmin"
                         accept=".iso, .img, .ima, .nrg"
                         :data-test-id="`virtualmedia-input-${concatId(dev.id)}`"
                         @input="validateFile(dev)"
@@ -142,7 +143,7 @@
                     >
                       <b-button
                         variant="secondary"
-                        :disabled="device.isActive"
+                        :disabled="device.isActive || isNotAdmin"
                         :data-test-id="`virtualmedia-button-configure-${device.id.toLowerCase()}`"
                         @click="configureConnection(device)"
                       >
@@ -209,6 +210,8 @@ import EmmcRedirection from './EmmcRedirection.vue';
 
 //license checking
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'VirtualMedia',
@@ -237,6 +240,10 @@ export default {
   computed: {
     ...mapState('global', ['virtualMediaServiceEnabledAccess']),
     ...mapState('virtualMedia', ['slot0File', 'slot1File']),
+    ...mapGetters('global', ['userPrivilege']),
+    isNotAdmin() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     proxyDevices() {
       return this.$store.getters['virtualMedia/proxyDevices'];
     },

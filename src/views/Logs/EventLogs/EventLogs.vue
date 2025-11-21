@@ -156,6 +156,7 @@
                 <b-col class="text-nowrap">
                   <b-button
                     v-if="item.additionalDataUri"
+                    :disabled="isButtonDisable"
                     @click="downloadEntry(item.additionalDataUri)"
                   >
                     <icon-download />{{ $t('pageEventLogs.additionalDataUri') }}

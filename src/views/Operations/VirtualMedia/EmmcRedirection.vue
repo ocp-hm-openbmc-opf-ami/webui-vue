@@ -92,7 +92,7 @@
                     variant="primary"
                     size="sm"
                     class="emmc-upload-btn"
-                    :disabled="!uploadFile || uploading"
+                    :disabled="!uploadFile || uploading || isButtonDisabled"
                     @click="handleUploadSubmit"
                   >
                     <template v-if="uploading">
@@ -125,7 +125,7 @@
                   variant="primary"
                   size="sm"
                   class="mb-2 mb-sm-0 me-2"
-                  :disabled="isAnyRedirectionActive"
+                  :disabled="isAnyRedirectionActive || isButtonDisabled"
                   :title="
                     isAnyRedirectionActive
                       ? $t('pageVirtualMedia.eMMC.stopActiveRedirection')
@@ -140,7 +140,7 @@
                   variant="secondary"
                   size="sm"
                   class="mb-2 mb-sm-0 me-2"
-                  :disabled="!item.isActive"
+                  :disabled="!item.isActive || isButtonDisabled"
                   @click="handleStop(item)"
                 >
                   <icon-stop class="mr-1" />
@@ -150,7 +150,7 @@
                   variant="danger"
                   size="sm"
                   class="mb-2 mb-sm-0"
-                  :disabled="item.isActive"
+                  :disabled="item.isActive || isButtonDisabled"
                   @click="handleDelete(item)"
                 >
                   <icon-delete class="mr-1" />
@@ -212,6 +212,8 @@ import {
   BModal,
   BAlert,
 } from 'bootstrap-vue';
+import { privilegesId } from '@/store/modules/GlobalStore';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'EmmcRedirection',
@@ -284,6 +286,10 @@ export default {
       const validExtensions = ['.iso', '.img', '.nrg', '.ima'];
       const fileExt = '.' + this.uploadFile.name.split('.').pop().toLowerCase();
       return validExtensions.includes(fileExt);
+    },
+    ...mapGetters('global', ['userPrivilege']),
+    isButtonDisabled() {
+      return this.userPrivilege !== privilegesId.admin;
     },
   },
   async mounted() {
