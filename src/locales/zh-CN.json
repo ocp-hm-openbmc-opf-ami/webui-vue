@@ -1551,7 +1551,8 @@
             "success" : "电源操作成功。",
             "error" : "执行电源操作时出错。"
         },
-        "viewonly" : "（仅供查看）"
+        "viewonly" : "（仅供查看）",
+        "kvmAccessRestricted": "访问被拒绝：用户没有启动 KVM 会话的权限。请尝试使用具有特权的用户帐户。"
     },
     "pageLdap": {
         "pageDescription": "配置 LDAP 设置和管理角色组",

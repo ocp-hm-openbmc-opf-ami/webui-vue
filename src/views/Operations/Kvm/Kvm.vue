@@ -1,6 +1,11 @@
 <template>
   <b-container fluid="xl">
     <page-title />
+    <div v-if="isKvmDisabled">
+      <b-alert show variant="warning">{{
+        $t('pageKvm.kvmAccessRestricted')
+      }}</b-alert>
+    </div>
     <div v-if="!LicenseState(licenseName)">
       <b-alert show variant="warning"
         >{{ $t('license.licenseExpired') }}
@@ -15,7 +20,7 @@
           $t('pageKvm.disabledKVMService')
         }}</b-alert>
       </div>
-      <div v-else class="terminal-container">
+      <div v-else-if="!isKvmDisabled" class="terminal-container">
         <kvm-console :is-full-window="true" />
       </div>
     </div>
@@ -26,14 +31,16 @@
 import PageTitle from '@/components/Global/PageTitle';
 import KvmConsole from './KvmConsole';
 import { mapState } from 'vuex';
-
+import { privilegesId } from '@/store/modules/GlobalStore';
+import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
 import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Kvm',
   components: { PageTitle, KvmConsole },
-  mixins: [LicensecheckMixin, LoadingBarMixin],
+  mixins: [LicensecheckMixin, LoadingBarMixin, BVToastMixin],
   data() {
     return {
       loading,
@@ -42,6 +49,10 @@ export default {
   },
   computed: {
     ...mapState('global', ['kvmServiceEnabledAccess']),
+    ...mapGetters('global', ['userPrivilege']),
+    isKvmDisabled() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
   },
   created() {
     this.startLoader();

@@ -1553,7 +1553,8 @@
             "success": "Stromvorgang erfolgreich ausgeführt.",
             "error": "Fehler beim Ausführen des Stromvorgangs."
         },
-        "viewonly" : "(Nur Anzeige)"
+        "viewonly" : "(Nur Anzeige)",
+        "kvmAccessRestricted": "Zugriff verweigert: Der Benutzer hat keine Berechtigung, eine KVM-Sitzung zu starten. Bitte versuchen Sie es mit einem Benutzerkonto mit entsprechenden Rechten."
     },
     "pageLdap": {
         "pageDescription": "LDAP-Einstellungen konfigurieren und Rollengruppen verwalten",

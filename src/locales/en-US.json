@@ -1552,7 +1552,8 @@
             "success": "Power Operation executed successfully.",
             "error": "Error in performing Power Operation."
         },
-        "viewonly" : "(View Only)"
+        "viewonly" : "(View Only)",
+        "kvmAccessRestricted": "Access Denied: User doesn't have privilege to launch KVM session. Please try from a privileged user account."
     },
     "pageLdap": {
         "pageDescription": "Configure LDAP Settings and manage Role Groups",

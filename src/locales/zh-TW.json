@@ -1551,8 +1551,9 @@
             "success" : "電源操作成功執行。",
             "error" : "執行電源操作時發生錯誤。"
         },
-        "viewonly" : "（僅供查看）"
-    },
+        "viewonly" : "（僅供查看）",
+        "kvmAccessRestricted": "存取被拒：使用者沒有啟動 KVM 會話的權限。請嘗試使用特權使用者帳戶。"
+        },
     "pageLdap": {
         "pageDescription": "配置 LDAP 設定和管理身分組",
         "roleGroups": "身分組",
