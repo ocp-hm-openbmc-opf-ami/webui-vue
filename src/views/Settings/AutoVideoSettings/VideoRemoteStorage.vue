@@ -354,7 +354,7 @@ export default {
             }
           }),
           pattern: function (val) {
-            return this.validateFieldValue(val, 10);
+            return this.validateFieldValue(val, 100);
           },
         },
         ServerIP: {

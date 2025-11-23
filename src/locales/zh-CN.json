@@ -3615,7 +3615,7 @@
         "form":{
             "maxDumpRangeRequired": "最大转储值的范围应为 1。",
             "maxDurationRangeRequired": "最大持续时间范围应为 1 到 20 秒。",
-            "maxSizeRangeRequired": "最大大小范围应为 1 到 10 MB。"
+            "maxSizeRangeRequired": "最大大小范围应为 1 到 100 MB。"
         },
         "toast": {
             "successSaveVideoTriggerSettings": "已成功保存视频触发设置。",

@@ -3622,7 +3622,7 @@
         "form":{
             "maxDumpRangeRequired": "Der Wert für maximale Dumps muss mindestens 1 sein.",
             "maxDurationRangeRequired": "Maximale Dauer muss zwischen 1 und 20 Sekunden liegen.",
-            "maxSizeRangeRequired": "Maximale Größe muss zwischen 1 und 10 MB liegen."
+            "maxSizeRangeRequired": "Maximale Größe muss zwischen 1 und 100 MB liegen."
         },
         "toast": {
             "successSaveVideoTriggerSettings": "Video-Trigger-Einstellungen erfolgreich gespeichert.",

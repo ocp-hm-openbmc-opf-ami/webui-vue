@@ -3615,7 +3615,7 @@
         "form":{
             "maxDumpRangeRequired": "最大轉儲值的範圍應為 1。",
             "maxDurationRangeRequired": "最大持續時間範圍應為 1 到 20 秒。",
-            "maxSizeRangeRequired": "最大大小範圍應為 1 到 10 MB。"
+            "maxSizeRangeRequired": "最大大小範圍應為 1 到 100 MB。"
         },
         "toast": {
             "successSaveVideoTriggerSettings": "已成功儲存視訊觸發設定。",
