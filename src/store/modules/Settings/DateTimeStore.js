@@ -47,24 +47,31 @@ const DateTimeStore = {
     },
     async updateDateTime({ state }, dateTimeForm) {
       const ntpData = {
+        NTP: {
+          ProtocolEnabled: dateTimeForm.ntpProtocolEnabled,
+          ...(dateTimeForm.ntpProtocolEnabled && {
+            NTPServers: dateTimeForm.ntpServersArray || [],
+          }),
+        },
         Oem: {
           Ami: {
             EncrytedNTP: {
-              NTPServers: dateTimeForm.secureNtpServersArray || [],
-              NTPStatus: dateTimeForm.secureNtpProtocolEnabled || false,
+              NTPStatus: dateTimeForm.secureNtpProtocolEnabled,
+              ...(dateTimeForm.secureNtpProtocolEnabled && {
+                NTPServers: dateTimeForm.secureNtpServersArray || [],
+              }),
             },
           },
-        },
-        NTP: {
-          NTPServers: dateTimeForm.ntpServersArray || [],
-          ProtocolEnabled: dateTimeForm.ntpProtocolEnabled || false,
         },
       };
       return await api
         .patch(`/redfish/v1/Managers/bmc/NetworkProtocol`, ntpData)
         .then(async () => {
           let dateTimePayload = {};
-          if (dateTimeForm.ntpProtocolEnabled) {
+          if (
+            dateTimeForm.ntpProtocolEnabled ||
+            dateTimeForm.secureNtpProtocolEnabled
+          ) {
             dateTimePayload.TimeZoneName = dateTimeForm.TimeZoneName;
           } else {
             dateTimePayload.DateTime = dateTimeForm.updatedDateTime;

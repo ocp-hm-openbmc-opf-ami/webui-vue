@@ -170,7 +170,11 @@
                     id="input-ntp-1"
                     v-model="form.ntp.firstAddress"
                     :state="getValidationState($v.form.ntp.firstAddress)"
-                    :disabled="manualOptionSelected || isButtonDisable"
+                    :disabled="
+                      manualOptionSelected ||
+                      secureNtpOptionSelected ||
+                      isButtonDisable
+                    "
                     data-test-id="dateTime-input-ntpServer1"
                     @input="$v.form.ntp.firstAddress.$touch()"
                   />
@@ -195,11 +199,18 @@
                     id="input-ntp-2"
                     v-model="form.ntp.secondAddress"
                     :state="getValidationState($v.form.ntp.secondAddress)"
-                    :disabled="manualOptionSelected || isButtonDisable"
+                    :disabled="
+                      manualOptionSelected ||
+                      secureNtpOptionSelected ||
+                      isButtonDisable
+                    "
                     data-test-id="dateTime-input-ntpServer2"
                     @input="$v.form.ntp.secondAddress.$touch()"
                   />
                   <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.form.ntp.secondAddress.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
                     <template v-if="!$v.form.ntp.secondAddress.pattern">
                       {{ $t('global.form.invalidFormat') }}
                     </template>
@@ -217,7 +228,11 @@
                     id="input-ntp-3"
                     v-model="form.ntp.thirdAddress"
                     :state="getValidationState($v.form.ntp.thirdAddress)"
-                    :disabled="manualOptionSelected || isButtonDisable"
+                    :disabled="
+                      manualOptionSelected ||
+                      secureNtpOptionSelected ||
+                      isButtonDisable
+                    "
                     data-test-id="dateTime-input-ntpServer3"
                     @input="$v.form.ntp.thirdAddress.$touch()"
                   />
@@ -248,7 +263,11 @@
                     id="input-ntpsec-1"
                     v-model="form.secureNtp.firstAddress"
                     :state="getValidationState($v.form.secureNtp.firstAddress)"
-                    :disabled="manualOptionSelected"
+                    :disabled="
+                      manualOptionSelected ||
+                      ntpOptionSelected ||
+                      isButtonDisable
+                    "
                     data-test-id="dateTime-input-ntpsecServer1"
                     @input="$v.form.secureNtp.firstAddress.$touch()"
                   />
@@ -273,11 +292,18 @@
                     id="input-ntpsec-2"
                     v-model="form.secureNtp.secondAddress"
                     :state="getValidationState($v.form.secureNtp.secondAddress)"
-                    :disabled="manualOptionSelected"
+                    :disabled="
+                      manualOptionSelected ||
+                      ntpOptionSelected ||
+                      isButtonDisable
+                    "
                     data-test-id="dateTime-input-ntpsecServer2"
                     @input="$v.form.secureNtp.secondAddress.$touch()"
                   />
                   <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.form.secureNtp.secondAddress.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
                     <template v-if="!$v.form.secureNtp.secondAddress.pattern">
                       {{ $t('global.form.invalidFormat') }}
                     </template>
@@ -295,7 +321,11 @@
                     id="input-ntpsec-3"
                     v-model="form.secureNtp.thirdAddress"
                     :state="getValidationState($v.form.secureNtp.thirdAddress)"
-                    :disabled="manualOptionSelected"
+                    :disabled="
+                      manualOptionSelected ||
+                      ntpOptionSelected ||
+                      isButtonDisable
+                    "
                     data-test-id="dateTime-input-ntpsecServer3"
                     @input="$v.form.secureNtp.thirdAddress.$touch()"
                   />
@@ -411,6 +441,13 @@ export default {
             },
           },
           secondAddress: {
+            required: requiredIf(function () {
+              return (
+                this.form.configurationSelected === 'ntp' &&
+                !this.form.ntp.secondAddress &&
+                this.form.ntp.thirdAddress
+              );
+            }),
             pattern: function (val) {
               return this.ntpServerValidation(val);
             },
@@ -434,6 +471,13 @@ export default {
             },
           },
           secondAddress: {
+            required: requiredIf(function () {
+              return (
+                this.form.configurationSelected === 'ntpsec' &&
+                !this.form.secureNtp.secondAddress &&
+                this.form.secureNtp.thirdAddress
+              );
+            }),
             pattern: function (val) {
               return this.ntpServerValidation(val);
             },
