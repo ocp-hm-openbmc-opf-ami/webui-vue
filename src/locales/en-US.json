@@ -1,5 +1,8 @@
 {
     "global": {
+        "alerts": {
+            "externalUserRestriction": "External users are not allowed to configure the External Server Settings."
+        },
         "action": {
             "add": "Add",
             "cancel": "Cancel",

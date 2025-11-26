@@ -15,6 +15,7 @@ const AuthenticationStore = {
     isAuthenticatedCookie: Cookies.get('IsAuthenticated'),
     tfaEnabled: false,
     tfaFeatureEnabled: false,
+    isExternalUser: false,
   },
   getters: {
     consoleWindow: (state) => state.consoleWindow,
@@ -28,6 +29,7 @@ const AuthenticationStore = {
     token: (state) => state.xsrfCookie,
     tfaEnabled: (state) => state.tfaEnabled,
     tfaFeatureEnabled: (state) => state.tfaFeatureEnabled,
+    isExternalUser: (state) => state.isExternalUser,
   },
   mutations: {
     authSuccess(state) {
@@ -57,6 +59,8 @@ const AuthenticationStore = {
     setTfaEnabled: (state, tfaEnabled) => (state.tfaEnabled = tfaEnabled),
     setTfaFeatureEnabled: (state, tfaFeatureEnabled) =>
       (state.tfaFeatureEnabled = tfaFeatureEnabled),
+    setIsExternalUser: (state, isExternal) =>
+      (state.isExternalUser = isExternal),
   },
   actions: {
     login({ commit }, { username, password }) {
@@ -80,6 +84,13 @@ const AuthenticationStore = {
               commit('setTfaEnabled', response.data.TwoFacEnableStatus);
               commit('setTfaFeatureEnabled', true);
             }
+          }
+          if (response.data.RemoteUser) {
+            commit('setIsExternalUser', true);
+            localStorage.setItem('isExternalUser', 'true');
+          } else {
+            commit('setIsExternalUser', false);
+            localStorage.removeItem('isExternalUser');
           }
         })
         .catch((error) => {

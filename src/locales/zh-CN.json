@@ -1,5 +1,8 @@
 {
     "global": {
+        "alerts": {
+            "externalUserRestriction": "外部用户不允许配置外部服务器设置。"
+        },
         "action": {
             "add": "添加",
             "cancel": "取消",

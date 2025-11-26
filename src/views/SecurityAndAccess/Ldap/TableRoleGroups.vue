@@ -11,7 +11,7 @@
       <b-col class="text-right" md="9">
         <b-btn
           variant="primary"
-          :disabled="!isServiceEnabled"
+          :disabled="!isServiceEnabled || isExternalUser"
           @click="initRoleGroupModal(null)"
         >
           <icon-add />
@@ -159,6 +159,7 @@ export default {
   },
   computed: {
     ...mapGetters('ldap', ['isServiceEnabled', 'enabledRoleGroups']),
+    ...mapGetters('authentication', ['isExternalUser']),
     tableItems() {
       return this.enabledRoleGroups.map(({ LocalRole, RemoteGroup }) => {
         return {

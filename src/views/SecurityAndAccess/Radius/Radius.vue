@@ -9,6 +9,12 @@
               $t('pageRadius.radiusConfiguration')
             }}</b-alert>
           </div>
+          <div v-if="isExternalUser">
+            <b-alert show variant="warning">
+              {{ $t('global.alerts.externalUserRestriction') }}
+              Settings.
+            </b-alert>
+          </div>
         </b-col>
         <b-col xl="8">
           <b-row>
@@ -350,15 +356,14 @@
           </b-row>
           <b-row class="mt-4 mb-5">
             <b-col>
-              <b-btn
+              <b-button
                 variant="primary"
-                type="submit"
-                :disabled="isNotAdmin(userPrivilege)"
+                :disabled="$v.radius.$invalid || isExternalUser"
                 @click="SaveConfig"
               >
                 <icon-save />
                 {{ $t('global.action.save') }}
-              </b-btn>
+              </b-button>
             </b-col>
           </b-row>
         </b-col>
@@ -418,6 +423,7 @@ export default {
   computed: {
     ...mapState('radius', ['radiusValues']),
     ...mapGetters('global', ['userPrivilege']),
+    ...mapGetters('authentication', ['isExternalUser']),
   },
   watch: {
     radiusValues() {

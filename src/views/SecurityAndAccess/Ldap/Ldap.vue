@@ -1,6 +1,9 @@
 <template>
   <b-container fluid="xl">
     <page-title :description="$t('pageLdap.pageDescription')" />
+    <b-alert v-if="isExternalUser" show variant="warning">
+      {{ $t('global.alerts.externalUserRestriction') }}
+    </b-alert>
     <page-section :section-title="$t('pageLdap.settings')">
       <b-form novalidate @submit.prevent="handleSubmit">
         <b-row>
@@ -214,7 +217,7 @@
               variant="primary"
               type="submit"
               data-test-id="ldap-button-saveSettings"
-              :disabled="loading"
+              :disabled="loading || isExternalUser"
             >
               <icon-save />
               {{ $t('global.action.save') }}
@@ -285,6 +288,7 @@ export default {
       'ldap',
       'activeDirectory',
     ]),
+    ...mapGetters('authentication', ['isExternalUser']),
     sslCertificates() {
       return this.$store.getters['certificates/allCertificates'];
     },
