@@ -704,8 +704,9 @@
         "snmp": "SNMP",
         "sysLog": "Syslog",
         "uploadRestoreFiles": "Upload Restore File",
-        "checkAll": "Enable/Disable all Backup Properties",
+        "checkAll": "Check All",
         "tarFileOnly": "Upload Restore (.tar) files only",
+        "downloadBackupFileInfo": "Select any backup configuration to proceed with downloading a file.",
         "toast": {
             "successMessage": "Successfully downloaded the Property Backup Features.",
             "errorMessage": "The Property Backup Features are not in the list of acceptable values.",

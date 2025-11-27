@@ -1,162 +1,87 @@
 <template>
   <b-container fluid="xl">
     <div class="form-background p-8">
+      <b-alert
+        v-if="isAllToggleButtonsDisabled"
+        show
+        variant="info"
+        class="mb-4"
+      >
+        <icon-information class="mr-2" />
+        {{ $t('pageBackupAndRestore.downloadBackupFileInfo') }}
+      </b-alert>
+
       <b-row>
-        <b-col md="9" lg="8" xl="9">
-          <b-form-group :label="$t('pageBackupAndRestore.checkAll')">
-            <b-form-checkbox
-              v-model="checkAll"
-              data-test-id="checkAllBackup"
-              switch
-              @change="toggleAllButtons"
-            >
-              <span v-if="checkAll">{{ $t('global.status.enabled') }}</span>
-              <span v-else>{{ $t('global.status.disabled') }}</span>
-            </b-form-checkbox>
-          </b-form-group>
+        <b-col sm="6" md="3">
+          <b-form-checkbox
+            v-model="checkAll"
+            data-test-id="checkAllBackup"
+            @change="toggleAllButtons"
+          >
+            {{ $t('pageBackupAndRestore.checkAll') }}
+          </b-form-checkbox>
+          <hr class="my-3" style="border-color: #e9ecef" />
         </b-col>
       </b-row>
-      <b-row v-if="togglebuttons.SMTP != undefined">
-        <b-col class="d-flex" cols="2">
-          <dl class="mr-3 w-10">
-            <dd class="font_style">
-              {{ $t('pageBackupAndRestore.smtp') }}
-            </dd>
-          </dl>
-        </b-col>
-        <b-col cols="10">
-          <b-form-checkbox id="smtp" v-model="togglebuttons.SMTP" switch>
-            <span v-if="togglebuttons.SMTP">{{
-              $t('global.status.enabled')
-            }}</span>
-            <span v-else>{{ $t('global.status.disabled') }}</span>
+      <b-row v-if="togglebuttons.SMTP != undefined" class="mb-2">
+        <b-col cols="12">
+          <b-form-checkbox id="smtp" v-model="togglebuttons.SMTP">
+            {{ $t('pageBackupAndRestore.smtp') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row v-if="hide">
-        <b-col class="d-flex" cols="2">
-          <dl class="mr-3 w-10">
-            <dd class="font_style">
-              {{ $t('pageBackupAndRestore.authentication') }}
-            </dd>
-          </dl>
-        </b-col>
-        <b-col cols="10">
+      <b-row v-if="hide" class="mb-2">
+        <b-col cols="12">
           <b-form-checkbox
             id="Authentication"
             v-model="togglebuttons.Authentication"
-            switch
           >
-            <span v-if="togglebuttons.Authentication">{{
-              $t('global.status.enabled')
-            }}</span>
-            <span v-else>{{ $t('global.status.disabled') }}</span>
+            {{ $t('pageBackupAndRestore.authentication') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row v-if="togglebuttons.VirtualMedia != undefined">
-        <b-col class="d-flex" cols="2">
-          <dl class="mr-3 w-10">
-            <dd class="font_style">
-              {{ $t('pageBackupAndRestore.virtualMedia') }}
-            </dd>
-          </dl>
-        </b-col>
-        <b-col cols="10">
+      <b-row v-if="togglebuttons.VirtualMedia != undefined" class="mb-2">
+        <b-col cols="12">
           <b-form-checkbox
             id="virtualMedia"
             v-model="togglebuttons.VirtualMedia"
-            switch
           >
-            <span v-if="togglebuttons.VirtualMedia">{{
-              $t('global.status.enabled')
-            }}</span>
-            <span v-else>{{ $t('global.status.disabled') }}</span>
+            {{ $t('pageBackupAndRestore.virtualMedia') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row v-if="hide">
-        <b-col class="d-flex" cols="2">
-          <dl class="mr-3 w-10">
-            <dd class="font_style">
-              {{ $t('pageBackupAndRestore.ipmi') }}
-            </dd>
-          </dl>
-        </b-col>
-        <b-col cols="10">
-          <b-form-checkbox id="ipmi" v-model="togglebuttons.IPMI" switch>
-            <span v-if="togglebuttons.IPMI">{{
-              $t('global.status.enabled')
-            }}</span>
-            <span v-else>{{ $t('global.status.disabled') }}</span>
+      <b-row v-if="hide" class="mb-2">
+        <b-col cols="12">
+          <b-form-checkbox id="ipmi" v-model="togglebuttons.IPMI">
+            {{ $t('pageBackupAndRestore.ipmi') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row v-if="togglebuttons.Network != undefined">
-        <b-col class="d-flex" cols="2">
-          <dl class="mr-3 w-10">
-            <dd class="font_style">
-              {{ $t('pageBackupAndRestore.network') }}
-            </dd>
-          </dl>
-        </b-col>
-        <b-col cols="10">
-          <b-form-checkbox id="network" v-model="togglebuttons.Network" switch>
-            <span v-if="togglebuttons.Network">{{
-              $t('global.status.enabled')
-            }}</span>
-            <span v-else>{{ $t('global.status.disabled') }}</span>
+      <b-row v-if="togglebuttons.Network != undefined" class="mb-2">
+        <b-col cols="12">
+          <b-form-checkbox id="network" v-model="togglebuttons.Network">
+            {{ $t('pageBackupAndRestore.network') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row v-if="togglebuttons.NTP != undefined">
-        <b-col class="d-flex" cols="2">
-          <dl class="mr-3 w-10">
-            <dd class="font_style">
-              {{ $t('pageBackupAndRestore.ntp') }}
-            </dd>
-          </dl>
-        </b-col>
-        <b-col cols="10">
-          <b-form-checkbox id="ntp" v-model="togglebuttons.NTP" switch>
-            <span v-if="togglebuttons.NTP">{{
-              $t('global.status.enabled')
-            }}</span>
-            <span v-else>{{ $t('global.status.disabled') }}</span>
+      <b-row v-if="togglebuttons.NTP != undefined" class="mb-2">
+        <b-col cols="12">
+          <b-form-checkbox id="ntp" v-model="togglebuttons.NTP">
+            {{ $t('pageBackupAndRestore.ntp') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row v-if="hide">
-        <b-col class="d-flex" cols="2">
-          <dl class="mr-3 w-10">
-            <dd class="font_style">
-              {{ $t('pageBackupAndRestore.snmp') }}
-            </dd>
-          </dl>
-        </b-col>
-        <b-col cols="10">
-          <b-form-checkbox id="snmp" v-model="togglebuttons.SNMP" switch>
-            <span v-if="togglebuttons.SNMP">{{
-              $t('global.status.enabled')
-            }}</span>
-            <span v-else>{{ $t('global.status.disabled') }}</span>
+      <b-row v-if="hide" class="mb-2">
+        <b-col cols="12">
+          <b-form-checkbox id="snmp" v-model="togglebuttons.SNMP">
+            {{ $t('pageBackupAndRestore.snmp') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row v-if="hide">
-        <b-col class="d-flex" cols="2">
-          <dl class="mr-3 w-10">
-            <dd class="font_style">
-              {{ $t('pageBackupAndRestore.sysLog') }}
-            </dd>
-          </dl>
-        </b-col>
-        <b-col cols="10">
-          <b-form-checkbox id="sysLog" v-model="togglebuttons.SysLog" switch>
-            <span v-if="togglebuttons.SysLog">{{
-              $t('global.status.enabled')
-            }}</span>
-            <span v-else>{{ $t('global.status.disabled') }}</span>
+      <b-row v-if="hide" class="mb-2">
+        <b-col cols="12">
+          <b-form-checkbox id="sysLog" v-model="togglebuttons.SysLog">
+            {{ $t('pageBackupAndRestore.sysLog') }}
           </b-form-checkbox>
         </b-col>
       </b-row>
@@ -166,7 +91,7 @@
             class="mt-2"
             type="submit"
             variant="primary"
-            :disabled="isButtonDisable"
+            :disabled="isButtonDisable || isAllToggleButtonsDisabled"
             @click="handleDownload"
             ><icon-download />
             {{ $t('global.action.download') }}
@@ -181,12 +106,13 @@
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import IconDownload from '@carbon/icons-vue/es/document--download/20';
+import IconInformation from '@carbon/icons-vue/es/information/20';
 import { mapState } from 'vuex';
 import { privilegesId } from '@/store/modules/GlobalStore';
 import { mapGetters } from 'vuex';
 export default {
   name: 'Backup',
-  components: { IconDownload },
+  components: { IconDownload, IconInformation },
   mixins: [BVToastMixin, LoadingBarMixin],
   props: {
     tabIndex: {
@@ -206,6 +132,9 @@ export default {
     ...mapGetters('global', ['userPrivilege']),
     isButtonDisable() {
       return this.userPrivilege !== privilegesId.admin;
+    },
+    isAllToggleButtonsDisabled() {
+      return Object.values(this.togglebuttons).every((value) => !value);
     },
   },
   watch: {

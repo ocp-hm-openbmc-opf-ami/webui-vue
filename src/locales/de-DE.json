@@ -703,8 +703,9 @@
         "snmp": "SNMP",
         "sysLog": "Syslog",
         "uploadRestoreFiles": "Wiederherstellungsdatei hochladen",
-        "checkAll": "Alle Sicherungseigenschaften aktivieren/deaktivieren",
+        "checkAll": "Alle auswählen",
         "tarFileOnly": "Nur Wiederherstellungsdateien (.tar) hochladen",
+        "downloadBackupFileInfo": "Wählen Sie eine beliebige Sicherungskonfiguration aus, um mit dem Herunterladen einer Datei fortzufahren.",
         "toast": {
             "successMessage": "Die Sicherungseigenschaften wurden erfolgreich heruntergeladen.",
             "errorMessage": "Die Sicherungseigenschaften sind nicht in der Liste der zulässiger Werte.",

@@ -32,7 +32,7 @@ const FactoryDefaultStore = {
     async saveResetDefault() {
       const data = { ResetType: 'ResetAll' };
       return await api
-        .post('/redfish/v1/Managers/bmc/ResetToDefaults', data)
+        .post('/redfish/v1/Managers/bmc/Actions/Manager.ResetToDefaults', data)
         .then(() => i18n.t('PageFactoryDefault.toast.restoreToDefaultsSuccess'))
         .catch((error) => {
           console.log(error);
