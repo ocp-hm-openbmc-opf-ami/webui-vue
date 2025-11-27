@@ -19,6 +19,11 @@ const SystemInventoryStore = {
     memoryAssembly: [],
     memoryMetrics: [],
     baseBoardId: '',
+    storageInfo: [],
+    storageControllersInfo: [],
+    storageDrivesInfo: [],
+    storageVolumesInfo: [],
+    simpleStorageInfo: [],
   },
   getters: {
     systems: (state) => state.systems,
@@ -39,6 +44,11 @@ const SystemInventoryStore = {
     memoryAssembly: (state) => state.memoryAssembly,
     memoryMetrics: (state) => state.memoryMetrics,
     baseBoardId: (state) => state.baseBoardId,
+    storageInfo: (state) => state.storageInfo,
+    storageControllersInfo: (state) => state.storageControllersInfo,
+    storageDrivesInfo: (state) => state.storageDrivesInfo,
+    storageVolumesInfo: (state) => state.storageVolumesInfo,
+    simpleStorageInfo: (state) => state.simpleStorageInfo,
   },
   mutations: {
     setSystems: (state, systems) => (state.systems = systems),
@@ -67,6 +77,15 @@ const SystemInventoryStore = {
     setMemoryMetrics: (state, memoryMetrics) =>
       (state.memoryMetrics = memoryMetrics),
     setBaseBoardId: (state, baseBoardId) => (state.baseBoardId = baseBoardId),
+    setStorageInfo: (state, storageInfo) => (state.storageInfo = storageInfo),
+    setStorageControllersInfo: (state, storageControllersInfo) =>
+      (state.storageControllersInfo = storageControllersInfo),
+    setStorageDrivesInfo: (state, storageDrivesInfo) =>
+      (state.storageDrivesInfo = storageDrivesInfo),
+    setStorageVolumesInfo: (state, storageVolumesInfo) =>
+      (state.storageVolumesInfo = storageVolumesInfo),
+    setSimpleStorageInfo: (state, simpleStorageInfo) =>
+      (state.simpleStorageInfo = simpleStorageInfo),
   },
   actions: {
     async getSystemsInfo({ commit }) {
@@ -748,6 +767,156 @@ const SystemInventoryStore = {
           console.log(error);
           commit('setBaseBoardId', '');
         });
+    },
+    async getStorageInfo({ commit }) {
+      const storageInfo = [];
+      const storageControllersInfo = [];
+      const storageDrivesInfo = [];
+      const storageVolumesInfo = [];
+      return await api
+        .get('/redfish/v1/Systems/system/Storage')
+        .then(({ data: { Members = [] } = {} }) =>
+          Members.filter((member) =>
+            member['@odata.id'].includes('/StorageUnit_'),
+          ).map((member) => api.get(member['@odata.id'])),
+        )
+        .then((promises) => api.all(promises))
+        .then(async (response) => {
+          await Promise.all(
+            response.map(async ({ data }) => {
+              const storageInfoData = {
+                id: data?.Id || 'NA',
+                name: data?.Name || 'NA',
+                description: data?.Description || 'NA',
+                state: data?.Status?.State || 'NA',
+                health: data?.Status?.Health || 'NA',
+              };
+              storageInfo.push(storageInfoData);
+              if (data?.Controllers != undefined) {
+                await api
+                  .get(data?.Controllers['@odata.id'])
+                  .then(({ data: { Members = [] } = {} }) =>
+                    Members.map((member) => api.get(member['@odata.id'])),
+                  )
+                  .then((promises) => api.all(promises))
+                  .then(async (response) => {
+                    await Promise.all(
+                      response.map(async ({ data }) => {
+                        const controller = data;
+                        const storageControllersInfoData = {
+                          id: controller?.Id || 'NA',
+                          name: controller?.Name || 'NA',
+                          assetTag: controller?.AssetTag || 'NA',
+                          model: controller?.Model || 'NA',
+                          serialNumber: controller?.SerialNumber || 'NA',
+                          firmwareVersion: controller?.FirmwareVersion || 'NA',
+                          speedGbps: controller?.SpeedGbps || 'NA',
+                          supportedControllerProtocols:
+                            controller?.SupportedControllerProtocols &&
+                            Array.isArray(
+                              controller.SupportedControllerProtocols,
+                            )
+                              ? controller.SupportedControllerProtocols.join(
+                                  ', ',
+                                )
+                              : 'NA',
+                          supportedDeviceProtocols:
+                            controller?.SupportedDeviceProtocols &&
+                            Array.isArray(controller.SupportedDeviceProtocols)
+                              ? controller.SupportedDeviceProtocols.join(', ')
+                              : 'NA',
+                          state: controller?.Status?.State || 'NA',
+                          health: controller?.Status?.Health || 'NA',
+                        };
+                        storageControllersInfo.push(storageControllersInfoData);
+                      }),
+                    );
+                  });
+              }
+              if (data?.Volumes != undefined) {
+                await api
+                  .get(data?.Volumes['@odata.id'])
+                  .then(({ data: { Members = [] } = {} }) =>
+                    Members.map((member) => api.get(member['@odata.id'])),
+                  )
+                  .then((promises) => api.all(promises))
+                  .then(async (response) => {
+                    await Promise.all(
+                      response.map(async ({ data }) => {
+                        const volume = data;
+                        const storageVolumesInfoData = {
+                          id: volume?.Id || 'NA',
+                          name: volume?.Name || 'NA',
+                          blockSizeBytes: volume?.BlockSizeBytes || 'NA',
+                          capacityBytes: volume?.CapacityBytes || 'NA',
+                          state: volume?.Status?.State || 'NA',
+                          health: volume?.Status?.Health || 'NA',
+                        };
+                        storageVolumesInfo.push(storageVolumesInfoData);
+                      }),
+                    );
+                  });
+              }
+              if (data?.Drives.length > 0) {
+                data?.Drives.map(async (drives) => {
+                  await api.get(drives['@odata.id']).then((responses) => {
+                    const drivesData = responses.data || {};
+                    const storageDrivesInfoData = {
+                      id: drivesData?.Id || 'NA',
+                      name: drivesData?.Name || 'NA',
+                      manufacturer: drivesData?.Manufacturer || 'NA',
+                      model: drivesData?.Model || 'NA',
+                      mediaType: drivesData?.MediaType || 'NA',
+                      serialNumber: drivesData?.SerialNumber || 'NA',
+                      protocol: drivesData?.Protocol || 'NA',
+                      blockSizeBytes: drivesData?.BlockSizeBytes || 'NA',
+                      capacityBytes: drivesData?.CapacityBytes || 'NA',
+                      encryptionAbility: drivesData?.EncryptionAbility || 'NA',
+                      revision: drivesData?.Revision || 'NA',
+                      readyToRemove: drivesData?.ReadyToRemove || 'NA',
+                      state: drivesData?.Status?.State || 'NA',
+                      health: drivesData?.Status?.Health || 'NA',
+                    };
+                    storageDrivesInfo.push(storageDrivesInfoData);
+                  });
+                });
+              }
+            }),
+          );
+          commit('setStorageInfo', storageInfo);
+          commit('setStorageControllersInfo', storageControllersInfo);
+          commit('setStorageDrivesInfo', storageDrivesInfo);
+          commit('setStorageVolumesInfo', storageVolumesInfo);
+        })
+        .catch((error) => console.log(error));
+    },
+    async getSimpleStorageInfo({ commit }) {
+      const simpleStorageInfo = [];
+      return await api
+        .get('/redfish/v1/Systems/system/SimpleStorage')
+        .then(({ data: { Members = [] } = {} }) =>
+          Members.filter((member) =>
+            member['@odata.id'].split('/').pop().match(/^\d+$/),
+          ).map((member) => api.get(member['@odata.id'])),
+        )
+        .then((promises) => api.all(promises))
+        .then(async (response) => {
+          await Promise.all(
+            response.map(async ({ data }) => {
+              const simpleStorage = data;
+              const simpleStorageInfoData = {
+                id: simpleStorage?.Id || 'NA',
+                name: simpleStorage?.Name || 'NA',
+                uefiDevicePath: simpleStorage?.UefiDevicePath || 'NA',
+                state: simpleStorage?.Status?.State || 'NA',
+                health: simpleStorage?.Status?.Health || 'NA',
+              };
+              simpleStorageInfo.push(simpleStorageInfoData);
+            }),
+          );
+          commit('setSimpleStorageInfo', simpleStorageInfo);
+        })
+        .catch((error) => console.log(error));
     },
   },
 };

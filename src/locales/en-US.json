@@ -629,27 +629,62 @@
         },
         "storage": {
             "storage": "Storage",
-            "storageDriveInfo": "Storage Drive Info",
+            "storageInfo": "Storage Information",
+            "storageControllerInfo": "Storage Controller Information",
+            "storageDriveInfo": "Storage Drive Information",
+            "storageVolumeInfo": "Storage Volume Information",
+            "simpleStorageInfo": "Simple Storage Information"
+        },
+        "storageInfo": {
             "id": "ID",
             "name": "Name",
-            "serialNumuber": "Serial Number",
-            "manufacturer": "Manufacturer",
-            "protocol": "Protocol",
-            "model": "Model",
-            "revision": "Revision",
-            "encryptionStatus": "Encryption Status",
-            "mediaType": "MediaType",
-            "state": "State"
+            "description": "Description",
+            "state": "State",
+            "health": "Health"
         },
         "storageController": {
-            "storageControllerInfo": "Storage Controller Info",
-            "memberId": "Member ID",
+            "id": "ID",
             "name": "Name",
-            "serialNumuber": "Serial Number",
             "model": "Model",
+            "assetTag": "Asset Tag",
+            "serialNumber": "Serial Number",
             "firmwareVersion": "Firmware Version",
-            "speedGbs": "Speed Gbs",
-            "state": "State"
+            "speedGbps": "Speed Gbps",
+            "supportedControllerProtocols": "Supported Controller Protocols",
+            "supportedDeviceProtocols": "Supported Device Protocols",
+            "state": "State",
+            "health": "Health"
+        },
+        "storageDrive": {
+            "id": "ID",
+            "name": "Name",
+            "manufacturer": "Manufacturer",
+            "model": "Model",
+            "mediaType": "Media Type",
+            "serialNumber": "Serial Number",
+            "protocol": "Protocol",
+            "blockSizeBytes":"Block Size Bytes",
+            "capacityBytes": "Capacity Bytes",
+            "encryptionAbility": "Encryption Ability",
+            "revision": "Revision",
+            "readyToRemove": "Ready To Remove",
+            "state": "State",
+            "health": "Health"
+        },
+        "storageVolume": {
+            "id": "ID",
+            "name": "Name",
+            "blockSizeBytes": "Block Size Bytes",
+            "capacityBytes": "Capacity Bytes",
+            "state": "State",
+            "health": "Health"
+        },
+        "simpleStorage": {
+            "id": "ID",
+            "name": "Name",
+            "uefiDevicePath": "UEFI Device Path",
+            "state": "State",
+            "health": "Health"
         },
         "memoryAssembly" : {
             "assemblyInfo": "Memory Assembly Info",

@@ -69,16 +69,17 @@
             <b>{{ $t('pageSystemInventory.pcieFunction.pcieFunctionInfo') }}</b
             ><pcie-function class="mt-2"></pcie-function>
           </b-tab>
-          <b-tab
-            v-if="hideTab"
-            :title="$t('pageSystemInventory.storage.storage')"
-          >
+          <b-tab :title="$t('pageSystemInventory.storage.storage')">
+            <b>{{ $t('pageSystemInventory.storage.storageInfo') }}</b>
+            <storage-information class="mt-2"></storage-information>
+            <b>{{ $t('pageSystemInventory.storage.storageControllerInfo') }}</b>
+            <storage-controller class="mt-2"></storage-controller>
             <b>{{ $t('pageSystemInventory.storage.storageDriveInfo') }}</b>
             <storage-drive class="mt-2"></storage-drive>
-            <b>{{
-              $t('pageSystemInventory.storageController.storageControllerInfo')
-            }}</b>
-            <storage-controller class="mt-2"></storage-controller>
+            <b>{{ $t('pageSystemInventory.storage.storageVolumeInfo') }}</b>
+            <storage-volume class="mt-2"></storage-volume>
+            <b>{{ $t('pageSystemInventory.storage.simpleStorageInfo') }}</b>
+            <simple-storage class="mt-2"></simple-storage>
           </b-tab>
         </b-tabs>
       </b-card>
@@ -99,12 +100,15 @@ import Thermal from './Thermal.vue';
 import Temperature from './Temperature.vue';
 import PcieDevice from './PcieDevice.vue';
 import PcieFunction from './PcieFunction.vue';
-import StorageDrive from './StorageDrive.vue';
+import StorageInformation from './StorageInformation.vue';
 import StorageController from './StorageController.vue';
+import StorageDrive from './StorageDrive.vue';
+import StorageVolume from './StorageVolume.vue';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import Fpga from './FPGA.vue';
 import MemoryAssembly from './Assembly.vue';
 import MemoryMetrics from './MemoryMetrics.vue';
+import SimpleStorage from './SimpleStorage.vue';
 export default {
   name: 'SystemInventory',
   components: {
@@ -121,8 +125,11 @@ export default {
     Temperature,
     PcieDevice,
     PcieFunction,
-    StorageDrive,
+    StorageInformation,
     StorageController,
+    StorageDrive,
+    StorageVolume,
+    SimpleStorage,
     Fpga,
     MemoryAssembly,
     MemoryMetrics,
@@ -196,9 +203,9 @@ export default {
           );
           break;
         case 8: // Storage (if shown)
+          apiCalls.push(this.$store.dispatch('SystemStore/getStorageInfo'));
           apiCalls.push(
-            this.$store.dispatch('SystemStore/getStorageDriveInfo'),
-            this.$store.dispatch('SystemStore/getStorageControllerInfo'),
+            this.$store.dispatch('SystemStore/getSimpleStorageInfo'),
           );
           break;
         default:

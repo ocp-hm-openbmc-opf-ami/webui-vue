@@ -628,27 +628,62 @@
         },
         "storage": {
             "storage": "存储",
+            "storageInfo": "存储信息",
+            "storageControllerInfo": "存储控制器信息",
             "storageDriveInfo": "存储驱动器信息",
+            "storageVolumeInfo": "存储卷信息",
+            "simpleStorageInfo": "简单存储信息"
+        },
+        "storageInfo": {
             "id": "ID",
             "name": "名称",
-            "serialNumuber": "序列号",
-            "manufacturer": "制造商",
-            "protocol": "协议",
-            "model": "型号",
-            "revision": "修订",
-            "encryptionStatus": "加密状态",
-            "mediaType": "媒体类型",
-            "state": "状态"
+            "description": "描述",
+            "state": "状态",
+            "health": "健康"
         },
         "storageController": {
-            "storageControllerInfo": "存储控制器信息",
-            "memberId": "成员 ID",
+            "id": "ID",
             "name": "名称",
-            "serialNumuber": "序列号",
             "model": "型号",
+            "assetTag": "资产标签",
+            "serialNumber": "序列号",
             "firmwareVersion": "固件版本",
-            "speedGbs": "速度 Gbs",
-            "state": "状态"
+            "speedGbps": "速度 Gbps",
+            "supportedControllerProtocols": "支持的控制器协议",
+            "supportedDeviceProtocols": "支持的设备协议",
+            "state": "状态",
+            "health": "健康"
+        },
+        "storageDrive": {
+            "id": "ID",
+            "name": "名称",
+            "manufacturer": "制造商",
+            "model": "型号",
+            "mediaType": "媒体类型",
+            "serialNumber": "序列号",
+            "protocol": "协议",
+            "blockSizeBytes":"块大小字节数",
+            "capacityBytes": "容量字节数",
+            "encryptionAbility": "加密能力",
+            "revision": "修订版本",
+            "readyToRemove": "准备移除",
+            "state": "状态",
+            "health": "健康"
+        },
+        "storageVolume": {
+            "id": "ID",
+            "name": "名称",
+            "blockSizeBytes": "块大小字节数",
+            "capacityBytes": "容量字节数",
+            "state": "状态",
+            "health": "健康"
+        },
+        "simpleStorage": {
+            "id": "ID",
+            "name": "名称",
+            "uefiDevicePath": "UEFI 设备路径",
+            "state": "状态",
+            "health": "健康"
         },
         "memoryAssembly" : {
             "assemblyInfo": "内存组件信息",

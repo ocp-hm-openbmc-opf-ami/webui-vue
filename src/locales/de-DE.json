@@ -628,27 +628,62 @@
         },
         "storage": {
             "storage": "Speicher",
-            "storageDriveInfo": "Speicherlaufwerksinformationen",
+            "storageInfo": "Speicherinformationen",
+            "storageControllerInfo": "Speichercontroller-Informationen",
+            "storageDriveInfo": "Speicherlaufwerk-Informationen",
+            "storageVolumeInfo": "Speichervolume-Informationen",
+            "simpleStorageInfo": "Einfache Speicherinformationen"
+        },
+        "storageInfo": {
             "id": "ID",
             "name": "Name",
-            "serialNumuber": "Seriennummer",
-            "manufacturer": "Hersteller",
-            "protocol": "Protokoll",
-            "model": "Modell",
-            "revision": "Revision",
-            "encryptionStatus": "Verschlüsselungsstatus",
-            "mediaType": "Medientyp",
-            "state": "Zustand"
+            "description": "Beschreibung",
+            "state": "Zustand",
+            "health": "Funktionszustand"
         },
         "storageController": {
-            "storageControllerInfo": "Speichercontroller-Informationen",
-            "memberId": "Mitglieds-ID",
+            "id": "ID",
             "name": "Name",
-            "serialNumuber": "Seriennummer",
             "model": "Modell",
+            "assetTag": "Inventarkennzeichen",
+            "serialNumber": "Seriennummer",
             "firmwareVersion": "Firmware-Version",
-            "speedGbs": "Geschwindigkeit Gbs",
-            "state": "Zustand"
+            "speedGbps": "Geschwindigkeit Gbps",
+            "supportedControllerProtocols": "Unterstützte Controller-Protokolle",
+            "supportedDeviceProtocols": "Unterstützte Geräteprotokolle",
+            "state": "Zustand",
+            "health": "Funktionszustand"
+        },
+        "storageDrive": {
+            "id": "ID",
+            "name": "Name",
+            "manufacturer": "Hersteller",
+            "model": "Modell",
+            "mediaType": "Medientyp",
+            "serialNumber": "Seriennummer",
+            "protocol": "Protokoll",
+            "blockSizeBytes":"Blockgröße Bytes",
+            "capacityBytes": "Kapazität Bytes",
+            "encryptionAbility": "Verschlüsselungsfähigkeit",
+            "revision": "Revision",
+            "readyToRemove": "Bereit zum Entfernen",
+            "state": "Zustand",
+            "health": "Funktionszustand"
+        },
+        "storageVolume": {
+            "id": "ID",
+            "name": "Name",
+            "blockSizeBytes": "Blockgröße Bytes",
+            "capacityBytes": "Kapazität Bytes",
+            "state": "Zustand",
+            "health": "Funktionszustand"
+        },
+        "simpleStorage": {
+            "id": "ID",
+            "name": "Name",
+            "uefiDevicePath": "UEFI-Gerätepfad",
+            "state": "Zustand",
+            "health": "Funktionszustand"
         },
         "memoryAssembly": {
             "assemblyInfo": "Speicherbaugruppen-Informationen",

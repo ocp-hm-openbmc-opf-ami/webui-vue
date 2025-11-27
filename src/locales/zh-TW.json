@@ -627,28 +627,63 @@
             "state": "狀態"
         },
         "storage": {
-            "storage": "儲存",
-            "storageDriveInfo": "儲存設備資訊",
+            "storage": "儲存裝置",
+            "storageInfo": "儲存資訊",
+            "storageControllerInfo": "儲存控制器資訊",
+            "storageDriveInfo": "儲存磁碟機資訊",
+            "storageVolumeInfo": "儲存磁碟區資訊",
+            "simpleStorageInfo": "簡易儲存資訊"
+        },
+        "storageInfo": {
             "id": "ID",
             "name": "名稱",
-            "serialNumuber": "序號",
-            "manufacturer": "製造商",
-            "protocol": "協定",
-            "model": "模型",
-            "revision": "修訂",
-            "encryptionStatus": "加密狀態",
-            "mediaType": "媒體類型",
-            "state": "狀態"
+            "description": "描述",
+            "state": "狀態",
+            "health": "健康"
         },
         "storageController": {
-            "storageControllerInfo": "儲存控制器資訊",
-            "memberId": "會員 ID",
+            "id": "ID",
             "name": "名稱",
-            "serialNumuber": "序號",
-            "model": "模型",
+            "model": "型號",
+            "assetTag": "資產標籤",
+            "serialNumber": "序號",
             "firmwareVersion": "韌體版本",
-            "speedGbs": "速度 Gbs",
-            "state": "狀態"
+            "speedGbps": "速度 Gbps",
+            "supportedControllerProtocols": "支援的控制器協定",
+            "supportedDeviceProtocols": "支援的裝置協定",
+            "state": "狀態",
+            "health": "健康"
+        },
+        "storageDrive": {
+            "id": "ID",
+            "name": "名稱",
+            "manufacturer": "製造商",
+            "model": "型號",
+            "mediaType": "媒體類型",
+            "serialNumber": "序號",
+            "protocol": "協定",
+            "blockSizeBytes":"區塊大小位元組",
+            "capacityBytes": "容量位元組",
+            "encryptionAbility": "加密能力",
+            "revision": "修訂版",
+            "readyToRemove": "準備移除",
+            "state": "狀態",
+            "health": "健康"
+        },
+        "storageVolume": {
+            "id": "ID",
+            "name": "名稱",
+            "blockSizeBytes": "區塊大小位元組",
+            "capacityBytes": "容量位元組",
+            "state": "狀態",
+            "health": "健康"
+        },
+        "simpleStorage": {
+            "id": "ID",
+            "name": "名稱",
+            "uefiDevicePath": "UEFI 裝置路徑",
+            "state": "狀態",
+            "health": "健康"
         },
         "memoryAssembly" : {
             "assemblyInfo": "記憶體組件資訊",

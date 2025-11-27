@@ -6,6 +6,7 @@
       sticky-header
       show-empty
       :fields="storageControllerFields"
+      :items="storageControllersInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -17,20 +18,24 @@ export default {
     return {
       storageControllerFields: [
         {
-          key: 'memberId',
-          label: this.$t('pageSystemInventory.storageController.memberId'),
+          key: 'id',
+          label: this.$t('pageSystemInventory.storageController.id'),
         },
         {
           key: 'name',
           label: this.$t('pageSystemInventory.storageController.name'),
         },
         {
-          key: 'serialNmuber',
-          label: this.$t('pageSystemInventory.storageController.serialNmuber'),
+          key: 'assetTag',
+          label: this.$t('pageSystemInventory.storageController.assetTag'),
         },
         {
           key: 'model',
           label: this.$t('pageSystemInventory.storageController.model'),
+        },
+        {
+          key: 'serialNumber',
+          label: this.$t('pageSystemInventory.storageController.serialNumber'),
         },
         {
           key: 'firmwareVersion',
@@ -39,15 +44,36 @@ export default {
           ),
         },
         {
-          key: 'speedGbs',
-          label: this.$t('pageSystemInventory.storageController.speedGbs'),
+          key: 'speedGbps',
+          label: this.$t('pageSystemInventory.storageController.speedGbps'),
+        },
+        {
+          key: 'supportedControllerProtocols',
+          label: this.$t(
+            'pageSystemInventory.storageController.supportedControllerProtocols',
+          ),
+        },
+        {
+          key: 'supportedDeviceProtocols',
+          label: this.$t(
+            'pageSystemInventory.storageController.supportedDeviceProtocols',
+          ),
         },
         {
           key: 'state',
           label: this.$t('pageSystemInventory.storageController.state'),
         },
+        {
+          key: 'health',
+          label: this.$t('pageSystemInventory.storageController.health'),
+        },
       ],
     };
+  },
+  computed: {
+    storageControllersInfo() {
+      return this.$store.getters['SystemStore/storageControllersInfo'];
+    },
   },
 };
 </script>

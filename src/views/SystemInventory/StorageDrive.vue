@@ -5,7 +5,8 @@
       hover
       sticky-header
       show-empty
-      :fields="storageFields"
+      :fields="storageDriveFields"
+      :items="storageDrivesInfo"
       head-variant="light"
     ></b-table>
   </div>
@@ -15,45 +16,70 @@
 export default {
   data() {
     return {
-      storageFields: [
+      storageDriveFields: [
         {
-          key: 'name',
-          label: this.$t('pageSystemInventory.storage.name'),
+          key: 'id',
+          label: this.$t('pageSystemInventory.storageDrive.id'),
         },
         {
-          key: 'serialNmuber',
-          label: this.$t('pageSystemInventory.storage.serialNmuber'),
+          key: 'name',
+          label: this.$t('pageSystemInventory.storageDrive.name'),
         },
         {
           key: 'manufacturer',
-          label: this.$t('pageSystemInventory.storage.manufacturer'),
-        },
-        {
-          key: 'protocol',
-          label: this.$t('pageSystemInventory.storage.protocol'),
+          label: this.$t('pageSystemInventory.storageDrive.manufacturer'),
         },
         {
           key: 'model',
-          label: this.$t('pageSystemInventory.storage.model'),
-        },
-        {
-          key: 'revision',
-          label: this.$t('pageSystemInventory.storage.revision'),
-        },
-        {
-          key: 'encryptionStatus',
-          label: this.$t('pageSystemInventory.storage.encryptionStatus'),
+          label: this.$t('pageSystemInventory.storageDrive.model'),
         },
         {
           key: 'mediaType',
-          label: this.$t('pageSystemInventory.storage.mediaType'),
+          label: this.$t('pageSystemInventory.storageDrive.mediaType'),
+        },
+        {
+          key: 'serialNumber',
+          label: this.$t('pageSystemInventory.storageDrive.serialNumber'),
+        },
+        {
+          key: 'protocol',
+          label: this.$t('pageSystemInventory.storageDrive.protocol'),
+        },
+        {
+          key: 'blockSizeBytes',
+          label: this.$t('pageSystemInventory.storageDrive.blockSizeBytes'),
+        },
+        {
+          key: 'capacityBytes',
+          label: this.$t('pageSystemInventory.storageDrive.capacityBytes'),
+        },
+        {
+          key: 'encryptionAbility',
+          label: this.$t('pageSystemInventory.storageDrive.encryptionAbility'),
+        },
+        {
+          key: 'revision',
+          label: this.$t('pageSystemInventory.storageDrive.revision'),
+        },
+        {
+          key: 'readyToRemove',
+          label: this.$t('pageSystemInventory.storageDrive.readyToRemove'),
         },
         {
           key: 'state',
-          label: this.$t('pageSystemInventory.storage.state'),
+          label: this.$t('pageSystemInventory.storageDrive.state'),
+        },
+        {
+          key: 'health',
+          label: this.$t('pageSystemInventory.storageDrive.health'),
         },
       ],
     };
+  },
+  computed: {
+    storageDrivesInfo() {
+      return this.$store.getters['SystemStore/storageDrivesInfo'];
+    },
   },
 };
 </script>

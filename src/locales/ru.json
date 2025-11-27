@@ -627,27 +627,62 @@
         },
         "storage": {
             "storage": "Хранилище",
+            "storageInfo": "Информация о хранилище",
+            "storageControllerInfo": "Информация о контроллере хранилища",
             "storageDriveInfo": "Информация о накопителе",
+            "storageVolumeInfo": "Информация о томе хранилища",
+            "simpleStorageInfo": "Информация о простом хранилище"
+        },
+        "storageInfo": {
             "id": "ID",
             "name": "Имя",
-            "serialNumuber": "Серийный номер",
-            "manufacturer": "Производитель",
-            "protocol": "Протокол",
-            "model": "Модель",
-            "revision": "Ревизия",
-            "encryptionStatus": "Статус шифрования",
-            "mediaType": "Тип носителя",
-            "state": "Состояние"
+            "description": "Описание",
+            "state": "Состояние",
+            "health": "Состояние"
         },
         "storageController": {
-            "storageControllerInfo": "Информация о контроллере хранилища",
-            "memberId": "ID члена",
+            "id": "ID",
             "name": "Имя",
-            "serialNumuber": "Серийный номер",
             "model": "Модель",
+            "assetTag": "Инвентарный номер",
+            "serialNumber": "Серийный номер",
             "firmwareVersion": "Версия встроенного ПО",
-            "speedGbs": "Скорость Гбит/с",
-            "state": "Состояние"
+            "speedGbps": "Скорость Гбит/с",
+            "supportedControllerProtocols": "Поддерживаемые протоколы контроллера",
+            "supportedDeviceProtocols": "Поддерживаемые протоколы устройства",
+            "state": "Состояние",
+            "health": "Состояние"
+        },
+        "storageDrive": {
+            "id": "ID",
+            "name": "Имя",
+            "manufacturer": "Производитель",
+            "model": "Модель",
+            "mediaType": "Тип носителя",
+            "serialNumber": "Серийный номер",
+            "protocol": "Протокол",
+            "blockSizeBytes":"Размер блока в байтах",
+            "capacityBytes": "Емкость в байтах",
+            "encryptionAbility": "Возможность шифрования",
+            "revision": "Ревизия",
+            "readyToRemove": "Готов к удалению",
+            "state": "Состояние",
+            "health": "Состояние"
+        },
+        "storageVolume": {
+            "id": "ID",
+            "name": "Имя",
+            "blockSizeBytes": "Размер блока в байтах",
+            "capacityBytes": "Емкость в байтах",
+            "state": "Состояние",
+            "health": "Состояние"
+        },
+        "simpleStorage": {
+            "id": "ID",
+            "name": "Имя",
+            "uefiDevicePath": "Путь устройства UEFI",
+            "state": "Состояние",
+            "health": "Состояние"
         },
         "memoryAssembly" : {
             "assemblyInfo": "Информация о сборке памяти",
