@@ -337,6 +337,33 @@
                 </b-form-group>
               </b-col>
             </b-row>
+            <b-row>
+              <b-col lg="6">
+                <b-form-group
+                  :label="$t('pageUserManagement.modal.email')"
+                  label-for="email"
+                >
+                  <b-form-text id="email-help-block">
+                    {{ $t('pageUserManagement.modal.emailOptional') }}
+                  </b-form-text>
+                  <b-form-input
+                    id="email"
+                    v-model="form.email"
+                    type="email"
+                    data-test-id="userManagement-input-email"
+                    aria-describedby="email-help-block"
+                    :state="getValidationState($v.form.email)"
+                    autocomplete="email"
+                    @input="$v.form.email.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.form.email.email">
+                      {{ $t('pageUserManagement.modal.invalidEmailFormat') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+            </b-row>
             <b-row v-if="form.snmpUserEnable">
               <b-col lg="6">
                 <b-form-group
@@ -534,6 +561,7 @@ import {
   maxLength,
   minLength,
   sameAs,
+  email,
   helpers,
   requiredIf,
 } from 'vuelidate/lib/validators';
@@ -567,6 +595,7 @@ export default {
         privilege: null,
         password: '',
         passwordConfirmation: '',
+        email: '',
         manualUnlock: false,
         PasswordChangeRequired: false,
         vmediaAccess: true,
@@ -687,6 +716,7 @@ export default {
         : null;
       this.form.channelAccess = [];
       this.form.channelList = [];
+      this.form.email = value.Oem?.Ami?.SMTP?.SMTPMailId || '';
       value?.Oem?.Ami?.ChannelPrivileges?.forEach((channelPrivilege) => {
         this.form.channelList.push(channelPrivilege.ChannelPrivilege);
         this.form.channelAccess.push(channelPrivilege.ChannelAccess);
@@ -747,6 +777,9 @@ export default {
           minLength: minLength(8),
           maxLength: maxLength(20),
           sameAsPassword: sameAs('password'),
+        },
+        email: {
+          email: email,
         },
         manualUnlock: {},
         PasswordChangeRequired: {
@@ -810,6 +843,7 @@ export default {
         userData.PasswordChangeRequired = this.form.PasswordChangeRequired;
         userData.accountTypes = this.dynamicAccountTypes;
         userData.password = this.form.password;
+        userData.email = this.form.email;
         userData.snmpUserEnable = this.form.snmpUserEnable;
         userData.encryption = this.form.encryption ? this.form.encryption : '';
         userData.algorithm = this.form.algorithm ? this.form.algorithm : '';
@@ -834,6 +868,9 @@ export default {
         }
         if (this.$v.form.password.$dirty) {
           userData.password = this.form.password;
+        }
+        if (this.form.email || this.form.email === '') {
+          userData.email = this.form.email;
         }
         if (this.$v.form.snmpUserEnable.$dirty) {
           userData.snmpUserEnable = this.form.snmpUserEnable;
@@ -878,6 +915,7 @@ export default {
       this.form.vmediaAccess = true;
       this.form.password = '';
       this.form.passwordConfirmation = '';
+      this.form.email = '';
       this.form.changePassword = false;
       this.form.snmpUserEnable = false;
       this.form.encryption = null;

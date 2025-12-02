@@ -110,6 +110,17 @@ const AuthenticationStore = {
           throw new Error(error);
         });
     },
+
+    async generateOtp(_, { username }) {
+      return await api.post('/generate_otp', { username });
+    },
+    async validateOtp(_, { username, verificationCode, password }) {
+      return await api.post('/validate_otp', {
+        username,
+        verificationcode: verificationCode,
+        password,
+      });
+    },
     async logout({ commit, dispatch }) {
       return await api
         .post('/logout', { data: [] })

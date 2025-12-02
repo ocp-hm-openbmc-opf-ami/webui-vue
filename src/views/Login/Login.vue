@@ -97,7 +97,21 @@
               :disabled="disableSubmitButton"
               >{{ $t('pageLogin.logIn') }}</b-button
             >
+            <div class="text-center mt-3">
+              <b-link
+                href="#"
+                data-test-id="login-link-forgot-password"
+                @click.prevent="handleForgotPassword"
+              >
+                {{ $t('pageLogin.forgotPassword.forgotPassword') }}
+              </b-link>
+            </div>
           </b-form>
+
+          <forgot-password-modal
+            ref="forgotPasswordModal"
+            :username="userInfo.username"
+          />
         </div>
       </b-card>
     </div>
@@ -115,7 +129,11 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 
 export default {
   name: 'Login',
-  components: { Alert, InputPasswordToggle },
+  components: {
+    Alert,
+    InputPasswordToggle,
+    ForgotPasswordModal: () => import('./ForgotPasswordModal'),
+  },
   mixins: [VuelidateMixin, BVToastMixin],
   data() {
     return {
@@ -174,6 +192,83 @@ export default {
     },
   },
   methods: {
+    async handleForgotPassword() {
+      if (!this.userInfo.username) {
+        this.errorToast(this.$t('pageLogin.forgotPassword.enterUsername'));
+        return;
+      }
+
+      const confirmed = await this.$bvModal.msgBoxConfirm(
+        this.$t('pageLogin.forgotPassword.confirmReset'),
+        {
+          title: this.$t('pageLogin.forgotPassword.title'),
+          okVariant: 'primary',
+          okTitle: this.$t('global.action.ok'),
+          cancelTitle: this.$t('global.action.cancel'),
+          hideHeaderClose: false,
+        },
+      );
+
+      if (confirmed) {
+        try {
+          await this.$store.dispatch('authentication/generateOtp', {
+            username: this.userInfo.username,
+          });
+          this.$refs.forgotPasswordModal.$refs.modal.show();
+        } catch (error) {
+          let errorMessage = error.message;
+
+          // Check for specific SMTP mail ID error
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.error &&
+            error.response.data.error ===
+              'SMTP Mail ID is not configured for user'
+          ) {
+            errorMessage = this.$t(
+              'pageLogin.forgotPassword.smtpMailIdNotConfigured',
+            );
+          }
+          // Check for specific SMTP server error
+          else if (
+            error.response &&
+            error.response.data &&
+            error.response.data.error &&
+            error.response.data.error === 'SMTP Server is not configured'
+          ) {
+            errorMessage = this.$t(
+              'pageLogin.forgotPassword.smtpServerNotConfigured',
+            );
+          }
+          // Check for SMTP email account or server not configured
+          else if (
+            error.response &&
+            error.response.data &&
+            error.response.data.error &&
+            error.response.data.error ===
+              'The user does not have an SMTP mail ID and SMTP server configured'
+          ) {
+            errorMessage = this.$t(
+              'pageLogin.forgotPassword.smtpEmailAccountOrServerNotConfigured',
+            );
+          }
+          // Check for failed to generate OTP code
+          else if (
+            error.response &&
+            error.response.data &&
+            error.response.data.error &&
+            error.response.data.error === 'Failed to generate OTP code'
+          ) {
+            errorMessage = this.$t(
+              'pageLogin.forgotPassword.failedToGenerateOtp',
+            );
+          }
+
+          this.errorToast(errorMessage);
+        }
+      }
+    },
     login: function () {
       this.$v.$touch();
       if (this.$v.$invalid) return;

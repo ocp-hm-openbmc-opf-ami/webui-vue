@@ -219,6 +219,10 @@ export default {
           label: this.$t('pageUserManagement.table.status'),
         },
         {
+          key: 'email',
+          label: this.$t('pageUserManagement.table.email'),
+        },
+        {
           key: 'snmpUserEnabled',
           label: this.$t('pageUserManagement.table.snmpUserEnable'),
           tdClass: 'text-nowrap',
@@ -569,6 +573,7 @@ export default {
             : user.Enabled
               ? 'Enabled'
               : 'Disabled',
+          email: user?.Oem?.Ami?.SMTP?.SMTPMailId || 'NA',
           snmpUserEnabled: user?.Oem?.Ami?.SNMP?.SNMPAccessEnableStatus
             ? 'Enabled'
             : 'Disabled',

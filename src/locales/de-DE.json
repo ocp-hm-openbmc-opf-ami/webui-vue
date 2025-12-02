@@ -40,7 +40,8 @@
             "start": "Starten",
             "stop": "Stoppen",
             "actions": "Aktionen",
-            "browse": "Durchsuchen"
+            "browse": "Durchsuchen",
+            "submit": "Senden"
         },
         "ariaLabel": {
             "clearSearch": "Sucheingabe löschen",
@@ -1728,12 +1729,16 @@
             "authProtocolsha512": "SHA-512",
             "logoutConfirmMessage": "Möchten Sie wirklich das Passwort für den angemeldeten Benutzer '%{user}' ändern? Dieser Benutzer wird abgemeldet und die Änderung wird erst bei der nächsten Anmeldung wirksam.",
             "logoutAlert": "Abmeldewarnung",
-            "channel": "Kanal"
+            "channel": "Kanal",
+            "email": "E-Mail",
+            "emailOptional": "Optional: Geben Sie eine gültige E-Mail-Adresse ein",
+            "invalidEmailFormat": "Bitte geben Sie eine gültige E-Mail-Adresse ein"
         },
         "table": {
             "privilege": "Berechtigung",
             "status": "Status",
             "username": "Benutzername",
+            "email": "E-Mail",
             "snmpUserEnable": "SNMP-Benutzer aktiviert",
             "algorithm": "Algorithmus",
             "readWritePermission": "Lese-/Schreibberechtigung",
@@ -1835,6 +1840,43 @@
         "alert": {
             "message": "Ungültiger Benutzername oder Passwort",
             "authLockmessage": "Maximale Anzahl an Anmeldeversuchen erreicht. Benutzerkonto gesperrt."
+        },
+        "forgotPassword": {
+            "forgotPassword": "Passwort vergessen",
+            "enterUsername": "Um Ihr Passwort zurückzusetzen, geben Sie bitte Ihren Benutzernamen ein.",
+            "confirmReset": "Sind Sie sicher, dass Sie Ihr Passwort zurücksetzen möchten?",
+            "title": "Passwort vergessen",
+            "link": "Passwort vergessen?",
+            "verificationCode": "Verifizierungscode",
+            "numericOnly": "Verifizierungscode darf nur Zahlen enthalten",
+            "newPassword": "Neues Passwort",
+            "passwordRequirements": "Passwort muss 8-20 Zeichen lang sein",
+            "passwordLength": "Passwort muss mindestens 8 Zeichen lang sein",
+            "confirmPassword": "Passwort bestätigen",
+            "passwordMismatch": "Passwörter stimmen nicht überein",
+            "successMessage": "Passwort erfolgreich zurückgesetzt. Bitte melden Sie sich mit Ihrem neuen Passwort an.",
+            "otpValidationError": "Die eingegebene OTP ist falsch oder abgelaufen. Bitte geben Sie eine gültige OTP ein.",
+            "smtpMailIdNotConfigured": "SMTP-Mail-ID nicht für Benutzer konfiguriert",
+            "smtpServerNotConfigured": "SMTP-Server ist nicht konfiguriert.",
+            "smtpEmailAccountOrServerNotConfigured": "Für diesen Benutzer ist kein SMTP-E-Mail-Konto und -Server konfiguriert.",
+            "failedToGenerateOtp": "Verbindung zum SMTP-Server konnte nicht hergestellt werden.",
+            "otpSentMessage": "OTP wurde an die konfigurierte E-Mail gesendet.",
+            "otpExpiryNote": "Hinweis: OTP läuft in fünf Minuten ab.",
+            "enterEmail": "Geben Sie Ihre E-Mail-Adresse ein",
+            "sendOtp": "OTP senden",
+            "otpSent": "OTP erfolgreich gesendet",
+            "enterOtp": "OTP eingeben",
+            "verifyOtp": "OTP verifizieren",
+            "otpVerified": "OTP erfolgreich verifiziert",
+            "invalidOtp": "Ungültiges OTP",
+            "otpExpired": "OTP ist abgelaufen",
+            "resendOtp": "OTP erneut senden",
+            "resetPassword": "Passwort zurücksetzen",
+            "passwordResetSuccess": "Passwort erfolgreich zurückgesetzt",
+            "smtpError": "SMTP-Konfigurationsfehler",
+            "emailNotConfigured": "E-Mail nicht für diesen Benutzer konfiguriert",
+            "invalidEmail": "Ungültige E-Mail-Adresse",
+            "emailSendFailed": "E-Mail konnte nicht gesendet werden"
         }
     },
     "pageOverview": {

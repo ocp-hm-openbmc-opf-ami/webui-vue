@@ -40,7 +40,8 @@
             "start":"Start",
             "stop":"Stop",
             "actions":"Actions",
-            "browse" : "Browse"
+            "browse" : "Browse",
+            "submit": "Submit"
         },
         "ariaLabel": {
             "clearSearch": "Clear Search Input",
@@ -1727,12 +1728,16 @@
             "authProtocolsha512": "SHA-512",
             "logoutConfirmMessage": "Are you sure you want to change Password for the logged in user '%{user}'? This user will get logout and it will be reflected in the next login only.",
             "logoutAlert": "Logout Alert",
-            "channel": "Channel"
+            "channel": "Channel",
+            "email": "Email",
+            "emailOptional": "Optional: Enter a valid email address",
+            "invalidEmailFormat": "Please enter a valid email address"
         },
         "table": {
             "privilege": "Privilege",
             "status": "Status",
             "username": "Username",
+            "email": "Email",
             "snmpUserEnable": "SNMP User Enable",
             "algorithm": "Algorithm",
             "readWritePermission": "Read Write Permission",
@@ -1834,6 +1839,43 @@
         "alert": {
             "message": "Invalid Username or Password",
             "authLockmessage": "Reached maximum login attempts. User account locked."
+        },
+        "forgotPassword": {
+            "forgotPassword": "Forgot Password",
+            "enterUsername": "To reset your password, please enter your username.",
+            "confirmReset": "Are you sure you want to reset your password?",
+            "title": "Forgot Password",
+            "link": "Forgot Password?",
+            "verificationCode": "Verification Code",
+            "numericOnly": "Verification code must contain only numbers",
+            "newPassword": "New Password",
+            "passwordRequirements": "Password must be 8-20 characters long",
+            "passwordLength": "Password must be at least 8 characters long",
+            "confirmPassword": "Confirm Password",
+            "passwordMismatch": "Passwords do not match",
+            "successMessage": "Password reset successfully. Please log in with your new password.",
+            "otpValidationError": "The OTP you entered is incorrect or expired. Please enter a valid OTP.",
+            "smtpMailIdNotConfigured": "SMTP mail ID not configured for user",
+            "smtpServerNotConfigured": "SMTP server is not configured.",
+            "smtpEmailAccountOrServerNotConfigured": "SMTP email account and server is not configured for this user.",
+            "failedToGenerateOtp": "Unable to connect to the SMTP server.",
+            "otpSentMessage": "OTP has been sent to the configured Email.",
+            "otpExpiryNote": "Note: OTP will get expired in five minutes.",
+            "enterEmail": "Enter your email address",
+            "sendOtp": "Send OTP",
+            "otpSent": "OTP sent successfully",
+            "enterOtp": "Enter OTP",
+            "verifyOtp": "Verify OTP",
+            "otpVerified": "OTP verified successfully",
+            "invalidOtp": "Invalid OTP",
+            "otpExpired": "OTP has expired",
+            "resendOtp": "Resend OTP",
+            "resetPassword": "Reset Password",
+            "passwordResetSuccess": "Password reset successfully",
+            "smtpError": "SMTP configuration error",
+            "emailNotConfigured": "Email not configured for this user",
+            "invalidEmail": "Invalid email address",
+            "emailSendFailed": "Failed to send email"
         }
     },
     "pageOverview": {

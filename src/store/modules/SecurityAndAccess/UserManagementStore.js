@@ -137,6 +137,7 @@ const UserManagementStore = {
         status,
         PasswordChangeRequired,
         accountTypes,
+        email,
         snmpUserEnable,
         encryption,
         algorithm,
@@ -151,27 +152,33 @@ const UserManagementStore = {
         Enabled: status,
         PasswordChangeRequired: PasswordChangeRequired,
         AccountTypes: accountTypes || [],
+        Oem: {
+          Ami: {},
+        },
       };
-      if (snmpUserEnable === true) {
-        data.Oem = {
-          Ami: {
-            SNMP: {
-              Algorithm: algorithm,
-              Encryption: encryption,
-              Access: readWritePermission,
-              SNMPAccessEnableStatus: snmpUserEnable,
-            },
-          },
-        };
-      } else if (snmpUserEnable === false) {
-        data.Oem = {
-          Ami: {
-            SNMP: {
-              SNMPAccessEnableStatus: snmpUserEnable,
-            },
-          },
+
+      // Add email if provided and not empty
+      if (email && email.trim() !== '') {
+        data.Oem.Ami.SMTP = {
+          SMTPMailId: email,
         };
       }
+
+      // Add SNMP settings
+      if (snmpUserEnable === true) {
+        data.Oem.Ami.SNMP = {
+          Algorithm: algorithm,
+          Encryption: encryption,
+          Access: readWritePermission,
+          SNMPAccessEnableStatus: snmpUserEnable,
+        };
+      } else if (snmpUserEnable === false) {
+        data.Oem.Ami.SNMP = {
+          SNMPAccessEnableStatus: snmpUserEnable,
+        };
+      }
+
+      // Add channel privileges
       data.Oem.Ami.ChannelPrivileges = channelPrivileges.map(
         (channelPrivilege) => {
           return {
@@ -181,6 +188,16 @@ const UserManagementStore = {
           };
         },
       );
+
+      // Remove empty Oem if no extensions are used
+      if (
+        !email &&
+        snmpUserEnable === undefined &&
+        channelPrivileges.length === 0
+      ) {
+        delete data.Oem;
+      }
+
       return await api
         .post('/redfish/v1/AccountService/Accounts', data)
         .then(() =>
@@ -206,6 +223,7 @@ const UserManagementStore = {
         PasswordChangeRequired,
         routerPath,
         accountTypes,
+        email,
         snmpUserEnable,
         encryption,
         algorithm,
@@ -219,48 +237,44 @@ const UserManagementStore = {
       if (globalPrivilege === 'Administrator') {
         if (originalUsername === 'root') {
           if (password) {
-            if (snmpUserEnable === true) {
-              data.Password = password;
-              if (username) data.UserName = username;
-              if (
-                snmpUserEnable !== undefined ||
-                encryption !== undefined ||
-                algorithm !== undefined ||
-                readWritePermission !== undefined
-              ) {
-                data.Oem = {
-                  Ami: {
-                    SNMP: {
-                      Algorithm: algorithm,
-                      Encryption: encryption,
-                      Access: readWritePermission,
-                      SNMPAccessEnableStatus: snmpUserEnable,
-                    },
-                  },
-                };
-              }
-            } else {
-              data.Password = password;
-            }
-          } else {
-            if (username) data.UserName = username;
+            data.Password = password;
+          }
+          if (username) data.UserName = username;
+
+          // Build Oem structure for root user
+          const oemData = { Ami: {} };
+
+          // Add email if provided and not empty
+          if (email && email.trim() !== '') {
+            oemData.Ami.SMTP = {
+              SMTPMailId: email,
+            };
+          }
+
+          // Add SNMP settings if provided
+          if (snmpUserEnable === true) {
             if (
               snmpUserEnable !== undefined ||
               encryption !== undefined ||
               algorithm !== undefined ||
               readWritePermission !== undefined
             ) {
-              data.Oem = {
-                Ami: {
-                  SNMP: {
-                    Algorithm: algorithm,
-                    Encryption: encryption,
-                    Access: readWritePermission,
-                    SNMPAccessEnableStatus: snmpUserEnable,
-                  },
-                },
+              oemData.Ami.SNMP = {
+                Algorithm: algorithm,
+                Encryption: encryption,
+                Access: readWritePermission,
+                SNMPAccessEnableStatus: snmpUserEnable,
               };
             }
+          } else if (snmpUserEnable === false) {
+            oemData.Ami.SNMP = {
+              SNMPAccessEnableStatus: snmpUserEnable,
+            };
+          }
+
+          // Only add Oem if there are extensions
+          if (Object.keys(oemData.Ami).length > 0) {
+            data.Oem = oemData;
           }
         } else {
           if (username) data.UserName = username;
@@ -271,6 +285,18 @@ const UserManagementStore = {
           if (locked !== undefined) data.Locked = locked;
           if (PasswordChangeRequired !== undefined)
             data.PasswordChangeRequired = PasswordChangeRequired;
+
+          // Build Oem structure for extensions
+          const oemData = { Ami: {} };
+
+          // Add email if provided and not empty
+          if (email && email.trim() !== '') {
+            oemData.Ami.SMTP = {
+              SMTPMailId: email,
+            };
+          }
+
+          // Add SNMP settings if provided
           if (snmpUserEnable === true) {
             if (
               snmpUserEnable !== undefined ||
@@ -278,37 +304,36 @@ const UserManagementStore = {
               algorithm !== undefined ||
               readWritePermission !== undefined
             ) {
-              data.Oem = {
-                Ami: {
-                  SNMP: {
-                    Algorithm: algorithm,
-                    Encryption: encryption,
-                    Access: readWritePermission,
-                    SNMPAccessEnableStatus: snmpUserEnable,
-                  },
-                },
+              oemData.Ami.SNMP = {
+                Algorithm: algorithm,
+                Encryption: encryption,
+                Access: readWritePermission,
+                SNMPAccessEnableStatus: snmpUserEnable,
               };
             }
           } else if (snmpUserEnable === false) {
-            data.Oem = {
-              Ami: {
-                SNMP: {
-                  SNMPAccessEnableStatus: snmpUserEnable,
-                },
-              },
+            oemData.Ami.SNMP = {
+              SNMPAccessEnableStatus: snmpUserEnable,
             };
           }
-        }
-        if (channelPrivileges.length > 0) {
-          data.Oem.Ami.ChannelPrivileges = channelPrivileges.map(
-            (channelPrivilege) => {
-              return {
-                ChannelId: channelPrivilege.ChannelId.ChannelId,
-                ChannelPrivilege: channelPrivilege.ChannelPrivilege,
-                ChannelAccess: channelPrivilege.ChannelAccess,
-              };
-            },
-          );
+
+          // Add channel privileges if provided
+          if (channelPrivileges.length > 0) {
+            oemData.Ami.ChannelPrivileges = channelPrivileges.map(
+              (channelPrivilege) => {
+                return {
+                  ChannelId: channelPrivilege.ChannelId.ChannelId,
+                  ChannelPrivilege: channelPrivilege.ChannelPrivilege,
+                  ChannelAccess: channelPrivilege.ChannelAccess,
+                };
+              },
+            );
+          }
+
+          // Only add Oem if there are extensions
+          if (Object.keys(oemData.Ami).length > 0) {
+            data.Oem = oemData;
+          }
         }
       } else if (
         globalPrivilege === 'Operator' ||

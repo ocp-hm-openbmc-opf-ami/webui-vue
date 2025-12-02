@@ -40,7 +40,8 @@
             "start": "Запустить",
             "stop": "Остановить",
             "actions": "Действия",
-            "browse": "Обзор"
+            "browse": "Обзор",
+            "submit": "Отправить"
         },
         "ariaLabel": {
             "clearSearch": "Очистить поле поиска",
@@ -1724,12 +1725,16 @@
             "authProtocolsha384": "SHA-384",
             "authProtocolsha512": "SHA-512",
             "logoutConfirmMessage": "Вы уверены, что хотите изменить пароль для вошедшего пользователя '%{user}'? Этот пользователь выйдет из системы, и это отразится только при следующем входе.",
-            "logoutAlert": "Предупреждение о выходе"
+            "logoutAlert": "Предупреждение о выходе",
+            "email": "Электронная почта",
+            "emailOptional": "Необязательно: введите действительный адрес электронной почты",
+            "invalidEmailFormat": "Пожалуйста, введите действительный адрес электронной почты"
         },
         "table": {
             "privilege": "Уровень доступа",
             "status": "Статус",
             "username": "Имя пользователя",
+            "email": "Электронная почта",
             "snmpUserEnable": "SNMP пользователь включен",
             "algorithm": "Алгоритм",
             "readWritePermission": "Разрешение на чтение-запись",
@@ -1831,6 +1836,43 @@
         "alert": {
             "message": "Неверное имя пользователя или пароль",
             "authLockmessage": "Достигнуто максимальное количество попыток входа. Учетная запись пользователя заблокирована."
+        },
+        "forgotPassword": {
+            "forgotPassword": "Забыли пароль",
+            "enterUsername": "Чтобы сбросить пароль, введите свое имя пользователя.",
+            "confirmReset": "Вы уверены, что хотите сбросить пароль?",
+            "title": "Забыли пароль",
+            "link": "Забыли пароль?",
+            "verificationCode": "Код подтверждения",
+            "numericOnly": "Код подтверждения должен содержать только цифры",
+            "newPassword": "Новый пароль",
+            "passwordRequirements": "Пароль должен быть длиной 8-20 символов",
+            "passwordLength": "Пароль должен быть не менее 8 символов",
+            "confirmPassword": "Подтвердить пароль",
+            "passwordMismatch": "Пароли не совпадают",
+            "successMessage": "Пароль успешно сброшен. Пожалуйста, войдите с новым паролем.",
+            "otpValidationError": "Введенный OTP неверен или истек. Пожалуйста, введите действительный OTP.",
+            "smtpMailIdNotConfigured": "SMTP mail ID не настроен для пользователя",
+            "smtpServerNotConfigured": "SMTP-сервер не настроен.",
+            "smtpEmailAccountOrServerNotConfigured": "Учетная запись электронной почты SMTP и сервер не настроены для этого пользователя.",
+            "failedToGenerateOtp": "Не удалось подключиться к SMTP-серверу.",
+            "otpSentMessage": "OTP отправлен на настроенный адрес электронной почты.",
+            "otpExpiryNote": "Примечание: OTP истечет через пять минут.",
+            "enterEmail": "Введите ваш адрес электронной почты",
+            "sendOtp": "Отправить OTP",
+            "otpSent": "OTP успешно отправлен",
+            "enterOtp": "Введите OTP",
+            "verifyOtp": "Проверить OTP",
+            "otpVerified": "OTP успешно проверен",
+            "invalidOtp": "Неверный OTP",
+            "otpExpired": "OTP истек",
+            "resendOtp": "Отправить OTP повторно",
+            "resetPassword": "Сбросить пароль",
+            "passwordResetSuccess": "Пароль успешно сброшен",
+            "smtpError": "Ошибка конфигурации SMTP",
+            "emailNotConfigured": "Электронная почта не настроена для этого пользователя",
+            "invalidEmail": "Неверный адрес электронной почты",
+            "emailSendFailed": "Не удалось отправить письмо"
         }
     },
     "pageOverview": {
