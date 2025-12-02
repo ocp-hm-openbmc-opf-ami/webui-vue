@@ -144,6 +144,8 @@ import i18n from '@/i18n';
 import FormFile from '@/components/Global/FormFile';
 import ModalUpdateFirmware from './FirmwareModalUpdateFirmware';
 import IconUpdate from '@carbon/icons-vue/es/update-now/20';
+import { untar } from 'untar.js';
+import { ungzip } from 'pako';
 
 export default {
   components: { FormFile, ModalUpdateFirmware, IconUpdate },
@@ -193,6 +195,7 @@ export default {
       PFR_BMC_MAGIC_CODE: '19FDEAB6', //BMC Magic number
       capsuleCodeStart: 17,
       bmcBiosFileUpload: 'bmc',
+      bmcErrorActiveBackupSelected: [],
       isPFREnable:
         process.env.VUE_APP_ONETREE_INTEL_PFR_ENABLED === 'true' ? true : false,
     };
@@ -321,12 +324,18 @@ export default {
           this.updateFirmwareImage();
         });
       } else {
-        this.bmcBiosFileUpload =
-          fileTypeExtension == 'bin' &&
-          this.file.size <= this.NON_PFR_BIOS_IMG_SIZE
-            ? 'bios'
-            : 'bmc'; //checking the non PFR file type with the bmc/bios file size
-        this.updateFirmwareImage();
+        if (this.file.name.endsWith('.gz') || this.file.name.endsWith('.tgz')) {
+          this.tarfileChecking().then(() => {
+            this.updateFirmwareImage();
+          });
+        } else {
+          this.bmcBiosFileUpload =
+            fileTypeExtension == 'bin' &&
+            this.file.size <= this.NON_PFR_BIOS_IMG_SIZE
+              ? 'bios'
+              : 'bmc'; //checking the non PFR file type with the bmc/bios file size
+          this.updateFirmwareImage();
+        }
       }
     },
     updateFirmwareImage() {
@@ -396,7 +405,32 @@ export default {
           })
           .catch(({ message }) => {
             this.endLoader();
-            this.errorToast(message);
+            let errorMessage = message;
+            let targetFailValue = [];
+            if (message.includes('HttpPushUriTargets are Invalid')) {
+              this.bmcErrorActiveBackupSelected =
+                this.$store.getters['firmware/getInventryFirmwareData'];
+              for (var i = 0; i < this.bmcActiveBackupSelected.length; i++) {
+                if (
+                  this.bmcActiveBackupSelected[i] !==
+                  this.bmcErrorActiveBackupSelected[i]
+                ) {
+                  var parts = this.bmcActiveBackupSelected[i].split('_'); // ["bmc", "active"]
+                  for (var j = 0; j < parts.length; j++) {
+                    parts[j] =
+                      parts[j].charAt(0).toUpperCase() + parts[j].slice(1);
+                  }
+                  targetFailValue.push(parts.join(' '));
+                }
+              }
+              errorMessage = this.$t(
+                'pageFirmware.toast.errorHttpPushUriTargetsmsg',
+                {
+                  bmcTarget: targetFailValue,
+                },
+              );
+            }
+            this.errorToast(errorMessage);
           });
       }
     },
@@ -605,6 +639,30 @@ export default {
           }
         };
       });
+    },
+    async tarfileChecking() {
+      const file = this.file;
+      if (!file) return;
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        let tarBuffer = arrayBuffer;
+
+        // If file ends with .gz or .tgz, decompress first
+        if (file.name.endsWith('.gz') || file.name.endsWith('.tgz')) {
+          tarBuffer = ungzip(new Uint8Array(arrayBuffer)).buffer;
+        }
+
+        const tarEntries = await untar(tarBuffer);
+        const filenames = tarEntries.map((entry) => entry.name);
+        if (filenames.includes('image-bios')) {
+          this.bmcBiosFileUpload = 'bios';
+        } else {
+          this.bmcBiosFileUpload = 'bmc';
+        }
+        return;
+      } catch (e) {
+        console.error(e);
+      }
     },
   },
 };

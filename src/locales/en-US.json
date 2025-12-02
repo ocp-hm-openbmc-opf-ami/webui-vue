@@ -1396,7 +1396,9 @@
             "successFirmwarePfrImmediate": "The image is now staged, and the firmware update has started. Please do not power cycle or interrupt the system during this time.",
             "successFirmwarePfrOnreset": "The image is now staged, and the system is ready for update upon the next reboot.  Please reboot the system to begin the update and please do not power cycle or interrupt the system during this time.",
             "errorEnabledClearConfig": "Error in enabling Clear Configuration.",
-            "errorDisabledClearConfig": "Error in disabling Clear Configuration."
+            "errorDisabledClearConfig": "Error in disabling Clear Configuration.",
+            "errorHttpPushUriTargets":"HttpPushUriTargets are Invalid.",
+            "errorHttpPushUriTargetsmsg": "Unable to set %{bmcTarget} as target , SPI may be corrupted."
         }
     },
     "pagePreserve": {

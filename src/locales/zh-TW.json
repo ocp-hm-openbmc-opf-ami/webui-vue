@@ -1395,7 +1395,9 @@
             "successFirmwarePfrImmediate": "映像現已上演，韌體更新已開始。在此期間請不要重新啟動或中斷系統。",
             "successFirmwarePfrOnreset": "映像現已暫存，系統已準備好在下次重新啟動時進行更新。  請重新啟動系統以開始更新，並且在此期間請勿重新啟動或中斷系統。",
             "errorEnabledClearConfig": "啟用清除配置時發生錯誤。",
-            "errorDisabledClearConfig": "停用清除配置時發生錯誤。"
+            "errorDisabledClearConfig": "停用清除配置時發生錯誤。",
+            "errorHttpPushUriTargets":"HttpPushUriTargets 無效。",
+            "errorHttpPushUriTargetsmsg": "無法將 %{bmcTarget} 設置為目標，SPI 可能已損壞。"
         }
     },
     "pagePreserve": {

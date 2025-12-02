@@ -1397,7 +1397,9 @@
             "successFirmwarePfrImmediate": "Das Image wurde vorbereitet und das Firmware-Update wurde gestartet. Bitte schalten Sie das System während des Updates nicht aus und unterbrechen Sie den Vorgang nicht.",
             "successFirmwarePfrOnreset": "Das Image wurde vorbereitet und das System ist bereit für das Update beim nächsten Neustart. Bitte starten Sie das System neu, um das Update zu beginnen, und unterbrechen Sie den Vorgang nicht bzw. schalten Sie das System währenddessen nicht aus.",
             "errorEnabledClearConfig": "Fehler beim Aktivieren der Clear Konfiguration.",
-            "errorDisabledClearConfig": "Fehler beim Deaktivieren der Clear Konfiguration."
+            "errorDisabledClearConfig": "Fehler beim Deaktivieren der Clear Konfiguration.",
+            "errorHttpPushUriTargets":"Die HttpPushUriTargets sind ungültig.",
+            "errorHttpPushUriTargetsmsg": "%{bmcTarget} konnte nicht als Ziel festgelegt werden, möglicherweise ist die SPI-Schnittstelle beschädigt."
         }
     },
     "pagePreserve": {

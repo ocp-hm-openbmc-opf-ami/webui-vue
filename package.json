@@ -32,6 +32,7 @@
         "moment-timezone": "0.5.46",
         "qrcode.vue": "1.7.0",
         "simple-keyboard": "3.5.43",
+        "untar.js": "0.3.0",
         "vue": "2.6.12",
         "vue-i18n": "8.24.2",
         "vue-json-pretty": "1.9.4",

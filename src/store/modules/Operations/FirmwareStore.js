@@ -24,6 +24,7 @@ const FirmwareStore = {
     gpuFirmwareinfo: [],
     fpgaFirmwareinfo: [],
     bmcRecoveryEnabled: false,
+    inventryFirmwareData: [],
   },
   getters: {
     isTftpUploadAvailable: (state) => state.tftpAvailable,
@@ -60,6 +61,7 @@ const FirmwareStore = {
     getGpuFirmwareinfo: (state) => state.gpuFirmwareinfo,
     getFpgaFirmwareinfo: (state) => state.fpgaFirmwareinfo,
     getBmcRecoveryEnabledStatus: (state) => state.bmcRecoveryEnabled,
+    getInventryFirmwareData: (state) => state.inventryFirmwareData,
   },
   mutations: {
     setActiveBmcFirmwareId: (state, id) => (state.bmcActiveFirmwareId = id),
@@ -95,6 +97,8 @@ const FirmwareStore = {
       (state.fpgaFirmwareinfo = fpgaFirmwareinfo),
     setBmcRecoveryFeatureEnabled: (state, bmcRecoveryEnabled) =>
       (state.bmcRecoveryEnabled = bmcRecoveryEnabled),
+    setInventryFirmwareData: (state, inventryFirmwareData) =>
+      (state.inventryFirmwareData = inventryFirmwareData),
   },
   actions: {
     async getFirmwareInformation({ dispatch }) {
@@ -138,7 +142,10 @@ const FirmwareStore = {
           const hostFirmware = [];
           const fpgaFirmware = [];
           const gpgpuFirmware = [];
+          const firmwareInventoryValues = [];
           response.forEach(({ data }) => {
+            firmwareInventoryValues.push(data?.['@odata.id'].split('/').pop());
+            commit('setInventryFirmwareData', firmwareInventoryValues);
             const firmwareType = data?.RelatedItem?.[0]?.['@odata.id']
               .split('/')
               .pop();
@@ -303,7 +310,22 @@ const FirmwareStore = {
         .patch('/redfish/v1/UpdateService', data)
         .catch((error) => {
           console.log(error);
-          throw new Error(i18n.t('pageFirmware.toast.errorSwitchImages'));
+          if (
+            (error.response &&
+              error.response.data &&
+              error.response.data.error[
+                '@Message.ExtendedInfo'
+              ][0].Message.includes("'HttpPushUriTargets' is invalid")) ||
+            error.response.data.error[
+              '@Message.ExtendedInfo'
+            ][1].Message.includes("'HttpPushUriTargets' is invalid")
+          ) {
+            throw new Error(
+              i18n.t('pageFirmware.toast.errorHttpPushUriTargets'),
+            );
+          } else {
+            throw new Error(i18n.t('pageFirmware.toast.errorSwitchImages'));
+          }
         });
     },
     async saveClearConfig({ commit }, clearStatus) {
