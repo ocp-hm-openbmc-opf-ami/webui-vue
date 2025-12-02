@@ -96,6 +96,18 @@ const FireWallStore = {
           throw new Error(i18n.t('pageFireWall.toast.errorDelete'));
         });
     },
+    async setReorderRules({ state, dispatch }, items) {
+      return await api
+        .post(
+          `${state.FirstInterfaceId}/Actions/Oem/Ami/EthernetInterface.ReorderFirewallRules`,
+          items,
+        )
+        .then(() => dispatch('getFireWallData'))
+        .then(() => i18n.t('pageFireWall.toast.successReorderedFireWall'))
+        .catch(() => {
+          throw new Error(i18n.t('pageFireWall.toast.errorReorderedFireWall'));
+        });
+    },
   },
 };
 

@@ -3471,6 +3471,8 @@
         "firewallSettings": {
             "addNewRule": "Add New Rule",
             "flushAll": "Flush All",
+            "reorderRules": "Reorder Rules",
+            "reorderConfirmMessage": "Are you sure you want the Reorder the Rules ? This action will take some time to complete. Please wait.",
             "modal": {
                 "blockAll": "Block All",
                 "addFirewallSettings": "Add New Firewall Rule",
@@ -3512,7 +3514,9 @@
             "errorDelete": "Error in deleting Firewall Rules.",
             "errorDateOrTimeSaveFireWall": "Invalid Date or Time.",
             "errorStartorEndIpSaveFireWall": "Invalid Range Start or Range End IP.",
-            "errorCreateLimitReachedForResource": "The maximum number of Firewall Rules that can be created is up to 64 IPv4 Firewall Rules and 64 IPv6 Firewall Rules."
+            "errorCreateLimitReachedForResource": "The maximum number of Firewall Rules that can be created is up to 64 IPv4 Firewall Rules and 64 IPv6 Firewall Rules.",
+            "successReorderedFireWall": "Successfully Reordered Firewall Rules.",
+            "errorReorderedFireWall": "Error in Reordering Firewall Rules."
         },
         "table": {
             "startIP": "Start IP",
@@ -3526,7 +3530,9 @@
             "preLoad": "PreLoad",
             "target": "Target",
             "networkType": "Network Type",
-            "searchFirewallRule": "Search Firewall Rule"
+            "searchFirewallRule": "Search Firewall Rule",
+            "ipv4": "IPv4",
+            "ipv6": "IPv6"
         }
     },
     "bond": {

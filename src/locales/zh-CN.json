@@ -3467,6 +3467,8 @@
         "firewallSettings": {
             "addNewRule":"添加新规则",
             "flushAll": "刷新全部",
+            "reorderRules": "重新排序规则",
+            "reorderConfirmMessage": "您确定要重新排序规则吗？此操作需要一些时间才能完成。请稍候。",
             "modal": {
                 "blockAll": "全部阻塞",
                 "addFirewallSettings": "添加新的防火墙规则",
@@ -3508,7 +3510,9 @@
             "errorDelete": "删除防火墙规则时出错。",
             "errorDateOrTimeSaveFireWall": "日期或时间无效。",
             "errorStartorEndIpSaveFireWall": "范围起始或范围结束 IP 无效。",
-            "errorCreateLimitReachedForResource": "可以创建的防火墙规则的最大数量为 64 个 IPv4 防火墙规则和 64 个 IPv6 防火墙规则。"
+            "errorCreateLimitReachedForResource": "可以创建的防火墙规则的最大数量为 64 个 IPv4 防火墙规则和 64 个 IPv6 防火墙规则。",
+            "successReorderedFireWall": "成功重新排序防火墙规则。",
+            "errorReorderedFireWall": "重新排序防火墙规则时出错。"
         },
         "table": {
             "startIP": "起始 IP",
@@ -3522,7 +3526,9 @@
             "preLoad": "预加载",
             "target": "目标",
             "networkType": "网络类型",
-            "searchFirewallRule": "搜索防火墙规则"
+            "searchFirewallRule": "搜索防火墙规则",
+            "ipv4": "IPv4",
+            "ipv6": "IPv6"
         }
     },
     "bond": {

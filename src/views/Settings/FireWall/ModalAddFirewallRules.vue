@@ -481,11 +481,7 @@ export default {
           required,
         },
         protocol: {
-          required: requiredIf(function (form) {
-            if (form.portStart != '' || form.portEnd != '') {
-              return true;
-            }
-          }),
+          required,
         },
         ipStart: {
           required: requiredIf(function (form) {

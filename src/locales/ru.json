@@ -3466,6 +3466,8 @@
         "firewallSettings": {
             "addNewRule": "Добавить новое правило",
             "flushAll": "Очистить все",
+            "reorderRules": "Перестроить правила",
+            "reorderConfirmMessage": "Вы уверены, что хотите перестроить правила? Эта операция может занять некоторое время. Пожалуйста, подождите.",
             "modal": {
                 "blockAll": "Заблокировать все",
                 "addFirewallSettings": "Добавить новое правило брандмауэра",
@@ -3508,7 +3510,9 @@
             "errorDateOrTimeSaveFireWall": "Неверная дата или время.",
             "errorStartorEndIpSaveFireWall": "Неверный начальный или конечный IP диапазона.",
             "featureNotAvailable": "Функция системного брандмауэра не включена.",
-            "errorCreateLimitReachedForResource": "Максимальное количество правил брандмауэра, которые можно создать, составляет до 64 правил IPv4 и 64 правил IPv6."
+            "errorCreateLimitReachedForResource": "Максимальное количество правил брандмауэра, которые можно создать, составляет до 64 правил IPv4 и 64 правил IPv6.",
+            "successReorderedFireWall": "Правила брандмауэра успешно перестроены.",
+            "errorReorderedFireWall": "Ошибка при перестроении правил брандмауэра."
         },
         "table": {
             "startIP": "Начальный IP",
@@ -3522,7 +3526,9 @@
             "preLoad": "Предзагрузка",
             "target": "Действие",
             "networkType": "Тип сети",
-            "searchFirewallRule": "Поиск правила брандмауэра"
+            "searchFirewallRule": "Поиск правила брандмауэра",
+            "ipv4": "IPv4",
+            "ipv6": "IPv6"
         }
     },
     "bond": {

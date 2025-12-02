@@ -3471,6 +3471,8 @@
         "firewallSettings": {
             "addNewRule": "Neue Regel hinzufügen",
             "flushAll": "Alle leeren",
+            "reorderRules": "Regeln neu anordnen",
+            "reorderConfirmMessage": "Sind Sie sicher, dass Sie die Regeln neu anordnen möchten? Diese Aktion kann einige Zeit in Anspruch nehmen. Bitte warten.",
             "modal": {
                 "blockAll": "Alles blockieren",
                 "addFirewallSettings": "Neue Firewall-Regel hinzufügen",
@@ -3513,7 +3515,9 @@
             "errorDateOrTimeSaveFireWall": "Ungültiges Datum oder Uhrzeit.",
             "errorStartorEndIpSaveFireWall": "Ungültiger Start- oder End-IP-Bereich.",
             "featureNotAvailable": "Die System-Firewall-Funktion ist nicht aktiviert.",
-            "errorCreateLimitReachedForResource": "Die maximale Anzahl an Firewall-Regeln beträgt 64 IPv4- und 64 IPv6-Regeln."
+            "errorCreateLimitReachedForResource": "Die maximale Anzahl an Firewall-Regeln beträgt 64 IPv4- und 64 IPv6-Regeln.",
+            "successReorderedFireWall": "Firewall-Regeln erfolgreich neu geordnet.",
+            "errorReorderedFireWall": "Fehler beim Neuordnen der Firewall-Regeln."
         },
         "table": {
             "startIP": "Start-IP",
@@ -3527,7 +3531,9 @@
             "preLoad": "Vorab laden",
             "target": "Ziel",
             "networkType": "Netzwerktyp",
-            "searchFirewallRule": "Firewall-Regel suchen"
+            "searchFirewallRule": "Firewall-Regel suchen",
+            "ipv4": "IPv4",
+            "ipv6": "IPv6"
         }
     },
     "bond": {
