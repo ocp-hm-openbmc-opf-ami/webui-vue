@@ -39,7 +39,7 @@
           </b-col>
         </b-row>
         <b-row>
-          <b-col sm="6">
+          <!-- <b-col sm="6">
             <b-form-group
               :label="$t('pageVideo.videoTriggerSettings.nonRecoverable')"
               label-for="password"
@@ -55,8 +55,8 @@
                 <span v-else>{{ $t('global.status.disabled') }}</span>
               </b-form-checkbox>
             </b-form-group>
-          </b-col>
-          <b-col sm="6">
+          </b-col> -->
+          <!-- <b-col sm="6">
             <b-form-group
               :label="$t('pageVideo.videoTriggerSettings.fanStateChanged')"
               label-for="password"
@@ -91,7 +91,7 @@
                 <span v-else>{{ $t('global.status.disabled') }}</span>
               </b-form-checkbox>
             </b-form-group>
-          </b-col>
+          </b-col> -->
           <b-col sm="6">
             <b-form-group
               :label="$t('pageVideo.videoTriggerSettings.chassisPowerOn')"
@@ -109,8 +109,6 @@
               </b-form-checkbox>
             </b-form-group>
           </b-col>
-        </b-row>
-        <b-row>
           <b-col sm="6">
             <b-form-group
               :label="$t('pageVideo.videoTriggerSettings.chassisPowerOff')"
@@ -128,6 +126,8 @@
               </b-form-checkbox>
             </b-form-group>
           </b-col>
+        </b-row>
+        <b-row>
           <b-col sm="6">
             <b-form-group
               :label="$t('pageVideo.videoTriggerSettings.chassisReset')"
@@ -145,8 +145,6 @@
               </b-form-checkbox>
             </b-form-group>
           </b-col>
-        </b-row>
-        <b-row>
           <b-col sm="6">
             <b-form-group
               :label="$t('pageVideo.videoTriggerSettings.LPCReset')"
@@ -164,6 +162,8 @@
               </b-form-checkbox>
             </b-form-group>
           </b-col>
+        </b-row>
+        <b-row>
           <!-- <b-col sm="6">
             <b-form-group
               :label="$t('pageVideo.preEventVideoRecord')"
@@ -389,9 +389,9 @@ export default {
       videoTriggerEvent: {
         criticalTmpVolt: true,
         nonCriticalTmpVolt: true,
-        nonRecovTmpVolt: true,
-        fanstatechanged: true,
-        watchdogTimer: true,
+        // nonRecovTmpVolt: true,
+        // fanstatechanged: true,
+        // watchdogTimer: true,
         chassisPowerOn: true,
         chassisPowerOff: true,
         chassisReset: true,
@@ -474,12 +474,12 @@ export default {
               config.TriggerEvents.criticalTmpVolt == 0 ? false : true,
             nonCriticalTmpVolt:
               config.TriggerEvents.nonCriticalTmpVolt == 0 ? false : true,
-            nonRecovTmpVolt:
-              config.TriggerEvents.nonRecovTmpVolt == 0 ? false : true,
-            fanstatechanged:
-              config.TriggerEvents.fanstatechanged == 0 ? false : true,
-            watchdogTimer:
-              config.TriggerEvents.watchdogTimer == 0 ? false : true,
+            // nonRecovTmpVolt:
+            //   config.TriggerEvents.nonRecovTmpVolt == 0 ? false : true,
+            // fanstatechanged:
+            //   config.TriggerEvents.fanstatechanged == 0 ? false : true,
+            // watchdogTimer:
+            //   config.TriggerEvents.watchdogTimer == 0 ? false : true,
             chassisPowerOn:
               config.TriggerEvents.chassisPowerOn == 0 ? false : true,
             chassisPowerOff:
@@ -508,9 +508,9 @@ export default {
             nonCriticalTmpVolt: this.videoTriggerEvent.nonCriticalTmpVolt
               ? 1
               : 0,
-            nonRecovTmpVolt: this.videoTriggerEvent.nonRecovTmpVolt ? 1 : 0,
-            fanstatechanged: this.videoTriggerEvent.fanstatechanged ? 1 : 0,
-            watchdogTimer: this.videoTriggerEvent.watchdogTimer ? 1 : 0,
+            // nonRecovTmpVolt: this.videoTriggerEvent.nonRecovTmpVolt ? 1 : 0,
+            // fanstatechanged: this.videoTriggerEvent.fanstatechanged ? 1 : 0,
+            // watchdogTimer: this.videoTriggerEvent.watchdogTimer ? 1 : 0,
             chassisPowerOn: this.videoTriggerEvent.chassisPowerOn ? 1 : 0,
             chassisPowerOff: this.videoTriggerEvent.chassisPowerOff ? 1 : 0,
             chassisReset: this.videoTriggerEvent.chassisReset ? 1 : 0,
