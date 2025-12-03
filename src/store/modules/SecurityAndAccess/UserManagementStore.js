@@ -318,7 +318,7 @@ const UserManagementStore = {
           }
 
           // Add channel privileges if provided
-          if (channelPrivileges.length > 0) {
+          if (channelPrivileges.length > 0 && originalUsername !== 'root') {
             oemData.Ami.ChannelPrivileges = channelPrivileges.map(
               (channelPrivilege) => {
                 return {
