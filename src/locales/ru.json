@@ -2127,7 +2127,6 @@
             "addTrap": "Добавить ловушку",
             "bmcUser": "Пользователи BMC",
             "password": "Пароль",
-            "portNumber": "Номер порта",
             "all": "Все",
             "smtp": "SMTP",
             "system": "Система",

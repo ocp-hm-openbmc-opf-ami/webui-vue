@@ -2128,7 +2128,6 @@
             "addTrap": "添加 SNMPTrap",
             "bmcUser": "BMC 用户",
             "password": "密码",
-            "portNumber": "端口号",
             "all": "全部",
             "smtp": "SMTP",
             "system": "系统",

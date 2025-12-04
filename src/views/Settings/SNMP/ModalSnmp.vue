@@ -126,34 +126,6 @@
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-row>
-            <b-row>
-              <b-form-group
-                :label="$t('pageSnmp.modal.portNumber')"
-                label-for="portNumber"
-                class="field-width"
-              >
-                <b-form-input
-                  id="portNumber"
-                  v-model="form.portNumber"
-                  type="text"
-                  data-test-id="snmp-input-portNumber"
-                  :state="getValidationState($v.form.portNumber)"
-                  @input="$v.form.portNumber.$touch()"
-                />
-                <b-form-invalid-feedback role="alert">
-                  <template v-if="!$v.form.portNumber.required">
-                    {{ $t('global.form.fieldRequired') }}
-                  </template>
-                  <template
-                    v-if="
-                      $v.form.portNumber.required && !$v.form.portNumber.pattern
-                    "
-                  >
-                    {{ $t('global.form.invalidFormat') }}
-                  </template>
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-row>
             <b-row v-if="form.selectProtocol === 'SNMPv3'">
               <b-form-group
                 :label="$t('pageSnmp.modal.bmcUser')"
@@ -234,7 +206,6 @@ export default {
         selectSubscriptionType: null,
         selectProtocol: null,
         bmcUser: null,
-        portNumber: '',
         communityString: null,
       },
       subscriptionType: [
@@ -279,10 +250,6 @@ export default {
       },
       selectSubscriptionType: { required },
       selectProtocol: { required },
-      portNumber: {
-        required,
-        pattern: (val) => this.portNumberValidation(val),
-      },
       communityString: {
         required: requiredIf(function () {
           return this.form.selectProtocol === 'SNMPv3' ? false : true;
@@ -307,17 +274,12 @@ export default {
         if (this.$v.$invalid) return;
         if (this.form.selectProtocol === 'SNMPv3') {
           SnmpTrap.destination =
-            this.form.bmcUser +
-            '@' +
-            this.form.destination +
-            ':' +
-            this.form.portNumber;
+            this.form.bmcUser + '@' + this.form.destination;
           SnmpTrap.selectSubscriptionType = this.form.selectSubscriptionType;
           SnmpTrap.selectProtocol = this.form.selectProtocol;
           SnmpTrap.bmcUser = this.form.bmcUser;
         } else {
-          SnmpTrap.destination =
-            this.form.destination + ':' + this.form.portNumber;
+          SnmpTrap.destination = this.form.destination;
           SnmpTrap.selectSubscriptionType = this.form.selectSubscriptionType;
           SnmpTrap.selectProtocol = this.form.selectProtocol;
           SnmpTrap.communityString = this.form.communityString;
@@ -327,11 +289,7 @@ export default {
         if (this.$v.$invalid) return;
         if (this.$v.form.destination.$dirty) {
           SnmpTrap.destination =
-            this.form.bmcUser +
-            '@' +
-            this.form.destination +
-            ':' +
-            this.form.portNumber;
+            this.form.bmcUser + '@' + this.form.destination;
         }
         if (this.$v.form.selectSubscriptionType.$dirty) {
           SnmpTrap.selectSubscriptionType = this.form.selectSubscriptionType;
@@ -360,7 +318,6 @@ export default {
       this.form.selectSubscriptionType = null;
       this.form.selectProtocol = null;
       this.form.bmcUser = null;
-      this.form.portNumber = '';
       this.form.communityString = null;
       this.$v.$reset();
       this.$emit('hidden');
@@ -404,13 +361,6 @@ export default {
         return false;
       } else {
         return true;
-      }
-    },
-    portNumberValidation(value) {
-      if (/^\d+$/.test(value) && value >= 1 && value <= 65535) {
-        return true;
-      } else {
-        return false;
       }
     },
   },
