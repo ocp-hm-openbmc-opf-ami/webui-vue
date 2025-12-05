@@ -93,7 +93,10 @@
             </div>
           </div>
           <div class="serverPowerBtn">
-            <b-dropdown variant="link" :disabled="isButtonDisable">
+            <b-dropdown
+              variant="link"
+              :disabled="isButtonDisable || buttonStatus"
+            >
               <template #button-content>
                 <span class="responsive-text">
                   <b-icon icon="power"></b-icon>
@@ -604,6 +607,10 @@ export default {
 
 .margin-left-full-window {
   margin-left: 5px;
+}
+
+.serverPowerBtn:hover {
+  background-color: #e6e6e6;
 }
 
 .modal {

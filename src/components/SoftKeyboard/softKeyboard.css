@@ -177,3 +177,7 @@
   box-shadow: #3cd5e0 0 3px 7px inset;
   transform: translateY(2px);
 }
+
+.softkeyboard-dropdown .btn {
+  margin-top: -8px !important;
+}

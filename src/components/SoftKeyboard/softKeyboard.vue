@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-2 mt-2">
+    <div class="mb-2 mt-2 softkeyboard-dropdown">
       <b-dropdown variant="link" :disabled="dropdownStatus">
         <template #button-content>
           <span class="responsive-text">
