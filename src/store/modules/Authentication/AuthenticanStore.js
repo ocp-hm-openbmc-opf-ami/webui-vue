@@ -30,6 +30,7 @@ const AuthenticationStore = {
     tfaEnabled: (state) => state.tfaEnabled,
     tfaFeatureEnabled: (state) => state.tfaFeatureEnabled,
     isExternalUser: (state) => state.isExternalUser,
+    loginRoleId: (state) => state.loginRoleId,
   },
   mutations: {
     authSuccess(state) {
@@ -63,7 +64,7 @@ const AuthenticationStore = {
       (state.isExternalUser = isExternal),
   },
   actions: {
-    login({ commit }, { username, password }) {
+    login({ commit, state }, { username, password }) {
       commit('authError', false);
       return api
         .post('/login', { data: [username, password] })
@@ -74,8 +75,10 @@ const AuthenticationStore = {
             store.commit('global/setSessionId', response.data.Session_ID);
           }
           if (response.data.RoleId) {
+            store.commit('global/setPrivilege', response.data.RoleId);
             localStorage.setItem('loginRoleId', response.data.RoleId); //stored in the localStorage because store getting null when browser refresh
             store.loginRoleId = response.data.RoleId;
+            state.loginRoleId = response.data.RoleId;
           }
           if (response.data.TwoFacEnableStatus != undefined) {
             if (response.data.TwoFacEnableStatus == 'N/A') {

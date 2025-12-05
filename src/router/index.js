@@ -85,6 +85,20 @@ router.beforeEach((to, from, next) => {
         store.commit('global/setPrivilege', response.Oem?.Ami?.WebRoleId);
         // allow the route to continue
         allowRouterToNavigate(to, next, response.Oem?.Ami?.WebRoleId);
+      } else {
+        // set role ID
+        store.commit(
+          'global/setPrivilege',
+          store.getters['authentication/loginRoleId'] ||
+            localStorage.getItem('loginRoleId'),
+        );
+        // allow the route to continue
+        allowRouterToNavigate(
+          to,
+          next,
+          store.getters['authentication/loginRoleId'] ||
+            localStorage.getItem('loginRoleId'),
+        );
       }
     });
   } else {
