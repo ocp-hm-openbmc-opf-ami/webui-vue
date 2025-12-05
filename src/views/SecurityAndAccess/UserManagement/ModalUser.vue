@@ -817,6 +817,12 @@ export default {
 
       // Validate channel list only if channels are enabled
       this.channelPrivilegesList = [];
+      this.dynamicAccountTypes.indexOf('HostConsole') == -1
+        ? this.dynamicAccountTypes.push('HostConsole')
+        : this.dynamicAccountTypes;
+      this.dynamicAccountTypes.indexOf('ManagerConsole') == -1
+        ? this.dynamicAccountTypes.push('ManagerConsole')
+        : this.dynamicAccountTypes;
       for (let i = 0; i < this.form.channelList.length; i++) {
         const channelAccessValue = this.form.channelAccess[i] || false; // Default to false if value not avaiable
         const privilegeValue = this.form.channelList[i];
@@ -830,6 +836,23 @@ export default {
           this.defaultChannelList.ChannelId === networkChannelNumber.ChannelId
         ) {
           userData.RoleId = privilegeValue;
+        }
+
+        if (
+          this.defaultChannelList.ChannelId ===
+            networkChannelNumber.ChannelId &&
+          privilegeValue !== 'Administrator'
+        ) {
+          const hostConsoleIndex =
+            this.dynamicAccountTypes.indexOf('HostConsole');
+          if (hostConsoleIndex > -1) {
+            this.dynamicAccountTypes.splice(hostConsoleIndex, 1);
+          }
+          const managerConsoleIndex =
+            this.dynamicAccountTypes.indexOf('ManagerConsole');
+          if (managerConsoleIndex > -1) {
+            this.dynamicAccountTypes.splice(managerConsoleIndex, 1);
+          }
         }
         this.channelPrivilegesList.push(channelPrivilegesAccess);
         userData.channelPrivileges = this.channelPrivilegesList;
