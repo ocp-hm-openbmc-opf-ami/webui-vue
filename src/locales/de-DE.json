@@ -36,7 +36,7 @@
             "yes": "Ja",
             "no": "Nein",
             "same_session_running_information": "Es läuft bereits eine Sitzung in diesem Browser, daher wird dieselbe Sitzung geöffnet.",
-            "na": "NA",
+            "na": "Keine",
             "start": "Starten",
             "stop": "Stoppen",
             "actions": "Aktionen",
@@ -79,11 +79,14 @@
             "valueMustBeBetween": "Wert muss zwischen %{min} und %{max} liegen."
         },
         "status": {
+            "true": "Wahr",
+            "false": "Falsch",
             "copied": "Kopiert",
             "diagnosticMode": "Diagnosemodus",
             "disabled": "Deaktiviert",
             "enabled": "Aktiviert",
             "error": "Fehler",
+            "absent": "Fehlt",
             "notAvailable": "Nicht verfügbar",
             "off": "Aus",
             "on": "Ein",
@@ -447,7 +450,9 @@
             "assetTag": "Inventarkennzeichen",
             "biosVersion": "BIOS-Version",
             "state": "Zustand",
-            "health": "Funktionszustand"
+            "health": "Funktionszustand",
+            "physical": "Physisch",
+            "composed": "Zusammengesetzt"
         },
         "processor": {
             "processor": "Prozessor",
@@ -725,6 +730,17 @@
             "predictedMediaLifeLeftPercent": "Geschätzter verbleibender Medienlebensdauer-Prozentsatz",
             "remainingSpareBlockPercentage": "Verbleibender Ersatzblock-Prozentsatz",
             "operatingSpeedMHz": "Betriebsgeschwindigkeit MHz"
+        },
+        "readingType": {
+            "airFlow": "Luftstrom",
+            "altitude": "Höhe",
+            "current": "Strom",
+            "energyJoules": "Energie (Joule)",
+            "energykWh": "Energie (kWh)",
+            "humidity": "Relative Luftfeuchtigkeit",
+            "power": "Leistung",
+            "temperature": "Temperatur",
+            "voltage": "Spannung (AC oder DC)"
         }
     },
     "pageBackupAndRestore": {
@@ -1742,7 +1758,8 @@
             "snmpUserEnable": "SNMP-Benutzer aktiviert",
             "algorithm": "Algorithmus",
             "readWritePermission": "Lese-/Schreibberechtigung",
-            "encryption": "Verschlüsselung"
+            "encryption": "Verschlüsselung",
+            "userAccess": "Benutzerzugriff"
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "Von diesem Dienst verwaltete Komponenten konfigurieren",

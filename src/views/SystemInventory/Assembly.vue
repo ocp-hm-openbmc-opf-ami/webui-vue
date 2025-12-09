@@ -5,6 +5,7 @@
       hover
       sticky-header
       show-empty
+      :empty-text="$t('global.table.emptyMessage')"
       :fields="assemblyFields"
       :items="memoryAssemblyInfo"
       head-variant="light"
@@ -77,6 +78,7 @@ export default {
         {
           key: 'state',
           label: this.$t('pageSystemInventory.memoryAssembly.state'),
+          formatter: this.convertState,
         },
         {
           key: 'vendor',
@@ -92,6 +94,25 @@ export default {
   computed: {
     memoryAssemblyInfo() {
       return this.$store.getters['SystemStore/memoryAssembly'];
+    },
+  },
+  methods: {
+    convertState(value) {
+      if (value === null || value === undefined) return '';
+      const valueType = typeof value;
+      let status = value;
+      switch (valueType) {
+        case 'string':
+          status = this.$t(`global.status.${value.toLowerCase()}`);
+          break;
+        case 'boolean':
+          status = this.$t(`global.status.${String(value).toLowerCase()}`);
+          break;
+        default:
+          return String(value);
+      }
+      if (status !== value) return status;
+      else return value;
     },
   },
 };

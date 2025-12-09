@@ -6,6 +6,7 @@
       sticky-header
       show-empty
       :fields="storageControllerFields"
+      :empty-text="$t('global.table.emptyMessage')"
       :items="storageControllersInfo"
       head-variant="light"
     ></b-table>

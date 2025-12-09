@@ -7,6 +7,7 @@
       show-empty
       :fields="processorFpgaFields"
       :items="processorFpgaInfo"
+      :empty-text="$t('global.table.emptyMessage')"
       head-variant="light"
     ></b-table>
   </div>
@@ -58,6 +59,7 @@ export default {
           label: this.$t(
             'pageSystemInventory.processorFPGA.programmableFromHost',
           ),
+          formatter: this.convertState,
         },
       ],
     };
@@ -65,6 +67,25 @@ export default {
   computed: {
     processorFpgaInfo() {
       return this.$store.getters['SystemStore/fpga'];
+    },
+  },
+  methods: {
+    convertState(value) {
+      if (value === null || value === undefined) return '';
+      const valueType = typeof value;
+      let status = value;
+      switch (valueType) {
+        case 'string':
+          status = this.$t(`global.status.${value.toLowerCase()}`);
+          break;
+        case 'boolean':
+          status = this.$t(`global.status.${String(value).toLowerCase()}`);
+          break;
+        default:
+          return String(value);
+      }
+      if (status !== value) return status;
+      else return value;
     },
   },
 };

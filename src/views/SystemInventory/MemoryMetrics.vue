@@ -7,6 +7,7 @@
       show-empty
       :fields="MetricsFields"
       :items="memoryMetricsInfo"
+      :empty-text="$t('global.table.emptyMessage')"
       head-variant="light"
     ></b-table>
   </div>
@@ -54,20 +55,24 @@ export default {
           label: this.$t(
             'pageSystemInventory.memoryMetrics.correctableECCError',
           ),
+          formatter: this.convertState,
         },
         {
           key: 'temperature',
           label: this.$t('pageSystemInventory.memoryMetrics.temperature'),
+          formatter: this.convertState,
         },
         {
           key: 'dataLossDetected',
           label: this.$t('pageSystemInventory.memoryMetrics.dataLossDetected'),
+          formatter: this.convertState,
         },
         {
           key: 'lastShutdownSuccess',
           label: this.$t(
             'pageSystemInventory.memoryMetrics.lastShutdownSuccess',
           ),
+          formatter: this.convertState,
         },
         {
           key: 'performanceDegraded',
@@ -97,6 +102,25 @@ export default {
   computed: {
     memoryMetricsInfo() {
       return this.$store.getters['SystemStore/memoryMetrics'];
+    },
+  },
+  methods: {
+    convertState(value) {
+      if (value === null || value === undefined) return '';
+      const valueType = typeof value;
+      let status = value;
+      switch (valueType) {
+        case 'string':
+          status = this.$t(`global.status.${value.toLowerCase()}`);
+          break;
+        case 'boolean':
+          status = this.$t(`global.status.${String(value).toLowerCase()}`);
+          break;
+        default:
+          return String(value);
+      }
+      if (status !== value) return status;
+      else return value;
     },
   },
 };

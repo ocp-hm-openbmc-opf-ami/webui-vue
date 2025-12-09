@@ -36,7 +36,7 @@
             "yes": "是的",
             "no": "不",
             "same_session_running_information": "該瀏覽器中已經有一個會話正在運行，因此打開同一個會話",
-            "na": "NA",
+            "na": "無",
             "start":"開始",
             "stop":"停止",
             "actions":"動作",
@@ -79,11 +79,14 @@
             "valueMustBeBetween": "值必須在 %{min} – %{max} 之間。"
         },
         "status": {
+            "true": "是",
+            "false": "否",
             "copied": "已複製",
             "diagnosticMode": "診斷的模式",
             "disabled": "停用",
             "enabled": "啟用",
             "error": "錯誤",
+            "absent": "無",
             "notAvailable": "無效",
             "off": "關",
             "on": "開",
@@ -447,7 +450,9 @@
             "assetTag": "資產標籤",
             "biosVersion": "BIOS 版本",
             "state": "狀態",
-            "health": "健康"
+            "health": "健康",
+            "physical": "實體",
+            "composed": "組合"
         },
         "processor": {
             "processor": "處理器",
@@ -725,6 +730,17 @@
             "predictedMediaLifeLeftPercent": "預測媒體剩餘壽命百分比",
             "remainingSpareBlockPercentage": "剩餘備用區塊百分比",
             "operatingSpeedMHz": "工作速度 MHz"
+        },
+        "readingType": {
+            "airFlow": "氣流",
+            "altitude": "海拔",
+            "current": "電流",
+            "energyJoules": "能量 (焦耳)",
+            "energykWh": "能量 (千瓦時)",
+            "humidity": "相對濕度",
+            "power": "功率",
+            "temperature": "溫度",
+            "voltage": "電壓 (交流或直流)"
         }
     },
     "pageBackupAndRestore": {
@@ -1740,7 +1756,8 @@
             "snmpUserEnable": "SNMP 使用者啟用",
             "algorithm": "演算法",
             "readWritePermission": "讀寫權限",
-            "encryption": "加密"
+            "encryption": "加密",
+            "userAccess": "使用者存取"
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "配置此服務所管理的元件",

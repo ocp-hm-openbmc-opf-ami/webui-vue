@@ -79,11 +79,14 @@
             "valueMustBeBetween": "Value must be between %{min} – %{max}."
         },
         "status": {
+            "true": "True",
+            "false": "False",
             "copied": "Copied",
             "diagnosticMode": "Diagnostic Mode",
             "disabled": "Disabled",
             "enabled": "Enabled",
             "error": "Error",
+            "absent": "Absent",
             "notAvailable": "Not available",
             "off": "Off",
             "on": "On",
@@ -448,7 +451,9 @@
             "assetTag": "Asset Tag",
             "biosVersion": "BIOS Version",
             "state": "State",
-            "health": "Health"
+            "health": "Health",
+            "physical": "Physical",
+            "composed": "Composed"
         },
         "processor": {
             "processor": "Processor",
@@ -726,6 +731,17 @@
             "predictedMediaLifeLeftPercent": "Predicted Media Life Left Percent",
             "remainingSpareBlockPercentage": "Remaining Spare Block Percentage",
             "operatingSpeedMHz": "Operating Speed MHz"
+        },
+        "readingType" : {
+            "airFlow":"AirFlow",
+            "altitude":"Altitude",
+            "current":"Current",
+            "energyJoules":"Energy (Joules",
+            "energykWh":"Energy (kWh)",
+            "humidity":"Relative Humidity",
+            "power":"Power",
+            "temperature":"Temperature",
+            "voltage":"Voltage (AC or DC)"
         }
     },
     "pageBackupAndRestore": {
@@ -1741,7 +1757,8 @@
             "snmpUserEnable": "SNMP User Enable",
             "algorithm": "Algorithm",
             "readWritePermission": "Read Write Permission",
-            "encryption": "Encryption"
+            "encryption": "Encryption",
+            "userAccess": "UserAccess"
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "Configure components managed by this service",

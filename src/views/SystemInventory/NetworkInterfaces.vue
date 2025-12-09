@@ -5,6 +5,7 @@
       hover
       sticky-header
       show-empty
+      :empty-text="$t('global.table.emptyMessage')"
       :fields="networkInterfacesFields"
       :items="networkInterfacesInfo"
       head-variant="light"
@@ -30,6 +31,7 @@ export default {
           label: this.$t(
             'pageSystemInventory.networkInterfaces.interfaceEnabled',
           ),
+          formatter: this.convertState,
         },
         {
           key: 'iPv4Addresses',
@@ -42,6 +44,7 @@ export default {
         {
           key: 'state',
           label: this.$t('pageSystemInventory.networkInterfaces.state'),
+          formatter: this.convertState,
         },
       ],
     };
@@ -49,6 +52,25 @@ export default {
   computed: {
     networkInterfacesInfo() {
       return this.$store.getters['SystemStore/basebordInfoNetworkinterfaces'];
+    },
+  },
+  methods: {
+    convertState(value) {
+      if (value === null || value === undefined) return '';
+      const valueType = typeof value;
+      let status = value;
+      switch (valueType) {
+        case 'string':
+          status = this.$t(`global.status.${value.toLowerCase()}`);
+          break;
+        case 'boolean':
+          status = this.$t(`global.status.${String(value).toLowerCase()}`);
+          break;
+        default:
+          return String(value);
+      }
+      if (status !== value) return status;
+      else return value;
     },
   },
 };

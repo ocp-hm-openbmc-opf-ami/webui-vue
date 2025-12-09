@@ -213,10 +213,12 @@ export default {
         {
           key: 'privilege',
           label: this.$t('pageUserManagement.table.privilege'),
+          formatter: this.convertPrivilege,
         },
         {
           key: 'status',
           label: this.$t('pageUserManagement.table.status'),
+          formatter: this.convertState,
         },
         {
           key: 'email',
@@ -226,6 +228,7 @@ export default {
           key: 'snmpUserEnabled',
           label: this.$t('pageUserManagement.table.snmpUserEnable'),
           tdClass: 'text-nowrap',
+          formatter: this.convertState,
         },
         {
           key: 'algorithm',
@@ -244,8 +247,9 @@ export default {
         },
         {
           key: 'UserAccess',
-          label: 'UserAccess',
+          label: this.$t('pageUserManagement.table.userAccess'),
           tdClass: 'text-nowrap',
+          formatter: this.convertState,
         },
         {
           key: 'actions',
@@ -627,6 +631,35 @@ export default {
         });
         this.userItemsInit();
       }
+    },
+    convertState(value) {
+      if (value === null || value === undefined) return '';
+      const valueType = typeof value;
+      let status = value;
+      switch (valueType) {
+        case 'string':
+          status = this.$t(`global.status.${value.toLowerCase()}`);
+          break;
+        case 'boolean':
+          status = this.$t(`global.status.${String(value).toLowerCase()}`);
+          break;
+        default:
+          return String(value);
+      }
+      if (status !== value) return status;
+      else return value;
+    },
+    convertPrivilege(value) {
+      if (!value) return '';
+      const role = value.toLowerCase();
+      if (role.includes('administrator')) {
+        return this.$t('pageSessions.table.administrator');
+      } else if (role.includes('operator')) {
+        return this.$t('pageSessions.table.operator');
+      } else if (role.includes('readonly')) {
+        return this.$t('pageSessions.table.readOnly');
+      }
+      return value;
     },
   },
 };

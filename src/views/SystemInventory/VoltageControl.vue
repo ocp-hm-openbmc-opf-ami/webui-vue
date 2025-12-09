@@ -7,6 +7,7 @@
       show-empty
       :fields="voltageFields"
       :items="temperatureInfo"
+      :empty-text="$t('global.table.emptyMessage')"
       head-variant="light"
     ></b-table>
   </div>
@@ -24,6 +25,7 @@ export default {
         {
           key: 'state',
           label: this.$t('pageSystemInventory.voltage.state'),
+          formatter: this.convertState,
         },
         {
           key: 'readingUnits',
@@ -44,6 +46,7 @@ export default {
         {
           key: 'readingType',
           label: this.$t('pageSystemInventory.voltage.readingType'),
+          formatter: this.convertReadingType,
         },
         {
           key: 'upperThresholdFatal',
@@ -67,6 +70,32 @@ export default {
   computed: {
     temperatureInfo() {
       return this.$store.getters['SystemStore/voltage'];
+    },
+  },
+  methods: {
+    convertState(value) {
+      if (value === null || value === undefined) return '';
+      const valueType = typeof value;
+      let status = value;
+      switch (valueType) {
+        case 'string':
+          status = this.$t(`global.status.${value.toLowerCase()}`);
+          break;
+        case 'boolean':
+          status = this.$t(`global.status.${String(value).toLowerCase()}`);
+          break;
+        default:
+          return String(value);
+      }
+      if (status !== value) return status;
+      else return value;
+    },
+    convertReadingType(value) {
+      if (value === null || value === undefined) return '';
+      else
+        return this.$t(
+          `pageSystemInventory.readingType.${value.toLowerCase()}`,
+        );
     },
   },
 };

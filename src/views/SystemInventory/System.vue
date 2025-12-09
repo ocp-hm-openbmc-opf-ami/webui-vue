@@ -31,6 +31,7 @@ export default {
           key: 'indicatorLED',
           label: this.$t('pageSystemInventory.system.indicatorLED'),
           class: 'text-center',
+          formatter: this.convertState,
         },
         {
           key: 'manufacturer',
@@ -41,6 +42,7 @@ export default {
           key: 'powerState',
           label: this.$t('pageSystemInventory.system.powerState'),
           class: 'text-center',
+          formatter: this.convertState,
         },
         {
           key: 'serialNumuber',
@@ -56,6 +58,7 @@ export default {
           key: 'systemType',
           label: this.$t('pageSystemInventory.system.systemType'),
           class: 'text-center',
+          formatter: this.convertSystemType,
         },
         {
           key: 'assetTag',
@@ -71,6 +74,7 @@ export default {
           key: 'state',
           label: this.$t('pageSystemInventory.system.state'),
           class: 'text-center',
+          formatter: this.convertState,
         },
       ],
     };
@@ -78,6 +82,33 @@ export default {
   computed: {
     systemInfo() {
       return this.$store.getters['SystemStore/systems'];
+    },
+  },
+  methods: {
+    convertState(value) {
+      if (value === null || value === undefined) return '';
+      const valueType = typeof value;
+      let status = value;
+      switch (valueType) {
+        case 'string':
+          status = this.$t(`global.status.${value.toLowerCase()}`);
+          break;
+        case 'boolean':
+          status = this.$t(`global.status.${String(value).toLowerCase()}`);
+          break;
+        default:
+          return String(value);
+      }
+      if (status !== value) return status;
+      else return value;
+    },
+    convertSystemType(value) {
+      // Enum values : Physical and Composed
+      if (value === null || value === undefined)
+        return this.$t(global.action.na);
+      const key = String(value).toLowerCase();
+      const translated = this.$t(`pageSystemInventory.system.${key}`);
+      return translated || String(value);
     },
   },
 };

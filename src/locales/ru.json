@@ -36,7 +36,7 @@
             "yes": "Да",
             "no": "Нет",
             "same_session_running_information": "Сессия уже запущена в этом браузере, поэтому открывается та же сессия.",
-            "na": "NA",
+            "na": "Нет",
             "start": "Запустить",
             "stop": "Остановить",
             "actions": "Действия",
@@ -79,11 +79,14 @@
             "valueMustBeBetween": "Значение должно быть между %{min} – %{max}."
         },
         "status": {
+            "true": "Истина",
+            "false": "Ложь",
             "copied": "Скопировано",
             "diagnosticMode": "Диагностический режим",
             "disabled": "Отключено",
             "enabled": "Включено",
             "error": "Ошибка",
+            "absent": "Отсутствует",
             "notAvailable": "Недоступно",
             "off": "Выкл",
             "on": "Вкл",
@@ -446,7 +449,9 @@
             "assetTag": "Инвентарный номер",
             "biosVersion": "Версия BIOS",
             "state": "Состояние",
-            "health": "Состояние"
+            "health": "Состояние",
+            "physical": "Физический",
+            "composed": "Составной"
         },
         "processor": {
             "processor": "Процессор",
@@ -724,6 +729,17 @@
             "predictedMediaLifeLeftPercent": "Прогнозируемый остаток срока службы носителя в процентах",
             "remainingSpareBlockPercentage": "Оставшийся процент запасных блоков",
             "operatingSpeedMHz": "Рабочая скорость, МГц"
+        },
+        "readingType": {
+            "airFlow": "Поток воздуха",
+            "altitude": "Высота",
+            "current": "Ток",
+            "energyJoules": "Энергия (Джоули)",
+            "energykWh": "Энергия (кВт·ч)",
+            "humidity": "Относительная влажность",
+            "power": "Мощность",
+            "temperature": "Температура",
+            "voltage": "Напряжение (AC или DC)"
         }
     },
     "pageBackupAndRestore": {
@@ -1738,7 +1754,8 @@
             "snmpUserEnable": "SNMP пользователь включен",
             "algorithm": "Алгоритм",
             "readWritePermission": "Разрешение на чтение-запись",
-            "encryption": "Шифрование"
+            "encryption": "Шифрование",
+            "userAccess": "Доступ пользователя"
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "Настроить компоненты, управляемые этой службой",

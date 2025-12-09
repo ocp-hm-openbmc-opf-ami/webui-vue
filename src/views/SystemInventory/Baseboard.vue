@@ -7,6 +7,7 @@
       show-empty
       :fields="baseBoardFields"
       :items="baseBoardInfo"
+      :empty-text="$t('global.table.emptyMessage')"
       head-variant="light"
     >
     </b-table>
@@ -31,6 +32,7 @@ export default {
           label: this.$t(
             'pageSystemInventory.baseBoard.locationIndicatorActive',
           ),
+          formatter: this.convertState,
         },
         {
           key: 'model',
@@ -39,10 +41,12 @@ export default {
         {
           key: 'state',
           label: this.$t('pageSystemInventory.baseBoard.state'),
+          formatter: this.convertState,
         },
         {
           key: 'powerState',
           label: this.$t('pageSystemInventory.baseBoard.powerState'),
+          formatter: this.convertState,
         },
         {
           key: 'assetTag',
@@ -66,6 +70,25 @@ export default {
   computed: {
     baseBoardInfo() {
       return this.$store.getters['SystemStore/baseBoard'];
+    },
+  },
+  methods: {
+    convertState(value) {
+      if (value === null || value === undefined) return '';
+      const valueType = typeof value;
+      let status = value;
+      switch (valueType) {
+        case 'string':
+          status = this.$t(`global.status.${value.toLowerCase()}`);
+          break;
+        case 'boolean':
+          status = this.$t(`global.status.${String(value).toLowerCase()}`);
+          break;
+        default:
+          return String(value);
+      }
+      if (status !== value) return status;
+      else return value;
     },
   },
 };

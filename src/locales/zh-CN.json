@@ -36,7 +36,7 @@
             "yes": "是的",
             "no": "不",
             "same_session_running_information": "当前浏览器内已有会话处于运行状态，系统将直接打开该会话。",
-            "na": "NA",
+            "na": "无",
             "start": "开始",
             "stop": "停止",
             "actions": "操作",
@@ -79,11 +79,14 @@
             "valueMustBeBetween": "值必须在 %{min} – %{max} 之间"
         },
         "status": {
+            "true": "是",
+            "false": "否",
             "copied": "已复制",
             "diagnosticMode": "诊断模式",
             "disabled": "禁用",
             "enabled": "启用",
             "error": "错误",
+            "absent": "无",
             "notAvailable": "不可用",
             "off": "关",
             "on": "开",
@@ -447,7 +450,9 @@
             "assetTag": "资产标签",
             "biosVersion": "BIOS 版本",
             "state": "状态",
-            "health": "健康"
+            "health": "健康",
+            "physical": "实体",
+            "composed": "组合"
         },
         "processor": {
             "processor": "处理器",
@@ -725,6 +730,17 @@
             "predictedMediaLifeLeftPercent": "预测内存剩余寿命百分比",
             "remainingSpareBlockPercentage": "剩余备用块百分比",
             "operatingSpeedMHz": "工作速度 MHz"
+        },
+        "readingType": {
+            "airFlow": "气流",
+            "altitude": "海拔",
+            "current": "电流",
+            "energyJoules": "能量 (焦耳)",
+            "energykWh": "能量 (千瓦时)",
+            "humidity": "相对湿度",
+            "power": "功率",
+            "temperature": "温度",
+            "voltage": "电压 (交流或直流)"
         }
     },
     "pageBackupAndRestore": {
@@ -1740,7 +1756,8 @@
             "snmpUserEnable": "SNMP 用户启用",
             "algorithm": "算法",
             "readWritePermission": "读写权限",
-            "encryption": "加密"
+            "encryption": "加密",
+            "userAccess": "用户访问"
         },
         "tableRoles": {
             "configureComponentsManagedByThisService": "配置此服务所管理的组件",

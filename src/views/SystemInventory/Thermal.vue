@@ -7,6 +7,7 @@
       show-empty
       :fields="thermalFields"
       :items="thermalFanInfo"
+      :empty-text="$t('global.table.emptyMessage')"
       head-variant="light"
     >
       <!-- Health -->
@@ -40,6 +41,7 @@ export default {
         {
           key: 'state',
           label: this.$t('pageSystemInventory.thermal.state'),
+          formatter: this.convertState,
         },
         {
           key: 'readingRPM',
@@ -59,6 +61,25 @@ export default {
   computed: {
     thermalFanInfo() {
       return this.$store.getters['SystemStore/fans'];
+    },
+  },
+  methods: {
+    convertState(value) {
+      if (value === null || value === undefined) return '';
+      const valueType = typeof value;
+      let status = value;
+      switch (valueType) {
+        case 'string':
+          status = this.$t(`global.status.${value.toLowerCase()}`);
+          break;
+        case 'boolean':
+          status = this.$t(`global.status.${String(value).toLowerCase()}`);
+          break;
+        default:
+          return String(value);
+      }
+      if (status !== value) return status;
+      else return value;
     },
   },
 };

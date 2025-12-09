@@ -7,6 +7,7 @@
       show-empty
       :fields="pcieFunctionFields"
       :items="pcieFunctionInfo"
+      :empty-text="$t('global.table.emptyMessage')"
       head-variant="light"
     ></b-table>
   </div>

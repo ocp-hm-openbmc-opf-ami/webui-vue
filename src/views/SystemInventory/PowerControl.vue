@@ -7,6 +7,7 @@
       show-empty
       :fields="powerControlFields"
       :items="powerInfo"
+      :empty-text="$t('global.table.emptyMessage')"
       head-variant="light"
     >
       <!-- Health -->
@@ -81,6 +82,7 @@ export default {
         {
           key: 'state',
           label: this.$t('pageSystemInventory.power.state'),
+          formatter: this.convertState,
         },
       ],
     };
@@ -88,6 +90,25 @@ export default {
   computed: {
     powerInfo() {
       return this.$store.getters['SystemStore/power'];
+    },
+  },
+  methods: {
+    convertState(value) {
+      if (value === null || value === undefined) return '';
+      const valueType = typeof value;
+      let status = value;
+      switch (valueType) {
+        case 'string':
+          status = this.$t(`global.status.${value.toLowerCase()}`);
+          break;
+        case 'boolean':
+          status = this.$t(`global.status.${String(value).toLowerCase()}`);
+          break;
+        default:
+          return String(value);
+      }
+      if (status !== value) return status;
+      else return value;
     },
   },
 };
