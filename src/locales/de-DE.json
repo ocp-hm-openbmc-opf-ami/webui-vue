@@ -3132,6 +3132,7 @@
             "physicalDriveAuStatusHelperText": "Gibt die Gesundheit und Verfügbarkeit der Access Unit (AU) an, die bestimmt, ob Vorgänge wie Löschen oder Wiederherstellen durchgeführt werden können.",
             "secureEraseTypeHelperText": "Das Laufwerk wird mit Löschmustern überschrieben, um alle Daten sicher zu entfernen. Wählen Sie eine der verfügbaren Optionen und klicken Sie auf Speichern, um den Löschvorgang zu starten.",
             "labelSecureEraseType": "Sicheres Löschverfahren",
+            "noEraseTypesAvailable": "Im Backend wurde kein passender Löschtyp gefunden. Bitte überprüfen Sie den Status und die unterstützten Funktionen der physischen Geräte.",
             "alertNotSupport": "Die Löschoperation ist nur verfügbar, wenn der Gerätestatus 'Gut' ist. Stellen Sie sicher, dass das Gerät gesund ist und nicht an einem RAID-Rebuild oder Fehler beteiligt ist, bevor Sie fortfahren.",
             "secureEraseOptions": {
                 "simple": "Einfach",

@@ -3128,6 +3128,7 @@
             "physicalDriveAuStatusHelperText": "指示访问单元（AU）的健康状况和可用性，决定是否可以进行擦除或重建等操作。",
             "secureEraseTypeHelperText": "驱动器将被覆盖擦除以安全地删除所有数据。请选择一个可用选项并点击保存以开始擦除操作。",
             "labelSecureEraseType": "安全擦除类型",
+            "noEraseTypesAvailable": "后端未找到可匹配选择的擦除类型。请检查物理设备本身支持的状态和功能。",
             "alertNotSupport": "仅当设备状态为良好时才可进行擦除操作。请确保设备健康且未参与任何RAID重建或故障。",
             "secureEraseOptions": {
                 "simple": "简单",

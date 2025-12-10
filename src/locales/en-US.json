@@ -3132,6 +3132,7 @@
             "physicalDriveAuStatusHelperText":"Indicates the health and availability of the Access Unit (AU), which determines whether operations like erase or rebuild can proceed.",
             "secureEraseTypeHelperText":"The drive will be overwritten with erase patterns to securely remove all data. Select one of the available options and click Save to begin the erase operation.",
             "labelSecureEraseType": "Secures Erase Type",
+            "noEraseTypesAvailable": "No matching erase type found on the backend. Please check the physical devices’ supported status and capabilities.",
             "alertNotSupport":"Erase operation is only available when the device status is Good. Ensure the device is healthy and not involved in any RAID rebuild or failure before proceeding.",
             "secureEraseOptions": {
                 "simple": "Simple",

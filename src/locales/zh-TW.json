@@ -3128,6 +3128,7 @@
             "physicalDriveAuStatusHelperText": "表示存取單元（AU）的健康與可用性，決定是否可進行清除或重建等操作。",
             "secureEraseTypeHelperText": "磁碟將以清除模式覆寫以安全地移除所有資料。請選擇一個可用選項並點擊儲存以開始清除作業。",
             "labelSecureEraseType": "安全清除類型",
+            "noEraseTypesAvailable": "後端未找到可匹配選擇的清除類型。請檢查實體裝置本身支援的狀態與功能。",
             "alertNotSupport": "僅當裝置狀態為良好時才可執行清除作業。請確保裝置健康且未參與任何RAID重建或故障。",
             "secureEraseOptions": {
                 "simple": "簡單",
