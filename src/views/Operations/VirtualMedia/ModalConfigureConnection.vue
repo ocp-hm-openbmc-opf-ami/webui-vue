@@ -255,6 +255,10 @@ export default {
       if (this.$v.$invalid) return;
       let connectionData = {};
       Object.assign(connectionData, this.form);
+      const isIPv6 = this.ipv6Regex(connectionData.serverUri);
+      if (isIPv6) {
+        connectionData.serverUri = `[${connectionData.serverUri}]`;
+      }
       this.$store.commit('virtualMedia/setSlotData', {
         slotId: connectionData.id,
         slotData: connectionData,

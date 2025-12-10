@@ -33,27 +33,27 @@ const parseVirtualMediaUrl = (image, backupImageURL) => {
   if (url.startsWith('smb://')) {
     protocol = 'CIFS';
     const withoutProto = url.substring(6);
-    const parts = withoutProto.split('/');
-    serverUri = parts[0];
-    imagePath = '/' + parts.slice(1).join('/');
-  } else if (url.startsWith('https://')) {
-    protocol = 'HTTPS';
-    const withoutProto = url.substring(8);
-    const parts = withoutProto.split('/');
-    serverUri = parts[0];
-    imagePath = '/' + parts.slice(1).join('/');
-  } else if (url.startsWith('nfs://')) {
-    protocol = 'NFS';
-    const withoutProto = url.substring(6);
-    const colonIndex = withoutProto.indexOf(':');
-    if (colonIndex !== -1) {
-      serverUri = withoutProto.substring(0, colonIndex);
-      imagePath = withoutProto.substring(colonIndex + 1);
+    if (withoutProto.includes(':/')) {
+      const parts = withoutProto.split(':/');
+      serverUri = parts[0];
+      imagePath = '/' + parts.slice(1).join('/');
     } else {
       const parts = withoutProto.split('/');
       serverUri = parts[0];
       imagePath = '/' + parts.slice(1).join('/');
     }
+  } else if (url.startsWith('https://')) {
+    protocol = 'HTTPS';
+    const withoutProto = url.substring(8);
+    const parts = withoutProto.split(':/');
+    serverUri = parts[0];
+    imagePath = '/' + parts.slice(1).join('/');
+  } else if (url.startsWith('nfs://')) {
+    protocol = 'NFS';
+    const withoutProto = url.substring(6);
+    const parts = withoutProto.split(':/');
+    serverUri = parts[0];
+    imagePath = '/' + parts.slice(1).join('/');
   }
 
   return {

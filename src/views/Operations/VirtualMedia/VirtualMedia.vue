@@ -396,11 +396,17 @@ export default {
           break;
         case 'CIFS':
           data.Image =
-            'smb://' + connectionData.serverUri + connectionData.imagePath;
+            'smb://' +
+            connectionData.serverUri +
+            ':' +
+            connectionData.imagePath;
           break;
         case 'HTTPS':
           data.Image =
-            'https://' + connectionData.serverUri + connectionData.imagePath;
+            'https://' +
+            connectionData.serverUri +
+            ':' +
+            connectionData.imagePath;
           break;
       }
       data.UserName = connectionData.username;
