@@ -55,7 +55,7 @@ export default {
     vlanAllData() {
       this.tabData = [];
       this.vlanAllData.map((data) => {
-        if (data.Id.length < 5) {
+        if (!data.Id.includes('usb')) {
           this.tabData.push(data);
         }
       });
