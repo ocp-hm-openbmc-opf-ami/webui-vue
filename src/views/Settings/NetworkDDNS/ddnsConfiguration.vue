@@ -13,7 +13,8 @@
             :disabled="
               domainNames.length >= 12 ||
               dhcpv4useDomainName ||
-              dhcpv6useDomainName
+              dhcpv6useDomainName ||
+              ddnsInterfaceId === 'hostusb0'
             "
             @click="addDomainName"
           >
@@ -233,10 +234,12 @@ export default {
         useTSIGFileUpload: false,
       },
       domainNames: [],
+      ddnsInterfaceId:
+        this.$store.getters['ddnsNetwork/ddnsSelectedInterfaceId'],
     };
   },
   computed: {
-    ...mapState('ddnsNetwork', ['domainName1']),
+    ...mapState('ddnsNetwork', ['domainName1', 'ddnsSelectedInterfaceId']),
     ddnsEthernetData() {
       return this.$store.getters['ddnsNetwork/ddnsEthernetData'][this.tabIndex];
     },
@@ -252,6 +255,9 @@ export default {
   watch: {
     tabIndex() {
       this.getdata();
+    },
+    ddnsSelectedInterfaceId: function (value) {
+      this.ddnsInterfaceId = value;
     },
   },
   created() {
