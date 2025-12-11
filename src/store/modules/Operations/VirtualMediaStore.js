@@ -277,8 +277,8 @@ const VirtualMediaStore = {
         .catch((error) => {
           console.log('Mount image:', error);
           if (
-            error.response.status == 503 &&
-            error.response.data.error.code.indexOf('ResourceInUse') != -1
+            error.response.status == 400 &&
+            error.response.data.error.code.includes('ResourceAlreadyExists')
           ) {
             throw new Error(
               i18n.t('pageVirtualMedia.toast.errorResourceInUse', {
