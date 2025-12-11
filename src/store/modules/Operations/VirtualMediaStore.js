@@ -215,21 +215,41 @@ const VirtualMediaStore = {
                 d.id !== 'Slot_1',
             )
             .map((device) => {
-              const parsed = parseVirtualMediaUrl(
-                device.data?.Image,
-                device.data?.Oem?.Ami?.BackupImageURL,
+              // Check if there's saved slot data for this device
+              const savedSlot = state.slotArray.find(
+                (slot) => slot.id === device.id,
               );
-              return {
-                ...device,
-                serverUri: parsed.serverUri,
-                imagePath: parsed.imagePath,
-                username: '',
-                password: '',
-                isRW: false,
-                transferProtocolType: parsed.transferProtocolType,
-                image: device.data?.Image,
-                backupImageURL: device.data?.Oem?.Ami?.BackupImageURL,
-              };
+              if (savedSlot && savedSlot.data) {
+                // Use saved slot data
+                return {
+                  ...device,
+                  serverUri: savedSlot.data.serverUri,
+                  imagePath: savedSlot.data.imagePath,
+                  username: savedSlot.data.username,
+                  password: savedSlot.data.password,
+                  isRW: savedSlot.data.isRW,
+                  transferProtocolType: savedSlot.data.transferProtocolType,
+                  image: device.data?.Image,
+                  backupImageURL: device.data?.Oem?.Ami?.BackupImageURL,
+                };
+              } else {
+                // Parse from URLs
+                const parsed = parseVirtualMediaUrl(
+                  device.data?.Image,
+                  device.data?.Oem?.Ami?.BackupImageURL,
+                );
+                return {
+                  ...device,
+                  serverUri: parsed.serverUri,
+                  imagePath: parsed.imagePath,
+                  username: '',
+                  password: '',
+                  isRW: false,
+                  transferProtocolType: parsed.transferProtocolType,
+                  image: device.data?.Image,
+                  backupImageURL: device.data?.Oem?.Ami?.BackupImageURL,
+                };
+              }
             });
           commit('setProxyDevicesData', [...proxyDevices].reverse());
           commit('setLegacyDevicesData', [...legacyDevices].reverse());
