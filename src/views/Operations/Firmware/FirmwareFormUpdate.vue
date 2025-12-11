@@ -9,7 +9,7 @@
     </div>
     <div class="form-background p-3">
       <b-form @submit.prevent="onSubmitUpload">
-        <b-row class="choose-images">
+        <b-row v-if="!isMultiPartStatus" class="choose-images">
           <b-col v-if="activeFeatureEnabledStatus" sm="3">
             <b-form-checkbox
               v-model="activeImage"
@@ -66,27 +66,57 @@
         </b-form-group>
 
         <!-- Workstation Upload -->
-        <template v-if="isWorkstationSelected">
-          <b-form-group
-            :label="$t('pageFirmware.form.updateFirmware.imageFile')"
-            label-for="image-file"
+        <div v-if="isWorkstationSelected" class="workstation-upload-container">
+          <div
+            :class="
+              isMultiPartStatus ? 'upload-files-row' : 'single-file-container'
+            "
           >
-            <form-file
-              id="image-file"
-              :disabled="isPageDisabled"
-              :state="getValidationState($v.file)"
-              aria-describedby="image-file-help-block"
-              data-test-id="firmware-input-imageFile"
-              @input="onFileUpload($event)"
+            <b-form-group
+              v-show="isMultiPartStatus"
+              :label="$t('pageFirmware.form.updateFirmware.multiPart')"
+              label-for="multiPart-file"
+              :class="isMultiPartStatus ? 'multipart-file-group' : ''"
             >
-              <template #invalid>
-                <b-form-invalid-feedback role="alert">
-                  {{ $t('global.form.required') }}
-                </b-form-invalid-feedback>
-              </template>
-            </form-file>
-          </b-form-group>
-        </template>
+              <form-file
+                id="multiPart-image-file"
+                ref="multiPartFileRef"
+                v-model="multiPartfile"
+                :disabled="isPageDisabled"
+                :state="getValidationState($v.multiPartfile)"
+                aria-describedby="multiPart-file-help-block"
+                data-test-id="multiPart-file-upload"
+                accept=".json"
+                @input="onMultiPartFileUpload($event)"
+              >
+                <template #invalid>
+                  <b-form-invalid-feedback role="alert">
+                    {{ $t('global.form.required') }}
+                  </b-form-invalid-feedback>
+                </template>
+              </form-file>
+            </b-form-group>
+            <b-form-group
+              :label="$t('pageFirmware.form.updateFirmware.imageFile')"
+              label-for="image-file"
+              :class="isMultiPartStatus ? 'image-file-group' : ''"
+            >
+              <form-file
+                id="image-file"
+                :disabled="isPageDisabled"
+                :state="getValidationState($v.file)"
+                aria-describedby="image-file-help-block"
+                @input="onFileUpload($event)"
+              >
+                <template #invalid>
+                  <b-form-invalid-feedback role="alert">
+                    {{ $t('global.form.required') }}
+                  </b-form-invalid-feedback>
+                </template>
+              </form-file>
+            </b-form-group>
+          </div>
+        </div>
 
         <!-- TFTP Server Upload -->
         <template v-else>
@@ -168,6 +198,10 @@ export default {
       type: Object,
       default: () => {},
     },
+    isMultiPartStatus: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -196,6 +230,10 @@ export default {
       capsuleCodeStart: 17,
       bmcBiosFileUpload: 'bmc',
       bmcErrorActiveBackupSelected: [],
+      multiPartfile: null,
+      multiPartStatus: true,
+      jsonContent: null,
+      multipartapplyTimeFormValue: '',
       isPFREnable:
         process.env.VUE_APP_ONETREE_INTEL_PFR_ENABLED === 'true' ? true : false,
     };
@@ -227,6 +265,7 @@ export default {
     isWorkstationSelected: function () {
       this.$v.$reset();
       this.file = null;
+      this.multiPartfile = null;
       this.tftpFileAddress = null;
     },
   },
@@ -235,6 +274,11 @@ export default {
       file: {
         required: requiredIf(function () {
           return this.isWorkstationSelected;
+        }),
+      },
+      multiPartfile: {
+        required: requiredIf(function () {
+          return this.isWorkstationSelected && this.isMultiPartStatus;
         }),
       },
       tftpFileAddress: {
@@ -315,6 +359,7 @@ export default {
       this.startLoader();
       const fileTypeExtension = this.file.name.split('.').pop();
       if (
+        !this.isMultiPartStatus &&
         this.isPFREnable &&
         fileTypeExtension == 'bin' &&
         this.file.size <= this.PFR_IMG_SIZE //checking the  PFR feature file type with the bmc/bios file size
@@ -324,7 +369,10 @@ export default {
           this.updateFirmwareImage();
         });
       } else {
-        if (this.file.name.endsWith('.gz') || this.file.name.endsWith('.tgz')) {
+        if (
+          !this.isMultiPartStatus &&
+          (this.file.name.endsWith('.gz') || this.file.name.endsWith('.tgz'))
+        ) {
           this.tarfileChecking().then(() => {
             this.updateFirmwareImage();
           });
@@ -341,45 +389,95 @@ export default {
     updateFirmwareImage() {
       this.bmcActiveBackupSelected = [];
       this.updateServiceData = {};
-      if (this.activeImage) {
-        this.bmcActiveBackupSelected.push(this.bmcBiosFileUpload + '_active');
-      }
-      if (this.recoveryImage) {
-        this.bmcActiveBackupSelected.push(this.bmcBiosFileUpload + '_recovery');
-      }
-      if (this.backupImage) {
-        this.bmcActiveBackupSelected.push('bmc_bkup');
-      }
-      if (!this.httpPushUriTargetsBusyStatus) {
-        this.updateServiceData.HttpPushUriTargets =
-          this.bmcActiveBackupSelected;
-        this.updateServiceData.HttpPushUriTargetsBusy = true;
-      }
-      if (this.httpPushUriOptions !== undefined) {
-        var enddateval =
-          this.applyTimeFormValue.endDate != '' &&
-          this.applyTimeFormValue.endTime != ''
-            ? this.getUtcDate(
-                this.applyTimeFormValue.endDate,
-                this.applyTimeFormValue.endTime,
-                true, // include secounds in the value
-              )
-            : '';
-        this.updateServiceData.HttpPushUriOptions = {
-          HttpPushUriApplyTime: {
-            ApplyTime: this.applyTimeFormValue.applyTimeMode,
-            MaintenanceWindowDurationInSeconds: parseInt(
-              this.applyTimeFormValue.timeSlot,
-            ),
-            MaintenanceWindowStartTime:
-              enddateval != ''
-                ? enddateval.toISOString().substring(0, 19) +
-                  this.firmwareDateTime?.slice(19)
-                : '',
-          },
-        };
-      }
-      if (Object.keys(this.updateServiceData).length === 0) {
+      if (!this.isMultiPartStatus) {
+        if (this.activeImage) {
+          this.bmcActiveBackupSelected.push(this.bmcBiosFileUpload + '_active');
+        }
+        if (this.recoveryImage) {
+          this.bmcActiveBackupSelected.push(
+            this.bmcBiosFileUpload + '_recovery',
+          );
+        }
+        if (this.backupImage) {
+          this.bmcActiveBackupSelected.push('bmc_bkup');
+        }
+        if (!this.httpPushUriTargetsBusyStatus) {
+          this.updateServiceData.HttpPushUriTargets =
+            this.bmcActiveBackupSelected;
+          this.updateServiceData.HttpPushUriTargetsBusy = true;
+        }
+        if (this.httpPushUriOptions !== undefined) {
+          var enddateval =
+            this.applyTimeFormValue.endDate != '' &&
+            this.applyTimeFormValue.endTime != ''
+              ? this.getUtcDate(
+                  this.applyTimeFormValue.endDate,
+                  this.applyTimeFormValue.endTime,
+                  true, // include secounds in the value
+                )
+              : '';
+          this.updateServiceData.HttpPushUriOptions = {
+            HttpPushUriApplyTime: {
+              ApplyTime: this.applyTimeFormValue.applyTimeMode,
+              MaintenanceWindowDurationInSeconds: parseInt(
+                this.applyTimeFormValue.timeSlot,
+              ),
+              MaintenanceWindowStartTime:
+                enddateval != ''
+                  ? enddateval.toISOString().substring(0, 19) +
+                    this.firmwareDateTime?.slice(19)
+                  : '',
+            },
+          };
+        }
+        if (Object.keys(this.updateServiceData).length != 0) {
+          this.$store
+            .dispatch('firmware/setFirmwarUpdateActive', this.updateServiceData)
+            .then(() => {
+              this.infoToast(
+                this.$t('pageFirmware.toast.updateStartedMessage'),
+                {
+                  title: this.$t('pageFirmware.toast.updateStarted'),
+                  timestamp: true,
+                },
+              );
+              if (this.isWorkstationSelected) {
+                this.dispatchWorkstationUpload();
+              } else {
+                this.dispatchTftpUpload();
+              }
+            })
+            .catch(({ message }) => {
+              this.endLoader();
+              let errorMessage = message;
+              let targetFailValue = [];
+              if (message.includes('HttpPushUriTargets are Invalid')) {
+                this.bmcErrorActiveBackupSelected =
+                  this.$store.getters['firmware/getInventryFirmwareData'];
+                for (var i = 0; i < this.bmcActiveBackupSelected.length; i++) {
+                  if (
+                    this.bmcActiveBackupSelected[i] !==
+                    this.bmcErrorActiveBackupSelected[i]
+                  ) {
+                    var parts = this.bmcActiveBackupSelected[i].split('_'); // ["bmc", "active"]
+                    for (var j = 0; j < parts.length; j++) {
+                      parts[j] =
+                        parts[j].charAt(0).toUpperCase() + parts[j].slice(1);
+                    }
+                    targetFailValue.push(parts.join(' '));
+                  }
+                }
+                errorMessage = this.$t(
+                  'pageFirmware.toast.errorHttpPushUriTargetsmsg',
+                  {
+                    bmcTarget: targetFailValue,
+                  },
+                );
+              }
+              this.errorToast(errorMessage);
+            });
+        }
+      } else {
         this.infoToast(this.$t('pageFirmware.toast.updateStartedMessage'), {
           title: this.$t('pageFirmware.toast.updateStarted'),
           timestamp: true,
@@ -389,61 +487,26 @@ export default {
         } else {
           this.dispatchTftpUpload();
         }
-      } else {
-        this.$store
-          .dispatch('firmware/setFirmwarUpdateActive', this.updateServiceData)
-          .then(() => {
-            this.infoToast(this.$t('pageFirmware.toast.updateStartedMessage'), {
-              title: this.$t('pageFirmware.toast.updateStarted'),
-              timestamp: true,
-            });
-            if (this.isWorkstationSelected) {
-              this.dispatchWorkstationUpload();
-            } else {
-              this.dispatchTftpUpload();
-            }
-          })
-          .catch(({ message }) => {
-            this.endLoader();
-            let errorMessage = message;
-            let targetFailValue = [];
-            if (message.includes('HttpPushUriTargets are Invalid')) {
-              this.bmcErrorActiveBackupSelected =
-                this.$store.getters['firmware/getInventryFirmwareData'];
-              for (var i = 0; i < this.bmcActiveBackupSelected.length; i++) {
-                if (
-                  this.bmcActiveBackupSelected[i] !==
-                  this.bmcErrorActiveBackupSelected[i]
-                ) {
-                  var parts = this.bmcActiveBackupSelected[i].split('_'); // ["bmc", "active"]
-                  for (var j = 0; j < parts.length; j++) {
-                    parts[j] =
-                      parts[j].charAt(0).toUpperCase() + parts[j].slice(1);
-                  }
-                  targetFailValue.push(parts.join(' '));
-                }
-              }
-              errorMessage = this.$t(
-                'pageFirmware.toast.errorHttpPushUriTargetsmsg',
-                {
-                  bmcTarget: targetFailValue,
-                },
-              );
-            }
-            this.errorToast(errorMessage);
-          });
       }
     },
     dispatchWorkstationUpload() {
+      const image = this.isMultiPartStatus
+        ? { UpdateFile: this.file, UpdateParameters: this.multiPartfile }
+        : this.file;
+
+      const multiPartValue = this.isMultiPartStatus;
       this.$store
-        .dispatch('firmware/uploadFirmware', this.file)
+        .dispatch('firmware/uploadFirmware', { image, multiPartValue })
         .then((response) => {
+          let multipartapplyTimeFormValueInfo = this.isMultiPartStatus
+            ? this.multipartapplyTimeFormValue
+            : this.applyTimeFormValue.applyTimeMode;
           if (
             this.httpPushUriOptions !== undefined &&
-            this.applyTimeFormValue.applyTimeMode !== 'Immediate'
+            multipartapplyTimeFormValueInfo !== 'Immediate'
           ) {
             let applyTimeFirmwareninfo = '';
-            if (this.applyTimeFormValue.applyTimeMode == 'OnReset') {
+            if (multipartapplyTimeFormValueInfo == 'OnReset') {
               if (this.isPFREnable) {
                 applyTimeFirmwareninfo = this.$tc(
                   'pageFirmware.toast.successFirmwarePfrOnreset',
@@ -454,15 +517,13 @@ export default {
                 );
               }
             } else if (
-              this.applyTimeFormValue.applyTimeMode ==
-              'AtMaintenanceWindowStart'
+              multipartapplyTimeFormValueInfo == 'AtMaintenanceWindowStart'
             ) {
               applyTimeFirmwareninfo = this.$tc(
                 'pageFirmware.form.updateFirmware.atMaintenanceWindowStartinfo',
               );
             } else if (
-              this.applyTimeFormValue.applyTimeMode ==
-              'InMaintenanceWindowOnReset'
+              multipartapplyTimeFormValueInfo == 'InMaintenanceWindowOnReset'
             ) {
               applyTimeFirmwareninfo = this.$tc(
                 'pageFirmware.form.updateFirmware.inMaintenanceWindowOnResetinfo',
@@ -539,7 +600,11 @@ export default {
       }, 300);
     },
     onSubmitUpload() {
-      if (this.httpPushUriOptions == undefined) {
+      if (this.isMultiPartStatus) {
+        this.$v.$touch();
+        if (this.$v.$invalid) return;
+        this.$bvModal.show('modal-update-firmware');
+      } else if (this.httpPushUriOptions == undefined) {
         this.$v.$touch();
         if (this.$v.$invalid) return;
         this.$bvModal.show('modal-update-firmware');
@@ -552,6 +617,86 @@ export default {
     onFileUpload(file) {
       this.file = file;
       this.$v.file.$touch();
+    },
+    onMultiPartFileUpload(file) {
+      this.jsonContent = {};
+      this.multiPartfile = file;
+      this.$v.multiPartfile.$touch();
+      if (file && file.type === 'application/json') {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            this.jsonContent = JSON.parse(e.target.result);
+
+            const allowedProperties = [
+              'Targets',
+              '@Redfish.OperationApplyTime',
+            ];
+            const actualProperties = Object.keys(this.jsonContent);
+            const unexpectedProperties = [];
+
+            for (const prop of actualProperties) {
+              if (!allowedProperties.includes(prop)) {
+                unexpectedProperties.push(prop);
+              }
+            }
+
+            if (unexpectedProperties.length > 0) {
+              this.clearMultiPartFile();
+              this.errorToast(
+                this.$t(
+                  'pageFirmware.form.updateFirmware.requiredPropertymissing',
+                ) ||
+                  `Unexpected properties found: ${unexpectedProperties.join(
+                    ', ',
+                  )}. Only ${allowedProperties.join(', ')} are allowed.`,
+              );
+              this.$emit('multiplePartJsonContent', {});
+              return;
+            }
+
+            if (
+              'Targets' in this.jsonContent &&
+              JSON.stringify(this.jsonContent).includes('OperationApplyTime')
+            ) {
+              this.multipartapplyTimeFormValue =
+                this.jsonContent['@Redfish.OperationApplyTime'];
+              this.$emit('multiplePartJsonContent', this.jsonContent);
+            }
+          } catch (error) {
+            this.clearMultiPartFile();
+            this.errorToast(
+              this.$t(
+                'pageFirmware.form.updateFirmware.multiPartUploadJsonInvalidFormat',
+              ),
+            );
+            this.$emit('multiplePartJsonContent', {});
+          }
+        };
+        reader.readAsText(file);
+      } else {
+        if (file != null) {
+          this.errorToast(
+            this.$t(
+              'pageFirmware.form.updateFirmware.multiPartUploadJsonInvalidFormat',
+            ),
+          );
+          this.$v.multiPartfile.$touch();
+          this.clearMultiPartFile();
+        }
+        this.$emit('multiplePartJsonContent', {});
+      }
+    },
+    clearMultiPartFile() {
+      this.multiPartfile = null;
+      this.jsonContent = null;
+      // Clear the file input using the ref
+      if (
+        this.$refs.multiPartFileRef &&
+        this.$refs.multiPartFileRef.clearSelectedFile
+      ) {
+        this.$refs.multiPartFileRef.clearSelectedFile();
+      }
     },
     changeActiveImage(val) {
       if (val == false && this.bmcBackupEnabledStatus) {
@@ -672,7 +817,58 @@ export default {
   padding-top: 15px;
   padding-bottom: 25px;
 }
-.inline-alignment {
-  display: inline-flex;
+
+.workstation-upload-container {
+  width: 100%;
+}
+
+.upload-files-row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.single-file-container {
+  width: 100%;
+}
+
+.multipart-file-group {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.image-file-group {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.upload-files-row .multipart-file-group,
+.upload-files-row .image-file-group {
+  width: calc(50% - 0.5rem);
+}
+
+.single-file-container .image-file-group {
+  width: 100%;
+}
+
+/* Ensure form groups don't have conflicting margins */
+.upload-files-row .form-group {
+  margin-bottom: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .upload-files-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .upload-files-row .multipart-file-group,
+  .upload-files-row .image-file-group {
+    width: 100%;
+  }
 }
 </style>

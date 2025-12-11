@@ -20,9 +20,28 @@
     <!-- Update firmware-->
     <page-section
       :section-title="$t('pageFirmware.sectionTitleUpdateFirmware')"
+      class="firmware_header_inline"
     >
+      <label class="ml5 multipart_fontsize">
+        {{ $t('pageFirmware.form.updateFirmware.multiPartSupport') }}
+      </label>
+      <b-form-checkbox
+        v-model="multiPartChangStatus"
+        data-test-id="firmware-multiPart-support-checkbox"
+        class="firmware_header_inline"
+        switch
+      >
+      </b-form-checkbox>
+      <label>{{
+        $t('pageFirmware.form.updateFirmware.multiPartSupportEnd')
+      }}</label>
       <b-row>
-        <b-col v-if="httpPushUriOptions !== undefined" sm="6" md="6" xl="6">
+        <b-col
+          v-if="httpPushUriOptions !== undefined && !multiPartChangStatus"
+          sm="6"
+          md="6"
+          xl="6"
+        >
           <firmware-card-time-apply
             :current-bmc-time-value="currentBmcTime"
             :set-apply-time-status="setApplyTimeValue"
@@ -37,8 +56,23 @@
             :is-page-disabled="isPageDisabled"
             :is-validation-status="validationStatus"
             :apply-time-form-value="applyTimeFormvalues"
+            :is-multi-part-status="multiPartChangStatus"
             @onSubmitUploadOk="isOnSubmitUploadOk"
             @onGetApplyTimeSetValue="isOnGetApplyTimeSetValue"
+            @multiplePartJsonContent="isOnMultiplePartJsonContent"
+          />
+        </b-col>
+        <b-col
+          v-show="
+            Object.keys(MultiplePartJsonFormat).length != 0 &&
+            multiPartChangStatus
+          "
+          sm="6"
+          md="6"
+          xl="6"
+        >
+          <firmware-json-format
+            :multipart-json-content="MultiplePartJsonFormat"
           />
         </b-col>
       </b-row>
@@ -54,6 +88,7 @@ import HostCards from './FirmwareCardsHost';
 import PageSection from '@/components/Global/PageSection';
 import PageTitle from '@/components/Global/PageTitle';
 import FirmwareCardTimeApply from './FirmwareCardTimeApply';
+import FirmwareJsonFormat from './FirmwareJsonFormat';
 
 import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
 
@@ -67,6 +102,7 @@ export default {
     PageSection,
     PageTitle,
     FirmwareCardTimeApply,
+    FirmwareJsonFormat,
   },
   mixins: [LoadingBarMixin],
   beforeRouteLeave(to, from, next) {
@@ -83,6 +119,8 @@ export default {
       currentBmcTime: '',
       setApplyTimeValue: {},
       globalPrivilege: this.$store.getters['global/userPrivilege'],
+      multiPartChangStatus: false,
+      MultiplePartJsonFormat: {},
     };
   },
   computed: {
@@ -126,6 +164,26 @@ export default {
     isOnGetApplyTimeSetValue(val) {
       this.setApplyTimeValue = val;
     },
+    isOnMultiplePartJsonContent(val) {
+      this.MultiplePartJsonFormat = val;
+    },
   },
 };
 </script>
+<style>
+.firmware_header_inline {
+  display: inline !important;
+  top: 8px;
+  left: 5px;
+  h2 {
+    display: inline-block;
+  }
+}
+.ml5 {
+  margin-left: 5px;
+}
+.multipart_fontsize {
+  font-weight: 600;
+  color: #161616;
+}
+</style>

@@ -249,10 +249,12 @@ const FirmwareStore = {
         })
         .catch((error) => console.log(error));
     },
-    async uploadFirmware({ state, commit }, image) {
+    async uploadFirmware({ state, commit }, { image, multiPartValue }) {
       return await api
         .post(state.httpPushUri, image, {
-          headers: { 'Content-Type': 'application/octet-stream' },
+          headers: multiPartValue
+            ? { 'Content-Type': 'multipart/form-data' }
+            : { 'Content-Type': 'application/octet-stream' },
         })
         .then((response) => {
           commit('setImageName', response?.data?.Oem?.ImageName);
@@ -260,7 +262,31 @@ const FirmwareStore = {
         })
         .catch((error) => {
           console.log(error);
-          throw new Error(i18n.t('pageFirmware.toast.errorUpdateFirmware'));
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.error[
+              '@Message.ExtendedInfo'
+            ][0].MessageId.includes('PropertyValueFormatError')
+          ) {
+            throw new Error(
+              i18n.t('pageFirmware.toast.errorUpdateFirmwareMultipart'),
+            );
+          } else if (
+            error.response &&
+            error.response.data &&
+            error.response.data.error[
+              '@Message.ExtendedInfo'
+            ][0].MessageId.includes('ResourceNotFound')
+          ) {
+            throw new Error(
+              i18n.t(
+                error.response.data.error['@Message.ExtendedInfo'][0].Message,
+              ),
+            );
+          } else {
+            throw new Error(i18n.t('pageFirmware.toast.errorUpdateFirmware'));
+          }
         });
     },
     async uploadFirmwareTFTP(_, fileAddress) {

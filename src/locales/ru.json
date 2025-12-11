@@ -1379,7 +1379,13 @@
                 "timeValidation": "Время начала должно быть больше времени BMC.",
                 "onResetinfo": "BMC перезагрузится и после загрузки в консоль BMC для выбранной опции.",
                 "atMaintenanceWindowStartinfo": "Обновление встроенного ПО начнется на основе настроенной даты/времени начала для выбранной опции.",
-                "inMaintenanceWindowOnResetinfo": "Перезагрузка BMC должна произойти на основе настроенной даты/времени начала и длительности для выбранной опции."
+                "inMaintenanceWindowOnResetinfo": "Перезагрузка BMC должна произойти на основе настроенной даты/времени начала и длительности для выбранной опции.",
+                "multiPart": "Многочастный файл",
+                "multiPartSupport": "(Поддержка нескольких частей",
+                "multiPartSupportEnd": ")",
+                "multiPartUploadJsonFormat": "JSON формат многочастной загрузки",
+                "multiPartUploadJsonInvalidFormat": "Неверный формат JSON. Пожалуйста, загрузите действительный JSON файл.",
+                "requiredPropertymissing": "В JSON-файле должно присутствовать только обязательное свойство ('@Redfish.OperationApplyTime and Targets')."
             }
         },
         "modal": {
@@ -1413,7 +1419,8 @@
             "errorEnabledClearConfig": "Ошибка включения очистки конфигурации.",
             "errorDisabledClearConfig": "Ошибка отключения очистки конфигурации.",
             "errorHttpPushUriTargets":"Недействительные HttpPushUriTargets.",
-            "errorHttpPushUriTargetsmsg": "Невозможно установить %{bmcTarget} в качестве цели, SPI может быть поврежден."
+            "errorHttpPushUriTargetsmsg": "Невозможно установить %{bmcTarget} в качестве цели, SPI может быть поврежден.",
+            "errorUpdateFirmwareMultipart": "Ошибка загрузки многочастного файла."
         }
     },
     "pagePreserve": {

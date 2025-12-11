@@ -1382,7 +1382,13 @@
                 "onResetinfo": "Der BMC wird neu gestartet und anschließend zur BMC-Konsole für die gewählte Option booten.",
                 "atMaintenanceWindowStartinfo": "Firmware-Update startet basierend auf dem konfigurierten Startdatum/-zeit für die ausgewählte Option.",
                 "inMaintenanceWindowOnResetinfo": "BMC-Neustart sollte basierend auf dem konfigurierten Startdatum/-zeit und der Dauer für die ausgewählte Option erfolgen.",
-                "recoveryImage": "Wiederherstellungsbild"
+                "recoveryImage": "Wiederherstellungsbild",
+                "multiPart": "MultiPart-Datei",
+                "multiPartSupport": "(MultiPart-Unterstützung",
+                "multiPartSupportEnd": ")",
+                "multiPartUploadJsonFormat": "MultiPart-Upload-JSON-Format",
+                "multiPartUploadJsonInvalidFormat": "Ungültiges JSON-Format. Bitte laden Sie eine gültige JSON-Datei hoch.",
+                "requiredPropertymissing": "Nur die erforderlichen Eigenschaften ('@Redfish.OperationApplyTime' und Targets') sollten in der JSON-Datei vorhanden sein."
             }
         },
         "modal": {
@@ -1416,7 +1422,8 @@
             "errorEnabledClearConfig": "Fehler beim Aktivieren der Clear Konfiguration.",
             "errorDisabledClearConfig": "Fehler beim Deaktivieren der Clear Konfiguration.",
             "errorHttpPushUriTargets":"Die HttpPushUriTargets sind ungültig.",
-            "errorHttpPushUriTargetsmsg": "%{bmcTarget} konnte nicht als Ziel festgelegt werden, möglicherweise ist die SPI-Schnittstelle beschädigt."
+            "errorHttpPushUriTargetsmsg": "%{bmcTarget} konnte nicht als Ziel festgelegt werden, möglicherweise ist die SPI-Schnittstelle beschädigt.",
+            "errorUpdateFirmwareMultipart": "Fehler beim Hochladen der Multipart-Datei."
         }
     },
     "pagePreserve": {

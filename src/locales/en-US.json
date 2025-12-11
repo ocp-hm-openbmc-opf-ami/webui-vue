@@ -1381,7 +1381,13 @@
                 "onResetinfo": "BMC will reboot and after boot to BMC Console for the selected option.",
                 "atMaintenanceWindowStartinfo": "Firmware Update will start based on the configured Start Date/Time for the selected option.",
                 "inMaintenanceWindowOnResetinfo": "BMC reboot should happen based on configured Start Date/Time and duration for the selected option.",
-                "recoveryImage": "Recovery Image"
+                "recoveryImage": "Recovery Image",
+                "multiPart": "MultiPart File",
+                "multiPartSupport": "(MultiPart Support",
+                "multiPartSupportEnd": ")",
+                "multiPartUploadJsonFormat": "MultiPart Upload JSON Format",
+                "multiPartUploadJsonInvalidFormat": "Invalid JSON format. Please upload a valid JSON file.",
+                "requiredPropertymissing": "Required property('@Redfish.OperationApplyTime and Targets') only should be present in the JSON file."
             }
         },
         "modal": {
@@ -1415,7 +1421,8 @@
             "errorEnabledClearConfig": "Error in enabling Clear Configuration.",
             "errorDisabledClearConfig": "Error in disabling Clear Configuration.",
             "errorHttpPushUriTargets":"HttpPushUriTargets are Invalid.",
-            "errorHttpPushUriTargetsmsg": "Unable to set %{bmcTarget} as target , SPI may be corrupted."
+            "errorHttpPushUriTargetsmsg": "Unable to set %{bmcTarget} as target , SPI may be corrupted.",
+            "errorUpdateFirmwareMultipart": "Error in Upload MultiPart File."
         }
     },
     "pagePreserve": {

@@ -1380,7 +1380,13 @@
                 "onResetinfo": "BMC 将重新启动，并在启动后进入 BMC 控制台以获取所选选项。",
                 "atMaintenanceWindowStartinfo": "固件更新将根据所选选项配置的开始日期/时间开始。",
                 "inMaintenanceWindowOnResetinfo": "BMC 重新启动应根据所选选项的配置开始日期/时间和持续时间进行。",
-                "recoveryImage": "恢复图像"
+                "recoveryImage": "恢复图像",
+                "multiPart": "多部分文件",
+                "multiPartSupport": "（多部分支持",
+                "multiPartSupportEnd": ")",
+                "multiPartUploadJsonFormat": "多部分上传 JSON 格式",
+                "multiPartUploadJsonInvalidFormat": "JSON 格式无效。请上传有效的 JSON 文件。",
+                "requiredPropertymissing": "JSON 文件中应该只包含必需属性（'@Redfish.OperationApplyTime 和 Targets'）。"
             }
         },
         "modal": {
@@ -1414,7 +1420,8 @@
             "errorEnabledClearConfig": "启用清除配置时出错。",
             "errorDisabledClearConfig": "禁用清除配置时出错。",
             "errorHttpPushUriTargets":"HttpPushUriTargets 无效。",
-            "errorHttpPushUriTargetsmsg": "无法将 %{bmcTarget} 设置为目标，SPI 可能已损坏。"
+            "errorHttpPushUriTargetsmsg": "无法将 %{bmcTarget} 设置为目标，SPI 可能已损坏。",
+            "errorUpdateFirmwareMultipart": "上传多部分文件时出错。"
         }
     },
     "pagePreserve": {
