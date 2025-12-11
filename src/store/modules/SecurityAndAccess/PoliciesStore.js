@@ -708,7 +708,7 @@ const PoliciesStore = {
         .then((devices) => {
           devices.some((virtualMedia) => {
             if (virtualMedia.data.TransferProtocolType !== 'OEM') {
-              const config = virtualMedia.data.Oem?.OpenBMC || {};
+              const config = virtualMedia.data.Oem?.Ami || {};
               const vmValues = {
                 RetryCount: config?.RetryCount || 3,
                 RetryInterval: config?.RetryInterval || 15,
@@ -725,7 +725,7 @@ const PoliciesStore = {
     async saveVMReconnectValue({ dispatch, state }, vmReconnectValue) {
       const payLoad = {
         Oem: {
-          OpenBMC: {
+          Ami: {
             RetryCount: parseInt(vmReconnectValue.vmCount),
             RetryInterval: parseInt(vmReconnectValue.vmInterval),
           },
