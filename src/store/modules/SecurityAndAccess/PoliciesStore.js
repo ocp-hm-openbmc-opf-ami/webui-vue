@@ -120,18 +120,21 @@ const PoliciesStore = {
     setSolSshPortUpdatedValue({ commit }, solSshProtocolPort) {
       commit('setSolSshPort', solSshProtocolPort);
     },
-    async getNetworkProtocolStatus({ commit }) {
+    async getNetworkProtocolStatus({ commit, dispatch }) {
       return await api
         .get('/redfish/v1/Managers/bmc/NetworkProtocol')
         .then((response) => {
           const sshProtocol = response.data?.SSH?.ProtocolEnabled;
           const ChannelList = response.data?.Oem?.Ami?.AvailableChannelList;
-          const ipmiProtocol = !response.data?.Oem?.Ami?.IPMI?.Masked;
+          const curProtocolEnabled = response.data?.IPMI?.ProtocolEnabled;
+          const curIpmiMasked = response.data?.Oem?.Ami?.IPMI?.Masked;
+          if (curIpmiMasked == curProtocolEnabled)
+            dispatch('syncIpmiMasked', curIpmiMasked);
           const ssdpProtocol = response.data?.SSDP?.ProtocolEnabled;
           const ssdpPortValue = response.data?.SSDP?.Port;
           const defaultChannelInfo = response.data?.Oem?.Ami?.DefaultChannel;
           commit('setSshProtocolEnabled', sshProtocol);
-          commit('setIpmiProtocolEnabled', ipmiProtocol);
+          commit('setIpmiProtocolEnabled', curProtocolEnabled);
           commit('setSsdpProtocolEnabled', ssdpProtocol);
           commit('setSsdpPort', ssdpPortValue);
           commit('setChannelList', ChannelList);
@@ -245,8 +248,7 @@ const PoliciesStore = {
         })
         .catch((error) => console.log(error));
     },
-    async saveIpmiProtocolState({ commit }, protocolEnabled) {
-      commit('setIpmiProtocolEnabled', protocolEnabled);
+    async syncIpmiMasked(_, protocolEnabled) {
       const ipmi = {
         Oem: {
           Ami: {
@@ -258,6 +260,13 @@ const PoliciesStore = {
       };
       return await api
         .patch('/redfish/v1/Managers/bmc/NetworkProtocol', ipmi)
+        .catch((error) => {
+          console.log('Failed to sync Masked:', error);
+        });
+    },
+    async saveIpmiProtocolState({ commit, dispatch }, protocolEnabled) {
+      commit('setIpmiProtocolEnabled', protocolEnabled);
+      return dispatch('syncIpmiMasked', protocolEnabled)
         .then(() => {
           if (protocolEnabled) {
             return i18n.t('pagePolicies.toast.successIpmiEnabled');
