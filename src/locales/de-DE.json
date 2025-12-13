@@ -1795,6 +1795,7 @@
             "errorInvalidPassword": "Ungültiges Passwort, überprüfen Sie die Passwort-Komplexitätsregeln.",
             "successBatchDelete": "%{count} Benutzer erfolgreich gelöscht. | %{count} Benutzer erfolgreich gelöscht.",
             "errorLastPasswordUsed": "Bitte geben Sie ein neues Passwort ein. Es darf nicht mit Ihrem aktuellen Passwort übereinstimmen.",
+            "errorPasswordHistory": "Das von Ihnen angegebene Passwort wurde zuvor verwendet und kann nicht erneut verwendet werden. Bitte geben Sie ein anderes Passwort ein.",
             "successBatchDisable": "%{count} Benutzer erfolgreich deaktiviert. | %{count} Benutzer erfolgreich deaktiviert.",
             "successBatchEnable": "%{count} Benutzer erfolgreich aktiviert. | %{count} Benutzer erfolgreich aktiviert.",
             "successCreateUser": "Benutzer '%{username}' erstellt.",

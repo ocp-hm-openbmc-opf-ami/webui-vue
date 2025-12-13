@@ -562,6 +562,15 @@ const UserManagementStore = {
             );
             return errorMessage;
           }
+          if (message && message.indexOf('Last password') !== -1) {
+            const errorMessage = i18n.t(
+              'pageUserManagement.toast.errorPasswordHistory',
+              {
+                username,
+              },
+            );
+            return errorMessage;
+          }
         }
       }
       if (username && username !== undefined) {
