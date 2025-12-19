@@ -3573,7 +3573,9 @@
                 "both": "Beides",
                 "networkType": "Netzwerktyp",
                 "preLoad":"Vorab laden",
-                "ipVersion": "IP-Version"
+                "ipVersion": "IP-Version",
+                "ICMP": "ICMP",
+                "protocolAllIpRequired": "Für die Protokolloption „ALLE“ mit Datum und Uhrzeit ist entweder ein IP-Bereich oder eine MAC-Adresse erforderlich."
             }
         },
         "toast": {

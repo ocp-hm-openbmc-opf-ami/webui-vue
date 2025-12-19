@@ -3550,7 +3550,7 @@
                 "startTime": "开始时间（24 小时制 HH:MM）",
                 "endDate": "结束日期 (YYYY-MM-DD)",
                 "endTime": "结束时间（24 小时制 HH:MM）",
-                "sourceMacAddress": "MAC 地址",
+                "sourceMacAddress": "电脑地址",
                 "protocol": "协议",
                 "drop": "降低",
                 "tcp": "TCP",
@@ -3569,7 +3569,9 @@
                 "both": "全部",
                 "networkType": "网络类型",
                 "preLoad":"预加载",
-                "ipVersion": "IP版本"
+                "ipVersion": "IP版本",
+                "ICMP": "ICMP",
+                "protocolAllIpRequired": "对于带有日期和时间的协议选项“ALL”，需要 IP 范围或 MAC 地址。"
             }
         },
         "toast": {

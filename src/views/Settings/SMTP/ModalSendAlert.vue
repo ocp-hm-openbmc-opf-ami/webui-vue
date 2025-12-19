@@ -52,9 +52,11 @@
     </b-form>
     <template #modal-footer="{ cancel }">
       <b-button variant="secondary" @click="cancel()">
+        <icon-cancel />
         {{ $t('global.action.cancel') }}
       </b-button>
       <b-button form="form-alert" type="submit" variant="primary" @click="onOk">
+        <icon-send />
         {{ $t('global.action.send') }}
       </b-button>
     </template>
@@ -66,8 +68,14 @@ import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import { required } from 'vuelidate/lib/validators';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
+import IconSend from '@carbon/icons-vue/es/send--alt--filled/20';
 
 export default {
+  components: {
+    IconCancel,
+    IconSend,
+  },
   mixins: [VuelidateMixin, BVToastMixin, LoadingBarMixin],
   data() {
     return {

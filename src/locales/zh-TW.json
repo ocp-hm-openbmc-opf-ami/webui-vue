@@ -3550,7 +3550,7 @@
                 "startTime": "開始時間（24 小時制 HH:MM）",
                 "endDate": "結束日期 (YYYY-MM-DD)",
                 "endTime": "時間結束（24 小時制 HH:MM）",
-                "sourceMacAddress": "MAC 位址",
+                "sourceMacAddress": "電腦位址",
                 "protocol": "協定",
                 "drop": "降低",
                 "tcp": "TCP",
@@ -3569,7 +3569,9 @@
                 "both": "兩個都",
                 "networkType": "網路類型",
                 "preLoad":"預先載入",
-                "ipVersion": "IP版本"
+                "ipVersion": "IP版本",
+                "ICMP": "ICMP",
+                "protocolAllIpRequired": "對於帶有日期和時間的協定選項“ALL”，需要 IP 範圍或 MAC 位址。"
             }
         },
         "toast": {

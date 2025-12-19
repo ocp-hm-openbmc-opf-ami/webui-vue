@@ -68,8 +68,9 @@
               id="portStart"
               v-model="form.portStart"
               type="text"
+              data-test-id="port-input-portStart"
               :state="getValidationState($v.form.portStart)"
-              :disabled="form.protocol == 'ALL'"
+              :disabled="form.protocol == 'ALL' || form.protocol == 'ICMP'"
               @input="$v.form.portStart.$touch()"
             />
             <b-form-invalid-feedback role="alert">
@@ -91,8 +92,9 @@
               id="portEnd"
               v-model="form.portEnd"
               type="text"
+              data-test-id="port-input-portEnd"
               :state="getValidationState($v.form.portEnd)"
-              :disabled="form.protocol == 'ALL'"
+              :disabled="form.protocol == 'ALL' || form.protocol == 'ICMP'"
               @input="$v.form.portEnd.$touch()"
             />
             <b-form-invalid-feedback role="alert">
@@ -138,19 +140,12 @@
               id="sourceMacAddress"
               v-model="form.sourceMacAddress"
               type="text"
+              data-test-id="mac-input-sourceMacAddress"
               :state="getValidationState($v.form.sourceMacAddress)"
               @input="$v.form.sourceMacAddress.$touch()"
             />
             <b-form-invalid-feedback role="alert">
-              <template v-if="!$v.form.sourceMacAddress.required">
-                {{ $t('global.form.fieldRequired') }}
-              </template>
-              <template
-                v-if="
-                  $v.form.sourceMacAddress.required &&
-                  !$v.form.sourceMacAddress.pattern
-                "
-              >
+              <template v-if="!$v.form.sourceMacAddress.pattern">
                 {{ $t('global.form.invalidFormat') }}
               </template>
             </b-form-invalid-feedback>
@@ -167,6 +162,7 @@
               id="ipStart"
               v-model="form.ipStart"
               type="text"
+              data-test-id="ip-input-ipStart"
               :state="getValidationState($v.form.ipStart)"
               :disabled="form.ipVersion != '' && form.ipVersion == 'BOTH'"
               @input="$v.form.ipStart.$touch()"
@@ -192,6 +188,7 @@
               id="ipEnd"
               v-model="form.ipEnd"
               type="text"
+              data-test-id="ip-input-ipEnd"
               :state="getValidationState($v.form.ipEnd)"
               :disabled="form.ipVersion != '' && form.ipVersion == 'BOTH'"
               @input="$v.form.ipEnd.$touch()"
@@ -269,11 +266,7 @@
               <template
                 v-if="$v.form.startTime.required && !$v.form.startTime.pattern"
               >
-                {{
-                  $t(
-                    'pageFireWall.firewallSettings.modal.endTimeCanNotBeEqualToStartTime',
-                  )
-                }}
+                {{ $t('global.form.invalidFormat') }}
               </template>
             </b-form-invalid-feedback>
           </b-form-group>
@@ -365,11 +358,7 @@
                   !$v.form.endTime.pattern
                 "
               >
-                {{
-                  $t(
-                    'pageFireWall.firewallSettings.modal.endTimeCanNotBeEqualToStartTime',
-                  )
-                }}
+                {{ $t('global.form.invalidFormat') }}
               </template>
             </b-form-invalid-feedback>
           </b-form-group>
@@ -435,6 +424,10 @@ export default {
           value: 'UDP',
         },
         {
+          text: this.$t('pageFireWall.firewallSettings.modal.ICMP'),
+          value: 'ICMP',
+        },
+        {
           text: this.$t('pageFireWall.firewallSettings.modal.all'),
           value: 'ALL',
         },
@@ -485,7 +478,7 @@ export default {
         },
         ipStart: {
           required: requiredIf(function (form) {
-            if (form.ipVersion != '' && form.ipVersion != 'BOTH') {
+            if (form.ipEnd != '') {
               return true;
             }
           }),
@@ -500,11 +493,7 @@ export default {
         },
         portStart: {
           required: requiredIf(function (form) {
-            if (
-              form.portEnd != '' ||
-              form.protocol == 'TCP' ||
-              form.protocol == 'UDP'
-            ) {
+            if (form.portEnd != '') {
               return true;
             }
           }),
@@ -518,11 +507,6 @@ export default {
           },
         },
         sourceMacAddress: {
-          required: requiredIf(function (form) {
-            if (form.ipVersion != '' && form.ipVersion === 'BOTH') {
-              return true;
-            }
-          }),
           pattern: function (val) {
             return this.sourceMacAddressValidation(val);
           },
@@ -672,11 +656,7 @@ export default {
       });
     },
     ipStartValidation(value) {
-      if (
-        (this.form.ipVersion != '' && this.form.ipVersion === 'BOTH') ||
-        !value ||
-        value.length === 0
-      ) {
+      if (!value || value.length === 0) {
         return true; // Return true for empty input (not invalid)
       }
       const isIPv4 = this.ipv4Regex(value);
@@ -722,11 +702,7 @@ export default {
     },
     ipEndValidation(value) {
       // Only validate if there's input (length > 0)
-      if (
-        (this.form.ipVersion != '' && this.form.ipVersion === 'BOTH') ||
-        !value ||
-        value.length === 0
-      ) {
+      if (!value || value.length === 0) {
         return true; // Return true for empty input (not invalid)
       }
 

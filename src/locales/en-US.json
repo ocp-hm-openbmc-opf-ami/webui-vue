@@ -3554,7 +3554,7 @@
                 "startTime": "Start Time (24-hour time HH:MM)",
                 "endDate": "End Date (YYYY-MM-DD)",
                 "endTime": "End Time (24-hour time HH:MM)",
-                "sourceMacAddress": "MacAddress",
+                "sourceMacAddress": "Mac Address",
                 "protocol": "Protocol",
                 "drop": "Drop",
                 "tcp": "TCP",
@@ -3573,7 +3573,9 @@
                 "both": "Both",
                 "networkType": "Network Type",
                 "preLoad":"PreLoad",
-                "ipVersion": "IP Version"
+                "ipVersion": "IP Version",
+                "ICMP": "ICMP",
+                "protocolAllIpRequired": "For the Protocol option 'ALL' with Date and Time, either an IP Range or a MAC Address is required."
             }
         },
         "toast": {

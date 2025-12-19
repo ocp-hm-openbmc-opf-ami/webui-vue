@@ -3568,7 +3568,9 @@
                 "both": "Оба",
                 "networkType": "Тип сети",
                 "preLoad": "Предзагрузка",
-                "ipVersion": "Версия IP"
+                "ipVersion": "Версия IP",
+                "ICMP": "ICMP",
+                "protocolAllIpRequired": "Для параметра протокола 'ALL' с датой и временем требуется либо диапазон IP, либо MAC-адрес."
             }
         },
         "toast": {
