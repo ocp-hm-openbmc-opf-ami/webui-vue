@@ -245,6 +245,12 @@ export default {
     IconDelete,
   },
   mixins: [BVToastMixin],
+  props: {
+    virtualMediaServiceEnabledAccess: {
+      required: true,
+      type: Boolean,
+    },
+  },
   data() {
     return {
       loading: true,
@@ -315,11 +321,17 @@ export default {
           }
         } else {
           console.error('Memory data not found in response:', response);
-          this.errorToast(this.$t('pageVirtualMedia.eMMC.errorLoadingMemory'));
+          if (this.virtualMediaServiceEnabledAccess) {
+            this.errorToast(
+              this.$t('pageVirtualMedia.eMMC.errorLoadingMemory'),
+            );
+          }
         }
       } catch (error) {
         console.error('Error loading memory data:', error);
-        this.errorToast(this.$t('pageVirtualMedia.eMMC.errorLoadingMemory'));
+        if (this.virtualMediaServiceEnabledAccess) {
+          this.errorToast(this.$t('pageVirtualMedia.eMMC.errorLoadingMemory'));
+        }
       } finally {
         this.loading = false;
       }
@@ -352,7 +364,9 @@ export default {
           await this.handleImageSelect(this.selectedImage);
         }
       } catch (error) {
-        this.errorToast(this.$t('pageVirtualMedia.eMMC.errorLoadingImages'));
+        if (this.virtualMediaServiceEnabledAccess) {
+          this.errorToast(this.$t('pageVirtualMedia.eMMC.errorLoadingImages'));
+        }
       }
     },
     async handleImageSelect(odataId) {

@@ -187,7 +187,12 @@
             :connection="modalConfigureConnection"
             @ok="saveConnection"
           />
-          <emmc-redirection />
+          <emmc-redirection
+            v-if="systemInfoLoaded && virtualMediaServiceEnabledAccess"
+            :virtual-media-service-enabled-access="
+              virtualMediaServiceEnabledAccess
+            "
+          />
         </div>
       </div>
     </div>
@@ -235,6 +240,7 @@ export default {
           ? true
           : false,
       licenseName: 'MEDIA',
+      systemInfoLoaded: false,
     };
   },
   computed: {
@@ -290,10 +296,12 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('global/getSystemInfo');
-    this.getVirtualMedia();
-    this.$root.$on('stop-vmedia', () => {
-      this.proxyDevices.forEach((dev) => this.stopVM(dev));
+    this.$store.dispatch('global/getSystemInfo').then(() => {
+      this.systemInfoLoaded = true;
+      this.getVirtualMedia();
+      this.$root.$on('stop-vmedia', () => {
+        this.proxyDevices.forEach((dev) => this.stopVM(dev));
+      });
     });
   },
   methods: {
@@ -310,7 +318,9 @@ export default {
           });
         })
         .catch(({ message }) => {
-          this.errorToast(message);
+          if (this.virtualMediaServiceEnabledAccess) {
+            this.errorToast(message);
+          }
         })
         .finally(() => this.endLoader());
     },

@@ -121,8 +121,8 @@ const GlobalStore = {
         })
         .catch((error) => console.log(error));
     },
-    getSystemInfo({ commit }) {
-      api
+    async getSystemInfo({ commit }) {
+      return await api
         .get('/redfish/v1/Systems/system')
         .then(
           ({
