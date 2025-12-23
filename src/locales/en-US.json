@@ -2712,7 +2712,8 @@
             "uploadSuccess": "Image uploaded successfully",
             "uploading": "Uploading...",
             "usedSize": "Used Size",
-            "writeProtected": "Write Protection"
+            "writeProtected": "Write Protection",
+            "fileTooSmall": "The selected file must be at least 600 KB."
         },
         "permissionRestricted": "You don't have permission to view this page.",
         "disabledVirtualMediaService": " Virtual Media service is disabled. Go to Security and Access -> Policies page to enable Virtual Media service.",
@@ -2747,6 +2748,7 @@
             "serverClosedWithErrors": "Server closed with errors.",
             "invalidFileType": "Invalid Image File Type",
             "virtualMediaErrorFileTooSmall": "The selected file must be at least 600 KB.",
+            "virtualMediaErrorFileMountImageTooSmall": "The mounted image is invalid or does not meet the minimum size requirement of 600 KB.",
             "infoTitle": "External Server Start button",
             "infoMessage": "The Start button is enabled only if a Password is set and the Mount Type is CIFS or HTTPS."
         }

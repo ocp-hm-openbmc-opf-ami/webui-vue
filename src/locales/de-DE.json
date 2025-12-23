@@ -2714,7 +2714,8 @@
             "uploadSuccess": "Abbild erfolgreich hochgeladen",
             "uploading": "Hochladen...",
             "usedSize": "Verwendeter Speicherplatz",
-            "writeProtected": "Schreibschutz"
+            "writeProtected": "Schreibschutz",
+            "fileTooSmall": "Die ausgewählte Datei muss mindestens 600 KB groß sein."
         },
         "permissionRestricted": "Sie haben keine Berechtigung, diese Seite anzuzeigen.",
         "disabledVirtualMediaService": "Der Virtual Media-Dienst ist deaktiviert. Gehen Sie zu Sicherheit und Zugriff -> Richtlinien, um den Virtual Media-Dienst zu aktivieren.",
@@ -2746,7 +2747,8 @@
             "serverClosedSuccessfully": "Server erfolgreich geschlossen.",
             "serverClosedWithErrors": "Server mit Fehlern geschlossen.",
             "invalidFileType": "Ungültiger Image-Dateityp",
-	    "virtualMediaErrorFileTooSmall": "Die ausgewählte Datei muss mindestens 600 KB groß sein.",
+	        "virtualMediaErrorFileTooSmall": "Die ausgewählte Datei muss mindestens 600 KB groß sein.",
+            "virtualMediaErrorFileMountImageTooSmall": "Das eingehängte Abbild ist ungültig oder erfüllt nicht die Mindestgrößenanforderung von 600 KB.",
             "infoTitle": "Externer Server Start-Button",
             "infoMessage": "Die Schaltfläche Start ist nur aktiviert, wenn ein Passwort gesetzt ist und der Mount-Typ CIFS oder HTTPS ist."
         }

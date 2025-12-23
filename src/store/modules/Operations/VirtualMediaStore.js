@@ -285,6 +285,15 @@ const VirtualMediaStore = {
                 Slot: id,
               }),
             );
+          } else if (
+            error.response.status == 400 &&
+            error.response.data.error.code.includes('invalidImageSize')
+          ) {
+            throw new Error(
+              i18n.t(
+                'pageVirtualMedia.toast.virtualMediaErrorFileMountImageTooSmall',
+              ),
+            );
           } else {
             throw new Error(i18n.t('pageVirtualMedia.toast.errorMounting'));
           }

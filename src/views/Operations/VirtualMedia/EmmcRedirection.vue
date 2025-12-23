@@ -78,7 +78,7 @@
                 <div class="emmc-upload-container">
                   <b-form-file
                     v-model="uploadFile"
-                    :state="Boolean(uploadFile)"
+                    :state="fileValidationState"
                     :placeholder="$t('pageVirtualMedia.eMMC.choosePlaceholder')"
                     :browse-text="$t('global.action.browse')"
                     accept=".iso,.img, .nrg,.ima"
@@ -405,6 +405,13 @@ export default {
 
       if (!validExtensions.includes(fileExt)) {
         this.errorToast(this.$t('pageVirtualMedia.eMMC.invalidFileType'));
+        this.fileError = true;
+        return;
+      }
+
+      const minSize = 600 * 1024; // 600 KB
+      if (file.size < minSize) {
+        this.errorToast(this.$t('pageVirtualMedia.eMMC.fileTooSmall'));
         this.fileError = true;
         return;
       }

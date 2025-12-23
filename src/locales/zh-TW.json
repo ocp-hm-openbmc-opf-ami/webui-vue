@@ -2710,7 +2710,8 @@
             "uploadSuccess": "影像上傳成功",
             "uploading": "上傳中...",
             "usedSize": "已用空間",
-            "writeProtected": "寫入保護"
+            "writeProtected": "寫入保護",
+            "fileTooSmall": "所選檔案必須至少為 600 KB。"
         },
         "permissionRestricted": "您沒有權限查看此頁面。",
         "disabledVirtualMediaService": "虛擬媒體服務已停用。進入安全性和存取 -> 策略頁面以啟用虛擬媒體服務。",
@@ -2743,6 +2744,7 @@
             "serverClosedWithErrors": "伺服器已關閉但有錯誤發生。",
             "invalidFileType": "圖像檔案類型無效",
             "virtualMediaErrorFileTooSmall": "所選檔案必須至少為 600 KB。",
+            "virtualMediaErrorFileMountImageTooSmall": "掛載的映像檔無效或不符合 600 KB 的最低大小要求。",
             "infoTitle": "外部伺服器啟動按鈕",
             "infoMessage": "僅當設定了密碼並且安裝類型為 CIFS 或 HTTPS 時，才會啟用「開始」按鈕。"
         }
