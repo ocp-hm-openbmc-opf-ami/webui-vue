@@ -238,7 +238,10 @@ export default {
     ...mapState('fireWall', ['FireWallData']),
     ...mapGetters('global', ['userPrivilege']),
     isButtonDisable() {
-      return this.userPrivilege === privilegesId.readOnly;
+      return (
+        this.userPrivilege === privilegesId.readOnly ||
+        this.userPrivilege === privilegesId.operator
+      );
     },
     filteredRows() {
       if (this.activeTabValue === 'Ipv6') {

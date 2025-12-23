@@ -151,7 +151,10 @@ export default {
     ...mapState('vlan', ['vlanTableData']),
     ...mapGetters('global', ['userPrivilege']),
     isButtonDisable() {
-      return this.userPrivilege === privilegesId.readOnly;
+      return (
+        this.userPrivilege === privilegesId.readOnly ||
+        this.userPrivilege === privilegesId.operator
+      );
     },
   },
   watch: {

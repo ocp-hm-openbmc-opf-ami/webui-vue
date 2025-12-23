@@ -197,7 +197,10 @@ export default {
     ...mapState('preserveConfig', ['preserveConfigValues']),
     ...mapGetters('global', ['userPrivilege']),
     isButtonDisable() {
-      return this.userPrivilege === privilegesId.readOnly;
+      return (
+        this.userPrivilege === privilegesId.readOnly ||
+        this.userPrivilege === privilegesId.operator
+      );
     },
   },
   watch: {
