@@ -35,9 +35,9 @@ const DateTimeStore = {
           commit('setNtpServers', ntpServers);
           commit('setIsNtpProtocolEnabled', isNtpProtocolEnabled);
           const secureNtpServers =
-            response.data.Oem?.Ami?.EncrytedNTP?.NTPServers || [];
+            response.data.Oem?.Ami?.EncryptedNTP?.NTPServers || [];
           const isSecureNtpEnabled =
-            response.data.Oem?.Ami?.EncrytedNTP?.NTPStatus || false;
+            response.data.Oem?.Ami?.EncryptedNTP?.NTPStatus || false;
           commit('setSecureNtpServers', secureNtpServers);
           commit('setIsSecureNtpEnabled', isSecureNtpEnabled);
         })
@@ -55,7 +55,7 @@ const DateTimeStore = {
         },
         Oem: {
           Ami: {
-            EncrytedNTP: {
+            EncryptedNTP: {
               NTPStatus: dateTimeForm.secureNtpProtocolEnabled,
               ...(dateTimeForm.secureNtpProtocolEnabled && {
                 NTPServers: dateTimeForm.secureNtpServersArray || [],
