@@ -2,7 +2,7 @@
   display: flex;
   background-color: rgba(16, 221, 235, 0.342);
   justify-content: center;
-  width: 625px;
+  width: 445px;
   margin: 0 auto;
   border-radius: 5px;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
@@ -12,9 +12,9 @@
 }
 
 .hg-theme-default .hg-button {
-  height: 32px !important;
-  font-size: 12px;
-  font-weight: 700;
+  height: 20px !important;
+  font-size: 9px;
+  font-weight: bold;
 }
 
 .simple-keyboard.hg-theme-default {
@@ -22,8 +22,8 @@
 }
 
 .simple-keyboard-main.simple-keyboard {
-  width: 500px;
-  min-width: 500px;
+  width: 350px;
+  min-width: 350px;
   background-color: transparent;
 }
 .simple-keyboard-main.simple-keyboard .hg-row:first-child {
@@ -52,13 +52,14 @@
   justify-content: center;
 }
 .simple-keyboard-arrows .hg-button {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   flex-grow: 0;
   justify-content: center;
   display: flex;
   align-items: center;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: bold;
 }
 
 .controlArrows {
@@ -66,6 +67,8 @@
   align-items: center;
   justify-content: space-between;
   flex-flow: column;
+  font-size: 11px;
+  font-weight: bold;
 }
 
 .simple-keyboard-control.simple-keyboard {
@@ -77,13 +80,13 @@
 }
 
 .simple-keyboard-control .hg-button {
-  width: 35px;
-  height: 40px;
+  width: 22px;
+  height: 22px;
   flex-grow: 0;
   justify-content: center;
   display: flex;
   align-items: center;
-  font-size: 10px;
+  font-size: 5px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
@@ -99,7 +102,7 @@
 }
 
 .hg-button.hg-functionBtn.hg-button-space {
-  width: 250px;
+  width: 160px;
 }
 
 .hg-standardBtn:focus,
@@ -122,7 +125,7 @@
 }
 
 .closeBtnDiv {
-  width: 665px;
+  width: 500px;
 }
 
 .closeBtn {
