@@ -14,7 +14,7 @@
             <b-form-checkbox
               v-model="activeImage"
               value="fw_active"
-              :disabled="activeImageDisabled"
+              :disabled="activeImageDisabled || targetSelectedBmcDisabled"
               data-test-id="firmware-input-activeImage"
               @change="changeActiveImage"
             >
@@ -25,7 +25,7 @@
             <b-form-checkbox
               v-model="backupImage"
               value="bmc_bkup"
-              :disabled="activeImageDisabled"
+              :disabled="activeImageDisabled || targetSelectedBmcDisabled"
               data-test-id="firmware-input-backupImage"
               @change="changeBackupImage"
             >
@@ -36,12 +36,30 @@
             <b-form-checkbox
               v-model="recoveryImage"
               value="fw_recovery"
-              :disabled="activeImageDisabled"
+              :disabled="activeImageDisabled || targetSelectedBmcDisabled"
               data-test-id="firmware-input-recoveryImage"
               @change="changeRecoveryImage"
             >
               {{ $t('pageFirmware.form.updateFirmware.recoveryImage') }}
             </b-form-checkbox>
+          </b-col>
+          <b-col v-if="targetSelectedOptions.length > 0" sm="4">
+            <b-form-group
+              :label="$t('pageFirmware.form.updateFirmware.imageTarget')"
+              class="m0"
+            >
+              <b-form-select
+                v-model="targetSelected"
+                :options="targetSelectedOptions"
+                :disabled="activeImageDisabled"
+                @change="setTargetSelected(targetSelected)"
+                ><template #first>
+                  <b-form-select-option :value="valuedefault">
+                    {{ $t('pageFirmware.form.updateFirmware.bmcAndBios') }}
+                  </b-form-select-option>
+                </template></b-form-select
+              >
+            </b-form-group>
           </b-col>
         </b-row>
         <b-form-group
@@ -234,6 +252,10 @@ export default {
       multiPartStatus: true,
       jsonContent: null,
       multipartapplyTimeFormValue: '',
+      targetSelected: '',
+      targetSelectedOptions: [],
+      valuedefault: '',
+      targetSelectedBmcDisabled: false,
       isPFREnable:
         process.env.VUE_APP_ONETREE_INTEL_PFR_ENABLED === 'true' ? true : false,
     };
@@ -259,6 +281,9 @@ export default {
     },
     recoveryEnabledStatus() {
       return this.$store.getters['firmware/getBmcRecoveryEnabledStatus'];
+    },
+    inventryDetailsValues() {
+      return this.$store.getters['firmware/getInventryFirmwareData'];
     },
   },
   watch: {
@@ -294,6 +319,19 @@ export default {
   methods: {
     updateFirmwareInit() {
       this.$store.dispatch('firmware/getUpdateServiceSettings').then(() => {
+        this.inventryDetailsValues.forEach((val) => {
+          if (
+            !val.includes('bmc') &&
+            !val.includes('bios') &&
+            !val.includes('bkup')
+          ) {
+            let options = {
+              text: val,
+              value: val,
+            };
+            this.targetSelectedOptions.push(options);
+          }
+        });
         this.bmcActiveEnabledStatusValue =
           this.$store.getters['firmware/bmcActiveEnabledStatus'];
         // For Active and Backup Feature Enable
@@ -308,7 +346,8 @@ export default {
         if (
           !this.activeFeatureEnabledStatus &&
           this.bmcBackupEnabledStatus &&
-          !this.recoveryEnabledStatus
+          !this.recoveryEnabledStatus &&
+          this.targetSelectedOptions.length <= 0
         ) {
           this.backupImage = 'bmc_bkup';
           this.activeImageDisabled = true;
@@ -317,7 +356,8 @@ export default {
         if (
           this.activeFeatureEnabledStatus &&
           !this.bmcBackupEnabledStatus &&
-          !this.recoveryEnabledStatus
+          !this.recoveryEnabledStatus &&
+          this.targetSelectedOptions.length <= 0
         ) {
           this.activeImage = 'fw_active';
           this.activeImageDisabled = true;
@@ -326,7 +366,8 @@ export default {
         if (
           !this.activeFeatureEnabledStatus &&
           !this.bmcBackupEnabledStatus &&
-          this.recoveryEnabledStatus
+          this.recoveryEnabledStatus &&
+          this.targetSelectedOptions.length <= 0
         ) {
           this.recoveryImage = 'fw_recovery';
           this.activeImageDisabled = true;
@@ -343,6 +384,13 @@ export default {
             }
             if (val == 'bmc_recovery' || val == 'bios_recovery') {
               this.recoveryImage = 'fw_recovery';
+            }
+            if (
+              !val.includes('bmc') &&
+              !val.includes('bios') &&
+              !val.includes('bkup')
+            ) {
+              this.targetSelected = val;
             }
           });
           if (this.httpPushUriTargetsBusyStatus) {
@@ -362,7 +410,8 @@ export default {
         !this.isMultiPartStatus &&
         this.isPFREnable &&
         fileTypeExtension == 'bin' &&
-        this.file.size <= this.PFR_IMG_SIZE //checking the  PFR feature file type with the bmc/bios file size
+        this.file.size <= this.PFR_IMG_SIZE &&
+        this.targetSelected === '' //checking the  PFR feature file type with the bmc/bios file size
       ) {
         //checking the file type to call the capsule code
         this.checkCapsuleCode().then(() => {
@@ -390,16 +439,22 @@ export default {
       this.bmcActiveBackupSelected = [];
       this.updateServiceData = {};
       if (!this.isMultiPartStatus) {
-        if (this.activeImage) {
-          this.bmcActiveBackupSelected.push(this.bmcBiosFileUpload + '_active');
-        }
-        if (this.recoveryImage) {
-          this.bmcActiveBackupSelected.push(
-            this.bmcBiosFileUpload + '_recovery',
-          );
-        }
-        if (this.backupImage) {
-          this.bmcActiveBackupSelected.push('bmc_bkup');
+        if (this.targetSelected === '') {
+          if (this.activeImage) {
+            this.bmcActiveBackupSelected.push(
+              this.bmcBiosFileUpload + '_active',
+            );
+          }
+          if (this.recoveryImage) {
+            this.bmcActiveBackupSelected.push(
+              this.bmcBiosFileUpload + '_recovery',
+            );
+          }
+          if (this.backupImage) {
+            this.bmcActiveBackupSelected.push('bmc_bkup');
+          }
+        } else {
+          this.bmcActiveBackupSelected.push(this.targetSelected);
         }
         if (!this.httpPushUriTargetsBusyStatus) {
           this.updateServiceData.HttpPushUriTargets =
@@ -715,10 +770,15 @@ export default {
       ) {
         this.recoveryImage = false;
       }
+      if (val == 'fw_active') {
+        this.targetSelected = '';
+      }
     },
     changeBackupImage(val) {
       if (val == false) {
         this.activeImage = 'fw_active';
+      } else {
+        this.targetSelected = '';
       }
     },
     changeRecoveryImage(val) {
@@ -726,6 +786,7 @@ export default {
         this.activeImage = 'fw_active';
       } else {
         this.activeImage = false;
+        this.targetSelected = '';
       }
     },
     minValidationStatus() {
@@ -809,6 +870,18 @@ export default {
         console.error(e);
       }
     },
+    setTargetSelected(selectedOptions) {
+      if (selectedOptions && selectedOptions != '') {
+        this.activeImage = false;
+        this.backupImage = false;
+        this.recoveryImage = false;
+        this.targetSelectedBmcDisabled = true;
+        this.bmcActiveBackupSelected.push(selectedOptions);
+      } else {
+        this.activeImage = 'fw_active';
+        this.targetSelectedBmcDisabled = false;
+      }
+    },
   },
 };
 </script>
@@ -870,5 +943,8 @@ export default {
   .upload-files-row .image-file-group {
     width: 100%;
   }
+}
+.m0 {
+  margin: 0 !important;
 }
 </style>

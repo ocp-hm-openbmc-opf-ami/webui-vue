@@ -1385,7 +1385,9 @@
                 "multiPartSupportEnd": ")",
                 "multiPartUploadJsonFormat": "JSON формат многочастной загрузки",
                 "multiPartUploadJsonInvalidFormat": "Неверный формат JSON. Пожалуйста, загрузите действительный JSON файл.",
-                "requiredPropertymissing": "В JSON-файле должно присутствовать только обязательное свойство ('@Redfish.OperationApplyTime and Targets')."
+                "requiredPropertymissing": "В JSON-файле должно присутствовать только обязательное свойство ('@Redfish.OperationApplyTime and Targets').",
+                "imageTarget": "Цель изображения",
+                "bmcAndBios": "BMC/BIOS"
             }
         },
         "modal": {

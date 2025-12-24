@@ -1388,7 +1388,9 @@
                 "multiPartSupportEnd": ")",
                 "multiPartUploadJsonFormat": "MultiPart-Upload-JSON-Format",
                 "multiPartUploadJsonInvalidFormat": "Ungültiges JSON-Format. Bitte laden Sie eine gültige JSON-Datei hoch.",
-                "requiredPropertymissing": "Nur die erforderlichen Eigenschaften ('@Redfish.OperationApplyTime' und Targets') sollten in der JSON-Datei vorhanden sein."
+                "requiredPropertymissing": "Nur die erforderlichen Eigenschaften ('@Redfish.OperationApplyTime' und Targets') sollten in der JSON-Datei vorhanden sein.",
+                "imageTarget": "Bildziel",
+                "bmcAndBios": "BMC/BIOS"
             }
         },
         "modal": {

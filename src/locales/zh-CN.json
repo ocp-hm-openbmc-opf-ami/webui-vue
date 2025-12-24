@@ -1386,7 +1386,9 @@
                 "multiPartSupportEnd": ")",
                 "multiPartUploadJsonFormat": "多部分上传 JSON 格式",
                 "multiPartUploadJsonInvalidFormat": "JSON 格式无效。请上传有效的 JSON 文件。",
-                "requiredPropertymissing": "JSON 文件中应该只包含必需属性（'@Redfish.OperationApplyTime 和 Targets'）。"
+                "requiredPropertymissing": "JSON 文件中应该只包含必需属性（'@Redfish.OperationApplyTime 和 Targets'）。",
+                "imageTarget": "图像目标",
+                "bmcAndBios": "主板管理控制器/BIOS"
             }
         },
         "modal": {

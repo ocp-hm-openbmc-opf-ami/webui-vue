@@ -1387,7 +1387,9 @@
                 "multiPartSupportEnd": ")",
                 "multiPartUploadJsonFormat": "MultiPart Upload JSON Format",
                 "multiPartUploadJsonInvalidFormat": "Invalid JSON format. Please upload a valid JSON file.",
-                "requiredPropertymissing": "Required property('@Redfish.OperationApplyTime and Targets') only should be present in the JSON file."
+                "requiredPropertymissing": "Required property('@Redfish.OperationApplyTime and Targets') only should be present in the JSON file.",
+                "imageTarget": "Image Target",
+                "bmcAndBios": "BMC/BIOS"
             }
         },
         "modal": {
