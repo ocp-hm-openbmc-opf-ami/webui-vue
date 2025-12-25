@@ -69,16 +69,10 @@ Vue.filter('shortTzOffset', function (value) {
 
 Vue.filter('formatDate', function (value) {
   const isUtcDisplay = store.getters['global/isUtcDisplay'];
-  const bmcTimeZone = store.getters['global/timeZone'];
   if (value instanceof Date) {
     if (isUtcDisplay) {
-      let options = {
-        timeZone: bmcTimeZone,
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-      };
-      return value.toLocaleDateString('en-CA', options);
+      const dateTime = UtcDateTimeMixin.methods.extractBmcLocalDateTime(value);
+      return dateTime.date;
     }
     const pattern = `yyyy-MM-dd`;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -93,8 +87,8 @@ Vue.filter('formatTime', function (value) {
   if (value instanceof Date) {
     if (isUtcDisplay) {
       const shortTzOff = Vue.filter('shortTzOffset')(bmcTimeZone);
-      const timeString = UtcDateTimeMixin.methods.extractBmcLocalTime(value);
-      return timeString + ' (' + shortTzOff + ')';
+      const dateTime = UtcDateTimeMixin.methods.extractBmcLocalDateTime(value);
+      return dateTime.time + ' (' + shortTzOff + ')';
     }
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const shortTz = Vue.filter('shortTimeZone')(value);

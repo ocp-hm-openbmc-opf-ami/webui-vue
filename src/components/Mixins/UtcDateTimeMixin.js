@@ -31,23 +31,30 @@ const getUtcDateTimeMixin = {
       }
       return new Date(utcDate);
     },
-    extractBmcLocalTime(value) {
-      let timeString;
-      // Check if we have access to the original ISO string to extract local time
+    extractBmcLocalDateTime(value) {
+      let timeString, dateString;
       if (value._originalISOString) {
-        // Extract time from original ISO string (e.g., "04:58:53" from "2025-09-22T04:58:53.498+08:00")
-        const timeMatch =
-          value._originalISOString.match(/T(\d{2}:\d{2}:\d{2})/);
-        timeString = timeMatch ? timeMatch[1] : null;
+        // Extract date and time from original ISO string (e.g., "2025-12-19" and "04:58:53" from "2025-12-19T04:58:53.498Z")
+        const dateTimeMatch = value._originalISOString.match(
+          /^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})/,
+        );
+        if (dateTimeMatch) {
+          dateString = dateTimeMatch[1];
+          timeString = dateTimeMatch[2];
+        }
       }
-      if (!timeString) {
-        // Fallback: Extract UTC time components (e.g., 06:02:17 from 2025-09-23T06:02:17Z)
+      if (!timeString || !dateString) {
+        // Fallback: Extract UTC date and time components
+        const utcYear = value.getUTCFullYear();
+        const utcMonth = (value.getUTCMonth() + 1).toString().padStart(2, '0');
+        const utcDay = value.getUTCDate().toString().padStart(2, '0');
         const utcHours = value.getUTCHours().toString().padStart(2, '0');
         const utcMinutes = value.getUTCMinutes().toString().padStart(2, '0');
         const utcSeconds = value.getUTCSeconds().toString().padStart(2, '0');
+        dateString = `${utcYear}-${utcMonth}-${utcDay}`;
         timeString = `${utcHours}:${utcMinutes}:${utcSeconds}`;
       }
-      return timeString;
+      return { date: dateString, time: timeString };
     },
     //Creates a Date object from an ISO string while preserving the original string
     createDateWithISOString(isoString) {
