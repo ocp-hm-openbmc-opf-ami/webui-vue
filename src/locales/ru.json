@@ -92,7 +92,8 @@
             "on": "Вкл",
             "success": "Успешно",
             "warning": "Предупреждение",
-            "informational": "Информационное"
+            "informational": "Информационное",
+            "unknown": "Неизвестно"
         },
         "table": {
             "collapseTableRow": "Свернуть строку таблицы",

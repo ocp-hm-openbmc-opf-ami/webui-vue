@@ -122,7 +122,15 @@ export default {
     getSettings() {
       this.selectedInterface = this.tabIndex;
       this.linkStatus = this.ethernetData.LinkStatus;
-      this.linkSpeed = this.ethernetData.SpeedMbps;
+      // Display "Unknown" when AutoNeg is true and SpeedMbps is 65535
+      if (
+        this.ethernetData?.AutoNeg &&
+        this.ethernetData?.SpeedMbps === 65535
+      ) {
+        this.linkSpeed = this.$t('global.status.unknown');
+      } else {
+        this.linkSpeed = this.ethernetData.SpeedMbps;
+      }
       this.fqdn = this.ethernetData.FQDN;
       this.macAddress = this.ethernetData.MACAddress;
     },

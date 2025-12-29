@@ -92,7 +92,8 @@
             "on": "开",
             "success": "成功",
             "warning": "警告",
-            "informational": "信息"
+            "informational": "信息",
+            "unknown": "未知"
         },
         "table": {
             "collapseTableRow": "折叠表格",

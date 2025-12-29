@@ -92,7 +92,8 @@
             "on": "On",
             "success": "Success",
             "warning": "Warning",
-            "informational": "Informational"
+            "informational": "Informational",
+            "unknown": "Unknown"
         },
         "table": {
             "collapseTableRow": "Collapse table row",

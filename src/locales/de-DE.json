@@ -92,7 +92,8 @@
             "on": "Ein",
             "success": "Erfolg",
             "warning": "Warnung",
-            "informational": "Hinweis"
+            "informational": "Hinweis",
+            "unknown": "Unbekannt"
         },
         "table": {
             "collapseTableRow": "Tabellenzeile einklappen",

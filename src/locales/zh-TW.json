@@ -92,7 +92,8 @@
             "on": "開",
             "success": "成功",
             "warning": "警告",
-            "informational": "資訊"
+            "informational": "資訊",
+            "unknown": "未知"
         },
         "table": {
             "collapseTableRow": "摺疊表格欄位",
