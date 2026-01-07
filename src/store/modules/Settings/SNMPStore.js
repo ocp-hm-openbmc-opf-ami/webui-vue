@@ -56,25 +56,27 @@ const SnmpStore = {
           const snmpv3 = response.data?.SNMP?.EnableSNMPv3;
           const communityString =
             response.data?.Oem?.Ami?.SNMP?.CommunityStrings || [];
-          const accessMode = (response.data?.SNMP?.CommunityStrings || []).map(
-            (item) => {
+          const accessMode = (response.data?.SNMP?.CommunityStrings || [])
+            .filter((item) => item !== null)
+            .map((item) => {
               return {
                 AccessMode: item?.AccessMode,
                 CommunityString: item.CommunityString,
               };
-            },
-          );
-          const data = communityString.map((item, index) => {
-            return {
-              communityProfile: item?.AllowedMiBs,
-              communityString: item?.CommunityString,
-              Sino: index + 1,
-              readWritePermission: accessMode[index]?.AccessMode,
-            };
-          });
-          const snmpCommunityStrings = communityString.map(
-            (item) => item?.CommunityString,
-          );
+            });
+          const data = communityString
+            .filter((item) => item !== null)
+            .map((item, index) => {
+              return {
+                communityProfile: item?.AllowedMiBs,
+                communityString: item?.CommunityString,
+                Sino: index + 1,
+                readWritePermission: accessMode[index]?.AccessMode,
+              };
+            });
+          const snmpCommunityStrings = communityString
+            .filter((item) => item !== null)
+            .map((item) => item?.CommunityString);
           commit('setSnmpCommunityString', data);
           commit('setSnmpProtocolEnabled', snmpProtocol);
           commit('setsnmpv1Enabled', snmpv1);
