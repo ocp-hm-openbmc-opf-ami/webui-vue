@@ -2226,6 +2226,8 @@
         "cacertPEM": "Cacert PEM 证书",
         "serverCRT": "服务器 CRT 证书",
         "serverKey": "服务器密钥证书",
+        "oAuthEnable": "启用 OAuth",
+        "oAuthAccessToken": "OAuth 访问令牌",
         "modal": {
             "subject": "主题",
             "mailContent": "邮件内容"

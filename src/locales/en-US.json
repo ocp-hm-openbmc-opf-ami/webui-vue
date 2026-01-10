@@ -2227,6 +2227,8 @@
         "cacertPEM": "Cacert PEM Certificate",
         "serverCRT": "Server CRT Certificate",
         "serverKey": "Server Key Certificate",
+        "oAuthEnable": "OAuth Enable",
+        "oAuthAccessToken": "OAuth Access Token",
         "modal": {
             "subject": "Subject",
             "mailContent": "Mail Content"

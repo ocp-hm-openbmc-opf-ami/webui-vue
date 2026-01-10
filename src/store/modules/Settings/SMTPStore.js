@@ -41,6 +41,8 @@ const SmtpStore = {
       cacertModifiedDate: '',
       serverKeyModifiedDate: '',
       serverCrtModifiedDate: '',
+      oAuthEnable: false,
+      accessToken: '',
     },
     secondary: {
       smtpServiceEnabled: null,
@@ -58,6 +60,8 @@ const SmtpStore = {
       cacertModifiedDate: '',
       serverKeyModifiedDate: '',
       serverCrtModifiedDate: '',
+      oAuthEnable: false,
+      accessToken: '',
     },
   },
   getters: {
@@ -101,6 +105,8 @@ const SmtpStore = {
           smtpData.PrimaryConfiguration?.primaryserverCRTModifiedDate;
         state.primary.serverKeyModifiedDate =
           smtpData.PrimaryConfiguration?.primaryServerKeyModifiedDate;
+        state.primary.oAuthEnable = smtpData.PrimaryConfiguration?.OAUTH;
+        state.primary.accessToken = smtpData.PrimaryConfiguration?.AccessToken;
       }
       if (smtpData.SecondaryConfiguration) {
         state.secondary.smtpServiceEnabled =
@@ -136,6 +142,9 @@ const SmtpStore = {
           smtpData.SecondaryConfiguration?.secondaryserverCRTModifiedDate;
         state.secondary.serverKeyModifiedDate =
           smtpData.SecondaryConfiguration?.secondaryServerKeyModifiedDate;
+        state.secondary.oAuthEnable = smtpData.SecondaryConfiguration?.OAUTH;
+        state.secondary.accessToken =
+          smtpData.SecondaryConfiguration?.AccessToken;
       }
       if (
         (smtpData.PrimaryConfiguration.Enable &&
@@ -152,7 +161,7 @@ const SmtpStore = {
       return await api
         .get('/redfish/v1/EventService')
         .then((response) => {
-          commit('setSmtpData', response.data.Oem.OpenBmc.SMTP);
+          commit('setSmtpData', response.data.Oem.Ami.SMTP);
         })
         .catch((error) => console.log(error));
     },

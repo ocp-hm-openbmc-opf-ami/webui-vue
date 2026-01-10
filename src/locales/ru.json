@@ -2225,6 +2225,8 @@
         "cacertPEM": "Сертификат PEM CA",
         "serverCRT": "Сертификат CRT сервера",
         "serverKey": "Ключевой сертификат сервера",
+        "oAuthEnable": "Включить OAuth",
+        "oAuthAccessToken": "Токен доступа OAuth",
         "modal": {
             "subject": "Тема",
             "mailContent": "Содержание письма"
