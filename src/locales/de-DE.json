@@ -3387,7 +3387,15 @@
             "state": "Zustand",
             "diskWriteCachePolicy": "Richtlinie für Festplatten-Schreibcache",
             "operationProgressPercent": "Vorgangsfortschritt in Prozent",
-            "operationElapsedSeconds": "Vorgang in Sekunden"
+            "operationElapsedSeconds": "Vorgang in Sekunden",
+            "arrayRef": "Array-Referenz",
+            "size": "Größe",
+            "fwState": "Firmware-Status",
+            "numDrives": "Anzahl der Laufwerke",
+            "PD": "Physisches Laufwerk",
+            "ref": "Referenz",
+            "seqNum": "Sequenznummer",
+            "slot": "Steckplatz"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "Kein physisches Gerät zur Konfiguration verfügbar!",

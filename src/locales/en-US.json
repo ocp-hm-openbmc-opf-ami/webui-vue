@@ -3387,7 +3387,15 @@
             "state": "State",
             "diskWriteCachePolicy": "Disk Write Cache Policy",
             "operationProgressPercent": "Operation Progress Percent",
-            "operationElapsedSeconds": "Operation Elapsed Seconds"
+            "operationElapsedSeconds": "Operation Elapsed Seconds",
+            "arrayRef": "Array Ref",
+            "size": "Size",
+            "fwState": "FW State",
+            "numDrives": "Number of Drives",
+            "PD": "PD",
+            "ref": "Ref",
+            "seqNum": "SeqNum",
+            "slot": "Slot"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "No Physical Device is available to configure!",

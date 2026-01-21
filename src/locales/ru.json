@@ -3181,7 +3181,15 @@
             "state": "Состояние",
             "diskWriteCachePolicy": "Политика кэширования записи на диск",
             "operationProgressPercent": "Процент выполнения операции",
-            "operationElapsedSeconds": "Прошедшее время операции в секундах"
+            "operationElapsedSeconds": "Прошедшее время операции в секундах",
+            "arrayRef": "Ссылка на массив",
+            "size": "Размер",
+            "fwState": "Состояние прошивки",
+            "numDrives": "Количество дисков",
+            "PD": "Физический диск",
+            "ref": "Ссылка",
+            "seqNum": "Порядковый номер",
+            "slot": "Слот"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "Нет доступных физических устройств для настройки!",

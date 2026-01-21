@@ -3383,7 +3383,15 @@
             "state": "狀態",
             "diskWriteCachePolicy": "磁碟寫入快取政策",
             "operationProgressPercent": "操作進度百分比",
-            "operationElapsedSeconds": "操作已執行秒數"
+            "operationElapsedSeconds": "操作已執行秒數",
+            "arrayRef": "陣列代號",
+            "size": "大小",
+            "fwState": "韌體狀態",
+            "numDrives": "磁碟數量",
+            "PD": "實體磁碟",
+            "ref": "代號",
+            "seqNum": "序號",
+            "slot": "插槽"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "沒有可配置的實體設備！",
