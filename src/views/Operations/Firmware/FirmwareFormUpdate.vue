@@ -9,8 +9,8 @@
     </div>
     <div class="form-background p-3">
       <b-form @submit.prevent="onSubmitUpload">
-        <b-row v-if="!isMultiPartStatus" class="choose-images">
-          <b-col v-if="activeFeatureEnabledStatus" sm="3">
+        <b-row class="choose-images">
+          <b-col v-if="activeFeatureEnabledStatus && !isMultiPartStatus" sm="3">
             <b-form-checkbox
               v-model="activeImage"
               value="fw_active"
@@ -21,7 +21,7 @@
               {{ $t('pageFirmware.form.updateFirmware.activeImage') }}
             </b-form-checkbox>
           </b-col>
-          <b-col v-if="bmcBackupEnabledStatus" sm="4">
+          <b-col v-if="bmcBackupEnabledStatus && !isMultiPartStatus" sm="4">
             <b-form-checkbox
               v-model="backupImage"
               value="bmc_bkup"
@@ -32,7 +32,10 @@
               {{ $t('pageFirmware.form.updateFirmware.backupImage') }}
             </b-form-checkbox>
           </b-col>
-          <b-col v-if="isPFREnable && recoveryEnabledStatus" sm="4">
+          <b-col
+            v-if="isPFREnable && recoveryEnabledStatus && !isMultiPartStatus"
+            sm="4"
+          >
             <b-form-checkbox
               v-model="recoveryImage"
               value="fw_recovery"
@@ -43,17 +46,27 @@
               {{ $t('pageFirmware.form.updateFirmware.recoveryImage') }}
             </b-form-checkbox>
           </b-col>
-          <b-col v-if="targetSelectedOptions.length > 0" sm="4">
+          <b-col
+            v-if="
+              (targetSelectedOptions.length > 0 && !isMultiPartStatus) ||
+              (isMultiPartStatus && multipartTargetOptions.length > 0)
+            "
+            sm="5"
+          >
             <b-form-group
               :label="$t('pageFirmware.form.updateFirmware.imageTarget')"
               class="m0"
             >
               <b-form-select
                 v-model="targetSelected"
-                :options="targetSelectedOptions"
+                :options="
+                  isMultiPartStatus
+                    ? multipartTargetOptions
+                    : targetSelectedOptions
+                "
                 :disabled="activeImageDisabled"
                 @change="setTargetSelected(targetSelected)"
-                ><template #first>
+                ><template v-if="!isMultiPartStatus" #first>
                   <b-form-select-option :value="valuedefault">
                     {{ $t('pageFirmware.form.updateFirmware.bmcAndBios') }}
                   </b-form-select-option>
@@ -85,55 +98,24 @@
 
         <!-- Workstation Upload -->
         <div v-if="isWorkstationSelected" class="workstation-upload-container">
-          <div
-            :class="
-              isMultiPartStatus ? 'upload-files-row' : 'single-file-container'
-            "
+          <b-form-group
+            :label="$t('pageFirmware.form.updateFirmware.imageFile')"
+            label-for="image-file"
           >
-            <b-form-group
-              v-show="isMultiPartStatus"
-              :label="$t('pageFirmware.form.updateFirmware.multiPart')"
-              label-for="multiPart-file"
-              :class="isMultiPartStatus ? 'multipart-file-group' : ''"
+            <form-file
+              id="image-file"
+              :disabled="isPageDisabled"
+              :state="getValidationState($v.file)"
+              aria-describedby="image-file-help-block"
+              @input="onFileUpload($event)"
             >
-              <form-file
-                id="multiPart-image-file"
-                ref="multiPartFileRef"
-                v-model="multiPartfile"
-                :disabled="isPageDisabled"
-                :state="getValidationState($v.multiPartfile)"
-                aria-describedby="multiPart-file-help-block"
-                data-test-id="multiPart-file-upload"
-                accept=".json"
-                @input="onMultiPartFileUpload($event)"
-              >
-                <template #invalid>
-                  <b-form-invalid-feedback role="alert">
-                    {{ $t('global.form.required') }}
-                  </b-form-invalid-feedback>
-                </template>
-              </form-file>
-            </b-form-group>
-            <b-form-group
-              :label="$t('pageFirmware.form.updateFirmware.imageFile')"
-              label-for="image-file"
-              :class="isMultiPartStatus ? 'image-file-group' : ''"
-            >
-              <form-file
-                id="image-file"
-                :disabled="isPageDisabled"
-                :state="getValidationState($v.file)"
-                aria-describedby="image-file-help-block"
-                @input="onFileUpload($event)"
-              >
-                <template #invalid>
-                  <b-form-invalid-feedback role="alert">
-                    {{ $t('global.form.required') }}
-                  </b-form-invalid-feedback>
-                </template>
-              </form-file>
-            </b-form-group>
-          </div>
+              <template #invalid>
+                <b-form-invalid-feedback role="alert">
+                  {{ $t('global.form.required') }}
+                </b-form-invalid-feedback>
+              </template>
+            </form-file>
+          </b-form-group>
         </div>
 
         <!-- TFTP Server Upload -->
@@ -240,7 +222,6 @@ export default {
       firmwareOverlay: false,
       modalReset: 0,
       updateServiceData: {},
-      activeBackupValue: {},
       recoveryImage: false,
       PFR_IMG_SIZE: 33 * 1024 * 1024, // PFR BMC/BIOS Image Size 33MB
       NON_PFR_BIOS_IMG_SIZE: 21 * 1024 * 1024, // Non-PFR BIOS Image Size 21MB
@@ -249,11 +230,11 @@ export default {
       bmcBiosFileUpload: 'bmc',
       bmcErrorActiveBackupSelected: [],
       multiPartfile: null,
-      multiPartStatus: true,
       jsonContent: null,
       multipartapplyTimeFormValue: '',
       targetSelected: '',
       targetSelectedOptions: [],
+      multipartTargetOptions: [],
       valuedefault: '',
       targetSelectedBmcDisabled: false,
       isPFREnable:
@@ -293,6 +274,38 @@ export default {
       this.multiPartfile = null;
       this.tftpFileAddress = null;
     },
+    // Handle multipart status and auto-generate JSON
+    isMultiPartStatus(newVal) {
+      if (newVal) {
+        // When multipart is enabled, set default target and generate JSON
+        this.$nextTick(() => {
+          if (this.multipartTargetOptions.length > 0) {
+            this.targetSelected = this.multipartTargetOptions[0].value;
+          }
+          this.generateMultipartJson();
+        });
+      } else {
+        // When multipart is disabled, reset to default state
+        this.targetSelected = this.valuedefault;
+        this.multiPartfile = null;
+        this.jsonContent = null;
+        this.$emit('multiplePartJsonContent', {});
+      }
+    },
+    // Watch for target selection changes in multipart mode
+    targetSelected() {
+      if (this.isMultiPartStatus) {
+        this.$nextTick(() => this.generateMultipartJson());
+      }
+    },
+    applyTimeFormValue: {
+      handler() {
+        if (this.isMultiPartStatus) {
+          this.$nextTick(() => this.generateMultipartJson());
+        }
+      },
+      deep: true,
+    },
   },
   validations() {
     return {
@@ -319,19 +332,30 @@ export default {
   methods: {
     updateFirmwareInit() {
       this.$store.dispatch('firmware/getUpdateServiceSettings').then(() => {
+        this.targetSelectedOptions = [];
+        this.multipartTargetOptions = [];
         this.inventryDetailsValues.forEach((val) => {
+          let options = {
+            text: val.toUpperCase().replace(/_/g, ' '),
+            value: val,
+          };
           if (
             !val.includes('bmc') &&
             !val.includes('bios') &&
             !val.includes('bkup')
           ) {
-            let options = {
-              text: val,
-              value: val,
-            };
             this.targetSelectedOptions.push(options);
           }
+          this.multipartTargetOptions.push(options);
         });
+        // Set default target for multipart mode
+        if (
+          this.isMultiPartStatus &&
+          this.multipartTargetOptions.length > 0 &&
+          !this.targetSelected
+        ) {
+          this.targetSelected = this.multipartTargetOptions[0].value;
+        }
         this.bmcActiveEnabledStatusValue =
           this.$store.getters['firmware/bmcActiveEnabledStatus'];
         // For Active and Backup Feature Enable
@@ -402,6 +426,37 @@ export default {
           this.$store.getters['firmware/getApplyTimeSetValue'],
         );
       });
+    },
+    generateMultipartJson() {
+      if (!this.isMultiPartStatus) {
+        return;
+      }
+      const targets = [];
+      // For multipart, use the selected target directly from inventory
+      if (this.targetSelected) {
+        // Use the target directly as it comes from the API - no manual mapping needed
+        const targetUri = `/redfish/v1/UpdateService/FirmwareInventory/${this.targetSelected}`;
+        targets.push(targetUri);
+      }
+      const applyTime = this.applyTimeFormValue?.applyTimeMode;
+      if (targets.length > 0) {
+        const jsonContent = {
+          Targets: targets,
+          '@Redfish.OperationApplyTime': applyTime,
+        };
+        // Create JSON file
+        const jsonString = JSON.stringify(jsonContent);
+        this.multiPartfile = new File([jsonString], 'parameters.json', {
+          type: 'application/json',
+        });
+        this.jsonContent = jsonContent;
+        this.multipartapplyTimeFormValue = applyTime;
+        this.$emit('multiplePartJsonContent', jsonContent);
+      } else {
+        this.multiPartfile = null;
+        this.jsonContent = null;
+        this.$emit('multiplePartJsonContent', {});
+      }
     },
     updateFirmware() {
       this.startLoader();
@@ -545,6 +600,10 @@ export default {
       }
     },
     dispatchWorkstationUpload() {
+      if (this.isMultiPartStatus) {
+        // Generate JSON for multipart before upload
+        this.generateMultipartJson();
+      }
       const image = this.isMultiPartStatus
         ? { UpdateFile: this.file, UpdateParameters: this.multiPartfile }
         : this.file;
@@ -672,86 +731,6 @@ export default {
     onFileUpload(file) {
       this.file = file;
       this.$v.file.$touch();
-    },
-    onMultiPartFileUpload(file) {
-      this.jsonContent = {};
-      this.multiPartfile = file;
-      this.$v.multiPartfile.$touch();
-      if (file && file.type === 'application/json') {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          try {
-            this.jsonContent = JSON.parse(e.target.result);
-
-            const allowedProperties = [
-              'Targets',
-              '@Redfish.OperationApplyTime',
-            ];
-            const actualProperties = Object.keys(this.jsonContent);
-            const unexpectedProperties = [];
-
-            for (const prop of actualProperties) {
-              if (!allowedProperties.includes(prop)) {
-                unexpectedProperties.push(prop);
-              }
-            }
-
-            if (unexpectedProperties.length > 0) {
-              this.clearMultiPartFile();
-              this.errorToast(
-                this.$t(
-                  'pageFirmware.form.updateFirmware.requiredPropertymissing',
-                ) ||
-                  `Unexpected properties found: ${unexpectedProperties.join(
-                    ', ',
-                  )}. Only ${allowedProperties.join(', ')} are allowed.`,
-              );
-              this.$emit('multiplePartJsonContent', {});
-              return;
-            }
-
-            if (
-              'Targets' in this.jsonContent &&
-              JSON.stringify(this.jsonContent).includes('OperationApplyTime')
-            ) {
-              this.multipartapplyTimeFormValue =
-                this.jsonContent['@Redfish.OperationApplyTime'];
-              this.$emit('multiplePartJsonContent', this.jsonContent);
-            }
-          } catch (error) {
-            this.clearMultiPartFile();
-            this.errorToast(
-              this.$t(
-                'pageFirmware.form.updateFirmware.multiPartUploadJsonInvalidFormat',
-              ),
-            );
-            this.$emit('multiplePartJsonContent', {});
-          }
-        };
-        reader.readAsText(file);
-      } else {
-        if (file != null) {
-          this.errorToast(
-            this.$t(
-              'pageFirmware.form.updateFirmware.multiPartUploadJsonInvalidFormat',
-            ),
-          );
-          this.$v.multiPartfile.$touch();
-          this.clearMultiPartFile();
-        }
-        this.$emit('multiplePartJsonContent', {});
-      }
-    },
-    clearMultiPartFile() {
-      this.multiPartfile = null;
-      this.jsonContent = null;
-      // Clear the file input using the ref
-      if (
-        this.$refs.multiPartFileRef &&
-        this.$refs.multiPartFileRef.clearSelectedFile
-      ) {
-        this.$refs.multiPartFileRef.clearSelectedFile();
-      }
     },
     changeActiveImage(val) {
       if (val == false && this.bmcBackupEnabledStatus) {

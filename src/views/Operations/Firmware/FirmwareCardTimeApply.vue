@@ -203,33 +203,16 @@ export default {
       type: Object,
       default: () => {},
     },
+    isMultiPartStatus: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       locale: this.$store.getters['global/languagePreference'],
       sectionTitle: 'Apply TIme',
-      applyTimeModeOptions: [
-        {
-          text: this.$t('pageFirmware.form.updateFirmware.immediate'),
-          value: 'Immediate',
-        },
-        {
-          text: this.$t('pageFirmware.form.updateFirmware.onReset'),
-          value: 'OnReset',
-        },
-        {
-          text: this.$t(
-            'pageFirmware.form.updateFirmware.atMaintenanceWindowStart',
-          ),
-          value: 'AtMaintenanceWindowStart',
-        },
-        {
-          text: this.$t(
-            'pageFirmware.form.updateFirmware.inMaintenanceWindowOnReset',
-          ),
-          value: 'InMaintenanceWindowOnReset',
-        },
-      ],
+      applyTimeModeOptions: this.getFullApplyTimeModeOptions(),
       form: {
         applyTimeMode: '',
         endDate: '',
@@ -267,6 +250,9 @@ export default {
     },
     setApplyTimeStatus(val) {
       this.applyTimeSetValueStatus = val;
+      this.initChanges();
+    },
+    isMultiPartStatus() {
       this.initChanges();
     },
   },
@@ -334,6 +320,30 @@ export default {
     };
   },
   methods: {
+    getFullApplyTimeModeOptions() {
+      return [
+        {
+          text: this.$t('pageFirmware.form.updateFirmware.immediate'),
+          value: 'Immediate',
+        },
+        {
+          text: this.$t('pageFirmware.form.updateFirmware.onReset'),
+          value: 'OnReset',
+        },
+        {
+          text: this.$t(
+            'pageFirmware.form.updateFirmware.atMaintenanceWindowStart',
+          ),
+          value: 'AtMaintenanceWindowStart',
+        },
+        {
+          text: this.$t(
+            'pageFirmware.form.updateFirmware.inMaintenanceWindowOnReset',
+          ),
+          value: 'InMaintenanceWindowOnReset',
+        },
+      ];
+    },
     secondsValueValidation(value) {
       if (
         (this.form.applyTimeMode == 'AtMaintenanceWindowStart' ||
@@ -392,9 +402,19 @@ export default {
       this.form.endTime = timeElement.slice(0, 8);
       this.form.applyTimeMode = this.applyTimeSetValueStatus.applyTimeMode;
       this.form.timeSlot = this.applyTimeSetValueStatus.timeSlot;
+      // Set 'Immediate' as default for multipart when applyTimeMode is neither OnReset nor Immediate
+      if (
+        this.isMultiPartStatus &&
+        (this.form.applyTimeMode == 'InMaintenanceWindowOnReset' ||
+          this.form.applyTimeMode == 'AtMaintenanceWindowStart' ||
+          this.form.applyTimeMode == '' ||
+          this.form.applyTimeMode == undefined)
+      ) {
+        this.form.applyTimeMode = 'Immediate';
+      }
+
       this.applyTimeModeChange();
-      if (this.isPFREnable) {
-        this.applyTimeModeOptions = [];
+      if (this.isPFREnable || this.isMultiPartStatus) {
         this.applyTimeModeOptions = [
           {
             text: this.$t('pageFirmware.form.updateFirmware.immediate'),
@@ -405,6 +425,8 @@ export default {
             value: 'OnReset',
           },
         ];
+      } else {
+        this.applyTimeModeOptions = this.getFullApplyTimeModeOptions();
       }
     },
   },

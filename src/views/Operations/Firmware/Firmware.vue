@@ -36,15 +36,11 @@
         $t('pageFirmware.form.updateFirmware.multiPartSupportEnd')
       }}</label>
       <b-row>
-        <b-col
-          v-if="httpPushUriOptions !== undefined && !multiPartChangStatus"
-          sm="6"
-          md="6"
-          xl="6"
-        >
+        <b-col v-if="httpPushUriOptions !== undefined" sm="6" md="6" xl="6">
           <firmware-card-time-apply
             :current-bmc-time-value="currentBmcTime"
             :set-apply-time-status="setApplyTimeValue"
+            :is-multi-part-status="multiPartChangStatus"
             @validationSuccess="isValidationSuccess"
             @applyTimeForm="isApplyTimeForm"
           ></firmware-card-time-apply>
@@ -62,19 +58,6 @@
             @multiplePartJsonContent="isOnMultiplePartJsonContent"
           />
         </b-col>
-        <b-col
-          v-show="
-            Object.keys(MultiplePartJsonFormat).length != 0 &&
-            multiPartChangStatus
-          "
-          sm="6"
-          md="6"
-          xl="6"
-        >
-          <firmware-json-format
-            :multipart-json-content="MultiplePartJsonFormat"
-          />
-        </b-col>
       </b-row>
     </page-section>
   </b-container>
@@ -88,7 +71,6 @@ import HostCards from './FirmwareCardsHost';
 import PageSection from '@/components/Global/PageSection';
 import PageTitle from '@/components/Global/PageTitle';
 import FirmwareCardTimeApply from './FirmwareCardTimeApply';
-import FirmwareJsonFormat from './FirmwareJsonFormat';
 
 import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
 
@@ -102,7 +84,6 @@ export default {
     PageSection,
     PageTitle,
     FirmwareCardTimeApply,
-    FirmwareJsonFormat,
   },
   mixins: [LoadingBarMixin],
   beforeRouteLeave(to, from, next) {
@@ -175,10 +156,11 @@ export default {
   display: inline !important;
   top: 8px;
   left: 5px;
-  h2 {
-    display: inline-block;
-  }
 }
+.firmware_header_inline h2 {
+  display: inline-block;
+}
+
 .ml5 {
   margin-left: 5px;
 }
