@@ -507,7 +507,9 @@ if (process.env.VUE_APP_ONETREE_NETWORK_NCSI_SUPPORT_ENABLED == 'true') {
   });
 }
 if (
-  process.env.VUE_APP_ONETREE_NETWORK_SYSTEM_FIREWALL_SUPPORT_ENABLED == 'true'
+  process.env.VUE_APP_ONETREE_NETWORK_SYSTEM_FIREWALL_SUPPORT_ENABLED ==
+    'true' &&
+  process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true'
 ) {
   routes[2].children.push({
     path: '/settings/firewall',
@@ -528,7 +530,10 @@ if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_NETWORK_BONDING_SUPPORT_ENABLED == 'true') {
+if (
+  process.env.VUE_APP_ONETREE_NETWORK_BONDING_SUPPORT_ENABLED == 'true' &&
+  process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true'
+) {
   routes[2].children.push({
     path: '/settings/bond',
     name: 'Bond',
@@ -747,7 +752,10 @@ if (process.env.VUE_APP_ONETREE_NETWORK_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_NETWORK_ENABLED == 'true') {
+if (
+  process.env.VUE_APP_ONETREE_NETWORK_ENABLED == 'true' &&
+  process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true'
+) {
   routes[2].children.push({
     path: '/settings/network-ddns',
     name: 'network-DDNS',
