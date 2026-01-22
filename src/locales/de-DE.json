@@ -211,7 +211,10 @@
         "advancedLogSettings":"@:appPageTitle.advancedLogSettings",
         "fru":"@:appPageTitle.fru",
         "deviceOwnerTransfership": "Übertragung des Geräteeigentümers",
-        "spdm": "@:appPageTitle.spdm"
+        "spdm": "@:appPageTitle.spdm",
+        "powerShelf": "Power Shelf",
+        "powerSupplyInventory": "@:appPageTitle.powerSupplyInventory",
+        "powerEquipment": "@:appPageTitle.powerEquipment"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -285,7 +288,9 @@
         "advancedLogSettings":"Erweiterte Protokolleinstellungen",
         "fru":"FRU",
         "deviceOwnerTransfership": "Übertragung des Geräteeigentümers",
-        "spdm": "SPDM"
+        "spdm": "SPDM",
+        "powerSupplyInventory": "Stromversorgungsbestand",
+        "powerEquipment": "Stromversorgungsgeräte"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM-Konfiguration",
@@ -3861,6 +3866,54 @@
             "successCertificateUpload": "%{certificate} erfolgreich hinzugefügt.",
             "errorGettingLocalLog": "Fehler beim Speichern der lokalen Protokolleinstellungen.",
             "errorGettingRemoteLog": "Fehler beim Speichern der Remote-Protokolleinstellungen."
+        }
+    },
+    "powerShelf": {
+        "powerSupplyDevices": "Stromversorgungsgeräte",
+        "powerSupplyInfo": "Stromversorgungsinformationen",
+        "powerSupplyMetrics": "Stromversorgungsmetriken",
+        "powerEquipmentDevices": "Stromausrüstungsgeräte",
+        "id": "ID",
+        "name": "Name",
+        "model": "Modell",
+        "manufacturer": "Hersteller",
+        "partNumber": "Teilenummer",
+        "serialNumber": "Seriennummer",
+        "firmwareVersion": "Firmware-Version",
+        "powerSupplyType": "Stromversorgungstyp",
+        "powerCapacityWatts": "Leistungskapazität (Watt)",
+        "lineInputVoltage": "Netzspannung",
+        "health": "Zustand",
+        "state": "Status",
+        "inputVoltage": "Eingangsspannung (V)",
+        "inputCurrentAmps": "Eingangsstrom (A)",
+        "inputPowerWatts": "Eingangsleistung (W)",
+        "outputVoltage": "Ausgangsspannung (V)",
+        "outputCurrentAmps": "Ausgangsstrom (A)",
+        "outputPowerWatts": "Ausgangsleistung (W)",
+        "temperatureCelsius": "Temperatur (°C)",
+        "fanSpeedPercent": "Lüftergeschwindigkeit (%)",
+        "energykWh": "Energie (kWh)",
+        "branches": "Zweige",
+        "mains": "Netzanschlüsse",
+        "metrics": "Metriken",
+        "outlets": "Steckdosen",
+        "ratedCurrentAmps": "Nennstrom (A)",
+        "branchCircuitType": "Abzweigschaltungstyp",
+        "nominalVoltage": "Nennspannung (V)",
+        "outletType": "Steckdosentyp",
+        "powerEnabled": "Stromversorgung aktiviert",
+        "powerWatts": "Leistung (W)",
+        "humidityPercent": "Luftfeuchtigkeit (%)",
+        "tab": {
+            "powerSupply": "Stromversorgung",
+            "metrics": "Metriken"
+        },
+        "toast": {
+            "errorLoadingPowerSupply": "Fehler beim Laden der Stromversorgungsdaten",
+            "errorLoadingMetrics": "Fehler beim Laden der Stromversorgungsmetriken",
+            "errorLoadingPowerEquipment": "Fehler beim Laden der Stromausrüstungsdaten",
+            "errorLoadingPowerEquipmentDetails": "Fehler beim Laden der Stromausrüstungsdetails"
         }
     },
     "fru": {

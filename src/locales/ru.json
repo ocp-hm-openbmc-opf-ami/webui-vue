@@ -210,7 +210,10 @@
         "gpgpu": "@:appPageTitle.gpgpu",
         "advancedLogSettings":"@:appPageTitle.advancedLogSettings",
         "fru":"@:appPageTitle.fru",
-        "spdm": "@:appPageTitle.spdm"
+        "spdm": "@:appPageTitle.spdm",
+        "powerShelf": "Power Shelf",
+        "powerSupplyInventory": "@:appPageTitle.powerSupplyInventory",
+        "powerEquipment": "@:appPageTitle.powerEquipment"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -283,7 +286,9 @@
         "gpgpu": "GPGPU",
         "advancedLogSettings":"Расширенные настройки журналирования",
         "fru":"ФРУ",
-        "spdm": "SPDM"
+        "spdm": "SPDM",
+        "powerSupplyInventory": "Инвентарь источников питания",
+        "powerEquipment": "Оборудование питания"
 
     },
     "pageNodeManager": {
@@ -3854,6 +3859,54 @@
             "errorAdvancedAddCertificate": "Ошибка добавления %{certificate}.",
             "successCertificateUpload": "Успешно добавлен %{certificate}.",
             "errorGettingVideoLog": "Ошибка сохранения расширенных настроек журналирования."
+        }
+    },
+    "powerShelf": {
+        "powerSupplyDevices": "Устройства источников питания",
+        "powerSupplyInfo": "Информация об источнике питания",
+        "powerSupplyMetrics": "Метрики источника питания",
+        "powerEquipmentDevices": "Устройства оборудования питания",
+        "id": "ID",
+        "name": "Название",
+        "model": "Модель",
+        "manufacturer": "Производитель",
+        "partNumber": "Номер детали",
+        "serialNumber": "Серийный номер",
+        "firmwareVersion": "Версия прошивки",
+        "powerSupplyType": "Тип источника питания",
+        "powerCapacityWatts": "Мощность (Вт)",
+        "lineInputVoltage": "Входное напряжение линии",
+        "health": "Состояние",
+        "state": "Статус",
+        "inputVoltage": "Входное напряжение (В)",
+        "inputCurrentAmps": "Входной ток (А)",
+        "inputPowerWatts": "Входная мощность (Вт)",
+        "outputVoltage": "Выходное напряжение (В)",
+        "outputCurrentAmps": "Выходной ток (А)",
+        "outputPowerWatts": "Выходная мощность (Вт)",
+        "temperatureCelsius": "Температура (°C)",
+        "fanSpeedPercent": "Скорость вентилятора (%)",
+        "energykWh": "Энергия (кВт⋅ч)",
+        "branches": "Ветви",
+        "mains": "Основные",
+        "metrics": "Метрики",
+        "outlets": "Розетки",
+        "ratedCurrentAmps": "Номинальный ток (А)",
+        "branchCircuitType": "Тип ответвительной цепи",
+        "nominalVoltage": "Номинальное напряжение (В)",
+        "outletType": "Тип розетки",
+        "powerEnabled": "Питание включено",
+        "powerWatts": "Мощность (Вт)",
+        "humidityPercent": "Влажность (%)",
+        "tab": {
+            "powerSupply": "Источник питания",
+            "metrics": "Метрики"
+        },
+        "toast": {
+            "errorLoadingPowerSupply": "Ошибка загрузки данных источника питания",
+            "errorLoadingMetrics": "Ошибка загрузки метрик источника питания",
+            "errorLoadingPowerEquipment": "Ошибка загрузки данных оборудования питания",
+            "errorLoadingPowerEquipmentDetails": "Ошибка загрузки деталей оборудования питания"
         }
     },
     "fru": {

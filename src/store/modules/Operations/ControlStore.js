@@ -1,6 +1,7 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
 import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
+import store from '@/store/';
 
 /**
  * Watch for serverStatus changes in GlobalStore module
@@ -107,7 +108,7 @@ const ControlStore = {
     },
     getLastBmcRebootTime({ commit }) {
       return api
-        .get('/redfish/v1/Managers/bmc')
+        .get('/redfish/v1/Managers/' + store.getters['global/managerInstance'])
         .then((response) => {
           const lastBmcReset = response.data.LastResetTime;
           const lastBmcRebootTime =
@@ -119,7 +120,12 @@ const ControlStore = {
     async rebootBmc() {
       const data = { ResetType: 'GracefulRestart' };
       return await api
-        .post('/redfish/v1/Managers/bmc/Actions/Manager.Reset', data)
+        .post(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/Actions/Manager.Reset',
+          data,
+        )
         .then(() => i18n.t('pageRebootBmc.toast.successRebootStart'))
         .catch((error) => {
           console.log(error);

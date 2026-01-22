@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store/';
 
 const FirmwareStore = {
   namespaced: true,
@@ -32,7 +33,10 @@ const FirmwareStore = {
     clearConfigState: (state) => state.clearConfig,
     activeBmcFirmware: (state) => {
       return state.bmcFirmware.find(
-        (firmware) => firmware.id === state.bmcActiveFirmwareId,
+        (firmware) =>
+          firmware.id === state.bmcActiveFirmwareId ||
+          (process.env.VUE_APP_ONETREE_PSM_ENABLED == 'true' &&
+            firmware.id === 'bmc_active'),
       );
     },
     activeHostFirmware: (state) => {
@@ -108,7 +112,7 @@ const FirmwareStore = {
     },
     getActiveBmcFirmware({ commit }) {
       return api
-        .get('/redfish/v1/Managers/bmc')
+        .get('/redfish/v1/Managers/' + store.getters['global/managerInstance'])
         .then(({ data: { Links, DateTime } }) => {
           const id = Links?.ActiveSoftwareImage['@odata.id'].split('/').pop();
           commit('setFirmwareBmcDateTime', DateTime);
@@ -180,7 +184,7 @@ const FirmwareStore = {
               bmcRecoveryFeatureEnabled = true;
             }
             commit('setBmcRecoveryFeatureEnabled', bmcRecoveryFeatureEnabled);
-            if (firmwareType === 'bmc') {
+            if (firmwareType === 'bmc' || firmwareType === 'ps-scm') {
               bmcFirmware.push(item);
             } else if (firmwareType === 'Bios') {
               hostFirmware.push(item);
@@ -314,7 +318,10 @@ const FirmwareStore = {
         },
       };
       return await api
-        .patch('/redfish/v1/Managers/bmc', data)
+        .patch(
+          '/redfish/v1/Managers/' + store.getters['global/managerInstance'],
+          data,
+        )
         .catch((error) => {
           console.log(error);
           throw new Error(i18n.t('pageFirmware.toast.errorSwitchImages'));

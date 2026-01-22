@@ -132,7 +132,7 @@
                     </b-form-checkbox>
                   </b-col>
                 </b-row>
-                <b-row class="setting-section">
+                <b-row v-if="isKVMEnabled" class="setting-section">
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
@@ -253,7 +253,7 @@
                     </b-button>
                   </b-col>
                 </b-row>
-                <b-row class="setting-section">
+                <b-row v-if="isVmediaEnabled" class="setting-section">
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
@@ -378,7 +378,7 @@
                     </b-col>
                   </b-row>
                 </div>
-                <b-row v-if="!isMultiSolMode" class="setting-section">
+                <b-row v-if="isSOLEnabled" class="setting-section">
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
@@ -763,7 +763,7 @@
                     </b-button>
                   </b-col>
                 </b-row>
-                <b-row class="setting-section">
+                <b-row v-if="isKVMEnabled" class="setting-section">
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
@@ -815,7 +815,7 @@
                     </b-button>
                   </b-col>
                 </b-row>
-                <b-row class="setting-section">
+                <b-row v-if="isSOLEnabled" class="setting-section">
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
@@ -977,26 +977,32 @@ export default {
         { value: '115200', text: '115200' },
       ],
       maxSessionServicesField: [
-        {
-          key: 'kvmMaxSession',
-          label: this.$t('pagePolicies.kvmMaxSession'),
-          class: 'text-center',
-        },
+        process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true'
+          ? {
+              key: 'kvmMaxSession',
+              label: this.$t('pagePolicies.kvmMaxSession'),
+              class: 'text-center',
+            }
+          : null,
         {
           key: 'redfishMaxSession',
           label: this.$t('pagePolicies.redfishMaxSession'),
           class: 'text-center',
         },
-        {
-          key: 'sshMaxSession',
-          label: this.$t('pagePolicies.sshMaxSession'),
-          class: 'text-center',
-        },
-        {
-          key: 'vmMaxSession',
-          label: this.$t('pagePolicies.vmMaxSession'),
-          class: 'text-center',
-        },
+        process.env.VUE_APP_MODIFY_SSH_POLICY_DISABLED === 'true'
+          ? null
+          : {
+              key: 'sshMaxSession',
+              label: this.$t('pagePolicies.sshMaxSession'),
+              class: 'text-center',
+            },
+        process.env.VUE_APP_ONETREE_MEDIA_REDIRECT_ENABLED === 'true'
+          ? {
+              key: 'vmMaxSession',
+              label: this.$t('pagePolicies.vmMaxSession'),
+              class: 'text-center',
+            }
+          : null,
         {
           key: 'webMaxSession',
           label: this.$t('pagePolicies.webMaxSession'),
@@ -1010,6 +1016,10 @@ export default {
       webPort: this.$store.getters['policies/webPortValue'],
       modifySSHPolicyDisabled:
         process.env.VUE_APP_MODIFY_SSH_POLICY_DISABLED === 'true',
+      isSolEnabled: process.env.VUE_APP_ONETREE_SOL_ENABLED === 'true',
+      isKVMEnabled: process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true',
+      isVmediaEnabled:
+        process.env.VUE_APP_ONETREE_MEDIA_REDIRECT_ENABLED === 'true',
       DisplaySection: false,
       vmReconnectValues: {
         vmCount: '',
@@ -1211,8 +1221,12 @@ export default {
       this.$store.dispatch('policies/getAccountService'),
       this.$store.dispatch('policies/getSslFipsStatus'),
       this.$store.dispatch('snmp/getSNMPProtocolStatus'),
-      this.$store.dispatch('policies/getSolBitRateData'),
-      this.$store.dispatch('policies/getVMReconnect'),
+      process.env.VUE_APP_ONETREE_SOL_ENABLED === 'true'
+        ? this.$store.dispatch('policies/getSolBitRateData')
+        : Promise.resolve(),
+      process.env.VUE_APP_ONETREE_MEDIA_REDIRECT_ENABLED === 'true'
+        ? this.$store.dispatch('policies/getVMReconnect')
+        : Promise.resolve(),
     ]).finally(() => this.endLoader());
   },
   validations() {

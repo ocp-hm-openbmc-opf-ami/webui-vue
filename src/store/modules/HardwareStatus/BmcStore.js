@@ -1,6 +1,7 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
 import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
+import store from '@/store/';
 
 const BmcStore = {
   namespaced: true,
@@ -49,7 +50,7 @@ const BmcStore = {
   actions: {
     async getBmcInfo({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc')
+        .get('/redfish/v1/Managers/' + store.getters['global/managerInstance'])
         .then(({ data }) => commit('setBmcInfo', data))
         .catch((error) => console.log(error));
     },

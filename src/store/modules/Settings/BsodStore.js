@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store';
 
 const BsodStore = {
   namespaced: true,
@@ -13,7 +14,11 @@ const BsodStore = {
   actions: {
     async getBsodImage({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/Oem/OpenBmc/Jpeg')
+        .get(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/Oem/OpenBmc/Jpeg',
+        )
         .then((response) => {
           commit('SetBsodImageData', response.data.Image);
         })
@@ -25,7 +30,9 @@ const BsodStore = {
     },
     async deleteBsodImage({ dispatch }) {
       return await api
-        .delete(`/redfish/v1/Managers/bmc/Oem/OpenBmc/Jpeg`)
+        .delete(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/Oem/OpenBmc/Jpeg`,
+        )
         .then(() => dispatch('getBsodImage'))
         .then(() => i18n.t('pageBsod.toast.successDeleteBsodImage'))
         .catch((error) => {
@@ -36,7 +43,9 @@ const BsodStore = {
     },
     async triggerBsodImage({ dispatch }) {
       return await api
-        .post(`/redfish/v1/Managers/bmc/Oem/OpenBmc/Jpeg`)
+        .post(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/Oem/OpenBmc/Jpeg`,
+        )
         .then(() => dispatch('getBsodImage'))
         .then(() => i18n.t('pageBsod.toast.successTriggerBsodImage'))
         .catch((error) => {

@@ -55,7 +55,7 @@
           </b-form-checkbox>
         </b-col>
       </b-row>
-      <b-row class="mt-3">
+      <b-row v-if="isKVMEnabled" class="mt-3">
         <b-col sm="6" md="3">
           <b-form-checkbox v-model="checkboxes.kvm">
             {{ $t('pagePreserve.kvm') }}
@@ -201,6 +201,9 @@ export default {
         this.userPrivilege === privilegesId.readOnly ||
         this.userPrivilege === privilegesId.operator
       );
+    },
+    isKVMEnabled() {
+      return process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true';
     },
   },
   watch: {

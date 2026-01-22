@@ -283,6 +283,7 @@ export default {
             localStorage.setItem('storedUsername', username);
             this.$store.commit('global/setUsername', username);
             this.$store.commit('global/setLanguagePreference', i18n.locale);
+            this.$store.dispatch('global/getManagerinstance');
             return this.$store.dispatch('authentication/getUserInfo', username);
           })
           .then(({ PasswordChangeRequired, Oem }) => {

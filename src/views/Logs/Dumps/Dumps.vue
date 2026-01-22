@@ -340,7 +340,10 @@ export default {
     deleteAllDumps(uris) {
       uris.forEach((uri, index) => {
         uris[index] =
-          '/redfish/v1/Managers/bmc/LogServices/Dump/Entries/' + uri;
+          '/redfish/v1/Managers/' +
+          this.$store.getters['global/managerInstance'] +
+          '/LogServices/Dump/Entries/' +
+          uri;
       });
       this.$store.dispatch('dumps/deleteAllDumps').then((messages) => {
         messages.forEach(({ type, message }) => {
@@ -355,7 +358,10 @@ export default {
     deleteDumps(uris) {
       uris.forEach((uri, index) => {
         uris[index] =
-          '/redfish/v1/Managers/bmc/LogServices/Dump/Entries/' + uri;
+          '/redfish/v1/Managers/' +
+          this.$store.getters['global/managerInstance'] +
+          '/LogServices/Dump/Entries/' +
+          uri;
       });
       this.$store.dispatch('dumps/deleteDumps', uris).then((messages) => {
         messages.forEach(({ type, message }) => {
@@ -421,7 +427,9 @@ export default {
     },
     downloadFile(data) {
       return (
-        '/redfish/v1/Managers/bmc/LogServices/Dump/Entries/' +
+        '/redfish/v1/Managers/' +
+        this.$store.getters['global/managerInstance'] +
+        '/LogServices/Dump/Entries/' +
         data +
         '/attachment'
       );

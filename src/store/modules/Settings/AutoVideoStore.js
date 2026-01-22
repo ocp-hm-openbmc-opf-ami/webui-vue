@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store/';
 
 const AutoVideoStore = {
   namespaced: true,
@@ -29,7 +30,7 @@ const AutoVideoStore = {
   actions: {
     getActiveBmcVideoSettings({ state, commit }) {
       return api
-        .get('/redfish/v1/Managers/bmc')
+        .get('/redfish/v1/Managers/' + store.getters['global/managerInstance'])
         .then(({ data }) => {
           state.autoVideoSettingsURL =
             data.Oem?.Ami?.AutoVideoSettings['@odata.id'];
@@ -63,7 +64,7 @@ const AutoVideoStore = {
     async setVideoTriggerSettings(_, data) {
       return await api
         .patch(
-          `/redfish/v1/Managers/bmc/Oem/Ami/AutoVideoSettings/VideoTriggerSetting`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/Oem/Ami/AutoVideoSettings/VideoTriggerSetting`,
           data,
         )
         .then(() => i18n.t('pageVideo.toast.successSaveVideoTriggerSettings'))
@@ -77,7 +78,7 @@ const AutoVideoStore = {
     async setVideoRemoteStorage(_, data) {
       return await api
         .patch(
-          `/redfish/v1/Managers/bmc/Oem/Ami/AutoVideoSettings/RemoteVideoStorage`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/Oem/Ami/AutoVideoSettings/RemoteVideoStorage`,
           data,
         )
         .then(() => i18n.t('pageVideo.toast.successSaveVideoRemoteSettings'))

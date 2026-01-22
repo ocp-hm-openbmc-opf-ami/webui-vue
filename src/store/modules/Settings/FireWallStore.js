@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store';
 
 const FireWallStore = {
   namespaced: true,
@@ -17,7 +18,9 @@ const FireWallStore = {
   actions: {
     async getFireWallData({ state, commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
+        .get(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces`,
+        )
         .then((response) => {
           state.FirstInterfaceId = response.data.Members[0]['@odata.id'];
         })

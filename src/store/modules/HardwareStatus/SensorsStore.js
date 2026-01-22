@@ -33,6 +33,15 @@ const SensorsStore = {
         acc.push(dispatch('getSensors', id));
         return acc;
       }, []);
+      // Add API sensor ID to the collection
+      if (process.env.VUE_APP_ONETREE_PSM_ENABLED == 'true') {
+        promises.push(
+          dispatch(
+            'getSensors',
+            '/redfish/v1/PowerEquipment/PowerShelves/PowerShelf',
+          ),
+        );
+      }
       return await api.all(promises);
     },
     async getChassisCollection() {
@@ -48,7 +57,7 @@ const SensorsStore = {
         .get('/redfish/v1/')
         .then(({ data }) => {
           if (data?.ProtocolFeaturesSupported?.ExpandQuery?.MaxLevels > 0) {
-            return dispatch('getSensorsUsingQueryParams', id);
+            return dispatch('getSensorsWithoutQueryParams', id);
           } else {
             return dispatch('getSensorsWithoutQueryParams', id);
           }

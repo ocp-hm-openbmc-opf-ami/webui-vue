@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store';
 
 const SnmpStore = {
   namespaced: true,
@@ -48,7 +49,9 @@ const SnmpStore = {
   actions: {
     async getSNMPProtocolStatus({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/NetworkProtocol')
+        .get(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/NetworkProtocol`,
+        )
         .then((response) => {
           const snmpProtocol = response.data?.SNMP?.ProtocolEnabled;
           const snmpv1 = response.data?.SNMP?.EnableSNMPv1;
@@ -97,7 +100,10 @@ const SnmpStore = {
         },
       };
       return await api
-        .patch('/redfish/v1/Managers/bmc/NetworkProtocol', SNMP)
+        .patch(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/NetworkProtocol`,
+          SNMP,
+        )
         .then(() => dispatch('getNetworkProtocolStatus'))
         .then(() => {
           if (protocolEnabled) {
@@ -159,7 +165,10 @@ const SnmpStore = {
           break;
       }
       return await api
-        .patch('/redfish/v1/Managers/bmc/NetworkProtocol', SNMP)
+        .patch(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/NetworkProtocol`,
+          SNMP,
+        )
         .then(() => dispatch('getSNMPProtocolStatus'))
         .then(() => {
           if (snmpVersionEnabled) {
@@ -379,7 +388,10 @@ const SnmpStore = {
         },
       };
       return await api
-        .patch('/redfish/v1/Managers/bmc/NetworkProtocol', data)
+        .patch(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/NetworkProtocol`,
+          data,
+        )
         .then(() => dispatch('getSNMPProtocolStatus'))
         .then(() => i18n.t('pageSnmp.toast.successInAddCommunityString'))
         .catch(() => {
@@ -404,7 +416,10 @@ const SnmpStore = {
         },
       };
       return await api
-        .patch('/redfish/v1/Managers/bmc/NetworkProtocol', data)
+        .patch(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/NetworkProtocol`,
+          data,
+        )
         .then(() => dispatch('getSNMPProtocolStatus'))
         .then(() => dispatch('getSubscriptions'))
         .then(() => i18n.t('pageSnmp.toast.successInDeleteCommunityString'))
@@ -448,7 +463,10 @@ const SnmpStore = {
         },
       };
       return await api
-        .patch('/redfish/v1/Managers/bmc/NetworkProtocol', data)
+        .patch(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/NetworkProtocol`,
+          data,
+        )
         .then(() => dispatch('getSNMPProtocolStatus'))
         .then(() => i18n.t('pageSnmp.toast.successInUpdateCommunityString'))
         .catch(() => {

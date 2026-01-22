@@ -1,5 +1,7 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store';
+
 const NetworkStore = {
   namespaced: true,
   state: {
@@ -17,7 +19,9 @@ const NetworkStore = {
   actions: {
     async getEthernetData({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
+        .get(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces`,
+        )
         .then((response) =>
           response.data.Members.map(
             (ethernetInterface) => ethernetInterface['@odata.id'],
@@ -63,13 +67,16 @@ const NetworkStore = {
         Links: {
           RelatedInterfaces: [
             {
-              '@odata.id': `/redfish/v1/Managers/bmc/EthernetInterfaces/${TabId}`,
+              '@odata.id': `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${TabId}`,
             },
           ],
         },
       };
       return await api
-        .post('/redfish/v1/Managers/bmc/EthernetInterfaces', data)
+        .post(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces`,
+          data,
+        )
         .then(() => dispatch('getEthernetData'))
         .then(() => i18n.tc('pageVlan.toast.successAddedVlan'))
         .catch((error) => {
@@ -80,7 +87,7 @@ const NetworkStore = {
     async deleteVlan({ dispatch }, { VirtualInterface }) {
       return await api
         .delete(
-          `/redfish/v1/Managers/bmc/EthernetInterfaces/${VirtualInterface}`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${VirtualInterface}`,
         )
         .then(() => dispatch('getEthernetData'))
         .then(() => i18n.t('pageVlan.toast.successDeleteVlan'))

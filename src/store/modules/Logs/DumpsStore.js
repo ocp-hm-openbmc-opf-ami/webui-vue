@@ -1,6 +1,7 @@
 import api, { getResponseCount } from '@/store/api';
 import i18n from '@/i18n';
 import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
+import store from '@/store/';
 
 const DumpsStore = {
   namespaced: true,
@@ -29,7 +30,9 @@ const DumpsStore = {
           if (
             task.Payload &&
             task.Payload.TargetUri ===
-              '/redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData' &&
+              '/redfish/v1/Managers/' +
+                store.getters['global/managerInstance'] +
+                '/LogServices/Dump/Actions/LogService.CollectDiagnosticData' &&
             task.TaskState === 'New'
           ) {
             commit('setHasActiveDumpTask', true);
@@ -45,7 +48,11 @@ const DumpsStore = {
       return api
         .get('/redfish/v1/')
         .then((response) => api.get(response.data.Managers['@odata.id']))
-        .then((response) => api.get(`${response.data['@odata.id']}/bmc`))
+        .then((response) =>
+          api.get(
+            `${response.data['@odata.id']}/Managers/${store.getters['global/managerInstance']}`,
+          ),
+        )
         .then((response) => api.get(response.data.LogServices['@odata.id']))
         .then((response) => api.get(`${response.data['@odata.id']}/Dump`))
         .then((response) => api.get(response.data.Entries['@odata.id']))
@@ -90,7 +97,9 @@ const DumpsStore = {
     async createBmcDump() {
       return await api
         .post(
-          '/redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData',
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/LogServices/Dump/Actions/LogService.CollectDiagnosticData',
           {
             DiagnosticDataType: 'Manager',
             OEMDiagnosticDataType: '',
@@ -157,7 +166,9 @@ const DumpsStore = {
       const totalDumpCount = state.allDumps.length;
       return await api
         .post(
-          '/redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.ClearLog',
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/LogServices/Dump/Actions/LogService.ClearLog',
         )
         .then(() => {
           commit('setAllDumps', []);

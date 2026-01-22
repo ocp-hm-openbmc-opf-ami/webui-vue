@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store/';
 
 const PoliciesStore = {
   namespaced: true,
@@ -122,7 +123,11 @@ const PoliciesStore = {
     },
     async getNetworkProtocolStatus({ commit, dispatch }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/NetworkProtocol')
+        .get(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/NetworkProtocol',
+        )
         .then((response) => {
           const sshProtocol = response.data?.SSH?.ProtocolEnabled;
           const ChannelList = response.data?.Oem?.Ami?.AvailableChannelList;
@@ -153,7 +158,7 @@ const PoliciesStore = {
     },
     async getSslFipsStatus({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc')
+        .get('/redfish/v1/Managers/' + store.getters['global/managerInstance'])
         .then((response) => {
           commit(
             'setSslFipsProtocolEnabled',
@@ -259,7 +264,12 @@ const PoliciesStore = {
         },
       };
       return await api
-        .patch('/redfish/v1/Managers/bmc/NetworkProtocol', ipmi)
+        .patch(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/NetworkProtocol',
+          ipmi,
+        )
         .catch((error) => {
           console.log('Failed to sync Masked:', error);
         });
@@ -292,7 +302,12 @@ const PoliciesStore = {
         },
       };
       return await api
-        .patch('/redfish/v1/Managers/bmc/NetworkProtocol', ssh)
+        .patch(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/NetworkProtocol',
+          ssh,
+        )
         .then(() => {
           if (protocolEnabled) {
             return i18n.t('pagePolicies.toast.successSshEnabled');
@@ -514,7 +529,12 @@ const PoliciesStore = {
         },
       };
       return await api
-        .patch('/redfish/v1/Managers/bmc/NetworkProtocol', SSDP)
+        .patch(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/NetworkProtocol',
+          SSDP,
+        )
         .then(() => {
           if (protocolEnabled) {
             return i18n.t('pagePolicies.toast.successSSDPEnabled');
@@ -539,7 +559,9 @@ const PoliciesStore = {
       };
       return await api
         .post(
-          '/redfish/v1/Managers/bmc/Actions/Oem/AMIManager.ChangeOpensslFIPSStatus',
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/Actions/Oem/AMIManager.ChangeOpensslFIPSStatus',
           SslFipsMode,
         )
         .then(() => dispatch('getSslFipsStatus'))
@@ -684,7 +706,11 @@ const PoliciesStore = {
     },
     async getSolBitRateData({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/SerialInterfaces/IPMI-SOL')
+        .get(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/SerialInterfaces/IPMI-SOL',
+        )
         .then((response) => {
           const bitRateValue = response.data.BitRate;
           commit('setSolBitRate', bitRateValue);
@@ -696,9 +722,14 @@ const PoliciesStore = {
     async saveSolBitRateValue({ commit }, BitRate) {
       commit('setSolBitRate', BitRate);
       return await api
-        .patch('/redfish/v1/Managers/bmc/SerialInterfaces/IPMI-SOL', {
-          BitRate: BitRate,
-        })
+        .patch(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/SerialInterfaces/IPMI-SOL',
+          {
+            BitRate: BitRate,
+          },
+        )
         .then(() => commit('setSolBitRate', BitRate))
         .then(() => i18n.t('pagePolicies.toast.successSolBitRate'))
         .catch(() => {
@@ -707,7 +738,11 @@ const PoliciesStore = {
     },
     async getVMReconnect({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/VirtualMedia')
+        .get(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/VirtualMedia',
+        )
         .then((response) =>
           response.data.Members.map(
             (virtualMedia) => virtualMedia['@odata.id'],

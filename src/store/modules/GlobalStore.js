@@ -36,6 +36,7 @@ const serverStateMapper = (hostState) => {
 const GlobalStore = {
   namespaced: true,
   state: {
+    managerInstance: '',
     assetTag: null,
     bmcTime: null,
     bmcDateTime: null,
@@ -55,6 +56,7 @@ const GlobalStore = {
     sessionId: null, // Store Session_ID from login
   },
   getters: {
+    managerInstance: (state) => state.managerInstance,
     assetTag: (state) => state.assetTag,
     modelType: (state) => state.modelType,
     serialNumber: (state) => state.serialNumber,
@@ -73,6 +75,8 @@ const GlobalStore = {
     sessionId: (state) => state.sessionId,
   },
   mutations: {
+    setManagerInstance: (state, managerInstance) =>
+      (state.managerInstance = managerInstance),
     setAssetTag: (state, assetTag) => (state.assetTag = assetTag),
     setModelType: (state, modelType) => (state.modelType = modelType),
     setSerialNumber: (state, serialNumber) =>
@@ -107,9 +111,26 @@ const GlobalStore = {
     setSessionId: (state, sessionId) => (state.sessionId = sessionId),
   },
   actions: {
-    async getBmcTime({ commit }) {
+    getManagerinstance({ commit, state }) {
+      if (!state.managerInstance) {
+        api
+          .get('/redfish/v1/Managers')
+          .then((response) => {
+            const managerInstance = response.data.Members[0]['@odata.id']
+              .split('/')
+              .pop();
+            console.log(managerInstance);
+            commit('setManagerInstance', managerInstance);
+          })
+          .catch((error) => {
+            console.log(error);
+            commit('setManagerInstance', '');
+          });
+      }
+    },
+    async getBmcTime({ commit, state }) {
       return await api
-        .get('/redfish/v1/Managers/bmc')
+        .get('/redfish/v1/Managers/' + state.managerInstance)
         .then((response) => {
           const timeZone = response.data.TimeZoneName;
           var bmcDateTime = response.data.DateTime;

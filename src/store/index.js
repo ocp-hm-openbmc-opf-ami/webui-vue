@@ -73,6 +73,8 @@ import AdvancedLogSettingsStore from './modules/Settings/AdvancedLogSettingsStor
 import FruStore from './modules/Fru/FruStore';
 import DeviceOwnerTransfershipStore from './modules/Settings/DeviceOwnerTransfershipStore';
 import SpdmStore from './modules/Settings/SPDMStore';
+import PowerShelfStore from './modules/PowerShelf/PowerShelfStore';
+import PowerEquipmentStore from './modules/PowerShelf/PowerEquipmentStore';
 
 Vue.use(Vuex);
 
@@ -153,5 +155,7 @@ export default new Vuex.Store({
     fru: FruStore,
     deviceOwnerTransfership: DeviceOwnerTransfershipStore,
     spdm: SpdmStore,
+    powerShelf: PowerShelfStore,
+    powerEquipment: PowerEquipmentStore,
   },
 });

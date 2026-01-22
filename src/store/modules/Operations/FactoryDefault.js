@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store';
 
 const FactoryDefaultStore = {
   namespaced: true,
@@ -32,7 +33,12 @@ const FactoryDefaultStore = {
     async saveResetDefault() {
       const data = { ResetType: 'ResetAll' };
       return await api
-        .post('/redfish/v1/Managers/bmc/Actions/Manager.ResetToDefaults', data)
+        .post(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/Actions/Manager.ResetToDefaults',
+          data,
+        )
         .then(() => i18n.t('PageFactoryDefault.toast.restoreToDefaultsSuccess'))
         .catch((error) => {
           console.log(error);

@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store';
 
 const VideoLogStore = {
   namespaced: true,
@@ -16,7 +17,11 @@ const VideoLogStore = {
   actions: {
     async getVideoLogData({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/Oem/Ami/AutoVideoSettings/VideoLogs')
+        .get(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/Oem/Ami/AutoVideoSettings/VideoLogs',
+        )
         .then(({ data }) => {
           const allVideoLogs = data.Members.map((val) => {
             let lastElement = val['@odata.id'].split('/').pop();
