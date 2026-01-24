@@ -10,7 +10,7 @@
           <dd v-else>--</dd>
         </dl>
       </b-col>
-      <b-col sm="6" lg="3" class="mb-2 mt-2">
+      <b-col v-if="isSolEnabled" sm="6" lg="3" class="mb-2 mt-2">
         <b-button
           to="/operations/serial-over-lan"
           variant="primary"
@@ -41,6 +41,9 @@ export default {
     ...mapGetters('dashboard', ['bmcDateTime']),
     bmcTime() {
       return this.bmcDateTime;
+    },
+    isSolEnabled() {
+      return process.env.VUE_APP_ONETREE_SOL_ENABLED === 'true';
     },
   },
   created() {

@@ -1,6 +1,7 @@
 import api, { getResponseCount } from '@/store/api';
 import i18n from '@/i18n';
 import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
+import store from '@/store';
 
 const getHealthStatus = (events, loadedEvents) => {
   let status = loadedEvents ? 'OK' : '';
@@ -43,7 +44,11 @@ const IPMIEventLogStore = {
   actions: {
     async getEventLogData({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/LogServices/SEL/Entries')
+        .get(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/LogServices/SEL/Entries',
+        )
         .then(({ data: { Members = [] } = {} }) => {
           const ipmiEventLogs = Members.map((log) => {
             const {
@@ -84,7 +89,9 @@ const IPMIEventLogStore = {
     async deleteAllEventLogs({ dispatch }, data) {
       return await api
         .post(
-          '/redfish/v1/Managers/bmc/LogServices/SEL/Actions/LogService.ClearLog',
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/LogServices/SEL/Actions/LogService.ClearLog',
         )
         .then(() => dispatch('getEventLogData'))
         .then(() => i18n.tc('pageEventLogs.toast.successDelete', data.length))

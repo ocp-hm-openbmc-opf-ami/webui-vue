@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store';
 
 const NetworkLinkStore = {
   namespaced: true,
@@ -20,7 +21,9 @@ const NetworkLinkStore = {
   actions: {
     async getNetworkEthernetData({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
+        .get(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces`,
+        )
         .then((response) =>
           response.data.Members.map(
             (ethernetInterface) => ethernetInterface['@odata.id'],
@@ -56,7 +59,9 @@ const NetworkLinkStore = {
     },
     async getInterfaceNetworkLinkData({ commit }, selectedValue) {
       return api
-        .get(`/redfish/v1/Managers/bmc/EthernetInterfaces/${selectedValue}`)
+        .get(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${selectedValue}`,
+        )
         .then((response) => {
           commit('setNetworkLinkData', response.data);
         })
@@ -70,7 +75,7 @@ const NetworkLinkStore = {
     ) {
       return await api
         .patch(
-          `/redfish/v1/Managers/bmc/EthernetInterfaces/${selectedLanInterface}`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${selectedLanInterface}`,
           networkInterfaceLink,
         )
         .then(() => i18n.t('networkLink.toast.successSaveNetworkLink'))

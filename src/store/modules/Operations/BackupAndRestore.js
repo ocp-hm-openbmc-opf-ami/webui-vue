@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store/';
 
 const BackupAndRestore = {
   namespaced: true,
@@ -20,7 +21,9 @@ const BackupAndRestore = {
       };
       return await api
         .post(
-          '/redfish/v1/Managers/bmc/Actions/Oem/AMIManager.BackupConfig',
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/Actions/Oem/AMIManager.BackupConfig',
           data,
         )
         .then((response) => {
@@ -58,7 +61,7 @@ const BackupAndRestore = {
     },
     async getBackupConfig({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc')
+        .get('/redfish/v1/Managers/' + store.getters['global/managerInstance'])
         .then((response) => {
           const getBackupConfigValues =
             response.data.Oem.Ami?.SelectedBackupFeatures;
@@ -95,7 +98,9 @@ const BackupAndRestore = {
       };
       return await api
         .post(
-          'redfish/v1/Managers/bmc/Actions/Oem/AMIManager.RestoreConfig',
+          'redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/Actions/Oem/AMIManager.RestoreConfig',
           uploadData,
           config,
         )

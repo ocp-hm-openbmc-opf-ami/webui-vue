@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store/';
 
 const BondStore = {
   namespaced: true,
@@ -21,7 +22,11 @@ const BondStore = {
   actions: {
     async getBondEthernetData({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
+        .get(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/EthernetInterfaces',
+        )
         .then((response) =>
           response.data.Members.map(
             (ethernetInterface) => ethernetInterface['@odata.id'],
@@ -57,7 +62,7 @@ const BondStore = {
     async setBondEthernetData(_, data) {
       return await api
         .post(
-          `/redfish/v1/Managers/bmc/EthernetInterfaces/${data.bondInterface}/Actions/Oem/Ami/EthernetInterface.CreateBond`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${data.bondInterface}/Actions/Oem/Ami/EthernetInterface.CreateBond`,
           { MIIMonitorinms: parseInt(data.miiMonitorinms) },
         )
         .catch((error) => {
@@ -68,10 +73,10 @@ const BondStore = {
     async setChangeActiveSlave(_, data) {
       return await api
         .post(
-          `/redfish/v1/Managers/bmc/EthernetInterfaces/bond0/Actions/Oem/Ami/EthernetInterface.ChangeActiveSlave`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/bond0/Actions/Oem/Ami/EthernetInterface.ChangeActiveSlave`,
           {
             ActiveSlave: {
-              '@odata.id': `/redfish/v1/Managers/bmc/EthernetInterfaces/${data.bondInterface}`,
+              '@odata.id': `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${data.bondInterface}`,
             },
           },
         )
@@ -82,7 +87,11 @@ const BondStore = {
     },
     async deleteBondEthernetData() {
       return await api
-        .delete('/redfish/v1/Managers/bmc/EthernetInterfaces/bond0')
+        .delete(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/EthernetInterfaces/bond0',
+        )
         .catch((error) => {
           console.log(error);
           throw new Error(i18n.t('bond.errorDelete'));
@@ -90,7 +99,11 @@ const BondStore = {
     },
     async getbondData({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/EthernetInterfaces/bond0')
+        .get(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/EthernetInterfaces/bond0',
+        )
         .then((response) => {
           commit('setBondEnabledData', response.data.Oem.Ami.BondConfiguration);
         })

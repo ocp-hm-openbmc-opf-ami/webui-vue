@@ -13,6 +13,7 @@ import IconStorageRequest from '@carbon/icons-vue/es/storage-request/16';
 import IconTask from '@carbon/icons-vue/es/task/16';
 import Iconchip from '@carbon/icons-vue/es/chip/16';
 import IconInformation from '@carbon/icons-vue/es/information/16';
+import IconPower from '@carbon/icons-vue/es/power/16';
 
 const roles = {
   administrator: 'Administrator',
@@ -38,6 +39,7 @@ const AppNavigationMixin = {
     iconTask: IconTask,
     iconChip: Iconchip,
     iconInformation: IconInformation,
+    iconPower: IconPower,
   },
   data() {
     return this.renderNavigationItems();
@@ -334,7 +336,10 @@ const AppNavigationMixin = {
           exclusiveToRoles: [roles.administrator],
         });
       }
-      if (process.env.VUE_APP_ONETREE_POWER_ENABLED === 'true') {
+      if (
+        process.env.VUE_APP_ONETREE_POWER_ENABLED === 'true' &&
+        process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true'
+      ) {
         navigationItemsList.navigationItems[3].children.push({
           id: 'server-power-operations',
           label: this.$t('appNavigation.serverPowerOperations'),
@@ -462,6 +467,25 @@ const AppNavigationMixin = {
           icon: 'iconChip',
         });
       }
+      if (process.env.VUE_APP_ONETREE_PSM_ENABLED === 'true') {
+        navigationItemsList.navigationItems.push({
+          id: 'power-shelf',
+          label: this.$t('appNavigation.powerShelf'),
+          icon: 'iconPower',
+          children: [
+            {
+              id: 'power-supply-inventory',
+              label: this.$t('appNavigation.powerSupplyInventory'),
+              route: '/power-shelf/power-supply-inventory',
+            },
+            {
+              id: 'power-equipment',
+              label: this.$t('appNavigation.powerEquipment'),
+              route: '/power-shelf/power-equipment',
+            },
+          ],
+        });
+      }
       if (
         process.env.VUE_APP_ONETREE_NVME_ENABLED === 'true' ||
         process.env.VUE_APP_ONETREE_NVMEBASIC_ENABLED === 'true'
@@ -481,7 +505,10 @@ const AppNavigationMixin = {
           route: '/nic',
         });
       }
-      if (process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true') {
+      if (
+        process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true' &&
+        process.env.VUE_APP_ONETREE_SYSTEM_INVENTORY_ENABLED === 'true'
+      ) {
         navigationItemsList.navigationItems.push({
           id: 'system-inventory',
           label: this.$t('appNavigation.systemInventory'),

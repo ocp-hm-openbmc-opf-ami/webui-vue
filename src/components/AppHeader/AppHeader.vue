@@ -79,6 +79,7 @@
             {{ $t('appHeader.health') }}
           </b-nav-item>
           <b-nav-item
+            v-if="isKVMandPowerEnabled"
             to="/operations/server-power-operations"
             data-test-id="appHeader-container-power"
           >
@@ -225,7 +226,9 @@ export default {
       tfaFeatureEnabled:
         process.env.VUE_APP_ONETREE_2FA_ENABLED &&
         this.$store.getters['authentication/tfaFeatureEnabled'],
-      biosFeatureEnabled: process.env.VUE_APP_ONETREE_RTP_ENABLED,
+      biosFeatureEnabled:
+        process.env.VUE_APP_ONETREE_RTP_ENABLED &&
+        !process.env.VUE_APP_ONETREE_PSM_ENABLED,
       qrCodeUrl: '',
       recoveryCode: [],
       isNavigationOpen: false,
@@ -247,6 +250,12 @@ export default {
   computed: {
     isNavTagPresent() {
       return false;
+    },
+    isKVMandPowerEnabled() {
+      return (
+        process.env.VUE_APP_ONETREE_POWER_ENABLED === 'true' &&
+        process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true'
+      );
     },
     assetTag() {
       return this.$store.getters['global/assetTag'];
@@ -293,6 +302,7 @@ export default {
     },
   },
   created() {
+    this.$store.dispatch('global/getManagerinstance');
     this.$store.dispatch('authentication/resetStoreState');
     if (this.licenseStatus) {
       this.$store.dispatch('license/getUserAlertCount');

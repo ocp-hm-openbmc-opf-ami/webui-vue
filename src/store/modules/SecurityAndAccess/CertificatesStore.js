@@ -1,21 +1,28 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
 import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
+import store from '@/store/';
 
 export const CERTIFICATE_TYPES = [
   {
     type: 'HTTPS Certificate',
-    location: '/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates',
+    getLocation: () =>
+      '/redfish/v1/Managers/' +
+      store.getters['global/managerInstance'] +
+      '/NetworkProtocol/HTTPS/Certificates',
     label: i18n.t('pageCertificates.httpsCertificate'),
   },
   {
     type: 'LDAP Certificate',
-    location: '/redfish/v1/AccountService/LDAP/Certificates',
+    getLocation: () => '/redfish/v1/AccountService/LDAP/Certificates',
     label: i18n.t('pageCertificates.ldapCertificate'),
   },
   {
     type: 'TrustStore Certificate',
-    location: '/redfish/v1/Managers/bmc/Truststore/Certificates',
+    getLocation: () =>
+      '/redfish/v1/Managers/' +
+      store.getters['global/managerInstance'] +
+      '/Truststore/Certificates',
     // Web UI will show 'CA Certificate' instead of
     // 'TrustStore Certificate' after user testing revealed
     // the term 'TrustStore Certificate' wasn't recognized/was unfamilar
@@ -23,7 +30,10 @@ export const CERTIFICATE_TYPES = [
   },
   {
     type: 'ASD Certificate',
-    location: '/redfish/v1/Managers/bmc/Certificates',
+    getLocation: () =>
+      '/redfish/v1/Managers/' +
+      store.getters['global/managerInstance'] +
+      '/Certificates',
     label: i18n.t('pageCertificates.asdCertificate'),
   },
 ];
@@ -32,7 +42,11 @@ const getCertificateProp = (type, prop) => {
   const certificate = CERTIFICATE_TYPES.find(
     (certificate) => certificate.type === type,
   );
-  return certificate ? certificate[prop] : null;
+  if (!certificate) return null;
+  if (prop === 'location' && typeof certificate.getLocation === 'function') {
+    return certificate.getLocation();
+  }
+  return certificate[prop];
 };
 
 const CertificatesStore = {

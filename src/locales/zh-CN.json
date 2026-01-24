@@ -211,7 +211,9 @@
         "advancedLogSettings":"@:appPageTitle.advancedLogSettings",
         "fru":"@:appPageTitle.fru",
         "deviceOwnerTransfership": "设备所有者转让",
-        "spdm": "@:appPageTitle.spdm"
+        "spdm": "@:appPageTitle.spdm",
+        "powerSupplyInventory": "@:appPageTitle.powerSupplyInventory",
+        "powerEquipment": "@:appPageTitle.powerEquipment"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -285,7 +287,9 @@
         "advancedLogSettings":"高级日志设置",
         "fru":"现场可更换单元",
         "deviceOwnerTransfership": "设备所有者转让",
-        "spdm": "SPDM"
+        "spdm": "SPDM",
+        "powerSupplyInventory": "电源库存",
+        "powerEquipment": "电源设备"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM 配置",
@@ -3844,6 +3848,54 @@
             "successCertificateUpload": "已成功添加 %{certificate}。",
             "errorGettingLocalLog": "保存本地日志设置时发生错误。",
             "errorGettingRemoteLog": "保存远程日志设置时发生错误。"
+        }
+    },
+    "powerShelf": {
+        "powerSupplyDevices": "电源设备",
+        "powerSupplyInfo": "电源信息",
+        "powerSupplyMetrics": "电源指标",
+        "powerEquipmentDevices": "电源设备",
+        "id": "ID",
+        "name": "名称",
+        "model": "型号",
+        "manufacturer": "制造商",
+        "partNumber": "零件号",
+        "serialNumber": "序列号",
+        "firmwareVersion": "固件版本",
+        "powerSupplyType": "电源类型",
+        "powerCapacityWatts": "功率容量（瓦特）",
+        "lineInputVoltage": "线路输入电压",
+        "health": "健康状态",
+        "state": "状态",
+        "inputVoltage": "输入电压（V）",
+        "inputCurrentAmps": "输入电流（A）",
+        "inputPowerWatts": "输入功率（W）",
+        "outputVoltage": "输出电压（V）",
+        "outputCurrentAmps": "输出电流（A）",
+        "outputPowerWatts": "输出功率（W）",
+        "temperatureCelsius": "温度（°C）",
+        "fanSpeedPercent": "风扇速度（%）",
+        "energykWh": "能量（千瓦时）",
+        "branches": "分支",
+        "mains": "主电源",
+        "metrics": "指标",
+        "outlets": "插座",
+        "ratedCurrentAmps": "额定电流（A）",
+        "branchCircuitType": "分支电路类型",
+        "nominalVoltage": "额定电压（V）",
+        "outletType": "插座类型",
+        "powerEnabled": "电源启用",
+        "powerWatts": "功率（W）",
+        "humidityPercent": "湿度（%）",
+        "tab": {
+            "powerSupply": "电源",
+            "metrics": "指标"
+        },
+        "toast": {
+            "errorLoadingPowerSupply": "加载电源数据时出错",
+            "errorLoadingMetrics": "加载电源指标时出错",
+            "errorLoadingPowerEquipment": "加载电源设备数据时出错",
+            "errorLoadingPowerEquipmentDetails": "加载电源设备详细信息时出错"
         }
     },
     "fru": {

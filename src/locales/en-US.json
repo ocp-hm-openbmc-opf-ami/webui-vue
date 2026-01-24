@@ -211,7 +211,10 @@
         "advancedLogSettings":"@:appPageTitle.advancedLogSettings",
         "fru":"@:appPageTitle.fru",
         "deviceOwnerTransfership": "Device Owner Transfership",
-        "spdm": "@:appPageTitle.spdm"
+        "spdm": "@:appPageTitle.spdm",
+        "powerShelf": "Power Shelf",
+        "powerSupplyInventory": "@:appPageTitle.powerSupplyInventory",
+        "powerEquipment": "@:appPageTitle.powerEquipment"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -285,7 +288,9 @@
         "advancedLogSettings":"Advanced Log Settings",
         "fru":"FRU",
         "deviceOwnerTransfership": "Device Owner Transfership",
-        "spdm": "SPDM"
+        "spdm": "SPDM",
+        "powerSupplyInventory": "Power Supply Inventory",
+        "powerEquipment": "Power Equipment"
 
     },
     "pageNodeManager": {
@@ -3848,6 +3853,54 @@
             "successCertificateUpload": "Successfully added %{certificate}.",
             "errorGettingLocalLog": "Error in saving Local Log Settings.",
             "errorGettingRemoteLog": "Error in saving Remote Log Settings."
+        }
+    },
+    "powerShelf": {
+        "powerSupplyDevices": "Power Supply Devices",
+        "powerSupplyInfo": "Power Supply Information",
+        "powerSupplyMetrics": "Power Supply Metrics",
+        "powerEquipmentDevices": "Power Equipment Devices",
+        "id": "ID",
+        "name": "Name",
+        "model": "Model",
+        "manufacturer": "Manufacturer",
+        "partNumber": "Part Number",
+        "serialNumber": "Serial Number",
+        "firmwareVersion": "Firmware Version",
+        "powerSupplyType": "Power Supply Type",
+        "powerCapacityWatts": "Power Capacity (Watts)",
+        "lineInputVoltage": "Line Input Voltage",
+        "health": "Health",
+        "state": "State",
+        "inputVoltage": "Input Voltage (V)",
+        "inputCurrentAmps": "Input Current (A)",
+        "inputPowerWatts": "Input Power (W)",
+        "outputVoltage": "Output Voltage (V)",
+        "outputCurrentAmps": "Output Current (A)",
+        "outputPowerWatts": "Output Power (W)",
+        "temperatureCelsius": "Temperature (°C)",
+        "fanSpeedPercent": "Fan Speed (%)",
+        "energykWh": "Energy (kWh)",
+        "branches": "Branches",
+        "mains": "Mains",
+        "metrics": "Metrics",
+        "outlets": "Outlets",
+        "ratedCurrentAmps": "Rated Current (A)",
+        "branchCircuitType": "Branch Circuit Type",
+        "nominalVoltage": "Nominal Voltage (V)",
+        "outletType": "Outlet Type",
+        "powerEnabled": "Power Enabled",
+        "powerWatts": "Power (W)",
+        "humidityPercent": "Humidity (%)",
+        "tab": {
+            "powerSupply": "Power Supply",
+            "metrics": "Metrics"
+        },
+        "toast": {
+            "errorLoadingPowerSupply": "Error loading power supply data",
+            "errorLoadingMetrics": "Error loading power supply metrics",
+            "errorLoadingPowerEquipment": "Error loading power equipment data",
+            "errorLoadingPowerEquipmentDetails": "Error loading power equipment details"
         }
     },
     "fru":{

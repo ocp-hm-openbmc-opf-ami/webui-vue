@@ -72,7 +72,7 @@
             </div>
           </b-col>
         </b-row>
-        <b-row class="mt-3">
+        <b-row v-if="isKVMEnabled" class="mt-3">
           <b-col sm="6" md="3">
             <div class="d-flex align-items-center">
               <b-form-checkbox v-model="checkboxes.kvm" disabled>
@@ -264,6 +264,9 @@ export default {
     ...mapGetters('global', ['userPrivilege']),
     isButtonDisable() {
       return this.userPrivilege !== privilegesId.admin;
+    },
+    isKVMEnabled() {
+      return process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true';
     },
   },
   watch: {

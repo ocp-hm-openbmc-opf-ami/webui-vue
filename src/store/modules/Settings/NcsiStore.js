@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store/';
 
 const NcsiStore = {
   namespaced: true,
@@ -23,7 +24,7 @@ const NcsiStore = {
   actions: {
     async getEthernetInterfaces({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc')
+        .get('/redfish/v1/Managers/' + store.getters['global/managerInstance'])
         .then((response) => {
           const ncsiEthernetInterfaces =
             response.data.Oem?.Ami?.NCSIEthernetInterfaces || [];
@@ -60,7 +61,9 @@ const NcsiStore = {
     },
     async getNcsiData({ commit }, ethernetData) {
       return await api
-        .get(`/redfish/v1/Managers/bmc/EthernetInterfaces/${ethernetData}`)
+        .get(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${ethernetData}`,
+        )
         .then((response) => {
           commit('setNcsiData', response.data);
           return response.data;
@@ -97,7 +100,7 @@ const NcsiStore = {
       }
       return await api
         .patch(
-          `/redfish/v1/Managers/bmc/EthernetInterfaces/${interFace}`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${interFace}`,
           setNcsi,
         )
         .then(() => {

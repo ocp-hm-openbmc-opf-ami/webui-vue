@@ -60,6 +60,7 @@ export default {
   },
   created() {
     this.startLoader();
+    this.$store.dispatch('global/getManagerinstance');
     const dumpsPromise = new Promise((resolve) => {
       this.$root.$on('overview-dumps-complete', () => resolve());
     });

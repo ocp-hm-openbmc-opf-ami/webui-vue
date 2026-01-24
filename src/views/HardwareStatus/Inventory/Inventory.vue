@@ -11,6 +11,7 @@
         <b-col v-for="column in quicklinkColumns" :key="column.id" xl="4">
           <div v-for="item in column" :key="item.id">
             <b-link
+              v-if="item.id !== 'system' || isSystemInventoryEnabled"
               :href="item.href"
               :data-ref="item.dataRef"
               @click.prevent="scrollToOffset"
@@ -23,7 +24,7 @@
     </page-section>
 
     <!-- System table -->
-    <table-system ref="system" />
+    <table-system v-if="isSystemInventoryEnabled" ref="system" />
 
     <!-- BMC manager table -->
     <table-bmc-manager ref="bmc" />
@@ -91,6 +92,12 @@ export default {
       // Chunk links array to 3 array's to display 3 items per column
       return chunk(this.links, 3);
     },
+    isSystemInventoryEnabled() {
+      return (
+        process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true' &&
+        process.env.VUE_APP_ONETREE_SYSTEM_INVENTORY_ENABLED == 'true'
+      );
+    },
   },
   created() {
     this.startLoader();
@@ -103,9 +110,12 @@ export default {
     const serviceIndicatorPromise = new Promise((resolve) => {
       this.$root.$on('hardware-status-service-complete', () => resolve());
     });
-    const systemTablePromise = new Promise((resolve) => {
-      this.$root.$on('hardware-status-system-complete', () => resolve());
-    });
+    let systemTablePromise = Promise.resolve();
+    if (this.isSystemInventoryEnabled) {
+      systemTablePromise = new Promise((resolve) => {
+        this.$root.$on('hardware-status-system-complete', () => resolve());
+      });
+    }
     // Combine all child component Promises to indicate
     // when page data load complete
     Promise.all([

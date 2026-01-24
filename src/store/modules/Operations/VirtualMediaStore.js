@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store';
 
 const transferProtocolType = {
   CIFS: 'CIFS',
@@ -149,7 +150,11 @@ const VirtualMediaStore = {
       }
       commit('setMediaAlreadyRedirected', []);
       return await api
-        .get('/redfish/v1/Managers/bmc/VirtualMedia')
+        .get(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/VirtualMedia',
+        )
         .then((response) =>
           response.data.Members.map(
             (virtualMedia) => virtualMedia['@odata.id'],
@@ -271,7 +276,7 @@ const VirtualMediaStore = {
     async mountImage(_, { id, data }) {
       return await api
         .post(
-          `/redfish/v1/Managers/bmc/VirtualMedia/${id}/Actions/VirtualMedia.InsertMedia`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/VirtualMedia/${id}/Actions/VirtualMedia.InsertMedia`,
           data,
         )
         .catch((error) => {
@@ -302,7 +307,7 @@ const VirtualMediaStore = {
     async unmountImage(_, id) {
       return await api
         .post(
-          `/redfish/v1/Managers/bmc/VirtualMedia/${id}/Actions/VirtualMedia.EjectMedia`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/VirtualMedia/${id}/Actions/VirtualMedia.EjectMedia`,
         )
         .catch((error) => {
           console.log('Unmount image:', error);

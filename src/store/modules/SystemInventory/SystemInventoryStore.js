@@ -1,4 +1,5 @@
 import api from '@/store/api';
+import store from '@/store';
 
 const SystemInventoryStore = {
   namespaced: true,
@@ -407,7 +408,9 @@ const SystemInventoryStore = {
     async getBasebordInfoNetworkinterfaces({ commit }) {
       const networkInterfacesInfo = [];
       return await api
-        .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
+        .get(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces`,
+        )
         .then((response) =>
           response.data.Members.map(
             (ethernetInterface) => ethernetInterface['@odata.id'],
@@ -448,7 +451,9 @@ const SystemInventoryStore = {
     async getBasebordInfoNetworkInterfacesIpv6({ commit }) {
       const ipv6AddressInfo = [];
       return await api
-        .get('/redfish/v1/Managers/bmc/EthernetInterfaces')
+        .get(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces`,
+        )
         .then((response) =>
           response.data.Members.map(
             (ethernetInterface) => ethernetInterface['@odata.id'],

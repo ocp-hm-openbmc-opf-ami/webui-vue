@@ -319,7 +319,9 @@ export default {
     onDownloadlick(val) {
       this.startLoader();
       const uri =
-        '/redfish/v1/Managers/bmc/Oem/Ami/AutoVideoSettings/VideoLogs/' +
+        '/redfish/v1/Managers/' +
+        this.$store.getters['global/managerInstance'] +
+        '/Oem/Ami/AutoVideoSettings/VideoLogs/' +
         val.file;
       this.$store
         .dispatch('videoLog/videoLogDownload', uri)
@@ -356,7 +358,10 @@ export default {
     deleteVideoLogs(uris) {
       uris.forEach((uri, index) => {
         uris[index] =
-          '/redfish/v1/Managers/bmc/Oem/Ami/AutoVideoSettings/VideoLogs/' + uri;
+          '/redfish/v1/Managers/' +
+          this.$store.getters['global/managerInstance'] +
+          '/Oem/Ami/AutoVideoSettings/VideoLogs/' +
+          uri;
       });
       this.$store
         .dispatch('videoLog/deletevideoLog', uris)

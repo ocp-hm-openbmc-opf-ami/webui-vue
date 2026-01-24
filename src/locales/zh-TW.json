@@ -211,7 +211,10 @@
         "advancedLogSettings":"@:appPageTitle.advancedLogSettings",
         "fru":"@:appPageTitle.fru",
         "deviceOwnerTransfership": "設備所有者轉讓",
-        "spdm": "@:appPageTitle.spdm"
+        "spdm": "@:appPageTitle.spdm",
+        "powerShelf": "Power Shelf",
+        "powerSupplyInventory": "@:appPageTitle.powerSupplyInventory",
+        "powerEquipment": "@:appPageTitle.powerEquipment"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -285,7 +288,9 @@
         "advancedLogSettings":"進階日誌設定",
         "fru":"現場可更換單元",
         "deviceOwnerTransfership": "設備所有者轉讓",
-        "spdm": "SPDM"
+        "spdm": "SPDM",
+        "powerSupplyInventory": "電源供應清單",
+        "powerEquipment": "電源設備"
     },
     "pageNodeManager": {
         "nmConfiguration": "網管設定",
@@ -3844,6 +3849,54 @@
             "successCertificateUpload": "已成功新增%{證書}。",
             "errorGettingLocalLog": "儲存本地日誌設定時發生錯誤。",
             "errorGettingRemoteLog": "儲存遠端日誌設定時發生錯誤。"
+        }
+    },
+    "powerShelf": {
+        "powerSupplyDevices": "電源供應裝置",
+        "powerSupplyInfo": "電源供應資訊",
+        "powerSupplyMetrics": "電源供應指標",
+        "powerEquipmentDevices": "電源設備裝置",
+        "id": "ID",
+        "name": "名稱",
+        "model": "型號",
+        "manufacturer": "製造商",
+        "partNumber": "零件編號",
+        "serialNumber": "序號",
+        "firmwareVersion": "韌體版本",
+        "powerSupplyType": "電源供應類型",
+        "powerCapacityWatts": "電源容量 (瓦特)",
+        "lineInputVoltage": "線路輸入電壓",
+        "health": "健康狀態",
+        "state": "狀態",
+        "inputVoltage": "輸入電壓 (V)",
+        "inputCurrentAmps": "輸入電流 (A)",
+        "inputPowerWatts": "輸入功率 (W)",
+        "outputVoltage": "輸出電壓 (V)",
+        "outputCurrentAmps": "輸出電流 (A)",
+        "outputPowerWatts": "輸出功率 (W)",
+        "temperatureCelsius": "溫度 (°C)",
+        "fanSpeedPercent": "風扇轉速 (%)",
+        "energykWh": "能源 (kWh)",
+        "branches": "分支",
+        "mains": "主電源",
+        "metrics": "指標",
+        "outlets": "插座",
+        "ratedCurrentAmps": "額定電流 (A)",
+        "branchCircuitType": "分支電路類型",
+        "nominalVoltage": "標稱電壓 (V)",
+        "outletType": "插座類型",
+        "powerEnabled": "電源啟用",
+        "powerWatts": "功率 (W)",
+        "humidityPercent": "濕度 (%)",
+        "tab": {
+            "powerSupply": "電源供應",
+            "metrics": "指標"
+        },
+        "toast": {
+            "errorLoadingPowerSupply": "載入電源供應資料時發生錯誤",
+            "errorLoadingMetrics": "載入電源供應指標時發生錯誤",
+            "errorLoadingPowerEquipment": "載入電源設備資料時發生錯誤",
+            "errorLoadingPowerEquipmentDetails": "載入電源設備詳細資料時發生錯誤"
         }
     },
     "fru": {

@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store';
 
 const DateTimeStore = {
   namespaced: true,
@@ -27,7 +28,11 @@ const DateTimeStore = {
   actions: {
     async getNtpData({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/NetworkProtocol')
+        .get(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/NetworkProtocol',
+        )
         .then((response) => {
           const ntpServers = response.data.NTP?.NTPServers || [];
           const isNtpProtocolEnabled =
@@ -65,7 +70,10 @@ const DateTimeStore = {
         },
       };
       return await api
-        .patch(`/redfish/v1/Managers/bmc/NetworkProtocol`, ntpData)
+        .patch(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/NetworkProtocol`,
+          ntpData,
+        )
         .then(async () => {
           let dateTimePayload = {};
           if (
@@ -92,7 +100,10 @@ const DateTimeStore = {
           return await new Promise((resolve, reject) => {
             setTimeout(() => {
               return api
-                .patch(`/redfish/v1/Managers/bmc`, dateTimePayload)
+                .patch(
+                  `/redfish/v1/Managers/${store.getters['global/managerInstance']}`,
+                  dateTimePayload,
+                )
                 .then(() => resolve())
                 .catch(() => reject());
             }, timeoutVal);

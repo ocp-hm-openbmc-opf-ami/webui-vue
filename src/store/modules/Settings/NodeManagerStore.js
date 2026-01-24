@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
+import store from '@/store';
 
 const NMConfiguration = {
   namespaced: true,
@@ -24,7 +25,9 @@ const NMConfiguration = {
   actions: {
     async getPowerStatistics({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/Oem/Intel/NodeManager')
+        .get(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/Oem/Intel/NodeManager`,
+        )
         .then((response) => {
           return api.get(response.data.Domains['@odata.id']);
         })
@@ -115,7 +118,9 @@ const NMConfiguration = {
     },
     async getNodeManagerPolicies({ commit }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/Oem/Intel/NodeManager')
+        .get(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/Oem/Intel/NodeManager`,
+        )
         .then((response) => {
           return api.get(response.data.Policies['@odata.id']);
         })
@@ -191,7 +196,10 @@ const NMConfiguration = {
         },
       };
       return await api
-        .post('/redfish/v1/Managers/bmc/Oem/Intel/NodeManager/Policies', data)
+        .post(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/Oem/Intel/NodeManager/Policies`,
+          data,
+        )
         .then(() => dispatch('getNodeManagerPolicies'))
         .then(() => i18n.t('pageNodeManager.toast.successInAddNmConfiguration'))
         .catch((error) => {
@@ -207,7 +215,7 @@ const NMConfiguration = {
       data.Capabilities.Max = domainCapabilityData.capMaximum;
       return await api
         .patch(
-          `/redfish/v1/Managers/bmc/Oem/Intel/NodeManager/Domains/${domainCapabilityData.domain}`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/Oem/Intel/NodeManager/Domains/${domainCapabilityData.domain}`,
           data,
         )
         .then(() => dispatch('getPowerStatistics'))
@@ -233,7 +241,7 @@ const NMConfiguration = {
       };
       return await api
         .patch(
-          `/redfish/v1/Managers/bmc/Oem/Intel/NodeManager/Policies/${newPolicyData.policyId}`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/Oem/Intel/NodeManager/Policies/${newPolicyData.policyId}`,
           data,
         )
         .then(() => dispatch('getNodeManagerPolicies'))
@@ -246,7 +254,7 @@ const NMConfiguration = {
     async deletePolicy({ dispatch }, policyId) {
       return await api
         .delete(
-          `/redfish/v1/Managers/bmc/Oem/Intel/NodeManager/Policies/${policyId}`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/Oem/Intel/NodeManager/Policies/${policyId}`,
         )
         .then(() => dispatch('getNodeManagerPolicies'))
         .then(() => i18n.t('pageNodeManager.toast.successDeletePolicy'))

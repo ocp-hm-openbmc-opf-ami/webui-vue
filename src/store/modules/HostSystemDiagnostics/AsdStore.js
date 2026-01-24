@@ -1,5 +1,6 @@
 import i18n from '@/i18n';
 import api from '@/store/api';
+import store from '@/store/';
 
 const AsdStore = {
   namespaced: true,
@@ -79,7 +80,11 @@ const AsdStore = {
     },
     async getAsdCertificateStatus({ dispatch, commit, state }) {
       return await api
-        .get('/redfish/v1/Managers/bmc/Certificates')
+        .get(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/Certificates',
+        )
         .then((response) => {
           if (response.data.Members[0]) {
             commit('asdServerTlLSCertificate', 1);

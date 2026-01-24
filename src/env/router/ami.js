@@ -75,6 +75,8 @@ import Bond from '@/views/Settings/Bond';
 import FruInformation from '@/views/Fru';
 import DeviceOwnerTransfership from '@/views/Settings/DeviceOwnerTransfership/DeviceOwnerTransfership.vue';
 import SPDM from '@/views/Settings/SPDM/SPDM.vue';
+import PowerSupplyInventory from '@/views/PowerShelf';
+import PowerEquipment from '@/views/PowerShelf/PowerEquipment';
 
 const roles = {
   administrator: 'Administrator',
@@ -434,7 +436,10 @@ if (process.env.VUE_APP_ONETREE_NIC_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
+if (
+  process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true' &&
+  process.env.VUE_APP_ONETREE_SYSTEM_INVENTORY_ENABLED == 'true'
+) {
   routes[2].children.push({
     path: '/system-inventory',
     name: 'system-inventory',
@@ -802,6 +807,24 @@ if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true') {
     component: SPDM,
     meta: {
       title: i18n.t('appPageTitle.spdm'),
+    },
+  });
+}
+if (process.env.VUE_APP_ONETREE_PSM_ENABLED == 'true') {
+  routes[2].children.push({
+    path: '/power-shelf/power-supply-inventory',
+    name: 'power-supply-inventory',
+    component: PowerSupplyInventory,
+    meta: {
+      title: i18n.t('appPageTitle.powerSupplyInventory'),
+    },
+  });
+  routes[2].children.push({
+    path: '/power-shelf/power-equipment',
+    name: 'power-equipment',
+    component: PowerEquipment,
+    meta: {
+      title: i18n.t('appPageTitle.powerEquipment'),
     },
   });
 }
