@@ -237,6 +237,7 @@ export default {
       multipartTargetOptions: [],
       valuedefault: '',
       targetSelectedBmcDisabled: false,
+      defaultTargetDisabled: [],
       isPFREnable:
         process.env.VUE_APP_ONETREE_INTEL_PFR_ENABLED === 'true' ? true : false,
     };
@@ -356,6 +357,15 @@ export default {
         ) {
           this.targetSelected = this.multipartTargetOptions[0].value;
         }
+
+        // Check if exactly one feature is enabled.
+        this.defaultTargetDisabled = [
+          this.activeFeatureEnabledStatus,
+          this.bmcBackupEnabledStatus,
+          this.recoveryEnabledStatus,
+        ].filter(Boolean).length;
+        this.targetSelectedBmcDisabled =
+          this.defaultTargetDisabled > 1 ? false : true;
         this.bmcActiveEnabledStatusValue =
           this.$store.getters['firmware/bmcActiveEnabledStatus'];
         // For Active and Backup Feature Enable
@@ -858,7 +868,8 @@ export default {
         this.bmcActiveBackupSelected.push(selectedOptions);
       } else {
         this.activeImage = 'fw_active';
-        this.targetSelectedBmcDisabled = false;
+        this.targetSelectedBmcDisabled =
+          this.defaultTargetDisabled > 1 ? false : true;
       }
     },
   },
