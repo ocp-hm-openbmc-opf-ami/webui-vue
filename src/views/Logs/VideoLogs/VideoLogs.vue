@@ -302,8 +302,8 @@ export default {
           autoFocusButton: 'cancel',
         })
         .then((deleteConfirmed) => {
-          this.startLoader();
           if (deleteConfirmed) {
+            this.startLoader();
             this.deleteVideoLogs([val.file]);
           }
         });
@@ -349,8 +349,8 @@ export default {
           },
         )
         .then((deleteConfirmed) => {
-          this.startLoader();
           if (deleteConfirmed) {
+            this.startLoader();
             this.deleteVideoLogs(uris);
           }
         });
