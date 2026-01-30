@@ -50,9 +50,11 @@
             <network-interface-ipv6 class="mt-2"></network-interface-ipv6
           ></b-tab>
           <b-tab :title="$t('pageSystemInventory.power.power')">
-            <b>{{ $t('pageSystemInventory.power.powerInfo') }}</b
-            ><power-control class="mt-2"></power-control
-            ><b>{{ $t('pageSystemInventory.voltage.voltageControlInfo') }}</b>
+            <template v-if="!isAMDVenicePlatform">
+              <b>{{ $t('pageSystemInventory.power.powerInfo') }}</b>
+              <power-control class="mt-2"></power-control>
+            </template>
+            <b>{{ $t('pageSystemInventory.voltage.voltageControlInfo') }}</b>
             <voltage-control class="mt-2"></voltage-control
           ></b-tab>
           <b-tab :title="$t('pageSystemInventory.thermal.thermal')">
@@ -139,6 +141,10 @@ export default {
     return {
       tabIndex: 0,
       hideTab: false,
+      isAMDVenicePlatform:
+        process.env.VUE_APP_ONETREE_MULTI_HOST_SUPPORT_ENABLED === 'true'
+          ? true
+          : false,
     };
   },
   created() {
@@ -183,10 +189,10 @@ export default {
           );
           break;
         case 4: // Power
-          apiCalls.push(
-            this.$store.dispatch('SystemStore/getPowerInfo'),
-            this.$store.dispatch('SystemStore/getVoltageInfo'),
-          );
+          if (!this.isAMDVenicePlatform) {
+            apiCalls.push(this.$store.dispatch('SystemStore/getPowerInfo'));
+          }
+          apiCalls.push(this.$store.dispatch('SystemStore/getVoltageInfo'));
           break;
         case 5: // Thermal
           apiCalls.push(

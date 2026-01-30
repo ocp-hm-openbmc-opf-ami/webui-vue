@@ -648,7 +648,11 @@ const SystemInventoryStore = {
           const promises = Members.filter((member) =>
             member['@odata.id'].includes('temperature'),
           ).map((member) => api.get(member['@odata.id']));
-          return api.all(promises);
+          return Promise.allSettled(promises).then((results) =>
+            results
+              .filter((result) => result.status === 'fulfilled')
+              .map((result) => result.value),
+          );
         })
         .then((response) => {
           const temperatureInfo = response.map(({ data }) => {
@@ -757,11 +761,22 @@ const SystemInventoryStore = {
         .catch((error) => console.log(error));
     },
     async ChassisCollection({ commit }) {
+      var chassisInstacnce = '';
+      /*AMD - VUE_APP_ONETREE_MULTI_HOST_SUPPORT_ENABLED
+        Galaxy - VUE_APP_ONETREE_GPGPU_ENABLED
+        else - Baseboard*/
+      chassisInstacnce =
+        process.env.VUE_APP_ONETREE_MULTI_HOST_SUPPORT_ENABLED == 'true'
+          ? 'HPM'
+          : process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true'
+            ? 'BMC_0'
+            : 'Baseboard';
+      console.log('chassisInstacnce', chassisInstacnce);
       return await api
         .get('/redfish/v1/Chassis')
         .then(({ data: { Members = [] } = {} }) => {
           Members.filter((member) =>
-            member['@odata.id'].includes('Baseboard'),
+            member['@odata.id'].includes(chassisInstacnce),
           ).map((member) => {
             const url = member['@odata.id'].split('/');
             const lastValue = url[url.length - 1];
