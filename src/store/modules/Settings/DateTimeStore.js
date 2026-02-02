@@ -58,16 +58,18 @@ const DateTimeStore = {
             NTPServers: dateTimeForm.ntpServersArray || [],
           }),
         },
-        Oem: {
-          Ami: {
-            EncryptedNTP: {
-              NTPStatus: dateTimeForm.secureNtpProtocolEnabled,
-              ...(dateTimeForm.secureNtpProtocolEnabled && {
-                NTPServers: dateTimeForm.secureNtpServersArray || [],
-              }),
+        ...(process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true' && {
+          Oem: {
+            Ami: {
+              EncryptedNTP: {
+                NTPStatus: dateTimeForm.secureNtpProtocolEnabled,
+                ...(dateTimeForm.secureNtpProtocolEnabled && {
+                  NTPServers: dateTimeForm.secureNtpServersArray || [],
+                }),
+              },
             },
           },
-        },
+        }),
       };
       return await api
         .patch(
