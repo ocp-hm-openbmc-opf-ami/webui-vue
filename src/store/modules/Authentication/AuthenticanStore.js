@@ -16,6 +16,7 @@ const AuthenticationStore = {
     tfaEnabled: false,
     tfaFeatureEnabled: false,
     isExternalUser: false,
+    tfaPending: localStorage.getItem('tfaPending') === 'true',
   },
   getters: {
     consoleWindow: (state) => state.consoleWindow,
@@ -31,6 +32,7 @@ const AuthenticationStore = {
     tfaFeatureEnabled: (state) => state.tfaFeatureEnabled,
     isExternalUser: (state) => state.isExternalUser,
     loginRoleId: (state) => state.loginRoleId,
+    tfaPending: (state) => state.tfaPending,
   },
   mutations: {
     authSuccess(state) {
@@ -51,9 +53,11 @@ const AuthenticationStore = {
       Cookies.remove('loginSessionSuccess');
       localStorage.removeItem('storedUsername');
       localStorage.removeItem('loginRoleId');
+      localStorage.removeItem('tfaPending');
       store.commit('global/setUtcTime', true);
       state.xsrfCookie = undefined;
       state.isAuthenticatedCookie = undefined;
+      state.tfaPending = false;
       router.push('/login').catch(() => {});
     },
     setConsoleWindow: (state, window) => (state.consoleWindow = window),
@@ -62,6 +66,14 @@ const AuthenticationStore = {
       (state.tfaFeatureEnabled = tfaFeatureEnabled),
     setIsExternalUser: (state, isExternal) =>
       (state.isExternalUser = isExternal),
+    setTfaPending: (state, pending) => {
+      state.tfaPending = pending;
+      if (pending) {
+        localStorage.setItem('tfaPending', 'true');
+      } else {
+        localStorage.removeItem('tfaPending');
+      }
+    },
   },
   actions: {
     login({ commit, state }, { username, password }) {
@@ -86,6 +98,10 @@ const AuthenticationStore = {
             } else {
               commit('setTfaEnabled', response.data.TwoFacEnableStatus);
               commit('setTfaFeatureEnabled', true);
+              // Set 2FA as pending if enabled - user must verify OTP
+              if (response.data.TwoFacEnableStatus) {
+                commit('setTfaPending', true);
+              }
             }
           }
           if (response.data.RemoteUser) {
@@ -177,7 +193,7 @@ const AuthenticationStore = {
         })
         .catch((error) => console.log(error));
     },
-    async verifyOtp(_, verifyData) {
+    async verifyOtp({ commit }, verifyData) {
       const data = {
         username: verifyData.username,
         verificationcode: verifyData.verificationcode,
@@ -185,6 +201,8 @@ const AuthenticationStore = {
       return await api
         .post('/verify_otp', data)
         .then((response) => {
+          // Clear 2FA pending state after successful verification
+          commit('setTfaPending', false);
           return response.data;
         })
         .catch((error) => {
@@ -211,8 +229,9 @@ const AuthenticationStore = {
       Cookies.remove('XSRF-TOKEN');
       Cookies.remove('IsAuthenticated');
       Cookies.remove('loginSessionSuccess');
+      localStorage.removeItem('tfaPending');
       commit('setConsoleWindow', false);
-      localStorage.clear();
+      commit('setTfaPending', false);
     },
   },
 };
