@@ -552,7 +552,7 @@ const UserManagementStore = {
         const extendedInfo = error.response.data.error['@Message.ExtendedInfo'];
         if (Array.isArray(extendedInfo) && extendedInfo.length > 0) {
           const message = extendedInfo[0].Message;
-          if (message && message.indexOf('Password') !== -1) {
+          if (message && message.indexOf('Password is not a format') !== -1) {
             const errorMessage = i18n.t(
               'pageUserManagement.toast.errorInvalidPassword',
               {
@@ -565,6 +565,15 @@ const UserManagementStore = {
           if (message && message.indexOf('Last password') !== -1) {
             const errorMessage = i18n.t(
               'pageUserManagement.toast.errorPasswordHistory',
+              {
+                username,
+              },
+            );
+            return errorMessage;
+          }
+          if (message && message.indexOf('token corruption') !== -1) {
+            const errorMessage = i18n.t(
+              'pageUserManagement.toast.errorPasswordCorruption',
               {
                 username,
               },

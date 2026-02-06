@@ -1800,6 +1800,7 @@
             "errorUpdateUser": "更新使用者'%{username}'發生錯誤。",
             "errorInvalidPassword": "無效密碼 請確認密碼規則。",
             "errorLastPasswordUsed": "請輸入新密碼。它不能與您目前的密碼相同。",
+            "errorPasswordCorruption": "密碼驗證因內部系統錯誤而失敗。",
             "errorPasswordHistory": "您提供的密碼之前已被使用，不能重複使用。請使用不同的密碼。",
             "successBatchDelete": "成功刪除 %{count} 使用者 | 成功刪除 %{count} 使用者們。",
             "successBatchDisable": "成功停用 %{count} 使用者 | 成功停用 %{count} 使用者們。",
