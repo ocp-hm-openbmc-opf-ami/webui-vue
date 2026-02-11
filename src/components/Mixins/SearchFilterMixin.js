@@ -8,6 +8,11 @@ const SearchFilterMixin = {
     onClearSearchInput() {
       this.searchFilter = null;
     },
+    customTableFilter(row, filter) {
+      if (!filter) return true;
+      const searchTerm = filter.toLowerCase();
+      return row._searchableText && row._searchableText.includes(searchTerm);
+    },
   },
 };
 

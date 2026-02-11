@@ -25,10 +25,17 @@ export default {
       type: Number,
       required: true,
     },
+    isSearchActive: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     filterActive() {
-      return this.filteredItemsCount !== this.totalNumberOfCells;
+      return (
+        this.isSearchActive ||
+        this.filteredItemsCount !== this.totalNumberOfCells
+      );
     },
   },
 };
