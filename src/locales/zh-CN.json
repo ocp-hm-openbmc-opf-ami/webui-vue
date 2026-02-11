@@ -1851,7 +1851,7 @@
               "rule6": "包含一个小写字母 (e.g. a, g)。",
               "rule7": "包含数字 (e.g. 1, 6)。",
               "rule8": "至少包含一个空格或符号（例如 $、&）。",
-                "rule9": "不能包含用户名或是反向顺序的用户名 (pam_cracklib将会检查两者) (字母没有大小写之分) (eg, username=Hello,  Password=th12(heLLo)_78 和 Password=th12(oLleH)_78是不被允许,跟密码复杂度中高一样)。"
+                "rule9": "不能包含用户名或是反向顺序的用户名 (pam_pwquality将会检查两者) (字母没有大小写之分) (eg, username=Hello,  Password=th12(heLLo)_78 和 Password=th12(oLleH)_78是不被允许,跟密码复杂度中高一样)。"
             },
             "passwordForDisabled": {
                 "passwordComplexityForDisabled": "禁用密码复杂度",

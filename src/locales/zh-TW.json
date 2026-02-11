@@ -1852,7 +1852,7 @@
               "rule6": "包含一個小寫字母 (e.g. a, g)。",
               "rule7": "包含數字 (e.g. 1, 6)。",
               "rule8": "至少包含一個空格或符號（例如 $、&）。",
-              "rule9": "不能包含使用者名稱或是倒反的使用者名稱 (pam_cracklib將會檢查兩者) (字母沒有大小寫之分) (eg, username=Hello,  Password=th12(heLLo)_78 和 Password=th12(oLleH)_78是不被允許,跟密碼複雜度中高一樣)。"
+              "rule9": "不能包含使用者名稱或是倒反的使用者名稱 (pam_pwquality將會檢查兩者) (字母沒有大小寫之分) (eg, username=Hello,  Password=th12(heLLo)_78 和 Password=th12(oLleH)_78是不被允許,跟密碼複雜度中高一樣)。"
             },
             "passwordForDisabled": {
                 "passwordComplexityForDisabled": "停用密碼複雜性",

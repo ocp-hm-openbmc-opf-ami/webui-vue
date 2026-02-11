@@ -1853,7 +1853,7 @@
                 "rule6": "Contains Lower Case (e.g. a, g).",
                 "rule7": "Contains Digit Numbers (e.g. 1, 6).",
                 "rule8": "Contains at least a Space or Symbols (e.g. $, &).",
-                "rule9": "Could not contain username or the username in reverse order (pam_cracklib will check both) (case insensitive) (eg. username=Hello, both Password=th12(heLLo)_78 and Password=th12(oLleH)_78 is not allowed)."
+                "rule9": "Could not contain username or the username in reverse order (pam_pwquality will check both) (case insensitive) (eg. username=Hello, both Password=th12(heLLo)_78 and Password=th12(oLleH)_78 is not allowed)."
             },
             "passwordForDisabled": {
                 "passwordComplexityForDisabled": "Password Complexity for disabled.",
