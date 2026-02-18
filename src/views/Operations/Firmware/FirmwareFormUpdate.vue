@@ -238,6 +238,7 @@ export default {
       valuedefault: '',
       targetSelectedBmcDisabled: false,
       defaultTargetDisabled: [],
+      targetSelectedClone: '',
       isPFREnable:
         process.env.VUE_APP_ONETREE_INTEL_PFR_ENABLED === 'true' ? true : false,
     };
@@ -280,14 +281,18 @@ export default {
       if (newVal) {
         // When multipart is enabled, set default target and generate JSON
         this.$nextTick(() => {
-          if (this.multipartTargetOptions.length > 0) {
+          if (
+            this.targetSelected === '' &&
+            this.multipartTargetOptions.length > 0
+          ) {
             this.targetSelected = this.multipartTargetOptions[0].value;
           }
           this.generateMultipartJson();
         });
       } else {
         // When multipart is disabled, reset to default state
-        this.targetSelected = this.valuedefault;
+        this.targetSelected = this.targetSelectedClone;
+        this.setTargetSelected(this.targetSelectedClone);
         this.multiPartfile = null;
         this.jsonContent = null;
         this.$emit('multiplePartJsonContent', {});
@@ -341,9 +346,11 @@ export default {
             value: val,
           };
           if (
-            !val.includes('bmc') &&
-            !val.includes('bios') &&
-            !val.includes('bkup')
+            !val.includes('bmc_active') &&
+            !val.includes('bmc_recovery') &&
+            !val.includes('bios_active') &&
+            !val.includes('bios_recovery') &&
+            !val.includes('bmc_bkup')
           ) {
             this.targetSelectedOptions.push(options);
           }
@@ -420,11 +427,14 @@ export default {
               this.recoveryImage = 'fw_recovery';
             }
             if (
-              !val.includes('bmc') &&
-              !val.includes('bios') &&
-              !val.includes('bkup')
+              !val.includes('bmc_active') &&
+              !val.includes('bmc_recovery') &&
+              !val.includes('bios_active') &&
+              !val.includes('bios_recovery') &&
+              !val.includes('bmc_bkup')
             ) {
               this.targetSelected = val;
+              this.targetSelectedClone = val;
             }
           });
           if (this.httpPushUriTargetsBusyStatus) {
