@@ -76,13 +76,17 @@
                   ></b-form-select>
                 </div>
                 <div class="emmc-upload-container">
+                  <div
+                    v-if="isUploadInProgress"
+                    class="emmc-upload-overlay"
+                  ></div>
                   <b-form-file
                     v-model="uploadFile"
                     :state="fileValidationState"
                     :placeholder="$t('pageVirtualMedia.eMMC.choosePlaceholder')"
                     :browse-text="$t('global.action.browse')"
                     accept=".iso,.img, .nrg,.ima"
-                    :disabled="uploading"
+                    :disabled="isUploadInProgress"
                     size="sm"
                     class="emmc-file-input"
                     data-test-id="emmc-input-file"
@@ -92,10 +96,12 @@
                     variant="primary"
                     size="sm"
                     class="emmc-upload-btn"
-                    :disabled="!uploadFile || uploading || isButtonDisabled"
+                    :disabled="
+                      !uploadFile || isUploadInProgress || isButtonDisabled
+                    "
                     @click="handleUploadSubmit"
                   >
-                    <template v-if="uploading">
+                    <template v-if="isUploadInProgress">
                       <b-spinner small class="mr-1"></b-spinner>
                       {{ $t('pageVirtualMedia.eMMC.uploading') }}
                     </template>
@@ -286,6 +292,12 @@ export default {
         this.tableItems.some((item) => item.isActive)
       );
     },
+    isUploadInProgress() {
+      return (
+        this.uploading ||
+        this.$store.getters['virtualMedia/localMediaUploadInProgress']
+      );
+    },
     fileValidationState() {
       if (!this.uploadFile) return null;
       if (this.fileError) return false;
@@ -299,6 +311,8 @@ export default {
     },
   },
   async mounted() {
+    this.uploading =
+      this.$store.getters['virtualMedia/localMediaUploadInProgress'];
     await this.getMemoryData();
     await this.getLocalMediaList();
   },
@@ -419,19 +433,15 @@ export default {
       this.fileError = false;
     },
     async handleUploadSubmit() {
-      if (!this.uploadFile || this.uploading) return;
+      if (!this.uploadFile || this.isUploadInProgress) return;
       this.uploading = true;
       try {
-        const formData = new FormData();
-        const fileName = this.uploadFile.name;
-        const uploadPath = `/tmp/lmedia/${fileName}`;
-        formData.append('FilePath', uploadPath);
-        formData.append('UploadFile', this.uploadFile, fileName);
-
         await this.$store.dispatch('virtualMedia/uploadLocalMedia', {
-          formData: formData,
+          file: this.uploadFile,
+          fileName: this.uploadFile.name,
         });
         this.successToast(this.$t('pageVirtualMedia.eMMC.uploadSuccess'));
+        this.$root.$emit('refresh-application');
         await Promise.all([this.getLocalMediaList(), this.getMemoryData()]);
       } catch (error) {
         console.error('Upload error:', error);
@@ -459,7 +469,8 @@ export default {
         }
         this.errorToast(this.$t('pageVirtualMedia.eMMC.uploadError'));
       } finally {
-        this.uploading = false;
+        this.uploading =
+          this.$store.getters['virtualMedia/localMediaUploadInProgress'];
         this.$bvModal.hide('modal-upload');
         this.uploadFile = null;
       }
