@@ -378,7 +378,7 @@
                     </b-col>
                   </b-row>
                 </div>
-                <b-row v-if="isSOLEnabled" class="setting-section">
+                <b-row v-if="isSolEnabled" class="setting-section">
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
@@ -815,7 +815,7 @@
                     </b-button>
                   </b-col>
                 </b-row>
-                <b-row v-if="isSOLEnabled" class="setting-section">
+                <b-row v-if="isSolEnabled" class="setting-section">
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"

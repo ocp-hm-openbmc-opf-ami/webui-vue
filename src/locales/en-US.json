@@ -1802,6 +1802,7 @@
             "errorInvalidPassword": "Invalid Password check the Password Complexity Rules.",
             "successBatchDelete": "Successfully deleted %{count} user. | Successfully deleted %{count} users.",
             "errorLastPasswordUsed": "Please enter a new Password. It cannot be the same as your current Password.",
+            "errorPasswordCorruption": "The password authentication failed due to an internal system error.",
             "errorPasswordHistory": "The password you provided has been used previously and cannot be reused. Kindly enter a different password.",
             "successBatchDisable": "Successfully disabled %{count} user. | Successfully disabled %{count} users.",
             "successBatchEnable": "Successfully enabled %{count} user. | Successfully enabled %{count} users.",
@@ -1852,7 +1853,7 @@
                 "rule6": "Contains Lower Case (e.g. a, g).",
                 "rule7": "Contains Digit Numbers (e.g. 1, 6).",
                 "rule8": "Contains at least a Space or Symbols (e.g. $, &).",
-                "rule9": "Could not contain username or the username in reverse order (pam_cracklib will check both) (case insensitive) (eg. username=Hello, both Password=th12(heLLo)_78 and Password=th12(oLleH)_78 is not allowed)."
+                "rule9": "Could not contain username or the username in reverse order (pam_pwquality will check both) (case insensitive) (eg. username=Hello, both Password=th12(heLLo)_78 and Password=th12(oLleH)_78 is not allowed)."
             },
             "passwordForDisabled": {
                 "passwordComplexityForDisabled": "Password Complexity for disabled.",

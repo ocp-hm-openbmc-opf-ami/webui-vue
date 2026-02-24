@@ -84,6 +84,7 @@ const VirtualMediaStore = {
     slot1File: null,
     emmcMemoryData: null,
     localMediaList: [],
+    localMediaUploadInProgress: false,
   },
   getters: {
     proxyDevices: (state) => state.proxyDevices,
@@ -102,6 +103,7 @@ const VirtualMediaStore = {
     },
     slot0File: (state) => state.slot0File,
     slot1File: (state) => state.slot1File,
+    localMediaUploadInProgress: (state) => state.localMediaUploadInProgress,
   },
   mutations: {
     setProxyDevicesData: (state, deviceData) =>
@@ -130,6 +132,8 @@ const VirtualMediaStore = {
     setSlot1File: (state, file) => (state.slot1File = file),
     setEmmcMemoryData: (state, data) => (state.emmcMemoryData = data),
     setLocalMediaList: (state, data) => (state.localMediaList = data),
+    setLocalMediaUploadInProgress: (state, inProgress) =>
+      (state.localMediaUploadInProgress = inProgress),
   },
   actions: {
     async getData({ commit, state }) {
@@ -351,22 +355,27 @@ const VirtualMediaStore = {
         });
     },
 
-    async uploadLocalMedia(_, { formData }) {
-      return await api
-        .post(
+    async uploadLocalMedia({ commit }, { file }) {
+      commit('setLocalMediaUploadInProgress', true);
+      try {
+        return await api.post(
           '/redfish/v1/Managers/bmc/Actions/Oem/AMIManager.LocalMediaUpload',
-          formData,
+          file,
           {
             headers: {
               Accept: 'application/json',
+              'Content-Type': 'application/octet-stream',
+              'X-File-Name': file.name,
             },
             transformRequest: [(data) => data],
           },
-        )
-        .catch((error) => {
-          console.log('Upload local media:', error);
-          throw error;
-        });
+        );
+      } catch (error) {
+        console.log('Upload local media:', error);
+        throw new Error(i18n.t('pageVirtualMedia.eMMC.uploadError'));
+      } finally {
+        commit('setLocalMediaUploadInProgress', false);
+      }
     },
 
     async startLocalMediaRedirect(

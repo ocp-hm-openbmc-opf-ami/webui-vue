@@ -1803,6 +1803,7 @@
             "errorInvalidPassword": "Ungültiges Passwort, überprüfen Sie die Passwort-Komplexitätsregeln.",
             "successBatchDelete": "%{count} Benutzer erfolgreich gelöscht. | %{count} Benutzer erfolgreich gelöscht.",
             "errorLastPasswordUsed": "Bitte geben Sie ein neues Passwort ein. Es darf nicht mit Ihrem aktuellen Passwort übereinstimmen.",
+            "errorPasswordCorruption": "Die Passwortauthentifizierung ist aufgrund eines internen Systemfehlers fehlgeschlagen.",
             "errorPasswordHistory": "Das von Ihnen angegebene Passwort wurde zuvor verwendet und kann nicht erneut verwendet werden. Bitte geben Sie ein anderes Passwort ein.",
             "successBatchDisable": "%{count} Benutzer erfolgreich deaktiviert. | %{count} Benutzer erfolgreich deaktiviert.",
             "successBatchEnable": "%{count} Benutzer erfolgreich aktiviert. | %{count} Benutzer erfolgreich aktiviert.",
@@ -1853,7 +1854,7 @@
                 "rule6": "Enthält Kleinbuchstaben (z. B. a, g).",
                 "rule7": "Enthält Ziffern (z. B. 1, 6).",
                 "rule8": "Enthält mindestens ein Leerzeichen oder Symbol (z. B. $, &).",
-                "rule9": "Darf nicht den Benutzernamen oder den Benutzernamen in umgekehrter Reihenfolge enthalten (pam_cracklib prüft beides) (Groß-/Kleinschreibung wird ignoriert) (z. B. Benutzername=Hello, sowohl Passwort=th12(heLLo)_78 als auch Passwort=th12(oLleH)_78 sind nicht erlaubt)."
+                "rule9": "Darf nicht den Benutzernamen oder den Benutzernamen in umgekehrter Reihenfolge enthalten (pam_pwquality prüft beides) (Groß-/Kleinschreibung wird ignoriert) (z. B. Benutzername=Hello, sowohl Passwort=th12(heLLo)_78 als auch Passwort=th12(oLleH)_78 sind nicht erlaubt)."
             },
             "passwordForDisabled": {
                 "passwordComplexityForDisabled": "Passwort-Komplexität für Deaktiviert.",

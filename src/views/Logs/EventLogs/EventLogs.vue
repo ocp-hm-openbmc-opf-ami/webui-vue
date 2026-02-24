@@ -13,6 +13,7 @@
           <table-cell-count
             :filtered-items-count="filteredRows"
             :total-number-of-cells="allLogs.length"
+            :is-search-active="!!searchFilter"
           ></table-cell-count>
         </div>
       </b-col>
@@ -80,16 +81,17 @@
           show-empty
           sort-by="id"
           :fields="fields"
-          :items="filteredLogs"
+          :items="searchableDisplayLogs"
           :sort-compare="onSortCompare"
           :empty-text="$t('global.table.emptyMessage')"
           :empty-filtered-text="$t('global.table.emptySearchMessage')"
           :per-page="perPage"
           :current-page="currentPage"
           :filter="searchFilter"
+          :filter-function="customTableFilter"
           :busy="isBusy"
           @filtered="onFiltered"
-          @row-selected="onRowSelected($event, filteredLogs.length)"
+          @row-selected="onRowSelected($event, searchableDisplayLogs.length)"
         >
           <!-- Checkbox column -->
           <template #head(checkbox)>
@@ -433,7 +435,7 @@ export default {
       perPage: perPage,
       limit: limit,
       searchFilter: searchFilter,
-      searchTotalFilteredRows: 0,
+      searchTotalFilteredRows: null,
       selectedRows: selectedRows,
       tableHeaderCheckboxModel: tableHeaderCheckboxModel,
       tableHeaderCheckboxIndeterminate: tableHeaderCheckboxIndeterminate,
@@ -454,7 +456,7 @@ export default {
       return this.userPrivilege !== privilegesId.admin;
     },
     filteredRows() {
-      return this.searchFilter
+      return this.searchTotalFilteredRows !== null
         ? this.searchTotalFilteredRows
         : this.filteredLogs.length;
     },
@@ -500,6 +502,24 @@ export default {
         this.filteredLogsByDate,
         this.activeFilters,
       );
+    },
+    searchableDisplayLogs() {
+      return this.filteredLogs.map((log) => ({
+        ...log,
+        _searchableText: [
+          log.id,
+          log.severity,
+          this.$options.filters.formatDate(log.date),
+          this.$options.filters.formatTime(log.date),
+          log.description,
+          log.status
+            ? this.$t('pageEventLogs.resolved')
+            : this.$t('pageEventLogs.unresolved'),
+        ]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase(),
+      }));
     },
   },
   created() {
@@ -645,7 +665,13 @@ export default {
       this.filterEndDate = toDate;
     },
     onFiltered(filteredItems) {
-      this.searchTotalFilteredRows = filteredItems.length;
+      if (this.searchFilter) {
+        this.searchTotalFilteredRows = filteredItems.length;
+      }
+    },
+    onClearSearchInput() {
+      this.searchFilter = null;
+      this.searchTotalFilteredRows = null;
     },
     // Create export file name based on date
     exportFileNameByDate(value) {

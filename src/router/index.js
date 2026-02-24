@@ -43,6 +43,21 @@ function allowRouterToNavigate(to, next, currentUserRole) {
 }
 
 router.beforeEach((to, from, next) => {
+  // Check if 2FA verification is pending
+  const tfaPending = store.getters['authentication/tfaPending'];
+  const isLoggedIn = store.getters['authentication/isLoggedIn'];
+
+  // If 2FA is pending and user is trying to access any route except login or 2FA page
+  if (
+    tfaPending &&
+    isLoggedIn &&
+    to.path !== '/two-factor-authentication' &&
+    to.path !== '/login'
+  ) {
+    // Redirect to 2FA verification page
+    return next('/two-factor-authentication');
+  }
+
   if (Cookies.get('XSRF-TOKEN') && to.name === 'login') {
     setTimeout(() => {
       Cookies.set('loginSessionSuccess', 'true');

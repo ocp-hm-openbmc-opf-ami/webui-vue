@@ -245,99 +245,109 @@
               </b-form-group>
             </b-col>
           </b-row>
-          <b-form-radio
-            v-model="form.configurationSelected"
-            value="ntpsec"
-            data-test-id="dateTime-radio-configureNTPsec"
-          >
-            {{ $t('pageDateTime.form.ntpSec') }}
-          </b-form-radio>
-          <b-row class="mt-3 ml-3">
-            <b-col sm="6" lg="4" xl="3">
-              <b-form-group
-                :label="$t('pageDateTime.form.ntpServers.server1')"
-                label-for="input-ntpsec-1"
-              >
-                <b-input-group>
-                  <b-form-input
-                    id="input-ntpsec-1"
-                    v-model="form.secureNtp.firstAddress"
-                    :state="getValidationState($v.form.secureNtp.firstAddress)"
-                    :disabled="
-                      manualOptionSelected ||
-                      ntpOptionSelected ||
-                      isButtonDisable
-                    "
-                    data-test-id="dateTime-input-ntpsecServer1"
-                    @input="$v.form.secureNtp.firstAddress.$touch()"
-                  />
-                  <b-form-invalid-feedback role="alert">
-                    <template v-if="!$v.form.secureNtp.firstAddress.required">
-                      {{ $t('global.form.fieldRequired') }}
-                    </template>
-                    <template v-if="!$v.form.secureNtp.firstAddress.pattern">
-                      {{ $t('global.form.invalidFormat') }}
-                    </template>
-                  </b-form-invalid-feedback>
-                </b-input-group>
-              </b-form-group>
-            </b-col>
-            <b-col sm="6" lg="4" xl="3">
-              <b-form-group
-                :label="$t('pageDateTime.form.ntpServers.server2')"
-                label-for="input-ntp-2"
-              >
-                <b-input-group>
-                  <b-form-input
-                    id="input-ntpsec-2"
-                    v-model="form.secureNtp.secondAddress"
-                    :state="getValidationState($v.form.secureNtp.secondAddress)"
-                    :disabled="
-                      manualOptionSelected ||
-                      ntpOptionSelected ||
-                      isButtonDisable
-                    "
-                    data-test-id="dateTime-input-ntpsecServer2"
-                    @input="$v.form.secureNtp.secondAddress.$touch()"
-                  />
-                  <b-form-invalid-feedback role="alert">
-                    <template v-if="!$v.form.secureNtp.secondAddress.required">
-                      {{ $t('global.form.fieldRequired') }}
-                    </template>
-                    <template v-if="!$v.form.secureNtp.secondAddress.pattern">
-                      {{ $t('global.form.invalidFormat') }}
-                    </template>
-                  </b-form-invalid-feedback>
-                </b-input-group>
-              </b-form-group>
-            </b-col>
-            <b-col sm="6" lg="4" xl="3">
-              <b-form-group
-                :label="$t('pageDateTime.form.ntpServers.server3')"
-                label-for="input-ntpsec-3"
-              >
-                <b-input-group>
-                  <b-form-input
-                    id="input-ntpsec-3"
-                    v-model="form.secureNtp.thirdAddress"
-                    :state="getValidationState($v.form.secureNtp.thirdAddress)"
-                    :disabled="
-                      manualOptionSelected ||
-                      ntpOptionSelected ||
-                      isButtonDisable
-                    "
-                    data-test-id="dateTime-input-ntpsecServer3"
-                    @input="$v.form.secureNtp.thirdAddress.$touch()"
-                  />
-                  <b-form-invalid-feedback role="alert">
-                    <template v-if="!$v.form.secureNtp.thirdAddress.pattern">
-                      {{ $t('global.form.invalidFormat') }}
-                    </template>
-                  </b-form-invalid-feedback>
-                </b-input-group>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <div v-if="isOnetreeRtpEnabled">
+            <b-form-radio
+              v-model="form.configurationSelected"
+              value="ntpsec"
+              data-test-id="dateTime-radio-configureNTPsec"
+            >
+              {{ $t('pageDateTime.form.ntpSec') }}
+            </b-form-radio>
+            <b-row class="mt-3 ml-3">
+              <b-col sm="6" lg="4" xl="3">
+                <b-form-group
+                  :label="$t('pageDateTime.form.ntpServers.server1')"
+                  label-for="input-ntpsec-1"
+                >
+                  <b-input-group>
+                    <b-form-input
+                      id="input-ntpsec-1"
+                      v-model="form.secureNtp.firstAddress"
+                      :state="
+                        getValidationState($v.form.secureNtp.firstAddress)
+                      "
+                      :disabled="
+                        manualOptionSelected ||
+                        ntpOptionSelected ||
+                        isButtonDisable
+                      "
+                      data-test-id="dateTime-input-ntpsecServer1"
+                      @input="$v.form.secureNtp.firstAddress.$touch()"
+                    />
+                    <b-form-invalid-feedback role="alert">
+                      <template v-if="!$v.form.secureNtp.firstAddress.required">
+                        {{ $t('global.form.fieldRequired') }}
+                      </template>
+                      <template v-if="!$v.form.secureNtp.firstAddress.pattern">
+                        {{ $t('global.form.invalidFormat') }}
+                      </template>
+                    </b-form-invalid-feedback>
+                  </b-input-group>
+                </b-form-group>
+              </b-col>
+              <b-col sm="6" lg="4" xl="3">
+                <b-form-group
+                  :label="$t('pageDateTime.form.ntpServers.server2')"
+                  label-for="input-ntp-2"
+                >
+                  <b-input-group>
+                    <b-form-input
+                      id="input-ntpsec-2"
+                      v-model="form.secureNtp.secondAddress"
+                      :state="
+                        getValidationState($v.form.secureNtp.secondAddress)
+                      "
+                      :disabled="
+                        manualOptionSelected ||
+                        ntpOptionSelected ||
+                        isButtonDisable
+                      "
+                      data-test-id="dateTime-input-ntpsecServer2"
+                      @input="$v.form.secureNtp.secondAddress.$touch()"
+                    />
+                    <b-form-invalid-feedback role="alert">
+                      <template
+                        v-if="!$v.form.secureNtp.secondAddress.required"
+                      >
+                        {{ $t('global.form.fieldRequired') }}
+                      </template>
+                      <template v-if="!$v.form.secureNtp.secondAddress.pattern">
+                        {{ $t('global.form.invalidFormat') }}
+                      </template>
+                    </b-form-invalid-feedback>
+                  </b-input-group>
+                </b-form-group>
+              </b-col>
+              <b-col sm="6" lg="4" xl="3">
+                <b-form-group
+                  :label="$t('pageDateTime.form.ntpServers.server3')"
+                  label-for="input-ntpsec-3"
+                >
+                  <b-input-group>
+                    <b-form-input
+                      id="input-ntpsec-3"
+                      v-model="form.secureNtp.thirdAddress"
+                      :state="
+                        getValidationState($v.form.secureNtp.thirdAddress)
+                      "
+                      :disabled="
+                        manualOptionSelected ||
+                        ntpOptionSelected ||
+                        isButtonDisable
+                      "
+                      data-test-id="dateTime-input-ntpsecServer3"
+                      @input="$v.form.secureNtp.thirdAddress.$touch()"
+                    />
+                    <b-form-invalid-feedback role="alert">
+                      <template v-if="!$v.form.secureNtp.thirdAddress.pattern">
+                        {{ $t('global.form.invalidFormat') }}
+                      </template>
+                    </b-form-invalid-feedback>
+                  </b-input-group>
+                </b-form-group>
+              </b-col>
+            </b-row>
+          </div>
 
           <b-button
             variant="primary"
@@ -461,10 +471,7 @@ export default {
         secureNtp: {
           firstAddress: {
             required: requiredIf(function () {
-              return (
-                this.form.configurationSelected === 'ntp' ||
-                this.form.configurationSelected === 'ntpsec'
-              );
+              return this.form.configurationSelected === 'ntpsec';
             }),
             pattern: function (val) {
               return this.ntpServerValidation(val);
@@ -512,7 +519,9 @@ export default {
       return this.form.configurationSelected === 'ntp';
     },
     secureNtpOptionSelected() {
-      return this.form.configurationSelected === 'ntpsec';
+      return (
+        this.isOnetreeRtpEnabled && this.form.configurationSelected === 'ntpsec'
+      );
     },
     manualOptionSelected() {
       return this.form.configurationSelected === 'manual';
@@ -528,6 +537,9 @@ export default {
     },
     timeZoneName() {
       return this.$store.getters['global/timeZone'];
+    },
+    isOnetreeRtpEnabled() {
+      return process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true';
     },
   },
   watch: {
@@ -589,6 +601,7 @@ export default {
       ] = [this.ntpServers[0], this.ntpServers[1], this.ntpServers[2]];
     },
     setSecureNtpValues() {
+      if (!this.isOnetreeRtpEnabled) return;
       this.form.configurationSelected = this.isSecureNtpEnabled
         ? 'ntpsec'
         : this.form.configurationSelected;

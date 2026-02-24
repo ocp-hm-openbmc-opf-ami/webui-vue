@@ -437,8 +437,8 @@ if (process.env.VUE_APP_ONETREE_NIC_ENABLED == 'true') {
   });
 }
 if (
-  process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true' &&
-  process.env.VUE_APP_ONETREE_SYSTEM_INVENTORY_ENABLED == 'true'
+  process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true' &&
+  process.env.VUE_APP_ONETREE_PSM_ENABLED !== 'true'
 ) {
   routes[2].children.push({
     path: '/system-inventory',

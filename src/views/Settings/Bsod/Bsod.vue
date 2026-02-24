@@ -1,20 +1,24 @@
 <template>
   <div>
     <page-title />
-    <b-row sm="12">
-      <b-col sm="3">
-        <span v-if="base64ImageData === 'Image File is  not Created'">
-          <b-alert show variant="warning">{{
-            $t('pageBsod.bsodImageNotAvailable')
-          }}</b-alert>
-        </span>
-        <span v-if="base64ImageData != 'Image File is  not Created'">
-          <b-alert show variant="success">{{
-            $t('pageBsod.lastBsodCaptured')
-          }}</b-alert>
-        </span>
+    <b-row class="align-items-center">
+      <b-col class="d-flex">
+        <b-alert
+          v-if="base64ImageData === 'Image File is not Created'"
+          show
+          variant="warning"
+          class="mb-0 d-inline-block"
+          >{{ $t('pageBsod.bsodImageNotAvailable') }}</b-alert
+        >
+        <b-alert
+          v-if="base64ImageData != 'Image File is not Created'"
+          show
+          variant="success"
+          class="mb-0 d-inline-block"
+          >{{ $t('pageBsod.lastBsodCaptured') }}</b-alert
+        >
       </b-col>
-      <b-col sm="8" class="text-right">
+      <b-col sm="auto" class="ml-auto">
         <b-button
           variant="primary"
           type="button"
@@ -25,7 +29,7 @@
           {{ $t('pageBsod.triggerBsodImage') }}
         </b-button>
         <b-button
-          v-if="base64ImageData != 'Image File is  not Created'"
+          v-if="base64ImageData != 'Image File is not Created'"
           class="ml-3"
           variant="primary"
           type="button"
@@ -36,7 +40,7 @@
           {{ $t('pageBsod.downloadBsodImage') }}
         </b-button>
         <b-button
-          v-if="base64ImageData != 'Image File is  not Created'"
+          v-if="base64ImageData != 'Image File is not Created'"
           class="ml-3"
           variant="primary"
           type="button"
@@ -50,7 +54,7 @@
     </b-row>
     <br />
     <img
-      v-if="base64ImageData != 'Image File is  not Created'"
+      v-if="base64ImageData != 'Image File is not Created'"
       width="1500"
       :src="'data:image/jpeg;base64,' + base64ImageData"
       alt="Download BSOD Image"
