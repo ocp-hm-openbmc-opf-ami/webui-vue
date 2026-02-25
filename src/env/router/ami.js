@@ -568,7 +568,7 @@ if (process.env.VUE_APP_ONETREE_SMTP_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_POWER_RESTORE_POLICY_ENABLED == 'true') {
+if (process.env.VUE_APP_ONETREE_NVIDIASIPACK_ENABLED == 'true') {
   routes[2].children.push({
     path: '/settings/power-restore-policy',
     name: 'power-restore-policy',
