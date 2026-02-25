@@ -50,7 +50,7 @@ const DumpsStore = {
         .then((response) => api.get(response.data.Managers['@odata.id']))
         .then((response) =>
           api.get(
-            `${response.data['@odata.id']}/Managers/${store.getters['global/managerInstance']}`,
+            `${response.data['@odata.id']}/${store.getters['global/managerInstance']}`,
           ),
         )
         .then((response) => api.get(response.data.LogServices['@odata.id']))
