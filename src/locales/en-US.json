@@ -93,7 +93,8 @@
             "success": "Success",
             "warning": "Warning",
             "informational": "Informational",
-            "unknown": "Unknown"
+            "unknown": "Unknown",
+            "good": "Good"
         },
         "table": {
             "collapseTableRow": "Collapse table row",
@@ -2794,7 +2795,7 @@
         "noRaidControllerAvailable": "There are no RAID Controller Available.",
         "physicalDeviceCount": "Physical Device Count",
         "maxPhysicalDeviceCount": "Max Physical Devices Count",
-        "logicalDevicesCount": "Logical Devices Count",
+        "logicalDevicesCount": "Logical Device Count",
         "maxLogicalDevicesCount": "Max Logical Devices Count",
         "maxPhysicalDevicesCountPerLogicalDevicesCount": "Max Physical Devices Count Per Logical Devices Count",
         "hotSparesCount": "Hot Spares Count",
@@ -2875,6 +2876,85 @@
         "supportMixedSizeWithinArrayHDD": "Support Mixed Size HDD in Array",
         "supportMixedSizeWithinArrayNVMe": "Support Mixed Size NVMe in Array",
         "supportMixedSizeWithinArraySSD": "Support Mixed Size SSD in Array",
+        "chargingStatusOptions": {
+            "unknown": "Unknown",
+            "failed": "Failed",
+            "notPresent": "Not Present",
+            "charging": "Charging",
+            "charged": "Charged"
+        },
+        "bbuStatusMsccOptions": {
+            "unknown": "Unknown",
+            "uninitialized": "Uninitialized",
+            "ready": "Ready",
+            "learningCycle": "Learning Cycle",
+            "subsystemFailed": "Subsystem Failed",
+            "aboveMaxTemperature": "Above Max Temperature",
+            "aboveWarningTemperature": "Above Warning Temperature",
+            "overVoltage": "Over Voltage",
+            "aboveMaxChargingCurrent": "Above Max Charging Current",
+            "learningCyclePassed": "Learning Cycle Passed",
+            "learningCycleFailed": "Learning Cycle Failed",
+            "supercapacitorFailed": "Supercapacitor Failed",
+            "supercapacitorNearEOL": "Supercapacitor Near End of Life",
+            "supercapacitorPassedEOL": "Supercapacitor Passed End of Life",
+            "supercapacitorMissing": "Supercapacitor Missing"
+        },
+        "bbuTypeOptions": {
+            "unknown": "Unknown",
+            "none": "None",
+            "capacitor": "Capacitor",
+            "battery": "Battery",
+            "smartBattery": "Smart Battery",
+            "zcrLegacy": "ZCR Legacy"
+        },
+        "bbuStatusBrcmOptions": {
+            "none": "None",
+            "cacheOffloadNotRead": "Cache Offload Not Read",
+            "packMissing": "Pack Missing",
+            "voltageLow": "Voltage Low",
+            "temperatureHigh": "Temperature High",
+            "chargeActive": "Charge Active",
+            "dischargeActive": "Discharge Active",
+            "learnCycleRequested": "Learn Cycle Requested",
+            "learnCycleActive": "Learn Cycle Active",
+            "learnCycleFailed": "Learn Cycle Failed",
+            "learnCycleTimeout": "Learn Cycle Timeout",
+            "i2cErrorsDetected": "I2C Errors Detected",
+            "replacePack": "Replace Pack",
+            "remainingCapacityLow": "Remaining Capacity Low",
+            "periodicLearnRequired": "Periodic Learn Required",
+            "nonTransparentLearn": "Non-Transparent Learn",
+            "noSpace": "No Space",
+            "predictiveFailure": "Predictive Failure",
+            "microcodeUpdateReqd": "Microcode Update Required",
+            "cableFailure": "Cable Failure",
+            "transparentLearn": "Transparent Learn",
+            "premiumFeatureReqd": "Premium Feature Required",
+            "cacheVaultDisabled": "Cache Vault Disabled",
+            "batteryCableFailure": "Battery Cable Failure",
+            "good": "Good"
+        },
+        "bbuEnergyPackSubTypeOptions": {
+            "none": "None",
+            "broadcomSuperCapFBU345": "Broadcom Super Capacitor FBU345",
+            "broadcomSuperCapFBU03": "Broadcom Super Capacitor FBU03",
+            "oemBattery": "OEM Battery"
+        },
+        "bbuEnergyPackTypeOptions": {
+            "noPack": "No Pack",
+            "superCap": "Super Capacitor",
+            "battery": "Battery"
+        },
+        "inconsistencyRepairPolicyOptions": {
+            "unknown": "Unknown",
+            "enable": "Enable",
+            "disable": "Disable"
+        },
+        "spareActivationModeOptions": {
+            "unknown": "Unknown",
+            "failure": "Failure"
+        },
         "modal": {
             "dropdownPropertiesBtn":"Properties",
             "dropdownManagementBtn": "Management",
@@ -3129,8 +3209,8 @@
             "ssdPowerOnHours": "Ssd Power On Hours",
             "spareType": "Spare Type",
             "state": {
-                "hotspare": "Hot Spare",
-                "unknownState": "Unknown",
+                "hotSpare": "Hot Spare",
+                "unknown": "Unknown",
                 "copyback": "Copyback",
                 "unconfiguredGood": "Unconfigured Good",
                 "unconfiguredBad": "Unconfigured Bad",
@@ -3143,8 +3223,63 @@
                 "shieldUnconfigured": "Shielded Unconfigured Drive",
                 "shieldHotSpare": "Shielded Host Spare Drive",
                 "shieldConfigured": "Shielded Configured Drive",
-                "unconfigured": "Unconfigured"
+                "unconfigured": "Unconfigured",
+                "jbod": "JBOD",
+                "raidConfigured": "RAID Configured",
+                "raidHotSpare": "RAID Hot Spare",
+                "host": "Host",
+                "advHost": "ADV Host",
+                "unusable": "Unusable",
+                "shieldMask": "Shield Mask",
+                "sanitizeMask": "Sanitize Mask",
+                "degradedMask": "Degraded Mask",
+                "formatMask": "Format Mask"
             }
+        },
+        "powerStateOptions": {
+            "active": "Active",
+            "stop": "Stop",
+            "transitioning": "Transitioning"
+        },
+        "auOperationOptions": {
+            "none": "None",
+            "rebuild": "Rebuild",
+            "patrolRead": "Patrol Read",
+            "clear": "Clear",
+            "copyback": "Copyback",
+            "erase": "Erase",
+            "sanitize": "Sanitize",
+            "nvmeReconfigure": "Nvme Reconfigure"
+        },
+        "auStatusOptions": {
+            "unknown": "Unknown",
+            "unusable": "Unusable",
+            "missing": "Missing",
+            "good": "Good",
+            "bad": "Bad",
+            "raidRebuild": "Raid Rebuild",
+            "raidCopyback": "Raid Copyback",
+            "raidOffline": "Raid Offline",
+            "raidFailed": "Raid Failed",
+            "raidOnline": "Raid Online"
+        },
+        "spareTypeOptions": {
+            "none": "None",
+            "global": "Global",
+            "dedicated": "Dedicated"
+        },
+        "usageOptions": {
+            "unknown": "Unknown",
+            "unassigned": "Unassigned",
+            "data": "Data",
+            "autoReplaceStandbySpare": "Auto Replace Standby Spare",
+            "shareableStandbySpare": "Shareable Standby Spare",
+            "shareableActiveSpare": "Shareable Active Spare",
+            "transientData": "Transient Data",
+            "luCacheData": "LU Cache Data",
+            "hba": "HBA",
+            "transientUnassigned": "Transient Unassigned",
+            "unconfigurable": "Unconfigurable"
         },
         "modal": {
             "sourcePDriveId": "Device ID",
@@ -3329,8 +3464,9 @@
             "unprotectedWriteBack": "Unprotected Write Back",
             "writeThrough": "Write Through",
             "alwaysWriteBack": "Always Write Back",
-            "writeBackWithBBU": "Write Back With BBU",
-            "writeCacheAlways": "Write Cache Always"
+            "writeBackWithBBUCorrupted": "Write Back With BBU Corrupted",
+            "writeCacheAlways": "Write Cache Always",
+            "writeBack": "Write Back"
         },
         "ioPolicyOptions": {
             "directIO": "DirectIO",
@@ -3347,13 +3483,118 @@
             "disable": "Disabled"
         },
         "diskWriteCachePolicyOptions": {
-            "Unchanged": "Unchanged",
-            "Enable": "Enable",
-            "Disable": "Disable"
+            "unchanged": "Unchanged",
+            "enable": "Enable",
+            "disable": "Disable"
         },
         "initializationOptions": {
             "initializationFullMode":"Full Initialization",
             "initializationFastMode":"Fast Initialization"
+        },
+        "statusInfoOptions": {
+            "offline": "Offline",
+            "degraded": "Degraded",
+            "rebuild": "Rebuild",
+            "optimal": "Optimal",
+            "partiallyDegraded": "Partially Degraded",
+            "unknown": "Unknown",
+            "ok": "OK",
+            "failed": "Failed",
+            "notConfigured": "Not Configured",
+            "interimRecovery": "Interim Recovery",
+            "readyForRecovery": "Ready For Recovery",
+            "recovering": "Recovering",
+            "wrongDriveReplaced": "Wrong Drive Replaced",
+            "driveImproperlyConnected": "Drive Improperly Connected",
+            "hardwareIsOverheating": "Hardware Is Overheating",
+            "hardwareHasOverheated": "Hardware Has Overheated",
+            "expanding": "Expanding",
+            "notYetAvailable": "Not Yet Available",
+            "queuedForExpansion": "Queued For Expansion",
+            "disabledFromSCSIIdConflict": "Disabled From SCSI ID Conflict",
+            "ejected": "Ejected",
+            "eraseInProgress": "Erase In Progress",
+            "unused": "Unused",
+            "readyToPerformPredictiveSpareRebuild": "Ready To Perform Predictive Spare Rebuild",
+            "rpiInProgress": "RPI In Progress",
+            "rpiQueued": "RPI Queued",
+            "encryptedVolumeWithoutKey": "Encrypted Volume Without Key",
+            "plainTextVolumeRejectedInEncryptingMode": "Plain Text Volume Rejected In Encrypting Mode",
+            "encryptionMigration": "Encryption Migration",
+            "encryptedVolumeRekeying": "Encrypted Volume Rekeying",
+            "encryptedVolumeEncryptionOff": "Encrypted Volume Encryption Off",
+            "volumeEncodeRequested": "Volume Encode Requested",
+            "encryptedVolumeRekeyRequested": "Encrypted Volume Rekey Requested",
+            "unsupportedOnThisController": "Unsupported On This Controller",
+            "hasLockedSED": "Has Locked SED",
+            "sedQualificationOngoing": "SED Qualification Ongoing",
+            "sedQualificationFailed": "SED Qualification Failed",
+            "sedVolumeDataLocked": "SED Volume Data Locked"
+        },
+        "badBlockStatusOptions": {
+            "empty": "Empty",
+            "notEmpty": "Not Empty"
+        },
+        "operationOptions": {
+            "normal": "Normal",
+            "rebuild": "Rebuild",
+            "initializeInProgress": "Initialize In Progress",
+            "consistencyCheck": "Consistency Check",
+            "none": "None",
+            "backgroundInitialization": "Background Initialization",
+            "foregroundInitialization": "Foreground Initialization",
+            "onlineCapacityExpansion": "Online Capacity Expansion",
+            "secureErase": "Secure Erase"
+        },
+        "accessPolicyStatusOptions": {
+            "ok": "Ok",
+            "preservedCache": "Preserved Cache",
+            "trialKeyExpired": "Trial Key Expired",
+            "ldOffline": "Logical Device Offline",
+            "ctrlSafeMode": "Controller Safe Mode"
+        },
+        "encryptionTypeOptions": {
+            "none": "None",
+            "sed": "SED"
+        },
+        "powerSavingPolicyOptions": {
+            "none": "None",
+            "controllerDefault": "Controller Default",
+            "t10": "T10"
+        },
+        "ldTypeOptions": {
+            "unknown": "Unknown",
+            "data": "Data",
+            "cache": "Cache",
+            "splitMirrorSetPrimary": "Split Mirror Set Primary",
+            "splitMirrorSetBackup": "Split Mirror Set Backup",
+            "splitMirrorSetBackupOrphan": "Split Mirror Set Backup Orphan"
+        },
+        "acceleratorTypeOptions": {
+            "unknown": "Unknown",
+            "none": "None",
+            "controllerCache": "Controller Cache",
+            "ioBypass": "IO Bypass",
+            "luCache": "LU Cache"
+        },
+        "cacheLineSizeOptions": {
+            "unknown": "Unknown",
+            "lineSize64kb": "Line Size 64KB",
+            "lineSize128kb": "Line Size 128KB",
+            "lineSize256kb": "Line Size 256KB"
+        },
+        "luCacheAlgorithmOptions": {
+            "unknown": "Unknown",
+            "hashingLRU": "Hashing LRU",
+            "hashingLRU2": "Hashing LRU2",
+            "regional": "Regional",
+            "simpleLRU": "Simple LRU"
+        },
+        "cachePolicyOptions": {
+            "unknown": "Unknown",
+            "readOnly": "Read Only",
+            "writeThrough": "Write Through",
+            "writeBack": "Write Back"
         },
         "table": {
             "id": "ID",

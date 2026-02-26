@@ -93,7 +93,8 @@
             "success": "成功",
             "warning": "警告",
             "informational": "資訊",
-            "unknown": "未知"
+            "unknown": "未知",
+            "good": "良好"
         },
         "table": {
             "collapseTableRow": "摺疊表格欄位",
@@ -2871,6 +2872,85 @@
         "supportMixedSizeWithinArrayHDD": "支援不同容量 HDD 組陣列",
         "supportMixedSizeWithinArrayNVMe": "支援不同容量 NVMe 組陣列",
         "supportMixedSizeWithinArraySSD": "支援不同容量 SSD 組陣列",
+        "chargingStatusOptions": {
+            "unknown": "未知",
+            "failed": "失敗",
+            "notPresent": "不存在",
+            "charging": "充電中",
+            "charged": "已充電"
+        },
+        "bbuStatusMsccOptions": {
+            "unknown": "未知",
+            "uninitialized": "未初始化",
+            "ready": "就緒",
+            "learningCycle": "學習循環",
+            "subsystemFailed": "子系統失敗",
+            "aboveMaxTemperature": "超過最高溫度",
+            "aboveWarningTemperature": "超過警告溫度",
+            "overVoltage": "過電壓",
+            "aboveMaxChargingCurrent": "超過最大充電電流",
+            "learningCyclePassed": "學習循環通過",
+            "learningCycleFailed": "學習循環失敗",
+            "supercapacitorFailed": "超級電容失敗",
+            "supercapacitorNearEOL": "超級電容接近壽命終點",
+            "supercapacitorPassedEOL": "超級電容壽命已過",
+            "supercapacitorMissing": "超級電容缺失"
+        },
+        "bbuTypeOptions": {
+            "unknown": "未知",
+            "none": "無",
+            "capacitor": "電容",
+            "battery": "電池",
+            "smartBattery": "智慧電池",
+            "zcrLegacy": "ZCR 舊版"
+        },
+        "bbuStatusBrcmOptions": {
+            "none": "無",
+            "cacheOffloadNotRead": "快取卸載未讀取",
+            "packMissing": "模組缺失",
+            "voltageLow": "電壓過低",
+            "temperatureHigh": "溫度過高",
+            "chargeActive": "充電中",
+            "dischargeActive": "放電中",
+            "learnCycleRequested": "已請求學習循環",
+            "learnCycleActive": "學習循環進行中",
+            "learnCycleFailed": "學習循環失敗",
+            "learnCycleTimeout": "學習循環逾時",
+            "i2cErrorsDetected": "偵測到 I2C 錯誤",
+            "replacePack": "更換模組",
+            "remainingCapacityLow": "剩餘容量過低",
+            "periodicLearnRequired": "需要定期學習循環",
+            "nonTransparentLearn": "非透明學習循環",
+            "noSpace": "空間不足",
+            "predictiveFailure": "預測性故障",
+            "microcodeUpdateReqd": "需要微碼更新",
+            "cableFailure": "線纜故障",
+            "transparentLearn": "透明學習循環",
+            "premiumFeatureReqd": "需要進階功能",
+            "cacheVaultDisabled": "快取保護已停用",
+            "batteryCableFailure": "電池線纜故障",
+            "good": "良好"
+        },
+        "bbuEnergyPackSubTypeOptions": {
+            "none": "無",
+            "broadcomSuperCapFBU345": "Broadcom 超級電容 FBU345",
+            "broadcomSuperCapFBU03": "Broadcom 超級電容 FBU03",
+            "oemBattery": "OEM 電池"
+        },
+        "bbuEnergyPackTypeOptions": {
+            "noPack": "無模組",
+            "superCap": "超級電容",
+            "battery": "電池"
+        },
+        "inconsistencyRepairPolicyOptions": {
+            "unknown": "未知",
+            "enable": "啟用",
+            "disable": "停用"
+        },
+        "spareActivationModeOptions": {
+            "unknown": "未知",
+            "failure": "故障"
+        },
         "modal": {
             "dropdownPropertiesBtn": "屬性",
             "dropdownManagementBtn": "管理",
@@ -3125,8 +3205,8 @@
             "ssdPowerOnHours": "SSD開機時數",
             "spareType": "備援類型",
             "state": {
-                "hotspare": "熱備援",
-                "unknownState": "未知",
+                "hotSpare": "熱備援",
+                "unknown": "未知",
                 "copyback": "回寫",  
                 "unconfiguredGood": "未配置且良好",
                 "unconfiguredBad": "未配置且不良",      
@@ -3139,8 +3219,63 @@
                 "shieldUnconfigured": "屏蔽未配置的實體設備",
                 "shieldHotSpare": "屏蔽主機備用實體設備",
                 "shieldConfigured": "屏蔽配置的實體設備",
-                "unconfigured": "未配置"
+                "unconfigured": "未配置",
+                "jbod": "JBOD",
+                "raidConfigured": "RAID 已配置",
+                "raidHotSpare": "RAID 熱備援",
+                "host": "主機",
+                "advHost": "ADV 主機",
+                "unusable": "不可用",
+                "shieldMask": "防護遮罩",
+                "sanitizeMask": "清理遮罩",
+                "degradedMask": "降級遮罩",
+                "formatMask": "格式化遮罩"
             }
+        },
+        "powerStateOptions": {
+            "active": "運行中",
+            "stop": "停止",
+            "transitioning": "轉換中"
+        },
+        "auOperationOptions": {
+            "none": "無",
+            "rebuild": "重建",
+            "patrolRead": "巡檢讀取",
+            "clear": "清除",
+            "copyback": "回寫",
+            "erase": "抹除",
+            "sanitize": "清理",
+            "nvmeReconfigure": "NVMe 重新配置"
+        },
+        "auStatusOptions": {
+            "unknown": "未知",
+            "unusable": "不可用",
+            "missing": "缺失",
+            "good": "良好",
+            "bad": "不良",
+            "raidRebuild": "RAID 重建",
+            "raidCopyback": "RAID 回寫",
+            "raidOffline": "RAID 離線",
+            "raidFailed": "RAID 失敗",
+            "raidOnline": "RAID 在線"
+        },
+        "spareTypeOptions": {
+            "none": "無",
+            "global": "全域",
+            "dedicated": "專用"
+        },
+        "usageOptions": {
+            "unknown": "未知",
+            "unassigned": "未分配",
+            "data": "資料",
+            "autoReplaceStandbySpare": "自動替換待命備援",
+            "shareableStandbySpare": "可共享待命備援",
+            "shareableActiveSpare": "可共享活動備援",
+            "transientData": "暫時資料",
+            "luCacheData": "LU 快取資料",
+            "hba": "HBA",
+            "transientUnassigned": "暫時未分配",
+            "unconfigurable": "不可配置"
         },
         "modal": {
             "sourcePDriveId": "設備 ID",
@@ -3325,8 +3460,9 @@
             "unprotectedWriteBack": "不保護回寫",
             "writeThrough": "直寫",
             "alwaysWriteBack": "總是回寫",
-            "writeBackWithBBU": "用 BBU 回寫",
-            "writeCacheAlways": "總是啟用寫入快取"
+            "writeBackWithBBUCorrupted": "在 BBU 損壞時仍回寫",
+            "writeCacheAlways": "總是啟用寫入快取",
+            "writeBack": "回寫"
         },
         "ioPolicyOptions": {
             "directIO": "直接 IO",
@@ -3343,13 +3479,118 @@
             "disable": "禁用"
         },
         "diskWriteCachePolicyOptions": {
-            "Unchanged": "不變",
-            "Enable": "啟用",
-            "Disable": "禁用"
+            "unchanged": "不變",
+            "enable": "啟用",
+            "disable": "禁用"
         },
         "initializationOptions": {
             "initializationFullMode": "完整初始化",
             "initializationFastMode": "快速初始化"
+        },
+        "statusInfoOptions": {
+            "offline": "離線",
+            "degraded": "降級",
+            "rebuild": "重建",
+            "optimal": "最佳",
+            "partiallyDegraded": "部分降級",
+            "unknown": "未知",
+            "ok": "正常",
+            "failed": "失敗",
+            "notConfigured": "未配置",
+            "interimRecovery": "臨時恢復",
+            "readyForRecovery": "準備恢復",
+            "recovering": "恢復中",
+            "wrongDriveReplaced": "更換錯誤磁碟",
+            "driveImproperlyConnected": "磁碟連接不正確",
+            "hardwareIsOverheating": "硬體過熱中",
+            "hardwareHasOverheated": "硬體已過熱",
+            "expanding": "擴展中",
+            "notYetAvailable": "尚未可用",
+            "queuedForExpansion": "排隊擴展",
+            "disabledFromSCSIIdConflict": "因 SCSI ID 衝突停用",
+            "ejected": "已退出",
+            "eraseInProgress": "抹除中",
+            "unused": "未使用",
+            "readyToPerformPredictiveSpareRebuild": "準備執行預測備援重建",
+            "rpiInProgress": "RPI 進行中",
+            "rpiQueued": "RPI 排隊中",
+            "encryptedVolumeWithoutKey": "加密磁碟無金鑰",
+            "plainTextVolumeRejectedInEncryptingMode": "明文磁碟在加密模式下被拒絕",
+            "encryptionMigration": "加密遷移",
+            "encryptedVolumeRekeying": "加密磁碟重新加密金鑰",
+            "encryptedVolumeEncryptionOff": "加密磁碟加密關閉",
+            "volumeEncodeRequested": "磁碟編碼請求",
+            "encryptedVolumeRekeyRequested": "加密磁碟重新加密金鑰請求",
+            "unsupportedOnThisController": "此控制器不支援",
+            "hasLockedSED": "有鎖定的 SED",
+            "sedQualificationOngoing": "SED 認證進行中",
+            "sedQualificationFailed": "SED 認證失敗",
+            "sedVolumeDataLocked": "SED 磁碟資料已鎖定"
+        },
+        "badBlockStatusOptions": {
+            "empty": "空",
+            "notEmpty": "非空"
+        },
+        "operationOptions": {
+            "normal": "正常",
+            "rebuild": "重建",
+            "initializeInProgress": "初始化中",
+            "consistencyCheck": "一致性檢查",
+            "none": "無",
+            "backgroundInitialization": "背景初始化",
+            "foregroundInitialization": "前景初始化",
+            "onlineCapacityExpansion": "在線容量擴展",
+            "secureErase": "安全抹除"
+        },
+        "accessPolicyStatusOptions": {
+            "ok": "正常",
+            "preservedCache": "保留快取",
+            "trialKeyExpired": "試用金鑰過期",
+            "ldOffline": "邏輯裝置離線",
+            "ctrlSafeMode": "控制器安全模式"
+        },
+        "encryptionTypeOptions": {
+            "none": "無",
+            "sed": "SED"
+        },
+        "powerSavingPolicyOptions": {
+            "none": "無",
+            "controllerDefault": "控制器預設",
+            "t10": "T10"
+        },
+        "ldTypeOptions": {
+            "unknown": "未知",
+            "data": "資料",
+            "cache": "快取",
+            "splitMirrorSetPrimary": "分割鏡像集主",
+            "splitMirrorSetBackup": "分割鏡像集備份",
+            "splitMirrorSetBackupOrphan": "分割鏡像集孤立備份"
+        },
+        "acceleratorTypeOptions": {
+            "unknown": "未知",
+            "none": "無",
+            "controllerCache": "控制器快取",
+            "ioBypass": "IO 旁路",
+            "luCache": "LU 快取"
+        },
+        "cacheLineSizeOptions": {
+            "unknown": "未知",
+            "lineSize64kb": "行大小 64KB",
+            "lineSize128kb": "行大小 128KB",
+            "lineSize256kb": "行大小 256KB"
+        },
+        "luCacheAlgorithmOptions": {
+            "unknown": "未知",
+            "hashingLRU": "雜湊 LRU",
+            "hashingLRU2": "雜湊 LRU2",
+            "regional": "區域",
+            "simpleLRU": "簡單 LRU"
+        },
+        "cachePolicyOptions": {
+            "unknown": "未知",
+            "readOnly": "唯讀",
+            "writeThrough": "直寫",
+            "writeBack": "回寫"
         },
         "table": {
             "id": "ID",

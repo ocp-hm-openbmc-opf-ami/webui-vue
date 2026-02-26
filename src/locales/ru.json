@@ -93,7 +93,8 @@
             "success": "Успешно",
             "warning": "Предупреждение",
             "informational": "Информационное",
-            "unknown": "Неизвестно"
+            "unknown": "Неизвестно",
+            "good": "Хорошо"
         },
         "table": {
             "collapseTableRow": "Свернуть строку таблицы",
@@ -2870,6 +2871,85 @@
         "supportMixedSizeWithinArrayHDD": "Поддержка разных объемов HDD в массиве",
         "supportMixedSizeWithinArrayNVMe": "Поддержка разных объемов NVMe в массиве",
         "supportMixedSizeWithinArraySSD": "Поддержка разных объемов SSD в массиве",
+        "chargingStatusOptions": {
+            "unknown": "Неизвестно",
+            "failed": "Ошибка",
+            "notPresent": "Отсутствует",
+            "charging": "Зарядка",
+            "charged": "Заряжено"
+        },
+        "bbuStatusMsccOptions": {
+            "unknown": "Неизвестно",
+            "uninitialized": "Неинициализировано",
+            "ready": "Готово",
+            "learningCycle": "Цикл обучения",
+            "subsystemFailed": "Сбой подсистемы",
+            "aboveMaxTemperature": "Выше максимальной температуры",
+            "aboveWarningTemperature": "Выше температуры предупреждения",
+            "overVoltage": "Перенапряжение",
+            "aboveMaxChargingCurrent": "Выше максимального тока зарядки",
+            "learningCyclePassed": "Цикл обучения пройден",
+            "learningCycleFailed": "Цикл обучения не пройден",
+            "supercapacitorFailed": "Сбой суперконденсатора",
+            "supercapacitorNearEOL": "Суперконденсатор близок к концу срока службы",
+            "supercapacitorPassedEOL": "Суперконденсатор превысил срок службы",
+            "supercapacitorMissing": "Суперконденсатор отсутствует"
+        },
+        "bbuTypeOptions": {
+            "unknown": "Неизвестно",
+            "none": "Нет",
+            "capacitor": "Конденсатор",
+            "battery": "Батарея",
+            "smartBattery": "Умная батарея",
+            "zcrLegacy": "ZCR устаревший"
+        },
+        "bbuStatusBrcmOptions": {
+            "none": "Нет",
+            "cacheOffloadNotRead": "Кэш выгрузки не прочитан",
+            "packMissing": "Модуль отсутствует",
+            "voltageLow": "Низкое напряжение",
+            "temperatureHigh": "Высокая температура",
+            "chargeActive": "Зарядка активна",
+            "dischargeActive": "Разряд активен",
+            "learnCycleRequested": "Запрошен цикл обучения",
+            "learnCycleActive": "Цикл обучения активен",
+            "learnCycleFailed": "Цикл обучения не удался",
+            "learnCycleTimeout": "Тайм-аут цикла обучения",
+            "i2cErrorsDetected": "Обнаружены ошибки I2C",
+            "replacePack": "Заменить модуль",
+            "remainingCapacityLow": "Оставшаяся ёмкость низкая",
+            "periodicLearnRequired": "Требуется периодический цикл обучения",
+            "nonTransparentLearn": "Непрозрачный цикл обучения",
+            "noSpace": "Нет места",
+            "predictiveFailure": "Прогнозируемый отказ",
+            "microcodeUpdateReqd": "Требуется обновление микрокода",
+            "cableFailure": "Отказ кабеля",
+            "transparentLearn": "Прозрачный цикл обучения",
+            "premiumFeatureReqd": "Требуется премиум-функция",
+            "cacheVaultDisabled": "Хранилище кэша отключено",
+            "batteryCableFailure": "Сбой кабеля батареи",
+            "good": "Хорошо"
+        },
+        "bbuEnergyPackSubTypeOptions": {
+            "none": "Нет",
+            "broadcomSuperCapFBU345": "Broadcom суперконденсатор FBU345",
+            "broadcomSuperCapFBU03": "Broadcom суперконденсатор FBU03",
+            "oemBattery": "OEM батарея"
+        },
+        "bbuEnergyPackTypeOptions": {
+            "noPack": "Нет модуля",
+            "superCap": "Суперконденсатор",
+            "battery": "Батарея"
+        },
+        "inconsistencyRepairPolicyOptions": {
+            "unknown": "Неизвестно",
+            "enable": "Включить",
+            "disable": "Отключить"
+        },
+        "spareActivationModeOptions": {
+            "unknown": "Неизвестно",
+            "failure": "Сбой"
+        },
         "modal": {
             "dropdownPropertiesBtn":"Свойства",
             "dropdownManagementBtn": "Управление",
@@ -3123,8 +3203,9 @@
             "unprotectedWriteBack": "Незащищенная обратная запись",
             "writeThrough": "Сквозная запись",
             "alwaysWriteBack": "Всегда обратная запись",
-            "writeBackWithBBU": "Обратная запись с BBU",
-            "writeCacheAlways": "Всегда использовать кэш записи"
+            "writeBackWithBBUCorrupted": "Запись обратно даже при поврежденном BBU",
+            "writeCacheAlways": "Всегда использовать кэш записи",
+            "writeBack": "Запись обратно"
         },
         "ioPolicyOptions": {
             "directIO": "Прямой ввод-вывод",
@@ -3141,13 +3222,118 @@
             "disable": "Отключено"
         },
         "diskWriteCachePolicyOptions": {
-            "Unchanged": "Без изменений",
-            "Enable": "Включено",
-            "Disable": "Отключено"
+            "unchanged": "Без изменений",
+            "enable": "Включено",
+            "disable": "Отключено"
         },
         "initializationOptions": {
             "initializationFullMode":"Полная инициализация",
             "initializationFastMode":"Быстрая инициализация"
+        },
+        "statusInfoOptions": {
+            "offline": "Офлайн",
+            "degraded": "Деградировано",
+            "rebuild": "Восстановление",
+            "optimal": "Оптимально",
+            "partiallyDegraded": "Частично деградировано",
+            "unknown": "Неизвестно",
+            "ok": "OK",
+            "failed": "Ошибка",
+            "notConfigured": "Не настроено",
+            "interimRecovery": "Временное восстановление",
+            "readyForRecovery": "Готово к восстановлению",
+            "recovering": "Восстановление",
+            "wrongDriveReplaced": "Заменен неправильный диск",
+            "driveImproperlyConnected": "Диск подключен неправильно",
+            "hardwareIsOverheating": "Оборудование перегревается",
+            "hardwareHasOverheated": "Оборудование перегрелось",
+            "expanding": "Расширение",
+            "notYetAvailable": "Еще недоступно",
+            "queuedForExpansion": "В очереди на расширение",
+            "disabledFromSCSIIdConflict": "Отключено из-за конфликта SCSI ID",
+            "ejected": "Извлечено",
+            "eraseInProgress": "Стирание выполняется",
+            "unused": "Не используется",
+            "readyToPerformPredictiveSpareRebuild": "Готово к прогнозируемому восстановлению резервного диска",
+            "rpiInProgress": "RPI выполняется",
+            "rpiQueued": "RPI в очереди",
+            "encryptedVolumeWithoutKey": "Зашифрованный том без ключа",
+            "plainTextVolumeRejectedInEncryptingMode": "Том в открытом виде отклонен в режиме шифрования",
+            "encryptionMigration": "Миграция шифрования",
+            "encryptedVolumeRekeying": "Смена ключа зашифрованного тома",
+            "encryptedVolumeEncryptionOff": "Шифрование тома выключено",
+            "volumeEncodeRequested": "Запрошено кодирование тома",
+            "encryptedVolumeRekeyRequested": "Запрошена смена ключа зашифрованного тома",
+            "unsupportedOnThisController": "Не поддерживается этим контроллером",
+            "hasLockedSED": "Есть заблокированный SED",
+            "sedQualificationOngoing": "Квалификация SED выполняется",
+            "sedQualificationFailed": "Квалификация SED не удалась",
+            "sedVolumeDataLocked": "Данные тома SED заблокированы"
+        },
+        "badBlockStatusOptions": {
+            "empty": "Пусто",
+            "notEmpty": "Не пусто"
+        },
+        "operationOptions": {
+            "normal": "Нормально",
+            "rebuild": "Восстановление",
+            "initializeInProgress": "Инициализация выполняется",
+            "consistencyCheck": "Проверка согласованности",
+            "none": "Нет",
+            "backgroundInitialization": "Фоновая инициализация",
+            "foregroundInitialization": "Передняя инициализация",
+            "onlineCapacityExpansion": "Онлайн расширение емкости",
+            "secureErase": "Безопасное стирание"
+        },
+        "accessPolicyStatusOptions": {
+            "ok": "OK",
+            "preservedCache": "Кэш сохранен",
+            "trialKeyExpired": "Пробный ключ истек",
+            "ldOffline": "Логическое устройство офлайн",
+            "ctrlSafeMode": "Контроллер в безопасном режиме"
+        },
+        "encryptionTypeOptions": {
+            "none": "Нет",
+            "sed": "SED"
+        },
+        "powerSavingPolicyOptions": {
+            "none": "Нет",
+            "controllerDefault": "По умолчанию контроллера",
+            "t10": "T10"
+        },
+        "ldTypeOptions": {
+            "unknown": "Неизвестно",
+            "data": "Данные",
+            "cache": "Кэш",
+            "splitMirrorSetPrimary": "Разделенный зеркальный набор основной",
+            "splitMirrorSetBackup": "Разделенный зеркальный набор резервный",
+            "splitMirrorSetBackupOrphan": "Разделенный зеркальный набор осиротевший резервный"
+        },
+        "acceleratorTypeOptions": {
+            "unknown": "Неизвестно",
+            "none": "Нет",
+            "controllerCache": "Кэш контроллера",
+            "ioBypass": "IO обход",
+            "luCache": "LU кэш"
+        },
+        "cacheLineSizeOptions": {
+            "unknown": "Неизвестно",
+            "lineSize64kb": "Размер строки 64KB",
+            "lineSize128kb": "Размер строки 128KB",
+            "lineSize256kb": "Размер строки 256KB"
+        },
+        "luCacheAlgorithmOptions": {
+            "unknown": "Неизвестно",
+            "hashingLRU": "Хеширование LRU",
+            "hashingLRU2": "Хеширование LRU2",
+            "regional": "Региональный",
+            "simpleLRU": "Простой LRU"
+        },
+        "cachePolicyOptions": {
+            "unknown": "Неизвестно",
+            "readOnly": "Только чтение",
+            "writeThrough": "Прямая запись",
+            "writeBack": "Обратная запись"
         },
         "table": {
             "id": "ID",
@@ -3329,8 +3515,8 @@
             "ssdPowerOnHours": "Время работы SSD (часы)",
             "spareType": "Тип резервного устройства",
             "state": {
-                "hotspare": "Горячий резерв",
-                "unknownState": "Неизвестно",
+                "hotSpare": "Горячий резерв",
+                "unknown": "Неизвестно",
                 "copyback": "Copyback",
                 "unconfiguredGood": "Ненастроенный хороший",
                 "unconfiguredBad": "Ненастроенный плохой",
@@ -3343,8 +3529,63 @@
                 "shieldUnconfigured": "Экранированный ненастроенный диск",
                 "shieldHotSpare": "Экранированный резервный диск хоста",
                 "shieldConfigured": "Экранированный настроенный диск",
-                "unconfigured": "Ненастроенный"
+                "unconfigured": "Ненастроенный",
+                "jbod": "JBOD",
+                "raidConfigured": "RAID настроен",
+                "raidHotSpare": "RAID горячий резерв",
+                "host": "Хост",
+                "advHost": "ADV‑хост",
+                "unusable": "Непригодно",
+                "shieldMask": "Маска защиты",
+                "sanitizeMask": "Маска очистки",
+                "degradedMask": "Маска деградации",
+                "formatMask": "Маска форматирования"
             }
+        },
+        "powerStateOptions": {
+            "active": "Активный",
+            "stop": "Остановить",
+            "transitioning": "Переход"
+        },
+        "auOperationOptions": {
+            "none": "Нет",
+            "rebuild": "Восстановление",
+            "patrolRead": "Патрульное чтение",
+            "clear": "Очистить",
+            "copyback": "Копирование назад",
+            "erase": "Стереть",
+            "sanitize": "Очистить",
+            "nvmeReconfigure": "NVMe перенастройка"
+        },
+        "auStatusOptions": {
+            "unknown": "Неизвестно",
+            "unusable": "Непригодно",
+            "missing": "Отсутствует",
+            "good": "Хорошо",
+            "bad": "Плохо",
+            "raidRebuild": "RAID восстановление",
+            "raidCopyback": "RAID копирование назад",
+            "raidOffline": "RAID офлайн",
+            "raidFailed": "RAID ошибка",
+            "raidOnline": "RAID онлайн"
+        },
+        "spareTypeOptions": {
+            "none": "Нет",
+            "global": "Глобальный",
+            "dedicated": "Выделенный"
+        },
+        "usageOptions": {
+            "unknown": "Неизвестно",
+            "unassigned": "Не назначено",
+            "data": "Данные",
+            "autoReplaceStandbySpare": "Автоматическая замена резервного диска",
+            "shareableStandbySpare": "Общий резервный диск",
+            "shareableActiveSpare": "Общий активный резервный диск",
+            "transientData": "Временные данные",
+            "luCacheData": "LU кэш данные",
+            "hba": "HBA",
+            "transientUnassigned": "Временно не назначено",
+            "unconfigurable": "Неконфигурируемо"
         },
         "modal": {
             "sourcePDriveId": "ID",
