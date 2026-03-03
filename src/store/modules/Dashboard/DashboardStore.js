@@ -1,5 +1,19 @@
 import api from '@/store/api';
 import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
+import RuntimeConfig from '@/utilities/RuntimeConfig';
+import router from '@/router';
+import Kvm1Console from '@/views/Operations/Kvm1/Kvm1Console';
+import Kvm1 from '@/views/Operations/Kvm1/Kvm1';
+import ServerPowerOperations1 from '@/views/Operations/ServerPowerOperations1';
+import VirtualMediaHost02 from '@/views/Operations/VirtualMediaHost02';
+import AutoVideoSettings from '@/views/Settings/AutoVideoSettings';
+import VideoLogs from '@/views/Logs/VideoLogs';
+import PageNotFound from '@/views/PageNotFound';
+
+import i18n from '@/i18n';
+
+// Cache for preventing duplicate API calls
+let fetchPromise = null;
 
 const DashboardStore = {
   namespaced: true,
@@ -180,35 +194,183 @@ const DashboardStore = {
     resetDashboardData: (state) => {
       state.dashboardData = null;
       state.isLoaded = false;
+      // Clear the fetch promise cache to allow fresh fetch
+      fetchPromise = null;
     },
   },
   actions: {
-    async fetchDashboardData({ commit }) {
-      try {
-        const response = await api.get('/redfish/v1/Oem/Ami/Dashboard');
-        commit('setDashboardData', response.data);
-
-        // Also update global store for backward compatibility
-        // Some components still depend on global bmcTime and timeZone
-        if (response.data.DateTime) {
-          const bmcTime = UtcDateTimeMixin.methods.createDateWithISOString(
-            response.data.DateTime,
-          );
-          commit('global/setBmcTime', bmcTime, { root: true });
-        }
-
-        if (response.data.TimeZoneName) {
-          commit('global/setTimeZone', response.data.TimeZoneName, {
-            root: true,
-          });
-        }
-
-        return response.data;
-      } catch (error) {
-        console.error('Failed to fetch dashboard data:', error);
-        commit('resetDashboardData');
-        throw error;
+    async fetchDashboardData({ commit, state }) {
+      // If data is already loaded, return cached data
+      if (state.isLoaded && state.dashboardData) {
+        return state.dashboardData;
       }
+
+      // If a fetch is already in progress, return the existing promise
+      if (fetchPromise) {
+        return fetchPromise;
+      }
+
+      // Create new fetch promise
+      fetchPromise = (async () => {
+        try {
+          const response = await api.get('/redfish/v1/Oem/Ami/Dashboard');
+          commit('setDashboardData', response.data);
+          // dynamic add routes based on multi-host support
+          RuntimeConfig.updateFromDashboardData(response.data);
+          if (
+            RuntimeConfig.isMultiHostEnabled() &&
+            !RuntimeConfig.areRoutesAdded()
+          ) {
+            // Remove PageNotFound route if it exists (to add it after dynamic routes)
+            // if (router.getRoutes().some((r) => r.name === 'page-not-found')) {
+            //   router.removeRoute('page-not-found');
+            // }
+
+            const existingRoutes = router.getRoutes();
+            const routeExists = (name) =>
+              existingRoutes.some((r) => r.name === name);
+
+            // Add kvm1-console route to ConsoleLayout parent
+            if (!routeExists('kvm1-console')) {
+              router.addRoute('console-layout', {
+                path: 'kvm1',
+                name: 'kvm1-console',
+                component: Kvm1Console,
+                meta: {
+                  requiresAuth: true,
+                  title: i18n.t('appPageTitle.kvm1'),
+                },
+              });
+            }
+            if (!routeExists('kvm1')) {
+              router.addRoute('app-layout', {
+                path: 'operations/kvm1',
+                name: 'kvm1',
+                component: Kvm1,
+                meta: {
+                  requiresAuth: true,
+                  title: i18n.t('appPageTitle.kvm1'),
+                },
+              });
+            }
+            if (!routeExists('server-power-operations1')) {
+              router.addRoute('app-layout', {
+                path: 'operations/server-power-operations1',
+                name: 'server-power-operations1',
+                component: ServerPowerOperations1,
+                meta: {
+                  requiresAuth: true,
+                  title: i18n.t('appPageTitle.serverPowerOperations1'),
+                },
+              });
+            }
+
+            // Add virtual-media-host-02 route
+            if (!routeExists('virtual-media-host-02')) {
+              const roles = {
+                administrator: 'Administrator',
+                operator: 'Operator',
+                readonly: 'ReadOnly',
+              };
+              router.addRoute('app-layout', {
+                path: 'operations/virtual-media-host-01',
+                name: 'virtual-media-host-02',
+                component: VirtualMediaHost02,
+                meta: {
+                  requiresAuth: true,
+                  title: i18n.t('appPageTitle.virtualMediaHost02'),
+                  exclusiveToRoles: [
+                    roles.administrator,
+                    roles.operator,
+                    roles.readonly,
+                  ],
+                },
+              });
+            }
+
+            // Add catch-all route AFTER all dynamic routes to ensure proper matching order
+            if (!routeExists('page-not-found')) {
+              router.addRoute('app-layout', {
+                path: '*',
+                name: 'page-not-found',
+                component: PageNotFound,
+                meta: {
+                  title: i18n.t('appPageTitle.pageNotFound'),
+                },
+              });
+            }
+
+            RuntimeConfig.setRoutesAdded();
+          } else {
+            const existingRoutes = router.getRoutes();
+            const routeExists = (name) =>
+              existingRoutes.some((r) => r.name === name);
+            // If multi-host is not enabled, only add video-log route
+            if (!routeExists('video-log')) {
+              router.addRoute('app-layout', {
+                path: '/logs/video-log',
+                name: 'video-log',
+                component: VideoLogs,
+                meta: {
+                  title: i18n.t('appPageTitle.videoLog'),
+                },
+              });
+            }
+
+            if (!routeExists('auto-video')) {
+              router.addRoute('app-layout', {
+                path: '/settings/auto-video',
+                name: 'auto-video',
+                component: AutoVideoSettings,
+                meta: {
+                  title: i18n.t('appPageTitle.autoVideo'),
+                },
+              });
+            }
+
+            // Add page-not-found catch-all route after page-not-found
+            if (!routeExists('page-not-found')) {
+              router.addRoute('app-layout', {
+                path: '*',
+                name: 'page-not-found',
+                component: PageNotFound,
+                meta: {
+                  title: i18n.t('appPageTitle.pageNotFound'),
+                },
+              });
+            }
+
+            // Mark routes as added even when multi-host is disabled
+            RuntimeConfig.setRoutesAdded();
+          }
+
+          // Also update global store for backward compatibility
+          // Some components still depend on global bmcTime and timeZone
+          if (response.data.DateTime) {
+            const bmcTime = UtcDateTimeMixin.methods.createDateWithISOString(
+              response.data.DateTime,
+            );
+            commit('global/setBmcTime', bmcTime, { root: true });
+          }
+
+          if (response.data.TimeZoneName) {
+            commit('global/setTimeZone', response.data.TimeZoneName, {
+              root: true,
+            });
+          }
+
+          return response.data;
+        } catch (error) {
+          console.error('Failed to fetch dashboard data:', error);
+          commit('resetDashboardData');
+          throw error;
+        } finally {
+          // Clear the promise after completion (success or failure)
+          fetchPromise = null;
+        }
+      })();
+
+      return fetchPromise;
     },
 
     async updateLocationIndicator({ commit, state }, ledState) {

@@ -168,6 +168,8 @@
         "serverPowerOperations": "@:appPageTitle.serverPowerOperations",
         "certificates": "@:appPageTitle.certificates",
         "virtualMedia": "@:appPageTitle.virtualMedia",
+        "virtualMedia-host-01": "@:appPageTitle.virtualMediaHost01",
+        "virtualMedia-host-02": "@:appPageTitle.virtualMediaHost02",
         "power": "@:appPageTitle.power",
         "keyClear": "@:appPageTitle.keyClear",
         "factoryDefault": "出厂默认值",
@@ -213,7 +215,9 @@
         "deviceOwnerTransfership": "设备所有者转让",
         "spdm": "@:appPageTitle.spdm",
         "powerSupplyInventory": "@:appPageTitle.powerSupplyInventory",
-        "powerEquipment": "@:appPageTitle.powerEquipment"
+        "powerEquipment": "@:appPageTitle.powerEquipment",
+        "kvm1": "@:appPageTitle.kvm1",
+        "serverPowerOperations1": "@:appPageTitle.serverPowerOperations1"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -247,6 +251,8 @@
         "serverPowerOperations": "服务器电源操作",
         "certificates": "证书",
         "virtualMedia": "虚拟媒体",
+        "virtualMediaHost01": "虚拟媒体",
+        "virtualMediaHost02": "虚拟媒体 1",
         "keyClear": "清除密钥",
         "factoryDefault": "出厂默认值",
         "smtpSettings": "SMTP 设置",
@@ -289,7 +295,9 @@
         "deviceOwnerTransfership": "设备所有者转让",
         "spdm": "SPDM",
         "powerSupplyInventory": "电源库存",
-        "powerEquipment": "电源设备"
+        "powerEquipment": "电源设备",
+        "kvm1": "多电脑1",
+        "serverPowerOperations1": "服务器电源操作 1"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM 配置",
@@ -1626,6 +1634,58 @@
         "viewonly" : "（仅供查看）",
         "kvmAccessRestricted": "访问被拒绝：用户没有启动 KVM 会话的权限。请尝试使用具有特权的用户帐户。"
     },
+    "pageKvm1": {
+        "openNewTab": "在新标签页打开",
+        "buttonCtrlAltDelete": "发送 Ctrl+Alt+Delete",
+        "bootSettings":{
+            "buttonBootSettings" : "启动设置",
+            "bootSettingsHdr": "启动设置",
+            "bootSettingsOverride": "引导设置覆盖",
+            "enableOneTimeBoot": "启用一次性引导",
+            "bootOptionsToolTips" : "从列表中选择启动源选项"
+        },
+        "power": "电源",
+        "powerOperation": {
+            "powerOn": "开机",
+            "gracefulShutdown": "正常关机",
+            "gracefulRestart": "正常重启",
+            "forcedShutdown": "强制关机",
+            "forcedRestart": "强制重启"
+        },
+        "powerOnTooltip": "开启服务器",
+        "gracefulShutdownTooltip": "操作系统关闭后，服务器关机。<br><br><strong>注意：</strong>如果在主机操作系统中发起电源操作后又取消，建议用户等待一段时间以反映更改，或刷新以查看更新后的电源状态。",
+        "gracefulRestartTooltip": "操作系统关闭后，服务器重启。<br><br><strong>注意：</strong>如果在主机操作系统中发起电源操作后又取消，建议用户等待一段时间以反映更改，或刷新以查看更新后的电源状态。",
+        "forcedShutdownTooltip": "服务器在未关闭操作系统的情况下关机，可能导致数据损坏。<br><br><strong>注意：</strong>如果在主机操作系统中发起电源操作后又取消，建议用户等待一段时间以反映更改，或刷新以查看更新后的电源状态。",
+        "forcedRestartTooltip": "服务器重新启动而不关闭操作系统；可能会导致数据损坏。",
+        "openSoftKeyboard": "打开虚拟键盘",
+        "languages": {
+            "english": "英语",
+            "italian": "意大利语",
+            "dutch": "荷兰语",
+            "french": "法语",
+            "german": "德语",
+            "russian": "俄语",
+            "spanish": "西班牙语"
+        },
+        "status": "状态",
+        "connected": "已连接",
+        "connecting": "连接中",
+        "disconnected": "已断连",
+        "alreadyKVMSession": "KVM 会话在此 Web 会话中已经处于活动状态，每个 Web 会话只允许打开一个 KVM 会话",
+        "alreadyKVMSessionactive": "该浏览器中已经有一个会话正在运行。",
+        "alreadyActiveSession": "KVM 主会话正在运行 请稍后再试。",
+        "alreadyInMasterSession": "主会话正在运行",
+        "maximumSessionReached": "已达到最大 KVM 会话数。",
+        "maximumkvmSessionReached": "已达到允许的最大会话数。请关闭其他会话并重试。",
+        "errorInGettingActiveStatus": "获取 KVM 活动状态发生错误!",
+        "disabledKVMService": "KVM 1 服务已禁用。请转到“安全和访问”->“策略”页面以启用 KVM 1 服务。",
+        "toast": {
+            "success" : "电源操作成功。",
+            "error" : "执行电源操作时出错。"
+        },
+        "viewonly" : "（仅供查看）",
+        "kvmAccessRestricted": "访问被拒绝：用户没有启动 KVM 会话的权限。请尝试使用具有特权的用户帐户。"
+    },
     "pageLdap": {
         "pageDescription": "配置 LDAP 设置和管理角色组",
         "roleGroups": "角色组",
@@ -2350,7 +2410,9 @@
             "kvmPortTitle": "KVM 端口确认",
             "kvmPortConfirmation": "更改配置时，已打开的 KVM 会话将受到影响，并且服务将重新启动。如果您想继续，请单击 '确定'。",
             "vmReconnectTitle": "虚拟媒体重新连接确认",
-            "vmReconnectConfirmation": "更改配置时，已打开的虚拟媒体会话将受到影响，服务也将重新启动。如果您想继续，请单击 '确定'。"
+            "vmReconnectConfirmation": "更改配置时，已打开的虚拟媒体会话将受到影响，服务也将重新启动。如果您想继续，请单击 '确定'。",
+            "kvm1PortConfirmation": "更改配置后，已打开的 KVM 1 会话将受到影响，服务也将重启。单击“确定”继续。",
+            "kvm1ortTitle": "KVM 1 端口确认"
         },
         "toast": {
             "errorIpmiPort": "设置 IPMI 端口号发生错误。",
@@ -2365,8 +2427,12 @@
             "errorVtpmEnabled": "启用 VirtualTPM 安全设置失败。",
             "errorKvmDisabled": "禁用 KVM  安全设置失败。",
             "errorKvmEnabled": "启用 KVM  安全设置失败。",
+            "errorKvmDisabledHost2": "禁用 KVM 1 安全设置时出错。",
+            "errorKvmEnabledHost2": "启用 KVM 1 安全设置时出错。",
             "errorVmcDisabled": "禁用 Virtual Media  安全设置失败。",
             "errorVmcEnabled": "启用 Virtual Media  安全设置失败。",
+            "errorVmcDisabledHost2": "禁用 Virtual Media 1 安全设置时出错。",
+            "errorVmcEnabledHost2": "启用 Virtual Media 1 安全设置时出错。",
             "errorSOLDisabled": "禁用 SOLSSH  安全设置失败。",
             "errorSOLEnabled": "启用 SOLSSH  安全设置失败。",
             "errorMultiSOLEnabled": "为 {solId} 启用 SOL SSH 失败。",
@@ -2386,10 +2452,12 @@
             "errorSNMPVersionDisabled": "禁用 SNMP 版本类型时出错。",
             "errorSNMPVersionEnabled": "启用 SNMP 版本类型时出错。",
             "errorKVMPort": "KVM 端口值设置错误。",
+            "errorKVMPortHost2": "设置 KVM 1 端口值时出错。",
             "errorWebPort": "设置 Web 端口值时出错。",
             "errorKVMSessionTimeout": "配置 KVM 会话超时时出错。",
             "errorSolBitRate": "配置 SOL 非易失性比特率时出错。",
             "errorVMReconnect": "设置虚拟媒体重新连接参数时出错。",
+            "errorVMReconnectHost2": "设置虚拟媒体 1 重新连接参数时出错。",
             "errorMaxSessionLogin": "已使用的最大会话数。",
             "successIpmiDisabled": "禁用 IPMI 安全设置成功。",
             "successIpmiEnabled": "启用 IPMI 安全设置成功。",
@@ -2401,8 +2469,12 @@
             "successVtpmEnabled": "启用 VirtualTPM 安全设置成功。",
             "successKvmDisabled": "禁用的 KVM 服务已保存成功。请等待 10-20 秒后生效。",
             "successKvmEnabled": "启用的 KVM 服务已成功保存。请等待最多 10-20 秒后生效。",
+            "successKvmDisabledHost2": "KVM 1 的 KVM 服务禁用设置已成功保存。请等待 10-20 秒，禁用过程将完成。",
+            "successKvmEnabledHost2": "KVM 1 的 KVM 服务启用设置已成功保存。请等待 10-20 秒，启用过程将完成。",
             "successVmcDisabled": "虚拟媒体服务配置已成功保存。请等待 10-20 秒后并刷新操作 -> 虚拟媒体页面以查看更改。",
             "successVmcEnabled": "虚拟媒体服务配置已成功保存。请等待 10-20 秒后并刷新操作 -> 虚拟媒体页面以查看更改。",
+            "successVmcDisabledHost2": "虚拟媒体 1 的虚拟媒体服务配置已成功保存。请等待 10-20 秒以完成禁用。",
+            "successVmcEnabledHost2": "虚拟媒体 1 的虚拟媒体服务配置已成功保存。请等待 10-20 秒以完成启用。",
             "successSOLDisabled": "禁用 SOLSSH  安全设置成功。",
             "successSOLEnabled": "启用 SOLSSH  安全设置成功。",
             "successMultiSOLEnabled": "成功为 {solId} 启用 SOL SSH。",
@@ -2419,10 +2491,12 @@
             "successSNMPVersionDisabled": "成功禁用 SNMP 版本类型。",
             "successSNMPVersionEnabled": "成功启用 SNMP 版本类型。",
             "successKVMPort": "已成功更新 KVM 端口值。",
+            "successKVMPortHost2": "已成功更新 KVM 1 的端口值。",
             "successWebPort": "已成功更新 Web 端口值。",
             "successKVMSessionTimeout": "成功配置 KVM 会话超时。",
             "successSolBitRate": "已成功配置 SOL 非易失性比特率。",
             "successVMReconnect": "已成功更新虚拟媒体重新连接参数。",
+            "successVMReconnectHost2": "已成功更新虚拟媒体 1 的重新连接参数。",
             "noPrivilegeUser": "用户的相关访问权限不足。"
         },
         "options": {
@@ -2724,6 +2798,8 @@
         "permissionRestricted": "您没有权限查看此页面。",
         "disabledVirtualMediaService": "虚拟媒体服务已禁用。进入安全和访问 -> 策略页面以启用虚拟媒体服务。",
         "mediaAlreadyRedirected": "已经在进行 %{Slot} 的媒体重定向。请导航到“安全与访问” -> “会话”页面，断开 VMEDIA 挂载类型控制台会话以停止媒体重定向。",
+        "Host0Virtual": "主机0虚拟媒体设备",
+        "Host1Virtual": "主机1虚拟媒体设备",
         "modal": {
             "password": "密码",
             "serverUri": "外部服务器 URI",
@@ -4161,6 +4237,53 @@
             "successInGettingCertificate": "成功获取证书。",
             "errorGettingComponentIntegrityData": "获取组件完整性数据时出错。",
             "errorInGettingSpdmDevicesInfo": "获取 SPDM 设备信息时出错。"
+        }
+    },
+    "pageServerPowerOperations1": {
+        "currentStatus": "当前状态",
+        "serverBootSettings": "开机设置",
+        "serverStatus": "服务器状态",
+        "immediateReboot": "立即 – 服务器在不关闭操作系统的情况下重新启动；可能会导致数据损坏。",
+        "immediateShutdown": "立即 - 服务器在不关闭操作系统的情况下关闭；可能会导致数据损坏。",
+        "lastPowerOperation": "最后一次电源操作",
+        "oneTimeBootWarning": "等待一次启动。下次启动将使用指定的一次性启动设置执行。后续启动将使用默认设置执行。",
+        "operationInProgress": "电源操作正在进行时没有可显示的选项。完成后，电源操作将显示在此处。",
+        "operations": "操作",
+        "orderlyReboot": "有序 - 操作系统关闭，然后服务器重新启动。",
+        "orderlyShutdown": "有序 - 操作系统关闭，然后服务器关闭。",
+        "powerOn": "开机",
+        "reboot": "重启",
+        "rebootServer": "服务器重启",
+        "shutDown": "关机",
+        "shutdownServer": "服务器关机",
+        "bootSettings": {
+            "bootSettingsOverride": "覆盖启动设置",
+            "enableOneTimeBoot": "启用一次性引导",
+            "tpmRequiredPolicy": "TPM 要求方针",
+            "tpmRequiredPolicyHelper": "启用以确保系统仅在 TPM 运行时启动。"
+        },
+        "modal": {
+            "confirmRebootMessage": "你确定要重启吗?",
+            "confirmRebootTitle": "服务器重新启动将会导致断电。",
+            "confirmShutdownMessage": "你确定要关机吗?",
+            "confirmShutdownTitle": "服务器关机将会导致断电。"
+        },
+        "toast": {
+            "errorSaveSettings": "保存设置失败。",
+            "successSaveSettings": "保存设置成功。"
+        }
+    },
+    "pageRebootBmc1": {
+        "lastReboot": "最后一次 BMC 重新启动",
+        "rebootBmc": "重新启动 BMC",
+        "rebootInformation": "当您重新启动 BMC 时，您的 Web 浏览器将与 BMC 失去联系几分钟。 当 BMC 重新上线后，您可能需要重新登录。",
+        "modal": {
+            "confirmMessage": "您确定要重启 BMC 吗？重启 BMC 需要几分钟时间。重启 BMC 成功完成后，请关闭当前会话并打开一个新会话。",
+            "confirmTitle": "确认 BMC 重启"
+        },
+        "toast": {
+            "errorRebootStart": "重新启动 BMC 时出错。",
+            "successRebootStart": "成功重启 BMC。"
         }
     },
     "countries": {

@@ -38,9 +38,12 @@ const BootSettingsStore = {
     },
   },
   actions: {
-    async getBootSettings({ commit }) {
+    async getBootSettings({ commit }, dualKvmEnabeled) {
+      const dualKvmUrl = dualKvmEnabeled
+        ? dualKvmEnabeled
+        : '/redfish/v1/Systems/system';
       return await api
-        .get('/redfish/v1/Systems/system')
+        .get(dualKvmUrl)
         .then(({ data: { Boot } }) => {
           commit(
             'setBootSourceOptions',

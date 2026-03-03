@@ -32,6 +32,10 @@ api.interceptors.response.use(undefined, (error) => {
     if (isConsoleWindow) {
       isConsoleWindow.isconsolewindowOpen.close();
     }
+    const isKvm1ConsoleWindow = store.getters['kvm/getIsKvm1ConsoleWindow'];
+    if (isKvm1ConsoleWindow) {
+      isKvm1ConsoleWindow.isKvm1consolewindowOpen.close();
+    }
     if (response.config.url != '/login') {
       // Commit logout to remove XSRF-TOKEN cookie
       store.commit('authentication/logout');

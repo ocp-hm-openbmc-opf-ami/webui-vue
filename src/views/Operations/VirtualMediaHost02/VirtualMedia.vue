@@ -191,7 +191,7 @@
             v-if="
               systemInfoLoaded &&
               virtualMediaServiceEnabledAccess &&
-              !isMultiHostSupportEnabled
+              isMultiHostSupportEnabled
             "
             :virtual-media-service-enabled-access="
               virtualMediaServiceEnabledAccess
@@ -221,7 +221,6 @@ import EmmcRedirection from './EmmcRedirection.vue';
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
 import { privilegesId } from '@/store/modules/GlobalStore';
 import { mapGetters } from 'vuex';
-import RuntimeConfig from '@/utilities/RuntimeConfig';
 
 export default {
   name: 'VirtualMedia',
@@ -246,31 +245,40 @@ export default {
           : false,
       licenseName: 'MEDIA',
       systemInfoLoaded: false,
-      isMultiHostSupportEnabled: RuntimeConfig.isMultiHostEnabled(),
+      isMultiHostSupportEnabled: false,
     };
   },
   computed: {
-    ...mapState('global', ['virtualMediaServiceEnabledAccess']),
-    ...mapState('virtualMedia', ['slot0File', 'slot1File']),
+    ...mapState('global', ['virtualMediaServiceEnabledAccessHost2']),
+    ...mapState('virtualMediaHost02', ['slot0File', 'slot1File']),
     ...mapGetters('global', ['userPrivilege']),
+    virtualMediaServiceEnabledAccess() {
+      return this.$store.state.global.virtualMediaServiceEnabledAccessHost2;
+    },
+    systemId() {
+      const routeName = this.$route.name;
+      if (routeName === 'virtual-media-node-01') return 'system0';
+      if (routeName === 'virtual-media-node-02') return 'system1';
+      return 'system';
+    },
     isNotAdmin() {
       return this.userPrivilege !== privilegesId.admin;
     },
     proxyDevices() {
-      return this.$store.getters['virtualMedia/proxyDevices'];
+      return this.$store.getters['virtualMediaHost02/proxyDevices'];
     },
     virtualMediaAccess() {
-      return this.$store.getters['virtualMedia/virtualMediaAccess'];
+      return this.$store.getters['virtualMediaHost02/virtualMediaAccess'];
     },
     mediaAlreadyRedirected() {
-      return this.$store.getters['virtualMedia/mediaAlreadyRedirected'];
+      return this.$store.getters['virtualMediaHost02/mediaAlreadyRedirected'];
     },
     legacyDevices() {
-      return this.$store.getters['virtualMedia/legacyDevices'];
+      return this.$store.getters['virtualMediaHost02/legacyDevices'];
     },
     vmStarted: {
       get() {
-        return this.$store.getters['virtualMedia/vmStarted'];
+        return this.$store.getters['virtualMediaHost02/vmStarted'];
       },
       set(newValue) {
         return newValue;
@@ -278,7 +286,7 @@ export default {
     },
     slot0Started: {
       get() {
-        return this.$store.getters['virtualMedia/slot0Started'];
+        return this.$store.getters['virtualMediaHost02/slot0Started'];
       },
       set(newValue) {
         return newValue;
@@ -286,7 +294,7 @@ export default {
     },
     slot1Started: {
       get() {
-        return this.$store.getters['virtualMedia/slot1Started'];
+        return this.$store.getters['virtualMediaHost02/slot1Started'];
       },
       set(newValue) {
         return newValue;
@@ -294,34 +302,50 @@ export default {
     },
     legacyStarted: {
       get() {
-        return this.$store.getters['virtualMedia/legacyStarted'];
+        return this.$store.getters['virtualMediaHost02/legacyStarted'];
       },
       set(newValue) {
         return newValue;
       },
     },
   },
+  watch: {
+    '$route.name': {
+      handler(newRoute, oldRoute) {
+        // Re-fetch data when switching between different virtual media nodes
+        if (newRoute !== oldRoute && this.systemInfoLoaded) {
+          // Fetch data for the new node without stopping existing connections
+          this.getVirtualMedia();
+        }
+      },
+    },
+  },
   created() {
-    this.$store.dispatch('global/getSystemInfo').then(() => {
-      this.systemInfoLoaded = true;
-      this.getVirtualMedia();
-      this.$root.$on('stop-vmedia', () => {
-        this.proxyDevices.forEach((dev) => this.stopVM(dev));
+    this.$store
+      .dispatch('global/getSystemInfo', '/redfish/v1/Systems/system1')
+      .then(() => {
+        this.systemInfoLoaded = true;
+        this.getVirtualMedia();
+        this.$root.$on('stop-vmedia', () => {
+          this.proxyDevices.forEach((dev) => this.stopVM(dev));
+        });
       });
-    });
+  },
+  beforeDestroy() {
+    // Clean up event listener
+    // this.$root.$off('stop-vmedia');
+    // Keep virtual media connections alive when navigating between routes
+    // Connections will remain active until manually stopped by the user
   },
   methods: {
-    ...mapMutations('virtualMedia', ['setSlot0File', 'setSlot1File']),
+    ...mapMutations('virtualMediaHost02', ['setSlot0File', 'setSlot1File']),
     getVirtualMedia() {
       this.startLoader();
       this.$store
-        .dispatch('virtualMedia/getData')
+        .dispatch('virtualMediaHost02/getData', this.systemId)
         .then(() => {
-          this.proxyDevices.forEach((dev) => {
-            if (dev.nbd && !dev.isActive) {
-              this.stopVM(dev);
-            }
-          });
+          // Data fetched successfully - connections remain active
+          // Users must manually stop connections using the Stop button
         })
         .catch(({ message }) => {
           if (this.virtualMediaServiceEnabledAccess) {
@@ -346,21 +370,21 @@ export default {
       device.nbd.socketStarted = () => {
         this.successToast(this.$t('pageVirtualMedia.toast.serverRunning'));
         if (device.id == 'Slot_0') {
-          this.$store.state.virtualMedia.slot0Started = true;
-          this.$store.state.virtualMedia.slot0Nbd = device.nbd;
+          this.$store.state.virtualMediaHost02.slot0Started = true;
+          this.$store.state.virtualMediaHost02.slot0Nbd = device.nbd;
         } else if (device.id == 'Slot_1') {
-          this.$store.state.virtualMedia.slot1Started = true;
-          this.$store.state.virtualMedia.slot1Nbd = device.nbd;
+          this.$store.state.virtualMediaHost02.slot1Started = true;
+          this.$store.state.virtualMediaHost02.slot1Nbd = device.nbd;
         }
       };
       device.nbd.errorReadingFile = () => {
         this.errorToast(this.$t('pageVirtualMedia.toast.errorReadingFile'));
         if (device.id == 'Slot_0') {
-          this.$store.state.virtualMedia.slot0Started = false;
-          this.$store.state.virtualMedia.slot0Nbd = null;
+          this.$store.state.virtualMediaHost02.slot0Started = false;
+          this.$store.state.virtualMediaHost02.slot0Nbd = null;
         } else if (device.id == 'Slot_1') {
-          this.$store.state.virtualMedia.slot1Started = false;
-          this.$store.state.virtualMedia.slot1Nbd = null;
+          this.$store.state.virtualMediaHost02.slot1Started = false;
+          this.$store.state.virtualMediaHost02.slot1Nbd = null;
         }
       };
       device.nbd.socketClosed = (code) => {
@@ -373,18 +397,18 @@ export default {
             this.$t('pageVirtualMedia.toast.serverClosedWithErrors'),
           );
         if (device.id == 'Slot_0') {
-          this.$store.state.virtualMedia.slot0Started = false;
-          this.$store.state.virtualMedia.slot0Nbd = null;
+          this.$store.state.virtualMediaHost02.slot0Started = false;
+          this.$store.state.virtualMediaHost02.slot0Nbd = null;
         } else if (device.id == 'Slot_1') {
-          this.$store.state.virtualMedia.slot1Started = false;
-          this.$store.state.virtualMedia.slot1Nbd = null;
+          this.$store.state.virtualMediaHost02.slot1Started = false;
+          this.$store.state.virtualMediaHost02.slot1Nbd = null;
         }
         this.getVirtualMedia();
         device.file = null;
         device.isActive = false;
-        this.$store.state.virtualMedia.vmStarted = --this.vmStarted;
+        this.$store.state.virtualMediaHost02.vmStarted = --this.vmStarted;
       };
-      this.$store.state.virtualMedia.vmStarted = ++this.vmStarted;
+      this.$store.state.virtualMediaHost02.vmStarted = ++this.vmStarted;
       device.nbd.start();
       device.isActive = true;
     },
@@ -432,12 +456,13 @@ export default {
       data.Inserted = true;
       this.startLoader();
       this.$store
-        .dispatch('virtualMedia/mountImage', {
+        .dispatch('virtualMediaHost02/mountImage', {
           id: connectionData.id,
           data: data,
         })
         .then(() => {
-          this.$store.state.virtualMedia.legacyStarted = ++this.legacyStarted;
+          this.$store.state.virtualMediaHost02.legacyStarted = ++this
+            .legacyStarted;
           this.successToast(
             this.$t('pageVirtualMedia.toast.serverConnectionEstablished'),
           );
@@ -454,9 +479,10 @@ export default {
     },
     stopLegacy(connectionData) {
       this.$store
-        .dispatch('virtualMedia/unmountImage', connectionData.id)
+        .dispatch('virtualMediaHost02/unmountImage', connectionData.id)
         .then(() => {
-          this.$store.state.virtualMedia.legacyStarted = --this.legacyStarted;
+          this.$store.state.virtualMediaHost02.legacyStarted = --this
+            .legacyStarted;
           this.successToast(
             this.$t('pageVirtualMedia.toast.serverClosedSuccessfully'),
           );
@@ -494,7 +520,7 @@ export default {
         connectionData.transferProtocolType;
     },
     configureConnection(connectionData) {
-      const storeData = this.$store.getters['virtualMedia/slotData'];
+      const storeData = this.$store.getters['virtualMediaHost02/slotData'];
       const matchedElement = storeData.find(
         (element) => element.data.id === connectionData.id,
       );
@@ -508,7 +534,7 @@ export default {
       }
       connectionData.password = '';
       this.modalConfigureConnection = connectionData;
-      this.$bvModal.show('configure-connection');
+      this.$bvModal.show('configure-connection-host02');
     },
     concatId(val) {
       return val.split(' ').join('_').toLowerCase();

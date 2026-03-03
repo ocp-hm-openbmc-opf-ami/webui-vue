@@ -63,7 +63,7 @@ const parseVirtualMediaUrl = (image, backupImageURL) => {
   };
 };
 
-const VirtualMediaStore = {
+const VirtualMediaStoreHost02 = {
   namespaced: true,
   state: {
     proxyDevices: [],
@@ -83,7 +83,6 @@ const VirtualMediaStore = {
     slot1File: null,
     emmcMemoryData: null,
     localMediaList: [],
-    localMediaUploadInProgress: false,
   },
   getters: {
     proxyDevices: (state) => state.proxyDevices,
@@ -102,7 +101,6 @@ const VirtualMediaStore = {
     },
     slot0File: (state) => state.slot0File,
     slot1File: (state) => state.slot1File,
-    localMediaUploadInProgress: (state) => state.localMediaUploadInProgress,
   },
   mutations: {
     setProxyDevicesData: (state, deviceData) =>
@@ -131,8 +129,6 @@ const VirtualMediaStore = {
     setSlot1File: (state, file) => (state.slot1File = file),
     setEmmcMemoryData: (state, data) => (state.emmcMemoryData = data),
     setLocalMediaList: (state, data) => (state.localMediaList = data),
-    setLocalMediaUploadInProgress: (state, inProgress) =>
-      (state.localMediaUploadInProgress = inProgress),
   },
   actions: {
     async getData({ commit, state }) {
@@ -153,7 +149,7 @@ const VirtualMediaStore = {
       }
       commit('setMediaAlreadyRedirected', []);
       return await api
-        .get('/redfish/v1/Systems/system/VirtualMedia')
+        .get('/redfish/v1/Systems/system1/VirtualMedia')
         .then((response) =>
           response.data.Members.map(
             (virtualMedia) => virtualMedia['@odata.id'],
@@ -275,7 +271,7 @@ const VirtualMediaStore = {
     async mountImage(_, { id, data }) {
       return await api
         .post(
-          `/redfish/v1/Systems/system/VirtualMedia/${id}/Actions/VirtualMedia.InsertMedia`,
+          `/redfish/v1/Systems/system1/VirtualMedia/${id}/Actions/VirtualMedia.InsertMedia`,
           data,
         )
         .catch((error) => {
@@ -306,7 +302,7 @@ const VirtualMediaStore = {
     async unmountImage(_, id) {
       return await api
         .post(
-          `/redfish/v1/Systems/system/VirtualMedia/${id}/Actions/VirtualMedia.EjectMedia`,
+          `/redfish/v1/Systems/system1/VirtualMedia/${id}/Actions/VirtualMedia.EjectMedia`,
         )
         .catch((error) => {
           console.log('Unmount image:', error);
@@ -316,7 +312,7 @@ const VirtualMediaStore = {
 
     async getEmmcMemoryData({ commit }) {
       try {
-        const response = await api.get('/redfish/v1/Systems/system');
+        const response = await api.get('/redfish/v1/Systems/system1');
         if (!response.data) {
           throw new Error(i18n.t('pageVirtualMedia.toast.apiCallFailed'));
         }
@@ -343,34 +339,29 @@ const VirtualMediaStore = {
 
     async getLocalMediaList({ commit }) {
       return await api
-        .get('/redfish/v1/Systems/system/Oem/Ami/LocalMedia')
+        .get('/redfish/v1/Systems/system1/Oem/Ami/LocalMedia')
         .then((response) => {
           commit('setLocalMediaList', response.data);
           return response.data;
         });
     },
 
-    async uploadLocalMedia({ commit }, { file }) {
-      commit('setLocalMediaUploadInProgress', true);
-      try {
-        return await api.post(
-          '/redfish/v1/Systems/system/Actions/Oem/AMIManager.LocalMediaUpload',
-          file,
+    async uploadLocalMedia(_, { formData }) {
+      return await api
+        .post(
+          '/redfish/v1/Systems/system1/Actions/Oem/AMIManager.LocalMediaUpload',
+          formData,
           {
             headers: {
               Accept: 'application/json',
-              'Content-Type': 'application/octet-stream',
-              'X-File-Name': file.name,
             },
             transformRequest: [(data) => data],
           },
-        );
-      } catch (error) {
-        console.log('Upload local media:', error);
-        throw new Error(i18n.t('pageVirtualMedia.eMMC.uploadError'));
-      } finally {
-        commit('setLocalMediaUploadInProgress', false);
-      }
+        )
+        .catch((error) => {
+          console.log('Upload local media:', error);
+          throw error;
+        });
     },
 
     async startLocalMediaRedirect(
@@ -379,7 +370,7 @@ const VirtualMediaStore = {
     ) {
       return await api
         .post(
-          '/redfish/v1/Systems/system/Actions/Oem/AMIManager.LocalMediaRedirect',
+          '/redfish/v1/Systems/system1/Actions/Oem/AMIManager.LocalMediaRedirect',
           {
             LocalMedia: localMedia,
             WriteProtected: writeProtected,
@@ -400,7 +391,7 @@ const VirtualMediaStore = {
     async stopLocalMediaRedirect({ dispatch }) {
       return await api
         .post(
-          '/redfish/v1/Systems/system/Actions/Oem/AMIManager.LocalMediaStopRedirect',
+          '/redfish/v1/Systems/system1/Actions/Oem/AMIManager.LocalMediaStopRedirect',
         )
         .then(async () => {
           await dispatch('getData');
@@ -423,7 +414,7 @@ const VirtualMediaStore = {
 
     async getImageDetails(_, imageName) {
       return await api
-        .get(`/redfish/v1/Systems/system/Oem/Ami/LocalMedia/${imageName}`)
+        .get(`/redfish/v1/Systems/system1/Oem/Ami/LocalMedia/${imageName}`)
         .then((response) => response.data)
         .catch((error) => {
           console.log('Get image details:', error);
@@ -435,4 +426,4 @@ const VirtualMediaStore = {
   },
 };
 
-export default VirtualMediaStore;
+export default VirtualMediaStoreHost02;

@@ -4,12 +4,12 @@
     <b-row class="mb-4">
       <b-col md="8" xl="6">
         <page-section
-          :section-title="$t('pageServerPowerOperations.currentStatus')"
+          :section-title="$t('pageServerPowerOperations1.currentStatus')"
         >
           <b-row>
             <b-col>
               <dl>
-                <dt>{{ $t('pageServerPowerOperations.serverStatus') }}</dt>
+                <dt>{{ $t('pageServerPowerOperations1.serverStatus') }}</dt>
                 <dd
                   v-if="serverStatus === 'on'"
                   data-test-id="powerServerOps-text-hostStatus"
@@ -38,7 +38,7 @@
             <b-col>
               <dl>
                 <dt>
-                  {{ $t('pageServerPowerOperations.lastPowerOperation') }}
+                  {{ $t('pageServerPowerOperations1.lastPowerOperation') }}
                 </dt>
                 <dd
                   v-if="lastPowerOperationTime"
@@ -55,23 +55,23 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col v-if="hasBootSourceOptions" sm="8" md="6" xl="4">
+      <!-- <b-col v-if="hasBootSourceOptions" sm="8" md="6" xl="4">
         <page-section
-          :section-title="$t('pageServerPowerOperations.serverBootSettings')"
+          :section-title="$t('pageServerPowerOperations1.serverBootSettings')"
         >
           <boot-settings />
         </page-section>
-      </b-col>
+      </b-col> -->
       <b-col sm="8" md="6" xl="7">
         <page-section
-          :section-title="$t('pageServerPowerOperations.operations')"
+          :section-title="$t('pageServerPowerOperations1.operations')"
         >
           <alert :show="oneTimeBootEnabled" variant="warning">
-            {{ $t('pageServerPowerOperations.oneTimeBootWarning') }}
+            {{ $t('pageServerPowerOperations1.oneTimeBootWarning') }}
           </alert>
           <template v-if="isOperationInProgress">
             <alert variant="info">
-              {{ $t('pageServerPowerOperations.operationInProgress') }}
+              {{ $t('pageServerPowerOperations1.operationInProgress') }}
             </alert>
           </template>
           <template v-else-if="serverStatus === 'off'">
@@ -82,14 +82,14 @@
               @click="powerOn"
             >
               <icon-power />
-              {{ $t('pageServerPowerOperations.powerOn') }}
+              {{ $t('pageServerPowerOperations1.powerOn') }}
             </b-button>
           </template>
           <template v-else>
             <!-- Reboot server options -->
             <b-form novalidate class="mb-5" @submit.prevent="rebootServer">
               <b-form-group
-                :label="$t('pageServerPowerOperations.rebootServer')"
+                :label="$t('pageServerPowerOperations1.rebootServer')"
               >
                 <b-form-radio
                   v-model="form.rebootOption"
@@ -97,7 +97,7 @@
                   data-test-id="serverPowerOperations-radio-rebootOrderly"
                   value="orderly"
                 >
-                  {{ $t('pageServerPowerOperations.orderlyReboot') }}
+                  {{ $t('pageServerPowerOperations1.orderlyReboot') }}
                 </b-form-radio>
                 <b-form-radio
                   v-model="form.rebootOption"
@@ -105,7 +105,7 @@
                   data-test-id="serverPowerOperations-radio-rebootImmediate"
                   value="immediate"
                 >
-                  {{ $t('pageServerPowerOperations.immediateReboot') }}
+                  {{ $t('pageServerPowerOperations1.immediateReboot') }}
                 </b-form-radio>
               </b-form-group>
               <b-button
@@ -115,13 +115,13 @@
                 :disabled="globalPrivilege !== 'Administrator'"
               >
                 <icon-reset />
-                {{ $t('pageServerPowerOperations.reboot') }}
+                {{ $t('pageServerPowerOperations1.reboot') }}
               </b-button>
             </b-form>
             <!-- Shutdown server options -->
             <b-form novalidate @submit.prevent="shutdownServer">
               <b-form-group
-                :label="$t('pageServerPowerOperations.shutdownServer')"
+                :label="$t('pageServerPowerOperations1.shutdownServer')"
               >
                 <b-form-radio
                   v-model="form.shutdownOption"
@@ -129,7 +129,7 @@
                   data-test-id="serverPowerOperations-radio-shutdownOrderly"
                   value="orderly"
                 >
-                  {{ $t('pageServerPowerOperations.orderlyShutdown') }}
+                  {{ $t('pageServerPowerOperations1.orderlyShutdown') }}
                 </b-form-radio>
                 <b-form-radio
                   v-model="form.shutdownOption"
@@ -137,7 +137,7 @@
                   data-test-id="serverPowerOperations-radio-shutdownImmediate"
                   value="immediate"
                 >
-                  {{ $t('pageServerPowerOperations.immediateShutdown') }}
+                  {{ $t('pageServerPowerOperations1.immediateShutdown') }}
                 </b-form-radio>
               </b-form-group>
               <b-button
@@ -147,7 +147,7 @@
                 :disabled="globalPrivilege !== 'Administrator'"
               >
                 <icon-power />
-                {{ $t('pageServerPowerOperations.shutDown') }}
+                {{ $t('pageServerPowerOperations1.shutDown') }}
               </b-button>
             </b-form>
           </template>
@@ -161,19 +161,18 @@
 import PageTitle from '@/components/Global/PageTitle';
 import PageSection from '@/components/Global/PageSection';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
-import BootSettings from './BootSettings';
+// import BootSettings from './BootSettings1';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import Alert from '@/components/Global/Alert';
 import IconPower from '@carbon/icons-vue/es/power/20';
 import IconReset from '@carbon/icons-vue/es/reset/20';
-import RuntimeConfig from '@/utilities/RuntimeConfig';
 
 export default {
   name: 'ServerPowerOperations',
   components: {
     PageTitle,
     PageSection,
-    BootSettings,
+    // BootSettings,
     Alert,
     IconPower,
     IconReset,
@@ -190,18 +189,17 @@ export default {
         shutdownOption: 'orderly',
       },
       globalPrivilege: this.$store.getters['global/userPrivilege'],
-      isMultiHostEnabled: RuntimeConfig.isMultiHostEnabled(),
     };
   },
   computed: {
     serverStatus() {
-      return this.$store.getters['controls/serverStatus'];
+      return this.$store.getters['kvm1Control/serverStatus'];
     },
     isOperationInProgress() {
-      return this.$store.getters['controls/isOperationInProgress'];
+      return this.$store.getters['kvm1Control/isOperationInProgress'];
     },
     lastPowerOperationTime() {
-      return this.$store.getters['controls/lastPowerOperationTime'];
+      return this.$store.getters['kvm1Control/lastPowerOperationTime'];
     },
     oneTimeBootEnabled() {
       return this.$store.getters['serverBootSettings/overrideEnabled'];
@@ -214,34 +212,20 @@ export default {
   },
   created() {
     this.startLoader();
-
-    let resolveBoot;
-    const bootSettingsPromise = new Promise((resolve) => {
-      resolveBoot = resolve;
-      this.$root.$once(
-        'server-power-operations-boot-settings-complete',
-        resolve,
-      );
-    });
-
-    const bootSettingsDispatch = !this.isMultiHostEnabled
-      ? this.$store
-          .dispatch('serverBootSettings/getBootSettings')
-          .finally(() => resolveBoot())
-      : Promise.resolve();
-
+    // const bootSettingsPromise = new Promise((resolve) => {
+    //   this.$root.$on('server-power-operations1-boot-settings-complete', () =>
+    //     resolve(),
+    //   );
+    // });
     Promise.all([
-      bootSettingsDispatch,
-      this.$store.dispatch('controls/getLastPowerOperationTime'),
-      !this.isMultiHostEnabled ? bootSettingsPromise : Promise.resolve(),
-    ]).finally(() => {
-      this.endLoader();
-    });
+      // this.$store.dispatch('serverBootSettings/getBootSettings'),
+      this.$store.dispatch('kvm1Control/getLastPowerOperationTime'),
+    ]).finally(() => this.endLoader());
   },
   methods: {
     powerOn() {
       this.$store
-        .dispatch('controls/serverPowerOn')
+        .dispatch('kvm1Control/serverPowerOn')
         .then((message) => {
           this.successToast(message);
           window.events.fire('powerActionServerStatus');
@@ -250,10 +234,10 @@ export default {
     },
     rebootServer() {
       const modalMessage = this.$t(
-        'pageServerPowerOperations.modal.confirmRebootMessage',
+        'pageServerPowerOperations1.modal.confirmRebootMessage',
       );
       const modalOptions = {
-        title: this.$t('pageServerPowerOperations.modal.confirmRebootTitle'),
+        title: this.$t('pageServerPowerOperations1.modal.confirmRebootTitle'),
         okTitle: this.$t('global.action.confirm'),
         cancelTitle: this.$t('global.action.cancel'),
         autoFocusButton: 'ok',
@@ -265,7 +249,7 @@ export default {
           .then((confirmed) => {
             if (confirmed) {
               this.$store
-                .dispatch('controls/serverSoftReboot')
+                .dispatch('kvm1Control/serverSoftReboot')
                 .then((message) => {
                   this.successToast(message);
                   window.events.fire('powerActionServerStatus');
@@ -279,7 +263,7 @@ export default {
           .then((confirmed) => {
             if (confirmed) {
               this.$store
-                .dispatch('controls/serverHardReboot')
+                .dispatch('kvm1Control/serverHardReboot')
                 .then((message) => {
                   this.successToast(message);
                   window.events.fire('powerActionServerStatus');
@@ -291,10 +275,10 @@ export default {
     },
     shutdownServer() {
       const modalMessage = this.$t(
-        'pageServerPowerOperations.modal.confirmShutdownMessage',
+        'pageServerPowerOperations1.modal.confirmShutdownMessage',
       );
       const modalOptions = {
-        title: this.$t('pageServerPowerOperations.modal.confirmShutdownTitle'),
+        title: this.$t('pageServerPowerOperations1.modal.confirmShutdownTitle'),
         okTitle: this.$t('global.action.confirm'),
         cancelTitle: this.$t('global.action.cancel'),
         autoFocusButton: 'ok',
@@ -306,7 +290,7 @@ export default {
           .then((confirmed) => {
             if (confirmed) {
               this.$store
-                .dispatch('controls/serverSoftPowerOff')
+                .dispatch('kvm1Control/serverSoftPowerOff')
                 .then((message) => {
                   this.successToast(message);
                   window.events.fire('powerActionServerStatus');
@@ -321,7 +305,7 @@ export default {
           .then((confirmed) => {
             if (confirmed) {
               this.$store
-                .dispatch('controls/serverHardPowerOff')
+                .dispatch('kvm1Control/serverHardPowerOff')
                 .then((message) => {
                   this.successToast(message);
                   window.events.fire('powerActionServerStatus');

@@ -14,6 +14,7 @@ import IconTask from '@carbon/icons-vue/es/task/16';
 import Iconchip from '@carbon/icons-vue/es/chip/16';
 import IconInformation from '@carbon/icons-vue/es/information/16';
 import IconPower from '@carbon/icons-vue/es/power/16';
+import RuntimeConfig from '@/utilities/RuntimeConfig';
 
 const roles = {
   administrator: 'Administrator',
@@ -251,7 +252,7 @@ const AppNavigationMixin = {
           route: '/settings/date-time',
         });
       }
-      if (process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true') {
+      if (!RuntimeConfig.isMultiHostEnabled()) {
         navigationItemsList.navigationItems[1].children.push({
           id: 'video-log',
           label: this.$t('appNavigation.videoLog'),
@@ -328,6 +329,13 @@ const AppNavigationMixin = {
           route: '/operations/kvm',
         });
       }
+      if (RuntimeConfig.isMultiHostEnabled()) {
+        navigationItemsList.navigationItems[3].children.push({
+          id: 'kvm1',
+          label: this.$t('appNavigation.kvm1'),
+          route: '/operations/kvm1',
+        });
+      }
       if (process.env.VUE_APP_ONETREE_SOL_ENABLED === 'true') {
         navigationItemsList.navigationItems[3].children.push({
           id: 'serial-over-lan',
@@ -346,6 +354,13 @@ const AppNavigationMixin = {
           route: '/operations/server-power-operations',
         });
       }
+      if (RuntimeConfig.isMultiHostEnabled()) {
+        navigationItemsList.navigationItems[3].children.push({
+          id: 'server-power-operations1',
+          label: this.$t('appNavigation.serverPowerOperations1'),
+          route: '/operations/server-power-operations1',
+        });
+      }
       if (process.env.VUE_APP_ONETREE_MEDIA_REDIRECT_ENABLED === 'true') {
         navigationItemsList.navigationItems[3].children.push({
           id: 'virtual-media',
@@ -357,6 +372,19 @@ const AppNavigationMixin = {
             roles.readonly,
           ],
         });
+
+        if (RuntimeConfig.isMultiHostEnabled()) {
+          navigationItemsList.navigationItems[3].children.push({
+            id: 'virtual-media-2',
+            label: this.$t('appNavigation.virtualMedia-host-01'),
+            route: '/operations/virtual-media-host-01',
+            exclusiveToRoles: [
+              roles.administrator,
+              roles.operator,
+              roles.readonly,
+            ],
+          });
+        }
       }
       if (process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true') {
         navigationItemsList.navigationItems[4].children.push({
@@ -379,7 +407,7 @@ const AppNavigationMixin = {
           route: '/settings/license',
         });
       }
-      if (process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true') {
+      if (!RuntimeConfig.isMultiHostEnabled()) {
         navigationItemsList.navigationItems[4].children.push({
           id: 'auto-video-settings',
           label: this.$t('appNavigation.autoVideo'),

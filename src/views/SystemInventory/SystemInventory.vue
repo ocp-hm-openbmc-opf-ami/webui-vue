@@ -110,6 +110,7 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import Fpga from './FPGA.vue';
 import MemoryAssembly from './Assembly.vue';
 import MemoryMetrics from './MemoryMetrics.vue';
+import RuntimeConfig from '@/utilities/RuntimeConfig';
 import SimpleStorage from './SimpleStorage.vue';
 export default {
   name: 'SystemInventory',
@@ -141,10 +142,7 @@ export default {
     return {
       tabIndex: 0,
       hideTab: false,
-      isAMDVenicePlatform:
-        process.env.VUE_APP_ONETREE_MULTI_HOST_SUPPORT_ENABLED === 'true'
-          ? true
-          : false,
+      isAMDVenicePlatform: RuntimeConfig.isMultiHostEnabled(),
     };
   },
   created() {

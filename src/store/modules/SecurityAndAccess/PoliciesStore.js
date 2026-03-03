@@ -1,6 +1,7 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
 import store from '@/store/';
+import RuntimeConfig from '@/utilities/RuntimeConfig';
 
 const PoliciesStore = {
   namespaced: true,
@@ -8,7 +9,9 @@ const PoliciesStore = {
     sshProtocolEnabled: false,
     ipmiProtocolEnabled: false,
     kvmServiceEnabled: false,
+    kvmServiceEnabledHost2: null,
     virtualMediaServiceEnabled: false,
+    virtualMediaServiceEnabledHost2: false,
     solSshServiceEnabled: false,
     solSshPortValue: null,
     multiSolSshList: [],
@@ -26,9 +29,11 @@ const PoliciesStore = {
     sslFipsProtocolEnabled: false,
     kvmSessionTimeout: null,
     kvmPortValue: null,
+    kvmPortValueHost2: '',
     webPortValue: null,
     solBitRate: null,
     vmReconnectData: {},
+    vmReconnectDataHost2: {},
     maxSessions: [],
     channelList: [],
     defaultChannelList: {},
@@ -47,7 +52,10 @@ const PoliciesStore = {
     solEnabled: (state) => state.solEnabled,
     solSshServiceEnabled: (state) => state.solSshServiceEnabled,
     kvmServiceEnabled: (state) => state.kvmServiceEnabled,
+    kvmServiceEnabledHost2: (state) => state.kvmServiceEnabledHost2,
     virtualMediaServiceEnabled: (state) => state.virtualMediaServiceEnabled,
+    virtualMediaServiceEnabledHost2: (state) =>
+      state.virtualMediaServiceEnabledHost2,
     complexity: (state) => state.complexity,
     passwordHistory: (state) => state.passwordHistory,
     ssdpProtocolEnabled: (state) => state.ssdpProtocolEnabled,
@@ -55,9 +63,11 @@ const PoliciesStore = {
     sslFipsProtocolEnabled: (state) => state.sslFipsProtocolEnabled,
     kvmSessionTimeout: (state) => state.kvmSessionTimeout,
     kvmPortValue: (state) => state.kvmPortValue,
+    kvmPortValueHost2: (state) => state.kvmPortValueHost2,
     webPortValue: (state) => state.webPortValue,
     solBitRate: (state) => state.solBitRate,
     vmReconnectData: (state) => state.vmReconnectData,
+    vmReconnectDataHost2: (state) => state.vmReconnectDataHost2,
     maxSessions: (state) => state.maxSessions,
     getChannelList: (state) => state.channelList,
     getDefaultChannelList: (state) => state.defaultChannelList,
@@ -89,8 +99,15 @@ const PoliciesStore = {
       (state.isMultiSolMode = isMultiSolMode),
     setKvmServiceEnabled: (state, kvmServiceEnabled) =>
       (state.kvmServiceEnabled = kvmServiceEnabled),
+    setKvmServiceEnabledHost2: (state, kvmServiceEnabledHost2) =>
+      (state.kvmServiceEnabledHost2 = kvmServiceEnabledHost2),
     setVirtualMediaServiceEnabled: (state, virtualMediaServiceEnabled) =>
       (state.virtualMediaServiceEnabled = virtualMediaServiceEnabled),
+    setVirtualMediaServiceEnabledHost2: (
+      state,
+      virtualMediaServiceEnabledHost2,
+    ) =>
+      (state.virtualMediaServiceEnabledHost2 = virtualMediaServiceEnabledHost2),
     setSessionTimeoutValue(state, sessionTimeoutValue) {
       state.sessionTimeoutValue = sessionTimeoutValue;
     },
@@ -107,11 +124,15 @@ const PoliciesStore = {
       (state.kvmSessionTimeout = kvmSessionTimeout),
     setKvmPortValue: (state, kvmPortValue) =>
       (state.kvmPortValue = kvmPortValue),
+    setKvmPortValueHost2: (state, kvmPortValueHost2) =>
+      (state.kvmPortValueHost2 = kvmPortValueHost2),
     setWebPortValue: (state, webPortValue) =>
       (state.webPortValue = webPortValue),
     setSolBitRate: (state, solBitRate) => (state.solBitRate = solBitRate),
     setVMReconnectValues: (state, vmReconnectData) =>
       (state.vmReconnectData = vmReconnectData),
+    setVMReconnectValuesHost2: (state, vmReconnectDataHost2) =>
+      (state.vmReconnectDataHost2 = vmReconnectDataHost2),
     setMaxSessions: (state, maxSessions) => (state.maxSessions = maxSessions),
     setChannelList: (state, channelList) => (state.channelList = channelList),
     setDefaultChannelList: (state, defaultChannelList) =>
@@ -168,7 +189,7 @@ const PoliciesStore = {
         .catch((error) => console.log(error));
     },
     async getKvmServiceStatus({ commit }) {
-      return await api
+      const systemPromise = api
         .get('/redfish/v1/Systems/system')
         .then((response) => {
           const kvmServiceEnabled =
@@ -193,8 +214,47 @@ const PoliciesStore = {
           }
           commit('setKvmServiceEnabled', kvmServiceEnabled);
           commit('setVirtualMediaServiceEnabled', virtualMediaServiceEnabled);
+          commit(
+            'global/setVirtualMediaServiceEnabledAccess',
+            virtualMediaServiceEnabled,
+            { root: true },
+          );
         })
         .catch((error) => console.log(error));
+
+      const dualKvmEnabled = RuntimeConfig.isMultiHostEnabled();
+      if (dualKvmEnabled) {
+        const system1Promise = api
+          .get('/redfish/v1/Systems/system1')
+          .then((response) => {
+            const kvmServiceEnabledHost2 =
+              response.data?.GraphicalConsole?.ServiceEnabled;
+            const virtualMediaServiceEnabledHost2 =
+              response.data?.VirtualMediaConfig?.ServiceEnabled;
+            commit('setKvmServiceEnabledHost2', kvmServiceEnabledHost2);
+            commit(
+              'setVirtualMediaServiceEnabledHost2',
+              virtualMediaServiceEnabledHost2,
+            );
+            commit(
+              'global/setVirtualMediaServiceEnabledAccessHost2',
+              virtualMediaServiceEnabledHost2,
+              { root: true },
+            );
+          })
+          .catch((error) => {
+            console.log('Host 2 not available:', error);
+            commit('setKvmServiceEnabledHost2', null);
+            commit('setVirtualMediaServiceEnabledHost2', null);
+          });
+
+        return Promise.all([systemPromise, system1Promise]);
+      } else {
+        // Set host2 values to null when dual KVM is not enabled
+        commit('setKvmServiceEnabledHost2', null);
+        commit('setVirtualMediaServiceEnabledHost2', null);
+        return systemPromise;
+      }
     },
     async getSessionTimeout({ commit }) {
       const maxSessionsServiceInfo = [];
@@ -211,6 +271,9 @@ const PoliciesStore = {
           );
           const kvmPortValue = commonValidation(
             response.data?.Oem?.Ami?.KVMPort,
+          );
+          const kvmPortValueHost2 = commonValidation(
+            response.data?.Oem?.Ami?.KVMPortHost2,
           );
           const webPortValue = commonValidation(
             response.data?.Oem?.Ami?.BMCwebPort,
@@ -235,6 +298,7 @@ const PoliciesStore = {
           commit('setSessionTimeoutValue', sessionTimeoutValue);
           commit('setKvmSessionTimeout', kvmSessionTimeoutValue);
           commit('setKvmPortValue', kvmPortValue);
+          commit('setKvmPortValueHost2', kvmPortValueHost2);
           commit('setWebPortValue', webPortValue);
           commit('setMaxSessions', maxSessionsServiceInfo);
         })
@@ -399,8 +463,39 @@ const PoliciesStore = {
           }
         });
     },
+    async saveKvmStateHost2({ commit }, kvmServiceEnabled) {
+      commit('setKvmServiceEnabledHost2', kvmServiceEnabled);
+      const kvm = {
+        GraphicalConsole: {
+          ServiceEnabled: kvmServiceEnabled,
+        },
+      };
+      return await api
+        .patch('/redfish/v1/Systems/system1', kvm)
+        .then(() => {
+          if (kvmServiceEnabled) {
+            return i18n.t('pagePolicies.toast.successKvmEnabledHost2');
+          } else {
+            return i18n.t('pagePolicies.toast.successKvmDisabledHost2');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          commit('setKvmServiceEnabledHost2', !kvmServiceEnabled);
+          if (kvmServiceEnabled) {
+            throw new Error(i18n.t('pagePolicies.toast.errorKvmEnabledHost2'));
+          } else {
+            throw new Error(i18n.t('pagePolicies.toast.errorKvmDisabledHost2'));
+          }
+        });
+    },
     async saveVmcState({ commit }, virtualMediaServiceEnabled) {
       commit('setVirtualMediaServiceEnabled', virtualMediaServiceEnabled);
+      commit(
+        'global/setVirtualMediaServiceEnabledAccess',
+        virtualMediaServiceEnabled,
+        { root: true },
+      );
       const virtualMedia = {
         VirtualMediaConfig: {
           ServiceEnabled: virtualMediaServiceEnabled,
@@ -418,10 +513,55 @@ const PoliciesStore = {
         .catch((error) => {
           console.log(error);
           commit('setVirtualMediaServiceEnabled', !virtualMediaServiceEnabled);
+          commit(
+            'global/setVirtualMediaServiceEnabledAccess',
+            !virtualMediaServiceEnabled,
+            { root: true },
+          );
           if (virtualMediaServiceEnabled) {
             throw new Error(i18n.t('pagePolicies.toast.errorVmcEnabled'));
           } else {
             throw new Error(i18n.t('pagePolicies.toast.errorVmcDisabled'));
+          }
+        });
+    },
+    async saveVmcStateHost2({ commit }, virtualMediaServiceEnabled) {
+      commit('setVirtualMediaServiceEnabledHost2', virtualMediaServiceEnabled);
+      commit(
+        'global/setVirtualMediaServiceEnabledAccessHost2',
+        virtualMediaServiceEnabled,
+        { root: true },
+      );
+      const virtualMedia = {
+        VirtualMediaConfig: {
+          ServiceEnabled: virtualMediaServiceEnabled,
+        },
+      };
+
+      return await api
+        .patch('/redfish/v1/Systems/system1', virtualMedia)
+        .then(() => {
+          if (virtualMediaServiceEnabled) {
+            return i18n.t('pagePolicies.toast.successVmcEnabledHost2');
+          } else {
+            return i18n.t('pagePolicies.toast.successVmcDisabledHost2');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          commit(
+            'setVirtualMediaServiceEnabledHost2',
+            !virtualMediaServiceEnabled,
+          );
+          commit(
+            'global/setVirtualMediaServiceEnabledAccessHost2',
+            !virtualMediaServiceEnabled,
+            { root: true },
+          );
+          if (virtualMediaServiceEnabled) {
+            throw new Error(i18n.t('pagePolicies.toast.errorVmcEnabledHost2'));
+          } else {
+            throw new Error(i18n.t('pagePolicies.toast.errorVmcDisabledHost2'));
           }
         });
     },
@@ -685,6 +825,25 @@ const PoliciesStore = {
           throw new Error(i18n.t('pagePolicies.toast.errorKVMPort'));
         });
     },
+    async saveKVMPortValueHost2({ dispatch }, kvmPortValue) {
+      const Oem = {
+        Oem: {
+          Ami: {
+            KVM1Port: kvmPortValue,
+          },
+        },
+      };
+      return await api
+        .patch('/redfish/v1/SessionService', Oem)
+        .then(() => dispatch('getSessionTimeout'))
+        .then(() => {
+          return i18n.t('pagePolicies.toast.successKVMPortHost2');
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(i18n.t('pagePolicies.toast.errorKVMPortHost2'));
+        });
+    },
     async saveWebPortValue({ dispatch }, webPortValue) {
       const Oem = {
         Oem: {
@@ -737,12 +896,8 @@ const PoliciesStore = {
         });
     },
     async getVMReconnect({ commit }) {
-      return await api
-        .get(
-          '/redfish/v1/Managers/' +
-            store.getters['global/managerInstance'] +
-            '/VirtualMedia',
-        )
+      const systemPromise = api
+        .get('/redfish/v1/Systems/system/VirtualMedia')
         .then((response) =>
           response.data.Members.map(
             (virtualMedia) => virtualMedia['@odata.id'],
@@ -765,6 +920,44 @@ const PoliciesStore = {
           });
         })
         .catch((error) => console.log(error));
+
+      // Check if dual KVM is enabled from RuntimeConfig
+      const dualKvmEnabled = RuntimeConfig.isMultiHostEnabled();
+
+      if (dualKvmEnabled) {
+        const system1Promise = api
+          .get('/redfish/v1/Systems/system1/VirtualMedia')
+          .then((response) =>
+            response.data.Members.map(
+              (virtualMedia) => virtualMedia['@odata.id'],
+            ),
+          )
+          .then((devices) => api.all(devices.map((device) => api.get(device))))
+          .then((devices) => {
+            devices.some((virtualMedia) => {
+              if (virtualMedia.data.TransferProtocolType !== 'OEM') {
+                const config = virtualMedia.data.Oem?.Ami || {};
+                const vmValuesHost2 = {
+                  RetryCount: config?.RetryCount || 3,
+                  RetryInterval: config?.RetryInterval || 15,
+                  vmReconnectUrl: config['@odata.id'],
+                };
+                commit('setVMReconnectValuesHost2', vmValuesHost2);
+                return true;
+              }
+              return false;
+            });
+          })
+          .catch((error) => {
+            console.log('Host 2 VM Reconnect not available:', error);
+            commit('setVMReconnectValuesHost2', {});
+          });
+
+        return Promise.all([systemPromise, system1Promise]);
+      } else {
+        commit('setVMReconnectValuesHost2', {});
+        return systemPromise;
+      }
     },
     async saveVMReconnectValue({ dispatch, state }, vmReconnectValue) {
       const payLoad = {
@@ -784,6 +977,26 @@ const PoliciesStore = {
         .catch((error) => {
           console.log(error);
           throw new Error(i18n.t('pagePolicies.toast.errorVMReconnect'));
+        });
+    },
+    async saveVMReconnectValueHost2({ dispatch, state }, vmReconnectValue) {
+      const payLoad = {
+        Oem: {
+          Ami: {
+            RetryCount: parseInt(vmReconnectValue.vmCount),
+            RetryInterval: parseInt(vmReconnectValue.vmInterval),
+          },
+        },
+      };
+      return await api
+        .patch(state.vmReconnectDataHost2.vmReconnectUrl, payLoad)
+        .then(() => dispatch('getVMReconnect'))
+        .then(() => {
+          return i18n.t('pagePolicies.toast.successVMReconnectHost2');
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(i18n.t('pagePolicies.toast.errorVMReconnectHost2'));
         });
     },
   },

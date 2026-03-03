@@ -168,6 +168,8 @@
         "serverPowerOperations": "@:appPageTitle.serverPowerOperations",
         "certificates": "@:appPageTitle.certificates",
         "virtualMedia": "@:appPageTitle.virtualMedia",
+        "virtualMedia-host-01": "@:appPageTitle.virtualMediaHost01",
+        "virtualMedia-host-02": "@:appPageTitle.virtualMediaHost02",
         "power": "@:appPageTitle.power",
         "keyClear": "@:appPageTitle.keyClear",
         "factoryDefault": "Werkseinstellung",
@@ -214,7 +216,9 @@
         "spdm": "@:appPageTitle.spdm",
         "powerShelf": "Power Shelf",
         "powerSupplyInventory": "@:appPageTitle.powerSupplyInventory",
-        "powerEquipment": "@:appPageTitle.powerEquipment"
+        "powerEquipment": "@:appPageTitle.powerEquipment",
+        "kvm1": "@:appPageTitle.kvm1",
+        "serverPowerOperations1": "@:appPageTitle.serverPowerOperations1"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -248,6 +252,8 @@
         "serverPowerOperations": "Server-Stromversorgungsaktionen",
         "certificates": "Zertifikate",
         "virtualMedia": "Virtuelle Medien",
+        "virtualMediaHost01": "Virtuelle Medien",
+        "virtualMediaHost02": "Virtuelle Medien 1",
         "keyClear": "Schlüssel löschen",
         "factoryDefault": "Werkseinstellung",
         "smtpSettings": "SMTP-Einstellungen",
@@ -290,7 +296,9 @@
         "deviceOwnerTransfership": "Übertragung des Geräteeigentümers",
         "spdm": "SPDM",
         "powerSupplyInventory": "Stromversorgungsbestand",
-        "powerEquipment": "Stromversorgungsgeräte"
+        "powerEquipment": "Stromversorgungsgeräte",
+        "kvm1": "KVM 1",
+        "serverPowerOperations1": "Server-Stromversorgungsvorgänge 1"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM-Konfiguration",
@@ -1629,6 +1637,58 @@
         "viewonly" : "(Nur Anzeige)",
         "kvmAccessRestricted": "Zugriff verweigert: Der Benutzer hat keine Berechtigung, eine KVM-Sitzung zu starten. Bitte versuchen Sie es mit einem Benutzerkonto mit entsprechenden Rechten."
     },
+    "pageKvm1": {
+        "openNewTab": "In neuem Tab öffnen",
+        "buttonCtrlAltDelete": "Strg+Alt+Entf senden",
+        "bootSettings":{
+            "buttonBootSettings" : "Boot Einstellungen",
+            "bootSettingsHdr": "Boot Einstellungen",
+            "bootSettingsOverride": "Boot Einstellungen Überschreiben",
+            "enableOneTimeBoot": "Einmaliges Booten aktivieren",
+            "bootOptionsToolTips" : "Wählen Sie die Boot Source Option aus der Liste"
+        },
+        "power": "Strom",
+        "powerOperation": {
+            "powerOn": "Einschalten",
+            "gracefulShutdown": "Ordnungsgemäßes Herunterfahren",
+            "gracefulRestart": "Ordnungsgemäßer Neustart",
+            "forcedShutdown": "Erzwungenes Herunterfahren",
+            "forcedRestart": "Erzwungener Neustart"
+        },
+        "powerOnTooltip": "Server einschalten",
+        "gracefulShutdownTooltip": "Betriebssystem fährt herunter, dann schaltet der Server ab.<br><br><strong>Hinweis:</strong> Wenn eine Stromoperation initiiert und dann vom Hostbetriebssystem abgebrochen wird, muss eine gewisse Zeit gewartet werden, um den aktualisierten Stromstatus anzuzeigen, oder die Seite muss aktualisiert werden, um den aktualisierten Stromstatus anzuzeigen.",
+        "gracefulRestartTooltip": "Betriebssystem fährt herunter, dann startet der Server neu.<br><br><strong>Hinweis:</strong> Wenn eine Stromoperation initiiert und dann vom Hostbetriebssystem abgebrochen wird, muss eine gewisse Zeit gewartet werden, um den aktualisierten Stromstatus anzuzeigen, oder die Seite muss aktualisiert werden, um den aktualisierten Stromstatus anzuzeigen.",
+        "forcedShutdownTooltip": "Server schaltet ab, ohne dass das Betriebssystem herunterfährt; kann zu Datenkorruption führen.<br><br><strong>Hinweis:</strong> Wenn eine Stromoperation initiiert und dann vom Hostbetriebssystem abgebrochen wird, muss eine gewisse Zeit gewartet werden, um den aktualisierten Stromstatus anzuzeigen, oder die Seite muss aktualisiert werden, um den aktualisierten Stromstatus anzuzeigen.",
+        "forcedRestartTooltip": "Server startet neu, ohne dass das Betriebssystem herunterfährt; kann zu Datenkorruption führen.",
+        "openSoftKeyboard": "Soft-Tastatur öffnen",
+        "languages": {
+            "english": "Englisch",
+            "italian": "Italienisch",
+            "dutch": "Niederländisch",
+            "french": "Französisch",
+            "german": "Deutsch",
+            "russian": "Russisch",
+            "spanish": "Spanisch"
+        },
+        "status": "Status",
+        "connected": "Verbunden",
+        "connecting": "Verbindung wird hergestellt",
+        "disconnected": "Getrennt",
+        "alreadyKVMSession": "Eine KVM-Sitzung ist bereits für diese Websitzung aktiv. Pro Websitzung ist nur eine KVM-Sitzung zulässig.",
+        "alreadyKVMSessionactive":"In diesem Browser läuft bereits eine Sitzung.",
+        "alreadyActiveSession": "Eine Master-KVM-Sitzung ist bereits aktiv! Bitte versuchen Sie es später erneut.",
+        "alreadyInMasterSession": "Master-Sitzung läuft.",
+        "maximumSessionReached": "Maximale KVM-Sitzungsanzahl erreicht.",
+        "maximumkvmSessionReached": "Maximale Anzahl zulässiger Sitzungen erreicht. Bitte schließen Sie andere Sitzungen und versuchen Sie es erneut.",
+        "errorInGettingActiveStatus": "Fehler beim Abrufen des KVM-Aktivstatus.",
+        "disabledKVM1Service": "KVM 1 Service ist disabled. Gehen Sie zu Sicherheit und Zugriff -> Richtlinien, um den KVM 1 Service zu aktivieren.",
+        "toast": {
+            "success": "Stromvorgang erfolgreich ausgeführt.",
+            "error": "Fehler beim Ausführen des Stromvorgangs."
+        },
+        "viewonly" : "(Nur Anzeige)",
+        "kvmAccessRestricted": "Zugriff verweigert: Der Benutzer hat keine Berechtigung, eine KVM-Sitzung zu starten. Bitte versuchen Sie es mit einem Benutzerkonto mit entsprechenden Rechten."
+    },
     "pageLdap": {
         "pageDescription": "LDAP-Einstellungen konfigurieren und Rollengruppen verwalten",
         "roleGroups": "Rollengruppen",
@@ -2354,7 +2414,9 @@
             "kvmPortTitle": "KVM-Port-Bestätigung",
             "kvmPortConfirmation": "Durch die Änderung der Konfiguration werden bereits geöffnete KVM-Sitzungen für den Dienst betroffen und der Dienst wird neu gestartet. Klicken Sie auf OK, wenn Sie fortfahren möchten.",
             "vmReconnectTitle": "Virtual Media-Neuverbindungsbestätigung",
-            "vmReconnectConfirmation": "Durch die Änderung der Konfiguration werden bereits geöffnete Virtual Media-Sitzungen für den Dienst betroffen und der Dienst wird neu gestartet. Klicken Sie auf OK, wenn Sie fortfahren möchten."
+            "vmReconnectConfirmation": "Durch die Änderung der Konfiguration werden bereits geöffnete Virtual Media-Sitzungen für den Dienst betroffen und der Dienst wird neu gestartet. Klicken Sie auf OK, wenn Sie fortfahren möchten.",
+            "kvm1PortConfirmation": "Durch die Änderung der Konfiguration werden bereits geöffnete KVM-1-Sitzungen für den Dienst beeinträchtigt und der Dienst wird neu gestartet. Klicken Sie auf OK, um fortzufahren.",
+            "kvm1ortTitle": "KVM 1 Port-Bestätigung"
         },
         "toast": {
             "errorIpmiPort": "Fehler beim Setzen des IPMI-Portwerts.",
@@ -2369,8 +2431,12 @@
             "errorVtpmEnabled": "Fehler beim Aktivieren der Virtual TPM-Sicherheitseinstellung.",
             "errorKvmDisabled": "Fehler beim Deaktivieren der KVM-Sicherheitseinstellung.",
             "errorKvmEnabled": "Fehler beim Aktivieren der KVM-Sicherheitseinstellung.",
+            "errorKvmDisabledHost2": "Fehler beim Deaktivieren der KVM-Sicherheitseinstellung für KVM 1.",
+            "errorKvmEnabledHost2": "Fehler beim Aktivieren der KVM-Sicherheitseinstellung für KVM 1.",
             "errorVmcDisabled": "Fehler beim Deaktivieren der Virtual Media-Sicherheitseinstellung.",
             "errorVmcEnabled": "Fehler beim Aktivieren der Virtual Media-Sicherheitseinstellung.",
+            "errorVmcDisabledHost2": "Fehler beim Deaktivieren der Virtual Media-Sicherheitseinstellung für Virtual Media 1.",
+            "errorVmcEnabledHost2": "Fehler beim Aktivieren der Virtual Media-Sicherheitseinstellung für Virtual Media 1.",
             "errorSOLDisabled": "Fehler beim Deaktivieren der SOL SSH-Sicherheitseinstellung.",
             "errorSOLEnabled": "Fehler beim Aktivieren der SOL SSH-Sicherheitseinstellung.",
             "errorMultiSOLEnabled": "Fehler beim Aktivieren von SOL SSH für {solId}.",
@@ -2390,10 +2456,12 @@
             "errorSNMPVersionDisabled": "Fehler beim Deaktivieren des SNMP-Versionstyps.",
             "errorSNMPVersionEnabled": "Fehler beim Aktivieren des SNMP-Versionstyps.",
             "errorKVMPort": "Fehler beim Setzen des KVM-Portwerts.",
+            "errorKVMPortHost2": "Fehler beim Setzen des KVM-Portwerts für KVM 1.",
             "errorWebPort": "Fehler beim Setzen des Web-Portwerts.",
             "errorKVMSessionTimeout": "Fehler beim Konfigurieren des KVM-Sitzungs-Timeouts.",
             "errorSolBitRate": "Fehler beim Konfigurieren der SOL Non-Volatile Bitrate.",
             "errorVMReconnect": "Fehler beim Setzen des Virtual Media-Neuverbindungswerts.",
+            "errorVMReconnectHost2": "Fehler beim Festlegen des Werts für Virtual Media Reconnect für Virtual Media 1.",
             "errorMaxSessionLogin": "Maximale Anzahl an Sitzungen bereits in Verwendung.",
             "successIpmiDisabled": "IPMI-Sicherheitseinstellung erfolgreich deaktiviert.",
             "successIpmiEnabled": "IPMI-Sicherheitseinstellung erfolgreich aktiviert.",
@@ -2405,6 +2473,10 @@
             "successVtpmEnabled": "VirtualTPM-Sicherheitseinstellung erfolgreich aktiviert.",
             "successKvmDisabled": "KVM-Dienst wurde erfolgreich deaktiviert. Bitte warten Sie 10–20 Sekunden.",
             "successKvmEnabled": "KVM-Dienst wurde erfolgreich aktiviert. Bitte warten Sie 10–20 Sekunden.",
+            "successKvmDisabledHost2": "Die Deaktivierung des KVM-Dienstes für KVM 1 wurde erfolgreich gespeichert. Bitte warten Sie 10–20 Sekunden, bis die Deaktivierung abgeschlossen ist.",
+            "successKvmEnabledHost2": "Der KVM-Dienst für die Aktivierung von KVM 1 wurde erfolgreich gespeichert. Bitte warten Sie 10–20 Sekunden, bis die Aktivierung abgeschlossen ist..",
+            "successVmcDisabledHost2": "Der Virtual Media Service für Virtual Media 1 wurde erfolgreich konfiguriert. Bitte warten Sie 10-20 Sekunden, bis die Deaktivierung abgeschlossen ist.",
+            "successVmcEnabledHost2": "Virtual Media Service for Virtual Media 1 Configuration saved Successfully. Please wait 10-20 seconds for Enabling.",
             "successVmcDisabled": "Virtual Media-Dienstkonfiguration erfolgreich gespeichert. Bitte warten Sie 10–20 Sekunden und aktualisieren Sie die Seite Operations -> Virtual Media, um die Änderungen zu sehen.",
             "successVmcEnabled": "Virtual Media-Dienstkonfiguration erfolgreich gespeichert. Bitte warten Sie 10–20 Sekunden und aktualisieren Sie die Seite Operations -> Virtual Media, um die Änderungen zu sehen.",
             "successSOLDisabled": "SOL SSH-Sicherheitseinstellung erfolgreich deaktiviert.",
@@ -2423,10 +2495,12 @@
             "successSNMPVersionDisabled": "SNMP-Versionstyp erfolgreich deaktiviert.",
             "successSNMPVersionEnabled": "SNMP-Versionstyp erfolgreich aktiviert.",
             "successKVMPort": "KVM-Portwert erfolgreich aktualisiert.",
+            "successKVMPortHost2": "KVM-Portwert für KVM 1 erfolgreich aktualisiert.",
             "successWebPort": "Web-Portwert erfolgreich aktualisiert.",
             "successKVMSessionTimeout": "KVM-Sitzungs-Timeout erfolgreich konfiguriert.",
             "successSolBitRate": "SOL Non-Volatile Bitrate erfolgreich konfiguriert.",
             "successVMReconnect": "Virtual Media-Neuverbindungswert erfolgreich aktualisiert.",
+            "successVMReconnectHost2": "Virtual Media-Neuverbindungswert für Virtual Media 1 erfolgreich aktualisiert.",
             "noPrivilegeUser": "Dem Benutzer fehlen die entsprechenden Zugriffsrechte."
         },
         "options": {
@@ -2729,6 +2803,8 @@
         "permissionRestricted": "Sie haben keine Berechtigung, diese Seite anzuzeigen.",
         "disabledVirtualMediaService": "Der Virtual Media-Dienst ist deaktiviert. Gehen Sie zu Sicherheit und Zugriff -> Richtlinien, um den Virtual Media-Dienst zu aktivieren.",
         "mediaAlreadyRedirected": "Für %{Slot} läuft bereits eine Medienumleitung. Navigieren Sie zu Sicherheit und Zugriff -> Sitzungen und trennen Sie die VMEDIA Mount Type Console-Sitzung, um die Medienumleitung zu stoppen.",
+        "Host0Virtual": "Host0 Virtuelles Mediengerät",
+        "Host1Virtual": "Host1 Virtuelles Mediengerät",
         "modal": {
             "password": "Passwort",
             "serverUri": "Externe Server-URI",
@@ -4171,6 +4247,53 @@
         "errorInGettingSpdmDevicesInfo": "Fehler beim Abrufen der SPDM-Geräteinformationen."
     }
 },
+"pageServerPowerOperations1": {
+    "currentStatus": "Aktueller Status",
+    "serverBootSettings": "Boot-Einstellungen",
+    "serverStatus": "Serverstatus",
+    "immediateReboot": "Sofortiger Neustart – Server wird ohne Herunterfahren des Betriebssystems neu gestartet; kann zu Datenverlust führen.",
+    "immediateShutdown": "Sofortiges Ausschalten – Server wird ohne Herunterfahren des Betriebssystems ausgeschaltet; kann zu Datenverlust führen.",
+    "lastPowerOperation": "Letzte Stromoperation",
+    "oneTimeBootWarning": "Einmaliger Bootvorgang steht aus. Der nächste Start erfolgt mit den angegebenen einmaligen Boot-Einstellungen. Nachfolgende Starts erfolgen mit den Standard-Einstellungen.",
+    "operationInProgress": "Während eine Stromoperation läuft, werden hier keine Optionen angezeigt. Nach Abschluss wird die Stromoperation hier angezeigt.",
+    "operations": "Operationen",
+    "orderlyReboot": "Ordnungsgemäßer Neustart – Betriebssystem wird heruntergefahren, dann wird der Server neu gestartet.",
+    "orderlyShutdown": "Ordnungsgemäßes Ausschalten – Betriebssystem wird heruntergefahren, dann wird der Server ausgeschaltet.",
+    "powerOn": "Einschalten",
+    "reboot": "Neustart",
+    "rebootServer": "Server neu starten",
+    "shutDown": "Herunterfahren",
+    "shutdownServer": "Server herunterfahren",
+    "bootSettings": {
+        "bootSettingsOverride": "Boot-Einstellungen überschreiben",
+        "enableOneTimeBoot": "Einmaligen Boot aktivieren",
+        "tpmRequiredPolicy": "TPM-Pflichtrichtlinie",
+        "tpmRequiredPolicyHelper": "Aktivieren, um sicherzustellen, dass das System nur startet, wenn TPM funktionsfähig ist."
+    },
+    "modal": {
+        "confirmRebootMessage": "Möchten Sie den Server wirklich neu starten?",
+        "confirmRebootTitle": "Der Neustart des Servers führt zu einer Unterbrechung.",
+        "confirmShutdownMessage": "Möchten Sie den Server wirklich herunterfahren?",
+        "confirmShutdownTitle": "Das Ausschalten des Servers führt zu einer Unterbrechung."
+    },
+    "toast": {
+        "errorSaveSettings": "Fehler beim Speichern der Einstellungen.",
+        "successSaveSettings": "Erfolgreich gespeichert."
+    }
+    },
+    "pageRebootBmc1": {
+        "lastReboot": "Letzter BMC-Neustart",
+        "rebootBmc": "BMC neu starten",
+        "rebootInformation": "Wenn Sie den BMC neu starten, verliert Ihr Webbrowser für einige Minuten die Verbindung zum BMC. Wenn der BMC wieder online ist, müssen Sie sich möglicherweise erneut anmelden.",
+        "modal": {
+            "confirmMessage": "Sind Sie sicher, dass Sie den BMC neu starten möchten? Der Neustart dauert einige Minuten. Schließen Sie die aktuelle Sitzung und öffnen Sie nach erfolgreichem Neustart eine neue Sitzung.",
+            "confirmTitle": "BMC-Neustart bestätigen"
+        },
+        "toast": {
+            "errorRebootStart": "Fehler beim Neustart des BMC.",
+            "successRebootStart": "BMC wird erfolgreich neu gestartet."
+        }
+    },
     "countries": {
         "AF": "Afghanistan",
         "AL": "Albania",

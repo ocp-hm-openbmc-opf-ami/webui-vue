@@ -132,7 +132,8 @@
                     </b-form-checkbox>
                   </b-col>
                 </b-row>
-                <b-row v-if="isKVMEnabled" class="setting-section">
+                <!-- KVM Section with Dual Host Support -->
+                <b-row class="setting-section">
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
@@ -144,72 +145,200 @@
                       </dd>
                     </dl>
                   </b-col>
-                  <b-col lg="3" class="session-timeout">
-                    <b-form-checkbox
-                      id="kvmSwitch"
-                      v-model="kvmState"
-                      data-test-id="policies-toggle-kvm"
-                      switch
-                      :disabled="userPrivilege !== privilegesId.admin"
-                      @change="changeKmvState"
-                    >
-                      <span class="sr-only">
-                        {{ $t('pagePolicies.kvm') }}
-                      </span>
-                      <span v-if="kvmState">
-                        {{ $t('global.status.enabled') }}
-                      </span>
-                      <span v-else>{{ $t('global.status.disabled') }}</span>
-                    </b-form-checkbox>
-                  </b-col>
                 </b-row>
-                <b-row v-if="kvmState" class="setting-section">
-                  <b-col cols="3" class="d-flex align-items-center">
-                    <b-form-group
-                      id="input-group-kvm-port"
-                      :label="$t('pagePolicies.kvmPortValue')"
-                      label-for="input-kvm-port"
-                    >
-                      <b-form-input
-                        id="input-kvm-port"
-                        v-model.number="kvmPort"
-                        data-test-id="input-kvmPort"
-                        type="number"
-                        :disabled="userPrivilege !== privilegesId.admin"
-                        aria-describedby="power-help-text"
-                        :state="getValidationState($v.kvmPort)"
-                        @input="$v.kvmPort.$touch()"
-                      ></b-form-input>
-                      <b-form-invalid-feedback role="alert">
-                        <template v-if="!$v.kvmPort.required">
-                          {{ $t('global.form.fieldRequired') }}
-                        </template>
-                        <template v-else-if="!$v.kvmPort.pattern">
-                          {{
-                            $t('pagePolicies.kvmPortValueLimits', {
-                              min: 1,
-                              max: 65535,
-                            })
-                          }}
-                        </template>
-                      </b-form-invalid-feedback>
-                    </b-form-group>
-                  </b-col>
-                  <b-col class="d-flex align-items-center">
-                    <b-button
-                      variant="primary"
-                      type="submit"
-                      :disabled="userPrivilege !== privilegesId.admin"
-                      data-test-id="button-saveKVMPortValue"
-                      @click="saveKVMPortValue"
-                    >
-                      <icon-save />
-                      {{ $t('global.action.save') }}
-                    </b-button>
+                <b-row class="setting-section">
+                  <b-col lg="7">
+                    <!-- Tab Navigation for Dual Hosts -->
+                    <b-card no-body class="vm-card">
+                      <b-tabs pills card>
+                        <!-- KVM Tab -->
+                        <b-tab :title="$t('pagePolicies.kvm')" active>
+                          <b-row class="mb-3">
+                            <b-col
+                              lg="12"
+                              class="d-flex align-items-center justify-content-between"
+                            >
+                              <span>{{ $t('pagePolicies.enableKvm') }}</span>
+                              <b-form-checkbox
+                                id="kvmSwitchHost1"
+                                v-model="kvmState"
+                                data-test-id="policies-toggle-kvm-host1"
+                                switch
+                                :disabled="userPrivilege !== privilegesId.admin"
+                                @change="changeKmvState"
+                              >
+                                <span class="sr-only">
+                                  {{ $t('pagePolicies.kvm') }} - Host 1
+                                </span>
+                                <span v-if="kvmState">
+                                  {{ $t('global.status.enabled') }}
+                                </span>
+                                <span v-else>{{
+                                  $t('global.status.disabled')
+                                }}</span>
+                              </b-form-checkbox>
+                            </b-col>
+                          </b-row>
+
+                          <div v-if="kvmState && !isMultiHostEnabled">
+                            <b-row>
+                              <b-col cols="12" md="4" class="mb-4">
+                                <b-form-group
+                                  id="input-group-kvm-port-host1"
+                                  :label="$t('pagePolicies.kvmPortValue')"
+                                  label-for="input-kvm-port-host1"
+                                >
+                                  <b-form-input
+                                    id="input-kvm-port-host1"
+                                    v-model.number="kvmPort"
+                                    data-test-id="input-kvmPort-host1"
+                                    type="number"
+                                    :disabled="
+                                      userPrivilege !== privilegesId.admin
+                                    "
+                                    aria-describedby="power-help-text"
+                                    :state="getValidationState($v.kvmPort)"
+                                    @input="$v.kvmPort.$touch()"
+                                  ></b-form-input>
+                                  <b-form-invalid-feedback role="alert">
+                                    <template v-if="!$v.kvmPort.required">
+                                      {{ $t('global.form.fieldRequired') }}
+                                    </template>
+                                    <template v-else-if="!$v.kvmPort.pattern">
+                                      {{
+                                        $t('pagePolicies.kvmPortValueLimits', {
+                                          min: 1,
+                                          max: 65535,
+                                        })
+                                      }}
+                                    </template>
+                                  </b-form-invalid-feedback>
+                                </b-form-group>
+                              </b-col>
+                              <b-col
+                                cols="12"
+                                md="3"
+                                class="d-flex align-items-center mb-3"
+                              >
+                                <b-button
+                                  variant="primary"
+                                  type="submit"
+                                  :disabled="
+                                    userPrivilege !== privilegesId.admin
+                                  "
+                                  data-test-id="button-saveKVMPortValue-host1"
+                                  @click="saveKVMPortValue"
+                                >
+                                  <icon-save />
+                                  {{ $t('global.action.save') }}
+                                </b-button>
+                              </b-col>
+                            </b-row>
+                          </div>
+                        </b-tab>
+
+                        <!-- KVM 1 Tab -->
+                        <b-tab
+                          v-if="isMultiHostEnabled"
+                          :title="$t('pagePolicies.policeskvm1')"
+                        >
+                          <b-row class="mb-3">
+                            <b-col
+                              lg="12"
+                              class="d-flex align-items-center justify-content-between"
+                            >
+                              <span>{{ $t('pagePolicies.enableKvm1') }}</span>
+                              <b-form-checkbox
+                                id="kvmSwitchHost2"
+                                v-model="kvmStateHost2"
+                                data-test-id="policies-toggle-kvm-host2"
+                                switch
+                                :disabled="userPrivilege !== privilegesId.admin"
+                                @change="changeKmvStateHost2"
+                              >
+                                <span class="sr-only">
+                                  {{ $t('pagePolicies.kvm') }} - Host 2
+                                </span>
+                                <span v-if="kvmStateHost2">
+                                  {{ $t('global.status.enabled') }}
+                                </span>
+                                <span v-else>{{
+                                  $t('global.status.disabled')
+                                }}</span>
+                              </b-form-checkbox>
+                            </b-col>
+                          </b-row>
+
+                          <!-- <div>
+                            <b-row>
+                              <b-col cols="12" md="4" class="mb-4">
+                                <b-form-group
+                                  id="input-group-kvm-port-host2"
+                                  :label="$t('pagePolicies.kvmPortValue')"
+                                  label-for="input-kvm-port-host2"
+                                >
+                                  <b-form-input
+                                    id="input-kvm-port-host2"
+                                    v-model.number="kvmPortHost2"
+                                    data-test-id="input-kvmPort-host2"
+                                    type="number"
+                                    :disabled="
+                                      userPrivilege !== privilegesId.admin
+                                    "
+                                    aria-describedby="power-help-text"
+                                    :state="getValidationState($v.kvmPortHost2)"
+                                    @input="$v.kvmPortHost2.$touch()"
+                                  ></b-form-input>
+                                  <b-form-invalid-feedback role="alert">
+                                    <template v-if="!$v.kvmPortHost2.required">
+                                      {{ $t('global.form.fieldRequired') }}
+                                    </template>
+                                    <template
+                                      v-else-if="
+                                        $v.kvmPortHost2.required &&
+                                        !$v.kvmPortHost2.pattern
+                                      "
+                                    >
+                                      {{
+                                        $t('pagePolicies.kvmPortValueLimits', {
+                                          min: 1,
+                                          max: 65535,
+                                        })
+                                      }}
+                                    </template>
+                                  </b-form-invalid-feedback>
+                                </b-form-group>
+                              </b-col>
+                              <b-col
+                                cols="12"
+                                md="3"
+                                class="d-flex align-items-center mb-3"
+                              >
+                                <b-button
+                                  variant="primary"
+                                  type="submit"
+                                  :disabled="
+                                    userPrivilege !== privilegesId.admin
+                                  "
+                                  data-test-id="button-saveKVMPortValue-host2"
+                                  @click="saveKVMPortValueHost2"
+                                >
+                                  <icon-save />
+                                  {{ $t('global.action.save') }}
+                                </b-button>
+                              </b-col>
+                            </b-row>
+                          </div> -->
+                        </b-tab>
+                      </b-tabs>
+                    </b-card>
                   </b-col>
                 </b-row>
                 <b-row class="setting-section">
-                  <b-col cols="3" class="d-flex align-items-center">
+                  <b-col
+                    cols="3"
+                    class="d-flex align-items-center mt-3 mr-4 w-75"
+                  >
                     <b-form-group
                       id="input-group-web-port"
                       :label="$t('pagePolicies.webPortValue')"
@@ -253,7 +382,8 @@
                     </b-button>
                   </b-col>
                 </b-row>
-                <b-row v-if="isVmediaEnabled" class="setting-section">
+                <!-- Virtual Media Section with Dual Host Support -->
+                <b-row class="setting-section">
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
@@ -265,119 +395,333 @@
                       </dd>
                     </dl>
                   </b-col>
-                  <b-col lg="3" class="session-timeout">
-                    <b-form-checkbox
-                      id="vmcSwitch"
-                      v-model="vmcState"
-                      data-test-id="policies-toggle-vmc"
-                      switch
-                      :disabled="userPrivilege === privilegesId.readOnly"
-                      @change="changeVmcState"
-                    >
-                      <span class="sr-only">
-                        {{ $t('pagePolicies.vmc') }}
-                      </span>
-                      <span v-if="vmcState">
-                        {{ $t('global.status.enabled') }}
-                      </span>
-                      <span v-else>{{ $t('global.status.disabled') }}</span>
-                    </b-form-checkbox>
+                </b-row>
+                <b-row class="setting-section">
+                  <b-col lg="7">
+                    <!-- Tab Navigation for Dual Hosts -->
+                    <b-card no-body class="vm-card">
+                      <b-tabs pills card>
+                        <!-- Host 1 Tab -->
+                        <b-tab :title="$t('pagePolicies.vmc')" active>
+                          <b-row class="mb-3">
+                            <b-col
+                              lg="12"
+                              class="d-flex align-items-center justify-content-between"
+                            >
+                              <span>{{
+                                $t('pagePolicies.enableVirtualMedia')
+                              }}</span>
+                              <b-form-checkbox
+                                id="vmcSwitchHost1"
+                                v-model="vmcState"
+                                data-test-id="policies-toggle-vmc-host1"
+                                switch
+                                :disabled="
+                                  userPrivilege === privilegesId.readOnly
+                                "
+                                @change="changeVmcState"
+                              >
+                                <span class="sr-only">
+                                  {{ $t('pagePolicies.vmc') }} - Host 1
+                                </span>
+                                <span v-if="vmcState">
+                                  {{ $t('global.status.enabled') }}
+                                </span>
+                                <span v-else>{{
+                                  $t('global.status.disabled')
+                                }}</span>
+                              </b-form-checkbox>
+                            </b-col>
+                          </b-row>
+
+                          <div v-if="vmcState && !isMultiHostEnabled">
+                            <b-row>
+                              <b-col cols="12" md="3" class="mb-3">
+                                <b-form-group
+                                  id="input-group-vm-interval-host1"
+                                  :label="$t('pagePolicies.retryInterval')"
+                                  label-for="input-vm-interval-host1"
+                                >
+                                  <b-form-input
+                                    id="input-vm-interval-host1"
+                                    v-model="vmReconnectValues.vmInterval"
+                                    :disabled="
+                                      userPrivilege === privilegesId.readOnly
+                                    "
+                                    data-test-id="input-vminterval-host1"
+                                    type="number"
+                                    aria-describedby="power-help-text"
+                                    :state="
+                                      getValidationState(
+                                        $v.vmReconnectValues.vmInterval,
+                                      )
+                                    "
+                                    @input="
+                                      $v.vmReconnectValues.vmInterval.$touch()
+                                    "
+                                  ></b-form-input>
+                                  <b-form-invalid-feedback role="alert">
+                                    <template
+                                      v-if="
+                                        !$v.vmReconnectValues.vmInterval
+                                          .required
+                                      "
+                                    >
+                                      {{ $t('global.form.fieldRequired') }}
+                                    </template>
+                                    <template
+                                      v-else-if="
+                                        $v.vmReconnectValues.vmInterval
+                                          .required &&
+                                        !$v.vmReconnectValues.vmInterval.pattern
+                                      "
+                                    >
+                                      {{
+                                        $t('pagePolicies.vmVMValueLimits', {
+                                          min: 15,
+                                          max: 30,
+                                        })
+                                      }}
+                                    </template>
+                                  </b-form-invalid-feedback>
+                                </b-form-group>
+                              </b-col>
+                              <b-col cols="12" md="3" class="mb-3">
+                                <b-form-group
+                                  id="input-group-vm-count-host1"
+                                  :label="$t('pagePolicies.retryCount')"
+                                  label-for="input-vm-count-host1"
+                                >
+                                  <b-form-input
+                                    id="input-vm-count-host1"
+                                    v-model="vmReconnectValues.vmCount"
+                                    data-test-id="input-vmcount-host1"
+                                    type="number"
+                                    aria-describedby="power-help-text"
+                                    :disabled="
+                                      userPrivilege === privilegesId.readOnly
+                                    "
+                                    :state="
+                                      getValidationState(
+                                        $v.vmReconnectValues.vmCount,
+                                      )
+                                    "
+                                    @input="
+                                      $v.vmReconnectValues.vmCount.$touch()
+                                    "
+                                  ></b-form-input>
+                                  <b-form-invalid-feedback role="alert">
+                                    <template
+                                      v-if="
+                                        !$v.vmReconnectValues.vmCount.required
+                                      "
+                                    >
+                                      {{ $t('global.form.fieldRequired') }}
+                                    </template>
+                                    <template
+                                      v-else-if="
+                                        $v.vmReconnectValues.vmCount.required &&
+                                        !$v.vmReconnectValues.vmCount.pattern
+                                      "
+                                    >
+                                      {{
+                                        $t('pagePolicies.vmVMValueLimits', {
+                                          min: 3,
+                                          max: 6,
+                                        })
+                                      }}
+                                    </template>
+                                  </b-form-invalid-feedback>
+                                </b-form-group>
+                              </b-col>
+                              <b-col
+                                cols="12"
+                                md="3"
+                                class="d-flex align-items-center mb-3"
+                              >
+                                <b-button
+                                  variant="primary"
+                                  type="submit"
+                                  :disabled="
+                                    userPrivilege === privilegesId.readOnly
+                                  "
+                                  data-test-id="button-saveVMReconnectValues-host1"
+                                  @click="saveVMReconnectValues"
+                                >
+                                  <icon-save />
+                                  {{ $t('global.action.save') }}
+                                </b-button>
+                              </b-col>
+                            </b-row>
+                          </div>
+                        </b-tab>
+
+                        <!-- Host 2 Tab -->
+                        <b-tab
+                          v-if="isMultiHostEnabled"
+                          :title="$t('pagePolicies.vmc1')"
+                          :disabled="vmcStateHost2 === null"
+                        >
+                          <b-row class="mb-3">
+                            <b-col
+                              lg="12"
+                              class="d-flex align-items-center justify-content-between"
+                            >
+                              <span>{{
+                                $t('pagePolicies.enableVirtualMedia')
+                              }}</span>
+                              <b-form-checkbox
+                                id="vmcSwitchHost2"
+                                v-model="vmcStateHost2"
+                                data-test-id="policies-toggle-vmc-host2"
+                                switch
+                                :disabled="
+                                  userPrivilege === privilegesId.readOnly
+                                "
+                                @change="changeVmcStateHost2"
+                              >
+                                <span class="sr-only">
+                                  {{ $t('pagePolicies.vmc') }} - Host 2
+                                </span>
+                                <span v-if="vmcStateHost2">
+                                  {{ $t('global.status.enabled') }}
+                                </span>
+                                <span v-else>{{
+                                  $t('global.status.disabled')
+                                }}</span>
+                              </b-form-checkbox>
+                            </b-col>
+                          </b-row>
+
+                          <div v-if="vmcStateHost2 && !isMultiHostEnabled">
+                            <b-row>
+                              <b-col cols="12" md="3" class="mb-3">
+                                <b-form-group
+                                  id="input-group-vm-interval-host2"
+                                  :label="$t('pagePolicies.retryInterval')"
+                                  label-for="input-vm-interval-host2"
+                                >
+                                  <b-form-input
+                                    id="input-vm-interval-host2"
+                                    v-model="vmReconnectValuesHost2.vmInterval"
+                                    :disabled="
+                                      userPrivilege === privilegesId.readOnly
+                                    "
+                                    data-test-id="input-vminterval-host2"
+                                    type="number"
+                                    aria-describedby="power-help-text"
+                                    :state="
+                                      getValidationState(
+                                        $v.vmReconnectValuesHost2.vmInterval,
+                                      )
+                                    "
+                                    @input="
+                                      $v.vmReconnectValuesHost2.vmInterval.$touch()
+                                    "
+                                  ></b-form-input>
+                                  <b-form-invalid-feedback role="alert">
+                                    <template
+                                      v-if="
+                                        !$v.vmReconnectValuesHost2.vmInterval
+                                          .required
+                                      "
+                                    >
+                                      {{ $t('global.form.fieldRequired') }}
+                                    </template>
+                                    <template
+                                      v-else-if="
+                                        $v.vmReconnectValuesHost2.vmInterval
+                                          .required &&
+                                        !$v.vmReconnectValuesHost2.vmInterval
+                                          .pattern
+                                      "
+                                    >
+                                      {{
+                                        $t('pagePolicies.vmVMValueLimits', {
+                                          min: 15,
+                                          max: 30,
+                                        })
+                                      }}
+                                    </template>
+                                  </b-form-invalid-feedback>
+                                </b-form-group>
+                              </b-col>
+                              <b-col cols="12" md="3" class="mb-3">
+                                <b-form-group
+                                  id="input-group-vm-count-host2"
+                                  :label="$t('pagePolicies.retryCount')"
+                                  label-for="input-vm-count-host2"
+                                >
+                                  <b-form-input
+                                    id="input-vm-count-host2"
+                                    v-model="vmReconnectValuesHost2.vmCount"
+                                    data-test-id="input-vmcount-host2"
+                                    type="number"
+                                    aria-describedby="power-help-text"
+                                    :disabled="
+                                      userPrivilege === privilegesId.readOnly
+                                    "
+                                    :state="
+                                      getValidationState(
+                                        $v.vmReconnectValuesHost2.vmCount,
+                                      )
+                                    "
+                                    @input="
+                                      $v.vmReconnectValuesHost2.vmCount.$touch()
+                                    "
+                                  ></b-form-input>
+                                  <b-form-invalid-feedback role="alert">
+                                    <template
+                                      v-if="
+                                        !$v.vmReconnectValuesHost2.vmCount
+                                          .required
+                                      "
+                                    >
+                                      {{ $t('global.form.fieldRequired') }}
+                                    </template>
+                                    <template
+                                      v-else-if="
+                                        $v.vmReconnectValuesHost2.vmCount
+                                          .required &&
+                                        !$v.vmReconnectValuesHost2.vmCount
+                                          .pattern
+                                      "
+                                    >
+                                      {{
+                                        $t('pagePolicies.vmVMValueLimits', {
+                                          min: 3,
+                                          max: 6,
+                                        })
+                                      }}
+                                    </template>
+                                  </b-form-invalid-feedback>
+                                </b-form-group>
+                              </b-col>
+                              <b-col
+                                cols="12"
+                                md="3"
+                                class="d-flex align-items-center mb-3"
+                              >
+                                <b-button
+                                  variant="primary"
+                                  type="submit"
+                                  :disabled="
+                                    userPrivilege === privilegesId.readOnly
+                                  "
+                                  data-test-id="button-saveVMReconnectValues-host2"
+                                  @click="saveVMReconnectValuesHost2"
+                                >
+                                  <icon-save />
+                                  {{ $t('global.action.save') }}
+                                </b-button>
+                              </b-col>
+                            </b-row>
+                          </div>
+                        </b-tab>
+                      </b-tabs>
+                    </b-card>
                   </b-col>
                 </b-row>
-                <div v-if="vmcState">
-                  <b-row>
-                    <b-col cols="3" class="d-flex align-items-center">
-                      <b-form-group
-                        id="input-group-vm-interval"
-                        :label="$t('pagePolicies.retryInterval')"
-                        label-for="input-vm-interval"
-                      >
-                        <b-form-input
-                          id="input-vm-interval"
-                          v-model="vmReconnectValues.vmInterval"
-                          :disabled="userPrivilege === privilegesId.readOnly"
-                          data-test-id="input-vminterval"
-                          aria-describedby="power-help-text"
-                          :state="
-                            getValidationState($v.vmReconnectValues.vmInterval)
-                          "
-                          @input="$v.vmReconnectValues.vmInterval.$touch()"
-                        ></b-form-input>
-                        <b-form-invalid-feedback role="alert">
-                          <template
-                            v-if="!$v.vmReconnectValues.vmInterval.required"
-                          >
-                            {{ $t('global.form.fieldRequired') }}
-                          </template>
-                          <template
-                            v-else-if="
-                              $v.vmReconnectValues.vmInterval.required &&
-                              !$v.vmReconnectValues.vmInterval.pattern
-                            "
-                          >
-                            {{
-                              $t('pagePolicies.vmVMValueLimits', {
-                                min: 15,
-                                max: 30,
-                              })
-                            }}
-                          </template>
-                        </b-form-invalid-feedback>
-                      </b-form-group>
-                    </b-col>
-                    <b-col cols="3" class="d-flex align-items-center">
-                      <b-form-group
-                        id="input-group-vm-count"
-                        :label="$t('pagePolicies.retryCount')"
-                        label-for="input-vm-count"
-                      >
-                        <b-form-input
-                          id="input-vm-count"
-                          v-model="vmReconnectValues.vmCount"
-                          data-test-id="input-vmcount"
-                          aria-describedby="power-help-text"
-                          :disabled="userPrivilege === privilegesId.readOnly"
-                          :state="
-                            getValidationState($v.vmReconnectValues.vmCount)
-                          "
-                          @input="$v.vmReconnectValues.vmCount.$touch()"
-                        ></b-form-input>
-                        <b-form-invalid-feedback role="alert">
-                          <template
-                            v-if="!$v.vmReconnectValues.vmCount.required"
-                          >
-                            {{ $t('global.form.fieldRequired') }}
-                          </template>
-                          <template
-                            v-else-if="
-                              $v.vmReconnectValues.vmCount.required &&
-                              !$v.vmReconnectValues.vmCount.pattern
-                            "
-                          >
-                            {{
-                              $t('pagePolicies.vmVMValueLimits', {
-                                min: 3,
-                                max: 6,
-                              })
-                            }}
-                          </template>
-                        </b-form-invalid-feedback>
-                      </b-form-group>
-                    </b-col>
-                    <b-col class="d-flex align-items-center">
-                      <b-button
-                        variant="primary"
-                        type="submit"
-                        :disabled="userPrivilege === privilegesId.readOnly"
-                        data-test-id="button-saveVMReconnectValues"
-                        @click="saveVMReconnectValues"
-                      >
-                        <icon-save />
-                        {{ $t('global.action.save') }}
-                      </b-button>
-                    </b-col>
-                  </b-row>
-                </div>
                 <b-row v-if="isSolEnabled" class="setting-section">
                   <b-col
                     lg="7"
@@ -934,6 +1278,7 @@ import { mapState } from 'vuex';
 import IconSave from '@carbon/icons-vue/es/save/20';
 import { privilegesId } from '@/store/modules/GlobalStore';
 import { mapGetters } from 'vuex';
+import RuntimeConfig from '@/utilities/RuntimeConfig';
 export default {
   name: 'Policies',
   components: { PageTitle, PageSection, IconSave },
@@ -1025,10 +1370,18 @@ export default {
         vmCount: '',
         vmInterval: '',
       },
+      vmReconnectValuesHost2: {
+        vmCount: '',
+        vmInterval: '',
+      },
+      // kvmPortHost2: this.$store.getters['policies/kvmPortValueHost2'] || '',
     };
   },
   computed: {
     ...mapGetters('global', ['userPrivilege']),
+    isMultiHostEnabled() {
+      return RuntimeConfig.isMultiHostEnabled();
+    },
     sshProtocolState: {
       get() {
         return this.$store.getters['policies/sshProtocolEnabled'];
@@ -1077,9 +1430,36 @@ export default {
         return newValue;
       },
     },
+    kvmStateHost2: {
+      get() {
+        const value = this.$store.getters['policies/kvmServiceEnabledHost2'];
+        return value === null ? null : value;
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    // kvmPortHost2: {
+    //   get() {
+    //     return this.$store.getters['policies/kvmPortValueHost2'];
+    //   },
+    //   set(newValue) {
+    //     return newValue;
+    //   },
+    // },
     vmcState: {
       get() {
         return this.$store.getters['policies/virtualMediaServiceEnabled'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    vmcStateHost2: {
+      get() {
+        const value =
+          this.$store.getters['policies/virtualMediaServiceEnabledHost2'];
+        return value === null ? null : value;
       },
       set(newValue) {
         return newValue;
@@ -1191,6 +1571,7 @@ export default {
       'webPortValue',
       'sessionTimeoutValue',
       'vmReconnectData',
+      'vmReconnectDataHost2',
     ]),
   },
   watch: {
@@ -1209,6 +1590,10 @@ export default {
     vmReconnectData: function (value) {
       this.vmReconnectValues.vmCount = value.RetryCount;
       this.vmReconnectValues.vmInterval = value.RetryInterval;
+    },
+    vmReconnectDataHost2: function (value) {
+      this.vmReconnectValuesHost2.vmCount = value.RetryCount;
+      this.vmReconnectValuesHost2.vmInterval = value.RetryInterval;
     },
   },
   created() {
@@ -1249,6 +1634,12 @@ export default {
           return this.kvmPortValueValidation(pw);
         },
       },
+      // kvmPortHost2: {
+      //   required,
+      //   pattern: function (pw) {
+      //     return this.kvmPortValueValidation(pw);
+      //   },
+      // },
       webPort: {
         required,
         pattern: function (pw) {
@@ -1262,6 +1653,20 @@ export default {
         },
       },
       vmReconnectValues: {
+        vmInterval: {
+          required,
+          pattern: function (pw) {
+            return this.vmRetryIntervalValidation(pw);
+          },
+        },
+        vmCount: {
+          required,
+          pattern: function (pw) {
+            return this.vmRetryCountValidation(pw);
+          },
+        },
+      },
+      vmReconnectValuesHost2: {
         vmInterval: {
           required,
           pattern: function (pw) {
@@ -1308,6 +1713,12 @@ export default {
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
+    changeKmvStateHost2(state) {
+      this.$store
+        .dispatch('policies/saveKvmStateHost2', state ? true : false)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
     changeVmcState(state) {
       this.startLoader();
       this.$store
@@ -1325,6 +1736,29 @@ export default {
                 .catch(() => this.endLoader())
                 .finally(() => this.endLoader());
             }, 20000); // wait for the Virtual media service configuration success
+          }
+          this.successToast(message);
+        })
+        .catch(({ message }) => {
+          this.errorToast(message);
+          this.endLoader();
+        });
+    },
+    changeVmcStateHost2(state) {
+      this.startLoader();
+      this.$store
+        .dispatch('policies/saveVmcStateHost2', state ? true : false)
+        .then((message) => {
+          if (!state) {
+            // Handle stop media for host 2 if needed
+            this.endLoader();
+          } else {
+            setTimeout(() => {
+              this.$store
+                .dispatch('policies/getVMReconnect')
+                .catch(() => this.endLoader())
+                .finally(() => this.endLoader());
+            }, 20000);
           }
           this.successToast(message);
         })
@@ -1486,6 +1920,28 @@ export default {
           }
         });
     },
+    saveKVMPortValueHost2() {
+      this.$v.kvmPortHost2.$touch();
+      if (this.$v.kvmPortHost2.$invalid) return;
+      this.$bvModal
+        .msgBoxConfirm(this.$tc('pagePolicies.modal.kvm1PortConfirmation'), {
+          title: this.$tc('pagePolicies.modal.kvm1ortTitle'),
+          okTitle: this.$tc('global.action.ok'),
+          cancelTitle: this.$t('global.action.cancel'),
+          autoFocusButton: 'ok',
+        })
+        .then((confirmation) => {
+          if (confirmation) {
+            this.$store
+              .dispatch(
+                'policies/saveKVMPortValueHost2',
+                parseInt(this.kvmPortHost2),
+              )
+              .then((message) => this.successToast(message))
+              .catch(({ message }) => this.errorToast(message));
+          }
+        });
+    },
     saveWebPortValue() {
       this.$v.webPort.$touch();
       if (this.$v.webPort.$invalid) return;
@@ -1520,6 +1976,18 @@ export default {
 
       this.$store
         .dispatch('policies/saveVMReconnectValue', this.vmReconnectValues)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
+    saveVMReconnectValuesHost2() {
+      this.$v.vmReconnectValuesHost2.$touch();
+      if (this.$v.vmReconnectValuesHost2.$invalid) return;
+
+      this.$store
+        .dispatch(
+          'policies/saveVMReconnectValueHost2',
+          this.vmReconnectValuesHost2,
+        )
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },

@@ -52,6 +52,7 @@ const GlobalStore = {
     isAuthorized: true,
     userPrivilege: null,
     virtualMediaServiceEnabledAccess: true,
+    virtualMediaServiceEnabledAccessHost2: true,
     kvmServiceEnabledAccess: true,
     sessionId: null, // Store Session_ID from login
   },
@@ -71,6 +72,8 @@ const GlobalStore = {
     userPrivilege: (state) => state.userPrivilege,
     virtualMediaServiceEnabledAccess: (state) =>
       state.virtualMediaServiceEnabledAccess,
+    virtualMediaServiceEnabledAccessHost2: (state) =>
+      state.virtualMediaServiceEnabledAccessHost2,
     kvmServiceEnabledAccess: (state) => state.kvmServiceEnabledAccess,
     sessionId: (state) => state.sessionId,
   },
@@ -104,6 +107,13 @@ const GlobalStore = {
       virtualMediaServiceEnabledAccess,
     ) => {
       state.virtualMediaServiceEnabledAccess = virtualMediaServiceEnabledAccess;
+    },
+    setVirtualMediaServiceEnabledAccessHost2: (
+      state,
+      virtualMediaServiceEnabledAccessHost2,
+    ) => {
+      state.virtualMediaServiceEnabledAccessHost2 =
+        virtualMediaServiceEnabledAccessHost2;
     },
     setkvmServiceEnabledAccess: (state, kvmServiceEnabledAccess) => {
       state.kvmServiceEnabledAccess = kvmServiceEnabledAccess;
@@ -142,9 +152,13 @@ const GlobalStore = {
         })
         .catch((error) => console.log(error));
     },
-    async getSystemInfo({ commit }) {
+    async getSystemInfo({ commit }, dualKvmEnabeled) {
+      const dualKvmUrl = dualKvmEnabeled
+        ? dualKvmEnabeled
+        : '/redfish/v1/Systems/system';
+      const isHost2 = dualKvmUrl === '/redfish/v1/Systems/system1';
       return await api
-        .get('/redfish/v1/Systems/system')
+        .get(dualKvmUrl)
         .then(
           ({
             data: {
@@ -160,10 +174,17 @@ const GlobalStore = {
             commit('setAssetTag', AssetTag);
             commit('setSerialNumber', SerialNumber);
             commit('setModelType', Model);
-            commit(
-              'setVirtualMediaServiceEnabledAccess',
-              VirtualMediaConfig.ServiceEnabled,
-            );
+            if (isHost2) {
+              commit(
+                'setVirtualMediaServiceEnabledAccessHost2',
+                VirtualMediaConfig.ServiceEnabled,
+              );
+            } else {
+              commit(
+                'setVirtualMediaServiceEnabledAccess',
+                VirtualMediaConfig.ServiceEnabled,
+              );
+            }
             commit(
               'setkvmServiceEnabledAccess',
               GraphicalConsole.ServiceEnabled,
