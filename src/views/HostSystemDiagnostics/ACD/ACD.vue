@@ -271,9 +271,16 @@ export default {
         let filename = this.allCrashDumpFiles[i].filename;
         let url = this.allCrashDumpFiles[i].urls;
         let promise = this.$store
-          .dispatch('acd/getJsonData', url)
-          .then((response) => {
-            zip.file(filename, JSON.stringify(response, null, 2));
+          .dispatch('acd/getRawJsonData', url)
+          .then((rawData) => {
+            zip.file(filename, rawData);
+          })
+          .catch((error) => {
+            console.error(`Error downloading ${filename}:`, error);
+            zip.file(
+              filename,
+              JSON.stringify({ error: error.message }, null, 2),
+            );
           });
         promises.push(promise);
       }
