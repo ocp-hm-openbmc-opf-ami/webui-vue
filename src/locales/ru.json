@@ -2746,7 +2746,8 @@
             "errorReplaceCertificate": "Ошибка замены сертификата.",
             "successAddCertificate": "Успешно добавлен %{Certificate}.",
             "successDeleteCertificate": "Успешно удален %{Certificate}.",
-            "successReplaceCertificate": "Успешно заменен %{Certificate}."
+            "successReplaceCertificate": "Успешно заменен %{Certificate}.",
+            "successReplaceHttpsCertificate": "Сертификат HTTPS был обновлен. Пожалуйста, обновите браузер через несколько секунд, чтобы применить изменения."
         }
     },
     "pageVirtualMedia": {

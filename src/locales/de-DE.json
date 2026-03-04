@@ -2751,7 +2751,8 @@
             "errorReplaceCertificate": "Fehler beim Ersetzen des Zertifikats.",
             "successAddCertificate": "%{Certificate} erfolgreich hinzugefügt.",
             "successDeleteCertificate": "%{Certificate} erfolgreich gelöscht.",
-            "successReplaceCertificate": "%{Certificate} erfolgreich ersetzt."
+            "successReplaceCertificate": "%{Certificate} erfolgreich ersetzt.",
+            "successReplaceHttpsCertificate": "Das HTTPS-Zertifikat wurde aktualisiert. Bitte aktualisieren Sie Ihren Browser in einigen Sekunden, um die Änderungen zu übernehmen."
         }
     },
     "pageVirtualMedia": {

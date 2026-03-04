@@ -2750,7 +2750,8 @@
             "errorReplaceCertificate": "Error in replacing Certificate.",
             "successAddCertificate": "Successfully added %{Certificate}.",
             "successDeleteCertificate": "Successfully deleted %{Certificate}.",
-            "successReplaceCertificate": "Successfully replaced %{Certificate}."
+            "successReplaceCertificate": "Successfully replaced %{Certificate}.",
+            "successReplaceHttpsCertificate": "The HTTPS certificate has been updated. Please refresh your browser in a few seconds to apply the changes."
         }
     },
     "pageVirtualMedia": {

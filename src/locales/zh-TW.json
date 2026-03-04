@@ -2747,7 +2747,8 @@
             "errorReplaceCertificate": "置換憑證失敗。",
             "successAddCertificate": "新增 %{certificate} 成功。",
             "successDeleteCertificate": "刪除 %{certificate} 成功。",
-            "successReplaceCertificate": "置換 %{certificate} 成功。"
+            "successReplaceCertificate": "置換 %{certificate} 成功。",
+            "successReplaceHttpsCertificate": "HTTPS 憑證已更新。請在幾秒鐘後重新整理您的瀏覽器以套用變更。"
         }
     },
     "pageVirtualMedia": {

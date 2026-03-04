@@ -2746,7 +2746,8 @@
             "errorReplaceCertificate": "替换证书失败。",
             "successAddCertificate": "添加 %{certificate} 成功。",
             "successDeleteCertificate": "删除 %{certificate} 成功。",
-            "successReplaceCertificate": "替换 %{certificate} 成功。"
+            "successReplaceCertificate": "替换 %{certificate} 成功。",
+            "successReplaceHttpsCertificate": "HTTPS 证书已更新。请在几秒钟后刷新浏览器以应用更改。"
         }
     },
     "pageVirtualMedia": {
