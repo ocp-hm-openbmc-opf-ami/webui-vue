@@ -1,7 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
 import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
-import store from '@/store/';
 
 /**
  * Watch for serverStatus changes in GlobalStore module
@@ -35,12 +34,12 @@ const serverStateMapper = (hostState) => {
       return 'unreachable';
   }
 };
-const checkForServerStatus = function (serverStatus, isKvm) {
+const checkForServerStatus = function (serverStatus, isKvm1) {
   /* If power action is done from KVM console
    * means timeout value reduced 10 seconds for
    * updating the server status
    */
-  const timeoutValue = isKvm === 'kvm' ? 10000 : 8000;
+  const timeoutValue = isKvm1 === 'kvm' ? 10000 : 8000;
   return new Promise((resolve) => {
     const timer = setTimeout(() => {
       resolve();
@@ -59,7 +58,7 @@ const checkForServerStatus = function (serverStatus, isKvm) {
   });
 };
 
-const ControlStore = {
+const kvm1ControlStore = {
   namespaced: true,
   state: {
     serverStatus: 'unreachable',
@@ -84,12 +83,9 @@ const ControlStore = {
       (state.serverStatus = serverStateMapper(serverState)),
   },
   actions: {
-    async getLastPowerOperationTime({ commit }, dualKvmEnabeled) {
-      const dualKvmUrl = dualKvmEnabeled
-        ? dualKvmEnabeled
-        : '/redfish/v1/Systems/system';
+    async getLastPowerOperationTime({ commit }) {
       return await api
-        .get(dualKvmUrl)
+        .get('/redfish/v1/Systems/system1')
         .then((response) => {
           commit('setOperationInProgress', false);
           const lastReset = response.data.LastResetTime;
@@ -111,7 +107,7 @@ const ControlStore = {
     },
     getLastBmcRebootTime({ commit }) {
       return api
-        .get('/redfish/v1/Managers/' + store.getters['global/managerInstance'])
+        .get('/redfish/v1/Managers/bmc')
         .then((response) => {
           const lastBmcReset = response.data.LastResetTime;
           const lastBmcRebootTime =
@@ -123,23 +119,18 @@ const ControlStore = {
     async rebootBmc() {
       const data = { ResetType: 'GracefulRestart' };
       return await api
-        .post(
-          '/redfish/v1/Managers/' +
-            store.getters['global/managerInstance'] +
-            '/Actions/Manager.Reset',
-          data,
-        )
-        .then(() => i18n.t('pageRebootBmc.toast.successRebootStart'))
+        .post('/redfish/v1/Managers/bmc/Actions/Manager.Reset', data)
+        .then(() => i18n.t('pageRebootBmc1.toast.successRebootStart'))
         .catch((error) => {
           console.log(error);
-          throw new Error(i18n.t('pageRebootBmc.toast.errorRebootStart'));
+          throw new Error(i18n.t('pageRebootBmc1.toast.errorRebootStart'));
         });
     },
-    async serverPowerOn({ dispatch, commit }, isKvm) {
+    async serverPowerOn({ dispatch, commit }, isKvm1) {
       const data = { ResetType: 'On' };
       return dispatch('serverPowerChange', data)
         .then(async () => {
-          await checkForServerStatus.bind(this, 'on', isKvm)();
+          await checkForServerStatus.bind(this, 'on', isKvm1)();
           commit('setOperationInProgress', false);
           dispatch('getLastPowerOperationTime');
           return i18n.t('pageKvm.toast.success');
@@ -149,11 +140,11 @@ const ControlStore = {
           throw new Error(i18n.t('pageKvm.toast.error'));
         });
     },
-    async serverSoftReboot({ dispatch, commit }, isKvm) {
+    async serverSoftReboot({ dispatch, commit }, isKvm1) {
       const data = { ResetType: 'GracefulRestart' };
       return dispatch('serverPowerChange', data)
         .then(async () => {
-          await checkForServerStatus.bind(this, 'on', isKvm)();
+          await checkForServerStatus.bind(this, 'on', isKvm1)();
           commit('setOperationInProgress', false);
           dispatch('getLastPowerOperationTime');
           return i18n.t('pageKvm.toast.success');
@@ -163,11 +154,11 @@ const ControlStore = {
           throw new Error(i18n.t('pageKvm.toast.error'));
         });
     },
-    async serverHardReboot({ dispatch, commit }, isKvm) {
+    async serverHardReboot({ dispatch, commit }, isKvm1) {
       const data = { ResetType: 'ForceRestart' };
       return dispatch('serverPowerChange', data)
         .then(async () => {
-          await checkForServerStatus.bind(this, 'on', isKvm)();
+          await checkForServerStatus.bind(this, 'on', isKvm1)();
           commit('setOperationInProgress', false);
           dispatch('getLastPowerOperationTime');
           return i18n.t('pageKvm.toast.success');
@@ -177,11 +168,11 @@ const ControlStore = {
           throw new Error(i18n.t('pageKvm.toast.error'));
         });
     },
-    async serverSoftPowerOff({ dispatch, commit }, isKvm) {
+    async serverSoftPowerOff({ dispatch, commit }, isKvm1) {
       const data = { ResetType: 'GracefulShutdown' };
       return dispatch('serverPowerChange', data)
         .then(async () => {
-          await checkForServerStatus.bind(this, 'off', isKvm)();
+          await checkForServerStatus.bind(this, 'off', isKvm1)();
           commit('setOperationInProgress', false);
           dispatch('getLastPowerOperationTime');
           return i18n.t('pageKvm.toast.success');
@@ -191,11 +182,11 @@ const ControlStore = {
           throw new Error(i18n.t('pageKvm.toast.error'));
         });
     },
-    async serverHardPowerOff({ dispatch, commit }, isKvm) {
+    async serverHardPowerOff({ dispatch, commit }, isKvm1) {
       const data = { ResetType: 'ForceOff' };
       return dispatch('serverPowerChange', data)
         .then(async () => {
-          await checkForServerStatus.bind(this, 'off', isKvm)();
+          await checkForServerStatus.bind(this, 'off', isKvm1)();
           commit('setOperationInProgress', false);
           dispatch('getLastPowerOperationTime');
           return i18n.t('pageKvm.toast.success');
@@ -208,7 +199,7 @@ const ControlStore = {
     async serverPowerChange({ commit }, data) {
       commit('setOperationInProgress', true);
       return await api
-        .post('/redfish/v1/Systems/system/Actions/ComputerSystem.Reset', data)
+        .post('/redfish/v1/Systems/system1/Actions/ComputerSystem.Reset', data)
         .catch((error) => {
           console.log(error);
           commit('setOperationInProgress', false);
@@ -218,4 +209,4 @@ const ControlStore = {
   },
 };
 
-export default ControlStore;
+export default kvm1ControlStore;

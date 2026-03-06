@@ -169,6 +169,7 @@
         "serverPowerOperations": "@:appPageTitle.serverPowerOperations",
         "certificates": "@:appPageTitle.certificates",
         "virtualMedia": "@:appPageTitle.virtualMedia",
+        "virtualMedia-host-01": "Virtual Media 1",
         "power": "@:appPageTitle.power",
         "keyClear": "@:appPageTitle.keyClear",
         "factoryDefault": "Factory Default",
@@ -215,7 +216,9 @@
         "spdm": "@:appPageTitle.spdm",
         "powerShelf": "Power Shelf",
         "powerSupplyInventory": "@:appPageTitle.powerSupplyInventory",
-        "powerEquipment": "@:appPageTitle.powerEquipment"
+        "powerEquipment": "@:appPageTitle.powerEquipment",
+        "kvm1": "@:appPageTitle.kvm1",
+        "serverPowerOperations1": "@:appPageTitle.serverPowerOperations1"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -249,6 +252,7 @@
         "serverPowerOperations": "Server Power Operations",
         "certificates": "Certificates",
         "virtualMedia": "Virtual Media",
+        "virtualMediaHost02": "Virtual Media 1",
         "keyClear": "Key Clear",
         "factoryDefault": "Factory Default",
         "smtpSettings": "SMTP Settings",
@@ -291,8 +295,9 @@
         "deviceOwnerTransfership": "Device Owner Transfership",
         "spdm": "SPDM",
         "powerSupplyInventory": "Power Supply Inventory",
-        "powerEquipment": "Power Equipment"
-
+        "powerEquipment": "Power Equipment",
+        "kvm1": "KVM 1",
+        "serverPowerOperations1": "Server Power Operations 1"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM Configuration",
@@ -1614,7 +1619,7 @@
         "connected": "Connected",
         "connecting": "Connecting",
         "disconnected": "Disconnected",
-	"alreadyKVMSession": "KVM Session is already active for this web session. Only one KVM Session is allowed for a web session",
+	"alreadyKVMSession": "KVM Session is already active for this web session. Only one KVM Session is allowed for a web session.",
         "alreadyKVMSessionactive":"Already a session is running in this browser.",
         "alreadyActiveSession": "Already master KVM session is Running! Please try after some time.",
         "alreadyInMasterSession": "Master Session is Running.",
@@ -1622,6 +1627,58 @@
         "maximumkvmSessionReached": "Maximum number of allowable sessions reached. Please close other sessions and try again.",
         "errorInGettingActiveStatus": "Error in getting KVM Active Status.",
         "disabledKVMService": "KVM Service is disabled. Go to Security and Access -> Policies page to enable KVM service.",
+        "toast": {
+            "success": "Power Operation executed successfully.",
+            "error": "Error in performing Power Operation."
+        },
+        "viewonly" : "(View Only)",
+        "kvmAccessRestricted": "Access Denied: User doesn't have privilege to launch KVM session. Please try from a privileged user account."
+    },
+    "pageKvm1": {
+        "openNewTab": "Open in New Tab",
+        "buttonCtrlAltDelete": "Send Ctrl+Alt+Delete",
+        "bootSettings":{
+            "buttonBootSettings" : "Boot Settings",
+            "bootSettingsHdr": "Boot Settings",
+            "bootSettingsOverride": "Boot settings override",
+            "enableOneTimeBoot": "Enable one time boot",
+            "bootOptionsToolTips" : "Select Boot Source option from the list"
+        },
+        "power": "Power",
+        "powerOperation": {
+            "powerOn": "Power ON",
+            "gracefulShutdown": "Graceful Shutdown",
+            "gracefulRestart": "Graceful Restart",
+            "forcedShutdown": "Forced Shutdown",
+            "forcedRestart": "Forced Restart"
+        },
+        "powerOnTooltip": "Turn on the Server",
+        "gracefulShutdownTooltip": "Operating System shuts down, then Server shuts down.<br><br><strong>Note:</strong> Initiating a power operation and then cancel it from the Host OS. User is recommended to wait for some time to reflect the changes or refresh to view the updated Power status.",
+        "gracefulRestartTooltip": "Operating System shuts down, then Server reboots.<br><br><strong>Note:</strong> Initiating a power operation and then cancel it from the Host OS. User is recommended to wait for some time to reflect the changes or refresh to view the updated Power status.",
+        "forcedShutdownTooltip": "Server shuts down without Operating System shutting down; may cause data corruption.<br><br><strong>Note:</strong> Initiating a power operation and then cancel it from the Host OS. User is recommended to wait for some time to reflect the changes or refresh to view the updated Power status.",
+        "forcedRestartTooltip": "Server reboots without Operating System shutting down; may cause data corruption.",
+        "openSoftKeyboard": "Open Soft Keyboard",
+        "languages": {
+            "english": "English",
+            "italian": "Italian",
+            "dutch": "Dutch",
+            "french": "French",
+            "german": "German",
+            "russian": "Russian",
+            "spanish": "Spanish"
+        },
+        "status": "Status",
+        "connected": "Connected",
+        "connecting": "Connecting",
+        "disconnected": "Disconnected",
+	"alreadyKVMSession": "KVM Session is already active for this web session. Only one KVM Session is allowed for a web session",
+        "alreadyKVMSessionactive":"Already a session is running in this browser.",
+        "alreadyActiveSession": "Already master KVM session is Running! Please try after some time.",
+        "alreadyInMasterSession": "Master Session is Running.",
+        "maximumSessionReached": "Maximum KVM Session Reached.",
+        "maximumkvmSessionReached": "Maximum number of allowable sessions reached. Please close other sessions and try again.",
+        "errorInGettingActiveStatus": "Error in getting KVM Active Status.",
+        "disabledKVM1Service": "KVM 1 Service is disabled. Go to Security and Access -> Policies page to enable KVM 1 service.",
         "toast": {
             "success": "Power Operation executed successfully.",
             "error": "Error in performing Power Operation."
@@ -2355,7 +2412,9 @@
             "kvmPortTitle": "KVM Port Confirmation",
             "kvmPortConfirmation": "On changing the configuration, already opened KVM sessions for the service will be affected, also the service will be restarted. Click OK if you want to continue.",
             "vmReconnectTitle": "Virtual Media Reconnect Confirmation",
-            "vmReconnectConfirmation": "On changing the configuration, already opened Virtual Media sessions for the service will be affected, also the service will be restarted. Click OK if you want to continue."
+            "vmReconnectConfirmation": "On changing the configuration, already opened Virtual Media sessions for the service will be affected, also the service will be restarted. Click OK if you want to continue.",
+            "kvm1PortConfirmation": "On changing the configuration, already opened KVM 1 sessions for the service will be affected, also the service will be restarted. Click OK if you want to continue.",
+            "kvm1ortTitle": "KVM 1 Port Confirmation"
         },
         "toast": {
             "errorIpmiPort": "Error in setting IPMI Port Value.",
@@ -2370,8 +2429,12 @@
             "errorVtpmEnabled": "Error in enabling Virtual TPM Security Setting.",
             "errorKvmDisabled": "Error in disabling KVM Security Setting.",
             "errorKvmEnabled": "Error in enabling KVM Security Setting.",
+            "errorKvmDisabledHost2": "Error in disabling KVM Security Setting for KVM 1.",
+            "errorKvmEnabledHost2": "Error in enabling KVM Security Setting for KVM 1.",
             "errorVmcDisabled": "Error in disabling Virtual Media Security Setting.",
             "errorVmcEnabled": "Error in enabling Virtual Media Security Setting.",
+            "errorVmcDisabledHost2": "Error in disabling Virtual Media Security Setting for Virtual Media 1.",
+            "errorVmcEnabledHost2": "Error in enabling Virtual Media Security Setting for Virtual Media 1.",
             "errorSOLDisabled": "Error in disabling SOL SSH Security Setting.",
             "errorSOLEnabled": "Error in enabling SOL SSH Security Setting.",
             "errorMultiSOLEnabled": "Error in enabling SOL SSH for {solId}.",
@@ -2391,10 +2454,12 @@
             "errorSNMPVersionDisabled": "Error in disabling SNMP Version Type.",
             "errorSNMPVersionEnabled": "Error in enabling SNMP Version Type.",
             "errorKVMPort": "Error in setting KVM port value.",
+            "errorKVMPortHost2": "Error in setting KVM port value for KVM 1.",
             "errorWebPort": "Error in setting Web port value.",
             "errorKVMSessionTimeout": "Error in configuring KVM session timeout.",
             "errorSolBitRate": "Error in configuring SOL Non-Volatile Bit Rate.",
             "errorVMReconnect": "Error in setting Virtual Media Reconnect value.",
+            "errorVMReconnectHost2": "Error in setting Virtual Media Reconnect value for Virtual Media 1.",
             "errorMaxSessionLogin": "Maximum number of sessions already in use.",
             "successIpmiDisabled": "Successfully disabled IPMI Security Setting.",
             "successIpmiEnabled": "Successfully enabled IPMI Security Setting.",
@@ -2406,8 +2471,12 @@
             "successVtpmEnabled": "Successfully enabled VirtualTPM Security Setting.",
             "successKvmDisabled": "The KVM service disabling has been saved successfully. Please wait up to 10–20 seconds for Disabling.",
             "successKvmEnabled": "The KVM service enabling has been saved successfully. Please wait up to 10–20 seconds for Enabling.",
+            "successKvmDisabledHost2": "The KVM service for KVM 1 disabling has been saved successfully. Please wait up to 10–20 seconds for Disabling.",
+            "successKvmEnabledHost2": "The KVM service for KVM 1 enabling has been saved successfully. Please wait up to 10–20 seconds for Enabling.",
             "successVmcDisabled": "Virtual Media Service Configuration saved Successfully. Please wait 10-20 seconds for Disabling and refresh Operations -> Virtual Media page to see the changes.",
             "successVmcEnabled": "Virtual Media Service Configuration saved Successfully. Please wait 10-20 seconds for Enabling and refresh Operations -> Virtual Media page to see the changes.",
+            "successVmcDisabledHost2": "Virtual Media Service for Virtual Media 1 Configuration saved Successfully. Please wait 10-20 seconds for Disabling.",
+            "successVmcEnabledHost2": "Virtual Media Service for Virtual Media 1 Configuration saved Successfully. Please wait 10-20 seconds for Enabling.",
             "successSOLDisabled": "Successfully disabled SOL SSH Security Setting.",
             "successSOLEnabled": "Successfully enabled SOL SSH Security Setting.",
             "successMultiSOLEnabled": "Successfully enabled SOL SSH for {solId}.",
@@ -2424,10 +2493,12 @@
             "successSNMPVersionDisabled": "Successfully disabled SNMP Version Type.",
             "successSNMPVersionEnabled": "Successfully enabled SNMP Version Type.",
             "successKVMPort": "Successfully updated the KVM Port value.",
+            "successKVMPortHost2": "Successfully updated the KVM Port value for KVM 1.",
             "successWebPort": "Successfully updated the Web Port value.",
             "successKVMSessionTimeout": "Successfully configured the KVM Session Timeout.",
             "successSolBitRate": "Successfully configured the SOL Non-Volatile Bit Rate.",
             "successVMReconnect": "Successfully updated the Virtual Media Reconnect value.",
+            "successVMReconnectHost2": "Successfully updated the Virtual Media Reconnect value for Virtual Media 1.",
             "noPrivilegeUser": "There are insufficient associated access rights for the User."
         },
         "options": {
@@ -2445,8 +2516,10 @@
         "webSessionTimeoutLimits": "Kindly enter the seconds between %{min} and %{max}.",
         "kvm": "KVM",
         "kvmDescription": "Enabling KVM makes to the guest Operating System.",
+        "enableKvm": "Enable KVM Service",
         "vmc": "Virtual Media",
         "vmcDescription": "Enabling Virtual Media for Image Redirection.",
+        "enableVirtualMedia": "Enable Virtual Media Service",
         "solssh": "SOL SSH",
         "solDescription": "Enabling SOL SSH",
         "multiSolSsh": "Multi SOL SSH Services",
@@ -2492,7 +2565,10 @@
         "vmMaxSession": "Virtual Media",
         "webMaxSession": "Web",
         "solSshPortValueLimits": "Kindly enter the values between %{min} and %{max}.",
-        "webPortValueLimits": "Kindly enter the values between %{min} and %{max}."
+        "webPortValueLimits": "Kindly enter the values between %{min} and %{max}.",
+        "policeskvm1": "KVM 1",
+        "enableKvm1": "Enable KVM 1 Service",
+        "vmc1": "Virtual Media 1"
     },
     "pagePower": {
         "description": "Set a power cap to keep power consumption at or below the specified value in Watts.",
@@ -2677,7 +2753,8 @@
             "errorReplaceCertificate": "Error in replacing Certificate.",
             "successAddCertificate": "Successfully added %{Certificate}.",
             "successDeleteCertificate": "Successfully deleted %{Certificate}.",
-            "successReplaceCertificate": "Successfully replaced %{Certificate}."
+            "successReplaceCertificate": "Successfully replaced %{Certificate}.",
+            "successReplaceHttpsCertificate": "The HTTPS certificate has been updated. Please refresh your browser in a few seconds to apply the changes."
         }
     },
     "pageVirtualMedia": {
@@ -2730,6 +2807,8 @@
         "permissionRestricted": "You don't have permission to view this page.",
         "disabledVirtualMediaService": " Virtual Media service is disabled. Go to Security and Access -> Policies page to enable Virtual Media service.",
         "mediaAlreadyRedirected": "Already Media Redirection in progress for %{Slot}. Please navigate to Security and Access -> Session’s page and disconnect the VMEDIA Mount Type Console session to stop Media Redirection.",
+        "Host0Virtual": "Host0 Virtual Media Device",
+        "Host1Virtual": "Host1 Virtual Media Device",
         "modal": {
             "password": "Password",
             "serverUri": "External Server URI",
@@ -4417,6 +4496,53 @@
             "successInGettingCertificate": "Successfully getting Certificate.",
             "errorGettingComponentIntegrityData": "Error in getting Component Integrity Data.",
             "errorInGettingSpdmDevicesInfo": "Error in getting SPDM Devices Information."
+        }
+    },
+    "pageServerPowerOperations1": {
+        "currentStatus": "Current Status",
+        "serverBootSettings": "Boot Settings",
+        "serverStatus": "Server Status",
+        "immediateReboot": "Immediate – Server reboots without Operating System shutting down; may cause data corruption.",
+        "immediateShutdown": "Immediate - Server shuts down without Operating System shutting down; may cause data corruption.",
+        "lastPowerOperation": "Last Power Operation",
+        "oneTimeBootWarning": "Pending one time boot. Next boot will be performed with the specified one-time Boot Settings. Subsequent booting will be performed with the default Settings.",
+        "operationInProgress": "There are no options to display while Power Operation is in progress. When it is completed, Power Operation will be displayed here.",
+        "operations": "Operations",
+        "orderlyReboot": "Orderly – Operating System shuts down, then Server reboots.",
+        "orderlyShutdown": "Orderly - Operating System shuts down, then Server shuts down.",
+        "powerOn": "Power On",
+        "reboot": "Reboot",
+        "rebootServer": "Reboot Server",
+        "shutDown": "Shut down",
+        "shutdownServer": "Shut down Server",
+        "bootSettings": {
+            "bootSettingsOverride": "Boot Settings Override",
+            "enableOneTimeBoot": "Enable One Time Boot",
+            "tpmRequiredPolicy": "TPM Required Policy",
+            "tpmRequiredPolicyHelper": "Enable to ensure the system only boots when the TPM is functional."
+        },
+        "modal": {
+            "confirmRebootMessage": "Are you sure you want to reboot?",
+            "confirmRebootTitle": "Server reboot will cause outage",
+            "confirmShutdownMessage": "Are you sure you want to shut down?",
+            "confirmShutdownTitle": "Server shut down will cause outage."
+        },
+        "toast": {
+            "errorSaveSettings": "Error in saving Settings.",
+            "successSaveSettings": "Successfully saved."
+        }
+    },
+    "pageRebootBmc1": {
+        "lastReboot": "Last BMC reboot",
+        "rebootBmc": "Reboot BMC",
+        "rebootInformation": "When you reboot the BMC, your web browser loses contact with the BMC for several minutes. When the BMC is back online, you may need to log in again.",
+        "modal": {
+            "confirmMessage": "Are you sure you want to reboot the BMC? To start Reboot BMC it will take few minutes. Close the current session and open a new session after Reboot BMC sucessfully completed.",
+            "confirmTitle": "Confirm BMC reboot"
+        },
+        "toast": {
+            "errorRebootStart": "Error in rebooting BMC.",
+            "successRebootStart": "Successfully rebooting BMC."
         }
     },
     "countries": {

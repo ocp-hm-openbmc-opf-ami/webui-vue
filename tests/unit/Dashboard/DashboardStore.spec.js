@@ -1,16 +1,85 @@
-/**
- * @jest-environment jsdom
- */
 import { createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-// Mock the api module more simply
+// Mock the api module
 jest.mock('@/store/api', () => ({
   get: jest.fn(),
   patch: jest.fn(),
+}));
+
+// Mock router to prevent circular dependency
+jest.mock('@/router', () => ({
+  __esModule: true,
+  default: {
+    getRoutes: jest.fn(() => []),
+    addRoute: jest.fn(),
+    removeRoute: jest.fn(),
+  },
+}));
+
+// Mock RuntimeConfig
+jest.mock('@/utilities/RuntimeConfig', () => ({
+  __esModule: true,
+  default: {
+    get: jest.fn(),
+  },
+}));
+
+// Mock i18n
+jest.mock('@/i18n', () => ({
+  __esModule: true,
+  default: {
+    t: jest.fn((key) => key),
+  },
+}));
+
+// Mock component imports
+jest.mock('@/views/Operations/Kvm1/Kvm1Console', () => ({
+  __esModule: true,
+  default: {},
+}));
+
+jest.mock('@/views/Operations/Kvm1/Kvm1', () => ({
+  __esModule: true,
+  default: {},
+}));
+
+jest.mock('@/views/Operations/ServerPowerOperations1', () => ({
+  __esModule: true,
+  default: {},
+}));
+
+jest.mock('@/views/Operations/VirtualMediaHost02', () => ({
+  __esModule: true,
+  default: {},
+}));
+
+jest.mock('@/views/Settings/AutoVideoSettings', () => ({
+  __esModule: true,
+  default: {},
+}));
+
+jest.mock('@/views/Logs/VideoLogs', () => ({
+  __esModule: true,
+  default: {},
+}));
+
+jest.mock('@/views/PageNotFound', () => ({
+  __esModule: true,
+  default: {},
+}));
+
+// Mock UtcDateTimeMixin
+jest.mock('@/components/Mixins/UtcDateTimeMixin', () => ({
+  __esModule: true,
+  default: {
+    methods: {
+      createDateWithISOString: (isoString) => new Date(isoString),
+    },
+  },
 }));
 
 describe('DashboardStore', () => {

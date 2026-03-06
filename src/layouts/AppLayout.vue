@@ -9,7 +9,11 @@
       @refresh="refresh"
       @languageChange="languageChange"
     />
-    <app-navigation :key="routerKey" class="app-navigation" />
+    <app-navigation
+      v-if="configLoaded"
+      :key="routerKey"
+      class="app-navigation"
+    />
     <page-container class="app-content">
       <router-view ref="routerView" :key="routerKey" />
       <!-- Scroll to top button -->
@@ -40,6 +44,7 @@ export default {
     return {
       routerKey: 0,
       isloading: true,
+      configLoaded: false,
     };
   },
   watch: {
@@ -49,11 +54,28 @@ export default {
       });
     },
   },
+  async beforeMount() {
+    // Routes are added dynamically in the DashboardStore action
+    try {
+      await this.$store.dispatch('dashboard/fetchDashboardData');
+      this.configLoaded = true;
+    } catch (error) {
+      this.configLoaded = true;
+    }
+  },
   mounted() {
     this.$root.$on('refresh-application', () => this.refresh());
   },
   methods: {
-    refresh() {
+    async refresh() {
+      // Reset dashboard data to force fresh fetch
+      this.$store.commit('dashboard/resetDashboardData');
+      // Fetch fresh dashboard data
+      try {
+        await this.$store.dispatch('dashboard/fetchDashboardData');
+      } catch (error) {
+        console.error('Failed to refresh dashboard data:', error);
+      }
       // Changing the component :key value will trigger
       // a component re-rendering and 'refresh' the view
       this.routerKey += 1;

@@ -39,3 +39,19 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+::v-deep .modal-body {
+  max-height: 70vh;
+  overflow: auto;
+}
+
+::v-deep .vjs-tree {
+  white-space: pre;
+  overflow-x: auto;
+}
+
+::v-deep .vjs-value__string {
+  white-space: nowrap;
+}
+</style>

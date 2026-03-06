@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import router from '@/router';
 import i18n from '@/i18n';
 import store from '../../index';
+import RuntimeConfig from '@/utilities/RuntimeConfig';
 
 const AuthenticationStore = {
   namespaced: true,
@@ -58,6 +59,8 @@ const AuthenticationStore = {
       state.xsrfCookie = undefined;
       state.isAuthenticatedCookie = undefined;
       state.tfaPending = false;
+      store.commit('dashboard/resetDashboardData');
+      RuntimeConfig.reset();
       router.push('/login').catch(() => {});
     },
     setConsoleWindow: (state, window) => (state.consoleWindow = window),

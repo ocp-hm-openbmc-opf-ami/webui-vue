@@ -1,5 +1,6 @@
 import i18n from '@/i18n';
 import api from '@/store/api';
+import Axios from 'axios';
 import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
 
 const AutonomousCrashDumpStore = {
@@ -117,6 +118,20 @@ const AutonomousCrashDumpStore = {
           return getJsonFile;
         }
       });
+    },
+    async getRawJsonData(_, data) {
+      return await Axios.get(data, {
+        responseType: 'text',
+        transformResponse: [(data) => data],
+        withCredentials: true,
+      })
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          console.error('Error fetching raw JSON data:', error);
+          throw error;
+        });
     },
   },
 };

@@ -472,7 +472,18 @@ export default {
             type,
             location,
           })
-          .then((success) => this.successToast(success))
+          .then((success) => {
+            // Show special message for HTTPS Certificate
+            if (type === 'HTTPS Certificate') {
+              this.successToast(
+                this.$t(
+                  'pageCertificates.toast.successReplaceHttpsCertificate',
+                ),
+              );
+            } else {
+              this.successToast(success);
+            }
+          })
           .catch(({ message }) => this.errorToast(message))
           .finally(() => this.endLoader());
       };

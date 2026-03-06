@@ -8,6 +8,7 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import store from '../store';
 import routes from './routes';
 import Cookies from 'js-cookie';
+import RuntimeConfig from '@/utilities/RuntimeConfig';
 
 Vue.use(VueRouter);
 
@@ -43,6 +44,34 @@ function allowRouterToNavigate(to, next, currentUserRole) {
 }
 
 router.beforeEach((to, from, next) => {
+  // Skip fetchDashboardData on login page or if not authenticated
+  const isLoginPage = to.path === '/login';
+  const isFromLoginPage = from.path === '/login';
+  const isAuthenticated = store.getters['authentication/isLoggedIn'];
+  const isDashboardDataLoaded = store.getters['dashboard/isLoaded'];
+
+  // If routes haven't been initialized OR dashboard data not loaded
+  // Skip if coming from login page - AppLayout will handle initial data fetch
+  if (
+    !isLoginPage &&
+    !isFromLoginPage &&
+    isAuthenticated &&
+    (!RuntimeConfig.areRoutesAdded() || !isDashboardDataLoaded)
+  ) {
+    // Fetch dashboard data to register all routes (including page-not-found)
+    store
+      .dispatch('dashboard/fetchDashboardData')
+      .then(() => {
+        // Routes are now registered, continue with navigation
+        next({ ...to, replace: true });
+      })
+      .catch(() => {
+        // If fetch fails, continue anyway (will likely show 404 if route doesn't exist)
+        next();
+      });
+    return;
+  }
+
   // Check if 2FA verification is pending
   const tfaPending = store.getters['authentication/tfaPending'];
   const isLoggedIn = store.getters['authentication/isLoggedIn'];

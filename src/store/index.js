@@ -33,7 +33,9 @@ import KeyClearStore from './modules/Operations/KeyClearStore';
 import FactoryDefaultStore from './modules/Operations/FactoryDefault';
 import DateTimeStore from './modules/Settings/DateTimeStore';
 import VirtualMediaStore from './modules/Operations/VirtualMediaStore';
+import VirtualMediaStoreHost02 from './modules/Operations/VirtualMediaStoreHost02';
 import KvmStore from './modules/Operations/KvmStore';
+import Kvm1Store from './modules/Operations/Kvm1Store';
 import NicStore from './modules/Nic/Nic';
 import NvmeInformationStore from './modules/NvmeInformation/NvmeInformationStore';
 import AutonomousCrashDumpStore from './modules/HostSystemDiagnostics/AcdStore';
@@ -75,6 +77,7 @@ import DeviceOwnerTransfershipStore from './modules/Settings/DeviceOwnerTransfer
 import SpdmStore from './modules/Settings/SPDMStore';
 import PowerShelfStore from './modules/PowerShelf/PowerShelfStore';
 import PowerEquipmentStore from './modules/PowerShelf/PowerEquipmentStore';
+import Kvm1ControlStore from './modules/Operations/kvm1ControlStore';
 
 Vue.use(Vuex);
 
@@ -111,7 +114,9 @@ export default new Vuex.Store({
     postCodeLogs: PostCodeLogsStore,
     sbmrCodeLogs: SbmrLogsStore,
     virtualMedia: VirtualMediaStore,
+    virtualMediaHost02: VirtualMediaStoreHost02,
     kvm: KvmStore,
+    kvm1: Kvm1Store,
     policies: PoliciesStore,
     factoryReset: FactoryResetStore,
     keyClear: KeyClearStore,
@@ -157,5 +162,6 @@ export default new Vuex.Store({
     spdm: SpdmStore,
     powerShelf: PowerShelfStore,
     powerEquipment: PowerEquipmentStore,
+    kvm1Control: Kvm1ControlStore,
   },
 });

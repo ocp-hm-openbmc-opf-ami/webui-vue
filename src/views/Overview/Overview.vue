@@ -53,6 +53,17 @@ export default {
     PageTitle,
   },
   mixins: [LoadingBarMixin],
+  beforeRouteEnter(to, from, next) {
+    // Reset dashboard data to force fresh fetch when entering overview page from another route
+    if (from.name && from.name !== 'login') {
+      next((vm) => {
+        vm.$store.commit('dashboard/resetDashboardData');
+        vm.$store.dispatch('dashboard/fetchDashboardData');
+      });
+    } else {
+      next();
+    }
+  },
   data() {
     return {
       showDumps: process.env.VUE_APP_ENV_NAME === 'intel',

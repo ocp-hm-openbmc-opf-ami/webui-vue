@@ -36,15 +36,14 @@
             {{ $t('pageKvm.openNewTab') }}
           </b-button>
 
-          <b-button
-            v-if="!isMultiHostEnabled"
+          <!-- <b-button
             variant="link"
             :disabled="buttonStatus"
             @click="openBootModal"
           >
             <icon-settings />
-            {{ $t('pageKvm.bootSettings.buttonBootSettings') }}</b-button
-          >
+            {{ $t('pageKvm.bootSettings.buttonBootSettings') }}</b-button 
+          >-->
           <div v-if="isBootModalOpen" class="modal">
             <div class="modal-content">
               <span class="close" @click="closeBootModal">&times;</span>
@@ -139,7 +138,7 @@ import Keys from '@novnc/novnc/core/input/keysym';
 import StatusIcon from '@/components/Global/StatusIcon';
 import IconLaunch from '@carbon/icons-vue/es/launch/20';
 import IconArrowDown from '@carbon/icons-vue/es/arrow--down/16';
-import IconSettings from '@carbon/icons-vue/es/settings--adjust/20';
+// import IconSettings from '@carbon/icons-vue/es/settings--adjust/20';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import softKeyBoard from '@/components/SoftKeyboard/softKeyboard';
@@ -148,7 +147,6 @@ import '@/components/SoftKeyboard/softKeyboard.css';
 import { throttle } from 'lodash';
 import { mapState, mapGetters } from 'vuex';
 import { privilegesId } from '@/store/modules/GlobalStore';
-import RuntimeConfig from '@/utilities/RuntimeConfig';
 
 const Connecting = 0;
 const Connected = 1;
@@ -160,7 +158,7 @@ export default {
     StatusIcon,
     IconLaunch,
     IconArrowDown,
-    IconSettings,
+    // IconSettings,
     softKeyBoard,
     DraggableDivVue,
   },
@@ -201,7 +199,6 @@ export default {
         bootOption: this.$store.getters['serverBootSettings/bootSource'],
         oneTimeBoot: this.$store.getters['serverBootSettings/overrideEnabled'],
       },
-      isMultiHostEnabled: RuntimeConfig.isMultiHostEnabled(),
     };
   },
   computed: {
@@ -232,7 +229,7 @@ export default {
       return 'secondary';
     },
     powerStatus() {
-      return this.$store.getters['controls/serverStatus'];
+      return this.$store.getters['kvm1Control/serverStatus'];
     },
     serverStatus() {
       if (this.AlreadykvmLaunched == true) {
@@ -285,20 +282,23 @@ export default {
   },
   created() {
     this.startLoader();
-    const bootSettingsPromise = new Promise((resolve) => {
-      this.$root.$on('server-power-operations-boot-settings-complete', () =>
-        resolve(),
-      );
-    });
+    const dualKvmEnabeled = '/redfish/v1/Systems/system1';
+    // const bootSettingsPromise = new Promise((resolve) => {
+    //   this.$root.$on('server-power-operations-boot-settings-complete', () =>
+    //     resolve(),
+    //   );
+    // });
     Promise.all([
-      !this.isMultiHostEnabled
-        ? this.$store.dispatch('serverBootSettings/getBootSettings')
-        : Promise.resolve(),
-      this.$store.dispatch('controls/getLastPowerOperationTime'),
-      !this.isMultiHostEnabled ? bootSettingsPromise : Promise.resolve(),
+      this.$store.dispatch(
+        'kvm1Control/getLastPowerOperationTime',
+        dualKvmEnabeled,
+      ),
     ]).finally(() => this.endLoader());
-    this.$store.dispatch('controls/getLastPowerOperationTime');
-    this.$store.dispatch('global/getSystemInfo');
+    this.$store.dispatch(
+      'kvm1Control/getLastPowerOperationTime',
+      dualKvmEnabeled,
+    );
+    this.$store.dispatch('global/getSystemInfo', dualKvmEnabeled);
     window.addEventListener('beforeunload', this.handleChildWindowBeforeUnload);
     window.addEventListener('blur', this.handleSoftKeyboardSyncedClose);
   },
@@ -349,7 +349,7 @@ export default {
         }
         this.rfb = new AMI_RFB(
           this.$refs.panel,
-          `wss://${window.location.host}/kvm/0`,
+          `wss://${window.location.host}/kvm/1`,
           { wsProtocols: [token] },
         );
 
@@ -406,13 +406,13 @@ export default {
       }
       const sessionId = this.sessionId;
       this.isConsoleWindow = window.open(
-        `#/console/kvm?popup=true&sessionId=${encodeURIComponent(sessionId)}`,
-        'kvmConsoleWindow',
+        `#/console/kvm1?popup=true&sessionId=${encodeURIComponent(sessionId)}`,
+        'kvm1ConsoleWindow',
         'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=700,height=550',
       );
       this.isConsoleWindowOpen = true; // Set flag to true when the window opens
-      this.$store.commit('kvm/setIsConsoleWindow', {
-        isconsolewindowOpen: this.isConsoleWindow,
+      this.$store.commit('kvm1/setIsKvm1ConsoleWindow', {
+        isKvm1consolewindowOpen: this.isConsoleWindow,
       });
     },
     handleChildWindowBeforeUnload() {
@@ -523,23 +523,23 @@ export default {
     },
 
     powerOn() {
-      this.dispatchPowerAction('controls/serverPowerOn', 'on');
+      this.dispatchPowerAction('kvm1Control/serverPowerOn', 'on');
     },
 
     gracefulRestart() {
-      this.dispatchPowerAction('controls/serverSoftReboot', 'on');
+      this.dispatchPowerAction('kvm1Control/serverSoftReboot', 'on');
     },
 
     forcedRestart() {
-      this.dispatchPowerAction('controls/serverHardReboot', 'on');
+      this.dispatchPowerAction('kvm1Control/serverHardReboot', 'on');
     },
 
     gracefulShutdown() {
-      this.dispatchPowerAction('controls/serverSoftPowerOff', 'on');
+      this.dispatchPowerAction('kvm1Control/serverSoftPowerOff', 'on');
     },
 
     forcedShutdown() {
-      this.dispatchPowerAction('controls/serverHardPowerOff', 'off');
+      this.dispatchPowerAction('kvm1Control/serverHardPowerOff', 'off');
     },
 
     dispatchPowerAction(action, dropdownValue) {

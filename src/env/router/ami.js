@@ -21,7 +21,6 @@ import EventFilter from '@/views/PEF/EventFilter';
 import Network from '@/views/Settings/Network';
 import Vlan from '@/views/Settings/Vlan';
 import Overview from '@/views/Overview';
-import PageNotFound from '@/views/PageNotFound';
 import PostCodeLogs from '@/views/Logs/PostCodeLogs';
 import Sbmr from '@/views/Logs/SbmrLogs';
 import PowerRestorePolicy from '@/views/Settings/PowerRestorePolicy';
@@ -42,8 +41,6 @@ import License from '@/views/Settings/License';
 import systemInventory from '@/views/SystemInventory/SystemInventory';
 import DDNS from '../../views/Settings/NetworkDDNS';
 import PAM from '../../views/Settings/PamOrder/PamOrder';
-import AutoVideoSettings from '@/views/Settings/AutoVideoSettings';
-import VideoLogs from '@/views/Logs/VideoLogs';
 import IPMIEventLog from '@/views/Logs/IPMIEventLogs';
 import AdvancedLogSettings from '@/views/Settings/AdvancedLogSettings/AdvancedLogSettings.vue';
 import Gpgpu from '@/views/Settings/Gpgpu';
@@ -120,6 +117,7 @@ const routes = [
   },
   {
     path: '/console',
+    name: 'console-layout',
     component: ConsoleLayout,
     meta: {
       requiresAuth: true,
@@ -145,6 +143,7 @@ const routes = [
   },
   {
     path: '/',
+    name: 'app-layout',
     meta: {
       requiresAuth: true,
     },
@@ -568,7 +567,7 @@ if (process.env.VUE_APP_ONETREE_SMTP_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_POWER_RESTORE_POLICY_ENABLED == 'true') {
+if (process.env.VUE_APP_ONETREE_NVIDIASIPACK_ENABLED == 'true') {
   routes[2].children.push({
     path: '/settings/power-restore-policy',
     name: 'power-restore-policy',
@@ -590,16 +589,6 @@ if (process.env.VUE_APP_ONETREE_SNMP_ENABLED == 'true') {
 }
 if (process.env.VUE_APP_ONETREE_KVM_ENABLED == 'true') {
   routes[2].children.push({
-    path: '/logs/video-log',
-    name: 'video-log',
-    component: VideoLogs,
-    meta: {
-      title: i18n.t('appPageTitle.videoLog'),
-    },
-  });
-}
-if (process.env.VUE_APP_ONETREE_KVM_ENABLED == 'true') {
-  routes[2].children.push({
     path: '/settings/bsod',
     name: 'bsod',
     component: Bsod,
@@ -615,16 +604,6 @@ if (process.env.VUE_APP_ONETREE_KVM_ENABLED == 'true') {
     component: Kvm,
     meta: {
       title: i18n.t('appPageTitle.kvm'),
-    },
-  });
-}
-if (process.env.VUE_APP_ONETREE_KVM_ENABLED == 'true') {
-  routes[2].children.push({
-    path: '/settings/auto-video',
-    name: 'auto-video',
-    component: AutoVideoSettings,
-    meta: {
-      title: i18n.t('appPageTitle.autoVideo'),
     },
   });
 }
@@ -828,13 +807,5 @@ if (process.env.VUE_APP_ONETREE_PSM_ENABLED == 'true') {
     },
   });
 }
-routes[2].children.push({
-  path: '*',
-  name: 'page-not-found',
-  component: PageNotFound,
-  meta: {
-    title: i18n.t('appPageTitle.pageNotFound'),
-  },
-});
 
 export default routes;

@@ -1,5 +1,6 @@
 import api from '@/store/api';
 import store from '@/store';
+import RuntimeConfig from '@/utilities/RuntimeConfig';
 
 const SystemInventoryStore = {
   namespaced: true,
@@ -765,12 +766,11 @@ const SystemInventoryStore = {
       /*AMD - VUE_APP_ONETREE_MULTI_HOST_SUPPORT_ENABLED
         Galaxy - VUE_APP_ONETREE_GPGPU_ENABLED
         else - Baseboard*/
-      chassisInstacnce =
-        process.env.VUE_APP_ONETREE_MULTI_HOST_SUPPORT_ENABLED == 'true'
-          ? 'HPM'
-          : process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true'
-            ? 'BMC_0'
-            : 'Baseboard';
+      chassisInstacnce = RuntimeConfig.isMultiHostEnabled()
+        ? 'HPM'
+        : process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true'
+          ? 'BMC_0'
+          : 'Baseboard';
       console.log('chassisInstacnce', chassisInstacnce);
       return await api
         .get('/redfish/v1/Chassis')

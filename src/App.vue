@@ -29,6 +29,7 @@ export default {
         Cookies.get('XSRF-TOKEN') &&
         Cookies.get('loginSessionSuccess') === 'false' &&
         window.name != 'kvmConsoleWindow' &&
+        window.name != 'kvm1ConsoleWindow' &&
         window.location.href.indexOf('serial-over-lan-console') == -1 &&
         window.location.href.indexOf('/redfish/v1') != -1
       ) {
@@ -47,6 +48,7 @@ export default {
     handleRefresh(event) {
       if (
         window.name != 'kvmConsoleWindow' &&
+        window.name != 'kvm1ConsoleWindow' &&
         window.location.href.indexOf('serial-over-lan-console') == -1 &&
         window.location.href.indexOf('/redfish/v1') != -1
       ) {

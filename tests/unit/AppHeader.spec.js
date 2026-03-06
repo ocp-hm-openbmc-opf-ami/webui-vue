@@ -4,6 +4,35 @@ import Vuex from 'vuex';
 import i18n from '@/i18n';
 import AppHeader from '@/components/AppHeader';
 
+// Mock HTMLCanvasElement for qrcode.vue component
+HTMLCanvasElement.prototype.getContext = jest.fn(() => ({
+  fillStyle: '',
+  fillRect: jest.fn(),
+  clearRect: jest.fn(),
+  getImageData: jest.fn(),
+  putImageData: jest.fn(),
+  createImageData: jest.fn(),
+  setTransform: jest.fn(),
+  drawImage: jest.fn(),
+  save: jest.fn(),
+  restore: jest.fn(),
+  beginPath: jest.fn(),
+  moveTo: jest.fn(),
+  lineTo: jest.fn(),
+  closePath: jest.fn(),
+  stroke: jest.fn(),
+  translate: jest.fn(),
+  scale: jest.fn(),
+  rotate: jest.fn(),
+  arc: jest.fn(),
+  fill: jest.fn(),
+  measureText: jest.fn(() => ({ width: 0 })),
+  transform: jest.fn(),
+  rect: jest.fn(),
+  clip: jest.fn(),
+}));
+HTMLCanvasElement.prototype.toDataURL = jest.fn(() => '');
+
 // Silencing warnings about undefined Bootsrap-vue components
 Vue.config.silent = true;
 const localVue = createLocalVue();
@@ -15,6 +44,7 @@ window.events = {
 describe('AppHeader.vue', () => {
   const actions = {
     'global/getServerStatus': jest.fn(),
+    'global/getManagerinstance': jest.fn(),
     'eventLog/getEventLogData': jest.fn(),
     'authentication/resetStoreState': jest.fn(),
     'license/getUserAlertCount': jest.fn(),
