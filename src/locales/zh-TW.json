@@ -2348,11 +2348,21 @@
         "powerUnitStatus": "電源單元狀態",
         "processorDimmThermTrip": "處理器 DIMM Therm Trip",
         "destinationType":"目的地類型",
+        "retryEvent":"重試事件",
+        "alertLimits":"警報限制",
+        "retryCount":"重試次數限制",
+        "timeInterval":"重試時間間隔（秒）",
+        "retryLabelSettings":"事件重試配置",
         "toast": {
             "successEventFilterMsg": "事件過濾器設定成功。",
             "errorEventFilterMsg": "事件過濾器設定發生錯誤。",
             "successDestinationType": "目標類型配置已成功更新。",
             "errorDestinationType": "更新目標類型配置時發生錯誤。"
+        },
+        "form":{
+            "maxAlertLimitRequired": "最大警報限制值應在 0 到 100 之間",
+            "maxTimeIntervalRequired": "最大時間間隔應在 0 到 3600 秒之間。",
+            "maxRetryCountRequired": "最大重試次數應在 0 到 10 之間。"
         }
     },
     "pagePageNotFound": {

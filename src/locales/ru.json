@@ -2347,11 +2347,21 @@
         "powerUnitStatus": "Статус блока питания",
         "processorDimmThermTrip": "Термическое отключение DIMM процессора",
         "destinationType": "Тип назначения",
+        "retryEvent":"Повторить событие",
+        "alertLimits":"Лимит оповещений",
+        "retryCount":"Предел количества повторов",
+        "timeInterval":"Интервал времени повторов (секунды)",
+        "retryLabelSettings":"Конфигурация повторов событий",
         "toast": {
             "successEventFilterMsg": "Конфигурация фильтра событий успешно обновлена.",
             "errorEventFilterMsg": "Ошибка обновления конфигурации фильтра событий.",
             "successDestinationType": "Конфигурация типа назначения успешно обновлена.",
             "errorDestinationType": "Ошибка обновления конфигурации типа назначения."
+        },
+        "form":{
+            "maxAlertLimitRequired": "Максимальное значение предела оповещений должно быть в диапазоне от 0 до 100",
+            "maxTimeIntervalRequired": "Максимальный интервал времени должен быть в диапазоне от 0 до 3600 секунд.",
+            "maxRetryCountRequired": "Максимальное количество повторов должно быть в диапазоне от 0 до 10."
         }
     },
     "pagePageNotFound": {

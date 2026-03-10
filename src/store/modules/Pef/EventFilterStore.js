@@ -116,11 +116,18 @@ const EventFilterStore = {
     ],
     checkAll: null,
     destinationType: '',
+    retryValues: {
+      alertLimits: '',
+      retryEnableStatus: false,
+      retryCount: '',
+      timeInterval: '',
+    },
   },
   getters: {
     getAlertData: (state) => state.alertData,
     getCheckAll: (state) => state.checkAll,
     getDestinationType: (state) => state.destinationType,
+    getRetryValues: (state) => state.retryValues,
   },
   mutations: {
     setAlertData: (state, eventFilterData) => {
@@ -142,18 +149,29 @@ const EventFilterStore = {
     setCheckAll: (state, newValue) => {
       state.checkAll = newValue;
     },
+
+    setRetryValues: (state, retryValues) => {
+      state.retryValues = retryValues;
+    },
   },
   actions: {
     async getEventFilterData({ commit }) {
       return await api
-        .get('/redfish/v1/PefService')
+        .get('/redfish/v1/Oem/Ami/PefService')
         .then((response) => {
           commit('setAlertData', response.data);
           commit('setDestinationType', response.data.DestinationType);
+          const retryValues = {
+            alertLimits: response.data.PendingAlertsLimit,
+            retryEnableStatus: response.data.RetryEnable,
+            retryCount: response.data.RetryCountLimit,
+            timeInterval: response.data.RetryTimeInterval,
+          };
+          commit('setRetryValues', retryValues);
         })
         .catch((error) => console.log(error));
     },
-    async setEventFilterData({ dispatch }, properties) {
+    async setEventFilterData(_, { properties, retryEventStatusValue }) {
       let filterArray = new Array(18);
       for (var i = 0; i < properties.length; i++) {
         if (properties[i].isSupported) {
@@ -166,10 +184,13 @@ const EventFilterStore = {
       }
       const data = {
         FilterEnable: filterArray,
+        RetryEnable: retryEventStatusValue.RetryEnable,
+        RetryCountLimit: retryEventStatusValue.RetryCountLimit,
+        RetryTimeInterval: retryEventStatusValue.RetryTimeInterval,
+        PendingAlertsLimit: retryEventStatusValue.PendingAlertsLimit,
       };
       return await api
-        .patch('/redfish/v1/PefService', data)
-        .then(() => dispatch('getEventFilterData'))
+        .patch('/redfish/v1/Oem/Ami/PefService', data)
         .then(() => i18n.t('pageEventFilter.toast.successEventFilterMsg'))
         .catch(() => {
           throw new Error(i18n.t('pageEventFilter.toast.errorEventFilterMsg'));
@@ -181,7 +202,7 @@ const EventFilterStore = {
         DestinationType: DestinationTypeValue,
       };
       return await api
-        .patch('/redfish/v1/PefService', destinationTypePayload)
+        .patch('/redfish/v1/Oem/Ami/PefService', destinationTypePayload)
         .then(() => {
           if (DestinationTypeValue) {
             return i18n.t('pageEventFilter.toast.successDestinationType');

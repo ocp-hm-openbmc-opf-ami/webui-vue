@@ -52,6 +52,115 @@
               </b-row>
             </b-col>
           </b-row>
+          <span class="mb20 inline__block">
+            {{ $t('pageEventFilter.retryLabelSettings') }}
+          </span>
+          <span class="inline__block">
+            <b-form-checkbox
+              v-model="retryEventStatus.retryEnableStatus"
+              data-test-id="alert-input-enable"
+              switch
+              :disabled="isButtonDisable"
+            >
+            </b-form-checkbox>
+          </span>
+          <!-- <b-row>
+            <b-col md="9" lg="8" xl="9">
+              <b-form-group :label="$t('pageEventFilter.retryEvent')">
+              </b-form-group>
+            </b-col>
+          </b-row> -->
+          <b-row v-if="retryEventStatus.retryEnableStatus">
+            <b-col lg="3">
+              <b-form-group
+                :label="$t('pageEventFilter.alertLimits')"
+                label-for="alertLimits"
+              >
+                <b-form-input
+                  id="alertLimits"
+                  v-model="retryEventStatus.alertLimits"
+                  type="text"
+                  data-test-id="userManagement-input-alertLimits"
+                  aria-describedby="alertLimits-help-block"
+                  :state="getValidationState($v.retryEventStatus.alertLimits)"
+                  @blur="$v.retryEventStatus.alertLimits.$touch()"
+                />
+                <b-form-invalid-feedback role="alert">
+                  <template v-if="!$v.retryEventStatus.alertLimits.required">
+                    {{ $t('global.form.fieldRequired') }}
+                  </template>
+                  <template
+                    v-if="
+                      $v.retryEventStatus.alertLimits.required &&
+                      !$v.retryEventStatus.alertLimits.pattern
+                    "
+                  >
+                    {{ $t('pageEventFilter.form.maxAlertLimitRequired') }}
+                  </template>
+                </b-form-invalid-feedback>
+              </b-form-group>
+            </b-col>
+            <b-col lg="3">
+              <b-form-group
+                :label="$t('pageEventFilter.retryCount')"
+                label-for="retryCount"
+              >
+                <b-form-input
+                  id="retryCount"
+                  v-model="retryEventStatus.retryCount"
+                  type="text"
+                  data-test-id="userManagement-input-retryCount"
+                  aria-describedby="retryCount-help-block"
+                  :state="getValidationState($v.retryEventStatus.retryCount)"
+                  @blur="$v.retryEventStatus.retryCount.$touch()"
+                />
+                <b-form-invalid-feedback role="alert">
+                  <template v-if="!$v.retryEventStatus.retryCount.required">
+                    {{ $t('global.form.fieldRequired') }}
+                  </template>
+                  <template
+                    v-if="
+                      $v.retryEventStatus.retryCount.required &&
+                      !$v.retryEventStatus.retryCount.pattern
+                    "
+                  >
+                    {{ $t('pageEventFilter.form.maxRetryCountRequired') }}
+                  </template>
+                </b-form-invalid-feedback>
+              </b-form-group>
+            </b-col>
+            <!-- </b-row> -->
+            <!-- <b-row v-if="retryEnableStatus"> -->
+            <b-col lg="3">
+              <b-form-group
+                :label="$t('pageEventFilter.timeInterval')"
+                label-for="timeInterval"
+              >
+                <b-form-input
+                  id="timeInterval"
+                  v-model="retryEventStatus.timeInterval"
+                  type="text"
+                  data-test-id="userManagement-input-timeInterval"
+                  aria-describedby="timeInterval-help-block"
+                  :state="getValidationState($v.retryEventStatus.timeInterval)"
+                  @blur="$v.retryEventStatus.timeInterval.$touch()"
+                />
+                <b-form-invalid-feedback role="alert">
+                  <template v-if="!$v.retryEventStatus.timeInterval.required">
+                    {{ $t('global.form.fieldRequired') }}
+                  </template>
+                  <template
+                    v-if="
+                      $v.retryEventStatus.timeInterval.required &&
+                      !$v.retryEventStatus.timeInterval.pattern
+                    "
+                  >
+                    {{ $t('pageEventFilter.form.maxTimeIntervalRequired') }}
+                  </template>
+                </b-form-invalid-feedback>
+              </b-form-group>
+            </b-col>
+          </b-row>
         </b-form-group>
         <b-row class="mb-3">
           <b-col>
@@ -95,6 +204,8 @@ import PageTitle from '@/components/Global/PageTitle';
 import IconSave from '@carbon/icons-vue/es/save/20';
 import { privilegesId } from '@/store/modules/GlobalStore';
 import { mapGetters } from 'vuex';
+import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
+import { requiredIf } from 'vuelidate/lib/validators';
 
 export default {
   name: 'EventFilterSettings',
@@ -102,7 +213,7 @@ export default {
     PageTitle,
     IconSave,
   },
-  mixins: [BVToastMixin, LoadingBarMixin],
+  mixins: [BVToastMixin, LoadingBarMixin, VuelidateMixin],
   data() {
     return {
       alertData: this.$store.getters['eventFilter/getAlertData'],
@@ -114,6 +225,12 @@ export default {
         { value: 'SnmpTrap', text: 'SNMP Trap' },
         { value: 'Both', text: 'Both' },
       ],
+      retryEventStatus: {
+        retryEnableStatus: false,
+        alertLimits: '',
+        retryCount: '',
+        timeInterval: '',
+      },
     };
   },
   computed: {
@@ -137,22 +254,92 @@ export default {
     },
   },
   created() {
-    this.startLoader();
-    this.$store.dispatch('eventFilter/getEventFilterData').finally(() => {
-      this.endLoader();
-      this.destinationTypes =
-        this.$store.getters['eventFilter/getDestinationType'];
-      this.localCheckAll = this.$store.getters['eventFilter/getCheckAll'];
-    });
+    this.eventFilterInit();
+  },
+  validations() {
+    return {
+      retryEventStatus: {
+        alertLimits: {
+          required: requiredIf(function () {
+            if (this.retryEventStatus.retryEnableStatus) {
+              return true;
+            }
+          }),
+          pattern: function (val) {
+            return this.retryEventStatus.retryEnableStatus
+              ? this.validateRange(val, 0, 100)
+              : true;
+          },
+        },
+        retryCount: {
+          required: requiredIf(function () {
+            if (this.retryEventStatus.retryEnableStatus) {
+              return true;
+            }
+          }),
+          pattern: function (val) {
+            return this.retryEventStatus.retryEnableStatus
+              ? this.validateRange(val, 0, 10)
+              : true;
+          },
+        },
+        timeInterval: {
+          required: requiredIf(function () {
+            if (this.retryEventStatus.retryEnableStatus) {
+              return true;
+            }
+          }),
+          pattern: function (val) {
+            return this.retryEventStatus.retryEnableStatus
+              ? this.validateRange(val, 0, 3600)
+              : true;
+          },
+        },
+      },
+    };
   },
   methods: {
-    handleSubmit() {
+    eventFilterInit() {
       this.startLoader();
+      this.$store.dispatch('eventFilter/getEventFilterData').finally(() => {
+        this.endLoader();
+        this.destinationTypes =
+          this.$store.getters['eventFilter/getDestinationType'];
+        this.retryEventStatus =
+          this.$store.getters['eventFilter/getRetryValues'];
+        this.localCheckAll = this.$store.getters['eventFilter/getCheckAll'];
+      });
+    },
+    handleSubmit() {
+      this.$v.$touch();
+      if (this.$v.$invalid) return;
+      this.startLoader();
+      const retryEventStatusValue = {};
+      retryEventStatusValue.RetryEnable =
+        this.retryEventStatus.retryEnableStatus;
+      if (this.retryEventStatus.retryCount !== '') {
+        retryEventStatusValue.RetryCountLimit = parseInt(
+          this.retryEventStatus.retryCount,
+        );
+      }
+      if (this.retryEventStatus.timeInterval !== '') {
+        retryEventStatusValue.RetryTimeInterval = parseInt(
+          this.retryEventStatus.timeInterval,
+        );
+      }
+      if (this.retryEventStatus.alertLimits !== '') {
+        retryEventStatusValue.PendingAlertsLimit = parseInt(
+          this.retryEventStatus.alertLimits,
+        );
+      }
       this.$store
-        .dispatch('eventFilter/setEventFilterData', this.alertData)
+        .dispatch('eventFilter/setEventFilterData', {
+          properties: this.alertData,
+          retryEventStatusValue,
+        })
         .then((success) => {
           this.successToast(success);
-          this.localCheckAll = this.$store.getters['eventFilter/getCheckAll'];
+          this.eventFilterInit();
         })
         .catch(({ message }) => {
           this.errorToast(message);
@@ -179,3 +366,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+.mb20 {
+  margin-bottom: 20px;
+  margin-right: 10px;
+}
+.inline__block {
+  display: inline-block;
+}
+</style>

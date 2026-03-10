@@ -6,7 +6,13 @@ const VuelidateMixin = {
       return $dirty ? !$error : null;
     },
     validateRange(val, min, max) {
-      return /^\d+$/.test(val) && val >= min && val <= max;
+      // Check if value contains only digits
+      if (!/^\d+$/.test(val)) return false;
+
+      const hasLeadingZero = val.length > 1 && val.charAt(0) === '0';
+      if (hasLeadingZero) return false;
+
+      return val >= min && val <= max;
     },
     //checking a value if value not come return NA
     getValidValue: function (val) {

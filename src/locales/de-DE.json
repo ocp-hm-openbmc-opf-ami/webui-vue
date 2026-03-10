@@ -2351,11 +2351,21 @@
         "powerUnitStatus": "Status der Stromversorgung",
         "processorDimmThermTrip": "Prozessor DIMM Thermischer Fehler",
         "destinationType": "Zieltyp",
+        "retryEvent":"Wiederholungsereignis",
+        "alertLimits":"Alarmlimit",
+        "retryCount":"Limit für Wiederholungsversuche",
+        "timeInterval":"Intervall für Wiederholungsversuche (Sekunden)",
+        "retryLabelSettings":"Konfiguration der Wiederholungsereignisse",
         "toast": {
             "successEventFilterMsg": "Ereignisfilter-Konfiguration erfolgreich aktualisiert.",
             "errorEventFilterMsg": "Fehler beim Aktualisieren der Ereignisfilter-Konfiguration.",
             "successDestinationType": "Zieltyp-Konfiguration erfolgreich aktualisiert.",
             "errorDestinationType": "Fehler beim Aktualisieren der Zieltyp-Konfiguration."
+        },
+        "form":{
+            "maxAlertLimitRequired": "Der maximale Alarmgrenzwert sollte im Bereich von 0 bis 100 liegen.",
+            "maxTimeIntervalRequired": "Das maximale Zeitintervall sollte im Bereich von 0 bis 3600 Sekunden liegen.",
+            "maxRetryCountRequired": "Die maximale Wiederholungsanzahl sollte im Bereich von 0 bis 10 liegen."
         }
     },
     "pagePageNotFound": {

@@ -211,7 +211,7 @@ const SmtpStore = {
     async sendTestAlert(_, properties) {
       return await api
         .post(
-          '/redfish/v1/PefService/Actions/PefService.SendAlertMail',
+          '/redfish/v1/Oem/Ami/PefService/Actions/PefService.SendAlertMail',
           properties,
         )
         .then(() => i18n.t('pageSmtp.toast.successMsgTestAlert'))

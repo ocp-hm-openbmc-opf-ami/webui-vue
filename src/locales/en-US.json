@@ -2346,11 +2346,21 @@
         "powerUnitStatus": "Power Unit Status",
         "processorDimmThermTrip": "Processor DIMM Therm Trip",
         "destinationType":"Destination Type",
+        "retryEvent":"Retry Event",
+        "alertLimits":"Alerts Limit",
+        "retryCount":"Retry Count Limit",
+        "timeInterval":"Retry Time Interval (Seconds)",
+        "retryLabelSettings":"Events Retry Configuration",
         "toast": {
             "successEventFilterMsg": "Event Filter Configuration updated successfully.",
             "errorEventFilterMsg": "Error in updating Event Filter Configuration.",
             "successDestinationType": "Destination Type Configuration updated successfully.",
             "errorDestinationType": "Error in updating Destination Type Configuration."
+        },
+        "form":{
+            "maxAlertLimitRequired": "Maximum Alert Limit value should be in range from 0 to 100",
+            "maxTimeIntervalRequired": "Maximum Time Interval should be in range from 0 to 3600 seconds.",
+            "maxRetryCountRequired": "Maximum Retry Count should be in range from 0 to 10."
         }
     },
     "pagePageNotFound": {
