@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import store from './store';
+import store from '../store';
+import router from './router';
 
 import Cookies from 'js-cookie';
 import i18n from '@/i18n';
@@ -24,6 +25,10 @@ export default {
       i18n.t('global.ariaLabel.megaracOneTree') + this.$route.meta.title ||
       'Page is missing title';
     window.addEventListener('beforeunload', this.handleRefresh);
+    const currentPath = router.currentRoute.path;
+    if (currentPath !== '/login') {
+      this.$store.dispatch('global/getManagerinstance');
+    }
     setTimeout(() => {
       if (
         Cookies.get('XSRF-TOKEN') &&

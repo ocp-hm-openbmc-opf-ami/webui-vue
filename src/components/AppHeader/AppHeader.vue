@@ -302,7 +302,6 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('global/getManagerinstance');
     this.$store.dispatch('authentication/resetStoreState');
     if (this.licenseStatus) {
       this.$store.dispatch('license/getUserAlertCount');
