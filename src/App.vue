@@ -7,7 +7,6 @@
 <script>
 import store from '../store';
 import router from './router';
-
 import Cookies from 'js-cookie';
 import i18n from '@/i18n';
 export default {
@@ -29,6 +28,7 @@ export default {
     if (currentPath !== '/login') {
       this.$store.dispatch('global/getManagerinstance');
     }
+    window.addEventListener('unload', this.handleRefresh);
     setTimeout(() => {
       if (
         Cookies.get('XSRF-TOKEN') &&
@@ -46,6 +46,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('beforeunload', this.handleRefresh);
+    window.removeEventListener('unload', this.handleRefresh);
   },
   methods: {
     // Perform logout or any other actions needed before unload
@@ -55,19 +56,11 @@ export default {
         window.name != 'kvmConsoleWindow' &&
         window.name != 'kvm1ConsoleWindow' &&
         window.location.href.indexOf('serial-over-lan-console') == -1 &&
-        window.location.href.indexOf('/redfish/v1') != -1
+        window.location.href.indexOf('/redfish/v1') == -1
       ) {
         if (event.srcElement.URL.indexOf('login') == -1) {
           console.log('event:', event);
           store.dispatch('authentication/logout');
-          //Due to firefox browser behaviour keep busy the browser to logout
-          if (
-            window.navigator.userAgent.toLowerCase().indexOf('firefox') != -1
-          ) {
-            for (let i = 0; i <= 1000; i++) {
-              console.log();
-            }
-          }
         }
       }
     },
