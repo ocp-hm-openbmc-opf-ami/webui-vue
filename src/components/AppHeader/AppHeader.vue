@@ -62,7 +62,7 @@
             ></b-form-select>
           </b-nav-item>
           <b-nav-item
-            v-if="biosFeatureEnabled"
+            v-if="biosFeatureEnabled && !isExternalUser"
             data-test-id="appHeader-container-bios"
             @click="openBios()"
           >
@@ -288,6 +288,9 @@ export default {
     },
     username() {
       return this.$store.getters['global/username'];
+    },
+    isExternalUser() {
+      return this.$store.getters['authentication/isExternalUser'];
     },
     ...mapState('license', ['isLicense']),
   },
