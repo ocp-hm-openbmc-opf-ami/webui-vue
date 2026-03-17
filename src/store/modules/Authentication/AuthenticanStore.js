@@ -61,6 +61,7 @@ const AuthenticationStore = {
       state.tfaPending = false;
       store.commit('dashboard/resetDashboardData');
       RuntimeConfig.reset();
+      state.consoleWindow = null;
       router.push('/login').catch(() => {});
     },
     setConsoleWindow: (state, window) => (state.consoleWindow = window),
@@ -144,6 +145,27 @@ const AuthenticationStore = {
       });
     },
     async logout({ commit, dispatch }) {
+      const isConsoleWindow = store.getters['kvm/getIsConsoleWindow'];
+      if (isConsoleWindow && isConsoleWindow.isconsolewindowOpen) {
+        try {
+          isConsoleWindow.isconsolewindowOpen.close();
+        } catch (e) {
+          console.log('Could not close KVM console window:', e);
+        }
+      }
+
+      if (window.isConsoleWindow && !window.isConsoleWindow.closed) {
+        try {
+          window.isConsoleWindow.postMessage(
+            { type: 'SOL_LOGOUT' },
+            window.location.origin,
+          );
+          window.isConsoleWindow.close();
+        } catch (e) {
+          console.log('Could not close SOL console window:', e);
+        }
+      }
+
       return await api
         .post('/logout', { data: [] })
         .then(() => {
@@ -222,6 +244,26 @@ const AuthenticationStore = {
       state.isAuthenticatedCookie = Cookies.get('IsAuthenticated');
     },
     customizedResetLogout({ commit }) {
+      const isConsoleWindow = store.getters['kvm/getIsConsoleWindow'];
+      if (isConsoleWindow && isConsoleWindow.isconsolewindowOpen) {
+        try {
+          isConsoleWindow.isconsolewindowOpen.close();
+        } catch (e) {
+          console.log('Could not close KVM console window:', e);
+        }
+      }
+      if (window.isConsoleWindow && !window.isConsoleWindow.closed) {
+        try {
+          window.isConsoleWindow.postMessage(
+            { type: 'SOL_LOGOUT' },
+            window.location.origin,
+          );
+          window.isConsoleWindow.close();
+        } catch (e) {
+          console.log('Could not close SOL console window:', e);
+        }
+      }
+
       commit('setConsoleWindow', false);
       commit('logout');
       localStorage.removeItem('storedLanguage');
