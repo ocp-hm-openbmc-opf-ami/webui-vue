@@ -85,6 +85,7 @@
             "diagnosticMode": "Diagnostic Mode",
             "disabled": "Disabled",
             "enabled": "Enabled",
+            "locked": "Locked",
             "error": "Error",
             "absent": "Absent",
             "notAvailable": "Not available",

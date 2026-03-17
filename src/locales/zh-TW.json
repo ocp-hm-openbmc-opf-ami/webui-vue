@@ -85,6 +85,7 @@
             "diagnosticMode": "診斷的模式",
             "disabled": "停用",
             "enabled": "啟用",
+            "locked": "已鎖定",
             "error": "錯誤",
             "absent": "無",
             "notAvailable": "無效",

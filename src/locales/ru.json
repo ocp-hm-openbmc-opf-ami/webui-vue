@@ -85,6 +85,7 @@
             "diagnosticMode": "Диагностический режим",
             "disabled": "Отключено",
             "enabled": "Включено",
+            "locked": "Заблокировано",
             "error": "Ошибка",
             "absent": "Отсутствует",
             "notAvailable": "Недоступно",

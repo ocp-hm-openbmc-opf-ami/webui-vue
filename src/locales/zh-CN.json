@@ -85,6 +85,7 @@
             "diagnosticMode": "诊断模式",
             "disabled": "禁用",
             "enabled": "启用",
+            "locked": "已锁定",
             "error": "错误",
             "absent": "无",
             "notAvailable": "不可用",
