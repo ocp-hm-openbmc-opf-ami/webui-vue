@@ -349,7 +349,7 @@ const VirtualMediaStoreHost02 = {
     async uploadLocalMedia(_, { formData }) {
       return await api
         .post(
-          '/redfish/v1/Systems/system1/Actions/Oem/AMIManager.LocalMediaUpload',
+          '/redfish/v1/Systems/system1/Actions/Oem/AmiVirtualMedia.LocalMediaUpload',
           formData,
           {
             headers: {
@@ -370,7 +370,7 @@ const VirtualMediaStoreHost02 = {
     ) {
       return await api
         .post(
-          '/redfish/v1/Systems/system1/Actions/Oem/AMIManager.LocalMediaRedirect',
+          '/redfish/v1/Systems/system1/Actions/Oem/AmiVirtualMedia.LocalMediaRedirect',
           {
             LocalMedia: localMedia,
             WriteProtected: writeProtected,
@@ -391,7 +391,7 @@ const VirtualMediaStoreHost02 = {
     async stopLocalMediaRedirect({ dispatch }) {
       return await api
         .post(
-          '/redfish/v1/Systems/system1/Actions/Oem/AMIManager.LocalMediaStopRedirect',
+          '/redfish/v1/Systems/system1/Actions/Oem/AmiVirtualMedia.LocalMediaStopRedirect',
         )
         .then(async () => {
           await dispatch('getData');
