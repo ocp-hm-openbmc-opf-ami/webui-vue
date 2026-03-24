@@ -78,7 +78,12 @@ export default {
     this.startLoader();
     Promise.all([
       this.$store.dispatch('ddnsNetwork/getDDNSEthernetData'),
-    ]).finally(() => this.endLoader());
+    ]).finally(() => {
+      this.endLoader();
+      if (this.ddnsEthernetData && this.ddnsEthernetData.length > 0) {
+        this.getTabIndex(this.ddnsEthernetData[0].Id, 0);
+      }
+    });
   },
   methods: {
     getTabIndex(id, selectedIndex) {
