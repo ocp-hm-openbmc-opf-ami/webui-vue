@@ -110,7 +110,6 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import Fpga from './FPGA.vue';
 import MemoryAssembly from './Assembly.vue';
 import MemoryMetrics from './MemoryMetrics.vue';
-import RuntimeConfig from '@/utilities/RuntimeConfig';
 import SimpleStorage from './SimpleStorage.vue';
 export default {
   name: 'SystemInventory',
@@ -142,8 +141,14 @@ export default {
     return {
       tabIndex: 0,
       hideTab: false,
-      isAMDVenicePlatform: RuntimeConfig.isMultiHostEnabled(),
     };
+  },
+  computed: {
+    isAMDVenicePlatform() {
+      const dashboardData = this.$store.getters['dashboard/dashboardData'];
+      const manufacturer = dashboardData?.Manufacturer;
+      return manufacturer && manufacturer === 'AMD';
+    },
   },
   created() {
     this.onTabChange(0); // Load first tab initially
