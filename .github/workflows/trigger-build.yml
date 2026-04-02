@@ -19,6 +19,9 @@ jobs:
     steps:
       - name: Dispatch to build_automation
         run: |
+          # Record timestamp before dispatch so we can find the exact run created by this trigger
+          echo "DISPATCH_TIME=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
+
           # Send PR context to build_automation via repository_dispatch.
           # Actor validation and target filtering happen inside openbmc-build.yml
           # which runs natively in build_automation with access to all repo variables.
@@ -72,17 +75,28 @@ jobs:
       - name: Comment on PR with build link
         if: success()
         run: |
-          # Wait briefly for the dispatched run to register in the API
-          sleep 5
+          # Poll the build_automation runs API until a run created after our dispatch
+          # timestamp appears. Retry up to 10 times with 5-second intervals (50s max).
+          RUN_URL=""
+          for i in $(seq 1 10); do
+            RUN_URL=$(curl -s \
+              -H "Authorization: Bearer ${{ secrets.BUILD_DISPATCH_TOKEN }}" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/ocp-hm-openbmc-opf-ami/build_automation/actions/runs?event=repository_dispatch&per_page=5" \
+              | jq -r --arg since "$DISPATCH_TIME" \
+                  '[.workflow_runs[] | select(.created_at > $since)] | first | .html_url // ""')
 
-          # Fetch the URL of the most recent repository_dispatch run in build_automation
-          RUN_URL=$(curl -s \
-            -H "Authorization: Bearer ${{ secrets.BUILD_DISPATCH_TOKEN }}" \
-            -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/repos/ocp-hm-openbmc-opf-ami/build_automation/actions/runs?event=repository_dispatch&per_page=1" \
-            | jq -r '.workflow_runs[0].html_url // "https://github.com/ocp-hm-openbmc-opf-ami/build_automation/actions"')
+            if [ -n "$RUN_URL" ] && [ "$RUN_URL" != "null" ]; then
+              echo "Found run: $RUN_URL"
+              break
+            fi
+            echo "Attempt $i: run not registered yet, retrying in 5s..."
+            sleep 5
+          done
 
-          # Use printf so \n is expanded to real newlines — bash double quotes do not expand \n
+          # Fall back to the general actions page if run was not found in time
+          RUN_URL="${RUN_URL:-https://github.com/ocp-hm-openbmc-opf-ami/build_automation/actions}"
+
           BODY=$(printf "**Yocto build triggered** by @${{ github.actor }}\nBranch: \`${{ github.head_ref }}\`\nTargets selected via labels on this PR.\n[View build run](%s)" "$RUN_URL")
 
           curl -s -X POST \
