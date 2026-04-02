@@ -61,10 +61,7 @@ jobs:
           # Post a comment on the PR so the author can track the build directly.
           # The build runs in build_automation — link points to its Actions page.
           BUILD_URL="https://github.com/ocp-hm-openbmc-opf-ami/build_automation/actions"
-          BODY="**Yocto build triggered** by @${{ github.actor }}  
-Branch: \`${{ github.head_ref }}\`  
-Targets selected via labels on this PR.  
-[View build progress in build_automation](${BUILD_URL})"
+          BODY="**Yocto build triggered** by @${{ github.actor }}\nBranch: \`${{ github.head_ref }}\`\nTargets selected via labels on this PR.\n[View build progress in build_automation](${BUILD_URL})"
 
           curl -s -X POST \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
