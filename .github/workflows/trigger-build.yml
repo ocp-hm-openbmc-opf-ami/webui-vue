@@ -72,10 +72,18 @@ jobs:
       - name: Comment on PR with build link
         if: success()
         run: |
-          # Post a comment on the PR so the author can track the build directly.
-          # The build runs in build_automation — link points to its Actions page.
-          BUILD_URL="https://github.com/ocp-hm-openbmc-opf-ami/build_automation/actions"
-          BODY="**Yocto build triggered** by @${{ github.actor }}\nBranch: \`${{ github.head_ref }}\`\nTargets selected via labels on this PR.\n[View build progress in build_automation](${BUILD_URL})"
+          # Wait briefly for the dispatched run to register in the API
+          sleep 5
+
+          # Fetch the URL of the most recent repository_dispatch run in build_automation
+          RUN_URL=$(curl -s \
+            -H "Authorization: Bearer ${{ secrets.BUILD_DISPATCH_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/ocp-hm-openbmc-opf-ami/build_automation/actions/runs?event=repository_dispatch&per_page=1" \
+            | jq -r '.workflow_runs[0].html_url // "https://github.com/ocp-hm-openbmc-opf-ami/build_automation/actions"')
+
+          # Use printf so \n is expanded to real newlines — bash double quotes do not expand \n
+          BODY=$(printf "**Yocto build triggered** by @${{ github.actor }}\nBranch: \`${{ github.head_ref }}\`\nTargets selected via labels on this PR.\n[View build run](%s)" "$RUN_URL")
 
           curl -s -X POST \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
