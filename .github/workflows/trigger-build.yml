@@ -9,8 +9,6 @@ on:
 jobs:
   trigger:
     name: Dispatch Build
-    # Fire whenever any label is added, as long as trigger_build is present on the PR.
-    # This covers the case where build-ast2700 is added after trigger_build is already there.
     if: contains(github.event.pull_request.labels.*.name, 'trigger_build')
     runs-on: ubuntu-latest
     permissions:
@@ -31,6 +29,7 @@ jobs:
             --arg pr_number   "${{ github.event.pull_request.number }}" \
             --arg base_ref    "${{ github.base_ref }}" \
             --arg source_repo "${{ github.repository }}" \
+            --arg repo_name   "${{ github.event.repository.name }}" \
             --arg pr_url      "${{ github.event.pull_request.html_url }}" \
             --argjson labels '${{ toJSON(github.event.pull_request.labels.*.name) }}' \
             '{
@@ -41,6 +40,7 @@ jobs:
                 pr_number:   $pr_number,
                 base_ref:    $base_ref,
                 source_repo: $source_repo,
+                repo_name:   $repo_name,
                 pr_url:      $pr_url,
                 pr_labels:   $labels
               }
@@ -77,14 +77,19 @@ jobs:
         run: |
           # Poll the build_automation runs API until a run created after our dispatch
           # timestamp appears. Retry up to 10 times with 5-second intervals (50s max).
+          # Note: querying another repo's Actions API requires the token to have Actions:read.
+          # BUILD_DISPATCH_TOKEN needs "Actions: Read-only" added to the fine-grained PAT.
           RUN_URL=""
           for i in $(seq 1 10); do
-            RUN_URL=$(curl -s \
+            API_RESPONSE=$(curl -s \
               -H "Authorization: Bearer ${{ secrets.BUILD_DISPATCH_TOKEN }}" \
               -H "Accept: application/vnd.github+json" \
-              "https://api.github.com/repos/ocp-hm-openbmc-opf-ami/build_automation/actions/runs?event=repository_dispatch&per_page=5" \
+              "https://api.github.com/repos/ocp-hm-openbmc-opf-ami/build_automation/actions/runs?event=repository_dispatch&per_page=5")
+            echo "Attempt $i — API response: $API_RESPONSE" | head -c 300
+
+            RUN_URL=$(echo "$API_RESPONSE" \
               | jq -r --arg since "$DISPATCH_TIME" \
-                  '[.workflow_runs[] | select(.created_at > $since)] | first | .html_url // ""')
+                  '[(.workflow_runs // [])[] | select(.created_at > $since)] | first | .html_url // ""')
 
             if [ -n "$RUN_URL" ] && [ "$RUN_URL" != "null" ]; then
               echo "Found run: $RUN_URL"
