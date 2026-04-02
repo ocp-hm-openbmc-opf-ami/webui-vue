@@ -9,8 +9,12 @@ on:
 jobs:
   trigger:
     name: Dispatch Build
-    if: github.event.label.name == 'trigger_build'
+    # Fire whenever any label is added, as long as trigger_build is present on the PR.
+    # This covers the case where build-ast2700 is added after trigger_build is already there.
+    if: contains(github.event.pull_request.labels.*.name, 'trigger_build')
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write   # required to post a comment and remove label
 
     steps:
       - name: Dispatch to build_automation
@@ -54,6 +58,16 @@ jobs:
             cat response.json
             exit 1
           fi
+
+      - name: Remove trigger_build label
+        if: success()
+        run: |
+          # Remove the trigger_build label so the pipeline does not re-fire on the
+          # next label event. The developer adds it again to re-trigger a build.
+          curl -s -X DELETE \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels/trigger_build"
 
       - name: Comment on PR with build link
         if: success()
