@@ -428,7 +428,8 @@
             "ipv6IPPriority": "Ipv6",
             "tsigFileUpload": "上傳 TSIG 金鑰文件",
             "tsigFileUploadDiscription": "僅上傳（.private）文件",
-            "addDomainNames": "新增網域名稱"
+            "addDomainNames": "新增網域名稱",
+            "invalidFQDN": "請輸入有效的完全限定網域名稱（例如：example.com）"
         },
         "toast": {
             "errorNsUpdate": "更新作業 DoNsUpdate 時發生錯誤。",

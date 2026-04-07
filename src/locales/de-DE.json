@@ -428,7 +428,8 @@
             "ipv6IPPriority": "Ipv6",
             "tsigFileUpload": "TSIG-Schlüsseldatei hochladen",
             "tsigFileUploadDiscription": "Nur (.private) Dateien hochladen",
-            "addDomainNames": "Domänennamen hinzufügen"
+            "addDomainNames": "Domänennamen hinzufügen",
+            "invalidFQDN": "Bitte geben Sie einen gültigen vollqualifizierten Domänennamen ein (z.B. example.com)"
         },
         "toast": {
             "errorNsUpdate": "Fehler beim Aktualisieren der Aktion DoNSUpdate.",

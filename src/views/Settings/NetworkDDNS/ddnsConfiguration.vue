@@ -51,6 +51,9 @@
               <template v-if="!$v.domainNames.$each[index].required">
                 {{ $t('global.form.fieldRequired') }}
               </template>
+              <template v-else-if="!$v.domainNames.$each[index].validFQDN">
+                {{ $t('pageDDNSNetwork.ddnsConfiguration.invalidFQDN') }}
+              </template>
             </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
@@ -275,6 +278,10 @@ export default {
       domainNames: {
         $each: {
           required,
+          validFQDN: function (value) {
+            if (!value) return true; // Skip validation if empty (required handles this)
+            return this.isValidFQDN(value);
+          },
         },
       },
     };
@@ -358,6 +365,45 @@ export default {
     getIsFileTypeCorrect(file) {
       const fileTypeExtension = file.name.split('.').pop();
       return fileTypeExtension === 'private';
+    },
+    isValidFQDN(domain) {
+      let cleanDomain = domain.trim();
+      cleanDomain = cleanDomain.replace(/^(https?:\/\/)/i, '');
+
+      if (!cleanDomain || cleanDomain.length > 253) {
+        return false;
+      }
+
+      if (!cleanDomain.includes('.')) {
+        return false;
+      }
+
+      const labels = cleanDomain.split('.');
+
+      if (labels.length < 2) {
+        return false;
+      }
+
+      const labelRegex = /^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$/;
+
+      for (let i = 0; i < labels.length; i++) {
+        const label = labels[i];
+
+        if (label.length === 0 || label.length > 63) {
+          return false;
+        }
+
+        if (!labelRegex.test(label)) {
+          return false;
+        }
+      }
+
+      const tld = labels[labels.length - 1];
+      if (tld.length < 2 || !/^[a-zA-Z]{2,}$/.test(tld)) {
+        return false;
+      }
+
+      return true;
     },
     reset() {
       this.file = null;

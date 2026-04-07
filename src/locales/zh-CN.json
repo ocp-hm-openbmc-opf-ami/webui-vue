@@ -427,7 +427,8 @@
             "ipv6IPPriority": "Ipv6",
             "tsigFileUpload": "上传 TSIG 密钥文件",
             "tsigFileUploadDiscription": "仅上传（.private）文件",
-            "addDomainNames": "添加域名"
+            "addDomainNames": "添加域名",
+            "invalidFQDN": "请输入有效的完全限定域名（例如：example.com）"
         },
         "toast": {
             "errorNsUpdate": "更新操作 DoNsUpdate 时出错。",

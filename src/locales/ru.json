@@ -427,7 +427,8 @@
             "ipv6IPPriority": "IPv6",
             "tsigFileUpload": "Загрузить файл ключа TSIG",
             "tsigFileUploadDiscription": "Загружать только файлы (.private)",
-            "addDomainNames": "Добавить доменные имена"
+            "addDomainNames": "Добавить доменные имена",
+            "invalidFQDN": "Пожалуйста, введите действительное полное доменное имя (например, example.com)"
         },
         "toast": {
             "errorNsUpdate": "Ошибка обновления действия DoNSUpdate.",
