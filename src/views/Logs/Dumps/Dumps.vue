@@ -280,9 +280,13 @@ export default {
         : this.filteredDumps.length;
     },
     allDumps() {
+      const bmcDumpLabel = this.$t('pageDumps.table.bmcDumpEntry');
       return this.$store.getters['dumps/allDumps'].map((item) => {
+        const dumpType =
+          item.dumpType === 'BMC Dump Entry' ? bmcDumpLabel : item.dumpType;
         return {
           ...item,
+          dumpType,
           actions: [
             {
               value: 'download',
