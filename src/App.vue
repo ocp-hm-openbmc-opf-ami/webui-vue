@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import store from '../store';
+import store from './store';
 import router from './router';
 import Cookies from 'js-cookie';
 import i18n from '@/i18n';

@@ -41,7 +41,8 @@
             "stop":"停止",
             "actions":"動作",
             "browse" : "瀏覽",
-            "submit": "提交"
+            "submit": "提交",
+            "done": "完成"
         },
         "ariaLabel": {
             "clearSearch": "清除搜索條件",
@@ -134,7 +135,10 @@
         "2fa":"2FA",
         "setupTwoFactorAuthentication":"設置雙重申份驗證",
         "qrCodeLabel":"將以下內容新增到您選擇的身分驗證應用程式中，並在下面驗證它以啟用。",
-        "backupCodeLable":"請儲存您的備份代碼以備緊急情況使用。"
+        "backupCodeLable":"請儲存您的備份代碼以備緊急情況使用。",
+        "tfaWarningMessage":"警告：關閉此視窗前，請先在身分驗證器應用程式中掃描兩步驟驗證的 QR 碼，並儲存備份代碼以備緊急使用。若工作階段過期，必須使用這些備份代碼才能恢復存取。",
+        "tfaCloseConfirmTitle":"完成 2FA 設定？",
+        "tfaCloseConfirmMessage":"您確定要關閉嗎？關閉前，請確認您已掃描兩步驟驗證 QR 碼，並已儲存備份代碼以備緊急使用。"
     },
     "appNavigation": {
         "bsod": "@:appPageTitle.bsod",
@@ -839,13 +843,15 @@
     "pageTfa": {
         "submit": "提交",
         "verificationCode": "驗證碼",
-        "verificationCodeMessage":"請輸入google認證產生的驗證碼。注意：OTP 將在 30 秒後過期。",
+        "verificationCodeMessage":"請輸入由您選擇的認證應用程式生成的驗證碼。注意：OTP 將在 30 秒後過期。",
         "modal": {
             "confirmation": "確認",
             "confirmMessage": "您想停用雙重認證嗎？"
         },
         "toast": {
-            "tfaFailed": "雙重認證失敗"
+            "tfaFailed": "雙重認證失敗",
+            "tfaEnabled": "雙重認證已成功啟用。請使用你的認證應用程式進行未來登錄。",
+            "setupCancelled": "雙重認證設定已取消。該功能仍然禁用。"
         }
     },
     "pageSessions": {

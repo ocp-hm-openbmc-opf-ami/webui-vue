@@ -41,7 +41,8 @@
             "stop": "Stoppen",
             "actions": "Aktionen",
             "browse": "Durchsuchen",
-            "submit": "Senden"
+            "submit": "Senden",
+            "done": "Fertig"
         },
         "ariaLabel": {
             "clearSearch": "Sucheingabe löschen",
@@ -134,7 +135,10 @@
         "2fa": "2FA",
         "setupTwoFactorAuthentication": "Zwei-Faktor-Authentifizierung einrichten",
         "qrCodeLabel": "Fügen Sie den folgenden Code in Ihre bevorzugte Authentifizierungs-App ein und bestätigen Sie ihn unten, um die Funktion zu aktivieren.",
-        "backupCodeLable": "Bitte speichern Sie Ihre Backup-Codes für den Notfall sicher ab."
+        "backupCodeLable": "Bitte speichern Sie Ihre Backup-Codes für den Notfall sicher ab.",
+        "tfaWarningMessage": "Warnung: Bevor Sie dieses Fenster schließen, scannen Sie den QR-Code für die Zwei-Faktor-Authentifizierung in Ihrer Authenticator-App und speichern Sie Ihre Backup-Codes für Notfälle. Wenn Ihre Sitzung abläuft, sind diese Backup-Codes erforderlich, um den Zugriff wiederherzustellen.",
+        "tfaCloseConfirmTitle": "2FA-Einrichtung abschließen?",
+        "tfaCloseConfirmMessage": "Möchten Sie dieses Fenster wirklich schließen? Bitte bestätigen Sie vorher, dass Sie den QR-Code für die Zwei-Faktor-Authentifizierung gescannt und Ihre Backup-Codes für den Notfall gespeichert haben."
     },
     "appNavigation": {
         "bsod": "@:appPageTitle.bsod",
@@ -840,13 +844,15 @@
     "pageTfa": {
         "submit": "Absenden",
         "verificationCode": "Verifizierungscode",
-        "verificationCodeMessage": "Bitte geben Sie den von Google Authenticator generierten Verifizierungscode ein. HINWEIS: OTP läuft nach 30 Sekunden ab.",
+        "verificationCodeMessage": "Bitte geben Sie den Verifizierungscode ein, der von Ihrer bevorzugten Authentifizierungs-App generiert wurde. HINWEIS: OTP läuft nach 30 Sekunden ab.",
         "modal": {
             "confirmation": "Bestätigung",
             "confirmMessage": "Möchten Sie die Zwei-Faktor-Authentifizierung deaktivieren?"
         },
         "toast": {
-            "tfaFailed": "Zwei-Faktor-Authentifizierung fehlgeschlagen."
+            "tfaFailed": "Zwei-Faktor-Authentifizierung fehlgeschlagen.",
+            "tfaEnabled": "Zwei-Faktor-Authentifizierung wurde erfolgreich aktiviert. Bitte verwenden Sie Ihre Authenticator-App für zukünftige Anmeldungen.",
+            "setupCancelled": "Die Einrichtung der Zwei-Faktor-Authentifizierung wurde abgebrochen. Die Funktion bleibt deaktiviert."
         }
     },
     "pageSessions": {
