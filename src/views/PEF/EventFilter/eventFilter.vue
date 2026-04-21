@@ -266,6 +266,10 @@ export default {
             }
           }),
           pattern: function (val) {
+            if (/^[0-9]+$/.test(val)) {
+              //handling value with leading zeors
+              this.retryEventStatus.alertLimits = String(Number(val));
+            }
             return this.retryEventStatus.retryEnableStatus
               ? this.validateRange(val, 0, 100)
               : true;
@@ -278,6 +282,10 @@ export default {
             }
           }),
           pattern: function (val) {
+            if (/^[0-9]+$/.test(val)) {
+              //handling value with leading zeors
+              this.retryEventStatus.retryCount = String(Number(val));
+            }
             return this.retryEventStatus.retryEnableStatus
               ? this.validateRange(val, 0, 10)
               : true;
@@ -290,6 +298,10 @@ export default {
             }
           }),
           pattern: function (val) {
+            if (/^[0-9]+$/.test(val)) {
+              //handling value with leading zeors
+              this.retryEventStatus.timeInterval = String(Number(val));
+            }
             return this.retryEventStatus.retryEnableStatus
               ? this.validateRange(val, 0, 3600)
               : true;
