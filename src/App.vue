@@ -74,14 +74,18 @@ export default {
     onLoaderStop() {
       this.isFirmwareLoaderActive = false;
     },
-    // Handle keyup events - reset F5detect flag
+    // Handle keyup events - reset refresh key flag
     handleKeyUp() {
       this.F5detect = false;
     },
-    // Handle keydown events - intercept F5 key
+    // Handle keydown events - intercept F5 and Ctrl+R refresh keys
     handleKeyDown(e) {
-      if ((e.which || e.keyCode) === 116 && this.F5detect === false) {
-        /* Disabled F5 button and trigger customized refresh.*/
+      const keyCode = e.which || e.keyCode;
+      const isF5 = keyCode === 116;
+      const isCtrlR = (e.ctrlKey || e.metaKey) && keyCode === 82;
+
+      if ((isF5 || isCtrlR) && this.F5detect === false) {
+        /* Disable browser refresh and trigger customized refresh action. */
         this.F5detect = true;
         e.preventDefault();
         this.handleRefresh(e);
