@@ -737,7 +737,7 @@
             "name": "名称",
             "bandwidthPercent": "带宽百分比",
             "blockSizeBytes": "块大小字节数",
-            "blocBlocksWrittenksRead": "读写的块",
+            "blocksWritten": "写入的块",
             "blocksRead": "已读取的块",
             "addressParityError": "地址奇偶校验错误",
             "correctableECCError": "可纠正的 ECC 错误",

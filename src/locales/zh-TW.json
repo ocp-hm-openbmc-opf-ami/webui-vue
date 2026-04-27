@@ -738,7 +738,7 @@
             "name": "名稱",
             "bandwidthPercent": "頻寬百分比",
             "blockSizeBytes": "區塊大小位元組",
-            "blocBlocksWrittenksRead": "寫入讀取的區塊",
+            "blocksWritten": "寫入的區塊",
             "blocksRead": "區塊讀取",
             "addressParityError": "地址奇偶校驗錯誤",
             "correctableECCError": "可糾正的 ECC 錯誤",

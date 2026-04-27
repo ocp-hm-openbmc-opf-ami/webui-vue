@@ -738,7 +738,7 @@
             "name": "Name",
             "bandwidthPercent": "Bandbreite Prozent",
             "blockSizeBytes": "Blockgröße Bytes",
-            "blocBlocksWrittenksRead": "Geschriebene und Gelesene Blöcke",
+            "blocksWritten": "Geschriebene Blöcke",
             "blocksRead": "Gelesene Blöcke",
             "addressParityError": "Adress-Paritätsfehler",
             "correctableECCError": "Korrigierbarer ECC-Fehler",

@@ -1,6 +1,7 @@
 import api from '@/store/api';
 import store from '@/store';
 import RuntimeConfig from '@/utilities/RuntimeConfig';
+import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 
 const SystemInventoryStore = {
   namespaced: true,
@@ -231,32 +232,18 @@ const SystemInventoryStore = {
                     const MetricsData = {
                       id: metricsresponse?.data?.Id || 'NA',
                       name: metricsresponse?.data?.Name || 'NA',
-                      bandwidthPercent: metricsresponse?.data?.BandwidthPercent
-                        ? metricsresponse?.data?.BandwidthPercent
-                        : metricsresponse?.data?.BandwidthPercent === 0 || 0.0
-                          ? metricsresponse?.data?.BandwidthPercent
-                          : 'NA',
-                      blockSizeBytes: metricsresponse?.data?.BlockSizeBytes
-                        ? metricsresponse?.data?.BlockSizeBytes
-                        : metricsresponse?.data?.BlockSizeBytes === 0 || 0.0
-                          ? metricsresponse?.data?.BlockSizeBytes
-                          : 'NA',
-                      blocBlocksWrittenksRead: metricsresponse?.data
-                        ?.CurrentPeriod?.BlocBlocksWrittenksRead
-                        ? metricsresponse?.data?.CurrentPeriod
-                            ?.BlocBlocksWrittenksRead
-                        : metricsresponse?.data?.CurrentPeriod
-                              ?.BlocBlocksWrittenksRead === 0 || 0.0
-                          ? metricsresponse?.data?.CurrentPeriod
-                              ?.BlocBlocksWrittenksRead
-                          : 'NA',
-                      blocksRead: metricsresponse?.data?.CurrentPeriod
-                        ?.BlocksRead
-                        ? metricsresponse?.data?.CurrentPeriod?.BlocksRead
-                        : metricsresponse?.data?.CurrentPeriod?.BlocksRead ===
-                              0 || 0.0
-                          ? metricsresponse?.data?.CurrentPeriod?.BlocksRead
-                          : 'NA',
+                      bandwidthPercent: VuelidateMixin.methods.getValidValue(
+                        metricsresponse?.data?.BandwidthPercent,
+                      ),
+                      blockSizeBytes: VuelidateMixin.methods.getValidValue(
+                        metricsresponse?.data?.BlockSizeBytes,
+                      ),
+                      blocksWritten: VuelidateMixin.methods.getValidValue(
+                        metricsresponse?.data?.CurrentPeriod?.BlocksWritten,
+                      ),
+                      blocksRead: VuelidateMixin.methods.getValidValue(
+                        metricsresponse?.data?.CurrentPeriod?.BlocksRead,
+                      ),
                       addressParityError: metricsresponse?.data?.HealthData
                         ?.AlarmTrips?.AddressParityError
                         ? metricsresponse?.data?.HealthData?.AlarmTrips
@@ -308,38 +295,22 @@ const SystemInventoryStore = {
                           ? metricsresponse?.data?.HealthData
                               ?.LastShutdownSuccess
                           : 'NA',
-                      performanceDegraded: metricsresponse?.data?.HealthData
-                        ?.PerformanceDegraded
-                        ? metricsresponse?.data?.HealthData?.PerformanceDegraded
-                        : metricsresponse?.data?.HealthData
-                              ?.PerformanceDegraded === 0 || 0.0
-                          ? metricsresponse?.data?.HealthData
-                              ?.PerformanceDegraded
-                          : 'NA',
-                      predictedMediaLifeLeftPercent: metricsresponse?.data
-                        ?.HealthData?.PredictedMediaLifeLeftPercent
-                        ? metricsresponse?.data?.HealthData
-                            ?.PredictedMediaLifeLeftPercent
-                        : metricsresponse?.data?.HealthData
-                              ?.PredictedMediaLifeLeftPercent === 0 || 0.0
-                          ? metricsresponse?.data?.HealthData
-                              ?.PredictedMediaLifeLeftPercent
-                          : 'NA',
-                      remainingSpareBlockPercentage: metricsresponse?.data
-                        ?.HealthData?.RemainingSpareBlockPercentage
-                        ? metricsresponse?.data?.HealthData
-                            ?.RemainingSpareBlockPercentage
-                        : metricsresponse?.data?.HealthData
-                              ?.RemainingSpareBlockPercentage === 0 || 0.0
-                          ? metricsresponse?.data?.HealthData
-                              ?.RemainingSpareBlockPercentage
-                          : 'NA',
-                      operatingSpeedMHz: metricsresponse?.data
-                        ?.OperatingSpeedMHz
-                        ? metricsresponse?.data?.OperatingSpeedMHz
-                        : metricsresponse?.data?.OperatingSpeedMHz === 0 || 0.0
-                          ? metricsresponse?.data?.OperatingSpeedMHz
-                          : 'NA',
+                      performanceDegraded: VuelidateMixin.methods.getValidValue(
+                        metricsresponse?.data?.HealthData?.PerformanceDegraded,
+                      ),
+                      predictedMediaLifeLeftPercent:
+                        VuelidateMixin.methods.getValidValue(
+                          metricsresponse?.data?.HealthData
+                            ?.PredictedMediaLifeLeftPercent,
+                        ),
+                      remainingSpareBlockPercentage:
+                        VuelidateMixin.methods.getValidValue(
+                          metricsresponse?.data?.HealthData
+                            ?.RemainingSpareBlockPercentage,
+                        ),
+                      operatingSpeedMHz: VuelidateMixin.methods.getValidValue(
+                        metricsresponse?.data?.OperatingSpeedMHz,
+                      ),
                     };
                     metricsInfo.push(MetricsData);
                   });

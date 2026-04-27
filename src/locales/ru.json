@@ -737,7 +737,7 @@
             "name": "Имя",
             "bandwidthPercent": "Пропускная способность в процентах",
             "blockSizeBytes": "Размер блока в байтах",
-            "blocBlocksWrittenksRead": "Записанные блоки прочитаны",
+            "blocksWritten": "Записанные блоки",
             "blocksRead": "Прочитанные блоки",
             "addressParityError": "Ошибка четности адреса",
             "correctableECCError": "Исправимая ошибка ECC",
