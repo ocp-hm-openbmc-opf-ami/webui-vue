@@ -194,7 +194,7 @@ const NetworkDDNSStore = {
       };
       return await api
         .patch(
-          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${state.ddnsFirstInterfaceId}`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${state.ddnsSelectedInterfaceId}`,
           dhcpState,
         )
         .then(() => dispatch('getDDNSEthernetData'))

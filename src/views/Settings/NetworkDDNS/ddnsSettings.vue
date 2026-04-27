@@ -6,24 +6,6 @@
       <b-row>
         <b-col sm="4">
           <b-form-group
-            :label="$t('pageDDNSNetwork.ddnsConfiguration.sendHostNameEnabled')"
-          >
-            <b-form-checkbox
-              v-model="sendHostNameEnabled"
-              data-test-id="ddns-toggle-host-name"
-              switch
-              :disabled="isButtonDisable"
-              @change="changeHostNameEnabled"
-            >
-              <span v-if="sendHostNameEnabled">
-                {{ $t('global.status.enabled') }}
-              </span>
-              <span v-else>{{ $t('global.status.disabled') }}</span>
-            </b-form-checkbox>
-          </b-form-group>
-        </b-col>
-        <b-col sm="4">
-          <b-form-group
             :label="$t('pageDDNSNetwork.ddnsConfiguration.sendNsupdateEnabled')"
           >
             <b-form-checkbox
@@ -157,14 +139,6 @@ export default {
       'staticHostName',
       'defaultHostName',
     ]),
-    sendHostNameEnabled: {
-      get() {
-        return this.$store.getters['ddnsNetwork/hostNameEnabled'];
-      },
-      set(newValue) {
-        return newValue;
-      },
-    },
     sendNsupdateEnabled: {
       get() {
         return this.$store.getters['ddnsNetwork/nsUpdateEnabled'];
@@ -186,18 +160,6 @@ export default {
     },
   },
   methods: {
-    changeHostNameEnabled(state) {
-      this.startLoader();
-      this.$store
-        .dispatch('ddnsNetwork/saveHostNameEnabled', state)
-        .then((success) => {
-          if (success) {
-            this.successToast(success);
-          }
-        })
-        .catch(({ message }) => this.errorToast(message))
-        .finally(() => this.endLoader());
-    },
     changeNsupdateEnabled(state) {
       this.startLoader();
       this.$store

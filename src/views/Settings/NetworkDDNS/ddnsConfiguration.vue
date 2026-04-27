@@ -1,5 +1,25 @@
 <template>
   <b-container fluid="xl">
+    <b-row>
+      <b-col sm="4">
+        <b-form-group
+          :label="$t('pageDDNSNetwork.ddnsConfiguration.sendHostNameEnabled')"
+        >
+          <b-form-checkbox
+            v-model="sendHostNameEnabled"
+            data-test-id="ddns-toggle-host-name"
+            switch
+            :disabled="isButtonDisable"
+            @change="changeHostNameEnabled"
+          >
+            <span v-if="sendHostNameEnabled">
+              {{ $t('global.status.enabled') }}
+            </span>
+            <span v-else>{{ $t('global.status.disabled') }}</span>
+          </b-form-checkbox>
+        </b-form-group>
+      </b-col>
+    </b-row>
     <page-section
       :section-title="
         $t('pageDDNSNetwork.ddnsConfiguration.domainConfiguration')
@@ -254,6 +274,20 @@ export default {
       return this.$store.getters['ddnsNetwork/domainNameServer'][this.tabIndex]
         .dhcpv6.useDomainNameEnabled;
     },
+    sendHostNameEnabled: {
+      get() {
+        console.log(
+          this.$store.getters['ddnsNetwork/ddnsEthernetData'][this.tabIndex].Oem
+            ?.Ami?.DNSConfiguration?.DHCPConfiguration?.SendHostNameEnabled,
+        );
+        return this.$store.getters['ddnsNetwork/ddnsEthernetData'][
+          this.tabIndex
+        ].Oem?.Ami?.DNSConfiguration?.DHCPConfiguration?.SendHostNameEnabled;
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
   },
   watch: {
     tabIndex() {
@@ -432,6 +466,18 @@ export default {
       this.startLoader();
       this.$store
         .dispatch('ddnsNetwork/saveDomainNameConfigurations', this.domainNames)
+        .then((success) => {
+          if (success) {
+            this.successToast(success);
+          }
+        })
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => this.endLoader());
+    },
+    changeHostNameEnabled(state) {
+      this.startLoader();
+      this.$store
+        .dispatch('ddnsNetwork/saveHostNameEnabled', state)
         .then((success) => {
           if (success) {
             this.successToast(success);
