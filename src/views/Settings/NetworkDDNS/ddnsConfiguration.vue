@@ -1,5 +1,25 @@
 <template>
   <b-container fluid="xl">
+    <b-row>
+      <b-col sm="4">
+        <b-form-group
+          :label="$t('pageDDNSNetwork.ddnsConfiguration.sendHostNameEnabled')"
+        >
+          <b-form-checkbox
+            v-model="sendHostNameEnabled"
+            data-test-id="ddns-toggle-host-name"
+            switch
+            :disabled="isButtonDisable"
+            @change="changeHostNameEnabled"
+          >
+            <span v-if="sendHostNameEnabled">
+              {{ $t('global.status.enabled') }}
+            </span>
+            <span v-else>{{ $t('global.status.disabled') }}</span>
+          </b-form-checkbox>
+        </b-form-group>
+      </b-col>
+    </b-row>
     <page-section
       :section-title="
         $t('pageDDNSNetwork.ddnsConfiguration.domainConfiguration')
@@ -50,6 +70,9 @@
             <b-form-invalid-feedback role="alert">
               <template v-if="!$v.domainNames.$each[index].required">
                 {{ $t('global.form.fieldRequired') }}
+              </template>
+              <template v-else-if="!$v.domainNames.$each[index].validFQDN">
+                {{ $t('pageDDNSNetwork.ddnsConfiguration.invalidFQDN') }}
               </template>
             </b-form-invalid-feedback>
           </b-form-group>
@@ -251,6 +274,20 @@ export default {
       return this.$store.getters['ddnsNetwork/domainNameServer'][this.tabIndex]
         .dhcpv6.useDomainNameEnabled;
     },
+    sendHostNameEnabled: {
+      get() {
+        console.log(
+          this.$store.getters['ddnsNetwork/ddnsEthernetData'][this.tabIndex].Oem
+            ?.Ami?.DNSConfiguration?.DHCPConfiguration?.SendHostNameEnabled,
+        );
+        return this.$store.getters['ddnsNetwork/ddnsEthernetData'][
+          this.tabIndex
+        ].Oem?.Ami?.DNSConfiguration?.DHCPConfiguration?.SendHostNameEnabled;
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
   },
   watch: {
     tabIndex() {
@@ -275,6 +312,10 @@ export default {
       domainNames: {
         $each: {
           required,
+          validFQDN: function (value) {
+            if (!value) return true; // Skip validation if empty (required handles this)
+            return this.isValidFQDN(value);
+          },
         },
       },
     };
@@ -359,6 +400,45 @@ export default {
       const fileTypeExtension = file.name.split('.').pop();
       return fileTypeExtension === 'private';
     },
+    isValidFQDN(domain) {
+      let cleanDomain = domain.trim();
+      cleanDomain = cleanDomain.replace(/^(https?:\/\/)/i, '');
+
+      if (!cleanDomain || cleanDomain.length > 253) {
+        return false;
+      }
+
+      if (!cleanDomain.includes('.')) {
+        return false;
+      }
+
+      const labels = cleanDomain.split('.');
+
+      if (labels.length < 2) {
+        return false;
+      }
+
+      const labelRegex = /^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$/;
+
+      for (let i = 0; i < labels.length; i++) {
+        const label = labels[i];
+
+        if (label.length === 0 || label.length > 63) {
+          return false;
+        }
+
+        if (!labelRegex.test(label)) {
+          return false;
+        }
+      }
+
+      const tld = labels[labels.length - 1];
+      if (tld.length < 2 || !/^[a-zA-Z]{2,}$/.test(tld)) {
+        return false;
+      }
+
+      return true;
+    },
     reset() {
       this.file = null;
       this.$v.$reset();
@@ -386,6 +466,18 @@ export default {
       this.startLoader();
       this.$store
         .dispatch('ddnsNetwork/saveDomainNameConfigurations', this.domainNames)
+        .then((success) => {
+          if (success) {
+            this.successToast(success);
+          }
+        })
+        .catch(({ message }) => this.errorToast(message))
+        .finally(() => this.endLoader());
+    },
+    changeHostNameEnabled(state) {
+      this.startLoader();
+      this.$store
+        .dispatch('ddnsNetwork/saveHostNameEnabled', state)
         .then((success) => {
           if (success) {
             this.successToast(success);

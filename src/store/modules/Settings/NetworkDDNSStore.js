@@ -90,7 +90,7 @@ const NetworkDDNSStore = {
       commit('setDefaultHostName', firstEtherData.HostName);
       commit('setStaticHostName', staticHostName);
     },
-    async getDDNSEthernetData({ commit, dispatch }) {
+    async getDDNSEthernetData({ commit, dispatch, state }) {
       return await api
         .get(
           `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces`,
@@ -117,7 +117,9 @@ const NetworkDDNSStore = {
             });
           const firstEtherData = ethernetData[0];
           const firstInterfaceId = ethernetData[0].Id;
-          commit('setDDNSSelectedInterfaceId', firstInterfaceId);
+          if (!state.ddnsSelectedInterfaceId) {
+            commit('setDDNSSelectedInterfaceId', firstInterfaceId);
+          }
           commit('setDDNSEthernetData', ethernetData);
           commit('setDDNSFirstInterfaceId', firstInterfaceId);
           commit('setDDNSFirstEtherData', firstEtherData);
@@ -192,7 +194,7 @@ const NetworkDDNSStore = {
       };
       return await api
         .patch(
-          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${state.ddnsFirstInterfaceId}`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${state.ddnsSelectedInterfaceId}`,
           dhcpState,
         )
         .then(() => dispatch('getDDNSEthernetData'))

@@ -157,6 +157,16 @@ exports[`AppHeader.vue should render correctly 1`] = `
             size="lg"
             title="appHeader.setupTwoFactorAuthentication"
           >
+            <b-alert
+              class="mb-3"
+              show=""
+              variant="warning"
+            >
+              <strong>
+                appHeader.tfaWarningMessage
+              </strong>
+            </b-alert>
+             
             <p
               class="my-4"
             >

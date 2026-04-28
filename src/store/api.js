@@ -28,16 +28,31 @@ api.interceptors.response.use(undefined, (error) => {
 
   // TODO: Provide user with a notification and way to keep system active
   if (response.status == 401) {
-    const isConsoleWindow = store.getters['kvm/getIsConsoleWindow'];
-    if (isConsoleWindow) {
-      isConsoleWindow.isconsolewindowOpen.close();
-    }
     const isKvm1ConsoleWindow = store.getters['kvm/getIsKvm1ConsoleWindow'];
     if (isKvm1ConsoleWindow) {
       isKvm1ConsoleWindow.isKvm1consolewindowOpen.close();
     }
     if (response.config.url != '/login') {
-      // Commit logout to remove XSRF-TOKEN cookie
+      const isConsoleWindow = store.getters['kvm/getIsConsoleWindow'];
+      if (isConsoleWindow && isConsoleWindow.isconsolewindowOpen) {
+        try {
+          isConsoleWindow.isconsolewindowOpen.close();
+        } catch (e) {
+          console.log('Could not close KVM console window:', e);
+        }
+      }
+      if (window.isConsoleWindow && !window.isConsoleWindow.closed) {
+        try {
+          window.isConsoleWindow.postMessage(
+            { type: 'SOL_LOGOUT' },
+            window.location.origin,
+          );
+          window.isConsoleWindow.close();
+        } catch (e) {
+          console.log('Could not close SOL console window:', e);
+        }
+      }
+      store.commit('authentication/setConsoleWindow', false);
       store.commit('authentication/logout');
     }
   }

@@ -609,19 +609,8 @@ export default {
       },
       disabled: this.$store.getters['global/username'],
       globalPrivilege: this.$store.getters['global/userPrivilege'],
-      encryptionType: [
-        { value: 'DES', text: 'DES' },
-        { value: 'AES', text: 'AES' },
-      ],
+      encryptionType: [{ value: 'AES', text: 'AES' }],
       algorithmType: [
-        {
-          value: 'SHA-224',
-          text: this.$tc('pageUserManagement.modal.authProtocolsh224'),
-        },
-        {
-          value: 'SHA-256',
-          text: this.$tc('pageUserManagement.modal.authProtocolsha256'),
-        },
         {
           value: 'SHA-384',
           text: this.$tc('pageUserManagement.modal.authProtocolsha384'),

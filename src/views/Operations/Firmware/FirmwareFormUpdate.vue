@@ -176,6 +176,7 @@ import ModalUpdateFirmware from './FirmwareModalUpdateFirmware';
 import IconUpdate from '@carbon/icons-vue/es/update-now/20';
 import { untar } from 'untar.js';
 import { ungzip } from 'pako';
+const moment = require('moment-timezone');
 
 export default {
   components: { FormFile, ModalUpdateFirmware, IconUpdate },
@@ -268,6 +269,9 @@ export default {
     inventryDetailsValues() {
       return this.$store.getters['firmware/getInventryFirmwareData'];
     },
+    bmcTimeZone() {
+      return this.$store.getters['global/timeZone'];
+    },
   },
   watch: {
     isWorkstationSelected: function () {
@@ -336,6 +340,10 @@ export default {
     this.updateFirmwareInit();
   },
   methods: {
+    getTimezoneOffset() {
+      // Get timezone offset based on BMC's TimeZoneName
+      return moment().tz(this.bmcTimeZone).format('Z');
+    },
     updateFirmwareInit() {
       this.$store.dispatch('firmware/getUpdateServiceSettings').then(() => {
         this.targetSelectedOptions = [];
@@ -555,7 +563,7 @@ export default {
               MaintenanceWindowStartTime:
                 enddateval != ''
                   ? enddateval.toISOString().substring(0, 19) +
-                    this.firmwareDateTime?.slice(19)
+                    this.getTimezoneOffset()
                   : '',
             },
           };

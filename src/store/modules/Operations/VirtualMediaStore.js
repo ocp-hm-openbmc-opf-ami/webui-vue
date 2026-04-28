@@ -354,7 +354,7 @@ const VirtualMediaStore = {
       commit('setLocalMediaUploadInProgress', true);
       try {
         return await api.post(
-          '/redfish/v1/Systems/system/Actions/Oem/AMIManager.LocalMediaUpload',
+          '/redfish/v1/Systems/system/Actions/Oem/AmiVirtualMedia.LocalMediaUpload',
           file,
           {
             headers: {
@@ -379,7 +379,7 @@ const VirtualMediaStore = {
     ) {
       return await api
         .post(
-          '/redfish/v1/Systems/system/Actions/Oem/AMIManager.LocalMediaRedirect',
+          '/redfish/v1/Systems/system/Actions/Oem/AmiVirtualMedia.LocalMediaRedirect',
           {
             LocalMedia: localMedia,
             WriteProtected: writeProtected,
@@ -400,7 +400,7 @@ const VirtualMediaStore = {
     async stopLocalMediaRedirect({ dispatch }) {
       return await api
         .post(
-          '/redfish/v1/Systems/system/Actions/Oem/AMIManager.LocalMediaStopRedirect',
+          '/redfish/v1/Systems/system/Actions/Oem/AmiVirtualMedia.LocalMediaStopRedirect',
         )
         .then(async () => {
           await dispatch('getData');

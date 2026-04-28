@@ -79,6 +79,8 @@ export default {
       fitAddon: null,
       cols: 80,
       rows: 25,
+      storageListener: null,
+      messageListener: null,
     };
   },
   computed: {
@@ -94,13 +96,51 @@ export default {
     },
   },
   watch: {
-    consoleWindow() {
-      if (this.consoleWindow == false) window.isConsoleWindow.close();
+    consoleWindow(newValue) {
+      if (newValue === false || newValue === null) {
+        if (
+          !this.isFullWindow &&
+          window.isConsoleWindow &&
+          !window.isConsoleWindow.closed
+        ) {
+          try {
+            window.isConsoleWindow.postMessage(
+              { type: 'SOL_LOGOUT' },
+              window.location.origin,
+            );
+          } catch (e) {
+            console.log('Failed to send message to child:', e);
+          }
+          window.isConsoleWindow.close();
+        }
+      }
     },
   },
   created() {
     this.$store.dispatch('global/getSystemInfo');
     window.addEventListener('beforeunload', this.handleChildWindowBeforeUnload);
+    if (this.isFullWindow && window.opener) {
+      this.storageListener = (e) => {
+        if (
+          (e.key === 'storedUsername' || e.key === 'loginRoleId') &&
+          e.newValue === null
+        ) {
+          console.log('Parent logged out - closing child window');
+          window.close();
+        }
+      };
+      window.addEventListener('storage', this.storageListener);
+      this.messageListener = (event) => {
+        if (
+          event.origin === window.location.origin &&
+          event.data.type === 'SOL_LOGOUT'
+        ) {
+          console.log('Received logout message from parent');
+          window.close();
+        }
+      };
+      window.addEventListener('message', this.messageListener);
+    }
   },
   mounted() {
     this.timeTrack();
@@ -120,6 +160,15 @@ export default {
       'beforeunload',
       this.handleChildWindowBeforeUnload,
     );
+
+    // Remove child window listeners
+    if (this.storageListener) {
+      window.removeEventListener('storage', this.storageListener);
+    }
+    if (this.messageListener) {
+      window.removeEventListener('message', this.messageListener);
+    }
+
     clearInterval(this.intervalId);
     this.closeTerminal();
   },

@@ -62,7 +62,7 @@
             ></b-form-select>
           </b-nav-item>
           <b-nav-item
-            v-if="biosFeatureEnabled"
+            v-if="biosFeatureEnabled && !isExternalUser"
             data-test-id="appHeader-container-bios"
             @click="openBios()"
           >
@@ -116,8 +116,11 @@
               centered
               :title="$t('appHeader.setupTwoFactorAuthentication')"
               size="lg"
-              @hidden="resetForm"
+              @hide="handleModalClose"
             >
+              <b-alert show variant="warning" class="mb-3">
+                <strong>{{ $t('appHeader.tfaWarningMessage') }}</strong>
+              </b-alert>
               <p class="my-4">
                 {{ $t('appHeader.qrCodeLabel') }}
               </p>
@@ -137,11 +140,11 @@
                   {{ code }}
                 </li>
               </ul>
-              <template #modal-footer="{ close }">
+              <template #modal-footer>
                 <b-button
                   variant="secondary"
                   data-test-id="2fa-close-button"
-                  @click="close()"
+                  @click="requestModalClose"
                 >
                   {{ $t('global.action.close') }}
                 </b-button>
@@ -232,6 +235,8 @@ export default {
       qrCodeUrl: '',
       recoveryCode: [],
       isNavigationOpen: false,
+      isShowingCloseConfirmation: false,
+      isClosingAfterAction: false,
       altLogo: process.env.VUE_APP_COMPANY_NAME || 'AMI',
       licenseStatus: this.$store.getters['license/isLicense'],
       serverStatusIcon: 'secondary', // Set default value
@@ -284,6 +289,9 @@ export default {
     username() {
       return this.$store.getters['global/username'];
     },
+    isExternalUser() {
+      return this.$store.getters['authentication/isExternalUser'];
+    },
     ...mapState('license', ['isLicense']),
   },
   watch: {
@@ -302,7 +310,6 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('global/getManagerinstance');
     this.$store.dispatch('authentication/resetStoreState');
     if (this.licenseStatus) {
       this.$store.dispatch('license/getUserAlertCount');
@@ -395,6 +402,8 @@ export default {
               this.$store.getters['authentication/tfaEnabled'];
             this.recoveryCode = response.RecoveryCodes;
             this.qrCodeUrl = response.Url;
+            this.isShowingCloseConfirmation = false;
+            this.isClosingAfterAction = false;
             this.$bvModal.show('modal-center');
           })
           .catch(({ message }) => this.errorToast(message))
@@ -411,8 +420,63 @@ export default {
       event.preventDefault();
       this.$root.$emit('skip-navigation');
     },
-    resetForm() {
-      this.tfaUserEnabled = true;
+    handleModalClose(bvEvent) {
+      if (this.isClosingAfterAction) {
+        this.isClosingAfterAction = false;
+        this.isShowingCloseConfirmation = false;
+        return;
+      }
+      bvEvent.preventDefault();
+      if (this.isShowingCloseConfirmation) {
+        return;
+      }
+
+      this.isShowingCloseConfirmation = true;
+
+      // Show confirmation dialog
+      this.$bvModal
+        .msgBoxConfirm(this.$t('appHeader.tfaCloseConfirmMessage'), {
+          title: this.$t('appHeader.tfaCloseConfirmTitle'),
+          okTitle: this.$t('global.action.yes'),
+          cancelTitle: this.$t('global.action.no'),
+        })
+        .then((confirmed) => {
+          if (confirmed) {
+            this.tfaUserEnabled =
+              this.$store.getters['authentication/tfaEnabled'];
+            this.isClosingAfterAction = true;
+            this.isShowingCloseConfirmation = false;
+            this.$nextTick(() => {
+              this.$bvModal.hide('modal-center');
+            });
+            this.successToast(this.$t('pageTfa.toast.tfaEnabled'));
+          } else {
+            this.startLoader();
+            this.$store
+              .dispatch('authentication/disableTfa')
+              .then(() => {
+                this.tfaUserEnabled =
+                  this.$store.getters['authentication/tfaEnabled'];
+                this.isClosingAfterAction = true;
+                this.isShowingCloseConfirmation = false;
+                this.$nextTick(() => {
+                  this.$bvModal.hide('modal-center');
+                });
+                this.infoToast(this.$t('pageTfa.toast.setupCancelled'));
+              })
+              .catch(({ message }) => {
+                this.errorToast(message);
+                this.isShowingCloseConfirmation = false;
+              })
+              .finally(() => this.endLoader());
+          }
+        })
+        .catch(() => {
+          this.isShowingCloseConfirmation = false;
+        });
+    },
+    requestModalClose() {
+      this.$bvModal.hide('modal-center');
     },
     languageChange() {
       this.$store.commit('global/setLanguagePreference', i18n.locale);

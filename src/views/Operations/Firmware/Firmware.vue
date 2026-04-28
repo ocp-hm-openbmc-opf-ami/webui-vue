@@ -48,6 +48,7 @@
         <!-- Update form -->
         <b-col sm="6" md="6" xl="6">
           <form-update
+            v-if="showFWinfo"
             :is-server-off="isServerOff"
             :is-page-disabled="isPageDisabled"
             :is-validation-status="validationStatus"
@@ -102,6 +103,7 @@ export default {
       globalPrivilege: this.$store.getters['global/userPrivilege'],
       multiPartChangStatus: false,
       MultiplePartJsonFormat: {},
+      showFWinfo: false,
     };
   },
   computed: {
@@ -128,9 +130,10 @@ export default {
   },
   created() {
     this.startLoader();
-    this.$store
-      .dispatch('firmware/getFirmwareInformation')
-      .finally(() => this.endLoader());
+    this.$store.dispatch('firmware/getFirmwareInformation').finally(() => {
+      this.showFWinfo = true;
+      this.endLoader();
+    });
   },
   methods: {
     isApplyTimeForm(val) {

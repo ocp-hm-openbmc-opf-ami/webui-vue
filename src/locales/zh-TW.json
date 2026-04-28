@@ -41,7 +41,8 @@
             "stop":"停止",
             "actions":"動作",
             "browse" : "瀏覽",
-            "submit": "提交"
+            "submit": "提交",
+            "done": "完成"
         },
         "ariaLabel": {
             "clearSearch": "清除搜索條件",
@@ -85,6 +86,7 @@
             "diagnosticMode": "診斷的模式",
             "disabled": "停用",
             "enabled": "啟用",
+            "locked": "已鎖定",
             "error": "錯誤",
             "absent": "無",
             "notAvailable": "無效",
@@ -134,7 +136,10 @@
         "2fa":"2FA",
         "setupTwoFactorAuthentication":"設置雙重申份驗證",
         "qrCodeLabel":"將以下內容新增到您選擇的身分驗證應用程式中，並在下面驗證它以啟用。",
-        "backupCodeLable":"請儲存您的備份代碼以備緊急情況使用。"
+        "backupCodeLable":"請儲存您的備份代碼以備緊急情況使用。",
+        "tfaWarningMessage":"警告：關閉此視窗前，請先在身分驗證器應用程式中掃描兩步驟驗證的 QR 碼，並儲存備份代碼以備緊急使用。若工作階段過期，必須使用這些備份代碼才能恢復存取。",
+        "tfaCloseConfirmTitle":"完成 2FA 設定？",
+        "tfaCloseConfirmMessage":"您確定要關閉嗎？關閉前，請確認您已掃描兩步驟驗證 QR 碼，並已儲存備份代碼以備緊急使用。"
     },
     "appNavigation": {
         "bsod": "@:appPageTitle.bsod",
@@ -428,7 +433,8 @@
             "ipv6IPPriority": "Ipv6",
             "tsigFileUpload": "上傳 TSIG 金鑰文件",
             "tsigFileUploadDiscription": "僅上傳（.private）文件",
-            "addDomainNames": "新增網域名稱"
+            "addDomainNames": "新增網域名稱",
+            "invalidFQDN": "請輸入有效的完全限定網域名稱（例如：example.com）"
         },
         "toast": {
             "errorNsUpdate": "更新作業 DoNsUpdate 時發生錯誤。",
@@ -733,7 +739,7 @@
             "name": "名稱",
             "bandwidthPercent": "頻寬百分比",
             "blockSizeBytes": "區塊大小位元組",
-            "blocBlocksWrittenksRead": "寫入讀取的區塊",
+            "blocksWritten": "寫入的區塊",
             "blocksRead": "區塊讀取",
             "addressParityError": "地址奇偶校驗錯誤",
             "correctableECCError": "可糾正的 ECC 錯誤",
@@ -838,13 +844,15 @@
     "pageTfa": {
         "submit": "提交",
         "verificationCode": "驗證碼",
-        "verificationCodeMessage":"請輸入google認證產生的驗證碼。注意：OTP 將在 30 秒後過期。",
+        "verificationCodeMessage":"請輸入由您選擇的認證應用程式生成的驗證碼。注意：OTP 將在 30 秒後過期。",
         "modal": {
             "confirmation": "確認",
             "confirmMessage": "您想停用雙重認證嗎？"
         },
         "toast": {
-            "tfaFailed": "雙重認證失敗"
+            "tfaFailed": "雙重認證失敗",
+            "tfaEnabled": "雙重認證已成功啟用。請使用你的認證應用程式進行未來登錄。",
+            "setupCancelled": "雙重認證設定已取消。該功能仍然禁用。"
         }
     },
     "pageSessions": {

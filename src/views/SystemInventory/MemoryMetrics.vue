@@ -35,10 +35,8 @@ export default {
           label: this.$t('pageSystemInventory.memoryMetrics.blockSizeBytes'),
         },
         {
-          key: 'blocBlocksWrittenksRead',
-          label: this.$t(
-            'pageSystemInventory.memoryMetrics.blocBlocksWrittenksRead',
-          ),
+          key: 'blocksWritten',
+          label: this.$t('pageSystemInventory.memoryMetrics.blocksWritten'),
         },
         {
           key: 'blocksRead',
