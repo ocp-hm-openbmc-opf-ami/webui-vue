@@ -78,8 +78,22 @@ const CertificatesStore = {
             },
           }) => Certificates.map((certificate) => certificate['@odata.id']),
         )
-        .then((certificateLocations) => {
-          const promises = certificateLocations.map((location) =>
+        .then(async (certificateLocations) => {
+          // ASD certificate is under the Manager resource
+          const asdResult = await this.dispatch(
+            'asd/getAsdCertificateLocations',
+            null,
+            { root: true },
+          ).catch(() => {
+            return { locations: [], supported: false };
+          });
+
+          const allCertificateLocations = [
+            ...certificateLocations,
+            ...asdResult.locations,
+          ];
+
+          const promises = allCertificateLocations.map((location) =>
             api.get(location),
           );
           api.all(promises).then(
@@ -129,12 +143,20 @@ const CertificatesStore = {
                   issuedToEmail: Subject.Email,
                 };
               });
-              const availableUploadTypes = CERTIFICATE_TYPES.filter(
+              let availableUploadTypes = CERTIFICATE_TYPES.filter(
                 ({ type }) =>
                   !certificates
                     .map((certificate) => certificate.type)
                     .includes(type),
               );
+
+              // Remove ASD Certificate from available types if BMC doesn't support ASD
+              if (!asdResult.supported) {
+                availableUploadTypes = availableUploadTypes.filter(
+                  (cert) => cert.type !== 'ASD Certificate',
+                );
+              }
+
               // Ensure "CA Certificate" is always included but max 10
               const caCertType = CERTIFICATE_TYPES.find(
                 (cert) => cert.type === 'TrustStore Certificate',
