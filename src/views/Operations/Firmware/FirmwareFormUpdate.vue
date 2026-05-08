@@ -283,7 +283,10 @@ export default {
     // Handle multipart status and auto-generate JSON
     isMultiPartStatus(newVal) {
       if (newVal) {
-        // When multipart is enabled, set default target and generate JSON
+        // When multipart is enabled, ensure image target is enabled unless busy
+        this.activeImageDisabled = this.httpPushUriTargetsBusyStatus
+          ? true
+          : false;
         this.$nextTick(() => {
           if (
             this.targetSelected === '' &&

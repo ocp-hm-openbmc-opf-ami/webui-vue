@@ -367,7 +367,7 @@ const VirtualMediaStore = {
         );
       } catch (error) {
         console.log('Upload local media:', error);
-        throw new Error(i18n.t('pageVirtualMedia.eMMC.uploadError'));
+        throw error;
       } finally {
         commit('setLocalMediaUploadInProgress', false);
       }

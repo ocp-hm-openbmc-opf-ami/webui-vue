@@ -344,6 +344,14 @@ const AppNavigationMixin = {
           exclusiveToRoles: [roles.administrator],
         });
       }
+      if (RuntimeConfig.isMultiHostEnabled()) {
+        navigationItemsList.navigationItems[3].children.push({
+          id: 'serial-over-lan-0',
+          label: this.$t('appNavigation.serialOverLan1'),
+          route: '/operations/serial-over-lan-1',
+          exclusiveToRoles: [roles.administrator],
+        });
+      }
       if (
         process.env.VUE_APP_ONETREE_POWER_ENABLED === 'true' &&
         process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true'

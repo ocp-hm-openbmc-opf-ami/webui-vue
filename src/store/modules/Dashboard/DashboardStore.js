@@ -8,12 +8,20 @@ import ServerPowerOperations1 from '@/views/Operations/ServerPowerOperations1';
 import VirtualMediaHost02 from '@/views/Operations/VirtualMediaHost02';
 import AutoVideoSettings from '@/views/Settings/AutoVideoSettings';
 import VideoLogs from '@/views/Logs/VideoLogs';
+import SerialOverLan1 from '@/views/Operations/SerialOverLan/SerialOverLan1';
+import SerialOverLanConsole1 from '@/views/Operations/SerialOverLan/SerialOverLanConsole1';
 import PageNotFound from '@/views/PageNotFound';
 
 import i18n from '@/i18n';
 
 // Cache for preventing duplicate API calls
 let fetchPromise = null;
+
+const rolesPrivilege = {
+  administrator: 'Administrator',
+  operator: 'Operator',
+  readonly: 'ReadOnly',
+};
 
 const DashboardStore = {
   namespaced: true,
@@ -284,6 +292,31 @@ const DashboardStore = {
                     roles.operator,
                     roles.readonly,
                   ],
+                },
+              });
+            }
+
+            // Add serial-over-lan-console-1 route to ConsoleLayout parent
+            if (!routeExists('serial-over-lan-console-1')) {
+              router.addRoute('console-layout', {
+                path: 'serial-over-lan-console-1',
+                name: 'serial-over-lan-console-1',
+                component: SerialOverLanConsole1,
+                meta: {
+                  title: i18n.t('appPageTitle.serialOverLan1'),
+                },
+              });
+            }
+
+            // Add serial-over-lan-1 route to AppLayout
+            if (!routeExists('serial-over-lan-1')) {
+              router.addRoute('app-layout', {
+                path: '/operations/serial-over-lan-1',
+                name: 'serial-over-lan-1',
+                component: SerialOverLan1,
+                meta: {
+                  title: i18n.t('appPageTitle.serialOverLan1'),
+                  exclusiveToRoles: [rolesPrivilege.administrator],
                 },
               });
             }

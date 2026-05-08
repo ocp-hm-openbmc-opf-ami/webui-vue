@@ -22,6 +22,7 @@
                 <table-cell-count
                   :filtered-items-count="filteredRows"
                   :total-number-of-cells="allDumps.length"
+                  :is-search-active="!!searchFilter"
                 ></table-cell-count>
               </div>
             </b-col>
@@ -55,15 +56,16 @@
             responsive="md"
             sort-by="dateTime"
             :fields="fields"
-            :items="filteredDumps"
+            :items="searchableDumps"
             :empty-text="$t('global.table.emptyMessage')"
             :empty-filtered-text="$t('global.table.emptySearchMessage')"
             :per-page="perPage"
             :filter="searchFilter"
+            :filter-function="customTableFilter"
             :busy="isBusy"
             :current-page="currentPage"
             @filtered="onFiltered"
-            @row-selected="onRowSelected($event, filteredDumps.length)"
+            @row-selected="onRowSelected($event, searchableDumps.length)"
           >
             <!-- Checkbox column -->
             <template #head(checkbox)>
@@ -263,7 +265,7 @@ export default {
       perPage: perPage,
       limit: limit,
       searchFilter: searchFilter,
-      searchTotalFilteredRows: 0,
+      searchTotalFilteredRows: null,
       selectedRows,
       tableHeaderCheckboxIndeterminate,
       tableHeaderCheckboxModel,
@@ -275,7 +277,7 @@ export default {
       return this.userPrivilege !== privilegesId.admin;
     },
     filteredRows() {
-      return this.searchFilter
+      return this.searchTotalFilteredRows !== null
         ? this.searchTotalFilteredRows
         : this.filteredDumps.length;
     },
@@ -316,6 +318,21 @@ export default {
         this.activeFilters,
       );
     },
+    searchableDumps() {
+      return this.filteredDumps.map((dump) => ({
+        ...dump,
+        _searchableText: [
+          this.$options.filters.formatDate(dump.dateTime),
+          this.$options.filters.formatTime(dump.dateTime),
+          dump.dumpType,
+          dump.id,
+          dump.size,
+        ]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase(),
+      }));
+    },
   },
   created() {
     this.startLoader();
@@ -332,7 +349,13 @@ export default {
       this.activeFilters = activeFilters;
     },
     onFiltered(filteredItems) {
-      this.searchTotalFilteredRows = filteredItems.length;
+      if (this.searchFilter) {
+        this.searchTotalFilteredRows = filteredItems.length;
+      }
+    },
+    onClearSearchInput() {
+      this.searchFilter = null;
+      this.searchTotalFilteredRows = null;
     },
     onChangeSearchInput(event) {
       this.searchFilter = event;

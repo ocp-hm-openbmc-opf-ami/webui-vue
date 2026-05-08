@@ -44,6 +44,7 @@ const GlobalStore = {
     modelType: null,
     serialNumber: null,
     serverStatus: 'unreachable',
+    serverStatus1: 'unreachable',
     languagePreference: localStorage.getItem('storedLanguage') || 'en-US',
     isUtcDisplay: localStorage.getItem('storedUtcDisplay')
       ? JSON.parse(localStorage.getItem('storedUtcDisplay'))
@@ -62,6 +63,7 @@ const GlobalStore = {
     modelType: (state) => state.modelType,
     serialNumber: (state) => state.serialNumber,
     serverStatus: (state) => state.serverStatus,
+    serverStatus1: (state) => state.serverStatus1,
     bmcTime: (state) => state.bmcTime,
     bmcDateTime: (state) => state.bmcDateTime,
     timeZone: (state) => state.timeZone,
@@ -89,6 +91,8 @@ const GlobalStore = {
     setTimeZone: (state, timeZone) => (state.timeZone = timeZone),
     setServerStatus: (state, serverState) =>
       (state.serverStatus = serverStateMapper(serverState)),
+    setServerStatus1: (state, serverState) =>
+      (state.serverStatus1 = serverStateMapper(serverState)),
     setLanguagePreference: (state, language) =>
       (state.languagePreference = language),
     setUsername: (state, username) => (state.username = username),
@@ -199,6 +203,21 @@ const GlobalStore = {
             }
           },
         )
+        .catch((error) => console.log(error));
+    },
+    async getSystemInfo1({ commit }) {
+      return await api
+        .get('/redfish/v1/Systems/system1')
+        .then(({ data: { PowerState, Status: { State } = {} } } = {}) => {
+          if (State === 'Quiesced' || State === 'InTest') {
+            // OpenBMC's host state interface is mapped to 2 Redfish
+            // properties "Status""State" and "PowerState". Look first
+            // at State for certain cases.
+            commit('setServerStatus1', State);
+          } else {
+            commit('setServerStatus1', PowerState);
+          }
+        })
         .catch((error) => console.log(error));
     },
   },

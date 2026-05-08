@@ -722,6 +722,7 @@
                     </b-card>
                   </b-col>
                 </b-row>
+                <!-- SOL Console Section with Dual Host Support -->
                 <b-row v-if="isSolEnabled" class="setting-section">
                   <b-col
                     lg="7"
@@ -734,128 +735,339 @@
                       </dd>
                     </dl>
                   </b-col>
-                  <b-col lg="3" class="session-timeout">
-                    <b-form-checkbox
-                      id="solSwitch"
-                      v-model="solState"
-                      data-test-id="policies-toggle-sol"
-                      switch
-                      :disabled="userPrivilege === privilegesId.readOnly"
-                      @change="changeSOLState"
-                    >
-                      <span class="sr-only">
-                        {{ $t('pagePolicies.solssh') }}
-                      </span>
-                      <span v-if="solState">
-                        {{ $t('global.status.enabled') }}
-                      </span>
-                      <span v-else>{{ $t('global.status.disabled') }}</span>
-                    </b-form-checkbox>
-                  </b-col>
                 </b-row>
-                <b-row
-                  v-if="solState && !isMultiSolMode"
-                  class="setting-section"
-                >
-                  <b-col cols="3" class="d-flex align-items-center">
-                    <b-form-group
-                      id="input-group-1"
-                      :label="$t('pagePolicies.solSshPortLabel')"
-                      label-for="input-1"
-                    >
-                      <b-form-input
-                        id="input-solSsh-port"
-                        v-model.number="solSshPort"
-                        data-test-id="input-solSshPort"
-                        type="number"
-                        :disabled="userPrivilege === privilegesId.readOnly"
-                        aria-describedby="power-help-text"
-                        :state="getValidationState($v.solSshPort)"
-                        @input="$v.solSshPort.$touch()"
-                      ></b-form-input>
-                      <b-form-invalid-feedback role="alert">
-                        <template v-if="!$v.solSshPort.required">
-                          {{ $t('global.form.fieldRequired') }}
-                        </template>
-                        <template v-else-if="!$v.solSshPort.pattern">
-                          {{
-                            $t('pagePolicies.solSshPortValueLimits', {
-                              min: 1,
-                              max: 65535,
-                            })
-                          }}
-                        </template>
-                      </b-form-invalid-feedback>
-                    </b-form-group>
-                  </b-col>
-                  <b-col class="d-flex align-items-center">
-                    <b-button
-                      variant="primary"
-                      type="submit"
-                      :disabled="userPrivilege === privilegesId.readOnly"
-                      data-test-id="power-button-saveIpmiPortValue"
-                      @click="saveSolSshPortValue"
-                    >
-                      <icon-save />
-                      {{ $t('global.action.save') }}
-                    </b-button>
-                  </b-col>
-                </b-row>
-                <b-row
-                  v-if="isMultiSolMode && multiSolSshList.length > 0"
-                  class="setting-section"
-                >
-                  <b-col lg="12">
-                    <dl class="mt-3 mb-4">
-                      <dt>{{ $t('pagePolicies.multiSolSsh') }}</dt>
-                      <dd>{{ $t('pagePolicies.multiSolSshDescription') }}</dd>
-                    </dl>
-                    <div>
-                      <b-row
-                        v-for="solService in multiSolSshList"
-                        :key="solService.Id"
-                        class="setting-section"
-                      >
-                        <b-col
-                          lg="7"
-                          class="d-flex align-items-center justify-content-between"
-                        >
-                          <dl class="mt-3 mr-4 w-75">
-                            <dt>
-                              {{
-                                $t('pagePolicies.solSshService', {
-                                  solId: solService.Id,
-                                })
-                              }}
-                            </dt>
-                          </dl>
-                        </b-col>
-                        <b-col lg="3" class="session-timeout">
-                          <b-form-checkbox
-                            :id="`solSwitch-${solService.Id}`"
-                            :checked="!solService.Masked"
-                            :data-test-id="`policies-toggle-sol-${solService.Id}`"
-                            switch
-                            :disabled="userPrivilege === privilegesId.readOnly"
-                            @change="changeMultiSOLState(solService.Id, $event)"
+                <b-row v-if="isSolEnabled" class="setting-section">
+                  <b-col lg="7">
+                    <!-- Tab Navigation for SOL Console -->
+                    <b-card no-body class="vm-card">
+                      <b-tabs pills card>
+                        <!-- SOL Console Tab -->
+                        <b-tab :title="$t('pagePolicies.solssh')" active>
+                          <b-row v-if="!isMultiSolMode" class="mb-3">
+                            <b-col
+                              lg="12"
+                              class="d-flex align-items-center justify-content-between"
+                            >
+                              <span>{{
+                                $t('pagePolicies.enableSolService')
+                              }}</span>
+                              <b-form-checkbox
+                                id="solSwitch"
+                                v-model="solState"
+                                data-test-id="policies-toggle-sol"
+                                switch
+                                :disabled="
+                                  userPrivilege === privilegesId.readOnly
+                                "
+                                @change="changeSOLState"
+                              >
+                                <span class="sr-only">
+                                  {{ $t('pagePolicies.solssh') }}
+                                </span>
+                                <span v-if="solState">
+                                  {{ $t('global.status.enabled') }}
+                                </span>
+                                <span v-else>{{
+                                  $t('global.status.disabled')
+                                }}</span>
+                              </b-form-checkbox>
+                            </b-col>
+                          </b-row>
+
+                          <div v-if="solState && !isMultiSolMode">
+                            <b-row>
+                              <b-col cols="12" md="3" class="mb-3">
+                                <b-form-group
+                                  id="input-group-sol-port"
+                                  :label="$t('pagePolicies.solSshPortLabel')"
+                                  label-for="input-sol-port"
+                                >
+                                  <b-form-input
+                                    id="input-solSsh-port"
+                                    v-model.number="solSshPort"
+                                    data-test-id="input-solSshPort"
+                                    type="number"
+                                    :disabled="
+                                      userPrivilege === privilegesId.readOnly
+                                    "
+                                    aria-describedby="power-help-text"
+                                    :state="getValidationState($v.solSshPort)"
+                                    @input="$v.solSshPort.$touch()"
+                                  ></b-form-input>
+                                  <b-form-invalid-feedback role="alert">
+                                    <template v-if="!$v.solSshPort.required">
+                                      {{ $t('global.form.fieldRequired') }}
+                                    </template>
+                                    <template
+                                      v-else-if="!$v.solSshPort.pattern"
+                                    >
+                                      {{
+                                        $t(
+                                          'pagePolicies.solSshPortValueLimits',
+                                          {
+                                            min: 1,
+                                            max: 65535,
+                                          },
+                                        )
+                                      }}
+                                    </template>
+                                  </b-form-invalid-feedback>
+                                </b-form-group>
+                              </b-col>
+                              <b-col
+                                cols="12"
+                                md="3"
+                                class="d-flex align-items-center mb-3"
+                              >
+                                <b-button
+                                  variant="primary"
+                                  type="submit"
+                                  :disabled="
+                                    userPrivilege === privilegesId.readOnly
+                                  "
+                                  data-test-id="power-button-saveIpmiPortValue"
+                                  @click="saveSolSshPortValue"
+                                >
+                                  <icon-save />
+                                  {{ $t('global.action.save') }}
+                                </b-button>
+                              </b-col>
+                            </b-row>
+                          </div>
+
+                          <div
+                            v-if="isMultiSolMode && multiSolSshList.length > 0"
                           >
-                            <span class="sr-only">
-                              {{
-                                $t('pagePolicies.solSshService', {
-                                  solId: solService.Id,
-                                })
-                              }}
-                            </span>
-                            <span v-if="solService.Masked == false">
-                              {{ $t('global.status.enabled') }}
-                            </span>
-                            <span v-else>{{
-                              $t('global.status.disabled')
-                            }}</span>
-                          </b-form-checkbox>
-                        </b-col>
-                      </b-row>
-                    </div>
+                            <dl class="mt-3 mb-4">
+                              <dt>{{ $t('pagePolicies.multiSolSsh') }}</dt>
+                              <dd>
+                                {{ $t('pagePolicies.multiSolSshDescription') }}
+                              </dd>
+                            </dl>
+                            <div>
+                              <b-row
+                                v-for="solService in multiSolSshList"
+                                :key="solService.Id"
+                                class="mb-3"
+                              >
+                                <b-col
+                                  lg="7"
+                                  class="d-flex align-items-center justify-content-between"
+                                >
+                                  <dl class="mt-3 mr-4 w-75">
+                                    <dt>
+                                      {{
+                                        $t('pagePolicies.solSshService', {
+                                          solId: solService.Id,
+                                        })
+                                      }}
+                                    </dt>
+                                  </dl>
+                                </b-col>
+                                <b-col lg="3" class="session-timeout">
+                                  <b-form-checkbox
+                                    :id="`solSwitch-${solService.Id}`"
+                                    :checked="!solService.Masked"
+                                    :data-test-id="`policies-toggle-sol-${solService.Id}`"
+                                    switch
+                                    :disabled="
+                                      userPrivilege === privilegesId.readOnly
+                                    "
+                                    @change="
+                                      changeMultiSOLState(solService.Id, $event)
+                                    "
+                                  >
+                                    <span class="sr-only">
+                                      {{
+                                        $t('pagePolicies.solSshService', {
+                                          solId: solService.Id,
+                                        })
+                                      }}
+                                    </span>
+                                    <span v-if="solService.Masked == false">
+                                      {{ $t('global.status.enabled') }}
+                                    </span>
+                                    <span v-else>{{
+                                      $t('global.status.disabled')
+                                    }}</span>
+                                  </b-form-checkbox>
+                                </b-col>
+                              </b-row>
+                            </div>
+                          </div>
+                        </b-tab>
+
+                        <!-- SOL Console 1 Tab -->
+                        <b-tab
+                          v-if="isMultiHostEnabled"
+                          :title="$t('pagePolicies.policiessolssh1')"
+                          :disabled="solStateHost2 === null"
+                        >
+                          <b-row v-if="!isMultiSolModeHost2" class="mb-3">
+                            <b-col
+                              lg="12"
+                              class="d-flex align-items-center justify-content-between"
+                            >
+                              <span>{{
+                                $t('pagePolicies.enableSol1Service')
+                              }}</span>
+                              <b-form-checkbox
+                                id="solSwitchHost2"
+                                v-model="solStateHost2"
+                                data-test-id="policies-toggle-sol-host2"
+                                switch
+                                :disabled="
+                                  userPrivilege === privilegesId.readOnly
+                                "
+                                @change="changeSOLStateHost2"
+                              >
+                                <span class="sr-only">
+                                  {{ $t('pagePolicies.solssh1') }} - Host 2
+                                </span>
+                                <span v-if="solStateHost2">
+                                  {{ $t('global.status.enabled') }}
+                                </span>
+                                <span v-else>{{
+                                  $t('global.status.disabled')
+                                }}</span>
+                              </b-form-checkbox>
+                            </b-col>
+                          </b-row>
+
+                          <div v-if="solStateHost2 && !isMultiSolModeHost2">
+                            <b-row>
+                              <b-col cols="12" md="3" class="mb-3">
+                                <b-form-group
+                                  id="input-group-sol-port-host2"
+                                  :label="$t('pagePolicies.solSshPortLabel')"
+                                  label-for="input-sol-port-host2"
+                                >
+                                  <b-form-input
+                                    id="input-solSsh-port-host2"
+                                    v-model.number="solSshPortHost2"
+                                    data-test-id="input-solSshPort-host2"
+                                    type="number"
+                                    :disabled="
+                                      userPrivilege === privilegesId.readOnly
+                                    "
+                                    aria-describedby="power-help-text"
+                                    :state="
+                                      getValidationState($v.solSshPortHost2)
+                                    "
+                                    @input="$v.solSshPortHost2.$touch()"
+                                  ></b-form-input>
+                                  <b-form-invalid-feedback role="alert">
+                                    <template
+                                      v-if="!$v.solSshPortHost2.required"
+                                    >
+                                      {{ $t('global.form.fieldRequired') }}
+                                    </template>
+                                    <template
+                                      v-else-if="!$v.solSshPortHost2.pattern"
+                                    >
+                                      {{
+                                        $t(
+                                          'pagePolicies.solSshPortValueLimits',
+                                          {
+                                            min: 1,
+                                            max: 65535,
+                                          },
+                                        )
+                                      }}
+                                    </template>
+                                  </b-form-invalid-feedback>
+                                </b-form-group>
+                              </b-col>
+                              <b-col
+                                cols="12"
+                                md="3"
+                                class="d-flex align-items-center mb-3"
+                              >
+                                <b-button
+                                  variant="primary"
+                                  type="submit"
+                                  :disabled="
+                                    userPrivilege === privilegesId.readOnly
+                                  "
+                                  data-test-id="button-savesolSshPortValue-host2"
+                                  @click="saveSolSshPortValueHost2"
+                                >
+                                  <icon-save />
+                                  {{ $t('global.action.save') }}
+                                </b-button>
+                              </b-col>
+                            </b-row>
+                          </div>
+
+                          <div
+                            v-if="
+                              isMultiSolModeHost2 &&
+                              multiSolSshListHost2.length > 0
+                            "
+                          >
+                            <dl class="mt-3 mb-4">
+                              <dt>{{ $t('pagePolicies.multiSolSsh') }}</dt>
+                              <dd>
+                                {{ $t('pagePolicies.multiSolSshDescription') }}
+                              </dd>
+                            </dl>
+                            <div>
+                              <b-row
+                                v-for="solService in multiSolSshListHost2"
+                                :key="solService.Id"
+                                class="mb-3"
+                              >
+                                <b-col
+                                  lg="7"
+                                  class="d-flex align-items-center justify-content-between"
+                                >
+                                  <dl class="mt-3 mr-4 w-75">
+                                    <dt>
+                                      {{
+                                        $t('pagePolicies.solSshService', {
+                                          solId: solService.Id,
+                                        })
+                                      }}
+                                    </dt>
+                                  </dl>
+                                </b-col>
+                                <b-col lg="3" class="session-timeout">
+                                  <b-form-checkbox
+                                    :id="`solSwitch-host2-${solService.Id}`"
+                                    :checked="!solService.Masked"
+                                    :data-test-id="`policies-toggle-sol-host2-${solService.Id}`"
+                                    switch
+                                    :disabled="
+                                      userPrivilege === privilegesId.readOnly
+                                    "
+                                    @change="
+                                      changeMultiSOLStateHost2(
+                                        solService.Id,
+                                        $event,
+                                      )
+                                    "
+                                  >
+                                    <span class="sr-only">
+                                      {{
+                                        $t('pagePolicies.solSshService', {
+                                          solId: solService.Id,
+                                        })
+                                      }}
+                                    </span>
+                                    <span v-if="solService.Masked == false">
+                                      {{ $t('global.status.enabled') }}
+                                    </span>
+                                    <span v-else>{{
+                                      $t('global.status.disabled')
+                                    }}</span>
+                                  </b-form-checkbox>
+                                </b-col>
+                              </b-row>
+                            </div>
+                          </div>
+                        </b-tab>
+                      </b-tabs>
+                    </b-card>
                   </b-col>
                 </b-row>
                 <b-row class="setting-section">
@@ -1159,35 +1371,112 @@
                     </b-button>
                   </b-col>
                 </b-row>
-                <b-row v-if="isSolEnabled" class="setting-section">
+                <!--SOL Non-Volatile Bit Rate Section with Dual Host Support -->
+                <b-row class="setting-section">
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
                   >
-                    <dl class="mt-3 mr-3 w-75">
-                      {{ $t('pagePolicies.solBitRate') }}
+                    <dl class="mt-3 mr-4 w-75">
+                      <dt>{{ $t('pagePolicies.solBitRateTitle') }}</dt>
+                      <dd>
+                        {{ $t('pagePolicies.solBitRateDescription') }}
+                      </dd>
                     </dl>
                   </b-col>
-                  <b-col lg="3" class="session-timeout text-right mt-5">
-                    <b-form-group>
-                      <b-form-select
-                        id="sol-baudRate"
-                        v-model="baudRateState"
-                        :disabled="userPrivilege !== privilegesId.admin"
-                        data-test-id="sol-select-baudRate"
-                        :options="baudRateOptions"
-                      ></b-form-select>
-                    </b-form-group>
-                    <b-button
-                      variant="primary"
-                      type="submit"
-                      :disabled="userPrivilege !== privilegesId.admin"
-                      data-test-id="sol-button-saveBaudRateValue"
-                      @click="saveBaudRateValue"
-                    >
-                      <icon-save />
-                      {{ $t('global.action.save') }}
-                    </b-button>
+                </b-row>
+                <!-- Tab Navigation for SOL Non-Volatile Bit Rate -->
+                <b-row class="setting-section">
+                  <b-col lg="7">
+                    <b-card no-body class="vm-card">
+                      <b-tabs pills card>
+                        <!-- SOL Non-Volatile Bit Rate Tab -->
+                        <b-tab :title="$t('pagePolicies.solBitRateTab')" active>
+                          <b-row v-if="isSolEnabled">
+                            <b-col cols="12" md="4" class="mb-4 m0">
+                              <b-form-group
+                                id="input-group-sol-baudRate"
+                                :label="$t('pagePolicies.solBitRate')"
+                                label-for="input-sol-baudRate"
+                              >
+                                <b-form-select
+                                  id="sol-baudRate"
+                                  v-model="baudRateState"
+                                  :disabled="
+                                    userPrivilege !== privilegesId.admin
+                                  "
+                                  data-test-id="sol-select-baudRate"
+                                  :options="baudRateOptions"
+                                ></b-form-select>
+                              </b-form-group>
+                            </b-col>
+                            <b-col
+                              cols="12"
+                              md="3"
+                              class="d-flex align-items-center mb-3 m0"
+                            >
+                              <b-button
+                                variant="primary"
+                                type="submit"
+                                :disabled="userPrivilege !== privilegesId.admin"
+                                data-test-id="sol-button-saveBaudRateValue"
+                                @click="saveBaudRateValue"
+                              >
+                                <icon-save />
+                                {{ $t('global.action.save') }}
+                              </b-button>
+                            </b-col>
+                          </b-row>
+                        </b-tab>
+
+                        <!-- SOL 1 Non-Volatile Bit Rate Tab -->
+                        <b-tab
+                          v-if="isMultiHostEnabled"
+                          :title="$t('pagePolicies.sol1BitRateTab')"
+                          :disabled="solStateHost2 === null"
+                        >
+                          <div v-if="isMultiHostEnabled">
+                            <b-row>
+                              <b-col cols="12" md="4" class="mb-4 m0">
+                                <b-form-group
+                                  id="input-group-sol1-baudRate"
+                                  :label="$t('pagePolicies.solBitRate')"
+                                  label-for="input-sol1-baudRate"
+                                >
+                                  <b-form-select
+                                    id="sol1-baudRate"
+                                    v-model="baudRate1State"
+                                    :disabled="
+                                      userPrivilege !== privilegesId.admin
+                                    "
+                                    data-test-id="sol1-select-baudRate"
+                                    :options="baudRateOptions"
+                                  ></b-form-select>
+                                </b-form-group>
+                              </b-col>
+                              <b-col
+                                cols="12"
+                                md="3"
+                                class="d-flex align-items-center mb-3 m0"
+                              >
+                                <b-button
+                                  variant="primary"
+                                  type="submit"
+                                  :disabled="
+                                    userPrivilege !== privilegesId.admin
+                                  "
+                                  data-test-id="sol1-button-saveBaudRateValue"
+                                  @click="saveBaudRate1Value"
+                                >
+                                  <icon-save />
+                                  {{ $t('global.action.save') }}
+                                </b-button>
+                              </b-col>
+                            </b-row>
+                          </div>
+                        </b-tab>
+                      </b-tabs>
+                    </b-card>
                   </b-col>
                 </b-row>
                 <b-row class="setting-section">
@@ -1473,6 +1762,15 @@ export default {
         return newValue;
       },
     },
+    solStateHost2: {
+      get() {
+        const value = this.$store.getters['policies/solSshServiceEnabledHost2'];
+        return value === null ? null : value;
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
     ssdpState: {
       get() {
         return this.$store.getters['policies/ssdpProtocolEnabled'];
@@ -1565,6 +1863,28 @@ export default {
     multiSolSshList() {
       return this.$store.getters['policies/multiSolSshList'] || [];
     },
+    isMultiSolModeHost2() {
+      return this.$store.getters['policies/isMultiSolModeHost2'];
+    },
+    multiSolSshListHost2() {
+      return this.$store.getters['policies/multiSolSshListHost2'] || [];
+    },
+    solSshPortHost2: {
+      get() {
+        return this.$store.getters['policies/solSshPortValueHost2'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
+    baudRate1State: {
+      get() {
+        return this.$store.getters['policies/sol1BitRate'];
+      },
+      set(newValue) {
+        this.$store.commit('policies/setSol1BitRate', newValue);
+      },
+    },
     ...mapState('policies', [
       'kvmSessionTimeout',
       'kvmPortValue',
@@ -1612,6 +1932,9 @@ export default {
       process.env.VUE_APP_ONETREE_MEDIA_REDIRECT_ENABLED === 'true'
         ? this.$store.dispatch('policies/getVMReconnect')
         : Promise.resolve(),
+      this.isMultiHostEnabled
+        ? this.$store.dispatch('policies/getSol1BitRateData')
+        : Promise.resolve(),
     ]).finally(() => this.endLoader());
   },
   validations() {
@@ -1647,6 +1970,12 @@ export default {
         },
       },
       solSshPort: {
+        required,
+        pattern: function (pw) {
+          return this.solSshValueValidation(pw);
+        },
+      },
+      solSshPortHost2: {
         required,
         pattern: function (pw) {
           return this.solSshValueValidation(pw);
@@ -1773,9 +2102,21 @@ export default {
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
+    changeSOLStateHost2(state) {
+      this.$store
+        .dispatch('policies/saveSOLSshStateHost2', state ? true : false)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
     changeMultiSOLState(solId, enabled) {
       this.$store
         .dispatch('policies/saveMultiSOLSshState', { solId, enabled })
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
+    changeMultiSOLStateHost2(solId, enabled) {
+      this.$store
+        .dispatch('policies/saveMultiSOLSshStateHost2', { solId, enabled })
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
@@ -1790,6 +2131,17 @@ export default {
       if (this.$v.solSshPort.$invalid) return;
       this.$store
         .dispatch('policies/saveSolSshPortState', parseInt(this.solSshPort))
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
+    saveSolSshPortValueHost2() {
+      this.$v.solSshPortHost2.$touch();
+      if (this.$v.solSshPortHost2.$invalid) return;
+      this.$store
+        .dispatch(
+          'policies/saveSolSshPortStateHost2',
+          parseInt(this.solSshPortHost2),
+        )
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
@@ -1991,6 +2343,12 @@ export default {
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message));
     },
+    saveBaudRate1Value() {
+      this.$store
+        .dispatch('policies/saveSol1BitRateValue', this.baudRate1State)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => this.errorToast(message));
+    },
     webKvmSessionTimeoutValidation(val) {
       if (
         !/^(3[0-9]|[4-9][0-9]|[1-9][0-9]{2}|[1-9][0-9]{3}|[1-7][0-9]{4}|8[0-5][0-9]{3}|86[0-3][0-9]{2}|86400)$/.test(
@@ -2049,7 +2407,12 @@ export default {
 .session-timeout {
   align-self: center;
 }
+
 .page-section {
   margin-bottom: 1rem;
+}
+
+.m0 {
+  margin: 0 !important;
 }
 </style>

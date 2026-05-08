@@ -16,6 +16,10 @@ const PoliciesStore = {
     solSshPortValue: null,
     multiSolSshList: [],
     isMultiSolMode: false,
+    solSshServiceEnabledHost2: null,
+    solSshPortValueHost2: null,
+    multiSolSshListHost2: [],
+    isMultiSolModeHost2: false,
     rtadEnabled: 'Disabled',
     vtpmEnabled: 'Disabled',
     sessionTimeoutValue: null,
@@ -37,6 +41,7 @@ const PoliciesStore = {
     maxSessions: [],
     channelList: [],
     defaultChannelList: {},
+    sol1BitRate: null,
   },
   getters: {
     sshProtocolEnabled: (state) => state.sshProtocolEnabled,
@@ -44,6 +49,10 @@ const PoliciesStore = {
     solSshPortValue: (state) => state.solSshPortValue,
     multiSolSshList: (state) => state.multiSolSshList,
     isMultiSolMode: (state) => state.isMultiSolMode,
+    solSshServiceEnabledHost2: (state) => state.solSshServiceEnabledHost2,
+    solSshPortValueHost2: (state) => state.solSshPortValueHost2,
+    multiSolSshListHost2: (state) => state.multiSolSshListHost2,
+    isMultiSolModeHost2: (state) => state.isMultiSolModeHost2,
     rtadEnabled: (state) => state.rtadEnabled,
     vtpmEnabled: (state) => state.vtpmEnabled,
     sessionTimeoutValue: (state) => state.sessionTimeoutValue,
@@ -71,6 +80,7 @@ const PoliciesStore = {
     maxSessions: (state) => state.maxSessions,
     getChannelList: (state) => state.channelList,
     getDefaultChannelList: (state) => state.defaultChannelList,
+    sol1BitRate: (state) => state.sol1BitRate,
   },
   mutations: {
     setSshProtocolEnabled: (state, sshProtocolEnabled) =>
@@ -97,6 +107,23 @@ const PoliciesStore = {
     },
     setIsMultiSolMode: (state, isMultiSolMode) =>
       (state.isMultiSolMode = isMultiSolMode),
+    setSolSshServiceEnabledHost2: (state, solSshServiceEnabledHost2) =>
+      (state.solSshServiceEnabledHost2 = solSshServiceEnabledHost2),
+    setSolSshPortHost2: (state, solSshPortValueHost2) =>
+      (state.solSshPortValueHost2 = solSshPortValueHost2),
+    setMultiSolSshListHost2: (state, multiSolSshListHost2) =>
+      (state.multiSolSshListHost2 = multiSolSshListHost2),
+    updateMultiSolSshServiceHost2: (state, { solId, enabled }) => {
+      const service = state.multiSolSshListHost2.find(
+        (sol) => sol.Id === solId,
+      );
+      if (service) {
+        service.ServiceEnabled = enabled;
+        service.Masked = !enabled;
+      }
+    },
+    setIsMultiSolModeHost2: (state, isMultiSolModeHost2) =>
+      (state.isMultiSolModeHost2 = isMultiSolModeHost2),
     setKvmServiceEnabled: (state, kvmServiceEnabled) =>
       (state.kvmServiceEnabled = kvmServiceEnabled),
     setKvmServiceEnabledHost2: (state, kvmServiceEnabledHost2) =>
@@ -137,6 +164,7 @@ const PoliciesStore = {
     setChannelList: (state, channelList) => (state.channelList = channelList),
     setDefaultChannelList: (state, defaultChannelList) =>
       (state.defaultChannelList = defaultChannelList),
+    setSol1BitRate: (state, sol1BitRate) => (state.sol1BitRate = sol1BitRate),
   },
   actions: {
     setSolSshPortUpdatedValue({ commit }, solSshProtocolPort) {
@@ -227,6 +255,23 @@ const PoliciesStore = {
         const system1Promise = api
           .get('/redfish/v1/Systems/system1')
           .then((response) => {
+            const multiSolSshDataHost2 =
+              response.data?.Oem?.Ami?.SerialConsole?.SSH?.SOLSSH;
+            if (multiSolSshDataHost2?.length > 0) {
+              commit('setMultiSolSshListHost2', multiSolSshDataHost2);
+              commit('setIsMultiSolModeHost2', true);
+              commit('setSolSshServiceEnabledHost2', false);
+              commit('setSolSshPortHost2', null);
+            } else {
+              const solSshServiceEnabledHost2 =
+                response.data?.SerialConsole?.SSH?.ServiceEnabled;
+              const solSshPortValueHost2 =
+                response.data?.SerialConsole?.SSH?.Port;
+              commit('setSolSshServiceEnabledHost2', solSshServiceEnabledHost2);
+              commit('setSolSshPortHost2', solSshPortValueHost2);
+              commit('setIsMultiSolModeHost2', false);
+              commit('setMultiSolSshListHost2', []);
+            }
             const kvmServiceEnabledHost2 =
               response.data?.GraphicalConsole?.ServiceEnabled;
             const virtualMediaServiceEnabledHost2 =
@@ -246,6 +291,10 @@ const PoliciesStore = {
             console.log('Host 2 not available:', error);
             commit('setKvmServiceEnabledHost2', null);
             commit('setVirtualMediaServiceEnabledHost2', null);
+            commit('setSolSshServiceEnabledHost2', null);
+            commit('setSolSshPortHost2', null);
+            commit('setIsMultiSolModeHost2', false);
+            commit('setMultiSolSshListHost2', []);
           });
 
         return Promise.all([systemPromise, system1Promise]);
@@ -601,7 +650,6 @@ const PoliciesStore = {
                 SOLSSH: [
                   {
                     Id: solId,
-                    ServiceEnabled: enabled,
                     Masked: !enabled,
                   },
                 ],
@@ -658,6 +706,105 @@ const PoliciesStore = {
           commit('saveSOLSshState', solSshProtocolPortNewValue);
           if (solSshProtocolPortNewValue) {
             throw new Error(i18n.t('pagePolicies.toast.errorSolSshPort'));
+          }
+        });
+    },
+    async saveSOLSshStateHost2({ commit }, solEnabled) {
+      commit('setSolSshServiceEnabledHost2', solEnabled);
+      const solSsh = {
+        SerialConsole: {
+          SSH: {
+            ServiceEnabled: solEnabled,
+          },
+        },
+      };
+      return await api
+        .patch('/redfish/v1/Systems/system1', solSsh)
+        .then(() => {
+          if (solEnabled) {
+            return i18n.t('pagePolicies.toast.successSOLEnabledHost2');
+          } else {
+            return i18n.t('pagePolicies.toast.successSOLDisabledHost2');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          commit('setSolSshServiceEnabledHost2', !solEnabled);
+          if (solEnabled) {
+            throw new Error(i18n.t('pagePolicies.toast.errorSOLEnabledHost2'));
+          } else {
+            throw new Error(i18n.t('pagePolicies.toast.errorSOLDisabledHost2'));
+          }
+        });
+    },
+    async saveMultiSOLSshStateHost2({ commit }, { solId, enabled }) {
+      commit('updateMultiSolSshServiceHost2', { solId, enabled });
+      const solSshUpdate = {
+        Oem: {
+          Ami: {
+            SerialConsole: {
+              SSH: {
+                SOLSSH: [
+                  {
+                    Id: solId,
+                    Masked: !enabled,
+                  },
+                ],
+              },
+            },
+          },
+        },
+      };
+      return await api
+        .patch('/redfish/v1/Systems/system1', solSshUpdate)
+        .then(() => {
+          if (enabled) {
+            return i18n.t('pagePolicies.toast.successMultiSOLEnabledHost2', {
+              solId,
+            });
+          } else {
+            return i18n.t('pagePolicies.toast.successMultiSOLDisabledHost2', {
+              solId,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          commit('updateMultiSolSshServiceHost2', { solId, enabled: !enabled });
+          if (enabled) {
+            throw new Error(
+              i18n.t('pagePolicies.toast.errorMultiSOLEnabledHost2', { solId }),
+            );
+          } else {
+            throw new Error(
+              i18n.t('pagePolicies.toast.errorMultiSOLDisabledHost2', {
+                solId,
+              }),
+            );
+          }
+        });
+    },
+    async saveSolSshPortStateHost2({ commit }, solSshProtocolPortNewValue) {
+      commit('setSolSshPortHost2', solSshProtocolPortNewValue);
+      const portValue = {
+        SerialConsole: {
+          SSH: {
+            Port: solSshProtocolPortNewValue,
+          },
+        },
+      };
+      return await api
+        .patch('/redfish/v1/Systems/system1', portValue)
+        .then(() => {
+          if (solSshProtocolPortNewValue) {
+            return i18n.t('pagePolicies.toast.successSolSshPortHost2');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          commit('setSolSshPortHost2', solSshProtocolPortNewValue);
+          if (solSshProtocolPortNewValue) {
+            throw new Error(i18n.t('pagePolicies.toast.errorSolSshPortHost2'));
           }
         });
     },
@@ -997,6 +1144,38 @@ const PoliciesStore = {
         .catch((error) => {
           console.log(error);
           throw new Error(i18n.t('pagePolicies.toast.errorVMReconnectHost2'));
+        });
+    },
+    async getSol1BitRateData({ commit }) {
+      return await api
+        .get(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/SerialInterfaces/IPMI-SOL1',
+        )
+        .then((response) => {
+          const bitRate1Value = response.data.BitRate;
+          commit('setSol1BitRate', bitRate1Value);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    async saveSol1BitRateValue({ commit }, BitRate) {
+      commit('setSol1BitRate', BitRate);
+      return await api
+        .patch(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/SerialInterfaces/IPMI-SOL1',
+          {
+            BitRate: BitRate,
+          },
+        )
+        .then(() => commit('setSol1BitRate', BitRate))
+        .then(() => i18n.t('pagePolicies.toast.successSol1BitRate'))
+        .catch(() => {
+          throw new Error(i18n.t('pagePolicies.toast.errorSol1BitRate'));
         });
     },
   },
