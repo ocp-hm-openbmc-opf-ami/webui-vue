@@ -18,7 +18,7 @@
     <page-section :section-title="$t('pageOverview.statusInformation')">
       <b-card-group deck>
         <overview-events />
-        <overview-inventory />
+        <overview-inventory v-if="showInventory" />
         <overview-dumps v-if="showDumps" />
       </b-card-group>
     </page-section>
@@ -37,6 +37,7 @@ import OverviewQuickLinks from './OverviewQuickLinks';
 import OverviewServer from './OverviewServer';
 import PageSection from '@/components/Global/PageSection';
 import PageTitle from '@/components/Global/PageTitle';
+import FeatureMixin from '@/components/Mixins/FeatureMixin';
 
 export default {
   name: 'Overview',
@@ -52,7 +53,7 @@ export default {
     PageSection,
     PageTitle,
   },
-  mixins: [LoadingBarMixin],
+  mixins: [LoadingBarMixin, FeatureMixin],
   beforeRouteEnter(to, from, next) {
     // Reset dashboard data to force fresh fetch when entering overview page from another route
     if (from.name && from.name !== 'login') {
@@ -67,6 +68,7 @@ export default {
   data() {
     return {
       showDumps: process.env.VUE_APP_ENV_NAME === 'intel',
+      showInventory: !this.isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED'),
     };
   },
   created() {

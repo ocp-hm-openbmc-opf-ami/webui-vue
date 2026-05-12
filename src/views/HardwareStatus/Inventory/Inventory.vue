@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <b-container fluid="xl">
     <page-title />
 
@@ -44,6 +44,7 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import PageSection from '@/components/Global/PageSection';
 import JumpLink16 from '@carbon/icons-vue/es/jump-link/16';
 import JumpLinkMixin from '@/components/Mixins/JumpLinkMixin';
+import FeatureMixin from '@/components/Mixins/FeatureMixin';
 import { chunk } from 'lodash';
 
 export default {
@@ -56,7 +57,7 @@ export default {
     PageSection,
     JumpLink: JumpLink16,
   },
-  mixins: [LoadingBarMixin, JumpLinkMixin],
+  mixins: [LoadingBarMixin, JumpLinkMixin, FeatureMixin],
   beforeRouteLeave(to, from, next) {
     // Hide loader if user navigates away from page
     // before requests complete
@@ -95,7 +96,7 @@ export default {
     isSystemInventoryEnabled() {
       return (
         process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true' &&
-        process.env.VUE_APP_ONETREE_PSM_ENABLED !== 'true'
+        !this.isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
       );
     },
   },

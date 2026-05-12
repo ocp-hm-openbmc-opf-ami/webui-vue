@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div>
     <div v-if="policiesOverlay">
       <b-overlay :show="true" opacity="0.6" no-wrap fixed class="full-overlay">
@@ -133,7 +133,10 @@
                   </b-col>
                 </b-row>
                 <!-- KVM Section with Dual Host Support -->
-                <b-row class="setting-section">
+                <b-row
+                  v-if="!isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')"
+                  class="setting-section"
+                >
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
@@ -146,7 +149,10 @@
                     </dl>
                   </b-col>
                 </b-row>
-                <b-row class="setting-section">
+                <b-row
+                  v-if="!isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')"
+                  class="setting-section"
+                >
                   <b-col lg="7">
                     <!-- Tab Navigation for Dual Hosts -->
                     <b-card no-body class="vm-card">
@@ -334,7 +340,10 @@
                     </b-card>
                   </b-col>
                 </b-row>
-                <b-row class="setting-section">
+                <b-row
+                  v-if="!isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')"
+                  class="setting-section"
+                >
                   <b-col
                     cols="3"
                     class="d-flex align-items-center mt-3 mr-4 w-75"
@@ -383,7 +392,10 @@
                   </b-col>
                 </b-row>
                 <!-- Virtual Media Section with Dual Host Support -->
-                <b-row class="setting-section">
+                <b-row
+                  v-if="!isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')"
+                  class="setting-section"
+                >
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
@@ -396,7 +408,10 @@
                     </dl>
                   </b-col>
                 </b-row>
-                <b-row class="setting-section">
+                <b-row
+                  v-if="!isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')"
+                  class="setting-section"
+                >
                   <b-col lg="7">
                     <!-- Tab Navigation for Dual Hosts -->
                     <b-card no-body class="vm-card">
@@ -1568,10 +1583,11 @@ import IconSave from '@carbon/icons-vue/es/save/20';
 import { privilegesId } from '@/store/modules/GlobalStore';
 import { mapGetters } from 'vuex';
 import RuntimeConfig from '@/utilities/RuntimeConfig';
+import FeatureMixin from '@/components/Mixins/FeatureMixin';
 export default {
   name: 'Policies',
   components: { PageTitle, PageSection, IconSave },
-  mixins: [LoadingBarMixin, BVToastMixin, VuelidateMixin],
+  mixins: [LoadingBarMixin, BVToastMixin, VuelidateMixin, FeatureMixin],
   beforeRouteLeave(to, from, next) {
     this.hideLoader();
     next();

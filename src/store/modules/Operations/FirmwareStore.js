@@ -1,6 +1,7 @@
-import api from '@/store/api';
+﻿import api from '@/store/api';
 import i18n from '@/i18n';
 import store from '@/store/';
+import { isFeatureEnabled } from '@/components/Mixins/FeatureMixin';
 
 const FirmwareStore = {
   namespaced: true,
@@ -35,7 +36,7 @@ const FirmwareStore = {
       return state.bmcFirmware.find(
         (firmware) =>
           firmware.id === state.bmcActiveFirmwareId ||
-          (process.env.VUE_APP_ONETREE_PSM_ENABLED == 'true' &&
+          (isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED') &&
             firmware.id === 'bmc_active'),
       );
     },

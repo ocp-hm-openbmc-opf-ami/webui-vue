@@ -167,6 +167,7 @@
         "sbmr": "@:appPageTitle.sbmr",
         "powerRestorePolicy": "@:appPageTitle.powerRestorePolicy",
         "rebootBmc": "@:appPageTitle.rebootBmc",
+        "rebootPmc": "PMC neu starten",
         "policies": "@:appPageTitle.policies",
         "sensors": "@:appPageTitle.sensors",
         "serialOverLan": "SOL-Konsole",
@@ -304,6 +305,7 @@
         "fru":"FRU",
         "deviceOwnerTransfership": "Übertragung des Geräteeigentümers",
         "spdm": "SPDM",
+        "psuAndPowerShelfSensorsEventLogs": "Ereignisprotokolle für Stromversorgung und Power Shelf",
         "powerSupplyInventory": "Stromversorgungsbestand",
         "powerEquipment": "Stromversorgungsgeräte",
         "kvm1": "KVM 1",
@@ -2390,15 +2392,26 @@
     },
     "pageRebootBmc": {
         "lastReboot": "Letzter BMC-Neustart",
+        "lastRebootPmc": "Letzter PMC-Neustart",
         "rebootBmc": "BMC neu starten",
-        "rebootInformation": "Wenn Sie den BMC neu starten, verliert Ihr Webbrowser für einige Minuten die Verbindung zum BMC. Wenn der BMC wieder online ist, müssen Sie sich möglicherweise erneut anmelden.",
+        "rebootPmc": "PMC neu starten",
+        "rebootInformation": "Wenn Sie den BMC neu starten, verliert Ihr Webbrowser für mehrere Minuten den Kontakt zum BMC. Wenn der BMC wieder online ist, müssen Sie sich möglicherweise erneut anmelden.",
+        "rebootPmcInformation": "Wenn Sie den PMC neu starten, verliert Ihr Webbrowser für mehrere Minuten den Kontakt zum PMC. Wenn der PMC wieder online ist, müssen Sie sich möglicherweise erneut anmelden.",
         "modal": {
-            "confirmMessage": "Sind Sie sicher, dass Sie den BMC neu starten möchten? Der Neustart dauert einige Minuten. Schließen Sie die aktuelle Sitzung und öffnen Sie nach erfolgreichem Neustart eine neue Sitzung.",
+            "confirmMessage": "Sind Sie sicher, dass Sie den BMC neu starten möchten? Der BMC-Neustart dauert einige Minuten. Schließen Sie die aktuelle Sitzung und öffnen Sie eine neue Sitzung, nachdem der BMC-Neustart erfolgreich abgeschlossen wurde.",
             "confirmTitle": "BMC-Neustart bestätigen"
+        },
+        "modalPmc": {
+            "confirmMessage": "Sind Sie sicher, dass Sie den PMC neu starten möchten? Der PMC-Neustart dauert einige Minuten. Schließen Sie die aktuelle Sitzung und öffnen Sie eine neue Sitzung, nachdem der PMC-Neustart erfolgreich abgeschlossen wurde.",
+            "confirmTitle": "PMC-Neustart bestätigen"
         },
         "toast": {
             "errorRebootStart": "Fehler beim Neustart des BMC.",
-            "successRebootStart": "BMC wird erfolgreich neu gestartet."
+            "successRebootStart": "BMC erfolgreich neu gestartet."
+        },
+        "toastPmc": {
+            "errorRebootStart": "Fehler beim Neustart des PMC.",
+            "successRebootStart": "PMC erfolgreich neu gestartet."
         }
     },
     "pagePolicies": {
@@ -3994,7 +4007,7 @@
         "outputCurrentAmps": "Ausgangsstrom (A)",
         "outputPowerWatts": "Ausgangsleistung (W)",
         "temperatureCelsius": "Temperatur (°C)",
-        "fanSpeedPercent": "Lüftergeschwindigkeit (%)",
+        "fanSpeedPercent": "Lüftergeschwindigkeit (RPM)",
         "energykWh": "Energie (kWh)",
         "branches": "Zweige",
         "mains": "Netzanschlüsse",

@@ -151,7 +151,13 @@
                   <dl>
                     <!-- Modified date -->
                     <dt>{{ $t('pageCertificates.table.validFrom') }}:</dt>
-                    <dd v-if="item.validFrom">
+                    <dd
+                      v-if="
+                        isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+                          ? isValidDate(item.validFrom)
+                          : item.validFrom
+                      "
+                    >
                       {{ item.validFrom | formatDate }}
                       {{ item.validFrom | formatTime }}
                     </dd>
@@ -160,7 +166,13 @@
                   <dl>
                     <!-- Modified date -->
                     <dt>{{ $t('pageCertificates.table.validUntil') }}:</dt>
-                    <dd v-if="item.validUntil">
+                    <dd
+                      v-if="
+                        isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+                          ? isValidDate(item.validUntil)
+                          : item.validUntil
+                      "
+                    >
                       {{ item.validUntil | formatDate }}
                       {{ item.validUntil | formatTime }}
                     </dd>
@@ -269,6 +281,7 @@ import { mapGetters } from 'vuex';
 import IconChevron from '@carbon/icons-vue/es/chevron--down/20';
 import TableRowExpandMixin from '@/components/Mixins/TableRowExpandMixin';
 import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
+import FeatureMixin from '@/components/Mixins/FeatureMixin';
 
 export default {
   name: 'Certificates',
@@ -289,6 +302,7 @@ export default {
     LoadingBarMixin,
     TableRowExpandMixin,
     DataFormatterMixin,
+    FeatureMixin,
   ],
   beforeRouteLeave(to, from, next) {
     this.hideLoader();
@@ -397,6 +411,9 @@ export default {
     });
   },
   methods: {
+    isValidDate(value) {
+      return value instanceof Date && !Number.isNaN(value.getTime());
+    },
     onTableRowAction(event, rowItem) {
       switch (event) {
         case 'replace':

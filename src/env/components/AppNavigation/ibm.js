@@ -6,6 +6,7 @@ import IconSettings from '@carbon/icons-vue/es/settings/16';
 import IconSecurity from '@carbon/icons-vue/es/security/16';
 import IconChevronUp from '@carbon/icons-vue/es/chevron--up/16';
 import IconDataBase from '@carbon/icons-vue/es/data--base--alt/16';
+import { isFeatureEnabled } from '@/components/Mixins/FeatureMixin';
 
 const AppNavigationMixin = {
   components: {
@@ -157,8 +158,12 @@ const AppNavigationMixin = {
         },
         {
           id: 'reboot-bmc',
-          label: this.$t('appNavigation.rebootBmc'),
-          route: '/operations/reboot-bmc',
+          label: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+            ? this.$t('appNavigation.rebootPmc')
+            : this.$t('appNavigation.rebootBmc'),
+          route: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+            ? '/operations/reboot-pmc'
+            : '/operations/reboot-bmc',
         },
         {
           id: 'serial-over-lan',

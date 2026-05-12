@@ -3,7 +3,7 @@
     <loading-bar class="loading" @load="loading" />
     <app-header
       ref="focusTarget"
-      :key="routerKey"
+      :key="`header-${routerKey}`"
       class="app-header"
       :router-key="routerKey"
       @refresh="refresh"
@@ -11,7 +11,7 @@
     />
     <app-navigation
       v-if="configLoaded"
-      :key="routerKey"
+      :key="`navigation-${routerKey}`"
       class="app-navigation"
     />
     <page-container class="app-content">

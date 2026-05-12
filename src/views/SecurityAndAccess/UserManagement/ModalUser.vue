@@ -120,7 +120,10 @@
                 {{ $t('global.status.disabled') }}
               </b-form-radio>
             </b-form-group>
-            <b-form-group :label="$t('pageUserManagement.modal.vmediaAccess')">
+            <b-form-group
+              v-if="!isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')"
+              :label="$t('pageUserManagement.modal.vmediaAccess')"
+            >
               <b-form-radio
                 v-model="form.vmediaAccess"
                 name="vmediaAccess-change-status"
@@ -572,10 +575,11 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import IconSave from '@carbon/icons-vue/es/save/20';
 import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
+import FeatureMixin from '@/components/Mixins/FeatureMixin';
 
 export default {
   components: { Alert, InputPasswordToggle, IconSave, IconCancel, IconAdd },
-  mixins: [VuelidateMixin, BVToastMixin],
+  mixins: [VuelidateMixin, BVToastMixin, FeatureMixin],
   props: {
     user: {
       type: Object,

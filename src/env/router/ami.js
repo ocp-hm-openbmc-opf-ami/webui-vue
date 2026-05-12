@@ -1,4 +1,5 @@
-import AppLayout from '@/layouts/AppLayout.vue';
+﻿import AppLayout from '@/layouts/AppLayout.vue';
+import { isFeatureEnabled } from '@/components/Mixins/FeatureMixin';
 import ChangePassword from '@/views/ChangePassword';
 import TwoFactorAuthentication from '@/views/TwoFactorAuthentication';
 import Sessions from '@/views/SecurityAndAccess/Sessions';
@@ -222,11 +223,17 @@ const routes = [
         },
       },
       {
-        path: '/operations/reboot-bmc',
-        name: 'reboot-bmc',
+        path: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+          ? '/operations/reboot-pmc'
+          : '/operations/reboot-bmc',
+        name: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+          ? 'reboot-pmc'
+          : 'reboot-bmc',
         component: RebootBmc,
         meta: {
-          title: i18n.t('appPageTitle.rebootBmc'),
+          title: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+            ? i18n.t('appPageTitle.rebootPmc')
+            : i18n.t('appPageTitle.rebootBmc'),
         },
       },
       {
@@ -253,17 +260,19 @@ const routes = [
           title: i18n.t('appPageTitle.pam'),
         },
       },
-      {
-        path: '/settings/advanced-log',
-        name: 'advanced-log-settings',
-        component: AdvancedLogSettings,
-        meta: {
-          title: i18n.t('appPageTitle.advancedLogSettings'),
-        },
-      },
     ],
   },
 ];
+if (!isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')) {
+  routes[2].children.push({
+    path: '/settings/advanced-log',
+    name: 'advanced-log-settings',
+    component: AdvancedLogSettings,
+    meta: {
+      title: i18n.t('appPageTitle.advancedLogSettings'),
+    },
+  });
+}
 if (process.env.VUE_APP_ONETREE_FRU_ENABLED == 'true') {
   routes[2].children.push({
     path: '/fru',
@@ -437,7 +446,7 @@ if (process.env.VUE_APP_ONETREE_NIC_ENABLED == 'true') {
 }
 if (
   process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true' &&
-  process.env.VUE_APP_ONETREE_PSM_ENABLED !== 'true'
+  !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
 ) {
   routes[2].children.push({
     path: '/system-inventory',
@@ -524,7 +533,10 @@ if (
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
+if (
+  process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true' &&
+  !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+) {
   routes[2].children.push({
     path: '/settings/network-link',
     name: 'networkLink',
@@ -536,7 +548,8 @@ if (process.env.VUE_APP_ONETREE_RTP_ENABLED == 'true') {
 }
 if (
   process.env.VUE_APP_ONETREE_NETWORK_BONDING_SUPPORT_ENABLED == 'true' &&
-  process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true'
+  process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true' &&
+  !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
 ) {
   routes[2].children.push({
     path: '/settings/bond',
@@ -587,7 +600,10 @@ if (process.env.VUE_APP_ONETREE_SNMP_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_KVM_ENABLED == 'true') {
+if (
+  process.env.VUE_APP_ONETREE_KVM_ENABLED == 'true' &&
+  !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+) {
   routes[2].children.push({
     path: '/settings/bsod',
     name: 'bsod',
@@ -597,7 +613,10 @@ if (process.env.VUE_APP_ONETREE_KVM_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_KVM_ENABLED == 'true') {
+if (
+  process.env.VUE_APP_ONETREE_KVM_ENABLED == 'true' &&
+  !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+) {
   routes[2].children.push({
     path: '/operations/kvm',
     name: 'kvm',
@@ -629,11 +648,17 @@ if (process.env.VUE_APP_ONETREE_SEL_ENABLED == 'true') {
 }
 if (process.env.VUE_APP_ONETREE_SEL_ENABLED == 'true') {
   routes[2].children.push({
-    path: '/logs/ipmi-event-log',
-    name: 'ipmi-event-log',
+    path: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+      ? '/logs/power-shelf-event-logs'
+      : '/logs/ipmi-event-logs',
+    name: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+      ? 'power-shelf-event-logs'
+      : 'ipmi-event-logs',
     component: IPMIEventLog,
     meta: {
-      title: i18n.t('appPageTitle.ipmiEventLog'),
+      title: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+        ? i18n.t('appPageTitle.psuAndPowerShelfSensorsEventLogs')
+        : i18n.t('appPageTitle.ipmiEventLog'),
     },
   });
 }
@@ -664,7 +689,10 @@ if (
     },
   });
 }
-if (process.env.VUE_APP_OBMC_LEDS_ENABLED == 'true') {
+if (
+  process.env.VUE_APP_OBMC_LEDS_ENABLED == 'true' &&
+  !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+) {
   routes[2].children.push({
     path: '/hardware-status/inventory',
     name: 'inventory',
@@ -684,7 +712,10 @@ if (process.env.VUE_APP_ONETREE_SENSORS_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_SOL_ENABLED == 'true') {
+if (
+  process.env.VUE_APP_ONETREE_SOL_ENABLED == 'true' &&
+  !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+) {
   routes[2].children.push({
     path: '/operations/serial-over-lan',
     name: 'serial-over-lan',
@@ -695,7 +726,10 @@ if (process.env.VUE_APP_ONETREE_SOL_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_POWER_ENABLED == 'true') {
+if (
+  process.env.VUE_APP_ONETREE_POWER_ENABLED == 'true' &&
+  !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+) {
   routes[2].children.push({
     path: '/operations/server-power-operations',
     name: 'server-power-operations',
@@ -705,7 +739,10 @@ if (process.env.VUE_APP_ONETREE_POWER_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_MEDIA_REDIRECT_ENABLED == 'true') {
+if (
+  process.env.VUE_APP_ONETREE_MEDIA_REDIRECT_ENABLED == 'true' &&
+  !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+) {
   routes[2].children.push({
     path: '/operations/virtual-media',
     name: 'virtual-media',
@@ -738,7 +775,8 @@ if (process.env.VUE_APP_ONETREE_NETWORK_ENABLED == 'true') {
 }
 if (
   process.env.VUE_APP_ONETREE_NETWORK_ENABLED == 'true' &&
-  process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true'
+  process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true' &&
+  !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
 ) {
   routes[2].children.push({
     path: '/settings/network-ddns',
@@ -749,7 +787,10 @@ if (
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_NETWORK_ENABLED == 'true') {
+if (
+  process.env.VUE_APP_ONETREE_NETWORK_ENABLED == 'true' &&
+  !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+) {
   routes[2].children.push({
     path: '/settings/vlan',
     name: 'vlan',
@@ -789,7 +830,7 @@ if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_PSM_ENABLED == 'true') {
+if (isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')) {
   routes[2].children.push({
     path: '/power-shelf/power-supply-inventory',
     name: 'power-supply-inventory',

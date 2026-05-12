@@ -1,6 +1,7 @@
 import api from '@/store/api';
 import { uniqBy } from 'lodash';
 import i18n from '@/i18n';
+import { isFeatureEnabled } from '@/components/Mixins/FeatureMixin';
 
 const SensorsStore = {
   namespaced: true,
@@ -34,7 +35,7 @@ const SensorsStore = {
         return acc;
       }, []);
       // Add API sensor ID to the collection
-      if (process.env.VUE_APP_ONETREE_PSM_ENABLED == 'true') {
+      if (isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')) {
         promises.push(
           dispatch(
             'getSensors',

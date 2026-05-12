@@ -1,6 +1,12 @@
 <template>
   <b-container fluid="xl">
-    <page-title />
+    <page-title
+      :custom-title="
+        isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+          ? $t('pageRebootBmc.rebootPmc')
+          : $t('pageRebootBmc.rebootBmc')
+      "
+    />
     <b-row>
       <b-col md="8" lg="8" xl="6">
         <page-section>
@@ -8,7 +14,11 @@
             <b-col>
               <dl>
                 <dt>
-                  {{ $t('pageRebootBmc.lastReboot') }}
+                  {{
+                    !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+                      ? $t('pageRebootBmc.lastReboot')
+                      : $t('pageRebootBmc.lastRebootPmc')
+                  }}
                 </dt>
                 <dd v-if="lastBmcRebootTime">
                   {{ lastBmcRebootTime | formatDate }}
@@ -18,7 +28,11 @@
               </dl>
             </b-col>
           </b-row>
-          {{ $t('pageRebootBmc.rebootInformation') }}
+          {{
+            !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+              ? $t('pageRebootBmc.rebootInformation')
+              : $t('pageRebootBmc.rebootPmcInformation')
+          }}
           <b-button
             variant="primary"
             class="d-block mt-5"
@@ -27,7 +41,11 @@
             @click="onClick"
           >
             <icon-reset />
-            {{ $t('pageRebootBmc.rebootBmc') }}
+            {{
+              !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+                ? $t('pageRebootBmc.rebootBmc')
+                : $t('pageRebootBmc.rebootPmc')
+            }}
           </b-button>
         </page-section>
       </b-col>
@@ -40,6 +58,7 @@ import PageTitle from '@/components/Global/PageTitle';
 import PageSection from '@/components/Global/PageSection';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import FeatureMixin from '@/components/Mixins/FeatureMixin';
 import IconReset from '@carbon/icons-vue/es/reset/20';
 import { privilegesId } from '@/store/modules/GlobalStore';
 import { mapGetters } from 'vuex';
@@ -47,7 +66,7 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'RebootBmc',
   components: { PageTitle, PageSection, IconReset },
-  mixins: [BVToastMixin, LoadingBarMixin],
+  mixins: [BVToastMixin, LoadingBarMixin, FeatureMixin],
   beforeRouteLeave(to, from, next) {
     this.hideLoader();
     next();
@@ -70,12 +89,19 @@ export default {
   methods: {
     onClick() {
       this.$bvModal
-        .msgBoxConfirm(this.$t('pageRebootBmc.modal.confirmMessage'), {
-          title: this.$t('pageRebootBmc.modal.confirmTitle'),
-          okTitle: this.$t('global.action.confirm'),
-          cancelTitle: this.$t('global.action.cancel'),
-          autoFocusButton: 'ok',
-        })
+        .msgBoxConfirm(
+          this.isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+            ? this.$t('pageRebootBmc.modalPmc.confirmMessage')
+            : this.$t('pageRebootBmc.modal.confirmMessage'),
+          {
+            title: this.isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+              ? this.$t('pageRebootBmc.modalPmc.confirmTitle')
+              : this.$t('pageRebootBmc.modal.confirmTitle'),
+            okTitle: this.$t('global.action.confirm'),
+            cancelTitle: this.$t('global.action.cancel'),
+            autoFocusButton: 'ok',
+          },
+        )
         .then((confirmed) => {
           if (confirmed) this.rebootBmc();
         });

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div>
     <header id="page-header">
       <a
@@ -199,6 +199,7 @@ import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import QrcodeVue from 'qrcode.vue';
 import { mapState } from 'vuex';
 import IconInfo from '@carbon/icons-vue/es/information--filled/20';
+import FeatureMixin from '@/components/Mixins/FeatureMixin';
 import i18n from '@/i18n';
 
 export default {
@@ -215,7 +216,7 @@ export default {
     LoadingBar,
     QrcodeVue,
   },
-  mixins: [BVToastMixin, LoadingBarMixin],
+  mixins: [BVToastMixin, LoadingBarMixin, FeatureMixin],
   props: {
     routerKey: {
       type: Number,
@@ -231,7 +232,7 @@ export default {
         this.$store.getters['authentication/tfaFeatureEnabled'],
       biosFeatureEnabled:
         process.env.VUE_APP_ONETREE_RTP_ENABLED &&
-        !process.env.VUE_APP_ONETREE_PSM_ENABLED,
+        !this.isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED'),
       qrCodeUrl: '',
       recoveryCode: [],
       isNavigationOpen: false,

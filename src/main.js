@@ -50,6 +50,36 @@ import Events from './components/Mixins/EventBus.js';
 import UtcDateTimeMixin from './components/Mixins/UtcDateTimeMixin.js';
 const moment = require('moment-timezone');
 
+function formatShortTimeZoneOffset(timeZone) {
+  if (!timeZone) {
+    return 'UTC+00:00';
+  }
+
+  if (moment && typeof moment.tz === 'function') {
+    const zonedMoment = moment.tz(new Date(), timeZone);
+    if (zonedMoment && typeof zonedMoment.format === 'function') {
+      const offset = zonedMoment.format('Z');
+      const shortTz = zonedMoment.format('z');
+      return shortTz !== 'UTC'
+        ? 'GMT' + offset + ' ' + shortTz
+        : 'UTC' + offset;
+    }
+  }
+
+  try {
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      timeZoneName: 'shortOffset',
+    }).formatToParts(new Date());
+    const timeZoneName = parts.find((part) => part.type === 'timeZoneName');
+    return timeZoneName
+      ? timeZoneName.value.replace('GMT', 'UTC')
+      : 'UTC+00:00';
+  } catch (error) {
+    return 'UTC+00:00';
+  }
+}
+
 // Filters
 Vue.filter('shortTimeZone', function (value) {
   const longTZ = value
@@ -62,9 +92,7 @@ Vue.filter('shortTimeZone', function (value) {
 
 // Short timezone using the timezone
 Vue.filter('shortTzOffset', function (value) {
-  const offset = moment().tz(value).format('Z');
-  const shortTz = moment().tz(value).format('z');
-  return shortTz != 'UTC' ? 'GMT' + offset + ' ' + shortTz : 'UTC' + offset;
+  return formatShortTimeZoneOffset(value);
 });
 
 Vue.filter('formatDate', function (value) {

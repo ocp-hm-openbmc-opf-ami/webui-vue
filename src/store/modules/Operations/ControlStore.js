@@ -1,6 +1,7 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
 import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
+import { isFeatureEnabled } from '@/components/Mixins/FeatureMixin';
 import store from '@/store/';
 
 /**
@@ -129,10 +130,18 @@ const ControlStore = {
             '/Actions/Manager.Reset',
           data,
         )
-        .then(() => i18n.t('pageRebootBmc.toast.successRebootStart'))
+        .then(() => {
+          return !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+            ? i18n.t('pageRebootBmc.toast.successRebootStart')
+            : i18n.t('pageRebootBmc.toastPmc.successRebootStart');
+        })
         .catch((error) => {
           console.log(error);
-          throw new Error(i18n.t('pageRebootBmc.toast.errorRebootStart'));
+          throw new Error(
+            !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+              ? i18n.t('pageRebootBmc.toast.errorRebootStart')
+              : i18n.t('pageRebootBmc.toastPmc.errorRebootStart'),
+          );
         });
     },
     async serverPowerOn({ dispatch, commit }, isKvm) {
