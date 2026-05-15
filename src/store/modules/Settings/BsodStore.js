@@ -24,7 +24,7 @@ const BsodStore = {
         .get(
           '/redfish/v1/Managers/' +
             store.getters['global/managerInstance'] +
-            '/Oem/OpenBmc/Jpeg',
+            '/Oem/Ami/Jpeg',
         )
         .then(async (response) => {
           const imageURI = response.data.ImageURI;
@@ -50,7 +50,7 @@ const BsodStore = {
     async deleteBsodImage({ dispatch }) {
       return await api
         .delete(
-          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/Oem/OpenBmc/Jpeg/Image`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/Oem/Ami/Jpeg/Image`,
         )
         .then(() => dispatch('getBsodImage'))
         .then(() => i18n.t('pageBsod.toast.successDeleteBsodImage'))
@@ -63,7 +63,7 @@ const BsodStore = {
     async triggerBsodImage({ dispatch }) {
       return await api
         .post(
-          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/Oem/OpenBmc/Jpeg`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/Oem/Ami/Jpeg`,
         )
         .then(() => dispatch('getBsodImage'))
         .then(() => i18n.t('pageBsod.toast.successTriggerBsodImage'))
