@@ -48,66 +48,110 @@
       <template #row-details="{ item }">
         <b-container fluid>
           <b-row>
-            <b-col class="mt-2" sm="6" xl="6">
+            <b-col
+              v-if="
+                item.name || item.partNumber || item.serialNumber || item.model
+              "
+              class="mt-2"
+              sm="6"
+              xl="6"
+            >
               <dl>
                 <!-- Name -->
-                <dt>{{ $t('pageInventory.table.name') }}:</dt>
-                <dd>{{ dataFormatter(item.name) }}</dd>
+                <template v-if="item.name">
+                  <dt>{{ $t('pageInventory.table.name') }}:</dt>
+                  <dd>{{ dataFormatter(item.name) }}</dd>
+                </template>
                 <!-- Part number -->
-                <dt>{{ $t('pageInventory.table.partNumber') }}:</dt>
-                <dd>{{ dataFormatter(item.partNumber) }}</dd>
+                <template v-if="item.partNumber">
+                  <dt>{{ $t('pageInventory.table.partNumber') }}:</dt>
+                  <dd>{{ dataFormatter(item.partNumber) }}</dd>
+                </template>
                 <!-- Serial Number -->
-                <dt>{{ $t('pageInventory.table.serialNumber') }}:</dt>
-                <dd>{{ dataFormatter(item.serialNumber) }}</dd>
+                <template v-if="item.serialNumber">
+                  <dt>{{ $t('pageInventory.table.serialNumber') }}:</dt>
+                  <dd>{{ dataFormatter(item.serialNumber) }}</dd>
+                </template>
                 <!-- Model -->
-                <dt>{{ $t('pageInventory.table.model') }}:</dt>
-                <dd class="mb-2">
-                  {{ dataFormatter(item.model) }}
-                </dd>
+                <template v-if="item.model">
+                  <dt>{{ $t('pageInventory.table.model') }}:</dt>
+                  <dd class="mb-2">
+                    {{ dataFormatter(item.model) }}
+                  </dd>
+                </template>
               </dl>
             </b-col>
-            <b-col class="mt-2" sm="6" xl="6">
+            <b-col
+              v-if="item.statusState || item.power || item.assetTag"
+              class="mt-2"
+              sm="6"
+              xl="6"
+            >
               <dl>
                 <!-- Status state -->
-                <dt>{{ $t('pageInventory.table.statusState') }}:</dt>
-                <dd>{{ dataFormatter(item.statusState) }}</dd>
+                <template v-if="item.statusState">
+                  <dt>{{ $t('pageInventory.table.statusState') }}:</dt>
+                  <dd>{{ dataFormatter(item.statusState) }}</dd>
+                </template>
                 <!-- Power state -->
-                <dt>{{ $t('pageInventory.table.power') }}:</dt>
-                <dd>{{ dataFormatter(item.power) }}</dd>
+                <template v-if="item.power">
+                  <dt>{{ $t('pageInventory.table.power') }}:</dt>
+                  <dd>{{ dataFormatter(item.power) }}</dd>
+                </template>
                 <!-- Asset tag -->
-                <dt>{{ $t('pageInventory.table.assetTag') }}:</dt>
-                <dd class="mb-2">
-                  {{ dataFormatter(item.assetTag) }}
-                </dd>
+                <template v-if="item.assetTag">
+                  <dt>{{ $t('pageInventory.table.assetTag') }}:</dt>
+                  <dd class="mb-2">
+                    {{ dataFormatter(item.assetTag) }}
+                  </dd>
+                </template>
               </dl>
             </b-col>
           </b-row>
           <div class="section-divider mb-3 mt-3"></div>
           <b-row>
-            <b-col class="mt-2" sm="6" xl="6">
+            <b-col
+              v-if="item.manufacturer || item.chassisType"
+              class="mt-2"
+              sm="6"
+              xl="6"
+            >
               <dl>
                 <!-- Manufacturer -->
-                <dt>{{ $t('pageInventory.table.manufacturer') }}:</dt>
-                <dd>{{ dataFormatter(item.manufacturer) }}</dd>
+                <template v-if="item.manufacturer">
+                  <dt>{{ $t('pageInventory.table.manufacturer') }}:</dt>
+                  <dd>{{ dataFormatter(item.manufacturer) }}</dd>
+                </template>
                 <!-- Chassis Type -->
-                <dt>{{ $t('pageInventory.table.chassisType') }}:</dt>
-                <dd>{{ dataFormatter(item.chassisType) }}</dd>
+                <template v-if="item.chassisType">
+                  <dt>{{ $t('pageInventory.table.chassisType') }}:</dt>
+                  <dd>{{ dataFormatter(item.chassisType) }}</dd>
+                </template>
               </dl>
             </b-col>
-            <b-col class="mt-2" sm="6" xl="6">
+            <b-col
+              v-if="item.minPowerWatts || item.maxPowerWatts"
+              class="mt-2"
+              sm="6"
+              xl="6"
+            >
               <dl>
                 <!-- Min power -->
-                <dt>{{ $t('pageInventory.table.minPowerWatts') }}:</dt>
-                <dd>
-                  {{ dataFormatter(item.minPowerWatts) }}
-                  {{ $t('unit.W') }}
-                </dd>
+                <template v-if="item.minPowerWatts">
+                  <dt>{{ $t('pageInventory.table.minPowerWatts') }}:</dt>
+                  <dd>
+                    {{ dataFormatter(item.minPowerWatts) }}
+                    {{ $t('unit.W') }}
+                  </dd>
+                </template>
                 <!-- Max power -->
-                <dt>{{ $t('pageInventory.table.maxPowerWatts') }}:</dt>
-                <dd>
-                  {{ dataFormatter(item.maxPowerWatts) }}
-                  {{ $t('unit.W') }}
-                </dd>
+                <template v-if="item.maxPowerWatts">
+                  <dt>{{ $t('pageInventory.table.maxPowerWatts') }}:</dt>
+                  <dd>
+                    {{ dataFormatter(item.maxPowerWatts) }}
+                    {{ $t('unit.W') }}
+                  </dd>
+                </template>
               </dl>
             </b-col>
           </b-row>

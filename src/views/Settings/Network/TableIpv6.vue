@@ -140,10 +140,18 @@
         hover
         :fields="ipv6TableFields"
         :items="form.ipv6TableItems"
-        :empty-text="$t('global.table.emptyMessage')"
         class="mb-0"
         show-empty
       >
+        <template #empty>
+          <div class="text-center">
+            {{ $t('global.table.emptyMessage') }}
+            <info-tooltip
+              v-if="ipv6GatewayWithoutIp"
+              :title="$t('pageNetwork.ipv6GatewayWithoutIp')"
+            />
+          </div>
+        </template>
         <template #cell(actions)="{ item, index }">
           <table-row-action
             v-for="(action, actionIndex) in item.actions"
@@ -169,6 +177,7 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import IconEdit from '@carbon/icons-vue/es/edit/20';
 import IconTrashcan from '@carbon/icons-vue/es/trash-can/20';
+import InfoTooltip from '@/components/Global/InfoTooltip';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import PageSection from '@/components/Global/PageSection';
 import TableRowAction from '@/components/Global/TableRowAction';
@@ -181,6 +190,7 @@ export default {
     IconAdd,
     IconEdit,
     IconTrashcan,
+    InfoTooltip,
     PageSection,
     TableRowAction,
   },
@@ -283,6 +293,20 @@ export default {
     getOemAmiActions() {
       return this.ethernetData[this.tabIndex].Actions?.Oem?.Ami ? true : false;
     },
+    ipv6GatewayWithoutIp() {
+      // Show warning tooltip when gateway exists but no static IPv6 addresses (DHCPv6 disabled)
+      const hasGateway =
+        (this.ethernetData[this.tabIndex].IPv6StaticDefaultGateways?.length >
+          0 &&
+          this.ethernetData[this.tabIndex].IPv6StaticDefaultGateways[0]
+            ?.Address) ||
+        this.ethernetData[this.tabIndex].IPv6DefaultGateway;
+      const hasNoStaticAddresses =
+        this.ethernetData[this.tabIndex].IPv6StaticAddresses?.length === 0;
+      const isDhcpDisabled =
+        this.ethernetData[this.tabIndex].DHCPv6.OperatingMode === 'Disabled';
+      return hasGateway && hasNoStaticAddresses && isDhcpDisabled;
+    },
   },
   watch: {
     // Watch for change in tab index
@@ -334,7 +358,9 @@ export default {
         return {
           Address: ipv6.Address,
           PrefixLength: ipv6.PrefixLength,
-          Gateway: this.ethernetData[index].IPv6DefaultGateway,
+          Gateway:
+            this.ethernetData[index].IPv6StaticDefaultGateways?.[0]?.Address ||
+            this.ethernetData[index].IPv6DefaultGateway,
           ...(ipv6.Oem?.Ami && {
             ipv6Index: ipv6.Oem.Ami.StaticIPv6AddressIndex,
           }), // Conditionally add ipv6Index

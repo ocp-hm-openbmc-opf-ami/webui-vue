@@ -1,4 +1,4 @@
-import IconDashboard from '@carbon/icons-vue/es/dashboard/16';
+﻿import IconDashboard from '@carbon/icons-vue/es/dashboard/16';
 import IconTextLinkAnalysis from '@carbon/icons-vue/es/text-link--analysis/16';
 import IconDataCheck from '@carbon/icons-vue/es/data--check/16';
 import IconSettingsAdjust from '@carbon/icons-vue/es/settings--adjust/16';
@@ -15,6 +15,7 @@ import Iconchip from '@carbon/icons-vue/es/chip/16';
 import IconInformation from '@carbon/icons-vue/es/information/16';
 import IconPower from '@carbon/icons-vue/es/power/16';
 import RuntimeConfig from '@/utilities/RuntimeConfig';
+import { isFeatureEnabled } from '@/components/Mixins/FeatureMixin';
 
 const roles = {
   administrator: 'Administrator',
@@ -84,8 +85,12 @@ const AppNavigationMixin = {
             },
             {
               id: 'reboot-bmc',
-              label: this.$t('appNavigation.rebootBmc'),
-              route: '/operations/reboot-bmc',
+              label: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+                ? this.$t('appNavigation.rebootPmc')
+                : this.$t('appNavigation.rebootBmc'),
+              route: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+                ? '/operations/reboot-pmc'
+                : '/operations/reboot-bmc',
             },
             {
               id: 'task',
@@ -109,11 +114,6 @@ const AppNavigationMixin = {
               id: 'pam',
               label: this.$t('appNavigation.pam'),
               route: '/settings/pam',
-            },
-            {
-              id: 'advanced-log-settings',
-              label: this.$t('appNavigation.advancedLogSettings'),
-              route: '/settings/advanced-log',
             },
           ],
         },
@@ -157,6 +157,13 @@ const AppNavigationMixin = {
           ],
         },
       ];
+      if (!isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')) {
+        navigationItemsList.navigationItems[4].children.push({
+          id: 'advanced-log-settings',
+          label: this.$t('appNavigation.advancedLogSettings'),
+          route: '/settings/advanced-log',
+        });
+      }
       if (process.env.VUE_APP_ONETREE_NETWORK_NCSI_SUPPORT_ENABLED === 'true') {
         navigationItemsList.navigationItems[4].children.push({
           id: 'ncsi',
@@ -175,7 +182,10 @@ const AppNavigationMixin = {
           route: '/settings/firewall',
         });
       }
-      if (process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true') {
+      if (
+        process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true' &&
+        !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+      ) {
         navigationItemsList.navigationItems[4].children.push({
           id: 'network-link',
           label: this.$t('appNavigation.networkLink'),
@@ -191,7 +201,8 @@ const AppNavigationMixin = {
       }
       if (
         process.env.VUE_APP_ONETREE_NETWORK_ENABLED === 'true' &&
-        process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true'
+        process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true' &&
+        !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
       ) {
         navigationItemsList.navigationItems[4].children.push({
           id: 'network_ddns',
@@ -199,7 +210,10 @@ const AppNavigationMixin = {
           route: '/settings/network-ddns',
         });
       }
-      if (process.env.VUE_APP_ONETREE_NETWORK_ENABLED === 'true') {
+      if (
+        process.env.VUE_APP_ONETREE_NETWORK_ENABLED === 'true' &&
+        !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+      ) {
         navigationItemsList.navigationItems[4].children.push({
           id: 'vlan',
           label: this.$t('appNavigation.vlan'),
@@ -252,18 +266,24 @@ const AppNavigationMixin = {
           route: '/settings/date-time',
         });
       }
-      if (!RuntimeConfig.isMultiHostEnabled()) {
-        navigationItemsList.navigationItems[1].children.push({
-          id: 'video-log',
-          label: this.$t('appNavigation.videoLog'),
-          route: '/logs/video-log',
-        });
+      if (!isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')) {
+        if (!RuntimeConfig.isMultiHostEnabled()) {
+          navigationItemsList.navigationItems[1].children.push({
+            id: 'video-log',
+            label: this.$t('appNavigation.videoLog'),
+            route: '/logs/video-log',
+          });
+        }
       }
       if (process.env.VUE_APP_ONETREE_SEL_ENABLED === 'true') {
         navigationItemsList.navigationItems[1].children.push({
           id: 'ipmi-event-log',
-          label: this.$t('appNavigation.ipmiEventLog'),
-          route: '/logs/ipmi-event-log',
+          label: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+            ? this.$t('appPageTitle.psuAndPowerShelfSensorsEventLogs')
+            : this.$t('appPageTitle.ipmiEventLog'),
+          route: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+            ? '/logs/power-shelf-event-logs'
+            : '/logs/ipmi-event-logs',
         });
       }
       if (process.env.VUE_APP_OBMC_DEBUG_COLLECTOR_ENABLED === 'true') {
@@ -301,7 +321,10 @@ const AppNavigationMixin = {
           route: '/logs/sbmr',
         });
       }
-      if (process.env.VUE_APP_OBMC_LEDS_ENABLED === 'true') {
+      if (
+        process.env.VUE_APP_OBMC_LEDS_ENABLED === 'true' &&
+        !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+      ) {
         navigationItemsList.navigationItems[2].children.push({
           id: 'inventory',
           label: this.$t('appNavigation.inventory'),
@@ -322,85 +345,88 @@ const AppNavigationMixin = {
           route: '/operations/backup-and-restore',
         });
       }
-      if (process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true') {
-        navigationItemsList.navigationItems[3].children.push({
-          id: 'kvm',
-          label: this.$t('appNavigation.kvm'),
-          route: '/operations/kvm',
-        });
-      }
-      if (RuntimeConfig.isMultiHostEnabled()) {
-        navigationItemsList.navigationItems[3].children.push({
-          id: 'kvm1',
-          label: this.$t('appNavigation.kvm1'),
-          route: '/operations/kvm1',
-        });
-      }
-      if (process.env.VUE_APP_ONETREE_SOL_ENABLED === 'true') {
-        navigationItemsList.navigationItems[3].children.push({
-          id: 'serial-over-lan',
-          label: this.$t('appNavigation.serialOverLan'),
-          route: '/operations/serial-over-lan',
-          exclusiveToRoles: [roles.administrator],
-        });
-      }
-      if (RuntimeConfig.isMultiHostEnabled()) {
-        navigationItemsList.navigationItems[3].children.push({
-          id: 'serial-over-lan-0',
-          label: this.$t('appNavigation.serialOverLan1'),
-          route: '/operations/serial-over-lan-1',
-          exclusiveToRoles: [roles.administrator],
-        });
-      }
-      if (
-        process.env.VUE_APP_ONETREE_POWER_ENABLED === 'true' &&
-        process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true'
-      ) {
-        navigationItemsList.navigationItems[3].children.push({
-          id: 'server-power-operations',
-          label: this.$t('appNavigation.serverPowerOperations'),
-          route: '/operations/server-power-operations',
-        });
-      }
-      if (RuntimeConfig.isMultiHostEnabled()) {
-        navigationItemsList.navigationItems[3].children.push({
-          id: 'server-power-operations1',
-          label: this.$t('appNavigation.serverPowerOperations1'),
-          route: '/operations/server-power-operations1',
-        });
-      }
-      if (process.env.VUE_APP_ONETREE_MEDIA_REDIRECT_ENABLED === 'true') {
-        navigationItemsList.navigationItems[3].children.push({
-          id: 'virtual-media',
-          label: this.$t('appNavigation.virtualMedia'),
-          route: '/operations/virtual-media',
-          exclusiveToRoles: [
-            roles.administrator,
-            roles.operator,
-            roles.readonly,
-          ],
-        });
-
+      if (!isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')) {
+        if (process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true') {
+          navigationItemsList.navigationItems[3].children.push({
+            id: 'kvm',
+            label: this.$t('appNavigation.kvm'),
+            route: '/operations/kvm',
+          });
+        }
         if (RuntimeConfig.isMultiHostEnabled()) {
           navigationItemsList.navigationItems[3].children.push({
-            id: 'virtual-media-2',
-            label: this.$t('appNavigation.virtualMedia-host-01'),
-            route: '/operations/virtual-media-host-01',
+            id: 'kvm1',
+            label: this.$t('appNavigation.kvm1'),
+            route: '/operations/kvm1',
+          });
+        }
+        if (process.env.VUE_APP_ONETREE_SOL_ENABLED === 'true') {
+          navigationItemsList.navigationItems[3].children.push({
+            id: 'serial-over-lan',
+            label: this.$t('appNavigation.serialOverLan'),
+            route: '/operations/serial-over-lan',
+            exclusiveToRoles: [roles.administrator],
+          });
+        }
+        if (RuntimeConfig.isMultiHostEnabled()) {
+          navigationItemsList.navigationItems[3].children.push({
+            id: 'serial-over-lan-0',
+            label: this.$t('appNavigation.serialOverLan1'),
+            route: '/operations/serial-over-lan-1',
+            exclusiveToRoles: [roles.administrator],
+          });
+        }
+        if (
+          process.env.VUE_APP_ONETREE_POWER_ENABLED === 'true' &&
+          process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true'
+        ) {
+          navigationItemsList.navigationItems[3].children.push({
+            id: 'server-power-operations',
+            label: this.$t('appNavigation.serverPowerOperations'),
+            route: '/operations/server-power-operations',
+          });
+        }
+        if (RuntimeConfig.isMultiHostEnabled()) {
+          navigationItemsList.navigationItems[3].children.push({
+            id: 'server-power-operations1',
+            label: this.$t('appNavigation.serverPowerOperations1'),
+            route: '/operations/server-power-operations1',
+          });
+        }
+        if (process.env.VUE_APP_ONETREE_MEDIA_REDIRECT_ENABLED === 'true') {
+          navigationItemsList.navigationItems[3].children.push({
+            id: 'virtual-media',
+            label: this.$t('appNavigation.virtualMedia'),
+            route: '/operations/virtual-media',
             exclusiveToRoles: [
               roles.administrator,
               roles.operator,
               roles.readonly,
             ],
           });
+
+          if (RuntimeConfig.isMultiHostEnabled()) {
+            navigationItemsList.navigationItems[3].children.push({
+              id: 'virtual-media-2',
+              label: this.$t('appNavigation.virtualMedia-host-01'),
+              route: '/operations/virtual-media-host-01',
+              exclusiveToRoles: [
+                roles.administrator,
+                roles.operator,
+                roles.readonly,
+              ],
+            });
+          }
+        }
+        if (process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true') {
+          navigationItemsList.navigationItems[4].children.push({
+            id: 'bsod',
+            label: this.$t('appNavigation.bsod'),
+            route: '/settings/bsod',
+          });
         }
       }
-      if (process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true') {
-        navigationItemsList.navigationItems[4].children.push({
-          id: 'bsod',
-          label: this.$t('appNavigation.bsod'),
-          route: '/settings/bsod',
-        });
-      }
+
       if (process.env.VUE_APP_ONETREE_GPGPU_ENABLED === 'true') {
         navigationItemsList.navigationItems[4].children.push({
           id: 'device-owner-transfership',
@@ -415,12 +441,14 @@ const AppNavigationMixin = {
           route: '/settings/license',
         });
       }
-      if (!RuntimeConfig.isMultiHostEnabled()) {
-        navigationItemsList.navigationItems[4].children.push({
-          id: 'auto-video-settings',
-          label: this.$t('appNavigation.autoVideo'),
-          route: '/settings/auto-video',
-        });
+      if (!isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')) {
+        if (!RuntimeConfig.isMultiHostEnabled()) {
+          navigationItemsList.navigationItems[4].children.push({
+            id: 'auto-video-settings',
+            label: this.$t('appNavigation.autoVideo'),
+            route: '/settings/auto-video',
+          });
+        }
       }
       if (process.env.VUE_APP_ONETREE_NVIDIASIPACK_ENABLED == 'true') {
         navigationItemsList.navigationItems[4].children.push({
@@ -503,7 +531,7 @@ const AppNavigationMixin = {
           icon: 'iconChip',
         });
       }
-      if (process.env.VUE_APP_ONETREE_PSM_ENABLED === 'true') {
+      if (isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')) {
         navigationItemsList.navigationItems.push({
           id: 'power-shelf',
           label: this.$t('appNavigation.powerShelf'),
@@ -543,7 +571,7 @@ const AppNavigationMixin = {
       }
       if (
         process.env.VUE_APP_ONETREE_RTP_ENABLED === 'true' &&
-        process.env.VUE_APP_ONETREE_PSM_ENABLED !== 'true'
+        !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
       ) {
         navigationItemsList.navigationItems.push({
           id: 'system-inventory',
@@ -613,6 +641,19 @@ const AppNavigationMixin = {
           children: hostSystemDiagnosticsChildren,
         });
       }
+
+      const powerShelfIndex = navigationItemsList.navigationItems.findIndex(
+        (item) => item.id === 'power-shelf',
+      );
+
+      if (powerShelfIndex > 1) {
+        const [powerShelfItem] = navigationItemsList.navigationItems.splice(
+          powerShelfIndex,
+          1,
+        );
+        navigationItemsList.navigationItems.splice(1, 0, powerShelfItem);
+      }
+
       return navigationItemsList;
     },
   },

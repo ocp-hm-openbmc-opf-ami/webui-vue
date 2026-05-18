@@ -168,6 +168,7 @@
         "sbmr": "@:appPageTitle.sbmr",
         "powerRestorePolicy": "@:appPageTitle.powerRestorePolicy",
         "rebootBmc": "@:appPageTitle.rebootBmc",
+        "rebootPmc": "Перезагрузить PMC",
         "policies": "@:appPageTitle.policies",
         "sensors": "@:appPageTitle.sensors",
         "serialOverLan": "SOL консоль",
@@ -299,6 +300,7 @@
         "radius": "RADIUS",
         "amdRemoteDebug": "Удаленная отладка",
         "ipmiEventLog": "Журналы событий IPMI",
+        "psuAndPowerShelfSensorsEventLogs": "Журналы событий Power Shelf",
         "gpgpu": "GPGPU",
         "advancedLogSettings":"Расширенные настройки журналирования",
         "fru":"ФРУ",
@@ -2115,6 +2117,7 @@
         "enableLAN": "Включить LAN",
         "ipv6Index": "IPv6 индекс",
         "ipv4ipv6statusinfo": "Для выбранного интерфейса должна быть включена поддержка IPv4 или IPv6; оба не могут быть отключены одновременно.",
+        "ipv6GatewayWithoutIp": "Шлюз настроен без IPv6-адресов. Добавьте хотя бы один статический адрес или включите DHCPv6 для завершения настройки.",
         "modal": {
             "confirmDisableDhcp": "Вы уверены, что хотите отключить DHCP?",
             "confirmEnableDhcp": "При включении DHCP статические IP-адреса станут недоступны.",
@@ -2399,15 +2402,26 @@
     },
     "pageRebootBmc": {
         "lastReboot": "Последняя перезагрузка BMC",
+        "lastRebootPmc": "Последняя перезагрузка PMC",
         "rebootBmc": "Перезагрузить BMC",
-        "rebootInformation": "При перезагрузке BMC ваш веб-браузер теряет связь с BMC на несколько минут. Когда BMC снова будет в сети, Вам может потребоваться войти снова.",
+        "rebootPmc": "Перезагрузить PMC",
+        "rebootInformation": "При перезагрузке BMC ваш веб-браузер теряет контакт с BMC на несколько минут. Когда BMC вернётся в режим, вам может потребоваться войти снова.",
+        "rebootPmcInformation": "При перезагрузке PMC ваш веб-браузер теряет контакт с PMC на несколько минут. Когда PMC вернётся в режим, вам может потребоваться войти снова.",
         "modal": {
-            "confirmMessage": "Вы уверены, что хотите перезагрузить BMC? Запуск перезагрузки BMC займет несколько минут. Закройте текущую сессию и откройте новую сессию после успешного завершения перезагрузки BMC.",
+            "confirmMessage": "Вы уверены, что хотите перезагрузить BMC? Перезагрузка BMC займет несколько минут. Закройте текущую сессию и откройте новую сессию после успешного завершения перезагрузки BMC.",
             "confirmTitle": "Подтвердить перезагрузку BMC"
         },
+        "modalPmc": {
+            "confirmMessage": "Вы уверены, что хотите перезагрузить PMC? Перезагрузка PMC займет несколько минут. Закройте текущую сессию и откройте новую сессию после успешного завершения перезагрузки PMC.",
+            "confirmTitle": "Подтвердить перезагрузку PMC"
+        },
         "toast": {
-            "errorRebootStart": "Ошибка перезагрузки BMC.",
-            "successRebootStart": "Перезагрузка BMC успешно запущена."
+            "errorRebootStart": "Ошибка при перезагрузке BMC.",
+            "successRebootStart": "BMC успешно перезагружается."
+        },
+        "toastPmc": {
+            "errorRebootStart": "Ошибка при перезагрузке PMC.",
+            "successRebootStart": "PMC успешно перезагружается."
         }
     },
     "pagePolicies": {
@@ -4249,7 +4263,7 @@
         "outputCurrentAmps": "Выходной ток (А)",
         "outputPowerWatts": "Выходная мощность (Вт)",
         "temperatureCelsius": "Температура (°C)",
-        "fanSpeedPercent": "Скорость вентилятора (%)",
+        "fanSpeedPercent": "Скорость вентилятора (RPM)",
         "energykWh": "Энергия (кВт⋅ч)",
         "branches": "Ветви",
         "mains": "Основные",

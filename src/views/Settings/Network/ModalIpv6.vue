@@ -117,7 +117,13 @@
         <icon-cancel />
         {{ $t('global.action.cancel') }}
       </b-button>
-      <b-button form="form-ipv6" type="submit" variant="primary" @click="onOk">
+      <b-button
+        form="form-ipv6"
+        type="submit"
+        variant="primary"
+        :disabled="isButtonDisable"
+        @click="onOk"
+      >
         <icon-add />
         {{ $t('global.action.add') }}
       </b-button>
@@ -155,6 +161,10 @@ export default {
       default: () => {},
     },
     modalSuccess: {
+      type: Boolean,
+      default: false,
+    },
+    isButtonDisable: {
       type: Boolean,
       default: false,
     },
@@ -345,7 +355,9 @@ export default {
         if (val.Oem.Ami.StaticIPv6AddressIndex === value) {
           this.form.ipAddress = val.Address;
           this.form.prefixLength = val.PrefixLength;
-          this.form.gateway = this.ipv6IndexValue.IPv6DefaultGateway;
+          this.form.gateway =
+            this.ipv6IndexValue.IPv6StaticDefaultGateways?.[0]?.Address ||
+            this.ipv6IndexValue.IPv6DefaultGateway;
           return true; // stops further iteration
         } else {
           this.form.ipAddress = null;

@@ -168,6 +168,7 @@
         "sbmr": "@:appPageTitle.sbmr",
         "powerRestorePolicy": "@:appPageTitle.powerRestorePolicy",
         "rebootBmc": "@:appPageTitle.rebootBmc",
+        "rebootPmc": "重新启动 PMC",
         "policies": "@:appPageTitle.policies",
         "sensors": "@:appPageTitle.sensors",
         "serialOverLan": "SOL 控制面板",
@@ -299,6 +300,7 @@
         "radius": "RADIUS",
         "amdRemoteDebug": "AMD 远程调试",
         "ipmiEventLog": "IPMI事件日志",
+        "psuAndPowerShelfSensorsEventLogs": "Power Shelf 事件日志",
         "gpgpu": "GPGPU",
         "advancedLogSettings":"高级日志设置",
         "fru":"现场可更换单元",
@@ -2116,6 +2118,7 @@
         "enableLAN": "启用局域网",	
         "ipv6Index": "IPv6索引",        
         "ipv4ipv6statusinfo": "对于所选接口，应启用 IPv4 或 IPv6 支持；两者不能同时关闭。", 
+        "ipv6GatewayWithoutIp": "网关已配置，但没有任何 IPv6 地址。请添加至少一个静态地址或启用 DHCPv6 以完成设置。",
         "modal": {
             "confirmDisableDhcp": "你确定要禁用 DHCP?",
             "confirmEnableDhcp": "启用 DHCP 后，无法访问静态 IP 地址。",
@@ -2399,15 +2402,26 @@
     },
     "pageRebootBmc": {
         "lastReboot": "最后一次 BMC 重新启动",
+        "lastRebootPmc": "最后一次 PMC 重新启动",
         "rebootBmc": "重新启动 BMC",
+        "rebootPmc": "重新启动 PMC",
         "rebootInformation": "当您重新启动 BMC 时，您的 Web 浏览器将与 BMC 失去联系几分钟。 当 BMC 重新上线后，您可能需要重新登录。",
+        "rebootPmcInformation": "当您重新启动 PMC 时，您的 Web 浏览器将与 PMC 失去联系几分钟。 当 PMC 重新上线后，您可能需要重新登录。",
         "modal": {
-            "confirmMessage": "您确定要重启 BMC 吗？重启 BMC 需要几分钟时间。重启 BMC 成功完成后，请关闭当前会话并打开一个新会话。",
-            "confirmTitle": "确认 BMC 重启"
+            "confirmMessage": "您确定要重新启动 BMC 吗？ 启动 BMC 重新启动需要几分钟。 BMC 重新启动成功完成后，关闭当前会话并打开新会话。",
+            "confirmTitle": "确认 BMC 重新启动"
+        },
+        "modalPmc": {
+            "confirmMessage": "您确定要重新启动 PMC 吗？ 启动 PMC 重新启动需要几分钟。 PMC 重新启动成功完成后，关闭当前会话并打开新会话。",
+            "confirmTitle": "确认 PMC 重新启动"
         },
         "toast": {
             "errorRebootStart": "重新启动 BMC 时出错。",
-            "successRebootStart": "成功重启 BMC。"
+            "successRebootStart": "成功重新启动 BMC。"
+        },
+        "toastPmc": {
+            "errorRebootStart": "重新启动 PMC 时出错。",
+            "successRebootStart": "成功重新启动 PMC。"
         }
     },
     "pagePolicies": {
@@ -4237,7 +4251,7 @@
         "outputCurrentAmps": "输出电流（A）",
         "outputPowerWatts": "输出功率（W）",
         "temperatureCelsius": "温度（°C）",
-        "fanSpeedPercent": "风扇速度（%）",
+        "fanSpeedPercent": "风扇速度（RPM）",
         "energykWh": "能量（千瓦时）",
         "branches": "分支",
         "mains": "主电源",

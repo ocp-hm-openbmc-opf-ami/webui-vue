@@ -168,6 +168,7 @@
         "sbmr": "@:appPageTitle.sbmr",
         "powerRestorePolicy": "@:appPageTitle.powerRestorePolicy",
         "rebootBmc": "@:appPageTitle.rebootBmc",
+        "rebootPmc": "重新啟動 PMC",
         "policies": "@:appPageTitle.policies",
         "sensors": "@:appPageTitle.sensors",
         "serialOverLan": "SOL 控制面板",
@@ -223,6 +224,7 @@
         "deviceOwnerTransfership": "設備所有者轉讓",
         "spdm": "@:appPageTitle.spdm",
         "powerShelf": "Power Shelf",
+        "psuAndPowerShelfSensorsEventLogs": "Power Shelf 事件日誌",
         "powerSupplyInventory": "@:appPageTitle.powerSupplyInventory",
         "powerEquipment": "@:appPageTitle.powerEquipment",
         "kvm1": "@:appPageTitle.kvm1",
@@ -300,6 +302,7 @@
         "radius": "RADIUS",
         "amdRemoteDebug": "AMD 遠端偵錯",
         "ipmiEventLog": "IPMI事件日誌",
+        "psuAndPowerShelfSensorsEventLogs": "Power Shelf 事件日誌",
         "gpgpu": "GPGPU",
         "advancedLogSettings":"進階日誌設定",
         "fru":"現場可更換單元",
@@ -2116,7 +2119,8 @@
         "staticDns": "固定 DNS",
         "enableLAN": "啟用區域網路",	
         "ipv6Index": "IPv6索引", 
-        "ipv4ipv6statusinfo": "對於所選接口，應啟用 IPv4 或 IPv6 支援；兩者不能同時關閉。", 
+        "ipv4ipv6statusinfo": "對於所選接口，應啟用 IPv4 或 IPv6 支援；兩者不能同時關閉。",
+        "ipv6GatewayWithoutIp": "閘道已配置，但沒有任何 IPv6 地址。請添加至少一個靜態地址或啟用 DHCPv6 以完成設置。",
         "modal": {
             "confirmDisableDhcp": "你確定要停用 DHCP?",
             "confirmEnableDhcp": "啟用 DHCP 後，無法訪問靜態 IP 地址。",
@@ -2400,15 +2404,26 @@
     },
     "pageRebootBmc": {
         "lastReboot": "最後一次 BMC 重新啟動",
+        "lastRebootPmc": "最後一次 PMC 重新啟動",
         "rebootBmc": "重新啟動 BMC",
-        "rebootInformation": "當您重新啟動 BMC 時，您的 Web 瀏覽器將與 BMC 失去聯繫幾分鐘。 當BMC重新上線後，您可能需要重新登錄。",
+        "rebootPmc": "重新啟動 PMC",
+        "rebootInformation": "當您重新啟動 BMC 時，您的 Web 瀏覽器將與 BMC 失去聯繫幾分鐘。當 BMC 重新上線後，您可能需要重新登錄。",
+        "rebootPmcInformation": "當您重新啟動 PMC 時，您的 Web 瀏覽器將與 PMC 失去聯繫幾分鐘。當 PMC 重新上線後，您可能需要重新登錄。",
         "modal": {
-            "confirmMessage": "您確定要重新啟動 BMC 嗎？開始重新啟動 BMC 需要幾分鐘。重新啟動 BMC 成功完成後，關閉目前會話並開啟一個新會話。",
-            "confirmTitle": "確認 BMC 重啟"
+            "confirmMessage": "您確定要重新啟動 BMC 嗎？開始重新啟動 BMC 將需要幾分鐘。在 BMC 重新啟動成功完成後，請關閉目前的會話並開啟新的會話。",
+            "confirmTitle": "確認 BMC 重新啟動"
+        },
+        "modalPmc": {
+            "confirmMessage": "您確定要重新啟動 PMC 嗎？開始重新啟動 PMC 將需要幾分鐘。在 PMC 重新啟動成功完成後，請關閉目前的會話並開啟新的會話。",
+            "confirmTitle": "確認 PMC 重新啟動"
         },
         "toast": {
             "errorRebootStart": "重新啟動 BMC 時發生錯誤。",
-            "successRebootStart": "成功重啟 BMC。"
+            "successRebootStart": "成功重新啟動 BMC。"
+        },
+        "toastPmc": {
+            "errorRebootStart": "重新啟動 PMC 時發生錯誤。",
+            "successRebootStart": "成功重新啟動 PMC。"
         }
     },
     "pagePolicies": {
@@ -4248,7 +4263,7 @@
         "outputCurrentAmps": "輸出電流 (A)",
         "outputPowerWatts": "輸出功率 (W)",
         "temperatureCelsius": "溫度 (°C)",
-        "fanSpeedPercent": "風扇轉速 (%)",
+        "fanSpeedPercent": "風扇轉速 (RPM)",
         "energykWh": "能源 (kWh)",
         "branches": "分支",
         "mains": "主電源",

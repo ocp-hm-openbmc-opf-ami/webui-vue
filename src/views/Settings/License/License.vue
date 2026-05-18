@@ -74,6 +74,7 @@ import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import IconEvent from '@carbon/icons-vue/es/event--schedule/20';
 import { privilegesId } from '@/store/modules/GlobalStore';
 import { mapGetters } from 'vuex';
+import FeatureMixin from '@/components/Mixins/FeatureMixin';
 export default {
   components: {
     TableRowAction,
@@ -83,7 +84,7 @@ export default {
     IconAdd,
     IconEvent,
   },
-  mixins: [LoadingBarMixin, BVToastMixin],
+  mixins: [LoadingBarMixin, BVToastMixin, FeatureMixin],
   data() {
     return {
       loading,
@@ -169,6 +170,13 @@ export default {
                 );
         }
         if (licenseVal[0] != '' && licenseVal[1] != undefined) {
+          const featureName = licenseVal[0].toUpperCase().trim();
+          if (
+            this.isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED') &&
+            (featureName === 'KVM' || featureName === 'MEDIA')
+          ) {
+            return;
+          }
           const itemAdded = {
             feature: licenseVal[0],
             uploadKeyValidity: licenseVal[1],

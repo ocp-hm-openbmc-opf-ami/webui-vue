@@ -48,100 +48,191 @@
       <template #row-details="{ item }">
         <b-container fluid>
           <b-row>
-            <b-col class="mt-2" sm="6">
+            <b-col
+              v-if="item.serialNumber || item.model || item.assetTag"
+              class="mt-2"
+              sm="6"
+            >
               <dl>
                 <!-- Serial number -->
-                <dt>{{ $t('pageInventory.table.serialNumber') }}:</dt>
-                <dd>{{ dataFormatter(item.serialNumber) }}</dd>
+                <template v-if="item.serialNumber">
+                  <dt>{{ $t('pageInventory.table.serialNumber') }}:</dt>
+                  <dd>{{ dataFormatter(item.serialNumber) }}</dd>
+                </template>
                 <!-- Model -->
-                <dt>{{ $t('pageInventory.table.model') }}:</dt>
-                <dd>{{ dataFormatter(item.model) }}</dd>
+                <template v-if="item.model">
+                  <dt>{{ $t('pageInventory.table.model') }}:</dt>
+                  <dd>{{ dataFormatter(item.model) }}</dd>
+                </template>
                 <!-- Asset tag -->
-                <dt>{{ $t('pageInventory.table.assetTag') }}:</dt>
-                <dd class="mb-2">
-                  {{ dataFormatter(item.assetTag) }}
-                </dd>
+                <template v-if="item.assetTag">
+                  <dt>{{ $t('pageInventory.table.assetTag') }}:</dt>
+                  <dd class="mb-2">
+                    {{ dataFormatter(item.assetTag) }}
+                  </dd>
+                </template>
               </dl>
             </b-col>
-            <b-col class="mt-2" sm="6">
+            <b-col
+              v-if="item.statusState || item.powerState || item.healthRollup"
+              class="mt-2"
+              sm="6"
+            >
               <dl>
                 <!-- Status state -->
-                <dt>{{ $t('pageInventory.table.statusState') }}:</dt>
-                <dd>{{ dataFormatter(item.statusState) }}</dd>
+                <template v-if="item.statusState">
+                  <dt>{{ $t('pageInventory.table.statusState') }}:</dt>
+                  <dd>{{ dataFormatter(item.statusState) }}</dd>
+                </template>
                 <!-- Power state -->
-                <dt>{{ $t('pageInventory.table.power') }}:</dt>
-                <dd>{{ dataFormatter(item.powerState) }}</dd>
+                <template v-if="item.powerState">
+                  <dt>{{ $t('pageInventory.table.power') }}:</dt>
+                  <dd>{{ dataFormatter(item.powerState) }}</dd>
+                </template>
                 <!-- Health rollup -->
-                <dt>{{ $t('pageInventory.table.healthRollup') }}:</dt>
-                <dd>{{ dataFormatter(item.healthRollup) }}</dd>
+                <template v-if="item.healthRollup">
+                  <dt>{{ $t('pageInventory.table.healthRollup') }}:</dt>
+                  <dd>{{ dataFormatter(item.healthRollup) }}</dd>
+                </template>
               </dl>
             </b-col>
           </b-row>
           <div class="section-divider mb-3 mt-3"></div>
           <b-row>
-            <b-col class="mt-1" sm="6">
+            <b-col
+              v-if="
+                item.manufacturer ||
+                item.description ||
+                item.subModel ||
+                item.systemType
+              "
+              class="mt-1"
+              sm="6"
+            >
               <dl>
                 <!-- Manufacturer -->
-                <dt>{{ $t('pageInventory.table.manufacturer') }}:</dt>
-                <dd>{{ dataFormatter(item.manufacturer) }}</dd>
+                <template v-if="item.manufacturer">
+                  <dt>{{ $t('pageInventory.table.manufacturer') }}:</dt>
+                  <dd>{{ dataFormatter(item.manufacturer) }}</dd>
+                </template>
                 <!-- Description -->
-                <dt>{{ $t('pageInventory.table.description') }}:</dt>
-                <dd>{{ dataFormatter(item.description) }}</dd>
+                <template v-if="item.description">
+                  <dt>{{ $t('pageInventory.table.description') }}:</dt>
+                  <dd>{{ dataFormatter(item.description) }}</dd>
+                </template>
                 <!-- Sub Model -->
-                <dt>{{ $t('pageInventory.table.subModel') }}:</dt>
-                <dd>
-                  {{ dataFormatter(item.subModel) }}
-                </dd>
+                <template v-if="item.subModel">
+                  <dt>{{ $t('pageInventory.table.subModel') }}:</dt>
+                  <dd>
+                    {{ dataFormatter(item.subModel) }}
+                  </dd>
+                </template>
                 <!-- System Type -->
-                <dt>{{ $t('pageInventory.table.systemType') }}:</dt>
-                <dd>
-                  {{ dataFormatter(item.systemType) }}
-                </dd>
+                <template v-if="item.systemType">
+                  <dt>{{ $t('pageInventory.table.systemType') }}:</dt>
+                  <dd>
+                    {{ dataFormatter(item.systemType) }}
+                  </dd>
+                </template>
               </dl>
             </b-col>
-            <b-col sm="6">
+            <b-col
+              v-if="
+                item.memorySummaryState ||
+                item.memorySummaryHealth ||
+                item.memorySummaryHealthRollup ||
+                item.totalSystemMemoryGiB ||
+                item.processorSummaryState ||
+                item.processorSummaryHealth ||
+                item.processorSummaryHealthRoll ||
+                item.processorSummaryCount ||
+                item.processorSummaryCoreCount
+              "
+              sm="6"
+            >
               <!-- Memory Summary -->
-              <p class="mt-1 mb-2 h6 float-none m-0">
-                {{ $t('pageInventory.table.memorySummary') }}
-              </p>
-              <dl class="ml-4">
-                <!-- Status state -->
-                <dt>{{ $t('pageInventory.table.statusState') }}:</dt>
-                <dd>{{ dataFormatter(item.memorySummaryState) }}</dd>
-                <!-- Health -->
-                <dt>{{ $t('pageInventory.table.health') }}:</dt>
-                <dd>{{ dataFormatter(item.memorySummaryHealth) }}</dd>
-                <!-- Health Roll  -->
-                <dt>{{ $t('pageInventory.table.healthRollup') }}:</dt>
-                <dd>{{ dataFormatter(item.memorySummaryHealthRollup) }}</dd>
-                <!-- Total system memory -->
-                <dt>{{ $t('pageInventory.table.totalSystemMemoryGiB') }}:</dt>
-                <dd>
-                  {{ dataFormatter(item.totalSystemMemoryGiB) }}
-                  {{ $t('unit.GiB') }}
-                </dd>
-              </dl>
+              <template
+                v-if="
+                  item.memorySummaryState ||
+                  item.memorySummaryHealth ||
+                  item.memorySummaryHealthRollup ||
+                  item.totalSystemMemoryGiB
+                "
+              >
+                <p class="mt-1 mb-2 h6 float-none m-0">
+                  {{ $t('pageInventory.table.memorySummary') }}
+                </p>
+                <dl class="ml-4">
+                  <!-- Status state -->
+                  <template v-if="item.memorySummaryState">
+                    <dt>{{ $t('pageInventory.table.statusState') }}:</dt>
+                    <dd>{{ dataFormatter(item.memorySummaryState) }}</dd>
+                  </template>
+                  <!-- Health -->
+                  <template v-if="item.memorySummaryHealth">
+                    <dt>{{ $t('pageInventory.table.health') }}:</dt>
+                    <dd>{{ dataFormatter(item.memorySummaryHealth) }}</dd>
+                  </template>
+                  <!-- Health Roll  -->
+                  <template v-if="item.memorySummaryHealthRollup">
+                    <dt>{{ $t('pageInventory.table.healthRollup') }}:</dt>
+                    <dd>{{ dataFormatter(item.memorySummaryHealthRollup) }}</dd>
+                  </template>
+                  <!-- Total system memory -->
+                  <template v-if="item.totalSystemMemoryGiB">
+                    <dt>
+                      {{ $t('pageInventory.table.totalSystemMemoryGiB') }}:
+                    </dt>
+                    <dd>
+                      {{ dataFormatter(item.totalSystemMemoryGiB) }}
+                      {{ $t('unit.GiB') }}
+                    </dd>
+                  </template>
+                </dl>
+              </template>
               <!-- Processor Summary -->
-              <p class="mt-1 mb-2 h6 float-none m-0">
-                {{ $t('pageInventory.table.processorSummary') }}
-              </p>
-              <dl class="ml-4">
-                <!-- Status state -->
-                <dt>{{ $t('pageInventory.table.statusState') }}:</dt>
-                <dd>{{ dataFormatter(item.processorSummaryState) }}</dd>
-                <!-- Health -->
-                <dt>{{ $t('pageInventory.table.health') }}:</dt>
-                <dd>{{ dataFormatter(item.processorSummaryHealth) }}</dd>
-                <!-- Health Rollup -->
-                <dt>{{ $t('pageInventory.table.healthRollup') }}:</dt>
-                <dd>{{ dataFormatter(item.processorSummaryHealthRoll) }}</dd>
-                <!-- Count -->
-                <dt>{{ $t('pageInventory.table.count') }}:</dt>
-                <dd>{{ dataFormatter(item.processorSummaryCount) }}</dd>
-                <!-- Core Count -->
-                <dt>{{ $t('pageInventory.table.coreCount') }}:</dt>
-                <dd>{{ dataFormatter(item.processorSummaryCoreCount) }}</dd>
-              </dl>
+              <template
+                v-if="
+                  item.processorSummaryState ||
+                  item.processorSummaryHealth ||
+                  item.processorSummaryHealthRoll ||
+                  item.processorSummaryCount ||
+                  item.processorSummaryCoreCount
+                "
+              >
+                <p class="mt-1 mb-2 h6 float-none m-0">
+                  {{ $t('pageInventory.table.processorSummary') }}
+                </p>
+                <dl class="ml-4">
+                  <!-- Status state -->
+                  <template v-if="item.processorSummaryState">
+                    <dt>{{ $t('pageInventory.table.statusState') }}:</dt>
+                    <dd>{{ dataFormatter(item.processorSummaryState) }}</dd>
+                  </template>
+                  <!-- Health -->
+                  <template v-if="item.processorSummaryHealth">
+                    <dt>{{ $t('pageInventory.table.health') }}:</dt>
+                    <dd>{{ dataFormatter(item.processorSummaryHealth) }}</dd>
+                  </template>
+                  <!-- Health Rollup -->
+                  <template v-if="item.processorSummaryHealthRoll">
+                    <dt>{{ $t('pageInventory.table.healthRollup') }}:</dt>
+                    <dd>
+                      {{ dataFormatter(item.processorSummaryHealthRoll) }}
+                    </dd>
+                  </template>
+                  <!-- Count -->
+                  <template v-if="item.processorSummaryCount">
+                    <dt>{{ $t('pageInventory.table.count') }}:</dt>
+                    <dd>{{ dataFormatter(item.processorSummaryCount) }}</dd>
+                  </template>
+                  <!-- Core Count -->
+                  <template v-if="item.processorSummaryCoreCount">
+                    <dt>{{ $t('pageInventory.table.coreCount') }}:</dt>
+                    <dd>{{ dataFormatter(item.processorSummaryCoreCount) }}</dd>
+                  </template>
+                </dl>
+              </template>
             </b-col>
           </b-row>
         </b-container>

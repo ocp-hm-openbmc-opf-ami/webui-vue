@@ -79,6 +79,7 @@
       :ipv6-index-value="ipv6IndexValue"
       :modal-success="isIpv6ModalSuccess"
       :tab-index="tabIndex"
+      :is-button-disable="isButtonDisable"
       @ok="saveIpv6Address"
       @closeIpv6Modal="isIpv6closeAddModal"
     />

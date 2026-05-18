@@ -1,6 +1,12 @@
 <template>
   <b-container fluid="xl">
-    <page-title />
+    <page-title
+      :custom-title="
+        isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+          ? $t('appPageTitle.psuAndPowerShelfSensorsEventLogs')
+          : $t('appPageTitle.ipmiEventLog')
+      "
+    />
     <b-row class="align-items-start">
       <b-col sm="8" xl="6" class="d-sm-flex align-items-end mb-4">
         <search
@@ -303,6 +309,7 @@ import SearchFilterMixin, {
 } from '@/components/Mixins/SearchFilterMixin';
 import i18n from '@/i18n';
 import { privilegesId } from '@/store/modules/GlobalStore';
+import FeatureMixin from '@/components/Mixins/FeatureMixin';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -332,6 +339,7 @@ export default {
     TableSortMixin,
     TableRowExpandMixin,
     SearchFilterMixin,
+    FeatureMixin,
   ],
   beforeRouteLeave(to, from, next) {
     // Hide loader if the user navigates to another page

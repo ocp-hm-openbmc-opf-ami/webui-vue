@@ -168,6 +168,7 @@
         "sbmr": "@:appPageTitle.sbmr",
         "powerRestorePolicy": "@:appPageTitle.powerRestorePolicy",
         "rebootBmc": "@:appPageTitle.rebootBmc",
+        "rebootPmc": "Reboot PMC",
         "policies": "@:appPageTitle.policies",
         "sensors": "@:appPageTitle.sensors",
         "serialOverLan": "SOL Console",
@@ -298,6 +299,7 @@
         "radius": "RADIUS",
         "amdRemoteDebug": "Remote Debug",
         "ipmiEventLog": "IPMI Event Logs",
+        "psuAndPowerShelfSensorsEventLogs": "Power Shelf Event Logs",
         "gpgpu": "GPGPU",
         "advancedLogSettings":"Advanced Log Settings",
         "fru":"FRU",
@@ -2114,7 +2116,8 @@
         "staticDns": "Static DNS",
         "enableLAN": "Enable LAN",	
         "ipv6Index": "IPv6 Index",
-        "ipv4ipv6statusinfo": "For the selected interface, either IPv4 or IPv6 support should be enabled; neither can be turned off simultaneously.", 
+        "ipv4ipv6statusinfo": "For the selected interface, either IPv4 or IPv6 support should be enabled; neither can be turned off simultaneously.",
+        "ipv6GatewayWithoutIp": "Gateway configured without any IPv6 addresses. Add at least one static address or enable DHCPv6 to complete setup.",
         "modal": {
             "confirmDisableDhcp": "Are you sure you want to disable DHCP?",
             "confirmEnableDhcp": "When DHCP is enabled, static IP Addresses will not be accessible.",
@@ -2398,15 +2401,26 @@
     },
     "pageRebootBmc": {
         "lastReboot": "Last BMC reboot",
+        "lastRebootPmc": "Last PMC reboot",
         "rebootBmc": "Reboot BMC",
+        "rebootPmc": "Reboot PMC",
         "rebootInformation": "When you reboot the BMC, your web browser loses contact with the BMC for several minutes. When the BMC is back online, you may need to log in again.",
+        "rebootPmcInformation": "When you reboot the PMC, your web browser loses contact with the PMC for several minutes. When the PMC is back online, you may need to log in again.",
         "modal": {
             "confirmMessage": "Are you sure you want to reboot the BMC? To start Reboot BMC it will take few minutes. Close the current session and open a new session after Reboot BMC sucessfully completed.",
             "confirmTitle": "Confirm BMC reboot"
         },
+        "modalPmc": {
+            "confirmMessage": "Are you sure you want to reboot the PMC? To start Reboot PMC it will take few minutes. Close the current session and open a new session after Reboot PMC sucessfully completed.",
+            "confirmTitle": "Confirm PMC reboot"
+        },
         "toast": {
             "errorRebootStart": "Error in rebooting BMC.",
             "successRebootStart": "Successfully rebooting BMC."
+        },
+        "toastPmc": {
+            "errorRebootStart": "Error in rebooting PMC.",
+            "successRebootStart": "Successfully rebooting PMC."
         }
     },
     "pagePolicies": {
@@ -4256,7 +4270,7 @@
         "outputCurrentAmps": "Output Current (A)",
         "outputPowerWatts": "Output Power (W)",
         "temperatureCelsius": "Temperature (°C)",
-        "fanSpeedPercent": "Fan Speed (%)",
+        "fanSpeedPercent": "Fan Speed (RPM)",
         "energykWh": "Energy (kWh)",
         "branches": "Branches",
         "mains": "Mains",

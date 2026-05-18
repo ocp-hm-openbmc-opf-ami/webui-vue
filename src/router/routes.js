@@ -1,4 +1,5 @@
 import AppLayout from '@/layouts/AppLayout.vue';
+import { isFeatureEnabled } from '@/components/Mixins/FeatureMixin';
 import ChangePassword from '@/views/ChangePassword';
 import ConsoleLayout from '@/layouts/ConsoleLayout.vue';
 import DateTime from '@/views/Settings/DateTime';
@@ -292,11 +293,17 @@ const routes = [
         },
       },
       {
-        path: '/operations/reboot-bmc',
-        name: 'reboot-bmc',
+        path: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+          ? '/operations/reboot-pmc'
+          : '/operations/reboot-bmc',
+        name: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+          ? 'reboot-pmc'
+          : 'reboot-bmc',
         component: RebootBmc,
         meta: {
-          title: i18n.t('appPageTitle.rebootBmc'),
+          title: isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+            ? i18n.t('appPageTitle.rebootPmc')
+            : i18n.t('appPageTitle.rebootBmc'),
         },
       },
       {

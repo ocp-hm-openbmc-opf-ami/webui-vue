@@ -50,96 +50,185 @@
       <template #row-details="{ item }">
         <b-container fluid>
           <b-row>
-            <b-col class="mt-2" sm="6" xl="6">
+            <b-col
+              v-if="
+                item.name ||
+                item.partNumber ||
+                item.serialNumber ||
+                item.sparePartNumber ||
+                item.model ||
+                item.uuid ||
+                item.serviceEntryPointUuid
+              "
+              class="mt-2"
+              sm="6"
+              xl="6"
+            >
               <dl>
                 <!-- Name -->
-                <dt>{{ $t('pageInventory.table.name') }}:</dt>
-                <dd>{{ dataFormatter(item.name) }}</dd>
+                <template v-if="item.name">
+                  <dt>{{ $t('pageInventory.table.name') }}:</dt>
+                  <dd>{{ dataFormatter(item.name) }}</dd>
+                </template>
                 <!-- Part number -->
-                <dt>{{ $t('pageInventory.table.partNumber') }}:</dt>
-                <dd>{{ dataFormatter(item.partNumber) }}</dd>
+                <template v-if="item.partNumber">
+                  <dt>{{ $t('pageInventory.table.partNumber') }}:</dt>
+                  <dd>{{ dataFormatter(item.partNumber) }}</dd>
+                </template>
                 <!-- Serial number -->
-                <dt>{{ $t('pageInventory.table.serialNumber') }}:</dt>
-                <dd>{{ dataFormatter(item.serialNumber) }}</dd>
+                <template v-if="item.serialNumber">
+                  <dt>{{ $t('pageInventory.table.serialNumber') }}:</dt>
+                  <dd>{{ dataFormatter(item.serialNumber) }}</dd>
+                </template>
                 <!-- Spare part number -->
-                <dt>{{ $t('pageInventory.table.sparePartNumber') }}:</dt>
-                <dd>{{ dataFormatter(item.sparePartNumber) }}</dd>
+                <template v-if="item.sparePartNumber">
+                  <dt>{{ $t('pageInventory.table.sparePartNumber') }}:</dt>
+                  <dd>{{ dataFormatter(item.sparePartNumber) }}</dd>
+                </template>
                 <!-- Model -->
-                <dt>{{ $t('pageInventory.table.model') }}:</dt>
-                <dd>{{ dataFormatter(item.model) }}</dd>
+                <template v-if="item.model">
+                  <dt>{{ $t('pageInventory.table.model') }}:</dt>
+                  <dd>{{ dataFormatter(item.model) }}</dd>
+                </template>
                 <!-- UUID -->
-                <dt>{{ $t('pageInventory.table.uuid') }}:</dt>
-                <dd>{{ dataFormatter(item.uuid) }}</dd>
+                <template v-if="item.uuid">
+                  <dt>{{ $t('pageInventory.table.uuid') }}:</dt>
+                  <dd>{{ dataFormatter(item.uuid) }}</dd>
+                </template>
                 <!-- Service entry point UUID -->
-                <dt>{{ $t('pageInventory.table.serviceEntryPointUuid') }}:</dt>
-                <dd>{{ dataFormatter(item.serviceEntryPointUuid) }}</dd>
+                <template v-if="item.serviceEntryPointUuid">
+                  <dt>
+                    {{ $t('pageInventory.table.serviceEntryPointUuid') }}:
+                  </dt>
+                  <dd>{{ dataFormatter(item.serviceEntryPointUuid) }}</dd>
+                </template>
               </dl>
             </b-col>
-            <b-col class="mt-2" sm="6" xl="6">
+            <b-col
+              v-if="
+                item.statusState ||
+                item.powerState ||
+                item.healthRollup ||
+                item.dateTime ||
+                item.lastResetTime
+              "
+              class="mt-2"
+              sm="6"
+              xl="6"
+            >
               <dl>
                 <!-- Status state -->
-                <dt>{{ $t('pageInventory.table.statusState') }}:</dt>
-                <dd>{{ dataFormatter(item.statusState) }}</dd>
+                <template v-if="item.statusState">
+                  <dt>{{ $t('pageInventory.table.statusState') }}:</dt>
+                  <dd>{{ dataFormatter(item.statusState) }}</dd>
+                </template>
                 <!-- Power state -->
-                <dt>{{ $t('pageInventory.table.power') }}:</dt>
-                <dd>{{ dataFormatter(item.powerState) }}</dd>
+                <template v-if="item.powerState">
+                  <dt>{{ $t('pageInventory.table.power') }}:</dt>
+                  <dd>{{ dataFormatter(item.powerState) }}</dd>
+                </template>
                 <!-- Health rollup -->
-                <dt>{{ $t('pageInventory.table.healthRollup') }}:</dt>
-                <dd>{{ dataFormatter(item.healthRollup) }}</dd>
+                <template v-if="item.healthRollup">
+                  <dt>{{ $t('pageInventory.table.healthRollup') }}:</dt>
+                  <dd>{{ dataFormatter(item.healthRollup) }}</dd>
+                </template>
                 <!-- BMC date and time -->
-                <dt>{{ $t('pageInventory.table.bmcDateTime') }}:</dt>
-                <dd>
-                  {{ item.dateTime | formatDate }}
-                  {{ item.dateTime | formatTime }}
-                </dd>
+                <template v-if="item.dateTime">
+                  <dt>{{ $t('pageInventory.table.bmcDateTime') }}:</dt>
+                  <dd>
+                    {{ item.dateTime | formatDate }}
+                    {{ item.dateTime | formatTime }}
+                  </dd>
+                </template>
                 <!-- Reset date and time -->
-                <dt>{{ $t('pageInventory.table.lastResetTime') }}:</dt>
-                <dd>
-                  {{ item.lastResetTime | formatDate }}
-                  {{ item.lastResetTime | formatTime }}
-                </dd>
+                <template v-if="item.lastResetTime">
+                  <dt>{{ $t('pageInventory.table.lastResetTime') }}:</dt>
+                  <dd>
+                    {{ item.lastResetTime | formatDate }}
+                    {{ item.lastResetTime | formatTime }}
+                  </dd>
+                </template>
               </dl>
             </b-col>
           </b-row>
           <div class="section-divider mb-3 mt-3"></div>
           <b-row>
-            <b-col class="mt-2" sm="6" xl="6">
+            <b-col
+              v-if="item.manufacturer || item.description || item.managerType"
+              class="mt-2"
+              sm="6"
+              xl="6"
+            >
               <dl>
                 <!-- Manufacturer -->
-                <dt>{{ $t('pageInventory.table.manufacturer') }}:</dt>
-                <dd>{{ dataFormatter(item.manufacturer) }}</dd>
+                <template v-if="item.manufacturer">
+                  <dt>{{ $t('pageInventory.table.manufacturer') }}:</dt>
+                  <dd>{{ dataFormatter(item.manufacturer) }}</dd>
+                </template>
                 <!-- Description -->
-                <dt>{{ $t('pageInventory.table.description') }}:</dt>
-                <dd>{{ dataFormatter(item.description) }}</dd>
+                <template v-if="item.description">
+                  <dt>{{ $t('pageInventory.table.description') }}:</dt>
+                  <dd>{{ dataFormatter(item.description) }}</dd>
+                </template>
                 <!-- Manager type -->
-                <dt>{{ $t('pageInventory.table.managerType') }}:</dt>
-                <dd>{{ dataFormatter(item.managerType) }}</dd>
+                <template v-if="item.managerType">
+                  <dt>{{ $t('pageInventory.table.managerType') }}:</dt>
+                  <dd>{{ dataFormatter(item.managerType) }}</dd>
+                </template>
               </dl>
             </b-col>
-            <b-col class="mt-2" sm="6" xl="6">
+            <b-col
+              v-if="
+                item.firmwareVersion ||
+                item.commandShellConnectTypes ||
+                item.commandShellMaxSessions ||
+                item.commandShellEnabled
+              "
+              class="mt-2"
+              sm="6"
+              xl="6"
+            >
               <!-- Firmware Version  -->
-              <dl>
+              <dl v-if="item.firmwareVersion">
                 <dt>{{ $t('pageInventory.table.firmwareVersion') }}:</dt>
                 <dd>{{ item.firmwareVersion }}</dd>
               </dl>
               <!-- Command Shell -->
-              <p class="mt-1 mb-2 h6 float-none m-0">
-                {{ $t('pageInventory.table.commandShell') }}
-              </p>
-              <dl class="ml-4">
-                <dt>{{ $t('pageInventory.table.connectTypesSupported') }}:</dt>
-                <dd>
-                  {{ dataFormatterArray(item.commandShellConnectTypes) }}
-                </dd>
-                <dt>{{ $t('pageInventory.table.maxConcurrentSessions') }}:</dt>
-                <dd>
-                  {{ dataFormatter(item.commandShellMaxSessions) }}
-                </dd>
-                <dt>{{ $t('pageInventory.table.serviceEnabled') }}:</dt>
-                <dd>
-                  {{ dataFormatter(item.commandShellEnabled) }}
-                </dd>
-              </dl>
+              <template
+                v-if="
+                  item.commandShellConnectTypes ||
+                  item.commandShellMaxSessions ||
+                  item.commandShellEnabled
+                "
+              >
+                <p class="mt-1 mb-2 h6 float-none m-0">
+                  {{ $t('pageInventory.table.commandShell') }}
+                </p>
+                <dl class="ml-4">
+                  <template v-if="item.commandShellConnectTypes">
+                    <dt>
+                      {{ $t('pageInventory.table.connectTypesSupported') }}:
+                    </dt>
+                    <dd>
+                      {{ dataFormatterArray(item.commandShellConnectTypes) }}
+                    </dd>
+                  </template>
+                  <template v-if="item.commandShellMaxSessions">
+                    <dt>
+                      {{ $t('pageInventory.table.maxConcurrentSessions') }}:
+                    </dt>
+                    <dd>
+                      {{ dataFormatter(item.commandShellMaxSessions) }}
+                    </dd>
+                  </template>
+                  <template v-if="item.commandShellEnabled">
+                    <dt>{{ $t('pageInventory.table.serviceEnabled') }}:</dt>
+                    <dd>
+                      {{ dataFormatter(item.commandShellEnabled) }}
+                    </dd>
+                  </template>
+                </dl>
+              </template>
             </b-col>
           </b-row>
         </b-container>

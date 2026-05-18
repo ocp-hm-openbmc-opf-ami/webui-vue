@@ -1,6 +1,7 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
 import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
+import { isFeatureEnabled } from '@/components/Mixins/FeatureMixin';
 
 /**
  * Watch for serverStatus changes in GlobalStore module
@@ -120,10 +121,18 @@ const kvm1ControlStore = {
       const data = { ResetType: 'GracefulRestart' };
       return await api
         .post('/redfish/v1/Managers/bmc/Actions/Manager.Reset', data)
-        .then(() => i18n.t('pageRebootBmc1.toast.successRebootStart'))
+        .then(() => {
+          return !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+            ? i18n.t('pageRebootBmc1.toast.successRebootStart')
+            : i18n.t('pageRebootBmc.toastPmc.successRebootStart');
+        })
         .catch((error) => {
           console.log(error);
-          throw new Error(i18n.t('pageRebootBmc1.toast.errorRebootStart'));
+          throw new Error(
+            !isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')
+              ? i18n.t('pageRebootBmc1.toast.errorRebootStart')
+              : i18n.t('pageRebootBmc.toastPmc.errorRebootStart'),
+          );
         });
     },
     async serverPowerOn({ dispatch, commit }, isKvm1) {
