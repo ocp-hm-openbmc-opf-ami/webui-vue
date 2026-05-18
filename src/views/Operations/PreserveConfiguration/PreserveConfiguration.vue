@@ -22,7 +22,10 @@
       <hr class="my-3" style="border-color: #e9ecef" />
       <b-row class="mt-3">
         <b-col sm="6" md="3">
-          <b-form-checkbox v-model="checkboxes.authentication">
+          <b-form-checkbox
+            v-model="checkboxes.authentication"
+            @change="onAuthenticationChange"
+          >
             {{ $t('pagePreserve.authentication') }}
           </b-form-checkbox>
         </b-col>
@@ -106,7 +109,7 @@
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
-          <b-form-checkbox v-model="checkboxes.snmp">
+          <b-form-checkbox v-model="checkboxes.snmp" @change="onSnmpChange">
             {{ $t('pagePreserve.snmp') }}
           </b-form-checkbox>
         </b-col>
@@ -228,8 +231,11 @@ export default {
     initpreserveConfigValues() {
       const config =
         this.$store.getters['preserveConfig/getPreserveConfigValues'] || {};
+      const shouldCheckAuthAndSnmp = Boolean(
+        config.AUTHENTICATION || config.SNMP,
+      );
       this.checkboxes = {
-        authentication: config.AUTHENTICATION,
+        authentication: shouldCheckAuthAndSnmp,
         bootOverride: config.Boot_Override,
         extLog: config.EXTLOG,
         fru: config.FRU,
@@ -241,12 +247,22 @@ export default {
         sdr: config.SDR,
         sel: config.SEL,
         smtp: config.SMTP,
-        snmp: config.SNMP,
+        snmp: shouldCheckAuthAndSnmp,
         sol: config.SOL,
         sysLog: config.SYSLOG,
         serviceManager: config.ServiceManager,
         ubootEnv: config.U_BOOT_ENV,
       };
+    },
+    onAuthenticationChange(isChecked) {
+      if (this.checkboxes.snmp !== isChecked) {
+        this.checkboxes.snmp = isChecked;
+      }
+    },
+    onSnmpChange(isChecked) {
+      if (this.checkboxes.authentication !== isChecked) {
+        this.checkboxes.authentication = isChecked;
+      }
     },
     SaveConfig() {
       this.$bvModal
