@@ -2118,7 +2118,8 @@
         "staticDns": "固定 DNS",
         "enableLAN": "啟用區域網路",	
         "ipv6Index": "IPv6索引", 
-        "ipv4ipv6statusinfo": "對於所選接口，應啟用 IPv4 或 IPv6 支援；兩者不能同時關閉。", 
+        "ipv4ipv6statusinfo": "對於所選接口，應啟用 IPv4 或 IPv6 支援；兩者不能同時關閉。",
+        "ipv6GatewayWithoutIp": "閘道已配置，但沒有任何 IPv6 地址。請添加至少一個靜態地址或啟用 DHCPv6 以完成設置。",
         "modal": {
             "confirmDisableDhcp": "你確定要停用 DHCP?",
             "confirmEnableDhcp": "啟用 DHCP 後，無法訪問靜態 IP 地址。",

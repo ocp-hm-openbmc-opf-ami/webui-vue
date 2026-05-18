@@ -2117,6 +2117,7 @@
         "enableLAN": "启用局域网",	
         "ipv6Index": "IPv6索引",        
         "ipv4ipv6statusinfo": "对于所选接口，应启用 IPv4 或 IPv6 支持；两者不能同时关闭。", 
+        "ipv6GatewayWithoutIp": "网关已配置，但没有任何 IPv6 地址。请添加至少一个静态地址或启用 DHCPv6 以完成设置。",
         "modal": {
             "confirmDisableDhcp": "你确定要禁用 DHCP?",
             "confirmEnableDhcp": "启用 DHCP 后，无法访问静态 IP 地址。",

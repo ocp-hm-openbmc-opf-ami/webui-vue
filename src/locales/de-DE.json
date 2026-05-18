@@ -2120,6 +2120,7 @@
         "enableLAN": "LAN aktivieren",
         "ipv6Index": "IPv6-Index",
         "ipv4ipv6statusinfo": "Für die ausgewählte Schnittstelle sollte entweder IPv4- oder IPv6-Unterstützung aktiviert sein; beide können nicht gleichzeitig deaktiviert werden.",
+        "ipv6GatewayWithoutIp": "Gateway ohne IPv6-Adressen konfiguriert. Fügen Sie mindestens eine statische Adresse hinzu oder aktivieren Sie DHCPv6, um die Einrichtung abzuschließen.",
         "modal": {
             "confirmDisableDhcp": "Möchten Sie DHCP wirklich deaktivieren?",
             "confirmEnableDhcp": "Wenn DHCP aktiviert ist, sind statische IP-Adressen nicht zugänglich.",
