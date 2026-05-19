@@ -340,6 +340,31 @@ const NetworkDDNSStore = {
           );
         });
     },
+    async saveDohConfiguration({ state, dispatch }, DoHSetting) {
+      const dohConfiguration = {
+        Oem: {
+          Ami: {
+            DoHSetting,
+          },
+        },
+      };
+
+      return await api
+        .patch(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${state.ddnsSelectedInterfaceId}`,
+          dohConfiguration,
+        )
+        .then(() => dispatch('getDDNSEthernetData'))
+        .then(() => {
+          return i18n.t('pageDDNSNetwork.toast.successSaveDohConfiguration');
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(
+            i18n.t('pageDDNSNetwork.toast.errorSaveDohConfiguration'),
+          );
+        });
+    },
   },
 };
 export default NetworkDDNSStore;
