@@ -343,7 +343,15 @@ const UserManagementStore = {
       }
       return await api
         .patch(`/redfish/v1/AccountService/Accounts/${originalUsername}`, data)
-        .then(() => {
+        .then((response) => {
+          const body = response?.data;
+          const extendedInfo =
+            body?.error?.['@Message.ExtendedInfo'] ??
+            body?.['@Message.ExtendedInfo'];
+          if (Array.isArray(extendedInfo) && extendedInfo.length > 0) {
+            const syntheticError = { response: { data: body } };
+            throw syntheticError;
+          }
           const passwordChangeRequired = data.PasswordChangeRequired;
           const password = data.Password;
           if (
