@@ -464,20 +464,18 @@ const AppNavigationMixin = {
           route: '/settings/spdm',
         });
       }
-      if (process.env.VUE_APP_ONETREE_AMD_POWERCAP_ENABLED === 'true') {
-        navigationItemsList.navigationItems.push({
-          id: 'resource-management',
-          label: this.$t('appNavigation.resourceManagement'),
-          icon: 'iconResourceManagement',
-          children: [
-            {
-              id: 'power',
-              label: this.$t('appNavigation.power'),
-              route: '/resource-management/power',
-            },
-          ],
-        });
-      }
+      navigationItemsList.navigationItems.push({
+        id: 'resource-management',
+        label: this.$t('appNavigation.resourceManagement'),
+        icon: 'iconResourceManagement',
+        children: [
+          {
+            id: 'power',
+            label: this.$t('appNavigation.power'),
+            route: '/resource-management/power',
+          },
+        ],
+      });
       if (
         process.env.VUE_APP_ONETREE_MSCCRAID_ENABLED === 'true' ||
         process.env.VUE_APP_ONETREE_BRCMRAID_ENABLED === 'true'

@@ -467,16 +467,14 @@ if (process.env.VUE_APP_ONETREE_RADIUS_CLIENT_ENABLED == 'true') {
     },
   });
 }
-if (process.env.VUE_APP_ONETREE_AMD_POWERCAP_ENABLED == 'true') {
-  routes[2].children.push({
-    path: '/resource-management/power',
-    name: 'power',
-    component: Power,
-    meta: {
-      title: i18n.t('appPageTitle.power'),
-    },
-  });
-}
+routes[2].children.push({
+  path: '/resource-management/power',
+  name: 'power',
+  component: Power,
+  meta: {
+    title: i18n.t('appPageTitle.power'),
+  },
+});
 
 if (process.env.VUE_APP_ONETREE_INTELSIPACK_ENABLED == 'true') {
   routes[2].children.push({

@@ -25,7 +25,6 @@
               <b-form-input
                 id="input-1"
                 v-model.number="powerCapValue"
-                :disabled="!isPowerCapFieldEnabled"
                 data-test-id="power-input-powerCapValue"
                 type="number"
                 aria-describedby="power-help-text"
@@ -90,42 +89,14 @@ export default {
       return this.userPrivilege !== privilegesId.admin;
     },
 
-    /**
-      Computed property isPowerCapFieldEnabled is used to enable or disable the input field.
-      The input field is enabled when the powercapValue property is not null.
-   **/
-    isPowerCapFieldEnabled: {
-      get() {
-        return this.powerCapValue !== null;
-      },
-      set(value) {
-        this.$v.$reset();
-        let newValue = null;
-        if (value) {
-          if (this.powerCapValue) {
-            newValue = this.powerCapValue;
-          } else {
-            newValue = '';
-          }
-        }
-        this.$store.dispatch('powerControl/setPowerCapUpdatedValue', newValue);
-      },
-    },
     powerCapValue: {
       get() {
-        return this.$store.getters['powerControl/powerCapValue'];
+        let powerCapValue = this.$store.getters['powerControl/powerCapValue'];
+        return powerCapValue !== null ? powerCapValue : 0;
       },
       set(value) {
         this.$v.$touch();
         this.$store.dispatch('powerControl/setPowerCapUpdatedValue', value);
-      },
-    },
-    powerCapEnable: {
-      get() {
-        return this.$store.getters['powerControl/powerCapEnable'];
-      },
-      set(newValue) {
-        return newValue;
       },
     },
   },
@@ -139,7 +110,7 @@ export default {
     powerCapValue: {
       between: between(0, 1000),
       required: requiredIf(function () {
-        return this.isPowerCapFieldEnabled;
+        return !this.powerCapValue;
       }),
     },
   },
@@ -153,12 +124,6 @@ export default {
         .then((message) => this.successToast(message))
         .catch(({ message }) => this.errorToast(message))
         .finally(() => this.endLoader());
-    },
-    changePowerCapState(state) {
-      this.$store
-        .dispatch('powerControl/setPowerCapEnable', state)
-        .then((message) => this.successToast(message))
-        .catch(({ message }) => this.errorToast(message));
     },
   },
 };

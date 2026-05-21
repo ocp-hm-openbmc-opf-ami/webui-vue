@@ -1,6 +1,6 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
-import store from '@/store';
+//import store from '@/store';
 
 const PowerControlStore = {
   namespaced: true,
@@ -36,41 +36,39 @@ const PowerControlStore = {
     },
     async getPowerControl({ dispatch, commit }) {
       const collection = (await dispatch('getChassisCollection')) || [];
-      const amdApi = '/redfish/v1/Chassis/Chalupa_Baseboard';
-      const isAmdPlatform = Object.values(collection).includes(amdApi);
-      const powerCapApi = isAmdPlatform ? amdApi : collection[0];
-
-      // Store flag in global store
-      store.commit('global/setIsAmdPlatform', isAmdPlatform);
-
-      if (!collection || collection.length === 0) return;
+      // Find chassis with Baseboard or EVB
+      const targetChassis = collection.find((uri) => {
+        const lastPart = uri.split('/').pop();
+        return lastPart.includes('Baseboard') || lastPart.includes('EVB');
+      });
+      if (!targetChassis) return;
       return await api
-        .get(powerCapApi)
-        .then((response) => api.get(response.data.Power['@odata.id']))
+        .get(targetChassis)
+        .then((response) =>
+          api.get(response.data.EnvironmentMetrics['@odata.id']),
+        )
         .then((response) => {
-          const powerControl = response.data.PowerControl;
-          if (!powerControl || powerControl.length === 0) return;
           const powerCapUri = response.data['@odata.id'];
-          const powerCap = powerControl[0].PowerLimit.LimitInWatts;
-          // If system is powered off, power consumption does not exist in the PowerControl
-          const powerConsumption = powerControl[0].PowerConsumedWatts || null;
+          const powerCap = response.data.PowerLimitWatts?.SetPoint;
+          const powerConsumption = response.data.PowerConsumedWatts;
           commit('setPowerCapUri', powerCapUri);
           commit('setPowerCapValue', powerCap);
           commit('setPowerConsumptionValue', powerConsumption);
         })
-        .catch((error) => {
-          console.log('Power control', error);
-        });
+        .catch((error) => console.log(error));
     },
-    async setPowerControl({ state }, powerCapValue) {
+    async setPowerControl({ state, commit }, powerCapValue) {
       const data = {
-        PowerControl: [{ PowerLimit: { LimitInWatts: powerCapValue } }],
+        PowerLimitWatts: {
+          SetPoint: powerCapValue,
+        },
       };
       return await api
         .patch(state.powerCapUri, data)
-        .then(() =>
-          i18n.t('pageServerPowerOperations.toast.successSaveSettings'),
-        )
+        .then(() => {
+          commit('setPowerCapValue', powerCapValue);
+          return i18n.t('pageServerPowerOperations.toast.successSaveSettings');
+        })
         .catch((error) => {
           console.log(error);
           throw new Error(
