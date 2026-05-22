@@ -99,6 +99,40 @@ const AsdStore = {
           throw new Error(i18n.t('pageAsd.toast.errorAsdCertificate'));
         });
     },
+    async getAsdCertificateLocations() {
+      if (!store.getters['global/managerInstance']) {
+        return { locations: [], supported: false };
+      }
+      // First check if ASD is supported via the ASD service endpoint
+      const supported = await api
+        .get('/redfish/v1/Oem/Ami/AtScaleDebug')
+        .then(() => true)
+        .catch(() => false);
+
+      if (!supported) {
+        return { locations: [], supported: false };
+      }
+
+      // If ASD is supported, try to get the certificate locations.
+      return await api
+        .get(
+          '/redfish/v1/Managers/' +
+            store.getters['global/managerInstance'] +
+            '/Certificates',
+        )
+        .then(({ data }) => {
+          if (data.Members && data.Members.length > 0) {
+            return {
+              locations: data.Members.map((member) => member['@odata.id']),
+              supported: true,
+            };
+          }
+          return { locations: [], supported: true };
+        })
+        .catch(() => {
+          return { locations: [], supported: true };
+        });
+    },
     async getAsdCertificateDetails({ state, commit }) {
       return await api
         .get(state.certificatePath)
