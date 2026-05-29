@@ -64,7 +64,10 @@ export default {
     }),
   },
   created() {
-    this.$store.dispatch('firmware/getFirmwareInformation').finally(() => {
+    Promise.all([
+      this.$store.dispatch('firmware/getFirmwareInformation'),
+      this.$store.dispatch('system/getSystem'),
+    ]).finally(() => {
       this.$root.$emit('overview-firmware-complete');
     });
   },

@@ -125,22 +125,28 @@ const GlobalStore = {
     setSessionId: (state, sessionId) => (state.sessionId = sessionId),
   },
   actions: {
-    getManagerinstance({ commit, state }) {
-      if (!state.managerInstance) {
-        api
-          .get('/redfish/v1/Managers')
-          .then((response) => {
-            const managerInstance = response.data.Members[0]['@odata.id']
-              .split('/')
-              .pop();
-            console.log(managerInstance);
-            commit('setManagerInstance', managerInstance);
-          })
-          .catch((error) => {
-            console.log(error);
-            commit('setManagerInstance', '');
-          });
+    async getManagerinstance({ commit, state }) {
+      if (state.managerInstance) {
+        return state.managerInstance;
       }
+      return await api
+        .get('/redfish/v1/Managers')
+        .then((response) => {
+          const managerInstance = response.data.Members[0]['@odata.id']
+            .split('/')
+            .pop();
+          if (!managerInstance) {
+            commit('setManagerInstance', '');
+            return '';
+          }
+          commit('setManagerInstance', managerInstance);
+          return managerInstance;
+        })
+        .catch((error) => {
+          console.log(error);
+          commit('setManagerInstance', '');
+          return '';
+        });
     },
     async getBmcTime({ commit, state }) {
       return await api
