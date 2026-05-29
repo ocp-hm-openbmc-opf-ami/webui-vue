@@ -18,6 +18,8 @@ import NetworkStore from './modules/Settings/NetworkStore';
 import VlanStore from './modules/Settings/VlanStore';
 import SMTPStore from './modules/Settings/SMTPStore';
 import EventFilterStore from './modules/Pef/EventFilterStore';
+import LanDestinationsStore from './modules/Pef/LanDestinationsStore';
+import AlertPolicyStore from './modules/Pef/AlertPolicyStore';
 import EventLogStore from './modules/Logs/EventLogStore';
 import DumpsStore from './modules/Logs/DumpsStore';
 import SensorsStore from './modules/HardwareStatus/SensorsStore';
@@ -103,6 +105,8 @@ export default new Vuex.Store({
     vlan: VlanStore,
     smtp: SMTPStore,
     eventFilter: EventFilterStore,
+    lanDestinations: LanDestinationsStore,
+    alertPolicy: AlertPolicyStore,
     eventLog: EventLogStore,
     dumps: DumpsStore,
     sensors: SensorsStore,

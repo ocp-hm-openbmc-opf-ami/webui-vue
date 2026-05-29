@@ -329,8 +329,7 @@ export default {
     // Dispatch Vuex action to fetch dashboard data instead of individual API calls
     this.$store
       .dispatch('dashboard/fetchDashboardData')
-      .catch((error) => console.error(error))
-      .finally(() => this.endLoader());
+      .catch((error) => console.error(error));
     if (process.env.VUE_APP_CHINESE_ZH_CN_LANGUAGE_SUPPORT == 'true')
       this.languages.push({
         value: 'zh-CN',

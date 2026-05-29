@@ -127,6 +127,16 @@ const AppNavigationMixin = {
               label: this.$t('appNavigation.eventFilter'),
               route: '/pef/eventFilter',
             },
+            {
+              id: 'alert-policy',
+              label: this.$t('appNavigation.alertPolicy'),
+              route: '/pef/alert-policy',
+            },
+            {
+              id: 'lan-destinations',
+              label: this.$t('appNavigation.lanDestinations'),
+              route: '/pef/lan-destinations',
+            },
           ],
         },
         {
