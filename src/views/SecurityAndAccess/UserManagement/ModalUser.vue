@@ -743,7 +743,7 @@ export default {
         username: {
           required,
           maxLength: maxLength(16),
-          pattern: helpers.regex('pattern', /^[a-zA-Z_][a-zA-Z_0-9.]*$/),
+          pattern: helpers.regex('pattern', /^[a-zA-Z_][a-zA-Z_0-9]*$/),
         },
         password: {
           required: requiredIf(function () {
