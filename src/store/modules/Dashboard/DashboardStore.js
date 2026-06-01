@@ -422,8 +422,13 @@ const DashboardStore = {
         }
       } catch (error) {
         console.error('Failed to update location indicator:', error);
-        // Revert the change by refetching dashboard data
-        throw error;
+        if (ledState) {
+          throw new Error(i18n.t('pageInventory.toast.errorEnableIdentifyLed'));
+        } else {
+          throw new Error(
+            i18n.t('pageInventory.toast.errorDisableIdentifyLed'),
+          );
+        }
       }
     },
   },

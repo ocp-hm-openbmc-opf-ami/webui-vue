@@ -111,9 +111,19 @@ const FirmwareStore = {
       dispatch('getActiveBmcFirmware');
       return await dispatch('getFirmwareInventory');
     },
-    getActiveBmcFirmware({ commit }) {
+    async getActiveBmcFirmware({ commit, dispatch }) {
+      let managerInstance = store.getters['global/managerInstance'];
+      if (!managerInstance) {
+        await dispatch('global/getManagerinstance', null, {
+          root: true,
+        });
+        managerInstance = store.getters['global/managerInstance'];
+      }
+      if (!managerInstance) {
+        return;
+      }
       return api
-        .get('/redfish/v1/Managers/' + store.getters['global/managerInstance'])
+        .get('/redfish/v1/Managers/' + managerInstance)
         .then(({ data: { Links, DateTime } }) => {
           const id = Links?.ActiveSoftwareImage['@odata.id'].split('/').pop();
           commit('setFirmwareBmcDateTime', DateTime);

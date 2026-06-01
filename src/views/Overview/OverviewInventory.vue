@@ -136,6 +136,17 @@ export default {
     toggleIdentifyLedSwitch(state) {
       this.$store
         .dispatch('dashboard/updateLocationIndicator', state)
+        .then(() => {
+          if (state) {
+            this.successToast(
+              this.$t('pageInventory.toast.successEnableIdentifyLed'),
+            );
+          } else {
+            this.successToast(
+              this.$t('pageInventory.toast.successDisableIdentifyLed'),
+            );
+          }
+        })
         .catch(({ message }) => this.errorToast(message));
     },
     setGreenLED() {
