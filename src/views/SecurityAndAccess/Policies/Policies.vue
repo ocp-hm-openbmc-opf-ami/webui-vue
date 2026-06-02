@@ -431,9 +431,7 @@
                                 v-model="vmcState"
                                 data-test-id="policies-toggle-vmc-host1"
                                 switch
-                                :disabled="
-                                  userPrivilege === privilegesId.readOnly
-                                "
+                                :disabled="userPrivilege !== privilegesId.admin"
                                 @change="changeVmcState"
                               >
                                 <span class="sr-only">
@@ -461,7 +459,7 @@
                                     id="input-vm-interval-host1"
                                     v-model="vmReconnectValues.vmInterval"
                                     :disabled="
-                                      userPrivilege === privilegesId.readOnly
+                                      userPrivilege !== privilegesId.admin
                                     "
                                     data-test-id="input-vminterval-host1"
                                     type="number"
@@ -514,7 +512,7 @@
                                     type="number"
                                     aria-describedby="power-help-text"
                                     :disabled="
-                                      userPrivilege === privilegesId.readOnly
+                                      userPrivilege !== privilegesId.admin
                                     "
                                     :state="
                                       getValidationState(
@@ -558,7 +556,7 @@
                                   variant="primary"
                                   type="submit"
                                   :disabled="
-                                    userPrivilege === privilegesId.readOnly
+                                    userPrivilege !== privilegesId.admin
                                   "
                                   data-test-id="button-saveVMReconnectValues-host1"
                                   @click="saveVMReconnectValues"
@@ -590,9 +588,7 @@
                                 v-model="vmcStateHost2"
                                 data-test-id="policies-toggle-vmc-host2"
                                 switch
-                                :disabled="
-                                  userPrivilege === privilegesId.readOnly
-                                "
+                                :disabled="userPrivilege !== privilegesId.admin"
                                 @change="changeVmcStateHost2"
                               >
                                 <span class="sr-only">
@@ -620,7 +616,7 @@
                                     id="input-vm-interval-host2"
                                     v-model="vmReconnectValuesHost2.vmInterval"
                                     :disabled="
-                                      userPrivilege === privilegesId.readOnly
+                                      userPrivilege !== privilegesId.admin
                                     "
                                     data-test-id="input-vminterval-host2"
                                     type="number"
@@ -674,7 +670,7 @@
                                     type="number"
                                     aria-describedby="power-help-text"
                                     :disabled="
-                                      userPrivilege === privilegesId.readOnly
+                                      userPrivilege !== privilegesId.admin
                                     "
                                     :state="
                                       getValidationState(
@@ -721,7 +717,7 @@
                                   variant="primary"
                                   type="submit"
                                   :disabled="
-                                    userPrivilege === privilegesId.readOnly
+                                    userPrivilege !== privilegesId.admin
                                   "
                                   data-test-id="button-saveVMReconnectValues-host2"
                                   @click="saveVMReconnectValuesHost2"
