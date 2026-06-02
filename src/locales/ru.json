@@ -97,6 +97,7 @@
             "informational": "Информационное",
             "unknown": "Неизвестно",
             "good": "Хорошо"
+            "standbyoffline": "StandbyOffline"
         },
         "table": {
             "collapseTableRow": "Свернуть строку таблицы",

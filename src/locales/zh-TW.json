@@ -97,6 +97,7 @@
             "informational": "資訊",
             "unknown": "未知",
             "good": "良好"
+            "standbyoffline": "StandbyOffline"
         },
         "table": {
             "collapseTableRow": "摺疊表格欄位",

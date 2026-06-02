@@ -97,6 +97,7 @@
             "informational": "Informational",
             "unknown": "Unknown",
             "good": "Good"
+            "standbyoffline": "StandbyOffline"
         },
         "table": {
             "collapseTableRow": "Collapse table row",

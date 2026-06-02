@@ -97,6 +97,7 @@
             "informational": "Hinweis",
             "unknown": "Unbekannt",
             "good": "Gut"
+            "standbyoffline": "StandbyOffline"
         },
         "table": {
             "collapseTableRow": "Tabellenzeile einklappen",
