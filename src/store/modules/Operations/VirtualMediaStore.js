@@ -263,7 +263,9 @@ const VirtualMediaStore = {
         .catch((error) => {
           console.log('Virtual Media:', error);
           if (error.response.status == 404) {
-            throw new Error(i18n.t('pageVirtualMedia.toast.errorVirtualMedia'));
+            commit('global/setVirtualMediaServiceEnabledAccess', false, {
+              root: true,
+            });
           } else if (error.response.status != 500) {
             commit('setVirtualMediaAccess', false);
           } else {
