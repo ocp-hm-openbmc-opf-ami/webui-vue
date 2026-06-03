@@ -2627,7 +2627,7 @@
             "lowerCritical": "过低严重警告",
             "name": "名称",
             "status": "状态",
-            "state": "状态",
+            "state": "启用状态",
             "upperWarning": "过高警告",
             "upperCritical": "过高严重警告",
             "upperFatal": "上限不可恢复",

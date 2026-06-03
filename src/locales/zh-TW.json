@@ -2639,6 +2639,7 @@
             "lowerCritical": "低於值的嚴重警告",
             "name": "名稱",
             "status": "狀態",
+            "state": "啟用狀態",
             "upperWarning": "高於值的警告",
             "upperCritical": "高於值的嚴重警告",
             "upperFatal": "上限不可恢復",

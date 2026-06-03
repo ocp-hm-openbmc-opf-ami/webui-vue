@@ -82,12 +82,29 @@
                 <span class="sr-only">{{ $t('global.table.selectItem') }}</span>
               </b-form-checkbox>
             </template>
-            <template #cell(status)="{ value }">
-              <status-icon :status="statusIcon(value)" /> {{ value }}
-            </template>
             <!-- Sensor State column -->
-            <template #cell(filterByStatus)="{ value }">
-              {{ value }}
+            <template #cell(state)="{ value }">
+              <span v-if="value === 'Enabled'">
+                {{ $t('global.status.enabled') }}
+              </span>
+              <span v-else-if="value === 'Disabled'">
+                {{ $t('global.status.disabled') }}
+              </span>
+            </template>
+            <template #cell(status)="{ value }">
+              <status-icon v-if="value" :status="statusIcon(value)" />
+              <span v-if="value === 'OK'">
+                {{ $t('global.action.ok') }}
+              </span>
+              <span v-else-if="value === 'Warning'">
+                {{ $t('global.action.warning') }}
+              </span>
+              <span v-else-if="value === 'Critical'">
+                {{ $t('global.action.critical') }}
+              </span>
+              <span v-else>
+                {{ value }}
+              </span>
             </template>
             <template #cell(currentValue)="data">
               {{ data.value }} {{ data.item.units }}
@@ -291,7 +308,7 @@ export default {
       ],
       tableFilters: [
         {
-          key: 'status',
+          key: 'filterByStatus',
           label: this.$t('pageSensors.table.status'),
           values: [
             this.$t('global.action.ok'),
@@ -300,9 +317,12 @@ export default {
           ],
         },
         {
-          key: 'state',
+          key: 'filterByState',
           label: this.$t('pageSensors.table.state'),
-          values: ['Enabled', 'Disabled'],
+          values: [
+            this.$t('global.status.enabled'),
+            this.$t('global.status.disabled'),
+          ],
         },
       ],
       activeFilters: [],
@@ -399,7 +419,13 @@ export default {
       return this.userPrivilege === privilegesId.readOnly;
     },
     allSensors() {
-      return this.$store.getters['sensors/sensors'];
+      return this.$store.getters['sensors/sensors'].map((sensor) => {
+        return {
+          ...sensor,
+          filterByStatus: this.getFilterByStatus(sensor.status),
+          filterByState: this.getFilterByState(sensor.state),
+        };
+      });
     },
     showSensor() {
       return this.$store.getters['sensors/sensorGraphRefreshGet'];
@@ -494,6 +520,28 @@ export default {
     },
     iscloseAddModal(val) {
       this.isModalSuccess = val;
+    },
+    getFilterByStatus(status) {
+      switch (status) {
+        case 'OK':
+          return this.$t('global.action.ok');
+        case 'Warning':
+          return this.$t('global.action.warning');
+        case 'Critical':
+          return this.$t('global.action.critical');
+        default:
+          return this.$t('global.action.na');
+      }
+    },
+    getFilterByState(state) {
+      switch (state) {
+        case 'Enabled':
+          return this.$t('global.status.enabled');
+        case 'Disabled':
+          return this.$t('global.status.disabled');
+        default:
+          return this.$t('global.action.na');
+      }
     },
   },
 };
