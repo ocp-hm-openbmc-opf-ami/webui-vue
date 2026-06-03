@@ -11,6 +11,7 @@
               <b-form-checkbox
                 id="critical"
                 v-model="videoTriggerEvent.criticalTmpVolt"
+                data-test-id="videoTrigger-checkbox-critical"
                 switch
               >
                 <span v-if="videoTriggerEvent.criticalTmpVolt">
@@ -28,6 +29,7 @@
               <b-form-checkbox
                 id="nonCritical"
                 v-model="videoTriggerEvent.nonCriticalTmpVolt"
+                data-test-id="videoTrigger-checkbox-nonCritical"
                 switch
               >
                 <span v-if="videoTriggerEvent.nonCriticalTmpVolt">
@@ -39,7 +41,7 @@
           </b-col>
         </b-row>
         <b-row>
-          <!-- <b-col sm="6">
+          <b-col sm="6">
             <b-form-group
               :label="$t('pageVideo.videoTriggerSettings.nonRecoverable')"
               label-for="password"
@@ -47,6 +49,7 @@
               <b-form-checkbox
                 id="nonRecoverable"
                 v-model="videoTriggerEvent.nonRecovTmpVolt"
+                data-test-id="videoTrigger-checkbox-nonRecoverable"
                 switch
               >
                 <span v-if="videoTriggerEvent.nonRecovTmpVolt">
@@ -55,8 +58,8 @@
                 <span v-else>{{ $t('global.status.disabled') }}</span>
               </b-form-checkbox>
             </b-form-group>
-          </b-col> -->
-          <!-- <b-col sm="6">
+          </b-col>
+          <b-col sm="6">
             <b-form-group
               :label="$t('pageVideo.videoTriggerSettings.fanStateChanged')"
               label-for="password"
@@ -64,6 +67,7 @@
               <b-form-checkbox
                 id="fanStateChanged"
                 v-model="videoTriggerEvent.fanstatechanged"
+                data-test-id="videoTrigger-checkbox-fanStateChanged"
                 switch
               >
                 <span v-if="videoTriggerEvent.fanstatechanged">
@@ -83,6 +87,7 @@
               <b-form-checkbox
                 id="watchdogTimer"
                 v-model="videoTriggerEvent.watchdogTimer"
+                data-test-id="videoTrigger-checkbox-watchdogTimer"
                 switch
               >
                 <span v-if="videoTriggerEvent.watchdogTimer">
@@ -91,7 +96,7 @@
                 <span v-else>{{ $t('global.status.disabled') }}</span>
               </b-form-checkbox>
             </b-form-group>
-          </b-col> -->
+          </b-col>
           <b-col sm="6">
             <b-form-group
               :label="$t('pageVideo.videoTriggerSettings.chassisPowerOn')"
@@ -100,26 +105,10 @@
               <b-form-checkbox
                 id="chassisPowerOn"
                 v-model="videoTriggerEvent.chassisPowerOn"
+                data-test-id="videoTrigger-checkbox-chassisPowerOn"
                 switch
               >
                 <span v-if="videoTriggerEvent.chassisPowerOn">
-                  {{ $t('global.status.enabled') }}
-                </span>
-                <span v-else>{{ $t('global.status.disabled') }}</span>
-              </b-form-checkbox>
-            </b-form-group>
-          </b-col>
-          <b-col sm="6">
-            <b-form-group
-              :label="$t('pageVideo.videoTriggerSettings.chassisPowerOff')"
-              label-for="password"
-            >
-              <b-form-checkbox
-                id="chassisPowerOff"
-                v-model="videoTriggerEvent.chassisPowerOff"
-                switch
-              >
-                <span v-if="videoTriggerEvent.chassisPowerOff">
                   {{ $t('global.status.enabled') }}
                 </span>
                 <span v-else>{{ $t('global.status.disabled') }}</span>
@@ -130,12 +119,31 @@
         <b-row>
           <b-col sm="6">
             <b-form-group
+              :label="$t('pageVideo.videoTriggerSettings.chassisPowerOff')"
+              label-for="password"
+            >
+              <b-form-checkbox
+                id="chassisPowerOff"
+                v-model="videoTriggerEvent.chassisPowerOff"
+                data-test-id="videoTrigger-checkbox-chassisPowerOff"
+                switch
+              >
+                <span v-if="videoTriggerEvent.chassisPowerOff">
+                  {{ $t('global.status.enabled') }}
+                </span>
+                <span v-else>{{ $t('global.status.disabled') }}</span>
+              </b-form-checkbox>
+            </b-form-group>
+          </b-col>
+          <b-col sm="6">
+            <b-form-group
               :label="$t('pageVideo.videoTriggerSettings.chassisReset')"
               label-for="password"
             >
               <b-form-checkbox
                 id="chassisReset"
                 v-model="videoTriggerEvent.chassisReset"
+                data-test-id="videoTrigger-checkbox-chassisReset"
                 switch
               >
                 <span v-if="videoTriggerEvent.chassisReset">
@@ -153,9 +161,28 @@
               <b-form-checkbox
                 id="lpcReset"
                 v-model="videoTriggerEvent.lPCReset"
+                data-test-id="videoTrigger-checkbox-lpcReset"
                 switch
               >
                 <span v-if="videoTriggerEvent.lPCReset">
+                  {{ $t('global.status.enabled') }}
+                </span>
+                <span v-else>{{ $t('global.status.disabled') }}</span>
+              </b-form-checkbox>
+            </b-form-group>
+          </b-col>
+          <b-col sm="6">
+            <b-form-group
+              :label="$t('pageVideo.videoTriggerSettings.dateAndTime')"
+              label-for="password"
+            >
+              <b-form-checkbox
+                id="dateAndTime"
+                v-model="videoTriggerEvent.dateandTime"
+                data-test-id="videoTrigger-checkbox-dateAndTime"
+                switch
+              >
+                <span v-if="videoTriggerEvent.dateandTime">
                   {{ $t('global.status.enabled') }}
                 </span>
                 <span v-else>{{ $t('global.status.disabled') }}</span>
@@ -181,27 +208,10 @@
               </b-form-checkbox>
             </b-form-group>
           </b-col> -->
-          <b-col sm="6">
-            <b-form-group
-              :label="$t('pageVideo.videoTriggerSettings.dateAndTime')"
-              label-for="password"
-            >
-              <b-form-checkbox
-                id="dateAndTime"
-                v-model="videoTriggerEvent.dateandTime"
-                switch
-              >
-                <span v-if="videoTriggerEvent.dateandTime">
-                  {{ $t('global.status.enabled') }}
-                </span>
-                <span v-else>{{ $t('global.status.disabled') }}</span>
-              </b-form-checkbox>
-            </b-form-group>
-          </b-col>
         </b-row>
         <div v-if="videoTriggerEvent.dateandTime">
           <b-row>
-            <b-col sm="4">
+            <b-col sm="6">
               <b-form-group
                 :label="$t('pageFireWall.firewallSettings.modal.startDate')"
                 label-for="startDate"
@@ -240,6 +250,7 @@
                   </b-form-invalid-feedback>
                   <b-form-datepicker
                     v-model="videoTriggerEvent.Date"
+                    data-test-id="videoTrigger-datepicker-startDate"
                     class="btn-datepicker btn-icon-only"
                     button-only
                     right
@@ -263,9 +274,13 @@
                 </b-input-group>
               </b-form-group>
             </b-col>
-            <b-col sm="4">
+            <b-col sm="6">
               <b-form-group
-                :label="$t('pageFireWall.firewallSettings.modal.startTime')"
+                :label="
+                  $t(
+                    'pageFirmware.form.updateFirmware.maintenanceWindowStartTime',
+                  )
+                "
                 label-for="startTime"
               >
                 <b-form-input
@@ -389,9 +404,9 @@ export default {
       videoTriggerEvent: {
         criticalTmpVolt: true,
         nonCriticalTmpVolt: true,
-        // nonRecovTmpVolt: true,
-        // fanstatechanged: true,
-        // watchdogTimer: true,
+        nonRecovTmpVolt: true,
+        fanstatechanged: true,
+        watchdogTimer: true,
         chassisPowerOn: true,
         chassisPowerOff: true,
         chassisReset: true,
@@ -474,12 +489,12 @@ export default {
               config.TriggerEvents.criticalTmpVolt == 0 ? false : true,
             nonCriticalTmpVolt:
               config.TriggerEvents.nonCriticalTmpVolt == 0 ? false : true,
-            // nonRecovTmpVolt:
-            //   config.TriggerEvents.nonRecovTmpVolt == 0 ? false : true,
-            // fanstatechanged:
-            //   config.TriggerEvents.fanstatechanged == 0 ? false : true,
-            // watchdogTimer:
-            //   config.TriggerEvents.watchdogTimer == 0 ? false : true,
+            nonRecovTmpVolt:
+              config.TriggerEvents.nonRecovTmpVolt == 0 ? false : true,
+            fanstatechanged:
+              config.TriggerEvents.fanstatechanged == 0 ? false : true,
+            watchdogTimer:
+              config.TriggerEvents.watchdogTimer == 0 ? false : true,
             chassisPowerOn:
               config.TriggerEvents.chassisPowerOn == 0 ? false : true,
             chassisPowerOff:
@@ -508,9 +523,9 @@ export default {
             nonCriticalTmpVolt: this.videoTriggerEvent.nonCriticalTmpVolt
               ? 1
               : 0,
-            // nonRecovTmpVolt: this.videoTriggerEvent.nonRecovTmpVolt ? 1 : 0,
-            // fanstatechanged: this.videoTriggerEvent.fanstatechanged ? 1 : 0,
-            // watchdogTimer: this.videoTriggerEvent.watchdogTimer ? 1 : 0,
+            nonRecovTmpVolt: this.videoTriggerEvent.nonRecovTmpVolt ? 1 : 0,
+            fanstatechanged: this.videoTriggerEvent.fanstatechanged ? 1 : 0,
+            watchdogTimer: this.videoTriggerEvent.watchdogTimer ? 1 : 0,
             chassisPowerOn: this.videoTriggerEvent.chassisPowerOn ? 1 : 0,
             chassisPowerOff: this.videoTriggerEvent.chassisPowerOff ? 1 : 0,
             chassisReset: this.videoTriggerEvent.chassisReset ? 1 : 0,
