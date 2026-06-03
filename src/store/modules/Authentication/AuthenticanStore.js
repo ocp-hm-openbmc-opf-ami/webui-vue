@@ -18,6 +18,7 @@ const AuthenticationStore = {
     tfaFeatureEnabled: false,
     isExternalUser: false,
     tfaPending: localStorage.getItem('tfaPending') === 'true',
+    userType: null,
   },
   getters: {
     consoleWindow: (state) => state.consoleWindow,
@@ -34,6 +35,7 @@ const AuthenticationStore = {
     isExternalUser: (state) => state.isExternalUser,
     loginRoleId: (state) => state.loginRoleId,
     tfaPending: (state) => state.tfaPending,
+    userType: (state) => state.userType,
   },
   mutations: {
     authSuccess(state) {
@@ -78,6 +80,7 @@ const AuthenticationStore = {
         localStorage.removeItem('tfaPending');
       }
     },
+    setUserType: (state, type) => (state.userType = type),
   },
   actions: {
     login({ commit, state }, { username, password }) {
@@ -86,6 +89,10 @@ const AuthenticationStore = {
         .post('/login', { data: [username, password] })
         .then((response) => {
           commit('authSuccess');
+          const userType = response.data?.UserType
+            ? response.data.UserType
+            : '';
+          commit('setUserType', userType);
           // Store Session_ID in global store if present
           if (response.data.Session_ID !== undefined) {
             store.commit('global/setSessionId', response.data.Session_ID);

@@ -2086,6 +2086,7 @@
         "timezoneDisplayDesc": "Select preferred Timezone to be displayed throughout the application",
         "username": "Username",
         "userPrivilege": "User Privilege",
+        "userType": "User Type",
         "toast": {
             "successUpdatingTimeZone": "Timezone updated successfully.",
             "wrongCredentials": "Wrong credentials"
