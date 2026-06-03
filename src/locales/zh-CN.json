@@ -879,7 +879,7 @@
             "sessionType": "会话类型",
             "userID": "用户 ID",
             "username": "用户名",
-            "ipAddress": "IP 地址",
+            "ipAddress": "客户端 IP",
             "privilege": "权限",
             "searchSessions": "查找会话",
             "mountType": "挂载类型",

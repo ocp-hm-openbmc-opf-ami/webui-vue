@@ -881,7 +881,7 @@
             "sessionType": "Sitzungstyp",
             "userID": "Benutzer-ID",
             "username": "Benutzername",
-            "ipAddress": "IP-Adresse",
+            "ipAddress": "Client-IP",
             "privilege": "Berechtigung",
             "searchSessions": "Sitzungen suchen",
             "mountType": "Mount-Typ",

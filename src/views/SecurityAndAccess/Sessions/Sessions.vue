@@ -294,9 +294,6 @@ export default {
       this.searchFilter = event;
     },
     disconnectSessions(uris) {
-      uris.forEach((uri, index) => {
-        uris[index] = '/redfish/v1/SessionService/Sessions/' + uri;
-      });
       this.$store
         .dispatch('sessions/disconnectSessions', uris)
         .then((messages) => {
@@ -322,6 +319,10 @@ export default {
             if (deleteConfirmed) this.disconnectSessions([uri]);
           });
       }
+    },
+    onConfirmDelete() {
+      this.disconnectSessions(this.pendingUris, this.selectedReason);
+      this.showReasonModal = false;
     },
     onBatchAction(action) {
       if (action === 'delete') {

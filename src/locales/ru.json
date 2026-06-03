@@ -880,7 +880,7 @@
             "sessionType": "Тип сессии",
             "userID": "ID пользователя",
             "username": "Имя пользователя",
-            "ipAddress": "IP-адрес",
+            "ipAddress": "IP-адрес клиента",
             "privilege": "Уровень доступа",
             "searchSessions": "Поиск сессий",
             "mountType": "Тип монтирования",

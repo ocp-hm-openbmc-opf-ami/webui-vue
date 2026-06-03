@@ -878,7 +878,7 @@
             "sessionType": "Session Type",
             "userID": "User ID",
             "username": "User Name",
-            "ipAddress": "IP Address",
+            "ipAddress": "Client IP",
             "privilege": "Privilege",
             "searchSessions": "Search Sessions",
             "mountType": "Mount Type",
