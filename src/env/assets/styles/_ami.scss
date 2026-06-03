@@ -177,6 +177,12 @@ body {
 .enableTfa {
   color: $dark-green
 }
+.iconSync {
+  color: $gold;
+}
+.sync-active .iconSync {
+  color: $dark-green;
+}
 *::-ms-reveal {
   display: none;
 }

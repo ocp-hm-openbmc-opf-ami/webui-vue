@@ -139,7 +139,9 @@
         "backupCodeLable":"請儲存您的備份代碼以備緊急情況使用。",
         "tfaWarningMessage":"警告：關閉此視窗前，請先在身分驗證器應用程式中掃描兩步驟驗證的 QR 碼，並儲存備份代碼以備緊急使用。若工作階段過期，必須使用這些備份代碼才能恢復存取。",
         "tfaCloseConfirmTitle":"完成 2FA 設定？",
-        "tfaCloseConfirmMessage":"您確定要關閉嗎？關閉前，請確認您已掃描兩步驟驗證 QR 碼，並已儲存備份代碼以備緊急使用。"
+        "tfaCloseConfirmMessage":"您確定要關閉嗎？關閉前，請確認您已掃描兩步驟驗證 QR 碼，並已儲存備份代碼以備緊急使用。",
+        "disableAutoRefresh": "停用自動更新",
+        "enableAutoRefresh": "啟用自動更新"
     },
     "appNavigation": {
         "bsod": "@:appPageTitle.bsod",

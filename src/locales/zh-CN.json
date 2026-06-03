@@ -139,7 +139,9 @@
         "backupCodeLable":"请保存您的备份代码以备紧急情况使用。",
         "tfaWarningMessage":"警告：关闭此窗口前，请先在身份验证器应用中扫描用于两步验证的二维码，并保存备份代码以备紧急使用。如果会话过期，必须使用这些备份代码才能恢复访问。",
         "tfaCloseConfirmTitle":"完成2FA设置？",
-        "tfaCloseConfirmMessage":"您确定要关闭吗？关闭前，请确认您已扫描两步验证二维码，并已保存备份代码以备紧急使用。"
+        "tfaCloseConfirmMessage":"您确定要关闭吗？关闭前，请确认您已扫描两步验证二维码，并已保存备份代码以备紧急使用。",
+        "disableAutoRefresh": "禁用自动刷新",
+        "enableAutoRefresh": "启用自动刷新"
     },
     "appNavigation": {
         "bsod": "@:appPageTitle.bsod",

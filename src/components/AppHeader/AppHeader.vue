@@ -101,6 +101,35 @@
               <span class="responsive-text">{{ $t('appHeader.refresh') }}</span>
             </b-button>
             <b-button
+              id="app-header-sync"
+              v-b-tooltip.hover
+              variant="link"
+              :class="{
+                'sync-active': pollingEnabled,
+              }"
+              :title="
+                pollingEnabled
+                  ? $t('appHeader.disableAutoRefresh')
+                  : $t('appHeader.enableAutoRefresh')
+              "
+              data-test-id="appHeader-button-sync"
+              @click="togglePolling"
+            >
+              <icon-sync
+                :key="isPollingCall ? 'spinning' : 'not-spinning'"
+                class="iconSync"
+                :class="{ 'spin-animation': isPollingCall }"
+                :title="
+                  pollingEnabled
+                    ? $t('appHeader.disableAutoRefresh')
+                    : $t('appHeader.enableAutoRefresh')
+                "
+                @click.stop="togglePolling"
+                @contextmenu.prevent.stop="manualRefresh"
+              />
+              <span class="responsive-text">Sync</span>
+            </b-button>
+            <b-button
               v-if="tfaFeatureEnabled"
               id="app-header-tfa"
               variant="link"
@@ -191,6 +220,7 @@ import IconAvatar from '@carbon/icons-vue/es/user--avatar/20';
 import IconClose from '@carbon/icons-vue/es/close/20';
 import IconMenu from '@carbon/icons-vue/es/menu/20';
 import IconRenew from '@carbon/icons-vue/es/renew/20';
+import IconSync from '@carbon/icons-vue/es/update-now/20';
 import EnableTfaIcon from '@carbon/icons-vue/es/locked/20';
 import DisableTfaIcon from '@carbon/icons-vue/es/unlocked/20';
 import StatusIcon from '@/components/Global/StatusIcon';
@@ -209,6 +239,7 @@ export default {
     IconClose,
     IconMenu,
     IconRenew,
+    IconSync,
     IconInfo,
     EnableTfaIcon,
     DisableTfaIcon,
@@ -240,7 +271,10 @@ export default {
       isClosingAfterAction: false,
       altLogo: process.env.VUE_APP_COMPANY_NAME || 'AMI',
       licenseStatus: this.$store.getters['license/isLicense'],
-      serverStatusIcon: 'secondary', // Set default value
+      serverStatusIcon: 'secondary',
+      pollingEnabled: localStorage.getItem('pollingEnabled') === 'true',
+      pollingInterval: null,
+      isPollingCall: false,
       languages: [
         {
           value: 'en-US',
@@ -315,8 +349,13 @@ export default {
     if (this.licenseStatus) {
       this.$store.dispatch('license/getUserAlertCount');
     }
-
-    // Ensure server status icon is set on page load
+  },
+  beforeDestroy() {
+    if (this.pollingInterval) {
+      clearInterval(this.pollingInterval);
+      this.pollingInterval = null;
+    }
+    this.$root.$off('refresh-dashboard-data', this.fetchData);
     this.serverStatusIcon = this.computeServerStatusIcon(
       this.$store.getters['dashboard/powerStatus'],
     );
@@ -351,6 +390,14 @@ export default {
       'change-is-navigation-open',
       (isNavigationOpen) => (this.isNavigationOpen = isNavigationOpen),
     );
+    this.$root.$on('refresh-dashboard-data', this.fetchData);
+
+    if (this.pollingEnabled && !this.pollingInterval) {
+      this.fetchData();
+      this.pollingInterval = setInterval(() => {
+        this.fetchData();
+      }, 10000);
+    }
   },
   methods: {
     computeServerStatusIcon(status) {
@@ -371,6 +418,30 @@ export default {
     },
     refresh() {
       this.$emit('refresh');
+
+      this.isPollingCall = true;
+
+      try {
+        const promise = this.$store.dispatch('dashboard/fetchDashboardData', {
+          force: true,
+        });
+        if (promise && typeof promise.catch === 'function') {
+          promise
+            .catch((error) => console.error('Refresh error:', error))
+            .finally(() => {
+              setTimeout(() => {
+                this.isPollingCall = false;
+              }, 10000);
+            });
+        } else {
+          setTimeout(() => {
+            this.isPollingCall = false;
+          }, 10000);
+        }
+      } catch (error) {
+        console.error('Error during refresh:', error);
+        this.isPollingCall = false;
+      }
     },
     clickTfa() {
       if (this.tfaUserEnabled) {
@@ -482,6 +553,60 @@ export default {
       this.$store.commit('global/setLanguagePreference', i18n.locale);
       localStorage.setItem('storedLanguage', i18n.locale);
       this.$emit('languageChange');
+    },
+    togglePolling() {
+      if (this.pollingEnabled) {
+        this.stopPolling();
+      } else {
+        this.startPolling();
+      }
+    },
+    manualRefresh(e) {
+      e.preventDefault();
+      this.fetchData();
+    },
+    startPolling() {
+      this.stopPolling();
+      this.pollingEnabled = true;
+      localStorage.setItem('pollingEnabled', 'true');
+      this.fetchData();
+      this.pollingInterval = setInterval(() => {
+        this.fetchData();
+      }, 10000);
+    },
+
+    fetchData() {
+      this.isPollingCall = true;
+
+      try {
+        const promise = this.$store.dispatch('dashboard/fetchDashboardData', {
+          force: true,
+        });
+        if (promise && typeof promise.catch === 'function') {
+          promise
+            .catch((error) => console.error('Polling error:', error))
+            .finally(() => {
+              setTimeout(() => {
+                this.isPollingCall = false;
+              }, 1500);
+            });
+        } else {
+          setTimeout(() => {
+            this.isPollingCall = false;
+          }, 1500);
+        }
+      } catch (error) {
+        console.error('Error during fetch:', error);
+        this.isPollingCall = false;
+      }
+    },
+    stopPolling() {
+      if (this.pollingInterval) {
+        clearInterval(this.pollingInterval);
+        this.pollingInterval = null;
+      }
+      this.pollingEnabled = false;
+      localStorage.setItem('pollingEnabled', 'false');
     },
   },
 };
@@ -659,6 +784,32 @@ export default {
       color: #161616 !important;
     }
   }
+
+  .spin-animation {
+    animation: spin 1s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+    transform-origin: center;
+    display: inline-block;
+  }
+
+  .iconSync svg {
+    transform-origin: center;
+    display: inline-block;
+  }
+
+  .iconSync.spin-animation svg {
+    fill: $warning !important;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   .language_dropdown {
     .nav-link:focus {
       box-shadow:

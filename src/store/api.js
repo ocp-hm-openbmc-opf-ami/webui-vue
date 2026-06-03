@@ -28,6 +28,10 @@ api.interceptors.response.use(undefined, (error) => {
 
   // TODO: Provide user with a notification and way to keep system active
   if (response.status == 401) {
+    const isConsoleWindow = store.getters['kvm/getIsConsoleWindow'];
+    if (isConsoleWindow) {
+      isConsoleWindow.isconsolewindowOpen.close();
+    }
     const isKvm1ConsoleWindow = store.getters['kvm/getIsKvm1ConsoleWindow'];
     if (isKvm1ConsoleWindow) {
       isKvm1ConsoleWindow.isKvm1consolewindowOpen.close();

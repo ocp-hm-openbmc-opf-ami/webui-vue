@@ -139,7 +139,9 @@
         "backupCodeLable":"Please save your backup codes for emergency use.",
         "tfaWarningMessage":"Warning: Before closing this window, scan the QR code for two-step authentication in your authenticator app and save your backup codes for emergency use. If your session expires, these backup codes are required to regain access.",
         "tfaCloseConfirmTitle":"Complete 2FA Setup?",
-        "tfaCloseConfirmMessage":"Are you sure you want to close? Before closing, confirm that you have scanned the QR code for two-step authentication and saved your backup codes for emergency use."
+        "tfaCloseConfirmMessage":"Are you sure you want to close? Before closing, confirm that you have scanned the QR code for two-step authentication and saved your backup codes for emergency use.",
+        "disableAutoRefresh": "Disable auto-refresh",
+        "enableAutoRefresh": "Enable auto-refresh"
     },
     "appNavigation": {
         "bsod": "@:appPageTitle.bsod",

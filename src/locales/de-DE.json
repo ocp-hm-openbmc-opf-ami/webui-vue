@@ -139,7 +139,9 @@
         "backupCodeLable": "Bitte speichern Sie Ihre Backup-Codes für den Notfall sicher ab.",
         "tfaWarningMessage": "Warnung: Bevor Sie dieses Fenster schließen, scannen Sie den QR-Code für die Zwei-Faktor-Authentifizierung in Ihrer Authenticator-App und speichern Sie Ihre Backup-Codes für Notfälle. Wenn Ihre Sitzung abläuft, sind diese Backup-Codes erforderlich, um den Zugriff wiederherzustellen.",
         "tfaCloseConfirmTitle": "2FA-Einrichtung abschließen?",
-        "tfaCloseConfirmMessage": "Möchten Sie dieses Fenster wirklich schließen? Bitte bestätigen Sie vorher, dass Sie den QR-Code für die Zwei-Faktor-Authentifizierung gescannt und Ihre Backup-Codes für den Notfall gespeichert haben."
+        "tfaCloseConfirmMessage": "Möchten Sie dieses Fenster wirklich schließen? Bitte bestätigen Sie vorher, dass Sie den QR-Code für die Zwei-Faktor-Authentifizierung gescannt und Ihre Backup-Codes für den Notfall gespeichert haben.",
+        "disableAutoRefresh": "Automatische Aktualisierung deaktivieren",
+        "enableAutoRefresh": "Automatische Aktualisierung aktivieren"
     },
     "appNavigation": {
         "bsod": "@:appPageTitle.bsod",
