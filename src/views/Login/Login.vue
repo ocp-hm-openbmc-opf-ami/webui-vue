@@ -165,6 +165,7 @@ export default {
     },
   },
   created() {
+    localStorage.setItem('pollingEnabled', 'false');
     if (process.env.VUE_APP_CHINESE_ZH_CN_LANGUAGE_SUPPORT == 'true')
       this.languages.push({
         value: 'zh-CN',

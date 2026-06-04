@@ -207,15 +207,20 @@ const DashboardStore = {
     },
   },
   actions: {
-    async fetchDashboardData({ commit, state }) {
-      // If data is already loaded, return cached data
-      if (state.isLoaded && state.dashboardData) {
+    async fetchDashboardData({ commit, state }, { force = false } = {}) {
+      // If data is already loaded, return cached data (unless force is true)
+      if (!force && state.isLoaded && state.dashboardData) {
         return state.dashboardData;
       }
 
-      // If a fetch is already in progress, return the existing promise
-      if (fetchPromise) {
+      // If a fetch is already in progress, return the existing promise (unless force is true)
+      if (!force && fetchPromise) {
         return fetchPromise;
+      }
+
+      // If force is true and a fetch is in progress, clear it to start a fresh fetch
+      if (force && fetchPromise) {
+        fetchPromise = null;
       }
 
       // Create new fetch promise

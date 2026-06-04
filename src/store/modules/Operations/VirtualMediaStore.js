@@ -127,6 +127,7 @@ const VirtualMediaStore = {
         }
       }
     },
+    resetSlotArray: (state) => (state.slotArray = []),
     setSlot0File: (state, file) => (state.slot0File = file),
     setSlot1File: (state, file) => (state.slot1File = file),
     setEmmcMemoryData: (state, data) => (state.emmcMemoryData = data),

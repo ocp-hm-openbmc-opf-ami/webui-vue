@@ -95,7 +95,8 @@
             "success": "Success",
             "warning": "Warning",
             "informational": "Informational",
-            "unknown": "Unknown"
+            "unknown": "Unknown",
+            "good": "Good"
         },
         "table": {
             "collapseTableRow": "Collapse table row",
@@ -138,7 +139,9 @@
         "backupCodeLable":"Please save your backup codes for emergency use.",
         "tfaWarningMessage":"Warning: Before closing this window, scan the QR code for two-step authentication in your authenticator app and save your backup codes for emergency use. If your session expires, these backup codes are required to regain access.",
         "tfaCloseConfirmTitle":"Complete 2FA Setup?",
-        "tfaCloseConfirmMessage":"Are you sure you want to close? Before closing, confirm that you have scanned the QR code for two-step authentication and saved your backup codes for emergency use."
+        "tfaCloseConfirmMessage":"Are you sure you want to close? Before closing, confirm that you have scanned the QR code for two-step authentication and saved your backup codes for emergency use.",
+        "disableAutoRefresh": "Disable auto-refresh",
+        "enableAutoRefresh": "Enable auto-refresh"
     },
     "appNavigation": {
         "bsod": "@:appPageTitle.bsod",
@@ -184,6 +187,8 @@
         "snmpSettings": "@:appPageTitle.snmp",
         "pef": "Platform Event Filter",
         "eventFilter": "Event Filter",
+        "alertPolicy": "Alert Policy",
+        "lanDestinations": "Lan Destinations",
         "nicInformation": "NIC Information",
         "nvmeInformation": "@:appPageTitle.nvmeInformation",
         "hostSystemDiagnostics": "Host System Diagnostics",
@@ -267,6 +272,8 @@
         "smtpSettings": "SMTP Settings",
         "snmp": "SNMP Settings",
         "eventFilter": "Event Filter",
+        "alertPolicy": "Alert Policy",
+        "lanDestinations": "LAN Destinations",
         "nicInformation": "NIC Information",
         "nvmeInformation": "NVMe Information",
         "addc": "ADDC",
@@ -871,7 +878,7 @@
             "sessionType": "Session Type",
             "userID": "User ID",
             "username": "User Name",
-            "ipAddress": "IP Address",
+            "ipAddress": "Client IP",
             "privilege": "Privilege",
             "searchSessions": "Search Sessions",
             "mountType": "Mount Type",
@@ -2306,6 +2313,8 @@
         "cacertPEM": "Cacert PEM Certificate",
         "serverCRT": "Server CRT Certificate",
         "serverKey": "Server Key Certificate",
+        "oAuthEnable": "OAuth Enable",
+        "oAuthAccessToken": "OAuth Access Token",
         "modal": {
             "subject": "Subject",
             "mailContent": "Mail Content"
@@ -2337,33 +2346,161 @@
     },
     "pageEventFilter": {
         "pageDescription": "Select the events that will trigger the alert.",
-        "sectionTitle": "Event Filter",
-        "eventFilterLabel": "Configure Alert Destination details.",
-        "enableAllEvents": "Enable/Disable all Event Filters",
-        "temperatureSensorOutOfRange": "Temperature Sensor Out of Range",
-        "fanFailure": "Fan Failure",
-        "powerSupplyFailure": "Power Supply Failure",
-        "biosPostErrorCode": "BIOS: Post Error Code",
-        "nodeManagerException": "Node Manager Exception",
-        "systemRestart": "System Restart",
-        "powerUnitRedundancyFailure": "Power Unit Redundancy Failure",
-        "fanRedundancyFailure": "Fan Redundancy Failure",
-        "processorPresence": "Processor Presence",
-        "voltageSensorOutOfRange": "Voltage Sensor Out of Range",
-        "chassisIntrusion": "Chassis Intrusion",
-        "memoryError": "Memory Error",
-        "frbFailure": "FRB Failure",
-        "watchdogTimer": "Watchdog Timer",
-        "hardDriveFailure": "Hard Drive Failure",
-        "inletTemperatureOverheatShutdown": "Inlet Temperature Overheat Shut down",
-        "powerUnitStatus": "Power Unit Status",
-        "processorDimmThermTrip": "Processor DIMM Therm Trip",
-        "destinationType":"Destination Type",
+        "retryEvent":"Retry Event",
+        "alertLimits":"Alerts Limit",
+        "retryCount":"Retry Count Limit",
+        "timeInterval":"Retry Time Interval (Seconds)",
+        "retryLabelSettings":"Events Retry Configuration",
+        "EventFilterTableEntry": "Event Filter Table Entry",
+        "Id": "Id",
+        "FilterConfig": "Filter Config",
+        "EvtFilterAction": "Event Filter Action",
+        "AlertPolicyNum": "Alert Policy Number",
+        "EventSeverity": "Event Severity",
+        "GenIDByte1": "Gen ID Byte1",
+        "GenIDByte2": "Gen ID Byte2",
+        "SensorType": "Sensor Type",
+        "SensorName": "Sensor Name",
+        "EventTrigger": "Event Trigger",
+        "EventData1OffsetMask": "Event Data1 Offset Mask",
+        "EventData1ANDMask": "Event Data1 AND Mask",
+        "EventData1Cmp1": "Event Data1 Compare1",
+        "EventData1Cmp2": "Event Data1 Compare2",
+        "EventData2ANDMask": "Event Data2 AND Mask",
+        "EventData2Cmp1": "Event Data2 Compare1",
+        "EventData2Cmp2": "Event Data2 Compare2",
+        "EventData3ANDMask": "Event Data3 AND Mask",
+        "EventData3Cmp1": "Event Data3 Compare1",
+        "EventData3Cmp2": "Event Data3 Compare2",
+        "actions": "Actions",
+        "editEventFilter": "Edit Event Filter",
+        "deleteEventFilter": "Delete Event Filter",
+        "validation": {
+            "EventFilterTableEntry": "Event Filter Table Entry must be between 1 and 40",
+            "FilterConfig": "Filter Config must be one of: 0, 64, 128, 192",
+            "EvtFilterAction": "Event Filter Action must be between 0 and 127",
+            "AlertPolicyNum": "Alert Policy Number must be between 0 and 127",
+            "GenIDByte1": "Gen ID Byte1 must be between 0 and 255",
+            "GenIDByte2": "Gen ID Byte2 must be between 0 and 255",
+            "EventTrigger": "Event Trigger must be between 0 and 255",
+            "EventData1OffsetMask": "Event Data1 Offset Mask must be between 0 and 65535",
+            "EventData1ANDMask": "Event Data1 AND Mask must be between 0 and 255",
+            "EventData1Cmp1": "Event Data1 Compare1 must be between 0 and 255",
+            "EventData1Cmp2": "Event Data1 Compare2 must be between 0 and 255",
+            "EventData2ANDMask": "Event Data2 AND Mask must be between 0 and 255",
+            "EventData2Cmp1": "Event Data2 Compare1 must be between 0 and 255",
+            "EventData2Cmp2": "Event Data2 Compare2 must be between 0 and 255",
+            "EventData3ANDMask": "Event Data3 AND Mask must be between 0 and 255",
+            "EventData3Cmp1": "Event Data3 Compare1 must be between 0 and 255",
+            "EventData3Cmp2": "Event Data3 Compare2 must be between 0 and 255"
+        },
+        "modal": {
+            "deleteConfirmTitle": "Confirm Delete Event Filter",
+            "deleteConfirmMessage": "Are you sure you want to delete the event filter with Id '{index}'?"
+        },
         "toast": {
             "successEventFilterMsg": "Event Filter Configuration updated successfully.",
             "errorEventFilterMsg": "Error in updating Event Filter Configuration.",
             "successDestinationType": "Destination Type Configuration updated successfully.",
             "errorDestinationType": "Error in updating Destination Type Configuration."
+        },
+        "form":{
+            "maxAlertLimitRequired": "Maximum Alert Limit value should be in range from 0 to 100",
+            "maxTimeIntervalRequired": "Maximum Time Interval should be in range from 0 to 3600 seconds.",
+            "maxRetryCountRequired": "Maximum Retry Count should be in range from 0 to 10."
+        }
+    },
+    "pageLanDestinations": {
+        "pageDescription": "Manage event destinations and SNMP configurations for system alerts.",
+        "activeSlots": "Active Slots",
+        "active": "Active",
+        "available": "Available",
+        "selectedInterface": "Selected Interface",
+        "lastAlert": "Last Alert",
+        "none": "None (Last 24h)",
+        "lastTime": "Last 24h",
+        "ethernetInterface": "Ethernet Interface",
+        "linkUp": "1GbE / Link UP",
+        "index": "Index",
+        "Id": "Id",
+        "status": "Status",
+        "destinationUrl": "Destination URL",
+        "destination": "Destination",
+        "username": "Username",
+        "protocol": "Protocol",
+        "health": "Health",
+        "actions": "Actions",
+        "addSubscription": "Add Subscription",
+        "editSubscription": "Edit Subscription",
+        "deleteSubscription": "Delete Subscription",
+        "generalConfiguration": "General Configuration",
+        "oemDetails": "OEM Details (AMI)",
+        "name": "Name",
+        "namePlaceholder": "SNMP Trap Destination 0",
+        "destinationPlaceholder": "snmp://10.0.96.127:162",
+        "contextPlaceholder": "Enter context (optional)",
+        "contextString": "Context String",
+        "deliveryRetryPolicy": "Delivery Retry Policy",
+        "sendHeartbeat": "Send Heartbeat",
+        "sendHeartbeatDescription": "Periodic keep-alive signal",
+        "heartbeatInterval": "Heartbeat Interval (Seconds)",
+        "seconds": "s",
+        "communityString": "Community String",
+        "destinationType": "Destination Type",
+        "destinationIndex": "Destination Index",        
+        "sendTestAlert":"Send Test Alert",
+        "modal": {
+            "deleteConfirmTitle": "Confirm Delete Subscription",
+            "deleteConfirmMessage": "Are you sure you want to delete the subscription for destination '{destination}'?"
+        },
+        "toast": {
+            "successCreateSubscription": "Subscription created successfully.",
+            "errorCreateSubscription": "Error creating subscription.",
+            "successUpdateSubscription": "Subscription updated successfully.",
+            "errorUpdateSubscription": "Error updating subscription.",
+            "successDeleteSubscription": "Subscription deleted successfully.",
+            "errorDeleteSubscription": "Error deleting subscription.",
+            "errorLoadingData": "Error loading subscription data.",
+            "errorEmptyDestination": "Destination URL is required.",
+            "errorEmptyCommunityString": "Community String is required.",
+            "sendTestAlertSuccess": "Test Alert sent successfully.",
+            "sendTestAlertError": "Error in sending Test Alert."
+        }
+    },
+    "pageAlertPolicy": {
+        "pageDescription": "Manage PEF Alert Policy entries for system alert configuration.",
+        "activeSlots": "Active Policies",
+        "available": "Available",
+        "totalChannels": "Total Channels",
+        "configured": "Configured",
+        "index": "Index",
+        "status": "Status",
+        "channel": "Channel",
+        "channelNo": "Channel No",
+        "destinationSel": "Destination Selection",
+        "enableAlert": "Enable Alert",
+        "policyAction": "Policy Action",
+        "actions": "Actions",
+        "addPolicy": "Add Alert Policy",
+        "editPolicy": "Edit Alert Policy",
+        "deletePolicy": "Delete Alert Policy",
+        "policyConfiguration": "Policy Configuration",
+        "alertPolicyGroupNum": "Alert Policy Group Number",
+        "Id": "Id",
+        "modal": {
+            "deleteConfirmTitle": "Confirm Delete Alert Policy",
+            "deleteConfirmMessage": "Are you sure you want to delete the alert policy with Id '{index}'?"
+        },
+        "toast": {
+            "successCreatePolicy": "Alert Policy created successfully.",
+            "errorCreatePolicy": "Error creating Alert Policy.",
+            "successUpdatePolicy": "Alert Policy updated successfully.",
+            "errorUpdatePolicy": "Error updating Alert Policy.",
+            "successDeletePolicy": "Alert Policy deleted successfully.",
+            "errorDeletePolicy": "Error deleting Alert Policy.",
+            "errorLoadingData": "Error loading Alert Policy data.",
+            "errorEmptyAlertGroupNum": "Alert Policy Group Number is required.",
+            "errorEmptyChannelNo": "Channel Number is required."
         }
     },
     "pagePageNotFound": {
@@ -2922,7 +3059,7 @@
         "noRaidControllerAvailable": "There are no RAID Controller Available.",
         "physicalDeviceCount": "Physical Device Count",
         "maxPhysicalDeviceCount": "Max Physical Devices Count",
-        "logicalDevicesCount": "Logical Devices Count",
+        "logicalDevicesCount": "Logical Device Count",
         "maxLogicalDevicesCount": "Max Logical Devices Count",
         "maxPhysicalDevicesCountPerLogicalDevicesCount": "Max Physical Devices Count Per Logical Devices Count",
         "hotSparesCount": "Hot Spares Count",
@@ -3003,6 +3140,85 @@
         "supportMixedSizeWithinArrayHDD": "Support Mixed Size HDD in Array",
         "supportMixedSizeWithinArrayNVMe": "Support Mixed Size NVMe in Array",
         "supportMixedSizeWithinArraySSD": "Support Mixed Size SSD in Array",
+        "chargingStatusOptions": {
+            "unknown": "Unknown",
+            "failed": "Failed",
+            "notPresent": "Not Present",
+            "charging": "Charging",
+            "charged": "Charged"
+        },
+        "bbuStatusMsccOptions": {
+            "unknown": "Unknown",
+            "uninitialized": "Uninitialized",
+            "ready": "Ready",
+            "learningCycle": "Learning Cycle",
+            "subsystemFailed": "Subsystem Failed",
+            "aboveMaxTemperature": "Above Max Temperature",
+            "aboveWarningTemperature": "Above Warning Temperature",
+            "overVoltage": "Over Voltage",
+            "aboveMaxChargingCurrent": "Above Max Charging Current",
+            "learningCyclePassed": "Learning Cycle Passed",
+            "learningCycleFailed": "Learning Cycle Failed",
+            "supercapacitorFailed": "Supercapacitor Failed",
+            "supercapacitorNearEOL": "Supercapacitor Near End of Life",
+            "supercapacitorPassedEOL": "Supercapacitor Passed End of Life",
+            "supercapacitorMissing": "Supercapacitor Missing"
+        },
+        "bbuTypeOptions": {
+            "unknown": "Unknown",
+            "none": "None",
+            "capacitor": "Capacitor",
+            "battery": "Battery",
+            "smartBattery": "Smart Battery",
+            "zcrLegacy": "ZCR Legacy"
+        },
+        "bbuStatusBrcmOptions": {
+            "none": "None",
+            "cacheOffloadNotRead": "Cache Offload Not Read",
+            "packMissing": "Pack Missing",
+            "voltageLow": "Voltage Low",
+            "temperatureHigh": "Temperature High",
+            "chargeActive": "Charge Active",
+            "dischargeActive": "Discharge Active",
+            "learnCycleRequested": "Learn Cycle Requested",
+            "learnCycleActive": "Learn Cycle Active",
+            "learnCycleFailed": "Learn Cycle Failed",
+            "learnCycleTimeout": "Learn Cycle Timeout",
+            "i2cErrorsDetected": "I2C Errors Detected",
+            "replacePack": "Replace Pack",
+            "remainingCapacityLow": "Remaining Capacity Low",
+            "periodicLearnRequired": "Periodic Learn Required",
+            "nonTransparentLearn": "Non-Transparent Learn",
+            "noSpace": "No Space",
+            "predictiveFailure": "Predictive Failure",
+            "microcodeUpdateReqd": "Microcode Update Required",
+            "cableFailure": "Cable Failure",
+            "transparentLearn": "Transparent Learn",
+            "premiumFeatureReqd": "Premium Feature Required",
+            "cacheVaultDisabled": "Cache Vault Disabled",
+            "batteryCableFailure": "Battery Cable Failure",
+            "good": "Good"
+        },
+        "bbuEnergyPackSubTypeOptions": {
+            "none": "None",
+            "broadcomSuperCapFBU345": "Broadcom Super Capacitor FBU345",
+            "broadcomSuperCapFBU03": "Broadcom Super Capacitor FBU03",
+            "oemBattery": "OEM Battery"
+        },
+        "bbuEnergyPackTypeOptions": {
+            "noPack": "No Pack",
+            "superCap": "Super Capacitor",
+            "battery": "Battery"
+        },
+        "inconsistencyRepairPolicyOptions": {
+            "unknown": "Unknown",
+            "enable": "Enable",
+            "disable": "Disable"
+        },
+        "spareActivationModeOptions": {
+            "unknown": "Unknown",
+            "failure": "Failure"
+        },
         "modal": {
             "dropdownPropertiesBtn":"Properties",
             "dropdownManagementBtn": "Management",
@@ -3257,8 +3473,8 @@
             "ssdPowerOnHours": "Ssd Power On Hours",
             "spareType": "Spare Type",
             "state": {
-                "hotspare": "Hot Spare",
-                "unknownState": "Unknown",
+                "hotSpare": "Hot Spare",
+                "unknown": "Unknown",
                 "copyback": "Copyback",
                 "unconfiguredGood": "Unconfigured Good",
                 "unconfiguredBad": "Unconfigured Bad",
@@ -3271,8 +3487,63 @@
                 "shieldUnconfigured": "Shielded Unconfigured Drive",
                 "shieldHotSpare": "Shielded Host Spare Drive",
                 "shieldConfigured": "Shielded Configured Drive",
-                "unconfigured": "Unconfigured"
+                "unconfigured": "Unconfigured",
+                "jbod": "JBOD",
+                "raidConfigured": "RAID Configured",
+                "raidHotSpare": "RAID Hot Spare",
+                "host": "Host",
+                "advHost": "ADV Host",
+                "unusable": "Unusable",
+                "shieldMask": "Shield Mask",
+                "sanitizeMask": "Sanitize Mask",
+                "degradedMask": "Degraded Mask",
+                "formatMask": "Format Mask"
             }
+        },
+        "powerStateOptions": {
+            "active": "Active",
+            "stop": "Stop",
+            "transitioning": "Transitioning"
+        },
+        "auOperationOptions": {
+            "none": "None",
+            "rebuild": "Rebuild",
+            "patrolRead": "Patrol Read",
+            "clear": "Clear",
+            "copyback": "Copyback",
+            "erase": "Erase",
+            "sanitize": "Sanitize",
+            "nvmeReconfigure": "Nvme Reconfigure"
+        },
+        "auStatusOptions": {
+            "unknown": "Unknown",
+            "unusable": "Unusable",
+            "missing": "Missing",
+            "good": "Good",
+            "bad": "Bad",
+            "raidRebuild": "Raid Rebuild",
+            "raidCopyback": "Raid Copyback",
+            "raidOffline": "Raid Offline",
+            "raidFailed": "Raid Failed",
+            "raidOnline": "Raid Online"
+        },
+        "spareTypeOptions": {
+            "none": "None",
+            "global": "Global",
+            "dedicated": "Dedicated"
+        },
+        "usageOptions": {
+            "unknown": "Unknown",
+            "unassigned": "Unassigned",
+            "data": "Data",
+            "autoReplaceStandbySpare": "Auto Replace Standby Spare",
+            "shareableStandbySpare": "Shareable Standby Spare",
+            "shareableActiveSpare": "Shareable Active Spare",
+            "transientData": "Transient Data",
+            "luCacheData": "LU Cache Data",
+            "hba": "HBA",
+            "transientUnassigned": "Transient Unassigned",
+            "unconfigurable": "Unconfigurable"
         },
         "modal": {
             "sourcePDriveId": "Device ID",
@@ -3457,8 +3728,9 @@
             "unprotectedWriteBack": "Unprotected Write Back",
             "writeThrough": "Write Through",
             "alwaysWriteBack": "Always Write Back",
-            "writeBackWithBBU": "Write Back With BBU",
-            "writeCacheAlways": "Write Cache Always"
+            "writeBackWithBBUCorrupted": "Write Back With BBU Corrupted",
+            "writeCacheAlways": "Write Cache Always",
+            "writeBack": "Write Back"
         },
         "ioPolicyOptions": {
             "directIO": "DirectIO",
@@ -3475,13 +3747,118 @@
             "disable": "Disabled"
         },
         "diskWriteCachePolicyOptions": {
-            "Unchanged": "Unchanged",
-            "Enable": "Enable",
-            "Disable": "Disable"
+            "unchanged": "Unchanged",
+            "enable": "Enable",
+            "disable": "Disable"
         },
         "initializationOptions": {
             "initializationFullMode":"Full Initialization",
             "initializationFastMode":"Fast Initialization"
+        },
+        "statusInfoOptions": {
+            "offline": "Offline",
+            "degraded": "Degraded",
+            "rebuild": "Rebuild",
+            "optimal": "Optimal",
+            "partiallyDegraded": "Partially Degraded",
+            "unknown": "Unknown",
+            "ok": "OK",
+            "failed": "Failed",
+            "notConfigured": "Not Configured",
+            "interimRecovery": "Interim Recovery",
+            "readyForRecovery": "Ready For Recovery",
+            "recovering": "Recovering",
+            "wrongDriveReplaced": "Wrong Drive Replaced",
+            "driveImproperlyConnected": "Drive Improperly Connected",
+            "hardwareIsOverheating": "Hardware Is Overheating",
+            "hardwareHasOverheated": "Hardware Has Overheated",
+            "expanding": "Expanding",
+            "notYetAvailable": "Not Yet Available",
+            "queuedForExpansion": "Queued For Expansion",
+            "disabledFromSCSIIdConflict": "Disabled From SCSI ID Conflict",
+            "ejected": "Ejected",
+            "eraseInProgress": "Erase In Progress",
+            "unused": "Unused",
+            "readyToPerformPredictiveSpareRebuild": "Ready To Perform Predictive Spare Rebuild",
+            "rpiInProgress": "RPI In Progress",
+            "rpiQueued": "RPI Queued",
+            "encryptedVolumeWithoutKey": "Encrypted Volume Without Key",
+            "plainTextVolumeRejectedInEncryptingMode": "Plain Text Volume Rejected In Encrypting Mode",
+            "encryptionMigration": "Encryption Migration",
+            "encryptedVolumeRekeying": "Encrypted Volume Rekeying",
+            "encryptedVolumeEncryptionOff": "Encrypted Volume Encryption Off",
+            "volumeEncodeRequested": "Volume Encode Requested",
+            "encryptedVolumeRekeyRequested": "Encrypted Volume Rekey Requested",
+            "unsupportedOnThisController": "Unsupported On This Controller",
+            "hasLockedSED": "Has Locked SED",
+            "sedQualificationOngoing": "SED Qualification Ongoing",
+            "sedQualificationFailed": "SED Qualification Failed",
+            "sedVolumeDataLocked": "SED Volume Data Locked"
+        },
+        "badBlockStatusOptions": {
+            "empty": "Empty",
+            "notEmpty": "Not Empty"
+        },
+        "operationOptions": {
+            "normal": "Normal",
+            "rebuild": "Rebuild",
+            "initializeInProgress": "Initialize In Progress",
+            "consistencyCheck": "Consistency Check",
+            "none": "None",
+            "backgroundInitialization": "Background Initialization",
+            "foregroundInitialization": "Foreground Initialization",
+            "onlineCapacityExpansion": "Online Capacity Expansion",
+            "secureErase": "Secure Erase"
+        },
+        "accessPolicyStatusOptions": {
+            "ok": "Ok",
+            "preservedCache": "Preserved Cache",
+            "trialKeyExpired": "Trial Key Expired",
+            "ldOffline": "Logical Device Offline",
+            "ctrlSafeMode": "Controller Safe Mode"
+        },
+        "encryptionTypeOptions": {
+            "none": "None",
+            "sed": "SED"
+        },
+        "powerSavingPolicyOptions": {
+            "none": "None",
+            "controllerDefault": "Controller Default",
+            "t10": "T10"
+        },
+        "ldTypeOptions": {
+            "unknown": "Unknown",
+            "data": "Data",
+            "cache": "Cache",
+            "splitMirrorSetPrimary": "Split Mirror Set Primary",
+            "splitMirrorSetBackup": "Split Mirror Set Backup",
+            "splitMirrorSetBackupOrphan": "Split Mirror Set Backup Orphan"
+        },
+        "acceleratorTypeOptions": {
+            "unknown": "Unknown",
+            "none": "None",
+            "controllerCache": "Controller Cache",
+            "ioBypass": "IO Bypass",
+            "luCache": "LU Cache"
+        },
+        "cacheLineSizeOptions": {
+            "unknown": "Unknown",
+            "lineSize64kb": "Line Size 64KB",
+            "lineSize128kb": "Line Size 128KB",
+            "lineSize256kb": "Line Size 256KB"
+        },
+        "luCacheAlgorithmOptions": {
+            "unknown": "Unknown",
+            "hashingLRU": "Hashing LRU",
+            "hashingLRU2": "Hashing LRU2",
+            "regional": "Regional",
+            "simpleLRU": "Simple LRU"
+        },
+        "cachePolicyOptions": {
+            "unknown": "Unknown",
+            "readOnly": "Read Only",
+            "writeThrough": "Write Through",
+            "writeBack": "Write Back"
         },
         "table": {
             "id": "ID",
@@ -3521,7 +3898,15 @@
             "state": "State",
             "diskWriteCachePolicy": "Disk Write Cache Policy",
             "operationProgressPercent": "Operation Progress Percent",
-            "operationElapsedSeconds": "Operation Elapsed Seconds"
+            "operationElapsedSeconds": "Operation Elapsed Seconds",
+            "arrayRef": "Array Ref",
+            "size": "Size",
+            "fwState": "FW State",
+            "numDrives": "Number of Drives",
+            "PD": "PD",
+            "ref": "Ref",
+            "seqNum": "SeqNum",
+            "slot": "Slot"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "No Physical Device is available to configure!",

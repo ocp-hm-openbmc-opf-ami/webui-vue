@@ -95,7 +95,8 @@
             "success": "Успешно",
             "warning": "Предупреждение",
             "informational": "Информационное",
-            "unknown": "Неизвестно"
+            "unknown": "Неизвестно",
+            "good": "Хорошо"
         },
         "table": {
             "collapseTableRow": "Свернуть строку таблицы",
@@ -138,7 +139,9 @@
         "backupCodeLable":"Пожалуйста, сохраните ваши резервные коды для экстренного использования.",
         "tfaWarningMessage":"Предупреждение: Перед закрытием этого окна отсканируйте QR-код для двухфакторной аутентификации в приложении-аутентификаторе и сохраните резервные коды для экстренных случаев. Если срок действия вашей сессии истечет, эти резервные коды потребуются для восстановления доступа.",
         "tfaCloseConfirmTitle":"Завершить настройку 2FA?",
-        "tfaCloseConfirmMessage":"Вы уверены, что хотите закрыть это окно? Перед закрытием подтвердите, что вы отсканировали QR-код для двухфакторной аутентификации и сохранили резервные коды для экстренных случаев."
+        "tfaCloseConfirmMessage":"Вы уверены, что хотите закрыть это окно? Перед закрытием подтвердите, что вы отсканировали QR-код для двухфакторной аутентификации и сохранили резервные коды для экстренных случаев.",
+        "disableAutoRefresh": "Отключить автообновление",
+        "enableAutoRefresh": "Включить автообновление"
     },
     "appNavigation": {
         "bsod": "@:appPageTitle.bsod",
@@ -185,6 +188,8 @@
         "snmpSettings": "@:appPageTitle.snmp",
         "pef": "Фильтр событий платформы",
         "eventFilter": "Фильтр событий",
+        "alertPolicy": "Политика оповещений",
+        "lanDestinations": "Назначения LAN",
         "nicInformation": "Сетевые интерфейсы",
         "nvmeInformation": "@:appPageTitle.nvmeInformation",
         "hostSystemDiagnostics": "Диагностика хост-системы",
@@ -268,6 +273,8 @@
         "smtpSettings": "Настройки SMTP",
         "snmp": "Настройки SNMP",
         "eventFilter": "Фильтр событий",
+        "alertPolicy": "Политика оповещений",
+        "lanDestinations": "Назначения LAN",
         "nicInformation": "Информация о сетевых интерфейсах",
         "nvmeInformation": "Информация о NVMe",
         "addc": "ADDC",
@@ -873,7 +880,7 @@
             "sessionType": "Тип сессии",
             "userID": "ID пользователя",
             "username": "Имя пользователя",
-            "ipAddress": "IP-адрес",
+            "ipAddress": "IP-адрес клиента",
             "privilege": "Уровень доступа",
             "searchSessions": "Поиск сессий",
             "mountType": "Тип монтирования",
@@ -2307,6 +2314,8 @@
         "cacertPEM": "Сертификат PEM CA",
         "serverCRT": "Сертификат CRT сервера",
         "serverKey": "Ключевой сертификат сервера",
+        "oAuthEnable": "Включить OAuth",
+        "oAuthAccessToken": "Токен доступа OAuth",
         "modal": {
             "subject": "Тема",
             "mailContent": "Содержание письма"
@@ -2338,33 +2347,161 @@
     },
     "pageEventFilter": {
         "pageDescription": "Выберите события, которые будут запускать уведомления.",
-        "sectionTitle": "Фильтр событий",
-        "eventFilterLabel": "Настройка деталей назначения уведомления.",
-        "enableAllEvents": "Включить/отключить все фильтры событий",
-        "temperatureSensorOutOfRange": "Значение температуры вне диапазона",
-        "fanFailure": "Отказ вентилятора",
-        "powerSupplyFailure": "Отказ блока питания",
-        "biosPostErrorCode": "BIOS: Код ошибки POST",
-        "nodeManagerException": "Исключение менеджера узлов",
-        "systemRestart": "Перезапуск системы",
-        "powerUnitRedundancyFailure": "Отказ резервирования блока питания",
-        "fanRedundancyFailure": "Отказ резервирования вентилятора",
-        "processorPresence": "Наличие процессора",
-        "voltageSensorOutOfRange": "Значение напряжения вне диапазона",
-        "chassisIntrusion": "Вскрытие корпуса",
-        "memoryError": "Ошибка памяти",
-        "frbFailure": "Отказ FRB",
-        "watchdogTimer": "Watchdog таймер",
-        "hardDriveFailure": "Отказ жесткого диска",
-        "inletTemperatureOverheatShutdown": "Отключение из-за перегрева входной температуры",
-        "powerUnitStatus": "Статус блока питания",
-        "processorDimmThermTrip": "Термическое отключение DIMM процессора",
-        "destinationType": "Тип назначения",
+        "retryEvent":"Повторить событие",
+        "alertLimits":"Лимит оповещений",
+        "retryCount":"Предел количества повторов",
+        "timeInterval":"Интервал времени повторов (секунды)",
+        "retryLabelSettings":"Конфигурация повторов событий",
+        "EventFilterTableEntry": "Запись таблицы фильтра событий",
+        "Id": "Id",
+        "FilterConfig": "Конфигурация фильтра",
+        "EvtFilterAction": "Действие фильтра событий",
+        "AlertPolicyNum": "Номер политики оповещений",
+        "EventSeverity": "Серьёзность события",
+        "GenIDByte1": "Gen ID Byte1",
+        "GenIDByte2": "Gen ID Byte2",
+        "SensorType": "Тип датчика",
+        "SensorName": "Имя датчика",
+        "EventTrigger": "Триггер события",
+        "EventData1OffsetMask": "Маска смещения данных события 1",
+        "EventData1ANDMask": "Маска AND данных события 1",
+        "EventData1Cmp1": "Сравнение данных события 1.1",
+        "EventData1Cmp2": "Сравнение данных события 1.2",
+        "EventData2ANDMask": "Маска AND данных события 2",
+        "EventData2Cmp1": "Сравнение данных события 2.1",
+        "EventData2Cmp2": "Сравнение данных события 2.2",
+        "EventData3ANDMask": "Маска AND данных события 3",
+        "EventData3Cmp1": "Сравнение данных события 3.1",
+        "EventData3Cmp2": "Сравнение данных события 3.2",
+        "actions": "Действия",
+        "editEventFilter": "Редактировать фильтр событий",
+        "deleteEventFilter": "Удалить фильтр событий",
+        "validation": {
+            "EventFilterTableEntry": "Запись таблицы фильтра событий должна быть между 1 и 40",
+            "FilterConfig": "Конфигурация фильтра должна быть одной из: 0, 64, 128, 192",
+            "EvtFilterAction": "Действие фильтра событий должно быть между 0 и 127",
+            "AlertPolicyNum": "Номер политики оповещений должен быть между 0 и 127",
+            "GenIDByte1": "Gen ID Byte1 должен быть между 0 и 255",
+            "GenIDByte2": "Gen ID Byte2 должен быть между 0 и 255",
+            "EventTrigger": "Триггер события должен быть между 0 и 255",
+            "EventData1OffsetMask": "Маска смещения данных события 1 должна быть между 0 и 65535",
+            "EventData1ANDMask": "Маска AND данных события 1 должна быть между 0 и 255",
+            "EventData1Cmp1": "Сравнение данных события 1.1 должно быть между 0 и 255",
+            "EventData1Cmp2": "Сравнение данных события 1.2 должно быть между 0 и 255",
+            "EventData2ANDMask": "Маска AND данных события 2 должна быть между 0 и 255",
+            "EventData2Cmp1": "Сравнение данных события 2.1 должно быть между 0 и 255",
+            "EventData2Cmp2": "Сравнение данных события 2.2 должно быть между 0 и 255",
+            "EventData3ANDMask": "Маска AND данных события 3 должна быть между 0 и 255",
+            "EventData3Cmp1": "Сравнение данных события 3.1 должно быть между 0 и 255",
+            "EventData3Cmp2": "Сравнение данных события 3.2 должно быть между 0 и 255"
+        },
+        "modal": {
+            "deleteConfirmTitle": "Подтвердите удаление фильтра событий",
+            "deleteConfirmMessage": "Вы уверены, что хотите удалить фильтр событий с Id '{index}'?"
+        },
         "toast": {
             "successEventFilterMsg": "Конфигурация фильтра событий успешно обновлена.",
             "errorEventFilterMsg": "Ошибка обновления конфигурации фильтра событий.",
             "successDestinationType": "Конфигурация типа назначения успешно обновлена.",
             "errorDestinationType": "Ошибка обновления конфигурации типа назначения."
+        },
+        "form":{
+            "maxAlertLimitRequired": "Максимальное значение предела оповещений должно быть в диапазоне от 0 до 100",
+            "maxTimeIntervalRequired": "Максимальный интервал времени должен быть в диапазоне от 0 до 3600 секунд.",
+            "maxRetryCountRequired": "Максимальное количество повторов должно быть в диапазоне от 0 до 10."
+        }
+    },
+    "pageLanDestinations": {
+        "pageDescription": "Управление назначениями событий и конфигурациями SNMP для системных уведомлений.",
+        "activeSlots": "Активные слоты",
+        "active": "Активные",
+        "available": "Доступные",
+        "selectedInterface": "Выбранный интерфейс",
+        "lastAlert": "Последнее оповещение",
+        "none": "Нет (за последние 24 часа)",
+        "lastTime": "Последние 24 часа",
+        "ethernetInterface": "Ethernet интерфейс",
+        "linkUp": "1GbE / Ссылка Вверх",
+        "index": "Индекс",
+        "Id": "Идентификатор",
+        "status": "Статус",
+        "destinationUrl": "URL назначения",
+        "destination": "Назначение",
+        "username": "Имя пользователя",
+        "protocol": "Протокол",
+        "health": "Состояние",
+        "actions": "Действия",
+        "addSubscription": "Добавить подписку",
+        "editSubscription": "Редактировать подписку",
+        "deleteSubscription": "Удалить подписку",
+        "generalConfiguration": "Общие настройки",
+        "oemDetails": "Сведения OEM (AMI)",
+        "name": "Имя",
+        "namePlaceholder": "SNMP Trap Destination 0",
+        "destinationPlaceholder": "snmp://10.0.96.127:162",
+        "contextPlaceholder": "Введите контекст (необязательно)",
+        "contextString": "Строка контекста",
+        "deliveryRetryPolicy": "Политика повторной доставки",
+        "sendHeartbeat": "Отправить сигнал активности",
+        "sendHeartbeatDescription": "Периодический сигнал поддержания активности",
+        "heartbeatInterval": "Интервал сигнала активности (секунды)",
+        "seconds": "с",
+        "communityString": "Строка сообщества",
+        "destinationType": "Тип назначения",
+        "destinationIndex": "Индекс назначения",        
+        "sendTestAlert":"Отправить тестовое оповещение",
+        "modal": {
+            "deleteConfirmTitle": "Подтвердить удаление подписки",
+            "deleteConfirmMessage": "Вы уверены, что хотите удалить подписку для назначения '{destination}'?"
+        },
+        "toast": {
+            "successCreateSubscription": "Подписка успешно создана.",
+            "errorCreateSubscription": "Ошибка при создании подписки.",
+            "successUpdateSubscription": "Подписка успешно обновлена.",
+            "errorUpdateSubscription": "Ошибка при обновлении подписки.",
+            "successDeleteSubscription": "Подписка успешно удалена.",
+            "errorDeleteSubscription": "Ошибка при удалении подписки.",
+            "errorLoadingData": "Ошибка при загрузке данных подписки.",
+            "errorEmptyDestination": "Требуется URL назначения.",
+            "errorEmptyCommunityString": "Требуется строка сообщества.",
+            "sendTestAlertSuccess": "Тестовое оповещение успешно отправлено.",
+            "sendTestAlertError": "Ошибка при отправке тестового оповещения."
+        }
+    },
+    "pageAlertPolicy": {
+        "pageDescription": "Управление записями политики оповещений PEF для настройки системных оповещений.",
+        "activeSlots": "Активные политики",
+        "available": "Доступно",
+        "totalChannels": "Всего каналов",
+        "configured": "Настроено",
+        "index": "Индекс",
+        "status": "Статус",
+        "channel": "Канал",
+        "channelNo": "Номер канала",
+        "destinationSel": "Выбор места назначения",
+        "enableAlert": "Включить оповещение",
+        "policyAction": "Действие политики",
+        "actions": "Действия",
+        "addPolicy": "Добавить политику оповещений",
+        "editPolicy": "Редактировать политику оповещений",
+        "deletePolicy": "Удалить политику оповещений",
+        "policyConfiguration": "Конфигурация политики",
+        "alertPolicyGroupNum": "Номер группы политики оповещений",
+        "Id": "Идентификатор",
+        "modal": {
+            "deleteConfirmTitle": "Подтвердить удаление политики оповещений",
+            "deleteConfirmMessage": "Вы уверены, что хотите удалить политику оповещений с идентификатором '{index}'?"
+        },
+        "toast": {
+            "successCreatePolicy": "Политика оповещений успешно создана.",
+            "errorCreatePolicy": "Ошибка при создании политики оповещений.",
+            "successUpdatePolicy": "Политика оповещений успешно обновлена.",
+            "errorUpdatePolicy": "Ошибка при обновлении политики оповещений.",
+            "successDeletePolicy": "Политика оповещений успешно удалена.",
+            "errorDeletePolicy": "Ошибка при удалении политики оповещений.",
+            "errorLoadingData": "Ошибка при загрузке данных политики оповещений.",
+            "errorEmptyAlertGroupNum": "Требуется номер группы политики оповещений.",
+            "errorEmptyChannelNo": "Требуется номер канала."
         }
     },
     "pagePageNotFound": {
@@ -2995,6 +3132,85 @@
         "supportMixedSizeWithinArrayHDD": "Поддержка разных объемов HDD в массиве",
         "supportMixedSizeWithinArrayNVMe": "Поддержка разных объемов NVMe в массиве",
         "supportMixedSizeWithinArraySSD": "Поддержка разных объемов SSD в массиве",
+        "chargingStatusOptions": {
+            "unknown": "Неизвестно",
+            "failed": "Ошибка",
+            "notPresent": "Отсутствует",
+            "charging": "Зарядка",
+            "charged": "Заряжено"
+        },
+        "bbuStatusMsccOptions": {
+            "unknown": "Неизвестно",
+            "uninitialized": "Неинициализировано",
+            "ready": "Готово",
+            "learningCycle": "Цикл обучения",
+            "subsystemFailed": "Сбой подсистемы",
+            "aboveMaxTemperature": "Выше максимальной температуры",
+            "aboveWarningTemperature": "Выше температуры предупреждения",
+            "overVoltage": "Перенапряжение",
+            "aboveMaxChargingCurrent": "Выше максимального тока зарядки",
+            "learningCyclePassed": "Цикл обучения пройден",
+            "learningCycleFailed": "Цикл обучения не пройден",
+            "supercapacitorFailed": "Сбой суперконденсатора",
+            "supercapacitorNearEOL": "Суперконденсатор близок к концу срока службы",
+            "supercapacitorPassedEOL": "Суперконденсатор превысил срок службы",
+            "supercapacitorMissing": "Суперконденсатор отсутствует"
+        },
+        "bbuTypeOptions": {
+            "unknown": "Неизвестно",
+            "none": "Нет",
+            "capacitor": "Конденсатор",
+            "battery": "Батарея",
+            "smartBattery": "Умная батарея",
+            "zcrLegacy": "ZCR устаревший"
+        },
+        "bbuStatusBrcmOptions": {
+            "none": "Нет",
+            "cacheOffloadNotRead": "Кэш выгрузки не прочитан",
+            "packMissing": "Модуль отсутствует",
+            "voltageLow": "Низкое напряжение",
+            "temperatureHigh": "Высокая температура",
+            "chargeActive": "Зарядка активна",
+            "dischargeActive": "Разряд активен",
+            "learnCycleRequested": "Запрошен цикл обучения",
+            "learnCycleActive": "Цикл обучения активен",
+            "learnCycleFailed": "Цикл обучения не удался",
+            "learnCycleTimeout": "Тайм-аут цикла обучения",
+            "i2cErrorsDetected": "Обнаружены ошибки I2C",
+            "replacePack": "Заменить модуль",
+            "remainingCapacityLow": "Оставшаяся ёмкость низкая",
+            "periodicLearnRequired": "Требуется периодический цикл обучения",
+            "nonTransparentLearn": "Непрозрачный цикл обучения",
+            "noSpace": "Нет места",
+            "predictiveFailure": "Прогнозируемый отказ",
+            "microcodeUpdateReqd": "Требуется обновление микрокода",
+            "cableFailure": "Отказ кабеля",
+            "transparentLearn": "Прозрачный цикл обучения",
+            "premiumFeatureReqd": "Требуется премиум-функция",
+            "cacheVaultDisabled": "Хранилище кэша отключено",
+            "batteryCableFailure": "Сбой кабеля батареи",
+            "good": "Хорошо"
+        },
+        "bbuEnergyPackSubTypeOptions": {
+            "none": "Нет",
+            "broadcomSuperCapFBU345": "Broadcom суперконденсатор FBU345",
+            "broadcomSuperCapFBU03": "Broadcom суперконденсатор FBU03",
+            "oemBattery": "OEM батарея"
+        },
+        "bbuEnergyPackTypeOptions": {
+            "noPack": "Нет модуля",
+            "superCap": "Суперконденсатор",
+            "battery": "Батарея"
+        },
+        "inconsistencyRepairPolicyOptions": {
+            "unknown": "Неизвестно",
+            "enable": "Включить",
+            "disable": "Отключить"
+        },
+        "spareActivationModeOptions": {
+            "unknown": "Неизвестно",
+            "failure": "Сбой"
+        },
         "modal": {
             "dropdownPropertiesBtn":"Свойства",
             "dropdownManagementBtn": "Управление",
@@ -3248,8 +3464,9 @@
             "unprotectedWriteBack": "Незащищенная обратная запись",
             "writeThrough": "Сквозная запись",
             "alwaysWriteBack": "Всегда обратная запись",
-            "writeBackWithBBU": "Обратная запись с BBU",
-            "writeCacheAlways": "Всегда использовать кэш записи"
+            "writeBackWithBBUCorrupted": "Запись обратно даже при поврежденном BBU",
+            "writeCacheAlways": "Всегда использовать кэш записи",
+            "writeBack": "Запись обратно"
         },
         "ioPolicyOptions": {
             "directIO": "Прямой ввод-вывод",
@@ -3266,13 +3483,118 @@
             "disable": "Отключено"
         },
         "diskWriteCachePolicyOptions": {
-            "Unchanged": "Без изменений",
-            "Enable": "Включено",
-            "Disable": "Отключено"
+            "unchanged": "Без изменений",
+            "enable": "Включено",
+            "disable": "Отключено"
         },
         "initializationOptions": {
             "initializationFullMode":"Полная инициализация",
             "initializationFastMode":"Быстрая инициализация"
+        },
+        "statusInfoOptions": {
+            "offline": "Офлайн",
+            "degraded": "Деградировано",
+            "rebuild": "Восстановление",
+            "optimal": "Оптимально",
+            "partiallyDegraded": "Частично деградировано",
+            "unknown": "Неизвестно",
+            "ok": "OK",
+            "failed": "Ошибка",
+            "notConfigured": "Не настроено",
+            "interimRecovery": "Временное восстановление",
+            "readyForRecovery": "Готово к восстановлению",
+            "recovering": "Восстановление",
+            "wrongDriveReplaced": "Заменен неправильный диск",
+            "driveImproperlyConnected": "Диск подключен неправильно",
+            "hardwareIsOverheating": "Оборудование перегревается",
+            "hardwareHasOverheated": "Оборудование перегрелось",
+            "expanding": "Расширение",
+            "notYetAvailable": "Еще недоступно",
+            "queuedForExpansion": "В очереди на расширение",
+            "disabledFromSCSIIdConflict": "Отключено из-за конфликта SCSI ID",
+            "ejected": "Извлечено",
+            "eraseInProgress": "Стирание выполняется",
+            "unused": "Не используется",
+            "readyToPerformPredictiveSpareRebuild": "Готово к прогнозируемому восстановлению резервного диска",
+            "rpiInProgress": "RPI выполняется",
+            "rpiQueued": "RPI в очереди",
+            "encryptedVolumeWithoutKey": "Зашифрованный том без ключа",
+            "plainTextVolumeRejectedInEncryptingMode": "Том в открытом виде отклонен в режиме шифрования",
+            "encryptionMigration": "Миграция шифрования",
+            "encryptedVolumeRekeying": "Смена ключа зашифрованного тома",
+            "encryptedVolumeEncryptionOff": "Шифрование тома выключено",
+            "volumeEncodeRequested": "Запрошено кодирование тома",
+            "encryptedVolumeRekeyRequested": "Запрошена смена ключа зашифрованного тома",
+            "unsupportedOnThisController": "Не поддерживается этим контроллером",
+            "hasLockedSED": "Есть заблокированный SED",
+            "sedQualificationOngoing": "Квалификация SED выполняется",
+            "sedQualificationFailed": "Квалификация SED не удалась",
+            "sedVolumeDataLocked": "Данные тома SED заблокированы"
+        },
+        "badBlockStatusOptions": {
+            "empty": "Пусто",
+            "notEmpty": "Не пусто"
+        },
+        "operationOptions": {
+            "normal": "Нормально",
+            "rebuild": "Восстановление",
+            "initializeInProgress": "Инициализация выполняется",
+            "consistencyCheck": "Проверка согласованности",
+            "none": "Нет",
+            "backgroundInitialization": "Фоновая инициализация",
+            "foregroundInitialization": "Передняя инициализация",
+            "onlineCapacityExpansion": "Онлайн расширение емкости",
+            "secureErase": "Безопасное стирание"
+        },
+        "accessPolicyStatusOptions": {
+            "ok": "OK",
+            "preservedCache": "Кэш сохранен",
+            "trialKeyExpired": "Пробный ключ истек",
+            "ldOffline": "Логическое устройство офлайн",
+            "ctrlSafeMode": "Контроллер в безопасном режиме"
+        },
+        "encryptionTypeOptions": {
+            "none": "Нет",
+            "sed": "SED"
+        },
+        "powerSavingPolicyOptions": {
+            "none": "Нет",
+            "controllerDefault": "По умолчанию контроллера",
+            "t10": "T10"
+        },
+        "ldTypeOptions": {
+            "unknown": "Неизвестно",
+            "data": "Данные",
+            "cache": "Кэш",
+            "splitMirrorSetPrimary": "Разделенный зеркальный набор основной",
+            "splitMirrorSetBackup": "Разделенный зеркальный набор резервный",
+            "splitMirrorSetBackupOrphan": "Разделенный зеркальный набор осиротевший резервный"
+        },
+        "acceleratorTypeOptions": {
+            "unknown": "Неизвестно",
+            "none": "Нет",
+            "controllerCache": "Кэш контроллера",
+            "ioBypass": "IO обход",
+            "luCache": "LU кэш"
+        },
+        "cacheLineSizeOptions": {
+            "unknown": "Неизвестно",
+            "lineSize64kb": "Размер строки 64KB",
+            "lineSize128kb": "Размер строки 128KB",
+            "lineSize256kb": "Размер строки 256KB"
+        },
+        "luCacheAlgorithmOptions": {
+            "unknown": "Неизвестно",
+            "hashingLRU": "Хеширование LRU",
+            "hashingLRU2": "Хеширование LRU2",
+            "regional": "Региональный",
+            "simpleLRU": "Простой LRU"
+        },
+        "cachePolicyOptions": {
+            "unknown": "Неизвестно",
+            "readOnly": "Только чтение",
+            "writeThrough": "Прямая запись",
+            "writeBack": "Обратная запись"
         },
         "table": {
             "id": "ID",
@@ -3312,7 +3634,15 @@
             "state": "Состояние",
             "diskWriteCachePolicy": "Политика кэширования записи на диск",
             "operationProgressPercent": "Процент выполнения операции",
-            "operationElapsedSeconds": "Прошедшее время операции в секундах"
+            "operationElapsedSeconds": "Прошедшее время операции в секундах",
+            "arrayRef": "Ссылка на массив",
+            "size": "Размер",
+            "fwState": "Состояние прошивки",
+            "numDrives": "Количество дисков",
+            "PD": "Физический диск",
+            "ref": "Ссылка",
+            "seqNum": "Порядковый номер",
+            "slot": "Слот"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "Нет доступных физических устройств для настройки!",
@@ -3446,8 +3776,8 @@
             "ssdPowerOnHours": "Время работы SSD (часы)",
             "spareType": "Тип резервного устройства",
             "state": {
-                "hotspare": "Горячий резерв",
-                "unknownState": "Неизвестно",
+                "hotSpare": "Горячий резерв",
+                "unknown": "Неизвестно",
                 "copyback": "Copyback",
                 "unconfiguredGood": "Ненастроенный хороший",
                 "unconfiguredBad": "Ненастроенный плохой",
@@ -3460,8 +3790,63 @@
                 "shieldUnconfigured": "Экранированный ненастроенный диск",
                 "shieldHotSpare": "Экранированный резервный диск хоста",
                 "shieldConfigured": "Экранированный настроенный диск",
-                "unconfigured": "Ненастроенный"
+                "unconfigured": "Ненастроенный",
+                "jbod": "JBOD",
+                "raidConfigured": "RAID настроен",
+                "raidHotSpare": "RAID горячий резерв",
+                "host": "Хост",
+                "advHost": "ADV‑хост",
+                "unusable": "Непригодно",
+                "shieldMask": "Маска защиты",
+                "sanitizeMask": "Маска очистки",
+                "degradedMask": "Маска деградации",
+                "formatMask": "Маска форматирования"
             }
+        },
+        "powerStateOptions": {
+            "active": "Активный",
+            "stop": "Остановить",
+            "transitioning": "Переход"
+        },
+        "auOperationOptions": {
+            "none": "Нет",
+            "rebuild": "Восстановление",
+            "patrolRead": "Патрульное чтение",
+            "clear": "Очистить",
+            "copyback": "Копирование назад",
+            "erase": "Стереть",
+            "sanitize": "Очистить",
+            "nvmeReconfigure": "NVMe перенастройка"
+        },
+        "auStatusOptions": {
+            "unknown": "Неизвестно",
+            "unusable": "Непригодно",
+            "missing": "Отсутствует",
+            "good": "Хорошо",
+            "bad": "Плохо",
+            "raidRebuild": "RAID восстановление",
+            "raidCopyback": "RAID копирование назад",
+            "raidOffline": "RAID офлайн",
+            "raidFailed": "RAID ошибка",
+            "raidOnline": "RAID онлайн"
+        },
+        "spareTypeOptions": {
+            "none": "Нет",
+            "global": "Глобальный",
+            "dedicated": "Выделенный"
+        },
+        "usageOptions": {
+            "unknown": "Неизвестно",
+            "unassigned": "Не назначено",
+            "data": "Данные",
+            "autoReplaceStandbySpare": "Автоматическая замена резервного диска",
+            "shareableStandbySpare": "Общий резервный диск",
+            "shareableActiveSpare": "Общий активный резервный диск",
+            "transientData": "Временные данные",
+            "luCacheData": "LU кэш данные",
+            "hba": "HBA",
+            "transientUnassigned": "Временно не назначено",
+            "unconfigurable": "Неконфигурируемо"
         },
         "modal": {
             "sourcePDriveId": "ID",

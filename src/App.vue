@@ -26,6 +26,7 @@ export default {
     },
   },
   created() {
+    localStorage.setItem('pollingEnabled', 'false');
     Cookies.set('loginSessionSuccess', 'true');
     this.$root.$on('loader-start', this.onLoaderStart);
     this.$root.$on('loader-end', this.onLoaderStop);

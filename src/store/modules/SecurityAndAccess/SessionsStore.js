@@ -16,29 +16,44 @@ const SessionsStore = {
   actions: {
     async getSessionsData({ commit }) {
       return await api
-        .get('/redfish/v1/SessionService/Sessions')
-        .then((response) =>
-          response.data.Members.map((sessionLogs) => sessionLogs['@odata.id']),
-        )
-        .then((sessionUris) =>
-          api.all(sessionUris.map((sessionUri) => api.get(sessionUri))),
-        )
+        .get('/redfish/v1/SessionService/Oem/Ami/ActiveSessions')
+        .then((response) => {
+          const allUris = [
+            ...(response.data.SSH || []).map((session) => session['@odata.id']),
+            ...(response.data.WEB || []).map((session) => session['@odata.id']),
+            ...(response.data.KVM || []).map((session) => session['@odata.id']),
+            ...(response.data.VMEDIA || []).map(
+              (session) => session['@odata.id'],
+            ),
+            ...(response.data.REDFISH || []).map(
+              (session) => session['@odata.id'],
+            ),
+          ];
+          return api.all(allUris.map((uri) => api.get(uri)));
+        })
         .then((sessionUris) => {
           const allConnectionsData = sessionUris.map((sessionUri) => {
-            let lastElement = sessionUri.data['@odata.id'].split('/').pop();
+            let userID = sessionUri.data?.UserId ?? 'NA';
+            if (sessionUri.data?.Oem?.Ami?.UserId !== undefined) {
+              userID = sessionUri.data.Oem.Ami.UserId;
+            }
+            let mountType = sessionUri.data?.Oem?.Ami?.MountType ?? 'NA';
+            let sessionType = sessionUri.data?.SessionType;
+            if (sessionType === 'VirtualMedia') {
+              const slotId = sessionUri.data?.Oem?.Ami?.SlotId;
+              if (slotId) {
+                sessionType += ' - ' + slotId;
+              }
+            }
             return {
               sessionID: sessionUri.data?.Id,
-              sessionType: sessionUri.data?.SessionType,
-              userID:
-                (sessionUri.data?.Oem?.AMI_WebSession?.UserId ?? '') === ''
-                  ? 'NA'
-                  : sessionUri.data?.Oem?.AMI_WebSession?.UserId,
+              sessionType,
+              userID,
               username: sessionUri.data?.UserName,
               ipAddress: sessionUri.data?.ClientOriginIPAddress,
-              privilege: sessionUri.data?.Roles[0],
-              uri: lastElement,
-              mountType:
-                sessionUri.data?.Oem?.AMI_WebSession?.MountType || 'NA',
+              privilege: sessionUri.data?.Roles?.[0],
+              uri: sessionUri.data['@odata.id'],
+              mountType,
             };
           });
           commit('setAllConnections', allConnectionsData);

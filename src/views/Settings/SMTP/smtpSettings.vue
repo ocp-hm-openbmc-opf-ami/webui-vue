@@ -333,8 +333,57 @@
                   </b-form-checkbox>
                 </b-form-group>
               </b-col>
+              <b-col
+                v-if="primary.enableConfiguration && primary.tlsEnable"
+                sm="3"
+              >
+                <b-form-group :label="$t('pageSmtp.oAuthEnable')">
+                  <b-form-checkbox
+                    id="primary-oauth-enable"
+                    v-model="primary.oAuthEnable"
+                    :disabled="!primary.enableConfiguration"
+                    data-test-id="enable-oauth"
+                    switch
+                  >
+                    <span v-if="primary.oAuthEnable">
+                      {{ $t('global.status.enabled') }}
+                    </span>
+                    <span v-else>{{ $t('global.status.disabled') }}</span>
+                  </b-form-checkbox>
+                </b-form-group>
+              </b-col>
             </b-row>
-            <b-row v-if="primary.enableConfiguration && primary.tlsEnable">
+            <b-row
+              v-if="
+                primary.enableConfiguration &&
+                primary.tlsEnable &&
+                primary.oAuthEnable
+              "
+            >
+              <b-col sm="3">
+                <b-form-group :label="$t('pageSmtp.oAuthAccessToken')">
+                  <b-form-input
+                    v-model="primary.accessToken"
+                    :disabled="!primary.enableConfiguration"
+                    :state="getValidationState($v.primary.accessToken)"
+                    data-test-id="input-access-token"
+                    @input="$v.primary.accessToken.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.primary.accessToken.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row
+              v-if="
+                primary.enableConfiguration &&
+                primary.tlsEnable &&
+                !primary.oAuthEnable
+              "
+            >
               <b-col sm="4">
                 <b-form-group :label="$t('pageSmtp.cacertPEM')">
                   <span v-if="primaryCacertModifiedDate">
@@ -722,8 +771,57 @@
                   </b-form-checkbox>
                 </b-form-group>
               </b-col>
+              <b-col
+                v-if="secondary.enableConfiguration && secondary.tlsEnable"
+                sm="3"
+              >
+                <b-form-group :label="$t('pageSmtp.oAuthEnable')">
+                  <b-form-checkbox
+                    id="secondary-oauth-enable"
+                    v-model="secondary.oAuthEnable"
+                    :disabled="!secondary.enableConfiguration"
+                    data-test-id="enable-oauth"
+                    switch
+                  >
+                    <span v-if="secondary.oAuthEnable">
+                      {{ $t('global.status.enabled') }}
+                    </span>
+                    <span v-else>{{ $t('global.status.disabled') }}</span>
+                  </b-form-checkbox>
+                </b-form-group>
+              </b-col>
             </b-row>
-            <b-row v-if="secondary.enableConfiguration && secondary.tlsEnable">
+            <b-row
+              v-if="
+                secondary.enableConfiguration &&
+                secondary.tlsEnable &&
+                secondary.oAuthEnable
+              "
+            >
+              <b-col sm="3">
+                <b-form-group :label="$t('pageSmtp.oAuthAccessToken')">
+                  <b-form-input
+                    v-model="secondary.accessToken"
+                    :disabled="!secondary.enableConfiguration"
+                    :state="getValidationState($v.secondary.accessToken)"
+                    data-test-id="input-access-token"
+                    @input="$v.secondary.accessToken.$touch()"
+                  />
+                  <b-form-invalid-feedback role="alert">
+                    <template v-if="!$v.secondary.accessToken.required">
+                      {{ $t('global.form.fieldRequired') }}
+                    </template>
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row
+              v-if="
+                secondary.enableConfiguration &&
+                secondary.tlsEnable &&
+                !secondary.oAuthEnable
+              "
+            >
               <b-col sm="4">
                 <b-form-group :label="$t('pageSmtp.cacertPEM')">
                   <span v-if="secondaryCacertModifiedDate">
@@ -878,6 +976,8 @@ export default {
         cacertModifiedDate: '',
         serverKeyModifiedDate: '',
         serverCRTModifiedDate: '',
+        oAuthEnable: false,
+        accessToken: '',
       },
       secondary: {
         serverAddress: '',
@@ -902,6 +1002,8 @@ export default {
         cacertModifiedDate: '',
         serverKeyModifiedDate: '',
         serverCRTModifiedDate: '',
+        oAuthEnable: false,
+        accessToken: '',
       },
       primaryConfiguration: true,
       secondaryConfiguration: true,
@@ -1017,7 +1119,8 @@ export default {
             if (
               primary.enableConfiguration &&
               primary.tlsEnable &&
-              !this.primaryCacertModifiedDate
+              !this.primaryCacertModifiedDate &&
+              !primary.oAuthEnable
             ) {
               return true;
             }
@@ -1028,7 +1131,8 @@ export default {
             if (
               primary.enableConfiguration &&
               primary.tlsEnable &&
-              !this.primaryServerCRTModifiedDate
+              !this.primaryServerCRTModifiedDate &&
+              !primary.oAuthEnable
             ) {
               return true;
             }
@@ -1039,7 +1143,19 @@ export default {
             if (
               primary.enableConfiguration &&
               primary.tlsEnable &&
-              !this.primaryServerKeyModifiedDate
+              !this.primaryServerKeyModifiedDate &&
+              !primary.oAuthEnable
+            ) {
+              return true;
+            }
+          }),
+        },
+        accessToken: {
+          required: requiredIf(function (primary) {
+            if (
+              primary.enableConfiguration &&
+              primary.tlsEnable &&
+              primary.oAuthEnable
             ) {
               return true;
             }
@@ -1125,7 +1241,8 @@ export default {
             if (
               secondary.enableConfiguration &&
               secondary.tlsEnable &&
-              !this.secondaryCacertModifiedDate
+              !this.secondaryCacertModifiedDate &&
+              !secondary.oAuthEnable
             ) {
               return true;
             }
@@ -1136,7 +1253,8 @@ export default {
             if (
               secondary.enableConfiguration &&
               secondary.tlsEnable &&
-              !this.secondaryServerCRTModifiedDate
+              !this.secondaryServerCRTModifiedDate &&
+              !secondary.oAuthEnable
             ) {
               return true;
             }
@@ -1147,7 +1265,19 @@ export default {
             if (
               secondary.enableConfiguration &&
               secondary.tlsEnable &&
-              !this.secondaryServerKeyModifiedDate
+              !this.secondaryServerKeyModifiedDate &&
+              !secondary.oAuthEnable
+            ) {
+              return true;
+            }
+          }),
+        },
+        accessToken: {
+          required: requiredIf(function (secondary) {
+            if (
+              secondary.enableConfiguration &&
+              secondary.tlsEnable &&
+              secondary.oAuthEnable
             ) {
               return true;
             }
@@ -1178,7 +1308,7 @@ export default {
       console.log('recipientEmailAddress', this.primary.recipientEmailAddress);
       let data = {
         Oem: {
-          OpenBmc: {
+          Ami: {
             SMTP: {
               PrimaryConfiguration: { Enable: false },
               SecondaryConfiguration: { Enable: false },
@@ -1206,12 +1336,14 @@ export default {
           Recipient: recipientMail,
           Sender: this.primary.senderEmailAddress,
           TLSEnable: this.primary.tlsEnable,
+          OAUTH: this.primary.tlsEnable ? this.primary.oAuthEnable : false,
+          AccessToken: this.primary.tlsEnable ? this.primary.accessToken : '',
         };
         if (this.primary.authentication) {
           primaryConfig.UserName = this.primary.username;
           primaryConfig.Password = this.primary.password;
         }
-        data.Oem.OpenBmc.SMTP.PrimaryConfiguration = primaryConfig;
+        data.Oem.Ami.SMTP.PrimaryConfiguration = primaryConfig;
       }
       if (this.secondary.enableConfiguration) {
         let recipientMail = [];
@@ -1233,12 +1365,16 @@ export default {
           Recipient: recipientMail,
           Sender: this.secondary.senderEmailAddress,
           TLSEnable: this.secondary.tlsEnable,
+          OAUTH: this.secondary.tlsEnable ? this.secondary.oAuthEnable : false,
+          AccessToken: this.secondary.tlsEnable
+            ? this.secondary.accessToken
+            : '',
         };
         if (this.secondary.authentication) {
           secondaryConfig.UserName = this.secondary.username;
           secondaryConfig.Password = this.secondary.password;
         }
-        data.Oem.OpenBmc.SMTP.SecondaryConfiguration = secondaryConfig;
+        data.Oem.Ami.SMTP.SecondaryConfiguration = secondaryConfig;
       }
 
       this.startLoader();
@@ -1262,6 +1398,7 @@ export default {
         })
         .finally(() => {
           this.$v.primary.$reset();
+          this.$v.secondary.$reset();
           this.endLoader();
         });
     },
@@ -1308,6 +1445,10 @@ export default {
           this.$store.getters['smtp/isPrimaryConfig'].serverKeyModifiedDate;
         this.primary.serverCRTModifiedDate =
           this.$store.getters['smtp/isPrimaryConfig'].serverCrtModifiedDate;
+        this.primary.oAuthEnable =
+          this.$store.getters['smtp/isPrimaryConfig'].oAuthEnable;
+        this.primary.accessToken =
+          this.$store.getters['smtp/isPrimaryConfig'].accessToken;
         this.primary.recipientEmail2 = this.primary.recipientEmailAddress2
           ? true
           : false;
@@ -1366,6 +1507,10 @@ export default {
           this.$store.getters['smtp/isSecondaryConfig'].serverKeyModifiedDate;
         this.secondary.serverCRTModifiedDate =
           this.$store.getters['smtp/isSecondaryConfig'].serverCrtModifiedDate;
+        this.secondary.oAuthEnable =
+          this.$store.getters['smtp/isSecondaryConfig'].oAuthEnable;
+        this.secondary.accessToken =
+          this.$store.getters['smtp/isSecondaryConfig'].accessToken;
         this.secondary.recipientEmail2 = this.secondary.recipientEmailAddress2
           ? true
           : false;

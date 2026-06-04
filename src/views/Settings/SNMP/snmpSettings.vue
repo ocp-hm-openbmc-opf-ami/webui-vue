@@ -10,29 +10,6 @@
       >
     </div>
     <div v-else>
-      <b-row>
-        <b-col class="text-right">
-          <b-button
-            variant="primary"
-            class="mr-2"
-            data-test-id="alertDestination-button-sendTestTrap"
-            :disabled="isButtonDisable"
-            @click="sendTestTrap"
-          >
-            <icon-send />
-            {{ $t('pageSnmp.sendTestTrap') }}
-          </b-button>
-          <b-button
-            variant="primary"
-            data-test-id="snmp-button-addSubscrition"
-            :disabled="isButtonDisable"
-            @click="initModalSNMP(null)"
-          >
-            <icon-add />
-            {{ $t('pageSnmp.addSubscrition') }}
-          </b-button>
-        </b-col>
-      </b-row>
       <!-- Tabs with card integration -->
       <b-card no-body>
         <b-tabs
@@ -41,11 +18,6 @@
           card
           content-class="mt-3"
         >
-          <b-tab :title="$t('pageSnmp.snmpSubscription')">
-            <snmpSubscription
-              :init-modal-s-n-m-p="initModalSNMP"
-            ></snmpSubscription>
-          </b-tab>
           <b-tab :title="$t('pageSnmp.snmpCommunity')">
             <snmpCommunityString></snmpCommunityString>
           </b-tab>
@@ -60,25 +32,19 @@
 <script>
 import PageTitle from '@/components/Global/PageTitle';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
-import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import ModalSnmp from './ModalSnmp.vue';
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
-import IconSend from '@carbon/icons-vue/es/send--alt--filled/20';
 import { privilegesId } from '@/store/modules/GlobalStore';
 import { mapGetters } from 'vuex';
 
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
-import snmpSubscription from './snmpSubscription.vue';
 import snmpCommunityString from './snmpCommunityString.vue';
 export default {
   name: 'SnmpSettings',
   components: {
     PageTitle,
-    IconAdd,
     ModalSnmp,
-    snmpSubscription,
     snmpCommunityString,
-    IconSend,
   },
   mixins: [LoadingBarMixin, LicensecheckMixin, BVToastMixin],
   data() {
@@ -97,7 +63,6 @@ export default {
   created() {
     this.startLoader();
     Promise.all([
-      this.$store.dispatch('snmp/getSubscriptions'),
       this.$store.dispatch('snmp/getBmcUsers'),
       this.$store.dispatch('snmp/getSNMPProtocolStatus'),
     ]).finally(() => {
@@ -108,30 +73,6 @@ export default {
     initModalSNMP(data) {
       this.snmpData = data;
       this.$bvModal.show('modal-snmp');
-    },
-    saveSnmpTrap({ isNewTrap, SnmpTrap }) {
-      this.startLoader();
-      if (isNewTrap) {
-        this.$store
-          .dispatch('snmp/createSubscriptions', SnmpTrap)
-          .then((success) => this.successToast(success))
-          .catch(({ message }) => this.errorToast(message))
-          .finally(() => this.endLoader());
-      } else {
-        this.$store
-          .dispatch('snmp/saveSnmpv3Subscriptions', SnmpTrap)
-          .then((success) => this.successToast(success))
-          .catch(({ message }) => this.errorToast(message))
-          .finally(() => this.endLoader());
-      }
-    },
-    sendTestTrap() {
-      this.startLoader();
-      this.$store
-        .dispatch('snmp/sendTestTrap')
-        .then((success) => this.successToast(success))
-        .catch(({ message }) => this.errorToast(message))
-        .finally(() => this.endLoader());
     },
   },
 };

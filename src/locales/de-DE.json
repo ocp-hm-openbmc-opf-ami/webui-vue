@@ -95,7 +95,8 @@
             "success": "Erfolg",
             "warning": "Warnung",
             "informational": "Hinweis",
-            "unknown": "Unbekannt"
+            "unknown": "Unbekannt",
+            "good": "Gut"
         },
         "table": {
             "collapseTableRow": "Tabellenzeile einklappen",
@@ -138,7 +139,9 @@
         "backupCodeLable": "Bitte speichern Sie Ihre Backup-Codes für den Notfall sicher ab.",
         "tfaWarningMessage": "Warnung: Bevor Sie dieses Fenster schließen, scannen Sie den QR-Code für die Zwei-Faktor-Authentifizierung in Ihrer Authenticator-App und speichern Sie Ihre Backup-Codes für Notfälle. Wenn Ihre Sitzung abläuft, sind diese Backup-Codes erforderlich, um den Zugriff wiederherzustellen.",
         "tfaCloseConfirmTitle": "2FA-Einrichtung abschließen?",
-        "tfaCloseConfirmMessage": "Möchten Sie dieses Fenster wirklich schließen? Bitte bestätigen Sie vorher, dass Sie den QR-Code für die Zwei-Faktor-Authentifizierung gescannt und Ihre Backup-Codes für den Notfall gespeichert haben."
+        "tfaCloseConfirmMessage": "Möchten Sie dieses Fenster wirklich schließen? Bitte bestätigen Sie vorher, dass Sie den QR-Code für die Zwei-Faktor-Authentifizierung gescannt und Ihre Backup-Codes für den Notfall gespeichert haben.",
+        "disableAutoRefresh": "Automatische Aktualisierung deaktivieren",
+        "enableAutoRefresh": "Automatische Aktualisierung aktivieren"
     },
     "appNavigation": {
         "bsod": "@:appPageTitle.bsod",
@@ -185,6 +188,8 @@
         "snmpSettings": "@:appPageTitle.snmp",
         "pef": "Plattform-Ereignisfilter",
         "eventFilter": "Ereignisfilter",
+        "alertPolicy": "Warnrichtlinie",
+        "lanDestinations": "LAN-Ziele",
         "nicInformation": "NIC-Informationen",
         "nvmeInformation": "@:appPageTitle.nvmeInformation",
         "hostSystemDiagnostics": "Host-Systemdiagnose",
@@ -269,6 +274,8 @@
         "smtpSettings": "SMTP-Einstellungen",
         "snmp": "SNMP-Einstellungen",
         "eventFilter": "Ereignisfilter",
+        "alertPolicy": "Warnrichtlinie",
+        "lanDestinations": "LAN-Ziele",
         "nicInformation": "NIC-Informationen",
         "nvmeInformation": "NVMe-Informationen",
         "addc": "ADDC",
@@ -874,7 +881,7 @@
             "sessionType": "Sitzungstyp",
             "userID": "Benutzer-ID",
             "username": "Benutzername",
-            "ipAddress": "IP-Adresse",
+            "ipAddress": "Client-IP",
             "privilege": "Berechtigung",
             "searchSessions": "Sitzungen suchen",
             "mountType": "Mount-Typ",
@@ -2311,6 +2318,8 @@
         "cacertPEM": "Cacert PEM-Zertifikat",
         "serverCRT": "Server-CRT-Zertifikat",
         "serverKey": "Server-Key-Zertifikat",
+        "oAuthEnable": "OAuth aktivieren",
+        "oAuthAccessToken": "OAuth-Zugriffstoken",
         "modal": {
             "subject": "Betreff",
             "mailContent": "E-Mail-Inhalt"
@@ -2341,35 +2350,163 @@
         }
     },
     "pageEventFilter": {
-        "pageDescription": "Wählen Sie die Ereignisse aus, die den Alarm auslösen.",
-        "sectionTitle": "Ereignisfilter",
-        "eventFilterLabel": "Konfigurieren Sie die Details des Alarmziels.",
-        "enableAllEvents": "Alle Ereignisfilter aktivieren/deaktivieren",
-        "temperatureSensorOutOfRange": "Temperatursensor außerhalb des gültigen Bereichs",
-        "fanFailure": "Lüfterausfall",
-        "powerSupplyFailure": "Stromversorgungsfehler",
-        "biosPostErrorCode": "BIOS: POST-Fehlercode",
-        "nodeManagerException": "Node Manager-Ausnahme",
-        "systemRestart": "Systemneustart",
-        "powerUnitRedundancyFailure": "Redundanzfehler der Stromversorgung",
-        "fanRedundancyFailure": "Redundanzfehler des Lüfters",
-        "processorPresence": "Prozessor vorhanden",
-        "voltageSensorOutOfRange": "Spannungssensor außerhalb des gültigen Bereichs",
-        "chassisIntrusion": "Gehäuseeingriff",
-        "memoryError": "Speicherfehler",
-        "frbFailure": "FRB-Fehler",
-        "watchdogTimer": "Watchdog-Timer",
-        "hardDriveFailure": "Festplattenfehler",
-        "inletTemperatureOverheatShutdown": "Überhitzung der Einlasstemperatur – Abschaltung",
-        "powerUnitStatus": "Status der Stromversorgung",
-        "processorDimmThermTrip": "Prozessor DIMM Thermischer Fehler",
-        "destinationType": "Zieltyp",
-        "toast": {
-            "successEventFilterMsg": "Ereignisfilter-Konfiguration erfolgreich aktualisiert.",
-            "errorEventFilterMsg": "Fehler beim Aktualisieren der Ereignisfilter-Konfiguration.",
-            "successDestinationType": "Zieltyp-Konfiguration erfolgreich aktualisiert.",
-            "errorDestinationType": "Fehler beim Aktualisieren der Zieltyp-Konfiguration."
-        }
+      "pageDescription": "Wählen Sie die Ereignisse aus, die den Alarm auslösen.",
+      "retryEvent": "Wiederholungsereignis",
+      "alertLimits": "Alarmlimit",
+      "retryCount": "Limit für Wiederholungsversuche",
+      "timeInterval": "Intervall für Wiederholungsversuche (Sekunden)",
+      "retryLabelSettings": "Konfiguration der Wiederholungsereignisse",
+      "EventFilterTableEntry": "Ereignisfiltereintrag",
+      "Id": "Id",
+      "FilterConfig": "Filterkonfiguration",
+      "EvtFilterAction": "Ereignisfilter-Aktion",
+      "AlertPolicyNum": "Warnrichtliniennummer",
+      "EventSeverity": "Ereignisschweregrad",
+      "GenIDByte1": "Gen ID Byte1",
+      "GenIDByte2": "Gen ID Byte2",
+      "SensorType": "Sensortyp",
+      "SensorName": "Sensorname",
+      "EventTrigger": "Ereignisauslöser",
+      "EventData1OffsetMask": "Ereignisdaten1-Offsetmaske",
+      "EventData1ANDMask": "Ereignisdaten1 UND-Maske",
+      "EventData1Cmp1": "Ereignisdaten1 Vergleich1",
+      "EventData1Cmp2": "Ereignisdaten1 Vergleich2",
+      "EventData2ANDMask": "Ereignisdaten2 UND-Maske",
+      "EventData2Cmp1": "Ereignisdaten2 Vergleich1",
+      "EventData2Cmp2": "Ereignisdaten2 Vergleich2",
+      "EventData3ANDMask": "Ereignisdaten3 UND-Maske",
+      "EventData3Cmp1": "Ereignisdaten3 Vergleich1",
+      "EventData3Cmp2": "Ereignisdaten3 Vergleich2",
+      "actions": "Aktionen",
+      "editEventFilter": "Ereignisfilter bearbeiten",
+      "deleteEventFilter": "Ereignisfilter löschen",
+      "validation": {
+        "EventFilterTableEntry": "Ereignisfiltereintrag muss zwischen 1 und 40 liegen",
+        "FilterConfig": "Filterkonfiguration muss eines der folgenden sein: 0, 64, 128, 192",
+        "EvtFilterAction": "Ereignisfilter-Aktion muss zwischen 0 und 127 liegen",
+        "AlertPolicyNum": "Warnrichtliniennummer muss zwischen 0 und 127 liegen",
+        "GenIDByte1": "Gen ID Byte1 muss zwischen 0 und 255 liegen",
+        "GenIDByte2": "Gen ID Byte2 muss zwischen 0 und 255 liegen",
+        "EventTrigger": "Ereignisauslöser muss zwischen 0 und 255 liegen",
+        "EventData1OffsetMask": "Ereignisdaten1-Offsetmaske muss zwischen 0 und 65535 liegen",
+        "EventData1ANDMask": "Ereignisdaten1 UND-Maske muss zwischen 0 und 255 liegen",
+        "EventData1Cmp1": "Ereignisdaten1 Vergleich1 muss zwischen 0 und 255 liegen",
+        "EventData1Cmp2": "Ereignisdaten1 Vergleich2 muss zwischen 0 und 255 liegen",
+        "EventData2ANDMask": "Ereignisdaten2 UND-Maske muss zwischen 0 und 255 liegen",
+        "EventData2Cmp1": "Ereignisdaten2 Vergleich1 muss zwischen 0 und 255 liegen",
+        "EventData2Cmp2": "Ereignisdaten2 Vergleich2 muss zwischen 0 und 255 liegen",
+        "EventData3ANDMask": "Ereignisdaten3 UND-Maske muss zwischen 0 und 255 liegen",
+        "EventData3Cmp1": "Ereignisdaten3 Vergleich1 muss zwischen 0 und 255 liegen",
+        "EventData3Cmp2": "Ereignisdaten3 Vergleich2 muss zwischen 0 und 255 liegen"
+      },
+      "modal": {
+        "deleteConfirmTitle": "Löschen des Ereignisfilters bestätigen",
+        "deleteConfirmMessage": "Sind Sie sicher, dass Sie den Ereignisfilter mit der ID '{index}' löschen möchten?"
+      },
+      "toast": {
+        "successEventFilterMsg": "Ereignisfilter-Konfiguration erfolgreich aktualisiert.",
+        "errorEventFilterMsg": "Fehler beim Aktualisieren der Ereignisfilter-Konfiguration.",
+        "successDestinationType": "Zieltyp-Konfiguration erfolgreich aktualisiert.",
+        "errorDestinationType": "Fehler beim Aktualisieren der Zieltyp-Konfiguration."
+      },
+      "form": {
+        "maxAlertLimitRequired": "Der maximale Alarmgrenzwert sollte im Bereich von 0 bis 100 liegen.",
+        "maxTimeIntervalRequired": "Das maximale Zeitintervall sollte im Bereich von 0 bis 3600 Sekunden liegen.",
+        "maxRetryCountRequired": "Die maximale Wiederholungsanzahl sollte im Bereich von 0 bis 10 liegen."
+      }
+    },
+    "pageLanDestinations": {
+      "pageDescription": "Verwalten Sie Ereignisziele und SNMP-Konfigurationen für Systemwarnungen.",
+      "activeSlots": "Aktive Steckplätze",
+      "active": "Aktiv",
+      "available": "Verfügbar",
+      "selectedInterface": "Ausgewählte Schnittstelle",
+      "lastAlert": "Letzte Warnung",
+      "none": "Keine (letzte 24 Std.)",
+      "lastTime": "Letzte 24 Std.",
+      "ethernetInterface": "Ethernet-Schnittstelle",
+      "linkUp": "1GbE / Verbindung aktiv",
+      "index": "Index",
+      "Id": "ID",
+      "status": "Status",
+      "destinationUrl": "Ziel-URL",
+      "destination": "Ziel",
+      "username": "Benutzername",
+      "protocol": "Protokoll",
+      "health": "Status",
+      "actions": "Aktionen",
+      "addSubscription": "Abonnement hinzufügen",
+      "editSubscription": "Abonnement bearbeiten",
+      "deleteSubscription": "Abonnement löschen",
+      "generalConfiguration": "Allgemeine Konfiguration",
+      "oemDetails": "OEM-Details (AMI)",
+      "name": "Name",
+      "namePlaceholder": "SNMP-Trap-Ziel 0",
+      "destinationPlaceholder": "snmp://10.0.96.127:162",
+      "contextPlaceholder": "Kontext eingeben (optional)",
+      "contextString": "Kontextzeichenfolge",
+      "deliveryRetryPolicy": "Zustellungswiederholungsrichtlinie",
+      "sendHeartbeat": "Heartbeat senden",
+      "sendHeartbeatDescription": "Periodisches Keep-Alive-Signal",
+      "heartbeatInterval": "Heartbeat-Intervall (Sekunden)",
+      "seconds": "s",
+      "communityString": "Community-Zeichenfolge",
+      "destinationType": "Zieltyp",
+      "destinationIndex": "Zielindex",
+      "sendTestAlert": "Testalarm senden",
+      "modal": {
+        "deleteConfirmTitle": "Abonnement löschen bestätigen",
+        "deleteConfirmMessage": "Möchten Sie das Abonnement für das Ziel '{destination}' wirklich löschen?"
+      },
+      "toast": {
+        "successCreateSubscription": "Abonnement erfolgreich erstellt.",
+        "errorCreateSubscription": "Fehler beim Erstellen des Abonnements.",
+        "successUpdateSubscription": "Abonnement erfolgreich aktualisiert.",
+        "errorUpdateSubscription": "Fehler beim Aktualisieren des Abonnements.",
+        "successDeleteSubscription": "Abonnement erfolgreich gelöscht.",
+        "errorDeleteSubscription": "Fehler beim Löschen des Abonnements.",
+        "errorLoadingData": "Fehler beim Laden der Abonnementdaten.",
+        "errorEmptyDestination": "Ziel-URL erforderlich.",
+        "errorEmptyCommunityString": "Community-Zeichenfolge erforderlich.",
+        "sendTestAlertSuccess": "Testbenachrichtigung erfolgreich gesendet.",
+        "sendTestAlertError": "Fehler beim Senden der Testbenachrichtigung."
+      }
+    },
+    "pageAlertPolicy": {
+      "pageDescription": "Verwalten Sie PEF-Warnrichtlinieneinträge für die Systemwarnungskonfiguration.",
+      "activeSlots": "Aktive Richtlinien",
+      "available": "Verfügbar",
+      "totalChannels": "Gesamtkanäle",
+      "configured": "Konfiguriert",
+      "index": "Index",
+      "status": "Status",
+      "channel": "Kanal",
+      "channelNo": "Kanalnummer",
+      "destinationSel": "Zielauswahl",
+      "enableAlert": "Warnung aktivieren",
+      "policyAction": "Richtlinienaktion",
+      "actions": "Aktionen",
+      "addPolicy": "Warnrichtlinie hinzufügen",
+      "editPolicy": "Warnrichtlinie bearbeiten",
+      "deletePolicy": "Warnrichtlinie löschen",
+      "policyConfiguration": "Richtlinienkonfiguration",
+      "alertPolicyGroupNum": "Nummer der Warnrichtliniengruppe",
+      "Id": "ID",
+      "modal": {
+        "deleteConfirmTitle": "Bestätigen Sie das Löschen der Benachrichtigungsrichtlinie",
+        "deleteConfirmMessage": "Möchten Sie die Benachrichtigungsrichtlinie mit der ID '{index}' wirklich löschen?"
+      },
+      "toast": {
+        "successCreatePolicy": "Benachrichtigungsrichtlinie erfolgreich erstellt.",
+        "errorCreatePolicy": "Fehler beim Erstellen der Benachrichtigungsrichtlinie.",
+        "successUpdatePolicy": "Benachrichtigungsrichtlinie erfolgreich aktualisiert.",
+        "errorUpdatePolicy": "Fehler beim Aktualisieren der Benachrichtigungsrichtlinie.",
+        "successDeletePolicy": "Benachrichtigungsrichtlinie erfolgreich gelöscht.",
+        "errorDeletePolicy": "Fehler beim Löschen der Benachrichtigungsrichtlinie.",
+        "errorLoadingData": "Fehler beim Laden der Daten der Benachrichtigungsrichtlinie.",
+        "errorEmptyAlertGroupNum": "Die Nummer der Benachrichtigungsrichtliniengruppe ist erforderlich.",
+        "errorEmptyChannelNo": "Die Kanalnummer ist erforderlich."
+      }
     },
     "pagePageNotFound": {
         "description": "Die angeforderte Ressource konnte nicht gefunden werden."
@@ -2999,6 +3136,85 @@
         "supportMixedSizeWithinArrayHDD": "Unterstützung für unterschiedliche HDD-Größen im Array",
         "supportMixedSizeWithinArrayNVMe": "Unterstützung für unterschiedliche NVMe-Größen im Array",
         "supportMixedSizeWithinArraySSD": "Unterstützung für unterschiedliche SSD-Größen im Array",
+        "chargingStatusOptions": {
+            "unknown": "Unbekannt",
+            "failed": "Fehlgeschlagen",
+            "notPresent": "Nicht vorhanden",
+            "charging": "Wird geladen",
+            "charged": "Geladen"
+        },
+        "bbuStatusMsccOptions": {
+            "unknown": "Unbekannt",
+            "uninitialized": "Nicht initialisiert",
+            "ready": "Bereit",
+            "learningCycle": "Lernzyklus",
+            "subsystemFailed": "Subsystem fehlgeschlagen",
+            "aboveMaxTemperature": "Über Maximaltemperatur",
+            "aboveWarningTemperature": "Über Warnungstemperatur",
+            "overVoltage": "Überspannung",
+            "aboveMaxChargingCurrent": "Über maximalen Ladestrom",
+            "learningCyclePassed": "Lernzyklus bestanden",
+            "learningCycleFailed": "Lernzyklus fehlgeschlagen",
+            "supercapacitorFailed": "Superkondensator fehlgeschlagen",
+            "supercapacitorNearEOL": "Superkondensator nahe Lebensende",
+            "supercapacitorPassedEOL": "Superkondensator Lebensende überschritten",
+            "supercapacitorMissing": "Superkondensator fehlt"
+        },
+        "bbuTypeOptions": {
+            "unknown": "Unbekannt",
+            "none": "Keine",
+            "capacitor": "Kondensator",
+            "battery": "Batterie",
+            "smartBattery": "Intelligente Batterie",
+            "zcrLegacy": "ZCR-Vergangenheit"
+        },
+        "bbuStatusBrcmOptions": {
+            "none": "Keine",
+            "cacheOffloadNotRead": "Cache-Auslagerung nicht gelesen",
+            "packMissing": "Paket fehlt",
+            "voltageLow": "Spannung niedrig",
+            "temperatureHigh": "Temperatur hoch",
+            "chargeActive": "Laden aktiv",
+            "dischargeActive": "Entladen aktiv",
+            "learnCycleRequested": "Lernzyklus angefordert",
+            "learnCycleActive": "Lernzyklus aktiv",
+            "learnCycleFailed": "Lernzyklus fehlgeschlagen",
+            "learnCycleTimeout": "Lernzyklus Zeitüberschreitung",
+            "i2cErrorsDetected": "I2C-Fehler erkannt",
+            "replacePack": "Paket ersetzen",
+            "remainingCapacityLow": "Restkapazität niedrig",
+            "periodicLearnRequired": "Periodischer Lernzyklus erforderlich",
+            "nonTransparentLearn": "Nicht-transparenter Lernzyklus",
+            "noSpace": "Kein Speicherplatz",
+            "predictiveFailure": "Vorhergesagter Fehler",
+            "microcodeUpdateReqd": "Mikrocode-Update erforderlich",
+            "cableFailure": "Kabelausfall",
+            "transparentLearn": "Transparenter Lernzyklus",
+            "premiumFeatureReqd": "Premium-Funktion erforderlich",
+            "cacheVaultDisabled": "Cache-Schutz deaktiviert",
+            "batteryCableFailure": "Batteriekabelausfall",
+            "good": "Gut"
+        },
+        "bbuEnergyPackSubTypeOptions": {
+            "none": "Keine",
+            "broadcomSuperCapFBU345": "Broadcom Superkondensator FBU345",
+            "broadcomSuperCapFBU03": "Broadcom Superkondensator FBU03",
+            "oemBattery": "OEM-Batterie"
+        },
+        "bbuEnergyPackTypeOptions": {
+            "noPack": "Kein Paket",
+            "superCap": "Superkondensator",
+            "battery": "Batterie"
+        },
+        "inconsistencyRepairPolicyOptions": {
+            "unknown": "Unbekannt",
+            "enable": "Aktivieren",
+            "disable": "Deaktivieren"
+        },
+        "spareActivationModeOptions": {
+            "unknown": "Unbekannt",
+            "failure": "Fehler"
+        },
         "modal": {
             "dropdownPropertiesBtn":"Eigenschaften",
             "dropdownManagementBtn": "Verwaltung",
@@ -3253,8 +3469,8 @@
             "ssdPowerOnHours": "SSD-Betriebsstunden",
             "spareType": "Hot-Spare-Typ",
             "state": {
-                "hotspare": "Heißes Ersatzteil",
-                "unknownState": "Unbekannt",
+                "hotSpare": "Heißes Ersatzteil",
+                "unknown": "Unbekannt",
                 "copyback": "Zurückkopie",
                 "unconfiguredGood": "Nicht konfigurierter guter Zustand",
                 "unconfiguredBad": "Nicht konfigurierter schlechter Zustand",                
@@ -3267,8 +3483,63 @@
                 "shieldUnconfigured": "Geschütztes unkonfiguriertes Laufwerk",
                 "shieldHotSpare": "Geschütztes Hot Spare-Laufwerk",
                 "shieldConfigured": "Geschütztes konfiguriertes Laufwerk",
-                "unconfigured": "Nicht konfiguriert"
+                "unconfigured": "Nicht konfiguriert",
+                "jbod": "JBOD",
+                "raidConfigured": "RAID konfiguriert",
+                "raidHotSpare": "RAID Hot Spare",
+                "host": "Host",
+                "advHost": "ADV-Host",
+                "unusable": "Unbenutzbar",
+                "shieldMask": "Schutzmaske",
+                "sanitizeMask": "Bereinigungsmaske",
+                "degradedMask": "Degradierte Maske",
+                "formatMask": "Formatierungsmaske"
             }
+        },
+        "powerStateOptions": {
+            "active": "Aktiv",
+            "stop": "Stopp",
+            "transitioning": "Übergang"
+        },
+        "auOperationOptions": {
+            "none": "Keine",
+            "rebuild": "Wiederaufbau",
+            "patrolRead": "Patrollesen",
+            "clear": "Löschen",
+            "copyback": "Zurückkopieren",
+            "erase": "Löschen",
+            "sanitize": "Bereinigen",
+            "nvmeReconfigure": "NVMe Neukonfiguration"
+        },
+        "auStatusOptions": {
+            "unknown": "Unbekannt",
+            "unusable": "Unbenutzbar",
+            "missing": "Fehlt",
+            "good": "Gut",
+            "bad": "Schlecht",
+            "raidRebuild": "RAID Wiederaufbau",
+            "raidCopyback": "RAID Zurückkopieren",
+            "raidOffline": "RAID Offline",
+            "raidFailed": "RAID Fehlgeschlagen",
+            "raidOnline": "RAID Online"
+        },
+        "spareTypeOptions": {
+            "none": "Keine",
+            "global": "Global",
+            "dedicated": "Dediziert"
+        },
+        "usageOptions": {
+            "unknown": "Unbekannt",
+            "unassigned": "Nicht zugewiesen",
+            "data": "Daten",
+            "autoReplaceStandbySpare": "Automatischer Ersatz-Standby-Spare",
+            "shareableStandbySpare": "Gemeinsamer Standby-Spare",
+            "shareableActiveSpare": "Gemeinsamer aktiver Spare",
+            "transientData": "Vorübergehende Daten",
+            "luCacheData": "LU Cache-Daten",
+            "hba": "HBA",
+            "transientUnassigned": "Vorübergehend nicht zugewiesen",
+            "unconfigurable": "Nicht konfigurierbar"
         },
         "modal": {
             "sourcePDriveId": "Geräte-ID",
@@ -3453,8 +3724,9 @@
             "unprotectedWriteBack": "Ungeschütztes Write Back",
             "writeThrough": "Write Through",
             "alwaysWriteBack": "Immer Write Back",
-            "writeBackWithBBU": "Write Back mit BBU",
-            "writeCacheAlways": "Schreibcache immer aktivieren"
+            "writeBackWithBBUCorrupted": "Schreibe zurück auch bei beschädigtem BBU",
+            "writeCacheAlways": "Schreibcache immer aktivieren",
+            "writeBack": "Write Back"
         },
         "ioPolicyOptions": {
             "directIO": "DirectIO",
@@ -3471,13 +3743,118 @@
             "disable": "Deaktiviert"
         },
         "diskWriteCachePolicyOptions": {
-            "Unchanged": "Unverändert",
-            "Enable": "Aktiviert",
-            "Disable": "Deaktiviert"
+            "unchanged": "Unverändert",
+            "enable": "Aktiviert",
+            "disable": "Deaktiviert"
         },
         "initializationOptions": {
             "initializationFullMode":"Vollständige Initialisierung",
             "initializationFastMode":"Schnelle Initialisierung"
+        },
+        "statusInfoOptions": {
+            "offline": "Offline",
+            "degraded": "Degradiert",
+            "rebuild": "Wiederaufbau",
+            "optimal": "Optimal",
+            "partiallyDegraded": "Teilweise degradiert",
+            "unknown": "Unbekannt",
+            "ok": "OK",
+            "failed": "Fehlgeschlagen",
+            "notConfigured": "Nicht konfiguriert",
+            "interimRecovery": "Zwischenzeitliche Wiederherstellung",
+            "readyForRecovery": "Bereit zur Wiederherstellung",
+            "recovering": "Wiederherstellung läuft",
+            "wrongDriveReplaced": "Falsches Laufwerk ersetzt",
+            "driveImproperlyConnected": "Laufwerk falsch verbunden",
+            "hardwareIsOverheating": "Hardware überhitzt",
+            "hardwareHasOverheated": "Hardware ist überhitzt",
+            "expanding": "Erweitern",
+            "notYetAvailable": "Noch nicht verfügbar",
+            "queuedForExpansion": "Zur Erweiterung eingereiht",
+            "disabledFromSCSIIdConflict": "Deaktiviert durch SCSI-ID-Konflikt",
+            "ejected": "Ausgeworfen",
+            "eraseInProgress": "Löschen läuft",
+            "unused": "Unbenutzt",
+            "readyToPerformPredictiveSpareRebuild": "Bereit für prädiktiven Spare-Wiederaufbau",
+            "rpiInProgress": "RPI läuft",
+            "rpiQueued": "RPI eingereiht",
+            "encryptedVolumeWithoutKey": "Verschlüsseltes Volume ohne Schlüssel",
+            "plainTextVolumeRejectedInEncryptingMode": "Klartext-Volume im Verschlüsselungsmodus abgelehnt",
+            "encryptionMigration": "Verschlüsselungsmigration",
+            "encryptedVolumeRekeying": "Verschlüsseltes Volume Schlüsselwechsel",
+            "encryptedVolumeEncryptionOff": "Verschlüsselung des Volumes ausgeschaltet",
+            "volumeEncodeRequested": "Volume-Codierung angefordert",
+            "encryptedVolumeRekeyRequested": "Schlüsselwechsel für verschlüsseltes Volume angefordert",
+            "unsupportedOnThisController": "Auf diesem Controller nicht unterstützt",
+            "hasLockedSED": "Hat gesperrtes SED",
+            "sedQualificationOngoing": "SED-Qualifikation läuft",
+            "sedQualificationFailed": "SED-Qualifikation fehlgeschlagen",
+            "sedVolumeDataLocked": "SED-Volume-Daten gesperrt"
+        },
+        "badBlockStatusOptions": {
+            "empty": "Leer",
+            "notEmpty": "Nicht leer"
+        },
+        "operationOptions": {
+            "normal": "Normal",
+            "rebuild": "Wiederaufbau",
+            "initializeInProgress": "Initialisierung läuft",
+            "consistencyCheck": "Konsistenzprüfung",
+            "none": "Keine",
+            "backgroundInitialization": "Hintergrundinitialisierung",
+            "foregroundInitialization": "Vordergrundinitialisierung",
+            "onlineCapacityExpansion": "Online-Kapazitätserweiterung",
+            "secureErase": "Sicheres Löschen"
+        },
+        "accessPolicyStatusOptions": {
+            "ok": "OK",
+            "preservedCache": "Cache erhalten",
+            "trialKeyExpired": "Testschlüssel abgelaufen",
+            "ldOffline": "Logisches Gerät offline",
+            "ctrlSafeMode": "Controller-Sicherheitsmodus"
+        },
+        "encryptionTypeOptions": {
+            "none": "Keine",
+            "sed": "SED"
+        },
+        "powerSavingPolicyOptions": {
+            "none": "Keine",
+            "controllerDefault": "Controller-Standard",
+            "t10": "T10"
+        },
+        "ldTypeOptions": {
+            "unknown": "Unbekannt",
+            "data": "Daten",
+            "cache": "Cache",
+            "splitMirrorSetPrimary": "Gesplittetes Spiegelset Primär",
+            "splitMirrorSetBackup": "Gesplittetes Spiegelset Backup",
+            "splitMirrorSetBackupOrphan": "Gesplittetes Spiegelset verwaistes Backup"
+        },
+        "acceleratorTypeOptions": {
+            "unknown": "Unbekannt",
+            "none": "Keine",
+            "controllerCache": "Controller-Cache",
+            "ioBypass": "IO-Bypass",
+            "luCache": "LU-Cache"
+        },
+        "cacheLineSizeOptions": {
+            "unknown": "Unbekannt",
+            "lineSize64kb": "Zeilengröße 64KB",
+            "lineSize128kb": "Zeilengröße 128KB",
+            "lineSize256kb": "Zeilengröße 256KB"
+        },
+        "luCacheAlgorithmOptions": {
+            "unknown": "Unbekannt",
+            "hashingLRU": "Hashing LRU",
+            "hashingLRU2": "Hashing LRU2",
+            "regional": "Regional",
+            "simpleLRU": "Einfaches LRU"
+        },
+        "cachePolicyOptions": {
+            "unknown": "Unbekannt",
+            "readOnly": "Nur Lesen",
+            "writeThrough": "Write-Through",
+            "writeBack": "Write-Back"
         },
         "table": {
             "id": "ID",
@@ -3517,7 +3894,15 @@
             "state": "Zustand",
             "diskWriteCachePolicy": "Richtlinie für Festplatten-Schreibcache",
             "operationProgressPercent": "Vorgangsfortschritt in Prozent",
-            "operationElapsedSeconds": "Vorgang in Sekunden"
+            "operationElapsedSeconds": "Vorgang in Sekunden",
+            "arrayRef": "Array-Referenz",
+            "size": "Größe",
+            "fwState": "Firmware-Status",
+            "numDrives": "Anzahl der Laufwerke",
+            "PD": "Physisches Laufwerk",
+            "ref": "Referenz",
+            "seqNum": "Sequenznummer",
+            "slot": "Steckplatz"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "Kein physisches Gerät zur Konfiguration verfügbar!",

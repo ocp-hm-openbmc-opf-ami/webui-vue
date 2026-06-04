@@ -304,6 +304,7 @@ export default {
   created() {
     this.$store.dispatch('global/getSystemInfo').then(() => {
       this.systemInfoLoaded = true;
+      this.resetSlotArray();
       this.getVirtualMedia();
       this.$root.$on('stop-vmedia', () => {
         this.proxyDevices.forEach((dev) => this.stopVM(dev));
@@ -311,7 +312,11 @@ export default {
     });
   },
   methods: {
-    ...mapMutations('virtualMedia', ['setSlot0File', 'setSlot1File']),
+    ...mapMutations('virtualMedia', [
+      'setSlot0File',
+      'setSlot1File',
+      'resetSlotArray',
+    ]),
     getVirtualMedia() {
       this.startLoader();
       this.$store

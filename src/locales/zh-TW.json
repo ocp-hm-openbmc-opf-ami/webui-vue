@@ -95,7 +95,8 @@
             "success": "成功",
             "warning": "警告",
             "informational": "資訊",
-            "unknown": "未知"
+            "unknown": "未知",
+            "good": "良好"
         },
         "table": {
             "collapseTableRow": "摺疊表格欄位",
@@ -138,7 +139,9 @@
         "backupCodeLable":"請儲存您的備份代碼以備緊急情況使用。",
         "tfaWarningMessage":"警告：關閉此視窗前，請先在身分驗證器應用程式中掃描兩步驟驗證的 QR 碼，並儲存備份代碼以備緊急使用。若工作階段過期，必須使用這些備份代碼才能恢復存取。",
         "tfaCloseConfirmTitle":"完成 2FA 設定？",
-        "tfaCloseConfirmMessage":"您確定要關閉嗎？關閉前，請確認您已掃描兩步驟驗證 QR 碼，並已儲存備份代碼以備緊急使用。"
+        "tfaCloseConfirmMessage":"您確定要關閉嗎？關閉前，請確認您已掃描兩步驟驗證 QR 碼，並已儲存備份代碼以備緊急使用。",
+        "disableAutoRefresh": "停用自動更新",
+        "enableAutoRefresh": "啟用自動更新"
     },
     "appNavigation": {
         "bsod": "@:appPageTitle.bsod",
@@ -185,6 +188,8 @@
         "snmpSettings": "SNMP 設定",
         "pef": "平台事件過濾器",
         "eventFilter": "事件過濾器",
+        "alertPolicy": "警報政策",
+        "lanDestinations": "LAN 目標",
         "nicInformation": "NIC 資訊",
         "nvmeInformation": "@:appPageTitle.nvmeInformation",
         "hostSystemDiagnostics": "主系統診斷",
@@ -271,6 +276,8 @@
         "smtpSettings": "SMTP 設定",
         "snmp": "SNMP 設定",
         "eventFilter": "事件過濾器",
+        "alertPolicy": "警報政策",
+        "lanDestinations": "LAN 目標",
         "nicInformation": "NIC 資訊",
         "nvmeInformation": "NVMe 資訊",
         "addc": "ADDC",
@@ -874,7 +881,7 @@
             "sessionType": "會話類型",
             "userID": "使用者 ID",
             "username": "使用者名稱",
-            "ipAddress": "IP 位址",
+            "ipAddress": "客戶端 IP",
             "privilege": "特權",
             "searchSessions": "搜尋會話們",
             "mountType": "安裝類型",
@@ -2309,6 +2316,8 @@
         "cacertPEM": "Cacert PEM 證書",
         "serverCRT": "伺服器CRT證書",
         "serverKey": "伺服器密鑰證書",
+        "oAuthEnable": "啟用 OAuth",
+        "oAuthAccessToken": "OAuth 访问令牌",
         "modal": {
             "subject": "主題",
             "mailContent": "郵件內容"
@@ -2340,33 +2349,161 @@
     },
     "pageEventFilter": {
         "pageDescription": "選擇將觸發警告的事件。",
-        "sectionTitle": "事件過濾器",
-        "eventFilterLabel": "設定警告接收者內容。",
-        "enableAllEvents": "啟用/停用所有事件過濾器",
-        "temperatureSensorOutOfRange": "溫度感測超過範圍",
-        "fanFailure": "風扇錯誤",
-        "powerSupplyFailure": "電源供應錯誤",
-        "biosPostErrorCode": "BIOS: Post 錯誤碼",
-        "nodeManagerException": "節點管理者例外",
-        "systemRestart": "系統重啟",
-        "powerUnitRedundancyFailure": "電源單位過多錯誤",
-        "fanRedundancyFailure": "風扇過多錯誤",
-        "processorPresence": "處理器存在",
-        "voltageSensorOutOfRange": "容量感測超過範圍",
-        "chassisIntrusion": "機箱入侵",
-        "memoryError": "記憶體錯誤",
-        "frbFailure": "FRB 錯誤",
-        "watchdogTimer": "看門狗計時器",
-        "hardDriveFailure": "硬體驅動錯誤",
-        "inletTemperatureOverheatShutdown": "Inlet 溫度過熱關機",
-        "powerUnitStatus": "電源單元狀態",
-        "processorDimmThermTrip": "處理器 DIMM Therm Trip",
-        "destinationType":"目的地類型",
+        "retryEvent":"重試事件",
+        "alertLimits":"警報限制",
+        "retryCount":"重試次數限制",
+        "timeInterval":"重試時間間隔（秒）",
+        "retryLabelSettings":"事件重試配置",
+        "EventFilterTableEntry": "事件篩選器表項目",
+        "Id": "Id",
+        "FilterConfig": "篩選器配置",
+        "EvtFilterAction": "事件篩選器操作",
+        "AlertPolicyNum": "警報策略編號",
+        "EventSeverity": "事件嚴重性",
+        "GenIDByte1": "Gen ID 位元組 1",
+        "GenIDByte2": "Gen ID 位元組 2",
+        "SensorType": "感測器類型",
+        "SensorName": "感測器名稱",
+        "EventTrigger": "事件觸發器",
+        "EventData1OffsetMask": "事件資料 1 偏移量遮罩",
+        "EventData1ANDMask": "事件資料 1 AND 遮罩",
+        "EventData1Cmp1": "事件資料 1 比較 1",
+        "EventData1Cmp2": "事件資料 1 比較 2",
+        "EventData2ANDMask": "事件資料 2 AND 遮罩",
+        "EventData2Cmp1": "事件資料 2 比較 1",
+        "EventData2Cmp2": "事件資料 2 比較 2",
+        "EventData3ANDMask": "事件資料 3 AND 遮罩",
+        "EventData3Cmp1": "事件資料 3 比較 1",
+        "EventData3Cmp2": "事件資料 3 比較 2",
+        "actions": "操作",
+        "editEventFilter": "編輯事件篩選器",
+        "deleteEventFilter": "刪除事件篩選器",
+        "validation": {
+            "EventFilterTableEntry": "事件篩選器表項目必須介於 1 到 40 之間",
+            "FilterConfig": "篩選器配置必須是以下之一：0、64、128、192",
+            "EvtFilterAction": "事件篩選器操作必須介於 0 到 127 之間",
+            "AlertPolicyNum": "警報策略編號必須介於 0 到 127 之間",
+            "GenIDByte1": "Gen ID 位元組 1 必須介於 0 到 255 之間",
+            "GenIDByte2": "Gen ID 位元組 2 必須介於 0 到 255 之間",
+            "EventTrigger": "事件觸發器必須介於 0 到 255 之間",
+            "EventData1OffsetMask": "事件資料 1 偏移量遮罩必須介於 0 到 65535 之間",
+            "EventData1ANDMask": "事件資料 1 AND 遮罩必須介於 0 到 255 之間",
+            "EventData1Cmp1": "事件資料 1 比較 1 必須介於 0 到 255 之間",
+            "EventData1Cmp2": "事件資料 1 比較 2 必須介於 0 到 255 之間",
+            "EventData2ANDMask": "事件資料 2 AND 遮罩必須介於 0 到 255 之間",
+            "EventData2Cmp1": "事件資料 2 比較 1 必須介於 0 到 255 之間",
+            "EventData2Cmp2": "事件資料 2 比較 2 必須介於 0 到 255 之間",
+            "EventData3ANDMask": "事件資料 3 AND 遮罩必須介於 0 到 255 之間",
+            "EventData3Cmp1": "事件資料 3 比較 1 必須介於 0 到 255 之間",
+            "EventData3Cmp2": "事件資料 3 比較 2 必須介於 0 到 255 之間"
+        },
+        "modal": {
+            "deleteConfirmTitle": "確認刪除事件過濾器",
+            "deleteConfirmMessage": "您確定要刪除 Id 為 '{index}' 的事件過濾器嗎？"
+        },
         "toast": {
             "successEventFilterMsg": "事件過濾器設定成功。",
             "errorEventFilterMsg": "事件過濾器設定發生錯誤。",
             "successDestinationType": "目標類型配置已成功更新。",
             "errorDestinationType": "更新目標類型配置時發生錯誤。"
+        },
+        "form":{
+            "maxAlertLimitRequired": "最大警報限制值應在 0 到 100 之間",
+            "maxTimeIntervalRequired": "最大時間間隔應在 0 到 3600 秒之間。",
+            "maxRetryCountRequired": "最大重試次數應在 0 到 10 之間。"
+        }
+    },
+    "pageLanDestinations": {
+        "pageDescription": "管理事件目標和 SNMP 配置以進行系統警報。",
+        "activeSlots": "活動插槽",
+        "active": "活動",
+        "available": "可用",
+        "selectedInterface": "選定的介面",
+        "lastAlert": "上次警報",
+        "none": "無（過去 24 小時）",
+        "lastTime": "過去 24 小時",
+        "ethernetInterface": "乙太網介面",
+        "linkUp": "1GbE / 連結開啟",
+        "index": "索引",
+        "Id": "ID",
+        "status": "狀態",
+        "destinationUrl": "目標 URL",
+        "destination": "目標",
+        "username": "使用者名稱",
+        "protocol": "協定",
+        "health": "健康狀態",
+        "actions": "操作",
+        "addSubscription": "新增訂閱",
+        "editSubscription": "編輯訂閱",
+        "deleteSubscription": "刪除訂閱",
+        "generalConfiguration": "一般配置",
+        "oemDetails": "OEM 詳細資訊（AMI）",
+        "name": "名稱",
+        "namePlaceholder": "SNMP Trap 目標 0",
+        "destinationPlaceholder": "snmp://10.0.96.127:162",
+        "contextPlaceholder": "輸入內容（可選）",
+        "contextString": "內容字符串",
+        "deliveryRetryPolicy": "配送重試政策",
+        "sendHeartbeat": "發送心跳信號",
+        "sendHeartbeatDescription": "定期保活信號",
+        "heartbeatInterval": "心跳間隔（秒）",
+        "seconds": "秒",
+        "communityString": "社區字串",
+        "destinationType": "目標類型",
+        "destinationIndex": "目標索引",        
+        "sendTestAlert":"發送測試警報",
+        "modal": {
+            "deleteConfirmTitle": "確認刪除訂閱",
+            "deleteConfirmMessage": "您確定要刪除目標「{destination}」的訂閱嗎？"
+        },
+        "toast": {
+            "successCreateSubscription": "成功建立訂閱。",
+            "errorCreateSubscription": "建立訂閱時發生錯誤。",
+            "successUpdateSubscription": "成功更新訂閱。",
+            "errorUpdateSubscription": "更新訂閱時發生錯誤。",
+            "successDeleteSubscription": "成功刪除訂閱。",
+            "errorDeleteSubscription": "刪除訂閱時發生錯誤。",
+            "errorLoadingData": "載入訂閱資料時發生錯誤。",
+            "errorEmptyDestination": "需要目標 URL。",
+            "errorEmptyCommunityString": "需要社區字串。",
+            "sendTestAlertSuccess": "測試警報發送成功。",
+            "sendTestAlertError": "發送測試警報時發生錯誤。"
+        }
+    },
+    "pageAlertPolicy": {
+        "pageDescription": "管理 PEF 警報政策條目以進行系統警報配置。",
+        "activeSlots": "活動政策",
+        "available": "可用",
+        "totalChannels": "總頻道數",
+        "configured": "已配置",
+        "index": "索引",
+        "status": "狀態",
+        "channel": "頻道",
+        "channelNo": "頻道編號",
+        "destinationSel": "目標選擇",
+        "enableAlert": "啟用警報",
+        "policyAction": "政策操作",
+        "actions": "操作",
+        "addPolicy": "新增警報政策",
+        "editPolicy": "編輯警報政策",
+        "deletePolicy": "刪除警報政策",
+        "policyConfiguration": "政策配置",
+        "alertPolicyGroupNum": "警報政策群組編號",
+        "Id": "ID",
+        "modal": {
+            "deleteConfirmTitle": "確認刪除警報政策",
+            "deleteConfirmMessage": "您確定要刪除 ID 為「{index}」的警報政策嗎？"
+        },
+        "toast": {
+            "successCreatePolicy": "成功建立警報政策。",
+            "errorCreatePolicy": "建立警報政策時發生錯誤。",
+            "successUpdatePolicy": "成功更新警報政策。",
+            "errorUpdatePolicy": "更新警報政策時發生錯誤。",
+            "successDeletePolicy": "成功刪除警報政策。",
+            "errorDeletePolicy": "刪除警報政策時發生錯誤。",
+            "errorLoadingData": "載入警報政策資料時發生錯誤。",
+            "errorEmptyAlertGroupNum": "需要警報政策群組編號。",
+            "errorEmptyChannelNo": "需要頻道編號。"
         }
     },
     "pagePageNotFound": {
@@ -2997,6 +3134,85 @@
         "supportMixedSizeWithinArrayHDD": "支援不同容量 HDD 組陣列",
         "supportMixedSizeWithinArrayNVMe": "支援不同容量 NVMe 組陣列",
         "supportMixedSizeWithinArraySSD": "支援不同容量 SSD 組陣列",
+        "chargingStatusOptions": {
+            "unknown": "未知",
+            "failed": "失敗",
+            "notPresent": "不存在",
+            "charging": "充電中",
+            "charged": "已充電"
+        },
+        "bbuStatusMsccOptions": {
+            "unknown": "未知",
+            "uninitialized": "未初始化",
+            "ready": "就緒",
+            "learningCycle": "學習循環",
+            "subsystemFailed": "子系統失敗",
+            "aboveMaxTemperature": "超過最高溫度",
+            "aboveWarningTemperature": "超過警告溫度",
+            "overVoltage": "過電壓",
+            "aboveMaxChargingCurrent": "超過最大充電電流",
+            "learningCyclePassed": "學習循環通過",
+            "learningCycleFailed": "學習循環失敗",
+            "supercapacitorFailed": "超級電容失敗",
+            "supercapacitorNearEOL": "超級電容接近壽命終點",
+            "supercapacitorPassedEOL": "超級電容壽命已過",
+            "supercapacitorMissing": "超級電容缺失"
+        },
+        "bbuTypeOptions": {
+            "unknown": "未知",
+            "none": "無",
+            "capacitor": "電容",
+            "battery": "電池",
+            "smartBattery": "智慧電池",
+            "zcrLegacy": "ZCR 舊版"
+        },
+        "bbuStatusBrcmOptions": {
+            "none": "無",
+            "cacheOffloadNotRead": "快取卸載未讀取",
+            "packMissing": "模組缺失",
+            "voltageLow": "電壓過低",
+            "temperatureHigh": "溫度過高",
+            "chargeActive": "充電中",
+            "dischargeActive": "放電中",
+            "learnCycleRequested": "已請求學習循環",
+            "learnCycleActive": "學習循環進行中",
+            "learnCycleFailed": "學習循環失敗",
+            "learnCycleTimeout": "學習循環逾時",
+            "i2cErrorsDetected": "偵測到 I2C 錯誤",
+            "replacePack": "更換模組",
+            "remainingCapacityLow": "剩餘容量過低",
+            "periodicLearnRequired": "需要定期學習循環",
+            "nonTransparentLearn": "非透明學習循環",
+            "noSpace": "空間不足",
+            "predictiveFailure": "預測性故障",
+            "microcodeUpdateReqd": "需要微碼更新",
+            "cableFailure": "線纜故障",
+            "transparentLearn": "透明學習循環",
+            "premiumFeatureReqd": "需要進階功能",
+            "cacheVaultDisabled": "快取保護已停用",
+            "batteryCableFailure": "電池線纜故障",
+            "good": "良好"
+        },
+        "bbuEnergyPackSubTypeOptions": {
+            "none": "無",
+            "broadcomSuperCapFBU345": "Broadcom 超級電容 FBU345",
+            "broadcomSuperCapFBU03": "Broadcom 超級電容 FBU03",
+            "oemBattery": "OEM 電池"
+        },
+        "bbuEnergyPackTypeOptions": {
+            "noPack": "無模組",
+            "superCap": "超級電容",
+            "battery": "電池"
+        },
+        "inconsistencyRepairPolicyOptions": {
+            "unknown": "未知",
+            "enable": "啟用",
+            "disable": "停用"
+        },
+        "spareActivationModeOptions": {
+            "unknown": "未知",
+            "failure": "故障"
+        },
         "modal": {
             "dropdownPropertiesBtn": "屬性",
             "dropdownManagementBtn": "管理",
@@ -3251,8 +3467,8 @@
             "ssdPowerOnHours": "SSD開機時數",
             "spareType": "備援類型",
             "state": {
-                "hotspare": "熱備援",
-                "unknownState": "未知",
+                "hotSpare": "熱備援",
+                "unknown": "未知",
                 "copyback": "回寫",  
                 "unconfiguredGood": "未配置且良好",
                 "unconfiguredBad": "未配置且不良",      
@@ -3265,8 +3481,63 @@
                 "shieldUnconfigured": "屏蔽未配置的實體設備",
                 "shieldHotSpare": "屏蔽主機備用實體設備",
                 "shieldConfigured": "屏蔽配置的實體設備",
-                "unconfigured": "未配置"
+                "unconfigured": "未配置",
+                "jbod": "JBOD",
+                "raidConfigured": "RAID 已配置",
+                "raidHotSpare": "RAID 熱備援",
+                "host": "主機",
+                "advHost": "ADV 主機",
+                "unusable": "不可用",
+                "shieldMask": "防護遮罩",
+                "sanitizeMask": "清理遮罩",
+                "degradedMask": "降級遮罩",
+                "formatMask": "格式化遮罩"
             }
+        },
+        "powerStateOptions": {
+            "active": "運行中",
+            "stop": "停止",
+            "transitioning": "轉換中"
+        },
+        "auOperationOptions": {
+            "none": "無",
+            "rebuild": "重建",
+            "patrolRead": "巡檢讀取",
+            "clear": "清除",
+            "copyback": "回寫",
+            "erase": "抹除",
+            "sanitize": "清理",
+            "nvmeReconfigure": "NVMe 重新配置"
+        },
+        "auStatusOptions": {
+            "unknown": "未知",
+            "unusable": "不可用",
+            "missing": "缺失",
+            "good": "良好",
+            "bad": "不良",
+            "raidRebuild": "RAID 重建",
+            "raidCopyback": "RAID 回寫",
+            "raidOffline": "RAID 離線",
+            "raidFailed": "RAID 失敗",
+            "raidOnline": "RAID 在線"
+        },
+        "spareTypeOptions": {
+            "none": "無",
+            "global": "全域",
+            "dedicated": "專用"
+        },
+        "usageOptions": {
+            "unknown": "未知",
+            "unassigned": "未分配",
+            "data": "資料",
+            "autoReplaceStandbySpare": "自動替換待命備援",
+            "shareableStandbySpare": "可共享待命備援",
+            "shareableActiveSpare": "可共享活動備援",
+            "transientData": "暫時資料",
+            "luCacheData": "LU 快取資料",
+            "hba": "HBA",
+            "transientUnassigned": "暫時未分配",
+            "unconfigurable": "不可配置"
         },
         "modal": {
             "sourcePDriveId": "設備 ID",
@@ -3451,8 +3722,9 @@
             "unprotectedWriteBack": "不保護回寫",
             "writeThrough": "直寫",
             "alwaysWriteBack": "總是回寫",
-            "writeBackWithBBU": "用 BBU 回寫",
-            "writeCacheAlways": "總是啟用寫入快取"
+            "writeBackWithBBUCorrupted": "在 BBU 損壞時仍回寫",
+            "writeCacheAlways": "總是啟用寫入快取",
+            "writeBack": "回寫"
         },
         "ioPolicyOptions": {
             "directIO": "直接 IO",
@@ -3469,13 +3741,118 @@
             "disable": "禁用"
         },
         "diskWriteCachePolicyOptions": {
-            "Unchanged": "不變",
-            "Enable": "啟用",
-            "Disable": "禁用"
+            "unchanged": "不變",
+            "enable": "啟用",
+            "disable": "禁用"
         },
         "initializationOptions": {
             "initializationFullMode": "完整初始化",
             "initializationFastMode": "快速初始化"
+        },
+        "statusInfoOptions": {
+            "offline": "離線",
+            "degraded": "降級",
+            "rebuild": "重建",
+            "optimal": "最佳",
+            "partiallyDegraded": "部分降級",
+            "unknown": "未知",
+            "ok": "正常",
+            "failed": "失敗",
+            "notConfigured": "未配置",
+            "interimRecovery": "臨時恢復",
+            "readyForRecovery": "準備恢復",
+            "recovering": "恢復中",
+            "wrongDriveReplaced": "更換錯誤磁碟",
+            "driveImproperlyConnected": "磁碟連接不正確",
+            "hardwareIsOverheating": "硬體過熱中",
+            "hardwareHasOverheated": "硬體已過熱",
+            "expanding": "擴展中",
+            "notYetAvailable": "尚未可用",
+            "queuedForExpansion": "排隊擴展",
+            "disabledFromSCSIIdConflict": "因 SCSI ID 衝突停用",
+            "ejected": "已退出",
+            "eraseInProgress": "抹除中",
+            "unused": "未使用",
+            "readyToPerformPredictiveSpareRebuild": "準備執行預測備援重建",
+            "rpiInProgress": "RPI 進行中",
+            "rpiQueued": "RPI 排隊中",
+            "encryptedVolumeWithoutKey": "加密磁碟無金鑰",
+            "plainTextVolumeRejectedInEncryptingMode": "明文磁碟在加密模式下被拒絕",
+            "encryptionMigration": "加密遷移",
+            "encryptedVolumeRekeying": "加密磁碟重新加密金鑰",
+            "encryptedVolumeEncryptionOff": "加密磁碟加密關閉",
+            "volumeEncodeRequested": "磁碟編碼請求",
+            "encryptedVolumeRekeyRequested": "加密磁碟重新加密金鑰請求",
+            "unsupportedOnThisController": "此控制器不支援",
+            "hasLockedSED": "有鎖定的 SED",
+            "sedQualificationOngoing": "SED 認證進行中",
+            "sedQualificationFailed": "SED 認證失敗",
+            "sedVolumeDataLocked": "SED 磁碟資料已鎖定"
+        },
+        "badBlockStatusOptions": {
+            "empty": "空",
+            "notEmpty": "非空"
+        },
+        "operationOptions": {
+            "normal": "正常",
+            "rebuild": "重建",
+            "initializeInProgress": "初始化中",
+            "consistencyCheck": "一致性檢查",
+            "none": "無",
+            "backgroundInitialization": "背景初始化",
+            "foregroundInitialization": "前景初始化",
+            "onlineCapacityExpansion": "在線容量擴展",
+            "secureErase": "安全抹除"
+        },
+        "accessPolicyStatusOptions": {
+            "ok": "正常",
+            "preservedCache": "保留快取",
+            "trialKeyExpired": "試用金鑰過期",
+            "ldOffline": "邏輯裝置離線",
+            "ctrlSafeMode": "控制器安全模式"
+        },
+        "encryptionTypeOptions": {
+            "none": "無",
+            "sed": "SED"
+        },
+        "powerSavingPolicyOptions": {
+            "none": "無",
+            "controllerDefault": "控制器預設",
+            "t10": "T10"
+        },
+        "ldTypeOptions": {
+            "unknown": "未知",
+            "data": "資料",
+            "cache": "快取",
+            "splitMirrorSetPrimary": "分割鏡像集主",
+            "splitMirrorSetBackup": "分割鏡像集備份",
+            "splitMirrorSetBackupOrphan": "分割鏡像集孤立備份"
+        },
+        "acceleratorTypeOptions": {
+            "unknown": "未知",
+            "none": "無",
+            "controllerCache": "控制器快取",
+            "ioBypass": "IO 旁路",
+            "luCache": "LU 快取"
+        },
+        "cacheLineSizeOptions": {
+            "unknown": "未知",
+            "lineSize64kb": "行大小 64KB",
+            "lineSize128kb": "行大小 128KB",
+            "lineSize256kb": "行大小 256KB"
+        },
+        "luCacheAlgorithmOptions": {
+            "unknown": "未知",
+            "hashingLRU": "雜湊 LRU",
+            "hashingLRU2": "雜湊 LRU2",
+            "regional": "區域",
+            "simpleLRU": "簡單 LRU"
+        },
+        "cachePolicyOptions": {
+            "unknown": "未知",
+            "readOnly": "唯讀",
+            "writeThrough": "直寫",
+            "writeBack": "回寫"
         },
         "table": {
             "id": "ID",
@@ -3515,7 +3892,15 @@
             "state": "狀態",
             "diskWriteCachePolicy": "磁碟寫入快取政策",
             "operationProgressPercent": "操作進度百分比",
-            "operationElapsedSeconds": "操作已執行秒數"
+            "operationElapsedSeconds": "操作已執行秒數",
+            "arrayRef": "陣列代號",
+            "size": "大小",
+            "fwState": "韌體狀態",
+            "numDrives": "磁碟數量",
+            "PD": "實體磁碟",
+            "ref": "代號",
+            "seqNum": "序號",
+            "slot": "插槽"
         },
         "modal": {
             "noPhysicalDeviceAvailable": "沒有可配置的實體設備！",
