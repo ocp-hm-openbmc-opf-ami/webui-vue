@@ -62,10 +62,18 @@ api.interceptors.response.use(undefined, (error) => {
   }
 
   if (response.status == 403) {
-    // Check if action is unauthorized.
-    // Toast error message will appear on screen
-    // when the action is unauthorized.
-    store.commit('global/setUnauthorized');
+    // Skip unauthorized toast for VirtualMedia slot APIs and CertificateLocations
+    const url = response.config?.url || '';
+    const suppressedUrls = [
+      /\/redfish\/v1\/Systems\/system\d?\/VirtualMedia\/Slot_/,
+      /\/redfish\/v1\/CertificateService\/CertificateLocations/,
+    ];
+    if (!suppressedUrls.some((pattern) => url.match(pattern))) {
+      // Check if action is unauthorized.
+      // Toast error message will appear on screen
+      // when the action is unauthorized.
+      store.commit('global/setUnauthorized');
+    }
   }
 
   return Promise.reject(error);

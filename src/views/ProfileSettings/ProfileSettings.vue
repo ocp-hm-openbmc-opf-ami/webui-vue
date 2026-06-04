@@ -19,6 +19,12 @@
               {{ userPrivilege }}
             </dd>
           </dl>
+          <dl>
+            <dt>{{ $t('pageProfileSettings.userType') }}</dt>
+            <dd>
+              {{ userType }}
+            </dd>
+          </dl>
         </page-section>
       </b-col>
     </b-row>
@@ -187,6 +193,9 @@ export default {
     },
     userPrivilege() {
       return this.$store.getters['global/userPrivilege'];
+    },
+    userType() {
+      return this.$store.getters['authentication/userType'];
     },
   },
   watch: {

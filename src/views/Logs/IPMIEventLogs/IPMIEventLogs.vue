@@ -213,9 +213,6 @@
               <span v-else> {{ $t('pageIpmiEventLogs.unresolved') }} </span>
             </b-form-checkbox>
           </template>
-          <template #cell(filterByStatus)="{ value }">
-            {{ value }}
-          </template>
 
           <!-- Actions column -->
           <template #cell(actions)="row">
@@ -399,7 +396,7 @@ export default {
         process.env.VUE_APP_EVENT_LOGS_TOGGLE_BUTTON_DISABLED === 'true'
           ? [
               {
-                key: 'severity',
+                key: 'filterBySeverity',
                 label: this.$t('pageIpmiEventLogs.table.severity'),
                 values: [
                   this.$t('global.action.ok'),
@@ -411,7 +408,7 @@ export default {
             ]
           : [
               {
-                key: 'severity',
+                key: 'filterBySeverity',
                 label: this.$t('pageIpmiEventLogs.table.severity'),
                 values: [
                   this.$t('global.action.ok'),
@@ -474,6 +471,10 @@ export default {
       return this.$store.getters['ipmiEventLog/allEvents'].map((event) => {
         return {
           ...event,
+          filterBySeverity: this.getFilterBySeverity(event.severity),
+          filterByStatus: event.status
+            ? this.$t('pageIpmiEventLogs.resolved')
+            : this.$t('pageIpmiEventLogs.unresolved'),
           actions: this.hideDelete
             ? [
                 {
@@ -540,6 +541,18 @@ export default {
     });
   },
   methods: {
+    getFilterBySeverity(severity) {
+      switch (severity) {
+        case 'OK':
+          return this.$t('global.action.ok');
+        case 'Warning':
+          return this.$t('global.action.warning');
+        case 'Critical':
+          return this.$t('global.action.critical');
+        default:
+          return this.$t('global.action.na');
+      }
+    },
     downloadEntry(uri) {
       let filename = uri?.split('LogServices/')?.[1].concat('.log');
       filename.replace(RegExp('/', 'g'), '_');

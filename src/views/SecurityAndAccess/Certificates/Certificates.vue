@@ -44,7 +44,7 @@
         </b-button>
         <b-button
           variant="primary"
-          :disabled="certificatesForUpload.length === 0"
+          :disabled="certificatesForUpload.length === 0 || isButtonDisable"
           @click="initModalUploadCertificate(null)"
         >
           <icon-add />
@@ -405,10 +405,15 @@ export default {
   async created() {
     this.startLoader();
     await this.$store.dispatch('global/getBmcTime');
-    this.$store.dispatch('certificates/getCertificates').finally(() => {
-      this.endLoader();
-      this.isBusy = false;
-    });
+    this.$store
+      .dispatch('certificates/getCertificates')
+      .catch(() => {
+        this.$store.commit('certificates/setCertificates', []);
+      })
+      .finally(() => {
+        this.endLoader();
+        this.isBusy = false;
+      });
   },
   methods: {
     isValidDate(value) {

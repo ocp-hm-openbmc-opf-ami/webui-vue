@@ -919,7 +919,7 @@
 </template>
 
 <script>
-import { requiredIf, email } from 'vuelidate/lib/validators';
+import { requiredIf } from 'vuelidate/lib/validators';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin';
 import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
@@ -1071,7 +1071,9 @@ export default {
               return true;
             }
           }),
-          email,
+          email: function (val) {
+            return !val ? true : this.emailValidation(val);
+          },
         },
         recipientEmailAddress1: {
           required: requiredIf(function (primary) {
@@ -1079,16 +1081,24 @@ export default {
               return true;
             }
           }),
-          email,
+          email: function (val) {
+            return !val ? true : this.emailValidation(val);
+          },
         },
         recipientEmailAddress2: {
-          email,
+          email: function (val) {
+            return !val ? true : this.emailValidation(val);
+          },
         },
         recipientEmailAddress3: {
-          email,
+          email: function (val) {
+            return !val ? true : this.emailValidation(val);
+          },
         },
         recipientEmailAddress4: {
-          email,
+          email: function (val) {
+            return !val ? true : this.emailValidation(val);
+          },
         },
         username: {
           required: requiredIf(function (primary) {
@@ -1183,7 +1193,9 @@ export default {
               return true;
             }
           }),
-          email,
+          email: function (val) {
+            return !val ? true : this.emailValidation(val);
+          },
         },
         recipientEmailAddress1: {
           required: requiredIf(function (secondary) {
@@ -1191,16 +1203,24 @@ export default {
               return true;
             }
           }),
-          email,
+          email: function (val) {
+            return !val ? true : this.emailValidation(val);
+          },
         },
         recipientEmailAddress2: {
-          email,
+          email: function (val) {
+            return !val ? true : this.emailValidation(val);
+          },
         },
         recipientEmailAddress3: {
-          email,
+          email: function (val) {
+            return !val ? true : this.emailValidation(val);
+          },
         },
         recipientEmailAddress4: {
-          email,
+          email: function (val) {
+            return !val ? true : this.emailValidation(val);
+          },
         },
         username: {
           required: requiredIf(function (secondary) {
@@ -1549,6 +1569,47 @@ export default {
       } else {
         return true;
       }
+    },
+    emailValidation(value) {
+      if (!value || value.trim() === '') {
+        return true;
+      }
+      // Total email length must not exceed 254 characters
+      if (value.length > 254) {
+        return false;
+      }
+      // Must contain exactly one @ symbol
+      const parts = value.split('@');
+      if (parts.length !== 2) {
+        return false;
+      }
+      const localPart = parts[0];
+      const domainPart = parts[1];
+      // Local part max 64 characters per RFC 5321
+      if (localPart.length < 1 || localPart.length > 64) {
+        return false;
+      }
+      // Local part: only allow alphanumeric, dot, underscore, hyphen, plus
+      if (!/^[a-zA-Z0-9._+-]+$/.test(localPart)) {
+        return false;
+      }
+      // Local part must not start or end with a dot
+      if (localPart.startsWith('.') || localPart.endsWith('.')) {
+        return false;
+      }
+      // Local part must not have consecutive dots
+      if (localPart.includes('..')) {
+        return false;
+      }
+      // Domain part validation
+      if (
+        !/^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)*\.[a-zA-Z]{2,63}$/.test(
+          domainPart,
+        )
+      ) {
+        return false;
+      }
+      return true;
     },
     primaryAuthChange() {
       this.primary.username = '';

@@ -2097,6 +2097,7 @@
         "timezoneDisplayDesc": "Wählen Sie die bevorzugte Zeitzone, die in der gesamten Anwendung angezeigt werden soll",
         "username": "Benutzername",
         "userPrivilege": "Benutzerberechtigung",
+        "userType": "Benutzertyp",
         "toast": {
             "successUpdatingTimeZone": "Zeitzone erfolgreich aktualisiert.",
             "wrongCredentials": "Falsche Anmeldedaten"
