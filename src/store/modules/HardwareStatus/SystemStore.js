@@ -64,7 +64,9 @@ const SystemStore = {
       return await api
         .get('/redfish/v1')
         .then((response) =>
-          api.get(`${response.data.Systems['@odata.id']}/system`),
+          api.get(
+            `${response.data.Systems?.['@odata.id'] ?? '/redfish/v1/Systems'}/system`,
+          ),
         )
         .then(({ data }) => {
           commit('setSystemInfo', data);
