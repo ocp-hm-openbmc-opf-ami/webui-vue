@@ -259,7 +259,10 @@ export default {
         ].dhcpv6.useDomainNameEnabled;
       },
       set(newValue) {
-        return newValue;
+        this.$store.commit('network/setDhcpDomainNameState', {
+          value: newValue,
+          protocol: 'v6',
+        });
       },
     },
     useDnsState: {
@@ -269,7 +272,10 @@ export default {
         ].dhcpv6.useDnsEnabled;
       },
       set(newValue) {
-        return newValue;
+        this.$store.commit('network/setDhcpDnsState', {
+          value: newValue,
+          protocol: 'v6',
+        });
       },
     },
     useNtpState: {
@@ -279,7 +285,10 @@ export default {
         ].dhcpv6.useNtpEnabled;
       },
       set(newValue) {
-        return newValue;
+        this.$store.commit('network/setDhcpNtpState', {
+          value: newValue,
+          protocol: 'v6',
+        });
       },
     },
     ipv6SettingsStatus() {

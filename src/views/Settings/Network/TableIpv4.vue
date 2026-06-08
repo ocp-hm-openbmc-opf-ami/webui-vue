@@ -226,7 +226,10 @@ export default {
         ].dhcpv4.useDomainNameEnabled;
       },
       set(newValue) {
-        return newValue;
+        this.$store.commit('network/setDhcpDomainNameState', {
+          value: newValue,
+          protocol: 'v4',
+        });
       },
     },
     ipv4SettingsStatus() {
@@ -244,7 +247,10 @@ export default {
         ].dhcpv4.useDnsEnabled;
       },
       set(newValue) {
-        return newValue;
+        this.$store.commit('network/setDhcpDnsState', {
+          value: newValue,
+          protocol: 'v4',
+        });
       },
     },
     useNtpState: {
@@ -254,7 +260,10 @@ export default {
         ].dhcpv4.useNtpEnabled;
       },
       set(newValue) {
-        return newValue;
+        this.$store.commit('network/setDhcpNtpState', {
+          value: newValue,
+          protocol: 'v4',
+        });
       },
     },
     getOemAmiActions() {

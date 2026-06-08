@@ -21,9 +21,32 @@ const NetworkStore = {
     getEnableLanNetworkSettings: (state) => state.enableLanNetworkSettings,
   },
   mutations: {
-    setDomainNameState: (state, domainState) =>
-      (state.domainState = domainState),
-    setDnsState: (state, dnsState) => (state.dnsState = dnsState),
+    setDhcpDomainNameState: (state, { value, protocol }) => {
+      const networkSettings =
+        state.globalNetworkSettings.find(
+          (settings) => settings.id === state.selectedInterfaceId,
+        ) || state.globalNetworkSettings[state.selectedInterfaceIndex];
+      if (!networkSettings) return;
+
+      if (protocol === 'v4') {
+        networkSettings.dhcpv4.useDomainNameEnabled = value;
+      } else {
+        networkSettings.dhcpv6.useDomainNameEnabled = value;
+      }
+    },
+    setDhcpDnsState: (state, { value, protocol }) => {
+      const networkSettings =
+        state.globalNetworkSettings.find(
+          (settings) => settings.id === state.selectedInterfaceId,
+        ) || state.globalNetworkSettings[state.selectedInterfaceIndex];
+      if (!networkSettings) return;
+
+      if (protocol === 'v4') {
+        networkSettings.dhcpv4.useDnsEnabled = value;
+      } else {
+        networkSettings.dhcpv6.useDnsEnabled = value;
+      }
+    },
     setEthernetData: (state, ethernetData) =>
       (state.ethernetData = ethernetData),
     setFirstInterfaceId: (state, firstInterfaceId) =>
@@ -78,16 +101,25 @@ const NetworkStore = {
               useDomainNameEnabled: DHCPv6.UseDomainName,
               useNtpEnabled: DHCPv6.UseNTPServers,
             },
-            useDnsEnabled: DHCPv4.UseDNSServers,
-            useDomainNameEnabled: DHCPv4.UseDomainName,
-            useNtpEnabled: DHCPv4.UseNTPServers,
             ipv4DhcpEnabled: DHCPv4.DHCPEnabled,
             ipv6DhcpEnabled: DHCPv6.OperatingMode == 'Enabled' ? true : false,
             id: Id,
           };
         });
     },
-    setNtpState: (state, ntpState) => (state.ntpState = ntpState),
+    setDhcpNtpState: (state, { value, protocol }) => {
+      const networkSettings =
+        state.globalNetworkSettings.find(
+          (settings) => settings.id === state.selectedInterfaceId,
+        ) || state.globalNetworkSettings[state.selectedInterfaceIndex];
+      if (!networkSettings) return;
+
+      if (protocol === 'v4') {
+        networkSettings.dhcpv4.useNtpEnabled = value;
+      } else {
+        networkSettings.dhcpv6.useNtpEnabled = value;
+      }
+    },
     setSelectedInterfaceId: (state, selectedInterfaceId) =>
       (state.selectedInterfaceId = selectedInterfaceId),
     setSelectedInterfaceIndex: (state, selectedInterfaceIndex) =>
@@ -134,7 +166,7 @@ const NetworkStore = {
         });
     },
     async saveDhcpv4DomainNameState({ commit, state }, domainState) {
-      commit('setDomainNameState', domainState);
+      commit('setDhcpDomainNameState', { value: domainState, protocol: 'v4' });
       const data = {
         DHCPv4: {
           UseDomainName: domainState,
@@ -154,7 +186,10 @@ const NetworkStore = {
         })
         .catch((error) => {
           console.log(error);
-          commit('setDomainNameState', !domainState);
+          commit('setDhcpDomainNameState', {
+            value: !domainState,
+            protocol: 'v4',
+          });
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.domainName'),
@@ -163,7 +198,7 @@ const NetworkStore = {
         });
     },
     async saveDhcpv4DnsState({ commit, state }, dnsState) {
-      commit('setDnsState', dnsState);
+      commit('setDhcpDnsState', { value: dnsState, protocol: 'v4' });
       const data = {
         DHCPv4: {
           UseDNSServers: dnsState,
@@ -183,7 +218,7 @@ const NetworkStore = {
         })
         .catch((error) => {
           console.log(error);
-          commit('setDnsState', !dnsState);
+          commit('setDhcpDnsState', { value: !dnsState, protocol: 'v4' });
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.dns'),
@@ -192,7 +227,7 @@ const NetworkStore = {
         });
     },
     async saveDhcpv4NtpState({ commit, state }, ntpState) {
-      commit('setNtpState', ntpState);
+      commit('setDhcpNtpState', { value: ntpState, protocol: 'v4' });
       const data = {
         DHCPv4: {
           UseNTPServers: ntpState,
@@ -212,7 +247,7 @@ const NetworkStore = {
         })
         .catch((error) => {
           console.log(error);
-          commit('setNtpState', !ntpState);
+          commit('setDhcpNtpState', { value: !ntpState, protocol: 'v4' });
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.ntp'),
@@ -528,7 +563,7 @@ const NetworkStore = {
         });
     },
     async saveDhcpv6DomainNameState({ commit, state }, domainState) {
-      commit('setDomainNameState', domainState);
+      commit('setDhcpDomainNameState', { value: domainState, protocol: 'v6' });
       const data = {
         DHCPv6: {
           UseDomainName: domainState,
@@ -548,7 +583,10 @@ const NetworkStore = {
         })
         .catch((error) => {
           console.log(error);
-          commit('setDomainNameState', !domainState);
+          commit('setDhcpDomainNameState', {
+            value: !domainState,
+            protocol: 'v6',
+          });
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.domainName'),
@@ -557,7 +595,7 @@ const NetworkStore = {
         });
     },
     async saveDhcpv6DnsState({ commit, state }, dnsState) {
-      commit('setDnsState', dnsState);
+      commit('setDhcpDnsState', { value: dnsState, protocol: 'v6' });
       const data = {
         DHCPv6: {
           UseDNSServers: dnsState,
@@ -577,7 +615,7 @@ const NetworkStore = {
         })
         .catch((error) => {
           console.log(error);
-          commit('setDnsState', !dnsState);
+          commit('setDhcpDnsState', { value: !dnsState, protocol: 'v6' });
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.dns'),
@@ -586,7 +624,7 @@ const NetworkStore = {
         });
     },
     async saveDhcpv6NtpState({ commit, state }, ntpState) {
-      commit('setNtpState', ntpState);
+      commit('setDhcpNtpState', { value: ntpState, protocol: 'v6' });
       const data = {
         DHCPv6: {
           UseNTPServers: ntpState,
@@ -606,7 +644,7 @@ const NetworkStore = {
         })
         .catch((error) => {
           console.log(error);
-          commit('setNtpState', !ntpState);
+          commit('setDhcpNtpState', { value: !ntpState, protocol: 'v6' });
           throw new Error(
             i18n.t('pageNetwork.toast.errorSaveNetworkSettings', {
               setting: i18n.t('pageNetwork.ntp'),
