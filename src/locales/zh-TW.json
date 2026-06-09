@@ -4049,7 +4049,17 @@
             "storeLibEvents": "StoreLib 事件",
             "storeLib": "StoreLib",
             "clusterEvents": "叢集事件",
-            "cluster": "叢集"
+            "cluster": "叢集",
+            "notDefinedEvents": "未定義事件",
+            "notDefined": "未定義",
+            "hardwareErrorEvents": "硬體錯誤事件",
+            "hardwareError": "硬體錯誤",
+            "environmentEvents": "環境事件",
+            "environment": "環境",
+            "encryptionEvents": "加密事件",
+            "encryption": "加密",
+            "settingEvents": "設定事件",
+            "setting": "設定"
         },
         "modal": {
             "deleteAllTitle": "刪除所有日誌",

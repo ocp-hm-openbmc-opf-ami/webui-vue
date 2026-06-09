@@ -4036,7 +4036,17 @@
             "storeLibEvents": "StoreLib 事件",
             "storeLib": "StoreLib",
             "clusterEvents": "集群事件",
-            "cluster": "集群"
+            "cluster": "集群",
+            "notDefinedEvents": "未定义事件",
+            "notDefined": "未定义",
+            "hardwareErrorEvents": "硬件错误事件",
+            "hardwareError": "硬件错误",
+            "environmentEvents": "环境事件",
+            "environment": "环境",
+            "encryptionEvents": "加密事件",
+            "encryption": "加密",
+            "settingEvents": "设置事件",
+            "setting": "设置"
         },
         "modal": {
             "deleteAllTitle": "删除所有日志",

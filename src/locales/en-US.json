@@ -4055,7 +4055,17 @@
             "storeLibEvents": "StoreLib Events",
             "storeLib": "StoreLib",
             "clusterEvents": "Cluster Events",
-            "cluster": "Cluster"
+            "cluster": "Cluster",
+            "notDefinedEvents": "Not Defined Events",
+            "notDefined": "Not Defined",
+            "hardwareErrorEvents": "Hardware Error Events",
+            "hardwareError": "Hardware Error",
+            "environmentEvents": "Environment Events",
+            "environment": "Environment",
+            "encryptionEvents": "Encryption Events",
+            "encryption": "Encryption",
+            "settingEvents": "Setting Events",
+            "setting": "Setting"
         },
         "modal": {
             "deleteAllTitle": "Delete All Logs",

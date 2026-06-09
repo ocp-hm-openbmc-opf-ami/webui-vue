@@ -4047,7 +4047,17 @@
             "storeLibEvents": "События StoreLib",
             "storeLib": "StoreLib",
             "clusterEvents": "События кластера",
-            "cluster": "Кластер"
+            "cluster": "Кластер",
+            "notDefinedEvents": "Неопределенные события",
+            "notDefined": "Не определено",
+            "hardwareErrorEvents": "События аппаратных ошибок",
+            "hardwareError": "Аппаратная ошибка",
+            "environmentEvents": "События окружающей среды",
+            "environment": "Окружающая среда",
+            "encryptionEvents": "События шифрования",
+            "encryption": "Шифрование",
+            "settingEvents": "События настроек",
+            "setting": "Настройка"
         },
         "modal": {
             "deleteAllTitle": "Удалить все журналы",

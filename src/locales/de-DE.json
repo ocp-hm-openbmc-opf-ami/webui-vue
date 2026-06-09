@@ -4051,7 +4051,17 @@
             "storeLibEvents": "StoreLib-Ereignisse",
             "storeLib": "StoreLib",
             "clusterEvents": "Cluster-Ereignisse",
-            "cluster": "Cluster"
+            "cluster": "Cluster",
+            "notDefinedEvents": "Nicht definierte Ereignisse",
+            "notDefined": "Nicht definiert",
+            "hardwareErrorEvents": "Hardwarefehler-Ereignisse",
+            "hardwareError": "Hardwarefehler",
+            "environmentEvents": "Umgebungsereignisse",
+            "environment": "Umgebung",
+            "encryptionEvents": "Verschlüsselungsereignisse",
+            "encryption": "Verschlüsselung",
+            "settingEvents": "Einstellungsereignisse",
+            "setting": "Einstellung"
         },
         "modal": {
             "deleteAllTitle": "Alle Protokolle löschen",
