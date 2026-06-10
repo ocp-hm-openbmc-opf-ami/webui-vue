@@ -237,7 +237,14 @@ export default {
             lanInterface: selectedVal,
             SpeedMbps: '',
           };
-          this.speedMbpsLabel = this.networkLinkData.SpeedMbps;
+          if (
+            this.networkLinkData?.AutoNeg &&
+            this.networkLinkData?.SpeedMbps === 65535
+          ) {
+            this.speedMbpsLabel = this.$t('global.status.unknown');
+          } else {
+            this.speedMbpsLabel = this.networkLinkData.SpeedMbps;
+          }
           if (
             !this.networkLinkData.AutoNeg &&
             (this.networkLinkData.SpeedMbps == 10 ||
