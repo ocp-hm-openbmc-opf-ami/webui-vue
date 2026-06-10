@@ -390,7 +390,6 @@ export default {
                   .dispatch('userManagement/updateUser', userData)
                   .then((success) => {
                     this.successToast(success);
-                    this.getUsersInit();
                   })
                   .catch(({ message }) => this.errorToast(message))
                   .finally(() => this.endLoader());
