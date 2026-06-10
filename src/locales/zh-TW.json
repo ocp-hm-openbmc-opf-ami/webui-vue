@@ -233,7 +233,8 @@
         "powerSupplyInventory": "@:appPageTitle.powerSupplyInventory",
         "powerEquipment": "@:appPageTitle.powerEquipment",
         "kvm1": "@:appPageTitle.kvm1",
-        "serverPowerOperations1": "@:appPageTitle.serverPowerOperations1"
+        "serverPowerOperations1": "@:appPageTitle.serverPowerOperations1",
+        "postCodeLogs1": "@:appPageTitle.postCodeLogs1"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -318,7 +319,8 @@
         "powerSupplyInventory": "電源供應清單",
         "powerEquipment": "電源設備",
         "kvm1": "多電腦1",
-        "serverPowerOperations1": "伺服器電源操作 1"
+        "serverPowerOperations1": "伺服器電源操作 1",
+        "postCodeLogs1": "POST 程式碼日誌 1"
     },
     "pageNodeManager": {
         "nmConfiguration": "網管設定",
@@ -4732,6 +4734,33 @@
         "toast": {
             "errorRebootStart": "重新啟動 BMC 時發生錯誤。",
             "successRebootStart": "成功重啟 BMC。"
+        }
+    },
+    "pagePostCodeLogs1": {
+        "allExportFilePrefix": "所有_POST_代碼_日誌_",
+        "downloadFilePrefix": "POST_代碼_附加_細節_",
+        "exportFilePrefix": "POST_代碼_日誌",
+        "action": {
+            "downloadDetails": "下載附加細節資訊",
+            "exportLogs": "匯出紀錄"
+        },
+        "button": {
+            "exportAll": "匯出全部"
+        },
+        "modal": {
+            "deleteAllTitle": "刪除所有紀錄",
+            "deleteAllMessage": "您確定要刪除所有日誌嗎？ 此操作無法撤消。"
+        },
+        "table": {
+            "created": "建立",
+            "bootCount": "啟動數",
+            "postCode": "POST 代碼",
+            "searchLogs": "搜索日誌",
+            "timeStampOffset": "時間戳偏移量"
+        },
+        "toast": {
+            "errorDelete": "刪除 %{count} 筆日誌失敗. | 刪除 %{count} 筆日誌失敗。",
+            "successDelete": "已經成功刪除 %{count} 筆日誌. | 已經成功刪除 %{count} 筆日誌。"
         }
     },
     "countries": {

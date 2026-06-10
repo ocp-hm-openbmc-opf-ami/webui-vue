@@ -10,6 +10,7 @@ import AutoVideoSettings from '@/views/Settings/AutoVideoSettings';
 import VideoLogs from '@/views/Logs/VideoLogs';
 import SerialOverLan1 from '@/views/Operations/SerialOverLan/SerialOverLan1';
 import SerialOverLanConsole1 from '@/views/Operations/SerialOverLan/SerialOverLanConsole1';
+import PostCodeLogs1 from '@/views/Logs/PostCodeLogs1';
 import PageNotFound from '@/views/PageNotFound';
 
 import i18n from '@/i18n';
@@ -322,6 +323,17 @@ const DashboardStore = {
                 meta: {
                   title: i18n.t('appPageTitle.serialOverLan1'),
                   exclusiveToRoles: [rolesPrivilege.administrator],
+                },
+              });
+            }
+
+            if (!routeExists('post-code-logs1')) {
+              router.addRoute('app-layout', {
+                path: '/logs/post-code-logs1',
+                name: 'post-code-logs1',
+                component: PostCodeLogs1,
+                meta: {
+                  title: i18n.t('appPageTitle.postCodeLogs1'),
                 },
               });
             }

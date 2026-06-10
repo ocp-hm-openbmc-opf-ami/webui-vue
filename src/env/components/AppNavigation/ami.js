@@ -321,6 +321,13 @@ const AppNavigationMixin = {
           route: '/logs/post-code-logs',
         });
       }
+      if (RuntimeConfig.isMultiHostEnabled()) {
+        navigationItemsList.navigationItems[1].children.push({
+          id: 'post-code-logs1',
+          label: this.$t('appNavigation.postCodeLogs1'),
+          route: '/logs/post-code-logs1',
+        });
+      }
       if (
         process.env.VUE_APP_ONETREE_ARM_SBMR_ENABLED === 'true' ||
         process.env.VUE_APP_ONETREE_NVIDIASIPACK_ENABLED === 'true'

@@ -231,7 +231,8 @@
         "powerSupplyInventory": "@:appPageTitle.powerSupplyInventory",
         "powerEquipment": "@:appPageTitle.powerEquipment",
         "kvm1": "@:appPageTitle.kvm1",
-        "serverPowerOperations1": "@:appPageTitle.serverPowerOperations1"
+        "serverPowerOperations1": "@:appPageTitle.serverPowerOperations1",
+        "postCodeLogs1": "@:appPageTitle.postCodeLogs1"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -315,7 +316,8 @@
         "powerSupplyInventory": "Power Supply Inventory",
         "powerEquipment": "Power Equipment",
         "kvm1": "KVM 1",
-        "serverPowerOperations1": "Server Power Operations 1"
+        "serverPowerOperations1": "Server Power Operations 1",
+        "postCodeLogs1": "POST Code Logs 1"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM Configuration",
@@ -4738,6 +4740,33 @@
         "toast": {
             "errorRebootStart": "Error in rebooting BMC.",
             "successRebootStart": "Successfully rebooting BMC."
+        }
+    },
+    "pagePostCodeLogs1": {
+        "allExportFilePrefix": "All_POST_codes_log_",
+        "downloadFilePrefix": "POST_codes_additional_details_",
+        "exportFilePrefix": "POST_codes_log_",
+        "action": {
+            "downloadDetails": "Download Additional Details",
+            "exportLogs": "Export Log"
+        },
+        "button": {
+            "exportAll": "Export All"
+        },
+        "modal": {
+            "deleteAllTitle": "Delete All Logs",
+            "deleteAllMessage": "Are you sure you want to delete all logs? This action cannot be undone."
+        },
+        "table": {
+            "created": "Created",
+            "bootCount": "Boot Count",
+            "postCode": "POST Code",
+            "searchLogs": "Search Logs",
+            "timeStampOffset": "Time Stamp Offset"
+        },
+        "toast": {
+            "errorDelete": "Error deleting %{count} log. | Error in deleting %{count} Logs.",
+            "successDelete": "Successfully deleted %{count} log. | Successfully deleted %{count} Logs."
         }
     },
     "countries": {

@@ -231,7 +231,8 @@
         "powerSupplyInventory": "@:appPageTitle.powerSupplyInventory",
         "powerEquipment": "@:appPageTitle.powerEquipment",
         "kvm1": "@:appPageTitle.kvm1",
-        "serverPowerOperations1": "@:appPageTitle.serverPowerOperations1"
+        "serverPowerOperations1": "@:appPageTitle.serverPowerOperations1",
+        "postCodeLogs1": "@:appPageTitle.postCodeLogs1"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -316,7 +317,8 @@
         "powerSupplyInventory": "电源库存",
         "powerEquipment": "电源设备",
         "kvm1": "多电脑1",
-        "serverPowerOperations1": "服务器电源操作 1"
+        "serverPowerOperations1": "服务器电源操作 1",
+        "postCodeLogs1": "POST 代码日志 1"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM 配置",
@@ -4719,6 +4721,33 @@
         "toast": {
             "errorRebootStart": "重新启动 BMC 时出错。",
             "successRebootStart": "成功重启 BMC。"
+        }
+    },
+    "pagePostCodeLogs1": {
+        "allExportFilePrefix": "All_POST_codes_log_",
+        "downloadFilePrefix": "POST_codes_additional_details_",
+        "exportFilePrefix": "POST_codes_log_",
+        "action": {
+            "downloadDetails": "下载更多详细信息",
+            "exportLogs": "导出日志"
+        },
+        "button": {
+            "exportAll": "全部导出"
+        },
+        "modal": {
+            "deleteAllTitle": "删除所有日志",
+            "deleteAllMessage": "您确定要删除所有日志吗？ 此操作无法恢复。"
+        },
+        "table": {
+            "created": "已创建",
+            "bootCount": "启动次数",
+            "postCode": "POST 代码",
+            "searchLogs": "搜索日志",
+            "timeStampOffset": "时间戳偏移量"
+        },
+        "toast": {
+            "errorDelete": "删除 %{count} 笔日志失败. | 删除 %{count} 笔日志失败。",
+            "successDelete": "已经成功删除 %{count} 笔日志. | 已经成功删除 %{count} 笔日志。"
         }
     },
     "countries": {

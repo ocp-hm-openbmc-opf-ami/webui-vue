@@ -231,7 +231,8 @@
         "powerSupplyInventory": "@:appPageTitle.powerSupplyInventory",
         "powerEquipment": "@:appPageTitle.powerEquipment",
         "kvm1": "@:appPageTitle.kvm1",
-        "serverPowerOperations1": "@:appPageTitle.serverPowerOperations1"
+        "serverPowerOperations1": "@:appPageTitle.serverPowerOperations1",
+        "postCodeLogs1": "@:appPageTitle.postCodeLogs1"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -315,7 +316,8 @@
         "powerSupplyInventory": "Инвентарь источников питания",
         "powerEquipment": "Оборудование питания",
         "kvm1": "КВМ 1",
-        "serverPowerOperations1": "Операции с питанием сервера 1"
+        "serverPowerOperations1": "Операции с питанием сервера 1",
+        "postCodeLogs1": "Журналы POST-кодов 1"
 
     },
     "pageNodeManager": {
@@ -4656,6 +4658,33 @@
         "toast": {
             "errorRebootStart": "Ошибка перезагрузки BMC.",
             "successRebootStart": "Перезагрузка BMC успешно запущена."
+        }
+    },
+    "pagePostCodeLogs1": {
+        "allExportFilePrefix": "Все_журналы_POST_кодов_",
+        "downloadFilePrefix": "POST_коды_дополнительные_детали_",
+        "exportFilePrefix": "Журнал_POST_кодов_",
+        "action": {
+            "downloadDetails": "Скачать дополнительные детали",
+            "exportLogs": "Экспорт журнала"
+        },
+        "button": {
+            "exportAll": "Экспортировать всё"
+        },
+        "modal": {
+            "deleteAllTitle": "Удалить все журналы",
+            "deleteAllMessage": "Вы уверены, что хотите удалить все журналы? Это действие нельзя отменить."
+        },
+        "table": {
+            "created": "Создано",
+            "bootCount": "Количество загрузок",
+            "postCode": "POST-код",
+            "searchLogs": "Поиск журналов",
+            "timeStampOffset": "Смещение временной метки"
+        },
+        "toast": {
+            "errorDelete": "Ошибка удаления %{count} журнала. | Ошибка удаления %{count} журналов.",
+            "successDelete": "Успешно удален %{count} журнал. | Успешно удалено %{count} журналов."
         }
     },
     "countries": {

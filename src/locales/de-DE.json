@@ -232,7 +232,8 @@
         "powerSupplyInventory": "@:appPageTitle.powerSupplyInventory",
         "powerEquipment": "@:appPageTitle.powerEquipment",
         "kvm1": "@:appPageTitle.kvm1",
-        "serverPowerOperations1": "@:appPageTitle.serverPowerOperations1"
+        "serverPowerOperations1": "@:appPageTitle.serverPowerOperations1",
+        "postCodeLogs1": "@:appPageTitle.postCodeLogs1"
     },
     "appPageTitle": {
         "bsod": "BSOD",
@@ -317,7 +318,8 @@
         "powerSupplyInventory": "Stromversorgungsbestand",
         "powerEquipment": "Stromversorgungsgeräte",
         "kvm1": "KVM 1",
-        "serverPowerOperations1": "Server-Stromversorgungsvorgänge 1"
+        "serverPowerOperations1": "Server-Stromversorgungsvorgänge 1",
+        "postCodeLogs1": "POST-Code-Protokolle 1"
     },
     "pageNodeManager": {
         "nmConfiguration": "NM-Konfiguration",
@@ -4737,6 +4739,33 @@
         "toast": {
             "errorRebootStart": "Fehler beim Neustart des BMC.",
             "successRebootStart": "BMC wird erfolgreich neu gestartet."
+        }
+    },
+    "pagePostCodeLogs1": {
+        "allExportFilePrefix": "All_POST_codes_log_",
+        "downloadFilePrefix": "POST_codes_additional_details_",
+        "exportFilePrefix": "POST_codes_log_",
+        "action": {
+            "downloadDetails": "Zusätzliche Details herunterladen",
+            "exportLogs": "Protokoll exportieren"
+        },
+        "button": {
+            "exportAll": "Alle exportieren"
+        },
+        "modal": {
+            "deleteAllTitle": "Alle Protokolle löschen",
+            "deleteAllMessage": "Möchten Sie wirklich alle Protokolle löschen? Diese Aktion kann nicht rückgängig gemacht werden."
+        },
+        "table": {
+            "created": "Erstellt",
+            "bootCount": "Anzahl Starts",
+            "postCode": "POST-Code",
+            "searchLogs": "Protokolle suchen",
+            "timeStampOffset": "Zeitstempel-Versatz"
+        },
+        "toast": {
+            "errorDelete": "Fehler beim Löschen von %{count} Protokoll. | Fehler beim Löschen von %{count} Protokollen.",
+            "successDelete": "%{count} Protokoll erfolgreich gelöscht. | %{count} Protokolle erfolgreich gelöscht."
         }
     },
     "countries": {

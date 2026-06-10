@@ -80,6 +80,7 @@ import SpdmStore from './modules/Settings/SPDMStore';
 import PowerShelfStore from './modules/PowerShelf/PowerShelfStore';
 import PowerEquipmentStore from './modules/PowerShelf/PowerEquipmentStore';
 import Kvm1ControlStore from './modules/Operations/kvm1ControlStore';
+import PostCodeLogs1Store from './modules/Logs/PostCodeLogs1Store';
 
 Vue.use(Vuex);
 
@@ -167,5 +168,6 @@ export default new Vuex.Store({
     powerShelf: PowerShelfStore,
     powerEquipment: PowerEquipmentStore,
     kvm1Control: Kvm1ControlStore,
+    postCodeLogs1: PostCodeLogs1Store,
   },
 });
