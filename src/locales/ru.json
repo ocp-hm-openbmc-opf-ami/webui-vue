@@ -2468,7 +2468,10 @@
             "errorEmptyDestination": "Требуется URL назначения.",
             "errorEmptyCommunityString": "Требуется строка сообщества.",
             "sendTestAlertSuccess": "Тестовое оповещение успешно отправлено.",
-            "sendTestAlertError": "Ошибка при отправке тестового оповещения."
+            "sendTestAlertError": "Ошибка при отправке тестового оповещения.",
+            "errorSNMPv1Disabled": "SNMP или SNMPv1 протокол отключен. Пожалуйста, включите его на странице Политики.",
+            "errorSNMPv2cDisabled": "SNMP или SNMPv2c протокол отключен. Пожалуйста, включите его на странице Политики.",
+            "errorSNMPv3Disabled": "SNMP или SNMPv3 протокол отключен. Пожалуйста, включите его на странице Политики."
         }
     },
     "pageAlertPolicy": {

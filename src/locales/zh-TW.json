@@ -2470,7 +2470,10 @@
             "errorEmptyDestination": "需要目標 URL。",
             "errorEmptyCommunityString": "需要社區字串。",
             "sendTestAlertSuccess": "測試警報發送成功。",
-            "sendTestAlertError": "發送測試警報時發生錯誤。"
+            "sendTestAlertError": "發送測試警報時發生錯誤。",
+            "errorSNMPv1Disabled": "SNMP 或 SNMPv1 協議已禁用。請在策略頁面啟用它。",
+            "errorSNMPv2cDisabled": "SNMP 或 SNMPv2c 協議已禁用。請在策略頁面啟用它。",
+            "errorSNMPv3Disabled": "SNMP 或 SNMPv3 協議已禁用。請在策略頁面啟用它。"
         }
     },
     "pageAlertPolicy": {

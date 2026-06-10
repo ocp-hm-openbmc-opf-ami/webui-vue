@@ -2468,7 +2468,10 @@
             "errorEmptyDestination": "目标 URL 为必填项。",
             "errorEmptyCommunityString": "社区字符串为必填项。",
             "sendTestAlertSuccess": "测试警报发送成功。",
-            "sendTestAlertError": "发送测试警报时出错。"
+            "sendTestAlertError": "发送测试警报时出错。",
+            "errorSNMPv1Disabled": "SNMP 或 SNMPv1 协议已禁用。请在策略页面启用它。",
+            "errorSNMPv2cDisabled": "SNMP 或 SNMPv2c 协议已禁用。请在策略页面启用它。",
+            "errorSNMPv3Disabled": "SNMP 或 SNMPv3 协议已禁用。请在策略页面启用它。"
         }
     },
     "pageAlertPolicy": {

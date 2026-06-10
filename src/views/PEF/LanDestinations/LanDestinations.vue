@@ -519,6 +519,42 @@ export default {
     async handleModalOk(bvModalEvent) {
       bvModalEvent.preventDefault();
 
+      const snmpv1Enabled = this.$store.getters['snmp/snmpv1Enabled'];
+      const snmpv2cEnabled = this.$store.getters['snmp/snmpv2cEnabled'];
+      const snmpv3Enabled = this.$store.getters['snmp/snmpv3Enabled'];
+      const snmpProtocolEnabled = this.$store.getters['snmp/snmpProtocol'];
+
+      if (
+        this.form.protocol === 'SNMPv1' &&
+        !snmpProtocolEnabled &&
+        !snmpv1Enabled
+      ) {
+        this.errorToast(
+          this.$t('pageLanDestinations.toast.errorSNMPv1Disabled'),
+        );
+        return;
+      }
+      if (
+        this.form.protocol === 'SNMPv2c' &&
+        !snmpProtocolEnabled &&
+        !snmpv2cEnabled
+      ) {
+        this.errorToast(
+          this.$t('pageLanDestinations.toast.errorSNMPv2cDisabled'),
+        );
+        return;
+      }
+      if (
+        this.form.protocol === 'SNMPv3' &&
+        !snmpProtocolEnabled &&
+        !snmpv3Enabled
+      ) {
+        this.errorToast(
+          this.$t('pageLanDestinations.toast.errorSNMPv3Disabled'),
+        );
+        return;
+      }
+
       // Validation
       if (!this.isSmtpProtocol && !this.form.destination) {
         this.errorToast(

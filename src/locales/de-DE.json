@@ -2472,7 +2472,10 @@
         "errorEmptyDestination": "Ziel-URL erforderlich.",
         "errorEmptyCommunityString": "Community-Zeichenfolge erforderlich.",
         "sendTestAlertSuccess": "Testbenachrichtigung erfolgreich gesendet.",
-        "sendTestAlertError": "Fehler beim Senden der Testbenachrichtigung."
+        "sendTestAlertError": "Fehler beim Senden der Testbenachrichtigung.",
+        "errorSNMPv1Disabled": "SNMP oder SNMPv1-Protokoll ist deaktiviert. Bitte aktivieren Sie es auf der Richtlinienseite.",
+        "errorSNMPv2cDisabled": "SNMP oder SNMPv2c-Protokoll ist deaktiviert. Bitte aktivieren Sie es auf der Richtlinienseite.",
+        "errorSNMPv3Disabled": "SNMP oder SNMPv3-Protokoll ist deaktiviert. Bitte aktivieren Sie es auf der Richtlinienseite."
       }
     },
     "pageAlertPolicy": {

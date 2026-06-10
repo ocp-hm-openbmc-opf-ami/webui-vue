@@ -2467,7 +2467,10 @@
             "errorEmptyDestination": "Destination URL is required.",
             "errorEmptyCommunityString": "Community String is required.",
             "sendTestAlertSuccess": "Test Alert sent successfully.",
-            "sendTestAlertError": "Error in sending Test Alert."
+            "sendTestAlertError": "Error in sending Test Alert.",
+            "errorSNMPv1Disabled": "SNMP or SNMPv1 protocol is disabled. Please enable it in Policies page.",
+            "errorSNMPv2cDisabled": "SNMP or SNMPv2c protocol is disabled. Please enable it in Policies page.",
+            "errorSNMPv3Disabled": "SNMP or SNMPv3 protocol is disabled. Please enable it in Policies page."
         }
     },
     "pageAlertPolicy": {
