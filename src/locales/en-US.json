@@ -3063,7 +3063,7 @@
         "maxPhysicalDeviceCount": "Max Physical Devices Count",
         "logicalDevicesCount": "Logical Device Count",
         "maxLogicalDevicesCount": "Max Logical Devices Count",
-        "maxPhysicalDevicesCountPerLogicalDevicesCount": "Max Physical Devices Count Per Logical Devices Count",
+        "maxPhysicalDevicesCountPerLogicalDevices": "Max Physical Devices Count Per Logical Devices",
         "hotSparesCount": "Hot Spares Count",
         "ldDegradedCount": "Degraded Logical Device Count",
         "ldOfflineCount": "Offline Logical Device Count",

@@ -3057,7 +3057,7 @@
         "maxPhysicalDeviceCount": "最大實體設備數量",
         "logicalDevicesCount": "邏輯設備數量",
         "maxLogicalDevicesCount": "最大邏輯設備數量",
-        "maxPhysicalDevicesCountPerLogicalDevicesCount": "每個邏輯設備的最大實體設備數量",
+        "maxPhysicalDevicesCountPerLogicalDevices": "每個邏輯設備的最大實體設備數量",
         "hotSparesCount": "熱備援數量",
         "ldDegradedCount": "降級邏輯裝置數量",
         "ldOfflineCount": "離線邏輯裝置數量",

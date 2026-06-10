@@ -3044,7 +3044,7 @@
         "maxPhysicalDeviceCount": "最大物理设备数量",
         "logicalDevicesCount": "逻辑设备数量",
         "maxLogicalDevicesCount": "最大逻辑设备数量",
-        "maxPhysicalDevicesCountPerLogicalDevicesCount": "每个逻辑设备的最大实体设备数量",
+        "maxPhysicalDevicesCountPerLogicalDevices": "每个逻辑设备的最大物理设备数量",
         "hotSparesCount": "热备份数量",
         "ldDegradedCount": "降级逻辑设备数量",
         "ldOfflineCount": "离线逻辑设备数量",

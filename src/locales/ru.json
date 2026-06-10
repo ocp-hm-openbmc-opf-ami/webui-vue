@@ -3055,7 +3055,7 @@
         "maxPhysicalDeviceCount": "Максимальное количество физических устройств",
         "logicalDevicesCount": "Количество логических устройств",
         "maxLogicalDevicesCount": "Максимальное количество логических устройств",
-        "maxPhysicalDevicesCountPerLogicalDevicesCount": "Максимальное количество физических устройств на логическое устройство",
+        "maxPhysicalDevicesCountPerLogicalDevices": "Максимальное количество физических устройств на одно логическое устройство",
         "hotSparesCount": "Количество горячих резервов",
         "ldDegradedCount": "Количество деградированных логических устройств",
         "ldOfflineCount": "Количество отключенных логических устройств",
