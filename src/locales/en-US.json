@@ -96,7 +96,7 @@
             "warning": "Warning",
             "informational": "Informational",
             "unknown": "Unknown",
-            "good": "Good"
+            "good": "Good",
             "standbyoffline": "StandbyOffline"
         },
         "table": {

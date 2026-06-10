@@ -96,7 +96,7 @@
             "warning": "Предупреждение",
             "informational": "Информационное",
             "unknown": "Неизвестно",
-            "good": "Хорошо"
+            "good": "Хорошо",
             "standbyoffline": "StandbyOffline"
         },
         "table": {
