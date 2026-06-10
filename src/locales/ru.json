@@ -554,7 +554,6 @@
             "health": "Состояние",
             "powerState": "Состояние питания",
             "assetTag": "Инвентарный номер",
-            "indicatorLED": "Светодиод индикации",
             "locationIndicatorActive": "Активный индикатор местоположения",
             "manufacturer": "Производитель",
             "partNumber": "Артикул",

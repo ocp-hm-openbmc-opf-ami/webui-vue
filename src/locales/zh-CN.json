@@ -554,7 +554,6 @@
             "health": "健康",
             "powerState": "电源状态",
             "assetTag": "资产标签",
-            "indicatorLED": "LED 指示灯",
             "locationIndicatorActive": "位置指示器激活",
             "manufacturer": "制造商",
             "partNumber": "零件编号",

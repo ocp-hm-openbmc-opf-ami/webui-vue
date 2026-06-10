@@ -555,7 +555,6 @@
             "health": "Funktionszustand",
             "powerState": "Stromzustand",
             "assetTag": "Inventarkennzeichen",
-            "indicatorLED": "Status-LED",
             "locationIndicatorActive": "Standortanzeige aktiv",
             "manufacturer": "Hersteller",
             "partNumber": "Teilenummer",

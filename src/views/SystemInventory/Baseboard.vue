@@ -24,10 +24,6 @@ export default {
           label: this.$t('pageSystemInventory.baseBoard.name'),
         },
         {
-          key: 'indicatorLED',
-          label: this.$t('pageSystemInventory.baseBoard.indicatorLED'),
-        },
-        {
           key: 'locationIndicatorActive',
           label: this.$t(
             'pageSystemInventory.baseBoard.locationIndicatorActive',

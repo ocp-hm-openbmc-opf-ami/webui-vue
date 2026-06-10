@@ -553,7 +553,6 @@
             "health": "Health",
             "powerState": "Power State",
             "assetTag": "Asset Tag",
-            "indicatorLED": "Indicator LED",
             "locationIndicatorActive": "LocationIndicatorActive",
             "manufacturer": "Manufacturer",
             "partNumber": "Part Number",

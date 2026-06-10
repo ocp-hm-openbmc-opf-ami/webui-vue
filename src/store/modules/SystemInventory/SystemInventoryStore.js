@@ -363,7 +363,6 @@ const SystemInventoryStore = {
             : response.data?.LocationIndicatorActive === false
               ? response.data?.LocationIndicatorActive
               : 'NA';
-          baseBoard.indicatorLED = response.data?.IndicatorLED || 'NA';
           baseBoard.manufacturer = response.data?.Manufacturer || 'NA';
           baseBoard.powerState = response.data?.PowerState || 'NA';
           baseBoard.serialNumber = response.data?.SerialNumber || 'NA';

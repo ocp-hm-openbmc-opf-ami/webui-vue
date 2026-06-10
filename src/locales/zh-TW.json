@@ -556,7 +556,6 @@
             "health": "健康",
             "powerState": "電源狀態",
             "assetTag": "資產標籤",
-            "indicatorLED": "LED 指示燈",
             "locationIndicatorActive": "位置指示器激活",
             "manufacturer": "製造商",
             "partNumber": "零件號",
