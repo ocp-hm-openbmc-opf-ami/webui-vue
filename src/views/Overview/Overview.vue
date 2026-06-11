@@ -102,12 +102,12 @@ export default {
     const promises = [
       eventsPromise,
       firmwarePromise,
-      inventoryPromise,
       networkPromise,
       powerPromise,
       quicklinksPromise,
       serverPromise,
     ];
+    if (this.showInventory) promises.push(inventoryPromise);
     if (this.showDumps) promises.push(dumpsPromise);
     Promise.all(promises).finally(() => this.endLoader());
   },

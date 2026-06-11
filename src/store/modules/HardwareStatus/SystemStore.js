@@ -62,12 +62,13 @@ const SystemStore = {
   actions: {
     async getSystem({ commit }) {
       return await api
-        .get('/redfish/v1')
-        .then((response) =>
-          api.get(
-            `${response.data.Systems?.['@odata.id'] ?? '/redfish/v1/Systems'}/system`,
-          ),
-        )
+        .get('/redfish/v1/Systems')
+        .then((response) => {
+          const members = response.data?.Members;
+          if (!members?.length)
+            return Promise.reject(new Error('No systems found'));
+          return api.get(members[0]['@odata.id']);
+        })
         .then(({ data }) => {
           commit('setSystemInfo', data);
           if (

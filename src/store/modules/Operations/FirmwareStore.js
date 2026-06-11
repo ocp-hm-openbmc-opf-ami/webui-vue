@@ -125,7 +125,9 @@ const FirmwareStore = {
       return api
         .get('/redfish/v1/Managers/' + managerInstance)
         .then(({ data: { Links, DateTime } }) => {
-          const id = Links?.ActiveSoftwareImage['@odata.id'].split('/').pop();
+          const id = Links?.ActiveSoftwareImage?.['@odata.id']
+            ?.split('/')
+            ?.pop();
           commit('setFirmwareBmcDateTime', DateTime);
           commit('setActiveBmcFirmwareId', id);
         })
@@ -135,7 +137,9 @@ const FirmwareStore = {
       return api
         .get('/redfish/v1/Systems/system/Bios')
         .then(({ data: { Links } }) => {
-          const id = Links?.ActiveSoftwareImage['@odata.id'].split('/').pop();
+          const id = Links?.ActiveSoftwareImage?.['@odata.id']
+            ?.split('/')
+            ?.pop();
           commit('setActiveHostFirmwareId', id);
         })
         .catch((error) => console.log(error));
@@ -159,11 +163,13 @@ const FirmwareStore = {
           const gpgpuFirmware = [];
           const firmwareInventoryValues = [];
           response.forEach(({ data }) => {
-            firmwareInventoryValues.push(data?.['@odata.id'].split('/').pop());
+            firmwareInventoryValues.push(
+              data?.['@odata.id']?.split('/')?.pop(),
+            );
             commit('setInventryFirmwareData', firmwareInventoryValues);
             const firmwareType = data?.RelatedItem?.[0]?.['@odata.id']
-              .split('/')
-              .pop();
+              ?.split('/')
+              ?.pop();
             const item = {
               version: data?.Version,
               id: data?.Id,
@@ -171,7 +177,7 @@ const FirmwareStore = {
               status: data?.Status?.Health,
             };
             // Check if bmc_active is available
-            var fwDeviceName = data?.['@odata.id'].split('/').pop();
+            var fwDeviceName = data?.['@odata.id']?.split('/')?.pop();
             if (
               fwDeviceName === 'bmc_active' ||
               fwDeviceName === 'bios_active'
