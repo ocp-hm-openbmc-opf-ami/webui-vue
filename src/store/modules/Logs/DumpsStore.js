@@ -94,7 +94,7 @@ const DumpsStore = {
         })
         .catch((error) => console.log(error));
     },
-    async createBmcDump() {
+    async createBmcDump({ commit }) {
       return await api
         .post(
           '/redfish/v1/Managers/' +
@@ -105,9 +105,18 @@ const DumpsStore = {
             OEMDiagnosticDataType: '',
           },
         )
+        .then(() => {
+          commit('setHasActiveDumpTask', true);
+        })
         .catch((error) => {
           console.log(error);
-          throw new Error(i18n.t('pageDumps.toast.errorStartBmcDump'));
+          if (
+            error.response?.data?.error?.code?.includes('dumpQuotaExceeded')
+          ) {
+            throw new Error(i18n.t('pageDumps.toast.dumpQuotaExceeded'));
+          } else {
+            throw new Error(i18n.t('pageDumps.toast.errorStartBmcDump'));
+          }
         });
     },
     async createSystemDump() {
@@ -121,7 +130,13 @@ const DumpsStore = {
         )
         .catch((error) => {
           console.log(error);
-          throw new Error(i18n.t('pageDumps.toast.errorStartSystemDump'));
+          if (
+            error.response?.data?.error?.code?.includes('dumpQuotaExceeded')
+          ) {
+            throw new Error(i18n.t('pageDumps.toast.dumpQuotaExceeded'));
+          } else {
+            throw new Error(i18n.t('pageDumps.toast.errorStartSystemDump'));
+          }
         });
     },
     async deleteDumps({ dispatch }, uris = []) {

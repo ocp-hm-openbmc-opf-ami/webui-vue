@@ -1144,6 +1144,7 @@
         },
         "toast": {
             "createDumpConfirmation": "您确定要创建新的 BMC 转储吗？此操作无法撤消。",
+            "dumpQuotaExceeded": "无法创建转储，因为已达到 MaxNumberOfRecords (150)，或可用转储存储空间 (1024 KB) 不足。",
             "errorDeleteDump": "删除转储 %{count} | 删除转储 %{count}。",
             "errorStartBmcDump": "启动新BMC转储发生错误。",
             "errorStartSystemDump": "启动新系统转储发生错误。",

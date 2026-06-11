@@ -1147,6 +1147,7 @@
         },
         "toast": {
             "createDumpConfirmation": "Möchten Sie wirklich einen neuen BMC-Dump erstellen? Diese Aktion kann nicht rückgängig gemacht werden.",
+            "dumpQuotaExceeded": "Der Dump kann nicht erstellt werden, da entweder die MaxNumberOfRecords (150) erreicht wurde oder der verfügbare Dump-Speicher (1024 KB) nicht ausreicht.",
             "errorDeleteDump": "Fehler beim Löschen von %{count} Dump. | Fehler beim Löschen von %{count} Dumps.",
             "errorStartBmcDump": "Fehler beim Starten eines neuen BMC-Dumps.",
             "errorStartSystemDump": "Fehler beim Starten eines neuen System-Dumps.",

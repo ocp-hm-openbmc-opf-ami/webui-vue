@@ -1143,6 +1143,7 @@
         },
         "toast": {
             "createDumpConfirmation": "Are you sure you want to create a new BMC Dump? This action cannot be undone.",
+            "dumpQuotaExceeded": "The dump cannot be created because either the MaxNumberOfRecords (150) has been reached or the available dump storage (1024 KB) is insufficient.",
             "errorDeleteDump": "Error deleting %{count} Dump. | Error deleting %{count} Dumps.",
             "errorStartBmcDump": "Error in starting new BMC Dump.",
             "errorStartSystemDump": "Error in starting new System Dump.",
