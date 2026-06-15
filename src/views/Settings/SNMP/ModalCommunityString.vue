@@ -51,6 +51,7 @@
                   type="text"
                   data-test-id="snmp-input-communityString"
                   :state="getValidationState($v.form.communityString)"
+                  :disabled="!snmpCommunityData"
                   @input="$v.form.communityString.$touch()"
                 />
                 <b-form-invalid-feedback role="alert">
