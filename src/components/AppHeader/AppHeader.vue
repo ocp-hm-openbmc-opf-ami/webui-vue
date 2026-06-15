@@ -349,13 +349,6 @@ export default {
     if (this.licenseStatus) {
       this.$store.dispatch('license/getUserAlertCount');
     }
-  },
-  beforeDestroy() {
-    if (this.pollingInterval) {
-      clearInterval(this.pollingInterval);
-      this.pollingInterval = null;
-    }
-    this.$root.$off('refresh-dashboard-data', this.fetchData);
     this.serverStatusIcon = this.computeServerStatusIcon(
       this.$store.getters['dashboard/powerStatus'],
     );
@@ -384,6 +377,13 @@ export default {
         value: 'de-DE',
         text: 'Germany - Deutsch',
       });
+  },
+  beforeDestroy() {
+    if (this.pollingInterval) {
+      clearInterval(this.pollingInterval);
+      this.pollingInterval = null;
+    }
+    this.$root.$off('refresh-dashboard-data', this.fetchData);
   },
   mounted() {
     this.$root.$on(
