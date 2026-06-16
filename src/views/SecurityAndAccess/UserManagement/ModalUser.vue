@@ -499,11 +499,6 @@
                         : ''
                     "
                   >
-                    <template #first>
-                      <b-form-select-option :value="null" disabled>
-                        {{ $t('global.form.selectAnOption') }}
-                      </b-form-select-option>
-                    </template>
                   </b-form-select>
                   <b-form-invalid-feedback role="alert">
                     <template
@@ -602,7 +597,7 @@ export default {
         snmpUserEnable: false,
         encryption: null,
         algorithm: null,
-        readWritePermission: null,
+        readWritePermission: 'ReadOnly',
         channelList: [],
         channelAccess: [],
       },
@@ -716,14 +711,17 @@ export default {
         this.user.snmpUserEnabled == 'Disabled' &&
         newValue === true;
     },
-    networkChannelList() {
-      // Initialize arrays with the correct length when channel list changes
-      this.form.channelAccess = new Array(this.networkChannelList.length).fill(
-        false,
-      );
-      this.form.channelList = new Array(this.networkChannelList.length).fill(
-        '',
-      );
+    networkChannelList: {
+      immediate: true,
+      handler() {
+        // Initialize arrays with the correct length when channel list changes
+        this.form.channelAccess = new Array(
+          this.networkChannelList.length,
+        ).fill(false);
+        this.form.channelList = new Array(this.networkChannelList.length).fill(
+          'ReadOnly',
+        );
+      },
     },
   },
   validations() {
@@ -934,9 +932,9 @@ export default {
       this.form.snmpUserEnable = false;
       this.form.encryption = null;
       this.form.algorithm = null;
-      this.form.readWritePermission = null;
+      this.form.readWritePermission = 'ReadOnly';
       this.form.channelList = new Array(this.form.channelAccess.length).fill(
-        '',
+        'ReadOnly',
       );
       this.form.channelAccess = [];
       this.$v.$reset();
