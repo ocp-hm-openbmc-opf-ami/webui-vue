@@ -57,7 +57,7 @@
                 :disabled="
                   (!newUser && originalUsername === disabled) ||
                   globalPrivilege !== 'Administrator' ||
-                  form.username === 'root'
+                  checkDefaultUser()
                 "
                 @input="$v.form.status.$touch()"
               >
@@ -73,8 +73,7 @@
                 :value="true"
                 data-test-id="userManagement-radioButton-statusEnabled"
                 :disabled="
-                  form.username === 'root' ||
-                  globalPrivilege !== 'Administrator'
+                  checkDefaultUser() || globalPrivilege !== 'Administrator'
                 "
                 @input="$v.form.PasswordChangeRequired.$touch()"
               >
@@ -86,8 +85,7 @@
                 data-test-id="userManagement-radioButton-statusDisabled"
                 :value="false"
                 :disabled="
-                  form.username === 'root' ||
-                  globalPrivilege !== 'Administrator'
+                  checkDefaultUser() || globalPrivilege !== 'Administrator'
                 "
                 @input="$v.form.PasswordChangeRequired.$touch()"
               >
@@ -102,8 +100,7 @@
                 name="snmp-user-enable"
                 :value="true"
                 :disabled="
-                  form.username === 'root' ||
-                  globalPrivilege !== 'Administrator'
+                  checkDefaultUser() || globalPrivilege !== 'Administrator'
                 "
                 data-test-id="userManagement-radioButton-snmpUserEnable"
                 @input="$v.form.snmpUserEnable.$touch()"
@@ -130,8 +127,7 @@
                 :value="true"
                 data-test-id="userManagement-vmediaAccess-statusEnabled"
                 :disabled="
-                  form.username === 'root' ||
-                  globalPrivilege !== 'Administrator'
+                  checkDefaultUser() || globalPrivilege !== 'Administrator'
                 "
                 @input="$v.form.vmediaAccess.$touch()"
               >
@@ -143,8 +139,7 @@
                 data-test-id="userManagement-vmediaAccess-statusDisabled"
                 :value="false"
                 :disabled="
-                  form.username === 'root' ||
-                  globalPrivilege !== 'Administrator'
+                  checkDefaultUser() || globalPrivilege !== 'Administrator'
                 "
                 @input="$v.form.vmediaAccess.$touch()"
               >
@@ -180,7 +175,7 @@
                     :disabled="
                       (!newUser && originalUsername === disabled) ||
                       globalPrivilege !== 'Administrator' ||
-                      newUser === 'root'
+                      checkDefaultUser()
                     "
                     autocomplete="new-username"
                     @input="$v.form.username.$touch()"
@@ -468,7 +463,7 @@
                   :id="'channelAccess' + index"
                   v-model="form.channelAccess[index]"
                   :disabled="
-                    (!newUser && originalUsername === 'root') ||
+                    (!newUser && checkDefaultUser()) ||
                     globalPrivilege !== 'Administrator'
                   "
                 >
@@ -494,7 +489,7 @@
                     "
                     data-test-id="userManagement-select-channelList"
                     :disabled="
-                      (!newUser && originalUsername === 'root') ||
+                      (!newUser && checkDefaultUser()) ||
                       globalPrivilege !== 'Administrator'
                     "
                     @input="
@@ -922,6 +917,9 @@ export default {
       this.$nextTick(() => {
         this.$refs.modal.hide();
       });
+    },
+    checkDefaultUser() {
+      return this.form.username === 'root' || this.form.username === 'admin';
     },
     resetForm() {
       this.form.originalUsername = '';
