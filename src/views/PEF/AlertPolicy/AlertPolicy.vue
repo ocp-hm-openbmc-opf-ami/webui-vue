@@ -118,9 +118,20 @@
               id="alert-group-num"
               v-model.number="form.alertPolicyGroupNum"
               type="number"
-              readonly
-              disabled
+              min="1"
+              max="15"
+              :state="getValidationState($v.form.alertPolicyGroupNum)"
+              required
+              @input="$v.form.alertPolicyGroupNum.$touch()"
             ></b-form-input>
+            <b-form-invalid-feedback role="alert">
+              <template v-if="!$v.form.alertPolicyGroupNum.required">
+                {{ $t('global.form.fieldRequired') }}
+              </template>
+              <template v-else-if="!$v.form.alertPolicyGroupNum.pattern">
+                {{ $t('global.form.valueMustBeBetween', { min: 1, max: 15 }) }}
+              </template>
+            </b-form-invalid-feedback>
           </b-form-group>
 
           <b-form-group
@@ -327,6 +338,12 @@ export default {
       form: {
         channelNo: {
           required,
+        },
+        alertPolicyGroupNum: {
+          required,
+          pattern: function (value) {
+            return this.validateRange(value, 1, 15);
+          },
         },
         destinationSel: {
           required,
