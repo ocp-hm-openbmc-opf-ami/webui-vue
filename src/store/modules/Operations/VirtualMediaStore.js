@@ -301,6 +301,39 @@ const VirtualMediaStore = {
                 'pageVirtualMedia.toast.virtualMediaErrorFileMountImageTooSmall',
               ),
             );
+          } else if (
+            error.response.status == 400 &&
+            error.response.data.error.message.includes('UserName/Password')
+          ) {
+            throw new Error(
+              i18n.t('pageVirtualMedia.toast.invalidUserNamePassword'),
+            );
+          } else if (
+            error.response.status == 400 &&
+            error.response.data.error.code.includes('InvalidIPAddress')
+          ) {
+            throw new Error(i18n.t('pageVirtualMedia.toast.invalidIPAddress'));
+          } else if (
+            error.response.status == 400 &&
+            error.response.data.error.code.includes('InvalidImagePath')
+          ) {
+            throw new Error(i18n.t('pageVirtualMedia.toast.invalidImagePath'));
+          } else if (
+            error.response.status == 400 &&
+            error.response.data.error.code.includes(
+              'RemoteServiceConnectionRefused',
+            )
+          ) {
+            throw new Error(
+              i18n.t('pageVirtualMedia.toast.remoteServiceConnectionRefused'),
+            );
+          } else if (
+            error.response.status == 400 &&
+            error.response.data.error.code.includes('RemoteServiceTimeout')
+          ) {
+            throw new Error(
+              i18n.t('pageVirtualMedia.toast.remoteServiceTimeout'),
+            );
           } else {
             throw new Error(i18n.t('pageVirtualMedia.toast.errorMounting'));
           }

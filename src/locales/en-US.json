@@ -3032,7 +3032,12 @@
             "virtualMediaErrorFileTooSmall": "The selected file must be at least 600 KB.",
             "virtualMediaErrorFileMountImageTooSmall": "The mounted image is invalid or does not meet the minimum size requirement of 600 KB.",
             "infoTitle": "External Server Start button",
-            "infoMessage": "The Start button is enabled only if a Password is set and the Mount Type is CIFS or HTTPS."
+            "infoMessage": "The Start button is enabled only if a Password is set and the Mount Type is CIFS or HTTPS.",
+            "invalidUserNamePassword": "Invalid UserName or Password.",
+            "invalidIPAddress": "Invalid IP Address.",
+            "invalidImagePath": "Invalid Image Path.",
+            "remoteServiceConnectionRefused": "The connection to the remote service was refused. Ensure the target service is running.",
+            "remoteServiceTimeout": "The connection to the remote service timed out. Ensure the target service is running and reachable."
         }
     },
     "pageAdapter": {

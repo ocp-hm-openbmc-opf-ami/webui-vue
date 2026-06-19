@@ -449,8 +449,10 @@ export default {
             connectionData.imagePath;
           break;
       }
-      data.UserName = connectionData.username;
-      data.Password = connectionData.password;
+      if (connectionData.transferProtocolType !== 'NFS') {
+        data.UserName = connectionData.username;
+        data.Password = connectionData.password;
+      }
       data.WriteProtected = !connectionData.isRW;
       data.TransferProtocolType = connectionData.transferProtocolType;
       data.Inserted = true;

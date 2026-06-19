@@ -3026,7 +3026,12 @@
             "virtualMediaErrorFileTooSmall": "所選檔案必須至少為 600 KB。",
             "virtualMediaErrorFileMountImageTooSmall": "掛載的映像檔無效或不符合 600 KB 的最低大小要求。",
             "infoTitle": "外部伺服器啟動按鈕",
-            "infoMessage": "僅當設定了密碼並且安裝類型為 CIFS 或 HTTPS 時，才會啟用「開始」按鈕。"
+            "infoMessage": "僅當設定了密碼並且安裝類型為 CIFS 或 HTTPS 時，才會啟用「開始」按鈕。",
+            "invalidUserNamePassword": "使用者名稱或密碼無效。",
+            "invalidIPAddress": "無效的 IP 位址。",
+            "invalidImagePath": "無效的映像路徑。",
+            "remoteServiceConnectionRefused": "連線到遠端服務被拒絕。請確保目標服務正在運行。",
+            "remoteServiceTimeout": "連線到遠端服務超時。請確保目標服務正在運行並且可訪問。"
         }
     },
     "pageAdapter": {

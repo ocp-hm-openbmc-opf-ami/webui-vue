@@ -3013,7 +3013,12 @@
             "virtualMediaErrorFileTooSmall": "所选文件必须至少为 600 KB。",
             "virtualMediaErrorFileMountImageTooSmall": "挂载的镜像无效或不符合 600 KB 的最低大小要求。",
             "infoTitle": "外部服务器启动按钮",
-            "infoMessage": "仅当设置了密码并且安装类型为 CIFS 或 HTTPS 时，才会启用 '开始' 按钮。"
+            "infoMessage": "仅当设置了密码并且安装类型为 CIFS 或 HTTPS 时，才会启用 '开始' 按钮。",
+            "invalidUserNamePassword": "用户名或密码无效。",
+            "invalidIPAddress": "无效的 IP 地址。",
+            "invalidImagePath": "无效的镜像路径。",
+            "remoteServiceConnectionRefused": "连接到远程服务被拒绝。请确保目标服务正在运行。",
+            "remoteServiceTimeout": "连接到远程服务超时。请确保目标服务正在运行并且可访问。"
         }
     },
     "pageAdapter": {

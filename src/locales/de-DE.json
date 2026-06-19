@@ -3028,7 +3028,12 @@
 	        "virtualMediaErrorFileTooSmall": "Die ausgewählte Datei muss mindestens 600 KB groß sein.",
             "virtualMediaErrorFileMountImageTooSmall": "Das eingehängte Abbild ist ungültig oder erfüllt nicht die Mindestgrößenanforderung von 600 KB.",
             "infoTitle": "Externer Server Start-Button",
-            "infoMessage": "Die Schaltfläche Start ist nur aktiviert, wenn ein Passwort gesetzt ist und der Mount-Typ CIFS oder HTTPS ist."
+            "infoMessage": "Die Schaltfläche Start ist nur aktiviert, wenn ein Passwort gesetzt ist und der Mount-Typ CIFS oder HTTPS ist.",
+            "invalidUserNamePassword": "Ungültiger Benutzername oder Passwort.",
+            "invalidIPAddress": "Ungültige IP-Adresse.",
+            "invalidImagePath": "Ungültiger Image-Pfad.",
+            "remoteServiceConnectionRefused": "Die Verbindung zum Remote-Dienst wurde abgelehnt. Stellen Sie sicher, dass der Ziel-Dienst läuft.",
+            "remoteServiceTimeout": "Die Verbindung zum Remote-Dienst ist abgelaufen. Stellen Sie sicher, dass der Ziel-Dienst läuft und erreichbar ist."
         }
     },
     "pageAdapter": {
