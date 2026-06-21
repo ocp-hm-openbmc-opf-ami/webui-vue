@@ -2152,6 +2152,7 @@
             "confirmMessage": "Diese Konfiguration kann die IP-Adresse des Geräts ändern, wodurch der weitere Zugriff unmöglich wird. Nach Bestätigung der Geräte-IP können Sie sich mit der neuen IP anmelden. Möchten Sie fortfahren?",
             "informatiomTitle": "Information",
             "informationMessage": "Netzwerkkonfiguration wurde erfolgreich zurückgesetzt. Bitte schließen Sie diese Browsersitzung und öffnen Sie eine neue, um sich mit der neuen IP des Geräts zu verbinden.",
+            "noOperationWarning": "Die IPv6-Adresseneinstellungen sind identisch, daher ist kein Speichern erforderlich.",
             "lanInterface": "LAN-Schnittstelle",
             "enableLAN": "LAN aktivieren",
             "confirmMsg": "Diese Funktion kann die IP-Adresse des Geräts ändern, und Sie könnten die Verbindung in dieser Browsersitzung verlieren. Bitte verbinden Sie sich nach der Änderung mit einer neuen Browsersitzung erneut. Möchten Sie fortfahren?"

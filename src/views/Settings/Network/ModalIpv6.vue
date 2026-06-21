@@ -6,6 +6,13 @@
     @hidden="resetForm"
   >
     <b-form id="form-ipv6" @submit.prevent="handleSubmit">
+      <b-row v-if="sameIpv6Settings">
+        <b-col>
+          <b-alert show variant="warning" class="mb-3">
+            {{ $t('pageNetwork.modal.noOperationWarning') }}
+          </b-alert>
+        </b-col>
+      </b-row>
       <b-row>
         <b-col v-if="getOemAmiActions" sm="6">
           <b-form-group
@@ -19,7 +26,7 @@
               :options="ipv6IndexOptions"
               data-test-id="ipv6Index-option"
               :state="getValidationState($v.form.ipv6Index)"
-              @input="$v.form.ipv6Index.$touch()"
+              @input="onFieldInput('ipv6Index')"
               @change="indexChange"
               ><template #first>
                 <b-form-select-option :value="valuedefault" disabled>
@@ -44,7 +51,7 @@
               v-model="form.ipAddress"
               type="text"
               :state="getValidationState($v.form.ipAddress)"
-              @input="$v.form.ipAddress.$touch()"
+              @input="onFieldInput('ipAddress')"
             />
             <b-form-invalid-feedback role="alert">
               <template v-if="!$v.form.ipAddress.required">
@@ -70,7 +77,7 @@
               v-model="form.prefixLength"
               type="text"
               :state="getValidationState($v.form.prefixLength)"
-              @input="$v.form.prefixLength.$touch()"
+              @input="onFieldInput('prefixLength')"
             />
             <b-form-invalid-feedback role="alert">
               <template v-if="!$v.form.prefixLength.required">
@@ -96,7 +103,7 @@
               v-model="form.gateway"
               type="text"
               :state="getValidationState($v.form.gateway)"
-              @input="$v.form.gateway.$touch()"
+              @input="onFieldInput('gateway')"
             />
             <b-form-invalid-feedback role="alert">
               <template v-if="!$v.form.gateway.required">
@@ -179,6 +186,7 @@ export default {
       },
       valuedefault: '',
       isAddIpv6: false,
+      sameIpv6Settings: false,
       ipv6IndexOptions: [
         {
           text: 0,
@@ -258,6 +266,7 @@ export default {
     },
     addIpv6() {
       this.isAddIpv6 = this.addIpv6;
+      this.sameIpv6Settings = false;
       if (this.isAddIpv6) {
         this.form.ipAddress = null;
         this.form.gateway = null;
@@ -265,6 +274,7 @@ export default {
       }
     },
     ipv6Data() {
+      this.sameIpv6Settings = false;
       this.form.ipAddress = this.ipv6Data?.Address;
       this.form.gateway = this.ipv6Data?.Gateway;
       this.form.prefixLength = this.ipv6Data?.PrefixLength;
@@ -311,6 +321,10 @@ export default {
     handleSubmit() {
       this.$v.$touch();
       if (this.$v.$invalid) return;
+      if (!this.isAddIpv6 && this.isSameIpv6Settings()) {
+        this.sameIpv6Settings = true;
+        return;
+      }
       let params = {
         Address: this.form.ipAddress,
         PrefixLength: this.form.prefixLength,
@@ -331,6 +345,7 @@ export default {
       });
     },
     resetForm() {
+      this.sameIpv6Settings = false;
       if (this.isAddIpv6) {
         this.form.ipAddress = null;
         this.form.gateway = null;
@@ -345,12 +360,37 @@ export default {
       this.$v.$reset();
       this.$emit('closeAddModal', false);
     },
+    onFieldInput(field) {
+      this.sameIpv6Settings = false;
+      this.$v.form[field].$touch();
+    },
+    isSameIpv6Settings() {
+      const existingAddress = this.ipv6Data?.Address ?? '';
+      const existingPrefixLength = String(this.ipv6Data?.PrefixLength ?? '');
+      const existingGateway = this.ipv6Data?.Gateway ?? '';
+      const existingIpv6Index = String(this.ipv6Data?.ipv6Index ?? '');
+
+      const currentAddress = this.form.ipAddress ?? '';
+      const currentPrefixLength = String(this.form.prefixLength ?? '');
+      const currentGateway = this.form.gateway ?? '';
+      const currentIpv6Index = String(this.form.ipv6Index ?? '');
+
+      const isAddressSame = currentAddress === existingAddress;
+      const isPrefixSame = currentPrefixLength === existingPrefixLength;
+      const isGatewaySame = currentGateway === existingGateway;
+      const isIndexSame = this.getOemAmiActions
+        ? currentIpv6Index === existingIpv6Index
+        : true;
+
+      return isAddressSame && isPrefixSame && isGatewaySame && isIndexSame;
+    },
     onOk(bvModalEvt) {
       // prevent modal close
       bvModalEvt.preventDefault();
       this.handleSubmit();
     },
     indexChange(value) {
+      this.sameIpv6Settings = false;
       this.ipv6IndexValue?.IPv6StaticAddresses?.some((val) => {
         if (val.Oem.Ami.StaticIPv6AddressIndex === value) {
           this.form.ipAddress = val.Address;

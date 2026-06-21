@@ -2151,6 +2151,7 @@
             "confirmMessage":"這個設定可能改變設備的IP位址，無法更進一步使用. 在確認設備 IP後, 你可以以新IP登入. 你想繼續嗎?",
             "informatiomTitle": "資訊",
             "informationMessage": "成功變更網路設定 請關閉此網頁對談然後開啟新網頁對談使用新IP連接設備。",
+            "noOperationWarning": "IPv6 位址設定相同，無需儲存。",
             "lanInterface":"區域網路介面",
             "enableLAN": "啟用區域網路",
             "confirmMsg": "此功能可能會變更裝置的 IP 位址，並且您可能會在此瀏覽器工作階段中失去連線。套用變更後，請使用新的瀏覽器會話重新連線。您想繼續嗎？"

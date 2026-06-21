@@ -2148,6 +2148,7 @@
             "confirmMessage": "This configuration may change the IP Address of the device, making further access impossible. After confirming the Device’s IP, you can log in with the new IP. Do you want to proceed?",
             "informatiomTitle": "Information",
             "informationMessage": "Network Configuration has been reset successfully. Please close this browser session and open a new browser session to connect to the device with new IP.",
+            "noOperationWarning": "IPv6 Address Settings are same, so no need to save.",
             "lanInterface":"LAN Interface",
             "enableLAN": "Enable LAN",
             "confirmMsg": "This function may change the IP Address of the device, and you may lose connectivity in this browser session. Please reconnect using new browser session after applying the changes. Do you want to proceed?"
