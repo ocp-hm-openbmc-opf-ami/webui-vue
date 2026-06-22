@@ -173,13 +173,18 @@ const SystemInventoryStore = {
                 : data?.OperatingSpeedMHz === 0 || 0.0
                   ? data?.OperatingSpeedMHz
                   : 'NA',
-              sparePartNumber: data.SparePartNumber,
-              instructionSet: data.InstructionSet,
-              version: data.Version,
-              assetTag: data.AssetTag,
-              totalThreads: data.TotalThreads,
-              partNumber: data.PartNumber,
-              serialNumber: data.SerialNumber,
+              instructionSet: VuelidateMixin.methods.getValidValue(
+                data.InstructionSet,
+              ),
+              version: VuelidateMixin.methods.getValidValue(data.Version),
+              assetTag: VuelidateMixin.methods.getValidValue(data.AssetTag),
+              totalThreads: VuelidateMixin.methods.getValidValue(
+                data.TotalThreads,
+              ),
+              partNumber: VuelidateMixin.methods.getValidValue(data.PartNumber),
+              serialNumber: VuelidateMixin.methods.getValidValue(
+                data.SerialNumber,
+              ),
             };
           });
           commit('setProcessors', proccessorInfo);
