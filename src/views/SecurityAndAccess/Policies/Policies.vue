@@ -2174,7 +2174,10 @@ export default {
     changeSNMPState(state) {
       this.$store
         .dispatch('snmp/saveSnmpProtocolState', state ? true : false)
-        .then((message) => this.successToast(message))
+        .then((message) => {
+          this.successToast(message);
+          this.$store.dispatch('snmp/getSNMPProtocolStatus');
+        })
         .catch(({ message }) => this.errorToast(message));
     },
     changeSNMPv1State(state) {
