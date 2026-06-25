@@ -1622,39 +1622,6 @@ export default {
         { value: '57600', text: '57600' },
         { value: '115200', text: '115200' },
       ],
-      maxSessionServicesField: [
-        process.env.VUE_APP_ONETREE_KVM_ENABLED === 'true'
-          ? {
-              key: 'kvmMaxSession',
-              label: this.$t('pagePolicies.kvmMaxSession'),
-              class: 'text-center',
-            }
-          : null,
-        {
-          key: 'redfishMaxSession',
-          label: this.$t('pagePolicies.redfishMaxSession'),
-          class: 'text-center',
-        },
-        process.env.VUE_APP_MODIFY_SSH_POLICY_DISABLED === 'true'
-          ? null
-          : {
-              key: 'sshMaxSession',
-              label: this.$t('pagePolicies.sshMaxSession'),
-              class: 'text-center',
-            },
-        process.env.VUE_APP_ONETREE_MEDIA_REDIRECT_ENABLED === 'true'
-          ? {
-              key: 'vmMaxSession',
-              label: this.$t('pagePolicies.vmMaxSession'),
-              class: 'text-center',
-            }
-          : null,
-        {
-          key: 'webMaxSession',
-          label: this.$t('pagePolicies.webMaxSession'),
-          class: 'text-center',
-        },
-      ],
       kvmSessionTimeOutValue: this.$store.getters['policies/kvmSessionTimeout'],
       webSessionTimeoutValue:
         this.$store.getters['policies/sessionTimeoutValue'],
@@ -1868,6 +1835,27 @@ export default {
     },
     maxSessionServicesInfo() {
       return this.$store.getters['policies/maxSessions'];
+    },
+    maxSessionServicesField() {
+      const info =
+        this.maxSessionServicesInfo && this.maxSessionServicesInfo[0];
+      if (!info) return [];
+      const fieldMap = [
+        { key: 'kvmMaxSession', label: this.$t('pagePolicies.kvmMaxSession') },
+        {
+          key: 'redfishMaxSession',
+          label: this.$t('pagePolicies.redfishMaxSession'),
+        },
+        { key: 'sshMaxSession', label: this.$t('pagePolicies.sshMaxSession') },
+        { key: 'vmMaxSession', label: this.$t('pagePolicies.vmMaxSession') },
+        {
+          key: 'webMaxSession',
+          label: this.$t('pagePolicies.webMaxSession'),
+        },
+      ];
+      return fieldMap
+        .filter(({ key }) => info[key] !== undefined)
+        .map(({ key, label }) => ({ key, label, class: 'text-center' }));
     },
     isMultiSolMode() {
       return this.$store.getters['policies/isMultiSolMode'];
