@@ -235,7 +235,7 @@ const UserManagementStore = {
       const data = {};
       const globalPrivilege = store.getters.userPrivilege(store.state);
       if (globalPrivilege === 'Administrator') {
-        if (originalUsername === 'root') {
+        if (originalUsername === 'root' || originalUsername === 'admin') {
           if (password) {
             data.Password = password;
           }
@@ -266,7 +266,11 @@ const UserManagementStore = {
                 SNMPAccessEnableStatus: snmpUserEnable,
               };
             }
-          } else if (snmpUserEnable === false) {
+          } else if (
+            snmpUserEnable === false &&
+            username !== 'root' &&
+            username !== 'admin'
+          ) {
             oemData.Ami.SNMP = {
               SNMPAccessEnableStatus: snmpUserEnable,
             };
