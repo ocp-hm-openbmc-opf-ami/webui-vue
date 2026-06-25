@@ -220,13 +220,24 @@
                 <template v-if="!$v.form.startDate.required">
                   {{ $t('global.form.fieldRequired') }}
                 </template>
+                <template
+                  v-if="
+                    $v.form.startDate.required && !$v.form.startDate.minDate
+                  "
+                >
+                  {{
+                    $t(
+                      'pageFireWall.firewallSettings.modal.firewallStartDateValidation',
+                    )
+                  }}
+                </template>
               </b-form-invalid-feedback>
               <b-form-datepicker
                 v-model="form.startDate"
                 class="btn-datepicker btn-icon-only"
                 button-only
                 right
-                :min="new Date()"
+                :min="bmcDateTime"
                 :max="form.endDate"
                 :hide-header="true"
                 :locale="locale"
@@ -264,7 +275,20 @@
                 {{ $t('global.form.fieldRequired') }}
               </template>
               <template
-                v-if="$v.form.startTime.required && !$v.form.startTime.pattern"
+                v-if="$v.form.startTime.required && !$v.form.startTime.minTime"
+              >
+                {{
+                  $t(
+                    'pageFireWall.firewallSettings.modal.firewallStartTimeValidation',
+                  )
+                }}
+              </template>
+              <template
+                v-if="
+                  $v.form.startTime.required &&
+                  $v.form.startTime.minTime &&
+                  !$v.form.startTime.pattern
+                "
               >
                 {{ $t('global.form.invalidFormat') }}
               </template>
@@ -306,7 +330,7 @@
                 class="btn-datepicker btn-icon-only"
                 button-only
                 right
-                :min="form.startDate == '' ? new Date() : form.startDate"
+                :min="form.startDate == '' ? bmcDateTime : form.startDate"
                 :hide-header="true"
                 :locale="locale"
                 :label-help="
@@ -384,12 +408,13 @@ import IconCalendar from '@carbon/icons-vue/es/calendar/20';
 import { required, requiredIf, helpers } from 'vuelidate/lib/validators';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import IconCancel from '@carbon/icons-vue/es/rule--cancelled/20';
+import BVToastMixin from '@/components/Mixins/BVToastMixin';
 
 const isoTimeRegex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
 
 export default {
   components: { IconCalendar, IconAdd, IconCancel },
-  mixins: [VuelidateMixin],
+  mixins: [VuelidateMixin, BVToastMixin],
   props: {
     modalSuccess: {
       type: Boolean,
@@ -460,6 +485,11 @@ export default {
       context: null,
     };
   },
+  computed: {
+    bmcDateTime() {
+      return this.$store.getters['global/bmcDateTime'];
+    },
+  },
   watch: {
     modalSuccess: function (value) {
       if (value === true) {
@@ -517,6 +547,14 @@ export default {
               return true;
             }
           }),
+          minTime: () => {
+            const time = this.bmcDateTime?.slice(11, 16);
+            if (this.bmcDateTime?.slice(0, 10) === this.form.startDate) {
+              return time < this.form.startTime;
+            } else {
+              return true;
+            }
+          },
           pattern: helpers.regex('pattern', isoTimeRegex),
         },
         endTime: {
@@ -545,6 +583,22 @@ export default {
               return true;
             }
           }),
+          minDate: () => {
+            if (!this.form.startDate) return true;
+
+            const dateObj = new Date(this.form.startDate);
+            if (isNaN(dateObj.getTime())) return false;
+
+            const formattedDate = dateObj.toISOString().slice(0, 10);
+            if (formattedDate !== this.form.startDate) return false;
+
+            let date = this.bmcDateTime?.slice(0, 10);
+            if (this.form.startDate < this.bmcDateTime?.slice(0, 10)) {
+              return date < this.form.startDate;
+            } else {
+              return true;
+            }
+          },
         },
         endDate: {
           required: requiredIf(function (form) {
@@ -586,6 +640,18 @@ export default {
       this.$v.$reset();
     },
     onOk() {
+      if (this.form.startDate || this.form.endDate) {
+        this.$store
+          .dispatch('global/getBmcTime')
+          .then(() => {
+            this.addNewFirewallRules();
+          })
+          .catch(({ message }) => this.errorToast(message));
+      } else {
+        this.addNewFirewallRules();
+      }
+    },
+    addNewFirewallRules() {
       this.$v.$touch();
       if (this.$v.$invalid) return;
       let startdateval = '',

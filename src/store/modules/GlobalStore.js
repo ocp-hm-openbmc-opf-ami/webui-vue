@@ -1,4 +1,5 @@
 import api from '@/store/api';
+import i18n from '@/i18n';
 import UtcDateTimeMixin from '@/components/Mixins/UtcDateTimeMixin';
 
 const HOST_STATE = {
@@ -159,8 +160,12 @@ const GlobalStore = {
 
           commit('setBmcTime', date);
           commit('setTimeZone', timeZone);
+          commit('setBmcDateTime', bmcDateTime);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          throw new Error(i18n.t('global.toast.errorInBmcManager'));
+        });
     },
     async getSystemInfo({ commit }, dualKvmEnabeled) {
       const dualKvmUrl = dualKvmEnabeled

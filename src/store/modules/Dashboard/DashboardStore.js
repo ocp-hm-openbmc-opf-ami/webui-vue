@@ -401,6 +401,9 @@ const DashboardStore = {
               response.data.DateTime,
             );
             commit('global/setBmcTime', bmcTime, { root: true });
+            commit('global/setBmcDateTime', response.data.DateTime, {
+              root: true,
+            });
           }
 
           if (response.data.TimeZoneName) {

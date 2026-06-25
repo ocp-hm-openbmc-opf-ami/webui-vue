@@ -121,7 +121,8 @@
         "toast": {
             "unAuthTitle": "未認證",
             "unAuthDescription": "無法從登錄帳戶訪問嘗試的操作。 請聯繫您的系統管理員檢查您的權限角色。",
-            "errorMessage": "错误资讯"
+            "errorMessage": "错误资讯",
+            "errorInBmcManager": "取得 BMC 管理員資訊時發生錯誤。"
         }
     },
     "appHeader": {
@@ -4125,7 +4126,9 @@
                 "preLoad":"預先載入",
                 "ipVersion": "IP版本",
                 "ICMP": "ICMP",
-                "protocolAllIpRequired": "對於帶有日期和時間的協定選項“ALL”，需要 IP 範圍或 MAC 位址。"
+                "protocolAllIpRequired": "對於帶有日期和時間的協定選項“ALL”，需要 IP 範圍或 MAC 位址。",
+                "firewallStartDateValidation": "開始日期必須大於 BMC 日期。",
+                "firewallStartTimeValidation": "開始時間必須大於 BMC 時間。"
             }
         },
         "toast": {

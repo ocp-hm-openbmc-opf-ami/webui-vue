@@ -121,7 +121,8 @@
         "toast": {
             "unAuthTitle": "Nicht autorisiert",
             "unAuthDescription": "Die gewünschte Aktion ist mit dem angemeldeten Konto nicht zulässig. Wenden Sie sich an Ihren Systemadministrator, um Ihre Berechtigungsrolle zu überprüfen.",
-            "errorMessage": "Fehler"
+            "errorMessage": "Fehler",
+            "errorInBmcManager": "Fehler beim Abrufen der BMC-Manager-Informationen."
         }
     },
     "appHeader": {
@@ -4127,7 +4128,9 @@
                 "preLoad":"Vorab laden",
                 "ipVersion": "IP-Version",
                 "ICMP": "ICMP",
-                "protocolAllIpRequired": "Für die Protokolloption „ALLE“ mit Datum und Uhrzeit ist entweder ein IP-Bereich oder eine MAC-Adresse erforderlich."
+                "protocolAllIpRequired": "Für die Protokolloption „ALLE“ mit Datum und Uhrzeit ist entweder ein IP-Bereich oder eine MAC-Adresse erforderlich.",
+                "firewallStartDateValidation": "Startdatum muss größer als das BMC-Datum sein.",
+                "firewallStartTimeValidation": "Startzeit muss größer als die BMC-Zeit sein."
             }
         },
         "toast": {

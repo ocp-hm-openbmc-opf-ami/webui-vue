@@ -121,7 +121,8 @@
         "toast": {
             "unAuthTitle": "Unauthorized",
             "unAuthDescription": "The attempted action is not accessible from the logged in account. Contact your system administrator to check your privilege role.",
-            "errorMessage": "Error Message"
+            "errorMessage": "Error Message",
+            "errorInBmcManager": "Error in getting BMC Manager info."
         }
     },
     "appHeader": {
@@ -4131,7 +4132,9 @@
                 "preLoad":"PreLoad",
                 "ipVersion": "IP Version",
                 "ICMP": "ICMP",
-                "protocolAllIpRequired": "For the Protocol option 'ALL' with Date and Time, either an IP Range or a MAC Address is required."
+                "protocolAllIpRequired": "For the Protocol option 'ALL' with Date and Time, either an IP Range or a MAC Address is required.",
+                "firewallStartDateValidation": "Start Date should be greater than the BMC Date.",
+                "firewallStartTimeValidation": "Start Time should be greater than the BMC Time."
             }
         },
         "toast": {

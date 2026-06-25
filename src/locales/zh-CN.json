@@ -121,7 +121,8 @@
         "toast": {
             "unAuthTitle": "未认证",
             "unAuthDescription": "无法从登录账户访问尝试的操作。 请联系您的系统管理员检查您的权限。",
-            "errorMessage": "错误信息"
+            "errorMessage": "错误信息",
+            "errorInBmcManager": "获取 BMC 管理器信息时出错。"
         }
     },
     "appHeader": {
@@ -4112,7 +4113,9 @@
                 "preLoad":"预加载",
                 "ipVersion": "IP版本",
                 "ICMP": "ICMP",
-                "protocolAllIpRequired": "对于带有日期和时间的协议选项“ALL”，需要 IP 范围或 MAC 地址。"
+                "protocolAllIpRequired": "对于带有日期和时间的协议选项“ALL”，需要 IP 范围或 MAC 地址。",
+                "firewallStartDateValidation": "开始日期必须大于 BMC 日期。",
+                "firewallStartTimeValidation": "开始时间必须大于 BMC 时间。"
             }
         },
         "toast": {

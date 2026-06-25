@@ -121,7 +121,8 @@
         "toast": {
             "unAuthTitle": "Неавторизован",
             "unAuthDescription": "Предпринятое действие недоступно для вошедшей учетной записи. Обратитесь к системному администратору для проверки вашей роли привилегий.",
-            "errorMessage": "Сообщение об ошибке"
+            "errorMessage": "Сообщение об ошибке",
+            "errorInBmcManager": "Ошибка при получении информации о BMC Manager."
         }
     },
     "appHeader": {
@@ -4123,7 +4124,9 @@
                 "preLoad": "Предзагрузка",
                 "ipVersion": "Версия IP",
                 "ICMP": "ICMP",
-                "protocolAllIpRequired": "Для параметра протокола 'ALL' с датой и временем требуется либо диапазон IP, либо MAC-адрес."
+                "protocolAllIpRequired": "Для параметра протокола 'ALL' с датой и временем требуется либо диапазон IP, либо MAC-адрес.",
+                "firewallStartDateValidation": "Дата начала должна быть больше даты BMC.",
+                "firewallStartTimeValidation": "Время начала должно быть больше времени BMC."
             }
         },
         "toast": {
