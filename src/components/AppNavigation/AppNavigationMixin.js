@@ -111,7 +111,6 @@ const AppNavigationMixin = {
               id: 'serial-over-lan',
               label: this.$t('appNavigation.serialOverLan'),
               route: '/operations/serial-over-lan',
-              exclusiveToRoles: [roles.administrator],
             },
             {
               id: 'server-power-operations',

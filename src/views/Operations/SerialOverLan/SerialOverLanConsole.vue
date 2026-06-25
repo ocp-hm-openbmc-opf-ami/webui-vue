@@ -1,53 +1,71 @@
 <template>
-  <div :class="isFullWindow ? 'full-window-container' : 'terminal-container'">
-    <b-row class="d-flex">
-      <b-col sm="4" md="6">
-        <alert
-          v-if="connection ? false : true"
-          variant="warning"
-          :small="true"
-          class="mt-4"
-        >
-          <p class="col-form-label">
-            {{ $t('pageSerialOverLan.alert.disconnectedAlertMessage') }}
-          </p>
-        </alert>
-      </b-col>
-    </b-row>
-    <b-row class="d-flex">
-      <b-col class="d-flex flex-column justify-content-end">
-        <dl class="mb-2" sm="6" md="6">
-          <dt class="d-inline font-weight-bold mr-1">
-            {{ $t('pageSerialOverLan.status') }}:
-          </dt>
-          <dd class="d-inline">
-            <status-icon :status="serverStatusIcon" />
-            {{
-              connection
-                ? $t('pageSerialOverLan.connected')
-                : $t('pageSerialOverLan.disconnected')
-            }}
-          </dd>
-        </dl>
-      </b-col>
+  <div
+    :class="isFullWindow ? 'full-window-container' : 'terminal-container'"
+    data-test-id="sol-console-container"
+  >
+    <access-denied-alert
+      v-if="accessDenied"
+      :page-name="$t('appPageTitle.serialOverLan')"
+      data-test-id="sol-console-accessDenied-alert"
+    />
+    <template v-else>
+      <b-row class="d-flex">
+        <b-col sm="4" md="6">
+          <alert
+            v-if="connection ? false : true"
+            variant="warning"
+            :small="true"
+            class="mt-4"
+            data-test-id="sol-console-alert-disconnected"
+          >
+            <p class="col-form-label">
+              {{ $t('pageSerialOverLan.alert.disconnectedAlertMessage') }}
+            </p>
+          </alert>
+        </b-col>
+      </b-row>
+      <b-row class="d-flex">
+        <b-col class="d-flex flex-column justify-content-end">
+          <dl
+            class="mb-2"
+            sm="6"
+            md="6"
+            data-test-id="sol-console-status-container"
+          >
+            <dt class="d-inline font-weight-bold mr-1">
+              {{ $t('pageSerialOverLan.status') }}:
+            </dt>
+            <dd class="d-inline" data-test-id="sol-console-status-text">
+              <status-icon :status="serverStatusIcon" />
+              {{
+                connection
+                  ? $t('pageSerialOverLan.connected')
+                  : $t('pageSerialOverLan.disconnected')
+              }}
+            </dd>
+          </dl>
+        </b-col>
 
-      <b-col v-if="!isFullWindow" class="d-flex justify-content-end">
-        <b-button
-          variant="link"
-          type="button"
-          :disabled="disable"
-          @click="openConsoleWindow()"
-        >
-          <icon-launch />
-          {{ $t('pageSerialOverLan.openNewTab') }}
-        </b-button>
-      </b-col>
-    </b-row>
-    <div id="terminal" ref="panel"></div>
+        <b-col v-if="!isFullWindow" class="d-flex justify-content-end">
+          <b-button
+            variant="link"
+            type="button"
+            :disabled="disable"
+            data-test-id="sol-console-button-openNewTab"
+            @click="openConsoleWindow()"
+          >
+            <icon-launch />
+            {{ $t('pageSerialOverLan.openNewTab') }}
+          </b-button>
+        </b-col>
+      </b-row>
+      <div id="terminal" ref="panel" data-test-id="sol-console-terminal"></div>
+    </template>
   </div>
 </template>
 
 <script>
+import AccessDeniedAlert from '@/components/Global/AccessDeniedAlert';
 import Alert from '@/components/Global/Alert';
 import { AttachAddon } from 'xterm-addon-attach';
 import { FitAddon } from 'xterm-addon-fit';
@@ -55,11 +73,13 @@ import { Terminal } from 'xterm';
 import { throttle } from 'lodash';
 import IconLaunch from '@carbon/icons-vue/es/launch/20';
 import StatusIcon from '@/components/Global/StatusIcon';
-import { mapState } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
+import { privilegesId } from '@/store/modules/GlobalStore';
 
 export default {
   name: 'SerialOverLanConsole',
   components: {
+    AccessDeniedAlert,
     Alert,
     IconLaunch,
     StatusIcon,
@@ -85,6 +105,10 @@ export default {
   },
   computed: {
     ...mapState('authentication', ['consoleWindow']),
+    ...mapGetters('global', ['userPrivilege']),
+    accessDenied() {
+      return this.userPrivilege !== privilegesId.admin;
+    },
     serverStatus() {
       return this.$store.getters['global/serverStatus'];
     },
@@ -117,7 +141,9 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('global/getSystemInfo');
+    if (!this.accessDenied) {
+      this.$store.dispatch('global/getSystemInfo');
+    }
     window.addEventListener('beforeunload', this.handleChildWindowBeforeUnload);
     if (this.isFullWindow && window.opener) {
       this.storageListener = (e) => {
@@ -144,6 +170,7 @@ export default {
   },
   mounted() {
     this.timeTrack();
+    if (this.accessDenied) return;
     if (window.isConsoleWindow) {
       if (window.isConsoleWindow.closed) {
         this.openTerminal();

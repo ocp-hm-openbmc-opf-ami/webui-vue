@@ -1,5 +1,8 @@
 {
     "global": {
+        "accessDeniedAlert": {
+            "message": "Zugriff verweigert: Der Benutzer hat keine Berechtigung, eine %{pageName}-Sitzung zu starten. Bitte versuchen Sie es mit einem privilegierten Benutzerkonto."
+        },
         "alerts": {
             "externalUserRestriction": "Externe Benutzer dürfen die Einstellungen des externen Servers nicht konfigurieren."
         },

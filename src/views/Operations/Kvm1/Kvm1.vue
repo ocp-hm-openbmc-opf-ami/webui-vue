@@ -1,11 +1,10 @@
 <template>
   <b-container fluid="xl">
     <page-title />
-    <div v-if="isKvmDisabled">
-      <b-alert show variant="warning">{{
-        $t('pageKvm1.kvmAccessRestricted')
-      }}</b-alert>
-    </div>
+    <access-denied-alert
+      v-if="isKvmDisabled"
+      :page-name="$t('appPageTitle.kvm1')"
+    />
     <div v-if="!LicenseState(licenseName)">
       <b-alert show variant="warning"
         >{{ $t('license.licenseExpired') }}
@@ -28,6 +27,7 @@
 </template>
 
 <script>
+import AccessDeniedAlert from '@/components/Global/AccessDeniedAlert';
 import PageTitle from '@/components/Global/PageTitle';
 import Kvm1Console from './Kvm1Console';
 import { mapState } from 'vuex';
@@ -39,7 +39,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'Kvm1',
-  components: { PageTitle, Kvm1Console },
+  components: { AccessDeniedAlert, PageTitle, Kvm1Console },
   mixins: [LicensecheckMixin, LoadingBarMixin, BVToastMixin],
   data() {
     return {

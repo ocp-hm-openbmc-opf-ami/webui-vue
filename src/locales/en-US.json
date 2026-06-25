@@ -1,5 +1,8 @@
 {
     "global": {
+        "accessDeniedAlert": {
+            "message": "Access Denied: User doesn't have privilege to launch %{pageName} session. Please try from a privileged user account."
+        },
         "alerts": {
             "externalUserRestriction": "External users are not allowed to configure the External Server Settings."
         },

@@ -1,5 +1,8 @@
 {
     "global": {
+        "accessDeniedAlert": {
+            "message": "拒绝访问：用户没有权限启动 %{pageName} 会话。请使用具有权限的用户帐户重试。"
+        },
         "alerts": {
             "externalUserRestriction": "外部用户不允许配置外部服务器设置。"
         },

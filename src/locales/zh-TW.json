@@ -1,5 +1,8 @@
 {
     "global": {
+        "accessDeniedAlert": {
+            "message": "拒絕存取：使用者沒有啟動 %{pageName} 工作階段的權限。請使用特權帳戶重試。"
+        },
         "alerts": {
             "externalUserRestriction": "外部用戶不允許配置外部伺服器設定。"
         },

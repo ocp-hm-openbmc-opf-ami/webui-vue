@@ -330,7 +330,6 @@ const routes = [
         component: SerialOverLan,
         meta: {
           title: i18n.t('appPageTitle.serialOverLan'),
-          exclusiveToRoles: [roles.administrator],
         },
       },
       {
