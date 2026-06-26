@@ -7,7 +7,8 @@ const SnmpStore = {
   state: {
     allSubscriptions: [],
     authenticationProtocolValue: null,
-    Bmcusers: [],
+    Snmpusers: [],
+    Smtpusers: [],
     snmpProtocolEnabled: false,
     snmpv1Enabled: false,
     snmpv2cEnabled: false,
@@ -18,7 +19,8 @@ const SnmpStore = {
   getters: {
     allSubscriptions: (state) => state.allSubscriptions,
     authenticationProtocolValue: (state) => state.authenticationProtocolValue,
-    Bmcusers: (state) => state.Bmcusers,
+    Snmpusers: (state) => state.Snmpusers,
+    Smtpusers: (state) => state.Smtpusers,
     snmpProtocolEnabled: (state) => state.snmpProtocolEnabled,
     snmpv1Enabled: (state) => state.snmpv1Enabled,
     snmpv2cEnabled: (state) => state.snmpv2cEnabled,
@@ -32,7 +34,8 @@ const SnmpStore = {
     setAuthenticationProtocolValue(state, authenticationProtocolValue) {
       state.authenticationProtocolValue = authenticationProtocolValue;
     },
-    setBmcUsers: (state, Bmcusers) => (state.Bmcusers = Bmcusers),
+    setSnmpUsers: (state, Snmpusers) => (state.Snmpusers = Snmpusers),
+    setSmtpUsers: (state, Smtpusers) => (state.Smtpusers = Smtpusers),
     setSnmpProtocolEnabled: (state, snmpProtocolEnabled) =>
       (state.snmpProtocolEnabled = snmpProtocolEnabled),
     setsnmpv1Enabled: (state, snmpv1Enabled) =>
@@ -336,7 +339,7 @@ const SnmpStore = {
           throw new Error(i18n.t('pageSnmp.toast.errorMsgAlert'));
         });
     },
-    async getBmcUsers({ commit }) {
+    async getUsers({ commit }) {
       return await api
         .get('/redfish/v1/AccountService/Accounts')
         .then((response) =>
@@ -354,8 +357,20 @@ const SnmpStore = {
         .then((users) => {
           const userData = users
             .filter((user) => user !== null)
+            .filter(
+              (user) =>
+                user.data &&
+                user.data.Oem.Ami.SNMP.SNMPAccessEnableStatus === true,
+            )
             .map((user) => user.data.UserName);
-          commit('setBmcUsers', userData);
+          const smtpUserData = users
+            .filter((user) => user !== null)
+            .filter(
+              (user) => user.data && user.data.Oem.Ami.SMTP.SMTPMailId !== '',
+            )
+            .map((user) => user.data.UserName);
+          commit('setSnmpUsers', userData);
+          commit('setSmtpUsers', smtpUserData);
         })
         .catch((error) => {
           console.log(error);

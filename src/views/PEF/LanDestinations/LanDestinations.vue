@@ -393,7 +393,12 @@ export default {
       return this.$store.getters['snmp/communityStrings'] || [];
     },
     usernameOptions() {
-      return this.$store.getters['snmp/Bmcusers'] || [];
+      if (this.form.protocol === 'SNMPv3') {
+        return this.$store.getters['snmp/Snmpusers'] || [];
+      } else if (this.form.protocol === 'SMTP') {
+        return this.$store.getters['snmp/Smtpusers'] || [];
+      }
+      return [];
     },
     isButtonDisabled() {
       return this.userPrivilege !== privilegesId.admin;
@@ -409,7 +414,7 @@ export default {
         await this.$store.dispatch('lanDestinations/getAllSubscriptions');
         await this.$store.dispatch('lanDestinations/getInterfaceSubscriptions');
         await this.$store.dispatch('snmp/getSNMPProtocolStatus');
-        await this.$store.dispatch('snmp/getBmcUsers');
+        await this.$store.dispatch('snmp/getUsers');
       } catch (error) {
         this.errorToast(this.$t('pageLanDestinations.toast.errorLoadingData'));
       } finally {
@@ -581,8 +586,9 @@ export default {
       }
       if (
         (this.isSmtpProtocol || this.isSnmpV3Protocol) &&
-        !this.form.username
+        (!this.form.username || this.form.username === '--')
       ) {
+        this.form.username = '--'; // Set to empty string if no valid username is selected
         this.errorToast(this.$t('global.form.usernameRequired'));
         return;
       }
@@ -614,6 +620,7 @@ export default {
         this.successToast(message);
         this.$bvModal.hide('subscription-modal');
       } catch (error) {
+        this.form.username = '--';
         this.errorToast(error.message);
       } finally {
         this.endLoader();

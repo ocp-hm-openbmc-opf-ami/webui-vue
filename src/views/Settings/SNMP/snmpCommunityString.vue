@@ -129,10 +129,12 @@ export default {
             {
               value: 'edit',
               title: this.$t('pageUserManagement.editUser'),
+              enabled: !this.isButtonDisable,
             },
             {
               value: 'delete',
               title: this.$tc('pageSnmp.table.delete'),
+              enabled: !this.isButtonDisable,
             },
           ],
         };
