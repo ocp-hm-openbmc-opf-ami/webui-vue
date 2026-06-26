@@ -900,20 +900,8 @@
               {{ $t('global.action.save') }}
             </b-button>
           </b-col>
-          <b-col sm="3">
-            <b-button
-              variant="primary"
-              data-test-id="alertDestination-button-sendTestAlert"
-              :disabled="!sendTestAlertDisabled"
-              @click="sendTestAlert"
-            >
-              <icon-send />
-              {{ $t('pageSmtp.sendTestAlert') }}
-            </b-button>
-          </b-col>
         </b-row>
       </b-form>
-      <modal-send-alert />
     </div>
   </b-container>
 </template>
@@ -927,13 +915,10 @@ import PageTitle from '@/components/Global/PageTitle';
 import PageSection from '@/components/Global/PageSection';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import IconMisuse from '@carbon/icons-vue/es/misuse/20';
-import ModalSendAlert from './ModalSendAlert.vue';
 import FormFile from '@/components/Global/FormFile';
 import InputPasswordToggle from '@/components/Global/InputPasswordToggle';
-//license checking
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
 import IconSave from '@carbon/icons-vue/es/save/20';
-import IconSend from '@carbon/icons-vue/es/send--alt--filled/20';
 import { privilegesId } from '@/store/modules/GlobalStore';
 import { mapGetters } from 'vuex';
 
@@ -944,11 +929,9 @@ export default {
     PageSection,
     IconAdd,
     IconMisuse,
-    ModalSendAlert,
     FormFile,
     InputPasswordToggle,
     IconSave,
-    IconSend,
   },
   mixins: [BVToastMixin, VuelidateMixin, LoadingBarMixin, LicensecheckMixin],
   data() {
@@ -1008,7 +991,6 @@ export default {
       primaryConfiguration: true,
       secondaryConfiguration: true,
       loading,
-      sendTestAlertDisabled: false,
       licenseName: 'SMTP',
     };
   },
@@ -1294,7 +1276,6 @@ export default {
         this.$store.getters['smtp/isPrimaryConfig'].smtpServiceEnabled;
       this.secondary.enableConfiguration =
         this.$store.getters['smtp/isSecondaryConfig'].smtpServiceEnabled;
-      this.sendTestAlertDisabled = this.$store.getters['smtp/sendTestAlert'];
       this.primaryConfiguration = true;
       this.updateSMTPPrimaryData();
       this.secondaryConfiguration = true;
@@ -1385,8 +1366,6 @@ export default {
             this.$store.getters['smtp/isPrimaryConfig'].smtpServiceEnabled;
           this.secondary.enableConfiguration =
             this.$store.getters['smtp/isSecondaryConfig'].smtpServiceEnabled;
-          this.sendTestAlertDisabled =
-            this.$store.getters['smtp/sendTestAlert'];
           this.primaryConfiguration = true;
           this.updateSMTPPrimaryData();
           this.secondaryConfiguration = true;
@@ -1672,9 +1651,6 @@ export default {
         this.secondary.recipientEmailAddress4 = '';
       }
       this.secondary.recipientCount--;
-    },
-    sendTestAlert() {
-      this.$bvModal.show('modal-send-alert');
     },
     onFileUpload(file, type, config) {
       if (file) {
