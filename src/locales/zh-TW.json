@@ -1054,6 +1054,7 @@
         "portTypeSMBus": "SMBus 連接埠類型",
         "nvmePCIePortMultiRecord": "NVMe PCIe 端口多筆記錄",
         "vitalProductData": "重要產品數據",
+        "deviceLocation": "裝置位置",
         "toast": {
             "errorShowingNVMeInfo": "顯示 NVMe 資訊時出錯。"
         }

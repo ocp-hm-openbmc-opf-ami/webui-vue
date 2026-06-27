@@ -1054,6 +1054,7 @@
         "portTypeSMBus": "Porttyp SMBus",
         "nvmePCIePortMultiRecord": "NVMe PCIe-Port MultiRecord",
         "vitalProductData": "Wichtige Produktdaten",
+        "deviceLocation": "Gerätestandort",
         "toast": {
             "errorShowingNVMeInfo": "Fehler beim Anzeigen der NVMe-Informationen."
         }

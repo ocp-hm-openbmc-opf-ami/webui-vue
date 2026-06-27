@@ -1053,6 +1053,7 @@
         "portTypeSMBus": "Тип порта SMBus",
         "nvmePCIePortMultiRecord": "Мультизапись порта NVMe PCIe",
         "vitalProductData": "Жизненно важные данные продукта",
+        "deviceLocation": "Расположение устройства",
         "toast": {
             "errorShowingNVMeInfo": "Ошибка отображения информации NVMe."
         }
