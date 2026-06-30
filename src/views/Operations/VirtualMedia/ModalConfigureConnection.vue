@@ -217,7 +217,7 @@ export default {
           required,
           pattern: helpers.regex(
             'pattern',
-            /^[a-zA-Z0-9/\\_.]+(\.(iso|nrg|ima|img))$/,
+            /^[a-zA-Z0-9/\\_.-]+(\.(iso|nrg|ima|img))$/,
           ),
         },
         username: {

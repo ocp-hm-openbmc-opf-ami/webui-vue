@@ -3018,7 +3018,7 @@
                 "item1": "IP Address (Both IPv4 and IPv6 format).",
                 "item2": "FQDN (Fully qualified domain name) format."
             },
-            "imagePathSupport":"Path must be alpha-numeric and the following special characters are only allowed: '/'(backward slash), '\\'(forward slash), '_'(underscore) , '.'(dot).",
+            "imagePathSupport":"Path must be alpha-numeric and the following special characters are only allowed: '/'(backward slash), '\\'(forward slash), '_'(underscore), '.'(dot), '-'(hyphen).",
             "imagePathSupportCharacter":"NOTE: This field will not allow more than 256 characters.",
             "rwDisabledForCD": "Read/Write option is not available for CD images (.iso, .nrg)"
         },

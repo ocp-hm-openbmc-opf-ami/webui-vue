@@ -3016,7 +3016,7 @@
                 "item1": "IP-Adresse (sowohl IPv4- als auch IPv6-Format).",
                 "item2": "FQDN (vollständig qualifizierter Domainname)."
             },
-            "imagePathSupport":"Der Pfad muss alphanumerisch sein und nur folgende Sonderzeichen sind erlaubt: '/' (Schrägstrich), '\\' (Backslash), '_' (Unterstrich), '.' (Punkt).",
+            "imagePathSupport":"Der Pfad muss alphanumerisch sein und nur folgende Sonderzeichen sind erlaubt: '/' (Schrägstrich), '\\' (Backslash), '_' (Unterstrich), '.' (Punkt), '-'(Bindestrich).",
             "imagePathSupportCharacter":"HINWEIS: Dieses Feld erlaubt nicht mehr als 256 Zeichen.",
             "rwDisabledForCD": "Read/Write-Option ist für CD-Images (.iso, .nrg) nicht verfügbar."
         },
