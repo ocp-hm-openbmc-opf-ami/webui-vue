@@ -177,8 +177,13 @@ export default {
   },
   created() {
     this.startLoader();
-    Promise.all([this.$store.dispatch('network/getEthernetData')]).finally(() =>
-      this.endLoader(),
+    Promise.all([this.$store.dispatch('network/getEthernetData')]).finally(
+      () => {
+        this.endLoader();
+        if (this.ethernetData && this.ethernetData.length > 0) {
+          this.getTabIndex(0);
+        }
+      },
     );
   },
   methods: {
