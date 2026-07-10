@@ -187,7 +187,6 @@
             <b-form-input
               id="destination"
               v-model="form.destination"
-              :placeholder="$t('pageLanDestinations.destinationPlaceholder')"
               required
             ></b-form-input>
           </b-form-group>
@@ -651,7 +650,7 @@ export default {
       }
     },
     validateDestinationAddress(destination = '') {
-      const ipAddress = this.extractIpAddress(destination).trim();
+      const ipAddress = destination;
       if (!ipAddress) return false;
 
       return this.ipv4Regex(ipAddress) || this.ipv6Regex(ipAddress);
