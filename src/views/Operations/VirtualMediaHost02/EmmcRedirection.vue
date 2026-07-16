@@ -92,7 +92,9 @@
                     variant="primary"
                     size="sm"
                     class="emmc-upload-btn"
-                    :disabled="!uploadFile || uploading || isButtonDisabled"
+                    :disabled="
+                      !uploadFile || fileError || uploading || isButtonDisabled
+                    "
                     @click="handleUploadSubmit"
                   >
                     <template v-if="uploading">
@@ -419,7 +421,7 @@ export default {
       this.fileError = false;
     },
     async handleUploadSubmit() {
-      if (!this.uploadFile || this.uploading) return;
+      if (!this.uploadFile || this.uploading || this.fileError) return;
       this.uploading = true;
       try {
         const formData = new FormData();
@@ -469,6 +471,19 @@ export default {
       this.uploading = false;
     },
     handleStart(item) {
+      const [sizeValue, sizeUnit = ''] = String(item.imageSize).split(/\s+/);
+      const size = Number.parseFloat(sizeValue);
+      const minSize = 600;
+      if (
+        Number.isFinite(size) &&
+        sizeUnit.toLowerCase() === 'kb' &&
+        size < minSize
+      ) {
+        this.errorToast(
+          this.$t('pageVirtualMedia.toast.virtualMediaErrorFileTooSmall'),
+        );
+        return;
+      }
       this.selectedImage = item.odataId;
       this.$bvModal.show('modal-redirect');
     },
