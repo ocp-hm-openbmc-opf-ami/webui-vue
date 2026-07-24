@@ -106,7 +106,7 @@ const AdvancedLogSettingsStore = {
       uploadData.append('', file.file);
       return await api
         .post(
-          '/redfish/v1/Systems/system/LogServices/Syslog/Actions/Oem/Ami/Rsyslog.RemoteServerCertificateUpload',
+          '/redfish/v1/Systems/system/LogServices/Syslog/Actions/Oem/AmiSyslog.RemoteServerCertificateUpload',
           uploadData,
           {
             headers: {

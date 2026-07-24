@@ -62,7 +62,7 @@ const BondStore = {
     async setBondEthernetData(_, data) {
       return await api
         .post(
-          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${data.bondInterface}/Actions/Oem/Ami/EthernetInterface.CreateBond`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${data.bondInterface}/Actions/Oem/AmiNetworkConfiguration.CreateBond`,
           { MIIMonitorinms: parseInt(data.miiMonitorinms) },
         )
         .catch((error) => {
@@ -73,7 +73,7 @@ const BondStore = {
     async setChangeActiveSlave(_, data) {
       return await api
         .post(
-          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/bond0/Actions/Oem/Ami/EthernetInterface.ChangeActiveSlave`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/bond0/Actions/Oem/AmiNetworkConfiguration.ChangeActiveSlave`,
           {
             ActiveSlave: {
               '@odata.id': `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${data.bondInterface}`,

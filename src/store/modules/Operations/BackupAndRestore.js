@@ -23,7 +23,7 @@ const BackupAndRestore = {
         .post(
           '/redfish/v1/Managers/' +
             store.getters['global/managerInstance'] +
-            '/Actions/Oem/AMIManager.BackupConfig',
+            '/Actions/Oem/AmiManager.BackupConfig',
           data,
         )
         .then((response) => {
@@ -100,7 +100,7 @@ const BackupAndRestore = {
         .post(
           'redfish/v1/Managers/' +
             store.getters['global/managerInstance'] +
-            '/Actions/Oem/AMIManager.RestoreConfig',
+            '/Actions/Oem/AmiManager.RestoreConfig',
           uploadData,
           config,
         )

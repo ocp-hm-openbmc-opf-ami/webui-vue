@@ -202,32 +202,63 @@ export default {
     fruDeviceChange(value) {
       this.startLoader();
       this.getFruCollectionInfo = [];
-      var listBoarddata = {};
-      var listProductdata = {};
       this.$store
         .dispatch('fru/getFruCollectionInfo', value)
         .then(() => {
           const getFruinfo = this.$store.getters['fru/getFruCollectionInfo'];
-          getFruinfo['FRU Device Description'].forEach((item) => {
-            const itemvalue = item.split(':');
-            if (itemvalue[0].trim().includes('Board')) {
-              listBoarddata[itemvalue[0].trim()] = itemvalue[1]
-                ? itemvalue[1].trim()
-                : '';
-              listBoarddata.id = this.$t('fru.board_Information');
-            } else {
-              listProductdata[itemvalue[0].trim()] = itemvalue[1]
-                ? itemvalue[1].trim()
-                : '';
-              listProductdata.id = this.$t('fru.product_Information');
-            }
-          });
+          const listBoarddata = {};
+          const listProductdata = {};
+
+          if (Array.isArray(getFruinfo?.['FRU Device Description'])) {
+            getFruinfo['FRU Device Description'].forEach((item) => {
+              const itemvalue = item.split(':');
+              if (itemvalue[0].trim().includes('Board')) {
+                listBoarddata[itemvalue[0].trim()] = itemvalue[1]
+                  ? itemvalue[1].trim()
+                  : '';
+                listBoarddata.id = this.$t('fru.board_Information');
+              } else {
+                listProductdata[itemvalue[0].trim()] = itemvalue[1]
+                  ? itemvalue[1].trim()
+                  : '';
+                listProductdata.id = this.$t('fru.product_Information');
+              }
+            });
+          } else {
+            listBoarddata.id = this.$t('fru.board_Information');
+            listBoarddata['Board Version'] = getFruinfo?.BoardVersion || '';
+            listBoarddata['Board language code'] =
+              getFruinfo?.BoardLanguageCode || '';
+            listBoarddata['Board Mfg Date'] = getFruinfo?.BoardMfgDate || '';
+            listBoarddata['Board Mfg'] = getFruinfo?.BoardMfg || '';
+            listBoarddata['Board Product'] = getFruinfo?.BoardProduct || '';
+            listBoarddata['Board Serial'] = getFruinfo?.BoardSerialNumber || '';
+            listBoarddata['Board Part Number'] =
+              getFruinfo?.BoardPartNumber || '';
+
+            listProductdata.id = this.$t('fru.product_Information');
+            listProductdata['Product language code'] =
+              getFruinfo?.ProductLanguageCode || '';
+            listProductdata['Product Manufacturer'] =
+              getFruinfo?.ProductManufacturer || '';
+            listProductdata['Product Name'] = getFruinfo?.ProductName || '';
+            listProductdata['Product Part Number'] =
+              getFruinfo?.ProductPartNumber || '';
+            listProductdata['Product Version'] =
+              getFruinfo?.ProductVersion || '';
+            listProductdata['Product Serial'] =
+              getFruinfo?.ProductSerialNumber || '';
+          }
+
           if (Object.keys(listBoarddata).length > 1) {
             this.getFruCollectionInfo.push(listBoarddata);
           }
           if (Object.keys(listProductdata).length > 1) {
             this.getFruCollectionInfo.push(listProductdata);
           }
+        })
+        .catch(({ message }) => {
+          this.errorToast(message);
         })
         .finally(() => {
           this.endLoader();
