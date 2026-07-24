@@ -133,7 +133,7 @@ const NetworkDDNSStore = {
     async nsUpdate({ state, dispatch }) {
       return await api
         .post(
-          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${state.ddnsFirstInterfaceId}/Actions/Oem/AmiNetworkConfiguration.DoNsupdate`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${state.ddnsFirstInterfaceId}/Actions/Oem/Ami/EthernetInterface.DoNsupdate`,
         )
         .then(() => dispatch('getDDNSEthernetData'))
         .then(() => {
@@ -266,7 +266,7 @@ const NetworkDDNSStore = {
       };
       return await api
         .post(
-          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${state.ddnsSelectedInterfaceId}/Actions/Oem/AmiNetworkConfiguration.TSIGUpload`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${state.ddnsSelectedInterfaceId}/Actions/Oem/Ami/EthernetInterface.TSIGUpload`,
           uploadData,
           config,
         )

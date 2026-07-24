@@ -103,7 +103,7 @@ const RadiusStore = {
       let uploadData = new FormData();
       uploadData.append(type, file);
       let uri =
-        '/redfish/v1/AccountService/ExternalAccountProviders/RADIUS/Actions/Oem/AmiExternalAccountProvider.SSLCertificateUpload';
+        '/redfish/v1/AccountService/ExternalAccountProviders/Actions/Oem/Ami/RADIUS.SSLCertificateUpload';
       return await api
         .post(uri, uploadData, {
           headers: {

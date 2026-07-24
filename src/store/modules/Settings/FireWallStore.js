@@ -35,7 +35,7 @@ const FireWallStore = {
     async setFireWallData({ state, dispatch }, data) {
       return await api
         .post(
-          `${state.FirstInterfaceId}/Actions/Oem/AmiNetworkConfiguration.AddFirewallRules`,
+          `${state.FirstInterfaceId}/Actions/Oem/Ami/EthernetInterface.AddFirewallRules`,
           data,
         )
         .then(() => dispatch('getFireWallData'))
@@ -78,7 +78,7 @@ const FireWallStore = {
     async deleteFireWallRules({ state, dispatch }, items) {
       return await api
         .post(
-          `${state.FirstInterfaceId}/Actions/Oem/AmiNetworkConfiguration.DeleteFirewallRules`,
+          `${state.FirstInterfaceId}/Actions/Oem/Ami/EthernetInterface.DeleteFirewallRules`,
           items,
         )
         .then(() => dispatch('getFireWallData'))
@@ -90,7 +90,7 @@ const FireWallStore = {
     async deleteFlushAll({ state, dispatch }, items) {
       return await api
         .post(
-          `${state.FirstInterfaceId}/Actions/Oem/AmiNetworkConfiguration.FlushFirewallRules`,
+          `${state.FirstInterfaceId}/Actions/Oem/Ami/EthernetInterface.FlushFirewallRules`,
           items,
         )
         .then(() => dispatch('getFireWallData'))
@@ -102,7 +102,7 @@ const FireWallStore = {
     async setReorderRules({ state, dispatch }, items) {
       return await api
         .post(
-          `${state.FirstInterfaceId}/Actions/Oem/AmiNetworkConfiguration.ReorderFirewallRules`,
+          `${state.FirstInterfaceId}/Actions/Oem/Ami/EthernetInterface.ReorderFirewallRules`,
           items,
         )
         .then(() => dispatch('getFireWallData'))
