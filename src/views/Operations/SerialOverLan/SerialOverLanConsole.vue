@@ -12,7 +12,7 @@
       <b-row class="d-flex">
         <b-col sm="4" md="6">
           <alert
-            v-if="connection ? false : true"
+            v-if="!connection && !disable"
             variant="warning"
             :small="true"
             class="mt-4"
