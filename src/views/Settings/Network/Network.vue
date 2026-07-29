@@ -302,7 +302,6 @@ export default {
       const dhcpv6State = this.ethernetData[this.tabIndex].DHCPv6.OperatingMode;
       const ipv6Data = ipv6AddressDataClone;
       const getOemAmiActions = this.ethernetData[this.tabIndex].Actions?.Oem
-        ?.Ami
         ? true
         : false;
       this.$store

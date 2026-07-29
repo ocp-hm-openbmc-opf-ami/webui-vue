@@ -300,7 +300,7 @@ export default {
         .ipv4Status;
     },
     getOemAmiActions() {
-      return this.ethernetData[this.tabIndex].Actions?.Oem?.Ami ? true : false;
+      return this.ethernetData[this.tabIndex].Actions?.Oem ? true : false;
     },
     ipv6GatewayWithoutIp() {
       // Show warning tooltip when gateway exists but no static IPv6 addresses (DHCPv6 disabled)
@@ -350,7 +350,7 @@ export default {
       });
       if (
         this.ethernetData[index].IPv6StaticAddresses.length > 0 &&
-        this.ethernetData[index].Actions?.Oem?.Ami
+        this.ethernetData[index].Actions?.Oem
       ) {
         this.ipv6TableFields.splice(this.ipv6TableFields.length - 1, 0, {
           //adding the ipv6Index field to the table baseon the IPv6StaticAddresses length
