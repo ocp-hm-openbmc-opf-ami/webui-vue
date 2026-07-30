@@ -455,12 +455,14 @@ export default {
           return;
         }
         if (error.response && error.response.status === 400) {
-          const responseData = error.response.data;
-          if (responseData && responseData['FilePath@Message.ExtendedInfo']) {
-            const messages = responseData['FilePath@Message.ExtendedInfo'];
+          const responseData = error.response.data.error;
+          if (responseData && responseData['@Message.ExtendedInfo']) {
+            const messages = responseData['@Message.ExtendedInfo'];
             const duplicateError = messages.find(
               (msg) =>
-                msg.Message && msg.Message.includes('FilePath was duplicated'),
+                msg.Message &&
+                msg.Message.includes('FilePath') &&
+                msg.Message.toLowerCase().includes('already exists'),
             );
             if (duplicateError) {
               this.errorToast(
