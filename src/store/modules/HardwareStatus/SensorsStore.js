@@ -3,21 +3,62 @@ import { uniqBy } from 'lodash';
 import i18n from '@/i18n';
 import { isFeatureEnabled } from '@/components/Mixins/FeatureMixin';
 
+const mapSensorResponseToRow = (responseData, sensorUri = null) => ({
+  id: responseData.Oem?.Ami?.['@odata.id'],
+  sensorUri,
+  name: responseData.Name,
+  status: responseData.Status?.Health,
+  state: responseData.Status?.State,
+  currentValue: responseData.Reading,
+  thresholdsId:
+    (responseData?.Oem?.Ami?.SensorThreshold ?? '') === ''
+      ? null
+      : responseData?.Oem?.Ami?.SensorThreshold?.['@odata.id'],
+  lowerCaution: responseData.Thresholds?.LowerCaution?.Reading,
+  upperCaution: responseData.Thresholds?.UpperCaution?.Reading,
+  lowerCritical: responseData.Thresholds?.LowerCritical?.Reading,
+  upperCritical: responseData.Thresholds?.UpperCritical?.Reading,
+  upperFatal: responseData.Thresholds?.UpperFatal?.Reading,
+  lowerFatal: responseData.Thresholds?.LowerFatal?.Reading,
+  units: responseData.ReadingUnits,
+});
+
 const SensorsStore = {
   namespaced: true,
   state: {
     sensors: [],
+    sensorCatalog: [],
+    loadedSensorUris: [],
+    totalSensors: 0,
     graphSensors: {},
     sensorGraphRefresh: true,
   },
   getters: {
     sensors: (state) => state.sensors,
+    totalSensors: (state) => state.totalSensors,
+    hasMoreSensors: (state) =>
+      state.loadedSensorUris.length < state.totalSensors,
     graphSensors: (state) => state.graphSensors,
     sensorGraphRefreshGet: (state) => state.sensorGraphRefresh,
   },
   mutations: {
     setSensors: (state, sensors) => {
-      state.sensors = uniqBy([...sensors, ...state.sensors], 'name');
+      state.sensors = uniqBy([...state.sensors, ...sensors], 'sensorUri');
+    },
+    resetSensors: (state) => {
+      state.sensors = [];
+      state.sensorCatalog = [];
+      state.loadedSensorUris = [];
+      state.totalSensors = 0;
+    },
+    setSensorCatalog: (state, sensorCatalog) => {
+      state.sensorCatalog = sensorCatalog;
+      state.totalSensors = sensorCatalog.length;
+    },
+    addLoadedSensorUris: (state, uris) => {
+      state.loadedSensorUris = Array.from(
+        new Set([...state.loadedSensorUris, ...uris]),
+      );
     },
     setGraphSensors: (state, sensors) => {
       state.graphSensors = sensors;
@@ -25,25 +66,80 @@ const SensorsStore = {
     setSensorGraph: (state, sensorGraphRefresh) => {
       state.sensorGraphRefresh = sensorGraphRefresh;
     },
+    // Replace a single sensor row in-place by sensorUri after a threshold update.
+    updateSensor: (state, updatedSensor) => {
+      const index = state.sensors.findIndex(
+        (s) => s.sensorUri === updatedSensor.sensorUri,
+      );
+      if (index !== -1) {
+        state.sensors.splice(index, 1, updatedSensor);
+      }
+    },
   },
   actions: {
-    async getAllSensors({ dispatch }) {
+    async getAllSensors({ commit, dispatch }, { batchSize = 20 } = {}) {
+      commit('resetSensors');
+      const sensorCatalog = await dispatch('getSensorCatalog');
+      commit('setSensorCatalog', sensorCatalog);
+
+      if (!sensorCatalog.length) return [];
+      return dispatch('fetchNextSensorsBatch', { count: batchSize });
+    },
+    async getSensorCatalog({ dispatch }) {
       const collection = await dispatch('getChassisCollection');
-      if (!collection) return;
-      const promises = collection.reduce((acc, id) => {
-        acc.push(dispatch('getSensors', id));
-        return acc;
-      }, []);
-      // Add API sensor ID to the collection
+      if (!collection) return [];
+
+      const sensorCollectionIds = [...collection];
       if (isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')) {
-        promises.push(
-          dispatch(
-            'getSensors',
-            '/redfish/v1/PowerEquipment/PowerShelves/PowerShelf',
-          ),
+        sensorCollectionIds.push(
+          '/redfish/v1/PowerEquipment/PowerShelves/PowerShelf',
         );
       }
-      return await api.all(promises);
+
+      const sensorCollectionPromises = sensorCollectionIds.map((id) => {
+        return api
+          .get(`${id}/Sensors`)
+          .then((response) => response.data.Members || [])
+          .catch((error) => {
+            console.log(error);
+            return [];
+          });
+      });
+
+      return await api.all(sensorCollectionPromises).then((responses) => {
+        const sensorUris = responses
+          .flat()
+          .map((sensor) => sensor['@odata.id'])
+          .filter(Boolean);
+        return Array.from(new Set(sensorUris));
+      });
+    },
+    async fetchNextSensorsBatch({ commit, state }, { count = 20 } = {}) {
+      const loadedSet = new Set(state.loadedSensorUris);
+      const remainingSensorUris = state.sensorCatalog.filter(
+        (uri) => !loadedSet.has(uri),
+      );
+      const batchUris = remainingSensorUris.slice(0, count);
+      if (!batchUris.length) return [];
+      const results = await Promise.allSettled(
+        batchUris.map((uri) => api.get(uri)),
+      );
+
+      const sensorData = [];
+      const succeededUris = [];
+      results.forEach((result, index) => {
+        const uri = batchUris[index];
+        if (result.status === 'fulfilled' && result.value?.data) {
+          sensorData.push(mapSensorResponseToRow(result.value.data, uri));
+          succeededUris.push(uri);
+        } else {
+          console.log(result.reason ?? 'Failed to fetch sensor', uri);
+        }
+      });
+
+      commit('setSensors', sensorData);
+      commit('addLoadedSensorUris', succeededUris);
+      return sensorData;
     },
     async getChassisCollection() {
       return await api
@@ -51,82 +147,6 @@ const SensorsStore = {
         .then(({ data: { Members } }) =>
           Members.map((member) => member['@odata.id']),
         )
-        .catch((error) => console.log(error));
-    },
-    async getSensors({ dispatch }, id) {
-      await api
-        .get('/redfish/v1/')
-        .then(({ data }) => {
-          if (data?.ProtocolFeaturesSupported?.ExpandQuery?.MaxLevels > 0) {
-            return dispatch('getSensorsWithoutQueryParams', id);
-          } else {
-            return dispatch('getSensorsWithoutQueryParams', id);
-          }
-        })
-        .catch((error) => console.log(error));
-    },
-    async getSensorsWithoutQueryParams({ commit }, id) {
-      const sensors = await api
-        .get(`${id}/Sensors`)
-        .then((response) => response.data.Members)
-        .catch((error) => console.log(error));
-      if (!sensors) return;
-      const promises = sensors.map((sensor) => {
-        return api.get(sensor['@odata.id']).catch((error) => {
-          console.log(error);
-          return error;
-        });
-      });
-      return await api.all(promises).then((responses) => {
-        const sensorData = [];
-        responses.forEach((response) => {
-          if (response.data) {
-            sensorData.push({
-              id: response.data.Oem?.Ami['@odata.id'],
-              name: response.data.Name,
-              status: response.data.Status?.Health,
-              state: response.data.Status?.State,
-              currentValue: response.data.Reading,
-              thresholdsId:
-                (response.data?.Oem?.Ami?.SensorThreshold ?? '') === ''
-                  ? null
-                  : response.data?.Oem?.Ami?.SensorThreshold['@odata.id'],
-              lowerCaution: response.data.Thresholds?.LowerCaution?.Reading,
-              upperCaution: response.data.Thresholds?.UpperCaution?.Reading,
-              lowerCritical: response.data.Thresholds?.LowerCritical?.Reading,
-              upperCritical: response.data.Thresholds?.UpperCritical?.Reading,
-              upperFatal: response.data.Thresholds?.UpperFatal?.Reading,
-              lowerFatal: response.data.Thresholds?.LowerFatal?.Reading,
-              units: response.data.ReadingUnits,
-            });
-          }
-        });
-        commit('setSensors', sensorData);
-      });
-    },
-    async getSensorsUsingQueryParams({ commit }, id) {
-      await api
-        .get(`${id}/Sensors?$expand=.($levels=1)`)
-        .then((response) => {
-          let sensorData = [];
-          response.data.Members.map((sensor) => {
-            const oneSensordata = {
-              name: sensor.Name,
-              status: sensor.Status?.Health,
-              currentValue: sensor.Reading,
-              lowerCaution: sensor.Thresholds?.LowerCaution?.Reading,
-              upperCaution: sensor.Thresholds?.UpperCaution?.Reading,
-              lowerCritical: sensor.Thresholds?.LowerCritical?.Reading,
-              upperCritical: sensor.Thresholds?.UpperCritical?.Reading,
-              units: sensor.ReadingUnits,
-            };
-            sensorData.push(oneSensordata);
-            commit('setSensors', sensorData);
-          });
-        })
-        .then(() => {
-          return;
-        })
         .catch((error) => console.log(error));
     },
     async getTimeInterval({ commit, state }, val) {
@@ -148,6 +168,21 @@ const SensorsStore = {
     },
     setSensorGraphRefresh({ commit }, val) {
       commit('setSensorGraph', val);
+    },
+    // Re-fetch a single sensor by its Redfish URI and update only that row.
+    async refreshSingleSensor({ commit }, sensorUri) {
+      if (!sensorUri) return;
+      try {
+        const response = await api.get(sensorUri);
+        if (response?.data) {
+          commit(
+            'updateSensor',
+            mapSensorResponseToRow(response.data, sensorUri),
+          );
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
     async setSensorThresholdValue(_, { val, thresholdsUrlId }) {
       return await api

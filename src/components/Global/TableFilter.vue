@@ -4,13 +4,14 @@
       <b-badge v-for="(tag, index) in tags" :key="index" pill>
         {{ tag }}
         <b-button-close
-          :disabled="dropdownVisible"
+          :disabled="dropdownVisible || disabled"
           :aria-hidden="true"
           @click="removeTag(tag)"
         />
       </b-badge>
     </p>
     <b-dropdown
+      :disabled="disabled"
       variant="link"
       no-caret
       right
@@ -28,7 +29,7 @@
           :key="index"
           :label="filter.label"
         >
-          <b-form-checkbox-group v-model="tags">
+          <b-form-checkbox-group v-model="tags" :disabled="disabled">
             <b-form-checkbox
               v-for="value in filter.values"
               :key="value"
@@ -42,6 +43,7 @@
       </b-dropdown-form>
       <b-dropdown-item-button
         variant="primary"
+        :disabled="disabled || tags.length === 0"
         data-test-id="tableFilter-button-clearAll"
         @click="clearAllTags"
       >
@@ -68,6 +70,10 @@ export default {
         );
       },
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -85,9 +91,11 @@ export default {
   },
   methods: {
     removeTag(removedTag) {
+      if (this.disabled) return;
       this.tags = this.tags.filter((tag) => tag !== removedTag);
     },
     clearAllTags() {
+      if (this.disabled) return;
       this.tags = [];
     },
     emitChange() {
