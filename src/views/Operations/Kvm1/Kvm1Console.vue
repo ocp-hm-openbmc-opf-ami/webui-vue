@@ -72,7 +72,9 @@
                   v-model="form.oneTimeBoot"
                   class="mb-4"
                   :disabled="
-                    form.bootOption === 'None' || bootSourceOptions.length === 0
+                    form.bootOption === 'None' ||
+                    isForcedOneTimeBootTarget ||
+                    bootSourceOptions.length === 0
                   "
                   @change="$v.form.oneTimeBoot.$touch()"
                 >
@@ -151,6 +153,7 @@ import { privilegesId } from '@/store/modules/GlobalStore';
 const Connecting = 0;
 const Connected = 1;
 const Disconnected = 2;
+const forcedOneTimeBootTargets = ['BiosSetup', 'UefiBootNext', 'UefiTarget'];
 
 export default {
   name: 'KvmConsole',
@@ -216,6 +219,9 @@ export default {
       'overrideEnabled',
       'tpmEnabled',
     ]),
+    isForcedOneTimeBootTarget() {
+      return forcedOneTimeBootTargets.includes(this.form.bootOption);
+    },
     serverStatusIcon() {
       if (this.AlreadykvmLaunched == true || this.MaxkvmSession == true) {
         return 'secondary';
@@ -267,9 +273,12 @@ export default {
     },
     bootSource: function (value) {
       this.form.bootOption = value;
+      if (forcedOneTimeBootTargets.includes(value)) {
+        this.form.oneTimeBoot = true;
+      }
     },
     overrideEnabled: function (value) {
-      this.form.oneTimeBoot = value;
+      this.form.oneTimeBoot = this.isForcedOneTimeBootTarget || value;
     },
   },
   validations: {
@@ -452,6 +461,7 @@ export default {
       this.form.bootOption =
         this.$store.getters['serverBootSettings/bootSource'];
       this.form.oneTimeBoot =
+        this.isForcedOneTimeBootTarget ||
         this.$store.getters['serverBootSettings/overrideEnabled'];
 
       this.isBootModalOpen = true;
@@ -488,6 +498,9 @@ export default {
       this.$v.form.bootOption.$touch();
       // Disable one time boot if selected boot option is 'None'
       if (selectedOption === 'None') this.form.oneTimeBoot = false;
+      if (forcedOneTimeBootTargets.includes(selectedOption)) {
+        this.form.oneTimeBoot = true;
+      }
     },
 
     handleCancel() {
