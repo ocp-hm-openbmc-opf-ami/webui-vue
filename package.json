@@ -28,7 +28,7 @@
         "file-saver": "2.0.5",
         "js-cookie": "2.2.1",
         "jszip": "3.10.1",
-        "lodash": "4.17.21",
+        "lodash": "4.18.1",
         "moment-timezone": "0.5.46",
         "qrcode.vue": "1.7.0",
         "simple-keyboard": "3.5.43",
