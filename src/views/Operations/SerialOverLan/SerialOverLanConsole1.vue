@@ -12,7 +12,7 @@
       <b-row class="d-flex">
         <b-col sm="4" md="6">
           <alert
-            v-if="connection ? false : true"
+            v-if="!connection && !disable"
             variant="warning"
             :small="true"
             class="mt-4"
@@ -96,9 +96,11 @@ export default {
       disable: false,
       term: null,
       ws: null,
+      isWsConnected: false,
       fitAddon: null,
       cols: 80,
       rows: 25,
+      intervalId: null,
     };
   },
   computed: {
@@ -111,7 +113,7 @@ export default {
       return this.$store.getters['global/serverStatus1'];
     },
     connection() {
-      return this.serverStatus === 'off' ? false : true;
+      return this.serverStatus !== 'off' && this.isWsConnected;
     },
     serverStatusIcon() {
       return this.connection ? 'success' : 'danger';
@@ -324,16 +326,19 @@ export default {
         true,
       );
       try {
-        this.ws.onopen = function () {
+        this.ws.onopen = () => {
           console.log('websocket console1/ opened');
+          this.isWsConnected = true;
         };
-        this.ws.onclose = function (event) {
+        this.ws.onclose = (event) => {
           console.log(
             'websocket console1/ closed. code: ' +
               event.code +
               ' reason: ' +
               event.reason,
           );
+          this.isWsConnected = false;
+          this.ws = null; // allow a subsequent reconnect attempt to proceed
         };
       } catch (error) {
         console.log(error);
@@ -348,6 +353,12 @@ export default {
         this.ws.close();
         this.ws = null;
       }
+      if (this.resizeConsoleWindow) {
+        window.removeEventListener('resize', this.resizeConsoleWindow);
+        this.resizeConsoleWindow = null;
+      }
+
+      this.isWsConnected = false;
       this.fitAddon = null;
     },
     handleWindowResize() {
@@ -391,11 +402,23 @@ export default {
       }
     },
     timeTrack() {
-      const intervalId = setInterval(() => {
+      if (this.intervalId) {
+        clearInterval(this.intervalId);
+      }
+      this.intervalId = setInterval(() => {
+        if (!window.isConsoleWindow1) {
+          clearInterval(this.intervalId);
+          this.intervalId = null;
+          return;
+        }
         if (window.isConsoleWindow1 && window.isConsoleWindow1.closed) {
           this.disable = false; // Update disable property when window is closed
+          if (!this.ws) {
+            this.openTerminal();
+          }
           // Clear interval once disable value is false
-          clearInterval(intervalId);
+          clearInterval(this.intervalId);
+          this.intervalId = null;
         }
       }, 1000); //To check open new window status every second
     },

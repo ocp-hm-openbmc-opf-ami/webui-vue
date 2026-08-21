@@ -6,6 +6,7 @@
         <b-col sm="6" md="5" xl="4">
           <search
             :placeholder="$t('pageSensors.searchForSensors')"
+            :disabled="!isSearchFilterReady"
             data-test-id="sensors-input-searchForSensors"
             @change-search="onChangeSearchInput"
             @clear-search="onClearSearchInput"
@@ -14,12 +15,13 @@
         <b-col sm="3" md="3" xl="2">
           <table-cell-count
             :filtered-items-count="filteredRows"
-            :total-number-of-cells="allSensors.length"
+            :total-number-of-cells="totalSensorsCount"
           ></table-cell-count>
         </b-col>
         <b-col sm="3" md="4" xl="6" class="text-right">
           <table-filter
             :filters="tableFilters"
+            :disabled="!isSearchFilterReady"
             @filter-change="onFilterChange"
           />
         </b-col>
@@ -39,6 +41,7 @@
             </template>
           </table-toolbar>
           <b-table
+            id="table-sensors"
             ref="table"
             responsive="md"
             selectable
@@ -55,6 +58,8 @@
             :sort-desc="true"
             :sort-compare="sortCompare"
             :filter="searchFilter"
+            :per-page="perPage"
+            :current-page="currentPage"
             :empty-text="$t('global.table.emptyMessage')"
             :empty-filtered-text="$t('global.table.emptySearchMessage')"
             :busy="isBusy"
@@ -166,6 +171,32 @@
           </b-table>
         </b-col>
       </b-row>
+      <b-row>
+        <b-col sm="6">
+          <b-form-group
+            class="table-pagination-select"
+            :label="$t('global.table.itemsPerPage')"
+            label-for="pagination-items-per-page"
+          >
+            <b-form-select
+              id="pagination-items-per-page"
+              v-model="perPage"
+              :options="itemsPerPageOptionsByLoad"
+            />
+          </b-form-group>
+        </b-col>
+        <b-col sm="6">
+          <b-pagination
+            v-model="currentPage"
+            first-number
+            last-number
+            :per-page="perPage"
+            :total-rows="getTotalRowCount(filteredRows)"
+            aria-controls="table-sensors"
+            :limit="limit"
+          />
+        </b-col>
+      </b-row>
     </div>
     <div v-else>
       <sensor-graph
@@ -200,6 +231,11 @@ import BVTableSelectableMixin, {
 } from '@/components/Mixins/BVTableSelectableMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import TableFilterMixin from '@/components/Mixins/TableFilterMixin';
+import BVPaginationMixin, {
+  currentPage,
+  perPage,
+  limit,
+} from '@/components/Mixins/BVPaginationMixin';
 import DataFormatterMixin from '@/components/Mixins/DataFormatterMixin';
 import TableSortMixin from '@/components/Mixins/TableSortMixin';
 import SearchFilterMixin, {
@@ -226,6 +262,7 @@ export default {
     IconEdit,
   },
   mixins: [
+    BVPaginationMixin,
     TableFilterMixin,
     BVTableSelectableMixin,
     LoadingBarMixin,
@@ -235,6 +272,7 @@ export default {
     BVToastMixin,
   ],
   beforeRouteLeave(to, from, next) {
+    this.stopBackgroundPreloading();
     this.$store.dispatch('sensors/setSensorGraphRefresh', true);
     this.hideLoader();
     next();
@@ -328,6 +366,9 @@ export default {
       activeFilters: [],
       searchFilter: searchFilter,
       searchTotalFilteredRows: 0,
+      currentPage: currentPage,
+      perPage: perPage,
+      limit: limit,
       selectedRows: selectedRows,
       tableHeaderCheckboxModel: tableHeaderCheckboxModel,
       tableHeaderCheckboxIndeterminate: tableHeaderCheckboxIndeterminate,
@@ -411,10 +452,17 @@ export default {
       ],
       modalSensorThresholdValue: {},
       isModalSuccess: false,
+      sensorBatchSize: 20,
+      backgroundBatchSize: 10,
+      isPreloadingAllSensors: false,
+      batchLoadPromises: {},
+      isPageActive: true,
+      preloadSessionId: 0,
     };
   },
   computed: {
     ...mapGetters('global', ['userPrivilege']),
+    ...mapGetters('sensors', ['totalSensors', 'hasMoreSensors']),
     isButtonDisable() {
       return this.userPrivilege === privilegesId.readOnly;
     },
@@ -430,6 +478,15 @@ export default {
     showSensor() {
       return this.$store.getters['sensors/sensorGraphRefreshGet'];
     },
+    totalSensorsCount() {
+      return this.totalSensors || this.allSensors.length;
+    },
+    itemsPerPageOptionsByLoad() {
+      return this.itemsPerPageOptions;
+    },
+    isSearchFilterReady() {
+      return !this.hasMoreSensors && !this.isPreloadingAllSensors;
+    },
     filteredRows() {
       return this.searchFilter
         ? this.searchTotalFilteredRows
@@ -439,17 +496,124 @@ export default {
       return this.getFilteredTableData(this.allSensors, this.activeFilters);
     },
   },
+  watch: {
+    currentPage() {
+      this.ensurePageDataReady();
+    },
+    perPage(newValue) {
+      if (this.currentPage !== 1) {
+        this.currentPage = 1;
+      }
+      if (newValue === 0) {
+        this.preloadAllSensorsInBackground();
+      } else {
+        this.ensurePageDataReady();
+      }
+    },
+  },
   created() {
     if (this.showSensor) {
       this.initSensorLoad();
     }
   },
+  beforeDestroy() {
+    this.stopBackgroundPreloading();
+  },
   methods: {
-    initSensorLoad() {
+    stopBackgroundPreloading() {
+      this.isPageActive = false;
+      this.preloadSessionId += 1;
+      this.isPreloadingAllSensors = false;
+    },
+    startPreloadSession() {
+      this.isPageActive = true;
+      this.preloadSessionId += 1;
+      return this.preloadSessionId;
+    },
+    isSessionActive(sessionId) {
+      return (
+        this.isPageActive &&
+        this.showSensor &&
+        sessionId === this.preloadSessionId
+      );
+    },
+    async loadSensorsByBatch({
+      sessionId = this.preloadSessionId,
+      batchSize = this.sensorBatchSize,
+      requiredRows = Infinity,
+    } = {}) {
+      if (!this.isSessionActive(sessionId)) return;
+
+      while (
+        this.hasMoreSensors &&
+        this.allSensors.length < requiredRows &&
+        this.isSessionActive(sessionId)
+      ) {
+        await this.fetchNextBatch(sessionId, batchSize);
+      }
+    },
+    isHistorySensorRow(item) {
+      return (
+        this.historyViewSensors.includes(item?.name) && item.id != undefined
+      );
+    },
+    async initSensorLoad() {
+      const sessionId = this.startPreloadSession();
       this.startLoader();
-      this.$store.dispatch('sensors/getAllSensors').finally(() => {
-        this.endLoader();
-        this.isBusy = false;
+      this.isBusy = true;
+
+      await this.$store
+        .dispatch('sensors/getAllSensors', { batchSize: this.sensorBatchSize })
+        .finally(() => {
+          this.endLoader();
+          this.isBusy = false;
+        });
+
+      if (!this.isSessionActive(sessionId)) return;
+      this.preloadAllSensorsInBackground(sessionId);
+    },
+    async fetchNextBatch(sessionId, count = this.sensorBatchSize) {
+      if (!this.isSessionActive(sessionId)) return [];
+      const requestKey = String(sessionId);
+      if (this.batchLoadPromises[requestKey]) {
+        return this.batchLoadPromises[requestKey];
+      }
+      this.batchLoadPromises[requestKey] = this.$store
+        .dispatch('sensors/fetchNextSensorsBatch', {
+          count,
+        })
+        .finally(() => {
+          this.$delete(this.batchLoadPromises, requestKey);
+        });
+      return this.batchLoadPromises[requestKey];
+    },
+    async preloadAllSensorsInBackground(sessionId = this.preloadSessionId) {
+      if (
+        this.isPreloadingAllSensors ||
+        !this.hasMoreSensors ||
+        !this.isSessionActive(sessionId)
+      ) {
+        return;
+      }
+      this.isPreloadingAllSensors = true;
+      try {
+        await this.loadSensorsByBatch({
+          sessionId,
+          batchSize: this.backgroundBatchSize,
+        });
+      } finally {
+        if (sessionId === this.preloadSessionId) {
+          this.isPreloadingAllSensors = false;
+        }
+      }
+    },
+    async ensurePageDataReady() {
+      if (this.perPage === 0) return;
+      const sessionId = this.preloadSessionId;
+      await this.loadSensorsByBatch({
+        sessionId,
+        batchSize: this.sensorBatchSize,
+        requiredRows: this.currentPage * this.perPage,
       });
     },
     sortCompare(a, b, key) {
@@ -458,13 +622,17 @@ export default {
       }
     },
     onFilterChange({ activeFilters }) {
+      if (!this.isSearchFilterReady) return;
       this.activeFilters = activeFilters;
+      this.currentPage = 1;
     },
     onFiltered(filteredItems) {
       this.searchTotalFilteredRows = filteredItems.length;
     },
     onChangeSearchInput(event) {
+      if (!this.isSearchFilterReady) return;
       this.searchFilter = event;
+      this.currentPage = 1;
     },
     exportFileNameByDate() {
       // Create export file name based on date
@@ -476,13 +644,10 @@ export default {
       return this.$t('pageSensors.exportFilePrefix') + date;
     },
     onRowclick(item) {
-      if (
-        this.historyViewSensors.includes(item?.name) &&
-        item.id != undefined
-      ) {
-        this.itemData = item;
-        this.$store.dispatch('sensors/setSensorGraphRefresh', false);
-      }
+      if (!this.isHistorySensorRow(item)) return;
+      this.stopBackgroundPreloading();
+      this.itemData = item;
+      this.$store.dispatch('sensors/setSensorGraphRefresh', false);
     },
     isBackSensorPage() {
       this.$store.dispatch('sensors/setSensorGraphRefresh', true);
@@ -490,14 +655,11 @@ export default {
       this.isBusy = false;
       this.tableHeaderCheckboxModel = false;
       this.tableHeaderCheckboxIndeterminate = false;
+      const sessionId = this.startPreloadSession();
+      this.preloadAllSensorsInBackground(sessionId);
     },
     rowClass(item) {
-      if (
-        this.historyViewSensors.includes(item?.name) &&
-        item.id != undefined
-      ) {
-        return 'row_class';
-      }
+      return this.isHistorySensorRow(item) ? 'row_class' : null;
     },
     initModalSensorThresholdModal(val) {
       this.modalSensorThresholdValue = {};
@@ -506,6 +668,7 @@ export default {
     },
     isSetSensorThresholdUpdateValue(val) {
       const thresholdsUrlId = this.modalSensorThresholdValue.thresholdsId;
+      const sensorUri = this.modalSensorThresholdValue.sensorUri;
       this.$store
         .dispatch('sensors/setSensorThresholdValue', {
           val,
@@ -514,7 +677,9 @@ export default {
         .then((success) => {
           this.successToast(success);
           this.isModalSuccess = true;
-          this.initSensorLoad();
+          this.$store
+            .dispatch('sensors/refreshSingleSensor', sensorUri)
+            .catch(() => {});
         })
         .catch(({ message }) => this.errorToast(message));
     },

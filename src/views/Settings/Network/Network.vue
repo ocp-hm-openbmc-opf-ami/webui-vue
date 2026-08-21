@@ -177,8 +177,13 @@ export default {
   },
   created() {
     this.startLoader();
-    Promise.all([this.$store.dispatch('network/getEthernetData')]).finally(() =>
-      this.endLoader(),
+    Promise.all([this.$store.dispatch('network/getEthernetData')]).finally(
+      () => {
+        this.endLoader();
+        if (this.ethernetData && this.ethernetData.length > 0) {
+          this.getTabIndex(0);
+        }
+      },
     );
   },
   methods: {
@@ -297,7 +302,6 @@ export default {
       const dhcpv6State = this.ethernetData[this.tabIndex].DHCPv6.OperatingMode;
       const ipv6Data = ipv6AddressDataClone;
       const getOemAmiActions = this.ethernetData[this.tabIndex].Actions?.Oem
-        ?.Ami
         ? true
         : false;
       this.$store

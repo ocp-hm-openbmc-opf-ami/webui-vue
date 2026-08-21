@@ -442,6 +442,7 @@
             "nsUpdateEnable": "NSUpdate Enable",
             "useTSIG": "Use TSIG",
             "doNsupdate": "DoNSUpdate",
+            "disable": "Disable",
             "manual": "Manual",
             "auto": "Auto",
             "register": "Register",
@@ -451,7 +452,23 @@
             "tsigFileUpload": "Upload TSIG Key File",
             "tsigFileUploadDiscription": "Upload (.private) files only",
             "addDomainNames": "Add Domain Names",
-            "invalidFQDN": "Please enter a valid Fully Qualified Domain Name (e.g., example.com)"
+            "invalidFQDN": "Please enter a valid Fully Qualified Domain Name (e.g., example.com)",
+            "dnsOverHttps": "DNS over HTTPS",
+            "mode": "Mode",
+            "server": "Server",
+            "serviceTraffic": "Service Traffic",
+            "automatic": "Automatic",
+            "addDohServer": "Add DoH Server",
+            "dohServer": "DoH Server",
+            "dohDnsUrl": "DoH DNS URL",
+            "invalidIPAddress": "Invalid IP Address",
+            "invalidUrl": "Invalid URL",
+            "google": "Google",
+            "cloudflare": "Cloudflare",
+            "opendns": "OpenDNS",
+            "both": "Both",
+            "ipv4": "IPv4",
+            "ipv6": "IPv6"
         },
         "toast": {
             "errorNsUpdate": "Error in updating action DoNSUpdate.",
@@ -462,6 +479,7 @@
             "errorDisableNsUpdate": "Error in disabling NSUpdate Settings.",
             "errorUpdateTsig": "Error in uploading TSIG File.",
             "errorSaveConfiguratin": "Error in updating DDNS Configurations.",
+            "errorSaveDohConfiguration": "Error in updating DNS over HTTPS configuration.",
             "successNsUpdate": "Successfully updated action DoNsUpdate.",
             "successInterfaceConfiguration": "Successfully updated DDNS Interface Configuration.",
             "successEnableHostName": "Successfully enabled Host Name Settings.",
@@ -469,7 +487,8 @@
             "successEnableNsUpdate": "Successfully enabled NSUpdate Settings.",
             "successDisableNsUpdate": "Successfully disabled NSUpdate Settings.",
             "successUpdateTsig": "Successfully uploaded TSIG File.",
-            "successSaveConfiguratin": "Successfully updated DDNS Configurations."
+            "successSaveConfiguratin": "Successfully updated DDNS Configurations.",
+            "successSaveDohConfiguration": "Successfully updated DNS over HTTPS configuration."
         }
     },
     "pageSystemInventory": {
