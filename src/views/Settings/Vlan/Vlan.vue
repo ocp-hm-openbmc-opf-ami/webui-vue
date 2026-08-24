@@ -16,7 +16,7 @@
                 :title="data.Id"
                 @click="getTabIndex(data.Id, index)"
               >
-                <vlan-list-table :tab-id="tabId" />
+                <vlan-list-table :tab-id="data.Id" />
               </b-tab>
             </b-tabs>
           </b-card>
@@ -55,7 +55,7 @@ export default {
     vlanAllData() {
       this.tabData = [];
       this.vlanAllData.map((data) => {
-        if (!data.Id.includes('usb')) {
+        if (!data.Id.includes('usb') && !data.Id.includes('_')) {
           this.tabData.push(data);
         }
       });
