@@ -816,11 +816,13 @@
         "downloadBackupFileInfo": "Select any backup configuration to proceed with downloading a file.",
         "toast": {
             "successMessage": "Successfully downloaded the Property Backup Features.",
-            "errorMessage": "The Property Backup Features are not in the list of acceptable values.",
+            "errorMessage": "Error in downloading the Property Backup Features.",
+            "errorMessageBackupFeaturesFormat": "The Property Backup Features are not in the list of acceptable values.",
             "fileUploadedSuccessfully": "Successfully uploaded the Restore File.",
             "fileUploadedError": "Error in uploading the Restore File.",
             "errorGettingBackupDetails": "Error in getting the Property Backup Features.",
             "errorMessageNotConfigured": "The operation cannot be completed, since the Configuration file does not exit.",
+            "errorMessageEncryptionFailed": "Failed to encrypt the backupconfig file.",
             "restoreConfirmation": "Restore functionality will restart the services of Configured Backup properties. Are you sure you want to proceed?",
             "confirmTitle": "Confirm?"
         }

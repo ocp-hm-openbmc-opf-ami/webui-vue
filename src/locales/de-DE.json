@@ -818,11 +818,13 @@
         "downloadBackupFileInfo": "Wählen Sie eine beliebige Sicherungskonfiguration aus, um mit dem Herunterladen einer Datei fortzufahren.",
         "toast": {
             "successMessage": "Die Sicherungseigenschaften wurden erfolgreich heruntergeladen.",
-            "errorMessage": "Die Sicherungseigenschaften sind nicht in der Liste der zulässiger Werte.",
+            "errorMessage": "Fehler beim Herunterladen der Sicherungseigenschaften.",
+            "errorMessageBackupFeaturesFormat": "Die Sicherungseigenschaften befinden sich nicht in der Liste der akzeptierten Werte.",
             "fileUploadedSuccessfully": "Wiederherstellungsdatei erfolgreich hochgeladen.",
             "fileUploadedError": "Fehler beim Hochladen der Wiederherstellungsdatei.",
             "errorGettingBackupDetails": "Fehler beim Abrufen der Sicherungseigenschaften.",
             "errorMessageNotConfigured": "Der Vorgang kann nicht abgeschlossen werden, da die Konfigurationsdatei nicht existiert.",
+            "errorMessageEncryptionFailed": "Fehler beim Verschlüsseln der Sicherungskonfigurationsdatei.",
             "restoreConfirmation": "Die Wiederherstellungsfunktion startet die Dienste der konfigurierten Sicherungseigenschaften neu. Möchten Sie fortfahren?",
             "confirmTitle": "Bestätigen?"
 
