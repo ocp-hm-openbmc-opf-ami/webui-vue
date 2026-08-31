@@ -1293,6 +1293,10 @@
     },
     "pageAddc": {
         "pageDescription": "Autonome Debug-Datenerfassung",
+        "alert": {
+            "serviceUnavailable1": "Keine ADDC-Konfiguration verfügbar.",
+            "serviceUnavailable2": "Bitte prüfen Sie, ob der ADDC-Dienst verfügbar ist und alle zugehörigen Anforderungen erfüllt sind, oder lesen Sie den Abschnitt 'ADDC Ready Signal' im Benutzerhandbuch."
+        },
         "errorRecoveryMode": {
             "errorRecoveryModeTitle": "Fehlerbehebungsmodus",
             "none": "Keine",

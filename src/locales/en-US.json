@@ -1289,6 +1289,10 @@
     },
     "pageAddc": {
         "pageDescription": "Autonomous Debug Data Collection",
+        "alert": {
+            "serviceUnavailable1": "No ADDC configuration is available.",
+            "serviceUnavailable2": "Please verify that the ADDC service is available and all related requirements are met, or refer to the 'ADDC Ready Signal' section in the User Guide."
+        },
         "errorRecoveryMode": {
             "errorRecoveryModeTitle": "Error Recovery Mode",
             "none": "None",

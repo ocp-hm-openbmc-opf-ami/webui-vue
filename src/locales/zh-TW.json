@@ -1292,6 +1292,10 @@
     },
     "pageAddc": {
         "pageDescription": "自主調試資料收集",
+        "alert": {
+            "serviceUnavailable1": "ADDC 配置不可用。",
+            "serviceUnavailable2": "請確認 ADDC 服務可用且所有相關要求已滿足，或參閱使用者指南中的 'ADDC Ready Signal' 部分。"
+        },
         "errorRecoveryMode": {
             "errorRecoveryModeTitle": "錯誤恢復模式",
             "none": "沒有任何",
