@@ -3,6 +3,19 @@ import { uniqBy } from 'lodash';
 import i18n from '@/i18n';
 import { isFeatureEnabled } from '@/components/Mixins/FeatureMixin';
 
+const polledFields = [
+  'status',
+  'state',
+  'currentValue',
+  'lowerCaution',
+  'upperCaution',
+  'lowerCritical',
+  'upperCritical',
+  'upperFatal',
+  'lowerFatal',
+  'units',
+];
+
 const SensorsStore = {
   namespaced: true,
   state: {
@@ -18,6 +31,17 @@ const SensorsStore = {
   mutations: {
     setSensors: (state, sensors) => {
       state.sensors = uniqBy([...sensors, ...state.sensors], 'name');
+    },
+    updateSensor: (state, sensor) => {
+      const index = state.sensors.findIndex((s) => s.name === sensor.name);
+      if (index === -1) {
+        state.sensors.push(sensor);
+      } else {
+        state.sensors.splice(index, 1, { ...state.sensors[index], ...sensor });
+      }
+    },
+    removeStaleSensors: (state, freshNames) => {
+      state.sensors = state.sensors.filter((s) => freshNames.has(s.name));
     },
     setGraphSensors: (state, sensors) => {
       state.graphSensors = sensors;
@@ -145,6 +169,41 @@ const SensorsStore = {
         .patch(val.id, { Interval: val.Interval, TimeFrame: val.TimeFrame })
         .then(() => {})
         .catch((error) => console.log(error));
+    },
+    // Single OEM endpoint returning every sensor reading in one response
+    async pollSensorUpdates({ commit, state }) {
+      const sensors = await api
+        .get('/redfish/v1/Oem/Ami/SensorsSummary')
+        .then(({ data }) => data.Sensors)
+        .catch((error) => console.log(error));
+      if (!sensors) return;
+      const cachedByName = new Map(state.sensors.map((s) => [s.name, s]));
+      const freshNames = new Set();
+      sensors
+        .filter((sensor) => sensor.Name)
+        .forEach((sensor) => {
+          freshNames.add(sensor.Name);
+          const fresh = {
+            name: sensor.Name,
+            status: sensor.Status?.Health,
+            state: sensor.Status?.State,
+            currentValue: sensor.Reading,
+            lowerCaution: sensor.Thresholds?.LowerCaution?.Reading,
+            upperCaution: sensor.Thresholds?.UpperCaution?.Reading,
+            lowerCritical: sensor.Thresholds?.LowerCritical?.Reading,
+            upperCritical: sensor.Thresholds?.UpperCritical?.Reading,
+            upperFatal: sensor.Thresholds?.UpperFatal?.Reading,
+            lowerFatal: sensor.Thresholds?.LowerFatal?.Reading,
+            units: sensor.ReadingUnits,
+          };
+          const cached = cachedByName.get(fresh.name);
+          if (!cached || polledFields.some((f) => cached[f] !== fresh[f])) {
+            commit('updateSensor', fresh);
+          }
+        });
+      if (freshNames.size > 0) {
+        commit('removeStaleSensors', freshNames);
+      }
     },
     setSensorGraphRefresh({ commit }, val) {
       commit('setSensorGraph', val);
