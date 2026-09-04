@@ -411,6 +411,7 @@ export default {
       ],
       modalSensorThresholdValue: {},
       isModalSuccess: false,
+      sensorPollingInterval: null,
     };
   },
   computed: {
@@ -443,11 +444,19 @@ export default {
     if (this.showSensor) {
       this.initSensorLoad();
     }
+    if (localStorage.getItem('pollingEnabled') === 'true') {
+      this.startSensorPolling();
+    }
+    this.$root.$on('polling-toggled', this.onPollingToggled);
+  },
+  beforeDestroy() {
+    this.stopSensorPolling();
+    this.$root.$off('polling-toggled', this.onPollingToggled);
   },
   methods: {
     initSensorLoad() {
       this.startLoader();
-      this.$store.dispatch('sensors/getAllSensors').finally(() => {
+      this.$store.dispatch('sensors/pollSensorUpdates').finally(() => {
         this.endLoader();
         this.isBusy = false;
       });
@@ -520,6 +529,25 @@ export default {
     },
     iscloseAddModal(val) {
       this.isModalSuccess = val;
+    },
+    onPollingToggled(enabled) {
+      if (enabled) {
+        this.startSensorPolling();
+      } else {
+        this.stopSensorPolling();
+      }
+    },
+    startSensorPolling() {
+      this.stopSensorPolling();
+      this.sensorPollingInterval = setInterval(() => {
+        this.$store.dispatch('sensors/pollSensorUpdates');
+      }, 10000);
+    },
+    stopSensorPolling() {
+      if (this.sensorPollingInterval) {
+        clearInterval(this.sensorPollingInterval);
+        this.sensorPollingInterval = null;
+      }
     },
     getFilterByStatus(status) {
       switch (status) {
