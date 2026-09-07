@@ -4234,6 +4234,7 @@
         "Mbps": "Mbps",
         "sameNetworkLinkSettings": "The Network Link Configurations are the same, so it is not required to save.",
         "modifyNetworkLinkSettings": "If users need to change these interface configurations, please modify the values of the parent interface instead.",
+        "ncsiNetworkLinkSettings": "The selected interface is configured as an NCSI interface. Link Speed and Duplex Mode cannot be modified.",
         "toast": {
             "successSaveNetworkLink": "Successfully saved Network Link.",
             "errorSavedNetworkLink": "Error in saving Network Link.",

@@ -4215,6 +4215,7 @@
         "Mbps": "Mbps",
         "sameNetworkLinkSettings": "网络连接配置相同，因此无需保存。",
         "modifyNetworkLinkSettings": "如果用户需要更改这些接口配置，请修改主接口的值。",
+        "ncsiNetworkLinkSettings": "所选接口已配置为 NCSI 接口。无法修改连接速度(LinkSpeed)和双工模式(DuplexMode)。",
         "toast": {
             "successSaveNetworkLink": "已成功保存网络连接。",
             "errorSavedNetworkLink": "保存网络连接时出错。",
