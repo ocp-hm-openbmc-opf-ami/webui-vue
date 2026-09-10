@@ -130,6 +130,7 @@ const NetworkStore = {
   },
   actions: {
     async getEthernetData({ commit, state }) {
+      await store.dispatch('global/getManagerinstance');
       return await api
         .get(
           `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces`,
