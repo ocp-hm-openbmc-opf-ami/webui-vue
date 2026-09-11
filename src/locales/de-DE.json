@@ -2183,6 +2183,7 @@
             "informatiomTitle": "Information",
             "informationMessage": "Netzwerkkonfiguration wurde erfolgreich zurückgesetzt. Bitte schließen Sie diese Browsersitzung und öffnen Sie eine neue, um sich mit der neuen IP des Geräts zu verbinden.",
             "noOperationWarning": "Die IPv6-Adresseneinstellungen sind identisch, daher ist kein Speichern erforderlich.",
+            "ipv6GatewayLinkLocalNotAllowed": "Das IPv6-Gateway darf keine Link-Local-Adresse sein.",
             "lanInterface": "LAN-Schnittstelle",
             "enableLAN": "LAN aktivieren",
             "confirmMsg": "Diese Funktion kann die IP-Adresse des Geräts ändern, und Sie könnten die Verbindung in dieser Browsersitzung verlieren. Bitte verbinden Sie sich nach der Änderung mit einer neuen Browsersitzung erneut. Möchten Sie fortfahren?"
