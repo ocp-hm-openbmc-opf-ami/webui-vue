@@ -461,6 +461,15 @@ export default {
         this.isBusy = false;
       });
     },
+    onPollingToggled(enabled) {
+      if (enabled) {
+        this.$store.commit('sensors/resetSensorDiscovery');
+        this.$store.dispatch('sensors/pollSensorUpdates');
+        this.startSensorPolling();
+      } else {
+        this.stopSensorPolling();
+      }
+    },
     sortCompare(a, b, key) {
       if (key === 'status') {
         return this.sortStatus(a, b, key);
@@ -529,13 +538,6 @@ export default {
     },
     iscloseAddModal(val) {
       this.isModalSuccess = val;
-    },
-    onPollingToggled(enabled) {
-      if (enabled) {
-        this.startSensorPolling();
-      } else {
-        this.stopSensorPolling();
-      }
     },
     startSensorPolling() {
       this.stopSensorPolling();

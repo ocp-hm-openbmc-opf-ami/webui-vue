@@ -3,6 +3,7 @@ import { uniqBy } from 'lodash';
 import i18n from '@/i18n';
 import { isFeatureEnabled } from '@/components/Mixins/FeatureMixin';
 
+// Fields a sensor poll can change; used to skip no-op commits
 const polledFields = [
   'status',
   'state',
@@ -20,6 +21,7 @@ const SensorsStore = {
   namespaced: true,
   state: {
     sensors: [],
+    sensorCollections: [],
     graphSensors: {},
     sensorGraphRefresh: true,
   },
@@ -31,6 +33,12 @@ const SensorsStore = {
   mutations: {
     setSensors: (state, sensors) => {
       state.sensors = uniqBy([...sensors, ...state.sensors], 'name');
+    },
+    setSensorCollections: (state, collections) => {
+      state.sensorCollections = collections;
+    },
+    resetSensorDiscovery: (state) => {
+      state.sensorCollections = [];
     },
     updateSensor: (state, sensor) => {
       const index = state.sensors.findIndex((s) => s.name === sensor.name);
@@ -170,38 +178,79 @@ const SensorsStore = {
         .then(() => {})
         .catch((error) => console.log(error));
     },
-    // Single OEM endpoint returning every sensor reading in one response
-    async pollSensorUpdates({ commit, state }) {
-      const sensors = await api
-        .get('/redfish/v1/Oem/Ami/SensorsSummary')
-        .then(({ data }) => data.Sensors)
-        .catch((error) => console.log(error));
-      if (!sensors) return;
+    // Fetch all sensor readings with one expanded request per chassis.
+    async pollSensorUpdates({ commit, state, dispatch }) {
+      let sensorCollections = state.sensorCollections;
+      if (!sensorCollections.length) {
+        const collection = (await dispatch('getChassisCollection')) || [];
+        const chassisCollection = [...collection];
+        if (isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')) {
+          chassisCollection.push(
+            '/redfish/v1/PowerEquipment/PowerShelves/PowerShelf',
+          );
+        }
+        const discoveredCollections = await api.all(
+          chassisCollection.map((chassisUri) =>
+            api
+              .get(chassisUri)
+              .then(({ data }) => data?.Sensors?.['@odata.id'])
+              .catch(() => null),
+          ),
+        );
+        sensorCollections = discoveredCollections.filter(Boolean);
+        commit('setSensorCollections', sensorCollections);
+      }
+      if (!sensorCollections.length) return;
+
+      let collectionRequestFailed = false;
+      const sensors = (
+        await api.all(
+          sensorCollections.map((sensorsUri) =>
+            api
+              .get(`${sensorsUri}?$expand=.($levels=1)`)
+              .then(({ data }) => data?.Members || [])
+              .catch((error) => {
+                collectionRequestFailed = true;
+                if (error.response?.status === 404) {
+                  commit('setSensorCollections', []);
+                }
+                console.log(error);
+                return [];
+              }),
+          ),
+        )
+      )
+        .flat()
+        .filter((sensor) => Boolean(sensor?.Name));
+
       const cachedByName = new Map(state.sensors.map((s) => [s.name, s]));
       const freshNames = new Set();
-      sensors
-        .filter((sensor) => sensor.Name)
-        .forEach((sensor) => {
-          freshNames.add(sensor.Name);
-          const fresh = {
-            name: sensor.Name,
-            status: sensor.Status?.Health,
-            state: sensor.Status?.State,
-            currentValue: sensor.Reading,
-            lowerCaution: sensor.Thresholds?.LowerCaution?.Reading,
-            upperCaution: sensor.Thresholds?.UpperCaution?.Reading,
-            lowerCritical: sensor.Thresholds?.LowerCritical?.Reading,
-            upperCritical: sensor.Thresholds?.UpperCritical?.Reading,
-            upperFatal: sensor.Thresholds?.UpperFatal?.Reading,
-            lowerFatal: sensor.Thresholds?.LowerFatal?.Reading,
-            units: sensor.ReadingUnits,
-          };
-          const cached = cachedByName.get(fresh.name);
-          if (!cached || polledFields.some((f) => cached[f] !== fresh[f])) {
-            commit('updateSensor', fresh);
-          }
-        });
-      if (freshNames.size > 0) {
+      sensors.forEach((sensor) => {
+        freshNames.add(sensor.Name);
+        const fresh = {
+          id: sensor.Oem?.Ami?.['@odata.id'] || sensor['@odata.id'],
+          name: sensor.Name,
+          status: sensor.Status?.Health ?? 'OK',
+          state: sensor.Status?.State,
+          currentValue: sensor.Reading,
+          thresholdsId:
+            (sensor.Oem?.Ami?.SensorThreshold ?? '') === ''
+              ? null
+              : sensor.Oem?.Ami?.SensorThreshold?.['@odata.id'],
+          lowerCaution: sensor.Thresholds?.LowerCaution?.Reading,
+          upperCaution: sensor.Thresholds?.UpperCaution?.Reading,
+          lowerCritical: sensor.Thresholds?.LowerCritical?.Reading,
+          upperCritical: sensor.Thresholds?.UpperCritical?.Reading,
+          upperFatal: sensor.Thresholds?.UpperFatal?.Reading,
+          lowerFatal: sensor.Thresholds?.LowerFatal?.Reading,
+          units: sensor.ReadingUnits,
+        };
+        const cached = cachedByName.get(fresh.name);
+        if (!cached || polledFields.some((f) => cached[f] !== fresh[f])) {
+          commit('updateSensor', fresh);
+        }
+      });
+      if (!collectionRequestFailed) {
         commit('removeStaleSensors', freshNames);
       }
     },
