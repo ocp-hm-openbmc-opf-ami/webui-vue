@@ -16,8 +16,8 @@
         "@carbon/icons-vue": "10.99.1",
         "@fontsource/source-sans-pro": "5.0.5",
         "@novnc/novnc": "1.2.0",
-        "axios": "1.6.0",
-        "axios-cache-interceptor": "1.5.1",
+        "axios": "1.20.0",
+        "axios-cache-interceptor": "1.10.0",
         "bootstrap": "4.6.0",
         "bootstrap-vue": "2.21.2",
         "canvas": "3.0.0",
@@ -70,6 +70,30 @@
         "vue-server-renderer": "2.7.16",
         "vue-template-compiler": "2.6.12",
         "yorkie": "2.0.0"
+    },
+    "overrides": {
+        "request": {
+            "form-data": "^2.5.4"
+        },
+        "json-schema": "^0.4.0",
+        "minimist": "^1.2.8",
+        "elliptic": "^6.6.1",
+        "glob-parent": "^6.0.2",
+        "flatted": "^3.4.4",
+        "node-forge": "^1.4.0",
+        "selfsigned": "^2.4.1",
+        "brace-expansion@1": "^1.1.12",
+        "brace-expansion@2": "^2.0.2",
+        "ansi-regex": "^5.0.1",
+        "js-yaml@4.1.0": "^4.3.2",
+        "lodash.template": "^4.18.1",
+        "braces": "^3.0.3",
+        "minimatch@3.1.2": "^3.1.5",
+        "minimatch@9.0.1": "^9.0.9",
+        "minimatch@9.0.5": "^9.0.9",
+        "test-exclude": {
+            "minimatch": "^3.1.5"
+        }
     },
     "engines": {
         "node": ">=12.14.1"
