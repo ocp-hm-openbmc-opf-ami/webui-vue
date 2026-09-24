@@ -133,7 +133,7 @@ const NetworkDDNSStore = {
     async nsUpdate({ state, dispatch }) {
       return await api
         .post(
-          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${state.ddnsFirstInterfaceId}/Actions/Oem/Ami/EthernetInterface.DoNsupdate`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${state.ddnsFirstInterfaceId}/Actions/Oem/AmiNetworkConfiguration.DoNsupdate`,
         )
         .then(() => dispatch('getDDNSEthernetData'))
         .then(() => {
@@ -266,7 +266,7 @@ const NetworkDDNSStore = {
       };
       return await api
         .post(
-          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${state.ddnsSelectedInterfaceId}/Actions/Oem/Ami/EthernetInterface.TSIGUpload`,
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${state.ddnsSelectedInterfaceId}/Actions/Oem/AmiNetworkConfiguration.TSIGUpload`,
           uploadData,
           config,
         )
@@ -337,6 +337,31 @@ const NetworkDDNSStore = {
           console.log(error);
           throw new Error(
             i18n.t('pageDDNSNetwork.toast.errorSaveConfiguratin'),
+          );
+        });
+    },
+    async saveDohConfiguration({ state, dispatch }, DoHSetting) {
+      const dohConfiguration = {
+        Oem: {
+          Ami: {
+            DoHSetting,
+          },
+        },
+      };
+
+      return await api
+        .patch(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces/${state.ddnsSelectedInterfaceId}`,
+          dohConfiguration,
+        )
+        .then(() => dispatch('getDDNSEthernetData'))
+        .then(() => {
+          return i18n.t('pageDDNSNetwork.toast.successSaveDohConfiguration');
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(
+            i18n.t('pageDDNSNetwork.toast.errorSaveDohConfiguration'),
           );
         });
     },

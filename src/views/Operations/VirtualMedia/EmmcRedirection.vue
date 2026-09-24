@@ -97,7 +97,10 @@
                     size="sm"
                     class="emmc-upload-btn"
                     :disabled="
-                      !uploadFile || isUploadInProgress || isButtonDisabled
+                      !uploadFile ||
+                      fileError ||
+                      isUploadInProgress ||
+                      isButtonDisabled
                     "
                     @click="handleUploadSubmit"
                   >
@@ -433,7 +436,7 @@ export default {
       this.fileError = false;
     },
     async handleUploadSubmit() {
-      if (!this.uploadFile || this.isUploadInProgress) return;
+      if (!this.uploadFile || this.isUploadInProgress || this.fileError) return;
       this.uploading = true;
       try {
         await this.$store.dispatch('virtualMedia/uploadLocalMedia', {
@@ -452,12 +455,14 @@ export default {
           return;
         }
         if (error.response && error.response.status === 400) {
-          const responseData = error.response.data;
-          if (responseData && responseData['FilePath@Message.ExtendedInfo']) {
-            const messages = responseData['FilePath@Message.ExtendedInfo'];
+          const responseData = error.response.data.error;
+          if (responseData && responseData['@Message.ExtendedInfo']) {
+            const messages = responseData['@Message.ExtendedInfo'];
             const duplicateError = messages.find(
               (msg) =>
-                msg.Message && msg.Message.includes('FilePath was duplicated'),
+                msg.Message &&
+                msg.Message.includes('FilePath') &&
+                msg.Message.toLowerCase().includes('already exists'),
             );
             if (duplicateError) {
               this.errorToast(
@@ -480,6 +485,19 @@ export default {
       this.uploading = false;
     },
     handleStart(item) {
+      const [sizeValue, sizeUnit = ''] = String(item.imageSize).split(/\s+/);
+      const size = Number.parseFloat(sizeValue);
+      const minSize = 600;
+      if (
+        Number.isFinite(size) &&
+        sizeUnit.toLowerCase() === 'kb' &&
+        size < minSize
+      ) {
+        this.errorToast(
+          this.$t('pageVirtualMedia.toast.virtualMediaErrorFileTooSmall'),
+        );
+        return;
+      }
       this.selectedImage = item.odataId;
       this.$bvModal.show('modal-redirect');
     },

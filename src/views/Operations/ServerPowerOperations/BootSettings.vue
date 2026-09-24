@@ -20,7 +20,7 @@
       <b-form-checkbox
         v-model="form.oneTimeBoot"
         class="mb-4"
-        :disabled="form.bootOption === 'None'"
+        :disabled="form.bootOption === 'None' || isForcedOneTimeBootTarget"
         @change="$v.form.oneTimeBoot.$touch()"
       >
         {{ $t('pageServerPowerOperations.bootSettings.enableOneTimeBoot') }}
@@ -82,10 +82,18 @@ export default {
       'overrideEnabled',
       'tpmEnabled',
     ]),
+    isForcedOneTimeBootTarget() {
+      return ['BiosSetup', 'UefiBootNext', 'UefiTarget'].includes(
+        this.form.bootOption,
+      );
+    },
   },
   watch: {
     bootSource: function (value) {
       this.form.bootOption = value;
+      if (['BiosSetup', 'UefiBootNext', 'UefiTarget'].includes(value)) {
+        this.form.oneTimeBoot = false;
+      }
     },
     overrideEnabled: function (value) {
       this.form.oneTimeBoot = value;
@@ -129,8 +137,13 @@ export default {
     },
     onChangeSelect(selectedOption) {
       this.$v.form.bootOption.$touch();
-      // Disable one time boot if selected boot option is 'None'
-      if (selectedOption === 'None') this.form.oneTimeBoot = false;
+      // Disable one time boot for None and forced one-time boot targets.
+      if (
+        selectedOption === 'None' ||
+        ['BiosSetup', 'UefiBootNext', 'UefiTarget'].includes(selectedOption)
+      ) {
+        this.form.oneTimeBoot = false;
+      }
     },
   },
 };

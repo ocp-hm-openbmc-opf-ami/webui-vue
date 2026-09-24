@@ -206,7 +206,7 @@ const AuthenticationStore = {
       const username = localStorage.getItem('storedUsername');
       return await api
         .post(
-          `/redfish/v1/AccountService/Accounts/${username}/Actions/Oem/Ami/TwoFactorAuthentication`,
+          `/redfish/v1/AccountService/Accounts/${username}/Actions/Oem/AmiManagerAccount.TwoFactorAuthentication`,
         )
         .then(({ data }) => {
           commit('setTfaEnabled', true);
@@ -218,7 +218,7 @@ const AuthenticationStore = {
       const username = localStorage.getItem('storedUsername');
       return await api
         .delete(
-          `/redfish/v1/AccountService/Accounts/${username}/Actions/Oem/Ami/TwoFactorAuthentication`,
+          `/redfish/v1/AccountService/Accounts/${username}/Actions/Oem/AmiManagerAccount.TwoFactorAuthentication`,
         )
         .then(() => {
           commit('setTfaEnabled', false);

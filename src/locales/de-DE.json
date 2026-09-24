@@ -444,6 +444,7 @@
             "nsUpdateEnable": "NSUpdate aktivieren",
             "useTSIG": "TSIG verwenden",
             "doNsupdate": "NSUpdate durchführen",
+            "disable": "Deaktiviert",
             "manual": "Manuell",
             "auto": "Automatisch",
             "register": "Registrieren",
@@ -453,7 +454,23 @@
             "tsigFileUpload": "TSIG-Schlüsseldatei hochladen",
             "tsigFileUploadDiscription": "Nur (.private) Dateien hochladen",
             "addDomainNames": "Domänennamen hinzufügen",
-            "invalidFQDN": "Bitte geben Sie einen gültigen vollqualifizierten Domänennamen ein (z.B. example.com)"
+            "invalidFQDN": "Bitte geben Sie einen gültigen vollqualifizierten Domänennamen ein (z.B. example.com)",
+            "dnsOverHttps": "DNS über HTTPS",
+            "mode": "Modus",
+            "server": "Server",
+            "serviceTraffic": "Service-Datenverkehr",
+            "automatic": "Automatisch",
+            "addDohServer": "DoH-Server hinzufügen",
+            "dohServer": "DoH-Server",
+            "dohDnsUrl": "DoH-DNS-URL",
+            "invalidIPAddress": "Ungültige IP-Adresse",
+            "invalidUrl": "Ungültige URL",
+            "google": "Google",
+            "cloudflare": "Cloudflare",
+            "opendns": "OpenDNS",
+            "both": "Beide",
+            "ipv4": "IPv4",
+            "ipv6": "IPv6"
         },
         "toast": {
             "errorNsUpdate": "Fehler beim Aktualisieren der Aktion DoNSUpdate.",
@@ -464,6 +481,7 @@
             "errorDisableNsUpdate": "Fehler beim Deaktivieren der NSUpdate-Einstellungen.",
             "errorUpdateTsig": "Fehler beim Hochladen der TSIG-Datei.",
             "errorSaveConfiguratin": "Fehler beim Aktualisieren der DDNS-Konfigurationen.",
+            "errorSaveDohConfiguration": "Fehler beim Aktualisieren der DNS-über-HTTPS-Konfiguration.",
             "successNsUpdate": "Aktion NsUpdate durchführen erfolgreich aktualisiert.",
             "successInterfaceConfiguration": "DDNS-Schnittstellenkonfiguration erfolgreich aktualisiert.",
             "successEnableHostName": "Hostname-Einstellungen erfolgreich aktiviert.",
@@ -471,7 +489,8 @@
             "successEnableNsUpdate": "NSUpdate-Einstellungen erfolgreich aktiviert.",
             "successDisableNsUpdate": "NSUpdate-Einstellungen erfolgreich deaktiviert.",
             "successUpdateTsig": "TSIG-Datei erfolgreich hochgeladen.",
-            "successSaveConfiguratin": "DDNS-Konfigurationen erfolgreich aktualisiert."
+            "successSaveConfiguratin": "DDNS-Konfigurationen erfolgreich aktualisiert.",
+            "successSaveDohConfiguration": "DNS-über-HTTPS-Konfiguration erfolgreich aktualisiert."
         }
     },
     "pageSystemInventory": {

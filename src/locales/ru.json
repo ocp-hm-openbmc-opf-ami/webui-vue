@@ -443,6 +443,7 @@
             "nsUpdateEnable": "Включить NSUpdate",
             "useTSIG": "Использовать TSIG",
             "doNsupdate": "Выполнить NSUpdate",
+            "disable": "Отключено",
             "manual": "Вручную",
             "auto": "Автоматически",
             "register": "Зарегистрировать",
@@ -452,7 +453,23 @@
             "tsigFileUpload": "Загрузить файл ключа TSIG",
             "tsigFileUploadDiscription": "Загружать только файлы (.private)",
             "addDomainNames": "Добавить доменные имена",
-            "invalidFQDN": "Пожалуйста, введите действительное полное доменное имя (например, example.com)"
+            "invalidFQDN": "Пожалуйста, введите действительное полное доменное имя (например, example.com)",
+            "dnsOverHttps": "DNS через HTTPS",
+            "mode": "Режим",
+            "server": "Сервер",
+            "serviceTraffic": "Сервисный трафик",
+            "automatic": "Автоматически",
+            "addDohServer": "Добавить DoH-сервер",
+            "dohServer": "DoH-сервер",
+            "dohDnsUrl": "DoH DNS URL",
+            "invalidIPAddress": "Неверный IP-адрес",
+            "invalidUrl": "Неверный URL",
+            "google": "Google",
+            "cloudflare": "Cloudflare",
+            "opendns": "OpenDNS",
+            "both": "Оба",
+            "ipv4": "IPv4",
+            "ipv6": "IPv6"
         },
         "toast": {
             "errorNsUpdate": "Ошибка обновления действия DoNSUpdate.",
@@ -463,6 +480,7 @@
             "errorDisableNsUpdate": "Ошибка отключения настроек NSUpdate.",
             "errorUpdateTsig": "Ошибка загрузки файла TSIG.",
             "errorSaveConfiguratin": "Ошибка обновления конфигураций DDNS.",
+            "errorSaveDohConfiguration": "Ошибка обновления конфигурации DNS через HTTPS.",
             "successNsUpdate": "Действие DoNsUpdate успешно обновлено.",
             "successInterfaceConfiguration": "Конфигурация интерфейса DDNS успешно обновлена.",
             "successEnableHostName": "Настройки имени хоста успешно включены.",
@@ -470,7 +488,8 @@
             "successEnableNsUpdate": "Настройки NSUpdate успешно включены.",
             "successDisableNsUpdate": "Настройки NSUpdate успешно отключены.",
             "successUpdateTsig": "Файл TSIG успешно загружен.",
-            "successSaveConfiguratin": "Конфигурации DDNS успешно обновлены."
+            "successSaveConfiguratin": "Конфигурации DDNS успешно обновлены.",
+            "successSaveDohConfiguration": "Конфигурация DNS через HTTPS успешно обновлена."
         }
     },
     "pageSystemInventory": {

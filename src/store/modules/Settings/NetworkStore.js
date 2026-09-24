@@ -129,7 +129,7 @@ const NetworkStore = {
     },
   },
   actions: {
-    async getEthernetData({ commit }) {
+    async getEthernetData({ commit, state }) {
       return await api
         .get(
           `/redfish/v1/Managers/${store.getters['global/managerInstance']}/EthernetInterfaces`,
@@ -157,7 +157,9 @@ const NetworkStore = {
           const firstInterfaceId = ethernetData[0].Id;
           commit('setEthernetData', ethernetData);
           commit('setFirstInterfaceId', firstInterfaceId);
-          commit('setSelectedInterfaceId', firstInterfaceId);
+          if (!state.selectedInterfaceId) {
+            commit('setSelectedInterfaceId', firstInterfaceId);
+          }
           commit('setGlobalNetworkSettings', ethernetInterfaces);
           commit('setEnableLanNetworkSettings', ethernetInterfaces);
         })

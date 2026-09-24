@@ -26,13 +26,27 @@ const FruStore = {
         })
         .then((promises) => api.all(promises))
         .then((response) => {
-          if (response[0].data.Oem.AMI.FRU) {
-            return [api.get(response[0].data.Oem.AMI.FRU['@odata.id'])];
+          const fruCollection =
+            response[0].data?.Oem?.Ami?.FRU || response[0].data?.Oem?.AMI?.FRU;
+
+          if (fruCollection?.['@odata.id']) {
+            return [api.get(fruCollection['@odata.id'])];
           }
+
+          return [];
         })
-        .then((promises) => api.all(promises))
+        .then((promises) => {
+          if (promises.length === 0) {
+            commit('setFruDeviceInfo', []);
+            return null;
+          }
+
+          return api.all(promises);
+        })
         .then((response) => {
-          commit('setFruDeviceInfo', response[0].data.Members);
+          if (response?.[0]?.data?.Members) {
+            commit('setFruDeviceInfo', response[0].data.Members);
+          }
         })
         .catch((error) => {
           console.log(error);

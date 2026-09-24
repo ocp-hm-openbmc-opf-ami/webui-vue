@@ -171,7 +171,20 @@ const EventFilterStore = {
           '/redfish/v1/Oem/Ami/PefService/EventFilterTable/',
         );
         const members = response.data.Members || [];
-        const sensorTypes = response.data.SensorType || {};
+        const rawSensorTypes = response.data.SensorType || {};
+        const sensorTypes = Object.entries(rawSensorTypes).reduce(
+          (acc, [typeName, typeValue]) => {
+            if (Array.isArray(typeValue)) {
+              acc[typeName] = typeValue;
+            } else if (Array.isArray(typeValue?.Entries)) {
+              acc[typeName] = typeValue.Entries;
+            } else {
+              acc[typeName] = [];
+            }
+            return acc;
+          },
+          {},
+        );
 
         commit('setSensorTypes', sensorTypes);
         commit('setAllFilters', members);

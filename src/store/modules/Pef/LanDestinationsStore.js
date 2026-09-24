@@ -157,7 +157,7 @@ const LanDestinationsStore = {
                 id: data.Id,
                 status: 'Enabled',
                 destination: data.Destination || '--',
-                username: snmpV3Username || data.UserName || '--',
+                username: snmpV3Username || data.Oem?.Ami?.UserName || '--',
                 protocol: data.Protocol || '--',
                 context: data.Context || '',
                 eventFormatType: data.EventFormatType || '',
@@ -257,7 +257,11 @@ const LanDestinationsStore = {
           case 'SMTP':
             payload = {
               Protocol: data.protocol,
-              UserName: data.username,
+              Oem: {
+                Ami: {
+                  UserName: data.username || '',
+                },
+              },
             };
             break;
           case 'SNMPv1':
@@ -297,7 +301,7 @@ const LanDestinationsStore = {
 
     async sendSubscriptionMail(_, uri) {
       try {
-        await api.post(uri);
+        await api.post(uri + '/Actions/Oem/AmiEventDestination.SendTestAlert');
         return i18n.t('global.action.send');
       } catch (error) {
         console.error('Error sending subscription mail:', error);

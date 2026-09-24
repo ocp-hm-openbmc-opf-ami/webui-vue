@@ -358,9 +358,11 @@ const PoliciesStore = {
         .get('/redfish/v1/AccountService')
         .then((response) => {
           const ComplexityValue =
-            response.data.Oem.OpenBMC.PasswordPolicyComplexity;
+            response.data?.Oem?.Ami?.PasswordPolicyComplexity ??
+            response.data?.Oem?.OpenBMC?.PasswordPolicyComplexity;
           const passwordHistory =
-            response.data.Oem.OpenBMC.RememberOldPasswordTimes;
+            response.data?.Oem?.Ami?.RememberOldPasswordTimes ??
+            response.data?.Oem?.OpenBMC?.RememberOldPasswordTimes;
           commit('setComplexity', ComplexityValue);
           commit('setPasswordHistory', passwordHistory);
         })
@@ -848,7 +850,7 @@ const PoliciesStore = {
         .post(
           '/redfish/v1/Managers/' +
             store.getters['global/managerInstance'] +
-            '/Actions/Oem/AMIManager.ChangeOpensslFIPSStatus',
+            '/Actions/Oem/AmiManager.ChangeOpensslFIPSStatus',
           SslFipsMode,
         )
         .then(() => dispatch('getSslFipsStatus'))
@@ -892,7 +894,7 @@ const PoliciesStore = {
       commit('setComplexity', complexityValue);
       const Oem = {
         Oem: {
-          OpenBMC: {
+          Ami: {
             PasswordPolicyComplexity: complexityValue,
           },
         },
@@ -915,7 +917,7 @@ const PoliciesStore = {
       commit('setPasswordHistory', passwordHistoryValue);
       const Oem = {
         Oem: {
-          OpenBMC: {
+          Ami: {
             RememberOldPasswordTimes: passwordHistoryValue,
           },
         },

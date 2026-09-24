@@ -257,7 +257,7 @@ export default {
   },
   computed: {
     getOemAmiActions() {
-      return this.ipv6IndexValue.Actions?.Oem?.Ami ? true : false;
+      return this.ipv6IndexValue.Actions?.Oem ? true : false;
     },
   },
   watch: {

@@ -16,13 +16,14 @@
           v-model="filter"
           class="search-input"
           type="text"
+          :disabled="disabled"
           :aria-label="$t('global.form.search')"
           :placeholder="placeholder"
           @input="onChangeInput"
         >
         </b-form-input>
         <b-button
-          v-if="filter"
+          v-if="filter && !disabled"
           variant="link"
           class="btn-icon-only input-action-btn"
           :title="$t('global.ariaLabel.clearSearch')"
@@ -50,6 +51,10 @@ export default {
         return this.$t('global.form.search');
       },
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -58,9 +63,11 @@ export default {
   },
   methods: {
     onChangeInput() {
+      if (this.disabled) return;
       this.$emit('change-search', this.filter);
     },
     onClearSearch() {
+      if (this.disabled) return;
       this.filter = '';
       this.$emit('clear-search');
       this.$refs.searchInput.focus();

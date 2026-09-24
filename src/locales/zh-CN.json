@@ -443,6 +443,7 @@
             "nsUpdateEnable": "NS 更新启用",
             "useTSIG": "使用 TSIG",
             "doNsupdate": "NS 更新",
+            "disable": "禁用",
             "manual": "手动",
             "auto": "自动",
             "register": "登记",
@@ -452,7 +453,23 @@
             "tsigFileUpload": "上传 TSIG 密钥文件",
             "tsigFileUploadDiscription": "仅上传（.private）文件",
             "addDomainNames": "添加域名",
-            "invalidFQDN": "请输入有效的完全限定域名（例如：example.com）"
+            "invalidFQDN": "请输入有效的完全限定域名（例如：example.com）",
+            "dnsOverHttps": "DNS over HTTPS",
+            "mode": "模式",
+            "server": "服务器",
+            "serviceTraffic": "业务流量",
+            "automatic": "自动",
+            "addDohServer": "添加 DoH 服务器",
+            "dohServer": "DoH 服务器",
+            "dohDnsUrl": "DoH DNS URL",
+            "invalidIPAddress": "IP 地址无效",
+            "invalidUrl": "无效 URL",
+            "google": "Google",
+            "cloudflare": "Cloudflare",
+            "opendns": "OpenDNS",
+            "both": "两者",
+            "ipv4": "IPv4",
+            "ipv6": "IPv6"
         },
         "toast": {
             "errorNsUpdate": "更新操作 DoNsUpdate 时出错。",
@@ -463,6 +480,7 @@
             "errorDisableNsUpdate": "禁用 NSUpdate 设置时出错。",
             "errorUpdateTsig": "上传 TSIG 文件时出错。",
             "errorSaveConfiguratin": "更新 DDNS 配置时出错。",
+            "errorSaveDohConfiguration": "更新 DNS over HTTPS 配置时出错。",
             "successNsUpdate": "已成功更新操作 DoNsUpdate。",
             "successInterfaceConfiguration": "成功更新 DDNS 接口配置。",
             "successEnableHostName": "成功启用主机名设置。",
@@ -470,7 +488,8 @@
             "successEnableNsUpdate": "成功启用 NSUpdate 设置。",
             "successDisableNsUpdate": "成功禁用 NSUpdate 设置。",
             "successUpdateTsig": "成功上传 TSIG 文件。",
-            "successSaveConfiguratin": "成功更新 DDNS 配置。"
+            "successSaveConfiguratin": "成功更新 DDNS 配置。",
+            "successSaveDohConfiguration": "成功更新 DNS over HTTPS 配置。"
         }
     },
     "pageSystemInventory": {

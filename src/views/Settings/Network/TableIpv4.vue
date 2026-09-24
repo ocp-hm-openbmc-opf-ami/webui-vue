@@ -267,7 +267,7 @@ export default {
       },
     },
     getOemAmiActions() {
-      return this.ethernetData[this.tabIndex].Actions?.Oem?.Ami ? true : false;
+      return this.ethernetData[this.tabIndex].Actions?.Oem ? true : false;
     },
   },
   watch: {
