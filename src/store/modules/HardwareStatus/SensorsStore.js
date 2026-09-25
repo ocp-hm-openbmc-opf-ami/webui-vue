@@ -247,7 +247,7 @@ const SensorsStore = {
       sensors.forEach((sensor) => {
         freshNames.add(sensor.Name);
         const fresh = {
-          id: sensor.Oem?.Ami?.['@odata.id'] || sensor['@odata.id'],
+          id: sensor.Oem?.Ami?.['@odata.id'],
           sensorUri: sensor['@odata.id'],
           name: sensor.Name,
           status: sensor.Status?.Health ?? 'OK',
@@ -270,7 +270,7 @@ const SensorsStore = {
           commit('updateSensor', fresh);
         }
       });
-      if (!collectionRequestFailed) {
+      if (!collectionRequestFailed && sensors.length > 0) {
         commit('removeStaleSensors', freshNames);
       }
     },
