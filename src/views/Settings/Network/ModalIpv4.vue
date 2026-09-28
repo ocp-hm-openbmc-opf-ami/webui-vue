@@ -90,7 +90,13 @@
         <icon-cancel />
         {{ $t('global.action.cancel') }}
       </b-button>
-      <b-button form="form-ipv4" type="submit" variant="primary" @click="onOk">
+      <b-button
+        form="form-ipv4"
+        type="submit"
+        variant="primary"
+        :disabled="isAddDisabled"
+        @click="onOk"
+      >
         <icon-add />
         {{ $t('global.action.add') }}
       </b-button>
@@ -133,6 +139,15 @@ export default {
       },
       isAddIpv4: false,
     };
+  },
+  computed: {
+    isAddDisabled() {
+      return (
+        this.$v.form.ipAddress.$invalid ||
+        this.$v.form.gateway.$invalid ||
+        this.$v.form.subnetMask.$invalid
+      );
+    },
   },
   watch: {
     defaultGateway() {

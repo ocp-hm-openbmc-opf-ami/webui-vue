@@ -499,8 +499,8 @@
             "name": "名称",
             "description": "描述",
             "model": "型号",
-            "indicatorLED": "LED 指示灯",
-            "manufacture": "制造商",
+            "locationIndicatorActive": "定位指示灯启用状态",
+            "manufacturer": "制造商",
             "powerState": "电源状态",
             "serialNumuber": "序列号",
             "partNumuber": "零件号",
@@ -517,7 +517,7 @@
             "processorInfo": "处理器信息",
             "id": "ID",
             "name": "名称",
-            "manufacture": "制造商",
+            "manufacturer": "制造商",
             "maxSpeedMHz": "最大速度 MHz",
             "model": "型号",
             "processorArchitecture": "处理器架构",
@@ -579,7 +579,7 @@
             "health": "健康",
             "powerState": "电源状态",
             "assetTag": "资产标签",
-            "locationIndicatorActive": "位置指示器激活",
+            "locationIndicatorActive": "定位指示灯启用状态",
             "manufacturer": "制造商",
             "partNumber": "零件编号",
             "serialNumber": "序列号"
@@ -817,11 +817,13 @@
         "downloadBackupFileInfo": "选择任何备份配置以继续下载文件。",
         "toast": {
             "successMessage": "已成功下载属性备份功能。",
-            "errorMessage": "属性“备份功能”不在可接受值列表中。",
+            "errorMessage": "下载属性备份功能时出错。",
+            "errorMessageBackupFeaturesFormat": "属性备份功能不在可接受的值列表中。",
             "fileUploadedSuccessfully": "恢复文件上传成功。",
             "fileUploadedError": "上传恢复文件时出错。",
             "errorGettingBackupDetails": "获取属性备份功能时出错。",
             "errorMessageNotConfigured": "由于配置文件不存在，操作无法完成。",
+            "errorMessageEncryptionFailed": "加密备份配置文件失败。",
             "restoreConfirmation": "还原功能将重新启动已配置备份属性的服务。您确定要继续吗？",
             "confirmTitle": "确认？"
         }
@@ -1290,6 +1292,10 @@
     },
     "pageAddc": {
         "pageDescription": "自主调试数据收集",
+        "alert": {
+            "serviceUnavailable1": "ADDC 配置不可用。",
+            "serviceUnavailable2": "请确认 ADDC 服务可用且所有相关要求已满足，或参阅用户指南中的 'ADDC Ready Signal' 部分。"
+        },
         "errorRecoveryMode": {
             "errorRecoveryModeTitle": "错误恢复模式",
             "none": "无",
@@ -2174,6 +2180,7 @@
             "informatiomTitle": "信息",
             "informationMessage": "成功更改网络设置 请关闭此网页对话然后使用新 IP 开启新网页对话连接设备。",
             "noOperationWarning": "IPv6 地址设置相同，无需保存。",
+            "ipv6GatewayLinkLocalNotAllowed": "IPv6 网关不能是链路本地地址。",
             "lanInterface":"局域网接口",
             "enableLAN": "启用局域网",
             "confirmMsg": "此功能可能会更改设备的 IP 地址，并且您可能会在此浏览器会话中失去连接。应用更改后，请使用新的浏览器会话重新连接。您想继续吗？"
@@ -3574,6 +3581,8 @@
             "physicalDriveAuStatusHelperText": "指示访问单元（AU）的健康状况和可用性，决定是否可以进行擦除或重建等操作。",
             "secureEraseTypeHelperText": "驱动器将被覆盖擦除以安全地删除所有数据。请选择一个可用选项并点击保存以开始擦除操作。",
             "labelSecureEraseType": "安全擦除类型",
+            "alertNoValidPdForCopyback1": "没有可用的物理设备用于回写。",
+            "alertNoValidPdForCopyback2": "条件：相同的媒体类型（或适配器配置为允许混合媒体类型），且容量大于或等于源设备。",
             "noEraseTypesAvailable": "后端未找到可匹配选择的擦除类型。请检查物理设备本身支持的状态和功能。",
             "alertNotSupport": "仅当设备状态为良好时才可进行擦除操作。请确保设备健康且未参与任何RAID重建或故障。",
             "secureEraseOptions": {
@@ -4209,6 +4218,7 @@
         "Mbps": "Mbps",
         "sameNetworkLinkSettings": "网络连接配置相同，因此无需保存。",
         "modifyNetworkLinkSettings": "如果用户需要更改这些接口配置，请修改主接口的值。",
+        "ncsiNetworkLinkSettings": "所选接口已配置为 NCSI 接口。无法修改连接速度(LinkSpeed)和双工模式(DuplexMode)。",
         "toast": {
             "successSaveNetworkLink": "已成功保存网络连接。",
             "errorSavedNetworkLink": "保存网络连接时出错。",

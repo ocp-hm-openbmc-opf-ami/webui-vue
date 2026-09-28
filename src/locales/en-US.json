@@ -498,8 +498,8 @@
             "name": "Name",
             "description": "Description",
             "model": "Model",
-            "indicatorLED": "Indicator LED",
-            "manufacture": "Manufacture",
+            "locationIndicatorActive": "Location Indicator Active",
+            "manufacturer": "Manufacturer",
             "powerState": "Power State",
             "serialNumuber": "Serial Number",
             "partNumuber": "Part Number",
@@ -516,11 +516,11 @@
             "processorInfo": "Processor Info",
             "id": "ID",
             "name": "Name",
-            "manufacture": "Manufacture",
+            "manufacturer": "Manufacturer",
             "maxSpeedMHz": "Max Speed MHz",
             "model": "Model",
             "processorArchitecture": "Processor Architecture",
-            "processorType": "ProcessorType",
+            "processorType": "Processor Type",
             "socket": "Socket",
             "effectiveFamily": "Effective Family",
             "totalCores": "Total Cores",
@@ -562,7 +562,7 @@
             "memoryType": "Memory Type",
             "description": "Description",
             "allowedSpeedsMHz": "Allowed Speeds MHz",
-            "serviceLabel": "ServiceLabel",
+            "serviceLabel": "Service Label",
             "baseModuleType": "Base Module Type",
             "busWidthBits": "Bus Width Bits",
             "dataWidthBits": "Data Width Bits",
@@ -578,7 +578,7 @@
             "health": "Health",
             "powerState": "Power State",
             "assetTag": "Asset Tag",
-            "locationIndicatorActive": "LocationIndicatorActive",
+            "locationIndicatorActive": "Location Indicator Active",
             "manufacturer": "Manufacturer",
             "partNumber": "Part Number",
             "serialNumber": "Serial Number"
@@ -625,8 +625,8 @@
             "state": "State",
             "readingUnits": "Reading Units",
             "reading": "Reading",
-            "minReadingRange": "MinReadingRange",
-            "maxReadingRange": "MaxReadingRange",
+            "minReadingRange": "Min Reading Range",
+            "maxReadingRange": "Max Reading Range",
             "readingType": "Reading Type",
             "upperThresholdFatal": "UF",
             "upperThresholdCritical": "UC",
@@ -640,8 +640,8 @@
             "sensorNumber": "SensorNumber",
             "state": "State",
             "readingRPM": "Reading RPM",
-            "minReadingRange": "MinReadingRange",
-            "maxReadingRange": "MaxReadingRange",
+            "minReadingRange": "Min Reading Range",
+            "maxReadingRange": "Max Reading Range",
             "health": "Health"
         },
         "temperature": {
@@ -651,8 +651,8 @@
             "state": "State",
             "readingUnits": "Reading Units",
             "reading": "Reading",
-            "minReadingRange": "MinReadingRange",
-            "maxReadingRange": "MaxReadingRange",
+            "minReadingRange": "Min Reading Range",
+            "maxReadingRange": "Max Reading Range",
             "readingType": "Reading Type",
             "upperThresholdFatal": "UF",
             "upperThresholdCritical": "UC",
@@ -816,11 +816,13 @@
         "downloadBackupFileInfo": "Select any backup configuration to proceed with downloading a file.",
         "toast": {
             "successMessage": "Successfully downloaded the Property Backup Features.",
-            "errorMessage": "The Property Backup Features are not in the list of acceptable values.",
+            "errorMessage": "Error in downloading the Property Backup Features.",
+            "errorMessageBackupFeaturesFormat": "The Property Backup Features are not in the list of acceptable values.",
             "fileUploadedSuccessfully": "Successfully uploaded the Restore File.",
             "fileUploadedError": "Error in uploading the Restore File.",
             "errorGettingBackupDetails": "Error in getting the Property Backup Features.",
             "errorMessageNotConfigured": "The operation cannot be completed, since the Configuration file does not exit.",
+            "errorMessageEncryptionFailed": "Failed to encrypt the backupconfig file.",
             "restoreConfirmation": "Restore functionality will restart the services of Configured Backup properties. Are you sure you want to proceed?",
             "confirmTitle": "Confirm?"
         }
@@ -1289,6 +1291,10 @@
     },
     "pageAddc": {
         "pageDescription": "Autonomous Debug Data Collection",
+        "alert": {
+            "serviceUnavailable1": "No ADDC configuration is available.",
+            "serviceUnavailable2": "Please verify that the ADDC service is available and all related requirements are met, or refer to the 'ADDC Ready Signal' section in the User Guide."
+        },
         "errorRecoveryMode": {
             "errorRecoveryModeTitle": "Error Recovery Mode",
             "none": "None",
@@ -2173,6 +2179,7 @@
             "informatiomTitle": "Information",
             "informationMessage": "Network Configuration has been reset successfully. Please close this browser session and open a new browser session to connect to the device with new IP.",
             "noOperationWarning": "IPv6 Address Settings are same, so no need to save.",
+            "ipv6GatewayLinkLocalNotAllowed": "IPv6 Gateway cannot be a link-local address.",
             "lanInterface":"LAN Interface",
             "enableLAN": "Enable LAN",
             "confirmMsg": "This function may change the IP Address of the device, and you may lose connectivity in this browser session. Please reconnect using new browser session after applying the changes. Do you want to proceed?"
@@ -3593,6 +3600,8 @@
             "physicalDriveAuStatusHelperText":"Indicates the health and availability of the Access Unit (AU), which determines whether operations like erase or rebuild can proceed.",
             "secureEraseTypeHelperText":"The drive will be overwritten with erase patterns to securely remove all data. Select one of the available options and click Save to begin the erase operation.",
             "labelSecureEraseType": "Secures Erase Type",
+            "alertNoValidPdForCopyback1": "No PD is available for copyback.",
+            "alertNoValidPdForCopyback2": "Requirements: Same media type (or the adapter is configured to allow mixed media types), and capacity greater than or equal to the source drive.",
             "noEraseTypesAvailable": "No matching erase type found on the backend. Please check the physical devices’ supported status and capabilities.",
             "alertNotSupport":"Erase operation is only available when the device status is Good. Ensure the device is healthy and not involved in any RAID rebuild or failure before proceeding.",
             "secureEraseOptions": {
@@ -4228,6 +4237,7 @@
         "Mbps": "Mbps",
         "sameNetworkLinkSettings": "The Network Link Configurations are the same, so it is not required to save.",
         "modifyNetworkLinkSettings": "If users need to change these interface configurations, please modify the values of the parent interface instead.",
+        "ncsiNetworkLinkSettings": "The selected interface is configured as an NCSI interface. Link Speed and Duplex Mode cannot be modified.",
         "toast": {
             "successSaveNetworkLink": "Successfully saved Network Link.",
             "errorSavedNetworkLink": "Error in saving Network Link.",
