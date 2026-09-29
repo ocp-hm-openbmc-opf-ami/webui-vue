@@ -89,12 +89,18 @@ router.beforeEach((to, from, next) => {
 
   if (Cookies.get('XSRF-TOKEN') && to.name === 'login') {
     setTimeout(() => {
-      Cookies.set('loginSessionSuccess', 'true');
+      Cookies.set('loginSessionSuccess', 'true', {
+        sameSite: 'Strict',
+        secure: true,
+      });
     }, 1500); // change the loginSessionSuccess to false to hide the same session popup when change the router manually to /login
     return next('/');
   } else {
     setTimeout(() => {
-      Cookies.set('loginSessionSuccess', 'false');
+      Cookies.set('loginSessionSuccess', 'false', {
+        sameSite: 'Strict',
+        secure: true,
+      });
     }, 500); // change the loginSessionSuccess to false to show the same session popup
   }
   if (from.matched.length) {

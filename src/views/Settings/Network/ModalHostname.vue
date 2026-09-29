@@ -40,6 +40,7 @@
         form="hostname-settings"
         type="submit"
         variant="primary"
+        :disabled="isAddDisabled"
         @click="onOk"
       >
         <icon-add />
@@ -75,6 +76,11 @@ export default {
         hostname: '',
       },
     };
+  },
+  computed: {
+    isAddDisabled() {
+      return this.$v.form.hostname.$invalid;
+    },
   },
   watch: {
     hostname() {

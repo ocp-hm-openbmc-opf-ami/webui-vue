@@ -27,7 +27,10 @@ export default {
   },
   created() {
     localStorage.setItem('pollingEnabled', 'false');
-    Cookies.set('loginSessionSuccess', 'true');
+    Cookies.set('loginSessionSuccess', 'true', {
+      sameSite: 'Strict',
+      secure: true,
+    });
     this.$root.$on('loader-start', this.onLoaderStart);
     this.$root.$on('loader-end', this.onLoaderStop);
     this.$root.$on('loader-hide', this.onLoaderStop);
