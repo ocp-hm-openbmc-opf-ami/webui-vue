@@ -3,6 +3,20 @@ import { uniqBy } from 'lodash';
 import i18n from '@/i18n';
 import { isFeatureEnabled } from '@/components/Mixins/FeatureMixin';
 
+// Fields a sensor poll can change; used to skip no-op commits
+const polledFields = [
+  'status',
+  'state',
+  'currentValue',
+  'lowerCaution',
+  'upperCaution',
+  'lowerCritical',
+  'upperCritical',
+  'upperFatal',
+  'lowerFatal',
+  'units',
+];
+
 const mapSensorResponseToRow = (responseData, sensorUri = null) => ({
   id: responseData.Oem?.Ami?.['@odata.id'],
   sensorUri,
@@ -27,6 +41,7 @@ const SensorsStore = {
   namespaced: true,
   state: {
     sensors: [],
+    sensorCollections: [],
     sensorCatalog: [],
     loadedSensorUris: [],
     totalSensors: 0,
@@ -60,19 +75,35 @@ const SensorsStore = {
         new Set([...state.loadedSensorUris, ...uris]),
       );
     },
+    setSensorCollections: (state, collections) => {
+      state.sensorCollections = collections;
+    },
+    resetSensorDiscovery: (state) => {
+      state.sensorCollections = [];
+    },
+    removeStaleSensors: (state, freshNames) => {
+      state.sensors = state.sensors.filter((s) => freshNames.has(s.name));
+    },
     setGraphSensors: (state, sensors) => {
       state.graphSensors = sensors;
     },
     setSensorGraph: (state, sensorGraphRefresh) => {
       state.sensorGraphRefresh = sensorGraphRefresh;
     },
-    // Replace a single sensor row in-place by sensorUri after a threshold update.
     updateSensor: (state, updatedSensor) => {
       const index = state.sensors.findIndex(
-        (s) => s.sensorUri === updatedSensor.sensorUri,
+        (sensor) =>
+          (updatedSensor.sensorUri &&
+            sensor.sensorUri === updatedSensor.sensorUri) ||
+          sensor.name === updatedSensor.name,
       );
-      if (index !== -1) {
-        state.sensors.splice(index, 1, updatedSensor);
+      if (index === -1) {
+        state.sensors.push(updatedSensor);
+      } else {
+        state.sensors.splice(index, 1, {
+          ...state.sensors[index],
+          ...updatedSensor,
+        });
       }
     },
   },
@@ -165,6 +196,83 @@ const SensorsStore = {
         .patch(val.id, { Interval: val.Interval, TimeFrame: val.TimeFrame })
         .then(() => {})
         .catch((error) => console.log(error));
+    },
+    // Fetch all sensor readings with one expanded request per chassis.
+    async pollSensorUpdates({ commit, state, dispatch }) {
+      let sensorCollections = state.sensorCollections;
+      if (!sensorCollections.length) {
+        const collection = (await dispatch('getChassisCollection')) || [];
+        const chassisCollection = [...collection];
+        if (isFeatureEnabled('VUE_APP_ONETREE_PSM_ENABLED')) {
+          chassisCollection.push(
+            '/redfish/v1/PowerEquipment/PowerShelves/PowerShelf',
+          );
+        }
+        const discoveredCollections = await api.all(
+          chassisCollection.map((chassisUri) =>
+            api
+              .get(chassisUri)
+              .then(({ data }) => data?.Sensors?.['@odata.id'])
+              .catch(() => null),
+          ),
+        );
+        sensorCollections = discoveredCollections.filter(Boolean);
+        commit('setSensorCollections', sensorCollections);
+      }
+      if (!sensorCollections.length) return;
+
+      let collectionRequestFailed = false;
+      const sensors = (
+        await api.all(
+          sensorCollections.map((sensorsUri) =>
+            api
+              .get(`${sensorsUri}?$expand=.($levels=1)`)
+              .then(({ data }) => data?.Members || [])
+              .catch((error) => {
+                collectionRequestFailed = true;
+                if (error.response?.status === 404) {
+                  commit('setSensorCollections', []);
+                }
+                console.log(error);
+                return [];
+              }),
+          ),
+        )
+      )
+        .flat()
+        .filter((sensor) => Boolean(sensor?.Name));
+
+      const cachedByName = new Map(state.sensors.map((s) => [s.name, s]));
+      const freshNames = new Set();
+      sensors.forEach((sensor) => {
+        freshNames.add(sensor.Name);
+        const fresh = {
+          id: sensor.Oem?.Ami?.['@odata.id'],
+          sensorUri: sensor['@odata.id'],
+          name: sensor.Name,
+          status: sensor.Status?.Health ?? 'OK',
+          state: sensor.Status?.State,
+          currentValue: sensor.Reading,
+          thresholdsId:
+            (sensor.Oem?.Ami?.SensorThreshold ?? '') === ''
+              ? null
+              : sensor.Oem?.Ami?.SensorThreshold?.['@odata.id'],
+          lowerCaution: sensor.Thresholds?.LowerCaution?.Reading,
+          upperCaution: sensor.Thresholds?.UpperCaution?.Reading,
+          lowerCritical: sensor.Thresholds?.LowerCritical?.Reading,
+          upperCritical: sensor.Thresholds?.UpperCritical?.Reading,
+          upperFatal: sensor.Thresholds?.UpperFatal?.Reading,
+          lowerFatal: sensor.Thresholds?.LowerFatal?.Reading,
+          units: sensor.ReadingUnits,
+        };
+        const cached = cachedByName.get(fresh.name);
+        if (!cached || polledFields.some((f) => cached[f] !== fresh[f])) {
+          commit('updateSensor', fresh);
+        }
+      });
+      if (!collectionRequestFailed && sensors.length > 0) {
+        commit('removeStaleSensors', freshNames);
+      }
     },
     setSensorGraphRefresh({ commit }, val) {
       commit('setSensorGraph', val);

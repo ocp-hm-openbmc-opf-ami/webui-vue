@@ -569,6 +569,7 @@ export default {
       this.stopPolling();
       this.pollingEnabled = true;
       localStorage.setItem('pollingEnabled', 'true');
+      this.$root.$emit('polling-toggled', true);
       this.fetchData();
       this.pollingInterval = setInterval(() => {
         this.fetchData();
@@ -607,6 +608,7 @@ export default {
       }
       this.pollingEnabled = false;
       localStorage.setItem('pollingEnabled', 'false');
+      this.$root.$emit('polling-toggled', false);
     },
   },
 };

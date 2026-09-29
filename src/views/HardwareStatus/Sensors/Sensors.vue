@@ -452,6 +452,7 @@ export default {
       ],
       modalSensorThresholdValue: {},
       isModalSuccess: false,
+      sensorPollingInterval: null,
       sensorBatchSize: 20,
       backgroundBatchSize: 10,
       isPreloadingAllSensors: false,
@@ -515,8 +516,14 @@ export default {
     if (this.showSensor) {
       this.initSensorLoad();
     }
+    if (localStorage.getItem('pollingEnabled') === 'true') {
+      this.startSensorPolling();
+    }
+    this.$root.$on('polling-toggled', this.onPollingToggled);
   },
   beforeDestroy() {
+    this.stopSensorPolling();
+    this.$root.$off('polling-toggled', this.onPollingToggled);
     this.stopBackgroundPreloading();
   },
   methods: {
@@ -571,6 +578,7 @@ export default {
 
       if (!this.isSessionActive(sessionId)) return;
       this.preloadAllSensorsInBackground(sessionId);
+      await this.$store.dispatch('sensors/pollSensorUpdates');
     },
     async fetchNextBatch(sessionId, count = this.sensorBatchSize) {
       if (!this.isSessionActive(sessionId)) return [];
@@ -615,6 +623,15 @@ export default {
         batchSize: this.sensorBatchSize,
         requiredRows: this.currentPage * this.perPage,
       });
+    },
+    onPollingToggled(enabled) {
+      if (enabled) {
+        this.$store.commit('sensors/resetSensorDiscovery');
+        this.$store.dispatch('sensors/pollSensorUpdates');
+        this.startSensorPolling();
+      } else {
+        this.stopSensorPolling();
+      }
     },
     sortCompare(a, b, key) {
       if (key === 'status') {
@@ -685,6 +702,18 @@ export default {
     },
     iscloseAddModal(val) {
       this.isModalSuccess = val;
+    },
+    startSensorPolling() {
+      this.stopSensorPolling();
+      this.sensorPollingInterval = setInterval(() => {
+        this.$store.dispatch('sensors/pollSensorUpdates');
+      }, 10000);
+    },
+    stopSensorPolling() {
+      if (this.sensorPollingInterval) {
+        clearInterval(this.sensorPollingInterval);
+        this.sensorPollingInterval = null;
+      }
     },
     getFilterByStatus(status) {
       switch (status) {
