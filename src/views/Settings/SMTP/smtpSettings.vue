@@ -10,6 +10,7 @@
       >
     </div>
     <div v-else>
+      <license-expiry-alert :license-name="licenseName" />
       <b-form novalidate @submit.prevent="handleSubmit">
         <page-section :section-title="$t('pageSmtp.primaryFormGroupLabel')">
           <div class="form-background p-3">
@@ -912,6 +913,7 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin';
 import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
 import PageTitle from '@/components/Global/PageTitle';
+import LicenseExpiryAlert from '@/components/Global/LicenseExpiryAlert';
 import PageSection from '@/components/Global/PageSection';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import IconMisuse from '@carbon/icons-vue/es/misuse/20';
@@ -926,6 +928,7 @@ export default {
   name: 'SmtpSettings',
   components: {
     PageTitle,
+    LicenseExpiryAlert,
     PageSection,
     IconAdd,
     IconMisuse,

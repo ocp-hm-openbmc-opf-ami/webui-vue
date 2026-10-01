@@ -4195,6 +4195,7 @@
         "userAlertCount": "用户警报计数",
         "userAlertCountPercentage": "用户警报计数天数",
         "licenseExpired": "您的模块许可证已过期。请更新有效的许可证密钥。",
+        "licenseExpiryWarning": "您的模块许可证即将过期（剩余 {days} 天）。请更新有效的许可证密钥。",
         "licensePageLink": "[ 许可证页面链接。 ]",
         "userAlertCountRangeRequired": "请输入有效的计数天数。",
         "toast": {
