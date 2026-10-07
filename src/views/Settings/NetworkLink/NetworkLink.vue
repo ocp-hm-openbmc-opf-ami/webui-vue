@@ -6,7 +6,10 @@
         <b-alert v-if="sameNetworkLink" show variant="warning">{{
           $t('networkLink.sameNetworkLinkSettings')
         }}</b-alert>
-        <b-alert v-if="disabledNetworkLinkStatus" show variant="warning">{{
+        <b-alert v-if="isNCSI" show variant="warning">{{
+          $t('networkLink.ncsiNetworkLinkSettings')
+        }}</b-alert>
+        <b-alert v-else-if="disabledNetworkLinkStatus" show variant="warning">{{
           $t('networkLink.modifyNetworkLinkSettings')
         }}</b-alert>
         <b-form id="form-networkLink">
@@ -41,7 +44,7 @@
                   id="autoNegotiation"
                   v-model="form.AutoNeg"
                   data-test-id="networklink-autoNegotiation"
-                  :disabled="isButtonDisable"
+                  :disabled="isButtonDisable || isNCSI"
                   switch
                 >
                 </b-form-checkbox>
@@ -54,7 +57,10 @@
                 :label="$t('networkLink.linkSpeed')"
                 label-for="linkSpeed"
               >
-                <div v-if="!form.AutoNeg">
+                <div v-if="isNCSI">
+                  <span>100 {{ $t('networkLink.Mbps') }}</span>
+                </div>
+                <div v-else-if="!form.AutoNeg">
                   <b-form-select
                     id="protocol"
                     v-model="form.SpeedMbps"
@@ -84,7 +90,7 @@
             <b-col sm="6">
               <b-form-group :label="$t('networkLink.duplexMode')">
                 <b-form-radio-group
-                  v-if="!form.AutoNeg"
+                  v-if="!isNCSI && !form.AutoNeg"
                   v-model="form.FullDuplex"
                   stacked
                 >
@@ -166,6 +172,7 @@ export default {
       sameNetworkLink: false,
       speedMbpsLabel: '',
       disabledNetworkLinkStatus: false,
+      isNCSI: false,
     };
   },
   computed: {
@@ -258,9 +265,12 @@ export default {
             this.form.FullDuplex = 'Half';
           }
           this.networkLinkoldVal = _.cloneDeep(this.form);
+          this.isNCSI =
+            !!this.networkLinkData.Oem?.Ami?.NCSIConfiguration?.IsNCSI;
           if (
             this.networkLinkData.VLAN?.VLANEnable ||
-            this.networkLinkData.Oem?.Ami?.BondConfiguration
+            this.networkLinkData.Oem?.Ami?.BondConfiguration ||
+            this.isNCSI
           ) {
             this.disabledNetworkLinkStatus = true;
           } else {

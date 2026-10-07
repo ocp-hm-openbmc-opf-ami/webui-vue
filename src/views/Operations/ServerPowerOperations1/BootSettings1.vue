@@ -20,7 +20,7 @@
       <b-form-checkbox
         v-model="form.oneTimeBoot"
         class="mb-4"
-        :disabled="form.bootOption === 'None'"
+        :disabled="form.bootOption === 'None' || isForcedOneTimeBootTarget"
         @change="$v.form.oneTimeBoot.$touch()"
       >
         {{ $t('pageServerPowerOperations1.bootSettings.enableOneTimeBoot') }}
@@ -63,6 +63,8 @@ import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import IconSave from '@carbon/icons-vue/es/save/20';
 
+const forcedOneTimeBootTargets = ['BiosSetup', 'UefiBootNext', 'UefiTarget'];
+
 export default {
   name: 'BootSettings',
   components: { IconSave },
@@ -84,13 +86,19 @@ export default {
       'overrideEnabled',
       'tpmEnabled',
     ]),
+    isForcedOneTimeBootTarget() {
+      return forcedOneTimeBootTargets.includes(this.form.bootOption);
+    },
   },
   watch: {
     bootSource: function (value) {
       this.form.bootOption = value;
+      if (forcedOneTimeBootTargets.includes(value)) {
+        this.form.oneTimeBoot = true;
+      }
     },
     overrideEnabled: function (value) {
-      this.form.oneTimeBoot = value;
+      this.form.oneTimeBoot = this.isForcedOneTimeBootTarget || value;
     },
     tpmEnabled: function (value) {
       this.form.tpmPolicyOn = value;
@@ -133,6 +141,10 @@ export default {
       this.$v.form.bootOption.$touch();
       // Disable one time boot if selected boot option is 'None'
       if (selectedOption === 'None') this.form.oneTimeBoot = false;
+      // Enable one time boot for forced one-time boot targets.
+      if (forcedOneTimeBootTargets.includes(selectedOption)) {
+        this.form.oneTimeBoot = true;
+      }
     },
   },
 };

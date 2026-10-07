@@ -41,6 +41,7 @@
         form="mac-settings"
         type="submit"
         variant="primary"
+        :disabled="isAddDisabled"
         @click="onOk"
       >
         <icon-add />
@@ -74,6 +75,11 @@ export default {
         macAddress: '',
       },
     };
+  },
+  computed: {
+    isAddDisabled() {
+      return this.$v.form.macAddress.$invalid;
+    },
   },
   watch: {
     macAddress() {

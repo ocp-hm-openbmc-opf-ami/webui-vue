@@ -38,7 +38,13 @@
         <icon-cancel />
         {{ $t('global.action.cancel') }}
       </b-button>
-      <b-button form="form-dns" type="submit" variant="primary" @click="onOk">
+      <b-button
+        form="form-dns"
+        type="submit"
+        variant="primary"
+        :disabled="isAddDisabled"
+        @click="onOk"
+      >
         <icon-add />
         {{ $t('global.action.add') }}
       </b-button>
@@ -64,6 +70,11 @@ export default {
         staticDns: null,
       },
     };
+  },
+  computed: {
+    isAddDisabled() {
+      return this.$v.form.staticDns.$invalid;
+    },
   },
   validations() {
     return {
