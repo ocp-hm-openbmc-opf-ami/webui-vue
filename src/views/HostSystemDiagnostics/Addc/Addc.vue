@@ -3,12 +3,24 @@
     <page-title :description="$t('pageAddc.pageDescription')" />
     <div class="form-background p-3">
       <b-row>
+        <b-col md="9">
+          <alert :show="!hasAddcConfiguration" variant="warning" class="mb-3">
+            {{ $t('pageAddc.alert.serviceUnavailable1') }} <br />
+            {{ $t('pageAddc.alert.serviceUnavailable2') }}
+          </alert>
+        </b-col>
+      </b-row>
+      <b-row>
         <b-col sm="6">
           <b-form-group
             :label="$t('pageAddc.errorRecoveryMode.errorRecoveryModeTitle')"
             label-for="errorRecoveryModeTitle"
           >
-            <b-form-radio-group v-model="form.recoveryMode" stacked>
+            <b-form-radio-group
+              v-model="form.recoveryMode"
+              stacked
+              :disabled="!hasAddcConfiguration"
+            >
               <b-form-row>
                 <b-form-radio
                   value="None"
@@ -40,10 +52,17 @@
         <b-col sm="8" md="6" xl="12">
           <b-form-group>
             <b-form-row>
-              <b-form-checkbox v-model="form.harvestUCode">
+              <b-form-checkbox
+                v-model="form.harvestUCode"
+                :disabled="!hasAddcConfiguration"
+              >
                 {{ $t('pageAddc.harvestUcode') }}
               </b-form-checkbox>
-              <b-form-checkbox v-model="form.harvestPPIN" class="ml-3">
+              <b-form-checkbox
+                v-model="form.harvestPPIN"
+                class="ml-3"
+                :disabled="!hasAddcConfiguration"
+              >
                 {{ $t('pageAddc.harvestPpin') }}
               </b-form-checkbox>
             </b-form-row>
@@ -52,7 +71,10 @@
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
-          <b-form-checkbox v-model="form.mcaPollingEn">
+          <b-form-checkbox
+            v-model="form.mcaPollingEn"
+            :disabled="!hasAddcConfiguration"
+          >
             {{ $t('pageAddc.mcaPolling') }}
           </b-form-checkbox>
         </b-col>
@@ -67,7 +89,7 @@
               type="text"
               class="form-control"
               style="width: 120px"
-              :disabled="!form.mcaPollingEn"
+              :disabled="!hasAddcConfiguration || !form.mcaPollingEn"
               :state="getValidationState($v.form.mcaPollingPeriod)"
               data-test-id="input-mcaPollingPeriod"
               @input="$v.form.mcaPollingPeriod.$touch()"
@@ -90,7 +112,10 @@
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
-          <b-form-checkbox v-model="form.dramCeccPollingEn">
+          <b-form-checkbox
+            v-model="form.dramCeccPollingEn"
+            :disabled="!hasAddcConfiguration"
+          >
             {{ $t('pageAddc.dramCeccPolling') }}
           </b-form-checkbox>
         </b-col>
@@ -105,7 +130,7 @@
               type="text"
               class="form-control"
               style="width: 120px"
-              :disabled="!form.dramCeccPollingEn"
+              :disabled="!hasAddcConfiguration || !form.dramCeccPollingEn"
               :state="getValidationState($v.form.dramCeccPollingPeriod)"
               data-test-id="input-dramCeccPollingPeriod"
               @input="$v.form.dramCeccPollingPeriod.$touch()"
@@ -128,7 +153,10 @@
       </b-row>
       <b-row class="mt-3">
         <b-col sm="6" md="3">
-          <b-form-checkbox v-model="form.pcieAerPollingEn">
+          <b-form-checkbox
+            v-model="form.pcieAerPollingEn"
+            :disabled="!hasAddcConfiguration"
+          >
             {{ $t('pageAddc.PCIeAerPolling') }}
           </b-form-checkbox>
         </b-col>
@@ -143,7 +171,7 @@
               type="text"
               class="form-control"
               style="width: 120px"
-              :disabled="!form.pcieAerPollingEn"
+              :disabled="!hasAddcConfiguration || !form.pcieAerPollingEn"
               :state="getValidationState($v.form.pcieAerPollingPeriod)"
               data-test-id="input-pcieAerPollingPeriod"
               @input="$v.form.pcieAerPollingPeriod.$touch()"
@@ -175,6 +203,7 @@
               <b-form-input
                 id="retry"
                 v-model="form.retry"
+                :disabled="!hasAddcConfiguration"
                 :state="getValidationState($v.form.retry)"
                 data-test-id="input-retry"
                 class="form-control"
@@ -303,13 +332,29 @@ import BVPaginationMixin, {
   perPage,
   limit,
 } from '@/components/Mixins/BVPaginationMixin';
+import Alert from '@/components/Global/Alert';
 import Search from '@/components/Global/Search';
 import TableCellCount from '@/components/Global/TableCellCount';
 import IconSave from '@carbon/icons-vue/es/save/20';
 import { privilegesId } from '@/store/modules/GlobalStore';
 import { mapGetters } from 'vuex';
+
+const getDefaultForm = () => ({
+  recoveryMode: '',
+  harvestUCode: '',
+  harvestPPIN: '',
+  mcaPollingEn: '',
+  mcaPollingPeriod: '',
+  dramCeccPollingEn: '',
+  dramCeccPollingPeriod: '',
+  pcieAerPollingEn: '',
+  pcieAerPollingPeriod: '',
+  retry: '',
+});
+
 export default {
   components: {
+    Alert,
     PageTitle,
     IconDownload,
     Search,
@@ -349,18 +394,7 @@ export default {
           class: 'text-center',
         },
       ],
-      form: {
-        recoveryMode: '',
-        harvestUCode: '',
-        harvestPPIN: '',
-        mcaPollingEn: '',
-        mcaPollingPeriod: '',
-        dramCeccPollingEn: '',
-        dramCeccPollingPeriod: '',
-        pcieAerPollingEn: '',
-        pcieAerPollingPeriod: '',
-        retry: '',
-      },
+      form: getDefaultForm(),
       items: [],
       currentPage: currentPage,
       perPage: perPage,
@@ -372,8 +406,15 @@ export default {
   computed: {
     ...mapState('addc', ['addcData', 'entriesDownload']),
     ...mapGetters('global', ['userPrivilege']),
+    // Check if ADDC configuration is available
+    hasAddcConfiguration() {
+      return Boolean(this.addcData?.Oem?.Ami?.Configuration);
+    },
     isButtonDisable() {
-      return this.userPrivilege === privilegesId.readOnly;
+      return (
+        this.userPrivilege === privilegesId.readOnly ||
+        !this.hasAddcConfiguration
+      );
     },
     filteredRows() {
       return this.searchFilter
@@ -439,6 +480,12 @@ export default {
   },
   methods: {
     initADDCConfiguration() {
+      if (!this.hasAddcConfiguration) {
+        this.form = getDefaultForm();
+        this.$v.$reset();
+        return;
+      }
+
       const config =
         this.$store.getters['addc/getADDCAllData']?.Oem?.Ami?.Configuration ||
         {};
@@ -454,8 +501,17 @@ export default {
         pcieAerPollingPeriod: config.PcieAerPollingPeriod,
         retry: config.Retry,
       };
+      this.$v.$reset();
     },
     onOk() {
+      if (!this.hasAddcConfiguration) {
+        this.errorToast(
+          this.$t('pageAddc.alert.serviceUnavailable1') +
+            '\n' +
+            this.$t('pageAddc.alert.serviceUnavailable2'),
+        );
+        return;
+      }
       this.$v.$touch();
       if (this.$v.$invalid) return;
       const addcSetValue = {};

@@ -58,9 +58,7 @@
                 {{ $t('global.form.fieldRequired') }}
               </template>
               <template
-                v-if="
-                  $v.form.ipAddress.required && !$v.form.ipAddress.ipAddress
-                "
+                v-if="$v.form.ipAddress.required && !$v.form.ipAddress.pattern"
               >
                 {{ $t('global.form.invalidFormat') }}
               </template>
@@ -110,9 +108,18 @@
                 {{ $t('global.form.fieldRequired') }}
               </template>
               <template
-                v-if="$v.form.gateway.required && !$v.form.gateway.ipAddress"
+                v-if="$v.form.gateway.required && !$v.form.gateway.pattern"
               >
                 {{ $t('global.form.invalidFormat') }}
+              </template>
+              <template
+                v-if="
+                  $v.form.gateway.required &&
+                  $v.form.gateway.pattern &&
+                  !$v.form.gateway.notLinkLocal
+                "
+              >
+                {{ $t('pageNetwork.modal.ipv6GatewayLinkLocalNotAllowed') }}
               </template>
             </b-form-invalid-feedback>
           </b-form-group>
@@ -128,7 +135,7 @@
         form="form-ipv6"
         type="submit"
         variant="primary"
-        :disabled="isButtonDisable"
+        :disabled="isAddDisabled"
         @click="onOk"
       >
         <icon-add />
@@ -259,6 +266,14 @@ export default {
     getOemAmiActions() {
       return this.ipv6IndexValue.Actions?.Oem ? true : false;
     },
+    isAddDisabled() {
+      return (
+        this.isButtonDisable ||
+        this.$v.form.ipAddress.$invalid ||
+        this.$v.form.prefixLength.$invalid ||
+        this.$v.form.gateway.$invalid
+      );
+    },
   },
   watch: {
     defaultGateway() {
@@ -305,6 +320,9 @@ export default {
           required,
           pattern: function (val) {
             return this.ipv6gatewayValidation(val);
+          },
+          notLinkLocal: function (val) {
+            return !this.isIpv6LinkLocal(val);
           },
         },
         ipv6Index: {
@@ -406,6 +424,9 @@ export default {
         }
       });
     },
+    isIpv6LinkLocal(value) {
+      return /^[fF][eE][89aAbB][0-9a-fA-F]:/.test(value);
+    },
     ipv6addressValidation(value) {
       if (
         !/^((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?$/.test(
@@ -414,8 +435,8 @@ export default {
         /^localhost$|^127(?:\.[0-9]+){0,2}\.[0-9]+$|^(?:0*\\:)*?:?0*1$/.test(
           value,
         ) ||
-        /[fF][eE][8][0]::|[fF][eE][bB]::/.test(value) ||
-        /[fF][eE][cC][0]::|[fF][eE][fF]::/.test(value) ||
+        /^[fF][eE][c-fC-F][0-9A-Fa-f]:/.test(value) ||
+        /^[fF][fF][0-9A-Fa-f]{2}:/.test(value) ||
         /[2][0][0][1]::/.test(value) ||
         /[2][0][0][1]:[dD][bB][8]::/.test(value) ||
         /::[fF][fF][fF][fF]:0:0/.test(value) ||
@@ -443,6 +464,8 @@ export default {
         /^localhost$|^127(?:\.[0-9]+){0,2}\.[0-9]+$|^(?:0*\\:)*?:?0*1$/.test(
           value,
         ) ||
+        /^[fF][eE][c-fC-F][0-9A-Fa-f]:/.test(value) ||
+        /^[fF][fF][0-9A-Fa-f]{2}:/.test(value) ||
         (value != undefined &&
           value != null &&
           (String(value).charAt(0) == '0' || String(value).charAt(0) == ':'))

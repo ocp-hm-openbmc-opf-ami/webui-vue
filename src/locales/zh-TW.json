@@ -501,8 +501,8 @@
             "name": "名稱",
             "description": "描述",
             "model": "模型",
-            "indicatorLED": "LED 指示燈",
-            "manufacture": "製造商",
+            "locationIndicatorActive": "定位指示燈啟用狀態",
+            "manufacturer": "製造商",
             "powerState": "電源狀態",
             "serialNumuber": "序號",
             "partNumuber": "零件號",
@@ -519,7 +519,7 @@
             "processorInfo": "處理器資訊",
             "id": "ID",
             "name": "名稱",
-            "manufacture": "製造商",
+            "manufacturer": "製造商",
             "maxSpeedMHz": "最大速度 MHz",
             "model": "模型",
             "processorArchitecture": "處理器架構",
@@ -581,7 +581,7 @@
             "health": "健康",
             "powerState": "電源狀態",
             "assetTag": "資產標籤",
-            "locationIndicatorActive": "位置指示器激活",
+            "locationIndicatorActive": "定位指示燈啟用狀態",
             "manufacturer": "製造商",
             "partNumber": "零件號",
             "serialNumber": "序號"
@@ -819,11 +819,13 @@
         "downloadBackupFileInfo": "選擇任何備份配置以繼續下載文件。",
         "toast": {
             "successMessage": "已成功下載屬性備份功能。",
-            "errorMessage": "屬性「備份功能」不在可接受值清單中。",
+            "errorMessage": "下載屬性備份功能時出錯。",
+            "errorMessageBackupFeaturesFormat": "屬性備份功能不在可接受的值列表中。",
             "fileUploadedSuccessfully": "恢復檔案上傳成功 。",
             "fileUploadedError": "上傳恢復檔案時發生錯誤。",
             "errorGettingBackupDetails": "取得屬性備份功能時發生錯誤。",
             "errorMessageNotConfigured": "由於設定檔不存在，操作無法完成。",
+            "errorMessageEncryptionFailed": "加密備份配置文件失敗。",
             "restoreConfirmation": "還原功能將重新啟動配置的備份屬性的服務。您確定要繼續嗎？",
             "confirmTitle": "確認嗎？"
         }
@@ -1292,6 +1294,10 @@
     },
     "pageAddc": {
         "pageDescription": "自主調試資料收集",
+        "alert": {
+            "serviceUnavailable1": "ADDC 配置不可用。",
+            "serviceUnavailable2": "請確認 ADDC 服務可用且所有相關要求已滿足，或參閱使用者指南中的 'ADDC Ready Signal' 部分。"
+        },
         "errorRecoveryMode": {
             "errorRecoveryModeTitle": "錯誤恢復模式",
             "none": "沒有任何",
@@ -2176,6 +2182,7 @@
             "informatiomTitle": "資訊",
             "informationMessage": "成功變更網路設定 請關閉此網頁對談然後開啟新網頁對談使用新IP連接設備。",
             "noOperationWarning": "IPv6 位址設定相同，無需儲存。",
+            "ipv6GatewayLinkLocalNotAllowed": "IPv6 閘道不可為連結本地位址。",
             "lanInterface":"區域網路介面",
             "enableLAN": "啟用區域網路",
             "confirmMsg": "此功能可能會變更裝置的 IP 位址，並且您可能會在此瀏覽器工作階段中失去連線。套用變更後，請使用新的瀏覽器會話重新連線。您想繼續嗎？"
@@ -3587,6 +3594,8 @@
             "physicalDriveAuStatusHelperText": "表示存取單元（AU）的健康與可用性，決定是否可進行清除或重建等操作。",
             "secureEraseTypeHelperText": "磁碟將以清除模式覆寫以安全地移除所有資料。請選擇一個可用選項並點擊儲存以開始清除作業。",
             "labelSecureEraseType": "安全清除類型",
+            "alertNoValidPdForCopyback1": "沒有可用於回寫的實體裝置。",
+            "alertNoValidPdForCopyback2": "條件：相同的媒體類型（或適配器配置為允許混合媒體類型），且容量大於或等於原實體裝置。",
             "noEraseTypesAvailable": "後端未找到可匹配選擇的清除類型。請檢查實體裝置本身支援的狀態與功能。",
             "alertNotSupport": "僅當裝置狀態為良好時才可執行清除作業。請確保裝置健康且未參與任何RAID重建或故障。",
             "secureEraseOptions": {
@@ -4222,6 +4231,7 @@
         "Mbps": "Mbps",
         "sameNetworkLinkSettings": "網路連結配置相同，因此無需儲存。",
         "modifyNetworkLinkSettings": "如果使用者需要變更這些介面配置，請修改父介面的值。",
+        "ncsiNetworkLinkSettings": "所選介面已配置為 NCSI 介面。無法修改連結速度(LinkSpeed)和雙工模式(DuplexMode)。",
         "toast": {
             "successSaveNetworkLink": "已成功儲存網頁連結。",
             "errorSavedNetworkLink": "儲存網頁連結時發生錯誤。",

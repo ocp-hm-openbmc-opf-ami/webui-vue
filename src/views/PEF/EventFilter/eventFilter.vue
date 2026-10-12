@@ -17,7 +17,7 @@
               v-model="retryEventStatus.retryEnableStatus"
               data-test-id="alert-input-enable"
               switch
-              :disabled="isButtonDisable"
+              :disabled="isButtonDisabled"
             >
             </b-form-checkbox>
           </span>
@@ -125,7 +125,7 @@
               variant="primary"
               type="submit"
               data-test-id="eventFilter-button-saveSettings"
-              :disabled="loading || isButtonDisable"
+              :disabled="loading || isButtonDisabled"
             >
               <icon-save />
               {{ $t('global.action.save') }}
@@ -726,7 +726,6 @@ export default {
   computed: {
     ...mapGetters('eventFilter', [
       'filters',
-      'loading',
       'sensorTypeOptions',
       'sensorNameOptionsByType',
       'resolveSensorTypeByValue',
@@ -734,6 +733,14 @@ export default {
       'list4Defaults',
     ]),
     ...mapGetters('global', ['userPrivilege']),
+    loading: {
+      get() {
+        return this.$store.getters['eventFilter/loading'];
+      },
+      set(value) {
+        this.$store.commit('eventFilter/setLoading', value);
+      },
+    },
     sensorNameOptions() {
       return this.sensorNameOptionsByType(this.selectedSensorType);
     },
@@ -754,7 +761,7 @@ export default {
           }),
           range: function (val) {
             return this.retryEventStatus.retryEnableStatus
-              ? this.validateRange(Number(val), 0, 100)
+              ? this.validateRange(val, 0, 100)
               : true;
           },
         },
@@ -764,7 +771,7 @@ export default {
           }),
           range: function (val) {
             return this.retryEventStatus.retryEnableStatus
-              ? this.validateRange(Number(val), 0, 10)
+              ? this.validateRange(val, 0, 10)
               : true;
           },
         },
@@ -774,7 +781,7 @@ export default {
           }),
           range: function (val) {
             return this.retryEventStatus.retryEnableStatus
-              ? this.validateRange(Number(val), 0, 3600)
+              ? this.validateRange(val, 0, 3600)
               : true;
           },
         },
@@ -782,6 +789,25 @@ export default {
     };
   },
   methods: {
+    // precheck if the value is a number and within the specified range
+    validateNumericInput(value, min, max) {
+      if (value === null || value === undefined || value === '') {
+        return false;
+      }
+
+      if (typeof value === 'string') {
+        if (/\s/.test(value) || !/^(?:0|[1-9]\d*)$/.test(value)) {
+          return false;
+        }
+        value = Number(value);
+      }
+
+      if (typeof value !== 'number' || !Number.isInteger(value)) {
+        return false;
+      }
+
+      return value >= min && value <= max;
+    },
     eventFilterInit() {
       this.$store.dispatch('eventFilter/fetchRetryValues').finally(() => {
         this.retryEventStatus =
@@ -978,7 +1004,7 @@ export default {
     },
 
     validateRange(value, min, max) {
-      return Number.isFinite(value) && value >= min && value <= max;
+      return this.validateNumericInput(value, min, max);
     },
 
     validateAllowedValues(value, allowedValues) {
