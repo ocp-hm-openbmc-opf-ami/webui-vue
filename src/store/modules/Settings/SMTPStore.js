@@ -3,7 +3,7 @@ import i18n from '@/i18n';
 
 export const CERTIFICATE_TYPES = [
   {
-    type: 'CacertPEM',
+    type: 'CACERT',
     label: i18n.t('pageSmtp.cacertPEM'),
   },
   {
@@ -184,7 +184,7 @@ const SmtpStore = {
     },
     async addNewCertificate({ dispatch }, { file, type, config }) {
       let uploadData = new FormData();
-      uploadData.append('', file);
+      uploadData.append(type, file);
       let uri =
         '/redfish/v1/EventService/Actions/Oem/Ami/SMTP.PrimarySSLCertificateUpload';
       if (config == 'secondary') {
@@ -205,7 +205,11 @@ const SmtpStore = {
         })
         .catch((error) => {
           console.log(error);
-          throw new Error(i18n.t('pageSmtp.toast.errorAddCertificate'));
+          const errorMessage =
+            error?.response?.data?.error?.message ||
+            error?.response?.data?.['@Message.ExtendedInfo']?.[0]?.Message ||
+            i18n.t('pageSmtp.toast.errorAddCertificate');
+          throw new Error(errorMessage);
         });
     },
     async sendTestAlert(_, properties) {

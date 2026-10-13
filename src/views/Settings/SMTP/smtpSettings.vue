@@ -396,7 +396,7 @@
                     accept=".pem"
                     :disabled="isButtonDisable"
                     :state="getValidationState($v.primary.cacertPEM)"
-                    @input="onFileUpload($event, 'CacertPEM', 'primary')"
+                    @input="onFileUpload($event, 'CACERT', 'primary')"
                   >
                     <template #invalid>
                       <b-form-invalid-feedback role="alert">
@@ -414,7 +414,7 @@
                   <form-file
                     id="primary-certificate-serverCRT"
                     v-model="primary.serverCRT"
-                    accept=".crt"
+                    accept=".pem"
                     :disabled="isButtonDisable"
                     :state="getValidationState($v.primary.serverCRT)"
                     @input="onFileUpload($event, 'ServerCRT', 'primary')"
@@ -435,7 +435,7 @@
                   <form-file
                     id="primary-certificate-serverKey"
                     v-model="primary.serverKey"
-                    accept=".key"
+                    accept=".pem"
                     :disabled="isButtonDisable"
                     :state="getValidationState($v.primary.serverKey)"
                     @input="onFileUpload($event, 'ServerKey', 'primary')"
@@ -834,7 +834,7 @@
                     accept=".pem"
                     :disabled="isButtonDisable"
                     :state="getValidationState($v.secondary.cacertPEM)"
-                    @input="onFileUpload($event, 'CacertPEM', 'secondary')"
+                    @input="onFileUpload($event, 'CACERT', 'secondary')"
                   >
                     <template #invalid>
                       <b-form-invalid-feedback role="alert">
@@ -852,7 +852,7 @@
                   <form-file
                     id="secondary-certificate-serverCRT"
                     v-model="secondary.serverCRT"
-                    accept=".crt"
+                    accept=".pem"
                     :disabled="isButtonDisable"
                     :state="getValidationState($v.secondary.serverCRT)"
                     @input="onFileUpload($event, 'ServerCRT', 'secondary')"
@@ -873,7 +873,7 @@
                   <form-file
                     id="secondary-certificate-serverKey"
                     v-model="secondary.serverKey"
-                    accept=".key"
+                    accept=".pem"
                     :disabled="isButtonDisable"
                     :state="getValidationState($v.secondary.serverKey)"
                     @input="onFileUpload($event, 'ServerKey', 'secondary')"
@@ -1669,7 +1669,12 @@ export default {
             else this.secondary.tlsEnable = true;
             this.successToast(success);
           })
-          .catch(({ message }) => this.errorToast(message))
+          .catch(({ message }) => {
+            if (type === 'CACERT') this[config].cacertPEM = null;
+            else if (type === 'ServerCRT') this[config].serverCRT = null;
+            else if (type === 'ServerKey') this[config].serverKey = null;
+            this.errorToast(message);
+          })
           .finally(() => this.endLoader());
       }
     },
