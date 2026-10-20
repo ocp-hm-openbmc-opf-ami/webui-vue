@@ -54,6 +54,20 @@ const BackupAndRestore = {
             throw new Error(
               i18n.t('pageBackupAndRestore.toast.errorMessageNotConfigured'),
             );
+          }
+          if (
+            errorMessage.includes('Failed to encrypt the backupconfig file')
+          ) {
+            throw new Error(
+              i18n.t('pageBackupAndRestore.toast.errorMessageEncryptionFailed'),
+            );
+          }
+          if (errorMessage.includes('BackupFeatures is not a format')) {
+            throw new Error(
+              i18n.t(
+                'pageBackupAndRestore.toast.errorMessageBackupFeaturesFormat',
+              ),
+            );
           } else {
             throw new Error(i18n.t('pageBackupAndRestore.toast.errorMessage'));
           }

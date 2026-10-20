@@ -500,8 +500,8 @@
             "name": "Name",
             "description": "Beschreibung",
             "model": "Modell",
-            "indicatorLED": "Status-LED",
-            "manufacture": "Hersteller",
+            "locationIndicatorActive": "Status der Standortanzeige",
+            "manufacturer": "Hersteller",
             "powerState": "Stromzustand",
             "serialNumuber": "Seriennummer",
             "partNumuber": "Teilenummer",
@@ -518,7 +518,7 @@
             "processorInfo": "Prozessorinformationen",
             "id": "ID",
             "name": "Name",
-            "manufacture": "Hersteller",
+            "manufacturer": "Hersteller",
             "maxSpeedMHz": "Max. Geschwindigkeit MHz",
             "model": "Modell",
             "processorArchitecture": "Prozessorarchitektur",
@@ -580,7 +580,7 @@
             "health": "Funktionszustand",
             "powerState": "Stromzustand",
             "assetTag": "Inventarkennzeichen",
-            "locationIndicatorActive": "Standortanzeige aktiv",
+            "locationIndicatorActive": "Status der Standortanzeige",
             "manufacturer": "Hersteller",
             "partNumber": "Teilenummer",
             "serialNumber": "Seriennummer"
@@ -818,11 +818,13 @@
         "downloadBackupFileInfo": "Wählen Sie eine beliebige Sicherungskonfiguration aus, um mit dem Herunterladen einer Datei fortzufahren.",
         "toast": {
             "successMessage": "Die Sicherungseigenschaften wurden erfolgreich heruntergeladen.",
-            "errorMessage": "Die Sicherungseigenschaften sind nicht in der Liste der zulässiger Werte.",
+            "errorMessage": "Fehler beim Herunterladen der Sicherungseigenschaften.",
+            "errorMessageBackupFeaturesFormat": "Die Sicherungseigenschaften befinden sich nicht in der Liste der akzeptierten Werte.",
             "fileUploadedSuccessfully": "Wiederherstellungsdatei erfolgreich hochgeladen.",
             "fileUploadedError": "Fehler beim Hochladen der Wiederherstellungsdatei.",
             "errorGettingBackupDetails": "Fehler beim Abrufen der Sicherungseigenschaften.",
             "errorMessageNotConfigured": "Der Vorgang kann nicht abgeschlossen werden, da die Konfigurationsdatei nicht existiert.",
+            "errorMessageEncryptionFailed": "Fehler beim Verschlüsseln der Sicherungskonfigurationsdatei.",
             "restoreConfirmation": "Die Wiederherstellungsfunktion startet die Dienste der konfigurierten Sicherungseigenschaften neu. Möchten Sie fortfahren?",
             "confirmTitle": "Bestätigen?"
 
@@ -1293,6 +1295,10 @@
     },
     "pageAddc": {
         "pageDescription": "Autonome Debug-Datenerfassung",
+        "alert": {
+            "serviceUnavailable1": "Keine ADDC-Konfiguration verfügbar.",
+            "serviceUnavailable2": "Bitte prüfen Sie, ob der ADDC-Dienst verfügbar ist und alle zugehörigen Anforderungen erfüllt sind, oder lesen Sie den Abschnitt 'ADDC Ready Signal' im Benutzerhandbuch."
+        },
         "errorRecoveryMode": {
             "errorRecoveryModeTitle": "Fehlerbehebungsmodus",
             "none": "Keine",
@@ -2177,6 +2183,7 @@
             "informatiomTitle": "Information",
             "informationMessage": "Netzwerkkonfiguration wurde erfolgreich zurückgesetzt. Bitte schließen Sie diese Browsersitzung und öffnen Sie eine neue, um sich mit der neuen IP des Geräts zu verbinden.",
             "noOperationWarning": "Die IPv6-Adresseneinstellungen sind identisch, daher ist kein Speichern erforderlich.",
+            "ipv6GatewayLinkLocalNotAllowed": "Das IPv6-Gateway darf keine Link-Local-Adresse sein.",
             "lanInterface": "LAN-Schnittstelle",
             "enableLAN": "LAN aktivieren",
             "confirmMsg": "Diese Funktion kann die IP-Adresse des Geräts ändern, und Sie könnten die Verbindung in dieser Browsersitzung verlieren. Bitte verbinden Sie sich nach der Änderung mit einer neuen Browsersitzung erneut. Möchten Sie fortfahren?"
@@ -3589,6 +3596,8 @@
             "physicalDriveAuStatusHelperText": "Gibt die Gesundheit und Verfügbarkeit der Access Unit (AU) an, die bestimmt, ob Vorgänge wie Löschen oder Wiederherstellen durchgeführt werden können.",
             "secureEraseTypeHelperText": "Das Laufwerk wird mit Löschmustern überschrieben, um alle Daten sicher zu entfernen. Wählen Sie eine der verfügbaren Optionen und klicken Sie auf Speichern, um den Löschvorgang zu starten.",
             "labelSecureEraseType": "Sicheres Löschverfahren",
+            "alertNoValidPdForCopyback1": "Kein physisches Laufwerk ist für Copyback verfügbar.",
+            "alertNoValidPdForCopyback2": "Voraussetzungen: Gleicher Medientyp (oder der Adapter ist so konfiguriert, dass gemischte Medientypen zulässig sind) und eine Kapazität, die größer oder gleich der des Quelllaufwerks ist.",
             "noEraseTypesAvailable": "Im Backend wurde kein passender Löschtyp gefunden. Bitte überprüfen Sie den Status und die unterstützten Funktionen der physischen Geräte.",
             "alertNotSupport": "Die Löschoperation ist nur verfügbar, wenn der Gerätestatus 'Gut' ist. Stellen Sie sicher, dass das Gerät gesund ist und nicht an einem RAID-Rebuild oder Fehler beteiligt ist, bevor Sie fortfahren.",
             "secureEraseOptions": {
@@ -4227,6 +4236,7 @@
         "sameNetworkLinkSettings": "Die Netzwerk-Link-Konfigurationen sind identisch, daher ist kein Speichern erforderlich.",
         "modifyNetworkLinkSettings": "Wenn Sie diese Schnittstellenkonfigurationen ändern möchten, passen Sie bitte die Werte der übergeordneten Schnittstelle an.",
         "networkLinkFeatureNotAvailable": "Die Netzwerk-Link-Funktion ist nicht aktiviert.",
+        "ncsiNetworkLinkSettings": "Die ausgewählte Schnittstelle ist als NCSI-Schnittstelle konfiguriert. Link-Geschwindigkeit (LinkSpeed) und Duplex-Modus (DuplexMode) können nicht geändert werden.",
         "toast": {
             "successSaveNetworkLink": "Netzwerk-Link erfolgreich gespeichert.",
             "errorSavedNetworkLink": "Fehler beim Speichern des Netzwerk-Links.",

@@ -27,20 +27,27 @@ const BsodStore = {
             '/Oem/Ami/Jpeg',
         )
         .then(async (response) => {
-          const imageURI = response.data.ImageURI;
-          if (imageURI === 'Image File is not Created') {
-            commit('SetBsodImageData', imageURI);
+          const imageURIData = response.data.ImageURI;
+          const imageURI =
+            typeof imageURIData === 'string'
+              ? imageURIData
+              : imageURIData?.['@odata.id'];
+          if (imageURI === undefined || imageURI === null) {
+            commit('SetBsodImageData', null);
             commit('SetBsodImageURI', null);
             return;
           }
-          if (imageURI && imageURI.startsWith('/redfish/')) {
+          if (
+            typeof imageURI === 'string' &&
+            imageURI.startsWith('/redfish/')
+          ) {
             try {
               const imageResponse = await api.get(imageURI);
               commit('SetBsodImageData', imageResponse.data.Image);
               commit('SetBsodImageURI', imageURI);
             } catch (error) {
               console.log('Error fetching image from URI:', imageURI, error);
-              commit('SetBsodImageData', 'Image File is not Created');
+              commit('SetBsodImageData', null);
               commit('SetBsodImageURI', null);
               throw new Error(i18n.t('pageBsod.toast.errorGettingBsodApi'));
             }

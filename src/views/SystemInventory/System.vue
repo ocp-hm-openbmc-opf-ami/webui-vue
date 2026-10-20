@@ -28,14 +28,14 @@ export default {
           class: 'text-center',
         },
         {
-          key: 'indicatorLED',
-          label: this.$t('pageSystemInventory.system.indicatorLED'),
+          key: 'locationIndicatorActive',
+          label: this.$t('pageSystemInventory.system.locationIndicatorActive'),
           class: 'text-center',
           formatter: this.convertState,
         },
         {
           key: 'manufacturer',
-          label: this.$t('pageSystemInventory.system.manufacture'),
+          label: this.$t('pageSystemInventory.system.manufacturer'),
           class: 'text-center',
         },
         {

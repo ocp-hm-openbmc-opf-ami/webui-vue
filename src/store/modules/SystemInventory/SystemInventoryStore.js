@@ -1,6 +1,5 @@
 import api from '@/store/api';
 import store from '@/store';
-import RuntimeConfig from '@/utilities/RuntimeConfig';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 
 const SystemInventoryStore = {
@@ -99,7 +98,8 @@ const SystemInventoryStore = {
           const systemData = response;
           systemData.name = response.data?.Name || 'NA';
           systemData.description = response.data?.Description || 'NA';
-          systemData.indicatorLED = response.data?.LocationIndicatorActive
+          systemData.locationIndicatorActive = response.data
+            ?.LocationIndicatorActive
             ? response.data?.LocationIndicatorActive
             : response.data?.LocationIndicatorActive === false
               ? response.data?.LocationIndicatorActive
@@ -164,10 +164,14 @@ const SystemInventoryStore = {
               processorArchitecture: data.ProcessorArchitecture || 'NA',
               processorType: data.ProcessorType || 'NA',
               socket: data.Socket || 'NA',
-              totalCores: data.TotalCores || 'NA',
+              totalCores: VuelidateMixin.methods.getValidValue(
+                data?.TotalCores,
+              ),
               state: data.Status?.State || 'NA',
               health: data?.Status?.Health || 'NA',
-              totalEnabledCores: data?.TotalEnabledCores || 'NA',
+              totalEnabledCores: VuelidateMixin.methods.getValidValue(
+                data?.TotalEnabledCores,
+              ),
               OperatingSpeedMHz: data?.OperatingSpeedMHz
                 ? data?.OperatingSpeedMHz
                 : data?.OperatingSpeedMHz === 0 || 0.0
@@ -602,7 +606,7 @@ const SystemInventoryStore = {
               PowerSupplyType: data.PowerSupplyType || 'NA',
               SerialNumber: data.SerialNumber || 'NA',
               state: data.Status?.State || 'NA',
-              partNumber: data.PartNumber,
+              partNumber: data.PartNumber || 'NA',
               sparePartNumber: data.SparePartNumber,
               efficiencyPercent: data.EfficiencyRatings[0].EfficiencyPercent
                 ? data.EfficiencyRatings[0].EfficiencyPercent
@@ -737,21 +741,21 @@ const SystemInventoryStore = {
         .catch((error) => console.log(error));
     },
     async ChassisCollection({ commit }) {
-      var chassisInstacnce = '';
+      var chassisInstance = '';
       /*AMD - VUE_APP_ONETREE_MULTI_HOST_SUPPORT_ENABLED
         Galaxy - VUE_APP_ONETREE_GPGPU_ENABLED
         else - Baseboard*/
-      chassisInstacnce = RuntimeConfig.isMultiHostEnabled()
-        ? 'HPM'
-        : process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true'
-          ? 'BMC_0'
-          : 'Baseboard';
-      console.log('chassisInstacnce', chassisInstacnce);
+      chassisInstance =
+        process.env.VUE_APP_ONETREE_MULTI_HOST_SUPPORT_ENABLED == 'true'
+          ? 'HPM'
+          : process.env.VUE_APP_ONETREE_GPGPU_ENABLED == 'true'
+            ? 'BMC_0'
+            : 'Baseboard';
       return await api
         .get('/redfish/v1/Chassis')
         .then(({ data: { Members = [] } = {} }) => {
           Members.filter((member) =>
-            member['@odata.id'].includes(chassisInstacnce),
+            member['@odata.id'].includes(chassisInstance),
           ).map((member) => {
             const url = member['@odata.id'].split('/');
             const lastValue = url[url.length - 1];

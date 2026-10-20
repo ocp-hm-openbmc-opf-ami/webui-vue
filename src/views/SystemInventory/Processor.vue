@@ -38,7 +38,7 @@ export default {
         },
         {
           key: 'manufacturer',
-          label: this.$t('pageSystemInventory.processor.manufacture'),
+          label: this.$t('pageSystemInventory.processor.manufacturer'),
         },
         {
           key: 'maxSpeedMHz',
