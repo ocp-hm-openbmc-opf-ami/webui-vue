@@ -4208,6 +4208,7 @@
         "userAlertCount": "用戶警報計數",
         "userAlertCountPercentage": "用戶警報計數天數",
         "licenseExpired": "您的模組授權已過期。請更新有效的許可證密鑰。",
+        "licenseExpiryWarning": "您的模組授權即將到期（剩餘 {days} 天）。請更新有效的授權金鑰。",
         "licensePageLink": "[ 許可證頁面連結。 ]",
         "userAlertCountRangeRequired": "請輸入有效的計數天數。",
         "toast": {
