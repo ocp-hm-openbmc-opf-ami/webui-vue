@@ -13,6 +13,7 @@ const SnmpStore = {
     snmpv1Enabled: false,
     snmpv2cEnabled: false,
     snmpv3Enabled: false,
+    snmpTrapStatus: false,
     snmpCommunityString: [],
     communityStrings: [],
   },
@@ -25,6 +26,7 @@ const SnmpStore = {
     snmpv1Enabled: (state) => state.snmpv1Enabled,
     snmpv2cEnabled: (state) => state.snmpv2cEnabled,
     snmpv3Enabled: (state) => state.snmpv3Enabled,
+    snmpTrapStatus: (state) => state.snmpTrapStatus,
     snmpCommunityString: (state) => state.snmpCommunityString,
     communityStrings: (state) => state.communityStrings,
   },
@@ -44,6 +46,8 @@ const SnmpStore = {
       (state.snmpv2cEnabled = snmpv2cEnabled),
     setsnmpv3Enabled: (state, snmpv3Enabled) =>
       (state.snmpv3Enabled = snmpv3Enabled),
+    setSnmpTrapStatus: (state, snmpTrapStatus) =>
+      (state.snmpTrapStatus = snmpTrapStatus),
     setSnmpCommunityString: (state, snmpCommunityString) =>
       (state.snmpCommunityString = snmpCommunityString),
     setCommunityStrings: (state, communityStrings) =>
@@ -60,6 +64,7 @@ const SnmpStore = {
           const snmpv1 = response.data?.SNMP?.EnableSNMPv1;
           const snmpv2c = response.data?.SNMP?.EnableSNMPv2c;
           const snmpv3 = response.data?.SNMP?.EnableSNMPv3;
+          const snmpTrapStatus = response.data?.Oem?.Ami?.SNMP?.SNMPTrapStatus;
           const communityString =
             response.data?.Oem?.Ami?.SNMP?.CommunityStrings || [];
           const accessMode = (response.data?.SNMP?.CommunityStrings || [])
@@ -88,6 +93,7 @@ const SnmpStore = {
           commit('setsnmpv1Enabled', snmpv1);
           commit('setsnmpv2cEnabled', snmpv2c);
           commit('setsnmpv3Enabled', snmpv3);
+          commit('setSnmpTrapStatus', snmpTrapStatus);
           commit('setCommunityStrings', snmpCommunityStrings);
         })
         .catch((error) => {
@@ -184,6 +190,45 @@ const SnmpStore = {
           console.log(error);
           commit('setSnmpv1Enable', !snmpVersionEnabled);
           if (snmpVersionEnabled) {
+            throw new Error(
+              i18n.t('pagePolicies.toast.errorSNMPVersionEnabled'),
+            );
+          } else {
+            throw new Error(
+              i18n.t('pagePolicies.toast.errorSNMPVersionDisabled'),
+            );
+          }
+        });
+    },
+    async saveSnmpTrapStatus({ commit, dispatch }, snmpTrapStatus) {
+      commit('setSnmpTrapStatus', snmpTrapStatus);
+      const data = {
+        Oem: {
+          Ami: {
+            SNMP: {
+              SNMPTrapStatus: snmpTrapStatus,
+            },
+          },
+        },
+      };
+
+      return await api
+        .patch(
+          `/redfish/v1/Managers/${store.getters['global/managerInstance']}/NetworkProtocol`,
+          data,
+        )
+        .then(() => dispatch('getSNMPProtocolStatus'))
+        .then(() => {
+          if (snmpTrapStatus) {
+            return i18n.t('pagePolicies.toast.successSNMPVersionEnabled');
+          } else {
+            return i18n.t('pagePolicies.toast.successSNMPVersionDisabled');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          commit('setSnmpTrapStatus', !snmpTrapStatus);
+          if (snmpTrapStatus) {
             throw new Error(
               i18n.t('pagePolicies.toast.errorSNMPVersionEnabled'),
             );

@@ -10,6 +10,7 @@
       >
     </div>
     <div v-else>
+      <license-expiry-alert :license-name="licenseName" />
       <div v-if="!virtualMediaAccess">
         <b-alert show variant="danger">{{
           $t('pageVirtualMedia.permissionRestricted')
@@ -205,6 +206,7 @@
 
 <script>
 import PageTitle from '@/components/Global/PageTitle';
+import LicenseExpiryAlert from '@/components/Global/LicenseExpiryAlert';
 import PageSection from '@/components/Global/PageSection';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
@@ -227,6 +229,7 @@ export default {
   name: 'VirtualMedia',
   components: {
     PageTitle,
+    LicenseExpiryAlert,
     PageSection,
     ModalConfigureConnection,
     FormFile,

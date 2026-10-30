@@ -4212,6 +4212,7 @@
         "userAlertCount": "Benutzer-Warnanzahl",
         "userAlertCountPercentage": "Benutzer-Warnanzahl (Tage)",
         "licenseExpired": "Ihre Modullizenz ist abgelaufen. Bitte aktualisieren Sie den gültigen Lizenzschlüssel unter",
+        "licenseExpiryWarning": "Ihre Modullizenz läuft bald ab (noch {days} Tag(e)). Bitte aktualisieren Sie den gültigen Lizenzschlüssel unter",
         "licensePageLink": "[ Lizenzseiten-Link. ]",
         "userAlertCountRangeRequired": "Bitte geben Sie eine gültige Anzahl von Tagen ein.",
         "toast": {
