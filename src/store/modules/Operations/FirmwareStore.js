@@ -3,6 +3,13 @@ import i18n from '@/i18n';
 import store from '@/store/';
 import { isFeatureEnabled } from '@/components/Mixins/FeatureMixin';
 
+const isHardwareFirmwareTarget = (data) =>
+  data?.Updateable === true &&
+  data?.Status?.State === 'Enabled' &&
+  data?.RelatedItem?.some(({ '@odata.id': uri } = {}) =>
+    /^\/redfish\/v1\/(Chassis|Managers|Systems)(\/|$)/.test(uri || ''),
+  );
+
 const FirmwareStore = {
   namespaced: true,
   state: {
@@ -163,10 +170,12 @@ const FirmwareStore = {
           const gpgpuFirmware = [];
           const firmwareInventoryValues = [];
           response.forEach(({ data }) => {
-            firmwareInventoryValues.push(
-              data?.['@odata.id']?.split('/')?.pop(),
-            );
-            commit('setInventryFirmwareData', firmwareInventoryValues);
+            if (isHardwareFirmwareTarget(data)) {
+              firmwareInventoryValues.push(
+                data?.['@odata.id']?.split('/')?.pop(),
+              );
+              commit('setInventryFirmwareData', firmwareInventoryValues);
+            }
             const firmwareType = data?.RelatedItem?.[0]?.['@odata.id']
               ?.split('/')
               ?.pop();

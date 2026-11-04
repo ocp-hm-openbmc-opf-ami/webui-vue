@@ -14,6 +14,7 @@
       >
     </div>
     <div v-else>
+      <license-expiry-alert :license-name="licenseName" />
       <div v-if="!kvmServiceEnabledAccess">
         <b-alert show variant="warning">{{
           $t('pageKvm.disabledKVMService')
@@ -29,6 +30,7 @@
 <script>
 import AccessDeniedAlert from '@/components/Global/AccessDeniedAlert';
 import PageTitle from '@/components/Global/PageTitle';
+import LicenseExpiryAlert from '@/components/Global/LicenseExpiryAlert';
 import KvmConsole from './KvmConsole';
 import { mapState } from 'vuex';
 import { privilegesId } from '@/store/modules/GlobalStore';
@@ -39,7 +41,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'Kvm',
-  components: { AccessDeniedAlert, PageTitle, KvmConsole },
+  components: { AccessDeniedAlert, PageTitle, LicenseExpiryAlert, KvmConsole },
   mixins: [LicensecheckMixin, LoadingBarMixin, BVToastMixin],
   data() {
     return {

@@ -10,6 +10,7 @@
       >
     </div>
     <div v-else>
+      <license-expiry-alert :license-name="licenseName" />
       <!-- Tabs with card integration -->
       <b-card no-body>
         <b-tabs
@@ -31,6 +32,7 @@
 
 <script>
 import PageTitle from '@/components/Global/PageTitle';
+import LicenseExpiryAlert from '@/components/Global/LicenseExpiryAlert';
 import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
 import ModalSnmp from './ModalSnmp.vue';
 import LicensecheckMixin from '@/components/Mixins/LicensecheckMixin';
@@ -43,6 +45,7 @@ export default {
   name: 'SnmpSettings',
   components: {
     PageTitle,
+    LicenseExpiryAlert,
     ModalSnmp,
     snmpCommunityString,
   },

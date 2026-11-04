@@ -4214,6 +4214,7 @@
         "userAlertCount": "User Alert Count",
         "userAlertCountPercentage": "User Alert Count Days",
         "licenseExpired": "Your module license is expired. Kindly update the valid license key in.",
+        "licenseExpiryWarning": "Your module license is expiring soon ({days} day(s) remaining). Kindly update the valid license key in.",
         "licensePageLink": "[ License Page Link. ]",
         "userAlertCountRangeRequired": "Kindly enter the Valid Count Days.",
         "toast": {

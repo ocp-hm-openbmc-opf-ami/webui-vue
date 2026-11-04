@@ -1151,7 +1151,7 @@
                     </b-form-checkbox>
                   </b-col>
                 </b-row>
-                <b-row v-if="snmpState" class="setting-section">
+                <b-row class="setting-section">
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
@@ -1179,7 +1179,7 @@
                     </b-form-checkbox>
                   </b-col>
                 </b-row>
-                <b-row v-if="snmpState" class="setting-section">
+                <b-row class="setting-section">
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
@@ -1207,7 +1207,7 @@
                     </b-form-checkbox>
                   </b-col>
                 </b-row>
-                <b-row v-if="snmpState" class="setting-section">
+                <b-row class="setting-section">
                   <b-col
                     lg="7"
                     class="d-flex align-items-center justify-content-between"
@@ -1229,6 +1229,34 @@
                         {{ $t('pagePolicies.snmpv3') }}
                       </span>
                       <span v-if="snmpv3State">
+                        {{ $t('global.status.enabled') }}
+                      </span>
+                      <span v-else>{{ $t('global.status.disabled') }}</span>
+                    </b-form-checkbox>
+                  </b-col>
+                </b-row>
+                <b-row class="setting-section">
+                  <b-col
+                    lg="7"
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <dl class="mt-3 mr-3 w-75">
+                      <dd>{{ $t('pageSnmp.snmpTrap') }}</dd>
+                    </dl>
+                  </b-col>
+                  <b-col lg="3" class="session-timeout">
+                    <b-form-checkbox
+                      id="snmpTrapSwitch"
+                      v-model="snmpTrapState"
+                      data-test-id="policies-toggle-snmp-trap"
+                      switch
+                      :disabled="userPrivilege !== privilegesId.admin"
+                      @change="changeSNMPTrapState"
+                    >
+                      <span class="sr-only">
+                        {{ $t('pageSnmp.snmpTrap') }}
+                      </span>
+                      <span v-if="snmpTrapState">
                         {{ $t('global.status.enabled') }}
                       </span>
                       <span v-else>{{ $t('global.status.disabled') }}</span>
@@ -1790,6 +1818,14 @@ export default {
         return newValue;
       },
     },
+    snmpTrapState: {
+      get() {
+        return this.$store.getters['snmp/snmpTrapStatus'];
+      },
+      set(newValue) {
+        return newValue;
+      },
+    },
     openSslFipsState: {
       get() {
         return this.$store.getters['policies/sslFipsProtocolEnabled'];
@@ -2206,6 +2242,12 @@ export default {
         .dispatch('snmp/saveSnmpVersionState', snmpversion)
         .then((message) => this.successToast(message + ': SNMPv3.'))
         .catch(({ message }) => this.errorToast(message + ': SNMPv3.'));
+    },
+    changeSNMPTrapState(state) {
+      this.$store
+        .dispatch('snmp/saveSnmpTrapStatus', state ? true : false)
+        .then((message) => this.successToast(message + ': SNMP Trap.'))
+        .catch(({ message }) => this.errorToast(message + ': SNMP Trap.'));
     },
     changeOpenSslFipsState(state) {
       this.$bvModal
